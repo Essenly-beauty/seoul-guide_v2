@@ -20,6 +20,7 @@ export function MapSheet({ places, origin, selectedId, onSelect, onClearSelectio
 }) {
   const [snap, setSnap] = useState<Snap>("peek");
   const dragStart = useRef<{ y: number; snap: Snap } | null>(null);
+  const dragMoved = useRef(false); // suppresses the native click that follows a drag release
 
   const ranked = useMemo(
     () =>
@@ -29,8 +30,13 @@ export function MapSheet({ places, origin, selectedId, onSelect, onClearSelectio
     [places, origin],
   );
   const selected = ranked.find((r) => r.p.id === selectedId);
+  const locked = Boolean(selected); // mini-card pins the sheet to half — don't mutate hidden snap
+
+  const cycle = () => setSnap(snap === "peek" ? "half" : snap === "half" ? "full" : "peek");
 
   const onPointerDown = (e: React.PointerEvent) => {
+    if (locked) return;
+    dragMoved.current = false;
     dragStart.current = { y: e.clientY, snap };
     (e.target as HTMLElement).setPointerCapture(e.pointerId);
   };
@@ -38,9 +44,22 @@ export function MapSheet({ places, origin, selectedId, onSelect, onClearSelectio
     if (!dragStart.current) return;
     const dy = e.clientY - dragStart.current.y;
     const i = ORDER.indexOf(dragStart.current.snap);
+    if (Math.abs(dy) > 40) dragMoved.current = true;
     if (dy < -40) setSnap(ORDER[Math.min(i + 1, 2)]);
     else if (dy > 40) setSnap(ORDER[Math.max(i - 1, 0)]);
     dragStart.current = null;
+  };
+  const onHandleClick = () => {
+    if (locked) return;
+    if (dragMoved.current) { dragMoved.current = false; return; }
+    cycle();
+  };
+  const onHandleKeyDown = (e: React.KeyboardEvent) => {
+    if (e.target !== e.currentTarget) return; // don't hijack keys bubbling from the inner button
+    if (e.key !== "Enter" && e.key !== " ") return;
+    e.preventDefault();
+    if (locked) return;
+    cycle();
   };
 
   return (
@@ -52,8 +71,9 @@ export function MapSheet({ places, origin, selectedId, onSelect, onClearSelectio
         aria-label={`Places list — ${snap === "peek" ? "expand" : "drag or press to resize"}`}
         onPointerDown={onPointerDown}
         onPointerUp={onPointerUp}
-        onClick={() => setSnap(snap === "peek" ? "half" : snap === "half" ? "full" : "peek")}
-        onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); setSnap(snap === "peek" ? "half" : "peek"); } }}
+        onPointerCancel={() => { dragStart.current = null; }}
+        onClick={onHandleClick}
+        onKeyDown={onHandleKeyDown}
       >
         <span className="mapsheet-grip" aria-hidden="true" />
         {!selected && <div className="small" style={{ fontWeight: 600 }}>{ranked.length} places near you</div>}
