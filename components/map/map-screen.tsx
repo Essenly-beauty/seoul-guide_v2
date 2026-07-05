@@ -5,7 +5,7 @@ import dynamic from "next/dynamic";
 import Link from "next/link";
 import { Icon } from "@/components/icon";
 import { routes } from "@/lib/routes";
-import { PLACES, TYPE_LABEL, type PlaceType } from "@/lib/data";
+import { PLACES, type PlaceType } from "@/lib/data";
 import { MYEONGDONG } from "@/lib/geo";
 
 const MapView = dynamic(() => import("./map-view"), {

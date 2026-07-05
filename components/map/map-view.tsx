@@ -27,14 +27,23 @@ const ATTRIB = '&copy; <a href="https://www.openstreetmap.org/copyright">OSM</a>
 const reducedMotion = () =>
   typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
+/** Cached per (place.id, selected) — PLACES is static, so at most 2 icons per place.
+ *  Without this, every selection change hands react-leaflet a fresh icon object and
+ *  it calls setIcon() on all unaffected markers. */
+const iconCache = new Map<string, L.DivIcon>();
 function bubbleIcon(place: Place, selected: boolean) {
+  const key = `${place.id}:${selected}`;
+  const hit = iconCache.get(key);
+  if (hit) return hit;
   const rating = place.rating ? `<span class="mono">${place.rating}</span>` : "";
   const name = selected ? `<b>${place.name}</b>` : "";
-  return L.divIcon({
+  const icon = L.divIcon({
     className: "map-anchor",
     html: `<div class="map-bubble${selected ? " selected" : ""}"><svg class="icn" aria-hidden="true"><use href="#i-${TYPE_ICON[place.type]}"/></svg>${rating}${name}</div>`,
     iconSize: [0, 0],
   });
+  iconCache.set(key, icon);
+  return icon;
 }
 
 function MapWiring({ flyTarget, onUserMove, getBounds }: Pick<MapViewProps, "flyTarget" | "onUserMove" | "getBounds">) {
