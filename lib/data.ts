@@ -75,20 +75,22 @@ export type Place = {
   tags: string[];
   nearestStation?: string;
   address: string;
+  lat: number;
+  lng: number;
   englishOk?: boolean;
   badge?: { cls: "accent" | "warning" | "info"; text: string };
 };
 
 export const PLACES: Place[] = [
-  { id: "hosu-dosan", name: "HOSU DOSAN", nameKr: "호수 도산점", type: "headspa", zone: "apgujeong", priceRange: "₩₩₩", rating: 4.8, ratingCount: 132, tags: ["scalp", "aroma", "therapy"], nearestStation: "Apgujeong Rodeo", address: "서울 강남구 도산대로 123", englishOk: true, badge: { cls: "accent", text: "English OK" } },
-  { id: "eden-headspa", name: "Eden Head Spa", nameKr: "에덴 헤드스파", type: "headspa", zone: "hongdae", priceRange: "₩₩", rating: 4.7, ratingCount: 88, tags: ["scalp", "therapy"], nearestStation: "Hongik Univ.", address: "서울 마포구 양화로 45", englishOk: true, badge: { cls: "accent", text: "English OK" } },
-  { id: "la-beaute", name: "La Beauté Coréenne", nameKr: "라 보떼 꼬레엔느", type: "headspa", zone: "cheongdam", priceRange: "₩₩₩", rating: 4.6, ratingCount: 61, tags: ["aroma", "luxury"], nearestStation: "Cheongdam", address: "서울 강남구 청담동 21", badge: { cls: "warning", text: "Luxury" } },
-  { id: "juno-hair-gangnam", name: "Juno Hair Gangnam", nameKr: "준오헤어 강남점", type: "salon", zone: "gangnam_station", priceRange: "₩₩", rating: 4.7, ratingCount: 210, tags: ["k-pop style", "color", "cut"], nearestStation: "Gangnam", address: "서울특별시 강남구 테헤란로 123", englishOk: true, badge: { cls: "accent", text: "English OK" } },
-  { id: "chahong-apgujeong", name: "Chahong Ardor", nameKr: "차홍아르더 압구정", type: "salon", zone: "apgujeong", priceRange: "₩₩₩", rating: 4.6, ratingCount: 154, tags: ["color", "perm"], nearestStation: "Apgujeong", address: "서울 강남구 압구정로 200", englishOk: true },
-  { id: "dragon-hill-spa", name: "Dragon Hill Spa", nameKr: "드래곤힐 스파", type: "spa", zone: "hangang", priceRange: "₩", rating: 4.4, ratingCount: 320, tags: ["jjimjilbang", "sauna"], nearestStation: "Yongsan", address: "서울 용산구 한강대로 21길 60" },
-  { id: "sulwha-clinic", name: "Sulwha Skin Clinic", nameKr: "설화 피부과", type: "clinic", zone: "gangnam_station", priceRange: "₩₩₩", rating: 4.5, ratingCount: 96, tags: ["skin booster", "facial"], nearestStation: "Gangnam", address: "서울 강남구 강남대로 400", badge: { cls: "info", text: "Consult first" } },
-  { id: "bukchon-hanok", name: "Bukchon Hanok Village", nameKr: "북촌한옥마을", type: "spots", zone: "jongno", priceRange: "₩", rating: 4.7, ratingCount: 1200, tags: ["photo spot", "hanok", "culture"], nearestStation: "Anguk", address: "서울 종로구 계동길" },
-  { id: "seongsu-cafe", name: "Onion Seongsu", nameKr: "어니언 성수", type: "spots", zone: "seongsu", priceRange: "₩₩", rating: 4.6, ratingCount: 540, tags: ["cafe", "photo spot"], nearestStation: "Seongsu", address: "서울 성동구 아차산로9길 8" },
+  { id: "hosu-dosan", name: "HOSU DOSAN", nameKr: "호수 도산점", type: "headspa", zone: "apgujeong", priceRange: "₩₩₩", rating: 4.8, ratingCount: 132, tags: ["scalp", "aroma", "therapy"], nearestStation: "Apgujeong Rodeo", address: "서울 강남구 도산대로 123", lat: 37.5240, lng: 127.0380, englishOk: true, badge: { cls: "accent", text: "English OK" } },
+  { id: "eden-headspa", name: "Eden Head Spa", nameKr: "에덴 헤드스파", type: "headspa", zone: "hongdae", priceRange: "₩₩", rating: 4.7, ratingCount: 88, tags: ["scalp", "therapy"], nearestStation: "Hongik Univ.", address: "서울 마포구 양화로 45", lat: 37.5537, lng: 126.9184, englishOk: true, badge: { cls: "accent", text: "English OK" } },
+  { id: "la-beaute", name: "La Beauté Coréenne", nameKr: "라 보떼 꼬레엔느", type: "headspa", zone: "cheongdam", priceRange: "₩₩₩", rating: 4.6, ratingCount: 61, tags: ["aroma", "luxury"], nearestStation: "Cheongdam", address: "서울 강남구 청담동 21", lat: 37.5253, lng: 127.0476, badge: { cls: "warning", text: "Luxury" } },
+  { id: "juno-hair-gangnam", name: "Juno Hair Gangnam", nameKr: "준오헤어 강남점", type: "salon", zone: "gangnam_station", priceRange: "₩₩", rating: 4.7, ratingCount: 210, tags: ["k-pop style", "color", "cut"], nearestStation: "Gangnam", address: "서울특별시 강남구 테헤란로 123", lat: 37.4995, lng: 127.0323, englishOk: true, badge: { cls: "accent", text: "English OK" } },
+  { id: "chahong-apgujeong", name: "Chahong Ardor", nameKr: "차홍아르더 압구정", type: "salon", zone: "apgujeong", priceRange: "₩₩₩", rating: 4.6, ratingCount: 154, tags: ["color", "perm"], nearestStation: "Apgujeong", address: "서울 강남구 압구정로 200", lat: 37.5273, lng: 127.0287, englishOk: true },
+  { id: "dragon-hill-spa", name: "Dragon Hill Spa", nameKr: "드래곤힐 스파", type: "spa", zone: "hangang", priceRange: "₩", rating: 4.4, ratingCount: 320, tags: ["jjimjilbang", "sauna"], nearestStation: "Yongsan", address: "서울 용산구 한강대로 21길 60", lat: 37.5299, lng: 126.9646 },
+  { id: "sulwha-clinic", name: "Sulwha Skin Clinic", nameKr: "설화 피부과", type: "clinic", zone: "gangnam_station", priceRange: "₩₩₩", rating: 4.5, ratingCount: 96, tags: ["skin booster", "facial"], nearestStation: "Gangnam", address: "서울 강남구 강남대로 400", lat: 37.4970, lng: 127.0276, badge: { cls: "info", text: "Consult first" } },
+  { id: "bukchon-hanok", name: "Bukchon Hanok Village", nameKr: "북촌한옥마을", type: "spots", zone: "jongno", priceRange: "₩", rating: 4.7, ratingCount: 1200, tags: ["photo spot", "hanok", "culture"], nearestStation: "Anguk", address: "서울 종로구 계동길", lat: 37.5814, lng: 126.9849 },
+  { id: "seongsu-cafe", name: "Onion Seongsu", nameKr: "어니언 성수", type: "spots", zone: "seongsu", priceRange: "₩₩", rating: 4.6, ratingCount: 540, tags: ["cafe", "photo spot"], nearestStation: "Seongsu", address: "서울 성동구 아차산로9길 8", lat: 37.5444, lng: 127.0578 },
 ];
 
 // ── Products ──────────────────────────────────────────────
