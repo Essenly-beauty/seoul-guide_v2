@@ -8,6 +8,7 @@ import { routes } from "@/lib/routes";
 import { PLACES, type PlaceType } from "@/lib/data";
 import { MYEONGDONG, type LatLng } from "@/lib/geo";
 import { useLocation } from "./use-location";
+import { MapSheet } from "./map-sheet";
 
 const MapView = dynamic(() => import("./map-view"), {
   ssr: false,
@@ -30,8 +31,15 @@ export function MapScreen() {
   const [flyTarget, setFlyTarget] = useState<LatLng | null>(null);
   const [bannerDismissed, setBannerDismissed] = useState(false);
   const centerRef = useRef(loc ?? MYEONGDONG); // 최초 마운트 center 고정용
+  const [moved, setMoved] = useState(false);
+  const [area, setArea] = useState<{ south: number; west: number; north: number; east: number } | null>(null);
+  const boundsGetter = useRef<(() => { south: number; west: number; north: number; east: number }) | null>(null);
 
-  const places = useMemo(() => (cat === "all" ? PLACES : PLACES.filter((p) => p.type === cat)), [cat]);
+  const places = useMemo(() => {
+    let list = cat === "all" ? PLACES : PLACES.filter((p) => p.type === cat);
+    if (area) list = list.filter((p) => p.lat >= area.south && p.lat <= area.north && p.lng >= area.west && p.lng <= area.east);
+    return list;
+  }, [cat, area]);
 
   useEffect(() => {
     if (status === "granted" && loc) setFlyTarget(loc);
@@ -46,7 +54,8 @@ export function MapScreen() {
         onSelect={setSelectedId}
         userLoc={loc}
         flyTarget={flyTarget}
-        onUserMove={() => {}}
+        onUserMove={() => setMoved(true)}
+        getBounds={(fn) => { boundsGetter.current = fn; }}
       />
 
       <div className="map-top">
@@ -64,6 +73,20 @@ export function MapScreen() {
             </button>
           ))}
         </div>
+        {moved && (
+          <button
+            className="chip selected"
+            style={{ justifySelf: "center" }}
+            onClick={() => { setArea(boundsGetter.current ? boundsGetter.current() : null); setMoved(false); setSelectedId(null); }}
+          >
+            Search this area
+          </button>
+        )}
+        {area && !moved && (
+          <button className="chip" style={{ justifySelf: "center" }} onClick={() => setArea(null)}>
+            Clear area · show all
+          </button>
+        )}
       </div>
 
       <button
@@ -73,6 +96,14 @@ export function MapScreen() {
       >
         <Icon name="locate" size="sm" />
       </button>
+
+      <MapSheet
+        places={places}
+        origin={loc ?? MYEONGDONG}
+        selectedId={selectedId}
+        onSelect={setSelectedId}
+        onClearSelection={() => setSelectedId(null)}
+      />
 
       {status === "fallback" && !bannerDismissed && (
         <div className="map-banner" role="status">
