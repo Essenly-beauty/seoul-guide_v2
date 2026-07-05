@@ -23,6 +23,9 @@ export default function HomePage() {
           <BrandMark size={22} />
           <span className="title" style={{ flex: "none" }}>Essenly Seoul Guide</span>
         </span>
+        <Link className="iconbtn" href={routes.search} aria-label="Search">
+          <Icon name="search" />
+        </Link>
         <Link className="iconbtn" href={routes.map} aria-label="Map">
           <Icon name="pin" />
         </Link>

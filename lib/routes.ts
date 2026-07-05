@@ -16,6 +16,7 @@ export const routes = {
   placesCategory: (cat: string) => `/places/${cat}`,
   place: (id: string) => `/place/${id}`,
   map: "/map",
+  search: "/search",
 
   // Journal
   journal: "/journal",
