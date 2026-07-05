@@ -29,7 +29,8 @@ export type IconName =
   | "lock"
   | "door"
   | "mark"
-  | "search";
+  | "search"
+  | "locate";
 
 type IconProps = {
   name: IconName;
@@ -151,6 +152,10 @@ export function IconSprite() {
       <symbol id="i-door" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
         <path d="M14 3H6a1 1 0 0 0-1 1v16a1 1 0 0 0 1 1h8" />
         <path d="M11 12h9M17 8l4 4-4 4" />
+      </symbol>
+      <symbol id="i-locate" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+        <circle cx="12" cy="12" r="7" /><circle cx="12" cy="12" r="2.4" fill="currentColor" stroke="none" />
+        <path d="M12 2v3M12 19v3M2 12h3M19 12h3" strokeLinecap="round" />
       </symbol>
       <symbol id="i-mark" viewBox="0 0 40 40">
         <path d="M20 4c-9 0-16 6.5-16 16 0 3 1 5.6 2.8 7.6C9 22 14 18 20.5 18c-4 2-7 5.5-8.4 10.4C14 30.6 16.8 32 20 32c9 0 16-6.5 16-16S29 4 20 4z" fill="#0C8E70" />

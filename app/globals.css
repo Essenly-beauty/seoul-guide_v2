@@ -1532,4 +1532,85 @@
     color: var(--muted);
     margin: 4px 0 12px;
   }
+
+  /* ── Map screen ────────────────────────────── */
+  .map-screen {
+    position: relative;
+    height: 100%;
+    overflow: hidden;
+  }
+  .map-canvas {
+    position: absolute;
+    inset: 0;
+    height: 100%;
+    background: var(--surface-hover); /* tile-load fallback */
+  }
+  .map-top {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 900;
+    padding: max(12px, env(safe-area-inset-top)) 14px 0;
+    display: grid;
+    gap: 8px;
+    pointer-events: none;
+  }
+  .map-top > * { pointer-events: auto; }
+  .map-searchpill {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    min-height: 44px;
+    padding: 10px 14px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--r-full);
+    box-shadow: var(--shadow-float);
+  }
+  .map-close {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow-float);
+    width: 44px;
+    height: 44px;
+  }
+  .map-top .chip {
+    box-shadow: var(--shadow-card);
+    min-height: 36px;
+  }
+  /* :not(.selected) — .chip.selected (earlier in the cascade) sets the same
+     specificity; without this guard this rule's background would win and
+     erase the accent fill on the active chip. */
+  .map-top .chip:not(.selected) {
+    background: var(--surface);
+  }
+  /* divIcon markers */
+  .map-anchor { background: none; border: none; }
+  .map-bubble {
+    position: absolute;
+    transform: translate(-50%, -100%);
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 7px 10px;
+    min-height: 34px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--r-full);
+    box-shadow: var(--shadow-float);
+    font-size: 13px;
+    white-space: nowrap;
+    cursor: pointer;
+  }
+  .map-bubble .icn { width: 15px; height: 15px; color: var(--accent); }
+  .map-bubble.selected {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff; /* matches .btn/.chip.selected convention */
+  }
+  .map-bubble.selected .icn { color: #fff; }
+  .map-bubble b { font-weight: 600; }
+  .leaflet-container { font-family: var(--sans); }
 }
