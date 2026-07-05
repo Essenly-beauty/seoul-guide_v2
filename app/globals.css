@@ -1513,4 +1513,23 @@
     0%, 100% { opacity: 0.3; }
     50% { opacity: 0.8; }
   }
+
+  /* ── Directions taxi card ─────────────────── */
+  .taxi-big {
+    background: var(--accent-soft);
+    border: 1px solid var(--border);
+    border-radius: var(--r-lg);
+    padding: 16px;
+    text-align: center;
+  }
+  .taxi-big-name {
+    font-family: var(--serif);
+    font-size: 26px;
+    margin-top: 8px;
+  }
+  .taxi-big-addr {
+    font-size: 16px;
+    color: var(--muted);
+    margin: 4px 0 12px;
+  }
 }

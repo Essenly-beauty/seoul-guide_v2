@@ -4,6 +4,7 @@ import { BackButtonBordered } from "@/components/ui/back-button";
 import { ActionButton } from "@/components/ui/action-button";
 import { FavoriteButton } from "@/components/ui/favorite-button";
 import { BookingSheet } from "@/components/booking/booking-sheet";
+import { DirectionsLauncher } from "@/components/directions/directions-sheet";
 import { Icon } from "@/components/icon";
 import { KitCta } from "@/components/cards";
 import { routes } from "@/lib/routes";
@@ -93,11 +94,10 @@ export default function PlaceDetailPage({ params }: { params: { id: string } }) 
             <Icon name="check" size="sm" style={{ color: "var(--warning)" }} /> View Reviews on Google <Icon name="ext" size="xs" />
           </ActionButton>
 
-          <div className="linkgrid">
-            <ActionButton className="linkbtn" toast="Opening Google Maps…"><Icon name="pin" size="sm" />Google</ActionButton>
-            <ActionButton className="linkbtn" toast="Opening Naver Map…"><Icon name="pin" size="sm" />Naver</ActionButton>
-            <ActionButton className="linkbtn" toast="Opening KakaoMap…"><Icon name="pin" size="sm" />Kakao</ActionButton>
-          </div>
+          <DirectionsLauncher
+            className="btn"
+            place={{ name: place.name, nameKr: place.nameKr, address: place.address, lat: place.lat, lng: place.lng }}
+          />
 
           <ActionButton className="taxicard" toast="Opening Instagram…">
             <span className="ic"><Icon name="ig" size="sm" /></span>
