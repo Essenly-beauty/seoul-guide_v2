@@ -1,12 +1,13 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import dynamic from "next/dynamic";
 import Link from "next/link";
 import { Icon } from "@/components/icon";
 import { routes } from "@/lib/routes";
 import { PLACES, type PlaceType } from "@/lib/data";
-import { MYEONGDONG } from "@/lib/geo";
+import { MYEONGDONG, type LatLng } from "@/lib/geo";
+import { useLocation } from "./use-location";
 
 const MapView = dynamic(() => import("./map-view"), {
   ssr: false,
@@ -25,18 +26,26 @@ const CATS: { key: "all" | PlaceType; label: string }[] = [
 export function MapScreen() {
   const [cat, setCat] = useState<"all" | PlaceType>("all");
   const [selectedId, setSelectedId] = useState<string | null>(null);
+  const { loc, status, retry } = useLocation();
+  const [flyTarget, setFlyTarget] = useState<LatLng | null>(null);
+  const [bannerDismissed, setBannerDismissed] = useState(false);
+  const centerRef = useRef(loc ?? MYEONGDONG); // 최초 마운트 center 고정용
 
   const places = useMemo(() => (cat === "all" ? PLACES : PLACES.filter((p) => p.type === cat)), [cat]);
+
+  useEffect(() => {
+    if (status === "granted" && loc) setFlyTarget(loc);
+  }, [status, loc]);
 
   return (
     <div className="map-screen">
       <MapView
-        center={MYEONGDONG}
+        center={centerRef.current}
         places={places}
         selectedId={selectedId}
         onSelect={setSelectedId}
-        userLoc={null}
-        flyTarget={null}
+        userLoc={loc}
+        flyTarget={flyTarget}
         onUserMove={() => {}}
       />
 
@@ -56,6 +65,23 @@ export function MapScreen() {
           ))}
         </div>
       </div>
+
+      <button
+        className="map-fab"
+        aria-label="Center on my location"
+        onClick={() => (loc ? setFlyTarget({ ...loc }) : (setBannerDismissed(false), retry()))}
+      >
+        <Icon name="locate" size="sm" />
+      </button>
+
+      {status === "fallback" && !bannerDismissed && (
+        <div className="map-banner" role="status">
+          <span className="small">Location is off — showing <b>Myeongdong</b> as your starting point.</span>
+          <button className="iconbtn" style={{ width: 32, height: 32 }} aria-label="Dismiss" onClick={() => setBannerDismissed(true)}>
+            <Icon name="x" size="xs" />
+          </button>
+        </div>
+      )}
     </div>
   );
 }

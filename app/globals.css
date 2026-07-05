@@ -1613,4 +1613,35 @@
   .map-bubble.selected .icn { color: #fff; }
   .map-bubble b { font-weight: 600; }
   .leaflet-container { font-family: var(--sans); }
+  .map-fab {
+    position: absolute;
+    right: 14px;
+    bottom: calc(120px + env(safe-area-inset-bottom)); /* above sheet peek */
+    z-index: 900;
+    width: 44px;
+    height: 44px;
+    display: grid;
+    place-items: center;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--r-full);
+    box-shadow: var(--shadow-float);
+    color: var(--accent);
+  }
+  .map-banner {
+    position: absolute;
+    left: 14px;
+    right: 14px;
+    top: calc(max(12px, env(safe-area-inset-top)) + 96px);
+    z-index: 900;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    padding: 8px 8px 8px 14px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--r-md);
+    box-shadow: var(--shadow-float);
+  }
 }
