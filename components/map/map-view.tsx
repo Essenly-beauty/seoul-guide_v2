@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo } from "react";
+import { useEffect, useMemo, useRef } from "react";
 import { MapContainer, TileLayer, Marker, CircleMarker, useMapEvents } from "react-leaflet";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
@@ -47,9 +47,13 @@ function bubbleIcon(place: Place, selected: boolean) {
 }
 
 function MapWiring({ flyTarget, onUserMove, getBounds }: Pick<MapViewProps, "flyTarget" | "onUserMove" | "getBounds">) {
+  // zoomend/dragend fire for programmatic flyTo/setView too, not just user gestures.
+  // Guard with this flag so "Search this area" doesn't appear after a GPS auto-fly.
+  const flying = useRef(false);
   const map = useMapEvents({
-    dragend: () => onUserMove(),
-    zoomend: () => onUserMove(),
+    dragend: () => { if (!flying.current) onUserMove(); },
+    zoomend: () => { if (!flying.current) onUserMove(); },
+    moveend: () => { flying.current = false; },
   });
   useEffect(() => {
     getBounds?.(() => {
@@ -59,6 +63,7 @@ function MapWiring({ flyTarget, onUserMove, getBounds }: Pick<MapViewProps, "fly
   }, [map, getBounds]);
   useEffect(() => {
     if (!flyTarget) return;
+    flying.current = true;
     if (reducedMotion()) map.setView([flyTarget.lat, flyTarget.lng], 14);
     else map.flyTo([flyTarget.lat, flyTarget.lng], 14, { duration: 0.8 });
   }, [flyTarget, map]);

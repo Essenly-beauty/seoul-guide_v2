@@ -1538,11 +1538,16 @@
     position: relative;
     height: 100%;
     overflow: hidden;
+    /* Establishes a stacking context so this screen's internal 900-950 sub-scale
+       (map-top, map-fab, mapsheet, etc.) can't outrank a portaled .overlay/.sheet
+       dialog (z-index 80) mounted as a later sibling in .app-shell. */
+    z-index: 0;
   }
   .map-canvas {
     position: absolute;
     inset: 0;
     height: 100%;
+    z-index: 0; /* traps Leaflet's internal z-index stack (attribution is z-index: 1000) below the sheet/dialog */
     background: var(--surface-hover); /* tile-load fallback */
   }
   .map-top {

@@ -95,7 +95,7 @@ export function MapSheet({ places, origin, selectedId, onSelect, onClearSelectio
             <div className="row" style={{ gap: 10 }}>
               {selected.p.rating && <span className="rating">★ {selected.p.rating}</span>}
               <span className="chip mono">{selected.p.priceRange}</span>
-              <span className="small muted">{formatDistance(selected.km)} · ~{walkMinutes(selected.km)} min walk</span>
+              <span className="small muted">{formatDistance(selected.km)}{selected.km <= 3 && <> · ~{walkMinutes(selected.km)} min walk</>}</span>
             </div>
             <div className="row" style={{ gap: 8 }}>
               <Link className="btn ghost" style={{ flex: 1 }} href={routes.place(selected.p.id)}>View details</Link>
@@ -115,7 +115,8 @@ export function MapSheet({ places, origin, selectedId, onSelect, onClearSelectio
                 <span className="label">{TYPE_LABEL[p.type]} · {zoneShort(p.zone)}</span>
                 <div style={{ fontWeight: 600 }}>{p.name}</div>
                 <div className="caption muted">
-                  <span className="mono">{formatDistance(km)}</span> · ~{walkMinutes(km)} min walk
+                  <span className="mono">{formatDistance(km)}</span>
+                  {km <= 3 && <> · ~{walkMinutes(km)} min walk</>}
                   {p.rating && <> · <span className="stars">★ {p.rating}</span></>}
                   {p.englishOk && <> · English OK</>}
                 </div>

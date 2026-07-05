@@ -1,9 +1,14 @@
 "use client";
 
+import { useEffect } from "react";
 import Link from "next/link";
 import { routes } from "@/lib/routes";
 
 export default function ErrorPage({ error, reset }: { error: Error & { digest?: string }; reset: () => void }) {
+  useEffect(() => {
+    console.error(error);
+  }, [error]);
+
   return (
     <main className="app-scroll pad" style={{ display: "flex", flexDirection: "column", justifyContent: "center", textAlign: "center" }}>
       <h1 className="h1">Something went <span style={{ fontStyle: "italic", color: "var(--accent)" }}>sideways.</span></h1>

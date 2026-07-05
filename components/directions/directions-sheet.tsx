@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState, type ReactNode } from "react";
+import { createPortal } from "react-dom";
 import { Icon } from "@/components/icon";
 import { useToast } from "@/components/ui/toast";
 import { googleMapsUrl, kakaoMapUrl, naverMapUrl } from "@/lib/geo";
@@ -16,9 +17,15 @@ const APPS = (p: DirectionsPlace) => [
 /** Trigger button + bottom-sheet chooser for map apps, with a taxi card. */
 export function DirectionsLauncher({ place, className, children }: { place: DirectionsPlace; className?: string; children?: ReactNode }) {
   const [open, setOpen] = useState(false);
+  const [host, setHost] = useState<Element | null>(null);
   const triggerRef = useRef<HTMLButtonElement>(null);
   const closeRef = useRef<HTMLButtonElement>(null);
   const { copy } = useToast();
+
+  // Anchor the overlay to .app-shell (full height), not wherever this launcher lives.
+  useEffect(() => {
+    setHost(document.querySelector(".app-shell"));
+  }, []);
 
   useEffect(() => {
     if (!open) return;
@@ -38,9 +45,8 @@ export function DirectionsLauncher({ place, className, children }: { place: Dire
         {children ?? (<><Icon name="pin" size="sm" /> Get Directions</>)}
       </button>
 
-      {open && (
-        <>
-          <div className="overlay" onClick={() => setOpen(false)} />
+      {open && host && createPortal(
+        <div className="overlay" onClick={(e) => { if (e.target === e.currentTarget) setOpen(false); }}>
           <div className="sheet" role="dialog" aria-modal="true" aria-label={`Directions to ${place.name}`}>
             <div className="shead">
               <div>
@@ -73,7 +79,8 @@ export function DirectionsLauncher({ place, className, children }: { place: Dire
               </div>
             </div>
           </div>
-        </>
+        </div>,
+        host,
       )}
     </>
   );

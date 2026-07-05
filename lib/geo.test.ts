@@ -19,6 +19,9 @@ describe("formatDistance", () => {
   it("uses km with one decimal at 1km+", () => {
     expect(formatDistance(1.23)).toBe("1.2 km");
   });
+  it("rounds meters up into km at the 1000m boundary", () => {
+    expect(formatDistance(0.996)).toBe("1.0 km");
+  });
 });
 
 describe("walkMinutes", () => {

@@ -18,7 +18,11 @@ export function haversineKm(a: LatLng, b: LatLng): number {
 }
 
 export function formatDistance(km: number): string {
-  if (km < 1) return `${Math.round((km * 1000) / 10) * 10} m`;
+  if (km < 1) {
+    const m = Math.round((km * 1000) / 10) * 10;
+    // Rounding can push meters up to (or past) 1000 (e.g. 0.996 → 1000m) — render as km instead.
+    if (m < 1000) return `${m} m`;
+  }
   return `${km.toFixed(1)} km`;
 }
 
