@@ -19,7 +19,7 @@ export default function MyReviewsPage() {
         <div className="label">Awaiting your review</div>
         <div className="card row between">
           <div><b>Eden Head Spa</b><div className="caption muted mono">Apr 22 · HS-8B14D2</div></div>
-          <Link className="btn sm outline" href={routes.booking(sample.booking)}>Write →</Link>
+          <Link className="btn sm outline" href={routes.reviewNew}>Write review</Link>
         </div>
 
         <div className="label">Written</div>

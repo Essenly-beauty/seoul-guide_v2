@@ -25,6 +25,7 @@ export const routes = {
   // My
   mypage: "/mypage",
   reviews: "/mypage/reviews",
+  reviewNew: "/mypage/reviews/new",
   notifications: "/mypage/notifications",
   settings: "/settings",
   favorites: "/favorites",
