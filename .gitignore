@@ -8,3 +8,13 @@ next-env.d.ts
 .DS_Store
 .gstack/
 .superpowers/
+
+# Local reference material (not for the public repo)
+/codex/
+/spacecloud-*.html
+/essenly-prototype.html
+/DESIGN.md
+/design-tokens.json
+/MIGRATION.md
+/AUDIT.md
+/docs/
