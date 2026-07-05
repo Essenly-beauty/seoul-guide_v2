@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { TopBar } from "@/components/ui/top-bar";
 import { BottomNav } from "@/components/ui/bottom-nav";
 import { BackButton } from "@/components/ui/back-button";
@@ -42,6 +43,14 @@ export default function SettingsPage() {
         <ChipGroup single items={["First time", "Know a bit", "Obsessed"]} defaultSelected={["Know a bit"]} />
         <div className="label">Monthly beauty spend · Optional</div>
         <ChipGroup single items={["Under $50", "$50–100", "$100–200", "$200+"]} />
+
+        <div className="label" style={{ marginTop: 6 }}>About</div>
+        <Link className="card tap row between" href={routes.legalTerms}>
+          <b>Terms of Service</b><span className="caption dim">→</span>
+        </Link>
+        <Link className="card tap row between" href={routes.legalPrivacy}>
+          <b>Privacy Policy</b><span className="caption dim">→</span>
+        </Link>
 
         <ActionButton className="btn" toast="Saved!">Save Changes</ActionButton>
         <SignoutModal />

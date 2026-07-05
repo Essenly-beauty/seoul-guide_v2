@@ -44,7 +44,9 @@ export default function SplashPage() {
           <Link className="btn" href={routes.home}>Dev Login (Skip to Home)</Link>
         </div>
         <p className="caption dim" style={{ marginTop: 18 }}>
-          By continuing you agree to the Terms and Privacy Policy.
+          By continuing you agree to the{" "}
+          <Link href={routes.legalTerms} style={{ textDecoration: "underline" }}>Terms</Link> and{" "}
+          <Link href={routes.legalPrivacy} style={{ textDecoration: "underline" }}>Privacy Policy</Link>.
         </p>
       </div>
     </div>

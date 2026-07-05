@@ -24,6 +24,11 @@ const ACCOUNT: Row[] = [
   { label: "Kit status", href: routes.kitStatus, icon: "gift" },
 ];
 
+const ABOUT: Row[] = [
+  { label: "Terms of Service", href: routes.legalTerms, icon: "book" },
+  { label: "Privacy Policy", href: routes.legalPrivacy, icon: "lock" },
+];
+
 export function HamburgerMenu() {
   const [open, setOpen] = useState(false);
   const [host, setHost] = useState<Element | null>(null);
@@ -66,6 +71,12 @@ export function HamburgerMenu() {
             <div className="dsection label">Account</div>
             {ACCOUNT.map((r) => (
               <Link key={r.href} href={r.href} className="drow" aria-current={isActive(r.href) ? "page" : undefined} onClick={() => setOpen(false)}>
+                <Icon name={r.icon} size="sm" />{r.label}
+              </Link>
+            ))}
+            <div className="dsection label">About</div>
+            {ABOUT.map((r) => (
+              <Link key={r.href} href={r.href} className="drow" onClick={() => setOpen(false)}>
                 <Icon name={r.icon} size="sm" />{r.label}
               </Link>
             ))}

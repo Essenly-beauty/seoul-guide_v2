@@ -28,6 +28,8 @@ export const routes = {
   settings: "/settings",
   favorites: "/favorites",
   support: "/support",
+  legalTerms: "/legal/terms",
+  legalPrivacy: "/legal/privacy",
 
   // Kit / bookings / trip (full scope, not MVP-hidden)
   kitSurvey: "/kit/survey",
