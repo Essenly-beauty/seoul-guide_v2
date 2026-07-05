@@ -1,0 +1,10 @@
+{
+  "name": "Essenly — Seoul Beauty Guide",
+  "short_name": "Essenly",
+  "description": "Free K-beauty travel guide + hair kit for your Seoul trip.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#FAFBFD",
+  "theme_color": "#FAFBFD",
+  "icons": []
+}
