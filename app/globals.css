@@ -1508,4 +1508,9 @@
     opacity: 1;
     transform: translate(-50%, 0);
   }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 0.8; }
+  }
 }

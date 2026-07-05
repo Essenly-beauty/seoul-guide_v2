@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { notFound } from "next/navigation";
 import { TopBar } from "@/components/ui/top-bar";
 import { BottomNav } from "@/components/ui/bottom-nav";
 import { BackButton } from "@/components/ui/back-button";
@@ -10,7 +11,8 @@ const slugify = (s: string) => s.toLowerCase().replace(/\s+/g, "-");
 
 export default function BrandPage({ params }: { params: { id: string } }) {
   const products = PRODUCTS.filter((p) => slugify(p.brand) === params.id);
-  const brandName = products[0]?.brand ?? params.id.replace(/-/g, " ");
+  if (products.length === 0) notFound();
+  const brandName = products[0].brand;
 
   return (
     <>
