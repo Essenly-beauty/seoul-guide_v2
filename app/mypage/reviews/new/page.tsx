@@ -30,10 +30,23 @@ export default function WriteReviewPage() {
           {STAR_LABELS.map((label, i) => (
             <button
               key={label}
+              type="button"
               role="radio"
               aria-checked={stars === i + 1}
               aria-label={`${i + 1} star${i ? "s" : ""} — ${label}`}
+              tabIndex={stars === i + 1 || (stars === 0 && i === 0) ? 0 : -1}
               onClick={() => setStars(i + 1)}
+              onKeyDown={(e) => {
+                let next: number | null = null;
+                if (e.key === "ArrowRight" || e.key === "ArrowUp") next = Math.min(i + 2, 5);
+                if (e.key === "ArrowLeft" || e.key === "ArrowDown") next = Math.max(i, 1);
+                if (next !== null) {
+                  e.preventDefault();
+                  setStars(next);
+                  const btns = e.currentTarget.parentElement?.querySelectorAll<HTMLButtonElement>("[role=radio]");
+                  btns?.[next - 1]?.focus();
+                }
+              }}
               style={{ width: 44, height: 44, fontSize: 26, color: i < stars ? "var(--warning)" : "var(--border)" }}
             >
               ★
@@ -62,11 +75,12 @@ export default function WriteReviewPage() {
         </div>
 
         <div className="label">Photos · Optional</div>
-        <button className="card" style={{ display: "grid", placeItems: "center", minHeight: 84, borderStyle: "dashed" }} onClick={() => toast("Photo upload arrives with the full release")}>
+        <button type="button" className="card" style={{ display: "grid", placeItems: "center", minHeight: 84, borderStyle: "dashed" }} onClick={() => toast("Photo upload arrives with the full release")}>
           <span className="row" style={{ gap: 6, color: "var(--muted)" }}><Icon name="plus" size="sm" /> Add photos</span>
         </button>
 
         <button
+          type="button"
           className="btn"
           disabled={stars === 0}
           style={stars === 0 ? { opacity: 0.5 } : undefined}
