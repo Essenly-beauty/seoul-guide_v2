@@ -41,7 +41,7 @@ export default function BeautyProfilePage() {
 
         <div className="row" style={{ marginTop: 8, gap: 10 }}>
           <Link className="btn ghost" href={routes.onboardingInterests} style={{ flex: 1 }}>Prev</Link>
-          <Link className="btn" href={routes.home} style={{ flex: 2 }}>Get Started</Link>
+          <Link className="btn" href={routes.map} style={{ flex: 2 }}>Get Started</Link>
         </div>
       </div>
     </>

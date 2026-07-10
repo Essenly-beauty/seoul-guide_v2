@@ -14,7 +14,7 @@ const FAQ = [
 export default function SupportPage() {
   return (
     <>
-      <TopBar center left={<BackButton fallback={routes.mypage} />} title="Support" />
+      <TopBar center left={<BackButton fallback={routes.menu} />} title="Support" />
       <div className="app-scroll pad stack">
         <div>
           <div className="label">FAQ</div>

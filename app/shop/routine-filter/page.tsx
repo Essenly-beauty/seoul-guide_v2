@@ -7,7 +7,7 @@ import { routes } from "@/lib/routes";
 export default function RoutinePage() {
   return (
     <>
-      <TopBar center left={<BackButton fallback={routes.shop} />} title="Routine" />
+      <TopBar center left={<BackButton fallback={routes.ranking} />} title="Routine" />
       <div className="app-scroll pad">
         <RoutineContent />
       </div>

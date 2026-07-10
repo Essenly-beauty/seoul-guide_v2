@@ -181,7 +181,7 @@ export function BookingSheet({
               )}
               {step === 4 && (
                 <div className="row" style={{ gap: 10 }}>
-                  <button className="btn ghost" style={{ flex: 1 }} onClick={() => close(routes.home)}>Done</button>
+                  <button className="btn ghost" style={{ flex: 1 }} onClick={() => close(routes.map)}>Done</button>
                   <button className="btn" style={{ flex: 1 }} onClick={() => close(routes.bookings)}>My Bookings</button>
                 </div>
               )}

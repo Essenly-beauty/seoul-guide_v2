@@ -7,7 +7,7 @@ import { routes } from "@/lib/routes";
 export default function NotificationsPage() {
   return (
     <>
-      <TopBar center left={<BackButton fallback={routes.mypage} />} title="Notifications" />
+      <TopBar center left={<BackButton fallback={routes.menu} />} title="Notifications" />
       <div className="app-scroll pad stack">
         <div>
           <div className="label">Notifications</div>

@@ -20,7 +20,7 @@ export default function ProductDetailPage({ params }: { params: { id: string } }
   return (
     <>
       <div className="topbar">
-        <BackButton fallback={routes.shop} />
+        <BackButton fallback={routes.ranking} />
         <span style={{ flex: 1 }} />
         <FavoriteButton initial={p.isEditorsPick} />
       </div>

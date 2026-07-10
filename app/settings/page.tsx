@@ -10,7 +10,7 @@ import { routes } from "@/lib/routes";
 export default function SettingsPage() {
   return (
     <>
-      <TopBar center left={<BackButton fallback={routes.mypage} />} title="Settings" />
+      <TopBar center left={<BackButton fallback={routes.menu} />} title="Settings" />
       <div className="app-scroll pad stack">
         <div>
           <div className="label">Profile</div>

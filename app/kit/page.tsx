@@ -7,7 +7,7 @@ import { routes } from "@/lib/routes";
 export default function KitStatusPage() {
   return (
     <>
-      <TopBar center left={<BackButton fallback={routes.mypage} />} title="My Kit Request" />
+      <TopBar center left={<BackButton fallback={routes.menu} />} title="My Kit Request" />
       <div className="app-scroll pad stack">
         <div className="card stack sm">
           <div className="row between">

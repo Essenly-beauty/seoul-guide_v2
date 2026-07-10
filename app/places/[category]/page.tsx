@@ -14,7 +14,7 @@ export default function PlacesCategoryPage({ params }: { params: { category: str
 
   return (
     <>
-      <TopBar center left={<BackButton fallback={routes.home} />} title={meta.title} />
+      <TopBar center left={<BackButton fallback={routes.map} />} title={meta.title} />
       <div className="app-scroll pad stack">
         <div>
           <div className="label">{meta.eyebrow}</div>

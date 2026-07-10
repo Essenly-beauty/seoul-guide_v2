@@ -24,7 +24,7 @@ export function KitSurvey() {
             <Icon name="back" />
           </button>
         ) : (
-          <BackButton fallback={routes.home} />
+          <BackButton fallback={routes.map} />
         )}
         <span className="steplabel" style={{ flex: 1 }}>
           {STEP_LABEL(step)}
@@ -143,7 +143,7 @@ export function KitSurvey() {
             </div>
             <div className="stack" style={{ marginTop: 8 }}>
               <Link className="btn" href={routes.kitStatus}>View My Kit Status</Link>
-              <button className="btn ghost" onClick={() => router.push(routes.home)}>Back to Home</button>
+              <button className="btn ghost" onClick={() => router.push(routes.map)}>Back to Home</button>
             </div>
           </div>
         )}

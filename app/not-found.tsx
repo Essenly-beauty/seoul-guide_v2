@@ -13,8 +13,8 @@ export default function NotFound() {
         The link may be old, or the place may have moved. Let&apos;s get you back on the route.
       </p>
       <div className="stack" style={{ marginTop: 22, maxWidth: 280, marginInline: "auto", width: "100%" }}>
-        <Link className="btn" href={routes.home}>Back to Home</Link>
-        <Link className="btn ghost" href={routes.spot}>Browse places</Link>
+        <Link className="btn" href={routes.map}>Back to Home</Link>
+        <Link className="btn ghost" href={routes.search}>Browse places</Link>
       </div>
     </main>
   );

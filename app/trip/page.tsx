@@ -9,7 +9,7 @@ import { routes } from "@/lib/routes";
 export default function TripPage() {
   return (
     <>
-      <TopBar center left={<BackButton fallback={routes.home} />} title="My Trips" />
+      <TopBar center left={<BackButton fallback={routes.map} />} title="My Trips" />
       <div className="app-scroll pad stack">
         <ActionButton className="empty" toast="Trip planner coming soon">
           <div className="ic"><Icon name="plane" size="sm" /></div>

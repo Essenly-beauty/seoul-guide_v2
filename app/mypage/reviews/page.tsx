@@ -7,7 +7,7 @@ import { routes, sample } from "@/lib/routes";
 export default function MyReviewsPage() {
   return (
     <>
-      <TopBar center left={<BackButton fallback={routes.mypage} />} title="My reviews" />
+      <TopBar center left={<BackButton fallback={routes.menu} />} title="My reviews" />
       <div className="app-scroll pad stack">
         <div>
           <h2 className="h2">Your reviews</h2>

@@ -209,23 +209,6 @@ export const SHOP_CATEGORIES: { key: "all" | ProductCategory; label: string }[] 
   { key: "fragrance", label: "Fragrance" },
 ];
 
-export const SUB_CATEGORIES: Partial<Record<ProductCategory, { key: "all" | StepCategory; label: string }[]>> = {
-  skincare: [
-    { key: "all", label: "All" }, { key: "cleanser", label: "Cleanser" }, { key: "toner", label: "Toner" },
-    { key: "essence", label: "Essence" }, { key: "serum", label: "Serum" }, { key: "moisturizer", label: "Moisturizer" },
-    { key: "sunscreen", label: "Sunscreen" }, { key: "mask_pack", label: "Mask Pack" },
-  ],
-  haircare: [
-    { key: "all", label: "All" }, { key: "shampoo", label: "Shampoo" },
-    { key: "conditioner", label: "Conditioner" }, { key: "hair_treatment", label: "Treatment" },
-  ],
-};
-
-export const ALL_FILTERS: { key: "all" | "essenly" | "3step" | "5step" | "7step"; label: string }[] = [
-  { key: "all", label: "All" }, { key: "essenly", label: "Essenly Pick" },
-  { key: "3step", label: "3-step" }, { key: "5step", label: "5-step" }, { key: "7step", label: "7-step" },
-];
-
 export const STEP_MAP: Record<3 | 5 | 7, StepCategory[]> = {
   3: ["cleanser", "moisturizer", "sunscreen"],
   5: ["cleanser", "toner", "essence", "moisturizer", "sunscreen"],

@@ -18,7 +18,7 @@ export default function ErrorPage({ error, reset }: { error: Error & { digest?: 
       {error.digest && <div className="caption dim mono" style={{ marginTop: 6 }}>Ref {error.digest}</div>}
       <div className="stack" style={{ marginTop: 22, maxWidth: 280, marginInline: "auto", width: "100%" }}>
         <button className="btn" onClick={reset}>Try again</button>
-        <Link className="btn ghost" href={routes.home}>Back to Home</Link>
+        <Link className="btn ghost" href={routes.map}>Back to Home</Link>
       </div>
     </main>
   );

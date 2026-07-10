@@ -13,7 +13,7 @@ export default function BookingsListPage() {
         left={<BrandMark size={24} />}
         title="My Bookings"
         right={
-          <Link className="iconbtn" href={routes.home} aria-label="Home">
+          <Link className="iconbtn" href={routes.map} aria-label="Home">
             <Icon name="home" />
           </Link>
         }
@@ -69,7 +69,7 @@ export default function BookingsListPage() {
           <p className="small muted">Curated head spas, salons, and clinics for foreign visitors.</p>
           <div className="row" style={{ gap: 8 }}>
             <Link className="btn sm" href={routes.placesCategory("head_spa")}>Browse Head Spa</Link>
-            <Link className="btn sm ghost" href={routes.home}>All Categories</Link>
+            <Link className="btn sm ghost" href={routes.map}>All Categories</Link>
           </div>
         </div>
       </div>
