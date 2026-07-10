@@ -68,7 +68,7 @@ export default function BookingsListPage() {
           <b className="serif h3">Looking for somewhere new?</b>
           <p className="small muted">Curated head spas, salons, and clinics for foreign visitors.</p>
           <div className="row" style={{ gap: 8 }}>
-            <Link className="btn sm" href={routes.placesCategory("headspa")}>Browse Head Spa</Link>
+            <Link className="btn sm" href={routes.placesCategory("head_spa")}>Browse Head Spa</Link>
             <Link className="btn sm ghost" href={routes.home}>All Categories</Link>
           </div>
         </div>

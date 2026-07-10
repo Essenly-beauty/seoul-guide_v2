@@ -30,20 +30,14 @@ export function PlacesContent({ category, places }: { category: string; places: 
     return [...counts.entries()].sort((a, b) => b[1] - a[1]).map(([d]) => d);
   }, [places]);
 
-  const zoneChips = !isSpotHub ? (CATEGORY_ZONES[category as Exclude<PlaceType, "spots"> | "spots"] ?? []) : [];
+  const zoneChips = !isSpotHub ? (CATEGORY_ZONES[category as PlaceType] ?? []) : [];
 
   const filtered = useMemo(() => {
     return places.filter((p) => {
       if (!isSpotHub && zone !== "all" && p.zone !== zone) return false;
       if (isSpotHub && district !== "all" && placeDistrict(p) !== district) return false;
       if (price !== "all" && p.priceRange !== price) return false;
-      if (isSpotHub && detail !== "all") {
-        if (detail === "spa") { if (p.type !== "spa" && p.type !== "headspa") return false; }
-        else if (detail === "nail") {
-          const hay = (p.name + " " + p.tags.join(" ")).toLowerCase();
-          if (!hay.includes("nail")) return false;
-        } else if (p.type !== detail) return false;
-      }
+      if (isSpotHub && detail !== "all" && p.type !== detail) return false;
       return true;
     });
   }, [places, isSpotHub, zone, district, price, detail]);
@@ -112,13 +106,6 @@ export function PlacesContent({ category, places }: { category: string; places: 
             <div style={{ position: "absolute", top: 10, right: 10 }}><FavoriteButton /></div>
           </div>
         ))
-      )}
-
-      {!isSpotHub && category === "spa" && (
-        <Link className="card accent" href={routes.placesCategory("headspa")}>
-          <b className="serif h3">Looking for a head spa?</b>
-          <p className="small muted" style={{ marginTop: 4 }}>Curated head spas with scalp therapy menus →</p>
-        </Link>
       )}
 
       <KitCta href={routes.kitSurvey} title="Get a free Essenly hair kit" subtitle="Pair your visit with our curated hair pack." />

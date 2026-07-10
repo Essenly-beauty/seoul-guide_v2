@@ -19,7 +19,7 @@ const REVIEWS = [
 ];
 
 export function isBookable(place: Place): boolean {
-  return place.type === "salon" || place.type === "spa" || place.type === "headspa" || place.type === "clinic";
+  return (place.bookingChannels?.length ?? 0) > 0;
 }
 
 /** Shared place-detail content: hero through KitCta. Renders in the /place page
@@ -72,7 +72,7 @@ export function PlaceDetailBody({ place, heroOverlay }: { place: Place; heroOver
           ))}
         </div>
 
-        {place.type === "clinic" && (
+        {place.type === "skin_clinic" && (
           <div className="banner warning">
             <Icon name="cross" size="sm" />
             <span>Medical procedures require a consultation before booking. Essenly does not provide medical advice.</span>

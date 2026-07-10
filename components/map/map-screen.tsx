@@ -5,7 +5,7 @@ import dynamic from "next/dynamic";
 import Link from "next/link";
 import { Icon } from "@/components/icon";
 import { routes } from "@/lib/routes";
-import { PLACES, type PlaceType } from "@/lib/data";
+import { PLACES, MAP_CATEGORIES, type PlaceType } from "@/lib/data";
 import { MYEONGDONG, type LatLng } from "@/lib/geo";
 import { useLocation } from "./use-location";
 import { MapSheet } from "./map-sheet";
@@ -14,15 +14,6 @@ const MapView = dynamic(() => import("./map-view"), {
   ssr: false,
   loading: () => <div className="map-canvas hero-img" aria-label="Loading map" />,
 });
-
-const CATS: { key: "all" | PlaceType; label: string }[] = [
-  { key: "all", label: "All" },
-  { key: "salon", label: "Hair" },
-  { key: "spa", label: "Spa" },
-  { key: "headspa", label: "Head Spa" },
-  { key: "clinic", label: "Clinic" },
-  { key: "spots", label: "Spots" },
-];
 
 export function MapScreen() {
   const [cat, setCat] = useState<"all" | PlaceType>("all");
@@ -67,7 +58,7 @@ export function MapScreen() {
           <Link className="iconbtn map-close" href={routes.home} aria-label="Close map"><Icon name="x" size="sm" /></Link>
         </div>
         <div className="chiprow" role="group" aria-label="Filter by category">
-          {CATS.map((c) => (
+          {MAP_CATEGORIES.map((c) => (
             <button key={c.key} className={"chip" + (cat === c.key ? " selected" : "")} aria-pressed={cat === c.key} onClick={() => { setCat(c.key); setSelectedId(null); }}>
               {c.label}
             </button>

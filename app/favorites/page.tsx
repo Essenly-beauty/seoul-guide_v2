@@ -11,7 +11,7 @@ import { routes } from "@/lib/routes";
 import { PRODUCTS, PLACES, TYPE_LABEL, TYPE_ICON, zoneShort } from "@/lib/data";
 
 const favProducts = PRODUCTS.slice(0, 3);
-const favPlaces = PLACES.filter((p) => p.type === "salon" || p.type === "spa").slice(0, 2);
+const favPlaces = PLACES.filter((p) => p.type === "hair_salon" || p.type === "head_spa").slice(0, 2);
 
 function ProductsPanel() {
   return (
