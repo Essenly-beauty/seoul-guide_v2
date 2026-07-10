@@ -19,6 +19,8 @@ export type MapViewProps = {
   onUserMove: () => void;
   /** Parent receives a bounds getter for area re-search. */
   getBounds?: (fn: () => { south: number; west: number; north: number; east: number }) => void;
+  /** Route-mode station markers (rendered in addition to place markers). */
+  stationPins?: { id: string; name: string; lat: number; lng: number }[];
 };
 
 const TILE_URL = "https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png";
@@ -70,7 +72,7 @@ function MapWiring({ flyTarget, onUserMove, getBounds }: Pick<MapViewProps, "fly
   return null;
 }
 
-export default function MapView({ center, places, selectedId, onSelect, userLoc, flyTarget, onUserMove, getBounds }: MapViewProps) {
+export default function MapView({ center, places, selectedId, onSelect, userLoc, flyTarget, onUserMove, getBounds, stationPins }: MapViewProps) {
   const markers = useMemo(
     () =>
       places.map((p) => (
@@ -102,6 +104,10 @@ export default function MapView({ center, places, selectedId, onSelect, userLoc,
         </>
       )}
       {markers}
+      {stationPins?.map((s) => (
+        <CircleMarker key={s.id} center={[s.lat, s.lng]} radius={9}
+          pathOptions={{ color: "#ffffff", weight: 2, fillColor: "#1f2937" /* station pin — Leaflet cannot read CSS vars */, fillOpacity: 1 }} />
+      ))}
     </MapContainer>
   );
 }

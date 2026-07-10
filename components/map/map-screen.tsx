@@ -12,6 +12,8 @@ import { useLocation } from "./use-location";
 import { MapSheet } from "./map-sheet";
 import { FilterSheet } from "./filter-sheet";
 import { SubwayMap } from "@/components/subway/subway-map";
+import { RouteStrip } from "@/components/subway/route-strip";
+import { findRoute, placesNearStations, STATIONS, type SubwayRoute } from "@/lib/subway";
 
 const MapView = dynamic(() => import("./map-view"), {
   ssr: false,
@@ -33,12 +35,36 @@ export function MapScreen() {
   const boundsGetter = useRef<(() => { south: number; west: number; north: number; east: number }) | null>(null);
   const [departure, setDeparture] = useState<string | null>(null);
   const [arrival, setArrival] = useState<string | null>(null);
+  const [route, setRoute] = useState<SubwayRoute | null>(null);
+  const [activeStation, setActiveStation] = useState<string | null>(null);
+
+  // 출발+도착이 모두 지정되는 순간 즉시 전환 (스펙 결정 #10)
+  useEffect(() => {
+    if (!departure || !arrival) return;
+    const r = findRoute(departure, arrival);
+    if (r) {
+      setRoute(r);
+      setActiveStation(departure);
+      setMode("map");
+      setFlyTarget({ lat: STATIONS[departure].lat, lng: STATIONS[departure].lng });
+      setSelectedId(null);
+      setArea(null);
+    }
+    setDeparture(null);
+    setArrival(null);
+  }, [departure, arrival]);
 
   const places = useMemo(() => {
     let list = applyFilters(PLACES, cat, filters);
-    if (area) list = list.filter((p) => p.lat >= area.south && p.lat <= area.north && p.lng >= area.west && p.lng <= area.east);
+    if (route) list = placesNearStations(list, route.stations);
+    else if (area) list = list.filter((p) => p.lat >= area.south && p.lat <= area.north && p.lng >= area.west && p.lng <= area.east);
     return list;
-  }, [cat, filters, area]);
+  }, [cat, filters, area, route]);
+
+  const stationPins = useMemo(
+    () => route?.stations.map((id) => ({ id, name: STATIONS[id].name, lat: STATIONS[id].lat, lng: STATIONS[id].lng })) ?? undefined,
+    [route],
+  );
 
   useEffect(() => {
     if (status === "granted" && loc) setFlyTarget(loc);
@@ -55,6 +81,7 @@ export function MapScreen() {
         flyTarget={flyTarget}
         onUserMove={() => setMoved(true)}
         getBounds={(fn) => { boundsGetter.current = fn; }}
+        stationPins={stationPins}
       />
 
       {mode === "subway" && (
@@ -104,7 +131,7 @@ export function MapScreen() {
             </button>
           </div>
         )}
-        {moved && (
+        {!route && moved && (
           <button
             className="chip selected"
             style={{ justifySelf: "center" }}
@@ -128,13 +155,22 @@ export function MapScreen() {
         <Icon name="locate" size="sm" />
       </button>
 
-      {mode === "map" && (
+      {mode === "map" && !route && (
         <MapSheet
           places={places}
           origin={loc ?? GANGNAM_STATION}
           selectedId={selectedId}
           onSelect={setSelectedId}
           onClearSelection={() => setSelectedId(null)}
+        />
+      )}
+
+      {route && mode === "map" && (
+        <RouteStrip
+          route={route}
+          activeId={activeStation}
+          onStation={(id) => { setActiveStation(id); setFlyTarget({ lat: STATIONS[id].lat, lng: STATIONS[id].lng }); }}
+          onClear={() => { setRoute(null); setActiveStation(null); }}
         />
       )}
 
