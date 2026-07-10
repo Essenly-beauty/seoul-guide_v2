@@ -5,11 +5,12 @@ import dynamic from "next/dynamic";
 import Link from "next/link";
 import { BrandMark, Icon } from "@/components/icon";
 import { routes } from "@/lib/routes";
-import { PLACES, MAP_CATEGORIES, type PlaceType } from "@/lib/data";
+import { PLACES, MAP_CATEGORIES, SERVICE_FILTERS, type PlaceType } from "@/lib/data";
 import { GANGNAM_STATION, type LatLng } from "@/lib/geo";
 import { applyFilters, countActiveFilters, EMPTY_FILTERS, type MapFilters } from "@/lib/places";
 import { useLocation } from "./use-location";
 import { MapSheet } from "./map-sheet";
+import { FilterSheet } from "./filter-sheet";
 
 const MapView = dynamic(() => import("./map-view"), {
   ssr: false,
@@ -69,7 +70,17 @@ export function MapScreen() {
           <div className="row" style={{ gap: 8, alignItems: "flex-start" }}>
             <div className="chiprow" role="group" aria-label="Filter by category" style={{ flex: 1 }}>
               {MAP_CATEGORIES.map((c) => (
-                <button key={c.key} className={"chip" + (cat === c.key ? " selected" : "")} aria-pressed={cat === c.key} onClick={() => { setCat(c.key); setSelectedId(null); }}>
+                <button
+                  key={c.key}
+                  className={"chip" + (cat === c.key ? " selected" : "")}
+                  aria-pressed={cat === c.key}
+                  onClick={() => {
+                    setCat(c.key);
+                    setSelectedId(null);
+                    const allowed = new Set((c.key === "all" ? [] : SERVICE_FILTERS[c.key as PlaceType] ?? []).map((s) => s.key));
+                    setFilters((f) => ({ ...f, serviceTags: f.serviceTags.filter((t) => allowed.has(t)) }));
+                  }}
+                >
                   {c.label}
                 </button>
               ))}
@@ -119,6 +130,15 @@ export function MapScreen() {
             <Icon name="x" size="xs" />
           </button>
         </div>
+      )}
+
+      {filterOpen && (
+        <FilterSheet
+          cat={cat}
+          filters={filters}
+          onApply={setFilters}
+          onClose={() => setFilterOpen(false)}
+        />
       )}
     </div>
   );
