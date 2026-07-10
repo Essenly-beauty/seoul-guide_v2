@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, type CSSProperties } from "react";
+import { useEffect, useRef, useState, type CSSProperties } from "react";
 import { createPortal } from "react-dom";
 import { Icon } from "@/components/icon";
 import { useToast } from "@/components/ui/toast";
@@ -15,19 +15,33 @@ const CHANNEL_INFO: Record<BookingChannel, { label: string; hint: string }> = {
 export function ChannelSheet({ place, triggerStyle }: { place: Place; triggerStyle?: CSSProperties }) {
   const [open, setOpen] = useState(false);
   const [host, setHost] = useState<Element | null>(null);
+  const triggerRef = useRef<HTMLButtonElement>(null);
+  const closeRef = useRef<HTMLButtonElement>(null);
   const { toast } = useToast();
 
   useEffect(() => { setHost(document.querySelector(".app-shell")); }, []);
 
+  useEffect(() => {
+    if (!open) return;
+    const trigger = triggerRef.current;
+    closeRef.current?.focus();
+    const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") setOpen(false); };
+    document.addEventListener("keydown", onKey);
+    return () => {
+      document.removeEventListener("keydown", onKey);
+      trigger?.focus();
+    };
+  }, [open]);
+
   return (
     <>
-      <button className="btn" style={triggerStyle} onClick={() => setOpen(true)}>Book</button>
+      <button ref={triggerRef} className="btn" style={triggerStyle} onClick={() => setOpen(true)}>Book</button>
       {open && host && createPortal(
         <div className="overlay" onClick={(e) => { if (e.target === e.currentTarget) setOpen(false); }}>
           <div className="sheet" role="dialog" aria-modal="true" aria-label={`Book ${place.name}`}>
             <div className="shead">
               <div><div className="label">Book via</div><b>{place.name}</b></div>
-              <button className="iconbtn" aria-label="Close" onClick={() => setOpen(false)}><Icon name="x" size="sm" /></button>
+              <button ref={closeRef} className="iconbtn" aria-label="Close" onClick={() => setOpen(false)}><Icon name="x" size="sm" /></button>
             </div>
             <div className="sbody stack">
               {(place.bookingChannels ?? []).map((c) => (

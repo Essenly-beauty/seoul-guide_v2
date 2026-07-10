@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { Icon } from "@/components/icon";
 import { PRICE_OPTIONS, SERVICE_FILTERS, TYPE_LABEL, type PlaceType, type PriceRange } from "@/lib/data";
@@ -17,6 +17,7 @@ export function FilterSheet({ cat, filters, onApply, onClose }: {
 }) {
   const [draft, setDraft] = useState<MapFilters>(filters);
   const [host, setHost] = useState<Element | null>(null);
+  const closeRef = useRef<HTMLButtonElement>(null);
   const services = cat !== "all" ? SERVICE_FILTERS[cat] : undefined;
 
   // Anchor to .app-shell like DirectionsLauncher — .map-screen traps z-index
@@ -25,6 +26,16 @@ export function FilterSheet({ cat, filters, onApply, onClose }: {
   useEffect(() => {
     setHost(document.querySelector(".app-shell"));
   }, []);
+
+  // Conditionally mounted by the parent (no internal trigger), so focus
+  // management on open/Escape happens here; focus restoration to the
+  // triggering button is handled by the parent (map-screen.tsx).
+  useEffect(() => {
+    closeRef.current?.focus();
+    const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") onClose(); };
+    document.addEventListener("keydown", onKey);
+    return () => document.removeEventListener("keydown", onKey);
+  }, [onClose]);
 
   if (!host) return null;
 
@@ -36,7 +47,7 @@ export function FilterSheet({ cat, filters, onApply, onClose }: {
             <div className="label">Filters</div>
             <b>{cat === "all" ? "All categories" : TYPE_LABEL[cat]}</b>
           </div>
-          <button className="iconbtn" aria-label="Close" onClick={onClose}><Icon name="x" size="sm" /></button>
+          <button ref={closeRef} className="iconbtn" aria-label="Close" onClick={onClose}><Icon name="x" size="sm" /></button>
         </div>
         <div className="sbody stack">
           <div>

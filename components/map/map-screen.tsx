@@ -37,6 +37,7 @@ export function MapScreen() {
   const [arrival, setArrival] = useState<string | null>(null);
   const [route, setRoute] = useState<SubwayRoute | null>(null);
   const [activeStation, setActiveStation] = useState<string | null>(null);
+  const filterBtnRef = useRef<HTMLButtonElement>(null);
 
   // 출발+도착이 모두 지정되는 순간 즉시 전환 (스펙 결정 #10)
   useEffect(() => {
@@ -66,6 +67,8 @@ export function MapScreen() {
     [route],
   );
 
+  const filteredForSubway = useMemo(() => applyFilters(PLACES, cat, filters), [cat, filters]);
+
   useEffect(() => {
     if (status === "granted" && loc) setFlyTarget(loc);
   }, [status, loc]);
@@ -86,7 +89,7 @@ export function MapScreen() {
 
       {mode === "subway" && (
         <SubwayMap
-          places={applyFilters(PLACES, cat, filters)}
+          places={filteredForSubway}
           departure={departure}
           arrival={arrival}
           onSetDeparture={setDeparture}
@@ -125,7 +128,7 @@ export function MapScreen() {
                 </button>
               ))}
             </div>
-            <button className="chip filterbtn" aria-label="Detail filters" onClick={() => setFilterOpen(true)}>
+            <button ref={filterBtnRef} className="chip filterbtn" aria-label="Detail filters" onClick={() => setFilterOpen(true)}>
               <Icon name="chev" size="xs" style={{ transform: "rotate(90deg)" }} />
               {countActiveFilters(filters) > 0 && <span className="filterbadge">{countActiveFilters(filters)}</span>}
             </button>
@@ -188,7 +191,7 @@ export function MapScreen() {
           cat={cat}
           filters={filters}
           onApply={setFilters}
-          onClose={() => setFilterOpen(false)}
+          onClose={() => { setFilterOpen(false); filterBtnRef.current?.focus(); }}
         />
       )}
     </div>

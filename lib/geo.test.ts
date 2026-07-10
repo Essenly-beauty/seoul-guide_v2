@@ -6,9 +6,8 @@ describe("haversineKm", () => {
     expect(haversineKm(MYEONGDONG, MYEONGDONG)).toBe(0);
   });
   it("measures Myeongdong→Gangnam stn ≈ 8.3km (±0.1)", () => {
-    const gangnam = { lat: 37.4979, lng: 127.0276 };
-    expect(haversineKm(MYEONGDONG, gangnam)).toBeGreaterThan(8.2);
-    expect(haversineKm(MYEONGDONG, gangnam)).toBeLessThan(8.4);
+    expect(haversineKm(MYEONGDONG, GANGNAM_STATION)).toBeGreaterThan(8.2);
+    expect(haversineKm(MYEONGDONG, GANGNAM_STATION)).toBeLessThan(8.4);
   });
 });
 

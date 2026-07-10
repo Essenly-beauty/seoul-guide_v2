@@ -25,7 +25,7 @@ export function RouteStrip({ route, activeId, onStation, onClear }: {
               (si === 0 || i > 0) && (
                 <span key={id} className="routestation">
                   {i > 0 && <span className="dash" aria-hidden="true">–</span>}
-                  <button className={activeId === id ? "on" : ""} onClick={() => onStation(id)}>{STATIONS[id].name}</button>
+                  <button className={activeId === id ? "on" : ""} aria-current={activeId === id ? "true" : undefined} onClick={() => onStation(id)}>{STATIONS[id].name}</button>
                 </span>
               )
             ))}

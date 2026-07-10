@@ -14,7 +14,7 @@ export default function NotFound() {
       </p>
       <div className="stack" style={{ marginTop: 22, maxWidth: 280, marginInline: "auto", width: "100%" }}>
         <Link className="btn" href={routes.map}>Back to Home</Link>
-        <Link className="btn ghost" href={routes.search}>Browse places</Link>
+        <Link className="btn ghost" href={routes.search}>Search Essenly</Link>
       </div>
     </main>
   );
