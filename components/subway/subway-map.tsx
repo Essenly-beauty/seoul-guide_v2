@@ -34,7 +34,21 @@ export function SubwayMap({ places, departure, arrival, onSetDeparture, onSetArr
           const state = s.id === departure ? "dep" : s.id === arrival ? "arr" : s.id === picked ? "picked" : "";
           const n = counts.get(s.id) ?? 0;
           return (
-            <g key={s.id} className={`substation ${state}`} onClick={() => setPicked(s.id)} style={{ cursor: "pointer" }}>
+            <g
+              key={s.id}
+              className={`substation ${state}`}
+              onClick={() => setPicked(s.id)}
+              onKeyDown={(e) => {
+                if (e.key === "Enter" || e.key === " ") {
+                  e.preventDefault();
+                  setPicked(s.id);
+                }
+              }}
+              tabIndex={0}
+              role="button"
+              aria-label={`${s.name} station${n > 0 ? `, ${n} shops nearby` : ""}`}
+              style={{ cursor: "pointer" }}
+            >
               <circle cx={s.x} cy={s.y} r={s.lines.length > 1 ? 9 : 7} />
               <text x={s.x} y={s.y - 14} textAnchor="middle">{s.name}</text>
               {n > 0 && (
