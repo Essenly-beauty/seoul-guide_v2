@@ -10,11 +10,11 @@ import { routes } from "@/lib/routes";
 type Row = { label: string; href: string; icon: IconName; danger?: boolean };
 
 const PRIMARY: Row[] = [
-  { label: "Home", href: routes.home, icon: "home" },
-  { label: "Shop", href: routes.shop, icon: "bag" },
-  { label: "Spot", href: routes.spot, icon: "pin" },
-  { label: "Journal", href: routes.journal, icon: "book" },
-  { label: "My", href: routes.mypage, icon: "user" },
+  { label: "Map", href: routes.map, icon: "pin" },
+  { label: "Ranking", href: routes.ranking, icon: "bag" },
+  { label: "Blog", href: routes.blog, icon: "book" },
+  { label: "Saved", href: routes.favorites, icon: "heart" },
+  { label: "Menu", href: routes.menu, icon: "user" },
 ];
 
 const ACCOUNT: Row[] = [
