@@ -11,6 +11,7 @@ import { applyFilters, countActiveFilters, EMPTY_FILTERS, type MapFilters } from
 import { useLocation } from "./use-location";
 import { MapSheet } from "./map-sheet";
 import { FilterSheet } from "./filter-sheet";
+import { SubwayMap } from "@/components/subway/subway-map";
 
 const MapView = dynamic(() => import("./map-view"), {
   ssr: false,
@@ -30,6 +31,8 @@ export function MapScreen() {
   const [moved, setMoved] = useState(false);
   const [area, setArea] = useState<{ south: number; west: number; north: number; east: number } | null>(null);
   const boundsGetter = useRef<(() => { south: number; west: number; north: number; east: number }) | null>(null);
+  const [departure, setDeparture] = useState<string | null>(null);
+  const [arrival, setArrival] = useState<string | null>(null);
 
   const places = useMemo(() => {
     let list = applyFilters(PLACES, cat, filters);
@@ -53,6 +56,16 @@ export function MapScreen() {
         onUserMove={() => setMoved(true)}
         getBounds={(fn) => { boundsGetter.current = fn; }}
       />
+
+      {mode === "subway" && (
+        <SubwayMap
+          places={applyFilters(PLACES, cat, filters)}
+          departure={departure}
+          arrival={arrival}
+          onSetDeparture={setDeparture}
+          onSetArrival={setArrival}
+        />
+      )}
 
       <div className="map-top">
         <div className="row" style={{ gap: 8 }}>
@@ -115,13 +128,15 @@ export function MapScreen() {
         <Icon name="locate" size="sm" />
       </button>
 
-      <MapSheet
-        places={places}
-        origin={loc ?? GANGNAM_STATION}
-        selectedId={selectedId}
-        onSelect={setSelectedId}
-        onClearSelection={() => setSelectedId(null)}
-      />
+      {mode === "map" && (
+        <MapSheet
+          places={places}
+          origin={loc ?? GANGNAM_STATION}
+          selectedId={selectedId}
+          onSelect={setSelectedId}
+          onClearSelection={() => setSelectedId(null)}
+        />
+      )}
 
       {status === "fallback" && !bannerDismissed && (
         <div className="map-banner" role="status">

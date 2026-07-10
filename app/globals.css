@@ -1750,4 +1750,31 @@
     font-size: 10px; font-weight: 700;
     display: grid; place-items: center; padding: 0 4px;
   }
+
+  /* ── Subway schematic (redesign) ── */
+  .subwaywrap {
+    position: absolute; inset: 0;
+    background: var(--bg);
+    overflow: auto;
+    padding: 110px 8px 16px; /* clears the floating map-top header */
+  }
+  .subwaywrap svg { width: 100%; min-width: 560px; height: auto; }
+  .substation circle { fill: var(--surface); stroke: var(--text); stroke-width: 2.5; }
+  .substation.picked circle { stroke: var(--accent); stroke-width: 4; }
+  .substation.dep circle { fill: var(--accent); stroke: var(--accent); }
+  .substation.arr circle { fill: var(--text); stroke: var(--text); }
+  .substation text { font-size: 11px; font-weight: 600; fill: var(--text); paint-order: stroke; stroke: var(--bg); stroke-width: 3px; }
+  .substation .countbadge { fill: var(--accent); stroke: none; }
+  .substation .countnum { font-size: 9px; font-weight: 700; fill: #fff; stroke: none; }
+  .substation-card {
+    position: absolute; left: 14px; right: 14px; bottom: 14px;
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 16px; box-shadow: var(--shadow-float); padding: 14px 16px;
+    z-index: 920;
+  }
+  .linebadge {
+    display: inline-grid; place-items: center;
+    min-width: 20px; height: 20px; padding: 0 5px;
+    border-radius: 10px; color: #fff; font-size: 11px; font-weight: 700;
+  }
 }
