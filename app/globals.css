@@ -1558,12 +1558,14 @@
     z-index: 900;
     padding: max(12px, env(safe-area-inset-top)) 14px 0;
     display: grid;
+    grid-template-columns: 1fr;
     gap: 8px;
     pointer-events: none;
   }
-  .map-top > * { pointer-events: auto; }
+  .map-top > * { pointer-events: auto; min-width: 0; }
   .map-searchpill {
     flex: 1;
+    min-width: 0;
     display: flex;
     align-items: center;
     gap: 8px;
@@ -1573,6 +1575,11 @@
     border: 1px solid var(--border);
     border-radius: var(--r-full);
     box-shadow: var(--shadow-float);
+  }
+  .map-searchpill span {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
   .map-close {
     background: var(--surface);
@@ -1715,4 +1722,32 @@
   .bloghero .body { padding: 14px 16px 16px; display: grid; gap: 6px; }
   .bloghero h2 { font-size: 19px; line-height: 1.3; }
   .bloghero .tags { display: flex; gap: 6px; }
+
+  /* ── Map header: segmented toggle + filter button (redesign) ── */
+  .segtoggle {
+    display: flex;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--r-full);
+    box-shadow: var(--shadow-float);
+    padding: 3px;
+    flex: none;
+  }
+  .segtoggle button {
+    min-height: 36px;
+    padding: 0 14px;
+    border-radius: var(--r-full);
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--muted);
+  }
+  .segtoggle button.on { background: var(--text); color: var(--surface); }
+  .filterbtn { position: relative; flex: none; box-shadow: var(--shadow-card); background: var(--surface); }
+  .filterbadge {
+    position: absolute; top: -5px; right: -5px;
+    min-width: 17px; height: 17px; border-radius: 9px;
+    background: var(--accent); color: #fff;
+    font-size: 10px; font-weight: 700;
+    display: grid; place-items: center; padding: 0 4px;
+  }
 }
