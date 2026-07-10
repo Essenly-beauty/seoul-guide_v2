@@ -40,7 +40,7 @@ export default function MyReviewsPage() {
           <div className="caption dim mono" style={{ marginTop: 6 }}>Apr 12, 2026</div>
         </Link>
       </div>
-      <BottomNav active="my" />
+      <BottomNav active="menu" />
     </>
   );
 }

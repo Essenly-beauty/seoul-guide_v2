@@ -144,7 +144,7 @@ export default function ShopPage() {
           </ol>
         )}
       </div>
-      <BottomNav active="shop" />
+      <BottomNav active="ranking" />
     </>
   );
 }

@@ -47,7 +47,7 @@ export default function JournalDetailPage({ params }: { params: { slug: string }
           </div>
         </div>
       </div>
-      <BottomNav active="journal" />
+      <BottomNav active="blog" />
     </>
   );
 }

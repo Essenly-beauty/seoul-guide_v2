@@ -36,7 +36,7 @@ export default function BrandPage({ params }: { params: { id: string } }) {
           </Link>
         ))}
       </div>
-      <BottomNav active="shop" />
+      <BottomNav active="ranking" />
     </>
   );
 }

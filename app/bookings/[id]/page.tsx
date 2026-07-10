@@ -74,7 +74,7 @@ export default function BookingDetailPage() {
           <Icon name="chev" size="sm" style={{ color: "var(--dim)" }} />
         </Link>
       </div>
-      <BottomNav active="my" />
+      <BottomNav active="menu" />
     </>
   );
 }

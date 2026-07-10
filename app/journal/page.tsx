@@ -38,7 +38,7 @@ export default function JournalListPage() {
           ))}
         </div>
       </div>
-      <BottomNav active="journal" />
+      <BottomNav active="blog" />
     </>
   );
 }

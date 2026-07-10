@@ -81,7 +81,7 @@ export default function FavoritesPage() {
         />
         <KitCta href={routes.kitSurvey} title="You have favorites! Get a free kit to match." subtitle="Personalized to your hair profile and shipped to your Seoul stay." />
       </div>
-      <BottomNav active="my" />
+      <BottomNav active="saved" />
     </>
   );
 }

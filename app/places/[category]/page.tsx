@@ -26,7 +26,7 @@ export default function PlacesCategoryPage({ params }: { params: { category: str
 
         <PlacesContent category={params.category} places={places} />
       </div>
-      <BottomNav active="spot" />
+      <BottomNav active="map" />
     </>
   );
 }

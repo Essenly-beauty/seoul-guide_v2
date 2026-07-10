@@ -11,7 +11,7 @@ export default function RoutinePage() {
       <div className="app-scroll pad">
         <RoutineContent />
       </div>
-      <BottomNav active="shop" />
+      <BottomNav active="ranking" />
     </>
   );
 }

@@ -41,7 +41,7 @@ export default function PlaceDetailPage({ params }: { params: { id: string } }) 
           <BookingSheet triggerStyle={{ flex: 1 }} />
         </div>
       )}
-      {!bookable && <BottomNav active="spot" />}
+      {!bookable && <BottomNav active="map" />}
     </>
   );
 }

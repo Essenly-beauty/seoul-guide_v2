@@ -26,7 +26,7 @@ export default function TripPage() {
           <div className="caption muted">Solo · 5 days</div>
         </div>
       </div>
-      <BottomNav active="home" />
+      <BottomNav active="map" />
     </>
   );
 }

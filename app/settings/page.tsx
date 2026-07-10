@@ -55,7 +55,7 @@ export default function SettingsPage() {
         <ActionButton className="btn" toast="Saved!">Save Changes</ActionButton>
         <SignoutModal />
       </div>
-      <BottomNav active="my" />
+      <BottomNav active="menu" />
     </>
   );
 }

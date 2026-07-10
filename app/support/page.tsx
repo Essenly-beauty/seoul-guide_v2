@@ -36,7 +36,7 @@ export default function SupportPage() {
           <ActionButton className="btn" toast="Opening mail to help@essenly.beauty…">Email help@essenly.beauty</ActionButton>
         </div>
       </div>
-      <BottomNav active="my" />
+      <BottomNav active="menu" />
     </>
   );
 }

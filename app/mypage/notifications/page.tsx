@@ -16,7 +16,7 @@ export default function NotificationsPage() {
         </div>
         <NotificationsForm />
       </div>
-      <BottomNav active="my" />
+      <BottomNav active="menu" />
     </>
   );
 }

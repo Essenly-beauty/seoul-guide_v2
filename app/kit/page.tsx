@@ -32,7 +32,7 @@ export default function KitStatusPage() {
 
         <p className="caption dim" style={{ textAlign: "center", marginTop: 6 }}>Questions? hello@essenly.com</p>
       </div>
-      <BottomNav active="my" />
+      <BottomNav active="menu" />
     </>
   );
 }

@@ -73,7 +73,7 @@ export default function BookingsListPage() {
           </div>
         </div>
       </div>
-      <BottomNav active="my" />
+      <BottomNav active="menu" />
     </>
   );
 }

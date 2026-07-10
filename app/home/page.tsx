@@ -98,7 +98,7 @@ export default function HomePage() {
           ))}
         </div>
       </div>
-      <BottomNav active="home" />
+      <BottomNav active="map" />
     </>
   );
 }

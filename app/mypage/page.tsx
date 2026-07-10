@@ -48,7 +48,7 @@ export default function MyPage() {
           ))}
         </div>
       </div>
-      <BottomNav active="my" />
+      <BottomNav active="menu" />
     </>
   );
 }

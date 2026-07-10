@@ -107,7 +107,7 @@ export default function ProductDetailPage({ params }: { params: { id: string } }
           <KitCta href={routes.kitSurvey} title="Try this with a free Essenly kit" subtitle="Hair pack + routine card, picked up in Seoul." />
         </div>
       </div>
-      <BottomNav active="shop" />
+      <BottomNav active="ranking" />
     </>
   );
 }

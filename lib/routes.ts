@@ -1,39 +1,42 @@
-/** Central route map mirroring seoul-beauty-guide's information architecture. */
+/** Central route map — map-first IA (2026-07 redesign). */
 export const routes = {
-  splash: "/",
+  login: "/",
+  splash: "/", // legacy alias — old references keep compiling
   onboardingInterests: "/onboarding/interests",
   onboardingProfile: "/onboarding/beauty-profile",
-  home: "/home",
 
-  // Shop (products)
-  shop: "/shop",
+  // Footer 5 tabs
+  map: "/map",
+  ranking: "/ranking",
+  blog: "/blog",
+  favorites: "/favorites",
+  menu: "/menu",
+
+  // Legacy aliases (redirect pages keep old deep links alive)
+  home: "/map",
+  spot: "/map",
+  shop: "/ranking",
+  journal: "/blog",
+  mypage: "/menu",
+
+  // Details
   shopItem: (id: string) => `/shop/${id}`,
   routine: "/shop/routine-filter",
   brand: (id: string) => `/brand/${id}`,
-
-  // Spot (places)
-  spot: "/places/spot",
   placesCategory: (cat: string) => `/places/${cat}`,
   place: (id: string) => `/place/${id}`,
-  map: "/map",
   search: "/search",
+  blogArticle: (slug: string) => `/blog/${slug}`,
+  journalArticle: (slug: string) => `/blog/${slug}`, // legacy alias
 
-  // Journal
-  journal: "/journal",
-  journalArticle: (slug: string) => `/journal/${slug}`,
-
-  // My
-  mypage: "/mypage",
+  // Menu-only screens
   reviews: "/mypage/reviews",
   reviewNew: "/mypage/reviews/new",
   notifications: "/mypage/notifications",
   settings: "/settings",
-  favorites: "/favorites",
   support: "/support",
   legalTerms: "/legal/terms",
   legalPrivacy: "/legal/privacy",
-
-  // Kit / bookings / trip (full scope, not MVP-hidden)
   kitSurvey: "/kit/survey",
   kitStatus: "/kit",
   bookings: "/bookings",
@@ -41,7 +44,6 @@ export const routes = {
   trip: "/trip",
 } as const;
 
-/** Default sample identifiers used by links. */
 export const sample = {
   place: "juno-hair-gangnam",
   product: "cosrx-snail-mucin",
