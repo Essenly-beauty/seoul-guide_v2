@@ -42,6 +42,7 @@ export default function ProductDetailPage({ params }: { params: { id: string } }
           <div>
             <div className="label">{p.brand.toUpperCase()}</div>
             <h1 className="h1">{p.name}</h1>
+            <div className="name-kr">{p.nameKr}</div>
             <p className="caption muted mono" style={{ marginTop: 4 }}>{CHANNEL_LABEL[p.channel]}</p>
           </div>
 

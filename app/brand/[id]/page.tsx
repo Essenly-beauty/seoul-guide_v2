@@ -5,18 +5,16 @@ import { BottomNav } from "@/components/ui/bottom-nav";
 import { BackButton } from "@/components/ui/back-button";
 import { Icon } from "@/components/icon";
 import { routes } from "@/lib/routes";
-import { PRODUCTS } from "@/lib/data";
-
-const slugify = (s: string) => s.toLowerCase().replace(/\s+/g, "-");
+import { PRODUCTS, brandSlug } from "@/lib/data";
 
 export default function BrandPage({ params }: { params: { id: string } }) {
-  const products = PRODUCTS.filter((p) => slugify(p.brand) === params.id);
+  const products = PRODUCTS.filter((p) => brandSlug(p.brand) === params.id);
   if (products.length === 0) notFound();
   const brandName = products[0].brand;
 
   return (
     <>
-      <TopBar center left={<BackButton fallback={routes.shop} />} title="Brand" />
+      <TopBar center left={<BackButton fallback={routes.ranking} />} title="Brand" />
       <div className="app-scroll pad stack">
         <div>
           <div className="label">Brand</div>

@@ -268,6 +268,7 @@ export const ARTICLES: Article[] = [
 export const getProduct = (id: string) => PRODUCTS.find((p) => p.id === id);
 export const getPlace = (id: string) => PLACES.find((p) => p.id === id);
 export const getArticle = (slug: string) => ARTICLES.find((a) => a.slug === slug);
+export const brandSlug = (brand: string) => brand.toLowerCase().replace(/\s+/g, "-");
 
 export const CATEGORY_META: Record<string, { title: string; eyebrow: string; line1: string; line2: string; blurb: string; types: PlaceType[] }> = {
   spot: { title: "Browse", eyebrow: "SEOUL BEAUTY", line1: "Beauty spots", line2: "by district.", blurb: "Browse Seoul by district first, then narrow into clinics, salons, nail and color studios.", types: ["olive_young", "skin_clinic", "hair_salon", "nail_lash", "personal_color", "head_spa", "etc"] },
