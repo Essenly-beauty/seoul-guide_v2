@@ -49,3 +49,7 @@ export function applyFilters(places: Place[], cat: "all" | PlaceType, f: MapFilt
     return true;
   });
 }
+
+export function isBookable(place: Place): boolean {
+  return (place.bookingChannels?.length ?? 0) > 0;
+}

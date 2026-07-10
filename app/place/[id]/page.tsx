@@ -5,9 +5,10 @@ import { ActionButton } from "@/components/ui/action-button";
 import { FavoriteButton } from "@/components/ui/favorite-button";
 import { BookingSheet } from "@/components/booking/booking-sheet";
 import { Icon } from "@/components/icon";
-import { PlaceDetailBody, isBookable } from "@/components/place/place-detail-body";
+import { PlaceDetailBody } from "@/components/place/place-detail-body";
 import { routes } from "@/lib/routes";
 import { getPlace } from "@/lib/data";
+import { isBookable } from "@/lib/places";
 
 export default function PlaceDetailPage({ params }: { params: { id: string } }) {
   const place = getPlace(params.id);
