@@ -9,8 +9,8 @@ import { googleMapsUrl, kakaoMapUrl, naverMapUrl } from "@/lib/geo";
 export type DirectionsPlace = { name: string; nameKr: string; address: string; lat: number; lng: number };
 
 const APPS = (p: DirectionsPlace) => [
-  { label: "KakaoMap", hint: "Best for Korea · English UI available", href: kakaoMapUrl(p.name, p.lat, p.lng), badge: "Recommended" },
-  { label: "Naver Map", hint: "Searches the Korean name", href: naverMapUrl(p.nameKr) },
+  { label: "Naver Map", hint: "English UI & directions — best for visitors", href: naverMapUrl(p.nameKr), badge: "Recommended" },
+  { label: "KakaoMap", hint: "Most detailed local data", href: kakaoMapUrl(p.name, p.lat, p.lng) },
   { label: "Google Maps", hint: "Familiar, lighter local detail", href: googleMapsUrl(p.lat, p.lng) },
 ];
 

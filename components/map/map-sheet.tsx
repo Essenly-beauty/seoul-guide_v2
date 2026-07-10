@@ -3,10 +3,10 @@
 import { useMemo, useRef, useState } from "react";
 import Link from "next/link";
 import { Icon } from "@/components/icon";
-import { DirectionsLauncher } from "@/components/directions/directions-sheet";
 import { routes } from "@/lib/routes";
 import { TYPE_LABEL, zoneShort, type Place } from "@/lib/data";
-import { formatDistance, haversineKm, walkMinutes, type LatLng } from "@/lib/geo";
+import { formatDistance, haversineKm, naverMapUrl, walkMinutes, type LatLng } from "@/lib/geo";
+import { statusLabel } from "@/lib/places";
 
 type Snap = "peek" | "half" | "full";
 const ORDER: Snap[] = ["peek", "half", "full"];
@@ -97,12 +97,10 @@ export function MapSheet({ places, origin, selectedId, onSelect, onClearSelectio
               <span className="chip mono">{selected.p.priceRange}</span>
               <span className="small muted">{formatDistance(selected.km)}{selected.km <= 3 && <> · ~{walkMinutes(selected.km)} min walk</>}</span>
             </div>
+            {selected.p.hours && <div className="caption muted">{statusLabel(selected.p.hours)}</div>}
             <div className="row" style={{ gap: 8 }}>
               <Link className="btn ghost" style={{ flex: 1 }} href={routes.place(selected.p.id)}>View details</Link>
-              <DirectionsLauncher
-                className="btn"
-                place={{ name: selected.p.name, nameKr: selected.p.nameKr, address: selected.p.address, lat: selected.p.lat, lng: selected.p.lng }}
-              />
+              <a className="btn" style={{ flex: 1 }} href={naverMapUrl(selected.p.nameKr)} target="_blank" rel="noopener noreferrer">Directions</a>
             </div>
           </div>
         ) : (
