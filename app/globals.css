@@ -1795,4 +1795,22 @@
   .routestation .dash { color: var(--dim); }
   .routestation button { font-size: 13px; font-weight: 600; color: var(--muted); white-space: nowrap; }
   .routestation button.on { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+
+  /* ── Favorites category rail (redesign) ── */
+  .favrail {
+    display: flex; flex-direction: column; gap: 4px;
+    flex: none; width: 86px;
+    position: sticky; top: 8px;
+  }
+  .favrail button {
+    display: flex; flex-direction: column; align-items: center; gap: 3px;
+    padding: 8px 4px; border-radius: 12px;
+    border: 1px solid transparent;
+    color: var(--muted); font-size: 10.5px; font-weight: 600;
+    text-align: center; line-height: 1.2;
+  }
+  .favrail button.on {
+    background: var(--surface); border-color: var(--border);
+    color: var(--accent); box-shadow: var(--shadow-card);
+  }
 }
