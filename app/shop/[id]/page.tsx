@@ -7,7 +7,7 @@ import { FavoriteButton } from "@/components/ui/favorite-button";
 import { Icon } from "@/components/icon";
 import { KitCta } from "@/components/cards";
 import { routes } from "@/lib/routes";
-import { getProduct, STEP_LABEL, CHANNEL_LABEL, zoneShort } from "@/lib/data";
+import { getProduct, STEP_LABEL, CHANNEL_LABEL, zoneShort, brandSlug } from "@/lib/data";
 
 export default function ProductDetailPage({ params }: { params: { id: string } }) {
   const p = getProduct(params.id);
@@ -64,7 +64,7 @@ export default function ProductDetailPage({ params }: { params: { id: string } }
           )}
 
           <div className="stack sm">
-            <div className="kv"><span className="k">Brand</span><Link className="v" href={routes.brand(p.brand.toLowerCase().replace(/\s+/g, "-"))} style={{ color: "var(--accent)", fontFamily: "var(--sans)" }}>{p.brand} →</Link></div>
+            <div className="kv"><span className="k">Brand</span><Link className="v" href={routes.brand(brandSlug(p.brand))} style={{ color: "var(--accent)", fontFamily: "var(--sans)" }}>{p.brand} →</Link></div>
             <div className="kv"><span className="k">Category</span><span className="v" style={{ fontFamily: "var(--sans)" }}>{cap(p.category)}{p.stepCategory ? ` · ${STEP_LABEL[p.stepCategory]}` : ""}</span></div>
             <div className="kv"><span className="k">Channel</span><span className="v" style={{ fontFamily: "var(--sans)" }}>{CHANNEL_LABEL[p.channel]}</span></div>
             {p.priceRange && <div className="kv"><span className="k">Price</span><span className="v">{p.priceRange}</span></div>}
