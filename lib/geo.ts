@@ -5,6 +5,9 @@ export type LatLng = { lat: number; lng: number };
 /** Fallback center when geolocation is denied/unavailable (Myeongdong). */
 export const MYEONGDONG: LatLng = { lat: 37.5636, lng: 126.9838 };
 
+/** Fallback center when geolocation is denied/unavailable (Gangnam Station). */
+export const GANGNAM_STATION: LatLng = { lat: 37.4979, lng: 127.0276 };
+
 const EARTH_KM = 6371;
 const rad = (d: number) => (d * Math.PI) / 180;
 

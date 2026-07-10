@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { haversineKm, formatDistance, walkMinutes, kakaoMapUrl, naverMapUrl, googleMapsUrl, MYEONGDONG } from "./geo";
+import { haversineKm, formatDistance, walkMinutes, kakaoMapUrl, naverMapUrl, googleMapsUrl, MYEONGDONG, GANGNAM_STATION } from "./geo";
 
 describe("haversineKm", () => {
   it("returns 0 for identical points", () => {
@@ -46,5 +46,12 @@ describe("map URLs (no API keys)", () => {
     expect(googleMapsUrl(37.524, 127.038)).toBe(
       "https://www.google.com/maps/search/?api=1&query=37.524%2C127.038",
     );
+  });
+});
+
+describe("GANGNAM_STATION", () => {
+  it("is at Gangnam Station (Seoul bounding box, Gangnam-gu)", () => {
+    expect(GANGNAM_STATION.lat).toBeCloseTo(37.4979, 3);
+    expect(GANGNAM_STATION.lng).toBeCloseTo(127.0276, 3);
   });
 });
