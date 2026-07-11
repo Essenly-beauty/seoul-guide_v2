@@ -189,6 +189,28 @@ const COORDINATE_CORRECTIONS = {
   양원: { lat: 37.6035, lng: 127.1084 },
 };
 
+// VERIFIED (not a defect): a review flagged 김포공항 (Gimpo Int'l Airport)
+// carrying line "9" plus its two Line 9 edges (개화↔김포공항, 김포공항↔공항시장)
+// as fabricated, hypothesizing the real topology is a single direct
+// 개화↔공항시장 edge with no Gimpo Airport stop on Line 9. Independently
+// re-verified and the review's premise is wrong — 김포공항 IS a real,
+// currently-operating Line 9 station between 개화 and 공항시장:
+//   - vuski nodeData.js: no=648 개화(서울9호선), no=649 김포공항(서울9호선),
+//     no=650 공항시장(서울9호선) are three separate, consecutively-numbered
+//     Line 9 nodes (not a 2-node line with an interloper).
+//   - vuski linkData.js: edges [648,649,317] and [649,650,133] exist; there
+//     is NO [648,650,*] direct edge anywhere in the source.
+//   - KRIC 전국도시철도역사정보표준데이터 has its own dedicated row for 김포공항
+//     filed under 노선명="서울 도시철도 9호선" (station code S1109), whose own
+//     환승노선명 field lists "서울 도시철도 5호선+인천국제공항선+김포골드라인+서해선"
+//     — i.e. KRIC's own authoritative data independently confirms Gimpo
+//     Airport is a Line 9 transfer hub, not merely an Airport Railroad stop.
+//   - Public sources (서울시메트로9호선 및 나무위키) confirm the real Line 9
+//     station order through this segment: 개화 → 김포공항 → 공항시장 → 신방화.
+// No correction applied; this comment documents the ground truth so the
+// finding isn't re-raised. See .superpowers/sdd/task-s1-report.md for the
+// full derivation this build's original station/edge data already reflects.
+
 const DEFAULT_EDGE_SECONDS = 120;
 
 function loadKric() {
@@ -199,9 +221,13 @@ function loadKric() {
   // KRIC columns (see README "Data sources"): 역번호,역사명,노선번호,노선명,
   // 영문역사명,한자역사명,환승역구분,환승노선번호,환승노선명,역위도,역경도, ...
   return data.map((r) => ({
-    nameKr: r[1],
+    // KRIC's XLSX export has stray leading/trailing whitespace on a handful
+    // of rows' 역사명/영문역사명 cells (e.g. "Gimpo Int'l Airport ", "Yangchon ")
+    // — trim at the source so it never leaks into stationId slugs or the
+    // `name`/`nameKr` fields written to lib/subway-data.json.
+    nameKr: typeof r[1] === "string" ? r[1].trim() : r[1],
     lineName: r[3],
-    nameEn: r[4],
+    nameEn: typeof r[4] === "string" ? r[4].trim() : r[4],
     // A handful of KRIC rows store lat/lng as text-formatted xlsx cells
     // instead of numeric cells (e.g. 구리/Line 8 extension) — coerce so the
     // schema's number contract holds regardless of source cell formatting.

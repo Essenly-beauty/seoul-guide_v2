@@ -55,4 +55,28 @@ describe("subway-data integrity", () => {
   it("no GTX lines", () => {
     expect(Object.keys(lines).some((l) => /gtx/i.test(l))).toBe(false);
   });
+  it("no leading/trailing whitespace in names", () => {
+    for (const [id, s] of Object.entries(stations)) {
+      expect(s.name, id).toBe(s.name.trim());
+      expect(s.nameKr, id).toBe(s.nameKr.trim());
+    }
+  });
+  it("line-9 west end topology is real (regression: Gimpo Airport fabricated edges)", () => {
+    // Ground truth (verified against vuski nodeData.js/linkData.js, KRIC's
+    // own 서울 도시철도 9호선 row for 김포공항, and public sources): Line 9's
+    // western segment is 개화(Gaehwa) → 김포공항(Gimpo Int'l Airport) →
+    // 공항시장(Airport Market) → 신방화(Sinbanghwa). Gimpo Int'l Airport is a
+    // real Line 9 transfer station (also serving Line 5, Airport Railroad,
+    // Gimpo Gold Line, Seohae Line) — not a fabricated interloper.
+    const hasEdge = (a: string, b: string, line: string) =>
+      edges.some(([x, y, l]) => l === line && ((x === a && y === b) || (x === b && y === a)));
+
+    expect(stations.gimpo_int_l_airport?.lines).toContain("9");
+    expect(hasEdge("gaehwa", "gimpo_int_l_airport", "9")).toBe(true);
+    expect(hasEdge("gimpo_int_l_airport", "airport_market", "9")).toBe(true);
+    expect(hasEdge("airport_market", "sinbanghwa", "9")).toBe(true);
+    // The direct Gaehwa<->Airport Market edge hypothesized by the (incorrect)
+    // review does not exist in reality — Gimpo Airport sits between them.
+    expect(hasEdge("gaehwa", "airport_market", "9")).toBe(false);
+  });
 });
