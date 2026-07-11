@@ -1,140 +1,171 @@
-/** Simplified Seoul subway network for beauty-zone route discovery.
- *  Corridors through beauty zones keep real station order; long stretches
- *  elsewhere are condensed (schematic, not survey-accurate). */
+/** Seoul metropolitan subway network (592 stations, 693 undirected edges) for
+ *  beauty-zone route discovery. Sourced from lib/subway-data.json (Task S1);
+ *  geometry (x/y schematic coords) now lives in the map SVG asset, not here. */
 
+import raw from "./subway-data.json";
 import { haversineKm } from "./geo";
 import type { Place } from "./data";
 
-export type LineId = "2" | "3" | "4" | "7" | "suin_bundang";
+type RawLineMeta = { label: string; labelKr: string; color: string };
+type RawStation = { name: string; nameKr: string; lat: number; lng: number; lines: string[]; transfer: boolean };
+type RawEdge = [string, string, string, number];
 
-export const LINE_META: Record<LineId, { label: string; shortLabel: string; color: string }> = {
-  "2": { label: "Line 2", shortLabel: "2", color: "#00A84D" },
-  "3": { label: "Line 3", shortLabel: "3", color: "#EF7C1C" },
-  "4": { label: "Line 4", shortLabel: "4", color: "#00A5DE" },
-  "7": { label: "Line 7", shortLabel: "7", color: "#747F00" },
-  suin_bundang: { label: "Suin–Bundang", shortLabel: "SB", color: "#F5A200" },
+const data = raw as unknown as { lines: Record<string, RawLineMeta>; stations: Record<string, RawStation>; edges: RawEdge[] };
+
+/** Abbreviations (≤3 chars) for non-numbered lines; numbered lines use the number itself. */
+const SHORT_LABELS: Record<string, string> = {
+  suin_bundang: "SB",
+  seohae: "SH",
+  gyeongui_jungang: "GJ",
+  gyeongchun: "GC",
+  ui_sinseol: "UI",
+  gimpo_gold: "GG",
+  incheon1: "I1",
+  incheon2: "I2",
+  airport: "A",
+  sinbundang: "SBD",
+  sillim: "SL",
 };
 
+export type LineId = string;
+
+export const LINE_META: Record<LineId, { label: string; shortLabel: string; color: string }> = Object.fromEntries(
+  Object.entries(data.lines).map(([id, meta]) => [
+    id,
+    { label: meta.label, shortLabel: SHORT_LABELS[id] ?? id, color: meta.color },
+  ]),
+);
+
 export type SubwayStation = {
-  id: string; name: string; nameKr: string;
-  lat: number; lng: number;
-  /** Schematic coords for the SVG map (viewBox 0 0 720 560). */
-  x: number; y: number;
+  id: string;
+  name: string;
+  nameKr: string;
+  lat: number;
+  lng: number;
   lines: LineId[];
 };
 
-const S = (id: string, name: string, nameKr: string, lat: number, lng: number, x: number, y: number, lines: LineId[]): SubwayStation =>
-  ({ id, name, nameKr, lat, lng, x, y, lines });
-
-export const STATIONS: Record<string, SubwayStation> = Object.fromEntries([
-  // Line 2 (simplified loop, clockwise from City Hall)
-  S("city_hall", "City Hall", "시청", 37.5657, 126.9769, 300, 90, ["2"]),
-  S("euljiro1", "Euljiro 1(il)-ga", "을지로입구", 37.5660, 126.9827, 360, 90, ["2"]),
-  S("euljiro3", "Euljiro 3(sam)-ga", "을지로3가", 37.5663, 126.9919, 420, 90, ["2", "3"]),
-  S("wangsimni", "Wangsimni", "왕십리", 37.5612, 127.0374, 540, 110, ["2"]),
-  S("seongsu", "Seongsu", "성수", 37.5446, 127.0559, 600, 150, ["2"]),
-  S("konkuk_univ", "Konkuk Univ.", "건대입구", 37.5403, 127.0703, 640, 200, ["2", "7"]),
-  S("samseong", "Samseong (World Trade Center)", "삼성", 37.5088, 127.0631, 600, 380, ["2"]),
-  S("seolleung", "Seolleung", "선릉", 37.5045, 127.0490, 540, 400, ["2", "suin_bundang"]),
-  S("yeoksam", "Yeoksam", "역삼", 37.5006, 127.0364, 480, 410, ["2"]),
-  S("gangnam", "Gangnam", "강남", 37.4979, 127.0276, 420, 420, ["2"]),
-  S("gyodae", "Seoul Nat'l Univ. of Education", "교대", 37.4934, 127.0140, 340, 420, ["2", "3"]),
-  S("sadang", "Sadang", "사당", 37.4766, 126.9816, 240, 430, ["2"]),
-  S("sindorim", "Sindorim", "신도림", 37.5089, 126.8913, 120, 330, ["2"]),
-  S("hongik_univ", "Hongik Univ.", "홍대입구", 37.5573, 126.9236, 130, 160, ["2"]),
-  S("hapjeong", "Hapjeong", "합정", 37.5497, 126.9139, 110, 200, ["2"]),
-  S("sinchon", "Sinchon", "신촌", 37.5551, 126.9368, 200, 130, ["2"]),
-  // Line 3
-  S("anguk", "Anguk", "안국", 37.5763, 126.9852, 400, 40, ["3"]),
-  S("chungmuro", "Chungmuro", "충무로", 37.5613, 126.9941, 450, 120, ["3", "4"]),
-  S("apgujeong", "Apgujeong", "압구정", 37.5270, 127.0286, 430, 270, ["3"]),
-  S("sinsa", "Sinsa", "신사", 37.5164, 127.0203, 400, 310, ["3"]),
-  S("jamwon", "Jamwon", "잠원", 37.5128, 127.0113, 375, 345, ["3"]),
-  S("express_bus", "Express Bus Terminal", "고속터미널", 37.5049, 127.0049, 350, 380, ["3", "7"]),
-  // Line 4
-  S("hoehyeon", "Hoehyeon", "회현", 37.5586, 126.9784, 380, 150, ["4"]),
-  S("myeongdong", "Myeongdong", "명동", 37.5609, 126.9863, 415, 135, ["4"]),
-  // Line 7
-  S("banpo", "Banpo", "반포", 37.5081, 127.0114, 390, 365, ["7"]),
-  S("nonhyeon", "Nonhyeon", "논현", 37.5110, 127.0214, 430, 350, ["7"]),
-  S("hakdong", "Hakdong", "학동", 37.5144, 127.0316, 470, 335, ["7"]),
-  S("gangnamgu_office", "Gangnam-gu Office", "강남구청", 37.5172, 127.0414, 510, 320, ["7", "suin_bundang"]),
-  S("cheongdam", "Cheongdam", "청담", 37.5195, 127.0537, 555, 300, ["7"]),
-  S("jayang", "Jayang (Ttukseom Hangang Park)", "자양", 37.5310, 127.0668, 610, 250, ["7"]),
-  // Suin–Bundang
-  S("seoul_forest", "Seoul Forest", "서울숲", 37.5435, 127.0447, 560, 180, ["suin_bundang"]),
-  S("apgujeong_rodeo", "Apgujeong Rodeo", "압구정로데오", 37.5273, 127.0403, 500, 260, ["suin_bundang"]),
-  S("seonjeongneung", "Seonjeongneung", "선정릉", 37.5104, 127.0435, 525, 360, ["suin_bundang"]),
-].map((s) => [s.id, s]));
-
-export const LINE_STATIONS: Record<LineId, string[]> = {
-  "2": ["city_hall", "euljiro1", "euljiro3", "wangsimni", "seongsu", "konkuk_univ", "samseong", "seolleung", "yeoksam", "gangnam", "gyodae", "sadang", "sindorim", "hapjeong", "hongik_univ", "sinchon", "city_hall"],
-  "3": ["anguk", "euljiro3", "chungmuro", "apgujeong", "sinsa", "jamwon", "express_bus", "gyodae"],
-  "4": ["hoehyeon", "myeongdong", "chungmuro"],
-  "7": ["express_bus", "banpo", "nonhyeon", "hakdong", "gangnamgu_office", "cheongdam", "jayang", "konkuk_univ"],
-  suin_bundang: ["seoul_forest", "apgujeong_rodeo", "gangnamgu_office", "seonjeongneung", "seolleung"],
-};
+export const STATIONS: Record<string, SubwayStation> = Object.fromEntries(
+  Object.entries(data.stations).map(([id, s]) => [
+    id,
+    { id, name: s.name, nameKr: s.nameKr, lat: s.lat, lng: s.lng, lines: s.lines },
+  ]),
+);
 
 export type RouteSegment = { line: LineId; stations: string[] };
 export type SubwayRoute = { stations: string[]; segments: RouteSegment[] };
 
-/** Lines on which stations a,b are adjacent. */
-function linesBetween(a: string, b: string): LineId[] {
-  const out: LineId[] = [];
-  for (const [line, ids] of Object.entries(LINE_STATIONS) as [LineId, string[]][]) {
-    for (let i = 0; i < ids.length - 1; i++) {
-      if ((ids[i] === a && ids[i + 1] === b) || (ids[i] === b && ids[i + 1] === a)) { out.push(line); break; }
-    }
-  }
-  return out;
+/** Adjacency built once at module scope: stationId -> [{ to, line, sec }]. */
+const ADJ = new Map<string, { to: string; line: LineId; sec: number }[]>();
+for (const [a, b, line, sec] of data.edges) {
+  if (!ADJ.has(a)) ADJ.set(a, []);
+  if (!ADJ.has(b)) ADJ.set(b, []);
+  ADJ.get(a)!.push({ to: b, line, sec });
+  ADJ.get(b)!.push({ to: a, line, sec });
 }
 
-/** BFS by station count over the schematic network. */
+/** Realistic transfer cost added whenever the arrival line changes mid-route. */
+const TRANSFER_PENALTY_SEC = 180;
+
+type SearchState = string; // `${stationId}|${line}`
+const key = (station: string, line: LineId | null): SearchState => `${station}|${line ?? ""}`;
+
+/**
+ * Dijkstra over edge seconds with a transfer penalty. Search state is
+ * (stationId, arrivalLine) rather than just stationId, so the penalty is
+ * only applied when consecutive hops actually switch lines — arriving at a
+ * transfer station on line 2 and continuing on line 2 costs nothing extra.
+ * A plain array is used as the "priority queue": at this scale (≤700 nodes)
+ * a binary heap buys nothing but implementation risk.
+ */
 export function findRoute(fromId: string, toId: string): SubwayRoute | null {
   if (!STATIONS[fromId] || !STATIONS[toId]) return null;
   if (fromId === toId) return { stations: [fromId], segments: [{ line: STATIONS[fromId].lines[0], stations: [fromId] }] };
 
-  const adj = new Map<string, string[]>();
-  for (const ids of Object.values(LINE_STATIONS)) {
-    for (let i = 0; i < ids.length - 1; i++) {
-      const [a, b] = [ids[i], ids[i + 1]];
-      if (!adj.get(a)?.includes(b)) adj.set(a, [...(adj.get(a) ?? []), b]);
-      if (!adj.get(b)?.includes(a)) adj.set(b, [...(adj.get(b) ?? []), a]);
+  type Frontier = { state: SearchState; station: string; line: LineId | null; cost: number };
+  type Step = { prevState: SearchState | null; station: string; line: LineId | null; hopSec: number };
+
+  const dist = new Map<SearchState, number>();
+  const prev = new Map<SearchState, Step>();
+  const startKey = key(fromId, null);
+  dist.set(startKey, 0);
+  prev.set(startKey, { prevState: null, station: fromId, line: null, hopSec: 0 });
+
+  // frontier: re-sorted each pop (fine at this scale, ≤700 nodes — no heap needed).
+  let frontier: Frontier[] = [{ state: startKey, station: fromId, line: null, cost: 0 }];
+  const settled = new Set<SearchState>();
+  let goalState: SearchState | null = null;
+
+  while (frontier.length) {
+    frontier.sort((a, b) => a.cost - b.cost);
+    const cur = frontier.shift()!;
+    if (settled.has(cur.state)) continue;
+    settled.add(cur.state);
+
+    if (cur.station === toId) {
+      goalState = cur.state;
+      break;
+    }
+
+    for (const edge of ADJ.get(cur.station) ?? []) {
+      const penalty = cur.line !== null && cur.line !== edge.line ? TRANSFER_PENALTY_SEC : 0;
+      const nextCost = cur.cost + edge.sec + penalty;
+      const nextState = key(edge.to, edge.line);
+      if (settled.has(nextState)) continue;
+      const known = dist.get(nextState);
+      if (known === undefined || nextCost < known) {
+        dist.set(nextState, nextCost);
+        prev.set(nextState, { prevState: cur.state, station: edge.to, line: edge.line, hopSec: edge.sec });
+        frontier.push({ state: nextState, station: edge.to, line: edge.line, cost: nextCost });
+      }
     }
   }
 
-  const prev = new Map<string, string>();
-  const queue = [fromId];
-  const seen = new Set([fromId]);
-  while (queue.length) {
-    const cur = queue.shift()!;
-    if (cur === toId) break;
-    for (const nxt of adj.get(cur) ?? []) {
-      if (seen.has(nxt)) continue;
-      seen.add(nxt);
-      prev.set(nxt, cur);
-      queue.push(nxt);
-    }
+  if (!goalState) return null;
+
+  // Reconstruct: walk prev-links from the goal back to the start, then reverse.
+  const chain: { station: string; line: LineId | null; hopSec: number }[] = [];
+  let state: SearchState | null = goalState;
+  while (state) {
+    const step: Step = prev.get(state)!;
+    chain.unshift({ station: step.station, line: step.line, hopSec: step.hopSec });
+    state = step.prevState;
   }
-  if (!seen.has(toId)) return null;
 
-  const stations: string[] = [toId];
-  while (stations[0] !== fromId) stations.unshift(prev.get(stations[0])!);
+  const stations = chain.map((c) => c.station);
 
-  // Assign a line to each hop, preferring to stay on the current line (fewer transfers).
+  // Merge consecutive same-line hops into segments; each hop's line comes
+  // straight from the edge (edges carry lineId), so no extra lookup needed.
   const segments: RouteSegment[] = [];
-  let curLine: LineId | null = null;
-  for (let i = 0; i < stations.length - 1; i++) {
-    const options = linesBetween(stations[i], stations[i + 1]);
-    const line: LineId = curLine && options.includes(curLine) ? curLine : options[0];
-    if (line !== curLine) {
-      segments.push({ line, stations: [stations[i], stations[i + 1]] });
-      curLine = line;
+  for (let i = 1; i < chain.length; i++) {
+    const line = chain[i].line!;
+    const last = segments[segments.length - 1];
+    if (last && last.line === line) {
+      last.stations.push(chain[i].station);
     } else {
-      segments[segments.length - 1].stations.push(stations[i + 1]);
+      segments.push({ line, stations: [chain[i - 1].station, chain[i].station] });
     }
   }
+
   return { stations, segments };
+}
+
+/**
+ * Total travel time in minutes: sum of the route's edge seconds (re-walked
+ * from the adjacency index — the path is at most a few dozen hops, so this
+ * is trivial) plus a ~3 min (180s) allowance per transfer. Transfer time is
+ * included because it makes the displayed ETA honest door-to-door, even
+ * though the search already applies the same penalty internally to steer
+ * away from excessive line-changes.
+ */
+export function travelMinutes(route: SubwayRoute): number {
+  let totalSec = 0;
+  for (let i = 0; i < route.stations.length - 1; i++) {
+    const edge = ADJ.get(route.stations[i])?.find((e) => e.to === route.stations[i + 1]);
+    if (edge) totalSec += edge.sec;
+  }
+  const transfers = Math.max(0, route.segments.length - 1);
+  return Math.round((totalSec + transfers * TRANSFER_PENALTY_SEC) / 60);
 }
 
 /** Shops within walking radius (~7 min) of ANY station on the route. */
