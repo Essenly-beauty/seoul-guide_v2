@@ -149,31 +149,39 @@ export function SubwayMap({
     svg.querySelectorAll(".shopbadge").forEach((n) => n.remove());
 
     const ns = "http://www.w3.org/2000/svg";
+
+    // W2: badge geometry scaled ~5x for the new viewBox (was r=5, offset ±5,
+    // text y=1 — tuned against the old ~1150-wide viewBox where station
+    // dots/hit-circles were correspondingly ~5x smaller than this map's).
+    //
+    // Quadrant pick: this Wikimedia map's labels sit all over the compass
+    // relative to their marker — most still-diagonal (non-horizontalized)
+    // labels run down-right from an anchor just up-right of the marker (e.g.
+    // Gangnam's own label anchor is only ~23,-12 from its marker, so a fixed
+    // up-right badge landed squarely on top of "Gangnam"), but horizontalized
+    // labels like Seongsu sit centered directly *below* their marker. No
+    // single fixed corner clears both, so we compare the on-screen rects of
+    // the hit-circle and its own station label (same pan/zoom transform
+    // applies to both, so the relative direction is preserved at any zoom)
+    // and place the badge in the opposite quadrant. Falls back to down-left
+    // if no label element is found. NOTE: this only dodges each station's OWN
+    // label — badges render only for the small set of stations near the
+    // user's filtered shops (≈Gangnam beauty zone), so cross-station badge/
+    // label overlap isn't a practical concern at this data scale; accepted.
+    //
+    // Two passes to avoid layout thrashing: batch all getBoundingClientRect
+    // reads first, then all DOM writes. Interleaving read→write→read would
+    // force a synchronous reflow on every iteration's rect read.
+    type BadgePlan = { parent: Element; cx: number; cy: number; signX: number; signY: number; count: number };
+    const plans: BadgePlan[] = [];
     for (const [stationId, count] of badgeStations) {
       const hit = svg.querySelector(`[data-station="${stationId}"]`);
       if (!hit) continue;
+      const parent = hit.parentElement;
       const cx = hit.getAttribute("cx");
       const cy = hit.getAttribute("cy");
-      if (cx === null || cy === null) continue;
+      if (!parent || cx === null || cy === null) continue;
 
-      // W2: badge geometry scaled ~5x for the new viewBox (was r=5, offset
-      // ±5, text y=1 — tuned against the old ~1150-wide viewBox where station
-      // dots/hit-circles were correspondingly ~5x smaller than this map's).
-      //
-      // Quadrant pick: this Wikimedia map's labels sit all over the compass
-      // relative to their marker — most still-diagonal (non-horizontalized)
-      // labels run down-right from an anchor just up-right of the marker
-      // (e.g. Gangnam's own label anchor is only ~23,-12 from its marker, so
-      // a fixed up-right badge landed squarely on top of "Gangnam"), but
-      // horizontalized labels like Seongsu sit centered directly *below*
-      // their marker instead. No single fixed corner clears both patterns,
-      // so compare the on-screen rects of the hit-circle and its station
-      // label (same pan/zoom transform applies to both, so the relative
-      // direction between them is preserved at any zoom level) and place the
-      // badge in the opposite quadrant from wherever that station's own
-      // label actually sits. Falls back to down-left — the safest default
-      // observed across the checked beauty-zone stations — if no label
-      // element is found for this station.
       let signX = -1;
       let signY = 1;
       const label = svg.querySelector(`[data-label-for="${stationId}"]`);
@@ -185,13 +193,13 @@ export function SubwayMap({
         signX = dx >= 0 ? -1 : 1;
         signY = dy >= 0 ? -1 : 1;
       }
+      plans.push({ parent, cx: parseFloat(cx), cy: parseFloat(cy), signX, signY, count });
+    }
 
+    for (const p of plans) {
       const g = document.createElementNS(ns, "g");
       g.setAttribute("class", "shopbadge");
-      g.setAttribute(
-        "transform",
-        `translate(${parseFloat(cx) + signX * 25}, ${parseFloat(cy) + signY * 25})`,
-      );
+      g.setAttribute("transform", `translate(${p.cx + p.signX * 25}, ${p.cy + p.signY * 25})`);
 
       const circle = document.createElementNS(ns, "circle");
       circle.setAttribute("r", "25");
@@ -200,10 +208,10 @@ export function SubwayMap({
       const text = document.createElementNS(ns, "text");
       text.setAttribute("x", "0");
       text.setAttribute("y", "5");
-      text.textContent = count > 9 ? "9+" : String(count);
+      text.textContent = p.count > 9 ? "9+" : String(p.count);
       g.appendChild(text);
 
-      hit.parentElement?.appendChild(g);
+      p.parent.appendChild(g);
     }
   }, [badgeStations, initialPos, healTick]);
 
