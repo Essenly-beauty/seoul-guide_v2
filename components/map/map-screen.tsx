@@ -11,13 +11,21 @@ import { applyFilters, countActiveFilters, EMPTY_FILTERS, type MapFilters } from
 import { useLocation } from "./use-location";
 import { MapSheet } from "./map-sheet";
 import { FilterSheet } from "./filter-sheet";
-import { SubwayMap } from "@/components/subway/subway-map";
 import { RouteStrip } from "@/components/subway/route-strip";
 import { findRoute, placesNearStations, STATIONS, type SubwayRoute } from "@/lib/subway";
 
 const MapView = dynamic(() => import("./map-view"), {
   ssr: false,
   loading: () => <div className="map-canvas hero-img" aria-label="Loading map" />,
+});
+
+// The processed metro SVG (~355KB string, see components/subway/metro-svg.ts)
+// is bundled into whatever chunk statically imports SubwayMap, so it's lazy
+// loaded the same way MapView is above — it only downloads once the user
+// actually switches into subway mode, not on every /map page load.
+const SubwayMap = dynamic(() => import("@/components/subway/subway-map").then((m) => m.SubwayMap), {
+  ssr: false,
+  loading: () => <div className="subwaywrap" role="application" aria-label="Loading subway map" />,
 });
 
 export function MapScreen() {

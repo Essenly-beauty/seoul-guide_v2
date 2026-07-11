@@ -23,12 +23,13 @@ npm run dev   # http://localhost:3000
 | `npm run typecheck` | `tsc --noEmit` |
 | `npm run lint` | ESLint |
 | `npm run build:subway-data` | Rebuild `lib/subway-data.json` from public sources (see Data sources below) |
+| `npm run build:subway-svg` | Rebuild the processed metro SVG (`components/subway/seoul-metro.svg` + `metro-svg.ts`) from the Sinseiki base map (see Data sources below) |
 
 ## Highlights
 
 - **Login → Map home** — sign-in flow drops straight into `/map` (no intermediate home/dashboard); onboarding (interests + beauty profile) runs once before first map view.
 - `/map` — full-screen map home: GPS with Gangnam Station fallback, rating bubble markers, a 7-category filter row (Olive Young · Skin Clinic · Hair Salon · Nail & Lash · Personal Color · Head Spa · Etc) plus per-category detail filters (service tags, zones), draggable distance-ranked bottom sheet, and a search pill that hands off to `/search?cat=<active category>`.
-- **Subway route explorer** — Kakao-Metro-style mode inside `/map`: pick two stations, see a route strip of intermediate stops, and filter places within walking radius of any station on the route (`lib/subway.ts`, `components/subway/*`).
+- **Subway route explorer** — Kakao-Metro-style mode inside `/map`: a full metropolitan-network map (pan/zoom, English station labels, shop-count badges) you tap to open a station callout and set Departure/Arrival; picking both instantly switches back to Map with a route strip of intermediate stops (line-transfer badges included) and filters places to walking radius of any station on the route (`lib/subway.ts`, `components/subway/*`).
 - **Tabbed place detail** (`/place/[id]`) — Info / Menu / Reviews tabs, open-hours status computed from live hours data, and a Naver-first "Get Directions" CTA bar with per-category booking channels (Naver / Kakao / Instagram) plus keyless deep links to KakaoMap / Naver Map / Google Maps and a "show to your taxi driver" card.
 - `/ranking` — Olive-Young-style product rankings (Sales Best / Review Best / Brands) with brand search.
 - `/blog` — beauty articles and guides (formerly "Journal").
@@ -42,10 +43,15 @@ npm run dev   # http://localhost:3000
 
 ## Data sources
 
-`lib/subway-data.json` (the full Seoul metropolitan subway network — stations, lines, and travel-time edges) is built once at dev time from public sources and committed; the app never calls a live subway API. Rebuild it with `npm run build:subway-data` (fetches into `scripts/.cache/`, gitignored, then merges).
+Two committed artifacts are built once at dev time from public sources; the app never calls a live subway API.
+
+- `lib/subway-data.json` — the full Seoul metropolitan subway network (stations, lines, travel-time edges) consumed by the routing logic in `lib/subway.ts`. Rebuild with `npm run build:subway-data` (fetches into `scripts/.cache/`, gitignored, then merges). Re-running is idempotent — the committed file is byte-identical output of the pinned source snapshots.
+- `components/subway/seoul-metro.svg` / `metro-svg.ts` — the full-network map SVG rendered by the Kakao-Metro-style map screen, with Korean labels swapped for English (KRIC) names and a transparent per-station hit target injected at each station. Rebuild with `npm run build:subway-svg`.
+
+Sources:
 
 - **KRIC (한국철도공단) 전국도시철도역사정보표준데이터** — station names (Korean/English), lines, transfer info, and coordinates. Public data under Korea's [공공누리 (KOGL) open license](https://www.data.go.kr/ugs/selectPortalPolicyView.do); dataset listing at [data.go.kr/data/15013205](https://www.data.go.kr/data/15013205/standard.do), served from [data.kric.go.kr](https://data.kric.go.kr/rips/M_01_01/detail.do?id=32).
 - **[vuski/seoulsubway](https://github.com/vuski/seoulsubway)** (MIT license) — which lines/stations are currently operating, station adjacency, inter-station travel time, and line colors. Per the repo's own attribution requirement: "이 데이터를 사용하실 경우, 코드에 다음의 주석을 반드시 남겨주시기 바랍니다 — source: https://github.com/vuski/seoulsubway" (see the credit comment at the top of `scripts/build-subway-data.mjs`).
-- Sinseiki subway map SVG (MIT) — planned dependency for the Kakao-Metro-style map screen (Task 3 of the subway map upgrade); not yet fetched by this pipeline.
+- **[Sinseiki/opensource-seoul-subway-map](https://github.com/Sinseiki/opensource-seoul-subway-map)** (MIT license) — the base full-network subway map SVG (`mapimage.svg`) that `npm run build:subway-svg` processes into `components/subway/seoul-metro.svg` (see the credit comment at the top of `scripts/build-subway-svg.mjs`).
 
 `dart-bird/korea-subway-stations` was evaluated as a secondary source for verifying per-line station ordering, but wasn't needed in the end — vuski's own station sequencing plus KRIC's coordinates were sufficient to build and verify the merged dataset.
