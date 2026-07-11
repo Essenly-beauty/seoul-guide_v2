@@ -1744,32 +1744,110 @@
     display: grid; place-items: center; padding: 0 4px;
   }
 
-  /* ── Subway schematic (redesign) ── */
+  /* ── Subway schematic (Kakao-Metro v2: full network, pan/zoom, callout) ── */
   .subwaywrap {
     position: absolute; inset: 0;
-    background: var(--bg);
-    overflow: auto;
-    padding: 110px 8px 16px; /* clears the floating map-top header */
+    background: #F7F7F4;
+    overflow: hidden; /* react-zoom-pan-pinch owns pan/zoom, not scroll */
+    touch-action: none;
+    z-index: 10; /* below .map-top (900) and its floating header controls */
   }
-  .subwaywrap svg { width: 100%; min-width: 560px; height: auto; }
-  .substation circle { fill: var(--surface); stroke: var(--text); stroke-width: 2.5; }
-  .substation.picked circle { stroke: var(--accent); stroke-width: 4; }
-  .substation.dep circle { fill: var(--accent); stroke: var(--accent); }
-  .substation.arr circle { fill: var(--text); stroke: var(--text); }
-  .substation text { font-size: 11px; font-weight: 600; fill: var(--text); paint-order: stroke; stroke: var(--bg); stroke-width: 3px; }
-  .substation .countbadge { fill: var(--accent); stroke: none; }
-  .substation .countnum { font-size: 9px; font-weight: 700; fill: #fff; stroke: none; }
-  .substation-card {
-    position: absolute; left: 14px; right: 14px; bottom: 14px;
-    background: var(--surface); border: 1px solid var(--border);
-    border-radius: 16px; box-shadow: var(--shadow-float); padding: 14px 16px;
-    z-index: 920;
+  .subwaywrap .react-transform-wrapper,
+  .subwaywrap .react-transform-component {
+    width: 100%;
+    height: 100%;
   }
+  .subwaywrap svg { display: block; width: 100%; height: 100%; }
+  /* Zoom-tier label rules — CSS targets classes on real DOM nodes injected via
+     dangerouslySetInnerHTML, so ordinary descendant selectors work here. */
+  .subwaywrap[data-zoom="far"] .lbl-minor { display: none; }
+  .subwaywrap[data-zoom="far"] .lbl-major { font-size: 13px; }
+  .subwaywrap[data-zoom="mid"] .lbl-minor { font-size: 8px; }
+
+  /* Shop badges — injected as <g class="shopbadge"> siblings of each station's
+     hit circle (see subway-map.tsx); they live inside the transformed SVG so
+     they scale and pan with the map itself. */
+  .shopbadge circle { fill: var(--accent); stroke: #fff; stroke-width: 1.5; }
+  .shopbadge text { font-size: 8px; font-weight: 700; fill: #fff; text-anchor: middle; dominant-baseline: middle; }
+
+  /* Kakao-style station callout: a plain absolutely-positioned card anchored
+     at the tapped hit-circle's screen position (recomputed on open only —
+     see contract). Deliberately NOT inside the transformed layer so its own
+     size/position math stays screen-space simple. */
+  .metro-callout {
+    position: absolute;
+    transform: translate(-50%, calc(-100% - 14px)) scale(1);
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    box-shadow: var(--shadow-float);
+    padding: 14px 16px;
+    min-width: 190px;
+    z-index: 15;
+    animation: metro-callout-in 120ms ease-out;
+    transform-origin: bottom center;
+  }
+  @keyframes metro-callout-in {
+    from { opacity: 0; transform: translate(-50%, calc(-100% - 14px)) scale(0.85); }
+    to { opacity: 1; transform: translate(-50%, calc(-100% - 14px)) scale(1); }
+  }
+  .metro-callout::after {
+    content: "";
+    position: absolute;
+    left: 50%; bottom: -7px;
+    width: 14px; height: 14px;
+    background: var(--surface);
+    border-right: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    transform: translateX(-50%) rotate(45deg);
+    border-radius: 0 0 3px 0;
+  }
+  .metro-callout-close {
+    position: absolute; top: 6px; right: 6px;
+    width: 26px; height: 26px;
+  }
+  .metro-callout-title { font-size: 15px; font-weight: 700; padding-right: 22px; }
+  .metro-callout-kr { margin-top: 1px; }
+  .metro-callout-lines { display: flex; gap: 4px; margin-top: 8px; flex-wrap: wrap; }
+  .metro-callout-actions { display: flex; gap: 8px; margin-top: 12px; }
+  .metro-callout-btn {
+    flex: 1;
+    min-height: 36px;
+    border-radius: var(--r-full);
+    font-size: 13px;
+    font-weight: 700;
+    color: #fff;
+  }
+  .metro-callout-btn.dep { background: #1E6EF4; }
+  .metro-callout-btn.arr { background: #E5462E; }
   .linebadge {
     display: inline-grid; place-items: center;
     min-width: 20px; height: 20px; padding: 0 5px;
     border-radius: 10px; color: #fff; font-size: 11px; font-weight: 700;
   }
+
+  /* Zoom +/- buttons — desktop fallback for pinch, sits above the locate FAB. */
+  .metro-zoombtn {
+    position: absolute;
+    right: 14px;
+    bottom: calc(176px + env(safe-area-inset-bottom));
+    z-index: 12;
+    display: flex;
+    flex-direction: column;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    box-shadow: var(--shadow-float);
+    overflow: hidden;
+  }
+  .metro-zoombtn button {
+    width: 40px;
+    height: 40px;
+    display: grid;
+    place-items: center;
+    color: var(--text);
+  }
+  .metro-zoombtn button:first-child { border-bottom: 1px solid var(--border); }
 
   /* ── Route strip (redesign) ── */
   .routestrip {
