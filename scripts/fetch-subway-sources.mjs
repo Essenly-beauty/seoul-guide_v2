@@ -51,7 +51,8 @@ const FILES = [
   { name: "nodeData.js", url: VUSKI_NODE_URL, required: true },
   { name: "linkData.js", url: VUSKI_LINK_URL, required: true },
   // Kept for provenance/comparison; no longer read by build-subway-svg.mjs.
-  { name: "mapimage.svg", url: SINSEIKI_MAPIMAGE_URL, required: true },
+  // Not required: a fresh clone should not hard-fail on this unused legacy source.
+  { name: "mapimage.svg", url: SINSEIKI_MAPIMAGE_URL, required: false },
   // Current base map for build-subway-svg.mjs.
   { name: "seoul-linemap-en.svg", url: WIKIMEDIA_LINEMAP_EN_URL, required: true },
 ];
