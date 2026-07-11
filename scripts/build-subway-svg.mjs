@@ -64,6 +64,31 @@ const ABBREVIATIONS = [
   [/\bUniversity\b/g, "Univ."],
 ];
 
+// ---------------------------------------------------------------------------
+// Task S7 #2: Kakao-style label hierarchy. Every station label gets a size
+// bump over its resolved class size (LABEL_SIZE_SCALE), plus a near-black
+// fill; transfer/terminus (lbl-major) labels get an additional bump and bold
+// weight, so important names read as bigger/darker the way Kakao's map does.
+const LABEL_SIZE_SCALE = 1.18; // +18%, inside the requested ~15-20% range
+const LABEL_MAJOR_SCALE = 1.1; // +10% on top of the base bump, majors only
+const LABEL_FILL_COLOR = "#1a1a1a";
+
+// ---------------------------------------------------------------------------
+// Task S7 #1: per-station number-code text on the source map (KRIC 역번호,
+// e.g. "222", "S403", "K412", "P157-1") — small alphanumeric codes threaded
+// along each line. Confirmed by inspecting scripts/.cache/mapimage.svg: this
+// SVG has zero <rect> elements anywhere, and the small <circle>s that sit
+// near these codes are station-marker dots (used elsewhere for hit-target
+// placement), not a backing "bubble" shape for the code itself — so removing
+// the code is just removing this one <text> element, nothing else. Kakao's
+// map omits these entirely; this regex distinguishes them from:
+//  - numbered-line badges: a lone digit "1".."9" (e.g. cls-19 next to a big
+//    colored circle marking where Line 2/6/etc. continues off this map) —
+//    excluded by requiring 2+ characters below (\d{2,4}).
+//  - real Korean station/legend text — excluded via the Hangul check at the
+//    call site (this regex only ever sees non-Korean content).
+const STATION_CODE_RE = /^[A-Z]{0,2}\d{2,4}(-\d{1,2})?[A-Z]?$/;
+
 function abbreviate(name) {
   let out = name;
   for (const [re, rep] of ABBREVIATIONS) out = out.replace(re, rep);
@@ -140,6 +165,29 @@ function main() {
   // matcher below) — used only if a given label's class is somehow absent
   // from the stylesheet (defensive; not expected in practice).
   const measuredFallbackPx = classFontSizes.get("cls-40") ?? FALLBACK_LABEL_FONT_PX;
+
+  // ---- Task S7 #1: strip per-station number-code text (see STATION_CODE_RE
+  // above). Runs first, before any label matching, so it can't interact with
+  // the passes below — every removed element is non-Korean and 2+ chars,
+  // disjoint from every class actually used for station/legend names or for
+  // the single-digit numbered-line badges.
+  let removedCodeCount = 0;
+  const removedCodeClasses = new Map(); // class -> count, for the build report
+  $("text").each((_, el) => {
+    const $el = $(el);
+    const tspans = $el.find("tspan");
+    if (tspans.length === 0) return; // empty placeholder <text/> (some g.cls-14 groups have one)
+    const content = tspans
+      .toArray()
+      .map((t) => $(t).text())
+      .join("")
+      .trim();
+    if (!content || /[가-힣]/.test(content) || !STATION_CODE_RE.test(content)) return;
+    const cls = ($el.attr("class") ?? "").trim();
+    removedCodeClasses.set(cls, (removedCodeClasses.get(cls) ?? 0) + 1);
+    removedCodeCount++;
+    $el.remove();
+  });
 
   const stations = data.stations;
   const stationIds = Object.keys(stations);
@@ -372,17 +420,32 @@ function main() {
     const existingClass = info.$el.attr("class") ?? "";
     const labelClass = major ? "lbl-major" : "lbl-minor";
     info.$el.attr("class", `${existingClass} ${labelClass}`.trim());
-    if (englishName.length > MAX_LABEL_CHARS_BEFORE_SHRINK) {
-      // Resolve *this* label's own class font-size (in px) and shrink that —
-      // not a percentage, which would resolve against the inherited/root
-      // font-size instead of the class rule on this same element. See
-      // parseClassFontSizes() above for why.
-      const finalClassAttr = info.$el.attr("class") ?? "";
-      const resolvedPx = resolveLabelFontPx(finalClassAttr, classFontSizes, measuredFallbackPx);
-      const shrunkPx = Math.round(resolvedPx * SHRINK_FACTOR * 100) / 100;
-      const existingStyle = info.$el.attr("style") ?? "";
-      info.$el.attr("style", `${existingStyle}${existingStyle ? ";" : ""}font-size:${shrunkPx}px`.trim());
-    }
+
+    // ---- Task S7 #2: Kakao-style label hierarchy. Resolve *this* label's
+    // own class font-size (in px — see parseClassFontSizes() above for why a
+    // resolved px, not a CSS percentage, is the right base to scale), bump it
+    // by LABEL_SIZE_SCALE, bump majors again by LABEL_MAJOR_SCALE, then apply
+    // the existing >12-char shrink on top of that NEW base (not the original
+    // class size) so long names still fit.
+    //
+    // The size is carried inline as a --lbl-fs custom property, NOT a literal
+    // `font-size` declaration: a literal inline font-size would always beat
+    // the zoom-tier rules in app/globals.css (`[data-zoom="mid"] .lbl-minor`,
+    // `[data-zoom="far"] .lbl-major`), freezing every label at its near-tier
+    // size when zoomed out. `.subwaywrap .lbl-major/.lbl-minor { font-size:
+    // var(--lbl-fs) }` supplies the near-tier size at the SAME specificity
+    // those zoom-tier rules already beat, so they still win when zoomed out.
+    // fill/font-weight have no such conflict, so they're set directly.
+    const finalClassAttr = info.$el.attr("class") ?? "";
+    const resolvedPx = resolveLabelFontPx(finalClassAttr, classFontSizes, measuredFallbackPx);
+    let sizedPx = resolvedPx * LABEL_SIZE_SCALE;
+    if (major) sizedPx *= LABEL_MAJOR_SCALE;
+    if (englishName.length > MAX_LABEL_CHARS_BEFORE_SHRINK) sizedPx *= SHRINK_FACTOR;
+    const finalPx = Math.round(sizedPx * 100) / 100;
+    const styleDecls = [`--lbl-fs:${finalPx}px`, `fill:${LABEL_FILL_COLOR}`];
+    if (major) styleDecls.push("font-weight:700");
+    const existingStyle = info.$el.attr("style") ?? "";
+    info.$el.attr("style", `${existingStyle}${existingStyle ? ";" : ""}${styleDecls.join(";")}`.trim());
 
     // Grouped multi-line labels (g.cls-14): remove the now-redundant sibling
     // <text> elements that used to carry the second/third visual line of the
@@ -405,8 +468,186 @@ function main() {
         .attr("style", "pointer-events:all");
       hitTargetsEl.append(hit);
     }
+
+    // Stash everything Task S7 #3 (label horizontalization, below) needs to
+    // estimate this label's box and candidate placements, without recomputing
+    // any of it.
+    info.major = major;
+    info.englishName = englishName;
+    info.finalPx = finalPx;
+    info.hx = hx;
+    info.hy = hy;
+    info.circleR = circle ? circle.r : null;
   }
   $("svg").append(hitTargetsEl);
+
+  // ---- Task S7 #3: horizontalize rotated labels where it doesn't collide.
+  // Kakao's map keeps station names horizontal except where there's truly no
+  // room; this map (inherited from the Sinseiki source) rotates almost every
+  // label to cram it into the available space (595 of 606 on first build).
+  // Greedy pass, in a fixed deterministic order (lbl-major first, then by
+  // station id — so re-running against the same source is idempotent): for
+  // each rotated label, try a small set of horizontal candidate placements
+  // anchored on the station's own marker; take the first one that doesn't
+  // overlap any other label's box or any station dot.
+  const HORIZ_CLEARANCE_PAD = 1.5; // gap (map units) between dot edge and label edge
+  const HORIZ_BOX_PAD = 0.3; // small buffer so accepted placements aren't flush against a neighbor
+  const FALLBACK_DOT_R = 2; // used only if a label has no matched marker circle
+
+  // Axis-aligned box for a horizontal, start/end/middle-anchored label.
+  // height/width follow the spec estimate (width = chars*fontSize*0.6, height
+  // = fontSize*1.2); the 0.8/0.2 split approximates ascender-above-baseline /
+  // descender-below-baseline so a "centered" vertical placement looks right.
+  function estimateBox(x, y, width, height, anchor) {
+    let left, right;
+    if (anchor === "end") {
+      left = x - width;
+      right = x;
+    } else if (anchor === "middle") {
+      left = x - width / 2;
+      right = x + width / 2;
+    } else {
+      left = x;
+      right = x + width;
+    }
+    return { left, right, top: y - height * 0.8, bottom: y + height * 0.2 };
+  }
+
+  // Conservative AABB for a still-rotated, start-anchored label: rotate its
+  // local (0,0)-(width,-height) rect (same 0.8/0.2 split as estimateBox) by
+  // the transform's own angle and take the min/max extent. Deliberately not
+  // tightened further — an over-estimate here only ever makes us *more*
+  // cautious about horizontalizing a neighboring label, never less.
+  function rotatedConservativeBox(ax, ay, width, height, angleDeg) {
+    const rad = (angleDeg * Math.PI) / 180;
+    const cos = Math.cos(rad);
+    const sin = Math.sin(rad);
+    const corners = [
+      [0, height * 0.2],
+      [width, height * 0.2],
+      [width, -height * 0.8],
+      [0, -height * 0.8],
+    ];
+    let left = Infinity;
+    let right = -Infinity;
+    let top = Infinity;
+    let bottom = -Infinity;
+    for (const [lx, ly] of corners) {
+      const gx = ax + lx * cos - ly * sin;
+      const gy = ay + lx * sin + ly * cos;
+      left = Math.min(left, gx);
+      right = Math.max(right, gx);
+      top = Math.min(top, gy);
+      bottom = Math.max(bottom, gy);
+    }
+    return { left, right, top, bottom };
+  }
+
+  function boxesOverlap(a, b, pad) {
+    return a.left < b.right + pad && a.right > b.left - pad && a.top < b.bottom + pad && a.bottom > b.top - pad;
+  }
+
+  // Station-marker dots — static obstacles, unaffected by this pass. (The
+  // transparent r=9 hit-targets aren't in circleEls: that list was captured
+  // above, before hit-targets were injected, so they can't self-block a
+  // label.)
+  const dotObstacles = circleEls.map((c) => ({
+    left: c.cx - c.r - 0.5,
+    right: c.cx + c.r + 0.5,
+    top: c.cy - c.r - 0.5,
+    bottom: c.cy + c.r + 0.5,
+    circle: c,
+  }));
+
+  const horizItems = matched
+    .filter((m) => m.info.hx != null && m.info.hy != null)
+    .map((m) => {
+      const transform = m.info.$el.attr("transform") ?? "";
+      const rotateMatch = transform.match(/rotate\(([-\d.]+)/);
+      const width = m.info.englishName.length * m.info.finalPx * 0.6;
+      const height = m.info.finalPx * 1.2;
+      const box = rotateMatch
+        ? rotatedConservativeBox(m.info.ax, m.info.ay, width, height, parseFloat(rotateMatch[1]))
+        : estimateBox(m.info.ax, m.info.ay, width, height, "start");
+      return { m, rotated: Boolean(rotateMatch), width, height, box, ownCircle: m.circle ?? null };
+    });
+
+  const alreadyHorizontalCount = horizItems.filter((it) => !it.rotated).length;
+  let horizontalizedCount = 0;
+  const leftRotatedIds = [];
+
+  const order = horizItems
+    .map((_, i) => i)
+    .sort((ia, ib) => {
+      const a = horizItems[ia].m;
+      const b = horizItems[ib].m;
+      const majorA = a.info.major ? 0 : 1;
+      const majorB = b.info.major ? 0 : 1;
+      if (majorA !== majorB) return majorA - majorB;
+      if (a.id !== b.id) return a.id < b.id ? -1 : 1;
+      return 0; // stable sort preserves original (document) order for true ties
+    });
+
+  for (const idx of order) {
+    const item = horizItems[idx];
+    if (!item.rotated) continue;
+    const { m, width, height } = item;
+    const hx = m.info.hx;
+    const hy = m.info.hy;
+    const r = item.ownCircle ? item.ownCircle.r : FALLBACK_DOT_R;
+    const clearance = r + HORIZ_CLEARANCE_PAD;
+
+    // Priority order: right, left, above, below — small offsets from the
+    // station's own marker, matching the task brief.
+    const candidates = [
+      { x: hx + clearance, y: hy + height * 0.3, anchor: "start" },
+      { x: hx - clearance, y: hy + height * 0.3, anchor: "end" },
+      { x: hx, y: hy - clearance - height * 0.2, anchor: "middle" },
+      { x: hx, y: hy + clearance + height * 0.8, anchor: "middle" },
+    ];
+
+    let chosen = null;
+    for (const cand of candidates) {
+      const box = estimateBox(cand.x, cand.y, width, height, cand.anchor);
+      let collides = false;
+      for (let j = 0; j < horizItems.length; j++) {
+        if (j === idx) continue;
+        if (boxesOverlap(box, horizItems[j].box, HORIZ_BOX_PAD)) {
+          collides = true;
+          break;
+        }
+      }
+      if (!collides) {
+        for (const dot of dotObstacles) {
+          if (item.ownCircle && dot.circle === item.ownCircle) continue;
+          if (boxesOverlap(box, dot, HORIZ_BOX_PAD)) {
+            collides = true;
+            break;
+          }
+        }
+      }
+      if (!collides) {
+        chosen = { ...cand, box };
+        break;
+      }
+    }
+
+    if (chosen) {
+      const roundedX = Math.round(chosen.x * 100) / 100;
+      const roundedY = Math.round(chosen.y * 100) / 100;
+      m.info.$el.attr("transform", `translate(${roundedX} ${roundedY})`);
+      if (chosen.anchor === "start") {
+        m.info.$el.removeAttr("text-anchor");
+      } else {
+        m.info.$el.attr("text-anchor", chosen.anchor);
+      }
+      item.box = chosen.box;
+      item.rotated = false;
+      horizontalizedCount++;
+    } else {
+      leftRotatedIds.push(m.id);
+    }
+  }
 
   // ---- SVG_SKIP: dataset stations legitimately absent from this map.
   const unwired = stationIds.filter((id) => !wiredIds.has(id) && !SVG_SKIP.has(id));
@@ -438,7 +679,12 @@ function main() {
   transparent per-station hit targets (attribute data-station, value = station
   id, r=9) injected at each matched station's marker coordinates. Labels carry
   a data-label-for attribute (value = station id) and class="lbl-major"
-  (transfer/terminus) or "lbl-minor" for zoom-tier CSS.
+  (transfer/terminus) or "lbl-minor" for zoom-tier CSS. Kakao-style pass
+  (Task S7): per-station number-code text (e.g. "222", "S403") stripped;
+  every label carries an inline --lbl-fs custom property (near-tier size,
+  read by .lbl-major/.lbl-minor in app/globals.css) plus a near-black fill,
+  with majors additionally bold; rotated labels are straightened to
+  horizontal wherever a collision-free spot exists near their marker.
 
   Source of the base SVG: ${SOURCE_URL}
 -->
@@ -500,6 +746,31 @@ export const METRO_SVG: string = ${JSON.stringify(output)};
     console.log(`  "${t}"`);
   }
   console.log(`Wired ratio (excl. SVG_SKIP): ${(wiredRatio * 100).toFixed(2)}%`);
+
+  console.log(`\nTask S7 #1 — station-number-code text removed: ${removedCodeCount}`);
+  for (const [cls, count] of [...removedCodeClasses.entries()].sort((a, b) => b[1] - a[1])) {
+    console.log(`  ${cls}: ${count}`);
+  }
+
+  console.log(`\nTask S7 #3 — label horizontalization:`);
+  console.log(`  already horizontal: ${alreadyHorizontalCount}`);
+  console.log(`  horizontalized this run: ${horizontalizedCount}`);
+  console.log(`  left rotated (no collision-free placement found): ${leftRotatedIds.length}`);
+  const BEAUTY_ZONE_STATIONS = {
+    gangnam: ["gangnam", "nonhyeon", "yeoksam", "seolleung", "samseong_world_trade_center_seoul", "gangnamgu_office", "sinnonhyeon"],
+    hongdae: ["hongik_univ", "sinchon", "hapjeong", "sangsu"],
+    myeongdong: ["myeongdong", "euljiro_1_il_ga", "euljiro_3_sam_ga", "euljiro_4_sa_ga", "city_hall"],
+    apgujeong: ["apgujeong", "apgujeong_rodeo", "sinsa"],
+    cheongdam: ["cheongdam"],
+    seongsu: ["seongsu", "ttukseom"],
+  };
+  const leftRotatedSet = new Set(leftRotatedIds);
+  for (const [zone, ids] of Object.entries(BEAUTY_ZONE_STATIONS)) {
+    const stillRotated = ids.filter((id) => leftRotatedSet.has(id));
+    if (stillRotated.length) {
+      console.log(`  still rotated in ${zone} corridor: ${stillRotated.join(", ")}`);
+    }
+  }
 
   if (wiredRatio <= 0.97) {
     console.error(`[build-subway-svg] FAILED: wired ratio ${(wiredRatio * 100).toFixed(2)}% <= 97% threshold.`);

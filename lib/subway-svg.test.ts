@@ -34,12 +34,22 @@ describe("processed subway svg", () => {
   it("no percentage font-size on labels (resolves against root, not class size)", () => {
     expect(svg).not.toMatch(/font-size:\s*\d+%/);
   });
-  it("inline label font sizes are small absolute px", () => {
+  it("inline label font sizes are small absolute px (via --lbl-fs, not a literal font-size)", () => {
+    // Task S7: every label (not just the >12-char shrunk ones) now carries an
+    // inline size, but as a `--lbl-fs` custom property rather than a literal
+    // `font-size` declaration — a literal inline font-size would always beat
+    // the zoom-tier rules in app/globals.css ([data-zoom="mid"] .lbl-minor,
+    // [data-zoom="far"] .lbl-major), freezing every label at its near-tier
+    // size when zoomed out. See LABEL_SIZE_SCALE/LABEL_MAJOR_SCALE in
+    // scripts/build-subway-svg.mjs and the matching CSS rule's comment.
     const sizes = [
-      ...svg.matchAll(/data-label-for="[^"]+"[^>]*style="[^"]*font-size:\s*([\d.]+)px/g),
+      ...svg.matchAll(/data-label-for="[^"]+"[^>]*style="[^"]*--lbl-fs:\s*([\d.]+)px/g),
     ].map((m) => parseFloat(m[1]));
-    expect(sizes.length).toBeGreaterThan(100); // guard: regex actually matched shrunk labels
+    expect(sizes.length).toBeGreaterThan(500); // guard: now covers ~all labels, not just the shrunk ones
     for (const s of sizes) {
+      // Bounds unchanged from pre-S7: the +18%/+10% Kakao-style bump keeps
+      // every label's near-tier size well within this range (measured min
+      // ~2.36px, max ~5.5px across the current build).
       expect(s).toBeGreaterThan(2);
       expect(s).toBeLessThan(10);
     }

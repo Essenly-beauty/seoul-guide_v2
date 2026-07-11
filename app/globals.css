@@ -1759,7 +1759,16 @@
   }
   .subwaywrap svg { display: block; width: 100%; height: 100%; }
   /* Zoom-tier label rules — CSS targets classes on real DOM nodes injected via
-     dangerouslySetInnerHTML, so ordinary descendant selectors work here. */
+     dangerouslySetInnerHTML, so ordinary descendant selectors work here.
+     Near-tier (default) size comes from --lbl-fs, a custom property
+     build-subway-svg.mjs sets inline per label (Kakao-style size hierarchy —
+     see LABEL_SIZE_SCALE/LABEL_MAJOR_SCALE there). It's a custom property
+     rather than a literal inline font-size on purpose: an inline `font-size`
+     would always win over the mid/far rules below regardless of their
+     specificity, freezing every label at its near-tier size when zoomed out.
+     This plain two-class rule has lower specificity than the `[data-zoom=…]`
+     rules, so those still override it correctly at mid/far tiers. */
+  .subwaywrap .lbl-major, .subwaywrap .lbl-minor { font-size: var(--lbl-fs); }
   .subwaywrap[data-zoom="far"] .lbl-minor { display: none; }
   .subwaywrap[data-zoom="far"] .lbl-major { font-size: 13px; }
   .subwaywrap[data-zoom="mid"] .lbl-minor { font-size: 8px; }
