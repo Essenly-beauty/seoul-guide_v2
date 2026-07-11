@@ -22,6 +22,7 @@ npm run dev   # http://localhost:3000
 | `npm test` | Vitest unit tests |
 | `npm run typecheck` | `tsc --noEmit` |
 | `npm run lint` | ESLint |
+| `npm run build:subway-data` | Rebuild `lib/subway-data.json` from public sources (see Data sources below) |
 
 ## Highlights
 
@@ -38,3 +39,13 @@ npm run dev   # http://localhost:3000
 - `/legal/terms`, `/legal/privacy` — draft legal pages (require counsel review before launch)
 
 > Prototype status: all data is an in-memory sample layer (`lib/data.ts`); bookings, favorites and reviews are client-state only. Legacy route keys (`routes.home`, `routes.spot`, `routes.shop`, `routes.mypage`, `routes.journal`, `routes.journalArticle`) remain as aliases in `lib/routes.ts` for any old deep links, but all in-app code uses the canonical keys (`routes.map`, `routes.ranking`, `routes.blog`, `routes.menu`, `routes.blogArticle`).
+
+## Data sources
+
+`lib/subway-data.json` (the full Seoul metropolitan subway network — stations, lines, and travel-time edges) is built once at dev time from public sources and committed; the app never calls a live subway API. Rebuild it with `npm run build:subway-data` (fetches into `scripts/.cache/`, gitignored, then merges).
+
+- **KRIC (한국철도공단) 전국도시철도역사정보표준데이터** — station names (Korean/English), lines, transfer info, and coordinates. Public data under Korea's [공공누리 (KOGL) open license](https://www.data.go.kr/ugs/selectPortalPolicyView.do); dataset listing at [data.go.kr/data/15013205](https://www.data.go.kr/data/15013205/standard.do), served from [data.kric.go.kr](https://data.kric.go.kr/rips/M_01_01/detail.do?id=32).
+- **[vuski/seoulsubway](https://github.com/vuski/seoulsubway)** (MIT license) — which lines/stations are currently operating, station adjacency, inter-station travel time, and line colors. Per the repo's own attribution requirement: "이 데이터를 사용하실 경우, 코드에 다음의 주석을 반드시 남겨주시기 바랍니다 — source: https://github.com/vuski/seoulsubway" (see the credit comment at the top of `scripts/build-subway-data.mjs`).
+- Sinseiki subway map SVG (MIT) — planned dependency for the Kakao-Metro-style map screen (Task 3 of the subway map upgrade); not yet fetched by this pipeline.
+
+`dart-bird/korea-subway-stations` was evaluated as a secondary source for verifying per-line station ordering, but wasn't needed in the end — vuski's own station sequencing plus KRIC's coordinates were sufficient to build and verify the merged dataset.
