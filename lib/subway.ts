@@ -53,7 +53,7 @@ export const STATIONS: Record<string, SubwayStation> = Object.fromEntries(
 );
 
 export type RouteSegment = { line: LineId; stations: string[] };
-export type SubwayRoute = { stations: string[]; segments: RouteSegment[] };
+export type SubwayRoute = { stations: string[]; segments: RouteSegment[]; totalSeconds: number };
 
 /** Adjacency built once at module scope: stationId -> [{ to, line, sec }]. */
 const ADJ = new Map<string, { to: string; line: LineId; sec: number }[]>();
@@ -80,7 +80,7 @@ const key = (station: string, line: LineId | null): SearchState => `${station}|$
  */
 export function findRoute(fromId: string, toId: string): SubwayRoute | null {
   if (!STATIONS[fromId] || !STATIONS[toId]) return null;
-  if (fromId === toId) return { stations: [fromId], segments: [{ line: STATIONS[fromId].lines[0], stations: [fromId] }] };
+  if (fromId === toId) return { stations: [fromId], segments: [{ line: STATIONS[fromId].lines[0], stations: [fromId] }], totalSeconds: 0 };
 
   type Frontier = { state: SearchState; station: string; line: LineId | null; cost: number };
   type Step = { prevState: SearchState | null; station: string; line: LineId | null; hopSec: number };
@@ -134,6 +134,17 @@ export function findRoute(fromId: string, toId: string): SubwayRoute | null {
 
   const stations = chain.map((c) => c.station);
 
+  // Accumulate total seconds from the path: edge seconds + transfer penalty for each line switch.
+  let totalSeconds = 0;
+  for (let i = 1; i < chain.length; i++) {
+    totalSeconds += chain[i].hopSec;
+    const prevLine = chain[i - 1].line;
+    const currLine = chain[i].line;
+    if (prevLine !== null && prevLine !== currLine) {
+      totalSeconds += TRANSFER_PENALTY_SEC;
+    }
+  }
+
   // Merge consecutive same-line hops into segments; each hop's line comes
   // straight from the edge (edges carry lineId), so no extra lookup needed.
   const segments: RouteSegment[] = [];
@@ -147,25 +158,17 @@ export function findRoute(fromId: string, toId: string): SubwayRoute | null {
     }
   }
 
-  return { stations, segments };
+  return { stations, segments, totalSeconds };
 }
 
 /**
- * Total travel time in minutes: sum of the route's edge seconds (re-walked
- * from the adjacency index — the path is at most a few dozen hops, so this
- * is trivial) plus a ~3 min (180s) allowance per transfer. Transfer time is
- * included because it makes the displayed ETA honest door-to-door, even
- * though the search already applies the same penalty internally to steer
- * away from excessive line-changes.
+ * Total travel time in minutes, derived from the chosen path's accumulated
+ * seconds (edge seconds + transfer penalty). Transfer time is included because
+ * it makes the displayed ETA honest door-to-door, even though the search already
+ * applies the same penalty internally to steer away from excessive line-changes.
  */
 export function travelMinutes(route: SubwayRoute): number {
-  let totalSec = 0;
-  for (let i = 0; i < route.stations.length - 1; i++) {
-    const edge = ADJ.get(route.stations[i])?.find((e) => e.to === route.stations[i + 1]);
-    if (edge) totalSec += edge.sec;
-  }
-  const transfers = Math.max(0, route.segments.length - 1);
-  return Math.round((totalSec + transfers * TRANSFER_PENALTY_SEC) / 60);
+  return Math.round(route.totalSeconds / 60);
 }
 
 /** Shops within walking radius (~7 min) of ANY station on the route. */

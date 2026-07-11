@@ -26,6 +26,11 @@ describe("findRoute (metropolitan dataset)", () => {
     expect(findRoute("gangnam", "gangnam")!.stations).toEqual(["gangnam"]);
     expect(findRoute("gangnam", "nope")).toBeNull();
   });
+  it("travelMinutes reflects the chosen path even across parallel edges", () => {
+    const r = findRoute("jeongwang", "oido")!;
+    expect(r.totalSeconds).toBeGreaterThan(0);
+    expect(travelMinutes(r)).toBe(Math.round(r.totalSeconds / 60));
+  });
   it("every LINE_META entry has color and label", () => {
     for (const [id, m] of Object.entries(LINE_META)) {
       expect(m.color, id).toMatch(/^#/);
