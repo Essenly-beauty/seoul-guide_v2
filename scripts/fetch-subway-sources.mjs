@@ -12,10 +12,12 @@
 //    nodeData.js / linkData.js via raw.githubusercontent.com. Coordinates in
 //    that file are EPSG:5179 and are NOT used; only line grouping, adjacency,
 //    and travel-time (seconds) are taken from it.
-//
-// NOTE: Task 3's map SVG (for label-matching) is NOT fetched here — no
-// specific SVG URL has been verified for this pipeline. Task 3 should add
-// its own verified fetch step (with a real, checked URL) when it starts.
+// 3. Sinseiki/opensource-seoul-subway-map (MIT,
+//    https://github.com/Sinseiki/opensource-seoul-subway-map) — mapimage.svg,
+//    a schematic Seoul metropolitan subway map (~1150x1075 viewBox, per-station
+//    <circle> markers + Korean <text>/<tspan> labels). Used by Task 3's
+//    build-subway-svg.mjs to produce the English-labeled, tap-target-wired
+//    map SVG for the client map component.
 
 import { existsSync, mkdirSync, writeFileSync } from "node:fs";
 import path from "node:path";
@@ -30,11 +32,14 @@ const VUSKI_NODE_URL =
   "https://raw.githubusercontent.com/vuski/seoulsubway/master/nodeData.js";
 const VUSKI_LINK_URL =
   "https://raw.githubusercontent.com/vuski/seoulsubway/master/linkData.js";
+const SINSEIKI_MAPIMAGE_URL =
+  "https://raw.githubusercontent.com/Sinseiki/opensource-seoul-subway-map/master/mapimage.svg";
 
 const FILES = [
   { name: "kric_stations.xlsx", url: KRIC_DOWNLOAD_URL, required: true },
   { name: "nodeData.js", url: VUSKI_NODE_URL, required: true },
   { name: "linkData.js", url: VUSKI_LINK_URL, required: true },
+  { name: "mapimage.svg", url: SINSEIKI_MAPIMAGE_URL, required: true },
 ];
 
 async function downloadFile({ name, url, required }) {

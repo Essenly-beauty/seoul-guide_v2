@@ -9,7 +9,8 @@
     "lint": "next lint",
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
-    "build:subway-data": "node scripts/fetch-subway-sources.mjs && node scripts/build-subway-data.mjs"
+    "build:subway-data": "node scripts/fetch-subway-sources.mjs && node scripts/build-subway-data.mjs",
+    "build:subway-svg": "node scripts/fetch-subway-sources.mjs && node scripts/build-subway-svg.mjs"
   },
   "dependencies": {
     "leaflet": "^1.9.4",
@@ -24,6 +25,7 @@
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "autoprefixer": "^10.4.20",
+    "cheerio": "^1.2.0",
     "eslint": "^8",
     "eslint-config-next": "14.2.35",
     "postcss": "^8",
