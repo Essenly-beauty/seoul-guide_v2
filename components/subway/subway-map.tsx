@@ -11,29 +11,49 @@ import type { Place } from "@/lib/data";
 // wrapper CSS width/height (see .subwaywrap svg in globals.css) makes 1 SVG
 // unit == 1 CSS px pre-transform, so initial-position math below is simple
 // (no viewBox-to-pixel scaling factor to account for).
-const SVG_W = 1150.36;
-const SVG_H = 1074.59;
+// W2: Wikimedia base map, viewBox 0 0 5724 6516 (portrait; was the Sinseiki
+// base's ~1150.36x1074.59 landscape crop — ~5x larger in linear units).
+const SVG_W = 5724;
+const SVG_H = 6516;
 
 // One attribute read on the generated SVG string to find Gangnam's hit-circle
 // coordinates for the initial viewport — not structural parsing, just a single
-// regex match on a known, stable attribute (see task brief).
+// regex match on a known, stable attribute (see task brief). Unchanged for
+// W2: the synthesized hit-circle markup format (data-station, then cx, then
+// cy) is the same in the new SVG, just with new coordinate values (~3599.83,
+// 3060.28 in the new viewBox).
 const GANGNAM_XY = (() => {
   const m = METRO_SVG.match(/data-station="gangnam" cx="([\d.]+)" cy="([\d.]+)"/);
   return m ? { x: parseFloat(m[1]), y: parseFloat(m[2]) } : { x: SVG_W / 2, y: SVG_H / 2 };
 })();
 
-const INITIAL_SCALE = 2.2;
-const MIN_SCALE = 0.8;
-const MAX_SCALE = 5;
+// W2 retune for the ~5x-larger viewBox: old INITIAL_SCALE (2.2) on the
+// 1150-wide old viewBox showed ~14.8% of its width on a 375px screen. The new
+// viewBox is 5724 wide, so the equivalent-density scale is 375 / (5724 *
+// 0.148) ≈ 0.44 — tuned by eye to 0.45 so the Gangnam cluster (Gangnam,
+// Yeoksam, Seolleung, Sinnonhyeon, Sinsa — inter-station spacing here runs
+// ~70-150 viewBox units) reads as "a handful of stations across the screen",
+// matching the old base's initial framing.
+const INITIAL_SCALE = 0.45;
+// MIN_SCALE: the whole portrait network (5724x6516) should fit a mobile
+// viewport (~360x640, the same fallback used below for initial centering)
+// without cropping — 360/5724 ≈ 0.063 is the binding (width) constraint, so
+// 0.06 fits the full network with a small margin on all sides.
+const MIN_SCALE = 0.06;
+// MAX_SCALE: native label font-size in this viewBox is ~19-23px (see
+// build-subway-svg.mjs), already large relative to the old base's ~2.4-5.5px
+// labels, so a much smaller ceiling than the old 5 is enough for comfortably
+// readable labels even in dense transfer-station clusters.
+const MAX_SCALE = 1.2;
 
 type ZoomTier = "far" | "mid" | "near";
 function tierFor(scale: number): ZoomTier {
-  if (scale < 1.2) return "far";
-  // Was `< 2.2` — exactly INITIAL_SCALE, so the very first paint landed right
-  // on the "near" (max label density) tier. Raised to 2.6 so the initial view
-  // renders as "mid" (reduced lbl-minor size); zooming in past 2.6 restores
-  // full near-tier density.
-  if (scale < 2.6) return "mid";
+  // Boundaries recomputed to preserve the same ratio to INITIAL_SCALE (0.45)
+  // as the old tiers had to the old INITIAL_SCALE (2.2): far/initial ≈ 0.545,
+  // mid/initial ≈ 1.18. That keeps the initial paint landing on "mid" (tidy
+  // label density) exactly as before, just at the new scale.
+  if (scale < 0.25) return "far";
+  if (scale < 0.55) return "mid";
   return "near";
 }
 
@@ -75,12 +95,10 @@ export function SubwayMap({
   const svgHostRef = useRef<HTMLDivElement>(null);
   const [callout, setCallout] = useState<CalloutState>(null);
   // react-zoom-pan-pinch does not invoke the `onTransform` prop on initial
-  // mount (only on actual pan/zoom interactions) — it was previously safe to
-  // hardcode "near" here because the old tier boundary (`scale < 2.2`) put
-  // INITIAL_SCALE (2.2) in "near" anyway, so the hardcoded default happened to
-  // match. Now that "near" starts at 2.6, the default must be computed the
-  // same way, or first paint would show "near" (undoing the zoom-tier fix)
-  // until the user's first interaction fires onTransform.
+  // mount (only on actual pan/zoom interactions), so the initial tier must be
+  // computed the same way tierFor() would from INITIAL_SCALE (0.45 → "mid"),
+  // or first paint would default to the wrong density until the user's first
+  // pan/zoom interaction fires onTransform.
   const [zoomTier, setZoomTier] = useState<ZoomTier>(() => tierFor(INITIAL_SCALE));
   const [initialPos, setInitialPos] = useState<{ x: number; y: number } | null>(null);
   // Bumped only by the self-heal guard below when it detects the injected SVG
@@ -138,17 +156,50 @@ export function SubwayMap({
       const cy = hit.getAttribute("cy");
       if (cx === null || cy === null) continue;
 
+      // W2: badge geometry scaled ~5x for the new viewBox (was r=5, offset
+      // ±5, text y=1 — tuned against the old ~1150-wide viewBox where station
+      // dots/hit-circles were correspondingly ~5x smaller than this map's).
+      //
+      // Quadrant pick: this Wikimedia map's labels sit all over the compass
+      // relative to their marker — most still-diagonal (non-horizontalized)
+      // labels run down-right from an anchor just up-right of the marker
+      // (e.g. Gangnam's own label anchor is only ~23,-12 from its marker, so
+      // a fixed up-right badge landed squarely on top of "Gangnam"), but
+      // horizontalized labels like Seongsu sit centered directly *below*
+      // their marker instead. No single fixed corner clears both patterns,
+      // so compare the on-screen rects of the hit-circle and its station
+      // label (same pan/zoom transform applies to both, so the relative
+      // direction between them is preserved at any zoom level) and place the
+      // badge in the opposite quadrant from wherever that station's own
+      // label actually sits. Falls back to down-left — the safest default
+      // observed across the checked beauty-zone stations — if no label
+      // element is found for this station.
+      let signX = -1;
+      let signY = 1;
+      const label = svg.querySelector(`[data-label-for="${stationId}"]`);
+      if (label) {
+        const hitRect = hit.getBoundingClientRect();
+        const labelRect = label.getBoundingClientRect();
+        const dx = labelRect.x + labelRect.width / 2 - (hitRect.x + hitRect.width / 2);
+        const dy = labelRect.y + labelRect.height / 2 - (hitRect.y + hitRect.height / 2);
+        signX = dx >= 0 ? -1 : 1;
+        signY = dy >= 0 ? -1 : 1;
+      }
+
       const g = document.createElementNS(ns, "g");
       g.setAttribute("class", "shopbadge");
-      g.setAttribute("transform", `translate(${parseFloat(cx) + 5}, ${parseFloat(cy) - 5})`);
+      g.setAttribute(
+        "transform",
+        `translate(${parseFloat(cx) + signX * 25}, ${parseFloat(cy) + signY * 25})`,
+      );
 
       const circle = document.createElementNS(ns, "circle");
-      circle.setAttribute("r", "5");
+      circle.setAttribute("r", "25");
       g.appendChild(circle);
 
       const text = document.createElementNS(ns, "text");
       text.setAttribute("x", "0");
-      text.setAttribute("y", "1");
+      text.setAttribute("y", "5");
       text.textContent = count > 9 ? "9+" : String(count);
       g.appendChild(text);
 
@@ -187,20 +238,21 @@ export function SubwayMap({
       g.setAttribute("transform", `translate(${cx}, ${cy})`);
 
       // Teardrop: tip at the local origin (sits on the station), bulb centered
-      // ~15 units above it. Scaled to ~78% of the original r=9 bulb — at
-      // INITIAL_SCALE (2.2) the old size read as oversized next to the r=3
-      // visible station dots (see task brief screenshots).
+      // ~75 units above it. W2: geometry scaled ~5x from the old base's
+      // tuning (bulb r=7, dot r=2.7 there) to sit proportionately next to
+      // this map's station dots/transfer rings (~13-27 units) instead of
+      // reading as tiny — see task brief for the ~5x viewBox factor.
       const path = document.createElementNS(ns, "path");
-      path.setAttribute("d", "M0 0 C-4.7 -6.2 -7 -10 -7 -15 A7 7 0 0 1 7 -15 C7 -10 4.7 -6.2 0 0 Z");
+      path.setAttribute("d", "M0 0 C-23.5 -31 -35 -50 -35 -75 A35 35 0 0 1 35 -75 C35 -50 23.5 -31 0 0 Z");
       path.setAttribute("fill", color);
       path.setAttribute("stroke", "#fff");
-      path.setAttribute("stroke-width", "1.2");
+      path.setAttribute("stroke-width", "6");
       g.appendChild(path);
 
       const dot = document.createElementNS(ns, "circle");
       dot.setAttribute("cx", "0");
-      dot.setAttribute("cy", "-15");
-      dot.setAttribute("r", "2.7");
+      dot.setAttribute("cy", "-75");
+      dot.setAttribute("r", "13.5");
       dot.setAttribute("fill", "#fff");
       g.appendChild(dot);
 
@@ -208,17 +260,17 @@ export function SubwayMap({
         const clear = document.createElementNS(ns, "g");
         clear.setAttribute("class", "subway-pin-clear");
         clear.setAttribute("data-pin-clear", "dep");
-        clear.setAttribute("transform", "translate(6.5, -22)");
+        clear.setAttribute("transform", "translate(32.5, -110)");
         const cbg = document.createElementNS(ns, "circle");
-        cbg.setAttribute("r", "5.5");
+        cbg.setAttribute("r", "27.5");
         cbg.setAttribute("fill", "#fff");
         cbg.setAttribute("stroke", color);
-        cbg.setAttribute("stroke-width", "1.1");
+        cbg.setAttribute("stroke-width", "5.5");
         clear.appendChild(cbg);
         const cross = document.createElementNS(ns, "path");
-        cross.setAttribute("d", "M-2.2 -2.2 L2.2 2.2 M2.2 -2.2 L-2.2 2.2");
+        cross.setAttribute("d", "M-11 -11 L11 11 M11 -11 L-11 11");
         cross.setAttribute("stroke", color);
-        cross.setAttribute("stroke-width", "1.4");
+        cross.setAttribute("stroke-width", "7");
         cross.setAttribute("stroke-linecap", "round");
         clear.appendChild(cross);
         g.appendChild(clear);

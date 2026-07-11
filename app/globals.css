@@ -1770,7 +1770,11 @@
      rules, so those still override it correctly at mid/far tiers. */
   .subwaywrap .lbl-major, .subwaywrap .lbl-minor { font-size: var(--lbl-fs); }
   .subwaywrap[data-zoom="far"] .lbl-minor { display: none; }
-  .subwaywrap[data-zoom="far"] .lbl-major { font-size: 13px; }
+  /* W2: was a flat 13px, tuned against the old ~1150-wide viewBox. Scaled
+     ~5x for the new 5724-wide viewBox (same ~19-23px native --lbl-fs range
+     as everywhere else) so major labels still read as enlarged at far zoom
+     instead of shrinking back down to native size. */
+  .subwaywrap[data-zoom="far"] .lbl-major { font-size: 65px; }
   /* Was a flat 8px — bigger than most labels' own --lbl-fs (measured ~2.36-
      5.5px), so mid tier was actually *enlarging* small-name labels instead of
      reducing density. Scale relative to each label's own near-tier size
@@ -1780,8 +1784,10 @@
   /* Shop badges — injected as <g class="shopbadge"> siblings of each station's
      hit circle (see subway-map.tsx); they live inside the transformed SVG so
      they scale and pan with the map itself. */
-  .shopbadge circle { fill: var(--accent); stroke: #fff; stroke-width: 1; }
-  .shopbadge text { font-size: 5.5px; font-weight: 700; fill: #fff; text-anchor: middle; dominant-baseline: middle; }
+  /* W2: r/font-size/stroke-width scaled ~5x for the new viewBox (was r=5,
+     font-size 5.5px, stroke-width 1 — see subway-map.tsx badge injection). */
+  .shopbadge circle { fill: var(--accent); stroke: #fff; stroke-width: 5; }
+  .shopbadge text { font-size: 27.5px; font-weight: 700; fill: #fff; text-anchor: middle; dominant-baseline: middle; }
 
   /* Departure/arrival pins — same injected-<g> pattern as shop badges, see
      subway-map.tsx. drop-shadow keeps the marker legible over any line color
@@ -1789,7 +1795,10 @@
      pin's tip sits exactly on the station's hit-circle, and without this the
      pin would shadow that station and block re-tapping it; only the small
      ✕ clear button (departure only) should be clickable. */
-  .subway-pin { filter: drop-shadow(0 2px 3px rgba(15, 23, 42, 0.35)); pointer-events: none; }
+  /* W2: shadow offset/blur scaled ~5x — this filter lives on an element
+     inside the transformed (viewBox-scale) content, so its px values are in
+     the same pre-transform unit space as the SVG, not screen space. */
+  .subway-pin { filter: drop-shadow(0 10px 15px rgba(15, 23, 42, 0.35)); pointer-events: none; }
   .subway-pin-clear { cursor: pointer; pointer-events: auto; }
 
   /* Kakao-style dark station toolbar: a plain absolutely-positioned card
