@@ -1,5 +1,6 @@
 import { describe, it, expect } from "vitest";
 import { readFileSync, existsSync } from "node:fs";
+import { load } from "cheerio";
 import data from "./subway-data.json";
 
 const svg = readFileSync("components/subway/seoul-metro.svg", "utf8");
@@ -18,8 +19,13 @@ describe("processed subway svg", () => {
     expect(svg).toContain(">Gangnam<");
   });
   it("no Korean label text remains on station labels", () => {
-    const labels = svg.match(/data-label-for="[^"]+"[^>]*>([^<]+)</g) ?? [];
-    for (const l of labels) expect(l).not.toMatch(/[가-힣]/);
+    const $ = load(svg, { xml: true });
+    const labels = $("[data-label-for]");
+    expect(labels.length).toBeGreaterThan(500); // guard: selector actually finds labels
+    labels.each((_, el) => {
+      const text = $(el).text();
+      expect(text, $(el).attr("data-label-for")).not.toMatch(/[가-힣]/);
+    });
   });
   it("keeps MIT notice", () => {
     expect(svg).toMatch(/MIT/);
