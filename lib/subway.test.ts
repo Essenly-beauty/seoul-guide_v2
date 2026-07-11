@@ -1,6 +1,7 @@
 import { describe, it, expect } from "vitest";
 import { findRoute, placesNearStations, travelMinutes, STATIONS, LINE_META } from "./subway";
 import type { Place } from "./data";
+import data from "./subway-data.json";
 
 describe("findRoute (metropolitan dataset)", () => {
   it("Nonhyeon → Konkuk Univ. stays on line 7 through Cheongdam (spec corridor)", () => {
@@ -26,10 +27,62 @@ describe("findRoute (metropolitan dataset)", () => {
     expect(findRoute("gangnam", "gangnam")!.stations).toEqual(["gangnam"]);
     expect(findRoute("gangnam", "nope")).toBeNull();
   });
-  it("travelMinutes reflects the chosen path even across parallel edges", () => {
+  it("totalSeconds matches independent recomputation — single hop on a parallel-edge pair", () => {
+    type RawEdge = [string, string, string, number];
+
+    /** Line-aware edge lookup straight from the dataset — independent of lib/subway internals. */
+    function edgeSeconds(a: string, b: string, line: string): number {
+      const e = (data.edges as RawEdge[]).find(
+        ([x, y, ln]) => ln === line && ((x === a && y === b) || (x === b && y === a)),
+      );
+      if (!e) throw new Error(`no ${line} edge ${a}~${b}`);
+      return e[3];
+    }
+
+    /** Recompute a route's total from raw data: per-hop seconds on the CHOSEN line + 180s per transfer. */
+    function recompute(r: { segments: { line: string; stations: string[] }[] }): number {
+      let sec = 0;
+      r.segments.forEach((seg, i) => {
+        for (let j = 0; j < seg.stations.length - 1; j++) {
+          sec += edgeSeconds(seg.stations[j], seg.stations[j + 1], seg.line);
+        }
+        if (i > 0) sec += 180; // transfer penalty
+      });
+      return sec;
+    }
+
     const r = findRoute("jeongwang", "oido")!;
-    expect(r.totalSeconds).toBeGreaterThan(0);
-    expect(travelMinutes(r)).toBe(Math.round(r.totalSeconds / 60));
+    expect(r.totalSeconds).toBe(recompute(r));
+    expect(travelMinutes(r)).toBe(Math.round(recompute(r) / 60));
+  });
+
+  it("totalSeconds matches independent recomputation — transfer route incl. 180s penalty", () => {
+    type RawEdge = [string, string, string, number];
+
+    /** Line-aware edge lookup straight from the dataset — independent of lib/subway internals. */
+    function edgeSeconds(a: string, b: string, line: string): number {
+      const e = (data.edges as RawEdge[]).find(
+        ([x, y, ln]) => ln === line && ((x === a && y === b) || (x === b && y === a)),
+      );
+      if (!e) throw new Error(`no ${line} edge ${a}~${b}`);
+      return e[3];
+    }
+
+    /** Recompute a route's total from raw data: per-hop seconds on the CHOSEN line + 180s per transfer. */
+    function recompute(r: { segments: { line: string; stations: string[] }[] }): number {
+      let sec = 0;
+      r.segments.forEach((seg, i) => {
+        for (let j = 0; j < seg.stations.length - 1; j++) {
+          sec += edgeSeconds(seg.stations[j], seg.stations[j + 1], seg.line);
+        }
+        if (i > 0) sec += 180; // transfer penalty
+      });
+      return sec;
+    }
+
+    const r = findRoute("gangnam", "apgujeong_rodeo")!;
+    expect(r.segments.length).toBeGreaterThan(1);
+    expect(r.totalSeconds).toBe(recompute(r));
   });
   it("every LINE_META entry has color and label", () => {
     for (const [id, m] of Object.entries(LINE_META)) {
