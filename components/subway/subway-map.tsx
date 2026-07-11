@@ -55,12 +55,17 @@ export function SubwayMap({
   arrival,
   onSetDeparture,
   onSetArrival,
+  onClearDeparture,
 }: {
   places: Place[];
   departure: string | null;
   arrival: string | null;
   onSetDeparture: (id: string) => void;
   onSetArrival: (id: string) => void;
+  /** Clears the departure pin's own ✕ (subway mode only — once both departure
+   *  and arrival are set the parent switches to route mode and unmounts this
+   *  component before this would ever matter for arrival). */
+  onClearDeparture?: () => void;
 }) {
   const wrapRef = useRef<HTMLDivElement>(null);
   const svgHostRef = useRef<HTMLDivElement>(null);
@@ -84,11 +89,14 @@ export function SubwayMap({
 
   // Shop badges: injected directly into the dangerouslySetInnerHTML'd SVG DOM
   // (React doesn't own that subtree, so this is a deliberate escape hatch —
-  // not a pattern to copy elsewhere). Re-runs whenever the filtered place
-  // list changes so badge counts/visibility stay in sync, and also once
-  // `initialPos` flips from null -> measured, since that's when the real
-  // SVG tree (as opposed to the pre-measurement placeholder) first mounts
-  // and svgHostRef first attaches to a live node.
+  // not a pattern to copy elsewhere). No dependency array — this deliberately
+  // re-runs after every SubwayMap render, not just when `places`/`initialPos`
+  // change: react-zoom-pan-pinch's TransformWrapper re-renders its children on
+  // essentially any state change in this component (confirmed empirically —
+  // e.g. simply opening the station toolbar), which silently resets this
+  // div's innerHTML back to pristine METRO_SVG and wipes anything injected
+  // here. Re-asserting on every render is the robust fix; the removal pass
+  // below keeps it idempotent when the reset didn't actually happen.
   useEffect(() => {
     const host = svgHostRef.current;
     if (!host) return;
@@ -124,12 +132,91 @@ export function SubwayMap({
 
       hit.parentElement?.appendChild(g);
     }
-  }, [places, initialPos]);
+    // Intentionally no dependency array — see comment above.
+  });
+
+  // Departure/arrival pins — same SVG-injection escape hatch as the shop
+  // badges above, so the pin pans/zooms with the map instead of drifting
+  // like an absolutely-positioned div would. A small teardrop marker is
+  // anchored with its tip on the station's hit-circle coordinates; the
+  // departure pin additionally gets a ✕ clear-button (data-pin-clear="dep",
+  // handled in handleContainerClick below) — the arrival pin is rendered
+  // defensively only, since in practice setting arrival immediately flips
+  // the parent into route mode and unmounts this component. No dependency
+  // array — see the shop-badges effect above for why.
+  useEffect(() => {
+    const host = svgHostRef.current;
+    if (!host) return;
+    const svg = host.querySelector("svg");
+    if (!svg) return;
+
+    svg.querySelectorAll(".subway-pin").forEach((n) => n.remove());
+
+    const ns = "http://www.w3.org/2000/svg";
+    const addPin = (svgEl: Element, stationId: string | null, cls: string, color: string, clearable: boolean) => {
+      if (!stationId) return;
+      const hit = svgEl.querySelector(`[data-station="${stationId}"]`);
+      if (!hit) return;
+      const cx = hit.getAttribute("cx");
+      const cy = hit.getAttribute("cy");
+      if (cx === null || cy === null) return;
+
+      const g = document.createElementNS(ns, "g");
+      g.setAttribute("class", `subway-pin ${cls}`);
+      g.setAttribute("transform", `translate(${cx}, ${cy})`);
+
+      // Teardrop: tip at the local origin (sits on the station), bulb centered
+      // ~19 units above it — roughly on par with the r=9 station hit-circle.
+      const path = document.createElementNS(ns, "path");
+      path.setAttribute("d", "M0 0 C-6 -8 -9 -13 -9 -19 A9 9 0 0 1 9 -19 C9 -13 6 -8 0 0 Z");
+      path.setAttribute("fill", color);
+      path.setAttribute("stroke", "#fff");
+      path.setAttribute("stroke-width", "1.4");
+      g.appendChild(path);
+
+      const dot = document.createElementNS(ns, "circle");
+      dot.setAttribute("cx", "0");
+      dot.setAttribute("cy", "-19");
+      dot.setAttribute("r", "3.4");
+      dot.setAttribute("fill", "#fff");
+      g.appendChild(dot);
+
+      if (clearable) {
+        const clear = document.createElementNS(ns, "g");
+        clear.setAttribute("class", "subway-pin-clear");
+        clear.setAttribute("data-pin-clear", "dep");
+        clear.setAttribute("transform", "translate(8, -28)");
+        const cbg = document.createElementNS(ns, "circle");
+        cbg.setAttribute("r", "6.5");
+        cbg.setAttribute("fill", "#fff");
+        cbg.setAttribute("stroke", color);
+        cbg.setAttribute("stroke-width", "1.2");
+        clear.appendChild(cbg);
+        const cross = document.createElementNS(ns, "path");
+        cross.setAttribute("d", "M-2.6 -2.6 L2.6 2.6 M2.6 -2.6 L-2.6 2.6");
+        cross.setAttribute("stroke", color);
+        cross.setAttribute("stroke-width", "1.6");
+        cross.setAttribute("stroke-linecap", "round");
+        clear.appendChild(cross);
+        g.appendChild(clear);
+      }
+
+      hit.parentElement?.appendChild(g);
+    };
+
+    addPin(svg, departure, "dep-pin", "#1E6EF4", Boolean(onClearDeparture));
+    addPin(svg, arrival, "arr-pin", "#E5462E", false);
+  });
 
   const closeCallout = useCallback(() => setCallout(null), []);
 
   const handleContainerClick = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
     const target = e.target as Element;
+    const clearHit = target.closest("[data-pin-clear]");
+    if (clearHit) {
+      if (clearHit.getAttribute("data-pin-clear") === "dep") onClearDeparture?.();
+      return;
+    }
     const hit = target.closest("[data-station]");
     if (!hit || !wrapRef.current) {
       closeCallout();
@@ -147,7 +234,7 @@ export function SubwayMap({
       x: hitRect.left + hitRect.width / 2 - wrapRect.left,
       y: hitRect.top - wrapRect.top,
     });
-  }, [closeCallout]);
+  }, [closeCallout, onClearDeparture]);
 
   useEffect(() => {
     if (!callout) return;
@@ -210,33 +297,39 @@ export function SubwayMap({
 
       {station && callout && (
         <div
-          className="metro-callout"
+          className="metro-toolbar"
           style={{ left: callout.x, top: callout.y }}
           role="dialog"
           aria-label={`${station.name} station`}
         >
-          <button className="iconbtn metro-callout-close" aria-label="Close" onClick={closeCallout}>
+          <button className="iconbtn metro-toolbar-close" aria-label="Close" onClick={closeCallout}>
             <Icon name="x" size="xs" />
           </button>
-          <div className="metro-callout-title">{station.name}</div>
-          <div className="metro-callout-kr small muted">{station.nameKr}</div>
-          <div className="metro-callout-lines">
-            {lineBadges.map(({ lineId, meta }) => (
-              <span key={lineId} className="linebadge" style={{ background: meta.color }}>{meta.shortLabel}</span>
-            ))}
+          <div className="metro-toolbar-name">
+            <span className="metro-toolbar-en">{station.name}</span>
+            <span className="metro-toolbar-kr">{station.nameKr}</span>
+            {lineBadges.length > 0 && (
+              <div className="metro-toolbar-lines">
+                {lineBadges.map(({ lineId, meta }) => (
+                  <span key={lineId} className="linebadge" style={{ background: meta.color }}>{meta.shortLabel}</span>
+                ))}
+              </div>
+            )}
           </div>
-          <div className="metro-callout-actions">
+          <div className="metro-toolbar-actions">
             <button
-              className="metro-callout-btn dep"
+              className={"metro-toolbar-seg" + (departure === station.id ? " on" : "")}
               onClick={() => { onSetDeparture(station.id); closeCallout(); }}
             >
-              {departure === station.id ? "✓ " : ""}Departure
+              <Icon name="ext" size="xs" />
+              <span>{departure === station.id ? "✓ Departure" : "Departure"}</span>
             </button>
             <button
-              className="metro-callout-btn arr"
+              className={"metro-toolbar-seg" + (arrival === station.id ? " on" : "")}
               onClick={() => { onSetArrival(station.id); closeCallout(); }}
             >
-              {arrival === station.id ? "✓ " : ""}Arrival
+              <Icon name="ext" size="xs" style={{ transform: "rotate(180deg)" }} />
+              <span>{arrival === station.id ? "✓ Arrival" : "Arrival"}</span>
             </button>
           </div>
         </div>

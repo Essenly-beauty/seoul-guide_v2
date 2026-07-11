@@ -12,7 +12,7 @@ import { useLocation } from "./use-location";
 import { MapSheet } from "./map-sheet";
 import { FilterSheet } from "./filter-sheet";
 import { RouteStrip } from "@/components/subway/route-strip";
-import { findRoute, placesNearStations, STATIONS, type SubwayRoute } from "@/lib/subway";
+import { findRoute, placesNearStations, LINE_META, STATIONS, type SubwayRoute } from "@/lib/subway";
 
 const MapView = dynamic(() => import("./map-view"), {
   ssr: false,
@@ -70,8 +70,27 @@ export function MapScreen() {
     return list;
   }, [cat, filters, area, route]);
 
-  const stationPins = useMemo(
-    () => route?.stations.map((id) => ({ id, name: STATIONS[id].name, lat: STATIONS[id].lat, lng: STATIONS[id].lng })) ?? undefined,
+  // First route station's pin is blue (departure), last is red (arrival);
+  // everything in between keeps MapView's default dark pin color.
+  const stationPins = useMemo(() => {
+    if (!route) return undefined;
+    const lastIdx = route.stations.length - 1;
+    return route.stations.map((id, i) => ({
+      id,
+      name: STATIONS[id].name,
+      lat: STATIONS[id].lat,
+      lng: STATIONS[id].lng,
+      color: i === 0 ? "#1E6EF4" : i === lastIdx ? "#E5462E" : undefined,
+    }));
+  }, [route]);
+
+  // One polyline per route segment, colored by that segment's line.
+  const routeLine = useMemo(
+    () =>
+      route?.segments.map((seg) => ({
+        positions: seg.stations.map((id) => [STATIONS[id].lat, STATIONS[id].lng] as [number, number]),
+        color: LINE_META[seg.line].color,
+      })) ?? undefined,
     [route],
   );
 
@@ -93,6 +112,7 @@ export function MapScreen() {
         onUserMove={() => setMoved(true)}
         getBounds={(fn) => { boundsGetter.current = fn; }}
         stationPins={stationPins}
+        routeLine={routeLine}
       />
 
       {mode === "subway" && (
@@ -102,6 +122,7 @@ export function MapScreen() {
           arrival={arrival}
           onSetDeparture={setDeparture}
           onSetArrival={setArrival}
+          onClearDeparture={() => setDeparture(null)}
         />
       )}
 

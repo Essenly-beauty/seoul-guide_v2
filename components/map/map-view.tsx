@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useRef } from "react";
-import { MapContainer, TileLayer, Marker, CircleMarker, useMapEvents } from "react-leaflet";
+import { MapContainer, TileLayer, Marker, CircleMarker, Polyline, useMapEvents } from "react-leaflet";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 import { TYPE_ICON, type Place } from "@/lib/data";
@@ -20,7 +20,9 @@ export type MapViewProps = {
   /** Parent receives a bounds getter for area re-search. */
   getBounds?: (fn: () => { south: number; west: number; north: number; east: number }) => void;
   /** Route-mode station markers (rendered in addition to place markers). */
-  stationPins?: { id: string; name: string; lat: number; lng: number }[];
+  stationPins?: { id: string; name: string; lat: number; lng: number; color?: string }[];
+  /** Route-mode line overlay — one polyline per route segment, colored by line. */
+  routeLine?: { positions: [number, number][]; color: string }[];
 };
 
 const TILE_URL = "https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png";
@@ -72,7 +74,7 @@ function MapWiring({ flyTarget, onUserMove, getBounds }: Pick<MapViewProps, "fly
   return null;
 }
 
-export default function MapView({ center, places, selectedId, onSelect, userLoc, flyTarget, onUserMove, getBounds, stationPins }: MapViewProps) {
+export default function MapView({ center, places, selectedId, onSelect, userLoc, flyTarget, onUserMove, getBounds, stationPins, routeLine }: MapViewProps) {
   const markers = useMemo(
     () =>
       places.map((p) => (
@@ -97,6 +99,13 @@ export default function MapView({ center, places, selectedId, onSelect, userLoc,
     >
       <TileLayer url={TILE_URL} attribution={ATTRIB} />
       <MapWiring flyTarget={flyTarget} onUserMove={onUserMove} getBounds={getBounds} />
+      {routeLine?.map((seg, i) => (
+        <Polyline
+          key={i}
+          positions={seg.positions}
+          pathOptions={{ color: seg.color, weight: 5, opacity: 0.85, lineCap: "round", lineJoin: "round" }}
+        />
+      ))}
       {userLoc && (
         <>
           <CircleMarker center={[userLoc.lat, userLoc.lng]} radius={26} pathOptions={{ color: "transparent", fillColor: "#3b82f6" /* = var(--info); Leaflet cannot read CSS vars */, fillOpacity: 0.12 }} />
@@ -106,7 +115,7 @@ export default function MapView({ center, places, selectedId, onSelect, userLoc,
       {markers}
       {stationPins?.map((s) => (
         <CircleMarker key={s.id} center={[s.lat, s.lng]} radius={9}
-          pathOptions={{ color: "#ffffff", weight: 2, fillColor: "#1f2937" /* station pin — Leaflet cannot read CSS vars */, fillOpacity: 1 }} />
+          pathOptions={{ color: "#ffffff", weight: 2, fillColor: s.color ?? "#1f2937" /* station pin — Leaflet cannot read CSS vars */, fillOpacity: 1 }} />
       ))}
     </MapContainer>
   );

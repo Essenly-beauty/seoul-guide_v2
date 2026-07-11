@@ -1770,56 +1770,70 @@
   .shopbadge circle { fill: var(--accent); stroke: #fff; stroke-width: 1; }
   .shopbadge text { font-size: 5.5px; font-weight: 700; fill: #fff; text-anchor: middle; dominant-baseline: middle; }
 
-  /* Kakao-style station callout: a plain absolutely-positioned card anchored
-     at the tapped hit-circle's screen position (recomputed on open only —
-     see contract). Deliberately NOT inside the transformed layer so its own
-     size/position math stays screen-space simple. */
-  .metro-callout {
+  /* Departure/arrival pins — same injected-<g> pattern as shop badges, see
+     subway-map.tsx. drop-shadow keeps the marker legible over any line color
+     underneath it. pointer-events: none on the pin body is deliberate — the
+     pin's tip sits exactly on the station's hit-circle, and without this the
+     pin would shadow that station and block re-tapping it; only the small
+     ✕ clear button (departure only) should be clickable. */
+  .subway-pin { filter: drop-shadow(0 2px 3px rgba(15, 23, 42, 0.35)); pointer-events: none; }
+  .subway-pin-clear { cursor: pointer; pointer-events: auto; }
+
+  /* Kakao-style dark station toolbar: a plain absolutely-positioned card
+     anchored at the tapped hit-circle's screen position (recomputed on open
+     only — see contract). Deliberately NOT inside the transformed layer so
+     its own size/position math stays screen-space simple. */
+  .metro-toolbar {
     position: absolute;
     transform: translate(-50%, calc(-100% - 14px)) scale(1);
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 16px;
+    background: #3C3C3C;
+    border-radius: 14px;
     box-shadow: var(--shadow-float);
-    padding: 14px 16px;
-    min-width: 190px;
+    min-width: 178px;
     z-index: 15;
-    animation: metro-callout-in 120ms ease-out;
+    animation: metro-toolbar-in 120ms ease-out;
     transform-origin: bottom center;
   }
-  @keyframes metro-callout-in {
+  @keyframes metro-toolbar-in {
     from { opacity: 0; transform: translate(-50%, calc(-100% - 14px)) scale(0.85); }
     to { opacity: 1; transform: translate(-50%, calc(-100% - 14px)) scale(1); }
   }
-  .metro-callout::after {
+  .metro-toolbar::after {
     content: "";
     position: absolute;
-    left: 50%; bottom: -7px;
-    width: 14px; height: 14px;
-    background: var(--surface);
-    border-right: 1px solid var(--border);
-    border-bottom: 1px solid var(--border);
+    left: 50%; bottom: -6px;
+    width: 12px; height: 12px;
+    background: #3C3C3C;
     transform: translateX(-50%) rotate(45deg);
     border-radius: 0 0 3px 0;
   }
-  .metro-callout-close {
-    position: absolute; top: 6px; right: 6px;
-    width: 26px; height: 26px;
+  .metro-toolbar-close {
+    position: absolute; top: 4px; right: 4px;
+    width: 24px; height: 24px;
+    color: rgba(255, 255, 255, 0.75);
   }
-  .metro-callout-title { font-size: 15px; font-weight: 700; padding-right: 22px; }
-  .metro-callout-kr { margin-top: 1px; }
-  .metro-callout-lines { display: flex; gap: 4px; margin-top: 8px; flex-wrap: wrap; }
-  .metro-callout-actions { display: flex; gap: 8px; margin-top: 12px; }
-  .metro-callout-btn {
+  .metro-toolbar-name { padding: 12px 30px 10px 14px; }
+  .metro-toolbar-en { display: block; font-size: 14px; font-weight: 700; color: #fff; }
+  .metro-toolbar-kr { display: block; margin-top: 1px; font-size: 11px; color: rgba(255, 255, 255, 0.55); }
+  .metro-toolbar-lines { display: flex; gap: 4px; margin-top: 7px; flex-wrap: wrap; }
+  .metro-toolbar-actions {
+    display: flex;
+    border-top: 1px solid rgba(255, 255, 255, 0.16);
+  }
+  .metro-toolbar-seg {
     flex: 1;
-    min-height: 36px;
-    border-radius: var(--r-full);
-    font-size: 13px;
-    font-weight: 700;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3px;
+    padding: 9px 6px 10px;
     color: #fff;
+    font-size: 11px;
+    font-weight: 600;
   }
-  .metro-callout-btn.dep { background: #1E6EF4; }
-  .metro-callout-btn.arr { background: #E5462E; }
+  .metro-toolbar-seg:not(:last-child) { border-right: 1px solid rgba(255, 255, 255, 0.16); }
+  .metro-toolbar-seg:active { background: rgba(255, 255, 255, 0.14); }
+  .metro-toolbar-seg.on { background: rgba(255, 255, 255, 0.1); }
   .linebadge {
     display: inline-grid; place-items: center;
     min-width: 20px; height: 20px; padding: 0 5px;
@@ -1849,23 +1863,36 @@
   }
   .metro-zoombtn button:first-child { border-bottom: 1px solid var(--border); }
 
-  /* ── Route strip (redesign) ── */
+  /* ── Route strip v2 (Kakao-reference: summary line + pinned end stations) ── */
   .routestrip {
     position: absolute; left: 10px; right: 10px;
     bottom: calc(12px + env(safe-area-inset-bottom));
     z-index: 930;
-    display: flex; align-items: center; gap: 2px;
+    display: flex; flex-direction: column;
     background: var(--surface); border: 1px solid var(--border);
-    border-radius: var(--r-full); box-shadow: var(--shadow-float);
-    padding: 6px 8px;
+    border-radius: 18px; box-shadow: var(--shadow-float);
+    overflow: hidden;
   }
+  .routesummary {
+    display: flex; align-items: baseline; gap: 6px;
+    padding: 8px 14px 6px;
+    font-size: 12px; color: var(--muted);
+    border-bottom: 1px solid var(--border);
+  }
+  .routesummary b { font-size: 13px; font-weight: 700; color: var(--text); }
+  .routestrip-controls { display: flex; align-items: center; gap: 2px; padding: 6px 8px; }
   .routescroll { flex: 1; display: flex; align-items: center; gap: 6px; overflow-x: auto; scrollbar-width: none; }
   .routescroll::-webkit-scrollbar { display: none; }
-  .routeseg { display: flex; align-items: center; gap: 6px; flex: none; }
+  /* border color set inline per-segment (LINE_META[seg.line].color) — the
+     line-colored "rail"/spine running under that segment's stations. */
+  .routeseg { display: flex; align-items: center; gap: 6px; flex: none; padding-bottom: 5px; border-bottom: 3px solid transparent; }
   .routestation { display: flex; align-items: center; gap: 6px; flex: none; }
-  .routestation .dash { color: var(--dim); }
   .routestation button { font-size: 13px; font-weight: 600; color: var(--muted); white-space: nowrap; }
   .routestation button.on { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+  .routedot { flex: none; width: 8px; height: 8px; border-radius: 50%; }
+  .routedot.dep { background: #1E6EF4; }
+  .routedot.arr { background: #E5462E; }
+  .routedot.transfer { width: 6px; height: 6px; background: var(--dim); }
 
   /* ── Favorites category rail (redesign) ── */
   .favrail {
