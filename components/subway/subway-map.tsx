@@ -187,18 +187,20 @@ export function SubwayMap({
       g.setAttribute("transform", `translate(${cx}, ${cy})`);
 
       // Teardrop: tip at the local origin (sits on the station), bulb centered
-      // ~19 units above it — roughly on par with the r=9 station hit-circle.
+      // ~15 units above it. Scaled to ~78% of the original r=9 bulb — at
+      // INITIAL_SCALE (2.2) the old size read as oversized next to the r=3
+      // visible station dots (see task brief screenshots).
       const path = document.createElementNS(ns, "path");
-      path.setAttribute("d", "M0 0 C-6 -8 -9 -13 -9 -19 A9 9 0 0 1 9 -19 C9 -13 6 -8 0 0 Z");
+      path.setAttribute("d", "M0 0 C-4.7 -6.2 -7 -10 -7 -15 A7 7 0 0 1 7 -15 C7 -10 4.7 -6.2 0 0 Z");
       path.setAttribute("fill", color);
       path.setAttribute("stroke", "#fff");
-      path.setAttribute("stroke-width", "1.4");
+      path.setAttribute("stroke-width", "1.2");
       g.appendChild(path);
 
       const dot = document.createElementNS(ns, "circle");
       dot.setAttribute("cx", "0");
-      dot.setAttribute("cy", "-19");
-      dot.setAttribute("r", "3.4");
+      dot.setAttribute("cy", "-15");
+      dot.setAttribute("r", "2.7");
       dot.setAttribute("fill", "#fff");
       g.appendChild(dot);
 
@@ -206,17 +208,17 @@ export function SubwayMap({
         const clear = document.createElementNS(ns, "g");
         clear.setAttribute("class", "subway-pin-clear");
         clear.setAttribute("data-pin-clear", "dep");
-        clear.setAttribute("transform", "translate(8, -28)");
+        clear.setAttribute("transform", "translate(6.5, -22)");
         const cbg = document.createElementNS(ns, "circle");
-        cbg.setAttribute("r", "6.5");
+        cbg.setAttribute("r", "5.5");
         cbg.setAttribute("fill", "#fff");
         cbg.setAttribute("stroke", color);
-        cbg.setAttribute("stroke-width", "1.2");
+        cbg.setAttribute("stroke-width", "1.1");
         clear.appendChild(cbg);
         const cross = document.createElementNS(ns, "path");
-        cross.setAttribute("d", "M-2.6 -2.6 L2.6 2.6 M2.6 -2.6 L-2.6 2.6");
+        cross.setAttribute("d", "M-2.2 -2.2 L2.2 2.2 M2.2 -2.2 L-2.2 2.2");
         cross.setAttribute("stroke", color);
-        cross.setAttribute("stroke-width", "1.6");
+        cross.setAttribute("stroke-width", "1.4");
         cross.setAttribute("stroke-linecap", "round");
         clear.appendChild(cross);
         g.appendChild(clear);
