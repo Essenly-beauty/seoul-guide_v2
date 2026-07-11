@@ -31,6 +31,19 @@ describe("processed subway svg", () => {
     expect(svg).toMatch(/MIT/);
     expect(svg).toMatch(/Sinseiki|opensource-seoul-subway-map/);
   });
+  it("no percentage font-size on labels (resolves against root, not class size)", () => {
+    expect(svg).not.toMatch(/font-size:\s*\d+%/);
+  });
+  it("inline label font sizes are small absolute px", () => {
+    const sizes = [
+      ...svg.matchAll(/data-label-for="[^"]+"[^>]*style="[^"]*font-size:\s*([\d.]+)px/g),
+    ].map((m) => parseFloat(m[1]));
+    expect(sizes.length).toBeGreaterThan(100); // guard: regex actually matched shrunk labels
+    for (const s of sizes) {
+      expect(s).toBeGreaterThan(2);
+      expect(s).toBeLessThan(10);
+    }
+  });
 });
 
 describe("generated metro-svg.ts module", () => {

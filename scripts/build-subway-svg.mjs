@@ -54,6 +54,11 @@ const MANUAL_SVG_MAP = {
 };
 
 const MAX_LABEL_CHARS_BEFORE_SHRINK = 12;
+const SHRINK_FACTOR = 0.9;
+// Fallback resolved font-size (px) used only if a label's class font-size
+// can't be determined from the stylesheet at all (defensive; the source map
+// has always defined a size for every label class observed so far).
+const FALLBACK_LABEL_FONT_PX = 4;
 const ABBREVIATIONS = [
   [/\bStation\b/g, "Stn."],
   [/\bUniversity\b/g, "Univ."],
@@ -69,6 +74,52 @@ function dist(ax, ay, bx, by) {
   return Math.hypot(ax - bx, ay - by);
 }
 
+// ---------------------------------------------------------------------------
+// Resolve each CSS class's effective font-size (in px) from the SVG's inline
+// <style> block. The stylesheet groups selectors like
+// `.cls-1, .cls-2, .cls-3 { font-size: 1.5px; }` — every class named in the
+// comma-separated selector list gets that declaration's font-size. Later
+// rules win on ties (last-applies-wins, mirroring CSS cascade order for
+// same-specificity class selectors declared later in the sheet).
+//
+// This replaces the previous `style="font-size:90%"` approach: a percentage
+// on an element resolves against the *inherited* (parent's computed) font
+// size, not the class rule applied to that same element — so on this SVG
+// (root font-size ~16px, no ancestor <text>/tspan setting font-size) a "90%"
+// label actually rendered at ~14.4px, ~2.5x-6x larger than the ~2.7-6px class
+// sizes used across labels. Resolving the class's own px size first and
+// scaling *that* keeps the shrunk label proportionate to its real size.
+function parseClassFontSizes(styleText) {
+  const sizes = new Map();
+  const ruleRe = /([^{}]+)\{([^{}]*)\}/g;
+  let m;
+  while ((m = ruleRe.exec(styleText))) {
+    const selectors = m[1];
+    const body = m[2];
+    const fontSizeMatch = body.match(/font-size:\s*([\d.]+)px/);
+    if (!fontSizeMatch) continue;
+    const px = parseFloat(fontSizeMatch[1]);
+    for (const sel of selectors.split(",")) {
+      const trimmed = sel.trim();
+      const classMatch = trimmed.match(/^\.(cls-\d+)$/);
+      if (classMatch) sizes.set(classMatch[1], px);
+    }
+  }
+  return sizes;
+}
+
+// Resolve a label's own effective font-size in px, given its `class`
+// attribute value (e.g. "cls-40 lbl-major") and the class->px map above.
+// Only `cls-N` classes carry font-size rules on this map; `lbl-major`/
+// `lbl-minor` are zoom-tier CSS added by this script, not size rules.
+function resolveLabelFontPx(classAttr, classSizes, fallbackPx) {
+  const classes = (classAttr ?? "").split(/\s+/).filter(Boolean);
+  for (const c of classes) {
+    if (classSizes.has(c)) return classSizes.get(c);
+  }
+  return fallbackPx;
+}
+
 function main() {
   if (!existsSync(SVG_SOURCE)) {
     console.error(`[build-subway-svg] source not found: ${SVG_SOURCE}`);
@@ -78,6 +129,17 @@ function main() {
 
   const raw = readFileSync(SVG_SOURCE, "utf8");
   const $ = cheerio.load(raw, { xmlMode: true });
+
+  // Resolve every `.cls-N` class's font-size (px) up front from the internal
+  // <style> block, so label shrinking below can scale each label's *actual*
+  // resolved size rather than a percentage of the inherited (root) size.
+  const styleText = $("style").text();
+  const classFontSizes = parseClassFontSizes(styleText);
+  // Fallback: the modal (most common) class font-size across all label-like
+  // classes actually used by station labels on this map (cls-40, per the
+  // matcher below) — used only if a given label's class is somehow absent
+  // from the stylesheet (defensive; not expected in practice).
+  const measuredFallbackPx = classFontSizes.get("cls-40") ?? FALLBACK_LABEL_FONT_PX;
 
   const stations = data.stations;
   const stationIds = Object.keys(stations);
@@ -311,8 +373,15 @@ function main() {
     const labelClass = major ? "lbl-major" : "lbl-minor";
     info.$el.attr("class", `${existingClass} ${labelClass}`.trim());
     if (englishName.length > MAX_LABEL_CHARS_BEFORE_SHRINK) {
+      // Resolve *this* label's own class font-size (in px) and shrink that —
+      // not a percentage, which would resolve against the inherited/root
+      // font-size instead of the class rule on this same element. See
+      // parseClassFontSizes() above for why.
+      const finalClassAttr = info.$el.attr("class") ?? "";
+      const resolvedPx = resolveLabelFontPx(finalClassAttr, classFontSizes, measuredFallbackPx);
+      const shrunkPx = Math.round(resolvedPx * SHRINK_FACTOR * 100) / 100;
       const existingStyle = info.$el.attr("style") ?? "";
-      info.$el.attr("style", `${existingStyle}${existingStyle ? ";" : ""}font-size:90%`.trim());
+      info.$el.attr("style", `${existingStyle}${existingStyle ? ";" : ""}font-size:${shrunkPx}px`.trim());
     }
 
     // Grouped multi-line labels (g.cls-14): remove the now-redundant sibling

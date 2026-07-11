@@ -1767,8 +1767,8 @@
   /* Shop badges — injected as <g class="shopbadge"> siblings of each station's
      hit circle (see subway-map.tsx); they live inside the transformed SVG so
      they scale and pan with the map itself. */
-  .shopbadge circle { fill: var(--accent); stroke: #fff; stroke-width: 1.5; }
-  .shopbadge text { font-size: 8px; font-weight: 700; fill: #fff; text-anchor: middle; dominant-baseline: middle; }
+  .shopbadge circle { fill: var(--accent); stroke: #fff; stroke-width: 1; }
+  .shopbadge text { font-size: 5.5px; font-weight: 700; fill: #fff; text-anchor: middle; dominant-baseline: middle; }
 
   /* Kakao-style station callout: a plain absolutely-positioned card anchored
      at the tapped hit-circle's screen position (recomputed on open only —

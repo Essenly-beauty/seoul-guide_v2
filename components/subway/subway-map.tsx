@@ -110,10 +110,10 @@ export function SubwayMap({
 
       const g = document.createElementNS(ns, "g");
       g.setAttribute("class", "shopbadge");
-      g.setAttribute("transform", `translate(${parseFloat(cx) + 7}, ${parseFloat(cy) - 7})`);
+      g.setAttribute("transform", `translate(${parseFloat(cx) + 5}, ${parseFloat(cy) - 5})`);
 
       const circle = document.createElementNS(ns, "circle");
-      circle.setAttribute("r", "7");
+      circle.setAttribute("r", "5");
       g.appendChild(circle);
 
       const text = document.createElementNS(ns, "text");
