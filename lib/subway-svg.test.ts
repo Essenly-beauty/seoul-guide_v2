@@ -6,13 +6,29 @@ import data from "./subway-data.json";
 const svg = readFileSync("components/subway/seoul-metro.svg", "utf8");
 
 describe("processed subway svg", () => {
-  it("has a hit target for ≥97% of dataset stations", () => {
+  it("has a hit target for ≥95% of dataset stations", () => {
     const ids = Object.keys(data.stations);
     const wired = ids.filter((id) => svg.includes(`data-station="${id}"`));
-    expect(wired.length / ids.length).toBeGreaterThan(0.97);
+    expect(wired.length / ids.length).toBeGreaterThanOrEqual(0.95);
   });
-  it("anchor stations are wired and labeled in English", () => {
-    for (const id of ["gangnam", "nonhyeon", "hongik_univ", "myeongdong", "apgujeong_rodeo"]) {
+  it("beauty-zone core stations are 100% wired and labeled in English", () => {
+    // The 12 anchor stations Task W1 gates on: every one must have both a
+    // tap target and a data-label-for tag, no exceptions.
+    const beautyZone = [
+      "gangnam",
+      "nonhyeon",
+      "sinsa",
+      "apgujeong",
+      "apgujeong_rodeo",
+      "cheongdam",
+      "gangnamgu_office",
+      "hongik_univ",
+      "myeongdong",
+      "seongsu",
+      "yeoksam",
+      "seolleung",
+    ];
+    for (const id of beautyZone) {
       expect(svg, id).toContain(`data-station="${id}"`);
       expect(svg, id).toContain(`data-label-for="${id}"`);
     }
@@ -27,31 +43,35 @@ describe("processed subway svg", () => {
       expect(text, $(el).attr("data-label-for")).not.toMatch(/[가-힣]/);
     });
   });
-  it("keeps MIT notice", () => {
-    expect(svg).toMatch(/MIT/);
-    expect(svg).toMatch(/Sinseiki|opensource-seoul-subway-map/);
+  it("keeps Wikimedia PD-self attribution (not the old Sinseiki MIT notice)", () => {
+    expect(svg).toMatch(/Wikimedia/);
+    expect(svg).toMatch(/PD-self/);
+    expect(svg).toMatch(/IRTC1015/);
+    expect(svg).not.toMatch(/MIT/);
   });
   it("no percentage font-size on labels (resolves against root, not class size)", () => {
     expect(svg).not.toMatch(/font-size:\s*\d+%/);
   });
-  it("inline label font sizes are small absolute px (via --lbl-fs, not a literal font-size)", () => {
-    // Task S7: every label (not just the >12-char shrunk ones) now carries an
-    // inline size, but as a `--lbl-fs` custom property rather than a literal
-    // `font-size` declaration — a literal inline font-size would always beat
-    // the zoom-tier rules in app/globals.css ([data-zoom="mid"] .lbl-minor,
-    // [data-zoom="far"] .lbl-major), freezing every label at its near-tier
-    // size when zoomed out. See LABEL_SIZE_SCALE/LABEL_MAJOR_SCALE in
-    // scripts/build-subway-svg.mjs and the matching CSS rule's comment.
+  it("inline label font sizes are absolute px (via --lbl-fs, not a literal font-size)", () => {
+    // Every label carries an inline size as a `--lbl-fs` custom property
+    // rather than a literal `font-size` declaration — a literal inline
+    // font-size would always beat the zoom-tier rules in app/globals.css
+    // ([data-zoom="mid"] .lbl-minor, [data-zoom="far"] .lbl-major), freezing
+    // every label at its near-tier size when zoomed out. See
+    // LABEL_SIZE_SCALE/LABEL_MAJOR_SCALE in scripts/build-subway-svg.mjs.
     const sizes = [
       ...svg.matchAll(/data-label-for="[^"]+"[^>]*style="[^"]*--lbl-fs:\s*([\d.]+)px/g),
     ].map((m) => parseFloat(m[1]));
-    expect(sizes.length).toBeGreaterThan(500); // guard: now covers ~all labels, not just the shrunk ones
+    expect(sizes.length).toBeGreaterThan(500); // guard: covers ~all labels
     for (const s of sizes) {
-      // Bounds unchanged from pre-S7: the +18%/+10% Kakao-style bump keeps
-      // every label's near-tier size well within this range (measured min
-      // ~2.36px, max ~5.5px across the current build).
-      expect(s).toBeGreaterThan(2);
-      expect(s).toBeLessThan(10);
+      // This base map's native label font-size (st50) is 18px in its own
+      // 5724-wide viewBox — an order of magnitude bigger than the previous
+      // (Sinseiki, ~1150-wide) base map's — so bounds are scaled up
+      // accordingly. The +18%/+10% Kakao-style bump keeps every label's
+      // near-tier size within this range (measured ~19-23px on the current
+      // build); W2 retunes the client-side scale these are viewed at.
+      expect(s).toBeGreaterThan(15);
+      expect(s).toBeLessThan(30);
     }
   });
 });

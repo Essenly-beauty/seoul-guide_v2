@@ -15,9 +15,18 @@
 // 3. Sinseiki/opensource-seoul-subway-map (MIT,
 //    https://github.com/Sinseiki/opensource-seoul-subway-map) — mapimage.svg,
 //    a schematic Seoul metropolitan subway map (~1150x1075 viewBox, per-station
-//    <circle> markers + Korean <text>/<tspan> labels). Used by Task 3's
-//    build-subway-svg.mjs to produce the English-labeled, tap-target-wired
-//    map SVG for the client map component.
+//    <circle> markers + Korean <text>/<tspan> labels). This was the base map
+//    used by build-subway-svg.mjs prior to the Wikimedia swap below; the
+//    download is kept here (harmless, unused by the current build) in case a
+//    future task needs to compare against it, but build-subway-svg.mjs no
+//    longer reads it.
+// 4. Wikimedia Commons — "Seoul_subway_linemap_en.svg" (file IRTC1015,
+//    PD-self / public domain, uploaded by the map's own author) —
+//    an official-style octilinear Seoul metropolitan subway map
+//    (viewBox 0 0 5724 6516, portrait) with native English <text> station
+//    labels, <use href="#환승역"> transfer-station markers, and per-station
+//    <line> tick marks. This is the current base map for
+//    build-subway-svg.mjs (see that file for processing details).
 
 import { existsSync, mkdirSync, writeFileSync } from "node:fs";
 import path from "node:path";
@@ -34,12 +43,17 @@ const VUSKI_LINK_URL =
   "https://raw.githubusercontent.com/vuski/seoulsubway/master/linkData.js";
 const SINSEIKI_MAPIMAGE_URL =
   "https://raw.githubusercontent.com/Sinseiki/opensource-seoul-subway-map/master/mapimage.svg";
+const WIKIMEDIA_LINEMAP_EN_URL =
+  "https://upload.wikimedia.org/wikipedia/commons/2/2f/Seoul_subway_linemap_en.svg";
 
 const FILES = [
   { name: "kric_stations.xlsx", url: KRIC_DOWNLOAD_URL, required: true },
   { name: "nodeData.js", url: VUSKI_NODE_URL, required: true },
   { name: "linkData.js", url: VUSKI_LINK_URL, required: true },
+  // Kept for provenance/comparison; no longer read by build-subway-svg.mjs.
   { name: "mapimage.svg", url: SINSEIKI_MAPIMAGE_URL, required: true },
+  // Current base map for build-subway-svg.mjs.
+  { name: "seoul-linemap-en.svg", url: WIKIMEDIA_LINEMAP_EN_URL, required: true },
 ];
 
 async function downloadFile({ name, url, required }) {
