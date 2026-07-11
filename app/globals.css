@@ -1771,7 +1771,11 @@
   .subwaywrap .lbl-major, .subwaywrap .lbl-minor { font-size: var(--lbl-fs); }
   .subwaywrap[data-zoom="far"] .lbl-minor { display: none; }
   .subwaywrap[data-zoom="far"] .lbl-major { font-size: 13px; }
-  .subwaywrap[data-zoom="mid"] .lbl-minor { font-size: 8px; }
+  /* Was a flat 8px — bigger than most labels' own --lbl-fs (measured ~2.36-
+     5.5px), so mid tier was actually *enlarging* small-name labels instead of
+     reducing density. Scale relative to each label's own near-tier size
+     instead, so mid consistently reads as "smaller than near" everywhere. */
+  .subwaywrap[data-zoom="mid"] .lbl-minor { font-size: calc(var(--lbl-fs) * 0.78); }
 
   /* Shop badges — injected as <g class="shopbadge"> siblings of each station's
      hit circle (see subway-map.tsx); they live inside the transformed SVG so

@@ -213,6 +213,79 @@ function main() {
     return stations[id].transfer || isTerminus(id);
   }
 
+  // ---------------------------------------------------------------------------
+  // Task S7 follow-up #1: KRIC English names embed long parenthetical
+  // disambiguators/former-names ("Yangjae (Seocho-gu Office)", "Dongjak (Seoul
+  // National Cemetery)", "Chongshin Univ. (Isu)") — the dominant label-collision
+  // driver in dense areas (Kakao's own map uses short primary names only).
+  // Derive a short DISPLAY name per station by stripping a trailing " (...)"
+  // suffix when the full name is long enough to need it, computed up front for
+  // every dataset station (not just ones matched on the map) so the uniqueness
+  // check below is stable regardless of match order. The FULL (abbreviated)
+  // name is preserved separately as `data-full-name` for a future tooltip, and
+  // is also what the dataset/callout/route-strip continue to read via
+  // STATIONS.name — this only changes what the map <text> label itself shows.
+  const DISPLAY_STRIP_MIN_CHARS = 14;
+  // Trailing parenthetical only — e.g. "Ichon (National Museum of Korea)" ->
+  // "Ichon" — NOT a mid-string paren like "Jongno 3(sam)ga" (the "(sam)" isn't
+  // a disambiguator suffix, it's part of the name itself; the regex's `$`
+  // anchor correctly leaves that one alone since it doesn't end in ")").
+  const TRAILING_PAREN_SUFFIX_RE = /^(.*?)\s*\(([^()]*)\)\s*$/;
+
+  function stripDisplayCandidate(fullName) {
+    if (fullName.length <= DISPLAY_STRIP_MIN_CHARS) return null;
+    const m = fullName.match(TRAILING_PAREN_SUFFIX_RE);
+    if (!m) return null;
+    const base = m[1].trim();
+    return base || null;
+  }
+
+  // FULL (abbreviated) name for every dataset station — same abbreviate() step
+  // as before this change, so `data-full-name` matches what the label used to
+  // render pre-fix.
+  const fullNameById = new Map();
+  for (const id of stationIds) fullNameById.set(id, abbreviate(stations[id].name));
+
+  // Tentative display name: the stripped candidate if the name is long enough
+  // and has a trailing parenthetical, else the full name unchanged.
+  const tentativeDisplayById = new Map();
+  for (const id of stationIds) {
+    const full = fullNameById.get(id);
+    tentativeDisplayById.set(id, stripDisplayCandidate(full) ?? full);
+  }
+
+  // Uniqueness check, against the whole dataset's tentative display names:
+  // never let two stations show the same stripped name. Group by tentative
+  // name; for any group of 2+, only the stations that actually got stripped
+  // (vs. ones whose full name already equals the group name) are candidates
+  // to revert — reverting an unstripped one wouldn't resolve anything, it'd
+  // just create a different collision. Among stripped colliders, keep the
+  // short form on the single most-important one (major: transfer/terminus)
+  // and revert every other stripped candidate in the group back to its full
+  // name; ties broken by station id ascending for deterministic, idempotent
+  // output.
+  const byTentative = new Map();
+  for (const id of stationIds) {
+    const name = tentativeDisplayById.get(id);
+    if (!byTentative.has(name)) byTentative.set(name, []);
+    byTentative.get(name).push(id);
+  }
+  const displayNameById = new Map(tentativeDisplayById);
+  for (const groupIds of byTentative.values()) {
+    if (groupIds.length <= 1) continue;
+    const strippedIds = groupIds.filter((id) => tentativeDisplayById.get(id) !== fullNameById.get(id));
+    if (strippedIds.length === 0) continue; // coincidental full-name dupe (e.g. Yangpyeong x2) — not from stripping, leave alone
+    const sorted = strippedIds.slice().sort((a, b) => {
+      const majorA = isMajor(a) ? 0 : 1;
+      const majorB = isMajor(b) ? 0 : 1;
+      if (majorA !== majorB) return majorA - majorB;
+      return a < b ? -1 : a > b ? 1 : 0;
+    });
+    for (const id of sorted.slice(1)) {
+      displayNameById.set(id, fullNameById.get(id)); // revert to full name
+    }
+  }
+
   // ---- Pass 1: collect all label <text> elements bearing a single, complete
   // Korean station-like name (cls-40 is the dominant station-label class on
   // this map; other classes carry incidental Korean in legend/terminal text,
@@ -404,10 +477,11 @@ function main() {
     if (!station) continue;
     wiredIds.add(id);
 
-    let englishName = abbreviate(station.name);
+    const fullName = fullNameById.get(id);
+    const englishName = displayNameById.get(id); // short DISPLAY name — see derivation above
     const major = isMajor(id);
 
-    // Replace all tspans with a single tspan carrying the English name,
+    // Replace all tspans with a single tspan carrying the DISPLAY name,
     // keeping the first tspan's position attributes.
     const first = info.tspans[0];
     const $first = $(first);
@@ -417,6 +491,7 @@ function main() {
     info.$el.append($newTspan);
 
     info.$el.attr("data-label-for", id);
+    info.$el.attr("data-full-name", fullName);
     const existingClass = info.$el.attr("class") ?? "";
     const labelClass = major ? "lbl-major" : "lbl-minor";
     info.$el.attr("class", `${existingClass} ${labelClass}`.trim());
@@ -684,7 +759,12 @@ function main() {
   every label carries an inline --lbl-fs custom property (near-tier size,
   read by .lbl-major/.lbl-minor in app/globals.css) plus a near-black fill,
   with majors additionally bold; rotated labels are straightened to
-  horizontal wherever a collision-free spot exists near their marker.
+  horizontal wherever a collision-free spot exists near their marker. Follow-up:
+  labels show a short DISPLAY name (trailing " (...)" parenthetical stripped
+  when the full name is long, unless that would collide with another
+  station's display name); the full (abbreviated) name is preserved as
+  data-full-name for a future tooltip. Dataset/callout/route-strip are
+  unaffected — they read STATIONS.name (full name) directly.
 
   Source of the base SVG: ${SOURCE_URL}
 -->
@@ -750,6 +830,15 @@ export const METRO_SVG: string = ${JSON.stringify(output)};
   console.log(`\nTask S7 #1 — station-number-code text removed: ${removedCodeCount}`);
   for (const [cls, count] of [...removedCodeClasses.entries()].sort((a, b) => b[1] - a[1])) {
     console.log(`  ${cls}: ${count}`);
+  }
+
+  const strippedDisplayIds = stationIds.filter((id) => displayNameById.get(id) !== fullNameById.get(id));
+  const revertedCollisionIds = stationIds.filter(
+    (id) => tentativeDisplayById.get(id) !== fullNameById.get(id) && displayNameById.get(id) === fullNameById.get(id),
+  );
+  console.log(`\nDisplay-name shortening (parenthetical-suffix strip) — stations with a shortened label: ${strippedDisplayIds.length} / ${totalDatasetStations}`);
+  if (revertedCollisionIds.length) {
+    console.log(`  reverted to full name due to a display-name collision: ${revertedCollisionIds.join(", ")}`);
   }
 
   console.log(`\nTask S7 #3 — label horizontalization:`);

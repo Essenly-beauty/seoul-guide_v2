@@ -29,7 +29,11 @@ const MAX_SCALE = 5;
 type ZoomTier = "far" | "mid" | "near";
 function tierFor(scale: number): ZoomTier {
   if (scale < 1.2) return "far";
-  if (scale < 2.2) return "mid";
+  // Was `< 2.2` — exactly INITIAL_SCALE, so the very first paint landed right
+  // on the "near" (max label density) tier. Raised to 2.6 so the initial view
+  // renders as "mid" (reduced lbl-minor size); zooming in past 2.6 restores
+  // full near-tier density.
+  if (scale < 2.6) return "mid";
   return "near";
 }
 
@@ -70,7 +74,14 @@ export function SubwayMap({
   const wrapRef = useRef<HTMLDivElement>(null);
   const svgHostRef = useRef<HTMLDivElement>(null);
   const [callout, setCallout] = useState<CalloutState>(null);
-  const [zoomTier, setZoomTier] = useState<ZoomTier>("near");
+  // react-zoom-pan-pinch does not invoke the `onTransform` prop on initial
+  // mount (only on actual pan/zoom interactions) — it was previously safe to
+  // hardcode "near" here because the old tier boundary (`scale < 2.2`) put
+  // INITIAL_SCALE (2.2) in "near" anyway, so the hardcoded default happened to
+  // match. Now that "near" starts at 2.6, the default must be computed the
+  // same way, or first paint would show "near" (undoing the zoom-tier fix)
+  // until the user's first interaction fires onTransform.
+  const [zoomTier, setZoomTier] = useState<ZoomTier>(() => tierFor(INITIAL_SCALE));
   const [initialPos, setInitialPos] = useState<{ x: number; y: number } | null>(null);
   // Bumped only by the self-heal guard below when it detects the injected SVG
   // content (badges/pins) is actually missing — included in the injection
