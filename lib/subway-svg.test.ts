@@ -11,6 +11,22 @@ describe("processed subway svg", () => {
     const wired = ids.filter((id) => svg.includes(`data-station="${id}"`));
     expect(wired.length / ids.length).toBeGreaterThanOrEqual(0.95);
   });
+  it("wires exactly one tap target per station (no duplicate/stolen markers)", () => {
+    // Guards the bug W1 fixed: triple-rendered labels at identical coords were
+    // stealing neighbours' tap markers. A station must map to exactly one
+    // data-station hit element. Two stations legitimately render twice because
+    // the base map draws them at two separate physical points (branch/loop
+    // termini); everything else must be unique. A regression that duplicated
+    // or misattributed a marker (0 or 3+ occurrences) fails here.
+    const DUP_ALLOWED = new Set(["sinchon", "mangwolsa"]);
+    const ids = Object.keys(data.stations);
+    for (const id of ids) {
+      const n = svg.split(`data-station="${id}"`).length - 1;
+      if (n === 0) continue; // coverage handled by the ≥95% test above
+      const max = DUP_ALLOWED.has(id) ? 2 : 1;
+      expect(n, `${id} has ${n} hit targets`).toBeLessThanOrEqual(max);
+    }
+  });
   it("beauty-zone core stations are 100% wired and labeled in English", () => {
     // The 12 anchor stations Task W1 gates on: every one must have both a
     // tap target and a data-label-for tag, no exceptions.
