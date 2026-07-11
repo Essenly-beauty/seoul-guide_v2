@@ -101,7 +101,7 @@ export default function MapView({ center, places, selectedId, onSelect, userLoc,
       <MapWiring flyTarget={flyTarget} onUserMove={onUserMove} getBounds={getBounds} />
       {routeLine?.map((seg, i) => (
         <Polyline
-          key={i}
+          key={`${seg.color}-${i}`}
           positions={seg.positions}
           pathOptions={{ color: seg.color, weight: 5, opacity: 0.85, lineCap: "round", lineJoin: "round" }}
         />

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import dynamic from "next/dynamic";
 import Link from "next/link";
 import { BrandMark, Icon } from "@/components/icon";
@@ -96,6 +96,10 @@ export function MapScreen() {
 
   const filteredForSubway = useMemo(() => applyFilters(PLACES, cat, filters), [cat, filters]);
 
+  // Stable identity so SubwayMap's pin-injection effect (keyed on this prop)
+  // doesn't re-run on unrelated MapScreen re-renders (filterOpen, banner, etc).
+  const handleClearDeparture = useCallback(() => setDeparture(null), []);
+
   useEffect(() => {
     if (status === "granted" && loc) setFlyTarget(loc);
   }, [status, loc]);
@@ -122,7 +126,7 @@ export function MapScreen() {
           arrival={arrival}
           onSetDeparture={setDeparture}
           onSetArrival={setArrival}
-          onClearDeparture={() => setDeparture(null)}
+          onClearDeparture={handleClearDeparture}
         />
       )}
 

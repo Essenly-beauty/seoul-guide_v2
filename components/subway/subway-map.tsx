@@ -72,6 +72,10 @@ export function SubwayMap({
   const [callout, setCallout] = useState<CalloutState>(null);
   const [zoomTier, setZoomTier] = useState<ZoomTier>("near");
   const [initialPos, setInitialPos] = useState<{ x: number; y: number } | null>(null);
+  // Bumped only by the self-heal guard below when it detects the injected SVG
+  // content (badges/pins) is actually missing — included in the injection
+  // effects' deps so a detected wipe forces exactly one re-injection.
+  const [healTick, setHealTick] = useState(0);
 
   // Center the initial viewport on Gangnam once the container is measured.
   // Falls back to a plain center-of-viewport guess if measurement is ever 0
@@ -87,16 +91,25 @@ export function SubwayMap({
     });
   }, []);
 
+  // Cheap worklist for the badge effect below: computed once per `places`
+  // change instead of walking all 592 STATIONS × haversine on every re-run.
+  const badgeStations = useMemo(
+    () =>
+      Object.keys(STATIONS)
+        .map((id) => [id, shopCount(places, id)] as const)
+        .filter(([, n]) => n > 0),
+    [places],
+  );
+
   // Shop badges: injected directly into the dangerouslySetInnerHTML'd SVG DOM
   // (React doesn't own that subtree, so this is a deliberate escape hatch —
-  // not a pattern to copy elsewhere). No dependency array — this deliberately
-  // re-runs after every SubwayMap render, not just when `places`/`initialPos`
-  // change: react-zoom-pan-pinch's TransformWrapper re-renders its children on
-  // essentially any state change in this component (confirmed empirically —
-  // e.g. simply opening the station toolbar), which silently resets this
-  // div's innerHTML back to pristine METRO_SVG and wipes anything injected
-  // here. Re-asserting on every render is the robust fix; the removal pass
-  // below keeps it idempotent when the reset didn't actually happen.
+  // not a pattern to copy elsewhere). React only resets `__html` when the
+  // string identity changes (METRO_SVG is a stable module constant) or the
+  // host node remounts, and TransformComponent passes children through
+  // without remounting them, so this only needs to run when the inputs that
+  // actually affect the injected content change. The removal pass keeps it
+  // idempotent on legitimate re-runs (e.g. `places` changing which stations
+  // have shops).
   useEffect(() => {
     const host = svgHostRef.current;
     if (!host) return;
@@ -107,10 +120,8 @@ export function SubwayMap({
     svg.querySelectorAll(".shopbadge").forEach((n) => n.remove());
 
     const ns = "http://www.w3.org/2000/svg";
-    for (const station of Object.values(STATIONS)) {
-      const count = shopCount(places, station.id);
-      if (count <= 0) continue;
-      const hit = svg.querySelector(`[data-station="${station.id}"]`);
+    for (const [stationId, count] of badgeStations) {
+      const hit = svg.querySelector(`[data-station="${stationId}"]`);
       if (!hit) continue;
       const cx = hit.getAttribute("cx");
       const cy = hit.getAttribute("cy");
@@ -132,8 +143,7 @@ export function SubwayMap({
 
       hit.parentElement?.appendChild(g);
     }
-    // Intentionally no dependency array — see comment above.
-  });
+  }, [badgeStations, initialPos, healTick]);
 
   // Departure/arrival pins — same SVG-injection escape hatch as the shop
   // badges above, so the pin pans/zooms with the map instead of drifting
@@ -142,8 +152,8 @@ export function SubwayMap({
   // departure pin additionally gets a ✕ clear-button (data-pin-clear="dep",
   // handled in handleContainerClick below) — the arrival pin is rendered
   // defensively only, since in practice setting arrival immediately flips
-  // the parent into route mode and unmounts this component. No dependency
-  // array — see the shop-badges effect above for why.
+  // the parent into route mode and unmounts this component. See the
+  // shop-badges effect above for why a real dependency array is correct here.
   useEffect(() => {
     const host = svgHostRef.current;
     if (!host) return;
@@ -206,6 +216,28 @@ export function SubwayMap({
 
     addPin(svg, departure, "dep-pin", "#1E6EF4", Boolean(onClearDeparture));
     addPin(svg, arrival, "arr-pin", "#E5462E", false);
+  }, [departure, arrival, onClearDeparture, initialPos, healTick]);
+
+  // Self-heal guard: an earlier version of the two effects above ran on every
+  // render because opening the station toolbar was *suspected* to wipe this
+  // div's dangerouslySetInnerHTML SVG back to pristine METRO_SVG. On
+  // investigation, React only resets `__html` on identity change or remount —
+  // neither happens here — so that was almost certainly a dev-only Fast
+  // Refresh artifact, not a real production hazard. This effect keeps the
+  // safety net without the O(592-station) cost: it runs on every render but
+  // only does an O(1) `querySelector` presence check, and only forces a
+  // re-injection (via healTick) when it actually finds injected content
+  // missing — so it cannot loop (a successful re-injection makes the next
+  // check pass and stop bumping).
+  // eslint-disable-next-line react-hooks/exhaustive-deps -- deliberately no deps array; must run every render to catch the hypothetical wipe.
+  useEffect(() => {
+    const host = svgHostRef.current;
+    if (!host) return;
+    const svg = host.querySelector("svg");
+    if (!svg) return;
+    const badgesMissing = badgeStations.length > 0 && !svg.querySelector(".shopbadge");
+    const pinsMissing = Boolean(departure || arrival) && !svg.querySelector(".subway-pin");
+    if (badgesMissing || pinsMissing) setHealTick((t) => t + 1);
   });
 
   const closeCallout = useCallback(() => setCallout(null), []);
