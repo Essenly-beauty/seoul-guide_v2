@@ -275,14 +275,58 @@ function main() {
     if (groupIds.length <= 1) continue;
     const strippedIds = groupIds.filter((id) => tentativeDisplayById.get(id) !== fullNameById.get(id));
     if (strippedIds.length === 0) continue; // coincidental full-name dupe (e.g. Yangpyeong x2) — not from stripping, leave alone
-    const sorted = strippedIds.slice().sort((a, b) => {
-      const majorA = isMajor(a) ? 0 : 1;
-      const majorB = isMajor(b) ? 0 : 1;
-      if (majorA !== majorB) return majorA - majorB;
-      return a < b ? -1 : a > b ? 1 : 0;
-    });
-    for (const id of sorted.slice(1)) {
+
+    const unstrippedIds = groupIds.filter((id) => tentativeDisplayById.get(id) === fullNameById.get(id));
+
+    // If the group contains unstripped members, revert ALL stripped members
+    // to prevent collision with unstripped members' names. Otherwise, keep the
+    // top-ranked stripped member (major: transfer/terminus, else by id ascending)
+    // and revert the rest.
+    let idsToRevert = [];
+    if (unstrippedIds.length > 0) {
+      // Stripped member's tentative display name collides with an unstripped
+      // member's full (already unstripped) name. Revert all stripped members.
+      idsToRevert = strippedIds;
+    } else {
+      // Only stripped members in this group — keep the most important one.
+      const sorted = strippedIds.slice().sort((a, b) => {
+        const majorA = isMajor(a) ? 0 : 1;
+        const majorB = isMajor(b) ? 0 : 1;
+        if (majorA !== majorB) return majorA - majorB;
+        return a < b ? -1 : a > b ? 1 : 0;
+      });
+      idsToRevert = sorted.slice(1);
+    }
+
+    for (const id of idsToRevert) {
       displayNameById.set(id, fullNameById.get(id)); // revert to full name
+    }
+  }
+
+  // Build-time assertion: ensure no display-name collisions where at least one
+  // member was stripped this run. Pre-existing collisions (both unstripped, like
+  // Yangpyeong/Yangpyeong_5) are allowed.
+  const finalDisplayNames = new Map(); // displayName -> [stationIds]
+  for (const id of stationIds) {
+    const displayName = displayNameById.get(id);
+    if (!finalDisplayNames.has(displayName)) {
+      finalDisplayNames.set(displayName, []);
+    }
+    finalDisplayNames.get(displayName).push(id);
+  }
+
+  for (const [displayName, ids] of finalDisplayNames.entries()) {
+    if (ids.length <= 1) continue;
+    // Check if at least one member was stripped this run.
+    const hasStripped = ids.some((id) => {
+      const tentative = tentativeDisplayById.get(id);
+      const full = fullNameById.get(id);
+      return tentative !== full; // was stripped at some point
+    });
+
+    if (hasStripped) {
+      console.error(`[build-subway-svg] FAILED: display-name collision "${displayName}" with at least one stripped member: ${ids.join(", ")}`);
+      process.exit(1);
     }
   }
 
