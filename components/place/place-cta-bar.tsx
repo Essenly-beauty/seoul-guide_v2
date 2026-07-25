@@ -1,31 +1,32 @@
 "use client";
 
-import { Icon } from "@/components/icon";
-import { DirectionsLauncher } from "@/components/directions/directions-sheet";
-import { BookingSheet } from "@/components/booking/booking-sheet";
-import { ChannelSheet } from "@/components/booking/channel-sheet";
-import { isBookable, statusLabel } from "@/lib/places";
-import { naverMapUrl } from "@/lib/geo";
+import { useEffect } from "react";
+import { MapLinkButtons } from "@/components/directions/map-link-buttons";
+import { useLocation } from "@/components/map/use-location";
+import { queuePriorityQuestion } from "@/lib/profile";
 import type { Place } from "@/lib/data";
 
-/** Sticky bottom CTA: Naver-direct directions + per-category booking (spec §4.4). */
+/** Sticky bottom CTA (spec §4.6-12): route-only — [Google][Kakao][Naver].
+    Share + save moved into the Kakao-style action strip under the title header
+    (user decision 2026-07-25), so the bar no longer duplicates them.
+    No standalone Directions CTA (confirmed); booking lives in the detail body. */
 export function PlaceCtaBar({ place }: { place: Place }) {
+  const { loc } = useLocation();
+
+  // Context trigger #1 (docs §4-2), simplified: the spec queues the category
+  // question on *first favorite* of a clinic/salon, but the shared
+  // FavoriteButton exposes no onClick and stays untouched — so *viewing* a
+  // clinic/salon queues the matching question for the My-page card instead.
+  // queuePriorityQuestion is a no-op once the field is answered.
+  useEffect(() => {
+    if (place.type === "skin_clinic") queuePriorityQuestion("skinType");
+    else if (place.type === "hair_salon") queuePriorityQuestion("hairType");
+  }, [place.type]);
+
   return (
     <div className="bookbar" style={{ gap: 8 }}>
-      <a className="btn ghost" style={{ flex: 1 }} href={naverMapUrl(place.nameKr)} target="_blank" rel="noopener noreferrer">
-        <Icon name="pin" size="sm" /> Directions
-      </a>
-      <DirectionsLauncher
-        className="iconbtn bordered"
-        place={{ name: place.name, nameKr: place.nameKr, address: place.address, lat: place.lat, lng: place.lng }}
-      >
-        <Icon name="ext" size="sm" aria-label="Other maps" />
-      </DirectionsLauncher>
-      {place.type === "skin_clinic" && <BookingSheet triggerStyle={{ flex: 1 }} />}
-      {place.type !== "skin_clinic" && isBookable(place) && <ChannelSheet place={place} triggerStyle={{ flex: 1 }} />}
-      {!isBookable(place) && place.hours && (
-        <span className="small muted" style={{ flex: 1, textAlign: "center" }}>{statusLabel(place.hours)}</span>
-      )}
+      {/* .bookbar .btn { flex: 1 } stretches each map link across the bar */}
+      <MapLinkButtons place={place} origin={loc} />
     </div>
   );
 }
