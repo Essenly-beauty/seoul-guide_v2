@@ -2,8 +2,82 @@ import Link from "next/link";
 import { TopBar } from "@/components/ui/top-bar";
 import { BottomNav } from "@/components/ui/bottom-nav";
 import { ChipGroup } from "@/components/ui/chip-group";
+import { ImgPh } from "@/components/ui/img-ph";
+import { SectionHeader } from "@/components/ui/section-header";
+import { CategoryBadge } from "@/components/category/category-badge";
 import { Icon, BrandMark } from "@/components/icon";
 import { routes, sample } from "@/lib/routes";
+import type { PlaceType } from "@/lib/data";
+
+type BookingRowData = {
+  type: PlaceType;
+  name: string;
+  kr: string;
+  when: string;
+  status: "pending" | "confirmed" | "completed" | "cancelled";
+  statusLabel: string;
+  note?: string;
+  dday?: string;
+  ddayWarn?: boolean;
+  today?: boolean;
+};
+
+const UPCOMING: BookingRowData[] = [
+  {
+    type: "head_spa", name: "Eden Head Spa", kr: "에덴 헤드스파",
+    when: "Wed, May 6 · 18:00 → 20:00 · Hair Therapy",
+    status: "pending", statusLabel: "Reschedule pending", dday: "D-2", ddayWarn: true,
+    note: "Waiting for Eden to approve your time change. Original time held until then.",
+  },
+  {
+    type: "head_spa", name: "HOSU DOSAN", kr: "호수 도산점",
+    when: "Mon, May 4 · 14:00 · Signature Scalp Therapy",
+    status: "confirmed", statusLabel: "Confirmed", dday: "D-5",
+    note: "Free cancellation until Sun, May 3 · 14:00.",
+  },
+  {
+    type: "hair_salon", name: "Juno Hair Gangnam", kr: "준오헤어 강남점",
+    when: "Today · 18:00 · K-pop Cut + Color",
+    status: "confirmed", statusLabel: "Confirmed", today: true,
+    note: "Within 24h — deposit non-refundable. Reschedule available (1 attempt).",
+  },
+];
+
+const PAST: BookingRowData[] = [
+  {
+    type: "head_spa", name: "La Beauté Coréenne", kr: "라 보떼 꼬레엔느",
+    when: "Apr 22 · 11:00 · Premium Treatment",
+    status: "completed", statusLabel: "Completed",
+  },
+  {
+    type: "hair_salon", name: "Salon de Cheveux", kr: "살롱 드 슈브",
+    when: "Apr 18 · 16:00 · Express Refresh",
+    status: "cancelled", statusLabel: "Cancelled · Refunded",
+    note: "₩22,500 refunded to your card on Apr 16.",
+  },
+];
+
+function BookingRowBody({ b }: { b: BookingRowData }) {
+  return (
+    <>
+      <ImgPh className="thumb56" />
+      <div className="stack" style={{ flex: 1, minWidth: 0, gap: 4 }}>
+        <div className="row" style={{ gap: 6 }}>
+          <CategoryBadge type={b.type} size={16} />
+          <b className="t-label-md" style={{ fontSize: 14, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{b.name}</b>
+          <span className="t-caption mono" style={{ flex: "none" }}>{b.kr}</span>
+        </div>
+        <div className="t-caption num">{b.when}</div>
+        <div className="row" style={{ gap: 8 }}>
+          <span className={`statuschip ${b.status}`}>{b.statusLabel}</span>
+          {b.dday && <span className="dday" style={b.ddayWarn ? { color: "var(--warning)" } : undefined}>{b.dday}</span>}
+          {b.today && <span className="pill-today">Today</span>}
+        </div>
+        {b.note && <p className="t-caption">{b.note}</p>}
+      </div>
+    </>
+  );
+}
 
 export default function BookingsListPage() {
   const detail = routes.booking(sample.booking);
@@ -18,60 +92,45 @@ export default function BookingsListPage() {
           </Link>
         }
       />
-      <div className="app-scroll pad stack">
-        <ChipGroup single wrap={false} items={["All 5", "Upcoming", "Action needed 1", "Past"]} defaultSelected={["All 5"]} />
+      <div className="app-scroll pad stack pagev2">
+        <ChipGroup ariaLabel="Booking status" single wrap={false} items={["All 5", "Upcoming", "Action needed 1", "Past"]} defaultSelected={["All 5"]} />
 
-        <Link className="card tap stack sm" href={detail}>
-          <div className="row between">
-            <span className="statuschip pending">Reschedule pending</span>
-            <span className="dday" style={{ color: "var(--warning)" }}>D-2</span>
+        <hr className="sec-divider" />
+        <section className="stack sm">
+          <SectionHeader title="Upcoming" count={UPCOMING.length} />
+          <div>
+            {UPCOMING.map((b) => (
+              <Link key={b.name} className="listrow v2 top" href={detail}>
+                <BookingRowBody b={b} />
+                <Icon name="chev" size="xs" className="chev" />
+              </Link>
+            ))}
           </div>
-          <div><b>Eden Head Spa</b> <span className="caption muted mono">에덴 헤드스파</span></div>
-          <div className="small muted mono">Wed, May 6 · 18:00 → 20:00 · Hair Therapy</div>
-          <p className="caption muted">Waiting for Eden to approve your time change. Original time held until then.</p>
-        </Link>
+        </section>
 
-        <Link className="card tap stack sm" href={detail}>
-          <div className="row between">
-            <span className="statuschip confirmed">Confirmed</span>
-            <span className="dday">D-5</span>
+        <hr className="sec-divider" />
+        <section className="stack sm">
+          <SectionHeader title="Past" count={PAST.length} />
+          <div>
+            <Link className="listrow v2 top" href={detail}>
+              <BookingRowBody b={PAST[0]} />
+              <Icon name="chev" size="xs" className="chev" />
+            </Link>
+            <div className="listrow v2 top" style={{ opacity: 0.7 }}>
+              <BookingRowBody b={PAST[1]} />
+            </div>
           </div>
-          <div><b>HOSU DOSAN</b> <span className="caption muted mono">호수 도산점</span></div>
-          <div className="small muted mono">Mon, May 4 · 14:00 · Signature Scalp Therapy</div>
-          <p className="caption muted">Free cancellation until Sun, May 3 · 14:00.</p>
-        </Link>
+        </section>
 
-        <Link className="card tap stack sm" href={detail}>
-          <div className="row between">
-            <span className="statuschip confirmed">Confirmed</span>
-            <span className="pill-today">Today</span>
-          </div>
-          <div><b>Juno Hair Gangnam</b> <span className="caption muted mono">준오헤어 강남점</span></div>
-          <div className="small muted mono">Today · 18:00 · K-pop Cut + Color</div>
-          <p className="caption muted">Within 24h — deposit non-refundable. Reschedule available (1 attempt).</p>
-        </Link>
-
-        <Link className="card tap stack sm" href={detail}>
-          <div className="row between"><span className="statuschip completed">Completed</span></div>
-          <div><b>La Beauté Coréenne</b> <span className="caption muted mono">라 보떼 꼬레엔느</span></div>
-          <div className="small muted mono">Apr 22 · 11:00 · Premium Treatment</div>
-        </Link>
-
-        <div className="card stack sm" style={{ opacity: 0.7 }}>
-          <div className="row between"><span className="statuschip cancelled">Cancelled · Refunded</span></div>
-          <div><b>Salon de Cheveux</b> <span className="caption muted mono">살롱 드 슈브</span></div>
-          <div className="small muted mono">Apr 18 · 16:00 · Express Refresh</div>
-          <p className="caption muted">₩22,500 refunded to your card on Apr 16.</p>
-        </div>
-
-        <div className="card accent stack sm">
-          <b className="serif h3">Looking for somewhere new?</b>
-          <p className="small muted">Curated head spas, salons, and clinics for foreign visitors.</p>
+        <hr className="sec-divider" />
+        <section className="stack sm">
+          <SectionHeader title="Looking for somewhere new?" />
+          <p className="t-caption">Curated head spas, salons, and clinics for foreign visitors.</p>
           <div className="row" style={{ gap: 8 }}>
             <Link className="btn sm" href={routes.placesCategory("head_spa")}>Browse Head Spa</Link>
-            <Link className="btn sm ghost" href={routes.map}>All Categories</Link>
+            <Link className="btn sm outline" href={routes.map}>All Categories</Link>
           </div>
-        </div>
+        </section>
       </div>
       <BottomNav active="menu" />
     </>

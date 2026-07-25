@@ -1,14 +1,15 @@
 "use client";
 
 import { useState } from "react";
+import { Icon, type IconName } from "@/components/icon";
 
-type Toggle = { key: string; title: string; desc: string; hint: string; on: boolean };
+type Toggle = { key: string; icon: IconName; title: string; desc: string; hint: string; on: boolean };
 
 const INITIAL: Toggle[] = [
-  { key: "booking", title: "Booking updates", desc: "Confirmations, reminders 48h & 6h before, schedule changes.", hint: "Email · Push", on: true },
-  { key: "kit", title: "Hair kit status", desc: "When your kit is preparing, ready for pickup, or expiring.", hint: "Email", on: true },
-  { key: "journal", title: "New journal stories", desc: "Curated K-beauty guides, occasional drops.", hint: "Email", on: false },
-  { key: "promo", title: "Promotions & events", desc: "Olive Young deals, Seoul beauty events, Essenly campaigns.", hint: "Email", on: false },
+  { key: "booking", icon: "cal", title: "Booking updates", desc: "Confirmations, reminders 48h & 6h before, schedule changes.", hint: "Email · Push", on: true },
+  { key: "kit", icon: "gift", title: "Hair kit status", desc: "When your kit is preparing, ready for pickup, or expiring.", hint: "Email", on: true },
+  { key: "journal", icon: "book", title: "New journal stories", desc: "Curated K-beauty guides, occasional drops.", hint: "Email", on: false },
+  { key: "promo", icon: "bell", title: "Promotions & events", desc: "Olive Young deals, Seoul beauty events, Essenly campaigns.", hint: "Email", on: false },
 ];
 
 export function NotificationsForm() {
@@ -16,33 +17,32 @@ export function NotificationsForm() {
   const toggle = (key: string) => setRows((r) => r.map((x) => (x.key === key ? { ...x, on: !x.on } : x)));
 
   return (
-    <div className="stack">
-      {rows.map((r) => (
-        <div className="card row between" key={r.key} style={{ gap: 12 }}>
-          <div style={{ flex: 1 }}>
-            <b>{r.title}</b>
-            <div className="caption muted" style={{ marginTop: 2 }}>{r.desc}</div>
-            <div className="label" style={{ marginTop: 6 }}>{r.hint}</div>
+    <div className="stack sm">
+      <div>
+        {rows.map((r) => (
+          <div className="listrow v2" key={r.key}>
+            <span className="ic"><Icon name={r.icon} size="sm" /></span>
+            <div style={{ flex: 1, minWidth: 0 }}>
+              <b className="t-label-md" style={{ fontSize: 14, display: "block" }}>{r.title}</b>
+              <div className="t-caption">{r.desc}</div>
+              <div className="t-label-sm" style={{ color: "var(--dim)", marginTop: 2 }}>{r.hint}</div>
+            </div>
+            <button
+              type="button"
+              className="notification-switch"
+              role="switch"
+              aria-checked={r.on}
+              aria-label={r.title}
+              onClick={() => toggle(r.key)}
+            >
+              <span className="notification-switch-track" aria-hidden="true">
+                <span className="notification-switch-thumb" />
+              </span>
+            </button>
           </div>
-          <button
-            role="switch"
-            aria-checked={r.on}
-            aria-label={r.title}
-            onClick={() => toggle(r.key)}
-            style={{
-              width: 46, height: 28, borderRadius: 999, flex: "none",
-              background: r.on ? "var(--accent)" : "var(--border)",
-              position: "relative", transition: "background .2s",
-            }}
-          >
-            <span style={{
-              position: "absolute", top: 3, left: r.on ? 21 : 3, width: 22, height: 22,
-              borderRadius: "50%", background: "#fff", transition: "left .2s", boxShadow: "var(--shadow-card)",
-            }} />
-          </button>
-        </div>
-      ))}
-      <div className="card"><p className="caption muted">These preferences apply across email and push (PWA). SMS for Korean numbers is coming later.</p></div>
+        ))}
+      </div>
+      <p className="t-caption">These preferences apply across email and push (PWA). SMS for Korean numbers is coming later.</p>
     </div>
   );
 }

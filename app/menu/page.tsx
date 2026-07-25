@@ -1,55 +1,100 @@
 import Link from "next/link";
 import { TopBar } from "@/components/ui/top-bar";
 import { BottomNav } from "@/components/ui/bottom-nav";
+import { SectionHeader } from "@/components/ui/section-header";
+import { FeedbackLauncher } from "@/components/ui/feedback-sheet";
+import { ProfileCard } from "@/components/mypage/profile-card";
 import { Icon } from "@/components/icon";
 import { routes } from "@/lib/routes";
 
-const MENU: { icon: Parameters<typeof Icon>[0]["name"]; title: string; desc: string; href: string; badge?: string }[] = [
-  { icon: "cal", title: "Reservations", desc: "Next: HOSU DOSAN · Mon, May 4 · 14:00", href: routes.bookings, badge: "D-5" },
-  { icon: "plane", title: "My Trip", desc: "Seoul · itinerary & beauty schedule", href: routes.trip },
-  { icon: "gift", title: "Beauty Kit", desc: "Free kit survey & shipping status", href: routes.kitStatus },
-  { icon: "heart", title: "Saved", desc: "Places, products & blog posts", href: routes.favorites, badge: "11" },
-  { icon: "book", title: "My reviews", desc: "2 written", href: routes.reviews, badge: "2" },
-  { icon: "user", title: "Beauty profile", desc: "Interests, skin & hair type", href: routes.onboardingInterests },
-  { icon: "bell", title: "Notifications", desc: "Booking, kit, blog, promotions", href: routes.notifications },
-  { icon: "mark", title: "Settings", desc: "Account & app preferences", href: routes.settings },
-  { icon: "cross", title: "Help & support", desc: "FAQ · contact Essenly support", href: routes.support },
-  { icon: "lock", title: "Terms & privacy", desc: "Legal documents", href: routes.legalTerms },
+type MenuRow = { icon: Parameters<typeof Icon>[0]["name"]; title: string; value?: string; href: string; badge?: string };
+
+const GROUPS: { title: string; rows: MenuRow[] }[] = [
+  {
+    title: "My activity",
+    rows: [
+      { icon: "cal", title: "Reservations", value: "HOSU DOSAN · May 4", href: routes.bookings, badge: "D-5" },
+      { icon: "plane", title: "My Trip", value: "Seoul", href: routes.trip },
+      { icon: "gift", title: "Beauty Kit", value: "Survey & shipping", href: routes.kitStatus },
+      { icon: "heart", title: "Saved", href: routes.favorites, badge: "11" },
+      { icon: "book", title: "My reviews", href: routes.reviews, badge: "2" },
+    ],
+  },
+  {
+    title: "Preferences",
+    rows: [
+      { icon: "user", title: "Beauty profile", value: "Skin & hair type", href: routes.onboardingInterests },
+      { icon: "bell", title: "Notifications", href: routes.notifications },
+      { icon: "mark", title: "Settings", href: routes.settings },
+    ],
+  },
+  {
+    title: "Support",
+    rows: [
+      { icon: "cross", title: "Help & support", href: routes.support },
+      { icon: "lock", title: "Terms & privacy", href: routes.legalTerms },
+    ],
+  },
 ];
 
 export default function MenuPage() {
   return (
     <>
       <TopBar title="Menu" />
-      <div className="app-scroll pad stack">
-        <div className="card row" style={{ gap: 14 }}>
-          <span className="avatar" style={{ width: 52, height: 52, fontSize: 18 }}>S</span>
-          <div style={{ flex: 1 }}>
-            <b style={{ fontSize: 17 }}>Sarah</b>
-            <div className="caption muted">Member · Starter</div>
-          </div>
-          <Link className="btn sm ghost" href={routes.settings}>Edit profile</Link>
-        </div>
-
-        <div className="card row between" style={{ textAlign: "center" }}>
-          {[["1", "Reservations"], ["11", "Saved"], ["2", "My reviews"]].map(([n, l]) => (
-            <div key={l} style={{ flex: 1 }}>
-              <div className="h2" style={{ color: "var(--accent)" }}>{n}</div>
-              <div className="caption muted">{l}</div>
+      <div className="app-scroll pad stack pagev2">
+        {/* Profile header block */}
+        <section className="stack">
+          <div className="row" style={{ gap: 14 }}>
+            <span className="avatar" style={{ width: 52, height: 52, fontSize: 18 }}>S</span>
+            <div style={{ flex: 1, minWidth: 0 }}>
+              <b style={{ fontSize: 17 }}>Sarah</b>
+              <div className="caption muted">Member · Starter</div>
             </div>
-          ))}
-        </div>
-
-        <div className="card" style={{ padding: "4px 16px" }}>
-          {MENU.map((m) => (
-            <Link key={m.title} className="listrow" href={m.href}>
-              <span className="ic"><Icon name={m.icon} size="sm" /></span>
-              <div><b>{m.title}</b><div className="caption muted">{m.desc}</div></div>
-              {m.badge && <span className="badge dim" style={{ marginLeft: "auto" }}>{m.badge}</span>}
-              <Icon name="chev" size="sm" className="chev" />
+            <Link className="iconbtn soft" href={routes.settings} aria-label="Edit profile">
+              <Icon name="user" size="sm" />
             </Link>
-          ))}
-        </div>
+          </div>
+          <div className="row between" style={{ textAlign: "center" }}>
+            {[["1", "Reservations"], ["11", "Saved"], ["2", "My reviews"]].map(([n, l]) => (
+              <div key={l} style={{ flex: 1 }}>
+                <div className="h2" style={{ color: "var(--accent)" }}>{n}</div>
+                <div className="caption muted">{l}</div>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* Progressive-profiling gauge + one-tap question (docs §4-1) */}
+        <ProfileCard />
+
+        {GROUPS.map((g) => (
+          <div key={g.title} className="stack" style={{ gap: 12 }}>
+            <hr className="sec-divider" />
+            <section className="stack sm">
+              <SectionHeader title={g.title} />
+              {g.rows.map((m) => (
+                <Link key={m.title} className="inforow" href={m.href}>
+                  <Icon name={m.icon} size="xs" />
+                  <span style={{ minWidth: 0, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{m.title}</span>
+                  <span className="chev row" style={{ gap: 7 }}>
+                    {m.value && <span className="caption muted">{m.value}</span>}
+                    {m.badge && <span className="badge dim">{m.badge}</span>}
+                    <Icon name="chev" size="xs" style={{ color: "var(--dim)" }} />
+                  </span>
+                </Link>
+              ))}
+              {g.title === "Support" && (
+                <FeedbackLauncher className="inforow" style={{ width: "100%" }}>
+                  <Icon name="ext" size="xs" />
+                  <span style={{ minWidth: 0, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>Send feedback</span>
+                  <span className="chev row" style={{ gap: 7 }}>
+                    <Icon name="chev" size="xs" style={{ color: "var(--dim)" }} />
+                  </span>
+                </FeedbackLauncher>
+              )}
+            </section>
+          </div>
+        ))}
       </div>
       <BottomNav active="menu" />
     </>

@@ -1,8 +1,9 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Icon } from "@/components/icon";
+import { useDialogFocus } from "@/components/ui/use-dialog-focus";
 import { routes } from "@/lib/routes";
 
 const SERVICES = [
@@ -34,6 +35,8 @@ export function BookingSheet({
   const [service, setService] = useState(0);
   const [alone, setAlone] = useState(true);
   const [time, setTime] = useState("14:00");
+  const closeRef = useRef<HTMLButtonElement>(null);
+  const dialogRef = useDialogFocus<HTMLDivElement>(open, () => setOpen(false), closeRef);
   const router = useRouter();
 
   function start() {
@@ -52,17 +55,24 @@ export function BookingSheet({
 
   return (
     <>
-      <button className={triggerClassName} style={triggerStyle} onClick={start}>
+      <button type="button" className={triggerClassName} style={triggerStyle} onClick={start}>
         {triggerLabel}
       </button>
 
       {open && (
         <div className="overlay" onClick={(e) => e.target === e.currentTarget && setOpen(false)}>
-          <div className="sheet">
+          <div
+            ref={dialogRef}
+            className="sheet"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="booking-sheet-title"
+            tabIndex={-1}
+          >
             <div className="handle" />
             <div className="shead">
-              <span className="steplabel" style={{ flex: 1 }}>{STEP_LABEL(step)}</span>
-              <button className="iconbtn" aria-label="Close" onClick={() => setOpen(false)}>
+              <span id="booking-sheet-title" className="steplabel" style={{ flex: 1 }}>{STEP_LABEL(step)}</span>
+              <button ref={closeRef} type="button" className="iconbtn" aria-label="Close" onClick={() => setOpen(false)}>
                 <Icon name="x" size="sm" />
               </button>
             </div>

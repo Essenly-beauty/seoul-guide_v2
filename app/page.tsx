@@ -5,16 +5,16 @@ import { routes } from "@/lib/routes";
 const SOCIALS: { key: string; label: string; style?: React.CSSProperties; mark: React.ReactNode }[] = [
   {
     key: "google", label: "Continue with Google",
-    mark: <span className="mono" style={{ fontWeight: 700, background: "linear-gradient(90deg,#4285F4,#EA4335,#FBBC05,#34A853)", WebkitBackgroundClip: "text", backgroundClip: "text", color: "transparent" }}>G</span>,
+    mark: <span className="mono" aria-hidden="true" style={{ fontWeight: 700, background: "linear-gradient(90deg,#4285F4,#EA4335,#FBBC05,#34A853)", WebkitBackgroundClip: "text", backgroundClip: "text", color: "transparent" }}>G</span>,
   },
   {
     key: "apple", label: "Continue with Apple",
-    mark: <span style={{ fontWeight: 700 }}>&#63743;</span>,
+    mark: <span aria-hidden="true" style={{ fontWeight: 700 }}>&#63743;</span>,
   },
   {
     key: "kakao", label: "Continue with Kakao",
     style: { background: "#FEE500", borderColor: "#FEE500", color: "#191919" },
-    mark: <span style={{ fontWeight: 700 }}>K</span>,
+    mark: <span aria-hidden="true" style={{ fontWeight: 700 }}>K</span>,
   },
 ];
 
@@ -40,7 +40,7 @@ export default function LoginPage() {
               {s.mark} {s.label}
             </Link>
           ))}
-          <Link className="caption muted" style={{ marginTop: 6, textDecoration: "underline" }} href={routes.map}>
+          <Link className="login-guest caption muted" style={{ marginTop: 6, textDecoration: "underline" }} href={routes.map}>
             Continue as guest
           </Link>
         </div>

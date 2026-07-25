@@ -2,6 +2,8 @@ import { TopBar } from "@/components/ui/top-bar";
 import { BottomNav } from "@/components/ui/bottom-nav";
 import { BackButton } from "@/components/ui/back-button";
 import { ActionButton } from "@/components/ui/action-button";
+import { SectionHeader } from "@/components/ui/section-header";
+import { FeedbackLauncher } from "@/components/ui/feedback-sheet";
 import { routes } from "@/lib/routes";
 
 const FAQ = [
@@ -15,26 +17,38 @@ export default function SupportPage() {
   return (
     <>
       <TopBar center left={<BackButton fallback={routes.menu} />} title="Support" />
-      <div className="app-scroll pad stack">
-        <div>
-          <div className="label">FAQ</div>
-          <div className="h1">How can we <span style={{ fontStyle: "italic", color: "var(--accent)" }}>help?</span></div>
-          <p className="muted small" style={{ marginTop: 6 }}>Check common questions or send us a message with your trip and place details.</p>
-        </div>
+      <div className="app-scroll pad stack pagev2">
+        <section className="stack sm">
+          <SectionHeader title="How can we help?" />
+          <p className="t-caption">Check common questions or send us a message with your trip and place details.</p>
+        </section>
 
-        {FAQ.map((f) => (
-          <details className="card" key={f.q}>
-            <summary style={{ fontWeight: 600, cursor: "pointer", listStyle: "none" }}>{f.q}</summary>
-            <p className="muted small" style={{ marginTop: 8 }}>{f.a}</p>
-          </details>
-        ))}
+        <hr className="sec-divider" />
+        <section className="stack sm">
+          <SectionHeader title="FAQ" count={FAQ.length} />
+          <div>
+            {FAQ.map((f) => (
+              <details className="qa" key={f.q}>
+                <summary>{f.q}</summary>
+                <p className="t-caption">{f.a}</p>
+              </details>
+            ))}
+          </div>
+        </section>
 
-        <div className="card accent stack sm">
-          <div className="label">Contact</div>
-          <b className="serif h3">Ask Essenly support</b>
-          <p className="small muted">We usually reply within a few hours. Include the place name, date, time, and what you need help with.</p>
+        <hr className="sec-divider" />
+        <section className="stack sm">
+          <SectionHeader title="Ask Essenly support" />
+          <p className="t-caption">We usually reply within a few hours. Include the place name, date, time, and what you need help with.</p>
           <ActionButton className="btn" toast="Opening mail to help@essenly.beauty…">Email help@essenly.beauty</ActionButton>
-        </div>
+        </section>
+
+        <hr className="sec-divider" />
+        <section className="stack sm">
+          <SectionHeader title="Something off?" />
+          <p className="t-caption">Spotted a bug or wrong place info? Tell us — it goes straight to the team.</p>
+          <FeedbackLauncher className="btn ghost">Send feedback</FeedbackLauncher>
+        </section>
       </div>
       <BottomNav active="menu" />
     </>

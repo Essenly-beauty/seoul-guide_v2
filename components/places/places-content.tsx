@@ -2,13 +2,15 @@
 
 import { useMemo, useState } from "react";
 import Link from "next/link";
-import { Icon } from "@/components/icon";
 import { FavoriteButton } from "@/components/ui/favorite-button";
+import { ImgPh } from "@/components/ui/img-ph";
+import { RatingLine } from "@/components/ui/rating-line";
+import { CategoryBadge } from "@/components/category/category-badge";
 import { KitCta } from "@/components/cards";
 import { routes } from "@/lib/routes";
 import {
   type Place, type PlaceType, CATEGORY_ZONES, DETAIL_CATEGORIES, PRICE_OPTIONS,
-  TYPE_LABEL, TYPE_ICON, zoneShort, districtOf,
+  TYPE_LABEL, zoneShort, districtOf,
 } from "@/lib/data";
 
 export function PlacesContent({ category, places }: { category: string; places: Place[] }) {
@@ -87,23 +89,24 @@ export function PlacesContent({ category, places }: { category: string; places: 
         <div className="empty"><p>No matches yet. Try different filters.</p></div>
       ) : (
         filtered.map((p) => (
-          <div className="placecard" key={p.id} style={{ position: "relative" }}>
-            <Link href={routes.place(p.id)} className="row" style={{ gap: 12, flex: 1, alignItems: "flex-start" }}>
-              <div className="thumb hero-img" style={{ display: "grid", placeItems: "center" }}>
-                <Icon name={TYPE_ICON[p.type]} style={{ color: "var(--accent)" }} />
-              </div>
-              <div style={{ flex: 1 }}>
-                <span className="label">{TYPE_LABEL[p.type]} · {placeDistrict(p)}</span>
-                <h3 style={{ fontSize: 17, margin: "2px 0" }}>{p.name}</h3>
-                <div className="name-kr">{p.nameKr}</div>
-                <div className="meta">
-                  {p.rating && <span className="stars">★ {p.rating}</span>}
-                  <span className="chip mono" style={{ padding: "3px 8px" }}>{p.priceRange}</span>
+          <div className="listrow v2" key={p.id}>
+            <Link href={routes.place(p.id)} className="row" style={{ gap: 12, flex: 1, minWidth: 0 }}>
+              <ImgPh className="thumb56" />
+              <div className="stack" style={{ flex: 1, minWidth: 0, gap: 2 }}>
+                <div className="row" style={{ gap: 6 }}>
+                  <CategoryBadge type={p.type} size={16} />
+                  <b className="t-label-md" style={{ fontSize: 14, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{p.name}</b>
+                </div>
+                <div className="t-caption" style={{ overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
+                  {TYPE_LABEL[p.type]} · {placeDistrict(p)} · {p.priceRange}
+                </div>
+                <div className="row t-caption" style={{ gap: 6 }}>
+                  <RatingLine rating={p.rating} plain />
                   {p.badge && <span className={"badge " + p.badge.cls}>{p.badge.text}</span>}
                 </div>
               </div>
             </Link>
-            <div style={{ position: "absolute", top: 10, right: 10 }}><FavoriteButton /></div>
+            <FavoriteButton kind="place" id={p.id} variant="soft" size="xs" />
           </div>
         ))
       )}
