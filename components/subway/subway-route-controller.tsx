@@ -65,7 +65,7 @@ function RailStop({ stationId, kind }: { stationId: string | null; kind: "depart
   return (
     <span
       className="subway-route-dot line"
-      style={{ background: meta.color, color: lineTextColor(meta.color) }}
+      style={{ background: meta.color, color: "#fff" }}
       aria-hidden="true"
     >
       {meta.shortLabel}
@@ -742,8 +742,10 @@ export function SubwayRouteController({
         <>
           <div ref={routeSummaryRef} className="subway-route-summary" tabIndex={-1} aria-live="polite">
             <b>Est. {travelMinutes(readyRoute)} min</b>
-            <span>{readyRoute.segments.length === 1 ? "Direct" : `${readyRoute.segments.length - 1} transfer${readyRoute.segments.length > 2 ? "s" : ""}`}</span>
-            <span>{readyRoute.stations.length - 1} stops</span>
+            <span>
+              {readyRoute.segments.length === 1 ? "Direct" : `${readyRoute.segments.length - 1} transfer${readyRoute.segments.length > 2 ? "s" : ""}`}
+              {" · "}{readyRoute.stations.length - 1} stops
+            </span>
             <a
               className="subway-live-pill"
               href={googleDirectionsUrl(STATIONS[readyRoute.stations[readyRoute.stations.length - 1]], STATIONS[readyRoute.stations[0]])}
@@ -756,6 +758,8 @@ export function SubwayRouteController({
             </a>
             {snap !== "compact" && (
               <>
+                {/* One ✕ only (header) — the summary's Clear duplicated it and
+                    read as clutter; route changes go through Edit. */}
                 <button
                   type="button"
                   className="subway-nearby-jump"
@@ -764,9 +768,6 @@ export function SubwayRouteController({
                   onClick={showNearby}
                 >
                   <Icon name="pin" size="xs" /> <span>Nearby</span>
-                </button>
-                <button type="button" className="iconbtn" aria-label="Clear route" title="Clear route" onClick={clearRoute}>
-                  <Icon name="x" size="xs" />
                 </button>
               </>
             )}

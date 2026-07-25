@@ -574,8 +574,8 @@
     left: 18px;
     right: 18px;
     top: 50%;
-    height: 32px;
-    border-radius: 16px;
+    height: 6px; /* Kakao-Metro: thin line-colored track, not a heavy bar */
+    border-radius: 3px;
     background: linear-gradient(to right, var(--station-line-left) 0 50%, var(--station-line-right) 50% 100%);
     transform: translateY(-50%);
   }
@@ -583,17 +583,23 @@
   .subway-active-station { position: relative; z-index: 1; }
   .subway-station-focus > button {
     min-width: 0;
-    min-height: 44px;
+    min-height: 34px;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 3px;
-    padding: 4px;
-    font-size: 11px;
-    font-weight: 700;
+    gap: 4px;
+    padding: 5px 10px;
+    font-size: 11.5px;
+    font-weight: 600;
+    color: var(--text);
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--r-full);
+    box-shadow: var(--shadow-card);
   }
-  .subway-station-focus > button:first-of-type { color: var(--station-text-left); text-shadow: var(--station-shadow-left); }
-  .subway-station-focus > button:last-of-type { color: var(--station-text-right); text-shadow: var(--station-shadow-right); }
+  /* chevrons pick up their segment's line color */
+  .subway-station-focus > button:first-of-type .icn { color: var(--station-line-left); }
+  .subway-station-focus > button:last-of-type .icn { color: var(--station-line-right); }
   .subway-station-focus > button span {
     min-width: 0;
     display: -webkit-box;
@@ -602,18 +608,22 @@
     -webkit-box-orient: vertical;
     line-height: 1.2;
   }
-  .subway-station-focus > button:disabled { opacity: 0.72; cursor: default; }
+  .subway-station-focus > button:disabled {
+    cursor: default;
+    color: var(--dim); /* solid pill, dimmed label — translucency let the track bleed through */
+  }
+  .subway-station-focus > button:disabled .icn { color: var(--dim); }
   .subway-active-station {
     min-width: 0;
-    min-height: 66px;
+    min-height: 58px;
     display: grid;
     align-content: center;
     justify-items: center;
-    padding: 8px 10px;
+    padding: 7px 18px;
     background: var(--surface);
     border: 3px solid var(--station-line);
-    border-radius: 8px;
-    box-shadow: 0 7px 18px rgba(15, 23, 42, 0.18);
+    border-radius: var(--r-full); /* Kakao-Metro capsule */
+    box-shadow: 0 4px 12px rgba(15, 23, 42, 0.12);
     text-align: center;
   }
   .subway-active-station b {
