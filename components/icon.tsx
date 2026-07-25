@@ -24,13 +24,16 @@ export type IconName =
   | "plus"
   | "minus"
   | "cal"
+  | "call"
   | "bell"
   | "ext"
   | "lock"
   | "door"
   | "mark"
   | "search"
-  | "locate";
+  | "locate"
+  | "swap"
+  | "train";
 
 type IconProps = {
   name: IconName;
@@ -140,6 +143,9 @@ export function IconSprite() {
         <rect x="4" y="5" width="16" height="16" rx="2" />
         <path d="M4 9h16M9 3v4M15 3v4" />
       </symbol>
+      <symbol id="i-call" viewBox="0 0 24 24">
+        <path d="M6.9 3c.5 0 1 .3 1.2.8l1.5 3.3c.2.5.1 1-.3 1.4L7.9 9.9a13.8 13.8 0 0 0 6.2 6.2l1.4-1.4c.4-.4.9-.5 1.4-.3l3.3 1.5c.5.2.8.7.8 1.2v3.2c0 .9-.7 1.7-1.6 1.7C10.7 21.4 2.6 13.3 2 4.6 1.9 3.7 2.7 3 3.6 3z" />
+      </symbol>
       <symbol id="i-bell" viewBox="0 0 24 24">
         <path d="M12 2a6 6 0 0 0-6 6c0 6-2 7-2 7h16s-2-1-2-7a6 6 0 0 0-6-6zM10 20a2 2 0 0 0 4 0z" />
       </symbol>
@@ -157,9 +163,18 @@ export function IconSprite() {
         <circle cx="12" cy="12" r="7" /><circle cx="12" cy="12" r="2.4" fill="currentColor" stroke="none" />
         <path d="M12 2v3M12 19v3M2 12h3M19 12h3" strokeLinecap="round" />
       </symbol>
+      <symbol id="i-swap" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M8 3 5 6l3 3M5 6h11a3 3 0 0 1 3 3v1M16 21l3-3-3-3m3 3H8a3 3 0 0 1-3-3v-1" />
+      </symbol>
+      <symbol id="i-train" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <rect x="5" y="3" width="14" height="14" rx="3" />
+        <path d="M8 21l2-4m6 4-2-4M8 7h8M8 12h.01M16 12h.01" />
+      </symbol>
+      {/* currentColor so the glyph inherits like every other icon (white inside
+          category badges, muted in chrome buttons); BrandMark supplies its own green. */}
       <symbol id="i-mark" viewBox="0 0 40 40">
-        <path d="M20 4c-9 0-16 6.5-16 16 0 3 1 5.6 2.8 7.6C9 22 14 18 20.5 18c-4 2-7 5.5-8.4 10.4C14 30.6 16.8 32 20 32c9 0 16-6.5 16-16S29 4 20 4z" fill="#0C8E70" />
-        <circle cx="27" cy="26" r="3.2" fill="#0C8E70" />
+        <path d="M20 4c-9 0-16 6.5-16 16 0 3 1 5.6 2.8 7.6C9 22 14 18 20.5 18c-4 2-7 5.5-8.4 10.4C14 30.6 16.8 32 20 32c9 0 16-6.5 16-16S29 4 20 4z" fill="currentColor" />
+        <circle cx="27" cy="26" r="3.2" fill="currentColor" />
       </symbol>
     </svg>
   );
@@ -168,7 +183,7 @@ export function IconSprite() {
 /** The brand mark, sized independently of the icon utility classes. */
 export function BrandMark({ size = 24, className, style }: { size?: number; className?: string; style?: CSSProperties }) {
   return (
-    <svg viewBox="0 0 40 40" width={size} height={size} className={className} style={style} aria-hidden="true">
+    <svg viewBox="0 0 40 40" width={size} height={size} className={className} style={{ color: "var(--accent)", ...style }} aria-hidden="true">
       <use href="#i-mark" />
     </svg>
   );

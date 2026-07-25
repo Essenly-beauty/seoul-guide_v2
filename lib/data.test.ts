@@ -13,9 +13,9 @@ describe("PLACES coordinates", () => {
 });
 
 describe("category taxonomy", () => {
-  it("chip order: All, Olive Young, Skin Clinic, Hair Salon, Nail & Lash, Personal Color, Head Spa, Etc", () => {
+  it("chip order: All, Olive Young, Skin Clinic, Hair Salon, Nail & Lash, Personal Color, Head Spa, Mall & Gifts, Etc", () => {
     expect(MAP_CATEGORIES.map((c) => c.key)).toEqual([
-      "all", "olive_young", "skin_clinic", "hair_salon", "nail_lash", "personal_color", "head_spa", "etc",
+      "all", "olive_young", "skin_clinic", "hair_salon", "nail_lash", "personal_color", "head_spa", "mall", "etc",
     ]);
   });
   it("every non-all category has at least one place", () => {

@@ -6,7 +6,7 @@ import type { IconName } from "@/components/icon";
 // ── Taxonomy (matches real app enums) ─────────────────────
 export type PlaceType =
   | "olive_young" | "skin_clinic" | "hair_salon" | "nail_lash"
-  | "personal_color" | "head_spa" | "etc";
+  | "personal_color" | "head_spa" | "mall" | "etc";
 export type PriceRange = "₩" | "₩₩" | "₩₩₩";
 export type ProductCategory = "skincare" | "haircare" | "makeup" | "nail" | "bodycare" | "tools" | "fragrance";
 export type StepCategory =
@@ -49,11 +49,20 @@ export function districtOf(zone: string): string {
 
 export const TYPE_LABEL: Record<PlaceType, string> = {
   olive_young: "Olive Young", skin_clinic: "Skin Clinic", hair_salon: "Hair Salon",
-  nail_lash: "Nail & Lash", personal_color: "Personal Color", head_spa: "Head Spa", etc: "Etc",
+  nail_lash: "Nail & Lash", personal_color: "Personal Color", head_spa: "Head Spa",
+  mall: "Mall & Gifts", etc: "Etc",
 };
 export const TYPE_ICON: Record<PlaceType, IconName> = {
   olive_young: "bag", skin_clinic: "cross", hair_salon: "scissors",
-  nail_lash: "spa", personal_color: "mark", head_spa: "spa", etc: "pin",
+  nail_lash: "spa", personal_color: "mark", head_spa: "spa", mall: "gift", etc: "pin",
+};
+
+/** Category accent colors (spec v2 §3.1) — shared by filter chips, map pins, and search rows.
+ *  Mirrored as --c-* custom properties in globals.css for CSS-only consumers. */
+export const TYPE_COLOR: Record<PlaceType, string> = {
+  olive_young: "#3f9d4e", skin_clinic: "#4a7ddc", hair_salon: "#8e5bd8",
+  nail_lash: "#e0559b", personal_color: "#dd9422", head_spa: "#2ba6a0",
+  mall: "#a61e4d", etc: "#8b9098",
 };
 
 /** Map filter chip row (spec decision #5) — order matters. */
@@ -65,6 +74,7 @@ export const MAP_CATEGORIES: { key: "all" | PlaceType; label: string }[] = [
   { key: "nail_lash", label: "Nail & Lash" },
   { key: "personal_color", label: "Personal Color" },
   { key: "head_spa", label: "Head Spa" },
+  { key: "mall", label: "Mall & Gifts" },
   { key: "etc", label: "Etc" },
 ];
 
@@ -103,6 +113,7 @@ export const CATEGORY_ZONES: Partial<Record<PlaceType, ZoneKey[]>> = {
   head_spa: ["apgujeong", "cheongdam", "gangnam_station", "hongdae", "myeongdong", "hannam"],
   nail_lash: ["gangnam_station", "hongdae", "myeongdong"],
   personal_color: ["gangnam_station", "hongdae"],
+  mall: ["myeongdong", "jongno", "samsung", "gangnam_station", "hangang"],
   olive_young: ["gangnam_station", "myeongdong", "hongdae"],
   etc: ["jongno", "myeongdong", "hongdae", "seongsu", "gangnam_station", "itaewon", "hangang"],
 };
@@ -155,9 +166,43 @@ export const PLACES: Place[] = [
   { id: "hosu-dosan", name: "HOSU DOSAN", nameKr: "호수 도산점", type: "head_spa", zone: "apgujeong", priceRange: "₩₩₩", rating: 4.8, ratingCount: 132, tags: ["scalp", "aroma", "therapy"], nearestStation: "Apgujeong Rodeo", address: "서울 강남구 도산대로 123", lat: 37.5240, lng: 127.0380, englishOk: true, hours: { open: "10:00", close: "21:00" }, stationWalk: { station: "Apgujeong Rodeo", exit: "5", minutes: 6 }, services: [ { name: "Signature Head Spa", nameKr: "시그니처 헤드스파", durationMin: 80, price: "₩150,000" }, { name: "Aroma Scalp Massage", nameKr: "아로마 두피 마사지", durationMin: 60, price: "₩110,000" } ], serviceTags: ["scalp", "aroma"], bookingChannels: ["naver", "instagram"], priceConfirmedDaysAgo: 4, badge: { cls: "accent", text: "English OK" } },
   { id: "eden-headspa", name: "Eden Head Spa", nameKr: "에덴 헤드스파", type: "head_spa", zone: "hongdae", priceRange: "₩₩", rating: 4.7, ratingCount: 88, tags: ["scalp", "therapy"], nearestStation: "Hongik Univ.", address: "서울 마포구 양화로 45", lat: 37.5537, lng: 126.9184, englishOk: true, hours: { open: "11:00", close: "21:00" }, stationWalk: { station: "Hongik Univ.", exit: "1", minutes: 4 }, services: [ { name: "Waterfall Rinse Spa", nameKr: "워터폴 린스 스파", durationMin: 70, price: "₩90,000" } ], serviceTags: ["scalp"], bookingChannels: ["kakao"], priceConfirmedDaysAgo: 8, badge: { cls: "accent", text: "English OK" } },
   { id: "la-beaute", name: "La Beauté Coréenne", nameKr: "라 보떼 꼬레엔느", type: "head_spa", zone: "cheongdam", priceRange: "₩₩₩", rating: 4.6, ratingCount: 61, tags: ["aroma", "luxury"], nearestStation: "Cheongdam", address: "서울 강남구 청담동 21", lat: 37.5253, lng: 127.0476, hours: { open: "10:00", close: "20:00" }, stationWalk: { station: "Cheongdam", exit: "9", minutes: 7 }, services: [ { name: "Luxury Aroma Course", nameKr: "럭셔리 아로마 코스", durationMin: 100, price: "₩190,000" } ], serviceTags: ["aroma"], bookingChannels: ["naver"], priceConfirmedDaysAgo: 12, badge: { cls: "warning", text: "Luxury" } },
-  { id: "dragon-hill-spa", name: "Dragon Hill Spa", nameKr: "드래곤힐 스파", type: "etc", zone: "hangang", priceRange: "₩", rating: 4.4, ratingCount: 320, tags: ["jjimjilbang", "sauna"], nearestStation: "Yongsan", address: "서울 용산구 한강대로 21길 60", lat: 37.5299, lng: 126.9646, hours: { open: "09:00", close: "23:00" } },
+  { id: "dragon-hill-spa", name: "Dragon Hill Spa", nameKr: "드래곤힐 스파", type: "etc", zone: "hangang", priceRange: "₩", rating: 4.4, ratingCount: 320, tags: ["jjimjilbang", "sauna"], nearestStation: "Yongsan", address: "서울 용산구 한강대로 21길 60", lat: 37.5299, lng: 126.9646, hours: { open: "09:00", close: "23:00" }, priceConfirmedDaysAgo: 6, services: [
+    { name: "Day Pass (Jjimjilbang)", nameKr: "찜질방 종일권", price: "₩15,000" },
+    { name: "Body Scrub", nameKr: "세신", durationMin: 60, price: "₩90,000" },
+    { name: "Aroma Massage", nameKr: "아로마 마사지", durationMin: 60, price: "₩110,000" },
+    { name: "Foot Care", nameKr: "발 관리", durationMin: 30, price: "₩45,000" },
+  ] },
   { id: "bukchon-hanok", name: "Bukchon Hanok Village", nameKr: "북촌한옥마을", type: "etc", zone: "jongno", priceRange: "₩", rating: 4.7, ratingCount: 1200, tags: ["photo spot", "hanok", "culture"], nearestStation: "Anguk", address: "서울 종로구 계동길", lat: 37.5814, lng: 126.9849 },
   { id: "seongsu-cafe", name: "Onion Seongsu", nameKr: "어니언 성수", type: "etc", zone: "seongsu", priceRange: "₩₩", rating: 4.6, ratingCount: 540, tags: ["cafe", "photo spot"], nearestStation: "Seongsu", address: "서울 성동구 아차산로9길 8", lat: 37.5444, lng: 127.0578 },
+
+  // ── Malls & gift shopping — real tourist landmarks (tax-refund / souvenir hubs) ──
+  { id: "hyundai-seoul", name: "The Hyundai Seoul", nameKr: "더현대 서울", type: "mall", zone: "hangang", district: "Yeongdeungpo-gu", priceRange: "₩₩", rating: 4.6, ratingCount: 2100, tags: ["tax-refund", "souvenirs", "k-beauty hall", "food hall"], nearestStation: "Yeouinaru", address: "서울 영등포구 여의대로 108", lat: 37.5259, lng: 126.9285, englishOk: true, hours: { open: "10:30", close: "20:00" }, stationWalk: { station: "Yeouinaru", exit: "1", minutes: 5 }, badge: { cls: "accent", text: "Tax-free" } },
+  { id: "lotte-dept-main", name: "Lotte Department Store Main", nameKr: "롯데백화점 본점", type: "mall", zone: "myeongdong", priceRange: "₩₩", rating: 4.5, ratingCount: 1850, tags: ["tax-refund", "souvenirs", "duty-free floor"], nearestStation: "Euljiro 1-ga", address: "서울 중구 남대문로 81", lat: 37.5649, lng: 126.9817, englishOk: true, hours: { open: "10:30", close: "20:00" }, stationWalk: { station: "Euljiro 1-ga", exit: "7", minutes: 2 }, badge: { cls: "accent", text: "Tax-free" } },
+  { id: "shinsegae-main", name: "Shinsegae Main Store", nameKr: "신세계백화점 본점", type: "mall", zone: "myeongdong", priceRange: "₩₩₩", rating: 4.6, ratingCount: 1400, tags: ["tax-refund", "souvenirs", "luxury", "heritage building"], nearestStation: "Hoehyeon", address: "서울 중구 소공로 63", lat: 37.5606, lng: 126.9805, englishOk: true, hours: { open: "10:30", close: "20:00" }, stationWalk: { station: "Hoehyeon", exit: "7", minutes: 1 } },
+  { id: "namdaemun-market", name: "Namdaemun Market", nameKr: "남대문시장", type: "mall", zone: "myeongdong", priceRange: "₩", rating: 4.4, ratingCount: 3200, tags: ["souvenirs", "street food", "ginseng", "bargain"], nearestStation: "Hoehyeon", address: "서울 중구 남대문시장4길 21", lat: 37.5594, lng: 126.9776, hours: { open: "09:00", close: "22:00" }, stationWalk: { station: "Hoehyeon", exit: "5", minutes: 1 } },
+  { id: "ssamziegil", name: "Ssamziegil (Insadong)", nameKr: "쌈지길", type: "mall", zone: "jongno", priceRange: "₩", rating: 4.5, ratingCount: 980, tags: ["souvenirs", "crafts", "hanji", "gift shops"], nearestStation: "Anguk", address: "서울 종로구 인사동길 44", lat: 37.5744, lng: 126.9852, englishOk: true, hours: { open: "10:30", close: "20:30" }, stationWalk: { station: "Anguk", exit: "6", minutes: 3 } },
+  { id: "doota-mall", name: "Doota Mall", nameKr: "두타몰", type: "mall", zone: "jongno", district: "Jung-gu", priceRange: "₩", rating: 4.3, ratingCount: 1100, tags: ["souvenirs", "fashion", "open late", "tax-refund"], nearestStation: "Dongdaemun", address: "서울 중구 장충단로 275", lat: 37.5687, lng: 127.0093, englishOk: true, hours: { open: "10:30", close: "24:00" }, stationWalk: { station: "Dongdaemun", exit: "8", minutes: 1 }, badge: { cls: "info", text: "Open late" } },
+  { id: "starfield-coex", name: "Starfield COEX Mall", nameKr: "스타필드 코엑스몰", type: "mall", zone: "samsung", priceRange: "₩₩", rating: 4.5, ratingCount: 2600, tags: ["souvenirs", "starfield library", "k-pop merch", "tax-refund"], nearestStation: "Samseong", address: "서울 강남구 영동대로 513", lat: 37.5115, lng: 127.0590, englishOk: true, hours: { open: "10:30", close: "22:00" }, stationWalk: { station: "Samseong", exit: "6", minutes: 2 }, badge: { cls: "accent", text: "Tax-free" } },
+  { id: "hyundai-trade", name: "Hyundai Dept. Trade Center", nameKr: "현대백화점 무역센터점", type: "mall", zone: "samsung", priceRange: "₩₩₩", rating: 4.4, ratingCount: 760, tags: ["tax-refund", "luxury", "souvenirs"], nearestStation: "Samseong", address: "서울 강남구 테헤란로 517", lat: 37.5088, lng: 127.0603, englishOk: true, hours: { open: "10:30", close: "20:00" }, stationWalk: { station: "Samseong", exit: "5", minutes: 1 } },
+  { id: "shinsegae-gangnam", name: "Shinsegae Gangnam", nameKr: "신세계백화점 강남점", type: "mall", zone: "gangnam_station", district: "Seocho-gu", priceRange: "₩₩₩", rating: 4.5, ratingCount: 1500, tags: ["tax-refund", "souvenirs", "food hall"], nearestStation: "Express Bus Terminal", address: "서울 서초구 신반포로 176", lat: 37.5049, lng: 127.0043, englishOk: true, hours: { open: "10:30", close: "20:00" }, stationWalk: { station: "Express Bus Terminal", exit: "7", minutes: 1 }, badge: { cls: "accent", text: "Tax-free" } },
+  { id: "lotte-world-mall", name: "Lotte World Mall", nameKr: "롯데월드몰", type: "mall", zone: "samsung", district: "Songpa-gu", priceRange: "₩₩", rating: 4.6, ratingCount: 2900, tags: ["souvenirs", "duty-free", "seoul sky", "k-pop merch"], nearestStation: "Jamsil", address: "서울 송파구 올림픽로 300", lat: 37.5125, lng: 127.1023, englishOk: true, hours: { open: "10:30", close: "22:00" }, stationWalk: { station: "Jamsil", exit: "1", minutes: 2 }, badge: { cls: "accent", text: "Tax-free" } },
+
+  // ── Density pass — beauty places across zones (map felt sparse outside Gangnam) ──
+  { id: "oy-hongdae", name: "Olive Young Hongdae Central", nameKr: "올리브영 홍대중앙점", type: "olive_young", zone: "hongdae", priceRange: "₩", rating: 4.5, ratingCount: 640, tags: ["tax-free", "k-beauty"], nearestStation: "Hongik Univ.", address: "서울 마포구 양화로 153", lat: 37.5563, lng: 126.9236, englishOk: true, hours: { open: "10:00", close: "22:30" }, stationWalk: { station: "Hongik Univ.", exit: "9", minutes: 2 }, serviceTags: ["global", "late"], badge: { cls: "accent", text: "Tax-free" } },
+  { id: "oy-seongsu", name: "Olive Young Seongsu", nameKr: "올리브영 성수역점", type: "olive_young", zone: "seongsu", priceRange: "₩", rating: 4.4, ratingCount: 310, tags: ["k-beauty"], nearestStation: "Seongsu", address: "서울 성동구 왕십리로 115", lat: 37.5444, lng: 127.0561, englishOk: true, hours: { open: "10:00", close: "22:00" }, stationWalk: { station: "Seongsu", exit: "3", minutes: 1 }, serviceTags: ["late"] },
+  { id: "oy-itaewon", name: "Olive Young Itaewon", nameKr: "올리브영 이태원점", type: "olive_young", zone: "itaewon", priceRange: "₩", rating: 4.3, ratingCount: 280, tags: ["k-beauty", "tax-free"], nearestStation: "Itaewon", address: "서울 용산구 이태원로 177", lat: 37.5346, lng: 126.9942, englishOk: true, hours: { open: "10:00", close: "22:30" }, stationWalk: { station: "Itaewon", exit: "2", minutes: 1 }, serviceTags: ["global"] },
+  { id: "glow-myeongdong", name: "Glow Seoul Clinic Myeongdong", nameKr: "글로우서울의원 명동", type: "skin_clinic", zone: "myeongdong", priceRange: "₩₩", rating: 4.6, ratingCount: 240, tags: ["glass skin", "facial"], nearestStation: "Myeongdong", address: "서울 중구 명동길 43", lat: 37.5633, lng: 126.9838, englishOk: true, hours: { open: "10:00", close: "20:00" }, stationWalk: { station: "Myeongdong", exit: "8", minutes: 2 }, serviceTags: ["facial", "aqua_peel"], bookingChannels: ["naver"], priceConfirmedDaysAgo: 5 },
+  { id: "hongdae-derma", name: "Hongdae Derma Lab", nameKr: "홍대 더마랩의원", type: "skin_clinic", zone: "hongdae", priceRange: "₩₩", rating: 4.5, ratingCount: 190, tags: ["laser", "skin booster"], nearestStation: "Hongik Univ.", address: "서울 마포구 홍익로 25", lat: 37.5559, lng: 126.9270, englishOk: true, hours: { open: "10:30", close: "20:30" }, stationWalk: { station: "Hongik Univ.", exit: "8", minutes: 3 }, serviceTags: ["laser", "skin_booster"], bookingChannels: ["naver", "kakao"], priceConfirmedDaysAgo: 9 },
+  { id: "ari-hair-myeongdong", name: "Ari Hair Myeongdong", nameKr: "아리헤어 명동", type: "hair_salon", zone: "myeongdong", priceRange: "₩₩", rating: 4.6, ratingCount: 170, tags: ["k-pop cut", "color"], nearestStation: "Myeongdong", address: "서울 중구 명동8길 27", lat: 37.5641, lng: 126.9853, englishOk: true, hours: { open: "10:00", close: "21:00" }, stationWalk: { station: "Myeongdong", exit: "6", minutes: 2 }, serviceTags: ["cut", "color"], bookingChannels: ["naver"], priceConfirmedDaysAgo: 7 },
+  { id: "mint-salon-seongsu", name: "Mint Salon Seongsu", nameKr: "민트살롱 성수", type: "hair_salon", zone: "seongsu", priceRange: "₩₩", rating: 4.7, ratingCount: 140, tags: ["perm", "treatment"], nearestStation: "Seongsu", address: "서울 성동구 연무장길 41", lat: 37.5427, lng: 127.0553, englishOk: true, hours: { open: "10:30", close: "20:30" }, stationWalk: { station: "Seongsu", exit: "4", minutes: 4 }, serviceTags: ["perm", "treatment"], bookingChannels: ["naver", "instagram"], priceConfirmedDaysAgo: 3 },
+  { id: "blanc-hair-hongdae", name: "Blanc Hair Hongdae", nameKr: "블랑헤어 홍대", type: "hair_salon", zone: "hongdae", priceRange: "₩", rating: 4.4, ratingCount: 210, tags: ["cut", "color", "student"], nearestStation: "Hongik Univ.", address: "서울 마포구 와우산로 87", lat: 37.5540, lng: 126.9225, hours: { open: "10:00", close: "21:00" }, stationWalk: { station: "Hongik Univ.", exit: "9", minutes: 5 }, serviceTags: ["cut", "color"], bookingChannels: ["kakao"], priceConfirmedDaysAgo: 11 },
+  { id: "petit-nail-myeongdong", name: "Petit Nail Myeongdong", nameKr: "쁘띠네일 명동", type: "nail_lash", zone: "myeongdong", priceRange: "₩₩", rating: 4.5, ratingCount: 130, tags: ["gel art", "walk-in"], nearestStation: "Myeongdong", address: "서울 중구 명동4길 18", lat: 37.5628, lng: 126.9862, englishOk: true, hours: { open: "11:00", close: "21:00" }, stationWalk: { station: "Myeongdong", exit: "6", minutes: 3 }, serviceTags: ["gel_art", "pedicure"], bookingChannels: ["naver"], priceConfirmedDaysAgo: 6 },
+  { id: "moon-nail-hongdae", name: "Moon Nail Hongdae", nameKr: "문네일 홍대", type: "nail_lash", zone: "hongdae", priceRange: "₩", rating: 4.6, ratingCount: 160, tags: ["3d art", "lash"], nearestStation: "Hongik Univ.", address: "서울 마포구 어울마당로 65", lat: 37.5570, lng: 126.9245, englishOk: true, hours: { open: "11:00", close: "21:30" }, stationWalk: { station: "Hongik Univ.", exit: "9", minutes: 4 }, serviceTags: ["3d", "lash_ext"], bookingChannels: ["instagram"], priceConfirmedDaysAgo: 8 },
+  { id: "tone-studio-hongdae", name: "Tone Studio Hongdae", nameKr: "톤스튜디오 홍대", type: "personal_color", zone: "hongdae", priceRange: "₩₩", rating: 4.8, ratingCount: 220, tags: ["draping", "photo"], nearestStation: "Hongik Univ.", address: "서울 마포구 잔다리로 32", lat: 37.5525, lng: 126.9218, englishOk: true, hours: { open: "11:00", close: "20:00" }, stationWalk: { station: "Hongik Univ.", exit: "9", minutes: 6 }, serviceTags: ["draping", "makeup"], bookingChannels: ["naver", "instagram"], priceConfirmedDaysAgo: 2 },
+  { id: "palette-lab-seongsu", name: "Palette Lab Seongsu", nameKr: "팔레트랩 성수", type: "personal_color", zone: "seongsu", priceRange: "₩₩", rating: 4.7, ratingCount: 150, tags: ["draping", "idol photoshoot"], nearestStation: "Seongsu", address: "서울 성동구 서울숲2길 19", lat: 37.5449, lng: 127.0428, englishOk: true, hours: { open: "11:00", close: "20:00" }, stationWalk: { station: "Ttukseom", exit: "8", minutes: 5 }, serviceTags: ["draping", "photoshoot"], bookingChannels: ["naver"], priceConfirmedDaysAgo: 4 },
+  { id: "cloud-headspa-cheongdam", name: "Cloud Head Spa Cheongdam", nameKr: "클라우드 헤드스파 청담", type: "head_spa", zone: "cheongdam", priceRange: "₩₩₩", rating: 4.7, ratingCount: 95, tags: ["scalp", "luxury"], nearestStation: "Cheongdam", address: "서울 강남구 도산대로 456", lat: 37.5252, lng: 127.0475, englishOk: true, hours: { open: "10:00", close: "21:00" }, stationWalk: { station: "Cheongdam", exit: "13", minutes: 5 }, serviceTags: ["scalp", "aroma"], bookingChannels: ["naver"], priceConfirmedDaysAgo: 5 },
+  { id: "onda-scalp-myeongdong", name: "Onda Scalp Myeongdong", nameKr: "온다스캘프 명동", type: "head_spa", zone: "myeongdong", priceRange: "₩₩", rating: 4.5, ratingCount: 110, tags: ["scalp", "diagnosis"], nearestStation: "Myeongdong", address: "서울 중구 퇴계로 123", lat: 37.5622, lng: 126.9829, englishOk: true, hours: { open: "10:30", close: "21:00" }, stationWalk: { station: "Myeongdong", exit: "3", minutes: 2 }, serviceTags: ["scalp", "diagnosis"], bookingChannels: ["kakao"], priceConfirmedDaysAgo: 10 },
+  { id: "siloam-sauna", name: "Siloam Sauna", nameKr: "실로암사우나", type: "etc", zone: "myeongdong", district: "Jung-gu", priceRange: "₩", rating: 4.2, ratingCount: 450, tags: ["jjimjilbang", "sauna", "24h"], nearestStation: "Seoul Station", address: "서울 중구 중림로 49", lat: 37.5554, lng: 126.9692, hours: { open: "00:00", close: "23:59" }, stationWalk: { station: "Seoul Station", exit: "15", minutes: 5 }, badge: { cls: "info", text: "24h" } },
 ];
 
 // ── Products ──────────────────────────────────────────────
@@ -176,6 +221,10 @@ export type Product = {
   skinTypes: string[];
   concerns: string[];
   zoneAvailability?: ZoneKey[];
+  /** External retailer URL; only rendered when verification metadata is also present. */
+  onlineUrl?: string;
+  /** ISO date documenting when the retailer URL was last verified. */
+  onlineUrlVerifiedAt?: string;
   salesRank: number;
   reviewRank: number;
 };

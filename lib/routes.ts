@@ -2,6 +2,7 @@
 export const routes = {
   login: "/",
   splash: "/", // legacy alias — old references keep compiling
+  onboardingBasics: "/onboarding/basics",
   onboardingInterests: "/onboarding/interests",
   onboardingProfile: "/onboarding/beauty-profile",
 
