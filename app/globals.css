@@ -3929,6 +3929,10 @@
   .mapsheet.dragging { transition: none; }
 }
 
+/* Place detail sits on surface white end-to-end — without this the title
+   block shows the page background tint and splits the header into two tones */
+.detail-scroll { background: var(--surface); min-height: 100%; }
+
 /* v2 kakao-style action strip */
 @layer components {
   /* Flat 4-up row under the place title header: icon over 12px label per
