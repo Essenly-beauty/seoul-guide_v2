@@ -4033,3 +4033,68 @@
    pills was never our border. Unlayered so it outranks the utilities layer. */
 .btn.outline { outline-style: none; }
 .btn.outline:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+/* ══ Design system v1 (docs/design-system.md) ══════════════════ */
+@layer base {
+  :root {
+    /* semantic aliases (doc2 4-layer) — role names over raw names; whitelabel swaps raw only */
+    --brand: var(--accent);
+    --brand-soft: var(--accent-soft);
+    --brand-strong: var(--accent-hover);
+    --text-primary: var(--text);
+    --text-secondary: var(--muted);
+    --text-disabled: var(--dim);
+    --bg-page: var(--bg);
+    --bg-surface: var(--surface);
+    --bg-surface-sunken: var(--surface-hover);
+    --border-default: var(--border);
+  }
+}
+
+@layer components {
+  /* Button variants — component classes; `ghost`/`outline` are deprecated aliases
+     kept only until the migration finishes (Tailwind collides with `.outline`). */
+  .btn.primary { background: var(--brand); color: #fff; }
+  .btn.primary:hover { background: var(--brand-strong); }
+  .btn.secondary {
+    background: var(--bg-surface);
+    border: 1px solid var(--border-default);
+    color: var(--text-primary);
+  }
+  .btn.secondary:hover { background: var(--bg-surface-sunken); }
+  .btn.tonal {
+    background: var(--brand-soft);
+    border: none;
+    color: var(--brand-strong);
+  }
+  .btn.tonal:hover { background: var(--accent-soft-2); }
+  .btn.full { width: 100%; }
+  .btn:disabled, .btn[aria-disabled="true"] {
+    background: var(--bg-surface-sunken);
+    border-color: transparent;
+    color: var(--text-disabled);
+    cursor: default;
+  }
+  /* IconButton overlay = white-on-photo (alias of existing bordered) */
+  .iconbtn.overlay {
+    background: var(--bg-surface);
+    border: 1px solid var(--border-default);
+    box-shadow: var(--shadow-card);
+  }
+}
+
+/* class-name armor: neutralize Tailwind utilities that share our variant names */
+.btn.secondary, .btn.tonal, .btn.primary { outline-style: none; }
+.btn.secondary:focus-visible, .btn.tonal:focus-visible, .btn.primary:focus-visible {
+  outline: 2px solid var(--brand);
+  outline-offset: 2px;
+}
+
+/* lucide icon tuning */
+/* Lucide sprite symbols (components/icon.tsx) omit stroke-width so it can be
+   tuned per context: inherited CSS values reach <use> shadow content, but a
+   presentation attribute on the symbol would not be overridable from here. */
+.icn { stroke-width: 2; }
+/* 11–17px badge glyphs (map pins, category squares): 2px @ 24-unit viewBox
+   renders ~0.9px — bump so white strokes stay visible on colored fills. */
+.catbadge .icn, .pin-badge .icn { stroke-width: 2.4; }
