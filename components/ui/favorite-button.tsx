@@ -3,16 +3,24 @@
 import { useState } from "react";
 import { Icon } from "@/components/icon";
 import { useToast } from "@/components/ui/toast";
+import { toggleFavorite, useFavorites, type FavKind } from "@/lib/favorites";
 
 type FavoriteButtonProps = {
+  /** Wire to the shared store — hearts sync across screens and the Saved tab. */
+  kind?: FavKind;
+  id?: string;
+  /** Fallback initial state when no kind/id is given (detached prototype button). */
   initial?: boolean;
-  /** iconbtn variant classes (e.g. "bordered"). */
+  /** iconbtn variant classes (e.g. "soft"). */
   variant?: string;
   size?: "sm" | "xs";
 };
 
-export function FavoriteButton({ initial = false, variant = "", size = "sm" }: FavoriteButtonProps) {
-  const [on, setOn] = useState(initial);
+export function FavoriteButton({ kind, id, initial = false, variant = "", size = "sm" }: FavoriteButtonProps) {
+  const favs = useFavorites();
+  const [localOn, setLocalOn] = useState(initial);
+  const stored = kind && id ? favs[kind].includes(id) : undefined;
+  const on = stored ?? localOn;
   const { toast } = useToast();
   return (
     <button
@@ -23,8 +31,8 @@ export function FavoriteButton({ initial = false, variant = "", size = "sm" }: F
       onClick={(e) => {
         e.preventDefault();
         e.stopPropagation();
-        const next = !on;
-        setOn(next);
+        const next = kind && id ? toggleFavorite(kind, id) : !on;
+        if (!(kind && id)) setLocalOn(next);
         toast(next ? "Saved to favorites" : "Removed");
       }}
     >
