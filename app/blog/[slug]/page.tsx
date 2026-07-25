@@ -21,7 +21,7 @@ export default function JournalDetailPage({ params }: { params: { slug: string }
           </div>
         </div>
 
-        <div className="pad stack">
+        <div className="pad stack article-body">
           <div className="row" style={{ gap: 6, flexWrap: "wrap" }}>
             {a.tags.map((t) => <span key={t} className="badge accent">{t}</span>)}
           </div>

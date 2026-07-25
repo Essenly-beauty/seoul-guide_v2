@@ -56,6 +56,23 @@ function readRecentStations(): string[] {
   }
 }
 
+/** Rail stop marker: generic dot until a station is chosen, then the
+    station's primary line as a colored numbered circle (user request). */
+function RailStop({ stationId, kind }: { stationId: string | null; kind: "departure" | "via" | "arrival" }) {
+  const station = stationId ? STATIONS[stationId] : undefined;
+  if (!station) return <span className={`subway-route-dot ${kind}`} />;
+  const meta = LINE_META[station.lines[0]];
+  return (
+    <span
+      className="subway-route-dot line"
+      style={{ background: meta.color, color: lineTextColor(meta.color) }}
+      aria-hidden="true"
+    >
+      {meta.shortLabel}
+    </span>
+  );
+}
+
 function StationLineBadges({ station }: { station: SubwayStation }) {
   return (
     <span className="station-linebadges" aria-label={station.lines.map((line) => LINE_META[line].label).join(", ")}>
@@ -769,11 +786,11 @@ export function SubwayRouteController({
           <div className="subway-search-panel">
             <div className="subway-search-fields">
               <span className="subway-search-route-rail" aria-hidden="true">
-                <span className="subway-route-dot departure" />
+                <RailStop stationId={draftDeparture} kind="departure" />
                 {draftVias.map((id) => (
                   <Fragment key={id}>
                     <span className="subway-route-connector" />
-                    <span className="subway-route-dot via" />
+                    <RailStop stationId={id} kind="via" />
                   </Fragment>
                 ))}
                 {viaAdding && (
@@ -783,7 +800,7 @@ export function SubwayRouteController({
                   </>
                 )}
                 <span className="subway-route-connector" />
-                <span className="subway-route-dot arrival" />
+                <RailStop stationId={draftArrival} kind="arrival" />
               </span>
               <div className="subway-search-field-stack">
                 <StationCombobox

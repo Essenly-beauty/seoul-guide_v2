@@ -761,10 +761,10 @@
     align-items: flex-start;
     justify-content: space-between;
     gap: 12px;
-    padding: 13px 16px 7px;
+    padding: 20px 16px 12px; /* was 13/7 — the section felt cramped */
   }
-  .subway-nearby-heading h3 { font-family: var(--sans); font-size: 14px; font-weight: 700; }
-  .subway-nearby-heading p { margin-top: 2px; color: var(--muted); font-size: 10.5px; }
+  .subway-nearby-heading h3 { font-family: var(--sans); font-size: 15px; font-weight: 700; }
+  .subway-nearby-heading p { margin-top: 3px; color: var(--muted); font-size: 11.5px; }
   .subway-nearby-heading > .mono {
     min-width: 25px;
     height: 25px;
@@ -780,7 +780,7 @@
   .subway-place-row {
     display: flex;
     align-items: center;
-    min-height: 68px;
+    min-height: 76px; /* was 68 — taller rows breathe */
     border-bottom: 1px solid var(--border);
   }
   .subway-place-row.selected { background: var(--accent-soft); }
@@ -3988,4 +3988,24 @@
   .detail-scroll .inforow > .icn.xs {
     width: 20px;
   }
+}
+
+/* Rail line circles — chosen stations show their primary line number/color */
+@layer components {
+  .subway-route-dot.line {
+    width: 20px;
+    height: 20px;
+    display: grid;
+    place-items: center;
+    font-size: 8.5px;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+  }
+}
+
+/* Article rhythm: headings bind to the paragraph BELOW them — extra space
+   above only, so sections read as grouped blocks (proximity) */
+@layer components {
+  .article-body h2 { margin-top: 16px; }
+  .article-body h2:first-of-type { margin-top: 4px; }
 }
