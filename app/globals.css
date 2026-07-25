@@ -3936,13 +3936,23 @@
   .place-actions {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
+    background: var(--surface); /* sit flush with the page, not a gray band */
     border-top: 1px solid var(--border);
     border-bottom: 1px solid var(--border);
   }
-  .place-actions > * + * {
-    border-left: 1px solid var(--border);
+  /* short centered dividers (Kakao) — full-height borders read as boxed cells */
+  .place-actions > * + *::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 1px;
+    height: 26px;
+    background: var(--border);
   }
   .place-actions > * {
+    position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
