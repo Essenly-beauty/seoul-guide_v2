@@ -1,0 +1,532 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Essenly Subway Preview</title>
+  <style>
+    :root {
+      --accent: #0c8e70;
+      --accent-soft: #eaf7f3;
+      --text: #17202e;
+      --muted: #667085;
+      --dim: #98a2b3;
+      --border: #e4e7ec;
+      --surface: #fff;
+      --soft: #f4f6f8;
+      --line: #00a84d;
+      --sans: "Plus Jakarta Sans", Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    * { box-sizing: border-box; }
+    html, body { width: 100%; height: 100%; margin: 0; }
+    body {
+      display: grid;
+      place-items: center;
+      background: #e7ebef;
+      color: var(--text);
+      font-family: var(--sans);
+      font-size: 14px;
+      letter-spacing: 0;
+    }
+    button, input { font: inherit; letter-spacing: 0; }
+    button { border: 0; background: none; color: inherit; cursor: pointer; }
+    button:focus-visible, input:focus-visible, [tabindex]:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: -2px;
+    }
+    .icon { width: 20px; height: 20px; fill: currentColor; stroke: currentColor; flex: none; }
+    .phone {
+      position: relative;
+      width: min(100%, 440px);
+      height: min(100dvh, 880px);
+      overflow: hidden;
+      background: var(--surface);
+      box-shadow: 0 24px 70px rgba(15, 23, 42, .25);
+    }
+    .map-screen { position: absolute; inset: 0 0 66px; overflow: hidden; background: #dfe6df; }
+    .map-frame { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; filter: saturate(.78) contrast(.96); }
+    .map-tint { position: absolute; inset: 0; pointer-events: none; background: rgba(255,255,255,.08); }
+    .topbar {
+      position: absolute;
+      z-index: 20;
+      top: max(12px, env(safe-area-inset-top));
+      left: 14px;
+      right: 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .avatar, .mode-button, .close, .clear-route {
+      width: 44px;
+      height: 44px;
+      display: grid;
+      place-items: center;
+      flex: none;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      box-shadow: 0 5px 16px rgba(15, 23, 42, .13);
+    }
+    .avatar, .mode-button { border-radius: 50%; }
+    .avatar { color: var(--muted); font-weight: 800; }
+    .context {
+      min-width: 0;
+      height: 44px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex: 1;
+      padding: 0 13px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      background: var(--surface);
+      box-shadow: 0 5px 16px rgba(15, 23, 42, .13);
+    }
+    .context .icon { color: var(--accent); }
+    .context span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 12px; font-weight: 650; }
+    .mode-button {
+      width: auto;
+      min-width: 88px;
+      padding: 0 12px;
+      display: flex;
+      gap: 6px;
+      border-radius: 22px;
+      border-color: var(--accent);
+      background: var(--accent);
+      color: #fff;
+      font-size: 12px;
+      font-weight: 750;
+    }
+    .place-pin {
+      position: absolute;
+      z-index: 8;
+      min-width: 44px;
+      min-height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transform: translate(-50%, -50%);
+      border-radius: 50%;
+    }
+    .place-pin span {
+      min-width: 34px;
+      height: 34px;
+      display: grid;
+      place-items: center;
+      padding: 0 7px;
+      border: 2px solid #fff;
+      border-radius: 17px;
+      background: #e5462e;
+      box-shadow: 0 4px 14px rgba(15, 23, 42, .28);
+      color: #fff;
+      font-size: 10px;
+      font-weight: 850;
+    }
+    .place-pin.beauty span { background: #7b3fc6; }
+    .controller {
+      position: absolute;
+      z-index: 30;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 72%;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      border-top: 1px solid var(--border);
+      border-radius: 16px 16px 0 0;
+      background: var(--surface);
+      box-shadow: 0 -12px 32px rgba(15, 23, 42, .16);
+    }
+    .controller.searching { height: 60%; }
+    .controller-header {
+      min-height: 62px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex: none;
+      padding: 9px 12px 8px 16px;
+      border-bottom: 1px solid var(--border);
+    }
+    .kicker { display: flex; align-items: center; gap: 5px; color: var(--accent); font-size: 10px; font-weight: 800; text-transform: uppercase; }
+    .controller-header h1 { margin: 2px 0 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 16px; line-height: 1.2; }
+    .header-actions { display: flex; align-items: center; gap: 2px; }
+    .edit { min-height: 44px; padding: 0 10px; color: var(--accent); font-size: 12px; font-weight: 800; }
+    .close { border: 0; box-shadow: none; color: var(--muted); }
+    .scroll { flex: 1; min-height: 0; overflow-y: auto; overscroll-behavior: contain; padding-bottom: 18px; }
+    .summary {
+      min-height: 48px;
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      padding: 2px 10px 2px 16px;
+      border-bottom: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 10px;
+    }
+    .summary strong { color: var(--text); font-size: 12px; }
+    .nearby-jump { min-height: 44px; display: flex; align-items: center; gap: 3px; margin-left: auto; padding: 0 4px; color: var(--accent); font-size: 10px; font-weight: 800; }
+    .clear-route { border: 0; box-shadow: none; color: var(--muted); }
+    .steps {
+      min-height: 48px;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      overflow-x: auto;
+      padding: 7px 16px;
+      border-bottom: 1px solid var(--border);
+      scrollbar-width: none;
+      white-space: nowrap;
+    }
+    .step { display: flex; align-items: center; gap: 7px; color: var(--muted); font-size: 9px; }
+    .step-copy { display: grid; gap: 1px; }
+    .step-copy strong { color: var(--text); font-size: 10px; }
+    .line-badge { width: 28px; height: 28px; display: grid; place-items: center; border-radius: 50%; background: var(--line); color: #fff; font-weight: 850; font-style: normal; }
+    .live { min-height: 44px; display: flex; align-items: center; color: var(--accent); font-size: 10px; font-weight: 800; }
+    .station-focus {
+      --left-line: var(--line);
+      --right-line: var(--line);
+      position: relative;
+      min-height: 94px;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(132px, 1.55fr) minmax(0, 1fr);
+      align-items: center;
+      padding: 13px 10px;
+    }
+    .station-focus::before {
+      content: "";
+      position: absolute;
+      left: 18px;
+      right: 18px;
+      top: 50%;
+      height: 32px;
+      border-radius: 16px;
+      background: linear-gradient(to right, var(--left-line) 0 50%, var(--right-line) 50% 100%);
+      transform: translateY(-50%);
+    }
+    .station-focus button, .active-station { position: relative; z-index: 1; }
+    .station-focus > button {
+      min-width: 0;
+      min-height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 2px;
+      padding: 3px;
+      color: #fff;
+      font-size: 10px;
+      font-weight: 800;
+    }
+    .station-focus > button span { min-width: 0; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; line-height: 1.15; }
+    .active-station {
+      min-width: 0;
+      min-height: 66px;
+      display: grid;
+      align-content: center;
+      justify-items: center;
+      padding: 7px 8px;
+      border: 3px solid var(--line);
+      border-radius: 8px;
+      background: var(--surface);
+      box-shadow: 0 7px 18px rgba(15, 23, 42, .18);
+      text-align: center;
+    }
+    .active-station strong { max-width: 100%; overflow-wrap: anywhere; font-size: 15px; line-height: 1.05; }
+    .active-station small { margin-top: 2px; color: var(--muted); font-size: 10px; }
+    .route-strip {
+      min-height: 88px;
+      display: flex;
+      align-items: stretch;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+    .strip-arrow { width: 44px; min-width: 44px; display: grid; place-items: center; color: var(--muted); }
+    .rail { position: relative; flex: 1; min-width: 0; display: flex; align-items: flex-start; overflow-x: auto; padding: 5px 0; scrollbar-width: none; }
+    .rail::before { content: ""; position: absolute; left: 24px; right: 24px; top: 26px; height: 4px; border-radius: 2px; background: var(--line); }
+    .station-marker {
+      position: relative;
+      z-index: 1;
+      min-width: 72px;
+      min-height: 68px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      padding: 15px 3px 3px;
+      color: var(--muted);
+      font-size: 10px;
+      font-weight: 700;
+      line-height: 1.1;
+      text-align: center;
+    }
+    .dot { width: 11px; height: 11px; flex: none; border: 3px solid var(--line); border-radius: 50%; background: #fff; }
+    .station-marker.active { color: var(--text); font-weight: 850; }
+    .station-marker.active .dot { width: 15px; height: 15px; margin: -2px 0; border: 3px solid #fff; background: var(--line); box-shadow: 0 0 0 3px var(--line); }
+    .nearby-controls { position: sticky; top: 0; z-index: 5; display: grid; gap: 7px; padding: 9px 16px 7px; border-bottom: 1px solid var(--border); background: rgba(255,255,255,.98); }
+    .radius { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; padding: 3px; border-radius: 8px; background: var(--soft); }
+    .radius button, .categories button { min-height: 44px; font-size: 10px; font-weight: 800; }
+    .radius button.active { border-radius: 6px; background: #fff; box-shadow: 0 1px 3px rgba(15,23,42,.11); }
+    .categories { display: flex; gap: 5px; overflow-x: auto; }
+    .categories button { flex: none; padding: 0 10px; border-bottom: 2px solid transparent; color: var(--muted); }
+    .categories button.active { border-bottom-color: var(--accent); color: var(--accent); }
+    .nearby-heading { display: flex; align-items: flex-start; justify-content: space-between; gap: 10px; padding: 12px 16px 6px; }
+    .nearby-heading h2 { margin: 0; font-size: 14px; }
+    .nearby-heading p { margin: 2px 0 0; color: var(--muted); font-size: 9px; }
+    .count { width: 26px; height: 26px; display: grid; place-items: center; border-radius: 50%; background: var(--accent-soft); color: var(--accent); font-size: 10px; font-weight: 850; }
+    .place-list { padding: 0 16px; }
+    .place-row { min-height: 68px; display: flex; align-items: center; gap: 10px; border-bottom: 1px solid var(--border); }
+    .place-kind { width: 28px; height: 28px; display: grid; place-items: center; flex: none; border-radius: 50%; background: #fce8e5; color: #d92d20; font-size: 9px; font-weight: 850; }
+    .place-kind.beauty { background: #f1e9fb; color: #6f2dbd; }
+    .place-copy { min-width: 0; flex: 1; display: grid; gap: 2px; }
+    .place-copy strong { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 12px; }
+    .place-copy span { color: var(--muted); font-size: 9px; }
+    .search-panel { padding: 14px 16px 20px; }
+    .field { position: relative; margin-bottom: 10px; }
+    .field label { display: block; margin: 0 0 5px 2px; color: var(--muted); font-size: 10px; font-weight: 800; text-transform: uppercase; }
+    .input-wrap { min-height: 46px; display: flex; align-items: center; gap: 8px; padding: 0 12px; border: 1px solid transparent; border-radius: 8px; background: var(--soft); }
+    .input-wrap:focus-within { border-color: var(--accent); background: #fff; box-shadow: 0 0 0 3px var(--accent-soft); }
+    .input-wrap input { min-width: 0; width: 100%; border: 0; outline: 0; background: transparent; color: var(--text); }
+    .suggestions { display: none; margin-top: 5px; overflow: hidden; border: 1px solid var(--border); border-radius: 8px; background: #fff; box-shadow: 0 8px 24px rgba(15,23,42,.16); }
+    .field:focus-within .suggestions { display: block; }
+    .suggestions button { width: 100%; min-height: 48px; display: flex; align-items: center; gap: 9px; padding: 7px 10px; text-align: left; }
+    .suggestions button + button { border-top: 1px solid var(--border); }
+    .suggestions b { display: block; font-size: 12px; }
+    .suggestions small { color: var(--muted); }
+    .search-footer { min-height: 66px; display: flex; gap: 8px; flex: none; padding: 10px 16px; border-top: 1px solid var(--border); background: #fff; box-shadow: 0 -6px 18px rgba(15,23,42,.08); }
+    .action { min-height: 46px; flex: 1; border-radius: 8px; background: var(--accent); color: #fff; font-weight: 800; }
+    .action.ghost { border: 1px solid var(--border); background: #fff; color: var(--text); }
+    .bottom-nav {
+      position: absolute;
+      z-index: 50;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 66px;
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      padding-bottom: env(safe-area-inset-bottom);
+      border-top: 1px solid var(--border);
+      background: #fff;
+    }
+    .bottom-nav button { min-height: 54px; display: grid; place-items: center; align-content: center; gap: 2px; color: var(--muted); font-size: 9px; }
+    .bottom-nav button.active { color: var(--accent); font-weight: 850; }
+    .bottom-nav .icon { width: 18px; height: 18px; }
+    [hidden] { display: none !important; }
+    @media (max-width: 360px) {
+      .mode-button { min-width: 44px; width: 44px; padding: 0; }
+      .mode-button span { display: none; }
+      .station-focus { grid-template-columns: minmax(0,.8fr) minmax(124px,1.5fr) minmax(0,.8fr); padding-inline: 6px; }
+      .summary .stops { display: none; }
+    }
+    @media (max-height: 680px) {
+      .controller { height: 68%; }
+      .controller.searching { height: 58%; }
+      .station-focus { min-height: 78px; padding-block: 8px; }
+      .steps { min-height: 42px; padding-block: 4px; }
+      .step-copy small { display: none; }
+    }
+    @media (min-width: 480px) {
+      .phone { border-radius: 22px; }
+    }
+  </style>
+</head>
+<body>
+  <main class="phone" aria-label="Essenly subway map preview">
+    <section class="map-screen">
+      <iframe id="map" class="map-frame" title="Map around Gangnam Station"></iframe>
+      <div class="map-tint"></div>
+      <div class="topbar">
+        <button class="avatar" aria-label="My page">E</button>
+        <div class="context"><svg class="icon"><use href="#i-train"></use></svg><span id="mapContext">Gangnam Station</span></div>
+        <button class="mode-button" aria-pressed="true"><svg class="icon"><use href="#i-train"></use></svg><span>Subway</span></button>
+      </div>
+      <div id="pins" aria-label="Nearby places"></div>
+
+      <section id="controller" class="controller" aria-label="Plan by subway stations">
+        <header class="controller-header">
+          <div>
+            <div class="kicker"><svg class="icon"><use href="#i-train"></use></svg> Subway</div>
+            <h1 id="controllerTitle">Yeoksam to Seoul Nat'l Univ. of Education</h1>
+          </div>
+          <div class="header-actions">
+            <button id="editButton" class="edit">Edit</button>
+            <button class="close" aria-label="Close subway planner"><svg class="icon"><use href="#i-x"></use></svg></button>
+          </div>
+        </header>
+
+        <div id="routeView" class="scroll">
+          <div class="summary">
+            <strong>Est. 8 min</strong><span>Direct</span><span class="stops">2 stops</span>
+            <button id="nearbyJump" class="nearby-jump"><svg class="icon"><use href="#i-pin"></use></svg> Nearby</button>
+            <button class="clear-route" aria-label="Clear route"><svg class="icon"><use href="#i-x"></use></svg></button>
+          </div>
+          <div class="steps">
+            <div class="step"><i class="line-badge">2</i><span class="step-copy"><strong>Take Line 2</strong><small>Next station: Gangnam</small></span></div>
+            <div class="step"><span class="step-copy"><strong>Arrive</strong><small>Seoul Nat'l Univ. of Education</small></span></div>
+            <a class="live" href="https://www.google.com/maps/dir/?api=1&amp;travelmode=transit" target="_blank" rel="noreferrer">Check live transit</a>
+          </div>
+          <div class="station-focus">
+            <button id="previousButton" aria-label="Previous station"><svg class="icon"><use href="#i-back"></use></svg><span id="previousName">Yeoksam</span></button>
+            <div class="active-station"><strong id="activeName">Gangnam</strong><small id="activeKr" lang="ko">강남</small></div>
+            <button id="nextButton" aria-label="Next station"><span id="nextName">Seoul Nat'l Univ. of Education</span><svg class="icon"><use href="#i-chev"></use></svg></button>
+          </div>
+          <div class="route-strip">
+            <button class="strip-arrow" aria-label="Scroll stations left"><svg class="icon"><use href="#i-back"></use></svg></button>
+            <div id="rail" class="rail"></div>
+            <button class="strip-arrow" aria-label="Scroll stations right"><svg class="icon"><use href="#i-chev"></use></svg></button>
+          </div>
+          <div id="nearbyControls" class="nearby-controls" tabindex="-1">
+            <div class="radius"><button>500 m</button><button class="active">1 km</button><button>2 km</button></div>
+            <div class="categories"><button class="active">All</button><button>Beauty</button><button>Olive Young</button><button>Daiso</button></div>
+          </div>
+          <div class="nearby-heading"><div><h2 id="nearbyTitle">Near Gangnam</h2><p>1 km straight-line radius from the station center</p></div><span id="placeCount" class="count">3</span></div>
+          <div id="placeList" class="place-list"></div>
+        </div>
+
+        <div id="searchView" class="scroll" hidden>
+          <div class="search-panel">
+            <div class="field">
+              <label for="departure">Departure</label>
+              <div class="input-wrap"><svg class="icon"><use href="#i-search"></use></svg><input id="departure" value="Yeoksam" autocomplete="off"></div>
+              <div class="suggestions">
+                <button data-value="Yeoksam"><i class="line-badge">2</i><span><b>Yeoksam</b><small lang="ko">역삼</small></span></button>
+                <button data-value="Yeouido"><i class="line-badge" style="background:#996cac">5</i><span><b>Yeouido</b><small lang="ko">여의도</small></span></button>
+              </div>
+            </div>
+            <div class="field">
+              <label for="arrival">Arrival</label>
+              <div class="input-wrap"><svg class="icon"><use href="#i-search"></use></svg><input id="arrival" value="Seoul Nat'l Univ. of Education" autocomplete="off"></div>
+              <div class="suggestions">
+                <button data-value="Seoul Nat'l Univ. of Education"><i class="line-badge">2</i><span><b>Seoul Nat'l Univ. of Education</b><small lang="ko">교대</small></span></button>
+                <button data-value="Seoul Station"><i class="line-badge" style="background:#0052a4">1</i><span><b>Seoul Station</b><small lang="ko">서울역</small></span></button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="searchFooter" class="search-footer" hidden><button id="cancelButton" class="action ghost">Cancel</button><button id="showRouteButton" class="action">Update route</button></div>
+      </section>
+    </section>
+
+    <nav class="bottom-nav" aria-label="Main">
+      <button class="active"><svg class="icon"><use href="#i-pin"></use></svg>Map</button>
+      <button><svg class="icon"><use href="#i-book"></use></svg>Stories</button>
+      <button><svg class="icon"><use href="#i-bag"></use></svg>Ranking</button>
+      <button><svg class="icon"><use href="#i-heart"></use></svg>Saved</button>
+      <button><svg class="icon"><use href="#i-user"></use></svg>My</button>
+    </nav>
+
+    <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+      <symbol id="i-train" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="3" width="14" height="14" rx="3"></rect><path d="M8 21l2-4m6 4-2-4M8 7h8M8 12h.01M16 12h.01"></path></symbol>
+      <symbol id="i-x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"></path></symbol>
+      <symbol id="i-back" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"></path></symbol>
+      <symbol id="i-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"></path></symbol>
+      <symbol id="i-search" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-3.5-3.5"></path></symbol>
+      <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 0-7 7c0 5 7 13 7 13s7-8 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"></path></symbol>
+      <symbol id="i-book" viewBox="0 0 24 24"><path d="M4 4h12a2 2 0 0 1 2 2v15l-5.5-2.7L7 21V6a2 2 0 0 0-2-2z"></path></symbol>
+      <symbol id="i-bag" viewBox="0 0 24 24"><path d="M6 8h12l1 12a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1zm3 0a3 3 0 0 1 6 0"></path></symbol>
+      <symbol id="i-heart" viewBox="0 0 24 24"><path d="M12 21S3.5 14.6 3.5 8.9A4.4 4.4 0 0 1 12 6.5a4.4 4.4 0 0 1 8.5 2.4C20.5 14.6 12 21 12 21z"></path></symbol>
+      <symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4.2"></circle><path d="M4 21a8 8 0 0 1 16 0z"></path></symbol>
+    </svg>
+  </main>
+
+  <script>
+    const stations = [
+      { name: "Yeoksam", kr: "역삼", lat: 37.5006, lng: 127.0365 },
+      { name: "Gangnam", kr: "강남", lat: 37.4979, lng: 127.0276 },
+      { name: "Seoul Nat'l Univ. of Education", short: "SNU Education", kr: "교대", lat: 37.4934, lng: 127.0145 }
+    ];
+    const places = {
+      Yeoksam: [
+        { kind: "Beauty", name: "Soothe Head Spa Gangnam", meta: "Head spa | 4 min from Exit 3", cls: "beauty" },
+        { kind: "Beauty", name: "Juno Hair Gangnam", meta: "Hair salon | English support reported", cls: "beauty" }
+      ],
+      Gangnam: [
+        { kind: "OY", name: "Olive Young Gangnam Town", meta: "Olive Young | 3 min from Exit 10", cls: "" },
+        { kind: "Beauty", name: "Glow & Co. Skin Clinic", meta: "Skin clinic | 4 min from Exit 1", cls: "beauty" },
+        { kind: "Beauty", name: "ColorLab Seoul", meta: "Personal color | English support reported", cls: "beauty" }
+      ],
+      "Seoul Nat'l Univ. of Education": [
+        { kind: "Beauty", name: "Gangnam Beauty Clinic", meta: "Skin clinic | Current sample data", cls: "beauty" }
+      ]
+    };
+    let activeIndex = 1;
+    const map = document.getElementById("map");
+    const pins = document.getElementById("pins");
+    const rail = document.getElementById("rail");
+    const placeList = document.getElementById("placeList");
+
+    function mapUrl(station) {
+      const dx = .020;
+      const dy = .012;
+      const bbox = [station.lng - dx, station.lat - dy, station.lng + dx, station.lat + dy].join("%2C");
+      return `https://www.openstreetmap.org/export/embed.html?bbox=${bbox}&layer=mapnik`;
+    }
+
+    function renderPins(items) {
+      pins.innerHTML = items.slice(0, 3).map((item, index) => {
+        const positions = [[24, 19], [68, 15], [82, 26]];
+        return `<button class="place-pin ${item.cls}" style="left:${positions[index][0]}%;top:${positions[index][1]}%" aria-label="${item.name}"><span>${item.kind}</span></button>`;
+      }).join("");
+    }
+
+    function renderPlaces(items) {
+      placeList.innerHTML = items.map(item => `<button class="place-row" style="width:100%;text-align:left"><span class="place-kind ${item.cls}">${item.kind}</span><span class="place-copy"><strong>${item.name}</strong><span>${item.meta}</span></span><svg class="icon" style="color:var(--dim)"><use href="#i-chev"></use></svg></button>`).join("");
+    }
+
+    function renderRail() {
+      rail.innerHTML = stations.map((station, index) => `<button class="station-marker ${index === activeIndex ? "active" : ""}" data-index="${index}" aria-current="${index === activeIndex ? "location" : "false"}"><span class="dot"></span><span>${station.short || station.name}</span></button>`).join("");
+      rail.querySelectorAll("button").forEach(button => button.addEventListener("click", () => setStation(Number(button.dataset.index))));
+    }
+
+    function setStation(index) {
+      activeIndex = Math.max(0, Math.min(stations.length - 1, index));
+      const station = stations[activeIndex];
+      const previous = stations[activeIndex - 1];
+      const next = stations[activeIndex + 1];
+      const stationPlaces = places[station.name] || [];
+      document.getElementById("activeName").textContent = station.short || station.name;
+      document.getElementById("activeKr").textContent = station.kr;
+      document.getElementById("previousName").textContent = previous ? (previous.short || previous.name) : "Departure";
+      document.getElementById("nextName").textContent = next ? (next.short || next.name) : "Arrival";
+      document.getElementById("previousButton").disabled = !previous;
+      document.getElementById("nextButton").disabled = !next;
+      document.getElementById("mapContext").textContent = `${station.name} Station`;
+      document.getElementById("nearbyTitle").textContent = `Near ${station.short || station.name}`;
+      document.getElementById("placeCount").textContent = stationPlaces.length;
+      map.title = `Map around ${station.name} Station`;
+      map.src = mapUrl(station);
+      renderPins(stationPlaces);
+      renderPlaces(stationPlaces);
+      renderRail();
+      requestAnimationFrame(() => rail.querySelector(".active")?.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "center" }));
+    }
+
+    function showSearch(show) {
+      document.getElementById("routeView").hidden = show;
+      document.getElementById("searchView").hidden = !show;
+      document.getElementById("searchFooter").hidden = !show;
+      document.getElementById("editButton").hidden = show;
+      document.getElementById("controller").classList.toggle("searching", show);
+      document.getElementById("controllerTitle").textContent = show ? "Choose your route" : "Yeoksam to Seoul Nat'l Univ. of Education";
+      if (show) requestAnimationFrame(() => document.getElementById("departure").focus());
+    }
+
+    document.getElementById("previousButton").addEventListener("click", () => setStation(activeIndex - 1));
+    document.getElementById("nextButton").addEventListener("click", () => setStation(activeIndex + 1));
+    document.getElementById("nearbyJump").addEventListener("click", () => document.getElementById("nearbyControls").scrollIntoView({ behavior: "smooth", block: "start" }));
+    document.getElementById("editButton").addEventListener("click", () => showSearch(true));
+    document.getElementById("cancelButton").addEventListener("click", () => showSearch(false));
+    document.getElementById("showRouteButton").addEventListener("click", () => showSearch(false));
+    document.querySelectorAll(".suggestions button").forEach(button => button.addEventListener("pointerdown", event => {
+      event.preventDefault();
+      button.closest(".field").querySelector("input").value = button.dataset.value;
+    }));
+    document.querySelectorAll(".radius button, .categories button").forEach(button => button.addEventListener("click", () => {
+      button.parentElement.querySelectorAll("button").forEach(item => item.classList.remove("active"));
+      button.classList.add("active");
+    }));
+    setStation(1);
+  </script>
+</body>
+</html>

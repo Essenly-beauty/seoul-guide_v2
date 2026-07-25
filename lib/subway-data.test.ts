@@ -79,4 +79,81 @@ describe("subway-data integrity", () => {
     // review does not exist in reality — Gimpo Airport sits between them.
     expect(hasEdge("gaehwa", "airport_market", "9")).toBe(false);
   });
+
+  it("keeps Gyeongui-Jungang Pungsan separate from Line 5 Hanam Pungsan", () => {
+    const hasEdge = (a: string, b: string, line: string) =>
+      edges.some(([x, y, l]) => l === line && ((x === a && y === b) || (x === b && y === a)));
+
+    expect(stations.pungsan?.nameKr).toBe("풍산");
+    expect(stations.pungsan?.lines).toEqual(["gyeongui_jungang"]);
+    expect(stations.hanam_pungsan?.nameKr).toBe("하남풍산");
+    expect(stations.hanam_pungsan?.lines).toEqual(["5"]);
+    expect(hasEdge("pungsan", "ilsan", "gyeongui_jungang")).toBe(true);
+    expect(hasEdge("baengma", "pungsan", "gyeongui_jungang")).toBe(true);
+    expect(hasEdge("hanam_pungsan", "ilsan", "gyeongui_jungang")).toBe(false);
+    expect(hasEdge("misa", "hanam_pungsan", "5")).toBe(true);
+  });
+
+  it("does not turn future extensions into fake transfer stations", () => {
+    expect(stations.byeollaebyeolgaram?.lines).toEqual(["4"]);
+    expect(stations.hanam_city_hall_deokpung_sinjang?.lines).toEqual(["5"]);
+    expect(stations.isu?.lines).toEqual(expect.arrayContaining(["4", "7"]));
+  });
+
+  it("rejects implausibly long adjacent-station edges", () => {
+    const toRad = (value: number) => value * Math.PI / 180;
+    const distanceKm = (a: (typeof stations)[string], b: (typeof stations)[string]) => {
+      const dLat = toRad(b.lat - a.lat);
+      const dLng = toRad(b.lng - a.lng);
+      const lat1 = toRad(a.lat);
+      const lat2 = toRad(b.lat);
+      const h = Math.sin(dLat / 2) ** 2 + Math.cos(lat1) * Math.cos(lat2) * Math.sin(dLng / 2) ** 2;
+      return 6371 * 2 * Math.atan2(Math.sqrt(h), Math.sqrt(1 - h));
+    };
+
+    for (const [a, b] of edges) {
+      expect(distanceKm(stations[a], stations[b]), `${a}~${b}`).toBeLessThan(15);
+    }
+  });
+
+  it("gives every operating station at least one graph edge", () => {
+    const degree = new Map(Object.keys(stations).map((id) => [id, 0]));
+    for (const [a, b] of edges) {
+      degree.set(a, (degree.get(a) ?? 0) + 1);
+      degree.set(b, (degree.get(b) ?? 0) + 1);
+    }
+
+    for (const [id, count] of degree) expect(count, id).toBeGreaterThan(0);
+  });
+
+  it("has no disconnected component except the known Yeoncheon segment", () => {
+    const adjacency = new Map<string, string[]>();
+    for (const id of Object.keys(stations)) adjacency.set(id, []);
+    for (const [a, b] of edges) {
+      adjacency.get(a)!.push(b);
+      adjacency.get(b)!.push(a);
+    }
+
+    const remaining = new Set(Object.keys(stations));
+    const components: string[][] = [];
+    while (remaining.size > 0) {
+      const start = remaining.values().next().value!;
+      const component: string[] = [];
+      const queue = [start];
+      remaining.delete(start);
+      while (queue.length > 0) {
+        const current = queue.shift()!;
+        component.push(current);
+        for (const neighbour of adjacency.get(current) ?? []) {
+          if (!remaining.delete(neighbour)) continue;
+          queue.push(neighbour);
+        }
+      }
+      components.push(component.sort());
+    }
+
+    components.sort((a, b) => b.length - a.length);
+    expect(components).toHaveLength(2);
+    expect(components[1]).toEqual(["jeongok", "yeoncheon"]);
+  });
 });

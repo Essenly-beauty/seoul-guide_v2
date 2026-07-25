@@ -21,7 +21,7 @@
 // Matching: vuski KR station name <-> KRIC 역사명, both normalized via
 // scripts/lib/normalize.mjs (strip parenthetical suffix, whitespace, trailing
 // "역"). Name mismatches that are genuinely the same real, operating station
-// are resolved via MANUAL_NAME_MAP below. vuski also carries placeholder
+// are resolved via LINE_SCOPED_NAME_MAP below. vuski also carries placeholder
 // nodes for lines/extensions that are not yet operating, individually
 // verified against the KRIC extract and listed in KNOWN_FUTURE_OR_MISSING —
 // those are logged to stderr and dropped (KRIC has no coordinates for a
@@ -70,23 +70,28 @@ const LINE_GROUPS = {
   인천2호선: { id: "incheon2", label: "Incheon Line 2", labelKr: "인천2호선", kr: ["인천지하철 2호선"], color: null },
 };
 
-// Real, currently-operating stations whose vuski KR name doesn't match the
-// KRIC 역사명 under simple normalization (checked individually against the
-// KRIC extract — see .superpowers/sdd/task-s1-report.md for the derivation).
-const MANUAL_NAME_MAP = {
-  지제: "평택지제",
-  별가람: "별내별가람",
-  덕풍: "하남시청",
-  서울대: "서울대벤처타운",
-  이수: "총신대입구", // KRIC's dual-name station (Line 4 + Line 7 transfer)
-  풍산: "하남풍산", // Line 5 Misa extension; distinct from Gyeongui-Jungang's 풍산
-  // vuski disambiguates its own two same-named "양평" nodes with a line
-  // suffix (Seoul Line 5's Yangpyeong in Yeongdeungpo-gu vs. Gyeongui–Jungang
-  // Line's Yangpyeong ~50km east in Yangpyeong-gun) — both are real,
-  // distinct KRIC stations; map each vuski spelling to its own KRIC row.
-  양평_5호선: "양평", // KRIC: 양평/5호선
-  양평_경의중앙: "양평역", // KRIC: 양평역/경의중앙선
-  뚝섬유원지: "자양", // Line 7's station was renamed; KRIC: 자양(뚝섬한강공원)
+// Some vuski aliases are only valid on one physical line. Keeping these
+// line-scoped prevents same-named stations or future extension placeholders
+// from being merged into a real station several kilometres away.
+const LINE_SCOPED_NAME_MAP = {
+  "서울1호선:지제": "평택지제",
+  "서울4호선:별가람": "별내별가람",
+  "서울4호선:당고개": "불암산",
+  "서울4호선:신길온천": "능길",
+  "수인선:신길온천": "능길",
+  "서울5호선:덕풍": "하남시청",
+  "경의중앙선:화전": "한국항공대",
+  "김포도시철도:김포시청": "사우",
+  "서해선:원곡": "시우",
+  "신림선:동작구민회관": "보라매병원",
+  "신림선:서림": "서울대벤처타운",
+  "신림선:서울대": "관악산",
+  "서울4호선:이수": "총신대입구",
+  "서울7호선:이수": "총신대입구",
+  "서울5호선:풍산": "하남풍산",
+  "서울5호선:양평_5호선": "양평",
+  "경의중앙선:양평_경의중앙": "양평역",
+  "서울7호선:뚝섬유원지": "자양",
 };
 
 // Stations vuski carries that this KRIC extract does not (yet) have —
@@ -100,19 +105,12 @@ const MANUAL_NAME_MAP = {
 //       Sinbundang's planned Sangam/Suwon extensions, Incheon Line 1's
 //       extension, Line 3's Toegyewon extension);
 //   (b) real, currently-operating stations this particular KRIC extract is
-//       simply missing outright (data gap, not a naming mismatch) — 신길온천,
-//       당고개, 학익, 김포시청, 화전, 원곡, 초성리, 국제테마파크역,
-//       송도국제도시, 과천지식정보단지.
+//       simply missing outright (data gap, not a naming mismatch) — 학익,
+//       초성리, 국제테마파크역, 송도국제도시, 과천지식정보단지.
 // Listed here (rather than silently swallowed) so the unresolved-station
 // gate below stays meaningful for *unexpected* mismatches.
 const KNOWN_FUTURE_OR_MISSING = new Set([
-  "서해선:원곡",
-  "경의중앙선:화전",
-  "김포도시철도:김포시청",
-  "서울4호선:신길온천",
-  "서울4호선:당고개",
   "서울8호선:우남",
-  "수인선:신길온천",
   "수인선:학익",
   "서해선:국제테마파크역",
   "인천1호선:송도국제도시",
@@ -123,9 +121,8 @@ const KNOWN_FUTURE_OR_MISSING = new Set([
   "서울8호선:토평",
   "서울8호선:구리도매시장",
   "서울8호선:진건",
+  "서울8호선:별가람",
   "서울1호선:초성리",
-  "신림선:동작구민회관",
-  "신림선:서림",
   "신림선:여의도성모병원",
   "서울7호선:국제업무단지",
   "서울7호선:청라시티타워",
@@ -143,6 +140,7 @@ const KNOWN_FUTURE_OR_MISSING = new Set([
   "서울3호선:S1역",
   "서울3호선:S2역",
   "서울3호선:S3역",
+  "서울3호선:덕풍",
   "서울5호선:연장101",
   "서울5호선:연장102",
   "서울5호선:연장103",
@@ -296,7 +294,8 @@ function main() {
     }
 
     let key = normalizeStationNameKr(node.nm);
-    if (MANUAL_NAME_MAP[key]) key = normalizeStationNameKr(MANUAL_NAME_MAP[key]);
+    const mappedName = LINE_SCOPED_NAME_MAP[`${node.ln}:${key}`];
+    if (mappedName) key = normalizeStationNameKr(mappedName);
 
     const candidates = kricByName.get(key) ?? [];
     // Prefer a KRIC row explicitly filed under this line group's KRIC line
@@ -370,7 +369,7 @@ function main() {
 
   if (unexpectedUnmatched.length > 0) {
     console.error(
-      `[build] ${unexpectedUnmatched.length} vuski station(s) had NO KRIC match and are NOT in KNOWN_FUTURE_OR_MISSING (matching failure — add to MANUAL_NAME_MAP or investigate):`
+      `[build] ${unexpectedUnmatched.length} vuski station(s) had NO KRIC match and are NOT in KNOWN_FUTURE_OR_MISSING (matching failure — add to LINE_SCOPED_NAME_MAP or investigate):`
     );
     for (const u of unexpectedUnmatched) console.error(`  - ${u}`);
   }

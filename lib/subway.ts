@@ -1,9 +1,9 @@
-/** Seoul metropolitan subway network (592 stations, 693 undirected edges) for
+/** Seoul metropolitan subway network (600 stations, 706 undirected edges) for
  *  beauty-zone route discovery. Sourced from lib/subway-data.json (Task S1);
  *  geometry (x/y schematic coords) now lives in the map SVG asset, not here. */
 
 import raw from "./subway-data.json";
-import { haversineKm } from "./geo";
+import { haversineKm, type LatLng } from "./geo";
 import type { Place } from "./data";
 
 type RawLineMeta = { label: string; labelKr: string; color: string };
@@ -52,8 +52,165 @@ export const STATIONS: Record<string, SubwayStation> = Object.fromEntries(
   ]),
 );
 
+const STATION_DISPLAY_NAME_OVERRIDES: Partial<Record<string, string>> = {
+  incheon_int_l_airport_cargo_terminal: "Airport Cargo Terminal",
+  dongdaemun_history_culture_park: "Dongdaemun H&C Park",
+  seoul_regional_office_of_millitary_manpower: "Seoul Military Manpower Office",
+  seoul_national_univ_venture_town: "Seoul Nat'l Univ. Venture Town",
+};
+
+/** Compact label for the route controller; search and accessible names keep the official full name. */
+export function stationDisplayName(station: SubwayStation): string {
+  return STATION_DISPLAY_NAME_OVERRIDES[station.id]
+    ?? station.name.replace(/\s*\([^)]*\)\s*$/u, "").trim();
+}
+
+const STATION_LIST = Object.values(STATIONS);
+
+const STATION_ALIASES: Partial<Record<string, string[]>> = {
+  hongik_univ: ["Hongdae", "홍대"],
+  gimpo_int_l_airport: ["Gimpo Airport", "김포공항"],
+  seoul: ["Seoul Station", "서울역"],
+};
+
+const POPULAR_STATION_IDS = [
+  "gangnam",
+  "myeongdong",
+  "hongik_univ",
+  "seoul",
+  "jamsil_songpa_gu_office",
+  "sinsa",
+  "seongsu",
+  "apgujeong_rodeo",
+];
+const POPULAR_STATION_RANK = new Map(POPULAR_STATION_IDS.map((id, index) => [id, index]));
+
+/** Search-key normalization shared by English, Korean, and station ids. */
+function stationSearchKey(value: string): string {
+  return value
+    .normalize("NFKC")
+    .toLocaleLowerCase("en")
+    .replace(/\b(?:station|stn)\b/gu, "")
+    .replace(/\buniversity\b/gu, "univ")
+    .replace(/\bnational\b/gu, "natl")
+    .replace(/\binternational\b/gu, "intl")
+    .replace(/int[‘’']?l/gu, "intl")
+    .replace(/(\d)\s*\([^)]*\)/gu, "$1")
+    .replace(/역$/u, "")
+    .replace(/[^\p{L}\p{N}]+/gu, "");
+}
+
+/**
+ * Deterministic local station search for the route comboboxes. Exact matches
+ * win over prefixes, which win over word-prefixes and general substrings.
+ */
+export function searchStations(query: string, limit = 8): SubwayStation[] {
+  const needle = stationSearchKey(query);
+  if (!needle || limit <= 0) return [];
+
+  return STATION_LIST
+    .map((station) => {
+      const terms = [station.name, station.nameKr, station.id, ...(STATION_ALIASES[station.id] ?? [])];
+      const keys = terms.map(stationSearchKey).filter(Boolean);
+      const words = station.name
+        .split(/[^\p{L}\p{N}]+/u)
+        .map(stationSearchKey)
+        .filter(Boolean);
+      let score = Number.POSITIVE_INFINITY;
+      if (keys.some((candidate) => candidate === needle)) score = 0;
+      else if (keys.some((candidate) => candidate.startsWith(needle))) score = 1;
+      else if (words.some((word) => word.startsWith(needle))) score = 2;
+      else if (keys.some((candidate) => candidate.includes(needle))) score = 3;
+      return { station, score };
+    })
+    .filter(({ score }) => Number.isFinite(score))
+    .sort((a, b) =>
+      a.score - b.score ||
+      (POPULAR_STATION_RANK.get(a.station.id) ?? Number.MAX_SAFE_INTEGER) -
+        (POPULAR_STATION_RANK.get(b.station.id) ?? Number.MAX_SAFE_INTEGER) ||
+      a.station.name.length - b.station.name.length ||
+      a.station.id.localeCompare(b.station.id),
+    )
+    .slice(0, limit)
+    .map(({ station }) => station);
+}
+
+/** Resolve only a complete station name/alias, for safe combobox blur commits. */
+export function exactStationMatch(query: string): SubwayStation | null {
+  const needle = stationSearchKey(query);
+  if (!needle) return null;
+
+  const matches = STATION_LIST.filter((station) =>
+    [station.name, station.nameKr, station.id, ...(STATION_ALIASES[station.id] ?? [])]
+      .map(stationSearchKey)
+      .some((candidate) => candidate === needle),
+  );
+  return matches.length === 1 ? matches[0] : null;
+}
+
+/** Pick a readable foreground for official line colors, including light lines. */
+export function lineTextColor(hex: string): "#000000" | "#FFFFFF" {
+  const match = /^#([\da-f]{2})([\da-f]{2})([\da-f]{2})$/iu.exec(hex);
+  if (!match) return "#FFFFFF";
+
+  const linear = (channel: string) => {
+    const value = Number.parseInt(channel, 16) / 255;
+    return value <= 0.04045 ? value / 12.92 : ((value + 0.055) / 1.055) ** 2.4;
+  };
+  const luminance = 0.2126 * linear(match[1]) + 0.7152 * linear(match[2]) + 0.0722 * linear(match[3]);
+  const darkContrast = (luminance + 0.05) / 0.05;
+  const lightContrast = 1.05 / (luminance + 0.05);
+  return darkContrast >= lightContrast ? "#000000" : "#FFFFFF";
+}
+
+export function nearestStation(origin: LatLng): SubwayStation | null {
+  let closest: SubwayStation | null = null;
+  let closestKm = Number.POSITIVE_INFINITY;
+  for (const station of STATION_LIST) {
+    const km = haversineKm(origin, station);
+    if (km < closestKm) {
+      closest = station;
+      closestKm = km;
+    }
+  }
+  return closest;
+}
+
 export type RouteSegment = { line: LineId; stations: string[] };
 export type SubwayRoute = { stations: string[]; segments: RouteSegment[]; totalSeconds: number };
+
+/**
+ * Absolute route index where each line segment begins. Transfer stations
+ * belong to both adjacent segments but occupy one step in route.stations.
+ */
+export function routeSegmentStartIndices(route: SubwayRoute): number[] {
+  let start = 0;
+  return route.segments.map((segment) => {
+    const current = start;
+    start += Math.max(0, segment.stations.length - 1);
+    return current;
+  });
+}
+
+/** Move one selected waypoint by one position while keeping the caller's order immutable. */
+export function moveRouteWaypoint(
+  waypoints: string[],
+  fromIndex: number,
+  direction: -1 | 1,
+): string[] {
+  const next = [...waypoints];
+  const toIndex = fromIndex + direction;
+  if (
+    fromIndex < 0
+    || fromIndex >= next.length
+    || toIndex < 0
+    || toIndex >= next.length
+  ) {
+    return next;
+  }
+  [next[fromIndex], next[toIndex]] = [next[toIndex], next[fromIndex]];
+  return next;
+}
 
 /** Adjacency built once at module scope: stationId -> [{ to, line, sec }]. */
 const ADJ = new Map<string, { to: string; line: LineId; sec: number }[]>();
@@ -162,6 +319,47 @@ export function findRoute(fromId: string, toId: string): SubwayRoute | null {
 }
 
 /**
+ * Route through intermediate waypoints (경유역): chains findRoute leg by leg,
+ * concatenating stations while dropping the duplicated junction station
+ * between legs. A line change at a via boundary receives the same transfer
+ * penalty as a line change within one leg. Adjacent same-line segments across
+ * a junction are merged so the transfer count stays honest when a via sits on
+ * the line the route already rides. Returns null when any waypoint id repeats
+ * or any leg is unroutable.
+ */
+export function findRouteVia(fromId: string, viaIds: string[], toId: string): SubwayRoute | null {
+  const waypoints = [fromId, ...viaIds, toId];
+  if (new Set(waypoints).size !== waypoints.length) return null;
+  if (viaIds.length === 0) return findRoute(fromId, toId);
+
+  const stations: string[] = [];
+  const segments: RouteSegment[] = [];
+  let totalSeconds = 0;
+  for (let i = 0; i < waypoints.length - 1; i++) {
+    const leg = findRoute(waypoints[i], waypoints[i + 1]);
+    if (!leg) return null;
+    const previousLine = segments[segments.length - 1]?.line;
+    const nextLine = leg.segments[0]?.line;
+    if (previousLine && nextLine && previousLine !== nextLine) {
+      totalSeconds += TRANSFER_PENALTY_SEC;
+    }
+    stations.push(...(i === 0 ? leg.stations : leg.stations.slice(1)));
+    for (const segment of leg.segments) {
+      const last = segments[segments.length - 1];
+      if (last && last.line === segment.line && last.stations[last.stations.length - 1] === segment.stations[0]) {
+        last.stations.push(...segment.stations.slice(1));
+      } else {
+        // Copy so merging never mutates the leg findRoute returned.
+        segments.push({ line: segment.line, stations: [...segment.stations] });
+      }
+    }
+    totalSeconds += leg.totalSeconds;
+  }
+
+  return { stations, segments, totalSeconds };
+}
+
+/**
  * Total travel time in minutes, derived from the chosen path's accumulated
  * seconds (edge seconds + transfer penalty). Transfer time is included because
  * it makes the displayed ETA honest door-to-door, even though the search already
@@ -175,6 +373,12 @@ export function travelMinutes(route: SubwayRoute): number {
 export function placesNearStations(places: Place[], stationIds: string[], radiusKm = 0.55): Place[] {
   const pts = stationIds.map((id) => STATIONS[id]).filter(Boolean);
   return places.filter((p) => pts.some((s) => haversineKm({ lat: p.lat, lng: p.lng }, { lat: s.lat, lng: s.lng }) <= radiusKm));
+}
+
+/** Places around one selected station. The station explorer defaults to 1 km. */
+export function placesNearStation(places: Place[], stationId: string, radiusKm = 1): Place[] {
+  if (!STATIONS[stationId]) return [];
+  return placesNearStations(places, [stationId], radiusKm);
 }
 
 export function shopCount(places: Place[], stationId: string): number {
