@@ -16,6 +16,8 @@ const ALLOWLIST = new Set([
   "components/ui/icon-button.tsx",
   "components/ui/back-button.tsx",
   "components/ui/hamburger-menu.tsx",
+  // v2 basic components — raw iconbtn kept for the ref-bearing close control
+  "components/ui/bottom-sheet.tsx",
   // ActionButton/launcher className passthrough + ref-bearing dialog controls
   "app/blog/[slug]/page.tsx",
   "app/blog/page.tsx",

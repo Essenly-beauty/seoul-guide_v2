@@ -14,6 +14,16 @@ import { RatingBars } from "@/components/ui/rating-bars";
 import { SectionHeader } from "@/components/ui/section-header";
 import { ImgPh } from "@/components/ui/img-ph";
 import { TopBar } from "@/components/ui/top-bar";
+import { ListRow } from "@/components/ui/list-row";
+import { SearchField } from "@/components/ui/search-field";
+import { BottomSheet } from "@/components/ui/bottom-sheet";
+import { Switch } from "@/components/ui/switch";
+import { Badge } from "@/components/ui/badge";
+import { EmptyState } from "@/components/ui/empty-state";
+import { Avatar } from "@/components/ui/avatar";
+import { Notice } from "@/components/ui/notice";
+import { SectionDivider } from "@/components/ui/section-divider";
+import { Icon } from "@/components/icon";
 import { MAP_CATEGORIES, TYPE_COLOR, TYPE_LABEL, type PlaceType } from "@/lib/data";
 
 const SEMANTIC_COLORS = [
@@ -37,6 +47,10 @@ function Swatch({ token, label }: { token: string; label: string }) {
 
 export default function DesignShowcase() {
   const [chip, setChip] = useState("all");
+  const [query, setQuery] = useState("");
+  const [sheetOpen, setSheetOpen] = useState(false);
+  const [switchOn, setSwitchOn] = useState(true);
+  const [noticeShown, setNoticeShown] = useState(true);
   const demoHours = { open: "09:00", close: "23:59" };
   return (
     <>
@@ -127,6 +141,99 @@ export default function DesignShowcase() {
           <RatingBars dist={[62, 24, 9, 3, 2]} />
           <ImgPh className="thumb56" />
         </div>
+
+        {/* ── Basics (v2 basic components) ─────────────────── */}
+        <SectionDivider />
+        <SectionHeader title="List rows" />
+        <div>
+          <ListRow
+            href="#"
+            media={<ImgPh className="thumb56" />}
+            titleAccessory={<CategoryBadge type="skin_clinic" size={16} />}
+            title="HOSU DOSAN"
+            caption="Skin clinic · Apgujeong · ₩₩₩"
+            meta={<><RatingLine rating={4.5} count={96} plain /><span aria-hidden="true">·</span><LiveBadge hours={demoHours} showUntil={false} /></>}
+            trailing={<IconButton name="heart-o" label="Save" variant="soft" iconSize="xs" />}
+          />
+          <ListRow
+            media={<span className="ic"><Icon name="book" size="sm" /></span>}
+            title="Icon-led row"
+            caption="May 4 · 5 min read"
+            trailing={<Icon name="chev" size="xs" style={{ color: "var(--dim)" }} />}
+          />
+        </div>
+        <div className="t-caption">thumb56 / .ic media 슬롯 · trailing이 있으면 링크는 콘텐츠에만</div>
+
+        <SectionDivider />
+        <SectionHeader title="Search field" />
+        <SearchField
+          value={query}
+          onChange={setQuery}
+          label="Search demo"
+          placeholder="Salons, products, districts…"
+          onClear={() => setQuery("")}
+        />
+        <div className="t-caption">{query ? `query: "${query}"` : "type to see the clear button"}</div>
+
+        <SectionDivider />
+        <SectionHeader title="Bottom sheet" />
+        <Button variant="secondary" onClick={() => setSheetOpen(true)}>Open bottom sheet</Button>
+        {sheetOpen && (
+          <BottomSheet
+            title="Bottom sheet"
+            kicker="Demo"
+            onClose={() => setSheetOpen(false)}
+            footer={<Button full onClick={() => setSheetOpen(false)}>Apply</Button>}
+          >
+            <p className="t-caption">Portals to .app-shell · overlay tap / Escape closes · focus trapped.</p>
+          </BottomSheet>
+        )}
+
+        <SectionDivider />
+        <SectionHeader title="Switch" />
+        <div className="row" style={{ gap: 12 }}>
+          <div style={{ flex: 1, minWidth: 0 }}>
+            <b className="t-label-md" style={{ fontSize: 14, display: "block" }}>Booking updates</b>
+            <div className="t-caption" id="design-switch-desc">role=&quot;switch&quot; · notifications-form pattern</div>
+          </div>
+          <Switch checked={switchOn} onChange={setSwitchOn} label="Booking updates" describedBy="design-switch-desc" />
+        </div>
+
+        <SectionDivider />
+        <SectionHeader title="Badges" />
+        <div className="row" style={{ gap: 8, flexWrap: "wrap" }}>
+          <Badge tone="accent">NEW</Badge>
+          <Badge tone="warning">D-5</Badge>
+          <Badge tone="info">EN OK</Badge>
+          <Badge tone="dim">11</Badge>
+        </div>
+
+        <SectionDivider />
+        <SectionHeader title="Empty state" />
+        <EmptyState icon="heart" action={<Button size="sm" variant="tonal">Explore places</Button>}>
+          Nothing saved yet — tap ♥ on any place.
+        </EmptyState>
+
+        <SectionDivider />
+        <SectionHeader title="Avatar" />
+        <div className="row" style={{ gap: 12, alignItems: "center" }}>
+          <Avatar name="Sarah" />
+          <Avatar name="Sarah" size={44} />
+          <Avatar name="Sarah" size={52} />
+          <Avatar size={44} />
+          <span className="t-caption">30(기본) · 44 · 52 · no-name fallback</span>
+        </div>
+
+        <SectionDivider />
+        <SectionHeader title="Notice" />
+        <Notice tone="info">Location is off — showing <b>Gangnam Station</b> as your starting point.</Notice>
+        {noticeShown ? (
+          <Notice tone="warning" icon="cross" onDismiss={() => setNoticeShown(false)}>
+            Medical procedures require a consultation before booking.
+          </Notice>
+        ) : (
+          <Button variant="secondary" size="sm" onClick={() => setNoticeShown(true)}>Restore dismissed notice</Button>
+        )}
       </div>
     </>
   );
