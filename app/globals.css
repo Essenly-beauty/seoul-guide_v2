@@ -1057,9 +1057,14 @@
     background: var(--surface-hover);
   }
   .btn.outline {
-    background: transparent;
-    border: 1.5px solid var(--accent);
-    color: var(--accent);
+    /* quiet secondary pill (More ›, See-all) — the accent outline read heavy */
+    background: var(--surface);
+    border: 1px solid var(--border);
+    color: var(--text);
+  }
+  .btn.outline:hover {
+    background: var(--surface-hover);
+    color: var(--text);
   }
   .btn.danger {
     background: transparent;
@@ -3833,7 +3838,10 @@
     overflow-wrap: anywhere;
     white-space: normal;
   }
-  .product-cta-unavailable {
+  /* status span, not a button — pin the muted look above .btn:hover too,
+     which otherwise repaints it accent-green under the pointer */
+  .btn.product-cta-unavailable,
+  .btn.product-cta-unavailable:hover {
     color: var(--muted);
     background: var(--surface-hover);
     border-color: var(--border);
@@ -4019,3 +4027,9 @@
   .article-body h2 { margin-top: 16px; }
   .article-body h2:first-of-type { margin-top: 4px; }
 }
+
+/* Tailwind's `.outline` utility (outline-style: solid, 3px currentColor) collides
+   with our .btn.outline variant name — the "thick dark ring" on More ›/See-all
+   pills was never our border. Unlayered so it outranks the utilities layer. */
+.btn.outline { outline-style: none; }
+.btn.outline:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
