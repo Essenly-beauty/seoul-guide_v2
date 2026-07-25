@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { Icon } from "@/components/icon";
+import { useDialogFocus } from "@/components/ui/use-dialog-focus";
 import { PRICE_OPTIONS, SERVICE_FILTERS, TYPE_LABEL, type PlaceType, type PriceRange } from "@/lib/data";
 import { EMPTY_FILTERS, type MapFilters } from "@/lib/places";
 
@@ -18,6 +19,7 @@ export function FilterSheet({ cat, filters, onApply, onClose }: {
   const [draft, setDraft] = useState<MapFilters>(filters);
   const [host, setHost] = useState<Element | null>(null);
   const closeRef = useRef<HTMLButtonElement>(null);
+  const dialogRef = useDialogFocus<HTMLDivElement>(Boolean(host), onClose, closeRef);
   const services = cat !== "all" ? SERVICE_FILTERS[cat] : undefined;
 
   // Anchor to .app-shell like DirectionsLauncher — .map-screen traps z-index
@@ -27,21 +29,11 @@ export function FilterSheet({ cat, filters, onApply, onClose }: {
     setHost(document.querySelector(".app-shell"));
   }, []);
 
-  // Conditionally mounted by the parent (no internal trigger), so focus
-  // management on open/Escape happens here; focus restoration to the
-  // triggering button is handled by the parent (map-screen.tsx).
-  useEffect(() => {
-    closeRef.current?.focus();
-    const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") onClose(); };
-    document.addEventListener("keydown", onKey);
-    return () => document.removeEventListener("keydown", onKey);
-  }, [onClose]);
-
   if (!host) return null;
 
   return createPortal(
     <div className="overlay" onClick={(e) => { if (e.target === e.currentTarget) onClose(); }}>
-      <div className="sheet" role="dialog" aria-modal="true" aria-label="Detail filters">
+      <div ref={dialogRef} className="sheet" role="dialog" aria-modal="true" aria-label="Detail filters" tabIndex={-1}>
         <div className="shead">
           <div>
             <div className="label">Filters</div>

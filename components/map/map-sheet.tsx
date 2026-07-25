@@ -1,12 +1,9 @@
 "use client";
 
-import { useMemo, useRef, useState } from "react";
-import Link from "next/link";
+import { useEffect, useId, useMemo, useRef, useState } from "react";
 import { Icon } from "@/components/icon";
-import { routes } from "@/lib/routes";
 import { TYPE_LABEL, zoneShort, type Place } from "@/lib/data";
-import { formatDistance, haversineKm, naverMapUrl, walkMinutes, type LatLng } from "@/lib/geo";
-import { statusLabel } from "@/lib/places";
+import { formatDistance, haversineKm, walkMinutes, type LatLng } from "@/lib/geo";
 
 type Snap = "peek" | "half" | "full";
 const ORDER: Snap[] = ["peek", "half", "full"];
@@ -19,8 +16,19 @@ export function MapSheet({ places, origin, selectedId, onSelect, onClearSelectio
   onClearSelection: () => void;
 }) {
   const [snap, setSnap] = useState<Snap>("peek");
-  const dragStart = useRef<{ y: number; snap: Snap } | null>(null);
+  // Free-form height: while dragging the sheet follows the pointer 1:1 and
+  // stays wherever it is released (user request); `offset` is the committed
+  // translateY in px, null = the snap class position.
+  const [offset, setOffset] = useState<number | null>(null);
+  const [dragging, setDragging] = useState(false);
+  const listId = useId();
+  const sheetRef = useRef<HTMLElement>(null);
+  const dragStart = useRef<{ y: number; startOffset: number; min: number; max: number; last: number } | null>(null);
   const dragMoved = useRef(false); // suppresses the native click that follows a drag release
+  const handleRef = useRef<HTMLDivElement>(null);
+  const rowRefs = useRef(new Map<string, HTMLButtonElement>());
+  const returnPlaceId = useRef<string | null>(null);
+  const previousSelectedId = useRef<string | null>(selectedId);
 
   const ranked = useMemo(
     () =>
@@ -29,28 +37,85 @@ export function MapSheet({ places, origin, selectedId, onSelect, onClearSelectio
         .sort((a, b) => a.km - b.km),
     [places, origin],
   );
-  const selected = ranked.find((r) => r.p.id === selectedId);
-  const locked = Boolean(selected); // mini-card pins the sheet to half — don't mutate hidden snap
+  const snapLabel = snap === "peek"
+    ? `Nearby places list, collapsed. ${ranked.length} places. Press to expand halfway.`
+    : snap === "half"
+      ? `Nearby places list, half expanded. ${ranked.length} places. Press to fully expand.`
+      : `Nearby places list, fully expanded. ${ranked.length} places. Press to collapse.`;
 
-  const cycle = () => setSnap(snap === "peek" ? "half" : snap === "half" ? "full" : "peek");
+  useEffect(() => {
+    const previous = previousSelectedId.current;
+    previousSelectedId.current = selectedId;
+
+    if (selectedId) {
+      if (previous && previous !== selectedId) returnPlaceId.current = null;
+      return;
+    }
+    if (!previous) return;
+
+    const placeId = returnPlaceId.current;
+    returnPlaceId.current = null;
+    const frame = window.requestAnimationFrame(() => {
+      const active = document.activeElement;
+      const focusWasLost = !active || active === document.body || active === document.documentElement;
+      if (!focusWasLost) return;
+      const target = (placeId ? rowRefs.current.get(placeId) : null) ?? handleRef.current;
+      target?.focus({ preventScroll: true });
+    });
+    return () => window.cancelAnimationFrame(frame);
+  }, [selectedId]);
+
+  const snapOffsets = () => {
+    const h = sheetRef.current?.offsetHeight ?? 0;
+    return { full: 0, half: h * 0.42, peek: Math.max(0, h - 116) } as const;
+  };
+  const currentOffset = () => offset ?? snapOffsets()[snap];
+
+  const cycle = () => {
+    setOffset(null); // snap classes take over again
+    setSnap(snap === "peek" ? "half" : snap === "half" ? "full" : "peek");
+  };
+
+  // Committed position → element style (skipped mid-drag; the move handler
+  // writes the transform directly so the sheet tracks the finger without renders).
+  useEffect(() => {
+    const el = sheetRef.current;
+    if (!el || dragging) return;
+    el.style.transform = offset !== null ? `translateY(${offset}px)` : "";
+  }, [offset, snap, dragging]);
 
   const onPointerDown = (e: React.PointerEvent) => {
-    if (locked) return;
     dragMoved.current = false;
-    dragStart.current = { y: e.clientY, snap };
+    const so = snapOffsets();
+    dragStart.current = { y: e.clientY, startOffset: currentOffset(), min: so.full, max: so.peek, last: currentOffset() };
+    setDragging(true);
     (e.target as HTMLElement).setPointerCapture(e.pointerId);
   };
+  const onPointerMove = (e: React.PointerEvent) => {
+    const d = dragStart.current;
+    const el = sheetRef.current;
+    if (!d || !el) return;
+    const next = Math.min(d.max, Math.max(d.min, d.startOffset + (e.clientY - d.y)));
+    d.last = next;
+    el.style.transform = `translateY(${next}px)`;
+  };
   const onPointerUp = (e: React.PointerEvent) => {
-    if (!dragStart.current) return;
-    const dy = e.clientY - dragStart.current.y;
-    const i = ORDER.indexOf(dragStart.current.snap);
-    if (Math.abs(dy) > 40) dragMoved.current = true;
-    if (dy < -40) setSnap(ORDER[Math.min(i + 1, 2)]);
-    else if (dy > 40) setSnap(ORDER[Math.max(i - 1, 0)]);
+    const d = dragStart.current;
     dragStart.current = null;
+    setDragging(false);
+    if (!d) return;
+    const dy = e.clientY - d.y;
+    if (Math.abs(dy) > 6) {
+      dragMoved.current = true;
+      setOffset(d.last); // stay exactly where the user let go
+      // nearest snap keeps the aria description and padding fallbacks honest
+      const so = snapOffsets();
+      const nearest = (Object.keys(so) as Snap[]).reduce((a, b) =>
+        Math.abs(so[a] - d.last) <= Math.abs(so[b] - d.last) ? a : b);
+      setSnap(nearest);
+    }
   };
   const onHandleClick = () => {
-    if (locked) return;
     if (dragMoved.current) { dragMoved.current = false; return; }
     cycle();
   };
@@ -58,54 +123,52 @@ export function MapSheet({ places, origin, selectedId, onSelect, onClearSelectio
     if (e.target !== e.currentTarget) return; // don't hijack keys bubbling from the inner button
     if (e.key !== "Enter" && e.key !== " ") return;
     e.preventDefault();
-    if (locked) return;
     cycle();
   };
 
+  // Selecting a place keeps the sheet exactly where the user left it — the
+  // callout opens in the visible map strip above instead (user decision).
   return (
-    <section className={`mapsheet ${selected ? "half" : snap}`} aria-label="Nearby places">
+    <section ref={sheetRef} className={`mapsheet ${snap}${dragging ? " dragging" : ""}`} aria-label="Nearby places">
       <div
+        ref={handleRef}
         className="mapsheet-handle"
         role="button"
         tabIndex={0}
-        aria-label={`Places list — ${snap === "peek" ? "expand" : "drag or press to resize"}`}
+        aria-label={snapLabel}
+        aria-expanded={snap !== "peek"}
+        aria-controls={listId}
         onPointerDown={onPointerDown}
+        onPointerMove={onPointerMove}
         onPointerUp={onPointerUp}
-        onPointerCancel={() => { dragStart.current = null; }}
+        onPointerCancel={() => { dragStart.current = null; setDragging(false); }}
         onClick={onHandleClick}
         onKeyDown={onHandleKeyDown}
       >
         <span className="mapsheet-grip" aria-hidden="true" />
-        {!selected && <div className="small" style={{ fontWeight: 600 }}>{ranked.length} places near you</div>}
-        {selected && (
-          <button className="row small" style={{ gap: 4, color: "var(--muted)" }} onClick={(e) => { e.stopPropagation(); onClearSelection(); }}>
-            <Icon name="back" size="xs" /> All places
-          </button>
-        )}
+        <div className="small" style={{ fontWeight: 600 }}>{ranked.length} places near you</div>
       </div>
 
-      <div className="mapsheet-body">
-        {selected ? (
-          <div className="stack" style={{ paddingBottom: 12 }}>
-            <div>
-              <span className="label">{TYPE_LABEL[selected.p.type]} · {zoneShort(selected.p.zone)}</span>
-              <h2 className="h2" style={{ marginTop: 2 }}>{selected.p.name}</h2>
-              <div className="caption muted">{selected.p.nameKr}</div>
-            </div>
-            <div className="row" style={{ gap: 10 }}>
-              {selected.p.rating && <span className="rating">★ {selected.p.rating}</span>}
-              <span className="chip mono">{selected.p.priceRange}</span>
-              <span className="small muted">{formatDistance(selected.km)}{selected.km <= 3 && <> · ~{walkMinutes(selected.km)} min walk</>}</span>
-            </div>
-            {selected.p.hours && <div className="caption muted">{statusLabel(selected.p.hours)}</div>}
-            <div className="row" style={{ gap: 8 }}>
-              <Link className="btn ghost" style={{ flex: 1 }} href={routes.place(selected.p.id)}>View details</Link>
-              <a className="btn" style={{ flex: 1 }} href={naverMapUrl(selected.p.nameKr)} target="_blank" rel="noopener noreferrer">Directions</a>
-            </div>
-          </div>
-        ) : (
-          ranked.map(({ p, km }) => (
-            <button key={p.id} className="maprow" onClick={() => onSelect(p.id)}>
+      <div
+        id={listId}
+        className="mapsheet-body"
+        style={offset !== null ? { paddingBottom: `calc(${Math.round(offset)}px + 84px + env(safe-area-inset-bottom))` } : undefined}
+      >
+        {ranked.map(({ p, km }) => (
+            <button
+              key={p.id}
+              ref={(node) => {
+                if (node) rowRefs.current.set(p.id, node);
+                else rowRefs.current.delete(p.id);
+              }}
+              type="button"
+              className={"maprow" + (selectedId === p.id ? " on" : "")}
+              aria-current={selectedId === p.id ? "true" : undefined}
+              onClick={() => {
+                returnPlaceId.current = p.id;
+                onSelect(p.id);
+              }}
+            >
               <div className="thumb hero-img" style={{ display: "grid", placeItems: "center" }}>
                 <Icon name="pin" size="sm" style={{ color: "var(--accent)" }} aria-hidden="true" />
               </div>
@@ -116,13 +179,13 @@ export function MapSheet({ places, origin, selectedId, onSelect, onClearSelectio
                   <span className="mono">{formatDistance(km)}</span>
                   {km <= 3 && <> · ~{walkMinutes(km)} min walk</>}
                   {p.rating && <> · <span className="stars">★ {p.rating}</span></>}
+                  {/* price folded into the meta line — the right-edge chip read too heavy */}
+                  <> · <span className="mono">{p.priceRange}</span></>
                   {p.englishOk && <> · English OK</>}
                 </div>
               </div>
-              <span className="chip mono" style={{ alignSelf: "center" }}>{p.priceRange}</span>
             </button>
-          ))
-        )}
+          ))}
       </div>
     </section>
   );
