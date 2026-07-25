@@ -7,6 +7,8 @@
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import { createPortal } from "react-dom";
 import { Icon } from "@/components/icon";
+import { Button } from "@/components/ui/button";
+import { Chip } from "@/components/ui/chip";
 import { useDialogFocus } from "@/components/ui/use-dialog-focus";
 import { useToast } from "@/components/ui/toast";
 import { submitFeedback, type FeedbackCategory } from "@/lib/feedback";
@@ -59,14 +61,13 @@ function FeedbackSheet({ onClose }: { onClose: () => void }) {
             <div className="label">What&apos;s it about?</div>
             <div className="chipwrap" style={{ marginTop: 6 }}>
               {CATEGORIES.map((c) => (
-                <button
+                <Chip
                   key={c.value}
-                  className={"chip" + (category === c.value ? " selected" : "")}
-                  aria-pressed={category === c.value}
+                  selected={category === c.value}
                   onClick={() => setCategory(c.value)}
                 >
                   {c.label}
-                </button>
+                </Chip>
               ))}
             </div>
           </div>
@@ -103,9 +104,9 @@ function FeedbackSheet({ onClose }: { onClose: () => void }) {
               }} />
             </button>
           </div>
-          <button className="btn" disabled={!canSubmit} style={canSubmit ? undefined : { opacity: 0.5 }} onClick={submit}>
+          <Button disabled={!canSubmit} style={canSubmit ? undefined : { opacity: 0.5 }} onClick={submit}>
             Send feedback
-          </button>
+          </Button>
         </div>
       </div>
     </div>,

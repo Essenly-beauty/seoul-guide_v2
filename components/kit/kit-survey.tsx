@@ -2,8 +2,8 @@
 
 import { useRef, useState } from "react";
 import { useRouter } from "next/navigation";
-import Link from "next/link";
 import { Icon } from "@/components/icon";
+import { Button } from "@/components/ui/button";
 import { ChipGroup } from "@/components/ui/chip-group";
 import { BackButton } from "@/components/ui/back-button";
 import { validateKitClaim, type KitClaimErrors, type KitClaimMethod } from "@/lib/kit-claim";
@@ -106,9 +106,9 @@ export function KitSurvey() {
               <Icon name="bell" size="sm" />
               <span>Apply 7+ days before arrival. 1 kit per person.</span>
             </div>
-            <button className="btn" style={{ marginTop: 14 }} onClick={() => setStep(1)}>
+            <Button style={{ marginTop: 14 }} onClick={() => setStep(1)}>
               Get My Free Kit →
-            </button>
+            </Button>
           </div>
         )}
 
@@ -119,7 +119,7 @@ export function KitSurvey() {
             <ChipGroup ariaLabel="Hair type" single items={["Straight", "Wavy", "Curly"]} defaultSelected={["Straight"]} />
             <div className="label" style={{ marginTop: 14 }}>Hair concerns</div>
             <ChipGroup ariaLabel="Hair concerns" items={["Damaged", "Scalp", "Volume", "Frizz", "Thinning"]} defaultSelected={["Damaged"]} />
-            <button className="btn" style={{ marginTop: 24 }} onClick={() => setStep(2)}>Next →</button>
+            <Button style={{ marginTop: 24 }} onClick={() => setStep(2)}>Next →</Button>
           </div>
         )}
 
@@ -132,7 +132,7 @@ export function KitSurvey() {
             <ChipGroup ariaLabel="Wash frequency" single items={["Every day", "2–3×/week", "4–5×/week", "Once/week"]} defaultSelected={["2–3×/week"]} />
             <div className="label" style={{ marginTop: 14 }}>Treatment experience</div>
             <ChipGroup ariaLabel="Treatment experience" single items={["Never", "Sometimes", "Regularly"]} defaultSelected={["Sometimes"]} />
-            <button className="btn" style={{ marginTop: 24 }} onClick={() => setStep(3)}>Next →</button>
+            <Button style={{ marginTop: 24 }} onClick={() => setStep(3)}>Next →</Button>
           </div>
         )}
 
@@ -215,7 +215,7 @@ export function KitSurvey() {
               <Icon name="bell" size="sm" />
               <span>Apply 7 days before arrival so we have time to prepare your kit.</span>
             </div>
-            <button type="submit" className="btn" style={{ marginTop: 16 }}>Claim My Free Kit</button>
+            <Button type="submit" style={{ marginTop: 16 }}>Claim My Free Kit</Button>
           </form>
         )}
 
@@ -231,8 +231,8 @@ export function KitSurvey() {
               </p>
             </div>
             <div className="stack" style={{ marginTop: 8 }}>
-              <Link className="btn" href={routes.kitStatus}>View My Kit Status</Link>
-              <button className="btn ghost" onClick={() => router.push(routes.map)}>Back to Home</button>
+              <Button href={routes.kitStatus}>View My Kit Status</Button>
+              <Button variant="secondary" onClick={() => router.push(routes.map)}>Back to Home</Button>
             </div>
           </div>
         )}

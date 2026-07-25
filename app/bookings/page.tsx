@@ -1,6 +1,8 @@
 import Link from "next/link";
 import { TopBar } from "@/components/ui/top-bar";
 import { BottomNav } from "@/components/ui/bottom-nav";
+import { Button } from "@/components/ui/button";
+import { StatusChip } from "@/components/ui/chip";
 import { ChipGroup } from "@/components/ui/chip-group";
 import { ImgPh } from "@/components/ui/img-ph";
 import { SectionHeader } from "@/components/ui/section-header";
@@ -69,7 +71,7 @@ function BookingRowBody({ b }: { b: BookingRowData }) {
         </div>
         <div className="t-caption num">{b.when}</div>
         <div className="row" style={{ gap: 8 }}>
-          <span className={`statuschip ${b.status}`}>{b.statusLabel}</span>
+          <StatusChip status={b.status}>{b.statusLabel}</StatusChip>
           {b.dday && <span className="dday" style={b.ddayWarn ? { color: "var(--warning)" } : undefined}>{b.dday}</span>}
           {b.today && <span className="pill-today">Today</span>}
         </div>
@@ -87,6 +89,7 @@ export default function BookingsListPage() {
         left={<BrandMark size={24} />}
         title="My Bookings"
         right={
+          /* raw iconbtn Link kept: <IconButton> renders a <button>, no href support (design-system migration, 2026-07-25) */
           <Link className="iconbtn" href={routes.map} aria-label="Home">
             <Icon name="home" />
           </Link>
@@ -127,8 +130,9 @@ export default function BookingsListPage() {
           <SectionHeader title="Looking for somewhere new?" />
           <p className="t-caption">Curated head spas, salons, and clinics for foreign visitors.</p>
           <div className="row" style={{ gap: 8 }}>
-            <Link className="btn sm" href={routes.placesCategory("head_spa")}>Browse Head Spa</Link>
-            <Link className="btn sm outline" href={routes.map}>All Categories</Link>
+            <Button size="sm" href={routes.placesCategory("head_spa")}>Browse Head Spa</Button>
+            {/* tonal: paired with the primary "Browse Head Spa" CTA (design-system §3) */}
+            <Button variant="tonal" size="sm" href={routes.map}>All Categories</Button>
           </div>
         </section>
       </div>

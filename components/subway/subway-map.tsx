@@ -5,6 +5,7 @@ import { TransformWrapper, TransformComponent, useControls } from "react-zoom-pa
 import { METRO_SVG } from "./metro-svg";
 import { STATIONS, LINE_META, shopCount } from "@/lib/subway";
 import { Icon } from "@/components/icon";
+import { IconButton } from "@/components/ui/icon-button";
 import type { Place } from "@/lib/data";
 
 // The processed metro SVG has no explicit width/height (viewBox only); this
@@ -407,9 +408,7 @@ export function SubwayMap({
           role="dialog"
           aria-label={`${station.name} station`}
         >
-          <button className="iconbtn metro-toolbar-close" aria-label="Close" onClick={closeCallout}>
-            <Icon name="x" size="xs" />
-          </button>
+          <IconButton name="x" label="Close" iconSize="xs" className="metro-toolbar-close" onClick={closeCallout} />
           <div className="metro-toolbar-name">
             <span className="metro-toolbar-en">{station.name}</span>
             <span className="metro-toolbar-kr">{station.nameKr}</span>

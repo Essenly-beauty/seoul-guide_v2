@@ -2,6 +2,7 @@ import Link from "next/link";
 import { TopBar } from "@/components/ui/top-bar";
 import { BottomNav } from "@/components/ui/bottom-nav";
 import { BackButton } from "@/components/ui/back-button";
+import { Button } from "@/components/ui/button";
 import { ImgPh } from "@/components/ui/img-ph";
 import { RatingLine } from "@/components/ui/rating-line";
 import { SectionHeader } from "@/components/ui/section-header";
@@ -42,7 +43,7 @@ export default function MyReviewsPage() {
               <b className="t-label-md" style={{ fontSize: 14, display: "block" }}>Eden Head Spa</b>
               <div className="t-caption mono num">Apr 22 · HS-8B14D2</div>
             </div>
-            <Link className="btn sm outline" href={routes.reviewNew}>Write review</Link>
+            <Button variant="secondary" size="sm" href={routes.reviewNew}>Write review</Button>
           </div>
         </section>
 

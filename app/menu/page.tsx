@@ -50,6 +50,7 @@ export default function MenuPage() {
               <b style={{ fontSize: 17 }}>Sarah</b>
               <div className="caption muted">Member · Starter</div>
             </div>
+            {/* raw iconbtn Link kept: <IconButton> renders a <button>, no href support (design-system migration, 2026-07-25) */}
             <Link className="iconbtn soft" href={routes.settings} aria-label="Edit profile">
               <Icon name="user" size="sm" />
             </Link>

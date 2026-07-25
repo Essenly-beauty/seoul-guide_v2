@@ -4,6 +4,9 @@ import { Suspense, useEffect, useMemo, useRef, useState, type CSSProperties } fr
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { Icon } from "@/components/icon";
+import { Button } from "@/components/ui/button";
+import { Chip } from "@/components/ui/chip";
+import { IconButton } from "@/components/ui/icon-button";
 import { ImgPh } from "@/components/ui/img-ph";
 import { BackButton } from "@/components/ui/back-button";
 import { CategoryBadge } from "@/components/category/category-badge";
@@ -85,13 +88,13 @@ function PlaceRow({ r, query, onOpen, onFill }: {
           </div>
         </div>
       </button>
-      <button
-        className="iconbtn soft"
-        aria-label={`Fill search with ${p.name}`}
+      <IconButton
+        name="ext"
+        label={`Fill search with ${p.name}`}
+        variant="soft"
+        iconSize="xs"
         onClick={(e) => { e.stopPropagation(); onFill(); }}
-      >
-        <Icon name="ext" size="xs" />
-      </button>
+      />
     </div>
   );
 }
@@ -186,9 +189,7 @@ function SearchPageInner() {
             onChange={(e) => setRaw(e.target.value)}
           />
           {raw && (
-            <button type="button" className="iconbtn" aria-label="Clear search" onClick={clearSearch}>
-              <Icon name="x" size="xs" />
-            </button>
+            <IconButton name="x" label="Clear search" iconSize="xs" onClick={clearSearch} />
           )}
         </div>
       </div>
@@ -214,9 +215,7 @@ function SearchPageInner() {
                       <Icon name="search" size="sm" style={{ color: "var(--muted)" }} aria-hidden="true" />
                       <span style={{ flex: 1, minWidth: 0, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{term}</span>
                     </button>
-                    <button type="button" className="iconbtn" aria-label={`Remove ${term}`} onClick={() => removeRecent(term)}>
-                      <Icon name="x" size="xs" />
-                    </button>
+                    <IconButton name="x" label={`Remove ${term}`} iconSize="xs" onClick={() => removeRecent(term)} />
                   </div>
                 ))}
               </section>
@@ -245,19 +244,19 @@ function SearchPageInner() {
             <div className="label" style={{ marginTop: 8 }}>Browse by category</div>
             <div className="chipwrap">
               {MAP_CATEGORIES.filter((c) => c.key !== "all").map((c) => (
-                <button key={c.key} className="chip" onClick={() => router.push(`${routes.map}?cat=${c.key}`)}>
+                <Chip key={c.key} onClick={() => router.push(`${routes.map}?cat=${c.key}`)}>
                   <CategoryBadge type={c.key as PlaceType} size={16} />
                   {c.label}
-                </button>
+                </Chip>
               ))}
             </div>
 
             <div className="label" style={{ marginTop: 8 }}>Popular areas</div>
             <div className="chipwrap">
               {ZONES.map((z) => (
-                <button key={z.key} className="chip" onClick={() => router.push(`${routes.map}?zone=${z.key}`)}>
+                <Chip key={z.key} onClick={() => router.push(`${routes.map}?zone=${z.key}`)}>
                   {zoneShort(z.key)}
-                </button>
+                </Chip>
               ))}
             </div>
           </>
@@ -267,7 +266,7 @@ function SearchPageInner() {
           <div style={{ textAlign: "center", padding: "40px 0" }}>
             <p className="muted">No matches for &quot;{query}&quot;.</p>
             <p className="caption dim" style={{ marginTop: 6 }}>Try a shorter word &mdash; &quot;spa&quot;, a district like &quot;Hongdae&quot;, or the Korean name.</p>
-            <Link className="btn ghost" style={{ marginTop: 16 }} href={routes.map}>Browse all places</Link>
+            <Button variant="secondary" style={{ marginTop: 16 }} href={routes.map}>Browse all places</Button>
           </div>
         )}
 

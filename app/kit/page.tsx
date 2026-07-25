@@ -1,6 +1,7 @@
 import { TopBar } from "@/components/ui/top-bar";
 import { BottomNav } from "@/components/ui/bottom-nav";
 import { BackButton } from "@/components/ui/back-button";
+import { StatusChip } from "@/components/ui/chip";
 import { Collapse } from "@/components/ui/collapse";
 import { SectionHeader } from "@/components/ui/section-header";
 import { Icon } from "@/components/icon";
@@ -14,7 +15,7 @@ export default function KitStatusPage() {
         <section className="stack sm">
           <SectionHeader title="Current request" />
           <div className="row" style={{ gap: 8 }}>
-            <span className="statuschip pending">Submitted</span>
+            <StatusChip status="pending">Submitted</StatusChip>
             <span className="t-caption num mono" style={{ marginLeft: "auto" }}>Apr 4, 2026</span>
           </div>
           <div className="inforow">
@@ -37,7 +38,7 @@ export default function KitStatusPage() {
         <section className="stack sm">
           <Collapse summary={<b>Previous requests (1)</b>}>
             <div className="listrow v2">
-              <span className="statuschip cancelled">Expired</span>
+              <StatusChip status="cancelled">Expired</StatusChip>
               <span className="t-caption num mono" style={{ marginLeft: "auto" }}>Feb 12, 2026</span>
             </div>
           </Collapse>

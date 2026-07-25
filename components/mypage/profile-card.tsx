@@ -6,6 +6,7 @@
 
 import Link from "next/link";
 import { Icon } from "@/components/icon";
+import { Chip } from "@/components/ui/chip";
 import { useToast } from "@/components/ui/toast";
 import { routes } from "@/lib/routes";
 import { answerQuestion, nextQuestion, profileCompleteness, useProfile } from "@/lib/profile";
@@ -61,16 +62,15 @@ export function ProfileCard() {
           multi-select lives in onboarding step 2; more can be added there. */}
       <div className="chipwrap">
         {q.options.map((o) => (
-          <button
+          <Chip
             key={o.value}
-            className="chip"
             onClick={() => {
               answerQuestion(q.key, o.value);
               toast("Saved — thanks!");
             }}
           >
             {o.label}
-          </button>
+          </Chip>
         ))}
       </div>
     </section>

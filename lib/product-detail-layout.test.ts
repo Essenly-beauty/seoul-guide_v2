@@ -47,7 +47,10 @@ describe("product detail information-page layout", () => {
     expect(ctaSource).toContain('aria-label="Share product"');
     expect(ctaSource).toContain('kind="product"');
     expect(ctaSource).toContain("Find nearby");
-    expect(ctaSource).toContain("<Link");
+    // 2026-07-25 design-system migration: the raw <Link className="btn ghost">
+    // became <Button href> (which renders a Next Link internally) — same intent:
+    // "Find nearby" must be a real navigation link into the map.
+    expect(ctaSource).toContain("<Button");
     expect(ctaSource).toContain("routes.map");
     expect(ctaSource).toContain("Buy online");
   });

@@ -3,6 +3,7 @@
 import { useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { routes } from "@/lib/routes";
+import { Button } from "@/components/ui/button";
 import { useDialogFocus } from "@/components/ui/use-dialog-focus";
 
 export function SignoutModal() {
@@ -12,7 +13,7 @@ export function SignoutModal() {
   const router = useRouter();
   return (
     <>
-      <button type="button" className="btn danger" onClick={() => setOpen(true)}>Sign Out</button>
+      <Button variant="danger" onClick={() => setOpen(true)}>Sign Out</Button>
       {open && (
         <div className="modal" onClick={(e) => e.target === e.currentTarget && setOpen(false)}>
           <div
@@ -27,10 +28,10 @@ export function SignoutModal() {
             <h3 id="signout-title" className="h3">Sign out of Essenly?</h3>
             <p id="signout-description" className="muted small">You&apos;ll need to sign in again to access your profile and favorites.</p>
             <div className="row" style={{ gap: 10, marginTop: 16 }}>
-              <button ref={cancelRef} type="button" className="btn ghost" style={{ flex: 1 }} onClick={() => setOpen(false)}>Cancel</button>
-              <button
-                type="button"
-                className="btn danger"
+              {/* Raw button (not <Button>): the dialog focus trap needs this ref. `secondary` replaces the deprecated `ghost` alias (same styles). */}
+              <button ref={cancelRef} type="button" className="btn secondary" style={{ flex: 1 }} onClick={() => setOpen(false)}>Cancel</button>
+              <Button
+                variant="danger"
                 style={{ flex: 1 }}
                 onClick={() => {
                   setOpen(false);
@@ -38,7 +39,7 @@ export function SignoutModal() {
                 }}
               >
                 Sign Out
-              </button>
+              </Button>
             </div>
           </div>
         </div>

@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef, useState } from "react";
+import { Button } from "@/components/ui/button";
 import { useDialogFocus } from "@/components/ui/use-dialog-focus";
 import { useToast } from "@/components/ui/toast";
 
@@ -17,9 +18,9 @@ export function CancelBookingButton() {
 
   return (
     <>
-      <button type="button" className="btn danger" style={{ flex: 1 }} onClick={() => setOpen(true)}>
+      <Button variant="danger" style={{ flex: 1 }} onClick={() => setOpen(true)}>
         Cancel
-      </button>
+      </Button>
       {open && (
         <div className="modal" onClick={(event) => event.target === event.currentTarget && setOpen(false)}>
           <div
@@ -43,12 +44,13 @@ export function CancelBookingButton() {
               <p className="caption muted">Full refund to your original payment method. This action cannot be undone.</p>
             </div>
             <div className="row" style={{ gap: 10, marginTop: 16 }}>
-              <button ref={keepRef} type="button" className="btn ghost" style={{ flex: 1 }} onClick={() => setOpen(false)}>
+              {/* Raw button (not <Button>): the dialog focus trap needs this ref. `secondary` replaces the deprecated `ghost` alias (same styles). */}
+              <button ref={keepRef} type="button" className="btn secondary" style={{ flex: 1 }} onClick={() => setOpen(false)}>
                 Keep booking
               </button>
-              <button type="button" className="btn danger" style={{ flex: 1 }} onClick={confirm}>
+              <Button variant="danger" style={{ flex: 1 }} onClick={confirm}>
                 Cancel booking
-              </button>
+              </Button>
             </div>
           </div>
         </div>

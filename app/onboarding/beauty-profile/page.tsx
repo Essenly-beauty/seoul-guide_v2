@@ -1,5 +1,5 @@
-import Link from "next/link";
 import { TopBar } from "@/components/ui/top-bar";
+import { Button } from "@/components/ui/button";
 import { ChipGroup } from "@/components/ui/chip-group";
 import { routes } from "@/lib/routes";
 
@@ -47,8 +47,9 @@ export default function BeautyProfilePage() {
         <ChipGroup ariaLabel="Monthly beauty spend" single items={["Under $50", "$50–100", "$100–200", "$200+"]} />
 
         <div className="row" style={{ marginTop: 8, gap: 10 }}>
-          <Link className="btn ghost" href={routes.onboardingInterests} style={{ flex: 1 }}>Prev</Link>
-          <Link className="btn" href={routes.map} style={{ flex: 2 }}>Get Started</Link>
+          {/* tonal: sits as the pair of the primary "Get Started" CTA (design-system §3) */}
+          <Button variant="tonal" href={routes.onboardingInterests} style={{ flex: 1 }}>Prev</Button>
+          <Button href={routes.map} style={{ flex: 2 }}>Get Started</Button>
         </div>
       </div>
     </>

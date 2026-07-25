@@ -4,6 +4,7 @@ import { BottomNav } from "@/components/ui/bottom-nav";
 import { BackButton } from "@/components/ui/back-button";
 import { ActionButton } from "@/components/ui/action-button";
 import { CancelBookingButton } from "@/components/booking/cancel-booking-button";
+import { StatusChip } from "@/components/ui/chip";
 import { SectionHeader } from "@/components/ui/section-header";
 import { CategoryBadge } from "@/components/category/category-badge";
 import { Icon } from "@/components/icon";
@@ -25,7 +26,7 @@ export default function BookingDetailPage() {
         {/* Booking summary */}
         <section className="stack sm">
           <div className="row" style={{ gap: 8 }}>
-            <span className="statuschip confirmed">Confirmed</span>
+            <StatusChip status="confirmed" />
             <span className="dday">D-5</span>
             <span className="t-caption" style={{ marginLeft: "auto" }}>Head Spa</span>
           </div>
@@ -70,7 +71,7 @@ export default function BookingDetailPage() {
             <span><b>Free cancellation</b> · Until Sun, May 3 · 14:00. Full refund and free reschedule before then.</span>
           </div>
           <div className="row" style={{ gap: 8 }}>
-            <ActionButton className="btn ghost" style={{ flex: 1 }} toast="Reschedule flow (stub)">Reschedule</ActionButton>
+            <ActionButton className="btn secondary" style={{ flex: 1 }} toast="Reschedule flow (stub)">Reschedule</ActionButton>
             <CancelBookingButton />
           </div>
         </section>

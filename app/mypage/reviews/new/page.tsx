@@ -88,6 +88,7 @@ export default function WriteReviewPage() {
           </button>
         </section>
 
+        {/* raw button kept: <Button> has no aria-describedby passthrough (design-system migration, 2026-07-25) */}
         <button
           type="button"
           className="btn"

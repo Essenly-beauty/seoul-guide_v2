@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import type { ReactNode } from "react";
+import { Chip } from "@/components/ui/chip";
 
 type Panel = { key: string; label: string; content: ReactNode };
 
@@ -13,9 +14,9 @@ export function Tabs({ panels, defaultKey }: { panels: Panel[]; defaultKey?: str
         {panels.map((p) => {
           const on = p.key === active;
           return (
-            <button key={p.key} className={"chip" + (on ? " selected" : "")} aria-pressed={on} onClick={() => setActive(p.key)}>
+            <Chip key={p.key} selected={on} onClick={() => setActive(p.key)}>
               {p.label}
-            </button>
+            </Chip>
           );
         })}
       </div>

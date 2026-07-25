@@ -47,7 +47,7 @@ export default function SupportPage() {
         <section className="stack sm">
           <SectionHeader title="Something off?" />
           <p className="t-caption">Spotted a bug or wrong place info? Tell us — it goes straight to the team.</p>
-          <FeedbackLauncher className="btn ghost">Send feedback</FeedbackLauncher>
+          <FeedbackLauncher className="btn secondary">Send feedback</FeedbackLauncher>
         </section>
       </div>
       <BottomNav active="menu" />

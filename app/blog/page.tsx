@@ -4,6 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { TopBar } from "@/components/ui/top-bar";
 import { BottomNav } from "@/components/ui/bottom-nav";
+import { Chip } from "@/components/ui/chip";
 import { ImgPh } from "@/components/ui/img-ph";
 import { SectionHeader } from "@/components/ui/section-header";
 import { HScroll } from "@/components/ui/h-scroll";
@@ -46,7 +47,7 @@ export default function BlogListPage() {
             </div>
           </Link>
           <div className="chipwrap">
-            {hero.tags.slice(0, 3).map((t) => <span key={t} className="chip">{t}</span>)}
+            {hero.tags.slice(0, 3).map((t) => <Chip key={t}>{t}</Chip>)}
           </div>
         </section>
 
@@ -66,8 +67,9 @@ export default function BlogListPage() {
               </Link>
             ))}
           </div>
+          {/* raw button kept: <Button> has no aria-expanded passthrough (design-system migration, 2026-07-25) */}
           {!showAll && (
-            <button className="btn outline sm" style={{ alignSelf: "center" }} aria-expanded={false} onClick={() => setShowAll(true)}>
+            <button className="btn secondary sm" style={{ alignSelf: "center" }} aria-expanded={false} onClick={() => setShowAll(true)}>
               More ›
             </button>
           )}
@@ -79,7 +81,7 @@ export default function BlogListPage() {
         <section className="stack sm">
           <SectionHeader title="Topics" />
           <HScroll ariaLabel="Topics">
-            {topics.map((t) => <span key={t} className="chip">#{t}</span>)}
+            {topics.map((t) => <Chip key={t}>#{t}</Chip>)}
           </HScroll>
         </section>
       </div>

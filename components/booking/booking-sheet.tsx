@@ -3,6 +3,7 @@
 import { useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Icon } from "@/components/icon";
+import { Button } from "@/components/ui/button";
 import { useDialogFocus } from "@/components/ui/use-dialog-focus";
 import { routes } from "@/lib/routes";
 
@@ -181,18 +182,18 @@ export function BookingSheet({
               {step < 3 && (
                 <div className="row" style={{ gap: 10 }}>
                   {step > 0 && (
-                    <button className="btn ghost" style={{ flex: 1 }} onClick={() => setStep((s) => Math.max(0, s - 1))}>Back</button>
+                    <Button variant="secondary" style={{ flex: 1 }} onClick={() => setStep((s) => Math.max(0, s - 1))}>Back</Button>
                   )}
-                  <button className="btn" style={{ flex: 2 }} onClick={() => setStep((s) => s + 1)}>Continue →</button>
+                  <Button style={{ flex: 2 }} onClick={() => setStep((s) => s + 1)}>Continue →</Button>
                 </div>
               )}
               {step === 3 && (
-                <button className="btn" onClick={() => setStep(4)}>Confirm &amp; Pay ₩45,000</button>
+                <Button onClick={() => setStep(4)}>Confirm &amp; Pay ₩45,000</Button>
               )}
               {step === 4 && (
                 <div className="row" style={{ gap: 10 }}>
-                  <button className="btn ghost" style={{ flex: 1 }} onClick={() => close(routes.map)}>Done</button>
-                  <button className="btn" style={{ flex: 1 }} onClick={() => close(routes.bookings)}>My Bookings</button>
+                  <Button variant="secondary" style={{ flex: 1 }} onClick={() => close(routes.map)}>Done</Button>
+                  <Button style={{ flex: 1 }} onClick={() => close(routes.bookings)}>My Bookings</Button>
                 </div>
               )}
             </div>

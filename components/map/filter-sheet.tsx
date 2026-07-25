@@ -3,6 +3,8 @@
 import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { Icon } from "@/components/icon";
+import { Button } from "@/components/ui/button";
+import { Chip } from "@/components/ui/chip";
 import { useDialogFocus } from "@/components/ui/use-dialog-focus";
 import { PRICE_OPTIONS, SERVICE_FILTERS, TYPE_LABEL, type PlaceType, type PriceRange } from "@/lib/data";
 import { EMPTY_FILTERS, type MapFilters } from "@/lib/places";
@@ -45,16 +47,16 @@ export function FilterSheet({ cat, filters, onApply, onClose }: {
           <div>
             <div className="label">Rating & options</div>
             <div className="chipwrap" style={{ marginTop: 6 }}>
-              <button className={"chip" + (draft.minRating4 ? " selected" : "")} aria-pressed={draft.minRating4} onClick={() => setDraft({ ...draft, minRating4: !draft.minRating4 })}>★ 4.0+</button>
-              <button className={"chip" + (draft.englishOnly ? " selected" : "")} aria-pressed={draft.englishOnly} onClick={() => setDraft({ ...draft, englishOnly: !draft.englishOnly })}>English OK</button>
-              <button className={"chip" + (draft.bookableOnly ? " selected" : "")} aria-pressed={draft.bookableOnly} onClick={() => setDraft({ ...draft, bookableOnly: !draft.bookableOnly })}>Bookable</button>
+              <Chip selected={draft.minRating4} onClick={() => setDraft({ ...draft, minRating4: !draft.minRating4 })}>★ 4.0+</Chip>
+              <Chip selected={draft.englishOnly} onClick={() => setDraft({ ...draft, englishOnly: !draft.englishOnly })}>English OK</Chip>
+              <Chip selected={draft.bookableOnly} onClick={() => setDraft({ ...draft, bookableOnly: !draft.bookableOnly })}>Bookable</Chip>
             </div>
           </div>
           <div>
             <div className="label">Price</div>
             <div className="chipwrap" style={{ marginTop: 6 }}>
               {PRICE_OPTIONS.map((p: PriceRange) => (
-                <button key={p} className={"chip mono" + (draft.prices.includes(p) ? " selected" : "")} aria-pressed={draft.prices.includes(p)} onClick={() => setDraft({ ...draft, prices: toggle(draft.prices, p) })}>{p}</button>
+                <Chip key={p} mono selected={draft.prices.includes(p)} onClick={() => setDraft({ ...draft, prices: toggle(draft.prices, p) })}>{p}</Chip>
               ))}
             </div>
           </div>
@@ -63,14 +65,14 @@ export function FilterSheet({ cat, filters, onApply, onClose }: {
               <div className="label">{TYPE_LABEL[cat as PlaceType]} services</div>
               <div className="chipwrap" style={{ marginTop: 6 }}>
                 {services.map((s) => (
-                  <button key={s.key} className={"chip" + (draft.serviceTags.includes(s.key) ? " selected" : "")} aria-pressed={draft.serviceTags.includes(s.key)} onClick={() => setDraft({ ...draft, serviceTags: toggle(draft.serviceTags, s.key) })}>{s.label}</button>
+                  <Chip key={s.key} selected={draft.serviceTags.includes(s.key)} onClick={() => setDraft({ ...draft, serviceTags: toggle(draft.serviceTags, s.key) })}>{s.label}</Chip>
                 ))}
               </div>
             </div>
           )}
           <div className="row" style={{ gap: 8, marginTop: 4 }}>
-            <button className="btn ghost" style={{ flex: 1 }} onClick={() => setDraft(EMPTY_FILTERS)}>Reset</button>
-            <button className="btn" style={{ flex: 2 }} onClick={() => { onApply(draft); onClose(); }}>Apply filters</button>
+            <Button variant="secondary" style={{ flex: 1 }} onClick={() => setDraft(EMPTY_FILTERS)}>Reset</Button>
+            <Button style={{ flex: 2 }} onClick={() => { onApply(draft); onClose(); }}>Apply filters</Button>
           </div>
         </div>
       </div>

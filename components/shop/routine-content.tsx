@@ -60,7 +60,8 @@ export function RoutineContent() {
         </div>
       </div>
 
-      <ActionButton className="btn outline" toast="Routine added to favorites"><Icon name="heart-o" size="sm" /> Add to Favorites</ActionButton>
+      {/* 2026-07-25: `outline` → `secondary` (identical styles; ghost/outline classes are deprecated aliases) */}
+      <ActionButton className="btn secondary" toast="Routine added to favorites"><Icon name="heart-o" size="sm" /> Add to Favorites</ActionButton>
 
       {stepCount >= 5 && (
         <KitCta href={routes.kitSurvey} title="Complete your routine with a free hair kit" subtitle="Essenly hair pack + essence + routine card." />

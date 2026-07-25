@@ -5,6 +5,8 @@ import dynamic from "next/dynamic";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { Icon } from "@/components/icon";
+import { Chip } from "@/components/ui/chip";
+import { IconButton } from "@/components/ui/icon-button";
 import { routes } from "@/lib/routes";
 import { MAP_CATEGORIES, PLACES, SERVICE_FILTERS, getPlace, type PlaceType } from "@/lib/data";
 import { CategoryChips, type MapCat } from "@/components/category/category-chips";
@@ -267,8 +269,10 @@ export function MapScreen() {
           </div>
         )}
         {mode === "map" && moved && (
-          <button
-            className="chip selected"
+          // className="selected" (not the selected prop) — this is a one-shot
+          // action pill, not a toggle, so it must not announce aria-pressed.
+          <Chip
+            className="selected"
             style={{ justifySelf: "center" }}
             onClick={() => {
               setArea(boundsGetter.current ? boundsGetter.current() : null);
@@ -277,12 +281,12 @@ export function MapScreen() {
             }}
           >
             Search this area
-          </button>
+          </Chip>
         )}
         {mode === "map" && area && !moved && (
-          <button className="chip" style={{ justifySelf: "center" }} onClick={() => setArea(null)}>
+          <Chip style={{ justifySelf: "center" }} onClick={() => setArea(null)}>
             Clear area · show all
-          </button>
+          </Chip>
         )}
       </div>
 
@@ -385,9 +389,7 @@ export function MapScreen() {
       {mode === "map" && status === "fallback" && !bannerDismissed && (
         <div className="map-banner" role="status">
           <span className="small">Location is off — showing <b>Gangnam Station</b> as your starting point.</span>
-          <button className="iconbtn" style={{ width: 32, height: 32 }} aria-label="Dismiss" onClick={() => setBannerDismissed(true)}>
-            <Icon name="x" size="xs" />
-          </button>
+          <IconButton name="x" label="Dismiss" size={32} iconSize="xs" onClick={() => setBannerDismissed(true)} />
         </div>
       )}
 

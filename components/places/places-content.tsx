@@ -2,6 +2,7 @@
 
 import { useMemo, useState } from "react";
 import Link from "next/link";
+import { Chip } from "@/components/ui/chip";
 import { FavoriteButton } from "@/components/ui/favorite-button";
 import { ImgPh } from "@/components/ui/img-ph";
 import { RatingLine } from "@/components/ui/rating-line";
@@ -51,9 +52,9 @@ export function PlacesContent({ category, places }: { category: string; places: 
         <>
           <div className="label">Zone</div>
           <div className="chiprow" role="tablist">
-            <button className={"chip" + (zone === "all" ? " active selected" : "")} aria-pressed={zone === "all"} onClick={() => { setZone("all"); setDistrict("all"); }}>All</button>
+            <Chip selected={zone === "all"} className={zone === "all" ? "active" : undefined} onClick={() => { setZone("all"); setDistrict("all"); }}>All</Chip>
             {zoneChips.map((z) => (
-              <button key={z} className={"chip" + (zone === z ? " selected" : "")} aria-pressed={zone === z} onClick={() => setZone(z)}>{zoneShort(z)}</button>
+              <Chip key={z} selected={zone === z} onClick={() => setZone(z)}>{zoneShort(z)}</Chip>
             ))}
           </div>
         </>
@@ -61,15 +62,15 @@ export function PlacesContent({ category, places }: { category: string; places: 
         <>
           <div className="label">District</div>
           <div className="chiprow" role="tablist">
-            <button className={"chip" + (district === "all" ? " selected" : "")} aria-pressed={district === "all"} onClick={() => setDistrict("all")}>All</button>
+            <Chip selected={district === "all"} onClick={() => setDistrict("all")}>All</Chip>
             {districtOptions.map((d) => (
-              <button key={d} className={"chip" + (district === d ? " selected" : "")} aria-pressed={district === d} onClick={() => setDistrict(d)}>{d}</button>
+              <Chip key={d} selected={district === d} onClick={() => setDistrict(d)}>{d}</Chip>
             ))}
           </div>
           <div className="label">Detail category</div>
           <div className="chiprow">
             {DETAIL_CATEGORIES.map((dc) => (
-              <button key={dc.key} className={"chip soft" + (detail === dc.key ? " selected" : "")} aria-pressed={detail === dc.key} onClick={() => setDetail(dc.key)}>{dc.label}</button>
+              <Chip key={dc.key} soft selected={detail === dc.key} onClick={() => setDetail(dc.key)}>{dc.label}</Chip>
             ))}
           </div>
         </>
@@ -77,9 +78,9 @@ export function PlacesContent({ category, places }: { category: string; places: 
 
       <div className="label">Price</div>
       <div className="chipwrap">
-        <button className={"chip soft" + (price === "all" ? " selected" : "")} aria-pressed={price === "all"} onClick={() => setPrice("all")}>All</button>
+        <Chip soft selected={price === "all"} onClick={() => setPrice("all")}>All</Chip>
         {PRICE_OPTIONS.map((pr) => (
-          <button key={pr} className={"chip soft mono" + (price === pr ? " selected" : "")} aria-pressed={price === pr} onClick={() => setPrice(pr)}>{pr}</button>
+          <Chip key={pr} soft mono selected={price === pr} onClick={() => setPrice(pr)}>{pr}</Chip>
         ))}
       </div>
 

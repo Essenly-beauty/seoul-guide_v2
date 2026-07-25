@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useRef } from "react";
-import { Icon } from "@/components/icon";
+import { IconButton } from "@/components/ui/icon-button";
 import {
   LINE_META,
   STATIONS,
@@ -57,7 +57,7 @@ export function RouteStrip({ route, activeIndex, embedded = false, onStation, on
         </div>
       )}
       <div className="routestrip-controls">
-        <button className="iconbtn" aria-label="Scroll left" onClick={() => scrollBy(-160)}><Icon name="back" size="xs" /></button>
+        <IconButton name="back" label="Scroll left" iconSize="xs" onClick={() => scrollBy(-160)} />
         <div className="routescroll" ref={scroller}>
           {route.segments.map((seg, si) => {
             const lineColor = LINE_META[seg.line].color;
@@ -105,8 +105,8 @@ export function RouteStrip({ route, activeIndex, embedded = false, onStation, on
             );
           })}
         </div>
-        <button className="iconbtn" aria-label="Scroll right" onClick={() => scrollBy(160)}><Icon name="chev" size="xs" /></button>
-        {!embedded && <button className="iconbtn" aria-label="Clear route" onClick={onClear}><Icon name="x" size="xs" /></button>}
+        <IconButton name="chev" label="Scroll right" iconSize="xs" onClick={() => scrollBy(160)} />
+        {!embedded && <IconButton name="x" label="Clear route" iconSize="xs" onClick={onClear} />}
       </div>
     </div>
   );

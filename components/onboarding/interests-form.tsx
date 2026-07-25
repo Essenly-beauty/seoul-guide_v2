@@ -7,6 +7,8 @@
 import Link from "next/link";
 import { CategoryBadge } from "@/components/category/category-badge";
 import { Icon } from "@/components/icon";
+import { Button } from "@/components/ui/button";
+import { Chip } from "@/components/ui/chip";
 import { routes } from "@/lib/routes";
 import { INTEREST_OPTIONS, answerQuestion, questionFor, useProfile } from "@/lib/profile";
 
@@ -58,9 +60,9 @@ export function InterestsForm() {
           {age.options.map((o) => {
             const on = profile.ageBand === o.value;
             return (
-              <button key={o.value} className={"chip" + (on ? " selected" : "")} aria-pressed={on} onClick={() => answerQuestion("ageBand", o.value)}>
+              <Chip key={o.value} selected={on} onClick={() => answerQuestion("ageBand", o.value)}>
                 {o.label}
-              </button>
+              </Chip>
             );
           })}
         </div>
@@ -76,9 +78,9 @@ export function InterestsForm() {
           {gender.options.map((o) => {
             const on = profile.gender === o.value;
             return (
-              <button key={o.value} className={"chip" + (on ? " selected" : "")} aria-pressed={on} onClick={() => answerQuestion("gender", o.value)}>
+              <Chip key={o.value} selected={on} onClick={() => answerQuestion("gender", o.value)}>
                 {o.label}
-              </button>
+              </Chip>
             );
           })}
         </div>
@@ -91,9 +93,9 @@ export function InterestsForm() {
         </div>
       )}
 
-      <Link className="btn" href={routes.onboardingProfile} style={{ marginTop: 4 }}>
+      <Button href={routes.onboardingProfile} style={{ marginTop: 4 }}>
         Next <Icon name="chev" size="sm" />
-      </Link>
+      </Button>
       <Link className="caption muted" href={routes.onboardingProfile} style={{ textAlign: "center", textDecoration: "underline" }}>
         Skip for now
       </Link>

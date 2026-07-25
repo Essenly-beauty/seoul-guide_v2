@@ -4,6 +4,8 @@ import { Fragment, useEffect, useId, useMemo, useRef, useState } from "react";
 import Link from "next/link";
 import { CategoryBadge } from "@/components/category/category-badge";
 import { Icon } from "@/components/icon";
+import { Button } from "@/components/ui/button";
+import { IconButton } from "@/components/ui/icon-button";
 import { RatingLine } from "@/components/ui/rating-line";
 import { PRODUCTS, TYPE_LABEL, type Place } from "@/lib/data";
 import { formatDistance, googleDirectionsUrl, haversineKm, naverMapUrl } from "@/lib/geo";
@@ -731,9 +733,7 @@ export function SubwayRouteController({
             {route && !editing && (
               <button type="button" className="subway-text-action" onClick={openEditor}>Edit</button>
             )}
-            <button type="button" className="iconbtn" aria-label="Close subway planner" title="Close subway planner" onClick={onClose}>
-              <Icon name="x" size="xs" />
-            </button>
+            <IconButton name="x" label="Close subway planner" iconSize="xs" onClick={onClose} />
           </div>
         </header>
       )}
@@ -1114,22 +1114,22 @@ export function SubwayRouteController({
               <div className="subway-empty-state" role="status">
                 <b>Daiso location data is not connected yet</b>
                 <p>Search around {activeStation.name} Station in Naver Map.</p>
-                <a
-                  className="btn sm auto"
+                <Button
+                  size="sm"
+                  className="auto"
                   href={naverMapUrl(`다이소 ${activeStation.nameKr}역`)}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  external
                 >
                   Search Naver Map
-                </a>
+                </Button>
               </div>
             ) : (
               <div className="subway-empty-state" role="status">
                 <b>No {category === "all" ? "places" : category === "beauty" ? "beauty places" : "Olive Young stores"} in our current data</b>
                 <p>Nothing is listed within {radiusLabel(radiusKm)} of {activeStation.name} Station.</p>
                 <div className="row" style={{ gap: 8, justifyContent: "center" }}>
-                  {radiusKm < 2 && <button type="button" className="btn sm ghost" onClick={() => onRadius(2)}>Expand to 2 km</button>}
-                  {category !== "all" && <button type="button" className="btn sm ghost" onClick={() => onCategory("all")}>Show all</button>}
+                  {radiusKm < 2 && <Button variant="secondary" size="sm" onClick={() => onRadius(2)}>Expand to 2 km</Button>}
+                  {category !== "all" && <Button variant="secondary" size="sm" onClick={() => onCategory("all")}>Show all</Button>}
                 </div>
               </div>
             )}
@@ -1159,7 +1159,7 @@ export function SubwayRouteController({
       {(editing || !route) && (
         <div className="subway-search-actions subway-search-footer">
           {!canApplyRoute && <p id="subway-route-help" className="subway-action-help">{routeHelp}</p>}
-          {route && <button type="button" className="btn ghost" onClick={cancelEditor}>Cancel</button>}
+          {route && <Button variant="secondary" onClick={cancelEditor}>Cancel</Button>}
           <button
             ref={routeButtonRef}
             type="button"

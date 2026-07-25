@@ -1,3 +1,4 @@
+import { Button } from "@/components/ui/button";
 import { googleDirectionsUrl, kakaoRouteUrl, naverRouteUrl, type LatLng } from "@/lib/geo";
 import type { Place } from "@/lib/data";
 
@@ -17,16 +18,15 @@ export function MapLinkButtons({ place, origin }: {
   return (
     <>
       {links.map((l) => (
-        <a
+        <Button
           key={l.label}
-          className="btn sm"
+          size="sm"
           style={{ background: l.bg, color: l.fg, border: "none" }}
           href={l.href}
-          target="_blank"
-          rel="noopener noreferrer"
+          external
         >
           {l.label}
-        </a>
+        </Button>
       ))}
     </>
   );

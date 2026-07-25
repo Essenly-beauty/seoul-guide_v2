@@ -3,6 +3,9 @@
 import { useMemo, useRef, useState } from "react";
 import Link from "next/link";
 import { BottomNav } from "@/components/ui/bottom-nav";
+import { Button } from "@/components/ui/button";
+import { Chip } from "@/components/ui/chip";
+import { IconButton } from "@/components/ui/icon-button";
 import { HScroll } from "@/components/ui/h-scroll";
 import { ImgPh } from "@/components/ui/img-ph";
 import { SectionHeader } from "@/components/ui/section-header";
@@ -55,9 +58,9 @@ function RankSection({ title, products }: { title: string; products: Product[] }
         </div>
       )}
       {products.length > shown.length && (
-        <button className="btn sm outline" style={{ alignSelf: "center" }} onClick={() => setExpanded(true)}>
+        <Button variant="secondary" size="sm" style={{ alignSelf: "center" }} onClick={() => setExpanded(true)}>
           More ›
-        </button>
+        </Button>
       )}
     </section>
   );
@@ -118,7 +121,7 @@ function BrandsPanel() {
           placeholder="Search brands" aria-label="Search brands"
           value={q} onChange={(e) => setQ(e.target.value)}
         />
-        {q && <button type="button" className="iconbtn soft" aria-label="Clear brand search" onClick={clearSearch}><Icon name="x" size="xs" /></button>}
+        {q && <IconButton name="x" label="Clear brand search" variant="soft" iconSize="xs" onClick={clearSearch} />}
       </div>
       <SectionHeader title="All brands" count={brands.length} />
       {brands.length === 0 ? (
@@ -177,6 +180,8 @@ export default function RankingPage() {
       </div>
 
       <div className="app-scroll pad stack pagev2">
+        {/* raw chip buttons kept: <Chip> has no role/tabIndex/onKeyDown passthrough for the
+            tablist keyboard contract (lib/navigation-a11y.test.ts) — design-system migration, 2026-07-25 */}
         <div className="chiprow" role="tablist" aria-label="Ranking type">
           {TABS.map((t) => (
             <button
@@ -207,9 +212,9 @@ export default function RankingPage() {
             <>
               <div className="chiprow" role="group" aria-label="Product category">
                 {SHOP_CATEGORIES.map((c) => (
-                  <button key={c.key} className={"chip soft" + (category === c.key ? " selected" : "")} aria-pressed={category === c.key} onClick={() => setCategory(c.key)}>
+                  <Chip key={c.key} soft selected={category === c.key} onClick={() => setCategory(c.key)}>
                     {c.label}
-                  </button>
+                  </Chip>
                 ))}
               </div>
               <hr className="sec-divider" />

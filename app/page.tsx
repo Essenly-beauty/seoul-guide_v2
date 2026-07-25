@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { BrandMark } from "@/components/icon";
+import { Button } from "@/components/ui/button";
 import { routes } from "@/lib/routes";
 
 const SOCIALS: { key: string; label: string; style?: React.CSSProperties; mark: React.ReactNode }[] = [
@@ -36,9 +37,9 @@ export default function LoginPage() {
         </p>
         <div className="stack" style={{ marginTop: 28 }}>
           {SOCIALS.map((s) => (
-            <Link key={s.key} className="btn ghost" style={s.style} href={routes.map}>
+            <Button key={s.key} variant="secondary" style={s.style} href={routes.map}>
               {s.mark} {s.label}
-            </Link>
+            </Button>
           ))}
           <Link className="login-guest caption muted" style={{ marginTop: 6, textDecoration: "underline" }} href={routes.map}>
             Continue as guest

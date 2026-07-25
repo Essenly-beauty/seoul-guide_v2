@@ -1,6 +1,7 @@
 "use client";
 
 import { CategoryBadge } from "./category-badge";
+import { Chip } from "@/components/ui/chip";
 import { MAP_CATEGORIES, type PlaceType } from "@/lib/data";
 
 export type MapCat = "all" | PlaceType;
@@ -16,15 +17,14 @@ export function CategoryChips({ value, onChange, className, style }: {
   return (
     <div className={["chiprow", "faded", className].filter(Boolean).join(" ")} role="group" aria-label="Filter by category" style={style}>
       {MAP_CATEGORIES.map((c) => (
-        <button
+        <Chip
           key={c.key}
-          className={"chip" + (value === c.key ? " selected" : "")}
-          aria-pressed={value === c.key}
+          selected={value === c.key}
           onClick={() => onChange(c.key)}
         >
           {c.key !== "all" && <CategoryBadge type={c.key as PlaceType} size={16} />}
           {c.label}
-        </button>
+        </Chip>
       ))}
     </div>
   );

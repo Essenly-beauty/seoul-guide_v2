@@ -1,7 +1,7 @@
 "use client";
 
-import Link from "next/link";
 import { ProductShareButton } from "@/components/product/product-share-button";
+import { Button } from "@/components/ui/button";
 import { FavoriteButton } from "@/components/ui/favorite-button";
 import { Icon } from "@/components/icon";
 import type { Product } from "@/lib/data";
@@ -20,23 +20,23 @@ export function ProductCtaBar({ product }: { product: Product }) {
         product={product}
       />
       <FavoriteButton kind="product" id={product.id} variant="soft" />
-      <Link
-        className="btn ghost product-cta-find"
+      <Button
+        variant="secondary"
+        icon="pin"
+        className="product-cta-find"
         href={`${routes.map}?cat=${storeCategory}`}
       >
-        <Icon name="pin" size="xs" />
         Find nearby
-      </Link>
+      </Button>
       {verifiedOnlineUrl ? (
-        <a
-          className="btn product-cta-buy"
+        <Button
+          className="product-cta-buy"
           href={verifiedOnlineUrl}
-          target="_blank"
-          rel="noopener noreferrer"
+          external
         >
           Buy online
           <Icon name="ext" size="xs" />
-        </a>
+        </Button>
       ) : (
         <span
           className="btn product-cta-buy product-cta-unavailable"

@@ -6,6 +6,8 @@
 
 import Link from "next/link";
 import { Icon } from "@/components/icon";
+import { Button } from "@/components/ui/button";
+import { Chip } from "@/components/ui/chip";
 import { routes } from "@/lib/routes";
 import { answerQuestion, questionFor, useProfile } from "@/lib/profile";
 
@@ -32,9 +34,9 @@ export function BasicsForm() {
           {country.options.map((o) => {
             const on = profile.countryCode === o.value;
             return (
-              <button key={o.value} className={"chip" + (on ? " selected" : "")} aria-pressed={on} onClick={() => answerQuestion("countryCode", o.value)}>
+              <Chip key={o.value} selected={on} onClick={() => answerQuestion("countryCode", o.value)}>
                 {o.label}
-              </button>
+              </Chip>
             );
           })}
         </div>
@@ -47,17 +49,17 @@ export function BasicsForm() {
           {stay.options.map((o) => {
             const on = profile.stayType === o.value;
             return (
-              <button key={o.value} className={"chip" + (on ? " selected" : "")} aria-pressed={on} onClick={() => answerQuestion("stayType", o.value)}>
+              <Chip key={o.value} selected={on} onClick={() => answerQuestion("stayType", o.value)}>
                 {o.label}
-              </button>
+              </Chip>
             );
           })}
         </div>
       </div>
 
-      <Link className="btn" href={routes.onboardingInterests} style={{ marginTop: 4 }}>
+      <Button href={routes.onboardingInterests} style={{ marginTop: 4 }}>
         Next <Icon name="chev" size="sm" />
-      </Link>
+      </Button>
       <Link className="caption muted" href={routes.onboardingInterests} style={{ textAlign: "center", textDecoration: "underline" }}>
         Skip for now
       </Link>

@@ -5,6 +5,7 @@ import { createPortal } from "react-dom";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { Icon, type IconName } from "@/components/icon";
+import { IconButton } from "@/components/ui/icon-button";
 import { routes } from "@/lib/routes";
 
 type Row = { label: string; href: string; icon: IconName; danger?: boolean };
@@ -56,9 +57,7 @@ export function HamburgerMenu() {
           <div className="drawer" role="dialog" aria-label="Menu">
             <div className="dhead">
               <span className="label">Menu</span>
-              <button className="iconbtn" aria-label="Close" onClick={() => setOpen(false)}>
-                <Icon name="x" size="sm" />
-              </button>
+              <IconButton name="x" label="Close" onClick={() => setOpen(false)} />
             </div>
 
             <div className="dsection label">Primary</div>

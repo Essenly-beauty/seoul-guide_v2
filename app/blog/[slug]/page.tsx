@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
-import Link from "next/link";
 import { BottomNav } from "@/components/ui/bottom-nav";
+import { Button } from "@/components/ui/button";
 import { BackButtonBordered } from "@/components/ui/back-button";
 import { ActionButton } from "@/components/ui/action-button";
 import { Icon } from "@/components/icon";
@@ -36,14 +36,14 @@ export default function JournalDetailPage({ params }: { params: { slug: string }
           <h2 className="h2">3. Moisturize + SPF</h2>
           <p className="muted">The seal. Even if you skip every other step, don&apos;t skip this. Korean SPFs are lighter and reapply-friendly.</p>
 
-          <ActionButton className="btn ghost" share={`${a.title} | essenly.com`}>
+          <ActionButton className="btn secondary" share={`${a.title} | essenly.com`}>
             <Icon name="share" size="sm" /> Share this article
           </ActionButton>
 
           <div className="card accent stack sm">
             <b className="serif h3">Try Essenly</b>
             <p className="small muted">Free K-beauty guide + hair kit for your Seoul trip.</p>
-            <Link className="btn" href={routes.splash}>Sign Up →</Link>
+            <Button href={routes.splash}>Sign Up →</Button>
           </div>
         </div>
       </div>

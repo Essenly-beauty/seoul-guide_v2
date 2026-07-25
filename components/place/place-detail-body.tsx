@@ -5,6 +5,8 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { ActionButton } from "@/components/ui/action-button";
 import { AnchorTabs } from "@/components/ui/anchor-tabs";
+import { Button } from "@/components/ui/button";
+import { Chip } from "@/components/ui/chip";
 import { Collapse } from "@/components/ui/collapse";
 import { HScroll } from "@/components/ui/h-scroll";
 import { ImgPh } from "@/components/ui/img-ph";
@@ -332,7 +334,7 @@ function PhotosSection() {
           <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 6 }}>
             {Array.from({ length: 12 }, (_, i) => <ImgPh key={i} style={{ height: 96 }} />)}
           </div>
-          <button className="btn ghost" onClick={() => setExpanded(false)}>Show less</button>
+          <Button variant="secondary" onClick={() => setExpanded(false)}>Show less</Button>
         </>
       )}
     </section>
@@ -420,14 +422,13 @@ function ReviewsSection({ place }: { place: Place }) {
       </div>
       <div className="chipwrap">
         {REVIEW_KEYWORDS.map((k) => (
-          <button
+          <Chip
             key={k.label}
-            className={"chip" + (keyword === k.label ? " selected" : "")}
-            aria-pressed={keyword === k.label}
+            selected={keyword === k.label}
             onClick={() => setKeyword((cur) => (cur === k.label ? null : k.label))}
           >
             {k.label} <span className={keyword === k.label ? undefined : "muted"}>{k.n}</span>
-          </button>
+          </Chip>
         ))}
       </div>
       {/* Sort row + review list */}
@@ -483,7 +484,7 @@ function ReviewsSection({ place }: { place: Place }) {
         })}
       </div>
       {remaining > 0 && (
-        <button className="btn ghost" onClick={() => setShowAll(true)}>More reviews ({remaining})</button>
+        <Button variant="secondary" onClick={() => setShowAll(true)}>More reviews ({remaining})</Button>
       )}
     </section>
   );
@@ -541,10 +542,10 @@ function InfoSection({ place }: { place: Place }) {
         <span className="caption muted chev">{place.englishOk ? "Staff can assist in English" : "Translation app recommended"}</span>
       </div>
       <div className="chipwrap">
-        <span className="chip">Card OK</span>
-        <span className="chip">Locker</span>
-        <span className="chip">Towel rental</span>
-        {place.englishOk && <span className="chip">English menu</span>}
+        <Chip>Card OK</Chip>
+        <Chip>Locker</Chip>
+        <Chip>Towel rental</Chip>
+        {place.englishOk && <Chip>English menu</Chip>}
       </div>
       <div className="inforow">
         <span className="muted" style={{ width: 20, textAlign: "center", flex: "none" }} aria-hidden="true">₩</span>

@@ -8,6 +8,7 @@ import { ProductShareButton } from "@/components/product/product-share-button";
 import { ActionButton } from "@/components/ui/action-button";
 import { AnchorTabs } from "@/components/ui/anchor-tabs";
 import { BackButton } from "@/components/ui/back-button";
+import { Chip } from "@/components/ui/chip";
 import { FavoriteButton } from "@/components/ui/favorite-button";
 import { ImgPh } from "@/components/ui/img-ph";
 import { SectionHeader } from "@/components/ui/section-header";
@@ -159,7 +160,7 @@ function DetailsSection({ product }: { product: Product }) {
           <div className="label">Best for</div>
           <div className="chipwrap" style={{ marginTop: 6 }}>
             {product.skinTypes.map((skinType) => (
-              <span key={skinType} className="chip">{skinType}</span>
+              <Chip key={skinType}>{skinType}</Chip>
             ))}
           </div>
         </div>
@@ -169,7 +170,7 @@ function DetailsSection({ product }: { product: Product }) {
           <div className="label">Targets</div>
           <div className="chipwrap" style={{ marginTop: 6 }}>
             {product.concerns.map((concern) => (
-              <span key={concern} className="chip">{concern}</span>
+              <Chip key={concern}>{concern}</Chip>
             ))}
           </div>
         </div>
@@ -191,7 +192,7 @@ function BuySection({ product }: { product: Product }) {
           <div className="label">Areas to check</div>
           <div className="chipwrap" style={{ marginTop: 6 }}>
             {product.zoneAvailability.map((zone) => (
-              <span key={zone} className="chip">{zoneShort(zone)}</span>
+              <Chip key={zone}>{zoneShort(zone)}</Chip>
             ))}
           </div>
           <p className="caption muted product-detail-availability-note">
