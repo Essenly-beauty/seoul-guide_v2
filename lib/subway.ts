@@ -370,6 +370,27 @@ export function travelMinutes(route: SubwayRoute): number {
 }
 
 /** Shops within walking radius (~7 min) of ANY station on the route. */
+export type StationExit = { no: number; lat: number; lng: number };
+
+/** Kakao-style exit markers need per-exit coordinates, but no public dataset
+    is wired yet (see codex report §1) — synthesize a deterministic ring around
+    the station so the map UI is real; swap for the national exit dataset later. */
+export function stationExits(stationId: string): StationExit[] {
+  const st = STATIONS[stationId];
+  if (!st) return [];
+  let h = 0;
+  for (const ch of stationId) h = (h * 31 + ch.charCodeAt(0)) >>> 0;
+  const count = 3 + (h % 6); // 3–8 exits
+  const radius = 55 + (h % 30); // 55–85 m from the station center
+  const start = ((h % 360) * Math.PI) / 180;
+  return Array.from({ length: count }, (_, i) => {
+    const angle = start + (i * 2 * Math.PI) / count;
+    const dLat = (radius * Math.cos(angle)) / 111320;
+    const dLng = (radius * Math.sin(angle)) / (111320 * Math.cos((st.lat * Math.PI) / 180));
+    return { no: i + 1, lat: st.lat + dLat, lng: st.lng + dLng };
+  });
+}
+
 export function placesNearStations(places: Place[], stationIds: string[], radiusKm = 0.55): Place[] {
   const pts = stationIds.map((id) => STATIONS[id]).filter(Boolean);
   return places.filter((p) => pts.some((s) => haversineKm({ lat: p.lat, lng: p.lng }, { lat: s.lat, lng: s.lng }) <= radiusKm));

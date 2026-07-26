@@ -411,11 +411,11 @@
   }
   .station-result-options > button {
     width: 100%;
-    min-height: 48px;
+    min-height: 56px;
     display: flex;
     align-items: center;
-    gap: 9px;
-    padding: 7px 10px;
+    gap: 6px;
+    padding: 8px 10px;
     text-align: left;
   }
   .station-result-options > button + button { border-top: 1px solid var(--border); }
@@ -423,20 +423,28 @@
   .station-result-options > button[aria-selected="true"] { background: var(--accent-soft); }
   .station-linebadges { display: flex; gap: 3px; flex: none; }
   .station-linebadge {
-    min-width: 24px;
-    height: 24px;
+    min-width: 20px;
+    height: 20px;
     display: grid;
     place-items: center;
-    padding: 0 4px;
-    border-radius: 50%;
+    padding: 0 3px;
+    border-radius: var(--r-full);
     color: #fff;
-    font-size: 9px;
+    font-size: 8px;
     font-weight: 800;
+    line-height: 1;
   }
-  .station-result-name { min-width: 0; flex: 1; display: grid; line-height: 1.25; }
-  .station-result-name b { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 13px; }
-  .station-result-name > span { color: var(--muted); font-size: 11px; }
-  .station-result-context { flex: none; color: var(--accent); font-size: 10px; font-weight: 700; }
+  .station-result-name { min-width: 0; flex: 1; display: grid; gap: 1px; line-height: 1.2; }
+  .station-result-name b { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 14px; }
+  .station-result-name > span { color: var(--muted); font-size: 12px; }
+  .station-result-context {
+    width: 32px;
+    height: 32px;
+    flex: none;
+    display: grid;
+    place-items: center;
+    color: var(--dim);
+  }
   .station-no-results { padding: 18px 12px; color: var(--muted); font-size: 13px; text-align: center; }
   .station-search-error {
     margin-top: 10px;
@@ -4130,3 +4138,51 @@
 /* 11–17px badge glyphs (map pins, category squares): 2px @ 24-unit viewBox
    renders ~0.9px — bump so white strokes stay visible on colored fills. */
 .catbadge .icn, .pin-badge .icn { stroke-width: 2.4; }
+
+/* Kakao-style transit layer — station circles + name halo, numbered exits */
+@layer components {
+  .station-marker {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    display: flex;
+    align-items: center;
+    gap: 3px;
+    pointer-events: none;
+    white-space: nowrap;
+  }
+  .station-badge {
+    width: 18px;
+    height: 18px;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    border: 2px solid #fff;
+    color: #fff;
+    font-size: 8.5px;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    box-shadow: var(--shadow-sm);
+    flex: none;
+  }
+  .station-badge + .station-badge { margin-left: -6px; }
+  .station-marker-name {
+    font-size: 11.5px;
+    font-weight: 650;
+    color: #2b3442;
+    text-shadow: 0 1px 0 #fff, 0 -1px 0 #fff, 1px 0 0 #fff, -1px 0 0 #fff, 0 0 3px #fff;
+  }
+  .exit-marker {
+    width: 16px;
+    height: 16px;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    background: #475569;
+    border: 1.5px solid #fff;
+    color: #fff;
+    font-size: 8.5px;
+    font-weight: 800;
+    box-shadow: var(--shadow-sm);
+    pointer-events: none;
+  }
+}

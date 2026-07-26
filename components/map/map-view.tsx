@@ -11,6 +11,7 @@ import { TYPE_COLOR, TYPE_ICON, TYPE_LABEL, zoneShort, type Place } from "@/lib/
 import { formatDistance, googleDirectionsUrl, haversineKm, walkMinutes, type LatLng } from "@/lib/geo";
 import { visibleMapAnchor } from "@/lib/map-camera";
 import { routes } from "@/lib/routes";
+import { LINE_META, STATIONS, stationExits } from "@/lib/subway";
 
 export type MapViewProps = {
   center: LatLng;
@@ -44,6 +45,10 @@ const INITIAL_ZOOM = 15; // neighborhood scale — dots/badges stay tappable on 
 const BADGE_ALL_ZOOM = 16;
 const BADGE_TOP_ZOOM = 14;
 const CLUSTER_MAX_ZOOM = 13;
+/** Kakao-style transit layer: station circles from z14, name labels from z16, exits from z17. */
+const STATION_ZOOM = 14;
+const STATION_LABEL_ZOOM = 16;
+const EXIT_ZOOM = 17;
 const CLUSTER_MIN = 5;
 /** Grid cell edge in degrees — ~0.02° at z13, halving with each zoom-in step. */
 const cellSize = (zoom: number) => 0.02 * Math.pow(2, CLUSTER_MAX_ZOOM - zoom);
@@ -108,6 +113,37 @@ function clusterIcon(count: number) {
   return icon;
 }
 
+const stationIconCache = new Map<string, L.DivIcon>();
+function stationIcon(id: string, labelled: boolean) {
+  const key = `${id}:${labelled}`;
+  const hit = stationIconCache.get(key);
+  if (hit) return hit;
+  const st = STATIONS[id];
+  const badges = st.lines.slice(0, 2).map((line) =>
+    `<span class="station-badge" style="background:${LINE_META[line].color}">${LINE_META[line].shortLabel}</span>`,
+  ).join("");
+  const icon = L.divIcon({
+    className: "map-anchor",
+    html: `<div class="station-marker">${badges}${labelled ? `<span class="station-marker-name">${st.name}</span>` : ""}</div>`,
+    iconSize: [0, 0], // .station-marker centers itself on the anchor
+  });
+  stationIconCache.set(key, icon);
+  return icon;
+}
+
+const exitIconCache = new Map<number, L.DivIcon>();
+function exitIcon(no: number) {
+  const hit = exitIconCache.get(no);
+  if (hit) return hit;
+  const icon = L.divIcon({
+    className: "map-anchor",
+    html: `<div class="exit-marker">${no}</div>`,
+    iconSize: [16, 16],
+  });
+  exitIconCache.set(no, icon);
+  return icon;
+}
+
 /** Red current-location marker (§3.2 — red is a confirmed decision). */
 const meIcon = L.divIcon({
   className: "map-anchor",
@@ -152,7 +188,8 @@ function MapWiring({ flyTarget, bottomInsetRatio = 0, bottomInsetPx, focusZoom, 
   });
   useEffect(() => {
     onMap(map);
-  }, [map, onMap]);
+    onView(); // initial bounds are ready — let bounds-dependent layers compute
+  }, [map, onMap, onView]);
   useEffect(() => {
     getBounds?.(() => {
       const b = map.getBounds();
@@ -384,6 +421,24 @@ export default function MapView({ center, places, selectedId, onSelect, userLoc,
     return out;
   }, [singles, selectedId, zoom, viewVersion]);
 
+  // Kakao-style transit layer: stations (line-colored circles + name) and
+  // synthesized exit numbers, gated by zoom and limited to the viewport.
+  const transit = useMemo(() => {
+    const map = mapRef.current;
+    if (!map || zoom < STATION_ZOOM || viewVersion < 0) {
+      return { stations: [] as string[], exits: [] as { id: string; no: number; lat: number; lng: number }[] };
+    }
+    const bounds = map.getBounds().pad(0.15);
+    const stations = Object.keys(STATIONS).filter((id) => {
+      const st = STATIONS[id];
+      return bounds.contains([st.lat, st.lng]);
+    });
+    const exits = zoom >= EXIT_ZOOM
+      ? stations.flatMap((id) => stationExits(id).map((e) => ({ id, ...e })))
+      : [];
+    return { stations, exits };
+  }, [zoom, viewVersion]);
+
   const markers = useMemo(
     () =>
       singles.map((p) => {
@@ -442,6 +497,27 @@ export default function MapView({ center, places, selectedId, onSelect, userLoc,
           title="Your current location"
         />
       )}
+      {/* Kakao-style transit layer — beneath place pins (negative z offsets) */}
+      {transit.stations.map((id) => (
+        <Marker
+          key={`st-${id}-${zoom >= STATION_LABEL_ZOOM}`}
+          position={[STATIONS[id].lat, STATIONS[id].lng]}
+          icon={stationIcon(id, zoom >= STATION_LABEL_ZOOM)}
+          interactive={false}
+          keyboard={false}
+          zIndexOffset={-200}
+        />
+      ))}
+      {transit.exits.map((e) => (
+        <Marker
+          key={`ex-${e.id}-${e.no}`}
+          position={[e.lat, e.lng]}
+          icon={exitIcon(e.no)}
+          interactive={false}
+          keyboard={false}
+          zIndexOffset={-100}
+        />
+      ))}
       {markers}
       {showSelectedCallout && selectedPlace && (
         <SelectedPlaceCallout

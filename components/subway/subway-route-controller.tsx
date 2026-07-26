@@ -310,7 +310,12 @@ function StationCombobox({
                       <b>{station.name}</b>
                       <span lang="ko">{station.nameKr}</span>
                     </span>
-                    {context && <span className="station-result-context">{context}</span>}
+                    {context && (
+                      <span className="station-result-context">
+                        <Icon name={context === "Recent" ? "history" : "locate"} size="sm" />
+                        <span className="sr-only">{context}</span>
+                      </span>
+                    )}
                   </button>
                 );
               })

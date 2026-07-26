@@ -122,3 +122,21 @@ describe("moveRouteWaypoint", () => {
     expect(moveRouteWaypoint(waypoints, 2, 1)).toEqual(waypoints);
   });
 });
+
+describe("stationExits (synthesized)", () => {
+  it("is deterministic and bounded", async () => {
+    const { stationExits, STATIONS } = await import("./subway");
+    const a = stationExits("gangnam");
+    const b = stationExits("gangnam");
+    expect(a).toEqual(b);
+    expect(a.length).toBeGreaterThanOrEqual(3);
+    expect(a.length).toBeLessThanOrEqual(8);
+    const st = STATIONS["gangnam"];
+    for (const e of a) {
+      const dm = Math.hypot((e.lat - st.lat) * 111320, (e.lng - st.lng) * 88000);
+      expect(dm).toBeLessThan(120);
+      expect(dm).toBeGreaterThan(30);
+    }
+    expect(stationExits("nope")).toEqual([]);
+  });
+});

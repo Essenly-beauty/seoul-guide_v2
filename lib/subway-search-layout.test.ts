@@ -10,6 +10,7 @@ const routeStripSource = readFileSync(
   new URL("../components/subway/route-strip.tsx", import.meta.url),
   "utf8",
 );
+const iconSource = readFileSync(new URL("../components/icon.tsx", import.meta.url), "utf8");
 
 describe("subway endpoint search layout", () => {
   it("groups departure and arrival into a connected route field", () => {
@@ -85,6 +86,21 @@ describe("subway endpoint search layout", () => {
 
   it("keeps combobox suggestions out of the Tab sequence", () => {
     expect(controllerSource).toMatch(/role="option"\s+tabIndex=\{-1\}/);
+  });
+
+  it("uses compact line badges and quiet accessible context icons", () => {
+    expect(cssSource).toMatch(
+      /\.station-result-options > button\s*\{[^}]*min-height:\s*56px;[^}]*gap:\s*6px;/,
+    );
+    expect(cssSource).toMatch(
+      /\.station-linebadge\s*\{[^}]*min-width:\s*20px;[^}]*height:\s*20px;/,
+    );
+    expect(cssSource).toMatch(/\.station-result-name b\s*\{[^}]*font-size:\s*14px;/);
+    expect(cssSource).toMatch(/\.station-result-name > span\s*\{[^}]*font-size:\s*12px;/);
+    expect(controllerSource).toContain('name={context === "Recent" ? "history" : "locate"}');
+    expect(controllerSource).toContain('<span className="sr-only">{context}</span>');
+    expect(iconSource).toContain('| "history"');
+    expect(iconSource).toContain('id="i-history"');
   });
 
   it("restores focus and announces via changes when a focused row unmounts", () => {
