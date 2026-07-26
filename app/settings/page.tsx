@@ -5,6 +5,7 @@ import { BackButton } from "@/components/ui/back-button";
 import { ChipGroup } from "@/components/ui/chip-group";
 import { ActionButton } from "@/components/ui/action-button";
 import { SectionHeader } from "@/components/ui/section-header";
+import { SectionDivider } from "@/components/ui/section-divider";
 import { FeedbackLauncher } from "@/components/ui/feedback-sheet";
 import { SignoutModal } from "@/components/ui/signout-modal";
 import { Icon } from "@/components/icon";
@@ -20,7 +21,7 @@ export default function SettingsPage() {
           <p className="t-caption">Used to match you with the right salons, spas, and clinics.</p>
         </section>
 
-        <hr className="sec-divider" />
+        <SectionDivider />
         <section className="stack sm">
           <SectionHeader title="Hair" />
           <div className="label">Hair Type</div>
@@ -40,7 +41,7 @@ export default function SettingsPage() {
           </div>
         </section>
 
-        <hr className="sec-divider" />
+        <SectionDivider />
         <section className="stack sm">
           <SectionHeader title="Skin" />
           <div className="label">Skin Type</div>
@@ -49,7 +50,7 @@ export default function SettingsPage() {
           <ChipGroup ariaLabel="Skin concerns" items={["Hydration", "Brightening", "Acne", "Anti-aging", "Pores", "Redness"]} defaultSelected={["Hydration", "Brightening"]} />
         </section>
 
-        <hr className="sec-divider" />
+        <SectionDivider />
         <section className="stack sm">
           <SectionHeader title="Trip & interests" />
           <div className="field">
@@ -66,7 +67,7 @@ export default function SettingsPage() {
           <ChipGroup ariaLabel="Monthly beauty spend" single items={["Under $50", "$50–100", "$100–200", "$200+"]} />
         </section>
 
-        <hr className="sec-divider" />
+        <SectionDivider />
         <section className="stack sm">
           <SectionHeader title="About" />
           <div>
@@ -88,7 +89,7 @@ export default function SettingsPage() {
           </div>
         </section>
 
-        <ActionButton className="btn" toast="Saved!">Save Changes</ActionButton>
+        <ActionButton variant="primary" toast="Saved!">Save Changes</ActionButton>
         <SignoutModal />
       </div>
       <BottomNav active="menu" />

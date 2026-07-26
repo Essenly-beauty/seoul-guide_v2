@@ -39,7 +39,7 @@ describe("product detail information-page layout", () => {
       expect(bodySource).toContain(`id="${id}"`);
     }
     expect(bodySource).toContain('className="d-sec stack sm product-detail-section"');
-    expect(bodySource).toContain("<Divider />");
+    expect(bodySource).toContain("<SectionDivider />");
   });
 
   it("provides fixed share, save, nearby, and online purchase actions", () => {

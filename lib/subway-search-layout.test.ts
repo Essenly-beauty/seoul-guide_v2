@@ -56,7 +56,7 @@ describe("subway endpoint search layout", () => {
   it("moves from a chosen arrival station to the route action without reopening results", () => {
     expect(controllerSource.match(/arrivalInputRef\.current\?\.focus\(\)/g)).toHaveLength(1);
     expect(controllerSource).toContain("routeButtonRef.current?.focus()");
-    expect(controllerSource).toContain("ref={routeButtonRef}");
+    expect(controllerSource).toContain("buttonRef={routeButtonRef}");
   });
 
   it("inserts via stations into the connected field and exposes explicit order controls", () => {

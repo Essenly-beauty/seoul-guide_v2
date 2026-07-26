@@ -2,10 +2,12 @@ import Link from "next/link";
 import { TopBar } from "@/components/ui/top-bar";
 import { BottomNav } from "@/components/ui/bottom-nav";
 import { Button } from "@/components/ui/button";
+import { IconButton } from "@/components/ui/icon-button";
 import { StatusChip } from "@/components/ui/chip";
 import { ChipGroup } from "@/components/ui/chip-group";
 import { ImgPh } from "@/components/ui/img-ph";
 import { SectionHeader } from "@/components/ui/section-header";
+import { SectionDivider } from "@/components/ui/section-divider";
 import { CategoryBadge } from "@/components/category/category-badge";
 import { Icon, BrandMark } from "@/components/icon";
 import { routes, sample } from "@/lib/routes";
@@ -88,17 +90,12 @@ export default function BookingsListPage() {
       <TopBar
         left={<BrandMark size={24} />}
         title="My Bookings"
-        right={
-          /* raw iconbtn Link kept: <IconButton> renders a <button>, no href support (design-system migration, 2026-07-25) */
-          <Link className="iconbtn" href={routes.map} aria-label="Home">
-            <Icon name="home" />
-          </Link>
-        }
+        right={<IconButton name="home" label="Home" iconSize="md" href={routes.map} />}
       />
       <div className="app-scroll pad stack pagev2">
         <ChipGroup ariaLabel="Booking status" single wrap={false} items={["All 5", "Upcoming", "Action needed 1", "Past"]} defaultSelected={["All 5"]} />
 
-        <hr className="sec-divider" />
+        <SectionDivider />
         <section className="stack sm">
           <SectionHeader title="Upcoming" count={UPCOMING.length} />
           <div>
@@ -111,7 +108,7 @@ export default function BookingsListPage() {
           </div>
         </section>
 
-        <hr className="sec-divider" />
+        <SectionDivider />
         <section className="stack sm">
           <SectionHeader title="Past" count={PAST.length} />
           <div>
@@ -125,7 +122,7 @@ export default function BookingsListPage() {
           </div>
         </section>
 
-        <hr className="sec-divider" />
+        <SectionDivider />
         <section className="stack sm">
           <SectionHeader title="Looking for somewhere new?" />
           <p className="t-caption">Curated head spas, salons, and clinics for foreign visitors.</p>

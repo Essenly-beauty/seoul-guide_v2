@@ -3,6 +3,7 @@ import { BottomNav } from "@/components/ui/bottom-nav";
 import { Button } from "@/components/ui/button";
 import { BackButtonBordered } from "@/components/ui/back-button";
 import { ActionButton } from "@/components/ui/action-button";
+import { Badge } from "@/components/ui/badge";
 import { Icon } from "@/components/icon";
 import { routes } from "@/lib/routes";
 import { getArticle } from "@/lib/data";
@@ -23,7 +24,7 @@ export default function JournalDetailPage({ params }: { params: { slug: string }
 
         <div className="pad stack article-body">
           <div className="row" style={{ gap: 6, flexWrap: "wrap" }}>
-            {a.tags.map((t) => <span key={t} className="badge accent">{t}</span>)}
+            {a.tags.map((t) => <Badge key={t} tone="accent">{t}</Badge>)}
           </div>
           <h1 className="hero" style={{ fontSize: 28 }}>{a.title}</h1>
           <p className="caption muted mono">{a.date} · {a.readMin} min read</p>
@@ -36,7 +37,7 @@ export default function JournalDetailPage({ params }: { params: { slug: string }
           <h2 className="h2">3. Moisturize + SPF</h2>
           <p className="muted">The seal. Even if you skip every other step, don&apos;t skip this. Korean SPFs are lighter and reapply-friendly.</p>
 
-          <ActionButton className="btn secondary" share={`${a.title} | essenly.com`}>
+          <ActionButton variant="secondary" share={`${a.title} | essenly.com`}>
             <Icon name="share" size="sm" /> Share this article
           </ActionButton>
 

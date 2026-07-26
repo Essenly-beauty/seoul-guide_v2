@@ -9,8 +9,10 @@ const layoutSource = source("../app/layout.tsx");
 const cssSource = source("../app/globals.css");
 const searchSource = source("../app/search/page.tsx");
 const rankingSource = source("../app/ranking/page.tsx");
+const searchFieldSource = source("../components/ui/search-field.tsx");
 const subwaySource = source("../components/subway/subway-route-controller.tsx");
 const dialogHookSource = source("../components/ui/use-dialog-focus.ts");
+const bottomSheetSource = source("../components/ui/bottom-sheet.tsx");
 const bookingSource = source("../components/booking/booking-sheet.tsx");
 const signoutSource = source("../components/ui/signout-modal.tsx");
 const filterSource = source("../components/map/filter-sheet.tsx");
@@ -38,11 +40,13 @@ describe("mobile interaction contracts", () => {
   });
 
   it("uses mobile search keyboards and restores focus after clearing", () => {
+    expect(searchFieldSource).toContain('type="search"');
+    expect(searchFieldSource).toContain('inputMode="search"');
+    expect(searchFieldSource).toContain('enterKeyHint="search"');
+    expect(searchFieldSource).toContain('autoComplete="off"');
     for (const pageSource of [searchSource, rankingSource]) {
-      expect(pageSource).toContain('type="search"');
-      expect(pageSource).toContain('inputMode="search"');
-      expect(pageSource).toContain('enterKeyHint="search"');
-      expect(pageSource).toContain('autoComplete="off"');
+      expect(pageSource).toContain("<SearchField");
+      expect(pageSource).toContain("onClear={clearSearch}");
       expect(pageSource).toContain("requestAnimationFrame");
       expect(pageSource).not.toMatch(/style=\{\{\s*width:\s*(28|32),\s*height:\s*(28|32)/);
     }
@@ -67,12 +71,17 @@ describe("dialog and form accessibility contracts", () => {
   });
 
   it("applies dialog semantics and focus management to sheets and confirmation dialogs", () => {
-    for (const dialogSource of [bookingSource, signoutSource, filterSource]) {
+    for (const dialogSource of [bookingSource, signoutSource]) {
       expect(dialogSource).toContain("useDialogFocus");
       expect(dialogSource).toContain('role="dialog"');
       expect(dialogSource).toContain('aria-modal="true"');
       expect(dialogSource).toContain("tabIndex={-1}");
     }
+    expect(filterSource).toContain("<BottomSheet");
+    expect(bottomSheetSource).toContain("useDialogFocus");
+    expect(bottomSheetSource).toContain('role="dialog"');
+    expect(bottomSheetSource).toContain('aria-modal="true"');
+    expect(bottomSheetSource).toContain("tabIndex={-1}");
   });
 
   it("links profile labels and review validation help to their controls", () => {

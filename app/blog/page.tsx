@@ -5,8 +5,10 @@ import Link from "next/link";
 import { TopBar } from "@/components/ui/top-bar";
 import { BottomNav } from "@/components/ui/bottom-nav";
 import { Chip } from "@/components/ui/chip";
+import { Button } from "@/components/ui/button";
 import { ImgPh } from "@/components/ui/img-ph";
 import { SectionHeader } from "@/components/ui/section-header";
+import { SectionDivider } from "@/components/ui/section-divider";
 import { HScroll } from "@/components/ui/h-scroll";
 import { routes } from "@/lib/routes";
 import { ARTICLES, type Article } from "@/lib/data";
@@ -51,7 +53,7 @@ export default function BlogListPage() {
           </div>
         </section>
 
-        <hr className="sec-divider" />
+        <SectionDivider />
 
         {/* Latest stories — thumb rows */}
         <section className="stack sm">
@@ -67,15 +69,14 @@ export default function BlogListPage() {
               </Link>
             ))}
           </div>
-          {/* raw button kept: <Button> has no aria-expanded passthrough (design-system migration, 2026-07-25) */}
           {!showAll && (
-            <button className="btn secondary sm" style={{ alignSelf: "center" }} aria-expanded={false} onClick={() => setShowAll(true)}>
+            <Button variant="secondary" size="sm" style={{ alignSelf: "center" }} aria-expanded={false} onClick={() => setShowAll(true)}>
               More ›
-            </button>
+            </Button>
           )}
         </section>
 
-        <hr className="sec-divider" />
+        <SectionDivider />
 
         {/* Browse by topic — horizontal chip rail */}
         <section className="stack sm">

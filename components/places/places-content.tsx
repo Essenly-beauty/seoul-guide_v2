@@ -1,10 +1,12 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import Link from "next/link";
+import { Badge } from "@/components/ui/badge";
 import { Chip } from "@/components/ui/chip";
+import { EmptyState } from "@/components/ui/empty-state";
 import { FavoriteButton } from "@/components/ui/favorite-button";
 import { ImgPh } from "@/components/ui/img-ph";
+import { ListRow } from "@/components/ui/list-row";
 import { RatingLine } from "@/components/ui/rating-line";
 import { CategoryBadge } from "@/components/category/category-badge";
 import { KitCta } from "@/components/cards";
@@ -87,28 +89,24 @@ export function PlacesContent({ category, places }: { category: string; places: 
       <div className="countline">{filtered.length} result{filtered.length === 1 ? "" : "s"}</div>
 
       {filtered.length === 0 ? (
-        <div className="empty"><p>No matches yet. Try different filters.</p></div>
+        <EmptyState>No matches yet. Try different filters.</EmptyState>
       ) : (
         filtered.map((p) => (
-          <div className="listrow v2" key={p.id}>
-            <Link href={routes.place(p.id)} className="row" style={{ gap: 12, flex: 1, minWidth: 0 }}>
-              <ImgPh className="thumb56" />
-              <div className="stack" style={{ flex: 1, minWidth: 0, gap: 2 }}>
-                <div className="row" style={{ gap: 6 }}>
-                  <CategoryBadge type={p.type} size={16} />
-                  <b className="t-label-md" style={{ fontSize: 14, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{p.name}</b>
-                </div>
-                <div className="t-caption" style={{ overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
-                  {TYPE_LABEL[p.type]} · {placeDistrict(p)} · {p.priceRange}
-                </div>
-                <div className="row t-caption" style={{ gap: 6 }}>
-                  <RatingLine rating={p.rating} plain />
-                  {p.badge && <span className={"badge " + p.badge.cls}>{p.badge.text}</span>}
-                </div>
-              </div>
-            </Link>
-            <FavoriteButton kind="place" id={p.id} variant="soft" size="xs" />
-          </div>
+          <ListRow
+            key={p.id}
+            href={routes.place(p.id)}
+            media={<ImgPh className="thumb56" />}
+            titleAccessory={<CategoryBadge type={p.type} size={16} />}
+            title={p.name}
+            caption={`${TYPE_LABEL[p.type]} · ${placeDistrict(p)} · ${p.priceRange}`}
+            meta={(
+              <>
+                <RatingLine rating={p.rating} plain />
+                {p.badge && <Badge tone={p.badge.cls}>{p.badge.text}</Badge>}
+              </>
+            )}
+            trailing={<FavoriteButton kind="place" id={p.id} variant="soft" size="xs" />}
+          />
         ))
       )}
 

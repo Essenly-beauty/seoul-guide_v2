@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { Icon, type IconName } from "@/components/icon";
+import { Switch } from "@/components/ui/switch";
 
 type Toggle = { key: string; icon: IconName; title: string; desc: string; hint: string; on: boolean };
 
@@ -27,18 +28,7 @@ export function NotificationsForm() {
               <div className="t-caption">{r.desc}</div>
               <div className="t-label-sm" style={{ color: "var(--dim)", marginTop: 2 }}>{r.hint}</div>
             </div>
-            <button
-              type="button"
-              className="notification-switch"
-              role="switch"
-              aria-checked={r.on}
-              aria-label={r.title}
-              onClick={() => toggle(r.key)}
-            >
-              <span className="notification-switch-track" aria-hidden="true">
-                <span className="notification-switch-thumb" />
-              </span>
-            </button>
+            <Switch checked={r.on} label={r.title} onChange={() => toggle(r.key)} />
           </div>
         ))}
       </div>

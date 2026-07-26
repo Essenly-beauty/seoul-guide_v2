@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import type { CSSProperties } from "react";
+import { Chip } from "@/components/ui/chip";
 
 export type ChipItem = {
   label: string;
@@ -85,22 +86,20 @@ export function ChipGroup({
       {items.map(normalize).map((item, i) => {
         const on = selected.has(item.label);
         return (
-          <button
-            type="button"
+          <Chip
             key={item.label + i}
-            className={["chip", soft ? "soft" : "", item.className ?? "", on ? "selected" : ""]
-              .filter(Boolean)
-              .join(" ")}
+            className={item.className}
+            selected={on}
+            soft={soft}
             role={single ? "radio" : undefined}
             aria-checked={single ? on : undefined}
-            aria-pressed={single ? undefined : on}
             tabIndex={single ? (on || (selected.size === 0 && i === 0) ? 0 : -1) : undefined}
             onClick={() => toggle(item.label)}
             onKeyDown={(event) => onRadioKeyDown(event, i)}
           >
             {item.label}
             {item.suffix}
-          </button>
+          </Chip>
         );
       })}
     </div>

@@ -6,6 +6,8 @@ import { Button } from "@/components/ui/button";
 import { ImgPh } from "@/components/ui/img-ph";
 import { RatingLine } from "@/components/ui/rating-line";
 import { SectionHeader } from "@/components/ui/section-header";
+import { SectionDivider } from "@/components/ui/section-divider";
+import { ListRow } from "@/components/ui/list-row";
 import { CategoryBadge } from "@/components/category/category-badge";
 import { Icon } from "@/components/icon";
 import { routes, sample } from "@/lib/routes";
@@ -34,20 +36,18 @@ export default function MyReviewsPage() {
           <p className="t-caption">Reviews show on each place&apos;s page and help future Essenly travelers pick wisely.</p>
         </section>
 
-        <hr className="sec-divider" />
+        <SectionDivider />
         <section className="stack sm">
           <SectionHeader title="Awaiting your review" count={1} />
-          <div className="listrow v2">
-            <span className="ic"><Icon name="cal" size="sm" /></span>
-            <div style={{ flex: 1, minWidth: 0 }}>
-              <b className="t-label-md" style={{ fontSize: 14, display: "block" }}>Eden Head Spa</b>
-              <div className="t-caption mono num">Apr 22 · HS-8B14D2</div>
-            </div>
-            <Button variant="secondary" size="sm" href={routes.reviewNew}>Write review</Button>
-          </div>
+          <ListRow
+            media={<span className="ic"><Icon name="cal" size="sm" /></span>}
+            title="Eden Head Spa"
+            caption={<span className="mono num">Apr 22 · HS-8B14D2</span>}
+            trailing={<Button variant="secondary" size="sm" href={routes.reviewNew}>Write review</Button>}
+          />
         </section>
 
-        <hr className="sec-divider" />
+        <SectionDivider />
         <section className="stack sm">
           <SectionHeader title="Written" count={WRITTEN.length} />
           <div>

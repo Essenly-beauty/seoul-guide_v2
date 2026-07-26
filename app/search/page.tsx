@@ -7,6 +7,7 @@ import { Icon } from "@/components/icon";
 import { Button } from "@/components/ui/button";
 import { Chip } from "@/components/ui/chip";
 import { IconButton } from "@/components/ui/icon-button";
+import { SearchField } from "@/components/ui/search-field";
 import { ImgPh } from "@/components/ui/img-ph";
 import { BackButton } from "@/components/ui/back-button";
 import { CategoryBadge } from "@/components/category/category-badge";
@@ -172,26 +173,15 @@ function SearchPageInner() {
     <>
       <div className="topbar" style={{ gap: 8 }}>
         <BackButton fallback={routes.map} />
-        <div className="mobile-search-field" style={{ flex: 1 }}>
-          <Icon name="search" size="sm" style={{ color: "var(--muted)" }} aria-hidden="true" />
-          <input
-            ref={inputRef}
-            className="small"
-            style={{ flex: 1, border: "none", outline: "none", background: "transparent", fontSize: 16 }}
-            type="search"
-            inputMode="search"
-            enterKeyHint="search"
-            autoComplete="off"
-            spellCheck={false}
-            placeholder="Salons, products, districts… (EN or 한글)"
-            aria-label="Search Essenly"
-            value={raw}
-            onChange={(e) => setRaw(e.target.value)}
-          />
-          {raw && (
-            <IconButton name="x" label="Clear search" iconSize="xs" onClick={clearSearch} />
-          )}
-        </div>
+        <SearchField
+          inputRef={inputRef}
+          style={{ flex: 1 }}
+          placeholder="Salons, products, districts… (EN or 한글)"
+          label="Search Essenly"
+          value={raw}
+          onChange={setRaw}
+          onClear={clearSearch}
+        />
       </div>
 
       <main className="app-scroll pad stack">

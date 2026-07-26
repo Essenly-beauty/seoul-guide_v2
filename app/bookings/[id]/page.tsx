@@ -5,7 +5,9 @@ import { BackButton } from "@/components/ui/back-button";
 import { ActionButton } from "@/components/ui/action-button";
 import { CancelBookingButton } from "@/components/booking/cancel-booking-button";
 import { StatusChip } from "@/components/ui/chip";
+import { Notice } from "@/components/ui/notice";
 import { SectionHeader } from "@/components/ui/section-header";
+import { SectionDivider } from "@/components/ui/section-divider";
 import { CategoryBadge } from "@/components/category/category-badge";
 import { Icon } from "@/components/icon";
 import { routes, sample } from "@/lib/routes";
@@ -17,9 +19,10 @@ export default function BookingDetailPage() {
         left={<BackButton fallback={routes.bookings} />}
         title={<span className="mono" style={{ fontFamily: "var(--mono)", fontSize: 14 }}>HS-4F92A1</span>}
         right={
-          <ActionButton className="iconbtn" aria-label="Share" share="My Essenly booking — HOSU DOSAN, Mon May 4, 14:00">
-            <Icon name="share" size="sm" />
-          </ActionButton>
+          <ActionButton
+            iconAction={{ name: "share", label: "Share" }}
+            share="My Essenly booking — HOSU DOSAN, Mon May 4, 14:00"
+          />
         }
       />
       <div className="app-scroll pad stack pagev2">
@@ -53,7 +56,7 @@ export default function BookingDetailPage() {
           </div>
         </section>
 
-        <hr className="sec-divider" />
+        <SectionDivider />
         <section className="stack sm">
           <SectionHeader title="Payment" />
           <div className="inforow">
@@ -66,17 +69,16 @@ export default function BookingDetailPage() {
             <span>Balance at salon</span>
             <span className="chev num" style={{ fontWeight: 600 }}>₩135,000</span>
           </div>
-          <div className="banner accent">
-            <Icon name="check" size="sm" />
+          <Notice tone="accent" icon="check">
             <span><b>Free cancellation</b> · Until Sun, May 3 · 14:00. Full refund and free reschedule before then.</span>
-          </div>
+          </Notice>
           <div className="row" style={{ gap: 8 }}>
-            <ActionButton className="btn secondary" style={{ flex: 1 }} toast="Reschedule flow (stub)">Reschedule</ActionButton>
+            <ActionButton variant="secondary" style={{ flex: 1 }} toast="Reschedule flow (stub)">Reschedule</ActionButton>
             <CancelBookingButton />
           </div>
         </section>
 
-        <hr className="sec-divider" />
+        <SectionDivider />
         <section className="stack sm">
           <SectionHeader title="Getting there" />
           <div className="linkgrid">
@@ -86,7 +88,7 @@ export default function BookingDetailPage() {
           </div>
         </section>
 
-        <hr className="sec-divider" />
+        <SectionDivider />
         <section className="stack sm">
           <SectionHeader title="Talk to HOSU DOSAN" />
           <p className="t-caption">Ask about parking, English, what to bring.</p>

@@ -3,9 +3,12 @@
 import { useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Icon } from "@/components/icon";
+import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { IconButton } from "@/components/ui/icon-button";
 import { ChipGroup } from "@/components/ui/chip-group";
 import { BackButton } from "@/components/ui/back-button";
+import { Notice } from "@/components/ui/notice";
 import { validateKitClaim, type KitClaimErrors, type KitClaimMethod } from "@/lib/kit-claim";
 import { routes } from "@/lib/routes";
 
@@ -56,9 +59,7 @@ export function KitSurvey() {
     <>
       <div className="topbar">
         {step > 0 && step < 4 ? (
-          <button className="iconbtn" aria-label="Back" onClick={() => setStep((s) => s - 1)}>
-            <Icon name="back" />
-          </button>
+          <IconButton name="back" label="Back" onClick={() => setStep((s) => s - 1)} />
         ) : (
           <BackButton fallback={routes.map} />
         )}
@@ -97,14 +98,15 @@ export function KitSurvey() {
             <div className="stack sm" style={{ marginTop: 14 }}>
               {["Complete a 3-step survey.", "We prepare your kit.", "Pick it up in Seoul."].map((t, i) => (
                 <div className="row" key={t} style={{ gap: 10 }}>
-                  <span className="badge accent">0{i + 1}</span>
+                  <Badge tone="accent">0{i + 1}</Badge>
                   <span className="small">{t}</span>
                 </div>
               ))}
             </div>
-            <div className="banner warning" style={{ marginTop: 14 }}>
-              <Icon name="bell" size="sm" />
-              <span>Apply 7+ days before arrival. 1 kit per person.</span>
+            <div style={{ marginTop: 14 }}>
+              <Notice tone="warning" icon="bell">
+                Apply 7+ days before arrival. 1 kit per person.
+              </Notice>
             </div>
             <Button style={{ marginTop: 14 }} onClick={() => setStep(1)}>
               Get My Free Kit →
@@ -211,9 +213,10 @@ export function KitSurvey() {
                 </p>
               )}
             </div>
-            <div className="banner warning" style={{ marginTop: 12 }}>
-              <Icon name="bell" size="sm" />
-              <span>Apply 7 days before arrival so we have time to prepare your kit.</span>
+            <div style={{ marginTop: 12 }}>
+              <Notice tone="warning" icon="bell">
+                Apply 7 days before arrival so we have time to prepare your kit.
+              </Notice>
             </div>
             <Button type="submit" style={{ marginTop: 16 }}>Claim My Free Kit</Button>
           </form>

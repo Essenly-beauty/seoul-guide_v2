@@ -3,6 +3,9 @@ import { BottomNav } from "@/components/ui/bottom-nav";
 import { BackButton } from "@/components/ui/back-button";
 import { ActionButton } from "@/components/ui/action-button";
 import { SectionHeader } from "@/components/ui/section-header";
+import { SectionDivider } from "@/components/ui/section-divider";
+import { Badge } from "@/components/ui/badge";
+import { ListRow } from "@/components/ui/list-row";
 import { Icon } from "@/components/icon";
 import { routes } from "@/lib/routes";
 
@@ -17,18 +20,16 @@ export default function TripPage() {
           <p className="caption" style={{ marginTop: 4 }}>Sets your dates + travel type.</p>
         </ActionButton>
 
-        <hr className="sec-divider" />
+        <SectionDivider />
         <section className="stack sm">
           <SectionHeader title="Your trips" count={1} />
-          <div className="listrow v2">
-            <span className="ic"><Icon name="plane" size="sm" /></span>
-            <div style={{ flex: 1, minWidth: 0 }}>
-              <b className="t-label-md" style={{ fontSize: 14, display: "block" }}>Seoul Trip</b>
-              <div className="t-caption num">May 1, 2026 – May 6, 2026</div>
-              <div className="t-caption">Solo · 5 days</div>
-            </div>
-            <span className="badge accent">Active</span>
-          </div>
+          <ListRow
+            media={<span className="ic"><Icon name="plane" size="sm" /></span>}
+            title="Seoul Trip"
+            caption={<span className="num">May 1, 2026 – May 6, 2026</span>}
+            meta="Solo · 5 days"
+            trailing={<Badge tone="accent">Active</Badge>}
+          />
         </section>
       </div>
       <BottomNav active="map" />

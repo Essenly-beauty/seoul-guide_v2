@@ -1158,6 +1158,12 @@
     border-color: var(--accent);
     color: var(--accent);
   }
+  .chip[aria-pressed="true"]:focus-visible,
+  .chip.selected:focus-visible {
+    outline: 2px solid var(--focus-ring-inner);
+    outline-offset: 2px;
+    box-shadow: 0 0 0 6px var(--focus-ring-outer);
+  }
   .chiprow {
     display: flex;
     gap: 8px;
@@ -1921,6 +1927,14 @@
   .sheet .shead > :first-child {
     flex: 1;
     min-width: 0;
+  }
+  .sheet-title {
+    margin: 0;
+    font-family: var(--sans);
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 1.5;
+    letter-spacing: 0;
   }
   .sheet .sbody {
     overflow-y: auto;
@@ -3404,6 +3418,16 @@
   .notification-switch[aria-checked="true"] .notification-switch-thumb {
     transform: translateX(18px);
   }
+  .notification-switch:disabled {
+    cursor: default;
+  }
+  .notification-switch:disabled .notification-switch-track {
+    background: var(--bg-surface-sunken);
+    box-shadow: inset 0 0 0 1px var(--border-default);
+  }
+  .notification-switch:disabled .notification-switch-thumb {
+    box-shadow: none;
+  }
 
   /* multi-line rows keep media/chevron pinned to the first line */
   .listrow.v2.top { align-items: flex-start; }
@@ -3838,8 +3862,7 @@
     overflow-wrap: anywhere;
     white-space: normal;
   }
-  /* status span, not a button — pin the muted look above .btn:hover too,
-     which otherwise repaints it accent-green under the pointer */
+  /* Keep the unavailable action visibly disabled in the fixed CTA bar. */
   .btn.product-cta-unavailable,
   .btn.product-cta-unavailable:hover {
     color: var(--muted);
@@ -4048,6 +4071,8 @@
     --bg-surface: var(--surface);
     --bg-surface-sunken: var(--surface-hover);
     --border-default: var(--border);
+    --focus-ring-inner: var(--bg-surface);
+    --focus-ring-outer: var(--brand);
   }
 }
 
@@ -4080,6 +4105,13 @@
     background: var(--bg-surface);
     border: 1px solid var(--border-default);
     box-shadow: var(--shadow-card);
+  }
+  .iconbtn:disabled,
+  .iconbtn[aria-disabled="true"] {
+    color: var(--text-disabled);
+    background: var(--bg-surface-sunken);
+    box-shadow: none;
+    cursor: default;
   }
 }
 

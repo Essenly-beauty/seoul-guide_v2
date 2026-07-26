@@ -67,7 +67,7 @@ export default function DesignShowcase() {
           {SEMANTIC_COLORS.map(([t, l]) => <Swatch key={t} token={t} label={l} />)}
         </div>
 
-        <hr className="sec-divider" />
+        <SectionDivider />
         <SectionHeader title="Category tokens" />
         <div className="chipwrap">
           {MAP_CATEGORIES.filter((c) => c.key !== "all").map((c) => (
@@ -76,7 +76,7 @@ export default function DesignShowcase() {
         </div>
         <div className="t-caption mono">{Object.values(TYPE_COLOR).join(" · ")}</div>
 
-        <hr className="sec-divider" />
+        <SectionDivider />
         <SectionHeader title="Typography" />
         <div className="stack sm">
           <span className="t-heading-sm">t-heading-sm · Section title 16/700</span>
@@ -87,7 +87,7 @@ export default function DesignShowcase() {
           <span className="mono num">num mono · 12,345 ₩₩₩ 4.5</span>
         </div>
 
-        <hr className="sec-divider" />
+        <SectionDivider />
         <SectionHeader title="Buttons" />
         <div className="stack sm">
           <div className="row" style={{ gap: 8, flexWrap: "wrap" }}>
@@ -106,16 +106,17 @@ export default function DesignShowcase() {
           <div className="t-caption">한 화면에 primary 1개 · secondary=더보기류 기본 · tonal=primary 짝</div>
         </div>
 
-        <hr className="sec-divider" />
+        <SectionDivider />
         <SectionHeader title="Icon buttons" />
         <div className="row" style={{ gap: 10, alignItems: "center" }}>
           <IconButton name="share" label="Share (plain)" />
           <IconButton name="heart-o" label="Save (soft)" variant="soft" />
           <IconButton name="back" label="Back (overlay)" variant="overlay" />
+          <IconButton name="x" label="Disabled icon button" disabled />
           <span className="t-caption">plain · soft · overlay(사진 위)</span>
         </div>
 
-        <hr className="sec-divider" />
+        <SectionDivider />
         <SectionHeader title="Chips" />
         <div className="chipwrap">
           {["all", "olive_young", "skin_clinic"].map((k) => (
@@ -130,7 +131,7 @@ export default function DesignShowcase() {
           <StatusChip status="confirmed" /><StatusChip status="pending" /><StatusChip status="cancelled" />
         </div>
 
-        <hr className="sec-divider" />
+        <SectionDivider />
         <SectionHeader title="Badges & meta" />
         <div className="row" style={{ gap: 10, flexWrap: "wrap", alignItems: "center" }}>
           <RatingLine rating={4.5} count={96} />
@@ -197,6 +198,7 @@ export default function DesignShowcase() {
             <div className="t-caption" id="design-switch-desc">role=&quot;switch&quot; · notifications-form pattern</div>
           </div>
           <Switch checked={switchOn} onChange={setSwitchOn} label="Booking updates" describedBy="design-switch-desc" />
+          <Switch checked onChange={() => {}} label="Disabled switch" disabled />
         </div>
 
         <SectionDivider />
@@ -205,6 +207,8 @@ export default function DesignShowcase() {
           <Badge tone="accent">NEW</Badge>
           <Badge tone="warning">D-5</Badge>
           <Badge tone="info">EN OK</Badge>
+          <Badge tone="success">OPEN</Badge>
+          <Badge tone="error">ERROR</Badge>
           <Badge tone="dim">11</Badge>
         </div>
 

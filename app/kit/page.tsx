@@ -3,7 +3,9 @@ import { BottomNav } from "@/components/ui/bottom-nav";
 import { BackButton } from "@/components/ui/back-button";
 import { StatusChip } from "@/components/ui/chip";
 import { Collapse } from "@/components/ui/collapse";
+import { Notice } from "@/components/ui/notice";
 import { SectionHeader } from "@/components/ui/section-header";
+import { SectionDivider } from "@/components/ui/section-divider";
 import { Icon } from "@/components/icon";
 import { routes } from "@/lib/routes";
 
@@ -28,13 +30,12 @@ export default function KitStatusPage() {
             <span>Location</span>
             <span className="t-caption chev">Hongdae</span>
           </div>
-          <div className="banner accent">
-            <Icon name="check" size="sm" />
+          <Notice tone="accent" icon="check">
             <span><b>Preparing</b> · We&apos;ll notify you when your kit is ready for pickup (usually 2–3 days).</span>
-          </div>
+          </Notice>
         </section>
 
-        <hr className="sec-divider" />
+        <SectionDivider />
         <section className="stack sm">
           <Collapse summary={<b>Previous requests (1)</b>}>
             <div className="listrow v2">

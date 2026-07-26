@@ -66,7 +66,7 @@ export function ListRow({
   if (trailing) {
     const innerStyle: CSSProperties = { gap: 12, flex: 1, minWidth: 0 };
     const inner = href ? (
-      <Link href={href} className="row" style={innerStyle}>{body}</Link>
+      <Link href={href} className="row" style={innerStyle} onClick={onClick}>{body}</Link>
     ) : onClick ? (
       <button type="button" className="row" style={{ ...innerStyle, textAlign: "left" }} onClick={onClick}>{body}</button>
     ) : (
@@ -74,7 +74,7 @@ export function ListRow({
     );
     return <div className={rowCls} style={style}>{inner}{trailing}</div>;
   }
-  if (href) return <Link className={rowCls} href={href} style={style}>{body}</Link>;
+  if (href) return <Link className={rowCls} href={href} style={style} onClick={onClick}>{body}</Link>;
   if (onClick) return <button type="button" className={rowCls} style={style} onClick={onClick}>{body}</button>;
   return <div className={rowCls} style={style}>{body}</div>;
 }

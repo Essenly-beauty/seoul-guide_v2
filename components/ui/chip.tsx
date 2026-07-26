@@ -1,5 +1,5 @@
 import type React from "react";
-import type { CSSProperties, MouseEventHandler, ReactNode } from "react";
+import type { CSSProperties, MouseEventHandler, ReactNode, Ref } from "react";
 
 // Design-system Chip (docs/design-system.md §3) — single-select filters,
 // toggles, and quiet tags. Interactive when onClick is given.
@@ -9,24 +9,26 @@ type ChipProps = {
   soft?: boolean;
   mono?: boolean;
   onClick?: MouseEventHandler;
+  /** Native button ref for focus management; ignored by static chip spans. */
+  buttonRef?: Ref<HTMLButtonElement>;
   className?: string;
   style?: CSSProperties;
   children: ReactNode;
   /** Tablist/roving-focus escape hatch: role, id, tabIndex, onKeyDown, aria-*. */
 } & Pick<React.ButtonHTMLAttributes<HTMLButtonElement>,
-  "role" | "id" | "tabIndex" | "onKeyDown" | "aria-label" | "aria-selected" | "aria-controls">;
+  "role" | "id" | "tabIndex" | "onKeyDown" | "aria-label" | "aria-checked" | "aria-expanded" | "aria-haspopup" | "aria-describedby" | "aria-selected" | "aria-controls">;
 
-export function Chip({ selected, soft, mono, onClick, className, style, children, ...rest }: ChipProps) {
+export function Chip({ selected, soft, mono, onClick, buttonRef, className, style, children, ...rest }: ChipProps) {
   const cls = ["chip", soft ? "soft" : "", mono ? "mono" : "", selected ? "selected" : "", className]
     .filter(Boolean)
     .join(" ");
   if (!onClick) {
-    return <span className={cls} style={style} aria-label={rest["aria-label"]}>{children}</span>;
+    return <span className={cls} style={style} {...rest}>{children}</span>;
   }
   // aria-pressed only when not acting as a tab (tabs use aria-selected instead)
-  const pressed = rest.role === "tab" ? undefined : selected;
+  const pressed = rest.role === "tab" || rest.role === "radio" ? undefined : selected;
   return (
-    <button type="button" className={cls} style={style} aria-pressed={pressed} onClick={onClick} {...rest}>
+    <button ref={buttonRef} type="button" className={cls} style={style} aria-pressed={pressed} onClick={onClick} {...rest}>
       {children}
     </button>
   );

@@ -5,14 +5,19 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { ActionButton } from "@/components/ui/action-button";
 import { AnchorTabs } from "@/components/ui/anchor-tabs";
+import { Avatar } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Chip } from "@/components/ui/chip";
 import { Collapse } from "@/components/ui/collapse";
+import { EmptyState } from "@/components/ui/empty-state";
 import { HScroll } from "@/components/ui/h-scroll";
+import { IconButton } from "@/components/ui/icon-button";
 import { ImgPh } from "@/components/ui/img-ph";
 import { LiveBadge } from "@/components/ui/live-badge";
+import { Notice } from "@/components/ui/notice";
 import { RatingBars } from "@/components/ui/rating-bars";
 import { RatingLine } from "@/components/ui/rating-line";
+import { SectionDivider } from "@/components/ui/section-divider";
 import { SectionHeader } from "@/components/ui/section-header";
 import { useToast } from "@/components/ui/toast";
 import { BookingSheet } from "@/components/booking/booking-sheet";
@@ -89,8 +94,6 @@ const starsFor = (rating?: number) => {
   const filled = Math.max(0, Math.min(5, Math.round(rating ?? 0)));
   return "★★★★★".slice(0, filled) + "☆☆☆☆☆".slice(filled);
 };
-
-const Divider = () => <hr className="sec-divider" />;
 
 /** SectionHeader variant whose action toggles between expand/collapse labels. */
 function ToggleHeader({ title, count, expanded, expandLabel, collapseLabel, onToggle }: {
@@ -266,7 +269,7 @@ function ServicesSection({ place }: { place: Place }) {
         </div>
       )}
       {services.length === 0 ? (
-        <div className="empty"><p>Walk-in retail — no service menu.</p></div>
+        <EmptyState>Walk-in retail — no service menu.</EmptyState>
       ) : expanded ? (
         <div>
           {services.map((s) => (
@@ -294,10 +297,9 @@ function ServicesSection({ place }: { place: Place }) {
         </HScroll>
       )}
       {place.type === "skin_clinic" && (
-        <div className="banner warning">
-          <Icon name="cross" size="sm" />
-          <span>Medical procedures require a consultation before booking. Essenly does not provide medical advice.</span>
-        </div>
+        <Notice tone="warning" icon="cross">
+          Medical procedures require a consultation before booking. Essenly does not provide medical advice.
+        </Notice>
       )}
       {/* Booking moved out of the CTA bar (§4.6 keeps the bar to share/save/map links). */}
       {place.type === "skin_clinic" ? (
@@ -447,14 +449,14 @@ function ReviewsSection({ place }: { place: Place }) {
       </div>
       <div>
         {visible.length === 0 && (
-          <div className="empty"><p>No reviews match these filters.</p></div>
+          <EmptyState>No reviews match these filters.</EmptyState>
         )}
         {visible.map((r) => {
           const voted = !!helpfulVotes[r.who];
           return (
             <div className="review" key={r.who}>
               <div className="head">
-                <span className="avatar">{r.a}</span>
+                <Avatar name={r.who} />
                 <div style={{ flex: 1, minWidth: 0 }}>
                   <div className="row" style={{ gap: 7, flexWrap: "wrap" }}>
                     <b>{r.who}</b>
@@ -632,9 +634,14 @@ function MoreMenu({ place }: { place: Place }) {
 
   return (
     <div ref={wrapRef} style={{ position: "relative", flex: "none" }}>
-      <button ref={triggerRef} type="button" className="iconbtn" aria-label="More options" aria-haspopup="menu" aria-expanded={open} onClick={() => setOpen((v) => !v)}>
-        <span style={{ fontSize: 17, fontWeight: 700 }} aria-hidden="true">⋮</span>
-      </button>
+      <IconButton
+        buttonRef={triggerRef}
+        name="more"
+        label="More options"
+        aria-haspopup="menu"
+        aria-expanded={open}
+        onClick={() => setOpen((v) => !v)}
+      />
       {open && (
         <div className="detail-menucard" role="menu" aria-label="Place actions" onKeyDown={onMenuKeyDown}>
           <button ref={(node) => { menuItemRefs.current[0] = node; }} type="button" role="menuitem" tabIndex={-1} onClick={pick(() => copy(window.location.href))}>Copy link</button>
@@ -673,13 +680,12 @@ export function PlaceDetailBody({ place, heroOverlay }: { place: Place; heroOver
           the anchor tabs stick at top:48 directly beneath it (globals.css Track B block). */}
       <div className={"detail-compactwrap" + (compact ? " on" : "")}>
         <div className="detail-compactbar">
-          <button className="iconbtn" aria-label="Collapse" onClick={() => router.back()}>
-            <Icon name="chev" size="sm" style={{ transform: "rotate(90deg)" }} />
-          </button>
+          <IconButton name="down" label="Collapse" onClick={() => router.back()} />
           <b>{place.name}</b>
-          <ActionButton className="iconbtn" aria-label="Share" share={`${place.name} on Essenly`}>
-            <Icon name="share" size="sm" />
-          </ActionButton>
+          <ActionButton
+            iconAction={{ name: "share", label: "Share" }}
+            share={`${place.name} on Essenly`}
+          />
           <MoreMenu place={place} />
         </div>
       </div>
@@ -706,15 +712,15 @@ export function PlaceDetailBody({ place, heroOverlay }: { place: Place; heroOver
 
       <div className="pad stack">
         <HomeSection place={place} />
-        <Divider />
+        <SectionDivider />
         <ServicesSection place={place} />
-        <Divider />
+        <SectionDivider />
         <PhotosSection />
-        <Divider />
+        <SectionDivider />
         <ReviewsSection place={place} />
-        <Divider />
+        <SectionDivider />
         <InfoSection place={place} />
-        <Divider />
+        <SectionDivider />
         <NearbySection place={place} />
       </div>
     </div>

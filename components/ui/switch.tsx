@@ -4,16 +4,21 @@
 // track/thumb toggle from mypage/notifications-form.tsx. Visible row text
 // stays with the caller; pass `label` (accessible name) and optionally
 // `describedBy` pointing at the caption element's id.
-type SwitchProps = {
+type AccessibleName =
+  | { label: string; labelledBy?: never }
+  | { label?: never; labelledBy: string };
+
+type SwitchProps = AccessibleName & {
   checked: boolean;
   onChange: (checked: boolean) => void;
-  /** Accessible name (aria-label) — required unless labelled elsewhere. */
-  label?: string;
+  /** id of the element labelling the switch (aria-labelledby). */
+  labelledBy?: string;
   /** id of the element describing the switch (aria-describedby). */
   describedBy?: string;
+  disabled?: boolean;
 };
 
-export function Switch({ checked, onChange, label, describedBy }: SwitchProps) {
+export function Switch({ checked, onChange, label, labelledBy, describedBy, disabled }: SwitchProps) {
   return (
     <button
       type="button"
@@ -21,7 +26,9 @@ export function Switch({ checked, onChange, label, describedBy }: SwitchProps) {
       role="switch"
       aria-checked={checked}
       aria-label={label}
+      aria-labelledby={labelledBy}
       aria-describedby={describedBy}
+      disabled={disabled}
       onClick={() => onChange(!checked)}
     >
       <span className="notification-switch-track" aria-hidden="true">

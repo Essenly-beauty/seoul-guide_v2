@@ -25,7 +25,7 @@ export default function ProductDetailPage({ params }: { params: { id: string } }
               <BackButtonBordered fallback={routes.ranking} />
               <span className="row" style={{ gap: 8 }}>
                 <ProductShareButton
-                  className="iconbtn bordered"
+                  variant="overlay"
                   aria-label="Share"
                   product={product}
                 />

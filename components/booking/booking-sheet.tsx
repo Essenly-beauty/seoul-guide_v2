@@ -3,7 +3,10 @@
 import { useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Icon } from "@/components/icon";
+import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { IconButton } from "@/components/ui/icon-button";
+import { Notice } from "@/components/ui/notice";
 import { useDialogFocus } from "@/components/ui/use-dialog-focus";
 import { routes } from "@/lib/routes";
 
@@ -24,11 +27,9 @@ const STEP_LABEL = (i: number) =>
 
 export function BookingSheet({
   triggerLabel = "Book Now →",
-  triggerClassName = "btn",
   triggerStyle,
 }: {
   triggerLabel?: string;
-  triggerClassName?: string;
   triggerStyle?: React.CSSProperties;
 }) {
   const [open, setOpen] = useState(false);
@@ -56,9 +57,9 @@ export function BookingSheet({
 
   return (
     <>
-      <button type="button" className={triggerClassName} style={triggerStyle} onClick={start}>
+      <Button style={triggerStyle} onClick={start}>
         {triggerLabel}
-      </button>
+      </Button>
 
       {open && (
         <div className="overlay" onClick={(e) => e.target === e.currentTarget && setOpen(false)}>
@@ -73,9 +74,7 @@ export function BookingSheet({
             <div className="handle" />
             <div className="shead">
               <span id="booking-sheet-title" className="steplabel" style={{ flex: 1 }}>{STEP_LABEL(step)}</span>
-              <button ref={closeRef} type="button" className="iconbtn" aria-label="Close" onClick={() => setOpen(false)}>
-                <Icon name="x" size="sm" />
-              </button>
+              <IconButton buttonRef={closeRef} name="x" label="Close" onClick={() => setOpen(false)} />
             </div>
             <div style={{ padding: "0 18px" }}>
               <div className="progress"><div className="fill" style={{ width: pct + "%" }} /></div>
@@ -95,9 +94,10 @@ export function BookingSheet({
                       <span className="chk" style={{ marginLeft: "auto" }}><Icon name="check" size="xs" /></span>
                     </button>
                   </div>
-                  <div className="banner info" style={{ marginTop: 14 }}>
-                    <Icon name="check" size="sm" />
-                    <span>Deposit (25%) is charged now per service. Balance is paid at the salon.</span>
+                  <div style={{ marginTop: 14 }}>
+                    <Notice icon="check">
+                      Deposit (25%) is charged now per service. Balance is paid at the salon.
+                    </Notice>
                   </div>
                 </div>
               )}
@@ -151,7 +151,7 @@ export function BookingSheet({
                   </div>
                   <div className="card row" style={{ gap: 10, marginTop: 10 }}>
                     <Icon name="lock" size="sm" style={{ color: "var(--muted)" }} />
-                    <div><b className="small">Stripe Payment Element</b><div className="caption muted">Card · Apple Pay · Google Pay <span className="badge dim">Demo</span></div></div>
+                    <div><b className="small">Stripe Payment Element</b><div className="caption muted">Card · Apple Pay · Google Pay <Badge tone="dim">Demo</Badge></div></div>
                   </div>
                   <p className="caption muted" style={{ marginTop: 10 }}>
                     <b>Plans change. We get it.</b> Up to 24h before, reschedule or cancel freely — full refund.

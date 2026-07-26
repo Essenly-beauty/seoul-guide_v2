@@ -28,8 +28,7 @@ export function SignoutModal() {
             <h3 id="signout-title" className="h3">Sign out of Essenly?</h3>
             <p id="signout-description" className="muted small">You&apos;ll need to sign in again to access your profile and favorites.</p>
             <div className="row" style={{ gap: 10, marginTop: 16 }}>
-              {/* Raw button (not <Button>): the dialog focus trap needs this ref. `secondary` replaces the deprecated `ghost` alias (same styles). */}
-              <button ref={cancelRef} type="button" className="btn secondary" style={{ flex: 1 }} onClick={() => setOpen(false)}>Cancel</button>
+              <Button buttonRef={cancelRef} variant="secondary" style={{ flex: 1 }} onClick={() => setOpen(false)}>Cancel</Button>
               <Button
                 variant="danger"
                 style={{ flex: 1 }}

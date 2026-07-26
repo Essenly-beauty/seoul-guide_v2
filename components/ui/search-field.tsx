@@ -15,6 +15,10 @@ type SearchFieldProps = {
   label: string;
   /** Shows the clear IconButton while `value` is non-empty. */
   onClear?: () => void;
+  /** Context-specific accessible name for the clear action. */
+  clearLabel?: string;
+  /** Lets the clear action match the field's surface treatment. */
+  clearVariant?: "plain" | "soft" | "overlay";
   autoFocus?: boolean;
   /** For focus management from the caller (e.g. refocus after clear). */
   inputRef?: Ref<HTMLInputElement>;
@@ -28,6 +32,8 @@ export function SearchField({
   placeholder,
   label,
   onClear,
+  clearLabel = "Clear search",
+  clearVariant = "plain",
   autoFocus,
   inputRef,
   className,
@@ -54,7 +60,13 @@ export function SearchField({
         onChange={(e) => onChange(e.target.value)}
       />
       {onClear && value && (
-        <IconButton name="x" label="Clear search" iconSize="xs" onClick={onClear} />
+        <IconButton
+          name="x"
+          label={clearLabel}
+          variant={clearVariant}
+          iconSize="xs"
+          onClick={onClear}
+        />
       )}
     </div>
   );

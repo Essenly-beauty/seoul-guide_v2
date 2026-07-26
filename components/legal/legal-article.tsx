@@ -1,5 +1,6 @@
 import { TopBar } from "@/components/ui/top-bar";
 import { BackButton } from "@/components/ui/back-button";
+import { Notice } from "@/components/ui/notice";
 import { routes } from "@/lib/routes";
 
 type Section = { heading: string; body: string[] };
@@ -17,9 +18,7 @@ export function LegalArticle({
           <h1 className="h1">{title}</h1>
           <div className="caption dim mono" style={{ marginTop: 6 }}>Last updated · {updated}</div>
         </div>
-        <div className="banner info">
-          <span>Draft for review — this document has not yet been reviewed by legal counsel.</span>
-        </div>
+        <Notice>Draft for review — this document has not yet been reviewed by legal counsel.</Notice>
         <p className="muted small">{intro}</p>
         {sections.map((s, i) => (
           <section key={s.heading}>

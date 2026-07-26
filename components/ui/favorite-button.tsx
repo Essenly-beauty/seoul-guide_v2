@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Icon } from "@/components/icon";
+import { IconButton } from "@/components/ui/icon-button";
 import { useToast } from "@/components/ui/toast";
 import { toggleFavorite, useFavorites, type FavKind } from "@/lib/favorites";
 
@@ -11,22 +11,24 @@ type FavoriteButtonProps = {
   id?: string;
   /** Fallback initial state when no kind/id is given (detached prototype button). */
   initial?: boolean;
-  /** iconbtn variant classes (e.g. "soft"). */
-  variant?: string;
+  /** Legacy bordered maps to the design-system overlay treatment. */
+  variant?: "plain" | "soft" | "bordered";
   size?: "sm" | "xs";
 };
 
-export function FavoriteButton({ kind, id, initial = false, variant = "", size = "sm" }: FavoriteButtonProps) {
+export function FavoriteButton({ kind, id, initial = false, variant = "plain", size = "sm" }: FavoriteButtonProps) {
   const favs = useFavorites();
   const [localOn, setLocalOn] = useState(initial);
   const stored = kind && id ? favs[kind].includes(id) : undefined;
   const on = stored ?? localOn;
   const { toast } = useToast();
   return (
-    <button
-      className={["iconbtn", variant].filter(Boolean).join(" ")}
-      aria-pressed={on}
-      aria-label={on ? "Remove from favorites" : "Add to favorites"}
+    <IconButton
+      name={on ? "heart" : "heart-o"}
+      label={on ? "Remove from favorites" : "Add to favorites"}
+      variant={variant === "bordered" ? "overlay" : variant}
+      pressed={on}
+      iconSize={size}
       style={{ color: on ? "var(--accent)" : undefined }}
       onClick={(e) => {
         e.preventDefault();
@@ -35,8 +37,6 @@ export function FavoriteButton({ kind, id, initial = false, variant = "", size =
         if (!(kind && id)) setLocalOn(next);
         toast(next ? "Saved to favorites" : "Removed");
       }}
-    >
-      <Icon name={on ? "heart" : "heart-o"} size={size} />
-    </button>
+    />
   );
 }

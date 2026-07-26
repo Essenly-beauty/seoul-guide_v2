@@ -15,7 +15,8 @@ export function ProductCtaBar({ product }: { product: Product }) {
   return (
     <nav className="bookbar product-cta-bar" aria-label="Product actions">
       <ProductShareButton
-        className="iconbtn soft product-cta-share"
+        variant="soft"
+        className="product-cta-share"
         aria-label="Share product"
         product={product}
       />
@@ -38,13 +39,13 @@ export function ProductCtaBar({ product }: { product: Product }) {
           <Icon name="ext" size="xs" />
         </Button>
       ) : (
-        <span
-          className="btn product-cta-buy product-cta-unavailable"
-          role="status"
+        <Button
+          disabled
+          className="product-cta-buy product-cta-unavailable"
           aria-label="Online purchase unavailable because no retailer link is verified"
         >
           Online unavailable
-        </span>
+        </Button>
       )}
     </nav>
   );

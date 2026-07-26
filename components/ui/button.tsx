@@ -1,4 +1,4 @@
-import type { CSSProperties, MouseEventHandler, ReactNode } from "react";
+import type { CSSProperties, MouseEventHandler, ReactNode, Ref } from "react";
 import Link from "next/link";
 import { Icon, type IconName } from "@/components/icon";
 
@@ -23,6 +23,8 @@ type ButtonProps = AriaProps & {
   href?: string;
   external?: boolean;
   disabled?: boolean;
+  /** Native button ref for dialog focus management; ignored by link branches. */
+  buttonRef?: Ref<HTMLButtonElement>;
   onClick?: MouseEventHandler;
   type?: "button" | "submit";
   className?: string;
@@ -38,6 +40,7 @@ export function Button({
   href,
   external,
   disabled,
+  buttonRef,
   onClick,
   type = "button",
   className,
@@ -57,17 +60,17 @@ export function Button({
 
   if (href && !disabled) {
     return external ? (
-      <a className={cls} style={style} href={href} target="_blank" rel="noopener noreferrer" {...rest}>
+      <a className={cls} style={style} href={href} target="_blank" rel="noopener noreferrer" onClick={onClick} {...rest}>
         {content}
       </a>
     ) : (
-      <Link className={cls} style={style} href={href} {...rest}>
+      <Link className={cls} style={style} href={href} onClick={onClick} {...rest}>
         {content}
       </Link>
     );
   }
   return (
-    <button type={type} className={cls} style={style} disabled={disabled} onClick={onClick} {...rest}>
+    <button ref={buttonRef} type={type} className={cls} style={style} disabled={disabled} onClick={onClick} {...rest}>
       {content}
     </button>
   );

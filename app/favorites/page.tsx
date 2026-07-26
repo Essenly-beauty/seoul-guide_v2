@@ -6,9 +6,12 @@ import { TopBar } from "@/components/ui/top-bar";
 import { BottomNav } from "@/components/ui/bottom-nav";
 import { FavoriteButton } from "@/components/ui/favorite-button";
 import { ImgPh } from "@/components/ui/img-ph";
+import { EmptyState } from "@/components/ui/empty-state";
+import { ListRow } from "@/components/ui/list-row";
 import { LiveBadge } from "@/components/ui/live-badge";
 import { RatingLine } from "@/components/ui/rating-line";
 import { SectionHeader } from "@/components/ui/section-header";
+import { SectionDivider } from "@/components/ui/section-divider";
 import { CategoryBadge } from "@/components/category/category-badge";
 import { CategoryChips, type MapCat } from "@/components/category/category-chips";
 import { Icon } from "@/components/icon";
@@ -25,30 +28,26 @@ function PlacesSection({ favPlaces }: { favPlaces: Place[] }) {
       <SectionHeader title="Places" count={favPlaces.length} actionLabel="See all" href={routes.map} />
       <CategoryChips value={cat} onChange={setCat} />
       {shown.length === 0 ? (
-        <div className="empty"><p>{favPlaces.length === 0 ? "Nothing saved yet — tap ♥ on any place." : "No saved places in this category."}</p></div>
+        <EmptyState>{favPlaces.length === 0 ? "Nothing saved yet — tap ♥ on any place." : "No saved places in this category."}</EmptyState>
       ) : (
         <div>
           {shown.map((p) => (
-            <div className="listrow v2" key={p.id}>
-              <Link href={routes.place(p.id)} className="row" style={{ gap: 12, flex: 1, minWidth: 0 }}>
-                <ImgPh className="thumb56" />
-                <div className="stack" style={{ flex: 1, minWidth: 0, gap: 2 }}>
-                  <div className="row" style={{ gap: 6 }}>
-                    <CategoryBadge type={p.type} size={16} />
-                    <b className="t-label-md" style={{ fontSize: 14, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{p.name}</b>
-                  </div>
-                  <div className="t-caption" style={{ overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
-                    {TYPE_LABEL[p.type]} · {zoneShort(p.zone)} · {p.priceRange}
-                  </div>
-                  <div className="row t-caption" style={{ gap: 6, overflow: "hidden", whiteSpace: "nowrap" }}>
-                    <RatingLine rating={p.rating} count={p.ratingCount} plain />
-                    <span aria-hidden="true">·</span>
-                    <LiveBadge hours={p.hours} showUntil={false} />
-                  </div>
-                </div>
-              </Link>
-              <FavoriteButton kind="place" id={p.id} variant="soft" size="xs" />
-            </div>
+            <ListRow
+              key={p.id}
+              href={routes.place(p.id)}
+              media={<ImgPh className="thumb56" />}
+              title={p.name}
+              titleAccessory={<CategoryBadge type={p.type} size={16} />}
+              caption={<>{TYPE_LABEL[p.type]} · {zoneShort(p.zone)} · {p.priceRange}</>}
+              meta={(
+                <>
+                  <RatingLine rating={p.rating} count={p.ratingCount} plain />
+                  <span aria-hidden="true">·</span>
+                  <LiveBadge hours={p.hours} showUntil={false} />
+                </>
+              )}
+              trailing={<FavoriteButton kind="place" id={p.id} variant="soft" size="xs" />}
+            />
           ))}
         </div>
       )}
@@ -61,7 +60,7 @@ function ProductsSection({ favProducts }: { favProducts: Product[] }) {
   return (
     <section className="stack sm">
       <SectionHeader title="Products" count={favProducts.length} actionLabel="See all" href={routes.ranking} />
-      {favProducts.length === 0 && <div className="empty"><p>No saved products yet.</p></div>}
+      {favProducts.length === 0 && <EmptyState>No saved products yet.</EmptyState>}
       <div>
         {favProducts.map((prod) => (
           <div className="listrow v2" key={prod.id}>
@@ -88,7 +87,7 @@ function ArticlesSection({ favArticles }: { favArticles: Article[] }) {
   return (
     <section className="stack sm">
       <SectionHeader title="Blog" count={favArticles.length} actionLabel="See all" href={routes.blog} />
-      {favArticles.length === 0 && <div className="empty"><p>No saved stories yet.</p></div>}
+      {favArticles.length === 0 && <EmptyState>No saved stories yet.</EmptyState>}
       <div>
         {favArticles.map((a) => (
           <div className="listrow" key={a.slug}>
@@ -122,9 +121,9 @@ export default function FavoritesPage() {
           <div className="h1">Your <span style={{ fontStyle: "italic", color: "var(--accent)" }}>K-beauty list.</span></div>
         </div>
         <PlacesSection favPlaces={favPlaces} />
-        <hr className="sec-divider" />
+        <SectionDivider />
         <ProductsSection favProducts={favProducts} />
-        <hr className="sec-divider" />
+        <SectionDivider />
         <ArticlesSection favArticles={favArticles} />
       </div>
       <BottomNav active="saved" />

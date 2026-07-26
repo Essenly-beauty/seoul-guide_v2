@@ -8,9 +8,12 @@ import { ProductShareButton } from "@/components/product/product-share-button";
 import { ActionButton } from "@/components/ui/action-button";
 import { AnchorTabs } from "@/components/ui/anchor-tabs";
 import { BackButton } from "@/components/ui/back-button";
+import { Badge } from "@/components/ui/badge";
 import { Chip } from "@/components/ui/chip";
 import { FavoriteButton } from "@/components/ui/favorite-button";
 import { ImgPh } from "@/components/ui/img-ph";
+import { Notice } from "@/components/ui/notice";
+import { SectionDivider } from "@/components/ui/section-divider";
 import { SectionHeader } from "@/components/ui/section-header";
 import { routes } from "@/lib/routes";
 import {
@@ -30,7 +33,6 @@ const SECTIONS = [
 const STICKY_OFFSET = 96;
 
 const cap = (value: string) => value.charAt(0).toUpperCase() + value.slice(1);
-const Divider = () => <hr className="sec-divider" />;
 
 function ProductTitleBlock({ product }: { product: Product }) {
   return (
@@ -69,14 +71,14 @@ function ProductTitleBlock({ product }: { product: Product }) {
       </div>
       <div className="chipwrap product-detail-badges" style={{ marginTop: 10 }}>
         {product.isEditorsPick && (
-          <span className="badge accent">
+          <Badge tone="accent">
             <Icon name="check" size="xs" />
             Editor&apos;s Pick
-          </span>
+          </Badge>
         )}
-        {product.isTrending && <span className="badge warning">Trending</span>}
+        {product.isTrending && <Badge tone="warning">Trending</Badge>}
         {product.stepCategory && (
-          <span className="badge info">{STEP_LABEL[product.stepCategory]}</span>
+          <Badge tone="info">{STEP_LABEL[product.stepCategory]}</Badge>
         )}
       </div>
     </div>
@@ -93,10 +95,9 @@ function OverviewSection({ product }: { product: Product }) {
     <section id="p-overview" className="d-sec stack sm product-detail-section">
       <SectionHeader title="Overview" />
       {matchBits.length > 0 && (
-        <div className="banner accent">
-          <Icon name="check" size="sm" />
-          <span>Matches your {matchBits.join(" + ")} concerns.</span>
-        </div>
+        <Notice tone="accent" icon="check">
+          Matches your {matchBits.join(" + ")} concerns.
+        </Notice>
       )}
       <ActionButton
         className="inforow product-detail-copy-row"
@@ -220,15 +221,12 @@ function BuySection({ product }: { product: Product }) {
           <Icon name="chev" size="xs" className="chev" />
         </a>
       ) : (
-        <div className="banner warning product-stock-status" role="status">
-          <Icon name="bag" size="sm" />
-          <span>
-            <b>Stock not verified</b>
-            <span className="caption">
-              No verified online seller or branch inventory is available yet.
-            </span>
+        <Notice tone="warning" icon="bag" className="product-stock-status">
+          <b>Stock not verified</b>
+          <span className="caption">
+            No verified online seller or branch inventory is available yet.
           </span>
-        </div>
+        </Notice>
       )}
 
       <Link
@@ -293,7 +291,6 @@ export function ProductDetailBody({ product, heroOverlay }: {
           <BackButton fallback={routes.ranking} />
           <b>{product.name}</b>
           <ProductShareButton
-            className="iconbtn"
             aria-label="Share product"
             product={product}
           />
@@ -331,11 +328,11 @@ export function ProductDetailBody({ product, heroOverlay }: {
 
       <div className="pad stack product-detail-content">
         <OverviewSection product={product} />
-        <Divider />
+        <SectionDivider />
         <DetailsSection product={product} />
-        <Divider />
+        <SectionDivider />
         <BuySection product={product} />
-        <Divider />
+        <SectionDivider />
         <RoutineSection product={product} />
       </div>
     </div>

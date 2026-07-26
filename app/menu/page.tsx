@@ -2,6 +2,10 @@ import Link from "next/link";
 import { TopBar } from "@/components/ui/top-bar";
 import { BottomNav } from "@/components/ui/bottom-nav";
 import { SectionHeader } from "@/components/ui/section-header";
+import { SectionDivider } from "@/components/ui/section-divider";
+import { Avatar } from "@/components/ui/avatar";
+import { Badge } from "@/components/ui/badge";
+import { IconButton } from "@/components/ui/icon-button";
 import { FeedbackLauncher } from "@/components/ui/feedback-sheet";
 import { ProfileCard } from "@/components/mypage/profile-card";
 import { Icon } from "@/components/icon";
@@ -45,15 +49,12 @@ export default function MenuPage() {
         {/* Profile header block */}
         <section className="stack">
           <div className="row" style={{ gap: 14 }}>
-            <span className="avatar" style={{ width: 52, height: 52, fontSize: 18 }}>S</span>
+            <Avatar name="S" size={52} />
             <div style={{ flex: 1, minWidth: 0 }}>
               <b style={{ fontSize: 17 }}>Sarah</b>
               <div className="caption muted">Member · Starter</div>
             </div>
-            {/* raw iconbtn Link kept: <IconButton> renders a <button>, no href support (design-system migration, 2026-07-25) */}
-            <Link className="iconbtn soft" href={routes.settings} aria-label="Edit profile">
-              <Icon name="user" size="sm" />
-            </Link>
+            <IconButton name="user" label="Edit profile" variant="soft" href={routes.settings} />
           </div>
           <div className="row between" style={{ textAlign: "center" }}>
             {[["1", "Reservations"], ["11", "Saved"], ["2", "My reviews"]].map(([n, l]) => (
@@ -70,7 +71,7 @@ export default function MenuPage() {
 
         {GROUPS.map((g) => (
           <div key={g.title} className="stack" style={{ gap: 12 }}>
-            <hr className="sec-divider" />
+            <SectionDivider />
             <section className="stack sm">
               <SectionHeader title={g.title} />
               {g.rows.map((m) => (
@@ -79,7 +80,7 @@ export default function MenuPage() {
                   <span style={{ minWidth: 0, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{m.title}</span>
                   <span className="chev row" style={{ gap: 7 }}>
                     {m.value && <span className="caption muted">{m.value}</span>}
-                    {m.badge && <span className="badge dim">{m.badge}</span>}
+                    {m.badge && <Badge tone="dim">{m.badge}</Badge>}
                     <Icon name="chev" size="xs" style={{ color: "var(--dim)" }} />
                   </span>
                 </Link>

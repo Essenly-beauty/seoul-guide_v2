@@ -18,5 +18,11 @@ scripts/.cache/
 /design-tokens.json
 /MIGRATION.md
 /AUDIT.md
-/docs/
+/docs/*
+!/docs/design-system.md
+!/docs/superpowers/
+/docs/superpowers/*
+!/docs/superpowers/specs/
+/docs/superpowers/specs/*
+!/docs/superpowers/specs/2026-07-25-design-system-hardening-design.md
 .vercel

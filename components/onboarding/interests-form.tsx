@@ -9,6 +9,7 @@ import { CategoryBadge } from "@/components/category/category-badge";
 import { Icon } from "@/components/icon";
 import { Button } from "@/components/ui/button";
 import { Chip } from "@/components/ui/chip";
+import { Notice } from "@/components/ui/notice";
 import { routes } from "@/lib/routes";
 import { INTEREST_OPTIONS, answerQuestion, questionFor, useProfile } from "@/lib/profile";
 
@@ -87,10 +88,9 @@ export function InterestsForm() {
       </div>
 
       {profile.interests.includes("skin_clinic") && (
-        <div className="banner warning">
-          <Icon name="cross" size="sm" />
-          <span>Medical procedures in Korea require a pre-visit consultation. We&apos;ll share details after you sign up.</span>
-        </div>
+        <Notice tone="warning" icon="cross" role="status">
+          Medical procedures in Korea require a pre-visit consultation. We&apos;ll share details after you sign up.
+        </Notice>
       )}
 
       <Button href={routes.onboardingProfile} style={{ marginTop: 4 }}>

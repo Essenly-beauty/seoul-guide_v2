@@ -5,10 +5,12 @@ import Link from "next/link";
 import { BottomNav } from "@/components/ui/bottom-nav";
 import { Button } from "@/components/ui/button";
 import { Chip } from "@/components/ui/chip";
-import { IconButton } from "@/components/ui/icon-button";
 import { HScroll } from "@/components/ui/h-scroll";
 import { ImgPh } from "@/components/ui/img-ph";
+import { EmptyState } from "@/components/ui/empty-state";
+import { SearchField } from "@/components/ui/search-field";
 import { SectionHeader } from "@/components/ui/section-header";
+import { SectionDivider } from "@/components/ui/section-divider";
 import { BrandMark, Icon } from "@/components/icon";
 import { routes } from "@/lib/routes";
 import { PRODUCTS, SHOP_CATEGORIES, brandSlug, type Product, type ProductCategory } from "@/lib/data";
@@ -51,7 +53,7 @@ function RankSection({ title, products }: { title: string; products: Product[] }
     <section className="stack sm">
       <SectionHeader title={title} count={products.length} />
       {products.length === 0 ? (
-        <div className="empty"><p>No products in this category yet.</p></div>
+        <EmptyState>No products in this category yet.</EmptyState>
       ) : (
         <div>
           {shown.map((p, i) => <RankRow key={p.id} p={p} rank={i + 1} />)}
@@ -108,24 +110,19 @@ function BrandsPanel() {
 
   return (
     <section className="stack sm">
-      <div className="mobile-search-field">
-        <Icon name="search" size="sm" style={{ color: "var(--muted)" }} aria-hidden="true" />
-        <input
-          ref={inputRef}
-          className="small" style={{ flex: 1, border: "none", outline: "none", background: "transparent", fontSize: 16 }}
-          type="search"
-          inputMode="search"
-          enterKeyHint="search"
-          autoComplete="off"
-          spellCheck={false}
-          placeholder="Search brands" aria-label="Search brands"
-          value={q} onChange={(e) => setQ(e.target.value)}
-        />
-        {q && <IconButton name="x" label="Clear brand search" variant="soft" iconSize="xs" onClick={clearSearch} />}
-      </div>
+      <SearchField
+        inputRef={inputRef}
+        value={q}
+        onChange={setQ}
+        placeholder="Search brands"
+        label="Search brands"
+        onClear={clearSearch}
+        clearLabel="Clear brand search"
+        clearVariant="soft"
+      />
       <SectionHeader title="All brands" count={brands.length} />
       {brands.length === 0 ? (
-        <div className="empty"><p>No brands match &quot;{q}&quot;.</p></div>
+        <EmptyState>No brands match &quot;{q}&quot;.</EmptyState>
       ) : (
         <div>
           {brands.map(([brand, count]) => (
@@ -180,24 +177,21 @@ export default function RankingPage() {
       </div>
 
       <div className="app-scroll pad stack pagev2">
-        {/* raw chip buttons kept: <Chip> has no role/tabIndex/onKeyDown passthrough for the
-            tablist keyboard contract (lib/navigation-a11y.test.ts) — design-system migration, 2026-07-25 */}
         <div className="chiprow" role="tablist" aria-label="Ranking type">
           {TABS.map((t) => (
-            <button
+            <Chip
               key={t.key}
               id={`ranking-tab-${t.key}`}
-              type="button"
               role="tab"
+              selected={tab === t.key}
               aria-selected={tab === t.key}
               aria-controls={`ranking-panel-${t.key}`}
               tabIndex={tab === t.key ? 0 : -1}
-              className={"chip" + (tab === t.key ? " selected" : "")}
               onClick={() => setTab(t.key)}
               onKeyDown={(event) => onTabKeyDown(event, TABS.indexOf(t))}
             >
               {t.label}
-            </button>
+            </Chip>
           ))}
         </div>
 
@@ -217,14 +211,14 @@ export default function RankingPage() {
                   </Chip>
                 ))}
               </div>
-              <hr className="sec-divider" />
+              <SectionDivider />
               {/* key resets the "More ›" expansion when the ranking scope changes */}
               <RankSection
                 key={`${tab}:${category}`}
                 title={tab === "sales" ? "Today's sales ranking" : "Highest-rated by reviews"}
                 products={ranked}
               />
-              <hr className="sec-divider" />
+              <SectionDivider />
               <TrendingSection />
             </>
           ) : (

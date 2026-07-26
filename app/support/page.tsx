@@ -3,6 +3,7 @@ import { BottomNav } from "@/components/ui/bottom-nav";
 import { BackButton } from "@/components/ui/back-button";
 import { ActionButton } from "@/components/ui/action-button";
 import { SectionHeader } from "@/components/ui/section-header";
+import { SectionDivider } from "@/components/ui/section-divider";
 import { FeedbackLauncher } from "@/components/ui/feedback-sheet";
 import { routes } from "@/lib/routes";
 
@@ -23,7 +24,7 @@ export default function SupportPage() {
           <p className="t-caption">Check common questions or send us a message with your trip and place details.</p>
         </section>
 
-        <hr className="sec-divider" />
+        <SectionDivider />
         <section className="stack sm">
           <SectionHeader title="FAQ" count={FAQ.length} />
           <div>
@@ -36,18 +37,18 @@ export default function SupportPage() {
           </div>
         </section>
 
-        <hr className="sec-divider" />
+        <SectionDivider />
         <section className="stack sm">
           <SectionHeader title="Ask Essenly support" />
           <p className="t-caption">We usually reply within a few hours. Include the place name, date, time, and what you need help with.</p>
-          <ActionButton className="btn" toast="Opening mail to help@essenly.beauty…">Email help@essenly.beauty</ActionButton>
+          <ActionButton variant="primary" toast="Opening mail to help@essenly.beauty…">Email help@essenly.beauty</ActionButton>
         </section>
 
-        <hr className="sec-divider" />
+        <SectionDivider />
         <section className="stack sm">
           <SectionHeader title="Something off?" />
           <p className="t-caption">Spotted a bug or wrong place info? Tell us — it goes straight to the team.</p>
-          <FeedbackLauncher className="btn secondary">Send feedback</FeedbackLauncher>
+          <FeedbackLauncher variant="secondary">Send feedback</FeedbackLauncher>
         </section>
       </div>
       <BottomNav active="menu" />

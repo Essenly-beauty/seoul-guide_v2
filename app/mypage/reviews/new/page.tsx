@@ -4,8 +4,10 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { TopBar } from "@/components/ui/top-bar";
 import { BackButton } from "@/components/ui/back-button";
+import { Button } from "@/components/ui/button";
 import { ChipGroup } from "@/components/ui/chip-group";
 import { SectionHeader } from "@/components/ui/section-header";
+import { SectionDivider } from "@/components/ui/section-divider";
 import { Icon } from "@/components/icon";
 import { useToast } from "@/components/ui/toast";
 import { routes } from "@/lib/routes";
@@ -58,13 +60,13 @@ export default function WriteReviewPage() {
           </div>
         </section>
 
-        <hr className="sec-divider" />
+        <SectionDivider />
         <section className="stack sm">
           <SectionHeader title="What did you get?" />
           <ChipGroup ariaLabel="Services received" items={["Scalp diagnosis", "Head spa", "Aroma massage", "Hair treatment", "Styling"]} />
         </section>
 
-        <hr className="sec-divider" />
+        <SectionDivider />
         <section className="stack sm">
           <SectionHeader title="Your review" />
           <textarea
@@ -80,7 +82,7 @@ export default function WriteReviewPage() {
           <div className="t-caption num" style={{ color: "var(--dim)", textAlign: "right" }}>{text.length}/800</div>
         </section>
 
-        <hr className="sec-divider" />
+        <SectionDivider />
         <section className="stack sm">
           <SectionHeader title="Photos" />
           <button type="button" className="card" style={{ display: "grid", placeItems: "center", minHeight: 84, borderStyle: "dashed" }} onClick={() => toast("Photo upload arrives with the full release")}>
@@ -88,17 +90,14 @@ export default function WriteReviewPage() {
           </button>
         </section>
 
-        {/* raw button kept: <Button> has no aria-describedby passthrough (design-system migration, 2026-07-25) */}
-        <button
-          type="button"
-          className="btn"
+        <Button
           disabled={!canSubmit}
           aria-describedby={!canSubmit ? "review-submit-help" : undefined}
           style={!canSubmit ? { opacity: 0.5 } : undefined}
           onClick={() => { toast("Review submitted — thank you!"); router.push(routes.reviews); }}
         >
           Submit review
-        </button>
+        </Button>
         {!canSubmit && <p id="review-submit-help" className="t-caption" style={{ color: "var(--dim)", textAlign: "center" }}>Add a star rating to submit.</p>}
       </main>
     </>

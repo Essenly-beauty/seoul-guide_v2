@@ -1160,16 +1160,14 @@ export function SubwayRouteController({
         <div className="subway-search-actions subway-search-footer">
           {!canApplyRoute && <p id="subway-route-help" className="subway-action-help">{routeHelp}</p>}
           {route && <Button variant="secondary" onClick={cancelEditor}>Cancel</Button>}
-          <button
-            ref={routeButtonRef}
-            type="button"
-            className="btn"
+          <Button
+            buttonRef={routeButtonRef}
             disabled={!canApplyRoute}
             aria-describedby={!canApplyRoute ? "subway-route-help" : undefined}
             onClick={applyRoute}
           >
             {route ? "Update route" : "Show route"}
-          </button>
+          </Button>
         </div>
       )}
     </section>

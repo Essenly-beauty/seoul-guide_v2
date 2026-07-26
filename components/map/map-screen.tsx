@@ -255,9 +255,9 @@ export function MapScreen() {
         {mode === "map" && (
           <div className="row" style={{ gap: 8, alignItems: "flex-start" }}>
             <CategoryChips value={cat} onChange={handleCat} style={{ flex: 1 }} />
-            <button
-              ref={filterBtnRef}
-              className="chip filterbtn"
+            <Chip
+              buttonRef={filterBtnRef}
+              className="filterbtn"
               aria-label={filterLabel}
               aria-expanded={filterOpen}
               aria-haspopup="dialog"
@@ -265,7 +265,7 @@ export function MapScreen() {
             >
               <Icon name="chev" size="xs" style={{ transform: "rotate(90deg)" }} />
               {activeFilterCount > 0 && <span className="filterbadge" aria-hidden="true">{activeFilterCount}</span>}
-            </button>
+            </Chip>
           </div>
         )}
         {mode === "map" && moved && (
