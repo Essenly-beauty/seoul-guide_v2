@@ -19,7 +19,16 @@ scripts/.cache/
 /MIGRATION.md
 /AUDIT.md
 /docs/*
+!/docs/README.md
+!/docs/service-overview.md
+!/docs/feature-status.md
+!/docs/data-and-integrations.md
+!/docs/launch-readiness.md
+!/docs/decisions-and-history.md
 !/docs/design-system.md
+!/docs/map-first-v2-spec.md
+!/docs/subway-bottom-controller-design.md
+!/docs/user-data-strategy.md
 !/docs/superpowers/
 /docs/superpowers/*
 !/docs/superpowers/specs/

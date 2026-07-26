@@ -1,6 +1,8 @@
 # Essenly — Seoul Beauty Guide
 
-Mobile-webview app for foreign visitors to Seoul: discover salons, spas, head spas and skin clinics in English, shop K-beauty, and hand off navigation to KakaoMap / Naver Map / Google Maps. Map-first IA: login drops straight into a full-screen map home, with subway-route exploration, tabbed place detail, and a 5-tab footer (Map · Ranking · Blog · Favorites · Menu).
+Mobile-webview prototype for foreign visitors to Seoul: discover beauty places in English, explore them by current location or subway station, browse K-beauty products, and hand navigation off to KakaoMap / Naver Map / Google Maps. The current product uses a map-first IA with a 5-tab footer (Map · Stories · Ranking · Saved · My).
+
+> Baseline: commit `563950d` (2026-07-26). This repository currently validates the client UX and navigation logic. It is not yet connected to production authentication, venue data, booking, payment, reviews, or store inventory.
 
 ## Stack
 
@@ -25,21 +27,30 @@ npm run dev   # http://localhost:3000
 | `npm run build:subway-data` | Rebuild `lib/subway-data.json` from public sources (see Data sources below) |
 | `npm run build:subway-svg` | Rebuild the processed metro SVG (`components/subway/seoul-metro.svg` + `metro-svg.ts`) from the Wikimedia base map (see Data sources below) |
 
+## Documentation
+
+- [`docs/README.md`](docs/README.md) — documentation index and source-of-truth order
+- [`docs/service-overview.md`](docs/service-overview.md) — audience, product scope, IA, and core journeys
+- [`docs/feature-status.md`](docs/feature-status.md) — implemented/prototype/missing status by feature
+- [`docs/data-and-integrations.md`](docs/data-and-integrations.md) — data coverage, storage, and external integrations
+- [`docs/launch-readiness.md`](docs/launch-readiness.md) — P0/P1/P2 work required before launch
+- [`docs/design-system.md`](docs/design-system.md) — UI tokens, components, states, and contribution rules
+
 ## Highlights
 
-- **Login → Map home** — sign-in flow drops straight into `/map` (no intermediate home/dashboard); onboarding (interests + beauty profile) runs once before first map view.
-- `/map` — full-screen map home: GPS with Gangnam Station fallback, rating bubble markers, a 7-category filter row (Olive Young · Skin Clinic · Hair Salon · Nail & Lash · Personal Color · Head Spa · Etc) plus per-category detail filters (service tags, zones), draggable distance-ranked bottom sheet, and a search pill that hands off to `/search?cat=<active category>`.
-- **Subway route explorer** — Kakao-Metro-style mode inside `/map`: a full metropolitan-network map (pan/zoom, English station labels, shop-count badges) you tap to open a station callout and set Departure/Arrival; picking both instantly switches back to Map with a route strip of intermediate stops (line-transfer badges included) and filters places to walking radius of any station on the route (`lib/subway.ts`, `components/subway/*`).
-- **Tabbed place detail** (`/place/[id]`) — Info / Menu / Reviews tabs, open-hours status computed from live hours data, and a Naver-first "Get Directions" CTA bar with per-category booking channels (Naver / Kakao / Instagram) plus keyless deep links to KakaoMap / Naver Map / Google Maps and a "show to your taxi driver" card.
+- **Login shell → Map home** — Google, Apple, Kakao, and guest actions currently link directly to `/map`. Authentication, sessions, and one-time onboarding gating are not implemented.
+- `/map` — full-screen map home: GPS with Gangnam Station fallback, rating bubble markers, All plus 8 place categories (Olive Young · Skin Clinic · Hair Salon · Nail & Lash · Personal Color · Head Spa · Mall & Gifts · Etc), rating / English OK / Bookable / price / service-tag filters, a draggable distance-ranked bottom sheet, and a search pill that hands off to `/search?cat=<active category>`.
+- **Subway route explorer** — station search and Departure / Via / Arrival planning live in the bottom controller. Moving the active station recenters the geographic map and refreshes nearby places within 500m / 1km / 2km. Subway lines are not drawn on the geographic map.
+- **Place detail** (`/place/[id]`) — overview, services, reviews, nearby places, Korean-name/address copy, local favorite/rating state, and keyless directions links. Booking channels and several venue details remain demo data.
 - `/ranking` — Olive-Young-style product rankings (Sales Best / Review Best / Brands) with brand search.
 - `/blog` — beauty articles and guides (formerly "Journal").
 - `/favorites` — saved places/products/blog posts across Map, Products, and Blog tabs with a category rail.
 - `/menu` — account hub: profile, bookings, reviews, notifications, settings, support, legal.
-- `/search` — unified English + 한글 search across places, products and blog articles; pre-query state shows a "Top picks" ranked list scoped to the map's active category (via `?cat=`), plus quick links back to Map / Ranking / Blog.
-- **5-tab bottom nav** — Map · Ranking · Blog · Favorites (Saved) · Menu (`components/ui/bottom-nav.tsx`).
+- `/search` — unified English + 한글 search across places, products and blog articles; pre-query state shows a "Top picks" list and quick links back to Map / Ranking / Blog. The map currently passes `?cat=`, but search does not yet apply it as a result filter.
+- **5-tab bottom nav** — Map · Stories · Ranking · Saved · My (`components/ui/bottom-nav.tsx`).
 - `/legal/terms`, `/legal/privacy` — draft legal pages (require counsel review before launch)
 
-> Prototype status: all data is an in-memory sample layer (`lib/data.ts`); bookings, favorites and reviews are client-state only. Legacy route keys (`routes.home`, `routes.spot`, `routes.shop`, `routes.mypage`, `routes.journal`, `routes.journalArticle`) remain as aliases in `lib/routes.ts` for any old deep links, but all in-app code uses the canonical keys (`routes.map`, `routes.ranking`, `routes.blog`, `routes.menu`, `routes.blogArticle`).
+> Prototype status: venue, product, article, booking, and review content is an in-memory sample layer (`lib/data.ts` and page-local arrays). Favorites, profile answers, recent searches/stations, ratings, and feedback use browser-local state. The subway network is a committed public-data artifact, but it has no live arrivals or service alerts. Legacy route keys remain as aliases in `lib/routes.ts` for old deep links.
 
 ## Data sources
 

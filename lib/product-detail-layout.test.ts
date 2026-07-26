@@ -20,13 +20,14 @@ describe("product detail information-page layout", () => {
     expect(routeSource).not.toContain("BottomNav");
   });
 
-  it("renders a collage with overlaid back, share, and save controls", () => {
+  it("renders a collage with a back-only hero overlay (2026-07-26: share/save live in the CTA bar)", () => {
     expect(bodySource).toContain('className="product-detail-gallery"');
     expect(bodySource.match(/<ImgPh/g)?.length ?? 0).toBeGreaterThanOrEqual(3);
     expect(bodySource).toContain("{heroOverlay}");
     expect(routeSource).toContain("BackButtonBordered");
-    expect(routeSource).toContain('aria-label="Share"');
-    expect(routeSource).toContain('kind="product"');
+    // duplicated top share/heart removed — they painted over the back control
+    expect(routeSource).not.toContain("ProductShareButton");
+    expect(routeSource).not.toContain("FavoriteButton");
   });
 
   it("uses the information-page title and anchored section hierarchy", () => {
@@ -90,7 +91,7 @@ describe("product detail information-page layout", () => {
   });
 
   it("shares a structured canonical product URL from every product share control", () => {
-    expect(routeSource).toContain("ProductShareButton");
+    // route hero no longer carries a share control (2026-07-26) — compact bar + CTA bar do
     expect(bodySource).toContain("ProductShareButton");
     expect(ctaSource).toContain("ProductShareButton");
     expect(shareSource).toContain("title:");
