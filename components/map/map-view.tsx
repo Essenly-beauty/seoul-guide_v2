@@ -172,16 +172,21 @@ function mapBottomInset(map: L.Map, fallback: number) {
   return Math.max(0, Math.min(mapRect.height, mapRect.bottom - overlayTop));
 }
 
-function MapWiring({ flyTarget, bottomInsetRatio = 0, bottomInsetPx, focusZoom, focusYBias = 0.5, onUserMove, getBounds, onZoom, onMap, onView }: Pick<MapViewProps, "flyTarget" | "bottomInsetRatio" | "bottomInsetPx" | "focusZoom" | "focusYBias" | "onUserMove" | "getBounds"> & {
+function MapWiring({ flyTarget, bottomInsetRatio = 0, bottomInsetPx, focusZoom, focusYBias = 0.5, onUserMove, getBounds, onZoom, onMap, onView, onBlankTap }: Pick<MapViewProps, "flyTarget" | "bottomInsetRatio" | "bottomInsetPx" | "focusZoom" | "focusYBias" | "onUserMove" | "getBounds"> & {
   onZoom: (z: number) => void;
   onMap: (m: L.Map) => void;
   /** Fires after any pan/zoom settles — collision pass re-projects pixel positions. */
   onView: () => void;
+  /** Tap on empty map — parent dismisses the focused place (standard map UX). */
+  onBlankTap: () => void;
 }) {
   // zoomend/dragend fire for programmatic flyTo/setView too, not just user gestures.
   // Guard with this flag so "Search this area" doesn't appear after a GPS auto-fly.
   const flying = useRef(false);
   const map = useMapEvents({
+    // Markers/popups stop propagation, so this only fires on empty map taps;
+    // Leaflet also suppresses the click that follows a drag.
+    click: () => onBlankTap(),
     dragend: () => { if (!flying.current) onUserMove(); },
     zoomend: () => { onZoom(map.getZoom()); if (!flying.current) onUserMove(); },
     moveend: () => { flying.current = false; onView(); },
@@ -486,6 +491,7 @@ export default function MapView({ center, places, selectedId, onSelect, userLoc,
         onZoom={setZoom}
         onMap={(m) => { mapRef.current = m; }}
         onView={() => setViewVersion((v) => v + 1)}
+        onBlankTap={() => { if (selectedId) onSelect(null); }}
       />
       {userLoc && (
         <Marker
