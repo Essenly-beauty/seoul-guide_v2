@@ -57,7 +57,7 @@ type Review = {
 const REVIEWS: Review[] = [
   { a: "L", who: "Lena", country: "Germany", date: "2026-04-21", stars: 4, verified: true, helpful: 5, hasPhoto: true, keywords: ["Open late"], text: "Walked in at 9pm without a booking and they still took me. Great for jet-lagged evenings." },
   { a: "S", who: "Sarah", country: "United States", date: "2026-04-18", stars: 5, verified: true, helpful: 12, hasPhoto: true, keywords: ["English OK", "Clean facilities"], text: "Nailed my reference photo on the first try. English was good enough to walk through every step." },
-  { a: "M", who: "Mei", country: "Singapore", date: "2026-04-11", stars: 4, verified: true, helpful: 8, hasPhoto: true, keywords: ["Clean facilities"], text: "Pricey but worth it. Booking via Essenly was smoother than calling — deposit confirmed everything." },
+  { a: "M", who: "Mei", country: "Singapore", date: "2026-04-11", stars: 4, verified: true, helpful: 8, hasPhoto: true, keywords: ["Clean facilities"], text: "Pricey but worth it. Booking via MYSEOULDROP was smoother than calling — deposit confirmed everything." },
   { a: "A", who: "Aiko", country: "Japan", date: "2026-04-05", stars: 5, verified: false, helpful: 3, hasPhoto: false, keywords: ["Good for groups"], text: "아주 친절했어요. 일본어 메뉴는 없지만 직원이 번역앱으로 응대." },
   { a: "P", who: "Priya", country: "India", date: "2026-03-28", stars: 5, verified: true, helpful: 9, hasPhoto: false, keywords: ["Good for groups", "English OK"], text: "Came with three friends and they seated us all together. Staff explained aftercare in English." },
   { a: "T", who: "Tom", country: "Australia", date: "2026-03-19", stars: 3, verified: false, helpful: 2, hasPhoto: true, keywords: ["Open late", "Clean facilities"], text: "Spotless place and open till late, but I waited 20 minutes past my slot on a Friday night." },
@@ -79,7 +79,7 @@ const RATING_SHARES = [0.62, 0.24, 0.09, 0.03, 0.02];
 const PHONE = "+82 2-555-0134";
 const PHONE_DISPLAY = "02-555-0134";
 const PHONE_TEL = `tel:${PHONE.replace(/[^+\d]/g, "")}`;
-const websiteFor = (id: string) => `essenly.kr/${id}`;
+const websiteFor = (id: string) => `myseouldrop.kr/${id}`;
 
 const WEEKDAYS = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
@@ -170,7 +170,7 @@ function PlaceActions({ place }: { place: Place }) {
         <Icon name={saved ? "heart" : "heart-o"} />
         <span className="lbl">Save</span>
       </button>
-      <button onClick={() => share(`${place.name} on Essenly`)}>
+      <button onClick={() => share(`${place.name} on MYSEOULDROP`)}>
         <Icon name="share" />
         <span className="lbl">Share</span>
       </button>
@@ -236,8 +236,8 @@ function HomeSection({ place }: { place: Place }) {
         {dealOpen && (
           <div className="stack" style={{ gap: 6, padding: "0 14px 12px" }}>
             <div className="row" style={{ gap: 10 }}>
-              <b className="mono" style={{ fontSize: 15, letterSpacing: "0.06em" }}>ESSENLY10</b>
-              <ActionButton className="small" style={{ color: "var(--accent)", fontWeight: 600, marginLeft: "auto" }} copy="ESSENLY10">
+              <b className="mono" style={{ fontSize: 15, letterSpacing: "0.06em" }}>MYSEOULDROP10</b>
+              <ActionButton className="small" style={{ color: "var(--accent)", fontWeight: 600, marginLeft: "auto" }} copy="MYSEOULDROP10">
                 Copy
               </ActionButton>
             </div>
@@ -302,7 +302,7 @@ function ServicesSection({ place }: { place: Place }) {
       )}
       {place.type === "skin_clinic" && (
         <Notice tone="warning" icon="cross">
-          Medical procedures require a consultation before booking. Essenly does not provide medical advice.
+          Medical procedures require a consultation before booking. MYSEOULDROP does not provide medical advice.
         </Notice>
       )}
       {/* Booking moved out of the CTA bar (§4.6 keeps the bar to share/save/map links). */}
@@ -649,7 +649,7 @@ function MoreMenu({ place }: { place: Place }) {
       {open && (
         <div className="detail-menucard" role="menu" aria-label="Place actions" onKeyDown={onMenuKeyDown}>
           <button ref={(node) => { menuItemRefs.current[0] = node; }} type="button" role="menuitem" tabIndex={-1} onClick={pick(() => copy(window.location.href))}>Copy link</button>
-          <button ref={(node) => { menuItemRefs.current[1] = node; }} type="button" role="menuitem" tabIndex={-1} onClick={pick(() => share(`${place.name} on Essenly`))}>Share</button>
+          <button ref={(node) => { menuItemRefs.current[1] = node; }} type="button" role="menuitem" tabIndex={-1} onClick={pick(() => share(`${place.name} on MYSEOULDROP`))}>Share</button>
           <button ref={(node) => { menuItemRefs.current[2] = node; }} type="button" role="menuitem" tabIndex={-1} onClick={pick(() => toast("Thanks — we'll take a look"))}>Report an issue</button>
         </div>
       )}
@@ -688,7 +688,7 @@ export function PlaceDetailBody({ place, heroOverlay }: { place: Place; heroOver
           <b>{place.name}</b>
           <ActionButton
             iconAction={{ name: "share", label: "Share" }}
-            share={`${place.name} on Essenly`}
+            share={`${place.name} on MYSEOULDROP`}
           />
           <MoreMenu place={place} />
         </div>

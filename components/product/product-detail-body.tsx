@@ -259,7 +259,7 @@ function RoutineSection({ product }: { product: Product }) {
       </Link>
       <KitCta
         href={routes.kitSurvey}
-        title="Try this with a free Essenly kit"
+        title="Try this with a free MYSEOULDROP kit"
         subtitle="Sample kit + routine card, picked up in Seoul."
       />
     </section>

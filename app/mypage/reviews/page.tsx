@@ -21,7 +21,7 @@ const WRITTEN: { type: PlaceType; name: string; kr: string; rating: number; text
   },
   {
     type: "hair_salon", name: "Juno Hair Gangnam", kr: "준오헤어 강남점", rating: 4,
-    text: "Got the K-pop layered cut. Stylist understood my reference photo immediately (showed via Essenly Style refs). Took 2 hours instead of 90min, but the result is exactly what I wanted.",
+    text: "Got the K-pop layered cut. Stylist understood my reference photo immediately (showed via MYSEOULDROP Style refs). Took 2 hours instead of 90min, but the result is exactly what I wanted.",
     date: "Apr 12, 2026",
   },
 ];
@@ -33,7 +33,7 @@ export default function MyReviewsPage() {
       <div className="app-scroll pad stack pagev2">
         <section className="stack sm">
           <SectionHeader title="Your reviews" count={WRITTEN.length} />
-          <p className="t-caption">Reviews show on each place&apos;s page and help future Essenly travelers pick wisely.</p>
+          <p className="t-caption">Reviews show on each place&apos;s page and help future MYSEOULDROP travelers pick wisely.</p>
         </section>
 
         <SectionDivider />

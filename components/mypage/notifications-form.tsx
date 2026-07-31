@@ -10,7 +10,7 @@ const INITIAL: Toggle[] = [
   { key: "booking", icon: "cal", title: "Booking updates", desc: "Confirmations, reminders 48h & 6h before, schedule changes.", hint: "Email · Push", on: true },
   { key: "kit", icon: "gift", title: "Hair kit status", desc: "When your kit is preparing, ready for pickup, or expiring.", hint: "Email", on: true },
   { key: "journal", icon: "book", title: "New journal stories", desc: "Curated K-beauty guides, occasional drops.", hint: "Email", on: false },
-  { key: "promo", icon: "bell", title: "Promotions & events", desc: "Olive Young deals, Seoul beauty events, Essenly campaigns.", hint: "Email", on: false },
+  { key: "promo", icon: "bell", title: "Promotions & events", desc: "Olive Young deals, Seoul beauty events, MYSEOULDROP campaigns.", hint: "Email", on: false },
 ];
 
 export function NotificationsForm() {

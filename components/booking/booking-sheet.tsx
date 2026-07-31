@@ -173,7 +173,7 @@ export function BookingSheet({
                     <div className="kv"><span className="k">Deposit charged</span><span className="v" style={{ color: "var(--accent)" }}>₩45,000</span></div>
                     <div className="kv"><span className="k">Balance at salon</span><span className="v">₩135,000</span></div>
                   </div>
-                  <p className="caption dim" style={{ marginTop: 12 }}>— Essentially Yours, essenly.</p>
+                  <p className="caption dim" style={{ marginTop: 12 }}>— see you in Seoul, MYSEOULDROP.</p>
                 </div>
               )}
             </div>

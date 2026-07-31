@@ -45,7 +45,7 @@ export default function KitStatusPage() {
           </Collapse>
         </section>
 
-        <p className="t-caption dim" style={{ textAlign: "center", marginTop: 6 }}>Questions? hello@essenly.com</p>
+        <p className="t-caption dim" style={{ textAlign: "center", marginTop: 6 }}>Questions? hello@myseouldrop.com</p>
       </div>
       <BottomNav active="menu" />
     </>

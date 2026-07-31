@@ -37,12 +37,12 @@ export default function JournalDetailPage({ params }: { params: { slug: string }
           <h2 className="h2">3. Moisturize + SPF</h2>
           <p className="muted">The seal. Even if you skip every other step, don&apos;t skip this. Korean SPFs are lighter and reapply-friendly.</p>
 
-          <ActionButton variant="secondary" share={`${a.title} | essenly.com`}>
+          <ActionButton variant="secondary" share={`${a.title} | myseouldrop.com`}>
             <Icon name="share" size="sm" /> Share this article
           </ActionButton>
 
           <div className="card accent stack sm">
-            <b className="serif h3">Try Essenly</b>
+            <b className="serif h3">Try MYSEOULDROP</b>
             <p className="small muted">Free K-beauty guide + hair kit for your Seoul trip.</p>
             <Button href={routes.splash}>Sign Up →</Button>
           </div>

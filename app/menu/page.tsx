@@ -7,6 +7,7 @@ import { Avatar } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { IconButton } from "@/components/ui/icon-button";
 import { FeedbackLauncher } from "@/components/ui/feedback-sheet";
+import { BrandMark, BrandWordmark } from "@/components/brand/brand-logo";
 import { ProfileCard } from "@/components/mypage/profile-card";
 import { Icon } from "@/components/icon";
 import { routes } from "@/lib/routes";
@@ -97,6 +98,13 @@ export default function MenuPage() {
             </section>
           </div>
         ))}
+
+        {/* Brand footer — mark + wordmark, the one place the app signs itself */}
+        <div className="stack sm" style={{ alignItems: "center", padding: "20px 0 8px" }}>
+          <BrandMark size={30} />
+          <BrandWordmark size={13} />
+          <span className="caption dim">Seoul beauty, mapped.</span>
+        </div>
       </div>
       <BottomNav active="menu" />
     </>

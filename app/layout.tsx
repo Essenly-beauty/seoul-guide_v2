@@ -4,13 +4,13 @@ import { IconSprite } from "@/components/icon";
 import { ToastProvider } from "@/components/ui/toast";
 
 export const metadata: Metadata = {
-  title: "Essenly — Seoul Beauty Guide",
+  title: "MYSEOULDROP — Seoul Beauty Guide",
   description: "Free K-beauty travel guide + hair kit for your Seoul trip.",
   manifest: "/manifest.json",
   appleWebApp: {
     capable: true,
     statusBarStyle: "default",
-    title: "Essenly",
+    title: "MYSEOULDROP",
   },
 };
 

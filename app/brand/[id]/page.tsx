@@ -20,7 +20,7 @@ export default function BrandPage({ params }: { params: { id: string } }) {
         <div>
           <div className="label">Brand</div>
           <h1 className="h1" style={{ textTransform: "capitalize" }}>{brandName}</h1>
-          <p className="muted" style={{ marginTop: 6 }}>{products.length} product{products.length === 1 ? "" : "s"} on Essenly.</p>
+          <p className="muted" style={{ marginTop: 6 }}>{products.length} product{products.length === 1 ? "" : "s"} on MYSEOULDROP.</p>
         </div>
 
         {products.map((p) => (

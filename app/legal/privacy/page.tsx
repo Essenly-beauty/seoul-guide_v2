@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { LegalArticle } from "@/components/legal/legal-article";
 
-export const metadata: Metadata = { title: "Privacy Policy — Essenly" };
+export const metadata: Metadata = { title: "Privacy Policy — MYSEOULDROP" };
 
 // NOTE: Draft copy. Must pass legal review before public launch.
 const SECTIONS = [
@@ -30,7 +30,7 @@ export default function PrivacyPage() {
     <LegalArticle
       title="Privacy Policy"
       updated="Jul 5, 2026"
-      intro="This policy explains what Essenly collects, why, and the choices you have — written for travelers, not lawyers."
+      intro="This policy explains what MYSEOULDROP collects, why, and the choices you have — written for travelers, not lawyers."
       sections={SECTIONS}
     />
   );

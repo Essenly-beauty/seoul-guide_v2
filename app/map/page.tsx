@@ -3,7 +3,7 @@ import { Suspense } from "react";
 import { MapScreen } from "@/components/map/map-screen";
 import { BottomNav } from "@/components/ui/bottom-nav";
 
-export const metadata: Metadata = { title: "Map — Essenly" };
+export const metadata: Metadata = { title: "Map — MYSEOULDROP" };
 
 export default function MapPage() {
   return (

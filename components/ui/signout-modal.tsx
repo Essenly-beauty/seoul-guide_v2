@@ -25,7 +25,7 @@ export function SignoutModal() {
             aria-describedby="signout-description"
             tabIndex={-1}
           >
-            <h3 id="signout-title" className="h3">Sign out of Essenly?</h3>
+            <h3 id="signout-title" className="h3">Sign out of MYSEOULDROP?</h3>
             <p id="signout-description" className="muted small">You&apos;ll need to sign in again to access your profile and favorites.</p>
             <div className="row" style={{ gap: 10, marginTop: 16 }}>
               <Button buttonRef={cancelRef} variant="secondary" style={{ flex: 1 }} onClick={() => setOpen(false)}>Cancel</Button>

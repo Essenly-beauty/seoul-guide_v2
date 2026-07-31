@@ -37,7 +37,7 @@ export type MapViewProps = {
   getBounds?: (fn: () => { south: number; west: number; north: number; east: number }) => void;
 };
 
-const TILE_URL = "https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png";
+const TILE_URL = "https://{s}.basemaps.cartocdn.com/rastertiles/dark_all/{z}/{x}/{y}{r}.png";
 const ATTRIB = '&copy; <a href="https://www.openstreetmap.org/copyright">OSM</a> &copy; <a href="https://carto.com/attributions">CARTO</a>';
 
 const INITIAL_ZOOM = 15; // neighborhood scale — dots/badges stay tappable on phones (was 13)

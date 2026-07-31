@@ -58,7 +58,7 @@ export default function DesignShowcase() {
       <div className="app-scroll pad stack pagev2" style={{ background: "var(--bg-surface)" }}>
         <div>
           <div className="label">Foundation</div>
-          <div className="h1">Essenly <span style={{ fontStyle: "italic", color: "var(--accent)" }}>design system.</span></div>
+          <div className="h1">MYSEOULDROP <span style={{ fontStyle: "italic", color: "var(--accent)" }}>design system.</span></div>
           <p className="t-caption" style={{ marginTop: 4 }}>docs/design-system.md · raw → semantic → component</p>
         </div>
 

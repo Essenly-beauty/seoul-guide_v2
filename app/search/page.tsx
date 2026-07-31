@@ -177,7 +177,7 @@ function SearchPageInner() {
           inputRef={inputRef}
           style={{ flex: 1 }}
           placeholder="Salons, products, districts… (EN or 한글)"
-          label="Search Essenly"
+          label="Search MYSEOULDROP"
           value={raw}
           onChange={setRaw}
           onClear={clearSearch}

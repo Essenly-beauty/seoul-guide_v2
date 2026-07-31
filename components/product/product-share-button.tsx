@@ -33,7 +33,7 @@ export function ProductShareButton({
 
         share({
           title: product.name,
-          text: `Discover ${product.name} by ${product.brand} on Essenly.`,
+          text: `Discover ${product.name} by ${product.brand} on MYSEOULDROP.`,
           url: url,
         });
       }}

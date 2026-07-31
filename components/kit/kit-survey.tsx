@@ -80,7 +80,7 @@ export function KitSurvey() {
               <span className="ic" style={{ width: 56, height: 56, borderRadius: "var(--r-full)", background: "var(--accent)", color: "#fff", display: "grid", placeItems: "center", margin: "0 auto 10px" }}>
                 <Icon name="gift" />
               </span>
-              <h1 className="h1">Free Essenly Hair Kit</h1>
+              <h1 className="h1">Free MYSEOULDROP Hair Kit</h1>
               <p className="muted" style={{ marginTop: 6 }}>Takes about 30 seconds.</p>
             </div>
             <div className="card stack sm" style={{ marginTop: 14 }}>

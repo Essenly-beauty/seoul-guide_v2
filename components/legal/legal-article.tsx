@@ -14,7 +14,7 @@ export function LegalArticle({
       <TopBar center left={<BackButton fallback={routes.settings} />} title={title} />
       <main className="app-scroll pad stack">
         <div>
-          <div className="label">Essenly Legal</div>
+          <div className="label">MYSEOULDROP Legal</div>
           <h1 className="h1">{title}</h1>
           <div className="caption dim mono" style={{ marginTop: 6 }}>Last updated · {updated}</div>
         </div>

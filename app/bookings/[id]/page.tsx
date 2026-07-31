@@ -21,7 +21,7 @@ export default function BookingDetailPage() {
         right={
           <ActionButton
             iconAction={{ name: "share", label: "Share" }}
-            share="My Essenly booking — HOSU DOSAN, Mon May 4, 14:00"
+            share="My MYSEOULDROP booking — HOSU DOSAN, Mon May 4, 14:00"
           />
         }
       />
@@ -101,10 +101,10 @@ export default function BookingDetailPage() {
               </div>
               <Icon name="chev" size="xs" className="chev" />
             </ActionButton>
-            <ActionButton className="listrow v2" toast="Ask Essenly concierge">
+            <ActionButton className="listrow v2" toast="Ask MYSEOULDROP concierge">
               <span className="ic" style={{ background: "var(--accent)", color: "#fff" }}><Icon name="check" size="sm" /></span>
               <div style={{ flex: 1, minWidth: 0 }}>
-                <b className="t-label-md" style={{ fontSize: 14, display: "block", color: "var(--accent)" }}>Ask Essenly concierge</b>
+                <b className="t-label-md" style={{ fontSize: 14, display: "block", color: "var(--accent)" }}>Ask MYSEOULDROP concierge</b>
                 <div className="t-caption">We answer in English within a few hours</div>
               </div>
               <Icon name="chev" size="xs" className="chev" />

@@ -110,7 +110,7 @@ export function PlacesContent({ category, places }: { category: string; places: 
         ))
       )}
 
-      <KitCta href={routes.kitSurvey} title="Get a free Essenly hair kit" subtitle="Pair your visit with our curated hair pack." />
+      <KitCta href={routes.kitSurvey} title="Get a free MYSEOULDROP hair kit" subtitle="Pair your visit with our curated hair pack." />
     </>
   );
 }
