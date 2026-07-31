@@ -24,6 +24,22 @@ describe("subway endpoint search layout", () => {
     expect(cssSource).toContain(".subway-route-dot.arrival");
   });
 
+  it("aligns endpoint markers with their station value rows", () => {
+    expect(cssSource).toMatch(
+      /\.subway-search-field-stack \.station-combobox\s*\{[^}]*min-height:\s*72px;[^}]*padding:\s*6px 0;/,
+    );
+    expect(cssSource).toMatch(
+      /\.subway-search-field-stack \.station-combobox > label\s*\{[^}]*line-height:\s*16px;/,
+    );
+    expect(cssSource).toMatch(
+      /\.subway-search-route-rail\s*\{[^}]*padding:\s*34px 0 18px;/,
+    );
+    expect(cssSource).toMatch(
+      /\.subway-route-dot\s*\{[^}]*width:\s*20px;[^}]*height:\s*20px;/,
+    );
+    expect(cssSource).toContain(".subway-route-dot:not(.line)::before");
+  });
+
   it("opens station suggestions below the connected fields at full width", () => {
     expect(cssSource).toContain(".subway-search-field-stack .station-search-results");
     expect(cssSource).toContain(".subway-search-fields:has(.station-search-results)");
