@@ -30,8 +30,8 @@
     --info-soft: rgba(111, 159, 255, 0.15);
     --scrim: rgba(0, 0, 0, 0.62);
     --r-sm: 6px;
-    --r-md: 10px;
-    --r-lg: 16px;
+    --r-md: 9px;
+    --r-lg: 14px;
     --r-full: 9999px;
     --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.5);
     --shadow-card: 0 1px 2px rgba(0, 0, 0, 0.4);
@@ -60,6 +60,19 @@
     color: var(--text);
     background: linear-gradient(180deg, #060708, #0d0f13);
     -webkit-font-smoothing: antialiased;
+  }
+  /* Film grain over the whole app — the cheap trick that makes flat dark
+     surfaces feel printed instead of rendered. Pure decoration: no pointer
+     events, sits above dialogs so the texture is uniform. */
+  body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 2000;
+    pointer-events: none;
+    opacity: 0.05;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-size: 180px 180px;
   }
   ::selection {
     background: var(--accent);
@@ -893,7 +906,8 @@
       min-height: auto;
       margin-top: max(0px, calc((100dvh - 880px) / 2));
       border-radius: 22px;
-      box-shadow: 0 30px 70px -24px rgba(15, 23, 42, 0.45);
+      border: 1px solid #1d2026;
+      box-shadow: 0 30px 70px -24px rgba(0, 0, 0, 0.85);
     }
   }
   .app-scroll {
@@ -1031,10 +1045,18 @@
     padding: max(12px, env(safe-area-inset-top)) 16px 12px;
     flex: none;
   }
+  /* Page titles speak in the brand's techno voice; every screen signs off
+     with the MYSEOULDROP period. */
   .topbar .title {
-    font-family: var(--serif);
-    font-size: 18px;
+    font-family: var(--brand-display);
+    font-size: 12.5px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
     flex: 1;
+  }
+  .topbar .title::after {
+    content: ".";
+    color: var(--accent);
   }
   .topbar.center .title {
     text-align: center;
@@ -1139,7 +1161,7 @@
   }
   .hero-img {
     border-radius: var(--r-md);
-    background: linear-gradient(135deg, #e6f3ef, #d9ece6 55%, #eef4f1);
+    background: linear-gradient(135deg, #1c1f25, #23262d 55%, #191c21);
     display: grid;
     place-items: center;
     color: var(--accent);
@@ -1160,7 +1182,9 @@
     gap: 6px;
     padding: 8px 14px;
     border-radius: var(--r-full);
-    background: var(--surface);
+    /* outlined, not filled — reads graphic against the dark field; chips that
+       float over the map re-add a surface fill (.map-top .chip). */
+    background: transparent;
     border: 1px solid var(--border);
     font-size: 13px;
     font-weight: 500;
@@ -1714,12 +1738,13 @@
     color: var(--accent);
     font-weight: 700;
   }
+  /* Active tab is marked by the brand period — a floating orange dot. */
   .bottomnav .nav[aria-current="page"]::before {
     content: "";
     position: absolute;
-    top: -9px;
-    width: 28px;
-    height: 3px;
+    top: -8px;
+    width: 5px;
+    height: 5px;
     border-radius: 999px;
     background: var(--accent);
   }

@@ -17,9 +17,11 @@ export function SectionHeader({ title, count, actionLabel, href, onAction }: {
     ));
   return (
     <div className="row between" style={{ alignItems: "baseline" }}>
-      {/* Board sections are bold sans, not the brand serif (spec §4.6). */}
+      {/* Board sections are bold sans, not the brand serif (spec §4.6);
+          each one signs off with the brand period. */}
       <h2 className="h2" style={{ fontFamily: "var(--sans)", fontSize: 16, fontWeight: 700 }}>
         {title}
+        <span style={{ color: "var(--accent)" }} aria-hidden="true">.</span>
         {count !== undefined && <span className="muted" style={{ fontWeight: 500, fontSize: 13 }}> · {count}</span>}
       </h2>
       {action}
