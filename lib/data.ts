@@ -2,6 +2,9 @@
 // Filters in Shop and Spot operate over these in-memory arrays (client-side, single-select, AND-combined).
 
 import type { IconName } from "@/components/icon";
+import { CREATRIP_PLACES } from "./generated/creatrip-places";
+import { OLIVEYOUNG_PLACES } from "./generated/oliveyoung-places";
+import { ADOS_PLACES } from "./generated/ados-places";
 
 // ── Taxonomy (matches real app enums) ─────────────────────
 export type PlaceType =
@@ -16,7 +19,9 @@ export type ProductChannel = "olive_young" | "korea_exclusive";
 
 export type ZoneKey =
   | "myeongdong" | "hongdae" | "gangnam_station" | "apgujeong" | "cheongdam"
-  | "sinsa" | "seongsu" | "samsung" | "jongno" | "hannam" | "itaewon" | "hangang";
+  | "sinsa" | "seongsu" | "samsung" | "jongno" | "hannam" | "itaewon" | "hangang"
+  // Coarse zones for the Creatrip import — areas outside the original 12.
+  | "jamsil" | "yeongdeungpo" | "seoul_etc" | "busan" | "gyeonggi";
 
 // ── Zone metadata ─────────────────────────────────────────
 export const ZONES: { key: ZoneKey; label: string; district: string }[] = [
@@ -32,12 +37,18 @@ export const ZONES: { key: ZoneKey; label: string; district: string }[] = [
   { key: "hannam", label: "Hannam", district: "Yongsan-gu" },
   { key: "itaewon", label: "Itaewon · Gyeongnidan-gil", district: "Yongsan-gu" },
   { key: "hangang", label: "Han River", district: "Multiple" },
+  { key: "jamsil", label: "Jamsil · Songpa", district: "Songpa-gu" },
+  { key: "yeongdeungpo", label: "Yeouido · Yeongdeungpo", district: "Yeongdeungpo-gu" },
+  { key: "seoul_etc", label: "Other Seoul", district: "Seoul" },
+  { key: "busan", label: "Busan", district: "Busan" },
+  { key: "gyeonggi", label: "Gyeonggi (Seongnam · Suwon)", district: "Gyeonggi-do" },
 ];
 
 export const ZONE_LABEL: Record<ZoneKey, string> = {
   myeongdong: "Myeongdong", hongdae: "Hongdae", gangnam_station: "Gangnam",
   apgujeong: "Apgujeong", cheongdam: "Cheongdam", sinsa: "Sinsa", seongsu: "Seongsu",
   samsung: "Samsung", jongno: "Jongno", hannam: "Hannam", itaewon: "Itaewon", hangang: "Han River",
+  jamsil: "Jamsil", yeongdeungpo: "Yeouido", seoul_etc: "Seoul", busan: "Busan", gyeonggi: "Gyeonggi",
 };
 
 export function zoneShort(key: string): string {
@@ -56,6 +67,9 @@ export const TYPE_ICON: Record<PlaceType, IconName> = {
   olive_young: "bag", skin_clinic: "cross", hair_salon: "scissors",
   nail_lash: "spa", personal_color: "mark", head_spa: "spa", mall: "gift", etc: "pin",
 };
+
+/** Olive Young's brand lime — used by the OY brand mark on chips and map pins. */
+export const OY_BRAND_GREEN = "#9bce26";
 
 /** Category accent colors (spec v2 §3.1) — shared by filter chips, map pins, and search rows.
  *  Mirrored as --c-* custom properties in globals.css for CSS-only consumers. */
@@ -108,9 +122,9 @@ export const SERVICE_FILTERS: Partial<Record<PlaceType, { key: string; label: st
 };
 
 export const CATEGORY_ZONES: Partial<Record<PlaceType, ZoneKey[]>> = {
-  hair_salon: ["gangnam_station", "apgujeong", "cheongdam", "hongdae", "myeongdong", "itaewon"],
+  hair_salon: ["gangnam_station", "apgujeong", "cheongdam", "hongdae", "myeongdong", "itaewon", "seongsu", "sinsa", "samsung", "jongno", "jamsil", "yeongdeungpo", "busan"],
   skin_clinic: ["gangnam_station", "apgujeong", "cheongdam", "myeongdong"],
-  head_spa: ["apgujeong", "cheongdam", "gangnam_station", "hongdae", "myeongdong", "hannam"],
+  head_spa: ["apgujeong", "cheongdam", "gangnam_station", "hongdae", "myeongdong", "hannam", "jongno"],
   nail_lash: ["gangnam_station", "hongdae", "myeongdong"],
   personal_color: ["gangnam_station", "hongdae"],
   mall: ["myeongdong", "jongno", "samsung", "gangnam_station", "hangang"],
@@ -145,6 +159,13 @@ export type Place = {
   serviceTags?: string[];
   bookingChannels?: BookingChannel[];
   priceConfirmedDaysAgo?: number;
+  // Creatrip import extras — kept so the CSV round-trips losslessly.
+  priceFromUsd?: number;
+  url?: string;
+  geoSource?: "address" | "area"; // "area" = neighborhood-centroid fallback, pin is approximate
+  // "A drop of Seoul" import — editorial descriptions shown on the detail page.
+  about?: string;
+  aboutKr?: string;
 };
 
 export const PLACES: Place[] = [
@@ -203,6 +224,12 @@ export const PLACES: Place[] = [
   { id: "cloud-headspa-cheongdam", name: "Cloud Head Spa Cheongdam", nameKr: "클라우드 헤드스파 청담", type: "head_spa", zone: "cheongdam", priceRange: "₩₩₩", rating: 4.7, ratingCount: 95, tags: ["scalp", "luxury"], nearestStation: "Cheongdam", address: "서울 강남구 도산대로 456", lat: 37.5252, lng: 127.0475, englishOk: true, hours: { open: "10:00", close: "21:00" }, stationWalk: { station: "Cheongdam", exit: "13", minutes: 5 }, serviceTags: ["scalp", "aroma"], bookingChannels: ["naver"], priceConfirmedDaysAgo: 5 },
   { id: "onda-scalp-myeongdong", name: "Onda Scalp Myeongdong", nameKr: "온다스캘프 명동", type: "head_spa", zone: "myeongdong", priceRange: "₩₩", rating: 4.5, ratingCount: 110, tags: ["scalp", "diagnosis"], nearestStation: "Myeongdong", address: "서울 중구 퇴계로 123", lat: 37.5622, lng: 126.9829, englishOk: true, hours: { open: "10:30", close: "21:00" }, stationWalk: { station: "Myeongdong", exit: "3", minutes: 2 }, serviceTags: ["scalp", "diagnosis"], bookingChannels: ["kakao"], priceConfirmedDaysAgo: 10 },
   { id: "siloam-sauna", name: "Siloam Sauna", nameKr: "실로암사우나", type: "etc", zone: "myeongdong", district: "Jung-gu", priceRange: "₩", rating: 4.2, ratingCount: 450, tags: ["jjimjilbang", "sauna", "24h"], nearestStation: "Seoul Station", address: "서울 중구 중림로 49", lat: 37.5554, lng: 126.9692, hours: { open: "00:00", close: "23:59" }, stationWalk: { station: "Seoul Station", exit: "15", minutes: 5 }, badge: { cls: "info", text: "24h" } },
+  // Creatrip hair-salon import (206 rows → scripts/build-creatrip-places.mjs).
+  ...CREATRIP_PLACES,
+  // Seoul Olive Young stores from OpenStreetMap (scripts/build-oliveyoung-places.mjs).
+  ...OLIVEYOUNG_PLACES,
+  // "A drop of Seoul" attractions + towers & markets (scripts/build-ados-places.mjs).
+  ...ADOS_PLACES,
 ];
 
 // ── Products ──────────────────────────────────────────────

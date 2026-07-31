@@ -2,11 +2,24 @@ import { describe, it, expect } from "vitest";
 import { PLACES, PRODUCTS, MAP_CATEGORIES, TYPE_LABEL } from "./data";
 
 describe("PLACES coordinates", () => {
-  it("every place has coords inside the Seoul bounding box", () => {
+  // The Creatrip import added Busan and Gyeonggi places; per-metro checks live
+  // in creatrip-places.test.ts. Here: everything is at least inside Korea, and
+  // places in a Seoul zone really are in Seoul.
+  it("every place has coords inside the Korea bounding box", () => {
     for (const p of PLACES) {
+      expect(p.lat, `${p.id} lat`).toBeGreaterThan(33);
+      expect(p.lat, `${p.id} lat`).toBeLessThan(38.7);
+      expect(p.lng, `${p.id} lng`).toBeGreaterThan(124.5);
+      expect(p.lng, `${p.id} lng`).toBeLessThan(132);
+    }
+  });
+
+  it("places in Seoul zones stay inside the Seoul bounding box", () => {
+    for (const p of PLACES) {
+      if (p.zone === "busan" || p.zone === "gyeonggi") continue;
       expect(p.lat, `${p.id} lat`).toBeGreaterThan(37.4);
-      expect(p.lat, `${p.id} lat`).toBeLessThan(37.7);
-      expect(p.lng, `${p.id} lng`).toBeGreaterThan(126.8);
+      expect(p.lat, `${p.id} lat`).toBeLessThan(37.75);
+      expect(p.lng, `${p.id} lng`).toBeGreaterThan(126.75);
       expect(p.lng, `${p.id} lng`).toBeLessThan(127.2);
     }
   });

@@ -185,8 +185,12 @@ function PlaceActions({ place }: { place: Place }) {
 // ── Home (d-home): visit-decision summary + actions ───────
 function HomeSection({ place }: { place: Place }) {
   const [dealOpen, setDealOpen] = useState(false);
+  const about = place.about || place.aboutKr;
   return (
     <section id="d-home" className="d-sec stack sm">
+      {about && (
+        <p className="small muted" style={{ margin: 0, lineHeight: 1.55 }}>{about}</p>
+      )}
       {place.hours && (
         <div className="inforow">
           <Icon name="cal" size="xs" />

@@ -7,7 +7,7 @@ import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 import { CategoryBadge } from "@/components/category/category-badge";
 import { Icon } from "@/components/icon";
-import { TYPE_COLOR, TYPE_ICON, TYPE_LABEL, zoneShort, type Place } from "@/lib/data";
+import { OY_BRAND_GREEN, TYPE_COLOR, TYPE_ICON, TYPE_LABEL, zoneShort, type Place } from "@/lib/data";
 import { formatDistance, googleDirectionsUrl, haversineKm, walkMinutes, type LatLng } from "@/lib/geo";
 import { visibleMapAnchor } from "@/lib/map-camera";
 import { routes } from "@/lib/routes";
@@ -57,6 +57,14 @@ const reducedMotion = () =>
   typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 type PinMode = "dot" | "badge";
+
+/** Pin tile color/glyph — Olive Young uses its brand mark (white OY on brand
+    lime, same as CategoryBadge) so stores read at a glance like on Kakao Map. */
+const pinColor = (type: Place["type"]) => (type === "olive_young" ? OY_BRAND_GREEN : TYPE_COLOR[type]);
+const pinGlyph = (type: Place["type"], px: number) =>
+  type === "olive_young"
+    ? `<svg viewBox="0 0 24 24" style="width:${px + 4}px;height:${px + 4}px"><text x="12" y="16.4" text-anchor="middle" font-size="11.5" font-weight="800" fill="#fff" letter-spacing="-0.5">OY</text></svg>`
+    : `<svg class="icn" style="width:${px}px;height:${px}px" aria-hidden="true"><use href="#i-${TYPE_ICON[type]}"/></svg>`;
 function pinMode(place: Place, selected: boolean, zoom: number): PinMode {
   if (selected) return "badge"; // selected pin is a badge at any zoom (§5.1)
   if (zoom >= BADGE_ALL_ZOOM) return "badge";
@@ -76,7 +84,7 @@ function pinIcon(place: Place, selected: boolean, mode: PinMode) {
     mode === "dot"
       ? L.divIcon({
           className: "map-anchor",
-          html: `<div class="pin-hitarea"><div class="pin-dot" style="background:${TYPE_COLOR[place.type]}"></div></div>`,
+          html: `<div class="pin-hitarea"><div class="pin-dot" style="background:${pinColor(place.type)}"></div></div>`,
           iconSize: [44, 44],
           iconAnchor: [22, 22],
         })
@@ -85,13 +93,13 @@ function pinIcon(place: Place, selected: boolean, mode: PinMode) {
             // Compact enlarged icon — rating/LIVE already live in the callout above;
             // the old wide dark badge duplicated them and covered neighboring pins.
             className: "map-anchor",
-            html: `<div class="pin-hitarea badge-hit"><div class="pin-selected" style="background:${TYPE_COLOR[place.type]}"><svg class="icn" aria-hidden="true"><use href="#i-${TYPE_ICON[place.type]}"/></svg></div></div>`,
+            html: `<div class="pin-hitarea badge-hit"><div class="pin-selected" style="background:${pinColor(place.type)}">${place.type === "olive_young" ? pinGlyph(place.type, 20) : `<svg class="icn" aria-hidden="true"><use href="#i-${TYPE_ICON[place.type]}"/></svg>`}</div></div>`,
             iconSize: [44, 44],
             iconAnchor: [22, 44],
           })
         : L.divIcon({
             className: "map-anchor",
-            html: `<div class="pin-hitarea badge-hit"><div class="pin-badge"><span class="catbadge" style="width:17px;height:17px;background:${TYPE_COLOR[place.type]}"><svg class="icn" style="width:11px;height:11px" aria-hidden="true"><use href="#i-${TYPE_ICON[place.type]}"/></svg></span>${place.rating ?? ""}</div></div>`,
+            html: `<div class="pin-hitarea badge-hit"><div class="pin-badge"><span class="catbadge" style="width:17px;height:17px;background:${pinColor(place.type)}">${pinGlyph(place.type, 11)}</span>${place.rating ?? ""}</div></div>`,
             iconSize: [44, 44],
             iconAnchor: [22, 44],
           });
@@ -407,6 +415,10 @@ export default function MapView({ center, places, selectedId, onSelect, userLoc,
   // greedily keep the highest-rated one per overlap region; losers demote to dots.
   // Re-runs whenever the view settles (viewVersion) so panning re-resolves overlaps.
   const [viewVersion, setViewVersion] = useState(0);
+  // MapWiring re-runs its wiring effect whenever these identities change; inline
+  // closures here re-render MapView every effect pass → maximum update depth loop.
+  const handleMap = useCallback((m: L.Map) => { mapRef.current = m; }, []);
+  const handleView = useCallback(() => setViewVersion((v) => v + 1), []);
   const demoted = useMemo(() => {
     const map = mapRef.current;
     const out = new Set<string>();
@@ -489,8 +501,8 @@ export default function MapView({ center, places, selectedId, onSelect, userLoc,
         onUserMove={onUserMove}
         getBounds={getBounds}
         onZoom={setZoom}
-        onMap={(m) => { mapRef.current = m; }}
-        onView={() => setViewVersion((v) => v + 1)}
+        onMap={handleMap}
+        onView={handleView}
         onBlankTap={() => { if (selectedId) onSelect(null); }}
       />
       {userLoc && (

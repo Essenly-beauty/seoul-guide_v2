@@ -1,14 +1,13 @@
 "use client";
 
 // Feedback channel bottom sheet (docs/user-data-strategy.md §5): category
-// 4-choice + message + optional "get a reply" toggle; current pathname is
-// auto-attached. BottomSheet owns portal, focus trap, and close behavior.
+// 4-choice + message; current pathname is auto-attached. BottomSheet owns
+// portal, focus trap, and close behavior.
 
 import { useState, type ReactNode } from "react";
 import { BottomSheet } from "@/components/ui/bottom-sheet";
 import { Button, type ButtonVariant } from "@/components/ui/button";
 import { Chip } from "@/components/ui/chip";
-import { Switch } from "@/components/ui/switch";
 import { useToast } from "@/components/ui/toast";
 import { submitFeedback, type FeedbackCategory } from "@/lib/feedback";
 
@@ -23,13 +22,12 @@ function FeedbackSheet({ onClose }: { onClose: () => void }) {
   const { toast } = useToast();
   const [category, setCategory] = useState<FeedbackCategory | null>(null);
   const [message, setMessage] = useState("");
-  const [contactOk, setContactOk] = useState(false);
 
   const canSubmit = category !== null && message.trim().length > 0;
 
   const submit = () => {
     if (!category || !canSubmit) return;
-    submitFeedback({ category, message: message.trim(), contactOk, page: window.location.pathname });
+    submitFeedback({ category, message: message.trim(), contactOk: false, page: window.location.pathname });
     toast("Thanks — we read every note.");
     onClose();
   };
@@ -60,13 +58,6 @@ function FeedbackSheet({ onClose }: { onClose: () => void }) {
         onChange={(e) => setMessage(e.target.value)}
         style={{ resize: "none", minHeight: 96, lineHeight: 1.45 }}
       />
-      <div className="row" style={{ gap: 12 }}>
-        <div style={{ flex: 1, minWidth: 0 }}>
-          <b className="t-label-md" style={{ fontSize: 14, display: "block" }}>Get a reply</b>
-          <div className="t-caption">We may follow up on your account email.</div>
-        </div>
-        <Switch checked={contactOk} label="Get a reply" onChange={setContactOk} />
-      </div>
       <Button disabled={!canSubmit} style={canSubmit ? undefined : { opacity: 0.5 }} onClick={submit}>
         Send feedback
       </Button>
