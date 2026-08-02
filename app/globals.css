@@ -159,7 +159,7 @@
     background: var(--surface);
     border-top: 1px solid var(--border);
     border-radius: 16px 16px 0 0;
-    box-shadow: 0 -10px 30px rgba(15, 23, 42, 0.16);
+    box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.55);
     overflow: hidden;
     animation: sheetup 0.24s cubic-bezier(0.16, 1, 0.3, 1);
     letter-spacing: 0;
@@ -2441,6 +2441,17 @@
   }
   .map-screen.subway-mode .leaflet-bottom { bottom: 60%; }
   .map-screen.subway-mode.subway-route-ready .leaflet-bottom { bottom: 72%; }
+  /* Kakao-style: while the route form is being edited the controller takes
+     the whole screen — the map (and its top chrome) returns once a route is
+     shown or a station browse begins. */
+  .map-screen.subway-mode.subway-editing .subway-controller {
+    height: 100%;
+    border-radius: 0;
+    border-top: none;
+  }
+  .map-screen.subway-mode.subway-editing .map-top {
+    display: none;
+  }
   .map-canvas {
     position: absolute;
     inset: 0;

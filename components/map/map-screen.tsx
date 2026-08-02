@@ -202,7 +202,7 @@ export function MapScreen() {
   }, [status, loc, deepLinkedPlace, mode]);
 
   return (
-    <div className={`map-screen${mode === "subway" ? ` subway-mode${subwayRouteReady ? " subway-route-ready" : ""}` : ""}`}>
+    <div className={`map-screen${mode === "subway" ? ` subway-mode${subwayRouteReady ? " subway-route-ready" : ""}${subwayEditing ? " subway-editing" : ""}` : ""}`}>
       <MapView
         center={centerRef.current}
         places={places}
