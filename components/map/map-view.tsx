@@ -104,6 +104,8 @@ const oyOliveHtml = (px: number) => `<svg viewBox="0 0 24 24" style="width:${px}
   <ellipse cx="12" cy="12.6" rx="5" ry="6.2" fill="none" stroke="#9bce26" stroke-width="2.6" transform="rotate(16 12 12.6)"/>
   <ellipse cx="14.1" cy="7.4" rx="1.7" ry="2.1" fill="#e0716e" transform="rotate(20 14.1 7.4)"/>
 </svg>`;
+/** OY discs run ~2x the ordinary 12px dots — the brand ask is "spot me first". */
+const OY_DOT_PX = 26;
 const pinGlyph = (type: Place["type"], px: number) =>
   type === "olive_young"
     ? `<svg viewBox="0 0 24 24" style="width:${px + 4}px;height:${px + 4}px"><text x="12" y="16.4" text-anchor="middle" font-size="11.5" font-weight="800" fill="#fff" letter-spacing="-0.5">OY</text></svg>`
@@ -128,7 +130,7 @@ function pinIcon(place: Place, selected: boolean, mode: PinMode, hero = false, v
       ? L.divIcon({
           className: "map-anchor",
           html: place.type === "olive_young"
-            ? `<div class="pin-hitarea"><div class="pin-oy">${oyOliveHtml(19)}</div></div>`
+            ? `<div class="pin-hitarea"><div class="pin-oy">${oyOliveHtml(OY_DOT_PX)}</div></div>`
             : `<div class="pin-hitarea"><div class="pin-dot" style="background:${pinColor(place.type, vivid)}"></div></div>`,
           iconSize: [44, 44],
           iconAnchor: [22, 22],

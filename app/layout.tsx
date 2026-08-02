@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import { IconSprite } from "@/components/icon";
+import { RouteProgress } from "@/components/ui/route-progress";
 import { ToastProvider } from "@/components/ui/toast";
 
 export const metadata: Metadata = {
@@ -28,7 +29,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body>
         <IconSprite />
         <ToastProvider>
-          <div className="app-shell">{children}</div>
+          <div className="app-shell">
+            <RouteProgress />
+            {children}
+          </div>
         </ToastProvider>
       </body>
     </html>

@@ -21,6 +21,7 @@ export function CategoryChips({ selected, onToggle, onClear, className, style }:
       {MAP_CATEGORIES.map((c) => (
         <Chip
           key={c.key}
+          className={c.key === "all" ? "chip-all" : undefined}
           selected={c.key === "all" ? selected.length === 0 : selected.includes(c.key as PlaceType)}
           onClick={() => (c.key === "all" ? onClear() : onToggle(c.key as PlaceType))}
         >

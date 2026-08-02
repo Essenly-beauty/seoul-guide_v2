@@ -105,13 +105,14 @@ describe("subway endpoint search layout", () => {
   });
 
   it("uses compact line badges and quiet accessible context icons", () => {
+    // Result rows grew to 64px/15.5px on 2026-08-02 — the list read too small.
     expect(cssSource).toMatch(
-      /\.station-result-options > button\s*\{[^}]*min-height:\s*56px;[^}]*gap:\s*6px;/,
+      /\.station-result-options > button\s*\{[^}]*min-height:\s*64px;[^}]*gap:\s*9px;/,
     );
     expect(cssSource).toMatch(
       /\.station-linebadge\s*\{[^}]*min-width:\s*20px;[^}]*height:\s*20px;/,
     );
-    expect(cssSource).toMatch(/\.station-result-name b\s*\{[^}]*font-size:\s*14px;/);
+    expect(cssSource).toMatch(/\.station-result-name b\s*\{[^}]*font-size:\s*15\.5px;/);
     expect(cssSource).toMatch(/\.station-result-name > span\s*\{[^}]*font-size:\s*12px;/);
     expect(controllerSource).toContain('name={context === "Recent" ? "history" : "locate"}');
     expect(controllerSource).toContain('<span className="sr-only">{context}</span>');

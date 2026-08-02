@@ -160,10 +160,10 @@ export function MapScreen() {
       return nearby;
     }
 
-    let list = applyFilters(PLACES, cats, filters);
+    let list = applyFilters(PLACES, cats, filters, loc ?? GANGNAM_STATION);
     if (area) list = list.filter((p) => p.lat >= area.south && p.lat <= area.north && p.lng >= area.west && p.lng <= area.east);
     return list;
-  }, [activeStation, area, cats, filters, mode, stationCategory, stationRadius]);
+  }, [activeStation, area, cats, filters, loc, mode, stationCategory, stationRadius]);
 
   const nearbyStationId = useMemo(() => {
     if (!loc) return null;
@@ -234,7 +234,7 @@ export function MapScreen() {
         routePath={mode === "subway" && subwayRouteReady && route
           ? route.stations.map((id) => ({ lat: STATIONS[id].lat, lng: STATIONS[id].lng }))
           : null}
-        vividPins={mode === "map" ? cats.length > 0 : stationCategory !== "all"}
+        vividPins={mode === "map" ? cats.length > 0 : true /* station browse is a focused task */}
         onStationClick={mode === "map" ? (id) => {
           // Tapping a station disc opens the subway browse with it preset as
           // departure — the editor's "Near {station}" list shows radius shops.

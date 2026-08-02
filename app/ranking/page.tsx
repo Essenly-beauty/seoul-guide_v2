@@ -120,7 +120,10 @@ function BrandsPanel() {
         clearLabel="Clear brand search"
         clearVariant="soft"
       />
-      <SectionHeader title="All brands" count={brands.length} />
+      {/* extra air between the search field and the list header (2026-08-02) */}
+      <div style={{ marginTop: 14 }}>
+        <SectionHeader title="All brands" count={brands.length} />
+      </div>
       {brands.length === 0 ? (
         <EmptyState>No brands match &quot;{q}&quot;.</EmptyState>
       ) : (
