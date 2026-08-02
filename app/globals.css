@@ -1347,8 +1347,8 @@
     width: 38px;
     height: 38px;
     border-radius: var(--r-md);
-    background: var(--accent-soft);
-    color: var(--accent);
+    background: var(--surface-hover);
+    color: var(--muted);
     display: grid;
     place-items: center;
     flex: none;
@@ -1379,8 +1379,8 @@
     width: 52px;
     height: 52px;
     border-radius: var(--r-md);
-    background: var(--accent-soft);
-    color: var(--accent);
+    background: var(--surface-hover);
+    color: var(--muted);
     display: grid;
     place-items: center;
     flex: none;
@@ -1482,7 +1482,7 @@
     align-items: center;
     gap: 13px;
     background: var(--surface);
-    border: 1.5px solid var(--border);
+    border: 1px solid var(--border);
     border-radius: var(--r-md);
     padding: 15px;
     width: 100%;
@@ -1510,8 +1510,10 @@
     flex: none;
   }
   .pickcard[aria-pressed="true"] {
-    border-color: var(--accent);
-    background: var(--accent-soft);
+    /* whisper of the accent — several cards select at once, so a hairline
+       edge and a faint wash instead of five glowing orange panels */
+    border-color: rgba(245, 88, 0, 0.4);
+    background: rgba(245, 88, 0, 0.06);
   }
   .pickcard[aria-pressed="true"] .ic {
     background: var(--accent);
@@ -1801,8 +1803,8 @@
     width: 40px;
     height: 40px;
     border-radius: var(--r-md);
-    background: var(--accent-soft);
-    color: var(--accent);
+    background: var(--surface-hover);
+    color: var(--muted);
     display: grid;
     place-items: center;
     flex: none;
