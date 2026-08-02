@@ -202,7 +202,6 @@ function SearchPageInner() {
                 {recent.map((term) => (
                   <div key={term} className="row" style={{ gap: 10, padding: "4px 0" }}>
                     <button type="button" style={rowBtn} onClick={() => fillQuery(term)}>
-                      <Icon name="search" size="sm" style={{ color: "var(--muted)" }} aria-hidden="true" />
                       <span style={{ flex: 1, minWidth: 0, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{term}</span>
                     </button>
                     <IconButton name="x" label={`Remove ${term}`} iconSize="xs" onClick={() => removeRecent(term)} />

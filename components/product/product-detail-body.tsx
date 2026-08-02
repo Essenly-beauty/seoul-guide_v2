@@ -56,7 +56,7 @@ function ProductTitleBlock({ product }: { product: Product }) {
       >
         <Link
           href={routes.brand(brandSlug(product.brand))}
-          style={{ color: "var(--accent)", fontWeight: 700 }}
+          style={{ color: "var(--text)", fontWeight: 700 }}
         >
           {product.brand}
         </Link>
@@ -95,7 +95,7 @@ function OverviewSection({ product }: { product: Product }) {
     <section id="p-overview" className="d-sec stack sm product-detail-section">
       <SectionHeader title="Overview" />
       {matchBits.length > 0 && (
-        <Notice tone="accent" icon="check">
+        <Notice tone="info" icon="check">
           Matches your {matchBits.join(" + ")} concerns.
         </Notice>
       )}
@@ -308,7 +308,7 @@ export function ProductDetailBody({ product, heroOverlay }: {
           aria-label={`${product.name} product gallery`}
         >
           <ImgPh className="product-detail-gallery-main">
-            <Icon name="bag" style={{ width: 44, height: 44, color: "var(--accent)" }} />
+            <Icon name="bag" style={{ width: 44, height: 44, color: "var(--dim)" }} />
           </ImgPh>
           <ImgPh><span className="label">{product.brand}</span></ImgPh>
           <ImgPh>

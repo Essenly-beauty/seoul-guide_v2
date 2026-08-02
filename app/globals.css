@@ -34,8 +34,11 @@
     --r-lg: 14px;
     --r-full: 9999px;
     --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.5);
-    --shadow-card: 0 1px 2px rgba(0, 0, 0, 0.4);
-    --shadow-float: 0 8px 24px -6px rgba(0, 0, 0, 0.65);
+    /* dark elevation = shadow below + hairline light above */
+    --shadow-card: 0 2px 6px -1px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.045);
+    --shadow-float: 0 14px 36px -10px rgba(0, 0, 0, 0.8), 0 2px 8px rgba(0, 0, 0, 0.4);
+    /* brand-tinted lift for primary CTAs — orange light source */
+    --shadow-accent: 0 10px 26px -10px rgba(245, 88, 0, 0.55);
     --serif: "Fraunces", Georgia, "Times New Roman", serif;
     --sans: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
     --mono: "Geist Mono", ui-monospace, "SF Mono", Menlo, monospace;
@@ -505,7 +508,7 @@
     padding: 10px 16px max(10px, env(safe-area-inset-bottom));
     background: var(--surface);
     border-top: 1px solid var(--border);
-    box-shadow: 0 -6px 18px rgba(15, 23, 42, 0.08);
+    box-shadow: 0 -8px 22px rgba(0, 0, 0, 0.55);
   }
   .subway-search-footer .btn { flex: 1; }
   .subway-action-help {
@@ -1201,6 +1204,7 @@
     background: var(--accent);
     border-color: var(--accent);
     color: #fff;
+    box-shadow: var(--shadow-accent);
     font-weight: 600;
   }
   .chip.soft[aria-pressed="true"] {
@@ -1246,19 +1250,19 @@
   }
   .badge.warning {
     background: var(--warning-soft);
-    color: #b45309;
+    color: var(--warning);
   }
   .badge.info {
     background: var(--info-soft);
-    color: #1d4ed8;
+    color: var(--info);
   }
   .badge.success {
     background: var(--success-soft);
-    color: #15803d;
+    color: var(--success);
   }
   .badge.error {
     background: var(--error-soft);
-    color: #b91c1c;
+    color: var(--error);
   }
   .badge.dim {
     background: var(--surface-hover);
@@ -1719,6 +1723,7 @@
     display: flex;
     background: var(--surface);
     border-top: 1px solid var(--border);
+    box-shadow: 0 -8px 24px rgba(0, 0, 0, 0.45);
     padding: 8px 0 max(20px, env(safe-area-inset-bottom));
   }
   .bottomnav .nav {
@@ -1738,13 +1743,14 @@
     color: var(--accent);
     font-weight: 700;
   }
-  /* Active tab is marked by the brand period — a floating orange dot. */
+  /* Non-color current-page signal (a11y contract): a thin notch sitting on
+     the nav's top border — not the floating dot, which read as map debris. */
   .bottomnav .nav[aria-current="page"]::before {
     content: "";
     position: absolute;
-    top: -8px;
-    width: 5px;
-    height: 5px;
+    top: -9px;
+    width: 16px;
+    height: 2px;
     border-radius: 999px;
     background: var(--accent);
   }
@@ -2451,6 +2457,18 @@
     grid-template-columns: 1fr;
     gap: 8px;
     pointer-events: none;
+    /* own stacking context so the ::before scrim can sit behind the controls */
+    isolation: isolate;
+  }
+  /* Top scrim — dark fading to clear, so the header controls read as a layer
+     floating above the basemap instead of competing with it. */
+  .map-top::before {
+    content: "";
+    position: absolute;
+    inset: 0 0 -56px 0;
+    z-index: -1;
+    pointer-events: none;
+    background: linear-gradient(180deg, rgba(6, 7, 8, 0.78), rgba(6, 7, 8, 0.38) 55%, rgba(6, 7, 8, 0));
   }
   .map-top > * { pointer-events: auto; min-width: 0; }
   .map-searchpill {
@@ -2461,7 +2479,10 @@
     gap: 8px;
     min-height: 44px;
     padding: 10px 14px;
-    background: var(--surface);
+    /* translucent + blur — floating controls sample the map beneath them */
+    background: rgba(22, 24, 29, 0.72);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
     border: 1px solid var(--border);
     border-radius: var(--r-full);
     box-shadow: var(--shadow-float);
@@ -2485,7 +2506,9 @@
      specificity; without this guard this rule's background would win and
      erase the accent fill on the active chip. */
   .map-top .chip:not(.selected) {
-    background: var(--surface);
+    background: rgba(22, 24, 29, 0.72);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
   }
   /* divIcon markers */
   .map-anchor { background: none; border: none; }
@@ -2523,7 +2546,9 @@
     height: 44px;
     display: grid;
     place-items: center;
-    background: var(--surface);
+    background: rgba(22, 24, 29, 0.72);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
     border: 1px solid var(--border);
     border-radius: var(--r-full);
     box-shadow: var(--shadow-float);
@@ -3106,7 +3131,8 @@
     height: 12px;
     border-radius: var(--r-full);
     background: var(--c-etc);
-    border: 2px solid #fff;
+    /* soft ring — full-white rings on a dark basemap made every dot shout */
+    border: 1.5px solid rgba(255, 255, 255, 0.35);
     box-shadow: var(--shadow-sm);
   }
   .pin-badge {
@@ -3248,10 +3274,19 @@
 
   /* Thick section divider — Naver full-scroll rhythm (§4.6) */
   .sec-divider {
-    height: 8px;
-    margin: 0 -16px;
-    background: var(--surface-hover);
+    height: 10px;
+    /* block margins open up the section rhythm — the 12px stack gap alone
+       read cramped; sections now get ~2x the air around each boundary */
+    margin: 12px -16px 18px;
+    /* a groove darker than the page, not a bright band — deep enough to read,
+       edged by hairlines so both sections have a clear boundary */
+    background: #040507;
     border: none;
+    border-top: 1px solid rgba(255, 255, 255, 0.09);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    box-shadow:
+      inset 0 7px 8px -6px rgba(0, 0, 0, 0.95),
+      inset 0 -5px 6px -5px rgba(0, 0, 0, 0.75);
   }
 }
 
@@ -3333,7 +3368,9 @@
     height: 44px;
     display: grid;
     place-items: center;
-    background: var(--surface);
+    background: rgba(22, 24, 29, 0.72);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
     border: 1px solid var(--border);
     border-radius: var(--r-full);
     box-shadow: var(--shadow-card);
@@ -3345,7 +3382,9 @@
     height: 44px;
     display: grid;
     place-items: center;
-    background: var(--surface);
+    background: rgba(22, 24, 29, 0.72);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
     border: 1px solid var(--border);
     border-radius: var(--r-full);
     box-shadow: var(--shadow-float);
@@ -3363,9 +3402,9 @@
 /* v2 soft icon buttons — reference-app CTA bar (soft fill, no border, brand-color glyph) */
 @layer components {
   .iconbtn.soft {
-    background: var(--accent-soft);
+    background: var(--surface-hover);
     border: none;
-    color: var(--accent);
+    color: var(--muted);
   }
 }
 
@@ -3779,7 +3818,7 @@
   }
   .product-detail-gallery-main {
     grid-row: 1 / 3;
-    background-color: var(--accent-soft);
+    background-color: var(--surface-hover);
   }
   .product-detail-gallery .label {
     max-width: 100%;
@@ -3818,8 +3857,8 @@
   .product-detail-copy-row {
     min-height: 62px;
     padding: 9px 12px;
-    background: var(--accent-soft);
-    border: 1px solid var(--accent-soft-2);
+    background: var(--surface);
+    border: 1px solid var(--border);
     border-radius: var(--r-md);
   }
   .product-detail-copy-text {
@@ -4137,7 +4176,7 @@
 @layer components {
   /* Button variants — component classes; `ghost`/`outline` are deprecated aliases
      kept only until the migration finishes (Tailwind collides with `.outline`). */
-  .btn.primary { background: var(--brand); color: #fff; }
+  .btn.primary { background: var(--brand); color: #fff; box-shadow: var(--shadow-accent); }
   .btn.primary:hover { background: var(--brand-strong); }
   .btn.secondary {
     background: var(--bg-surface);
@@ -4199,6 +4238,9 @@
     gap: 3px;
     pointer-events: none;
     white-space: nowrap;
+    /* transit is reference info, not content — sit it back into the basemap */
+    filter: saturate(0.55) brightness(0.88);
+    opacity: 0.85;
   }
   .station-badge {
     width: 18px;

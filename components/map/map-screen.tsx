@@ -216,6 +216,9 @@ export function MapScreen() {
         showSelectedCallout={mode === "map"}
         onUserMove={() => { if (mode === "map") setMoved(true); }}
         getBounds={(fn) => { boundsGetter.current = fn; }}
+        radiusCircle={mode === "subway" && activeStation
+          ? { center: { lat: STATIONS[activeStation].lat, lng: STATIONS[activeStation].lng }, radiusKm: stationRadius }
+          : null}
       />
 
       <div className="map-top">
