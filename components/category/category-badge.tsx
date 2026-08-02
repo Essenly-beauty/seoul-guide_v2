@@ -1,22 +1,18 @@
 import { Icon } from "@/components/icon";
-import { OY_BRAND_GREEN, TYPE_COLOR, TYPE_ICON, type PlaceType } from "@/lib/data";
+import { TYPE_COLOR, TYPE_ICON, type PlaceType } from "@/lib/data";
 
 /** Colored rounded square + white category glyph (spec v2 §3.1).
-    One visual language across filter chips, map pins, search rows, and rankings.
-    Olive Young gets its brand mark (white OY on the brand lime) instead of the
-    generic bag glyph — the tile users already know from Kakao/Naver maps. */
+    One visual language across filter chips, map pins, search rows, and
+    rankings. Olive Young always draws its olive logo mark (lime O + red
+    drupe on a light disc), never the "OY" letters (user decision 2026-08-02). */
 export function CategoryBadge({ type, size = 18 }: { type: PlaceType; size?: number }) {
   if (type === "olive_young") {
     return (
-      <span
-        className="catbadge"
-        style={{ width: size, height: size, background: OY_BRAND_GREEN }}
-        aria-hidden="true"
-      >
-        <svg viewBox="0 0 24 24" style={{ width: size * 0.95, height: size * 0.95 }}>
-          <text x="12" y="16.4" textAnchor="middle" fontSize="11.5" fontWeight="800" fill="#fff" fontFamily="inherit" letterSpacing="-0.5">OY</text>
-        </svg>
-      </span>
+      <svg viewBox="0 0 24 24" style={{ width: size, height: size, flex: "none" }} aria-hidden="true">
+        <circle cx="12" cy="12" r="11" fill="#ffffff" stroke="rgba(15, 23, 42, 0.16)" strokeWidth="1" />
+        <ellipse cx="12" cy="12.6" rx="5" ry="6.2" fill="none" stroke="#9bce26" strokeWidth="2.6" transform="rotate(16 12 12.6)" />
+        <ellipse cx="14.1" cy="7.4" rx="1.7" ry="2.1" fill="#e0716e" transform="rotate(20 14.1 7.4)" />
+      </svg>
     );
   }
   return (

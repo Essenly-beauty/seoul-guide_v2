@@ -8,6 +8,7 @@ import { SectionHeader } from "@/components/ui/section-header";
 import { SectionDivider } from "@/components/ui/section-divider";
 import { FeedbackLauncher } from "@/components/ui/feedback-sheet";
 import { SignoutModal } from "@/components/ui/signout-modal";
+import { ThemeToggle } from "@/components/theme/theme-toggle";
 import { Icon } from "@/components/icon";
 import { routes } from "@/lib/routes";
 
@@ -65,6 +66,12 @@ export default function SettingsPage() {
           <ChipGroup ariaLabel="K-Beauty experience" single items={["First time", "Know a bit", "Obsessed"]} defaultSelected={["Know a bit"]} />
           <div className="label">Monthly beauty spend · Optional</div>
           <ChipGroup ariaLabel="Monthly beauty spend" single items={["Under $50", "$50–100", "$100–200", "$200+"]} />
+        </section>
+
+        <SectionDivider />
+        <section className="stack sm">
+          <SectionHeader title="Appearance" />
+          <ThemeToggle />
         </section>
 
         <SectionDivider />

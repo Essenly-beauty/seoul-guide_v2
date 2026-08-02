@@ -1,12 +1,12 @@
 import { BrandMark, BrandWordmark } from "@/components/brand/brand-logo";
 
-// Splash (Spotify-style reference, 2026-08-02): pure black field, brand
-// lockup dead-center, nothing else.
+// Splash (Spotify-style reference, 2026-08-02): brand lockup dead-center on
+// the theme's own field — a black flash in light mode read as a glitch.
 export default function Loading() {
   return (
     <div
       className="app-scroll"
-      style={{ display: "grid", placeItems: "center", background: "#060708" }}
+      style={{ display: "grid", placeItems: "center", background: "var(--bg)" }}
       role="status"
       aria-label="Loading"
     >

@@ -17,6 +17,7 @@ import { MapSheet } from "./map-sheet";
 import { FilterSheet } from "./filter-sheet";
 import { SubwayRouteController, type SubwayPlaceCategory, type SubwaySnap } from "@/components/subway/subway-route-controller";
 import { findRoute, findRouteVia, nearestStation, placesNearStation, STATIONS } from "@/lib/subway";
+import { routeTrackPath } from "@/lib/subway-path";
 
 const MapView = dynamic(() => import("./map-view"), {
   ssr: false,
@@ -231,9 +232,7 @@ export function MapScreen() {
         radiusCircle={mode === "subway" && activeStation
           ? { center: { lat: STATIONS[activeStation].lat, lng: STATIONS[activeStation].lng }, radiusKm: stationRadius }
           : null}
-        routePath={mode === "subway" && subwayRouteReady && route
-          ? route.stations.map((id) => ({ lat: STATIONS[id].lat, lng: STATIONS[id].lng }))
-          : null}
+        routePath={mode === "subway" && subwayRouteReady && route ? routeTrackPath(route) : null}
         vividPins={mode === "map" ? cats.length > 0 : true /* station browse is a focused task */}
         onStationClick={mode === "map" ? (id) => {
           // Tapping a station disc opens the subway browse with it preset as

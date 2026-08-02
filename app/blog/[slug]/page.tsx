@@ -14,12 +14,13 @@ export default function JournalDetailPage({ params }: { params: { slug: string }
 
   return (
     <>
-      <div className="app-scroll">
-        <div style={{ position: "relative" }}>
+      <div className="app-scroll" style={{ position: "relative" }}>
+        {/* Back stays pinned while the article scrolls (2026-08-02). */}
+        <div style={{ position: "sticky", top: 14, zIndex: 20, height: 0, marginLeft: 14 }}>
+          <BackButtonBordered fallback={routes.blog} />
+        </div>
+        <div style={{ position: "relative", marginTop: -14 }}>
           <div className="hero-img" style={{ borderRadius: 0, aspectRatio: "16 / 10" }} />
-          <div style={{ position: "absolute", top: 14, left: 14 }}>
-            <BackButtonBordered fallback={routes.blog} />
-          </div>
         </div>
 
         <div className="pad stack article-body">

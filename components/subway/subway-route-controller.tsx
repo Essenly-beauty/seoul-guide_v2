@@ -753,9 +753,12 @@ export function SubwayRouteController({
               <b>{stationDisplayName(STATIONS[readyRoute.stations[readyRoute.stations.length - 1]])}</b>
             </div>
             <div className="subway-ticket-line" aria-hidden="true">
-              <i className="dot" /><i className="dash" />
+              {/* endpoint dots wear their segment's line color */}
+              <i className="dot" style={{ background: LINE_META[readyRoute.segments[0].line].color }} />
+              <i className="dash" />
               <span className="pill">{travelMinutes(readyRoute)} min</span>
-              <i className="dash" /><i className="dot" />
+              <i className="dash" />
+              <i className="dot" style={{ background: LINE_META[readyRoute.segments[readyRoute.segments.length - 1].line].color }} />
             </div>
             <div className="subway-ticket-meta">
               <span>

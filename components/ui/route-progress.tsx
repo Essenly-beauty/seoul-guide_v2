@@ -1,20 +1,23 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { usePathname } from "next/navigation";
 
-/** Top loading line — a soft-gradient primary streak sweeps right on every
-    route change (user request 2026-08-02). Purely decorative. */
+/** Route-change loading sweep. Renders nothing itself — it stamps a class on
+    <html> so each page's own header bottom edge (.topbar::after) carries the
+    moving gradient (user request 2026-08-02: on the header line, smooth). */
 export function RouteProgress() {
   const pathname = usePathname();
-  const [sweep, setSweep] = useState(0);
 
   useEffect(() => {
-    setSweep((n) => n + 1);
-    const timer = window.setTimeout(() => setSweep(0), 1000);
+    const root = document.documentElement;
+    root.classList.remove("route-sweep");
+    // restart the CSS animation even for rapid consecutive navigations
+    void root.offsetWidth;
+    root.classList.add("route-sweep");
+    const timer = window.setTimeout(() => root.classList.remove("route-sweep"), 1300);
     return () => window.clearTimeout(timer);
   }, [pathname]);
 
-  if (sweep === 0) return null;
-  return <div key={sweep} className="route-progress" aria-hidden="true" />;
+  return null;
 }

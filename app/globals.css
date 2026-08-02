@@ -43,6 +43,118 @@
     --sans: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
     --mono: "Geist Mono", ui-monospace, "SF Mono", Menlo, monospace;
     --brand-display: "Michroma", var(--sans);
+    --pin-disc: #1a1d22;
+    --pin-disc-ring: rgba(255, 255, 255, 0.28);
+    --station-halo: #0b0c0f;
+    --pin-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
+    --pin-shadow-c: rgba(0, 0, 0, 0.4);
+  }
+
+  /* Light theme — same orange, paper surfaces. Toggled from Settings; the
+     attribute is stamped pre-paint by the head boot script. */
+  [data-theme="light"] {
+    --bg: #f6f7f9;
+    --surface: #ffffff;
+    --surface-hover: #eef0f4;
+    --accent: #e94f00;
+    --accent-soft: rgba(233, 79, 0, 0.09);
+    --accent-soft-2: rgba(233, 79, 0, 0.18);
+    --accent-hover: #c94500;
+    --text: #1c2431;
+    --muted: #556175;
+    --dim: #67738a;
+    --border: #e3e7ee;
+    --success: #15803d;
+    --success-soft: rgba(21, 128, 61, 0.1);
+    --warning: #975a06;
+    --warning-soft: rgba(151, 90, 6, 0.1);
+    --error: #c0262d;
+    --error-soft: rgba(192, 38, 45, 0.1);
+    --info: #1d4ed8;
+    --info-soft: rgba(29, 78, 216, 0.09);
+    --scrim: rgba(15, 23, 42, 0.45);
+    --shadow-sm: 0 1px 3px rgba(15, 23, 42, 0.14);
+    --shadow-card: 0 1px 2px rgba(15, 23, 42, 0.07);
+    --shadow-float: 0 10px 28px -8px rgba(15, 23, 42, 0.22);
+    --shadow-accent: 0 10px 24px -10px rgba(233, 79, 0, 0.4);
+  }
+
+  /* Light-theme fixes for spots that hardcode dark values */
+  [data-theme="light"] {
+    --pin-disc: #ffffff;
+    --pin-disc-ring: rgba(15, 23, 42, 0.22);
+    --station-halo: #ffffff;
+    --pin-shadow: 0 1px 5px rgba(15, 23, 42, 0.14);
+    --pin-shadow-c: rgba(15, 23, 42, 0.16);
+  }
+  [data-theme="light"] body {
+    background: linear-gradient(180deg, #eef1f5, #e4e8ee);
+  }
+  [data-theme="light"] body::after {
+    opacity: 0.02;
+    filter: invert(1);
+  }
+  [data-theme="light"] .topbar {
+    background: rgba(246, 247, 249, 0.92);
+  }
+  [data-theme="light"] .sec-divider {
+    background: #f1f3f6;
+    border-top: 1px solid rgba(15, 23, 42, 0.05);
+    border-bottom: 0;
+    box-shadow: none;
+  }
+  [data-theme="light"] .map-top::before {
+    background: linear-gradient(180deg, rgba(246, 247, 249, 0.92), rgba(246, 247, 249, 0.6) 55%, rgba(246, 247, 249, 0));
+  }
+  [data-theme="light"] .map-searchpill,
+  [data-theme="light"] .map-avatar,
+  [data-theme="light"] .map-modebtn,
+  [data-theme="light"] .map-fab,
+  [data-theme="light"] .map-top .chip:not(.selected) {
+    background: rgba(255, 255, 255, 0.82);
+  }
+  [data-theme="light"] .map-top .chip.selected {
+    background: rgba(255, 239, 230, 0.9);
+  }
+  [data-theme="light"] .pin-dot {
+    border-color: #ffffff;
+  }
+  [data-theme="light"] .pin-cluster {
+    background: #1e293b;
+    color: #ffffff;
+    border-color: #ffffff;
+  }
+  [data-theme="light"] .station-marker-name {
+    text-shadow: 0 1px 0 #fff, 0 -1px 0 #fff, 1px 0 0 #fff, -1px 0 0 #fff, 0 0 4px #fff;
+  }
+  [data-theme="light"] .banner.warning { color: #92600b; }
+  [data-theme="light"] .banner.info { color: #1e40af; }
+  [data-theme="light"] .banner.accent { color: var(--accent-hover); }
+  [data-theme="light"] .hero-img {
+    background: linear-gradient(135deg, #f2f4f8, #eaeef3 55%, #f4f6f9);
+  }
+  [data-theme="light"] .subway-nearby-controls {
+    box-shadow: 0 8px 16px -10px rgba(15, 23, 42, 0.18);
+  }
+  [data-theme="light"] .imgph { color: var(--dim); }
+  [data-theme="light"] .iconbtn.soft {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    color: var(--muted);
+  }
+  [data-theme="light"] .bottomnav { box-shadow: 0 -6px 18px rgba(15, 23, 42, 0.07); }
+  [data-theme="light"] .mapsheet,
+  [data-theme="light"] .subway-controller { box-shadow: 0 -10px 26px rgba(15, 23, 42, 0.12); }
+  [data-theme="light"] .subway-search-footer { box-shadow: 0 -6px 16px rgba(15, 23, 42, 0.08); }
+
+  /* The rail's "All" reset keeps its strong fill in every context/theme —
+     placed late so map-top/light translucent overrides can't outrank it. */
+  .chip.chip-all.selected,
+  .map-top .chip.chip-all.selected,
+  [data-theme="light"] .map-top .chip.chip-all.selected {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
   }
 
   * {
@@ -371,7 +483,7 @@
     background: transparent;
     border: 0;
     border-radius: 50%;
-    color: var(--accent);
+    color: var(--muted);
     box-shadow: none;
   }
   .subway-swap-button::before {
@@ -823,10 +935,11 @@
     top: 0;
     z-index: 5;
     display: grid;
-    gap: 8px;
-    padding: 10px 16px 8px;
-    background: rgba(22, 24, 29, 0.97);
+    gap: 7px;
+    padding: 9px 16px 7px;
+    background: var(--surface);
     border-bottom: 1px solid var(--border);
+    box-shadow: 0 8px 16px -10px rgba(0, 0, 0, 0.7);
   }
   .subway-nearby-controls:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
   .subway-segmented {
@@ -847,7 +960,7 @@
   .subway-segmented button[aria-pressed="true"] {
     background: var(--surface);
     color: var(--text);
-    box-shadow: var(--shadow-card);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
   }
   .subway-category-tabs {
     display: flex;
@@ -1796,12 +1909,10 @@
     padding: 6px 13px;
     font-size: 12.5px;
   }
-  /* per-category service group cards — the badge does the labeling work */
+  /* per-category service groups — separated by hairlines, not boxes */
   .filtergroup {
-    padding: 11px 12px 12px;
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: var(--r-md);
+    padding: 13px 0 3px;
+    border-top: 1px solid var(--border);
   }
   .filtergroup-head {
     display: flex;
@@ -1812,27 +1923,23 @@
     color: var(--muted);
   }
 
-  /* Route-change loading line — a soft primary streak sweeps rightward. */
-  .route-progress {
-    position: absolute;
-    inset: 0 0 auto 0;
-    height: 2.5px;
-    z-index: 90;
-    overflow: hidden;
-    pointer-events: none;
-  }
-  .route-progress::after {
+  /* Route-change loading sweep — rides the header's bottom hairline instead
+     of the shell top; a soft gradient drifts across with a long easing. */
+  .route-sweep .topbar::after {
     content: "";
-    display: block;
-    height: 100%;
-    width: 45%;
-    border-radius: 999px;
-    background: linear-gradient(90deg, transparent, rgba(245, 88, 0, 0.7) 35%, #ff9b57 65%, transparent);
-    animation: route-progress-sweep 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -1px;
+    height: 2px;
+    pointer-events: none;
+    background: linear-gradient(90deg, transparent, rgba(245, 88, 0, 0.65) 40%, #ff9b57 60%, transparent) no-repeat;
+    background-size: 45% 100%;
+    animation: route-sweep-slide 1.15s cubic-bezier(0.45, 0, 0.2, 1) both;
   }
-  @keyframes route-progress-sweep {
-    from { transform: translateX(-110%); }
-    to { transform: translateX(330%); }
+  @keyframes route-sweep-slide {
+    from { background-position: -60% 0; }
+    to { background-position: 175% 0; }
   }
 
   /* bottom nav */
@@ -3269,13 +3376,17 @@
     background: var(--c-etc);
     /* soft ring — full-white rings on a dark basemap made every dot shout */
     border: 1.5px solid rgba(255, 255, 255, 0.35);
-    box-shadow: var(--shadow-sm);
+    box-shadow: 0 1px 3px var(--pin-shadow-c);
+  }
+  .pin-selected.pin-selected-oy {
+    background: #fff;
+    box-shadow: 0 0 0 2px var(--accent), var(--shadow-float);
   }
   /* Olive Young olive-motif dot — one notch larger than ordinary dots */
   .pin-oy {
     display: grid;
     place-items: center;
-    filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.55));
+    filter: drop-shadow(0 1px 2px var(--pin-shadow-c));
   }
   .pin-badge {
     position: absolute;
@@ -3288,7 +3399,7 @@
     padding: 3px 8px 3px 3px;
     background: var(--surface);
     border-radius: 8px;
-    box-shadow: var(--shadow-float);
+    box-shadow: var(--pin-shadow);
     font-size: 13px;
     font-weight: 700;
     color: var(--text);
@@ -3544,8 +3655,8 @@
 /* v2 soft icon buttons — reference-app CTA bar (soft fill, no border, brand-color glyph) */
 @layer components {
   .iconbtn.soft {
-    background: var(--surface-hover);
-    border: none;
+    background: var(--surface);
+    border: 1px solid var(--border);
     color: var(--muted);
   }
 }
@@ -3875,11 +3986,11 @@
   }
   .subway-via-add.inline {
     flex: none;
-    min-height: 44px;
-    padding: 0 10px;
-    background: var(--accent-soft);
-    border: none;
-    font-size: 11px;
+    min-height: 40px;
+    padding: 0 12px;
+    background: none;
+    border: 1px dashed rgba(245, 88, 0, 0.45);
+    white-space: nowrap;
   }
   /* Heading hosts the "Add as via" action between the title and the count. */
   .subway-nearby-heading > div:first-child { flex: 1; min-width: 0; }
@@ -4318,6 +4429,7 @@
   /* Button variants — component classes; `ghost`/`outline` are deprecated aliases
      kept only until the migration finishes (Tailwind collides with `.outline`). */
   .btn.primary { background: var(--brand); color: #fff; box-shadow: var(--shadow-accent); }
+  .btn.primary:disabled, .btn:disabled { box-shadow: none; }
   .btn.primary:hover { background: var(--brand-strong); }
   .btn.secondary {
     background: var(--bg-surface);
@@ -4397,7 +4509,7 @@
     border: 2.5px solid currentColor;
     font-size: 9px;
     font-weight: 800;
-    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.55);
+    box-shadow: 0 1px 3px var(--pin-shadow-c);
   }
   .station-badge {
     width: 18px;

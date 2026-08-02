@@ -10,6 +10,7 @@ import { Icon } from "@/components/icon";
 import { TYPE_ICON, TYPE_LABEL, zoneShort, type Place } from "@/lib/data";
 import { formatDistance, googleDirectionsUrl, haversineKm, walkMinutes, type LatLng } from "@/lib/geo";
 import { visibleMapAnchor } from "@/lib/map-camera";
+import { useTheme } from "@/components/theme/theme-provider";
 import { routes } from "@/lib/routes";
 import { LINE_META, STATIONS, stationExits } from "@/lib/subway";
 
@@ -45,7 +46,10 @@ export type MapViewProps = {
   onStationClick?: (id: string) => void;
 };
 
-const TILE_URL = "https://{s}.basemaps.cartocdn.com/rastertiles/dark_all/{z}/{x}/{y}{r}.png";
+const TILE_URLS = {
+  dark: "https://{s}.basemaps.cartocdn.com/rastertiles/dark_all/{z}/{x}/{y}{r}.png",
+  light: "https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png",
+} as const;
 const ATTRIB = '&copy; <a href="https://www.openstreetmap.org/copyright">OSM</a> &copy; <a href="https://carto.com/attributions">CARTO</a>';
 
 const INITIAL_ZOOM = 15; // neighborhood scale — dots/badges stay tappable on phones (was 13)
@@ -100,16 +104,14 @@ const pinColor = (type: Place["type"], vivid = false) =>
 /** Olive Young dot markers use the olive motif (lime "O" + red drupe) on a
     map-toned disc, drawn a notch larger than ordinary dots (user request). */
 const oyOliveHtml = (px: number) => `<svg viewBox="0 0 24 24" style="width:${px}px;height:${px}px" aria-hidden="true">
-  <circle cx="12" cy="12" r="11" fill="#1a1d22" stroke="rgba(255,255,255,0.28)" stroke-width="1.2"/>
+  <circle cx="12" cy="12" r="11" fill="var(--pin-disc)" stroke="var(--pin-disc-ring)" stroke-width="1.2"/>
   <ellipse cx="12" cy="12.6" rx="5" ry="6.2" fill="none" stroke="#9bce26" stroke-width="2.6" transform="rotate(16 12 12.6)"/>
   <ellipse cx="14.1" cy="7.4" rx="1.7" ry="2.1" fill="#e0716e" transform="rotate(20 14.1 7.4)"/>
 </svg>`;
 /** OY discs run ~2x the ordinary 12px dots — the brand ask is "spot me first". */
 const OY_DOT_PX = 26;
 const pinGlyph = (type: Place["type"], px: number) =>
-  type === "olive_young"
-    ? `<svg viewBox="0 0 24 24" style="width:${px + 4}px;height:${px + 4}px"><text x="12" y="16.4" text-anchor="middle" font-size="11.5" font-weight="800" fill="#fff" letter-spacing="-0.5">OY</text></svg>`
-    : `<svg class="icn" style="width:${px}px;height:${px}px" aria-hidden="true"><use href="#i-${TYPE_ICON[type]}"/></svg>`;
+  `<svg class="icn" style="width:${px}px;height:${px}px" aria-hidden="true"><use href="#i-${TYPE_ICON[type]}"/></svg>`;
 function pinMode(place: Place, selected: boolean, zoom: number): PinMode {
   if (selected) return "badge"; // selected pin is a badge at any zoom (§5.1)
   if (zoom >= BADGE_ALL_ZOOM) return "badge";
@@ -141,13 +143,15 @@ function pinIcon(place: Place, selected: boolean, mode: PinMode, hero = false, v
             // the old wide dark badge duplicated them and covered neighboring pins.
             // Selected is one of the two places the accent is allowed on the map.
             className: "map-anchor",
-            html: `<div class="pin-hitarea badge-hit"><div class="pin-selected" style="background:var(--accent)">${place.type === "olive_young" ? pinGlyph(place.type, 20) : `<svg class="icn" aria-hidden="true"><use href="#i-${TYPE_ICON[place.type]}"/></svg>`}</div></div>`,
+            html: `<div class="pin-hitarea badge-hit"><div class="pin-selected" style="background:var(--accent)">${place.type === "olive_young" ? oyOliveHtml(24) : `<svg class="icn" aria-hidden="true"><use href="#i-${TYPE_ICON[place.type]}"/></svg>`}</div></div>`,
             iconSize: [44, 44],
             iconAnchor: [22, 44],
           })
         : L.divIcon({
             className: "map-anchor",
-            html: `<div class="pin-hitarea badge-hit"><div class="pin-badge${hero ? " hero" : ""}"><span class="catbadge" style="width:17px;height:17px;background:${hero ? "var(--accent)" : pinColor(place.type, vivid)}">${pinGlyph(place.type, 11)}</span>${place.rating ?? ""}</div></div>`,
+            // OY badges carry the olive logo disc instead of a lettered tile;
+            // the hero accent tile never overrides the brand mark.
+            html: `<div class="pin-hitarea badge-hit"><div class="pin-badge${hero ? " hero" : ""}">${place.type === "olive_young" ? oyOliveHtml(19) : `<span class="catbadge" style="width:17px;height:17px;background:${hero ? "var(--accent)" : pinColor(place.type, vivid)}">${pinGlyph(place.type, 11)}</span>`}${place.rating ?? ""}</div></div>`,
             iconSize: [44, 44],
             iconAnchor: [22, 44],
           });
@@ -430,6 +434,7 @@ function SelectedPlaceCallout({ place, userLoc, onDismiss }: {
 
 export default function MapView({ center, places, selectedId, onSelect, userLoc, flyTarget, bottomInsetRatio, bottomInsetPx, focusZoom, focusYBias, showSelectedCallout = false, onUserMove, getBounds, radiusCircle, routePath, vividPins = false, onStationClick }: MapViewProps) {
   const [zoom, setZoom] = useState(INITIAL_ZOOM);
+  const { theme } = useTheme();
   const mapRef = useRef<L.Map | null>(null);
   const selectedPlace = selectedId ? places.find((place) => place.id === selectedId) ?? null : null;
 
@@ -552,7 +557,7 @@ export default function MapView({ center, places, selectedId, onSelect, userLoc,
       zoomControl={false}
       attributionControl={true}
     >
-      <TileLayer url={TILE_URL} attribution={ATTRIB} />
+      <TileLayer key={theme} url={TILE_URLS[theme]} attribution={ATTRIB} />
       <MapWiring
         flyTarget={flyTarget}
         bottomInsetRatio={bottomInsetRatio}
