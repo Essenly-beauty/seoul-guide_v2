@@ -745,26 +745,34 @@ export function SubwayRouteController({
 
       {readyRoute && activeStation && activeId && (
         <>
+          {/* Ticket-style summary: endpoints at the edges, travel time in a
+              pill on a dotted connector (train-ticket reference, 2026-08-02). */}
           <div ref={routeSummaryRef} className="subway-route-summary" tabIndex={-1} aria-live="polite">
-            <b>Est. {travelMinutes(readyRoute)} min</b>
-            <span>
-              {readyRoute.segments.length === 1 ? "Direct" : `${readyRoute.segments.length - 1} transfer${readyRoute.segments.length > 2 ? "s" : ""}`}
-              {" · "}{readyRoute.stations.length - 1} stops
-            </span>
-            <a
-              className="subway-live-pill"
-              href={googleDirectionsUrl(STATIONS[readyRoute.stations[readyRoute.stations.length - 1]], STATIONS[readyRoute.stations[0]])}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Check live transit directions in Google Maps"
-              title="Check live transit directions in Google Maps"
-            >
-              <Icon name="ext" size="xs" /> Live
-            </a>
-            {snap !== "compact" && (
-              <>
-                {/* One ✕ only (header) — the summary's Clear duplicated it and
-                    read as clutter; route changes go through Edit. */}
+            <div className="subway-ticket-ends">
+              <b>{stationDisplayName(STATIONS[readyRoute.stations[0]])}</b>
+              <b>{stationDisplayName(STATIONS[readyRoute.stations[readyRoute.stations.length - 1]])}</b>
+            </div>
+            <div className="subway-ticket-line" aria-hidden="true">
+              <i className="dot" /><i className="dash" />
+              <span className="pill">{travelMinutes(readyRoute)} min</span>
+              <i className="dash" /><i className="dot" />
+            </div>
+            <div className="subway-ticket-meta">
+              <span>
+                {readyRoute.segments.length === 1 ? "Direct" : `${readyRoute.segments.length - 1} transfer${readyRoute.segments.length > 2 ? "s" : ""}`}
+                {" · "}{readyRoute.stations.length - 1} stops
+              </span>
+              <a
+                className="subway-live-pill"
+                href={googleDirectionsUrl(STATIONS[readyRoute.stations[readyRoute.stations.length - 1]], STATIONS[readyRoute.stations[0]])}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Check live transit directions in Google Maps"
+                title="Check live transit directions in Google Maps"
+              >
+                <Icon name="ext" size="xs" /> Live
+              </a>
+              {snap !== "compact" && (
                 <button
                   type="button"
                   className="subway-nearby-jump"
@@ -774,8 +782,8 @@ export function SubwayRouteController({
                 >
                   <Icon name="pin" size="xs" /> <span>Nearby</span>
                 </button>
-              </>
-            )}
+              )}
+            </div>
           </div>
           {snap === "compact" && (
             <div className="subway-compact-station">
@@ -998,17 +1006,15 @@ export function SubwayRouteController({
               <div className="subway-route-steps" aria-label="Route steps">
                 {readyRoute.segments.map((segment, index) => {
                   const line = LINE_META[segment.line];
-                  const directionId = segment.stations[1];
-                  const endId = segment.stations[segment.stations.length - 1];
-                  const stops = segment.stations.length - 1;
                   return (
                     <span className="subway-route-leg" key={`${segment.line}-${index}`}>
                       <i className="linebadge" style={{ background: line.color, color: lineTextColor(line.color) }}>{line.shortLabel}</i>
+                      {/* One line per leg — the strip below already draws the
+                          station-by-station detail this small print repeated. */}
                       <span>
                         <b>{index === 0
                           ? `Take ${line.label}`
                           : `At ${STATIONS[segment.stations[0]].name}, transfer to ${line.label}`}</b>
-                        <small>Next station: {STATIONS[directionId].name} · {stops} stop{stops === 1 ? "" : "s"} to {STATIONS[endId].name}</small>
                       </span>
                     </span>
                   );

@@ -13,7 +13,7 @@ import { RatingLine } from "@/components/ui/rating-line";
 import { SectionHeader } from "@/components/ui/section-header";
 import { SectionDivider } from "@/components/ui/section-divider";
 import { CategoryBadge } from "@/components/category/category-badge";
-import { CategoryChips, type MapCat } from "@/components/category/category-chips";
+import { CategoryChips } from "@/components/category/category-chips";
 import { Icon } from "@/components/icon";
 import { routes } from "@/lib/routes";
 import { ARTICLES, PLACES, PRODUCTS, TYPE_LABEL, zoneShort, type Article, type Place, type Product } from "@/lib/data";
@@ -21,12 +21,16 @@ import { useFavorites } from "@/lib/favorites";
 
 // ── Places — category filter + detail-page list rows ──────
 function PlacesSection({ favPlaces }: { favPlaces: Place[] }) {
-  const [cat, setCat] = useState<MapCat>("all");
-  const shown = cat === "all" ? favPlaces : favPlaces.filter((p) => p.type === cat);
+  const [cats, setCats] = useState<Place["type"][]>([]);
+  const shown = cats.length === 0 ? favPlaces : favPlaces.filter((p) => cats.includes(p.type));
   return (
     <section className="stack sm">
       <SectionHeader title="Places" count={favPlaces.length} actionLabel="See all" href={routes.map} />
-      <CategoryChips value={cat} onChange={setCat} />
+      <CategoryChips
+        selected={cats}
+        onToggle={(key) => setCats((cur) => cur.includes(key) ? cur.filter((c) => c !== key) : [...cur, key])}
+        onClear={() => setCats([])}
+      />
       {shown.length === 0 ? (
         <EmptyState>{favPlaces.length === 0 ? "Nothing saved yet — tap ♥ on any place." : "No saved places in this category."}</EmptyState>
       ) : (

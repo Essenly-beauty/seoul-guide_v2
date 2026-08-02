@@ -1,51 +1,97 @@
 import Link from "next/link";
-import { BrandMark } from "@/components/icon";
+import { BrandMark, BrandWordmark } from "@/components/brand/brand-logo";
 import { Button } from "@/components/ui/button";
 import { routes } from "@/lib/routes";
 
+// Welcome / auth entry (Spotify onboarding reference, 2026-08-02): dark field
+// with faint contour-line decoration, brand lockup centered high, headline +
+// sub-copy, a filled brand CTA beside a quiet sign-in, socials beneath.
+
 const SOCIALS: { key: string; label: string; style?: React.CSSProperties; mark: React.ReactNode }[] = [
   {
-    key: "google", label: "Continue with Google",
+    key: "google", label: "Google",
     mark: <span className="mono" aria-hidden="true" style={{ fontWeight: 700, background: "linear-gradient(90deg,#4285F4,#EA4335,#FBBC05,#34A853)", WebkitBackgroundClip: "text", backgroundClip: "text", color: "transparent" }}>G</span>,
   },
   {
-    key: "apple", label: "Continue with Apple",
+    key: "apple", label: "Apple",
     mark: <span aria-hidden="true" style={{ fontWeight: 700 }}>&#63743;</span>,
   },
   {
-    key: "kakao", label: "Continue with Kakao",
+    key: "kakao", label: "Kakao",
     style: { background: "#FEE500", borderColor: "#FEE500", color: "#191919" },
     mark: <span aria-hidden="true" style={{ fontWeight: 700 }}>K</span>,
   },
 ];
 
-export default function LoginPage() {
+/** Faint concentric contour arcs — the reference's corner decoration. */
+function Contours({ style }: { style?: React.CSSProperties }) {
+  return (
+    <svg viewBox="0 0 200 200" aria-hidden="true" style={{ position: "absolute", width: 260, height: 260, pointerEvents: "none", ...style }}>
+      {[28, 52, 76, 100, 124].map((r) => (
+        <circle key={r} cx="200" cy="0" r={r} fill="none" stroke="rgba(245, 88, 0, 0.10)" strokeWidth="1" />
+      ))}
+    </svg>
+  );
+}
+
+export default function WelcomePage() {
   return (
     <div
       className="app-scroll"
-      style={{ display: "flex", flexDirection: "column", justifyContent: "center", padding: "32px 26px", textAlign: "center", background: "radial-gradient(120% 60% at 50% 0%,#eaf5f1,transparent),var(--bg)" }}
+      style={{
+        position: "relative",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        padding: "40px 26px",
+        textAlign: "center",
+        background: "#0a0b0d",
+        overflow: "hidden",
+      }}
     >
-      <div style={{ margin: "auto 0" }}>
-        <BrandMark size={84} style={{ margin: "0 auto 12px", display: "block" }} />
-        <div className="hero" style={{ fontSize: 34 }}>
-          Your personal
-          <br />
-          <span style={{ fontStyle: "italic", color: "var(--accent)" }}>K-beauty guide.</span>
+      <Contours style={{ top: 0, right: 0 }} />
+      <Contours style={{ bottom: -60, left: -60, transform: "rotate(180deg)" }} />
+
+      <div style={{ margin: "auto 0", position: "relative" }}>
+        <div style={{ display: "grid", justifyItems: "center", gap: 12, marginBottom: 34 }}>
+          <BrandMark size={72} />
+          <BrandWordmark size={16} />
         </div>
-        <p className="muted" style={{ fontSize: 15, marginTop: 14, maxWidth: "26ch", marginInline: "auto" }}>
-          Find clinics, salons and nail studios near you — in English.
+
+        <h1 style={{ fontFamily: "var(--sans)", fontSize: 27, fontWeight: 800, letterSpacing: "-0.01em", lineHeight: 1.25 }}>
+          Seoul beauty, mapped<span style={{ color: "var(--accent)" }}>.</span>
+        </h1>
+        <p className="muted" style={{ fontSize: 14.5, marginTop: 10, maxWidth: "30ch", marginInline: "auto", lineHeight: 1.55 }}>
+          Salons, clinics, Olive Young and hidden spots — curated for travelers, in English.
         </p>
-        <div className="stack" style={{ marginTop: 28 }}>
+
+        <div className="row" style={{ gap: 8, marginTop: 30, justifyContent: "center" }}>
+          <Button href={routes.onboardingBasics} style={{ flex: 1.4, maxWidth: 220 }}>
+            Get started
+          </Button>
+          <Button variant="secondary" href={routes.map} style={{ flex: 1, maxWidth: 150 }}>
+            Sign in
+          </Button>
+        </div>
+
+        <div className="caption dim" style={{ margin: "26px 0 10px" }}>or continue with</div>
+        <div className="row" style={{ gap: 10, justifyContent: "center" }}>
           {SOCIALS.map((s) => (
-            <Button key={s.key} variant="secondary" style={s.style} href={routes.map}>
-              {s.mark} {s.label}
+            <Button
+              key={s.key}
+              variant="secondary"
+              aria-label={`Continue with ${s.label}`}
+              style={{ width: 52, minWidth: 52, height: 48, padding: 0, borderRadius: 14, ...s.style }}
+              href={routes.map}
+            >
+              {s.mark}
             </Button>
           ))}
-          <Link className="login-guest caption muted" style={{ marginTop: 6, textDecoration: "underline" }} href={routes.map}>
-            Continue as guest
-          </Link>
         </div>
-        <p className="caption dim" style={{ marginTop: 18 }}>
+        <Link className="login-guest caption muted" style={{ display: "inline-block", marginTop: 18, textDecoration: "underline" }} href={routes.map}>
+          Continue as guest
+        </Link>
+        <p className="caption dim" style={{ marginTop: 16 }}>
           By continuing you agree to the{" "}
           <Link href={routes.legalTerms} style={{ textDecoration: "underline" }}>Terms</Link> and{" "}
           <Link href={routes.legalPrivacy} style={{ textDecoration: "underline" }}>Privacy Policy</Link>.

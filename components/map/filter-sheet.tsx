@@ -10,18 +10,22 @@ import { EMPTY_FILTERS, type MapFilters } from "@/lib/places";
 const toggle = <T,>(list: T[], v: T): T[] =>
   list.includes(v) ? list.filter((x) => x !== v) : [...list, v];
 
-export function FilterSheet({ cat, filters, onApply, onClose }: {
-  cat: "all" | PlaceType;
+export function FilterSheet({ cats, filters, onApply, onClose }: {
+  /** Selected category chips — empty means all categories. */
+  cats: readonly PlaceType[];
   filters: MapFilters;
   onApply: (f: MapFilters) => void;
   onClose: () => void;
 }) {
   const [draft, setDraft] = useState<MapFilters>(filters);
-  const services = cat !== "all" ? SERVICE_FILTERS[cat] : undefined;
+  // Multi-select chips: offer the union of the selected categories' tags.
+  const services = cats.length > 0
+    ? cats.flatMap((c) => SERVICE_FILTERS[c] ?? [])
+    : undefined;
 
   return (
     <BottomSheet
-      title={cat === "all" ? "All categories" : TYPE_LABEL[cat]}
+      title={cats.length === 0 ? "All categories" : cats.map((c) => TYPE_LABEL[c]).join(" · ")}
       kicker="Filters"
       onClose={onClose}
     >
@@ -41,9 +45,9 @@ export function FilterSheet({ cat, filters, onApply, onClose }: {
           ))}
         </div>
       </div>
-      {services && (
+      {services && services.length > 0 && (
         <div>
-          <div className="label">{TYPE_LABEL[cat as PlaceType]} services</div>
+          <div className="label">{cats.length === 1 ? `${TYPE_LABEL[cats[0]]} services` : "Services"}</div>
           <div className="chipwrap" style={{ marginTop: 6 }}>
             {services.map((s) => (
               <Chip key={s.key} selected={draft.serviceTags.includes(s.key)} onClick={() => setDraft({ ...draft, serviceTags: toggle(draft.serviceTags, s.key) })}>{s.label}</Chip>

@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useId, useMemo, useRef, useState } from "react";
 import Link from "next/link";
-import { Circle, MapContainer, TileLayer, Marker, Popup, useMapEvents } from "react-leaflet";
+import { Circle, MapContainer, Polyline, TileLayer, Marker, Popup, useMapEvents } from "react-leaflet";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 import { CategoryBadge } from "@/components/category/category-badge";
@@ -37,6 +37,12 @@ export type MapViewProps = {
   getBounds?: (fn: () => { south: number; west: number; north: number; east: number }) => void;
   /** Search-radius ring (subway station radius picker) — pale fill, translucent accent edge. */
   radiusCircle?: { center: LatLng; radiusKm: number } | null;
+  /** Wayfinding path drawn in the brand orange (subway route stations). */
+  routePath?: LatLng[] | null;
+  /** Category filter active — pins switch from the muted to the vivid palette. */
+  vividPins?: boolean;
+  /** Station discs become tappable when set — opens the station's nearby browse. */
+  onStationClick?: (id: string) => void;
 };
 
 const TILE_URL = "https://{s}.basemaps.cartocdn.com/rastertiles/dark_all/{z}/{x}/{y}{r}.png";
@@ -76,7 +82,28 @@ const MUTED_PIN_COLOR: Record<Place["type"], string> = {
   mall: "#7d505c",
   etc: "#565b64",
 };
-const pinColor = (type: Place["type"]) => MUTED_PIN_COLOR[type];
+/** Vivid colors return when a category filter is active — browse mode stays
+    calm, focus mode lights the chosen category up (user decision 2026-08-02). */
+const VIVID_PIN_COLOR: Record<Place["type"], string> = {
+  olive_young: "#9bce26",
+  skin_clinic: "#4a7ddc",
+  hair_salon: "#8e5bd8",
+  nail_lash: "#e0559b",
+  personal_color: "#dd9422",
+  head_spa: "#2ba6a0",
+  mall: "#a61e4d",
+  etc: "#8b9098",
+};
+const pinColor = (type: Place["type"], vivid = false) =>
+  vivid ? VIVID_PIN_COLOR[type] : MUTED_PIN_COLOR[type];
+
+/** Olive Young dot markers use the olive motif (lime "O" + red drupe) on a
+    map-toned disc, drawn a notch larger than ordinary dots (user request). */
+const oyOliveHtml = (px: number) => `<svg viewBox="0 0 24 24" style="width:${px}px;height:${px}px" aria-hidden="true">
+  <circle cx="12" cy="12" r="11" fill="#1a1d22" stroke="rgba(255,255,255,0.28)" stroke-width="1.2"/>
+  <ellipse cx="12" cy="12.6" rx="5" ry="6.2" fill="none" stroke="#9bce26" stroke-width="2.6" transform="rotate(16 12 12.6)"/>
+  <ellipse cx="14.1" cy="7.4" rx="1.7" ry="2.1" fill="#e0716e" transform="rotate(20 14.1 7.4)"/>
+</svg>`;
 const pinGlyph = (type: Place["type"], px: number) =>
   type === "olive_young"
     ? `<svg viewBox="0 0 24 24" style="width:${px + 4}px;height:${px + 4}px"><text x="12" y="16.4" text-anchor="middle" font-size="11.5" font-weight="800" fill="#fff" letter-spacing="-0.5">OY</text></svg>`
@@ -92,15 +119,17 @@ function pinMode(place: Place, selected: boolean, zoom: number): PinMode {
  *  icons per place at most. Without this, every selection/zoom change hands
  *  react-leaflet a fresh icon object and it calls setIcon() on unaffected markers. */
 const iconCache = new Map<string, L.DivIcon>();
-function pinIcon(place: Place, selected: boolean, mode: PinMode, hero = false) {
-  const key = `${place.id}:${mode}:${selected}:${hero}`;
+function pinIcon(place: Place, selected: boolean, mode: PinMode, hero = false, vivid = false) {
+  const key = `${place.id}:${mode}:${selected}:${hero}:${vivid}`;
   const hit = iconCache.get(key);
   if (hit) return hit;
   const icon =
     mode === "dot"
       ? L.divIcon({
           className: "map-anchor",
-          html: `<div class="pin-hitarea"><div class="pin-dot" style="background:${pinColor(place.type)}"></div></div>`,
+          html: place.type === "olive_young"
+            ? `<div class="pin-hitarea"><div class="pin-oy">${oyOliveHtml(19)}</div></div>`
+            : `<div class="pin-hitarea"><div class="pin-dot" style="background:${pinColor(place.type, vivid)}"></div></div>`,
           iconSize: [44, 44],
           iconAnchor: [22, 22],
         })
@@ -116,7 +145,7 @@ function pinIcon(place: Place, selected: boolean, mode: PinMode, hero = false) {
           })
         : L.divIcon({
             className: "map-anchor",
-            html: `<div class="pin-hitarea badge-hit"><div class="pin-badge${hero ? " hero" : ""}"><span class="catbadge" style="width:17px;height:17px;background:${hero ? "var(--accent)" : pinColor(place.type)}">${pinGlyph(place.type, 11)}</span>${place.rating ?? ""}</div></div>`,
+            html: `<div class="pin-hitarea badge-hit"><div class="pin-badge${hero ? " hero" : ""}"><span class="catbadge" style="width:17px;height:17px;background:${hero ? "var(--accent)" : pinColor(place.type, vivid)}">${pinGlyph(place.type, 11)}</span>${place.rating ?? ""}</div></div>`,
             iconSize: [44, 44],
             iconAnchor: [22, 44],
           });
@@ -144,12 +173,15 @@ function stationIcon(id: string, labelled: boolean) {
   const hit = stationIconCache.get(key);
   if (hit) return hit;
   const st = STATIONS[id];
-  const badges = st.lines.slice(0, 2).map((line) =>
-    `<span class="station-badge" style="background:${LINE_META[line].color}">${LINE_META[line].shortLabel}</span>`,
+  // Kakao-style: light disc ringed and numbered in the line color; the
+  // station name hangs beneath in the (first) line's color.
+  const discs = st.lines.slice(0, 2).map((line) =>
+    `<span class="station-disc" style="border-color:${LINE_META[line].color};color:${LINE_META[line].color}">${LINE_META[line].shortLabel}</span>`,
   ).join("");
+  const nameColor = LINE_META[st.lines[0]].color;
   const icon = L.divIcon({
     className: "map-anchor",
-    html: `<div class="station-marker">${badges}${labelled ? `<span class="station-marker-name">${st.name}</span>` : ""}</div>`,
+    html: `<div class="station-marker"><span class="station-disc-row">${discs}</span>${labelled ? `<span class="station-marker-name" style="color:${nameColor}">${st.name}</span>` : ""}</div>`,
     iconSize: [0, 0], // .station-marker centers itself on the anchor
   });
   stationIconCache.set(key, icon);
@@ -394,7 +426,7 @@ function SelectedPlaceCallout({ place, userLoc, onDismiss }: {
   );
 }
 
-export default function MapView({ center, places, selectedId, onSelect, userLoc, flyTarget, bottomInsetRatio, bottomInsetPx, focusZoom, focusYBias, showSelectedCallout = false, onUserMove, getBounds, radiusCircle }: MapViewProps) {
+export default function MapView({ center, places, selectedId, onSelect, userLoc, flyTarget, bottomInsetRatio, bottomInsetPx, focusZoom, focusYBias, showSelectedCallout = false, onUserMove, getBounds, radiusCircle, routePath, vividPins = false, onStationClick }: MapViewProps) {
   const [zoom, setZoom] = useState(INITIAL_ZOOM);
   const mapRef = useRef<L.Map | null>(null);
   const selectedPlace = selectedId ? places.find((place) => place.id === selectedId) ?? null : null;
@@ -490,9 +522,9 @@ export default function MapView({ center, places, selectedId, onSelect, userLoc,
         const hero = p.id === heroId && mode === "badge" && !selected;
         return (
           <Marker
-            key={`${p.id}-${mode}-${selected}-${hero}`}
+            key={`${p.id}-${mode}-${selected}-${hero}-${vividPins}`}
             position={[p.lat, p.lng]}
-            icon={pinIcon(p, selected, mode, hero)}
+            icon={pinIcon(p, selected, mode, hero, vividPins)}
             title={`${p.name}, ${TYPE_LABEL[p.type]}`}
             alt={`${p.name}, ${TYPE_LABEL[p.type]}`}
             eventHandlers={{
@@ -507,7 +539,7 @@ export default function MapView({ center, places, selectedId, onSelect, userLoc,
           />
         );
       }),
-    [singles, selectedId, onSelect, zoom, demoted, heroId],
+    [singles, selectedId, onSelect, zoom, demoted, heroId, vividPins],
   );
 
   return (
@@ -532,6 +564,14 @@ export default function MapView({ center, places, selectedId, onSelect, userLoc,
         onView={handleView}
         onBlankTap={() => { if (selectedId) onSelect(null); }}
       />
+      {/* Wayfinding path — the route's stations joined in the brand orange. */}
+      {routePath && routePath.length >= 2 && (
+        <Polyline
+          positions={routePath.map((p) => [p.lat, p.lng] as [number, number])}
+          interactive={false}
+          pathOptions={{ color: "#f55800", weight: 4, opacity: 0.85, lineJoin: "round", lineCap: "round" }}
+        />
+      )}
       {/* Search-radius ring — pale wash inside, translucent accent edge; sits
           in the vector pane beneath markers and never intercepts taps. */}
       {radiusCircle && (
@@ -558,14 +598,18 @@ export default function MapView({ center, places, selectedId, onSelect, userLoc,
           title="Your current location"
         />
       )}
-      {/* Kakao-style transit layer — beneath place pins (negative z offsets) */}
+      {/* Kakao-style transit layer — beneath place pins (negative z offsets).
+          Stations are tappable (opens nearby browse) when a handler is wired. */}
       {transit.stations.map((id) => (
         <Marker
-          key={`st-${id}-${zoom >= STATION_LABEL_ZOOM}`}
+          key={`st-${id}-${zoom >= STATION_LABEL_ZOOM}-${!!onStationClick}`}
           position={[STATIONS[id].lat, STATIONS[id].lng]}
           icon={stationIcon(id, zoom >= STATION_LABEL_ZOOM)}
-          interactive={false}
+          interactive={!!onStationClick}
           keyboard={false}
+          title={`${STATIONS[id].name} Station`}
+          alt={`${STATIONS[id].name} Station`}
+          eventHandlers={onStationClick ? { click: () => onStationClick(id) } : undefined}
           zIndexOffset={-200}
         />
       ))}

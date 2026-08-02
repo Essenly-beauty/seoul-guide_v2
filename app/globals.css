@@ -536,18 +536,61 @@
     text-align: center;
   }
 
+  /* Ticket-style route summary — endpoints at the edges, duration pill riding
+     a dotted connector, meta + actions in a quiet row underneath. */
   .subway-route-summary {
-    min-height: 48px;
-    display: flex;
-    align-items: center;
-    gap: 7px;
-    padding: 5px 10px 5px 16px;
+    display: grid;
+    gap: 6px;
+    padding: 12px 16px 9px;
     color: var(--muted);
     font-size: 11px;
     border-bottom: 1px solid var(--border);
   }
-  .subway-route-summary b { color: var(--text); font-size: 13px; }
-  .subway-route-summary > span + span::before { content: "·"; margin-right: 7px; }
+  .subway-ticket-ends {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+  }
+  .subway-ticket-ends b {
+    color: var(--text);
+    font-size: 14.5px;
+    max-width: 46%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .subway-ticket-line {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .subway-ticket-line .dot {
+    flex: none;
+    width: 6px;
+    height: 6px;
+    border-radius: var(--r-full);
+    background: var(--dim);
+  }
+  .subway-ticket-line .dash {
+    flex: 1;
+    border-top: 2px dotted var(--border);
+  }
+  .subway-ticket-line .pill {
+    flex: none;
+    padding: 3px 12px;
+    border-radius: var(--r-full);
+    background: var(--surface-hover);
+    color: var(--text);
+    font-family: var(--mono);
+    font-size: 11.5px;
+    font-weight: 600;
+  }
+  .subway-ticket-meta {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+  }
+  .subway-ticket-meta > span { flex: 1; }
   .subway-route-summary .iconbtn { width: 44px; height: 44px; margin-left: auto; }
   .subway-nearby-jump {
     min-height: 44px;
@@ -562,9 +605,10 @@
   .subway-route-summary:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
   .subway-route-steps {
     display: flex;
-    gap: 14px;
+    align-items: center;
+    gap: 12px;
     overflow-x: auto;
-    padding: 9px 16px;
+    padding: 7px 16px;
     border-bottom: 1px solid var(--border);
     scrollbar-width: none;
   }
@@ -607,8 +651,8 @@
     display: grid;
     grid-template-columns: minmax(0, 1fr) minmax(132px, 1.55fr) minmax(0, 1fr);
     align-items: center;
-    min-height: 94px;
-    padding: 14px 10px;
+    min-height: 60px;
+    padding: 8px 10px;
   }
   .subway-station-focus::before {
     content: "";
@@ -657,28 +701,26 @@
   .subway-station-focus > button:disabled .icn { color: var(--dim); }
   .subway-active-station {
     min-width: 0;
-    min-height: 58px;
+    min-height: 40px;
     display: grid;
     align-content: center;
     justify-items: center;
-    padding: 7px 18px;
+    padding: 4px 14px;
     background: var(--surface);
-    border: 3px solid var(--station-line);
+    border: 2px solid var(--station-line);
     border-radius: var(--r-full); /* Kakao-Metro capsule */
-    box-shadow: 0 4px 12px rgba(15, 23, 42, 0.12);
+    box-shadow: var(--shadow-card);
     text-align: center;
   }
   .subway-active-station b {
     max-width: 100%;
     overflow: hidden;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow-wrap: anywhere;
-    font-size: 15px;
-    line-height: 1.08;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 13.5px;
+    line-height: 1.2;
   }
-  .subway-active-station span { color: var(--muted); font-size: 10px; }
+  .subway-active-station span { display: none; }
 
   .routestrip.embedded {
     position: static;
@@ -2478,10 +2520,12 @@
   .map-top::before {
     content: "";
     position: absolute;
-    inset: 0 0 -56px 0;
+    inset: 0 0 -72px 0;
     z-index: -1;
     pointer-events: none;
-    background: linear-gradient(180deg, rgba(6, 7, 8, 0.78), rgba(6, 7, 8, 0.38) 55%, rgba(6, 7, 8, 0));
+    /* strong enough that markers scrolling under the chip rail read as
+       "behind the chrome" instead of colliding with it */
+    background: linear-gradient(180deg, rgba(6, 7, 8, 0.9), rgba(6, 7, 8, 0.62) 55%, rgba(6, 7, 8, 0));
   }
   .map-top > * { pointer-events: auto; min-width: 0; }
   .map-searchpill {
@@ -3148,6 +3192,12 @@
     border: 1.5px solid rgba(255, 255, 255, 0.35);
     box-shadow: var(--shadow-sm);
   }
+  /* Olive Young olive-motif dot — one notch larger than ordinary dots */
+  .pin-oy {
+    display: grid;
+    place-items: center;
+    filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.55));
+  }
   .pin-badge {
     position: absolute;
     left: 50%;
@@ -3589,7 +3639,7 @@
   /* Summary row lives above the scroll area so it persists at every snap;
      trimmed header/summary heights keep the half-snap budget (E3). */
   .subway-controller.route-ready .subway-controller-header { min-height: 52px; padding-block: 6px; }
-  .subway-controller.route-ready .subway-route-summary { flex: none; min-height: 40px; padding-block: 3px; }
+  .subway-controller.route-ready .subway-route-summary { flex: none; padding-block: 10px 7px; }
   .subway-controller.route-ready .subway-route-summary .iconbtn { margin-left: 0; }
 
   /* B. Persistent live-transit pill on the summary row (every snap size). */
@@ -3778,7 +3828,7 @@
     min-height: 80px;
     padding-block: 8px;
   }
-  .subway-active-station { min-height: 58px; padding: 6px 8px; }
+  .subway-active-station { min-height: 40px; padding: 4px 10px; }
   .subway-active-station b { font-size: 14px; }
 }
 
@@ -4246,14 +4296,30 @@
   .station-marker {
     position: absolute;
     transform: translate(-50%, -50%);
-    display: flex;
-    align-items: center;
-    gap: 3px;
-    pointer-events: none;
+    display: grid;
+    justify-items: center;
+    gap: 2px;
+    /* tappable — opens the station's nearby browse */
+    pointer-events: auto;
+    cursor: pointer;
     white-space: nowrap;
-    /* transit is reference info, not content — sit it back into the basemap */
-    filter: saturate(0.55) brightness(0.88);
-    opacity: 0.85;
+  }
+  .station-disc-row {
+    display: flex;
+    gap: 2px;
+  }
+  /* Kakao-style station: light disc, line-colored ring + number */
+  .station-disc {
+    width: 20px;
+    height: 20px;
+    display: grid;
+    place-items: center;
+    border-radius: var(--r-full);
+    background: #f2f3f5;
+    border: 2.5px solid currentColor;
+    font-size: 9px;
+    font-weight: 800;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.55);
   }
   .station-badge {
     width: 18px;
@@ -4273,8 +4339,8 @@
   .station-marker-name {
     font-size: 11.5px;
     font-weight: 650;
-    color: #2b3442;
-    text-shadow: 0 1px 0 #fff, 0 -1px 0 #fff, 1px 0 0 #fff, -1px 0 0 #fff, 0 0 3px #fff;
+    /* line-colored (inline style) over a dark halo so it reads on the basemap */
+    text-shadow: 0 1px 0 #0b0c0f, 0 -1px 0 #0b0c0f, 1px 0 0 #0b0c0f, -1px 0 0 #0b0c0f, 0 0 4px #0b0c0f;
   }
   .exit-marker {
     width: 16px;

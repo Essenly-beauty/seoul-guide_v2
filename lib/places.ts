@@ -38,9 +38,11 @@ export function countActiveFilters(f: MapFilters): number {
     (f.bookableOnly ? 1 : 0) + f.serviceTags.length;
 }
 
-export function applyFilters(places: Place[], cat: "all" | PlaceType, f: MapFilters): Place[] {
+export function applyFilters(places: Place[], cat: "all" | PlaceType | PlaceType[], f: MapFilters): Place[] {
+  // Array form = multi-select chips (empty array means no category filter).
+  const cats = Array.isArray(cat) ? cat : cat === "all" ? [] : [cat];
   return places.filter((p) => {
-    if (cat !== "all" && p.type !== cat) return false;
+    if (cats.length > 0 && !cats.includes(p.type)) return false;
     if (f.minRating4 && (p.rating ?? 0) < 4.0) return false;
     if (f.prices.length > 0 && !f.prices.includes(p.priceRange)) return false;
     if (f.englishOnly && !p.englishOk) return false;

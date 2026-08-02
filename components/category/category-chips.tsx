@@ -6,11 +6,13 @@ import { MAP_CATEGORIES, type PlaceType } from "@/lib/data";
 
 export type MapCat = "all" | PlaceType;
 
-/** Single-select category chip rail (spec v2 §4.1-2).
-    Chips never shrink; the rail scrolls with a right fade hinting at overflow. */
-export function CategoryChips({ value, onChange, className, style }: {
-  value: MapCat;
-  onChange: (cat: MapCat) => void;
+/** Multi-select category chip rail (user decision 2026-08-02) — categories
+    toggle independently; "All" clears the selection. Chips never shrink; the
+    rail scrolls with a right fade hinting at overflow. */
+export function CategoryChips({ selected, onToggle, onClear, className, style }: {
+  selected: readonly PlaceType[];
+  onToggle: (cat: PlaceType) => void;
+  onClear: () => void;
   className?: string;
   style?: React.CSSProperties;
 }) {
@@ -19,8 +21,8 @@ export function CategoryChips({ value, onChange, className, style }: {
       {MAP_CATEGORIES.map((c) => (
         <Chip
           key={c.key}
-          selected={value === c.key}
-          onClick={() => onChange(c.key)}
+          selected={c.key === "all" ? selected.length === 0 : selected.includes(c.key as PlaceType)}
+          onClick={() => (c.key === "all" ? onClear() : onToggle(c.key as PlaceType))}
         >
           {c.key !== "all" && <CategoryBadge type={c.key as PlaceType} size={16} />}
           {c.label}

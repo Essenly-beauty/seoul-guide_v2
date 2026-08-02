@@ -9,7 +9,7 @@ import { Chip } from "@/components/ui/chip";
 import { IconButton } from "@/components/ui/icon-button";
 import { routes } from "@/lib/routes";
 import { MAP_CATEGORIES, PLACES, SERVICE_FILTERS, getPlace, type PlaceType } from "@/lib/data";
-import { CategoryChips, type MapCat } from "@/components/category/category-chips";
+import { CategoryChips } from "@/components/category/category-chips";
 import { GANGNAM_STATION, haversineKm, type LatLng } from "@/lib/geo";
 import { applyFilters, countActiveFilters, EMPTY_FILTERS, type MapFilters } from "@/lib/places";
 import { useLocation } from "./use-location";
@@ -28,7 +28,8 @@ const SUBWAY_SNAP_INSET: Record<SubwaySnap, number> = { compact: 0.22, half: 0.5
 /** The selected-place sheet intentionally leaves only its handle visible. */
 
 export function MapScreen() {
-  const [cat, setCat] = useState<MapCat>("all");
+  // Multi-select category chips (user decision 2026-08-02); empty = all.
+  const [cats, setCats] = useState<PlaceType[]>([]);
   const [mode, setMode] = useState<"map" | "subway">("map");
   const [filters, setFilters] = useState<MapFilters>(EMPTY_FILTERS);
   const [filterOpen, setFilterOpen] = useState(false);
@@ -69,7 +70,9 @@ export function MapScreen() {
   const catParam = searchParams.get("cat");
   const zoneParam = searchParams.get("zone");
   useEffect(() => {
-    if (catParam && MAP_CATEGORIES.some((c) => c.key === catParam)) setCat(catParam as MapCat);
+    if (catParam && catParam !== "all" && MAP_CATEGORIES.some((c) => c.key === catParam)) {
+      setCats([catParam as PlaceType]);
+    }
   }, [catParam]);
   useEffect(() => {
     if (!zoneParam) return;
@@ -81,14 +84,23 @@ export function MapScreen() {
     });
   }, [zoneParam]);
 
-  // Single-select rail; narrowing category also prunes now-invalid service tag filters.
-  const handleCat = useCallback((key: MapCat) => {
-    setCat(key);
+  // Multi-select rail — functional updates so rapid toggles never clobber
+  // each other; narrowing categories prunes now-invalid service tag filters.
+  const toggleCat = useCallback((key: PlaceType) => {
+    setCats((cur) => (cur.includes(key) ? cur.filter((c) => c !== key) : [...cur, key]));
     setSelectedId(null);
     setFlyTarget(null);
-    const allowed = new Set((key === "all" ? [] : SERVICE_FILTERS[key as PlaceType] ?? []).map((s) => s.key));
-    setFilters((f) => ({ ...f, serviceTags: f.serviceTags.filter((t) => allowed.has(t)) }));
   }, []);
+  const clearCats = useCallback(() => {
+    setCats([]);
+    setSelectedId(null);
+    setFlyTarget(null);
+  }, []);
+  useEffect(() => {
+    if (cats.length === 0) return; // "All" keeps whatever tags were chosen
+    const allowed = new Set(cats.flatMap((c) => SERVICE_FILTERS[c] ?? []).map((s) => s.key));
+    setFilters((f) => ({ ...f, serviceTags: f.serviceTags.filter((t) => allowed.has(t)) }));
+  }, [cats]);
 
   const route = useMemo(
     () => departure && arrival && departure !== arrival
@@ -148,10 +160,10 @@ export function MapScreen() {
       return nearby;
     }
 
-    let list = applyFilters(PLACES, cat, filters);
+    let list = applyFilters(PLACES, cats, filters);
     if (area) list = list.filter((p) => p.lat >= area.south && p.lat <= area.north && p.lng >= area.west && p.lng <= area.east);
     return list;
-  }, [activeStation, area, cat, filters, mode, stationCategory, stationRadius]);
+  }, [activeStation, area, cats, filters, mode, stationCategory, stationRadius]);
 
   const nearbyStationId = useMemo(() => {
     if (!loc) return null;
@@ -219,6 +231,19 @@ export function MapScreen() {
         radiusCircle={mode === "subway" && activeStation
           ? { center: { lat: STATIONS[activeStation].lat, lng: STATIONS[activeStation].lng }, radiusKm: stationRadius }
           : null}
+        routePath={mode === "subway" && subwayRouteReady && route
+          ? route.stations.map((id) => ({ lat: STATIONS[id].lat, lng: STATIONS[id].lng }))
+          : null}
+        vividPins={mode === "map" ? cats.length > 0 : stationCategory !== "all"}
+        onStationClick={mode === "map" ? (id) => {
+          // Tapping a station disc opens the subway browse with it preset as
+          // departure — the editor's "Near {station}" list shows radius shops.
+          setSelectedId(null);
+          setDeparture(id);
+          setActiveStation(id);
+          setSubwayEditing(true);
+          setMode("subway");
+        } : undefined}
       />
 
       <div className="map-top">
@@ -227,7 +252,7 @@ export function MapScreen() {
             <Icon name="user" size="sm" />
           </Link>
           {mode === "map" ? (
-            <Link className="map-searchpill" href={`${routes.search}?cat=${cat}`}>
+            <Link className="map-searchpill" href={`${routes.search}?cat=${cats[0] ?? "all"}`}>
               <Icon name="search" size="sm" style={{ color: "var(--muted)" }} aria-hidden="true" />
               <span className="small muted">Search places, areas</span>
             </Link>
@@ -257,7 +282,7 @@ export function MapScreen() {
         </div>
         {mode === "map" && (
           <div className="row" style={{ gap: 8, alignItems: "flex-start" }}>
-            <CategoryChips value={cat} onChange={handleCat} style={{ flex: 1 }} />
+            <CategoryChips selected={cats} onToggle={toggleCat} onClear={clearCats} style={{ flex: 1 }} />
             <Chip
               buttonRef={filterBtnRef}
               className="filterbtn"
@@ -398,7 +423,7 @@ export function MapScreen() {
 
       {filterOpen && (
         <FilterSheet
-          cat={cat}
+          cats={cats}
           filters={filters}
           onApply={(nextFilters) => {
             setFilters(nextFilters);
