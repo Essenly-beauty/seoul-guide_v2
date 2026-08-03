@@ -1924,6 +1924,128 @@
     color: var(--muted);
   }
 
+  /* ── Welcome / splash ──────────────────────────
+     Bands top to bottom: brand lockup, pitch, map preview card, actions.
+     Both themes come from tokens — no forced-dark canvas. */
+  .welcome-screen {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    padding: 0 26px 24px;
+    text-align: center;
+    background: var(--bg);
+  }
+  .welcome-lockup {
+    display: grid;
+    justify-items: center;
+    gap: 13px;
+    padding-top: max(46px, calc(env(safe-area-inset-top) + 34px));
+  }
+  .welcome-title {
+    margin-top: 30px;
+    font-family: var(--sans);
+    font-size: 26px;
+    font-weight: 800;
+    letter-spacing: -0.01em;
+    line-height: 1.28;
+  }
+  .welcome-sub {
+    margin: 10px auto 0;
+    max-width: 30ch;
+    color: var(--muted);
+    font-size: 14.5px;
+    line-height: 1.55;
+  }
+  /* product preview — the map you are signing up for, not decoration */
+  .welcome-preview {
+    position: relative;
+    flex: 1;
+    min-height: 150px;
+    margin-top: 26px;
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    background: var(--surface);
+    overflow: hidden;
+  }
+  .welcome-hero { position: absolute; inset: 0; pointer-events: none; }
+  .welcome-hero svg { display: block; width: 100%; height: 100%; }
+  .wh-block { fill: var(--surface-hover); }
+  .wh-street { stroke: var(--border); stroke-width: 1.2; }
+  .wh-river { fill: none; stroke: var(--info); stroke-width: 22; opacity: 0.12; stroke-linecap: round; }
+  .wh-pin { fill: var(--dim); opacity: 0.5; }
+  /* fixed low alpha — the --accent-soft token read as a solid disc on dark */
+  .wh-ring { fill: rgba(245, 88, 0, 0.07); stroke: var(--accent); stroke-opacity: 0.3; stroke-width: 1; }
+  .wh-pin-main path { fill: var(--accent); }
+  .wh-pin-main-eye { fill: var(--surface); }
+
+  .welcome-actions { padding-top: 24px; }
+  .welcome-divider {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 20px;
+  }
+  .welcome-divider::before,
+  .welcome-divider::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+  .welcome-socials { gap: 10px; justify-content: center; margin-top: 13px; }
+  .welcome-social {
+    flex: 1;
+    max-width: 106px;
+    min-height: 48px;
+    padding: 0;
+    border-radius: 14px;
+  }
+  /* outranks .btn.secondary, which is defined later in the sheet */
+  .welcome-socials .btn.welcome-social-kakao {
+    background: #fee500;
+    border-color: #fee500;
+    color: #191919;
+  }
+  .welcome-socials .btn.welcome-social-kakao:hover { background: #f5dd00; }
+  .welcome-guest { display: inline-block; margin-top: 18px; text-decoration: underline; }
+  .welcome-terms { margin-top: 18px; }
+  .welcome-terms a { text-decoration: underline; }
+
+  /* Splash — lockup centered on the theme's own field, with a thin
+     indeterminate bar instead of pulsing the whole logo. */
+  .splash {
+    flex: 1;
+    display: grid;
+    place-content: center;
+    justify-items: center;
+    gap: 26px;
+    /* optical centering — a geometrically centered lockup reads low */
+    padding-bottom: 7vh;
+    background: var(--bg);
+  }
+  .splash-lockup { display: grid; justify-items: center; gap: 14px; }
+  .splash-bar {
+    position: relative;
+    width: 104px;
+    height: 2px;
+    border-radius: 999px;
+    background: var(--border);
+    overflow: hidden;
+  }
+  .splash-bar::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    width: 45%;
+    border-radius: 999px;
+    background: linear-gradient(90deg, transparent, var(--accent), transparent);
+    animation: splash-bar-slide 1.15s cubic-bezier(0.45, 0, 0.2, 1) infinite;
+  }
+  @keyframes splash-bar-slide {
+    from { transform: translateX(-120%); }
+    to { transform: translateX(320%); }
+  }
+
   /* Route-change loading sweep — rides the header's bottom hairline instead
      of the shell top; a soft gradient drifts across with a long easing. */
   .route-sweep .topbar::after {

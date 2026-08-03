@@ -1,19 +1,16 @@
 import { BrandMark, BrandWordmark } from "@/components/brand/brand-logo";
 
-// Splash (Spotify-style reference, 2026-08-02): brand lockup dead-center on
-// the theme's own field — a black flash in light mode read as a glitch.
+// Splash: brand lockup dead-center on the theme's own field (a black flash in
+// light mode read as a glitch) with a thin indeterminate bar — pulsing the
+// whole logo read cheap.
 export default function Loading() {
   return (
-    <div
-      className="app-scroll"
-      style={{ display: "grid", placeItems: "center", background: "var(--bg)" }}
-      role="status"
-      aria-label="Loading"
-    >
-      <div style={{ display: "grid", justifyItems: "center", gap: 14, animation: "pulse 1.6s ease-in-out infinite" }}>
-        <BrandMark size={64} />
+    <div className="splash" role="status" aria-label="Loading">
+      <div className="splash-lockup">
+        <BrandMark size={66} />
         <BrandWordmark size={15} />
       </div>
+      <span className="splash-bar" aria-hidden="true" />
     </div>
   );
 }
