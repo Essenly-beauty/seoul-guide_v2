@@ -1,7 +1,11 @@
 /** Central route map — map-first IA (2026-07 redesign). */
 export const routes = {
-  login: "/",
-  splash: "/", // legacy alias — old references keep compiling
+  welcome: "/",
+  login: "/", // legacy alias — old references keep compiling
+  splash: "/", // legacy alias
+  signIn: "/login",
+  register: "/register",
+  onboardingMode: "/onboarding/mode",
   onboardingBasics: "/onboarding/basics",
   onboardingInterests: "/onboarding/interests",
   onboardingProfile: "/onboarding/beauty-profile",
