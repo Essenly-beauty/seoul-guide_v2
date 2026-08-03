@@ -7,8 +7,9 @@
 @layer base {
   /* MYSEOULDROP dark system — near-black chrome (matches the brand mark's
      field), #F55800 signal orange as the single accent. Hovers go lighter,
-     shadows go heavier than the old light theme. */
-  :root {
+     shadows go heavier than the old light theme. .theme-dark re-applies the
+     set to a subtree — brand screens stay dark under the light theme. */
+  :root, .theme-dark {
     --bg: #0b0c0f;
     --surface: #16181d;
     --surface-hover: #1f2229;
@@ -98,8 +99,8 @@
     background: rgba(246, 247, 249, 0.92);
   }
   [data-theme="light"] .sec-divider {
-    background: #f1f3f6;
-    border-top: 1px solid rgba(15, 23, 42, 0.05);
+    background: #eaedf2;
+    border-top: 1px solid rgba(15, 23, 42, 0.06);
     border-bottom: 0;
     box-shadow: none;
   }
@@ -4245,17 +4246,16 @@
 /* Selected map pin — compact enlarged icon; rating/LIVE live in the callout */
 @layer components {
   .pin-selected {
-    width: 36px;
-    height: 36px;
+    width: 38px;
+    height: 38px;
     display: flex;
     align-items: center;
     justify-content: center;
     border-radius: 12px;
-    border: 3px solid #fff;
-    box-shadow: var(--shadow-float);
-    color: #fff;
+    background: var(--surface);
+    box-shadow: 0 0 0 2px var(--accent), var(--shadow-float);
   }
-  .pin-selected .icn { width: 18px; height: 18px; color: #fff; }
+  .pin-selected .icn { width: 20px; height: 20px; color: currentColor; }
   /* Slightly larger dots — small-screen tap visibility (hit area is 44px) */
   .pin-dot { width: 14px; height: 14px; }
 }

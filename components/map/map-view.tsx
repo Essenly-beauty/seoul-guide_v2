@@ -139,11 +139,12 @@ function pinIcon(place: Place, selected: boolean, mode: PinMode, hero = false, v
         })
       : selected
         ? L.divIcon({
-            // Compact enlarged icon — rating/LIVE already live in the callout above;
-            // the old wide dark badge duplicated them and covered neighboring pins.
-            // Selected is one of the two places the accent is allowed on the map.
+            // Compact enlarged icon — rating/LIVE already live in the callout
+            // above. Selection reads as a surface capsule with the category's
+            // vivid glyph inside a thin accent ring — the solid orange capsule
+            // shouted too loudly (user 2026-08-03).
             className: "map-anchor",
-            html: `<div class="pin-hitarea badge-hit"><div class="pin-selected" style="background:var(--accent)">${place.type === "olive_young" ? oyOliveHtml(24) : `<svg class="icn" aria-hidden="true"><use href="#i-${TYPE_ICON[place.type]}"/></svg>`}</div></div>`,
+            html: `<div class="pin-hitarea badge-hit"><div class="pin-selected${place.type === "olive_young" ? " pin-selected-oy" : ""}" style="color:${VIVID_PIN_COLOR[place.type]}">${place.type === "olive_young" ? oyOliveHtml(24) : `<svg class="icn" aria-hidden="true"><use href="#i-${TYPE_ICON[place.type]}"/></svg>`}</div></div>`,
             iconSize: [44, 44],
             iconAnchor: [22, 44],
           })
