@@ -5,6 +5,8 @@ export const routes = {
   splash: "/", // legacy alias
   signIn: "/login",
   register: "/register",
+  forgotPassword: "/forgot-password",
+  resetPassword: "/reset-password",
   onboardingMode: "/onboarding/mode",
   onboardingBasics: "/onboarding/basics",
   onboardingInterests: "/onboarding/interests",

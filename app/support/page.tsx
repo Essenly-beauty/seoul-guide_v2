@@ -1,7 +1,7 @@
 import { TopBar } from "@/components/ui/top-bar";
 import { BottomNav } from "@/components/ui/bottom-nav";
 import { BackButton } from "@/components/ui/back-button";
-import { ActionButton } from "@/components/ui/action-button";
+import { Button } from "@/components/ui/button";
 import { SectionHeader } from "@/components/ui/section-header";
 import { SectionDivider } from "@/components/ui/section-divider";
 import { FeedbackLauncher } from "@/components/ui/feedback-sheet";
@@ -41,7 +41,8 @@ export default function SupportPage() {
         <section className="stack sm">
           <SectionHeader title="Ask MYSEOULDROP support" />
           <p className="t-caption">We usually reply within a few hours. Include the place name, date, time, and what you need help with.</p>
-          <ActionButton variant="primary" toast="Opening mail to help@myseouldrop.com…">Email help@myseouldrop.com</ActionButton>
+          {/* real mailto — the toast-only stub claimed to open mail and didn't (review) */}
+          <Button href="mailto:help@myseouldrop.com" external>Email help@myseouldrop.com</Button>
         </section>
 
         <SectionDivider />

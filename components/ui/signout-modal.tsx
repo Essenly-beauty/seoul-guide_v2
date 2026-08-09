@@ -4,6 +4,7 @@ import { useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { routes } from "@/lib/routes";
 import { Button } from "@/components/ui/button";
+import { supabaseBrowser } from "@/lib/supabase/client";
 import { useDialogFocus } from "@/components/ui/use-dialog-focus";
 
 export function SignoutModal() {
@@ -32,9 +33,11 @@ export function SignoutModal() {
               <Button
                 variant="danger"
                 style={{ flex: 1 }}
-                onClick={() => {
+                onClick={async () => {
+                  await supabaseBrowser().auth.signOut();
                   setOpen(false);
-                  router.push(routes.splash);
+                  router.push(routes.welcome);
+                  router.refresh();
                 }}
               >
                 Sign Out

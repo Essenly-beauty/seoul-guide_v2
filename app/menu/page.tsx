@@ -3,9 +3,8 @@ import { TopBar } from "@/components/ui/top-bar";
 import { BottomNav } from "@/components/ui/bottom-nav";
 import { SectionHeader } from "@/components/ui/section-header";
 import { SectionDivider } from "@/components/ui/section-divider";
-import { Avatar } from "@/components/ui/avatar";
+import { MenuProfile } from "@/components/mypage/menu-profile";
 import { Badge } from "@/components/ui/badge";
-import { IconButton } from "@/components/ui/icon-button";
 import { FeedbackLauncher } from "@/components/ui/feedback-sheet";
 import { BrandMark, BrandWordmark } from "@/components/brand/brand-logo";
 import { ProfileCard } from "@/components/mypage/profile-card";
@@ -47,16 +46,9 @@ export default function MenuPage() {
     <>
       <TopBar title="Menu" />
       <div className="app-scroll pad stack pagev2">
-        {/* Profile header block */}
+        {/* Profile header block — live session state */}
         <section className="stack">
-          <div className="row" style={{ gap: 14 }}>
-            <Avatar name="S" size={52} />
-            <div style={{ flex: 1, minWidth: 0 }}>
-              <b style={{ fontSize: 17 }}>Sarah</b>
-              <div className="caption muted">Member · Starter</div>
-            </div>
-            <IconButton name="user" label="Edit profile" variant="soft" href={routes.settings} />
-          </div>
+          <MenuProfile />
           <div className="row between" style={{ textAlign: "center" }}>
             {[["1", "Reservations"], ["11", "Saved"], ["2", "My reviews"]].map(([n, l]) => (
               <div key={l} style={{ flex: 1 }}>

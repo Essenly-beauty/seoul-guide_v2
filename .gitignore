@@ -41,3 +41,5 @@ scripts/.cache/
 .vercel
 !/docs/user-scenarios.md
 !/docs/map-first-v2-spec.md
+
+.env

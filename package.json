@@ -13,6 +13,8 @@
     "build:subway-svg": "node scripts/fetch-subway-sources.mjs && node scripts/build-subway-svg.mjs"
   },
   "dependencies": {
+    "@supabase/ssr": "^0.12.4",
+    "@supabase/supabase-js": "^2.112.2",
     "leaflet": "^1.9.4",
     "lucide-react": "^1.26.0",
     "lucide-static": "^1.26.0",
