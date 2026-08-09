@@ -18,6 +18,7 @@ import { FilterSheet } from "./filter-sheet";
 import { SubwayRouteController, type SubwayPlaceCategory, type SubwaySnap } from "@/components/subway/subway-route-controller";
 import { findRoute, findRouteVia, nearestStation, placesNearStation, STATIONS } from "@/lib/subway";
 import { routeTrackPath } from "@/lib/subway-path";
+import { useFavorites } from "@/lib/favorites";
 
 const MapView = dynamic(() => import("./map-view"), {
   ssr: false,
@@ -31,6 +32,9 @@ const SUBWAY_SNAP_INSET: Record<SubwaySnap, number> = { compact: 0.22, half: 0.5
 export function MapScreen() {
   // Multi-select category chips (user decision 2026-08-02); empty = all.
   const [cats, setCats] = useState<PlaceType[]>([]);
+  // Saved-only map layer (Kakao-style favorites view, 2026-08-09)
+  const [favOnly, setFavOnly] = useState(false);
+  const favs = useFavorites();
   const [mode, setMode] = useState<"map" | "subway">("map");
   const [filters, setFilters] = useState<MapFilters>(EMPTY_FILTERS);
   const [filterOpen, setFilterOpen] = useState(false);
@@ -162,9 +166,15 @@ export function MapScreen() {
     }
 
     let list = applyFilters(PLACES, cats, filters, loc ?? GANGNAM_STATION);
+    // Kakao-style saved layer: the heart FAB narrows the map to favorites
+    // (still combines with category chips and detail filters).
+    if (favOnly) {
+      const saved = new Set(favs.place);
+      list = list.filter((p) => saved.has(p.id));
+    }
     if (area) list = list.filter((p) => p.lat >= area.south && p.lat <= area.north && p.lng >= area.west && p.lng <= area.east);
     return list;
-  }, [activeStation, area, cats, filters, loc, mode, stationCategory, stationRadius]);
+  }, [activeStation, area, cats, favOnly, favs.place, filters, loc, mode, stationCategory, stationRadius]);
 
   const nearbyStationId = useMemo(() => {
     if (!loc) return null;
@@ -317,6 +327,20 @@ export function MapScreen() {
         )}
       </div>
 
+      {mode === "map" && (
+        <button
+          className={"map-fab map-fab-fav" + (favOnly ? " on" : "")}
+          aria-label={favOnly ? "Show all places" : "Show only my saved places"}
+          aria-pressed={favOnly}
+          title="My saved places"
+          onClick={() => {
+            setFavOnly((v) => !v);
+            handleMapSelect(null);
+          }}
+        >
+          <Icon name={favOnly ? "heart" : "heart-o"} size="sm" />
+        </button>
+      )}
       {mode === "map" && (
         <button
           className="map-fab"

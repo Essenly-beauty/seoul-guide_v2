@@ -3077,6 +3077,15 @@
     box-shadow: var(--shadow-float);
     color: var(--accent);
   }
+  /* Saved-layer heart FAB stacks above the locate FAB */
+  .map-fab-fav {
+    bottom: calc(174px + env(safe-area-inset-bottom));
+  }
+  .map-fab-fav.on {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+  }
   .map-banner {
     position: absolute;
     left: 14px;
