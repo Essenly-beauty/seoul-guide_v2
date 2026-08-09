@@ -1,52 +1,43 @@
 import Link from "next/link";
-import { BrandMark } from "@/components/icon";
+import { BrandMark, BrandWordmark } from "@/components/brand/brand-logo";
+import { WelcomeHero } from "@/components/brand/welcome-hero";
 import { routes } from "@/lib/routes";
 
-export default function SplashPage() {
+// Welcome / auth entry, following the Figma reference (58:1239 + 58:1358):
+// lockup, pitch, a full-width visual, then one chunky brand CTA beside a
+// plain sign-in link. The reference's photo band is our map preview — it
+// shows the product instead of decorating around it. Theme-aware throughout.
+export default function WelcomePage() {
   return (
-    <div
-      className="app-scroll"
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "center",
-        padding: "32px 26px",
-        textAlign: "center",
-        background: "radial-gradient(120% 60% at 50% 0%,#eaf5f1,transparent),var(--bg)",
-      }}
-    >
-      <div style={{ margin: "auto 0" }}>
-        <BrandMark size={84} style={{ margin: "0 auto 12px", display: "block" }} />
-        <div className="hero" style={{ fontSize: 34 }}>
-          Your personal
-          <br />
-          <span style={{ fontStyle: "italic", color: "var(--accent)" }}>K-beauty guide.</span>
+    <div className="welcome-screen app-scroll">
+      <div className="welcome-lockup">
+        <BrandMark size={64} />
+        <BrandWordmark size={15} />
+      </div>
+
+      <h1 className="welcome-title">
+        Seoul beauty, mapped<span style={{ color: "var(--accent)" }}>.</span>
+      </h1>
+      <p className="welcome-sub">
+        Salons, clinics, Olive Young and hidden spots — curated for travelers, in English.
+      </p>
+
+      <div className="welcome-preview">
+        <WelcomeHero />
+      </div>
+
+      <div className="welcome-actions">
+        <div className="welcome-cta-row">
+          <Link className="auth-cta welcome-cta" href={routes.register}>Get started</Link>
+          <Link className="welcome-signin" href={routes.signIn}>Sign in</Link>
         </div>
-        <p className="muted" style={{ fontSize: 15, marginTop: 14, maxWidth: "26ch", marginInline: "auto" }}>
-          Curated Seoul beauty matched to your skin.
-        </p>
-        <div className="stack" style={{ marginTop: 28 }}>
-          <Link className="btn ghost" href={routes.onboardingInterests}>
-            <span
-              className="mono"
-              style={{
-                fontWeight: 700,
-                background: "linear-gradient(90deg,#4285F4,#EA4335,#FBBC05,#34A853)",
-                WebkitBackgroundClip: "text",
-                backgroundClip: "text",
-                color: "transparent",
-              }}
-            >
-              G
-            </span>{" "}
-            Continue with Google
-          </Link>
-          <Link className="btn" href={routes.home}>Dev Login (Skip to Home)</Link>
-        </div>
-        <p className="caption dim" style={{ marginTop: 18 }}>
+        <Link className="login-guest caption muted welcome-guest" href={routes.map}>
+          Continue as guest
+        </Link>
+        <p className="caption dim welcome-terms">
           By continuing you agree to the{" "}
-          <Link href={routes.legalTerms} style={{ textDecoration: "underline" }}>Terms</Link> and{" "}
-          <Link href={routes.legalPrivacy} style={{ textDecoration: "underline" }}>Privacy Policy</Link>.
+          <Link href={routes.legalTerms}>Terms</Link> and{" "}
+          <Link href={routes.legalPrivacy}>Privacy Policy</Link>.
         </p>
       </div>
     </div>

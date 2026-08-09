@@ -1,41 +1,163 @@
-@import url("https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Geist+Mono:wght@500;600&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Geist+Mono:wght@500;600&family=Michroma&display=swap");
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
-  :root {
-    --bg: #fafbfd;
-    --surface: #ffffff;
-    --surface-hover: #f1f5f9;
-    --accent: #0c8e70;
-    --accent-soft: rgba(12, 142, 112, 0.08);
-    --accent-soft-2: rgba(12, 142, 112, 0.16);
-    --accent-hover: #0a7d63;
-    --text: #1e293b;
-    --muted: #64748b;
-    --dim: #94a3b8;
-    --border: #e2e8f0;
-    --success: #22c55e;
-    --success-soft: rgba(34, 197, 94, 0.12);
-    --warning: #f59e0b;
-    --warning-soft: rgba(245, 158, 11, 0.12);
-    --error: #ef4444;
-    --error-soft: rgba(239, 68, 68, 0.12);
-    --info: #3b82f6;
-    --info-soft: rgba(59, 130, 246, 0.12);
-    --scrim: rgba(15, 23, 42, 0.5);
+  /* MYSEOULDROP dark system — near-black chrome (matches the brand mark's
+     field), #F55800 signal orange as the single accent. Hovers go lighter,
+     shadows go heavier than the old light theme. .theme-dark re-applies the
+     set to a subtree — brand screens stay dark under the light theme. */
+  :root, .theme-dark {
+    --bg: #0b0c0f;
+    --surface: #16181d;
+    --surface-hover: #1f2229;
+    --accent: #f55800;
+    --accent-soft: rgba(245, 88, 0, 0.14);
+    --accent-soft-2: rgba(245, 88, 0, 0.26);
+    --accent-hover: #ff6a14;
+    --text: #f2f3f5;
+    --muted: #a2abb9;
+    --dim: #828c9b;
+    --border: #272b33;
+    --success: #3ecf82;
+    --success-soft: rgba(62, 207, 130, 0.14);
+    --warning: #f2ab3d;
+    --warning-soft: rgba(242, 171, 61, 0.16);
+    --error: #ff5d64;
+    --error-soft: rgba(255, 93, 100, 0.15);
+    --info: #6f9fff;
+    --info-soft: rgba(111, 159, 255, 0.15);
+    --scrim: rgba(0, 0, 0, 0.62);
     --r-sm: 6px;
-    --r-md: 10px;
-    --r-lg: 16px;
+    --r-md: 9px;
+    --r-lg: 14px;
     --r-full: 9999px;
-    --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.14);
-    --shadow-card: 0 1px 2px rgba(15, 23, 42, 0.06);
-    --shadow-float: 0 8px 24px -6px rgba(15, 23, 42, 0.2);
+    --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.5);
+    /* dark elevation = shadow below + hairline light above */
+    --shadow-card: 0 2px 6px -1px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.045);
+    --shadow-float: 0 14px 36px -10px rgba(0, 0, 0, 0.8), 0 2px 8px rgba(0, 0, 0, 0.4);
+    /* brand-tinted lift for primary CTAs — orange light source */
+    --shadow-accent: 0 10px 26px -10px rgba(245, 88, 0, 0.55);
     --serif: "Fraunces", Georgia, "Times New Roman", serif;
     --sans: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
     --mono: "Geist Mono", ui-monospace, "SF Mono", Menlo, monospace;
+    --brand-display: "Michroma", var(--sans);
+    --pin-disc: #1a1d22;
+    --pin-disc-ring: rgba(255, 255, 255, 0.28);
+    --station-halo: #0b0c0f;
+    --pin-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
+    --pin-shadow-c: rgba(0, 0, 0, 0.4);
+    --auth-line: rgba(255, 255, 255, 0.14);
+  }
+
+  /* Light theme — same orange, paper surfaces. Toggled from Settings; the
+     attribute is stamped pre-paint by the head boot script. */
+  [data-theme="light"] {
+    --bg: #f6f7f9;
+    --surface: #ffffff;
+    --surface-hover: #eef0f4;
+    --accent: #e94f00;
+    --accent-soft: rgba(233, 79, 0, 0.09);
+    --accent-soft-2: rgba(233, 79, 0, 0.18);
+    --accent-hover: #c94500;
+    --text: #1c2431;
+    --muted: #556175;
+    --dim: #67738a;
+    --border: #e3e7ee;
+    --success: #15803d;
+    --success-soft: rgba(21, 128, 61, 0.1);
+    --warning: #975a06;
+    --warning-soft: rgba(151, 90, 6, 0.1);
+    --error: #c0262d;
+    --error-soft: rgba(192, 38, 45, 0.1);
+    --info: #1d4ed8;
+    --info-soft: rgba(29, 78, 216, 0.09);
+    --scrim: rgba(15, 23, 42, 0.45);
+    --shadow-sm: 0 1px 3px rgba(15, 23, 42, 0.14);
+    --shadow-card: 0 1px 2px rgba(15, 23, 42, 0.07);
+    --shadow-float: 0 10px 28px -8px rgba(15, 23, 42, 0.22);
+    --shadow-accent: 0 10px 24px -10px rgba(233, 79, 0, 0.4);
+  }
+
+  /* Light-theme fixes for spots that hardcode dark values */
+  [data-theme="light"] {
+    --pin-disc: #ffffff;
+    --pin-disc-ring: rgba(15, 23, 42, 0.22);
+    --station-halo: #ffffff;
+    --pin-shadow: 0 1px 5px rgba(15, 23, 42, 0.14);
+    --pin-shadow-c: rgba(15, 23, 42, 0.16);
+    --auth-line: rgba(15, 23, 42, 0.14);
+  }
+  [data-theme="light"] body {
+    background: linear-gradient(180deg, #eef1f5, #e4e8ee);
+  }
+  [data-theme="light"] body::after {
+    opacity: 0.02;
+    filter: invert(1);
+  }
+  [data-theme="light"] .topbar {
+    background: rgba(246, 247, 249, 0.92);
+  }
+  [data-theme="light"] .sec-divider {
+    background: #eaedf2;
+    border-top: 1px solid rgba(15, 23, 42, 0.06);
+    border-bottom: 0;
+    box-shadow: none;
+  }
+  [data-theme="light"] .map-top::before {
+    background: linear-gradient(180deg, rgba(246, 247, 249, 0.92), rgba(246, 247, 249, 0.6) 55%, rgba(246, 247, 249, 0));
+  }
+  [data-theme="light"] .map-searchpill,
+  [data-theme="light"] .map-avatar,
+  [data-theme="light"] .map-modebtn,
+  [data-theme="light"] .map-fab,
+  [data-theme="light"] .map-top .chip:not(.selected) {
+    background: rgba(255, 255, 255, 0.82);
+  }
+  [data-theme="light"] .map-top .chip.selected {
+    background: rgba(255, 239, 230, 0.9);
+  }
+  [data-theme="light"] .pin-dot {
+    border-color: #ffffff;
+  }
+  [data-theme="light"] .pin-cluster {
+    background: #1e293b;
+    color: #ffffff;
+    border-color: #ffffff;
+  }
+  [data-theme="light"] .station-marker-name {
+    text-shadow: 0 1px 0 #fff, 0 -1px 0 #fff, 1px 0 0 #fff, -1px 0 0 #fff, 0 0 4px #fff;
+  }
+  [data-theme="light"] .banner.warning { color: #92600b; }
+  [data-theme="light"] .banner.info { color: #1e40af; }
+  [data-theme="light"] .banner.accent { color: var(--accent-hover); }
+  [data-theme="light"] .hero-img {
+    background: linear-gradient(135deg, #f2f4f8, #eaeef3 55%, #f4f6f9);
+  }
+  [data-theme="light"] .subway-nearby-controls {
+    box-shadow: 0 8px 16px -10px rgba(15, 23, 42, 0.18);
+  }
+  [data-theme="light"] .imgph { color: var(--dim); }
+  [data-theme="light"] .iconbtn.soft {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    color: var(--muted);
+  }
+  [data-theme="light"] .bottomnav { box-shadow: 0 -6px 18px rgba(15, 23, 42, 0.07); }
+  [data-theme="light"] .mapsheet,
+  [data-theme="light"] .subway-controller { box-shadow: 0 -10px 26px rgba(15, 23, 42, 0.12); }
+  [data-theme="light"] .subway-search-footer { box-shadow: 0 -6px 16px rgba(15, 23, 42, 0.08); }
+
+  /* The rail's "All" reset keeps its strong fill in every context/theme —
+     placed late so map-top/light translucent overrides can't outrank it. */
+  .chip.chip-all.selected,
+  .map-top .chip.chip-all.selected,
+  [data-theme="light"] .map-top .chip.chip-all.selected {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
   }
 
   * {
@@ -54,14 +176,29 @@
     font-size: 14px;
     line-height: 1.5;
     color: var(--text);
-    background: linear-gradient(180deg, #eef2f7, #e2e8f0);
+    background: linear-gradient(180deg, #060708, #0d0f13);
     -webkit-font-smoothing: antialiased;
+  }
+  /* Film grain over the whole app — the cheap trick that makes flat dark
+     surfaces feel printed instead of rendered. Pure decoration: no pointer
+     events, sits above dialogs so the texture is uniform. */
+  body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 2000;
+    pointer-events: none;
+    opacity: 0.05;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-size: 180px 180px;
   }
   ::selection {
     background: var(--accent);
     color: #fff;
   }
   button {
+    min-width: 44px;
+    min-height: 44px;
     font-family: inherit;
     cursor: pointer;
     -webkit-appearance: none;
@@ -85,7 +222,7 @@
   h4 {
     font-family: var(--serif);
     font-weight: 400;
-    letter-spacing: -0.01em;
+    letter-spacing: 0;
     line-height: 1.2;
   }
   @media (prefers-reduced-motion: reduce) {
@@ -93,6 +230,836 @@
       animation: none !important;
       transition: none !important;
     }
+  }
+}
+
+/* Subway station planner: the geographic map stays clean while all route
+   selection and station browsing lives in this bottom controller. */
+@layer components {
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  .map-modebtn.with-label {
+    width: auto;
+    min-width: 84px;
+    padding: 0 12px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    border-radius: 22px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0;
+  }
+
+  .subway-controller {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 950;
+    display: flex;
+    flex-direction: column;
+    height: min(72%, 640px);
+    background: var(--surface);
+    border-top: 1px solid var(--border);
+    border-radius: 16px 16px 0 0;
+    box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.55);
+    overflow: hidden;
+    animation: sheetup 0.24s cubic-bezier(0.16, 1, 0.3, 1);
+    letter-spacing: 0;
+  }
+  .subway-controller.search-ready {
+    height: min(60%, 540px);
+    transition: height 0.24s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .subway-controller.search-ready { transition: none; }
+  }
+  .subway-controller-header {
+    min-height: 62px;
+    flex: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 10px 12px 9px 16px;
+    border-bottom: 1px solid var(--border);
+  }
+  .subway-controller-header > div:first-child { min-width: 0; }
+  .subway-controller-header .iconbtn { width: 44px; height: 44px; }
+  .subway-controller-header h2 {
+    margin-top: 2px;
+    font-family: var(--sans);
+    font-size: 16px;
+    font-weight: 700;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .subway-controller-kicker {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    color: var(--accent);
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+  .subway-text-action {
+    min-height: 44px;
+    padding: 0 8px;
+    color: var(--accent);
+    font-size: 13px;
+    font-weight: 700;
+  }
+  .subway-controller-scroll {
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: max(18px, env(safe-area-inset-bottom));
+  }
+
+  .subway-search-panel { padding: 14px 16px 20px; }
+  .subway-search-fields {
+    position: relative;
+    display: grid;
+    grid-template-columns: 24px minmax(0, 1fr) 44px;
+    align-items: center;
+    column-gap: 8px;
+    padding: 8px;
+    background: var(--surface-hover);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+  }
+  .subway-search-route-rail {
+    grid-column: 1;
+    grid-row: 1;
+    align-self: stretch;
+    min-height: 145px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 34px 0 18px;
+  }
+  .subway-route-dot {
+    --route-dot-color: var(--accent);
+    width: 20px;
+    height: 20px;
+    flex: none;
+    display: grid;
+    place-items: center;
+    background: transparent;
+    border: 0;
+    border-radius: 50%;
+  }
+  .subway-route-dot:not(.line)::before {
+    content: "";
+    width: 10px;
+    height: 10px;
+    background: var(--route-dot-color);
+    border: 2px solid var(--surface);
+    border-radius: 50%;
+    box-shadow: 0 0 0 1px var(--border);
+  }
+  .subway-route-dot.departure { --route-dot-color: #1e6ef4; }
+  .subway-route-dot.arrival { --route-dot-color: #f2a33a; }
+  .subway-route-dot.via { --route-dot-color: var(--accent); }
+  .subway-route-dot.via.pending::before {
+    background: var(--surface);
+    border-color: var(--accent);
+  }
+  .subway-route-connector {
+    width: 2px;
+    min-height: 24px;
+    flex: 1;
+    background: var(--border);
+  }
+  .subway-search-field-stack {
+    grid-column: 2;
+    grid-row: 1;
+    min-width: 0;
+  }
+  .subway-search-field-stack .station-combobox {
+    position: static;
+    min-height: 72px;
+    padding: 6px 0;
+  }
+  .subway-search-field-stack .station-combobox + .station-combobox {
+    border-top: 1px solid var(--border);
+  }
+  .station-combobox { position: relative; min-width: 0; }
+  .station-combobox > label {
+    display: block;
+    margin: 0 0 5px 2px;
+    color: var(--muted);
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+  .station-search-input {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    min-height: 46px;
+    padding: 0 48px 0 13px;
+    background: var(--surface-hover);
+    border: 1px solid transparent;
+    border-radius: 8px;
+  }
+  .subway-search-field-stack .station-combobox > label {
+    margin: 0;
+    color: var(--muted);
+    font-size: 11px;
+    line-height: 16px;
+    letter-spacing: 0;
+    text-transform: none;
+  }
+  .subway-search-field-stack .station-search-input {
+    min-height: 44px;
+    padding: 0 44px 0 12px;
+    background: transparent;
+    border: 0;
+    border-radius: 6px;
+  }
+  .subway-search-field-stack .station-search-input:focus-within {
+    background: var(--surface);
+    border-color: transparent;
+    box-shadow: inset 0 0 0 2px var(--accent);
+  }
+  .subway-search-field-stack .station-search-input > .icn { display: none; }
+  .station-search-input:focus-within {
+    background: var(--surface);
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px var(--accent-soft);
+  }
+  .station-search-input > .icn { flex: none; color: var(--muted); }
+  .station-search-input input {
+    width: 100%;
+    min-width: 0;
+    padding: 0;
+    border: 0;
+    outline: 0;
+    background: transparent;
+    color: var(--text);
+    font: inherit;
+    font-size: 16px;
+  }
+  .station-search-input input::-webkit-search-cancel-button {
+    display: none;
+    -webkit-appearance: none;
+  }
+  .station-search-input input::placeholder { color: var(--dim); }
+  .station-search-clear {
+    position: absolute;
+    right: 1px;
+    bottom: 1px;
+    width: 44px;
+    height: 44px;
+    display: grid;
+    place-items: center;
+    color: var(--muted);
+  }
+  .subway-swap-button {
+    position: relative;
+    grid-column: 3;
+    grid-row: 1;
+    justify-self: center;
+    align-self: center;
+    width: 44px;
+    height: 44px;
+    display: grid;
+    place-items: center;
+    background: transparent;
+    border: 0;
+    border-radius: 50%;
+    color: var(--muted);
+    box-shadow: none;
+  }
+  .subway-swap-button::before {
+    content: "";
+    position: absolute;
+    inset: 5px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 50%;
+    box-shadow: var(--shadow-card);
+  }
+  .subway-swap-button > .icn {
+    position: relative;
+    z-index: 1;
+    width: 16px;
+    height: 16px;
+  }
+  .subway-swap-button:disabled { color: var(--dim); cursor: default; }
+  .subway-swap-button:disabled::before {
+    background: var(--surface-hover);
+    box-shadow: none;
+  }
+  .station-search-results {
+    position: relative;
+    z-index: 10;
+    max-height: 230px;
+    margin-top: 5px;
+    overflow-y: auto;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    box-shadow: var(--shadow-float);
+  }
+  .subway-search-field-stack .station-search-results {
+    position: absolute;
+    top: calc(100% + 6px);
+    left: 0;
+    right: 0;
+    z-index: 20;
+    max-height: clamp(96px, calc(60dvh - 225px), 230px);
+    margin-top: 0;
+  }
+  .subway-search-fields:has(.station-search-results) {
+    margin-bottom: clamp(102px, calc(60dvh - 219px), 236px);
+  }
+  .subway-controller.search-ready:has(.station-search-results) {
+    height: min(88%, 720px);
+  }
+  .station-results-label {
+    padding: 8px 11px 5px;
+    color: var(--muted);
+    font-size: 11px;
+    font-weight: 600;
+  }
+  .station-location-note {
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    padding: 6px 11px;
+    background: var(--surface-hover);
+    color: var(--muted);
+    font-size: 11px;
+  }
+  .station-location-note button {
+    min-width: 52px;
+    min-height: 44px;
+    color: var(--accent);
+    font-weight: 700;
+  }
+  .station-result-options > button {
+    width: 100%;
+    min-height: 64px;
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    padding: 10px 12px;
+    text-align: left;
+  }
+  .station-result-options > button + button { border-top: 1px solid var(--border); }
+  .station-result-options > button.active,
+  .station-result-options > button[aria-selected="true"] { background: var(--accent-soft); }
+  .station-linebadges { display: flex; gap: 3px; flex: none; }
+  .station-linebadge {
+    min-width: 20px;
+    height: 20px;
+    display: grid;
+    place-items: center;
+    padding: 0 3px;
+    border-radius: var(--r-full);
+    color: #fff;
+    font-size: 8px;
+    font-weight: 800;
+    line-height: 1;
+  }
+  .station-result-name { min-width: 0; flex: 1; display: grid; gap: 1px; line-height: 1.2; }
+  .station-result-name b { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 15.5px; }
+  .station-result-name > span { color: var(--muted); font-size: 12px; }
+  .station-result-context {
+    width: 32px;
+    height: 32px;
+    flex: none;
+    display: grid;
+    place-items: center;
+    color: var(--dim);
+  }
+  .station-no-results { padding: 18px 12px; color: var(--muted); font-size: 13px; text-align: center; }
+  .station-search-error {
+    margin-top: 10px;
+    padding: 9px 11px;
+    background: var(--error-soft);
+    border-radius: 8px;
+    color: #b42318;
+    font-size: 12px;
+  }
+  .station-field-error {
+    margin: 5px 2px 0;
+    color: #b42318;
+    font-size: 11px;
+  }
+  .subway-search-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 12px;
+  }
+  .subway-search-actions .btn { min-height: 46px; padding: 10px 14px; }
+  .subway-search-actions .btn:disabled { opacity: 0.45; cursor: default; }
+  .subway-search-actions .btn:disabled:hover { background: var(--accent); }
+  .subway-search-footer {
+    flex: none;
+    margin: 0;
+    padding: 10px 16px max(10px, env(safe-area-inset-bottom));
+    background: var(--surface);
+    border-top: 1px solid var(--border);
+    box-shadow: 0 -8px 22px rgba(0, 0, 0, 0.55);
+  }
+  .subway-search-footer .btn { flex: 1; }
+  .subway-action-help {
+    flex-basis: 100%;
+    margin: 0;
+    color: var(--muted);
+    font-size: 12px;
+    line-height: 1.4;
+    text-align: center;
+  }
+  .subway-search-preview {
+    margin: 16px -16px -20px;
+    padding-bottom: 12px;
+    border-top: 8px solid var(--surface-hover);
+  }
+  .subway-search-preview .subway-place-row.compact,
+  .subway-search-preview .subway-place-row.compact > button { min-height: 58px; }
+  .subway-search-preview-empty {
+    margin: 0 16px;
+    padding: 14px;
+    background: var(--surface-hover);
+    border-radius: 8px;
+    color: var(--muted);
+    font-size: 11px;
+    text-align: center;
+  }
+
+  /* Ticket-style route summary — endpoints at the edges, duration pill riding
+     a dotted connector, meta + actions in a quiet row underneath. */
+  .subway-route-summary {
+    display: grid;
+    gap: 6px;
+    padding: 12px 16px 9px;
+    color: var(--muted);
+    font-size: 11px;
+    border-bottom: 1px solid var(--border);
+  }
+  .subway-ticket-ends {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+  }
+  .subway-ticket-ends b {
+    color: var(--text);
+    font-size: 14.5px;
+    max-width: 46%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .subway-ticket-line {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .subway-ticket-line .dot {
+    flex: none;
+    width: 6px;
+    height: 6px;
+    border-radius: var(--r-full);
+    background: var(--dim);
+  }
+  .subway-ticket-line .dash {
+    flex: 1;
+    border-top: 2px dotted var(--border);
+  }
+  .subway-ticket-line .pill {
+    flex: none;
+    padding: 3px 12px;
+    border-radius: var(--r-full);
+    background: var(--surface-hover);
+    color: var(--text);
+    font-family: var(--mono);
+    font-size: 11.5px;
+    font-weight: 600;
+  }
+  .subway-ticket-meta {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+  }
+  .subway-ticket-meta > span { flex: 1; }
+  .subway-route-summary .iconbtn { width: 44px; height: 44px; margin-left: auto; }
+  .subway-nearby-jump {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
+    padding: 0 5px;
+    color: var(--accent);
+    font-size: 11px;
+    font-weight: 700;
+  }
+  .subway-route-summary:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
+  .subway-route-steps {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    overflow-x: auto;
+    padding: 7px 16px;
+    border-bottom: 1px solid var(--border);
+    scrollbar-width: none;
+  }
+  .subway-route-steps::-webkit-scrollbar { display: none; }
+  .subway-route-steps span {
+    flex: none;
+    color: var(--muted);
+    font-size: 11px;
+    white-space: nowrap;
+  }
+  .subway-route-steps > span { min-height: 38px; }
+  .subway-route-steps b { color: var(--text); }
+  .subway-route-leg { display: flex; align-items: center; gap: 7px; }
+  .subway-route-leg > .linebadge { flex: none; font-style: normal; }
+  .subway-route-leg > span { display: grid; gap: 2px; }
+  .subway-route-leg small { color: var(--muted); font-size: 9.5px; }
+  .subway-route-arrival { display: flex; align-items: center; gap: 4px; }
+  .subway-live-route {
+    min-width: 44px;
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
+    justify-content: center;
+    padding-inline: 4px;
+    color: var(--accent);
+    font-size: 11px;
+    font-weight: 700;
+  }
+
+  .subway-station-focus {
+    --station-line: var(--accent);
+    --station-line-left: var(--station-line);
+    --station-line-right: var(--station-line);
+    --station-text-left: #fff;
+    --station-text-right: #fff;
+    --station-shadow-left: 0 1px 2px rgba(15, 23, 42, 0.42);
+    --station-shadow-right: 0 1px 2px rgba(15, 23, 42, 0.42);
+    position: relative;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(132px, 1.55fr) minmax(0, 1fr);
+    align-items: center;
+    min-height: 60px;
+    padding: 8px 10px;
+  }
+  .subway-station-focus::before {
+    content: "";
+    position: absolute;
+    left: 18px;
+    right: 18px;
+    top: 50%;
+    height: 6px; /* Kakao-Metro: thin line-colored track, not a heavy bar */
+    border-radius: 3px;
+    background: linear-gradient(to right, var(--station-line-left) 0 50%, var(--station-line-right) 50% 100%);
+    transform: translateY(-50%);
+  }
+  .subway-station-focus > button,
+  .subway-active-station { position: relative; z-index: 1; }
+  .subway-station-focus > button {
+    min-width: 0;
+    min-height: 34px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    padding: 5px 10px;
+    font-size: 11.5px;
+    font-weight: 600;
+    color: var(--text);
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--r-full);
+    box-shadow: var(--shadow-card);
+  }
+  .subway-station-focus > button { z-index: 0; }
+  .subway-station-focus > button:first-of-type {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    margin-right: -12px;
+    padding-right: 18px;
+    justify-content: flex-start;
+  }
+  .subway-station-focus > button:last-of-type {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    margin-left: -12px;
+    padding-left: 18px;
+    justify-content: flex-end;
+  }
+  /* chevrons pick up their segment's line color */
+  .subway-station-focus > button:first-of-type .icn { color: var(--station-line-left); }
+  .subway-station-focus > button:last-of-type .icn { color: var(--station-line-right); }
+  .subway-station-focus > button span {
+    min-width: 0;
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    line-height: 1.2;
+  }
+  .subway-station-focus > button:disabled {
+    cursor: default;
+    color: var(--dim); /* solid pill, dimmed label — translucency let the track bleed through */
+  }
+  .subway-station-focus > button:disabled .icn { color: var(--dim); }
+  .subway-active-station {
+    min-width: 0;
+    min-height: 40px;
+    display: grid;
+    align-content: center;
+    justify-items: center;
+    padding: 4px 14px;
+    background: var(--surface);
+    border: 2px solid var(--station-line);
+    border-radius: var(--r-full); /* Kakao-Metro capsule */
+    box-shadow: var(--shadow-card);
+    text-align: center;
+  }
+  .subway-active-station b {
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 13.5px;
+    line-height: 1.2;
+  }
+  .subway-active-station span { display: none; }
+
+  .routestrip.embedded {
+    position: static;
+    display: block;
+    margin: 0;
+    background: transparent;
+    border: 0;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    border-radius: 0;
+    box-shadow: none;
+    overflow: visible;
+  }
+  .routestrip.embedded .routestrip-controls { padding: 5px 6px; }
+  .routestrip.embedded .routestrip-controls > .iconbtn { width: 44px; height: 44px; flex: none; }
+  .routestrip.embedded .routescroll { min-height: 78px; padding: 4px 0; gap: 8px; }
+  .routestrip.embedded .routeseg {
+    --route-line: var(--accent);
+    position: relative;
+    align-items: flex-start;
+    gap: 5px;
+    padding: 0;
+    border: 0;
+  }
+  .routestrip.embedded .routeseg::before {
+    content: "";
+    position: absolute;
+    left: 10px;
+    right: 32px;
+    top: 17px;
+    z-index: 0;
+    height: 4px;
+    border-radius: 2px;
+    background: var(--route-line);
+  }
+  .routestrip.embedded .linebadge { position: relative; z-index: 1; margin-top: 8px; }
+  .routestrip.embedded .routestation {
+    position: relative;
+    z-index: 1;
+    min-width: 62px;
+    min-height: 68px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 5px;
+    padding: 12px 4px 4px;
+    color: var(--muted);
+    font-size: 11px;
+    font-weight: 650;
+    line-height: 1.15;
+    text-align: center;
+  }
+  .routestrip.embedded .routedot {
+    width: 11px;
+    height: 11px;
+    background: var(--surface);
+    border: 3px solid var(--route-line);
+    border-radius: 50%;
+    flex: none;
+  }
+  .routestrip.embedded .routedot.dep { background: #1e6ef4; border-color: #1e6ef4; }
+  .routestrip.embedded .routedot.arr { background: #e5462e; border-color: #e5462e; }
+  .routestrip.embedded .routedot.transfer { width: 13px; height: 13px; background: var(--surface); border-width: 4px; }
+  .routestrip.embedded .routestation > span:last-child {
+    max-width: 72px;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    white-space: normal;
+  }
+  .routestrip.embedded .routestation.on { color: var(--text); font-weight: 800; }
+  .routestrip.embedded .routestation.on .routedot {
+    width: 15px;
+    height: 15px;
+    margin-block: -2px;
+    background: var(--route-line);
+    border: 3px solid var(--surface);
+    box-shadow: 0 0 0 3px var(--route-line);
+  }
+
+  .subway-nearby-controls {
+    position: sticky;
+    top: 0;
+    z-index: 5;
+    display: grid;
+    gap: 7px;
+    padding: 9px 16px 7px;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    box-shadow: 0 8px 16px -10px rgba(0, 0, 0, 0.7);
+  }
+  .subway-nearby-controls:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
+  .subway-segmented {
+    --seg-pad: 2px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    padding: 3px;
+    background: var(--surface-hover);
+    border-radius: 8px;
+  }
+  .subway-segmented button {
+    min-height: 38px;
+    border-radius: 6px;
+    color: var(--muted);
+    font-size: 11px;
+    font-weight: 700;
+  }
+  .subway-segmented button[aria-pressed="true"] {
+    background: var(--surface);
+    color: var(--text);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  }
+  .subway-category-tabs {
+    display: flex;
+    gap: 4px;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .subway-category-tabs::-webkit-scrollbar { display: none; }
+  .subway-category-tabs button {
+    flex: none;
+    min-height: 44px;
+    padding: 0 10px;
+    border-bottom: 2px solid transparent;
+    color: var(--muted);
+    font-size: 11px;
+    font-weight: 700;
+  }
+  .subway-category-tabs button[aria-pressed="true"] { border-bottom-color: var(--accent); color: var(--accent); }
+  .subway-nearby-heading {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 20px 16px 12px; /* was 13/7 — the section felt cramped */
+  }
+  .subway-nearby-heading h3 { font-family: var(--sans); font-size: 15px; font-weight: 700; }
+  .subway-nearby-heading p { margin-top: 3px; color: var(--muted); font-size: 11.5px; }
+  .subway-nearby-heading > .mono {
+    min-width: 25px;
+    height: 25px;
+    display: grid;
+    place-items: center;
+    background: var(--accent-soft);
+    border-radius: 50%;
+    color: var(--accent);
+    font-size: 11px;
+    font-weight: 700;
+  }
+  .subway-place-list { padding: 0 16px; }
+  .subway-place-row {
+    display: flex;
+    align-items: center;
+    min-height: 76px; /* was 68 — taller rows breathe */
+    border-bottom: 1px solid var(--border);
+  }
+  .subway-place-row.selected { background: var(--accent-soft); }
+  .subway-place-row > button {
+    flex: 1;
+    min-width: 0;
+    min-height: 68px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 4px;
+    text-align: left;
+  }
+  .subway-place-row > a { width: 44px; height: 44px; display: grid; place-items: center; color: var(--dim); }
+  .subway-place-copy { min-width: 0; flex: 1; display: grid; gap: 2px; }
+  .subway-place-copy > b { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 13px; }
+  .subway-place-copy > span { color: var(--muted); font-size: 10.5px; line-height: 1.3; }
+  .subway-place-copy .ratingline { display: inline-flex; }
+  .subway-empty-state { margin: 4px 16px 12px; padding: 20px 14px; background: var(--surface-hover); border-radius: 8px; text-align: center; }
+  .subway-empty-state b { font-size: 13px; }
+  .subway-empty-state p { margin: 4px 0 12px; color: var(--muted); font-size: 11px; }
+
+  .subway-product-picks { margin-top: 10px; border-top: 8px solid var(--surface-hover); }
+  .subway-product-picks > a {
+    min-height: 60px;
+    display: grid;
+    grid-template-columns: 1fr auto auto;
+    align-items: center;
+    gap: 4px 9px;
+    margin: 0 16px;
+    padding: 9px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .subway-product-picks > a > span:first-child { grid-column: 1 / 2; color: var(--muted); font-size: 10px; }
+  .subway-product-picks > a > b { grid-column: 1 / 2; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 12px; }
+  .subway-product-picks > a > .mono { grid-column: 2 / 3; grid-row: 1 / 3; font-size: 11px; }
+  .subway-product-picks > a > .icn { grid-column: 3 / 4; grid-row: 1 / 3; color: var(--dim); }
+
+  @media (max-width: 360px) {
+    .map-modebtn.with-label { min-width: 44px; width: 44px; padding: 0; border-radius: 50%; }
+    .map-modebtn.with-label span { display: none; }
+    .subway-station-focus { grid-template-columns: minmax(0, 0.8fr) minmax(124px, 1.5fr) minmax(0, 0.8fr); padding-inline: 6px; }
+    .subway-station-focus > button { font-size: 9.5px; }
+    .subway-route-summary > span:nth-of-type(2) { display: none; }
+  }
+
+  @media (max-height: 680px) {
+    .subway-controller { height: 68%; }
+    .subway-controller.search-ready { height: 58%; }
+    .subway-station-focus { min-height: 78px; padding-block: 8px; }
+    .subway-route-steps { gap: 10px; padding-block: 5px; }
+    .subway-route-steps > span { min-height: 34px; }
+    .subway-route-leg small { display: none; }
   }
 }
 
@@ -116,7 +1083,8 @@
       min-height: auto;
       margin-top: max(0px, calc((100dvh - 880px) / 2));
       border-radius: 22px;
-      box-shadow: 0 30px 70px -24px rgba(15, 23, 42, 0.45);
+      border: 1px solid #1d2026;
+      box-shadow: 0 30px 70px -24px rgba(0, 0, 0, 0.85);
     }
   }
   .app-scroll {
@@ -245,7 +1213,7 @@
     position: sticky;
     top: 0;
     z-index: 20;
-    background: rgba(250, 251, 253, 0.92);
+    background: rgba(11, 12, 15, 0.9);
     backdrop-filter: blur(10px);
     border-bottom: 1px solid var(--border);
     display: flex;
@@ -254,17 +1222,27 @@
     padding: max(12px, env(safe-area-inset-top)) 16px 12px;
     flex: none;
   }
+  /* Page titles speak in the brand's techno voice; every screen signs off
+     with the MYSEOULDROP period. */
   .topbar .title {
-    font-family: var(--serif);
-    font-size: 18px;
+    font-family: var(--brand-display);
+    font-size: 12.5px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
     flex: 1;
+  }
+  .topbar .title::after {
+    content: ".";
+    color: var(--accent);
   }
   .topbar.center .title {
     text-align: center;
   }
   .iconbtn {
-    width: 40px;
-    height: 40px;
+    width: 44px;
+    height: 44px;
+    min-width: 44px;
+    min-height: 44px;
     border-radius: var(--r-full);
     display: grid;
     place-items: center;
@@ -304,9 +1282,14 @@
     background: var(--surface-hover);
   }
   .btn.outline {
-    background: transparent;
-    border: 1.5px solid var(--accent);
-    color: var(--accent);
+    /* quiet secondary pill (More ›, See-all) — the accent outline read heavy */
+    background: var(--surface);
+    border: 1px solid var(--border);
+    color: var(--text);
+  }
+  .btn.outline:hover {
+    background: var(--surface-hover);
+    color: var(--text);
   }
   .btn.danger {
     background: transparent;
@@ -314,6 +1297,7 @@
     color: var(--error);
   }
   .btn.sm {
+    min-height: 44px;
     padding: 9px 14px;
     font-size: 13px;
     width: auto;
@@ -354,7 +1338,7 @@
   }
   .hero-img {
     border-radius: var(--r-md);
-    background: linear-gradient(135deg, #e6f3ef, #d9ece6 55%, #eef4f1);
+    background: linear-gradient(135deg, #1c1f25, #23262d 55%, #191c21);
     display: grid;
     place-items: center;
     color: var(--accent);
@@ -369,12 +1353,15 @@
 
   /* chips / badges */
   .chip {
+    min-height: 44px;
     display: inline-flex;
     align-items: center;
     gap: 6px;
     padding: 8px 14px;
     border-radius: var(--r-full);
-    background: var(--surface);
+    /* outlined, not filled — reads graphic against the dark field; chips that
+       float over the map re-add a surface fill (.map-top .chip). */
+    background: transparent;
     border: 1px solid var(--border);
     font-size: 13px;
     font-weight: 500;
@@ -388,6 +1375,12 @@
   }
   .chip[aria-pressed="true"],
   .chip.selected {
+    background: rgba(245, 88, 0, 0.1);
+    border-color: rgba(245, 88, 0, 0.65);
+    color: var(--accent);
+  }
+  /* the rail's "All" reset reads as the strong state (user pick 2026-08-02) */
+  .chip.chip-all.selected {
     background: var(--accent);
     border-color: var(--accent);
     color: #fff;
@@ -397,6 +1390,12 @@
     background: var(--accent-soft);
     border-color: var(--accent);
     color: var(--accent);
+  }
+  .chip[aria-pressed="true"]:focus-visible,
+  .chip.selected:focus-visible {
+    outline: 2px solid var(--focus-ring-inner);
+    outline-offset: 2px;
+    box-shadow: 0 0 0 6px var(--focus-ring-outer);
   }
   .chiprow {
     display: flex;
@@ -430,19 +1429,19 @@
   }
   .badge.warning {
     background: var(--warning-soft);
-    color: #b45309;
+    color: var(--warning);
   }
   .badge.info {
     background: var(--info-soft);
-    color: #1d4ed8;
+    color: var(--info);
   }
   .badge.success {
     background: var(--success-soft);
-    color: #15803d;
+    color: var(--success);
   }
   .badge.error {
     background: var(--error-soft);
-    color: #b91c1c;
+    color: var(--error);
   }
   .badge.dim {
     background: var(--surface-hover);
@@ -527,8 +1526,8 @@
     width: 38px;
     height: 38px;
     border-radius: var(--r-md);
-    background: var(--accent-soft);
-    color: var(--accent);
+    background: var(--surface-hover);
+    color: var(--muted);
     display: grid;
     place-items: center;
     flex: none;
@@ -559,8 +1558,8 @@
     width: 52px;
     height: 52px;
     border-radius: var(--r-md);
-    background: var(--accent-soft);
-    color: var(--accent);
+    background: var(--surface-hover);
+    color: var(--muted);
     display: grid;
     place-items: center;
     flex: none;
@@ -662,7 +1661,7 @@
     align-items: center;
     gap: 13px;
     background: var(--surface);
-    border: 1.5px solid var(--border);
+    border: 1px solid var(--border);
     border-radius: var(--r-md);
     padding: 15px;
     width: 100%;
@@ -690,8 +1689,10 @@
     flex: none;
   }
   .pickcard[aria-pressed="true"] {
-    border-color: var(--accent);
-    background: var(--accent-soft);
+    /* whisper of the accent — several cards select at once, so a hairline
+       edge and a faint wash instead of five glowing orange panels */
+    border-color: rgba(245, 88, 0, 0.4);
+    background: rgba(245, 88, 0, 0.06);
   }
   .pickcard[aria-pressed="true"] .ic {
     background: var(--accent);
@@ -721,12 +1722,13 @@
   }
   .input {
     width: 100%;
+    min-height: 48px;
     background: var(--surface);
     border: 1px solid var(--border);
     border-radius: var(--r-md);
     padding: 12px 14px;
     font-family: inherit;
-    font-size: 14px;
+    font-size: 16px;
     color: var(--text);
   }
   .input:focus-visible {
@@ -740,6 +1742,50 @@
     background-repeat: no-repeat;
     background-position: right 12px center;
     background-size: 18px;
+  }
+  .mobile-search-field {
+    min-height: 48px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 2px 4px 2px 14px;
+    background: var(--surface-hover);
+    border-radius: var(--r-full);
+  }
+  .mobile-search-field:focus-within {
+    background: var(--surface);
+    box-shadow: inset 0 0 0 2px var(--accent), 0 0 0 3px var(--accent-soft);
+  }
+
+  .login-guest {
+    width: 100%;
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .mobile-search-field input {
+    min-width: 0;
+    min-height: 44px;
+  }
+  .mobile-search-field input[type="search"]::-webkit-search-cancel-button {
+    appearance: none;
+  }
+  .field-help,
+  .field-error {
+    margin-top: 6px;
+    font-size: 12px;
+    line-height: 1.4;
+  }
+  .field-help { color: var(--muted); }
+  .field-error { color: var(--error); }
+  .section-action {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    margin-right: -8px;
+    padding: 0 8px;
+    border-radius: var(--r-sm);
   }
 
   /* banners */
@@ -757,15 +1803,15 @@
   }
   .banner.warning {
     background: var(--warning-soft);
-    color: #92600b;
+    color: #f4c47e;
   }
   .banner.info {
     background: var(--info-soft);
-    color: #1e40af;
+    color: #b1c8ff;
   }
   .banner.accent {
     background: var(--accent-soft);
-    color: var(--accent-hover);
+    color: #ffb185;
   }
 
   /* progress */
@@ -852,19 +1898,341 @@
     flex: none;
   }
 
+  /* Filter sheet — many stacked groups, so the type rhythm goes compact:
+     quieter labels, tighter chips, less air between groups (2026-08-02). */
+  .filtersheet { gap: 13px; }
+  .filtersheet .label {
+    font-size: 10px;
+    letter-spacing: 0.05em;
+    color: var(--dim);
+  }
+  .filtersheet .chipwrap { gap: 6px; margin-top: 5px !important; }
+  .filtersheet .chip {
+    min-height: 38px;
+    padding: 6px 13px;
+    font-size: 12.5px;
+  }
+  /* per-category service groups — separated by hairlines, not boxes */
+  .filtergroup {
+    padding: 13px 0 3px;
+    border-top: 1px solid var(--border);
+  }
+  .filtergroup-head {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 12.5px;
+    font-weight: 650;
+    color: var(--muted);
+  }
+
+  /* ── Auth screens (Figma 58:1295 / 58:1319 / 58:1344) ──
+     The reference's DNA: generous 76px pill fields on a hairline outline,
+     a chunky brand CTA, a hairline "or" rule, bare social glyphs. Every
+     value is a token, so the same screens hold up in both themes. */
+  .auth-screen {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    padding: max(24px, env(safe-area-inset-top)) 28px 22px;
+    background: var(--bg);
+    text-align: center;
+  }
+  .auth-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+  }
+  .auth-top > :last-child { width: 44px; }
+  .auth-title {
+    margin-top: 44px;
+    font-family: var(--sans);
+    font-size: 30px;
+    font-weight: 800;
+    letter-spacing: -0.015em;
+  }
+  .auth-support {
+    margin-top: 14px;
+    color: var(--muted);
+    font-size: 12.5px;
+  }
+  .auth-link { color: var(--accent); font-weight: 700; }
+  .auth-fields { display: grid; gap: 16px; margin-top: 40px; }
+  .auth-field-wrap { position: relative; }
+  .auth-field {
+    width: 100%;
+    min-height: 76px;
+    padding: 0 26px;
+    background: transparent;
+    border: 1px solid var(--auth-line);
+    border-radius: 30px;
+    font-family: inherit;
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text);
+  }
+  .auth-field::placeholder { color: var(--dim); font-weight: 600; opacity: 1; }
+  .auth-field:focus-visible {
+    border-color: var(--accent);
+    outline: none;
+  }
+  .auth-field-toggle {
+    position: absolute;
+    right: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 44px;
+    height: 44px;
+    display: grid;
+    place-items: center;
+    color: var(--dim);
+  }
+  .auth-aside {
+    margin-top: 18px;
+    text-align: left;
+    font-size: 13.5px;
+    font-weight: 700;
+    color: var(--muted);
+  }
+  .auth-cta {
+    width: 100%;
+    min-height: 76px;
+    margin-top: 24px;
+    border-radius: 30px;
+    background: var(--accent);
+    color: #fff;
+    font-size: 19px;
+    font-weight: 700;
+    box-shadow: var(--shadow-accent);
+  }
+  .auth-cta:hover { background: var(--accent-hover); }
+  .auth-or {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-top: 28px;
+    color: var(--dim);
+    font-size: 12.5px;
+  }
+  .auth-or::before,
+  .auth-or::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: var(--auth-line);
+  }
+  .auth-socials { display: flex; justify-content: center; gap: 34px; margin-top: 18px; }
+  .auth-social {
+    width: 52px;
+    height: 52px;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    color: var(--text);
+  }
+  .auth-social:hover { background: var(--surface-hover); }
+  .auth-foot {
+    margin-top: auto;
+    padding-top: 26px;
+    font-size: 13.5px;
+    font-weight: 700;
+    color: var(--muted);
+  }
+
+  /* Theme picker (Figma 58:1344) — two orbs, the active one lit from below. */
+  .mode-options {
+    display: flex;
+    justify-content: center;
+    gap: 58px;
+    margin-top: 40px;
+  }
+  .mode-option {
+    display: grid;
+    justify-items: center;
+    gap: 14px;
+    padding: 0;
+    min-width: 73px;
+  }
+  .mode-orb {
+    position: relative;
+    width: 73px;
+    height: 73px;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    background: var(--surface-hover);
+    color: var(--muted);
+    transition: color 0.2s var(--ease, cubic-bezier(0.16, 1, 0.3, 1));
+  }
+  .mode-option[aria-pressed="true"] .mode-orb {
+    color: var(--accent);
+    box-shadow: inset 0 -22px 26px -16px var(--accent);
+  }
+  .mode-option[aria-pressed="true"] .mode-orb::after {
+    content: "";
+    position: absolute;
+    bottom: -2px;
+    width: 34px;
+    height: 3px;
+    border-radius: 999px;
+    background: var(--accent);
+  }
+  .mode-label { font-size: 14.5px; font-weight: 700; color: var(--muted); }
+  .mode-option[aria-pressed="true"] .mode-label { color: var(--text); }
+
+  /* ── Welcome / splash ──────────────────────────
+     Bands top to bottom: brand lockup, pitch, map preview card, actions.
+     Both themes come from tokens — no forced-dark canvas. */
+  .welcome-screen {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    padding: 0 26px 24px;
+    text-align: center;
+    background: var(--bg);
+  }
+  .welcome-lockup {
+    display: grid;
+    justify-items: center;
+    gap: 13px;
+    padding-top: max(46px, calc(env(safe-area-inset-top) + 34px));
+  }
+  .welcome-title {
+    margin-top: 30px;
+    font-family: var(--sans);
+    font-size: 26px;
+    font-weight: 800;
+    letter-spacing: -0.01em;
+    line-height: 1.28;
+  }
+  .welcome-sub {
+    margin: 10px auto 0;
+    max-width: 30ch;
+    color: var(--muted);
+    font-size: 14.5px;
+    line-height: 1.55;
+  }
+  /* product preview — the map you are signing up for, not decoration */
+  .welcome-preview {
+    position: relative;
+    flex: 1;
+    min-height: 150px;
+    margin-top: 26px;
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    background: var(--surface);
+    overflow: hidden;
+  }
+  .welcome-hero { position: absolute; inset: 0; pointer-events: none; }
+  .welcome-hero svg { display: block; width: 100%; height: 100%; }
+  .wh-block { fill: var(--surface-hover); }
+  .wh-street { stroke: var(--border); stroke-width: 1.2; }
+  .wh-river { fill: none; stroke: var(--info); stroke-width: 22; opacity: 0.12; stroke-linecap: round; }
+  .wh-pin { fill: var(--dim); opacity: 0.5; }
+  /* fixed low alpha — the --accent-soft token read as a solid disc on dark */
+  .wh-ring { fill: rgba(245, 88, 0, 0.07); stroke: var(--accent); stroke-opacity: 0.3; stroke-width: 1; }
+  .wh-pin-main path { fill: var(--accent); }
+  .wh-pin-main-eye { fill: var(--surface); }
+
+  .welcome-actions { padding-top: 24px; }
+  /* Figma 58:1239: one chunky brand pill beside a plain sign-in link. */
+  .welcome-cta-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .welcome-cta {
+    flex: 1;
+    margin-top: 0;
+    display: grid;
+    place-items: center;
+  }
+  .welcome-signin {
+    flex: none;
+    min-width: 92px;
+    min-height: 44px;
+    display: grid;
+    place-items: center;
+    color: var(--text);
+    font-size: 17px;
+    font-weight: 700;
+  }
+  .welcome-guest { display: inline-block; margin-top: 18px; text-decoration: underline; }
+  .welcome-terms { margin-top: 16px; }
+  .welcome-terms a { text-decoration: underline; }
+
+  /* Splash — lockup centered on the theme's own field, with a thin
+     indeterminate bar instead of pulsing the whole logo. */
+  .splash {
+    flex: 1;
+    display: grid;
+    place-content: center;
+    justify-items: center;
+    gap: 26px;
+    /* optical centering — a geometrically centered lockup reads low */
+    padding-bottom: 7vh;
+    background: var(--bg);
+  }
+  .splash-lockup { display: grid; justify-items: center; gap: 14px; }
+  .splash-bar {
+    position: relative;
+    width: 104px;
+    height: 2px;
+    border-radius: 999px;
+    background: var(--border);
+    overflow: hidden;
+  }
+  .splash-bar::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    width: 45%;
+    border-radius: 999px;
+    background: linear-gradient(90deg, transparent, var(--accent), transparent);
+    animation: splash-bar-slide 1.15s cubic-bezier(0.45, 0, 0.2, 1) infinite;
+  }
+  @keyframes splash-bar-slide {
+    from { transform: translateX(-120%); }
+    to { transform: translateX(320%); }
+  }
+
+  /* Route-change loading sweep — rides the header's bottom hairline instead
+     of the shell top; a soft gradient drifts across with a long easing. */
+  .route-sweep .topbar::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -1px;
+    height: 2px;
+    pointer-events: none;
+    background: linear-gradient(90deg, transparent, rgba(245, 88, 0, 0.65) 40%, #ff9b57 60%, transparent) no-repeat;
+    background-size: 45% 100%;
+    animation: route-sweep-slide 1.15s cubic-bezier(0.45, 0, 0.2, 1) both;
+  }
+  @keyframes route-sweep-slide {
+    from { background-position: -60% 0; }
+    to { background-position: 175% 0; }
+  }
+
   /* bottom nav */
   .bottomnav {
     flex: none;
     display: flex;
     background: var(--surface);
     border-top: 1px solid var(--border);
+    box-shadow: 0 -8px 24px rgba(0, 0, 0, 0.45);
     padding: 8px 0 max(20px, env(safe-area-inset-bottom));
   }
   .bottomnav .nav {
+    position: relative;
     flex: 1;
+    min-height: 48px;
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
     gap: 4px;
     color: var(--dim);
     font-size: 11px;
@@ -872,6 +2240,18 @@
   }
   .bottomnav .nav[aria-current="page"] {
     color: var(--accent);
+    font-weight: 700;
+  }
+  /* Non-color current-page signal (a11y contract): a thin notch sitting on
+     the nav's top border — not the floating dot, which read as map debris. */
+  .bottomnav .nav[aria-current="page"]::before {
+    content: "";
+    position: absolute;
+    top: -9px;
+    width: 16px;
+    height: 2px;
+    border-radius: 999px;
+    background: var(--accent);
   }
 
   /* sticky book bar */
@@ -920,8 +2300,8 @@
     width: 40px;
     height: 40px;
     border-radius: var(--r-md);
-    background: var(--accent-soft);
-    color: var(--accent);
+    background: var(--surface-hover);
+    color: var(--muted);
     display: grid;
     place-items: center;
     flex: none;
@@ -1098,6 +2478,19 @@
     align-items: center;
     gap: 10px;
     padding: 10px 18px 12px;
+  }
+  /* title block takes the row; the close button pins to the right edge */
+  .sheet .shead > :first-child {
+    flex: 1;
+    min-width: 0;
+  }
+  .sheet-title {
+    margin: 0;
+    font-family: var(--sans);
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 1.5;
+    letter-spacing: 0;
   }
   .sheet .sbody {
     overflow-y: auto;
@@ -1543,6 +2936,19 @@
        dialog (z-index 80) mounted as a later sibling in .app-shell. */
     z-index: 0;
   }
+  .map-screen.subway-mode .leaflet-bottom { bottom: 60%; }
+  .map-screen.subway-mode.subway-route-ready .leaflet-bottom { bottom: 72%; }
+  /* Kakao-style: while the route form is being edited the controller takes
+     the whole screen — the map (and its top chrome) returns once a route is
+     shown or a station browse begins. */
+  .map-screen.subway-mode.subway-editing .subway-controller {
+    height: 100%;
+    border-radius: 0;
+    border-top: none;
+  }
+  .map-screen.subway-mode.subway-editing .map-top {
+    display: none;
+  }
   .map-canvas {
     position: absolute;
     inset: 0;
@@ -1558,28 +2964,51 @@
     z-index: 900;
     padding: max(12px, env(safe-area-inset-top)) 14px 0;
     display: grid;
+    grid-template-columns: 1fr;
     gap: 8px;
     pointer-events: none;
+    /* own stacking context so the ::before scrim can sit behind the controls */
+    isolation: isolate;
   }
-  .map-top > * { pointer-events: auto; }
+  /* Top scrim — dark fading to clear, so the header controls read as a layer
+     floating above the basemap instead of competing with it. */
+  .map-top::before {
+    content: "";
+    position: absolute;
+    inset: 0 0 -72px 0;
+    z-index: -1;
+    pointer-events: none;
+    /* strong enough that markers scrolling under the chip rail read as
+       "behind the chrome" instead of colliding with it */
+    background: linear-gradient(180deg, rgba(6, 7, 8, 0.9), rgba(6, 7, 8, 0.62) 55%, rgba(6, 7, 8, 0));
+  }
+  .map-top > * { pointer-events: auto; min-width: 0; }
   .map-searchpill {
     flex: 1;
+    min-width: 0;
     display: flex;
     align-items: center;
     gap: 8px;
     min-height: 44px;
     padding: 10px 14px;
-    background: var(--surface);
+    /* translucent + blur — floating controls sample the map beneath them */
+    background: rgba(22, 24, 29, 0.72);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
     border: 1px solid var(--border);
     border-radius: var(--r-full);
     box-shadow: var(--shadow-float);
   }
-  .map-close {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    box-shadow: var(--shadow-float);
-    width: 44px;
-    height: 44px;
+  .map-searchpill span {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .subway-map-context { cursor: default; }
+
+  @media (max-height: 680px) {
+    .map-screen.subway-mode .leaflet-bottom { bottom: 58%; }
+    .map-screen.subway-mode.subway-route-ready .leaflet-bottom { bottom: 68%; }
   }
   .map-top .chip {
     box-shadow: var(--shadow-card);
@@ -1588,8 +3017,15 @@
   /* :not(.selected) — .chip.selected (earlier in the cascade) sets the same
      specificity; without this guard this rule's background would win and
      erase the accent fill on the active chip. */
+  .map-top .chip {
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
   .map-top .chip:not(.selected) {
-    background: var(--surface);
+    background: rgba(22, 24, 29, 0.72);
+  }
+  .map-top .chip.selected {
+    background: rgba(58, 30, 14, 0.8);
   }
   /* divIcon markers */
   .map-anchor { background: none; border: none; }
@@ -1627,7 +3063,9 @@
     height: 44px;
     display: grid;
     place-items: center;
-    background: var(--surface);
+    background: rgba(22, 24, 29, 0.72);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
     border: 1px solid var(--border);
     border-radius: var(--r-full);
     box-shadow: var(--shadow-float);
@@ -1663,8 +3101,9 @@
     height: 82%;
     transform: translateY(calc(100% - 116px));
     transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1);
-    touch-action: none;
   }
+  .mapsheet-handle { touch-action: none; }
+  .mapsheet.selected { transform: translateY(calc(100% - 72px)); }
   .mapsheet.half { transform: translateY(52%); }
   .mapsheet.full { transform: translateY(0); }
   .mapsheet-handle {
@@ -1701,5 +3140,1683 @@
     height: 44px;
     border-radius: var(--r-sm);
     flex: none;
+  }
+  .mapsheet.selected .mapsheet-body { display: none; }
+  .mapsheet.selected .mapsheet-handle { gap: 2px; padding-block: 6px; }
+  .mapsheet.selected .mapsheet-handle > button {
+    width: 100%;
+    min-height: 44px;
+    justify-content: center;
+  }
+
+  /* Selected-place preview: a map-anchored, action-ready callout. */
+  .map-place-popup .leaflet-popup-content-wrapper {
+    padding: 0;
+    overflow: hidden;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    box-shadow: 0 14px 34px rgba(15, 23, 42, 0.2);
+  }
+  .map-place-popup .leaflet-popup-content {
+    width: min(330px, calc(100vw - 36px)) !important;
+    margin: 0;
+  }
+  .map-place-popup .leaflet-popup-tip {
+    background: var(--surface);
+    box-shadow: 2px 2px 3px rgba(15, 23, 42, 0.12);
+  }
+  .map-place-callout {
+    position: relative;
+    padding: 14px;
+    color: var(--text);
+  }
+  .map-place-callout-close {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    z-index: 1;
+    width: 44px;
+    height: 44px;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    color: var(--muted);
+  }
+  .map-place-callout-main {
+    display: grid;
+    grid-template-columns: 82px minmax(0, 1fr);
+    gap: 12px;
+    align-items: stretch;
+    padding-right: 34px;
+  }
+  .map-place-callout-media {
+    min-height: 90px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    padding: 8px 5px;
+    background: var(--accent-soft);
+    border-radius: 8px;
+    color: var(--accent);
+    font-size: 10px;
+    font-weight: 700;
+    line-height: 1.15;
+    text-align: center;
+  }
+  .map-place-callout-copy { min-width: 0; }
+  .map-place-callout-kicker {
+    display: block;
+    padding-right: 14px;
+    overflow: hidden;
+    color: var(--muted);
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0;
+    text-overflow: ellipsis;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+  .map-place-callout h2 {
+    margin: 3px 0 5px;
+    display: -webkit-box;
+    overflow: hidden;
+    font-family: var(--sans);
+    font-size: 17px;
+    font-weight: 700;
+    line-height: 1.2;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+  }
+  .map-place-callout p {
+    margin: 0;
+    display: -webkit-box;
+    overflow: hidden;
+    color: var(--muted);
+    font-size: 11px;
+    line-height: 1.35;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+  }
+  .map-place-callout-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 3px 7px;
+    margin-top: 6px;
+    color: var(--muted);
+    font-size: 10px;
+    line-height: 1.25;
+  }
+  .map-place-callout-meta b { color: var(--warning); }
+  .map-place-callout-actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin-top: 12px;
+  }
+  .map-place-callout-action {
+    min-width: 0;
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    padding: 8px;
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: 700;
+    white-space: nowrap;
+  }
+  .map-place-callout-action.secondary {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    color: var(--text);
+  }
+  .map-place-callout-action.primary {
+    background: var(--accent);
+    color: #fff;
+  }
+
+  @media (max-width: 350px) {
+    .map-place-callout-main { grid-template-columns: 68px minmax(0, 1fr); gap: 9px; }
+    .map-place-callout-media { min-height: 84px; }
+    .map-place-callout-action { font-size: 11px; }
+  }
+  @media (max-height: 640px) {
+    .map-place-popup.leaflet-popup { margin-bottom: -20px; }
+    .map-screen .pin-badge.selected {
+      width: 20px;
+      height: 20px;
+      padding: 1px;
+      overflow: hidden;
+      border-radius: 50%;
+      font-size: 0;
+    }
+    .map-screen .pin-badge.selected .livebadge { display: none; }
+    .map-place-callout { padding: 10px; }
+    .map-place-callout-main { grid-template-columns: 70px minmax(0, 1fr); gap: 9px; }
+    .map-place-callout-media { min-height: 74px; padding-block: 6px; }
+    .map-place-callout-media .catbadge { width: 30px !important; height: 30px !important; }
+    .map-place-callout h2 {
+      margin-block: 2px 3px;
+      font-size: 15px;
+      -webkit-line-clamp: 1;
+    }
+    .map-place-callout-meta {
+      flex-wrap: nowrap;
+      margin-top: 3px;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+    .map-place-callout-meta > * { flex: none; }
+    .map-place-callout-actions { margin-top: 8px; }
+  }
+
+  /* ── Blog hero (redesign) ── */
+  .bloghero {
+    display: block;
+    border: 1px solid var(--border);
+    border-radius: var(--r-lg, 16px);
+    overflow: hidden;
+    background: var(--surface);
+  }
+  .bloghero .cover { aspect-ratio: 16 / 9; border-radius: 0; }
+  .bloghero .body { padding: 14px 16px 16px; display: grid; gap: 6px; }
+  .bloghero h2 { font-size: 19px; line-height: 1.3; }
+  .bloghero .tags { display: flex; gap: 6px; }
+
+  /* ── Map header: segmented toggle + filter button (redesign) ── */
+  .segtoggle {
+    display: flex;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--r-full);
+    box-shadow: var(--shadow-float);
+    padding: 3px;
+    flex: none;
+  }
+  .segtoggle button {
+    min-height: 36px;
+    padding: 0 14px;
+    border-radius: var(--r-full);
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--muted);
+  }
+  .segtoggle button.on { background: var(--text); color: var(--surface); }
+  .filterbtn { position: relative; flex: none; box-shadow: var(--shadow-card); background: var(--surface); }
+  .filterbadge {
+    position: absolute; top: -5px; right: -5px;
+    min-width: 17px; height: 17px; border-radius: 9px;
+    background: var(--accent); color: #fff;
+    font-size: 10px; font-weight: 700;
+    display: grid; place-items: center; padding: 0 4px;
+  }
+
+  /* ── Subway schematic (Kakao-Metro v2: full network, pan/zoom, callout) ── */
+  .subwaywrap {
+    position: absolute; inset: 0;
+    background: #F7F7F4;
+    overflow: hidden; /* react-zoom-pan-pinch owns pan/zoom, not scroll */
+    touch-action: none;
+    z-index: 10; /* below .map-top (900) and its floating header controls */
+  }
+  .subwaywrap .react-transform-wrapper,
+  .subwaywrap .react-transform-component {
+    width: 100%;
+    height: 100%;
+  }
+  .subwaywrap svg { display: block; width: 100%; height: 100%; }
+  /* Zoom-tier label rules — CSS targets classes on real DOM nodes injected via
+     dangerouslySetInnerHTML, so ordinary descendant selectors work here.
+     Near-tier (default) size comes from --lbl-fs, a custom property
+     build-subway-svg.mjs sets inline per label (Kakao-style size hierarchy —
+     see LABEL_SIZE_SCALE/LABEL_MAJOR_SCALE there). It's a custom property
+     rather than a literal inline font-size on purpose: an inline `font-size`
+     would always win over the mid/far rules below regardless of their
+     specificity, freezing every label at its near-tier size when zoomed out.
+     This plain two-class rule has lower specificity than the `[data-zoom=…]`
+     rules, so those still override it correctly at mid/far tiers. */
+  .subwaywrap .lbl-major, .subwaywrap .lbl-minor { font-size: var(--lbl-fs); }
+  .subwaywrap[data-zoom="far"] .lbl-minor { display: none; }
+  /* W2: was a flat 13px, tuned against the old ~1150-wide viewBox. Scaled
+     ~5x for the new 5724-wide viewBox (same ~19-23px native --lbl-fs range
+     as everywhere else) so major labels still read as enlarged at far zoom
+     instead of shrinking back down to native size. */
+  .subwaywrap[data-zoom="far"] .lbl-major { font-size: 65px; }
+  /* Was a flat 8px — bigger than most labels' own --lbl-fs (measured ~2.36-
+     5.5px), so mid tier was actually *enlarging* small-name labels instead of
+     reducing density. Scale relative to each label's own near-tier size
+     instead, so mid consistently reads as "smaller than near" everywhere. */
+  .subwaywrap[data-zoom="mid"] .lbl-minor { font-size: calc(var(--lbl-fs) * 0.78); }
+
+  /* Shop badges — injected as <g class="shopbadge"> siblings of each station's
+     hit circle (see subway-map.tsx); they live inside the transformed SVG so
+     they scale and pan with the map itself. */
+  /* W2: r/font-size/stroke-width scaled ~5x for the new viewBox (was r=5,
+     font-size 5.5px, stroke-width 1 — see subway-map.tsx badge injection). */
+  .shopbadge circle { fill: var(--accent); stroke: #fff; stroke-width: 5; }
+  .shopbadge text { font-size: 27.5px; font-weight: 700; fill: #fff; text-anchor: middle; dominant-baseline: middle; }
+
+  /* Departure/arrival pins — same injected-<g> pattern as shop badges, see
+     subway-map.tsx. drop-shadow keeps the marker legible over any line color
+     underneath it. pointer-events: none on the pin body is deliberate — the
+     pin's tip sits exactly on the station's hit-circle, and without this the
+     pin would shadow that station and block re-tapping it; only the small
+     ✕ clear button (departure only) should be clickable. */
+  /* W2: shadow offset/blur scaled ~5x — this filter lives on an element
+     inside the transformed (viewBox-scale) content, so its px values are in
+     the same pre-transform unit space as the SVG, not screen space. */
+  .subway-pin { filter: drop-shadow(0 10px 15px rgba(15, 23, 42, 0.35)); pointer-events: none; }
+  .subway-pin-clear { cursor: pointer; pointer-events: auto; }
+
+  /* Kakao-style dark station toolbar: a plain absolutely-positioned card
+     anchored at the tapped hit-circle's screen position (recomputed on open
+     only — see contract). Deliberately NOT inside the transformed layer so
+     its own size/position math stays screen-space simple.
+     Sized to read as a small unobtrusive bar (Kakao Metro reference), not a
+     panel: ~150-170px wide, ~56-62px tall total (slim name row + compact
+     action row) — see IMG_1975/IMG_1973 in the design task for the target. */
+  .metro-toolbar {
+    position: absolute;
+    transform: translate(-50%, calc(-100% - 12px)) scale(1);
+    background: #3C3C3C;
+    border-radius: 12px;
+    box-shadow: var(--shadow-float);
+    min-width: 152px;
+    max-width: 210px;
+    z-index: 15;
+    animation: metro-toolbar-in 120ms ease-out;
+    transform-origin: bottom center;
+  }
+  @keyframes metro-toolbar-in {
+    from { opacity: 0; transform: translate(-50%, calc(-100% - 12px)) scale(0.85); }
+    to { opacity: 1; transform: translate(-50%, calc(-100% - 12px)) scale(1); }
+  }
+  .metro-toolbar::after {
+    content: "";
+    position: absolute;
+    left: 50%; bottom: -5px;
+    width: 10px; height: 10px;
+    background: #3C3C3C;
+    transform: translateX(-50%) rotate(45deg);
+    border-radius: 0 0 2px 0;
+  }
+  .metro-toolbar-close {
+    position: absolute; top: 3px; right: 3px;
+    width: 18px; height: 18px;
+    color: rgba(255, 255, 255, 0.75);
+  }
+  .metro-toolbar-close .icn { width: 11px; height: 11px; }
+  /* Single slim row: EN name, KR caption, and line badges all inline — no
+     stacked block. */
+  .metro-toolbar-name {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 6px 22px 5px 10px;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+  .metro-toolbar-en {
+    font-size: 12px; font-weight: 600; color: #fff;
+    overflow: hidden; text-overflow: ellipsis;
+    flex-shrink: 1; min-width: 12px;
+  }
+  .metro-toolbar-kr {
+    font-size: 10px; color: rgba(255, 255, 255, 0.5);
+    overflow: hidden; text-overflow: ellipsis;
+    flex-shrink: 2; min-width: 0;
+  }
+  .metro-toolbar-lines { display: flex; gap: 2px; flex-shrink: 0; }
+  .metro-toolbar-lines .linebadge {
+    min-width: 14px; height: 14px; padding: 0 3px;
+    border-radius: 7px; font-size: 8px;
+  }
+  .metro-toolbar-actions {
+    display: flex;
+    border-top: 1px solid rgba(255, 255, 255, 0.16);
+  }
+  .metro-toolbar-seg {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    padding: 6px 8px;
+    color: #fff;
+    font-size: 11px;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+  .metro-toolbar-seg .icn { width: 12px; height: 12px; }
+  .metro-toolbar-seg:not(:last-child) { border-right: 1px solid rgba(255, 255, 255, 0.16); }
+  .metro-toolbar-seg:active { background: rgba(255, 255, 255, 0.14); }
+  .metro-toolbar-seg.on { background: rgba(255, 255, 255, 0.1); }
+  .linebadge {
+    display: inline-grid; place-items: center;
+    min-width: 20px; height: 20px; padding: 0 5px;
+    border-radius: 10px; color: #fff; font-size: 11px; font-weight: 700;
+  }
+
+  /* Zoom +/- buttons — desktop fallback for pinch, sits above the locate FAB. */
+  .metro-zoombtn {
+    position: absolute;
+    right: 14px;
+    bottom: calc(176px + env(safe-area-inset-bottom));
+    z-index: 12;
+    display: flex;
+    flex-direction: column;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    box-shadow: var(--shadow-float);
+    overflow: hidden;
+  }
+  .metro-zoombtn button {
+    width: 40px;
+    height: 40px;
+    display: grid;
+    place-items: center;
+    color: var(--text);
+  }
+  .metro-zoombtn button:first-child { border-bottom: 1px solid var(--border); }
+
+  /* ── Route strip v2 (Kakao-reference: summary line + pinned end stations) ── */
+  .routestrip {
+    position: absolute; left: 10px; right: 10px;
+    bottom: calc(12px + env(safe-area-inset-bottom));
+    z-index: 930;
+    display: flex; flex-direction: column;
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 18px; box-shadow: var(--shadow-float);
+    overflow: hidden;
+  }
+  .routesummary {
+    display: flex; align-items: baseline; gap: 6px;
+    padding: 8px 14px 6px;
+    font-size: 12px; color: var(--muted);
+    border-bottom: 1px solid var(--border);
+  }
+  .routesummary b { font-size: 13px; font-weight: 700; color: var(--text); }
+  .routestrip-controls { display: flex; align-items: center; gap: 2px; padding: 6px 8px; }
+  .routescroll { flex: 1; display: flex; align-items: center; gap: 6px; overflow-x: auto; scrollbar-width: none; }
+  .routescroll::-webkit-scrollbar { display: none; }
+  /* border color set inline per-segment (LINE_META[seg.line].color) — the
+     line-colored "rail"/spine running under that segment's stations. */
+  .routeseg { display: flex; align-items: center; gap: 6px; flex: none; padding-bottom: 5px; border-bottom: 3px solid transparent; }
+  .routestation { display: flex; align-items: center; gap: 6px; flex: none; }
+  .routestation button { font-size: 13px; font-weight: 600; color: var(--muted); white-space: nowrap; }
+  .routestation button.on { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+  .routedot { flex: none; width: 8px; height: 8px; border-radius: 50%; }
+  .routedot.dep { background: #1E6EF4; }
+  .routedot.arr { background: #E5462E; }
+  .routedot.transfer { width: 6px; height: 6px; background: var(--dim); }
+
+  /* ── Favorites category rail (redesign) ── */
+  .favrail {
+    display: flex; flex-direction: column; gap: 4px;
+    flex: none; width: 86px;
+    position: sticky; top: 8px;
+  }
+  .favrail button {
+    display: flex; flex-direction: column; align-items: center; gap: 3px;
+    padding: 8px 4px; border-radius: 12px;
+    border: 1px solid transparent;
+    color: var(--muted); font-size: 10.5px; font-weight: 600;
+    text-align: center; line-height: 1.2;
+  }
+  .favrail button.on {
+    background: var(--surface); border-color: var(--border);
+    color: var(--accent); box-shadow: var(--shadow-card);
+  }
+}
+
+/* ══ Map-first v2 design-system additions (docs/map-first-v2-spec.md) ══ */
+@layer base {
+  :root {
+    /* Category accents (§3.1) — keep in sync with TYPE_COLOR in lib/data.ts */
+    --c-oy: #3f9d4e;
+    --c-sc: #4a7ddc;
+    --c-hs: #8e5bd8;
+    --c-nl: #e0559b;
+    --c-pc: #dd9422;
+    --c-spa: #2ba6a0;
+    --c-etc: #8b9098;
+    --live: #2f9e44;
+    --me: #e03131;
+  }
+}
+
+@layer components {
+  /* CategoryBadge — colored rounded square + white glyph (chips, pins, rows) */
+  .catbadge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex: none;
+    border-radius: 5px;
+    color: #fff;
+  }
+  .catbadge .icn { color: #fff; }
+
+  /* Category chip rail: chips never squeeze; right fade hints at scroll */
+  .chiprow .chip { flex: none; }
+  .chiprow.faded {
+    mask-image: linear-gradient(to right, #000 calc(100% - 30px), transparent);
+    -webkit-mask-image: linear-gradient(to right, #000 calc(100% - 30px), transparent);
+  }
+
+  /* LiveBadge — open-now indicator (§3.2) */
+  .livebadge {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.04em;
+    color: var(--live);
+  }
+  .livebadge::before {
+    content: "";
+    width: 7px;
+    height: 7px;
+    border-radius: var(--r-full);
+    background: var(--live);
+  }
+
+  /* Map pins (§4.2): dot ↔ rating badge ↔ cluster */
+  .pin-hitarea {
+    position: relative;
+    width: 44px;
+    height: 44px;
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+  }
+  .map-anchor:focus-visible { outline: none; }
+  .map-anchor:focus-visible .pin-dot,
+  .map-anchor:focus-visible .pin-badge,
+  .map-anchor:focus-visible .pin-cluster {
+    outline: 3px solid var(--accent);
+    outline-offset: 3px;
+  }
+  .pin-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: var(--r-full);
+    background: var(--c-etc);
+    /* soft ring — full-white rings on a dark basemap made every dot shout */
+    border: 1.5px solid rgba(255, 255, 255, 0.35);
+    box-shadow: 0 1px 3px var(--pin-shadow-c);
+  }
+  .pin-selected.pin-selected-oy {
+    background: #fff;
+    box-shadow: 0 0 0 2px var(--accent), var(--shadow-float);
+  }
+  /* Olive Young olive-motif dot — one notch larger than ordinary dots */
+  .pin-oy {
+    display: grid;
+    place-items: center;
+    filter: drop-shadow(0 1px 2px var(--pin-shadow-c));
+  }
+  .pin-badge {
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 3px 8px 3px 3px;
+    background: var(--surface);
+    border-radius: 8px;
+    box-shadow: var(--pin-shadow);
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--text);
+    white-space: nowrap;
+    cursor: pointer;
+  }
+  .pin-badge.selected {
+    background: var(--accent);
+    color: #fff;
+    padding: 4px 10px 4px 4px;
+  }
+  .pin-badge .livebadge { font-size: 10px; }
+  .pin-cluster {
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--r-full);
+    /* light disc + near-black ring — separates from the dark basemap without
+       flooding the zoomed-out view with accent orange */
+    background: var(--text);
+    color: #0b0c0f;
+    font-size: 11.5px;
+    font-weight: 700;
+    letter-spacing: 0;
+    border: 2px solid #0b0c0f;
+    box-shadow: var(--shadow-float);
+    cursor: pointer;
+  }
+  .pin-me {
+    width: 14px;
+    height: 14px;
+    border-radius: var(--r-full);
+    background: var(--me);
+    border: 2.5px solid #fff;
+    box-shadow: 0 0 0 6px rgba(224, 49, 49, 0.14), var(--shadow-sm);
+  }
+
+  /* HScroll — full-bleed horizontal card rail (§4.6-6) */
+  .hscroll {
+    display: flex;
+    gap: 12px;
+    margin: 0 -16px;
+    padding: 2px 16px 8px;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .hscroll::-webkit-scrollbar { display: none; }
+  .hscroll > * { flex: none; }
+
+  /* ImgPh — photo placeholder */
+  .imgph {
+    position: relative;
+    display: grid;
+    place-items: center;
+    background:
+      linear-gradient(to top right, transparent calc(50% - 0.5px), var(--border) 50%, transparent calc(50% + 0.5px)),
+      linear-gradient(to bottom right, transparent calc(50% - 0.5px), var(--border) 50%, transparent calc(50% + 0.5px)),
+      var(--surface-hover);
+    border-radius: var(--r-md);
+    color: var(--muted);
+    overflow: hidden;
+  }
+
+  /* RatingBars — 5→1 distribution (§4.6-9) */
+  .rbar {
+    height: 8px;
+    flex: 1;
+    border-radius: var(--r-sm);
+    background: var(--surface-hover);
+    position: relative;
+    overflow: hidden;
+  }
+  .rbar > i {
+    position: absolute;
+    inset: 0 auto 0 0;
+    background: var(--dim);
+    border-radius: var(--r-sm);
+  }
+
+  /* AnchorTabs — sticky section tabs with scroll-spy (§4.6-3, §4.7) */
+  .anchortabs {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    display: flex;
+    gap: 18px;
+    padding: 0 16px;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+  }
+  .anchortabs button {
+    padding: 11px 2px;
+    font-size: 13.5px;
+    color: var(--muted);
+    border-bottom: 2px solid transparent;
+    white-space: nowrap;
+  }
+  .anchortabs button.on {
+    color: var(--text);
+    font-weight: 700;
+    border-bottom-color: var(--text);
+  }
+
+  /* D-2 compact header — appears once the photo header scrolls away (§4.7) */
+  .detail-compactbar {
+    position: sticky;
+    top: 0;
+    z-index: 21;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 14px;
+    background: var(--surface);
+  }
+  .detail-compactbar b {
+    flex: 1;
+    text-align: center;
+    font-size: 15px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  /* Thick section divider — Naver full-scroll rhythm (§4.6) */
+  .sec-divider {
+    height: 10px;
+    /* block margins open up the section rhythm — the 12px stack gap alone
+       read cramped; sections now get ~2x the air around each boundary */
+    margin: 12px -16px 18px;
+    /* a groove darker than the page, not a bright band — deep enough to read,
+       edged by hairlines so both sections have a clear boundary */
+    background: #040507;
+    border: none;
+    border-top: 1px solid rgba(255, 255, 255, 0.09);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    box-shadow:
+      inset 0 7px 8px -6px rgba(0, 0, 0, 0.95),
+      inset 0 -5px 6px -5px rgba(0, 0, 0, 0.75);
+  }
+}
+
+/* Track B — place detail D-1/D-2 (spec §4.6–4.7) */
+@layer components {
+  /* .pad is 18px horizontal — restore full bleed for rails/dividers inside it */
+  .detail-scroll .sec-divider {
+    margin-inline: -18px;
+  }
+  .detail-scroll .hscroll {
+    margin-inline: -18px;
+    padding-inline: 18px;
+  }
+
+  /* Anchor targets clear the sticky chrome (compact bar 48 + tabs ~44) */
+  .d-sec {
+    scroll-margin-top: 96px;
+  }
+
+  /* Tabs stick beneath the compact bar. The bar always fades in (hero exits at
+     ~scrollTop 190) before the tabs reach their stick point (~280), so the 48px
+     slot is never visibly empty. */
+  .detail-scroll .anchortabs {
+    top: 48px;
+  }
+
+  /* Zero-height sticky wrapper: mounting/unmounting the bar never shifts layout */
+  .detail-compactwrap {
+    position: sticky;
+    top: 0;
+    height: 0;
+    z-index: 22;
+  }
+  .detail-compactwrap .detail-compactbar {
+    position: relative;
+    height: 48px;
+    padding: 0 10px;
+    visibility: hidden;
+    opacity: 0;
+    transform: translateY(-8px);
+    pointer-events: none;
+    transition: opacity 0.18s ease, transform 0.18s ease, visibility 0.18s;
+  }
+  .detail-compactwrap.on .detail-compactbar {
+    visibility: visible;
+    opacity: 1;
+    transform: none;
+    pointer-events: auto;
+  }
+
+  /* Compact info rows (~36px) for Home/Info anchor sections */
+  .inforow {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-height: 36px;
+    width: 100%;
+    text-align: left;
+    font-size: 13.5px;
+  }
+  .inforow:is(a, button) {
+    min-height: 44px;
+  }
+  .inforow > .icn {
+    color: var(--dim);
+    flex: none;
+  }
+  .inforow .chev {
+    margin-left: auto;
+    flex: none;
+  }
+}
+
+/* v2 map chrome — board M-1 top bar (avatar · search pill · mode button) */
+@layer components {
+  .map-avatar {
+    flex: none;
+    width: 44px;
+    height: 44px;
+    display: grid;
+    place-items: center;
+    background: rgba(22, 24, 29, 0.72);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--border);
+    border-radius: var(--r-full);
+    box-shadow: var(--shadow-card);
+    color: var(--muted);
+  }
+  .map-modebtn {
+    flex: none;
+    width: 44px;
+    height: 44px;
+    display: grid;
+    place-items: center;
+    background: rgba(22, 24, 29, 0.72);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--border);
+    border-radius: var(--r-full);
+    box-shadow: var(--shadow-float);
+    color: var(--muted);
+  }
+  .map-modebtn.on {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+  }
+  /* B-1 half sheet ≈ 50% of the screen (board §4.5); list mode shares the snap */
+  .mapsheet.half { transform: translateY(42%); }
+}
+
+/* v2 soft icon buttons — reference-app CTA bar (soft fill, no border, brand-color glyph) */
+@layer components {
+  .iconbtn.soft {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    color: var(--muted);
+  }
+}
+
+/* v2 pages B — Blog/Menu tab pages in the detail-page layout language */
+@layer components {
+  /* .pad is 18px horizontal — restore full bleed for dividers/rails (same fix as Track B) */
+  .pagev2 .sec-divider {
+    margin-inline: -18px;
+  }
+  .pagev2 .hscroll {
+    margin-inline: -18px;
+    padding-inline: 18px;
+  }
+}
+
+/* v2 semantic type utilities — doc2 design-system guide §3.2 (files/) */
+@layer components {
+  .t-heading-sm { font-family: var(--sans); font-size: 16px; font-weight: 700; line-height: 1.2; }
+  .t-label-md { font-size: 13px; font-weight: 500; line-height: 1.2; }
+  .t-label-sm { font-size: 12px; font-weight: 500; line-height: 1.2; }
+  .t-caption { font-size: 12px; font-weight: 400; line-height: 1.4; color: var(--muted); }
+  .num { font-variant-numeric: tabular-nums; }
+  /* rating as quiet text, not a pill — list rows stay light (doc2 semantic roles) */
+  .rating.plain {
+    background: none;
+    padding: 0;
+    border-radius: 0;
+    gap: 4px;
+    color: var(--warning);
+    font-size: 13px;
+    font-weight: 700;
+  }
+  /* v2 list rows: 12px rhythm, 56px thumb (doc2 spacing_12 / size_56-ish media) */
+  .listrow.v2 { padding: 12px 0; gap: 12px; align-items: center; }
+  .listrow.v2 .thumb56 { width: 56px; height: 56px; border-radius: 12px; flex: none; }
+}
+
+/* v2 interactive */
+@layer components {
+  /* Compact-bar ⋮ menu — anchored to its wrapper, floats over the anchor tabs */
+  .detail-menucard {
+    position: absolute;
+    top: calc(100% + 4px);
+    right: 0;
+    min-width: 168px;
+    display: flex;
+    flex-direction: column;
+    padding: 4px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    box-shadow: var(--shadow-float);
+    z-index: 30;
+  }
+  .detail-menucard button {
+    min-height: 44px;
+    width: 100%;
+    text-align: left;
+    font-size: 13.5px;
+    padding: 9px 10px;
+    border-radius: 8px;
+    white-space: nowrap;
+  }
+  .detail-menucard button:hover {
+    background: var(--surface-hover);
+  }
+}
+
+/* v2 mypage */
+@layer components {
+  .notification-switch {
+    width: 52px;
+    height: 44px;
+    min-width: 52px;
+    min-height: 44px;
+    display: grid;
+    place-items: center;
+    flex: none;
+    border-radius: var(--r-full);
+  }
+  .notification-switch-track {
+    position: relative;
+    width: 46px;
+    height: 28px;
+    border-radius: var(--r-full);
+    background: var(--dim);
+    transition: background 0.2s;
+  }
+  .notification-switch[aria-checked="true"] .notification-switch-track {
+    background: var(--accent);
+  }
+  .notification-switch-thumb {
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: var(--surface);
+    box-shadow: var(--shadow-card);
+    transition: transform 0.2s;
+  }
+  .notification-switch[aria-checked="true"] .notification-switch-thumb {
+    transform: translateX(18px);
+  }
+  .notification-switch:disabled {
+    cursor: default;
+  }
+  .notification-switch:disabled .notification-switch-track {
+    background: var(--bg-surface-sunken);
+    box-shadow: inset 0 0 0 1px var(--border-default);
+  }
+  .notification-switch:disabled .notification-switch-thumb {
+    box-shadow: none;
+  }
+
+  /* multi-line rows keep media/chevron pinned to the first line */
+  .listrow.v2.top { align-items: flex-start; }
+  .listrow.v2.top > .chev { align-self: center; }
+  /* FAQ disclosure rows in the divider-list language (Support) */
+  .pagev2 .qa { border-bottom: 1px solid var(--border); }
+  .pagev2 .qa:last-of-type { border-bottom: none; }
+  .pagev2 .qa summary {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 0;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    list-style: none;
+  }
+  .pagev2 .qa summary::-webkit-details-marker { display: none; }
+  .pagev2 .qa summary::after {
+    content: "›";
+    margin-left: auto;
+    color: var(--dim);
+    font-size: 16px;
+    transition: transform 0.2s;
+  }
+  .pagev2 .qa[open] summary::after { transform: rotate(90deg); }
+  .pagev2 .qa > p { padding: 0 0 12px; }
+}
+
+/* v2 subway controller */
+@layer components {
+  /* A. Resizable route panel — 3 snap tiers (content curated per tier in JSX).
+     Half is sized so the "Near {station}" header AND one full list row fit
+     without scrolling on an 812px viewport (E3). */
+  .subway-controller.route-ready {
+    transition: height 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .subway-controller.route-ready.snap-compact { height: max(22%, 158px); }
+  .subway-controller.route-ready.snap-half { height: min(50%, 470px); }
+  .subway-controller.route-ready.snap-full { height: min(85%, 720px); }
+  @media (prefers-reduced-motion: reduce) {
+    .subway-controller.route-ready { transition: none; }
+  }
+  .subway-snap-handle {
+    flex: none;
+    display: grid;
+    justify-items: center;
+    padding: 8px 16px 4px;
+    cursor: grab;
+    touch-action: none;
+  }
+  .subway-snap-handle:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
+
+  /* Summary row lives above the scroll area so it persists at every snap;
+     trimmed header/summary heights keep the half-snap budget (E3). */
+  .subway-controller.route-ready .subway-controller-header { min-height: 52px; padding-block: 6px; }
+  .subway-controller.route-ready .subway-route-summary { flex: none; padding-block: 10px 7px; }
+  .subway-controller.route-ready .subway-route-summary .iconbtn { margin-left: 0; }
+
+  /* B. Persistent live-transit pill on the summary row (every snap size). */
+  .subway-live-pill {
+    min-width: 44px;
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
+    padding: 0 8px;
+    color: var(--accent);
+    font-size: 12px;
+    font-weight: 700;
+    background: none;
+    border-radius: var(--r-full);
+  }
+  .subway-live-pill .icn { flex: none; }
+
+  /* Compact tier: summary + current station name only. */
+  .subway-compact-station {
+    flex: none;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    min-width: 0;
+    padding: 10px 16px 4px;
+    color: var(--muted);
+    font-size: 11px;
+  }
+  .subway-compact-station .icn { flex: none; color: var(--accent); }
+  .subway-compact-station b {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: var(--text);
+    font-size: 13px;
+  }
+
+  /* C. Via stations (경유역) live inside the connected route field. */
+  .subway-via-editor {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+    margin-top: 10px;
+  }
+  .subway-search-field-stack > .subway-waypoint-row {
+    border-top: 1px solid var(--border);
+  }
+  .subway-search-field-stack > .subway-waypoint-row + .station-combobox {
+    border-top: 1px solid var(--border);
+  }
+  .subway-waypoint-row {
+    min-width: 0;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 88px;
+    align-items: center;
+    padding: 7px 0;
+  }
+  .subway-waypoint-row:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: -2px;
+    border-radius: 6px;
+  }
+  .subway-waypoint-field {
+    position: relative;
+    min-width: 0;
+    min-height: 58px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0 44px 0 12px;
+    border-radius: 6px;
+  }
+  .subway-waypoint-field > span {
+    color: var(--muted);
+    font-size: 11px;
+    font-weight: 700;
+  }
+  .subway-waypoint-field > b {
+    overflow: hidden;
+    color: var(--text);
+    font-size: 16px;
+    font-weight: 500;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .subway-waypoint-field .station-search-clear {
+    bottom: 7px;
+  }
+  .subway-waypoint-order {
+    display: grid;
+    grid-template-columns: repeat(2, 44px);
+    align-items: center;
+  }
+  .subway-waypoint-order button,
+  .subway-waypoint-cancel {
+    width: 44px;
+    height: 44px;
+    display: grid;
+    place-items: center;
+    color: var(--muted);
+  }
+  .subway-waypoint-order button:first-child .icn {
+    transform: rotate(-90deg);
+  }
+  .subway-waypoint-order button:last-child .icn {
+    transform: rotate(90deg);
+  }
+  .subway-waypoint-order button:not(:disabled):hover,
+  .subway-waypoint-order button:not(:disabled):focus-visible,
+  .subway-waypoint-cancel:hover,
+  .subway-waypoint-cancel:focus-visible {
+    color: var(--accent);
+  }
+  .subway-waypoint-order button:disabled {
+    color: var(--dim);
+    opacity: 0.45;
+  }
+  .subway-waypoint-row.adding {
+    grid-template-columns: minmax(0, 1fr) 44px;
+    align-items: stretch;
+    padding-block: 0;
+  }
+  .subway-waypoint-row.adding .station-combobox {
+    min-width: 0;
+  }
+  .subway-waypoint-row.adding .subway-waypoint-cancel {
+    align-self: end;
+    margin-bottom: 6px;
+  }
+  @media (max-width: 360px) {
+    .subway-waypoint-row:not(.adding) {
+      grid-template-columns: minmax(0, 1fr);
+    }
+    .subway-waypoint-order {
+      justify-content: end;
+      margin-top: -4px;
+    }
+  }
+  .subway-via-add {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    min-height: 44px;
+    padding: 0 12px;
+    border: 1px dashed var(--border);
+    border-radius: var(--r-full);
+    color: var(--accent);
+    font-size: 12px;
+    font-weight: 700;
+    white-space: nowrap;
+  }
+  .subway-via-add.inline {
+    flex: none;
+    min-height: 40px;
+    padding: 0 12px;
+    background: none;
+    border: 1px dashed rgba(245, 88, 0, 0.45);
+    white-space: nowrap;
+  }
+  /* Heading hosts the "Add as via" action between the title and the count. */
+  .subway-nearby-heading > div:first-child { flex: 1; min-width: 0; }
+  .subway-nearby-heading .subway-via-add.inline { align-self: center; }
+
+  /* D. Slimmer radius segmented control (~40px total, 13px labels). */
+  .subway-controller .subway-segmented { padding: 2px; }
+  .subway-controller .subway-segmented button { min-height: 38px; font-size: 13px; }
+  /* Category tabs and controls tightened with it so half-snap fits (E3). */
+  .subway-controller .subway-category-tabs button { min-height: 44px; font-size: 12px; }
+  .subway-controller .subway-nearby-controls { gap: 6px; padding: 8px 16px 6px; }
+  .subway-controller .subway-nearby-heading { padding: 9px 16px 5px; }
+
+  /* E1. Right-edge fade so cut-off step cards read as scrollable (.chiprow.faded pattern). */
+  .subway-route-steps {
+    mask-image: linear-gradient(to right, #000 calc(100% - 30px), transparent);
+    -webkit-mask-image: linear-gradient(to right, #000 calc(100% - 30px), transparent);
+  }
+
+  /* E2. Narrower elevated station card so prev/next labels on the colored
+     bar are not half-hidden; also trims the navigator for the half budget. */
+  .subway-station-focus {
+    grid-template-columns: minmax(0, 1.1fr) minmax(104px, 1.15fr) minmax(0, 1.1fr);
+    min-height: 80px;
+    padding-block: 8px;
+  }
+  .subway-active-station { min-height: 40px; padding: 4px 10px; }
+  .subway-active-station b { font-size: 14px; }
+}
+
+/* summary metrics never wrap — "Est. 29 min" and "2 transfers" stay on one line */
+@layer components {
+  .subway-route-summary > b,
+  .subway-route-summary > span { white-space: nowrap; }
+  @media (max-width: 420px) {
+    .subway-route-summary > span:nth-of-type(2) { display: none; }
+    .subway-nearby-jump {
+      width: 44px;
+      justify-content: center;
+      padding-inline: 0;
+    }
+    .subway-nearby-jump > span { display: none; }
+  }
+}
+
+/* Product detail uses the same section rhythm and compact chrome as place detail. */
+@layer components {
+  .product-detail-scroll {
+    min-height: 100%;
+    background: var(--surface);
+  }
+  .product-detail-scroll .anchortabs {
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .product-detail-scroll .anchortabs::-webkit-scrollbar {
+    display: none;
+  }
+  .product-detail-scroll .anchortabs button {
+    flex: none;
+  }
+  .product-detail-hero {
+    position: relative;
+    padding: 8px;
+    padding-top: max(66px, calc(env(safe-area-inset-top) + 58px));
+    background: var(--surface);
+  }
+  .product-detail-gallery {
+    display: grid;
+    grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+    grid-template-rows: 82px 82px;
+    gap: 6px;
+  }
+  .product-detail-gallery .imgph {
+    min-width: 0;
+    border-radius: var(--r-md);
+  }
+  .product-detail-gallery-main {
+    grid-row: 1 / 3;
+    background-color: var(--surface-hover);
+  }
+  .product-detail-gallery .label {
+    max-width: 100%;
+    padding: 0 8px;
+    overflow-wrap: anywhere;
+    text-align: center;
+    letter-spacing: 0;
+  }
+  .product-detail-hero-actions {
+    top: max(14px, calc(env(safe-area-inset-top) + 6px));
+    z-index: 2;
+  }
+  .product-detail-title-block,
+  .product-detail-title-row {
+    min-width: 0;
+  }
+  .product-detail-title {
+    min-width: 0;
+    overflow-wrap: anywhere;
+    letter-spacing: 0;
+  }
+  .product-detail-meta {
+    line-height: 1.35;
+  }
+  .product-detail-badges {
+    row-gap: 6px;
+  }
+  .product-detail-content {
+    gap: 0;
+    padding-top: 0;
+    padding-bottom: 24px;
+  }
+  .product-detail-section {
+    padding: 18px 0;
+  }
+  .product-detail-copy-row {
+    min-height: 62px;
+    padding: 9px 12px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--r-md);
+  }
+  .product-detail-copy-text {
+    flex: 1;
+    overflow: hidden;
+  }
+  .product-detail-copy-text > b {
+    display: -webkit-box;
+    overflow: hidden;
+    overflow-wrap: anywhere;
+    white-space: normal;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+  }
+  .product-detail-copy-text > span {
+    display: block;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+  .product-detail-copy {
+    flex: none;
+  }
+  .product-detail-facts {
+    margin: 0;
+  }
+  .product-detail-fact {
+    gap: 16px;
+    padding: 9px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .product-detail-fact:last-child {
+    border-bottom: 0;
+  }
+  .product-detail-fact dd {
+    max-width: 62%;
+    overflow-wrap: anywhere;
+  }
+  .product-detail-chip-group + .product-detail-chip-group {
+    margin-top: 6px;
+  }
+  .product-detail-buy-online {
+    min-height: 52px;
+    padding: 0 12px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--r-md);
+  }
+  .product-detail-buy-online > span {
+    flex: 1;
+    font-weight: 700;
+  }
+  .product-detail-purchase-copy > b,
+  .product-detail-purchase-copy > span {
+    display: block;
+  }
+  .product-detail-availability-note {
+    margin: 8px 0 0;
+  }
+  .product-stock-status > span {
+    display: grid;
+    gap: 2px;
+    min-width: 0;
+  }
+  .product-stock-status > span > b,
+  .product-stock-status > span > span {
+    display: block;
+    overflow-wrap: anywhere;
+  }
+  .product-detail-store-search {
+    min-height: 52px;
+    padding: 0 12px;
+    border: 1px solid var(--border);
+    border-radius: var(--r-md);
+  }
+  .product-detail-store-search > span:first-of-type {
+    flex: 1;
+    font-weight: 700;
+  }
+  .product-detail-routine-link {
+    padding: 12px 0;
+  }
+  .product-cta-bar {
+    gap: 8px;
+    padding: 10px 12px max(10px, env(safe-area-inset-bottom));
+  }
+  .product-cta-bar .iconbtn {
+    flex: none;
+  }
+  .product-cta-find,
+  .product-cta-buy {
+    width: auto;
+    flex: 1 1 0;
+    min-width: 0;
+    padding-inline: 10px;
+    font-size: 13px;
+    line-height: 1.25;
+    overflow-wrap: anywhere;
+    white-space: normal;
+  }
+  /* Keep the unavailable action visibly disabled in the fixed CTA bar. */
+  .btn.product-cta-unavailable,
+  .btn.product-cta-unavailable:hover {
+    color: var(--muted);
+    background: var(--surface-hover);
+    border-color: var(--border);
+    cursor: default;
+  }
+  @media (max-width: 360px) {
+    .product-cta-bar {
+      display: grid;
+      grid-template-columns: 44px 44px minmax(0, 1fr);
+      gap: 4px;
+      padding-inline: 8px;
+    }
+    .product-cta-find,
+    .product-cta-buy {
+      padding-inline: 6px;
+      font-size: 12px;
+    }
+    .product-cta-buy {
+      grid-column: 1 / -1;
+    }
+  }
+}
+
+/* Mall & Gifts category token (spec §3.1 addition) */
+@layer base {
+  :root { --c-mall: #a61e4d; }
+}
+
+/* Selected map pin — compact enlarged icon; rating/LIVE live in the callout */
+@layer components {
+  .pin-selected {
+    width: 38px;
+    height: 38px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    background: var(--surface);
+    box-shadow: 0 0 0 2px var(--accent), var(--shadow-float);
+  }
+  .pin-selected .icn { width: 20px; height: 20px; color: currentColor; }
+  /* Slightly larger dots — small-screen tap visibility (hit area is 44px) */
+  .pin-dot { width: 14px; height: 14px; }
+}
+
+/* Welcome-deal glossy sweep — a diagonal light band drifts across the unlocked
+   row every few seconds (profile-complete state). Decorative only. */
+@layer components {
+  .deal-sheen {
+    position: relative;
+    overflow: hidden;
+  }
+  .deal-sheen::after {
+    content: "";
+    position: absolute;
+    inset: -40% auto -40% 0;
+    width: 55%;
+    background: linear-gradient(
+      115deg,
+      transparent 20%,
+      rgba(255, 255, 255, 0.05) 38%,
+      rgba(255, 255, 255, 0.22) 50%,
+      rgba(255, 255, 255, 0.05) 62%,
+      transparent 80%
+    );
+    transform: translateX(-140%) skewX(-12deg);
+    animation: deal-sheen-sweep 3.4s ease-in-out infinite;
+    pointer-events: none;
+  }
+  @keyframes deal-sheen-sweep {
+    /* sweep for the first ~40%, then rest so it reads as a glint, not a loop */
+    0% { transform: translateX(-140%) skewX(-12deg); }
+    40%, 100% { transform: translateX(320%) skewX(-12deg); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .deal-sheen::after { animation: none; display: none; }
+  }
+}
+
+/* Sheet list reachability + selection highlight (user-reported scroll fix) */
+@layer components {
+  .mapsheet-body {
+    touch-action: pan-y;
+    -webkit-overflow-scrolling: touch;
+  }
+  /* Transform snaps hide the sheet's lower half off-screen — pad the scroll
+     area so every row can still scroll into the visible band (+ bottom nav). */
+  .mapsheet.half .mapsheet-body { padding-bottom: calc(34.5vh + 84px + env(safe-area-inset-bottom)); }
+  .mapsheet.full .mapsheet-body { padding-bottom: calc(84px + env(safe-area-inset-bottom)); }
+  .maprow.on {
+    background: var(--accent-soft);
+    /* full-bleed across the sheet: the row is width:100%, so negative margins
+       alone leave a 16px gap on the right — grow the box to compensate */
+    width: calc(100% + 32px);
+    margin-inline: -16px;
+    padding-inline: 16px;
+  }
+}
+
+/* Free-form sheet drag: no transition while the finger drives the transform */
+@layer components {
+  .mapsheet.dragging { transition: none; }
+}
+
+/* Place detail sits on surface white end-to-end — without this the title
+   block shows the page background tint and splits the header into two tones */
+.detail-scroll { background: var(--surface); min-height: 100%; }
+
+/* v2 kakao-style action strip */
+@layer components {
+  /* Flat 4-up row under the place title header: icon over 12px label per
+     column, 1px dividers between columns, hairline top+bottom, no boxes. */
+  .place-actions {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    background: var(--surface); /* sit flush with the page, not a gray band */
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+  /* short centered dividers (Kakao) — full-height borders read as boxed cells */
+  .place-actions > * + *::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 1px;
+    height: 26px;
+    background: var(--border);
+  }
+  .place-actions > * {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    min-height: 52px;
+    color: var(--text);
+  }
+  .place-actions .icn {
+    width: 20px;
+    height: 20px;
+    color: var(--muted);
+  }
+  .place-actions .lbl {
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 1.2;
+  }
+  .place-actions .saved,
+  .place-actions .saved .icn {
+    color: var(--accent);
+  }
+
+  /* Alignment pass (place detail Home/Info rows): fixed 20px leading icon
+     column (glyph stays its own size, centered) and 44px row rhythm. */
+  .detail-scroll .inforow {
+    min-height: 44px;
+  }
+  .detail-scroll .inforow > .icn.xs {
+    width: 20px;
+  }
+}
+
+/* Rail line circles — chosen stations show their primary line number/color */
+@layer components {
+  .subway-route-dot.line {
+    width: 20px;
+    height: 20px;
+    display: grid;
+    place-items: center;
+    font-size: 8.5px;
+    font-weight: 800;
+    letter-spacing: 0;
+  }
+}
+
+/* Article rhythm: headings bind to the paragraph BELOW them — extra space
+   above only, so sections read as grouped blocks (proximity) */
+@layer components {
+  .article-body h2 { margin-top: 16px; }
+  .article-body h2:first-of-type { margin-top: 4px; }
+}
+
+/* Tailwind's `.outline` utility (outline-style: solid, 3px currentColor) collides
+   with our .btn.outline variant name — the "thick dark ring" on More ›/See-all
+   pills was never our border. Unlayered so it outranks the utilities layer. */
+.btn.outline { outline-style: none; }
+.btn.outline:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+/* ══ Design system v1 (docs/design-system.md) ══════════════════ */
+@layer base {
+  :root {
+    /* semantic aliases (doc2 4-layer) — role names over raw names; whitelabel swaps raw only */
+    --brand: var(--accent);
+    --brand-soft: var(--accent-soft);
+    --brand-strong: var(--accent-hover);
+    --text-primary: var(--text);
+    --text-secondary: var(--muted);
+    --text-disabled: var(--dim);
+    --bg-page: var(--bg);
+    --bg-surface: var(--surface);
+    --bg-surface-sunken: var(--surface-hover);
+    --border-default: var(--border);
+    --focus-ring-inner: var(--bg-surface);
+    --focus-ring-outer: var(--brand);
+  }
+}
+
+@layer components {
+  /* Button variants — component classes; `ghost`/`outline` are deprecated aliases
+     kept only until the migration finishes (Tailwind collides with `.outline`). */
+  .btn.primary { background: var(--brand); color: #fff; box-shadow: var(--shadow-accent); }
+  .btn.primary:disabled, .btn:disabled { box-shadow: none; }
+  .btn.primary:hover { background: var(--brand-strong); }
+  .btn.secondary {
+    background: var(--bg-surface);
+    border: 1px solid var(--border-default);
+    color: var(--text-primary);
+  }
+  .btn.secondary:hover { background: var(--bg-surface-sunken); }
+  .btn.tonal {
+    background: var(--brand-soft);
+    border: none;
+    color: var(--brand-strong);
+  }
+  .btn.tonal:hover { background: var(--accent-soft-2); }
+  .btn.full { width: 100%; }
+  .btn:disabled, .btn[aria-disabled="true"] {
+    background: var(--bg-surface-sunken);
+    border-color: transparent;
+    color: var(--text-disabled);
+    cursor: default;
+  }
+  /* IconButton overlay = white-on-photo (alias of existing bordered) */
+  .iconbtn.overlay {
+    background: var(--bg-surface);
+    border: 1px solid var(--border-default);
+    box-shadow: var(--shadow-card);
+  }
+  .iconbtn:disabled,
+  .iconbtn[aria-disabled="true"] {
+    color: var(--text-disabled);
+    background: var(--bg-surface-sunken);
+    box-shadow: none;
+    cursor: default;
+  }
+}
+
+/* class-name armor: neutralize Tailwind utilities that share our variant names */
+.btn.secondary, .btn.tonal, .btn.primary { outline-style: none; }
+.btn.secondary:focus-visible, .btn.tonal:focus-visible, .btn.primary:focus-visible {
+  outline: 2px solid var(--brand);
+  outline-offset: 2px;
+}
+
+/* lucide icon tuning */
+/* Lucide sprite symbols (components/icon.tsx) omit stroke-width so it can be
+   tuned per context: inherited CSS values reach <use> shadow content, but a
+   presentation attribute on the symbol would not be overridable from here. */
+.icn { stroke-width: 2; }
+/* 11–17px badge glyphs (map pins, category squares): 2px @ 24-unit viewBox
+   renders ~0.9px — bump so white strokes stay visible on colored fills. */
+.catbadge .icn, .pin-badge .icn { stroke-width: 2.4; }
+
+/* Kakao-style transit layer — station circles + name halo, numbered exits */
+@layer components {
+  .station-marker {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    display: grid;
+    justify-items: center;
+    gap: 2px;
+    /* tappable — opens the station's nearby browse */
+    pointer-events: auto;
+    cursor: pointer;
+    white-space: nowrap;
+  }
+  .station-disc-row {
+    display: flex;
+    gap: 2px;
+  }
+  /* Kakao-style station: light disc, line-colored ring + number */
+  .station-disc {
+    width: 20px;
+    height: 20px;
+    display: grid;
+    place-items: center;
+    border-radius: var(--r-full);
+    background: #f2f3f5;
+    border: 2.5px solid currentColor;
+    font-size: 9px;
+    font-weight: 800;
+    box-shadow: 0 1px 3px var(--pin-shadow-c);
+  }
+  .station-badge {
+    width: 18px;
+    height: 18px;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    border: 2px solid #fff;
+    color: #fff;
+    font-size: 8.5px;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    box-shadow: var(--shadow-sm);
+    flex: none;
+  }
+  .station-badge + .station-badge { margin-left: -6px; }
+  .station-marker-name {
+    font-size: 11.5px;
+    font-weight: 650;
+    /* line-colored (inline style) over a dark halo so it reads on the basemap */
+    text-shadow: 0 1px 0 #0b0c0f, 0 -1px 0 #0b0c0f, 1px 0 0 #0b0c0f, -1px 0 0 #0b0c0f, 0 0 4px #0b0c0f;
+  }
+  .exit-marker {
+    width: 16px;
+    height: 16px;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    background: #475569;
+    border: 1.5px solid #fff;
+    color: #fff;
+    font-size: 8.5px;
+    font-weight: 800;
+    box-shadow: var(--shadow-sm);
+    pointer-events: none;
   }
 }

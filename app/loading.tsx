@@ -1,9 +1,16 @@
-import { BrandMark } from "@/components/icon";
+import { BrandMark, BrandWordmark } from "@/components/brand/brand-logo";
 
+// Splash: brand lockup dead-center on the theme's own field (a black flash in
+// light mode read as a glitch) with a thin indeterminate bar — pulsing the
+// whole logo read cheap.
 export default function Loading() {
   return (
-    <div className="app-scroll" style={{ display: "grid", placeItems: "center" }} role="status" aria-label="Loading">
-      <BrandMark size={44} style={{ opacity: 0.5, animation: "pulse 1.2s ease-in-out infinite" }} />
+    <div className="splash" role="status" aria-label="Loading">
+      <div className="splash-lockup">
+        <BrandMark size={66} />
+        <BrandWordmark size={15} />
+      </div>
+      <span className="splash-bar" aria-hidden="true" />
     </div>
   );
 }

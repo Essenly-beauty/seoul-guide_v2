@@ -2,14 +2,16 @@ import Link from "next/link";
 import { Icon, type IconName } from "@/components/icon";
 import { routes } from "@/lib/routes";
 
-export type NavKey = "home" | "shop" | "spot" | "journal" | "my";
+export type NavKey = "map" | "ranking" | "blog" | "saved" | "menu";
 
 const ITEMS: { key: NavKey; label: string; icon: IconName; href: string }[] = [
-  { key: "home", label: "Home", icon: "home", href: routes.home },
-  { key: "shop", label: "Shop", icon: "bag", href: routes.shop },
-  { key: "spot", label: "Spot", icon: "pin", href: routes.spot },
-  { key: "journal", label: "Journal", icon: "book", href: routes.journal },
-  { key: "my", label: "My", icon: "user", href: routes.mypage },
+  // Board M-1 order (지도·이야기·홈·즐찾·마이): Stories sits second; Ranking takes the
+  // center slot since /home redirects to /map in this app (spec §4.1).
+  { key: "map", label: "Map", icon: "pin", href: routes.map },
+  { key: "blog", label: "Stories", icon: "book", href: routes.blog },
+  { key: "ranking", label: "Ranking", icon: "bag", href: routes.ranking },
+  { key: "saved", label: "Saved", icon: "heart", href: routes.favorites },
+  { key: "menu", label: "My", icon: "user", href: routes.menu },
 ];
 
 export function BottomNav({ active }: { active?: NavKey }) {

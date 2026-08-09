@@ -14,7 +14,7 @@ export function TopBar({ left, title, right, center, titleClassName }: TopBarPro
     <div className={"topbar" + (center ? " center" : "")}>
       {left}
       {title !== undefined && <span className={"title " + (titleClassName ?? "")}>{title}</span>}
-      {right ?? (center ? <span style={{ width: 40 }} /> : null)}
+      {right ?? (center ? <span aria-hidden="true" style={{ width: 44 }} /> : null)}
     </div>
   );
 }

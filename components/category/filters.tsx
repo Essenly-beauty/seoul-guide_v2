@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { Chip } from "@/components/ui/chip";
 
 const ZONES = ["All", "Apgujeong · Cheongdam", "Gangnam", "Hongdae", "Myeongdong", "Jongno"];
 const PRICES = ["₩", "₩₩", "₩₩₩"];
@@ -22,23 +23,23 @@ export function CategoryFilters() {
     <>
       <div className="chiprow">
         {ZONES.map((z) => (
-          <button key={z} className={"chip" + (zone === z ? " selected" : "")} aria-pressed={zone === z} onClick={() => setZone(z)}>
+          <Chip key={z} selected={zone === z} onClick={() => setZone(z)}>
             {z}
-          </button>
+          </Chip>
         ))}
       </div>
       <div className="chiprow" style={{ alignItems: "center" }}>
         <span className="label" style={{ alignSelf: "center" }}>PRICE</span>
         {PRICES.map((p) => (
-          <button key={p} className={"chip mono" + (prices.has(p) ? " selected" : "")} aria-pressed={prices.has(p)} onClick={() => toggle(prices, p, setPrices)}>
+          <Chip key={p} mono selected={prices.has(p)} onClick={() => toggle(prices, p, setPrices)}>
             {p}
-          </button>
+          </Chip>
         ))}
         <span className="label" style={{ alignSelf: "center", marginLeft: 8 }}>SERVICE</span>
         {SERVICES.map((s) => (
-          <button key={s} className={"chip" + (services.has(s) ? " selected" : "")} aria-pressed={services.has(s)} onClick={() => toggle(services, s, setServices)}>
+          <Chip key={s} selected={services.has(s)} onClick={() => toggle(services, s, setServices)}>
             {s}
-          </button>
+          </Chip>
         ))}
       </div>
     </>

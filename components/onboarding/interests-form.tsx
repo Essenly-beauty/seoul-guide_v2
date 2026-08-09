@@ -1,105 +1,104 @@
 "use client";
 
-import { useState } from "react";
+// T1 screen ② (docs/user-data-strategy.md §2): interest categories
+// (PlaceType codes, multi-select — zero is fine) + self-reported age band and
+// gender, both visibly optional. Taps write straight to the profile store.
+
 import Link from "next/link";
-import { Icon, type IconName } from "@/components/icon";
+import { CategoryBadge } from "@/components/category/category-badge";
+import { Icon } from "@/components/icon";
+import { Button } from "@/components/ui/button";
+import { Chip } from "@/components/ui/chip";
+import { Notice } from "@/components/ui/notice";
 import { routes } from "@/lib/routes";
+import { INTEREST_OPTIONS, answerQuestion, questionFor, useProfile } from "@/lib/profile";
 
-const COUNTRIES = [
-  "United States", "Japan", "China", "Taiwan", "Thailand", "Vietnam", "Philippines", "Indonesia",
-  "Malaysia", "Singapore", "India", "United Kingdom", "Germany", "France", "Canada", "Australia",
-  "Russia", "Brazil", "Mexico", "Saudi Arabia", "UAE", "Turkey", "Italy", "Spain", "Netherlands",
-  "Sweden", "Switzerland", "New Zealand", "Hong Kong", "Mongolia",
-];
-
-const INTERESTS: { key: string; label: string; subtitle: string; icon: IconName }[] = [
-  { key: "shopping", label: "K-Beauty Shopping", subtitle: "Olive Young, Cosmetic Hauls", icon: "bag" },
-  { key: "salon", label: "Hair Salon", subtitle: "K-pop styles, Color, Treatments", icon: "scissors" },
-  { key: "spa", label: "Spa & Wellness", subtitle: "Head spa, Foot care, Massage", icon: "spa" },
-  { key: "clinic", label: "Skin Clinic", subtitle: "Facials, Non-surgical treatments", icon: "cross" },
-  { key: "spots", label: "Hip Spots", subtitle: "Cafes, Photo spots, Hidden gems", icon: "pin" },
-];
-
-const EXPERIENCE = [
-  { key: "first_time", label: "First time", subtitle: "Curious to try" },
-  { key: "know_a_bit", label: "Know a bit", subtitle: "Tried a few products" },
-  { key: "obsessed", label: "Obsessed", subtitle: "Daily K-beauty user" },
-];
+const INTEREST_SUBTITLES: Partial<Record<string, string>> = {
+  olive_young: "K-beauty hauls, drugstore picks",
+  skin_clinic: "Facials, non-surgical treatments",
+  hair_salon: "K-pop styles, color, treatments",
+  nail_lash: "Nail art, lash extensions",
+  personal_color: "Color analysis sessions",
+  head_spa: "Scalp care, relaxation",
+  etc: "Saunas, photo studios & more",
+};
 
 export function InterestsForm() {
-  const [country, setCountry] = useState("");
-  const [interests, setInterests] = useState<Set<string>>(new Set(["shopping"]));
-  const [exp, setExp] = useState<string | null>(null);
-
-  function toggleInterest(key: string) {
-    setInterests((prev) => {
-      const next = new Set(prev);
-      if (next.has(key)) {
-        if (next.size === 1) return prev; // can't deselect the last one
-        next.delete(key);
-      } else next.add(key);
-      return next;
-    });
-  }
-
-  const canNext = country !== "" && interests.size >= 1;
+  const profile = useProfile();
+  const age = questionFor("ageBand");
+  const gender = questionFor("gender");
 
   return (
     <div className="stack">
       <div>
-        <div className="label">Step 1 · Interests</div>
+        <div className="label">Step 2 · Interests</div>
         <div className="h1">
           What brings you<br />
           <span style={{ fontStyle: "italic", color: "var(--accent)" }}>to Seoul?</span>
         </div>
-        <p className="muted" style={{ marginTop: 6 }}>Complete your profile to get personalized picks.</p>
-      </div>
-
-      <div className="field">
-        <label>Your country</label>
-        <select className="input" value={country} onChange={(e) => setCountry(e.target.value)}>
-          <option value="">Select your country</option>
-          {COUNTRIES.map((c) => <option key={c}>{c}</option>)}
-          <option>Other</option>
-        </select>
+        <p className="muted" style={{ marginTop: 6 }}>Pick any — it presets your map and rankings.</p>
       </div>
 
       <div className="label">I&apos;m interested in</div>
-      {INTERESTS.map((it) => {
-        const on = interests.has(it.key);
+      {INTEREST_OPTIONS.map((it) => {
+        const on = profile.interests.includes(it.key);
         return (
-          <button key={it.key} className="pickcard" aria-pressed={on} onClick={() => toggleInterest(it.key)}>
-            <span className="ic"><Icon name={it.icon} /></span>
-            <div><b>{it.label}</b><div className="caption muted">{it.subtitle}</div></div>
+          <button key={it.key} className="pickcard" aria-pressed={on} onClick={() => answerQuestion("interests", it.key)}>
+            <CategoryBadge type={it.key} size={26} />
+            <div><b>{it.label}</b><div className="caption muted">{INTEREST_SUBTITLES[it.key]}</div></div>
             <span className="chk"><Icon name="check" size="xs" /></span>
           </button>
         );
       })}
 
-      <div className="label">How well do you know K-Beauty?</div>
-      <div className="chipwrap">
-        {EXPERIENCE.map((e) => {
-          const on = exp === e.key;
-          return (
-            <button key={e.key} className={"chip" + (on ? " selected" : "")} aria-pressed={on} onClick={() => setExp(on ? null : e.key)}>
-              {e.label}
-            </button>
-          );
-        })}
+      <div>
+        <div className="row" style={{ gap: 8, alignItems: "baseline" }}>
+          <div className="label">Age range</div>
+          <span className="t-caption" style={{ marginLeft: "auto" }}>Optional · skip freely</span>
+        </div>
+        <div className="t-caption" style={{ marginTop: 2 }}>Why we ask · {age.why}</div>
+        <div className="chipwrap" style={{ marginTop: 8 }}>
+          {age.options.map((o) => {
+            const on = profile.ageBand === o.value;
+            return (
+              <Chip key={o.value} selected={on} onClick={() => answerQuestion("ageBand", o.value)}>
+                {o.label}
+              </Chip>
+            );
+          })}
+        </div>
       </div>
 
-      {interests.has("clinic") && (
-        <div className="banner warning">
-          <Icon name="cross" size="sm" />
-          <span>Medical procedures in Korea require a pre-visit consultation. We&apos;ll share details after you sign up.</span>
+      <div>
+        <div className="row" style={{ gap: 8, alignItems: "baseline" }}>
+          <div className="label">Gender</div>
+          <span className="t-caption" style={{ marginLeft: "auto" }}>Optional · skip freely</span>
         </div>
+        <div className="t-caption" style={{ marginTop: 2 }}>Why we ask · {gender.why}</div>
+        <div className="chipwrap" style={{ marginTop: 8 }}>
+          {gender.options.map((o) => {
+            const on = profile.gender === o.value;
+            return (
+              <Chip key={o.value} selected={on} onClick={() => answerQuestion("gender", o.value)}>
+                {o.label}
+              </Chip>
+            );
+          })}
+        </div>
+      </div>
+
+      {profile.interests.includes("skin_clinic") && (
+        <Notice tone="warning" icon="cross" role="status">
+          Medical procedures in Korea require a pre-visit consultation. We&apos;ll share details after you sign up.
+        </Notice>
       )}
 
-      {canNext ? (
-        <Link className="btn" href={routes.onboardingProfile} style={{ marginTop: 4 }}>Next <Icon name="chev" size="sm" /></Link>
-      ) : (
-        <button className="btn" style={{ marginTop: 4, opacity: 0.5 }} disabled>Next <Icon name="chev" size="sm" /></button>
-      )}
+      <Button href={routes.onboardingProfile} style={{ marginTop: 4 }}>
+        Next <Icon name="chev" size="sm" />
+      </Button>
+      <Link className="caption muted" href={routes.onboardingProfile} style={{ textAlign: "center", textDecoration: "underline" }}>
+        Skip for now
+      </Link>
     </div>
   );
 }

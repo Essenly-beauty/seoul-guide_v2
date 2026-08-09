@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
-import Link from "next/link";
+import { Button } from "@/components/ui/button";
 import { routes } from "@/lib/routes";
 
 export default function ErrorPage({ error, reset }: { error: Error & { digest?: string }; reset: () => void }) {
@@ -17,8 +17,8 @@ export default function ErrorPage({ error, reset }: { error: Error & { digest?: 
       </p>
       {error.digest && <div className="caption dim mono" style={{ marginTop: 6 }}>Ref {error.digest}</div>}
       <div className="stack" style={{ marginTop: 22, maxWidth: 280, marginInline: "auto", width: "100%" }}>
-        <button className="btn" onClick={reset}>Try again</button>
-        <Link className="btn ghost" href={routes.home}>Back to Home</Link>
+        <Button onClick={reset}>Try again</Button>
+        <Button variant="secondary" href={routes.map}>Back to Home</Button>
       </div>
     </main>
   );

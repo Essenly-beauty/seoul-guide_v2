@@ -8,6 +8,7 @@ next-env.d.ts
 .DS_Store
 .gstack/
 .superpowers/
+scripts/.cache/
 
 # Local reference material (not for the public repo)
 /codex/
@@ -17,5 +18,26 @@ next-env.d.ts
 /design-tokens.json
 /MIGRATION.md
 /AUDIT.md
-/docs/
+/docs/*
+!/docs/README.md
+!/docs/service-overview.md
+!/docs/feature-status.md
+!/docs/data-and-integrations.md
+!/docs/launch-readiness.md
+!/docs/decisions-and-history.md
+!/docs/design-system.md
+!/docs/map-first-v2-spec.md
+!/docs/subway-bottom-controller-design.md
+!/docs/user-data-strategy.md
+!/docs/superpowers/
+/docs/superpowers/*
+!/docs/superpowers/plans/
+/docs/superpowers/plans/*
+!/docs/superpowers/plans/2026-07-26-subway-station-result-row.md
+!/docs/superpowers/specs/
+/docs/superpowers/specs/*
+!/docs/superpowers/specs/2026-07-25-design-system-hardening-design.md
+!/docs/superpowers/specs/2026-07-26-subway-station-result-row-design.md
 .vercel
+!/docs/user-scenarios.md
+!/docs/map-first-v2-spec.md

@@ -1,5 +1,6 @@
 import { TopBar } from "@/components/ui/top-bar";
 import { BackButton } from "@/components/ui/back-button";
+import { Notice } from "@/components/ui/notice";
 import { routes } from "@/lib/routes";
 
 type Section = { heading: string; body: string[] };
@@ -13,13 +14,11 @@ export function LegalArticle({
       <TopBar center left={<BackButton fallback={routes.settings} />} title={title} />
       <main className="app-scroll pad stack">
         <div>
-          <div className="label">Essenly Legal</div>
+          <div className="label">MYSEOULDROP Legal</div>
           <h1 className="h1">{title}</h1>
           <div className="caption dim mono" style={{ marginTop: 6 }}>Last updated · {updated}</div>
         </div>
-        <div className="banner info">
-          <span>Draft for review — this document has not yet been reviewed by legal counsel.</span>
-        </div>
+        <Notice>Draft for review — this document has not yet been reviewed by legal counsel.</Notice>
         <p className="muted small">{intro}</p>
         {sections.map((s, i) => (
           <section key={s.heading}>

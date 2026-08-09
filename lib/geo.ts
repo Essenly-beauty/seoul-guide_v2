@@ -5,6 +5,9 @@ export type LatLng = { lat: number; lng: number };
 /** Fallback center when geolocation is denied/unavailable (Myeongdong). */
 export const MYEONGDONG: LatLng = { lat: 37.5636, lng: 126.9838 };
 
+/** Fallback center when geolocation is denied/unavailable (Gangnam Station). */
+export const GANGNAM_STATION: LatLng = { lat: 37.4979, lng: 127.0276 };
+
 const EARTH_KM = 6371;
 const rad = (d: number) => (d * Math.PI) / 180;
 
@@ -43,4 +46,32 @@ export function naverMapUrl(nameKr: string): string {
 
 export function googleMapsUrl(lat: number, lng: number): string {
   return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${lat},${lng}`)}`;
+}
+
+// ── Route deep links (spec v2 §6): origin (my location) → destination.
+//    origin is optional — without location permission each service falls back
+//    to a destination-only link and resolves the start point itself.
+
+export function googleDirectionsUrl(
+  dest: LatLng,
+  origin?: LatLng | null,
+  travelMode: "transit" | "walking" = "transit",
+): string {
+  const base = `https://www.google.com/maps/dir/?api=1&destination=${dest.lat},${dest.lng}&travelmode=${travelMode}`;
+  return origin ? `${base}&origin=${origin.lat},${origin.lng}` : base;
+}
+
+export function kakaoRouteUrl(nameKr: string, dest: LatLng, origin?: LatLng | null): string {
+  const to = `${encodeURIComponent(nameKr)},${dest.lat},${dest.lng}`;
+  return origin
+    ? `https://map.kakao.com/link/from/${encodeURIComponent("내 위치")},${origin.lat},${origin.lng}/to/${to}`
+    : `https://map.kakao.com/link/to/${to}`;
+}
+
+export function naverRouteUrl(nameKr: string, dest: LatLng, origin?: LatLng | null): string {
+  if (!origin) return naverMapUrl(nameKr);
+  // Naver web directions path: /p/directions/{lng},{lat},{name}/{lng},{lat},{name}/-/transit
+  const start = `${origin.lng},${origin.lat},${encodeURIComponent("내 위치")}`;
+  const goal = `${dest.lng},${dest.lat},${encodeURIComponent(nameKr)}`;
+  return `https://map.naver.com/p/directions/${start}/${goal}/-/transit`;
 }

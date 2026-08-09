@@ -5,16 +5,17 @@ import { createPortal } from "react-dom";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { Icon, type IconName } from "@/components/icon";
+import { IconButton } from "@/components/ui/icon-button";
 import { routes } from "@/lib/routes";
 
 type Row = { label: string; href: string; icon: IconName; danger?: boolean };
 
 const PRIMARY: Row[] = [
-  { label: "Home", href: routes.home, icon: "home" },
-  { label: "Shop", href: routes.shop, icon: "bag" },
-  { label: "Spot", href: routes.spot, icon: "pin" },
-  { label: "Journal", href: routes.journal, icon: "book" },
-  { label: "My", href: routes.mypage, icon: "user" },
+  { label: "Map", href: routes.map, icon: "pin" },
+  { label: "Ranking", href: routes.ranking, icon: "bag" },
+  { label: "Blog", href: routes.blog, icon: "book" },
+  { label: "Saved", href: routes.favorites, icon: "heart" },
+  { label: "Menu", href: routes.menu, icon: "user" },
 ];
 
 const ACCOUNT: Row[] = [
@@ -44,11 +45,7 @@ export function HamburgerMenu() {
 
   return (
     <>
-      <button className="iconbtn" aria-label="Menu" onClick={() => setOpen(true)}>
-        <svg className="icn" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
-          <path d="M4 7h16M4 12h16M4 17h16" />
-        </svg>
-      </button>
+      <IconButton name="menu" label="Menu" iconSize="md" onClick={() => setOpen(true)} />
 
       {open && host && createPortal(
         <>
@@ -56,9 +53,7 @@ export function HamburgerMenu() {
           <div className="drawer" role="dialog" aria-label="Menu">
             <div className="dhead">
               <span className="label">Menu</span>
-              <button className="iconbtn" aria-label="Close" onClick={() => setOpen(false)}>
-                <Icon name="x" size="sm" />
-              </button>
+              <IconButton name="x" label="Close" onClick={() => setOpen(false)} />
             </div>
 
             <div className="dsection label">Primary</div>

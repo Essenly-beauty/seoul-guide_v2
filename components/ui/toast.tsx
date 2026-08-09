@@ -2,10 +2,16 @@
 
 import { createContext, useCallback, useContext, useRef, useState } from "react";
 
+export type SharePayload = {
+  title?: string;
+  text?: string;
+  url?: string;
+};
+
 type ToastContextValue = {
   toast: (message: string) => void;
   copy: (text: string) => void;
-  share: (text: string) => void;
+  share: (payload: string | SharePayload) => void;
 };
 
 const ToastContext = createContext<ToastContextValue | null>(null);
@@ -37,13 +43,17 @@ export function ToastProvider({ children }: { children: React.ReactNode }) {
   );
 
   const share = useCallback(
-    (text: string) => {
+    (payload: string | SharePayload) => {
+      const data = typeof payload === "string" ? { text: payload } : payload;
+      const fallbackText =
+        [data.text, data.url].filter(Boolean).join("\n") || data.title || "";
+
       if (typeof navigator !== "undefined" && navigator.share) {
-        navigator.share({ text }).catch(() => {});
+        navigator.share(data).catch(() => {});
         return;
       }
-      navigator.clipboard?.writeText(text).catch(() => {});
-      toast("Copied: " + text);
+      navigator.clipboard?.writeText(fallbackText).catch(() => {});
+      toast(data.url ? "Product link copied" : "Copied: " + fallbackText);
     },
     [toast],
   );

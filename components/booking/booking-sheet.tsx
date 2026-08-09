@@ -1,8 +1,13 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Icon } from "@/components/icon";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { IconButton } from "@/components/ui/icon-button";
+import { Notice } from "@/components/ui/notice";
+import { useDialogFocus } from "@/components/ui/use-dialog-focus";
 import { routes } from "@/lib/routes";
 
 const SERVICES = [
@@ -22,11 +27,9 @@ const STEP_LABEL = (i: number) =>
 
 export function BookingSheet({
   triggerLabel = "Book Now →",
-  triggerClassName = "btn",
   triggerStyle,
 }: {
   triggerLabel?: string;
-  triggerClassName?: string;
   triggerStyle?: React.CSSProperties;
 }) {
   const [open, setOpen] = useState(false);
@@ -34,6 +37,8 @@ export function BookingSheet({
   const [service, setService] = useState(0);
   const [alone, setAlone] = useState(true);
   const [time, setTime] = useState("14:00");
+  const closeRef = useRef<HTMLButtonElement>(null);
+  const dialogRef = useDialogFocus<HTMLDivElement>(open, () => setOpen(false), closeRef);
   const router = useRouter();
 
   function start() {
@@ -52,19 +57,24 @@ export function BookingSheet({
 
   return (
     <>
-      <button className={triggerClassName} style={triggerStyle} onClick={start}>
+      <Button style={triggerStyle} onClick={start}>
         {triggerLabel}
-      </button>
+      </Button>
 
       {open && (
         <div className="overlay" onClick={(e) => e.target === e.currentTarget && setOpen(false)}>
-          <div className="sheet">
+          <div
+            ref={dialogRef}
+            className="sheet"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="booking-sheet-title"
+            tabIndex={-1}
+          >
             <div className="handle" />
             <div className="shead">
-              <span className="steplabel" style={{ flex: 1 }}>{STEP_LABEL(step)}</span>
-              <button className="iconbtn" aria-label="Close" onClick={() => setOpen(false)}>
-                <Icon name="x" size="sm" />
-              </button>
+              <span id="booking-sheet-title" className="steplabel" style={{ flex: 1 }}>{STEP_LABEL(step)}</span>
+              <IconButton buttonRef={closeRef} name="x" label="Close" onClick={() => setOpen(false)} />
             </div>
             <div style={{ padding: "0 18px" }}>
               <div className="progress"><div className="fill" style={{ width: pct + "%" }} /></div>
@@ -84,9 +94,10 @@ export function BookingSheet({
                       <span className="chk" style={{ marginLeft: "auto" }}><Icon name="check" size="xs" /></span>
                     </button>
                   </div>
-                  <div className="banner info" style={{ marginTop: 14 }}>
-                    <Icon name="check" size="sm" />
-                    <span>Deposit (25%) is charged now per service. Balance is paid at the salon.</span>
+                  <div style={{ marginTop: 14 }}>
+                    <Notice icon="check">
+                      Deposit (25%) is charged now per service. Balance is paid at the salon.
+                    </Notice>
                   </div>
                 </div>
               )}
@@ -140,7 +151,7 @@ export function BookingSheet({
                   </div>
                   <div className="card row" style={{ gap: 10, marginTop: 10 }}>
                     <Icon name="lock" size="sm" style={{ color: "var(--muted)" }} />
-                    <div><b className="small">Stripe Payment Element</b><div className="caption muted">Card · Apple Pay · Google Pay <span className="badge dim">Demo</span></div></div>
+                    <div><b className="small">Stripe Payment Element</b><div className="caption muted">Card · Apple Pay · Google Pay <Badge tone="dim">Demo</Badge></div></div>
                   </div>
                   <p className="caption muted" style={{ marginTop: 10 }}>
                     <b>Plans change. We get it.</b> Up to 24h before, reschedule or cancel freely — full refund.
@@ -162,7 +173,7 @@ export function BookingSheet({
                     <div className="kv"><span className="k">Deposit charged</span><span className="v" style={{ color: "var(--accent)" }}>₩45,000</span></div>
                     <div className="kv"><span className="k">Balance at salon</span><span className="v">₩135,000</span></div>
                   </div>
-                  <p className="caption dim" style={{ marginTop: 12 }}>— Essentially Yours, essenly.</p>
+                  <p className="caption dim" style={{ marginTop: 12 }}>— see you in Seoul, MYSEOULDROP.</p>
                 </div>
               )}
             </div>
@@ -171,18 +182,18 @@ export function BookingSheet({
               {step < 3 && (
                 <div className="row" style={{ gap: 10 }}>
                   {step > 0 && (
-                    <button className="btn ghost" style={{ flex: 1 }} onClick={() => setStep((s) => Math.max(0, s - 1))}>Back</button>
+                    <Button variant="secondary" style={{ flex: 1 }} onClick={() => setStep((s) => Math.max(0, s - 1))}>Back</Button>
                   )}
-                  <button className="btn" style={{ flex: 2 }} onClick={() => setStep((s) => s + 1)}>Continue →</button>
+                  <Button style={{ flex: 2 }} onClick={() => setStep((s) => s + 1)}>Continue →</Button>
                 </div>
               )}
               {step === 3 && (
-                <button className="btn" onClick={() => setStep(4)}>Confirm &amp; Pay ₩45,000</button>
+                <Button onClick={() => setStep(4)}>Confirm &amp; Pay ₩45,000</Button>
               )}
               {step === 4 && (
                 <div className="row" style={{ gap: 10 }}>
-                  <button className="btn ghost" style={{ flex: 1 }} onClick={() => close(routes.home)}>Done</button>
-                  <button className="btn" style={{ flex: 1 }} onClick={() => close(routes.bookings)}>My Bookings</button>
+                  <Button variant="secondary" style={{ flex: 1 }} onClick={() => close(routes.map)}>Done</Button>
+                  <Button style={{ flex: 1 }} onClick={() => close(routes.bookings)}>My Bookings</Button>
                 </div>
               )}
             </div>
