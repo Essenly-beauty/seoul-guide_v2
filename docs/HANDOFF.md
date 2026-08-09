@@ -1,4 +1,4 @@
-# MYSEOULDROP — 작업 핸드오프 (2026-08-09 기준)
+# MYSEOULDROP — 작업 핸드오프 (2026-08-10 기준)
 
 > 다음 세션에서 이 문서 하나로 바로 이어서 작업할 수 있게 정리한 문서.
 > 프로젝트 전반 문서는 `docs/README.md`, 인증 설정은 `docs/auth-setup.md` 참고.
@@ -56,6 +56,17 @@ vercel env pull --yes  # .env.local 재생성
 - **회원 즐겨찾기**: `favorites` 테이블+RLS(5종 격리 테스트 통과), 게스트 localStorage → 로그인 시 자동 병합, 낙관적 토글+롤백, **지도 하트 FAB 레이어**(저장한 곳만 표시)
 - 첫 실유저 가입 확인됨 (gk***@naver.com, 이메일 확인 완료)
 
+### D. 출시 준비 배치 (8/10)
+- **즐겨찾기 출시 동작**: 데모 시드 제거(신규 게스트 빈 목록), `useFavoritesReady()` — Saved 탭 서버 fetch 중 스켈레톤(가짜 "nothing saved" 방지), 메뉴 Saved 뱃지/통계 실카운트(카탈로그 필터 기준)
+- **프로필 계정화**: `profiles` 테이블(jsonb+RLS+updated_at 트리거, 6/6 격리 테스트 통과), 게스트 답변 로그인 시 병합(서버 필드 우선·리스트 union·미확정 로컬 수정 우선), 600ms 디바운스 write-through
+- **동기화 적대적 리뷰(44 에이전트) → 확정 결함 13건 전부 수정**:
+  - fetch 중 하트 토글이 스테일 스냅샷에 덮이던 레이스 → pending-intent 오버레이+플러시
+  - 병합 upsert 실패에도 MERGED_KEY 소모(게스트 저장 영구 유실) → 성공 시에만 소모
+  - 로그아웃 후 계정 미러가 localStorage에 잔존(공유기기 개인정보 노출 + 다음 계정에 오염) → SIGNED_OUT+로그아웃 모달에서 미러 제거(`purgeFavoritesMirror`/`purgeProfileMirror`)
+  - 프로필 blind whole-row upsert(기기 간 last-writer-wins 답변 유실) → read-merge-write + dirty 필드 추적 + serverSnap 게이트(첫 fetch 실패 시 push 차단)
+  - fetch 실패 시 재시도(3회 백오프), 탭 숨김/pagehide 시 디바운스 플러시, 롤백 멤버십 가드 등
+- **출시 메타**: metadataBase+OG/트위터 태그, 동적 OG 카드(`app/opengraph-image.tsx`, Michroma+폴백), robots.txt(인증/계정 페이지 차단), sitemap.xml(장소 600곳 한글 id 인코딩)
+
 ---
 
 ## 3. ⚠️ 사용자(계정 소유자) 액션 대기 — 최우선
@@ -74,10 +85,11 @@ vercel env pull --yes  # .env.local 재생성
 ## 4. 다음 작업 백로그 (우선순위순)
 
 ### P1 — 계정 기능 마무리
-- [ ] **Saved 탭 서버 우선 로딩**: 즐겨찾기는 이미 서버 동기화되지만, 새 기기 첫 진입 시 서버 fetch 완료 전 로컬 시드가 잠깐 보임 → 로딩 상태 추가
-- [ ] **프로필 계정화**: 온보딩 답변(`lib/profile.ts`, localStorage) → `profiles` 테이블 (RLS, upsert on auth). 메뉴의 Reservations/Saved/Reviews 카운트 실데이터화
-- [ ] **리뷰 계정화**: 상세페이지 별점(`essenly.myrating`)·리뷰 작성 → 서버 테이블
+- [x] ~~Saved 탭 서버 우선 로딩~~ (8/10 완료 — useFavoritesReady + 스켈레톤)
+- [x] ~~프로필 계정화~~ (8/10 완료 — profiles 테이블+동기화. Reservations/Reviews 카운트는 아직 데모값)
+- [ ] **리뷰 계정화**: 상세페이지 별점(`essenly.myrating`)·리뷰 작성 → 서버 테이블. 메뉴의 Reservations/Reviews 카운트 실데이터화 포함
 - [ ] 소셜 로그인 e2e (콘솔 등록 후): Kakao/Google 실로그인 → `user_metadata` 이름 표시 확인
+- [ ] 프로필 동기화 실브라우저 e2e (가입→온보딩 답변→다른 기기 로그인 재현)
 
 ### P2 — 품질·운영
 - [ ] 커스텀 도메인 연결 (myseouldrop.com 등 — `vercel domains`)
