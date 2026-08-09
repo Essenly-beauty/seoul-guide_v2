@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 import { TopBar } from "@/components/ui/top-bar";
 import { BottomNav } from "@/components/ui/bottom-nav";
@@ -10,6 +12,8 @@ import { BrandMark, BrandWordmark } from "@/components/brand/brand-logo";
 import { ProfileCard } from "@/components/mypage/profile-card";
 import { Icon } from "@/components/icon";
 import { routes } from "@/lib/routes";
+import { ARTICLES, PLACES, PRODUCTS } from "@/lib/data";
+import { useFavorites, useFavoritesReady } from "@/lib/favorites";
 
 type MenuRow = { icon: Parameters<typeof Icon>[0]["name"]; title: string; value?: string; href: string; badge?: string };
 
@@ -20,7 +24,7 @@ const GROUPS: { title: string; rows: MenuRow[] }[] = [
       { icon: "cal", title: "Reservations", value: "HOSU DOSAN · May 4", href: routes.bookings, badge: "D-5" },
       { icon: "plane", title: "My Trip", value: "Seoul", href: routes.trip },
       { icon: "gift", title: "Beauty Kit", value: "Survey & shipping", href: routes.kitStatus },
-      { icon: "heart", title: "Saved", href: routes.favorites, badge: "11" },
+      { icon: "heart", title: "Saved", href: routes.favorites },
       { icon: "book", title: "My reviews", href: routes.reviews, badge: "2" },
     ],
   },
@@ -42,6 +46,16 @@ const GROUPS: { title: string; rows: MenuRow[] }[] = [
 ];
 
 export default function MenuPage() {
+  // Live favorites — the Saved count reflects the account (or guest list),
+  // not a hardcoded demo number. Counted against the catalog so it always
+  // matches exactly what the Saved page renders.
+  const favs = useFavorites();
+  const favsReady = useFavoritesReady();
+  const savedCount =
+    PLACES.filter((p) => favs.place.includes(p.id)).length +
+    PRODUCTS.filter((p) => favs.product.includes(p.id)).length +
+    ARTICLES.filter((a) => favs.article.includes(a.slug)).length;
+  const savedLabel = favsReady ? String(savedCount) : "–";
   return (
     <>
       <TopBar title="Menu" />
@@ -50,7 +64,7 @@ export default function MenuPage() {
         <section className="stack">
           <MenuProfile />
           <div className="row between" style={{ textAlign: "center" }}>
-            {[["1", "Reservations"], ["11", "Saved"], ["2", "My reviews"]].map(([n, l]) => (
+            {[["1", "Reservations"], [savedLabel, "Saved"], ["2", "My reviews"]].map(([n, l]) => (
               <div key={l} style={{ flex: 1 }}>
                 <div className="h2" style={{ color: "var(--accent)" }}>{n}</div>
                 <div className="caption muted">{l}</div>
@@ -67,17 +81,20 @@ export default function MenuPage() {
             <SectionDivider />
             <section className="stack sm">
               <SectionHeader title={g.title} />
-              {g.rows.map((m) => (
-                <Link key={m.title} className="inforow" href={m.href}>
-                  <Icon name={m.icon} size="xs" />
-                  <span style={{ minWidth: 0, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{m.title}</span>
-                  <span className="chev row" style={{ gap: 7 }}>
-                    {m.value && <span className="caption muted">{m.value}</span>}
-                    {m.badge && <Badge tone="dim">{m.badge}</Badge>}
-                    <Icon name="chev" size="xs" style={{ color: "var(--dim)" }} />
-                  </span>
-                </Link>
-              ))}
+              {g.rows.map((m) => {
+                const badge = m.title === "Saved" ? (favsReady && savedCount > 0 ? String(savedCount) : undefined) : m.badge;
+                return (
+                  <Link key={m.title} className="inforow" href={m.href}>
+                    <Icon name={m.icon} size="xs" />
+                    <span style={{ minWidth: 0, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{m.title}</span>
+                    <span className="chev row" style={{ gap: 7 }}>
+                      {m.value && <span className="caption muted">{m.value}</span>}
+                      {badge && <Badge tone="dim">{badge}</Badge>}
+                      <Icon name="chev" size="xs" style={{ color: "var(--dim)" }} />
+                    </span>
+                  </Link>
+                );
+              })}
               {g.title === "Support" && (
                 <FeedbackLauncher className="inforow" style={{ width: "100%" }}>
                   <Icon name="ext" size="xs" />

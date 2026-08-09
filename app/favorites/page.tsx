@@ -17,7 +17,32 @@ import { CategoryChips } from "@/components/category/category-chips";
 import { Icon } from "@/components/icon";
 import { routes } from "@/lib/routes";
 import { ARTICLES, PLACES, PRODUCTS, TYPE_LABEL, zoneShort, type Article, type Place, type Product } from "@/lib/data";
-import { useFavorites } from "@/lib/favorites";
+import { useFavorites, useFavoritesReady } from "@/lib/favorites";
+
+// Pulsing placeholder rows while the account's saved list is fetched —
+// flashing "nothing saved yet" on a fresh device reads as data loss.
+function LoadingRows() {
+  const bar = { borderRadius: 6, background: "var(--surface-hover)", border: "1px solid var(--border)" };
+  return (
+    <div
+      className="stack sm"
+      role="status"
+      aria-busy="true"
+      aria-label="Loading saved items"
+      style={{ animation: "pulse 1.6s ease-in-out infinite" }}
+    >
+      {[0, 1, 2].map((i) => (
+        <div key={i} className="row" style={{ gap: 12, padding: "10px 0" }}>
+          <div style={{ ...bar, width: 56, height: 56, flex: "none", borderRadius: 12 }} />
+          <div className="stack" style={{ flex: 1, gap: 7 }}>
+            <div style={{ ...bar, width: `${62 - i * 12}%`, height: 14 }} />
+            <div style={{ ...bar, width: `${40 - i * 6}%`, height: 11 }} />
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+}
 
 // ── Places — category filter + detail-page list rows ──────
 function PlacesSection({ favPlaces }: { favPlaces: Place[] }) {
@@ -113,6 +138,7 @@ function ArticlesSection({ favArticles }: { favArticles: Article[] }) {
 export default function FavoritesPage() {
   // Live store — rows appear/disappear as hearts toggle anywhere in the app.
   const favs = useFavorites();
+  const ready = useFavoritesReady();
   const favPlaces = PLACES.filter((p) => favs.place.includes(p.id));
   const favProducts = PRODUCTS.filter((p) => favs.product.includes(p.id));
   const favArticles = ARTICLES.filter((a) => favs.article.includes(a.slug));
@@ -124,11 +150,17 @@ export default function FavoritesPage() {
           <div className="label">Saved</div>
           <div className="h1">Your <span style={{ fontStyle: "italic", color: "var(--accent)" }}>K-beauty list.</span></div>
         </div>
-        <PlacesSection favPlaces={favPlaces} />
-        <SectionDivider />
-        <ProductsSection favProducts={favProducts} />
-        <SectionDivider />
-        <ArticlesSection favArticles={favArticles} />
+        {ready ? (
+          <>
+            <PlacesSection favPlaces={favPlaces} />
+            <SectionDivider />
+            <ProductsSection favProducts={favProducts} />
+            <SectionDivider />
+            <ArticlesSection favArticles={favArticles} />
+          </>
+        ) : (
+          <LoadingRows />
+        )}
       </div>
       <BottomNav active="saved" />
     </>

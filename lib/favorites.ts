@@ -7,29 +7,38 @@
 // Signed in: Supabase `favorites` table (RLS-scoped) is the source of truth.
 //   On sign-in the local list merges INTO the account once (union), so
 //   nothing a guest saved is lost; toggles write optimistically and roll
-//   back if the server rejects them. Sign-out returns to the local list.
+//   back if the server rejects them. Sign-out wipes the account's local
+//   mirror (shared-device privacy) and returns to a fresh guest list.
 
 import { useSyncExternalStore } from "react";
 import { supabaseBrowser } from "./supabase/client";
-import { ARTICLES } from "./data";
 
 export type FavKind = "place" | "product" | "article";
 export type FavMap = Record<FavKind, string[]>;
 
 const KEY = "essenly.favorites";
 const MERGED_KEY = "essenly.favorites.mergedFor";
-const SEED: FavMap = {
-  place: ["oy-gangnam-town", "juno-hair-gangnam", "colorlab-gangnam", "soothe-head-spa"],
-  product: ["cosrx-snail-mucin", "anua-heartleaf-toner", "boj-glow-serum"],
-  article: ARTICLES.slice(0, 2).map((a) => a.slug),
-};
 const EMPTY: FavMap = { place: [], product: [], article: [] };
 const KINDS: FavKind[] = ["place", "product", "article"];
 
 let cache: FavMap | null = null;
 let userId: string | null = null;
 let authWired = false;
+// Readiness: `hydrating` covers the initial session check; `syncing` covers a
+// signed-in account's server fetch. Until both settle, the Saved tab shows a
+// loading state instead of flashing "nothing saved" on a fresh device.
+let hydrating = true;
+let syncToken = 0;
+let syncing = false;
+// Latest local intent per item ("kind:id" → saved?). Toggles made while the
+// account snapshot is in flight are overlaid onto it when it lands and then
+// flushed to the server, so a stale fetch can never undo a visible heart.
+type PendingOp = { kind: FavKind; id: string; saved: boolean; seq: number };
+let opSeq = 0;
+const pending = new Map<string, PendingOp>();
 const listeners = new Set<() => void>();
+
+const sleep = (ms: number) => new Promise<void>((r) => setTimeout(r, ms));
 
 function notify() {
   listeners.forEach((l) => l());
@@ -47,9 +56,9 @@ function loadLocal(): FavMap {
       };
     }
   } catch {
-    // fall through to seed
+    // fall through to empty
   }
-  return SEED;
+  return { place: [], product: [], article: [] };
 }
 
 function load(): FavMap {
@@ -76,22 +85,32 @@ function write(next: FavMap) {
 
 async function fetchServer(): Promise<FavMap | null> {
   const supabase = supabaseBrowser();
-  const { data, error } = await supabase
-    .from("favorites")
-    .select("kind, item_id")
-    .order("created_at", { ascending: false });
-  if (error) return null;
-  const map: FavMap = { place: [], product: [], article: [] };
-  for (const row of data ?? []) {
-    if (KINDS.includes(row.kind as FavKind)) map[row.kind as FavKind].push(row.item_id);
+  // brief retry — a transient failure here would otherwise flip the Saved
+  // tab to an authoritative-looking wrong (usually empty) list all session
+  for (let attempt = 0; attempt < 3; attempt++) {
+    const { data, error } = await supabase
+      .from("favorites")
+      .select("kind, item_id")
+      .order("created_at", { ascending: false });
+    if (!error) {
+      const map: FavMap = { place: [], product: [], article: [] };
+      for (const row of data ?? []) {
+        if (KINDS.includes(row.kind as FavKind)) map[row.kind as FavKind].push(row.item_id);
+      }
+      return map;
+    }
+    await sleep(700 * (attempt + 1));
   }
-  return map;
+  return null;
 }
 
-/** One-time per account: union the guest's local list into the server. */
-async function mergeLocalIntoServer(uid: string) {
+/** One-time per account: union the guest's local list into the server.
+    Returns false when the write failed — the caller must NOT adopt the
+    server list then, or the guest's unsaved merge would be wiped locally
+    and the consumed flag would block every future retry. */
+async function mergeLocalIntoServer(uid: string): Promise<boolean> {
   try {
-    if (localStorage.getItem(MERGED_KEY) === uid) return;
+    if (localStorage.getItem(MERGED_KEY) === uid) return true;
   } catch { /* proceed — worst case the upsert is a no-op */ }
   const local = loadLocal();
   const rows = KINDS.flatMap((kind) =>
@@ -99,20 +118,103 @@ async function mergeLocalIntoServer(uid: string) {
   );
   if (rows.length > 0) {
     const supabase = supabaseBrowser();
-    await supabase.from("favorites").upsert(rows, { onConflict: "user_id,kind,item_id", ignoreDuplicates: true });
+    const { error } = await supabase
+      .from("favorites")
+      .upsert(rows, { onConflict: "user_id,kind,item_id", ignoreDuplicates: true });
+    if (error) return false; // flag stays unset so the next session retries
   }
   try {
     localStorage.setItem(MERGED_KEY, uid);
   } catch { /* ignore */ }
+  return true;
+}
+
+/** Re-apply local intents recorded while the server snapshot was in flight. */
+function overlayPending(server: FavMap): FavMap {
+  const map: FavMap = { place: [...server.place], product: [...server.product], article: [...server.article] };
+  pending.forEach((op) => {
+    const has = map[op.kind].includes(op.id);
+    if (op.saved && !has) map[op.kind] = [op.id, ...map[op.kind]];
+    if (!op.saved && has) map[op.kind] = map[op.kind].filter((x) => x !== op.id);
+  });
+  return map;
+}
+
+/** Send one toggle to the server; on failure roll the heart back — unless a
+    newer toggle for the same item owns it now (seq mismatch). */
+function sendOp(uid: string, op: PendingOp) {
+  const supabase = supabaseBrowser();
+  const req = op.saved
+    ? supabase.from("favorites").upsert(
+        { user_id: uid, kind: op.kind, item_id: op.id },
+        { onConflict: "user_id,kind,item_id", ignoreDuplicates: true },
+      )
+    : supabase.from("favorites").delete().match({ user_id: uid, kind: op.kind, item_id: op.id });
+  void req.then(({ error }) => {
+    const cur = pending.get(`${op.kind}:${op.id}`);
+    if (cur?.seq !== op.seq) return; // superseded — let the newer op settle it
+    pending.delete(`${op.kind}:${op.id}`);
+    if (error && userId === uid) {
+      const list = load()[op.kind];
+      write({
+        ...load(),
+        [op.kind]: op.saved
+          ? list.filter((x) => x !== op.id)
+          : list.includes(op.id) ? list : [op.id, ...list],
+      });
+    }
+  });
 }
 
 async function adoptServerState(uid: string) {
-  await mergeLocalIntoServer(uid);
-  const server = await fetchServer();
-  if (server && userId === uid) {
-    // server is the account's truth; mirror locally for fast next paint
-    write(server);
+  const token = ++syncToken;
+  syncing = true;
+  notify();
+  try {
+    if (!(await mergeLocalIntoServer(uid))) return; // keep the local view; retry next session
+    const server = await fetchServer();
+    if (server && userId === uid && token === syncToken) {
+      // server is the account's truth; overlay toggles made mid-fetch
+      write(overlayPending(server));
+      pending.forEach((op) => sendOp(uid, op)); // flush anything the server missed
+    }
+  } finally {
+    if (token === syncToken) syncing = false;
+    hydrating = false;
+    notify();
   }
+}
+
+function settleAsGuest(clearMirror: boolean) {
+  const changed = hydrating || syncing;
+  hydrating = false;
+  syncing = false;
+  syncToken++; // invalidate any in-flight adopt
+  if (clearMirror) {
+    // the localStorage copy mirrors the signed-out account — leaving it
+    // behind shows user A's saves to the next person on this device and
+    // would merge them into user B's account at B's sign-in
+    try {
+      localStorage.removeItem(KEY);
+      localStorage.removeItem(MERGED_KEY);
+    } catch { /* ignore */ }
+    pending.clear();
+  }
+  if (userId !== null || clearMirror) {
+    userId = null;
+    cache = null; // fall back to the local (guest) list
+    notify();
+  } else if (changed) {
+    notify();
+  }
+}
+
+/** Remove the signed-out account's local mirror. Called from the sign-out
+    action directly, so it also covers pages where no favorites component
+    happens to be mounted (the SIGNED_OUT event handler only runs if the
+    store was wired). Idempotent with that handler. */
+export function purgeFavoritesMirror(): void {
+  settleAsGuest(true);
 }
 
 function wireAuth() {
@@ -123,16 +225,14 @@ function wireAuth() {
     if (data.user && userId !== data.user.id) {
       userId = data.user.id;
       void adoptServerState(data.user.id);
+    } else if (!data.user && userId === null) {
+      settleAsGuest(false);
     }
   });
   supabase.auth.onAuthStateChange((event, session) => {
     const nextId = session?.user?.id ?? null;
     if (event === "SIGNED_OUT" || nextId === null) {
-      if (userId !== null) {
-        userId = null;
-        cache = null; // fall back to the local (guest) list
-        notify();
-      }
+      settleAsGuest(event === "SIGNED_OUT" && userId !== null);
       return;
     }
     if (nextId !== userId) {
@@ -152,25 +252,11 @@ export function toggleFavorite(kind: FavKind, id: string): boolean {
   };
   write(next);
 
-  if (userId) {
-    const uid = userId;
-    const supabase = supabaseBrowser();
-    const op = has
-      ? supabase.from("favorites").delete().match({ user_id: uid, kind, item_id: id })
-      : supabase.from("favorites").upsert(
-          { user_id: uid, kind, item_id: id },
-          { onConflict: "user_id,kind,item_id", ignoreDuplicates: true },
-        );
-    void op.then(({ error }) => {
-      if (error && userId === uid) {
-        // roll back the optimistic flip so the heart reflects reality
-        write({
-          ...load(),
-          [kind]: has ? [id, ...load()[kind]] : load()[kind].filter((x) => x !== id),
-        });
-      }
-    });
-  }
+  // record the intent even for guests / pre-auth taps — if a session turns
+  // out to exist, adoptServerState overlays and flushes it
+  const op: PendingOp = { kind, id, saved: !has, seq: ++opSeq };
+  pending.set(`${kind}:${id}`, op);
+  if (userId) sendOp(userId, op);
   return !has;
 }
 
@@ -194,4 +280,13 @@ function subscribe(cb: () => void) {
 /** Live favorites map — components re-render whenever any heart toggles. */
 export function useFavorites(): FavMap {
   return useSyncExternalStore(subscribe, load, () => EMPTY);
+}
+
+const readyNow = () => !hydrating && !syncing;
+
+/** False until the session check — and, when signed in, the first server
+    fetch — settles. Lets the Saved tab show a loading state instead of a
+    misleading "nothing saved yet" on a fresh device. */
+export function useFavoritesReady(): boolean {
+  return useSyncExternalStore(subscribe, readyNow, () => false);
 }
