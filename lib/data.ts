@@ -324,9 +324,22 @@ export const ARTICLES: Article[] = [
 ];
 
 // ── Lookups ───────────────────────────────────────────────
-export const getProduct = (id: string) => PRODUCTS.find((p) => p.id === id);
-export const getPlace = (id: string) => PLACES.find((p) => p.id === id);
-export const getArticle = (slug: string) => ARTICLES.find((a) => a.slug === slug);
+// Route params arrive percent-encoded (App Router does not decode them), and
+// ~240 Olive Young ids contain Hangul — decode before matching or every
+// Korean-id detail URL misses.
+function decodedFind<T>(list: T[], key: (x: T) => string, id: string): T | undefined {
+  const direct = list.find((x) => key(x) === id);
+  if (direct) return direct;
+  try {
+    const decoded = decodeURIComponent(id);
+    return decoded === id ? undefined : list.find((x) => key(x) === decoded);
+  } catch {
+    return undefined; // malformed % sequence
+  }
+}
+export const getProduct = (id: string) => decodedFind(PRODUCTS, (p) => p.id, id);
+export const getPlace = (id: string) => decodedFind(PLACES, (p) => p.id, id);
+export const getArticle = (slug: string) => decodedFind(ARTICLES, (a) => a.slug, slug);
 export const brandSlug = (brand: string) => brand.toLowerCase().replace(/\s+/g, "-");
 
 export const CATEGORY_META: Record<string, { title: string; eyebrow: string; line1: string; line2: string; blurb: string; types: PlaceType[] }> = {
