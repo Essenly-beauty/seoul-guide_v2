@@ -6,14 +6,32 @@ import { ThemeProvider } from "@/components/theme/theme-provider";
 import { ToastProvider } from "@/components/ui/toast";
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://seoul-guide-v2.vercel.app"),
   title: "MYSEOULDROP — Seoul Beauty Guide",
-  description: "Free K-beauty travel guide + hair kit for your Seoul trip.",
+  description:
+    "Seoul beauty, mapped. 600+ hair salons, Olive Young stores, and beauty spots on one map — with subway routes, filters, and a free hair kit for your trip.",
+  applicationName: "MYSEOULDROP",
   manifest: "/manifest.json",
   appleWebApp: {
     capable: true,
     statusBarStyle: "default",
     title: "MYSEOULDROP",
   },
+  openGraph: {
+    type: "website",
+    siteName: "MYSEOULDROP",
+    title: "MYSEOULDROP — Seoul Beauty Guide",
+    description:
+      "Seoul beauty, mapped. 600+ hair salons, Olive Young stores, and beauty spots on one map.",
+    locale: "en_US",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "MYSEOULDROP — Seoul Beauty Guide",
+    description:
+      "Seoul beauty, mapped. 600+ hair salons, Olive Young stores, and beauty spots on one map.",
+  },
+  robots: { index: true, follow: true },
 };
 
 export const viewport: Viewport = {
