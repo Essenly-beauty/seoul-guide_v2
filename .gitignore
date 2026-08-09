@@ -43,3 +43,5 @@ scripts/.cache/
 !/docs/map-first-v2-spec.md
 
 .env
+!/docs/auth-setup.md
+!/docs/HANDOFF.md

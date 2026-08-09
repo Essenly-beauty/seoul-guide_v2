@@ -1,0 +1,114 @@
+# MYSEOULDROP — 작업 핸드오프 (2026-08-09 기준)
+
+> 다음 세션에서 이 문서 하나로 바로 이어서 작업할 수 있게 정리한 문서.
+> 프로젝트 전반 문서는 `docs/README.md`, 인증 설정은 `docs/auth-setup.md` 참고.
+
+---
+
+## 1. 프로젝트 한 줄 요약
+
+서울 K-뷰티 여행자용 지도 앱 (구 Essenly → **MYSEOULDROP** 리브랜딩).
+Next.js 14 App Router + Supabase(인증/DB) + Vercel 배포. 실데이터 ~600곳.
+
+| 항목 | 값 |
+|---|---|
+| **프로덕션** | https://seoul-guide-v2.vercel.app |
+| GitHub | `Essenly-beauty/seoul-guide_v2` (main 브랜치가 배포 기준) |
+| Vercel 프로젝트 | `seoul-guide-v2` (팀 admin-28156576s-projects, CLI 로그인 유지 중) |
+| Supabase | `supabase-indigo-mountain` (Vercel Marketplace 연동, 무료 티어) |
+| 로컬 실행 | `start-essenly.command` 더블클릭 (포트 3000, .next 자가치유) |
+| 로컬 env | `.env.local` (git 제외, `vercel env pull --yes`로 재생성 가능) |
+
+### 자주 쓰는 명령
+```bash
+npm run dev            # 로컬 (start-essenly.command 권장 — 헬스체크 포함)
+npm run typecheck && npm run lint && npm test   # 202개 테스트
+npm run build          # ⚠️ dev 서버와 .next 공유 — 빌드 후 dev 서버 재시작 필요
+vercel deploy --prod --yes                      # 프로덕션 배포
+vercel env pull --yes  # .env.local 재생성
+```
+
+---
+
+## 2. 완료된 작업 (시간순 요약)
+
+### A. 버그 수정·지도 기반 (7/28~29)
+- 하단 탭바 먹통 원인 수정: `MapWiring` 인라인 콜백 무한 리렌더 → useCallback 안정화
+- 실데이터 파이프라인 3종 (지오코딩 캐시 커밋됨 → 재실행 수 초):
+  - **미용실 205곳**: Creatrip CSV → `scripts/build-creatrip-places.mjs` (Nominatim, 94% 주소 정확)
+  - **올리브영 239곳**: 카카오맵 구별 캡처(`scripts/capture-kakao-oy.sh`) → `build-oliveyoung-kakao.mjs` (99% 정확, OSM 폴백 스크립트 별도)
+  - **관광지·시장 112곳**: a_drop_of_seoul CSV 2종 → `build-ados-places.mjs` (about/aboutKr 설명 포함, 상세페이지 노출)
+- 존 5개 추가(jamsil/yeongdeungpo/seoul_etc/busan/gyeonggi), 데이터 무결성 테스트 (`lib/creatrip-places.test.ts`)
+
+### B. 디자인 전면 리뉴얼 (7/31~8/3, `design/myseouldrop-dark` → main 머지됨)
+- **MYSEOULDROP 리브랜딩**: 다크(#0b0c0f) + 오렌지 #F55800, 계단형 심볼+투톤 워드마크(`components/brand/brand-logo.tsx`), Michroma 브랜드체, 전 화면 문구 교체
+- **라이트 테마**: 토큰 이중화 + `ThemeProvider`(localStorage `essenly.theme`, pre-paint 부트 스크립트), 설정 화면 토글, 지도 타일도 테마 추종(dark_all/voyager)
+- **지도 디자인 시스템**: 뮤트 핀 팔레트(필터 시 비비드 전환), 오렌지는 화면당 최대 2개(선택 핀+히어로 뱃지), 올리브영은 올리브 로고 마크(26px), 카카오식 역 디스크(클릭→주변 숍 브라우즈), 상단 스크림+블러
+- **지하철**: 경로 편집 전체화면(카카오식), 기차표형 요약(노선색 양끝 점), **실선로 폴리라인**(`build-subway-geometry.mjs` — OSM, 1~9호선+신분당+인천1; 나머지 직선 폴백), 반경 원 표시
+- **필터**: 카테고리 다중 선택, 거리 필터(500m/1km/3km), 서비스 태그 전체 노출(카테고리 카드 그룹)
+- Figma 온보딩 구현: 웰컴(지도 프리뷰 카드)·스플래시·choose-mode — 양 테마
+
+### C. 프로덕션 인프라 (8/9)
+- main 머지(--no-ff)·푸시, Vercel 프로덕션 배포
+- Supabase 프로비저닝(마켓플레이스, env 자동 주입)
+- **실인증**: `@supabase/ssr` 쿠키 세션 + 미들웨어 갱신, `/login`·`/register`(재발송·기존이메일 가드)·`/forgot-password`·`/reset-password`, `/auth/callback`(token_hash+PKCE 겸용, 오픈리다이렉트 방어, 원인별 에러), 소셜 OAuth 연결(콘솔 등록 대기), 게스트 모드 유지
+- 29-에이전트 적대적 리뷰 → 확정 결함 전부 수정 (크로스브라우저 확인 링크, 비번찾기 막다른 길, 열거 공격 안전 처리 등)
+- **회원 즐겨찾기**: `favorites` 테이블+RLS(5종 격리 테스트 통과), 게스트 localStorage → 로그인 시 자동 병합, 낙관적 토글+롤백, **지도 하트 FAB 레이어**(저장한 곳만 표시)
+- 첫 실유저 가입 확인됨 (gk***@naver.com, 이메일 확인 완료)
+
+---
+
+## 3. ⚠️ 사용자(계정 소유자) 액션 대기 — 최우선
+
+> 상세 절차: `docs/auth-setup.md`
+
+1. **[필수] Supabase Site URL** — Dashboard → Authentication → URL Configuration
+   - Site URL: `https://seoul-guide-v2.vercel.app`
+   - Redirect URLs: `https://seoul-guide-v2.vercel.app/auth/callback`, `http://localhost:3000/auth/callback`
+   - **미설정 시 가입 확인 메일이 localhost로 감** (실제로 8/9에 발생했음)
+2. **[강력 권장] 이메일 템플릿 token_hash 교체** — 메일앱 내장 브라우저에서도 링크 동작 (auth-setup.md에 복사용 템플릿)
+3. **소셜 로그인 콘솔 등록** — Google Cloud Console, Kakao Developers (각 ~10분, 무료). Apple은 연 $129라 보류 중 (버튼은 "준비 중" 안내)
+
+---
+
+## 4. 다음 작업 백로그 (우선순위순)
+
+### P1 — 계정 기능 마무리
+- [ ] **Saved 탭 서버 우선 로딩**: 즐겨찾기는 이미 서버 동기화되지만, 새 기기 첫 진입 시 서버 fetch 완료 전 로컬 시드가 잠깐 보임 → 로딩 상태 추가
+- [ ] **프로필 계정화**: 온보딩 답변(`lib/profile.ts`, localStorage) → `profiles` 테이블 (RLS, upsert on auth). 메뉴의 Reservations/Saved/Reviews 카운트 실데이터화
+- [ ] **리뷰 계정화**: 상세페이지 별점(`essenly.myrating`)·리뷰 작성 → 서버 테이블
+- [ ] 소셜 로그인 e2e (콘솔 등록 후): Kakao/Google 실로그인 → `user_metadata` 이름 표시 확인
+
+### P2 — 품질·운영
+- [ ] 커스텀 도메인 연결 (myseouldrop.com 등 — `vercel domains`)
+- [ ] Supabase 이메일 발신자 커스텀 (기본 noreply@mail.app.supabase.io → SMTP 설정)
+- [ ] 지도 성능: 600 마커 → 뷰포트 기반 렌더링 or canvas 렌더러 검토 (현재 무리 없음, 1000+ 대비)
+- [ ] 미확보 노선 지오메트리 (경의중앙 등 9개 — `build-subway-geometry.mjs` MATCHERS 보강)
+- [ ] E2E 자동화: 현재 수동 스크립트(scratchpad) → Playwright 테스트로 정식화
+
+### P3 — 제품 확장 (이전 논의)
+- [ ] 장소 데이터 DB 이전 (지금은 `lib/generated/*.ts` 정적 — 운영 편집 필요 시)
+- [ ] 리뷰 수 기반 인기 표시 재검토 (한 번 뺐던 기능 — 데이터는 ratingCount로 보존됨)
+- [ ] Apple 로그인 (Developer Program 가입 후)
+
+---
+
+## 5. 주의사항 (다음 세션 함정 방지)
+
+- **`.next` 공유 충돌**: `npm run build`나 두 번째 dev 서버는 실행 중인 dev 서버의 캐시를 깨뜨림 → 500/404. 빌드 후엔 `start-essenly.command` 재실행. dev 서버는 **하나만**.
+- **환경변수**: dev 서버는 시작 시점의 `.env.local`만 읽음 — env 바뀌면 재시작.
+- **스토리지 키는 essenly.* 유지** (`essenly.favorites`, `essenly.theme` 등) — 리브랜딩 시 의도적으로 남긴 내부 식별자. 바꾸면 기존 사용자 로컬 데이터 끊김.
+- **DB 마이그레이션**: `supabase/migrations/*.sql` 순번 파일 + node pg로 적용 (예시는 git log의 favorites 커밋 참고). `POSTGRES_URL_NON_POOLING` 사용, URL의 `sslmode` 파라미터 제거 후 `ssl:{rejectUnauthorized:false}`.
+- **관리자 테스트 유저**: service role로 `admin.createUser({email_confirm:true})` → 테스트 → `deleteUser` 정리. `@myseouldrop.app` 도메인 사용 (가짜 TLD는 Supabase가 거부).
+- **협업 규칙**: main 직푸시 대신 브랜치+PR 권장, 강제 푸시 금지. 디자인 실험은 `design/*` 브랜치.
+
+## 6. 데이터 파이프라인 재실행
+
+```bash
+node scripts/build-creatrip-places.mjs      # 미용실 (CSV 경로 인자 가능)
+./scripts/capture-kakao-oy.sh && node scripts/build-oliveyoung-kakao.mjs  # 올리브영
+node scripts/build-ados-places.mjs          # 관광지·시장
+node scripts/build-subway-geometry.mjs      # 선로 지오메트리 (--refresh로 OSM 재조회)
+npm run build:subway-data                   # 지하철 그래프
+```
+캐시(`scripts/.*.json`)가 커밋돼 있어 재실행은 대부분 수 초.
