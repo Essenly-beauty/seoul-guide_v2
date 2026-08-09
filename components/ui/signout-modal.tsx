@@ -5,6 +5,8 @@ import { useRouter } from "next/navigation";
 import { routes } from "@/lib/routes";
 import { Button } from "@/components/ui/button";
 import { supabaseBrowser } from "@/lib/supabase/client";
+import { purgeFavoritesMirror } from "@/lib/favorites";
+import { purgeProfileMirror } from "@/lib/profile";
 import { useDialogFocus } from "@/components/ui/use-dialog-focus";
 
 export function SignoutModal() {
@@ -35,6 +37,9 @@ export function SignoutModal() {
                 style={{ flex: 1 }}
                 onClick={async () => {
                   await supabaseBrowser().auth.signOut();
+                  // shared-device privacy: drop the account's local mirrors
+                  purgeFavoritesMirror();
+                  purgeProfileMirror();
                   setOpen(false);
                   router.push(routes.welcome);
                   router.refresh();

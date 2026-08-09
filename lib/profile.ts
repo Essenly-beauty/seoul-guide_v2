@@ -1,12 +1,16 @@
 "use client";
 
 // Progressive-profiling store (docs/user-data-strategy.md §3–4).
-// Mirrors the profiles table columns in a DB-ready shape; persisted to
-// localStorage under "essenly.profile" following the favorites store pattern
-// (module cache + listeners + useSyncExternalStore + try/catch guards).
-// When the Supabase backend lands, only the read/write layer changes.
+//
+// Guests: localStorage under "essenly.profile", following the favorites
+// store pattern (module cache + listeners + useSyncExternalStore).
+// Signed in: Supabase `profiles` table (one jsonb row per account, RLS).
+//   On sign-in the guest's answers merge with the account's (server wins
+//   per field, list fields union) so nothing answered on either side is
+//   lost; every later answer writes through with a short debounce.
 
 import { useSyncExternalStore } from "react";
+import { supabaseBrowser } from "./supabase/client";
 import { MAP_CATEGORIES, type PlaceType } from "./data";
 
 export type StayType = "tourist" | "resident" | "planning";
@@ -158,6 +162,9 @@ const KEY = "essenly.profile";
 const EMPTY: Profile = { interests: [], skinConcerns: [], hairConcerns: [] };
 
 let cache: Profile | null = null;
+let userId: string | null = null;
+let authWired = false;
+let pushTimer: ReturnType<typeof setTimeout> | null = null;
 const listeners = new Set<() => void>();
 
 const QUESTION_KEYS = QUESTIONS.map((q) => q.key);
@@ -173,27 +180,31 @@ const strList = (v: unknown): string[] =>
 const oneOf = <T extends string>(v: unknown, allowed: readonly T[]): T | undefined =>
   typeof v === "string" && (allowed as readonly string[]).includes(v) ? (v as T) : undefined;
 
+/** Validate an untrusted payload (localStorage or server jsonb) field by field. */
+function sanitize(p: Partial<Profile>): Profile {
+  return {
+    countryCode: str(p.countryCode),
+    stayType: oneOf(p.stayType, ["tourist", "resident", "planning"]),
+    stayUntil: str(p.stayUntil),
+    interests: strList(p.interests).filter((x): x is PlaceType => (INTEREST_KEYS as string[]).includes(x)),
+    ageBand: oneOf(p.ageBand, ["18-24", "25-34", "35-44", "45+"]),
+    gender: oneOf(p.gender, ["female", "male", "other"]),
+    skinType: str(p.skinType),
+    skinConcerns: strList(p.skinConcerns),
+    hairType: str(p.hairType),
+    hairConcerns: strList(p.hairConcerns),
+    preferredLang: str(p.preferredLang),
+    budgetBand: str(p.budgetBand),
+    priorityKey: isQuestionKey(p.priorityKey) ? p.priorityKey : undefined,
+  };
+}
+
 function load(): Profile {
   if (cache) return cache;
   try {
     const raw = localStorage.getItem(KEY);
     if (raw) {
-      const p = JSON.parse(raw) as Partial<Profile>;
-      cache = {
-        countryCode: str(p.countryCode),
-        stayType: oneOf(p.stayType, ["tourist", "resident", "planning"]),
-        stayUntil: str(p.stayUntil),
-        interests: strList(p.interests).filter((x): x is PlaceType => (INTEREST_KEYS as string[]).includes(x)),
-        ageBand: oneOf(p.ageBand, ["18-24", "25-34", "35-44", "45+"]),
-        gender: oneOf(p.gender, ["female", "male", "other"]),
-        skinType: str(p.skinType),
-        skinConcerns: strList(p.skinConcerns),
-        hairType: str(p.hairType),
-        hairConcerns: strList(p.hairConcerns),
-        preferredLang: str(p.preferredLang),
-        budgetBand: str(p.budgetBand),
-        priorityKey: isQuestionKey(p.priorityKey) ? p.priorityKey : undefined,
-      };
+      cache = sanitize(JSON.parse(raw) as Partial<Profile>);
       return cache;
     }
   } catch {
@@ -213,9 +224,186 @@ function write(next: Profile) {
   listeners.forEach((l) => l());
 }
 
+// ── Server sync (signed-in only) ───────────────────────────
+
+const sleep = (ms: number) => new Promise<void>((r) => setTimeout(r, ms));
+
+const SCALAR_KEYS = [
+  "countryCode", "stayType", "stayUntil", "ageBand", "gender",
+  "skinType", "hairType", "preferredLang", "budgetBand", "priorityKey",
+] as const;
+const LIST_KEYS = ["interests", "skinConcerns", "hairConcerns"] as const;
+
+// Fields the user changed locally that no push has confirmed yet — they win
+// over server values in every merge, so an in-flight fetch can't revert a
+// tap the UI already acknowledged.
+let dirty = new Set<string>();
+// Last known server payload. Pushes are blocked until we have one — a failed
+// first fetch must never lead to blindly overwriting the account's row.
+let serverSnap: Profile | null = null;
+
+/** Server wins per answered field, lists union — except fields in
+    `localWins` (unconfirmed local edits), where local wins wholesale. */
+function mergeProfiles(local: Profile, server: Profile, localWins: Set<string>): Profile {
+  const merged: Profile = { ...local };
+  for (const k of SCALAR_KEYS) {
+    if (!localWins.has(k) && server[k]) (merged as Record<string, unknown>)[k] = server[k];
+  }
+  for (const k of LIST_KEYS) {
+    (merged as unknown as Record<string, string[]>)[k] = localWins.has(k)
+      ? [...local[k]]
+      : Array.from(new Set([...server[k], ...local[k]]));
+  }
+  return merged;
+}
+
+const val = (p: Profile, k: string) => JSON.stringify((p as Record<string, unknown>)[k] ?? null);
+
+/** Read-merge-write push: re-fetch the row (unless flushing at unload),
+    overlay local dirty fields, upsert. Keeps a laptop's stale mirror from
+    erasing answers the same account saved on a phone in the meantime. */
+async function pushNow(uid: string, refetch: boolean) {
+  const supabase = supabaseBrowser();
+  const before = load();
+  const keys = new Set(dirty);
+  let server = serverSnap;
+  if (refetch) {
+    const { data, error } = await supabase.from("profiles").select("data").eq("user_id", uid).maybeSingle();
+    if (!error) server = data ? sanitize((data.data ?? {}) as Partial<Profile>) : { ...EMPTY };
+  }
+  if (userId !== uid) return;
+  if (server === null) return; // never fetched this account — writing blind could erase its answers
+  const merged = mergeProfiles(load(), server, keys);
+  const { error } = await supabase.from("profiles").upsert({ user_id: uid, data: merged }, { onConflict: "user_id" });
+  if (userId !== uid) return;
+  if (error) {
+    schedulePush(5000); // keep `dirty`; one delayed retry, then next edit/flush retries
+    return;
+  }
+  serverSnap = merged;
+  // confirm only fields unchanged since capture — a mid-flight edit stays dirty
+  const after = load();
+  keys.forEach((k) => {
+    if (val(before, k) === val(after, k)) dirty.delete(k);
+  });
+  if (cache === before && JSON.stringify(merged) !== JSON.stringify(after)) {
+    write(merged); // surface newer answers this fetch brought from other devices
+  }
+}
+
+/** Debounced whole-profile push — answers often come in quick taps. */
+function schedulePush(delay = 600) {
+  if (!userId) return;
+  const uid = userId;
+  if (pushTimer) clearTimeout(pushTimer);
+  pushTimer = setTimeout(() => {
+    pushTimer = null;
+    void pushNow(uid, true);
+  }, delay);
+}
+
+/** Fire a pending push immediately (tab hidden/closing) — no refetch, merge
+    against the cached snapshot so the request races the unload. */
+function flushPush() {
+  if (!pushTimer || !userId) return;
+  clearTimeout(pushTimer);
+  pushTimer = null;
+  void pushNow(userId, false);
+}
+
+async function adoptServerProfile(uid: string) {
+  const supabase = supabaseBrowser();
+  let row: { data: unknown } | null = null;
+  let fetched = false;
+  for (let attempt = 0; attempt < 3; attempt++) {
+    const { data, error } = await supabase.from("profiles").select("data").eq("user_id", uid).maybeSingle();
+    if (!error) {
+      row = data;
+      fetched = true;
+      break;
+    }
+    await sleep(700 * (attempt + 1));
+  }
+  // on total failure serverSnap stays null: pushes remain blocked and dirty
+  // fields are preserved until a later load fetches the row successfully
+  if (!fetched || userId !== uid) return;
+  if (!row) {
+    // first sign-in on this account: the guest's answers become the account's
+    const local = load();
+    const { error } = await supabase.from("profiles").upsert({ user_id: uid, data: local }, { onConflict: "user_id" });
+    if (!error && userId === uid) serverSnap = local;
+    return;
+  }
+  const server = sanitize((row.data ?? {}) as Partial<Profile>);
+  serverSnap = server;
+  const merged = mergeProfiles(load(), server, dirty);
+  if (JSON.stringify(merged) !== JSON.stringify(load())) write(merged);
+  if (JSON.stringify(merged) !== JSON.stringify(server)) {
+    const { error } = await supabase.from("profiles").upsert({ user_id: uid, data: merged }, { onConflict: "user_id" });
+    if (!error && userId === uid) serverSnap = merged;
+  }
+}
+
+/** Remove the signed-out account's local mirror. Called from the sign-out
+    action directly, so it also covers pages where no profile component
+    happens to be mounted. Idempotent with the SIGNED_OUT handler below. */
+export function purgeProfileMirror(): void {
+  if (pushTimer) { clearTimeout(pushTimer); pushTimer = null; }
+  try { localStorage.removeItem(KEY); } catch { /* ignore */ }
+  userId = null;
+  serverSnap = null;
+  dirty = new Set();
+  cache = null;
+  listeners.forEach((l) => l());
+}
+
+function wireAuth() {
+  if (authWired || typeof window === "undefined") return;
+  authWired = true;
+  // best-effort flush of a pending debounced answer when the tab goes away
+  document.addEventListener("visibilitychange", () => {
+    if (document.visibilityState === "hidden") flushPush();
+  });
+  window.addEventListener("pagehide", flushPush);
+  const supabase = supabaseBrowser();
+  supabase.auth.getUser().then(({ data }) => {
+    if (data.user && userId !== data.user.id) {
+      userId = data.user.id;
+      void adoptServerProfile(data.user.id);
+    }
+  });
+  supabase.auth.onAuthStateChange((event, session) => {
+    const nextId = session?.user?.id ?? null;
+    if (event === "SIGNED_OUT" || nextId === null) {
+      const hadUser = userId !== null;
+      if (pushTimer) { clearTimeout(pushTimer); pushTimer = null; }
+      if (event === "SIGNED_OUT" && hadUser) {
+        // the local copy mirrors the signed-out account — leaving it behind
+        // would expose user A's demographics to the next person on this
+        // device and merge them into user B's account at B's sign-in
+        try { localStorage.removeItem(KEY); } catch { /* ignore */ }
+      }
+      if (hadUser) {
+        userId = null;
+        serverSnap = null;
+        dirty = new Set();
+        cache = null; // fall back to the local (guest) view
+        listeners.forEach((l) => l());
+      }
+      return;
+    }
+    if (nextId !== userId) {
+      userId = nextId;
+      void adoptServerProfile(nextId);
+    }
+  });
+}
+
 /** Merge a partial update into the stored profile. */
 export function updateProfile(patch: Partial<Profile>): void {
   write({ ...load(), ...patch });
+  Object.keys(patch).forEach((k) => dirty.add(k));
+  schedulePush();
 }
 
 /** One-tap answer from a question card (typed wrapper over updateProfile).
@@ -238,6 +426,8 @@ export function queuePriorityQuestion(key: QuestionKey): void {
   const cur = load();
   if (isAnswered(cur, key) || cur.priorityKey === key) return;
   write({ ...cur, priorityKey: key });
+  dirty.add("priorityKey");
+  schedulePush();
 }
 
 export function isAnswered(p: Profile, key: QuestionKey): boolean {
@@ -273,6 +463,7 @@ export function nextQuestion(p: Profile): Question | null {
 }
 
 function subscribe(cb: () => void) {
+  wireAuth();
   listeners.add(cb);
   // Cross-tab sync: invalidate the cache when another tab writes.
   const onStorage = (e: StorageEvent) => {
