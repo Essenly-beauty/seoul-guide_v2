@@ -1,4 +1,4 @@
-# MYSEOULDROP — 작업 핸드오프 (2026-08-10 기준)
+# MYSEOULDROP — 작업 핸드오프 (2026-08-11 기준)
 
 > 다음 세션에서 이 문서 하나로 바로 이어서 작업할 수 있게 정리한 문서.
 > 프로젝트 전반 문서는 `docs/README.md`, 인증 설정은 `docs/auth-setup.md` 참고.
@@ -66,6 +66,13 @@ vercel env pull --yes  # .env.local 재생성
   - 프로필 blind whole-row upsert(기기 간 last-writer-wins 답변 유실) → read-merge-write + dirty 필드 추적 + serverSnap 게이트(첫 fetch 실패 시 push 차단)
   - fetch 실패 시 재시도(3회 백오프), 탭 숨김/pagehide 시 디바운스 플러시, 롤백 멤버십 가드 등
 - **출시 메타**: metadataBase+OG/트위터 태그, 동적 OG 카드(`app/opengraph-image.tsx`, Michroma+폴백), robots.txt(인증/계정 페이지 차단), sitemap.xml(장소 600곳 한글 id 인코딩)
+- **한글 id 상세페이지 수정**: App Router params는 인코딩된 채 전달 → 올리브영 239곳 상세가 전부 soft-404였음. `lib/data.ts` decodedFind로 해결
+
+### E. 리뷰(별점) 계정화 (8/11)
+- `ratings` 테이블(rating 1-5, body 컬럼은 향후 텍스트 리뷰용 예약, RLS 4종, touch 트리거) — 프로드 적용, 7/7 검증(게스트 병합 시 계정 별점 우선, 한글 id, 제약 가드)
+- `lib/ratings.ts` — favorites와 동일한 강화 패턴(pending 오버레이·병합 플래그·재시도·로그아웃 퍼지). 레거시 `essenly.myrating` 숫자 형태 읽기 시 자동 업그레이드
+- 상세페이지 별점 위젯 공유 스토어 전환, My reviews 페이지 실데이터(목업 제거), 메뉴 카운트 라이브
+- Supabase Site URL 설정 완료됨(사용자 확인) — localhost 메일 문제 해결
 
 ---
 
@@ -73,12 +80,11 @@ vercel env pull --yes  # .env.local 재생성
 
 > 상세 절차: `docs/auth-setup.md`
 
-1. **[필수] Supabase Site URL** — Dashboard → Authentication → URL Configuration
-   - Site URL: `https://seoul-guide-v2.vercel.app`
-   - Redirect URLs: `https://seoul-guide-v2.vercel.app/auth/callback`, `http://localhost:3000/auth/callback`
-   - **미설정 시 가입 확인 메일이 localhost로 감** (실제로 8/9에 발생했음)
-2. **[강력 권장] 이메일 템플릿 token_hash 교체** — 메일앱 내장 브라우저에서도 링크 동작 (auth-setup.md에 복사용 템플릿)
+1. ~~[필수] Supabase Site URL~~ — ✅ 8/11 완료 (Site URL + Redirect 3개 등록 확인)
+2. **[강력 권장] 이메일 템플릿 token_hash 교체** — 메일앱 내장 브라우저에서도 링크 동작 (auth-setup.md에 복사용 템플릿). 대시보드 Monaco 에디터라 수동 편집 필요
 3. **소셜 로그인 콘솔 등록** — Google Cloud Console, Kakao Developers (각 ~10분, 무료). Apple은 연 $129라 보류 중 (버튼은 "준비 중" 안내)
+   - 두 콘솔 모두에 등록할 **콜백 URL**: `https://njsocpyuesntblifpips.supabase.co/auth/v1/callback`
+   - 발급받은 Client ID/Secret은 Supabase Dashboard → Authentication → Providers → Google/Kakao에 붙여넣고 Enable
 
 ---
 
@@ -86,8 +92,9 @@ vercel env pull --yes  # .env.local 재생성
 
 ### P1 — 계정 기능 마무리
 - [x] ~~Saved 탭 서버 우선 로딩~~ (8/10 완료 — useFavoritesReady + 스켈레톤)
-- [x] ~~프로필 계정화~~ (8/10 완료 — profiles 테이블+동기화. Reservations/Reviews 카운트는 아직 데모값)
-- [ ] **리뷰 계정화**: 상세페이지 별점(`essenly.myrating`)·리뷰 작성 → 서버 테이블. 메뉴의 Reservations/Reviews 카운트 실데이터화 포함
+- [x] ~~프로필 계정화~~ (8/10 완료 — profiles 테이블+동기화)
+- [x] ~~별점 계정화~~ (8/11 완료 — ratings 테이블+스토어. Reservations 카운트만 데모값 잔존)
+- [ ] **텍스트 리뷰 작성**: reviews/new 폼은 아직 목업 — ratings.body 컬럼 사용해 서버 저장 + 상세페이지 노출 (모더레이션 고려 필요)
 - [ ] 소셜 로그인 e2e (콘솔 등록 후): Kakao/Google 실로그인 → `user_metadata` 이름 표시 확인
 - [ ] 프로필 동기화 실브라우저 e2e (가입→온보딩 답변→다른 기기 로그인 재현)
 
