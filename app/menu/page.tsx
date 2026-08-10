@@ -12,8 +12,9 @@ import { BrandMark, BrandWordmark } from "@/components/brand/brand-logo";
 import { ProfileCard } from "@/components/mypage/profile-card";
 import { Icon } from "@/components/icon";
 import { routes } from "@/lib/routes";
-import { ARTICLES, PLACES, PRODUCTS } from "@/lib/data";
+import { ARTICLES, PLACES, PRODUCTS, getPlace } from "@/lib/data";
 import { useFavorites, useFavoritesReady } from "@/lib/favorites";
+import { useMyRatings, useMyRatingsReady } from "@/lib/ratings";
 
 type MenuRow = { icon: Parameters<typeof Icon>[0]["name"]; title: string; value?: string; href: string; badge?: string };
 
@@ -25,7 +26,7 @@ const GROUPS: { title: string; rows: MenuRow[] }[] = [
       { icon: "plane", title: "My Trip", value: "Seoul", href: routes.trip },
       { icon: "gift", title: "Beauty Kit", value: "Survey & shipping", href: routes.kitStatus },
       { icon: "heart", title: "Saved", href: routes.favorites },
-      { icon: "book", title: "My reviews", href: routes.reviews, badge: "2" },
+      { icon: "book", title: "My reviews", href: routes.reviews },
     ],
   },
   {
@@ -56,6 +57,10 @@ export default function MenuPage() {
     PRODUCTS.filter((p) => favs.product.includes(p.id)).length +
     ARTICLES.filter((a) => favs.article.includes(a.slug)).length;
   const savedLabel = favsReady ? String(savedCount) : "–";
+  const ratings = useMyRatings();
+  const ratingsReady = useMyRatingsReady();
+  const ratedCount = Object.keys(ratings).filter((id) => getPlace(id)).length;
+  const ratedLabel = ratingsReady ? String(ratedCount) : "–";
   return (
     <>
       <TopBar title="Menu" />
@@ -64,7 +69,7 @@ export default function MenuPage() {
         <section className="stack">
           <MenuProfile />
           <div className="row between" style={{ textAlign: "center" }}>
-            {[["1", "Reservations"], [savedLabel, "Saved"], ["2", "My reviews"]].map(([n, l]) => (
+            {[["1", "Reservations"], [savedLabel, "Saved"], [ratedLabel, "My reviews"]].map(([n, l]) => (
               <div key={l} style={{ flex: 1 }}>
                 <div className="h2" style={{ color: "var(--accent)" }}>{n}</div>
                 <div className="caption muted">{l}</div>
@@ -82,7 +87,10 @@ export default function MenuPage() {
             <section className="stack sm">
               <SectionHeader title={g.title} />
               {g.rows.map((m) => {
-                const badge = m.title === "Saved" ? (favsReady && savedCount > 0 ? String(savedCount) : undefined) : m.badge;
+                const badge =
+                  m.title === "Saved" ? (favsReady && savedCount > 0 ? String(savedCount) : undefined)
+                  : m.title === "My reviews" ? (ratingsReady && ratedCount > 0 ? String(ratedCount) : undefined)
+                  : m.badge;
                 return (
                   <Link key={m.title} className="inforow" href={m.href}>
                     <Icon name={m.icon} size="xs" />

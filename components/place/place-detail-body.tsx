@@ -25,6 +25,7 @@ import { ChannelSheet } from "@/components/booking/channel-sheet";
 import { Icon } from "@/components/icon";
 import { useLocation } from "@/components/map/use-location";
 import { toggleFavorite, useFavorites } from "@/lib/favorites";
+import { setRating, useMyRatings } from "@/lib/ratings";
 import { routes } from "@/lib/routes";
 import { PLACES, TYPE_LABEL, zoneShort, type Place } from "@/lib/data";
 import { GANGNAM_STATION, formatDistance, haversineKm } from "@/lib/geo";
@@ -70,8 +71,6 @@ const REVIEW_KEYWORDS = [
 ];
 /** Reviews shown before "More reviews (N)" expands the list. */
 const REVIEWS_PREVIEW = 2;
-/** Per-place my-rating persistence (JSON {placeId: n}). */
-const RATING_KEY = "essenly.myrating";
 /** Plausible 5→1 star share of ratingCount (§4.6 Reviews). */
 const RATING_SHARES = [0.62, 0.24, 0.09, 0.03, 0.02];
 
@@ -350,7 +349,9 @@ function PhotosSection() {
 // ── Reviews (d-reviews): prompt + summary + list ──────────
 function ReviewsSection({ place }: { place: Place }) {
   const { toast } = useToast();
-  const [myRating, setMyRating] = useState<number | null>(null);
+  // Shared store — persists per place, syncs to the account when signed in.
+  const myRatings = useMyRatings();
+  const myRating = myRatings[place.id]?.rating ?? null;
   const [editing, setEditing] = useState(false);
   const [sort, setSort] = useState<"latest" | "highest">("latest");
   const [photosOnly, setPhotosOnly] = useState(false);
@@ -358,27 +359,10 @@ function ReviewsSection({ place }: { place: Place }) {
   const [showAll, setShowAll] = useState(false);
   const [helpfulVotes, setHelpfulVotes] = useState<Record<string, boolean>>({});
 
-  // Restore my rating for this place (guarded — localStorage only in effects/handlers).
-  useEffect(() => {
-    try {
-      const raw = localStorage.getItem(RATING_KEY);
-      if (!raw) return;
-      const map = JSON.parse(raw) as Record<string, number>;
-      const n = map[place.id];
-      if (typeof n === "number" && n >= 1 && n <= 5) setMyRating(n);
-    } catch { /* ignore */ }
-  }, [place.id]);
-
   const rate = (n: number) => {
-    setMyRating(n);
+    setRating(place.id, n);
     setEditing(false);
     toast(`Thanks — you rated ${n} star${n === 1 ? "" : "s"}`);
-    try {
-      const raw = localStorage.getItem(RATING_KEY);
-      const map = raw ? (JSON.parse(raw) as Record<string, number>) : {};
-      map[place.id] = n;
-      localStorage.setItem(RATING_KEY, JSON.stringify(map));
-    } catch { /* ignore */ }
   };
 
   const total = place.ratingCount ?? 120;

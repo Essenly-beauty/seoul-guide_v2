@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { supabaseBrowser } from "@/lib/supabase/client";
 import { purgeFavoritesMirror } from "@/lib/favorites";
 import { purgeProfileMirror } from "@/lib/profile";
+import { purgeRatingsMirror } from "@/lib/ratings";
 import { useDialogFocus } from "@/components/ui/use-dialog-focus";
 
 export function SignoutModal() {
@@ -40,6 +41,7 @@ export function SignoutModal() {
                   // shared-device privacy: drop the account's local mirrors
                   purgeFavoritesMirror();
                   purgeProfileMirror();
+                  purgeRatingsMirror();
                   setOpen(false);
                   router.push(routes.welcome);
                   router.refresh();
