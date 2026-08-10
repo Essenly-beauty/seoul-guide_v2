@@ -81,7 +81,7 @@ vercel env pull --yes  # .env.local 재생성
 > 상세 절차: `docs/auth-setup.md`
 
 1. ~~[필수] Supabase Site URL~~ — ✅ 8/11 완료 (Site URL + Redirect 3개 등록 확인)
-2. **[강력 권장] 이메일 템플릿 token_hash 교체** — 메일앱 내장 브라우저에서도 링크 동작 (auth-setup.md에 복사용 템플릿). 대시보드 Monaco 에디터라 수동 편집 필요
+2. **[보류] 이메일 템플릿 token_hash 교체** — Supabase가 내장 메일러 사용 중엔 템플릿 편집을 잠금 → **커스텀 SMTP 선행 필요**, SMTP는 발신 도메인 필요. 순서: 도메인 구매(P2) → Resend 등 도메인 인증 → SMTP 연결 → 템플릿 교체 (auth-setup.md §1.5)
 3. **소셜 로그인 콘솔 등록** — Google Cloud Console, Kakao Developers (각 ~10분, 무료). Apple은 연 $129라 보류 중 (버튼은 "준비 중" 안내)
    - 두 콘솔 모두에 등록할 **콜백 URL**: `https://njsocpyuesntblifpips.supabase.co/auth/v1/callback`
    - 발급받은 Client ID/Secret은 Supabase Dashboard → Authentication → Providers → Google/Kakao에 붙여넣고 Enable
