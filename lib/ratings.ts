@@ -14,8 +14,11 @@
 import { useSyncExternalStore } from "react";
 import { supabaseBrowser } from "./supabase/client";
 
-export type MyRating = { rating: number; at?: string };
+export type MyRating = { rating: number; body?: string; at?: string };
 export type RatingMap = Record<string, MyRating>;
+
+/** ratings.body DB check is 2000 chars — mirror it client-side. */
+export const REVIEW_MAX_LEN = 2000;
 
 const KEY = "essenly.myrating";
 const MERGED_KEY = "essenly.myrating.mergedFor";
@@ -27,7 +30,8 @@ let authWired = false;
 let hydrating = true;
 let syncToken = 0;
 let syncing = false;
-type PendingOp = { placeId: string; rating: number; at: string; seq: number };
+// body: undefined = leave the server column untouched; null = clear it.
+type PendingOp = { placeId: string; rating: number; body?: string | null; at: string; seq: number };
 let opSeq = 0;
 const pending = new Map<string, PendingOp>();
 const listeners = new Set<() => void>();
@@ -40,15 +44,22 @@ function notify() {
 
 const validRating = (n: unknown): n is number => typeof n === "number" && n >= 1 && n <= 5;
 
-/** Parse either shape: legacy `{id: 4}` or current `{id: {rating: 4, at}}`. */
+const validBody = (v: unknown): v is string =>
+  typeof v === "string" && v.length > 0 && v.length <= REVIEW_MAX_LEN;
+
+/** Parse either shape: legacy `{id: 4}` or current `{id: {rating, body?, at?}}`. */
 export function parseRatings(raw: unknown): RatingMap {
   if (!raw || typeof raw !== "object" || Array.isArray(raw)) return {};
   const out: RatingMap = {};
   for (const [id, v] of Object.entries(raw as Record<string, unknown>)) {
     if (validRating(v)) out[id] = { rating: v };
     else if (v && typeof v === "object" && validRating((v as MyRating).rating)) {
-      const at = (v as MyRating).at;
-      out[id] = { rating: (v as MyRating).rating, ...(typeof at === "string" ? { at } : {}) };
+      const { body, at } = v as MyRating;
+      out[id] = {
+        rating: (v as MyRating).rating,
+        ...(validBody(body) ? { body } : {}),
+        ...(typeof at === "string" ? { at } : {}),
+      };
     }
   }
   return out;
@@ -85,11 +96,17 @@ function write(next: RatingMap) {
 async function fetchServer(): Promise<RatingMap | null> {
   const supabase = supabaseBrowser();
   for (let attempt = 0; attempt < 3; attempt++) {
-    const { data, error } = await supabase.from("ratings").select("place_id, rating, updated_at");
+    const { data, error } = await supabase.from("ratings").select("place_id, rating, body, updated_at");
     if (!error) {
       const map: RatingMap = {};
       for (const row of data ?? []) {
-        if (validRating(row.rating)) map[row.place_id] = { rating: row.rating, at: row.updated_at };
+        if (validRating(row.rating)) {
+          map[row.place_id] = {
+            rating: row.rating,
+            ...(validBody(row.body) ? { body: row.body } : {}),
+            at: row.updated_at,
+          };
+        }
       }
       return map;
     }
@@ -105,7 +122,12 @@ async function mergeLocalIntoServer(uid: string): Promise<boolean> {
     if (localStorage.getItem(MERGED_KEY) === uid) return true;
   } catch { /* proceed — worst case the upsert is a no-op */ }
   const local = loadLocal();
-  const rows = Object.entries(local).map(([place_id, v]) => ({ user_id: uid, place_id, rating: v.rating }));
+  const rows = Object.entries(local).map(([place_id, v]) => ({
+    user_id: uid,
+    place_id,
+    rating: v.rating,
+    ...(validBody(v.body) ? { body: v.body } : {}),
+  }));
   if (rows.length > 0) {
     const supabase = supabaseBrowser();
     const { error } = await supabase
@@ -122,7 +144,9 @@ async function mergeLocalIntoServer(uid: string): Promise<boolean> {
 function overlayPending(server: RatingMap): RatingMap {
   const map = { ...server };
   pending.forEach((op) => {
-    map[op.placeId] = { rating: op.rating, at: op.at };
+    // an op that doesn't touch the body keeps whatever the server had
+    const body = op.body === undefined ? map[op.placeId]?.body : op.body ?? undefined;
+    map[op.placeId] = { rating: op.rating, ...(body ? { body } : {}), at: op.at };
   });
   return map;
 }
@@ -131,7 +155,16 @@ function sendOp(uid: string, op: PendingOp, prev: MyRating | undefined) {
   const supabase = supabaseBrowser();
   void supabase
     .from("ratings")
-    .upsert({ user_id: uid, place_id: op.placeId, rating: op.rating }, { onConflict: "user_id,place_id" })
+    .upsert(
+      {
+        user_id: uid,
+        place_id: op.placeId,
+        rating: op.rating,
+        // omit body entirely on stars-only ops so an existing review survives
+        ...(op.body !== undefined ? { body: op.body } : {}),
+      },
+      { onConflict: "user_id,place_id" },
+    )
     .then(({ error }) => {
       const cur = pending.get(op.placeId);
       if (cur?.seq !== op.seq) return; // superseded by a newer tap
@@ -216,14 +249,28 @@ function wireAuth() {
   });
 }
 
-/** Set (or change) my rating for a place — optimistic, server-backed. */
+/** Set (or change) my rating for a place — optimistic, server-backed.
+    Stars only; an existing review text is left untouched. */
 export function setRating(placeId: string, rating: number): void {
   const cur = load();
   const prev = cur[placeId];
   const at = new Date().toISOString();
-  write({ ...cur, [placeId]: { rating, at } });
+  write({ ...cur, [placeId]: { rating, ...(prev?.body ? { body: prev.body } : {}), at } });
 
   const op: PendingOp = { placeId, rating, at, seq: ++opSeq };
+  pending.set(placeId, op);
+  if (userId) sendOp(userId, op, prev);
+}
+
+/** Save (or clear, with an empty string) my review text for a rated place. */
+export function setReview(placeId: string, rating: number, body: string): void {
+  const cur = load();
+  const prev = cur[placeId];
+  const trimmed = body.trim().slice(0, REVIEW_MAX_LEN);
+  const at = new Date().toISOString();
+  write({ ...cur, [placeId]: { rating, ...(trimmed ? { body: trimmed } : {}), at } });
+
+  const op: PendingOp = { placeId, rating, body: trimmed || null, at, seq: ++opSeq };
   pending.set(placeId, op);
   if (userId) sendOp(userId, op, prev);
 }

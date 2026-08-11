@@ -25,7 +25,7 @@ import { ChannelSheet } from "@/components/booking/channel-sheet";
 import { Icon } from "@/components/icon";
 import { useLocation } from "@/components/map/use-location";
 import { toggleFavorite, useFavorites } from "@/lib/favorites";
-import { setRating, useMyRatings } from "@/lib/ratings";
+import { REVIEW_MAX_LEN, setRating, setReview, useMyRatings } from "@/lib/ratings";
 import { routes } from "@/lib/routes";
 import { PLACES, TYPE_LABEL, zoneShort, type Place } from "@/lib/data";
 import { GANGNAM_STATION, formatDistance, haversineKm } from "@/lib/geo";
@@ -352,7 +352,10 @@ function ReviewsSection({ place }: { place: Place }) {
   // Shared store — persists per place, syncs to the account when signed in.
   const myRatings = useMyRatings();
   const myRating = myRatings[place.id]?.rating ?? null;
+  const myReview = myRatings[place.id]?.body ?? "";
   const [editing, setEditing] = useState(false);
+  const [composing, setComposing] = useState(false);
+  const [draft, setDraft] = useState("");
   const [sort, setSort] = useState<"latest" | "highest">("latest");
   const [photosOnly, setPhotosOnly] = useState(false);
   const [keyword, setKeyword] = useState<string | null>(null);
@@ -363,6 +366,13 @@ function ReviewsSection({ place }: { place: Place }) {
     setRating(place.id, n);
     setEditing(false);
     toast(`Thanks — you rated ${n} star${n === 1 ? "" : "s"}`);
+  };
+
+  const saveReview = () => {
+    if (myRating === null) return;
+    setReview(place.id, myRating, draft);
+    setComposing(false);
+    toast(draft.trim() ? "Review saved — visible only to you for now" : "Review removed");
   };
 
   const total = place.ratingCount ?? 120;
@@ -399,6 +409,43 @@ function ReviewsSection({ place }: { place: Place }) {
             You rated {myRating} star{myRating === 1 ? "" : "s"} ·{" "}
             <button className="caption" style={{ color: "var(--accent)", fontWeight: 600 }} onClick={() => setEditing(true)}>Edit</button>
           </span>
+        )}
+
+        {/* Review text — private-first: synced to the account, shown only to
+            the author until public reviews (with moderation) ship. */}
+        {myRating !== null && !composing && (
+          myReview ? (
+            <div className="stack sm" style={{ width: "100%", textAlign: "left", background: "var(--surface)", border: "1px solid var(--border)", borderRadius: 12, padding: "10px 12px" }}>
+              <span className="t-caption">Your review · only visible to you</span>
+              <p className="small" style={{ whiteSpace: "pre-wrap" }}>{myReview}</p>
+              <button className="caption" style={{ color: "var(--accent)", fontWeight: 600, alignSelf: "flex-start" }} onClick={() => { setDraft(myReview); setComposing(true); }}>
+                Edit review
+              </button>
+            </div>
+          ) : (
+            <button className="caption" style={{ color: "var(--accent)", fontWeight: 600 }} onClick={() => { setDraft(""); setComposing(true); }}>
+              Write a review (only visible to you)
+            </button>
+          )
+        )}
+        {composing && (
+          <div className="stack sm" style={{ width: "100%", textAlign: "left" }}>
+            <textarea
+              className="input"
+              aria-label="Your review"
+              placeholder="How was your visit? Notes stay private until public reviews launch."
+              rows={4}
+              maxLength={REVIEW_MAX_LEN}
+              value={draft}
+              onChange={(e) => setDraft(e.target.value)}
+              style={{ resize: "none", minHeight: 88, lineHeight: 1.45 }}
+              autoFocus
+            />
+            <div className="row" style={{ gap: 8 }}>
+              <Button variant="secondary" size="sm" style={{ flex: 1 }} onClick={() => setComposing(false)}>Cancel</Button>
+              <Button size="sm" style={{ flex: 1 }} onClick={saveReview}>Save review</Button>
+            </div>
+          </div>
         )}
       </div>
       {/* Summary: big rating + 5→1 bars + keyword chips */}

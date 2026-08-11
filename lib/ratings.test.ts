@@ -15,6 +15,17 @@ describe("parseRatings", () => {
     });
   });
 
+  it("keeps a valid review body, drops empty/oversized/non-string ones", () => {
+    expect(parseRatings({ a: { rating: 4, body: "Great cut, English OK" } })).toEqual({
+      a: { rating: 4, body: "Great cut, English OK" },
+    });
+    expect(parseRatings({
+      b: { rating: 4, body: "" },
+      c: { rating: 4, body: "x".repeat(2001) },
+      d: { rating: 4, body: 7 },
+    })).toEqual({ b: { rating: 4 }, c: { rating: 4 }, d: { rating: 4 } });
+  });
+
   it("drops out-of-range, malformed, and non-object input", () => {
     expect(parseRatings({ a: 0, b: 6, c: "5", d: { rating: 9 }, e: null, f: { at: "x" } })).toEqual({});
     expect(parseRatings(null)).toEqual({});

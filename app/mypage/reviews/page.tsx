@@ -42,7 +42,7 @@ export default function MyReviewsPage() {
       <div className="app-scroll pad stack pagev2">
         <section className="stack sm">
           <SectionHeader title="Your ratings" count={ready ? rated.length : undefined} />
-          <p className="t-caption">Rate places you&apos;ve visited — ratings sync to your account and help future MYSEOULDROP travelers pick wisely.</p>
+          <p className="t-caption">Rate places you&apos;ve visited and add review notes — synced to your account, visible only to you until public reviews launch.</p>
         </section>
 
         <SectionDivider />
@@ -63,7 +63,7 @@ export default function MyReviewsPage() {
         ) : (
           <section className="stack sm">
             <div>
-              {rated.map(({ place, rating, at }) => (
+              {rated.map(({ place, rating, body, at }) => (
                 <Link key={place!.id} className="listrow v2 top" href={routes.place(place!.id)}>
                   <div className="stack" style={{ flex: 1, minWidth: 0, gap: 3 }}>
                     <div className="row" style={{ gap: 6 }}>
@@ -72,6 +72,11 @@ export default function MyReviewsPage() {
                       <RatingLine rating={rating} plain />
                     </div>
                     <div className="t-caption mono">{place!.nameKr}</div>
+                    {body && (
+                      <p className="small muted" style={{ display: "-webkit-box", WebkitLineClamp: 2, WebkitBoxOrient: "vertical", overflow: "hidden" }}>
+                        {body}
+                      </p>
+                    )}
                     {formatAt(at) && <div className="t-caption num" style={{ color: "var(--dim)" }}>{formatAt(at)}</div>}
                   </div>
                   <Icon name="chev" size="xs" className="chev" />
