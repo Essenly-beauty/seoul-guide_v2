@@ -3,11 +3,13 @@
 import { useState, type ReactNode } from "react";
 import { BackButton } from "@/components/ui/back-button";
 import { BrandMark, BrandWordmark } from "@/components/brand/brand-logo";
-import { AppleGlyph, GoogleGlyph, KakaoGlyph } from "@/components/brand/auth-glyphs";
+import { AppleGlyph, GoogleGlyph } from "@/components/brand/auth-glyphs";
 import { supabaseBrowser } from "@/lib/supabase/client";
 import { routes } from "@/lib/routes";
 
-type SocialProvider = "google" | "apple" | "kakao";
+// Kakao dropped from launch scope (2026-08-11 user decision) — Google is
+// live; Apple ships once the Developer Program enrollment lands.
+type SocialProvider = "google" | "apple";
 
 /** Chrome shared by Sign in and Register (Figma 58:1295 / 58:1319):
     back + lockup, title, support line, the caller's form, then real social
@@ -60,7 +62,6 @@ export function AuthShell({ title, support, children, foot }: {
       <div className="auth-socials" style={socialBusy ? { opacity: 0.55, pointerEvents: "none" } : undefined}>
         <button type="button" className="auth-social" aria-label="Continue with Google" aria-busy={socialBusy === "google"} disabled={!!socialBusy} onClick={() => signInWith("google")}><GoogleGlyph /></button>
         <button type="button" className="auth-social" aria-label="Continue with Apple" aria-busy={socialBusy === "apple"} disabled={!!socialBusy} onClick={() => signInWith("apple")}><AppleGlyph /></button>
-        <button type="button" className="auth-social" aria-label="Continue with Kakao" aria-busy={socialBusy === "kakao"} disabled={!!socialBusy} style={{ background: "#fee500" }} onClick={() => signInWith("kakao")}><KakaoGlyph /></button>
       </div>
       {socialError && (
         <p className="auth-error" role="alert">{socialError}</p>
