@@ -94,7 +94,8 @@ vercel env pull --yes  # .env.local 재생성
 - [x] ~~Saved 탭 서버 우선 로딩~~ (8/10 완료 — useFavoritesReady + 스켈레톤)
 - [x] ~~프로필 계정화~~ (8/10 완료 — profiles 테이블+동기화)
 - [x] ~~별점 계정화~~ (8/11 완료 — ratings 테이블+스토어. Reservations 카운트만 데모값 잔존)
-- [ ] **텍스트 리뷰 작성**: reviews/new 폼은 아직 목업 — ratings.body 컬럼 사용해 서버 저장 + 상세페이지 노출 (모더레이션 고려 필요)
+- [x] ~~텍스트 리뷰 작성 (private-first MVP)~~ (8/12 완료 — 상세페이지 별점 아래 컴포저, ratings.body 저장/수정/계정동기화, My reviews 노출. **본인에게만 표시** — 공개 전환은 모더레이션 도입 후 표시 로직만 변경하면 됨. 실브라우저 8/8 검증)
+- [ ] **리뷰 공개 전환**: 모더레이션(신고/차단 or 사전 필터) 설계 후 상세페이지 리뷰 목록에 실사용자 리뷰 노출 (지금은 데모 리뷰만 표시). reviews/new 목업 페이지 정리 포함
 - [ ] 소셜 로그인 마무리 — **범위 변경(8/11): Kakao 제외, Google+Apple 체제** (버튼도 제거됨)
   - **Google ✅ 설정 완료(8/11)** — authorize→동의화면 진입 + 앱 버튼 클릭 플로우 검증됨. 남은 건 실계정 로그인 1회 스모크(사용자)
   - **Apple ⬜ 대기** — Apple Developer Program 가입(연 $129) 필요. 가입 후: App ID + **Services ID**(=Client ID) 생성 → Sign in with Apple 키(.p8) 발급 → Supabase Providers → Apple에 Services ID + Team ID + Key ID + .p8로 생성한 secret 등록. 그 전까지 버튼은 "준비 중" 안내
