@@ -96,7 +96,8 @@ vercel env pull --yes  # .env.local 재생성
 - [x] ~~별점 계정화~~ (8/11 완료 — ratings 테이블+스토어. Reservations 카운트만 데모값 잔존)
 - [ ] **텍스트 리뷰 작성**: reviews/new 폼은 아직 목업 — ratings.body 컬럼 사용해 서버 저장 + 상세페이지 노출 (모더레이션 고려 필요)
 - [ ] 소셜 로그인 e2e (콘솔 등록 후): Kakao/Google 실로그인 → `user_metadata` 이름 표시 확인
-- [ ] 프로필 동기화 실브라우저 e2e (가입→온보딩 답변→다른 기기 로그인 재현)
+  - 진행 상황(8/11): Google은 Enable+Client ID까지 저장됨, **Client Secret 미입력** ("missing OAuth secret") / Kakao 미시작
+- [x] ~~프로필 동기화 실브라우저 e2e~~ (8/11 완료 — 프로덕션에서 헤드리스 Chrome CDP로 9/9: 실로그인 → 온보딩 답변 → profiles 행 확인 → 별점 → ratings 행 확인 → 로그아웃 시 로컬 미러 4종 퍼지 + 서버 데이터 보존. 스크립트: 세션 scratchpad `e2e-browser.mjs`)
 
 ### P2 — 품질·운영
 - [ ] 커스텀 도메인 연결 (myseouldrop.com 등 — `vercel domains`)
