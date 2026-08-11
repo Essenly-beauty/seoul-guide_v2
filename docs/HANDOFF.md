@@ -95,8 +95,10 @@ vercel env pull --yes  # .env.local 재생성
 - [x] ~~프로필 계정화~~ (8/10 완료 — profiles 테이블+동기화)
 - [x] ~~별점 계정화~~ (8/11 완료 — ratings 테이블+스토어. Reservations 카운트만 데모값 잔존)
 - [ ] **텍스트 리뷰 작성**: reviews/new 폼은 아직 목업 — ratings.body 컬럼 사용해 서버 저장 + 상세페이지 노출 (모더레이션 고려 필요)
-- [ ] 소셜 로그인 e2e (콘솔 등록 후): Kakao/Google 실로그인 → `user_metadata` 이름 표시 확인
-  - 진행 상황(8/11): Google은 Enable+Client ID까지 저장됨, **Client Secret 미입력** ("missing OAuth secret") / Kakao 미시작
+- [ ] 소셜 로그인 마무리
+  - **Google ✅ 설정 완료(8/11)** — authorize→동의화면 진입 + 앱 버튼 클릭 플로우 검증됨. 남은 건 실계정 로그인 1회 스모크(사용자)
+  - **Kakao ⬜ 미시작** — developers.kakao.com에서 앱 생성 → REST API 키/Secret → Supabase Providers → Kakao (콜백 URL은 auth-setup.md §3)
+  - 실로그인 후 확인 포인트: 메뉴에 Google 프로필 이름 표시(`user_metadata.full_name`), 게스트 데이터 계정 병합
 - [x] ~~프로필 동기화 실브라우저 e2e~~ (8/11 완료 — 프로덕션에서 헤드리스 Chrome CDP로 9/9: 실로그인 → 온보딩 답변 → profiles 행 확인 → 별점 → ratings 행 확인 → 로그아웃 시 로컬 미러 4종 퍼지 + 서버 데이터 보존. 스크립트: 세션 scratchpad `e2e-browser.mjs`)
 
 ### P2 — 품질·운영
