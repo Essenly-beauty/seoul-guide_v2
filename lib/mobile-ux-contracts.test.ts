@@ -86,8 +86,9 @@ describe("dialog and form accessibility contracts", () => {
 
   it("links profile labels and review validation help to their controls", () => {
     expect(profileSource).toContain('htmlFor="current-hair-brand"');
-    expect(settingsSource).toContain('htmlFor="settings-hair-brand"');
-    expect(settingsSource).toContain('htmlFor="settings-country"');
+    // settings no longer hosts the demo profile form (launch scope) — it
+    // links to the real, account-synced editor instead
+    expect(settingsSource).toContain("Edit beauty profile");
     // launch scope: the mock write-review form is a redirect now — the real
     // composer (with its own a11y contract) lives in place-detail-body
     expect(reviewSource).toContain("redirect(");

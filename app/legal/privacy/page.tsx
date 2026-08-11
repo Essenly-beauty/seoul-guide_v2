@@ -15,7 +15,7 @@ const SECTIONS = [
     "Map location is used on-device to sort places by distance. It is not stored on our servers. You can decline the permission and browse from a default area instead.",
   ]},
   { heading: "Retention & your rights", body: [
-    "We keep your data while your account is active. You may request access, correction, or account deletion at any time through the Support page's feedback form — deletion removes your account, profile, saved places, and ratings within 30 days.",
+    "We keep your data while your account is active. You can download a copy of your data or permanently delete your account at any time from Settings → Data & privacy — deletion is immediate and removes your account, profile, saved places, and ratings.",
   ]},
   { heading: "Sensitive data", body: [
     "Skin and hair characteristics you share are used only for recommendations. We never infer or store medical conditions.",

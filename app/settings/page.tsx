@@ -2,16 +2,19 @@ import Link from "next/link";
 import { TopBar } from "@/components/ui/top-bar";
 import { BottomNav } from "@/components/ui/bottom-nav";
 import { BackButton } from "@/components/ui/back-button";
-import { ChipGroup } from "@/components/ui/chip-group";
-import { ActionButton } from "@/components/ui/action-button";
+import { Button } from "@/components/ui/button";
 import { SectionHeader } from "@/components/ui/section-header";
 import { SectionDivider } from "@/components/ui/section-divider";
 import { FeedbackLauncher } from "@/components/ui/feedback-sheet";
 import { SignoutModal } from "@/components/ui/signout-modal";
 import { ThemeToggle } from "@/components/theme/theme-toggle";
+import { AccountDataControls } from "@/components/settings/account-data-controls";
 import { Icon } from "@/components/icon";
 import { routes } from "@/lib/routes";
 
+// Launch scope: the old hair/skin/trip form here was unwired demo controls
+// with a fake "Save Changes" toast — removed. Real beauty-profile editing
+// lives in onboarding and the Menu tab's profile card (account-synced).
 export default function SettingsPage() {
   return (
     <>
@@ -19,59 +22,22 @@ export default function SettingsPage() {
       <div className="app-scroll pad stack pagev2">
         <section className="stack sm">
           <SectionHeader title="Beauty profile" />
-          <p className="t-caption">Used to match you with the right salons, spas, and clinics.</p>
-        </section>
-
-        <SectionDivider />
-        <section className="stack sm">
-          <SectionHeader title="Hair" />
-          <div className="label">Hair Type</div>
-          <ChipGroup ariaLabel="Hair type" single items={["Straight", "Wavy", "Curly"]} defaultSelected={["Straight"]} />
-          <div className="label">Hair Concerns</div>
-          <ChipGroup ariaLabel="Hair concerns" items={["Damaged", "Scalp", "Volume", "Frizz", "Thinning"]} defaultSelected={["Damaged"]} />
-          <div className="field">
-            <label htmlFor="settings-hair-brand">Current hair brand · Optional</label>
-            <input
-              id="settings-hair-brand"
-              className="input"
-              placeholder="e.g. Pantene, Aveda"
-              maxLength={60}
-              autoComplete="off"
-              spellCheck={false}
-            />
-          </div>
-        </section>
-
-        <SectionDivider />
-        <section className="stack sm">
-          <SectionHeader title="Skin" />
-          <div className="label">Skin Type</div>
-          <ChipGroup ariaLabel="Skin type" single items={["Dry", "Oily", "Combo", "Sensitive"]} defaultSelected={["Dry"]} />
-          <div className="label">Skin Concerns</div>
-          <ChipGroup ariaLabel="Skin concerns" items={["Hydration", "Brightening", "Acne", "Anti-aging", "Pores", "Redness"]} defaultSelected={["Hydration", "Brightening"]} />
-        </section>
-
-        <SectionDivider />
-        <section className="stack sm">
-          <SectionHeader title="Trip & interests" />
-          <div className="field">
-            <label htmlFor="settings-country">Country</label>
-            <select id="settings-country" className="input" defaultValue="United States" autoComplete="country-name">
-              <option>United States</option><option>Canada</option><option>United Kingdom</option><option>Japan</option><option>Singapore</option>
-            </select>
-          </div>
-          <div className="label">Interests</div>
-          <ChipGroup ariaLabel="Interests" items={["Shopping", "Salon", "Spa", "Clinic", "Spots"]} defaultSelected={["Shopping", "Salon"]} />
-          <div className="label">K-Beauty experience</div>
-          <ChipGroup ariaLabel="K-Beauty experience" single items={["First time", "Know a bit", "Obsessed"]} defaultSelected={["Know a bit"]} />
-          <div className="label">Monthly beauty spend · Optional</div>
-          <ChipGroup ariaLabel="Monthly beauty spend" single items={["Under $50", "$50–100", "$100–200", "$200+"]} />
+          <p className="t-caption">Your hair, skin, and trip answers tune the map and rankings. Edit them from the profile card on the Menu tab.</p>
+          <Button variant="secondary" size="sm" href={routes.onboardingInterests} style={{ alignSelf: "flex-start" }}>
+            Edit beauty profile
+          </Button>
         </section>
 
         <SectionDivider />
         <section className="stack sm">
           <SectionHeader title="Appearance" />
           <ThemeToggle />
+        </section>
+
+        <SectionDivider />
+        <section className="stack sm">
+          <SectionHeader title="Data & privacy" />
+          <AccountDataControls />
         </section>
 
         <SectionDivider />
@@ -96,7 +62,6 @@ export default function SettingsPage() {
           </div>
         </section>
 
-        <ActionButton variant="primary" toast="Saved!">Save Changes</ActionButton>
         <SignoutModal />
       </div>
       <BottomNav active="menu" />
