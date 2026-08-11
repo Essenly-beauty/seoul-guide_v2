@@ -78,6 +78,14 @@ vercel env pull --yes  # .env.local 재생성
 - 감사 지적 중 **사실과 다른 것**: Supabase 캐시 헤더 유실 주장(코드는 공식 @supabase/ssr 패턴 그대로, 유실할 헤더 없음)
 - **미반영(결정 필요)**: Next.js 15 업그레이드(major, 별도 배치), 장소 30~50곳 사람 검수 축소, 법무 검토, 계정 삭제/내보내기, CI/관측성, 실사진
 
+### G. Claude×Codex 상호 검증 라운드 (8/12)
+- codex CLI(읽기 전용)로 감사 대응을 역검증 → **잔여 결함 5건 확인·전부 수정**: +12 사진 뱃지·시설 칩·프로필 완성 "여권 10% 딜"·Report-an-issue 가짜 토스트·미차단 프로토타입 라우트(/bookings, /trip, /mypage/reviews/new, /mypage/notifications → redirect)·지원 FAQ/약관의 미구현 기능 서술·라이트 틴트 위 대비(accent #b83d00, 칩 토큰화, --dim 보정)
+- **핵심 발견**: 스크래핑 장소에는 services가 전무 — 화면의 모든 서비스 메뉴/가격은 샘플 44곳의 창작물 → "Example menu for this category" 라벨로 전환. 진짜 해결은 P1 데이터 원장(G)
+- **공유기기 A→B 직접 전환 격리**: 죽은 세션의 미러를 병합 전 소유자 불일치로 퍼지(3개 스토어) + 피드백 큐 작성자 고정·저장 read-back 검증·미저장 시 시트 유지
+- **Playwright E2E 8종 정식화** (`npm run e2e`): 스모크 4 + 인증/동기화 4(공유기기 회귀 포함). GitHub Actions CI(typecheck/lint/test/build)도 커밋됨
+- 합의 우선순위(양측 스코어 병합): ①공개표면 정직화(완료) ②격리 강화(완료) ③CI+E2E(완료) ④계정 삭제/내보내기 ⑤데이터 원장 슬라이스 ⑥Sentry ⑦Next15 ⑧실기기 QA
+- 주의: curl 폴링이 Vercel Security Checkpoint(봇 챌린지)를 유발 — 프로드 확인은 헤드리스 Chrome으로
+
 ### E. 리뷰(별점) 계정화 (8/11)
 - `ratings` 테이블(rating 1-5, body 컬럼은 향후 텍스트 리뷰용 예약, RLS 4종, touch 트리거) — 프로드 적용, 7/7 검증(게스트 병합 시 계정 별점 우선, 한글 id, 제약 가드)
 - `lib/ratings.ts` — favorites와 동일한 강화 패턴(pending 오버레이·병합 플래그·재시도·로그아웃 퍼지). 레거시 `essenly.myrating` 숫자 형태 읽기 시 자동 업그레이드
