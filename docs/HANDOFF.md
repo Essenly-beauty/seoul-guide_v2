@@ -83,7 +83,15 @@ vercel env pull --yes  # .env.local 재생성
 - **핵심 발견**: 스크래핑 장소에는 services가 전무 — 화면의 모든 서비스 메뉴/가격은 샘플 44곳의 창작물 → "Example menu for this category" 라벨로 전환. 진짜 해결은 P1 데이터 원장(G)
 - **공유기기 A→B 직접 전환 격리**: 죽은 세션의 미러를 병합 전 소유자 불일치로 퍼지(3개 스토어) + 피드백 큐 작성자 고정·저장 read-back 검증·미저장 시 시트 유지
 - **Playwright E2E 8종 정식화** (`npm run e2e`): 스모크 4 + 인증/동기화 4(공유기기 회귀 포함). GitHub Actions CI(typecheck/lint/test/build)도 커밋됨
-- 합의 우선순위(양측 스코어 병합): ①공개표면 정직화(완료) ②격리 강화(완료) ③CI+E2E(완료) ④계정 삭제/내보내기 ⑤데이터 원장 슬라이스 ⑥Sentry ⑦Next15 ⑧실기기 QA
+- 합의 우선순위(양측 스코어 병합): ①공개표면 정직화(완료) ②격리 강화(완료) ③CI+E2E(완료) ④계정 삭제/내보내기(완료 8/12) ⑤데이터 원장 슬라이스 ⑥Sentry ⑦Next15 ⑧실기기 QA
+
+### H. 계정 삭제 + 데이터 내보내기 (8/12)
+- `GET /api/account/export` — 계정·뷰티프로필·즐겨찾기·별점 JSON 다운로드(본인 세션 RLS로 조회)
+- `POST /api/account/delete` — 세션 인증+same-origin 가드, service role deleteUser(행 cascade, feedback은 작성자만 NULL). 설정 → Data & privacy(확인 모달, 로컬 미러 퍼지 포함)
+- 설정의 미연결 데모 폼(헤어/스킨/트립 + 가짜 "Save Changes" 토스트) 제거 — 실편집은 온보딩/프로필카드로 링크
+- 개인정보처리방침을 사실로 갱신: "설정에서 즉시 자가 삭제"
+- E2E `account-lifecycle.spec.ts`: 데이터 생성→export 포함 확인→UI 삭제→유저/행/미러/세션 전부 소멸 — **프로덕션에서 직접 통과**
+- CI: 프리렌더가 공개 env 요구 → 플레이스홀더 폴백으로 vars 없이도 green (실값은 GitHub repo Variables에 등록 권장)
 - 주의: curl 폴링이 Vercel Security Checkpoint(봇 챌린지)를 유발 — 프로드 확인은 헤드리스 Chrome으로
 
 ### E. 리뷰(별점) 계정화 (8/11)
