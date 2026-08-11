@@ -18,6 +18,9 @@ export type FeedbackEntry = {
   page: string;
   contactOk: boolean;
   createdAt: number; // epoch ms (Date.now in the submit handler)
+  /** Who wrote it, captured at write time — a queued note is never later
+      attributed to whichever different user happens to be signed in. */
+  userId: string | null;
 };
 
 const QUEUE_KEY = "essenly.feedback"; // same key the prototype used — old
@@ -36,19 +39,24 @@ function loadQueue(): FeedbackEntry[] {
   return [];
 }
 
-function saveQueue(entries: FeedbackEntry[]) {
+/** Persist and VERIFY (read back) — private mode/quota can silently drop
+    the write, and we must not tell the user "saved" when it wasn't. */
+function saveQueue(entries: FeedbackEntry[]): boolean {
   try {
-    localStorage.setItem(QUEUE_KEY, JSON.stringify(entries));
+    const payload = JSON.stringify(entries);
+    localStorage.setItem(QUEUE_KEY, payload);
+    return localStorage.getItem(QUEUE_KEY) === payload;
   } catch {
-    // storage unavailable — nothing else we can do client-side
+    return false;
   }
 }
 
-async function insertEntries(entries: FeedbackEntry[]): Promise<boolean> {
+async function insertEntries(entries: FeedbackEntry[], currentUid: string | null): Promise<boolean> {
   const supabase = supabaseBrowser();
-  const { data } = await supabase.auth.getUser();
   const rows = entries.map((e) => ({
-    user_id: data.user?.id ?? null,
+    // RLS only allows null or the caller's own uid — a note queued under a
+    // different (or unknown) account goes through anonymously
+    user_id: e.userId && e.userId === currentUid ? e.userId : null,
     category: e.category,
     message: e.message.slice(0, 2000),
     contact_ok: e.contactOk,
@@ -58,21 +66,29 @@ async function insertEntries(entries: FeedbackEntry[]): Promise<boolean> {
   return !error;
 }
 
-/** Send one feedback note (plus any queued from earlier failures).
-    Resolves true when it reached the server, false when it was queued. */
+export type FeedbackResult = "sent" | "queued" | "lost";
+
+/** Send one feedback note (plus any queued from earlier failures). */
 export async function submitFeedback(input: {
   category: FeedbackCategory;
   message: string;
   contactOk: boolean;
   page: string;
-}): Promise<boolean> {
+}): Promise<FeedbackResult> {
+  const supabase = supabaseBrowser();
+  const uid = await supabase.auth.getUser().then(({ data }) => data.user?.id ?? null).catch(() => null);
   const entry: FeedbackEntry = {
+    ...input,
     id: `fb-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`,
     createdAt: Date.now(),
-    ...input,
+    userId: uid,
   };
-  const batch = [...loadQueue(), entry];
-  const sent = await insertEntries(batch).catch(() => false);
-  saveQueue(sent ? [] : batch);
-  return sent;
+  // legacy queue entries predate userId — treat them as anonymous
+  const batch = [...loadQueue().map((e) => ({ ...e, userId: e.userId ?? null })), entry];
+  const sent = await insertEntries(batch, uid).catch(() => false);
+  if (sent) {
+    saveQueue([]);
+    return "sent";
+  }
+  return saveQueue(batch) ? "queued" : "lost";
 }

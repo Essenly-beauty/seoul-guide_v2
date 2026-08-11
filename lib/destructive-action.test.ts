@@ -1,21 +1,21 @@
-import { existsSync, readFileSync } from "node:fs";
+import { readFileSync } from "node:fs";
 import { describe, expect, it } from "vitest";
 
-const componentUrl = new URL("../components/booking/cancel-booking-button.tsx", import.meta.url);
-const cancelSource = existsSync(componentUrl) ? readFileSync(componentUrl, "utf8") : "";
-const bookingSource = readFileSync(new URL("../app/bookings/[id]/page.tsx", import.meta.url), "utf8");
+// Launch scope (2026-08-12 audit): the prototype booking flow — including
+// its cancel-with-refund dialog — is out of the public surface until real
+// bookings exist. These routes must stay redirects, not demo pages.
+const bookingsList = readFileSync(new URL("../app/bookings/page.tsx", import.meta.url), "utf8");
+const bookingDetail = readFileSync(new URL("../app/bookings/[id]/page.tsx", import.meta.url), "utf8");
 
-describe("destructive booking actions", () => {
-  it("requires an accessible confirmation before cancelling", () => {
-    expect(cancelSource).toContain("useDialogFocus");
-    expect(cancelSource).toContain('role="dialog"');
-    expect(cancelSource).toContain('aria-modal="true"');
-    expect(cancelSource).toContain("Full refund");
-    expect(cancelSource).toContain("₩45,000");
+describe("launch scope: prototype booking routes stay closed", () => {
+  it("bookings list redirects instead of rendering demo confirmations", () => {
+    expect(bookingsList).toContain("redirect(");
+    expect(bookingsList).not.toContain("listrow");
   });
 
-  it("uses the confirmation control on the booking detail page", () => {
-    expect(bookingSource).toContain("<CancelBookingButton");
-    expect(bookingSource).not.toContain('toast="Cancel — full refund (stub)"');
+  it("booking detail redirects instead of claiming deposits/refunds", () => {
+    expect(bookingDetail).toContain("redirect(");
+    expect(bookingDetail).not.toContain("CancelBookingButton");
+    expect(bookingDetail).not.toContain("₩45,000");
   });
 });

@@ -188,9 +188,10 @@ function ServicesSection({ place }: { place: Place }) {
           onToggle={() => setExpanded((v) => !v)}
         />
       )}
-      {/* "Prices confirmed N days ago" removed for launch — the field was
-          synthetic and a freshness claim we can't back yet (audit P0-5). */}
-      <div className="caption muted">Prices are from the source listing — confirm on visit.</div>
+      {/* Honest framing: no scraped place carries a service menu, so any
+          menu shown is curated/illustrative — never present it as venue-
+          confirmed (codex cross-check #1). */}
+      <div className="caption muted">Example menu for this category — confirm services and prices at the venue.</div>
       {services.length === 0 ? (
         <EmptyState>Walk-in retail — no service menu.</EmptyState>
       ) : expanded ? (
@@ -352,7 +353,7 @@ function ReviewsSection({ place }: { place: Place }) {
           <span style={{ fontSize: 30, fontWeight: 800, lineHeight: 1.15 }}>{place.rating.toFixed(1)}</span>
           <span className="stars">{starsFor(place.rating)}</span>
           {place.ratingCount !== undefined && (
-            <span className="caption muted">{place.ratingCount} ratings on the source listing</span>
+            <span className="caption muted">{place.ratingCount} ratings</span>
           )}
         </div>
       )}
@@ -391,12 +392,8 @@ function InfoSection({ place }: { place: Place }) {
         <span>English</span>
         <span className="caption muted chev">{place.englishOk ? "Staff can assist in English" : "Translation app recommended"}</span>
       </div>
-      <div className="chipwrap">
-        <Chip>Card OK</Chip>
-        <Chip>Locker</Chip>
-        <Chip>Towel rental</Chip>
-        {place.englishOk && <Chip>English menu</Chip>}
-      </div>
+      {/* facility chips (Card OK / Locker / Towel rental) were invented
+          shared samples — removed until per-place verified data exists */}
       <div className="inforow">
         <span className="muted" style={{ width: 20, textAlign: "center", flex: "none" }} aria-hidden="true">₩</span>
         <span>Price range</span>
@@ -437,6 +434,7 @@ function NearbySection({ place }: { place: Place }) {
 
 /** Compact-bar ⋮ menu — closes on outside tap / Escape. */
 function MoreMenu({ place }: { place: Place }) {
+  const router = useRouter();
   const { toast, copy, share } = useToast();
   const [open, setOpen] = useState(false);
   const wrapRef = useRef<HTMLDivElement>(null);
@@ -494,7 +492,9 @@ function MoreMenu({ place }: { place: Place }) {
         <div className="detail-menucard" role="menu" aria-label="Place actions" onKeyDown={onMenuKeyDown}>
           <button ref={(node) => { menuItemRefs.current[0] = node; }} type="button" role="menuitem" tabIndex={-1} onClick={pick(() => copy(window.location.href))}>Copy link</button>
           <button ref={(node) => { menuItemRefs.current[1] = node; }} type="button" role="menuitem" tabIndex={-1} onClick={pick(() => share(`${place.name} on MYSEOULDROP`))}>Share</button>
-          <button ref={(node) => { menuItemRefs.current[2] = node; }} type="button" role="menuitem" tabIndex={-1} onClick={pick(() => toast("Thanks — we'll take a look"))}>Report an issue</button>
+          {/* codex cross-check #5: the old thank-you toast faked a report —
+              route to the real feedback channel instead */}
+          <button ref={(node) => { menuItemRefs.current[2] = node; }} type="button" role="menuitem" tabIndex={-1} onClick={pick(() => router.push(routes.support))}>Report an issue</button>
         </div>
       )}
     </div>
@@ -543,7 +543,7 @@ export function PlaceDetailBody({ place, heroOverlay }: { place: Place; heroOver
         <div style={{ display: "grid", gridTemplateColumns: "1.4fr 1fr", gridTemplateRows: "82px 82px", gap: 6 }}>
           <ImgPh style={{ gridRow: "1 / 3" }} />
           <ImgPh />
-          <ImgPh><b className="muted">+12</b></ImgPh>
+          <ImgPh />
         </div>
         {heroOverlay}
       </div>

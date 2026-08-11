@@ -316,6 +316,17 @@ function flushPush() {
 }
 
 async function adoptServerProfile(uid: string) {
+  try {
+    const owner = localStorage.getItem(ACTIVE_KEY);
+    if (owner && owner !== uid) {
+      // the local profile mirrors a PREVIOUS account — merging it into this
+      // one would carry A's demographics into B (codex cross-check #3)
+      localStorage.removeItem(KEY);
+      cache = null;
+      dirty = new Set();
+      listeners.forEach((l) => l());
+    }
+  } catch { /* ignore */ }
   const supabase = supabaseBrowser();
   let row: { data: unknown } | null = null;
   let fetched = false;

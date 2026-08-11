@@ -7,11 +7,13 @@ import { SectionDivider } from "@/components/ui/section-divider";
 import { FeedbackLauncher } from "@/components/ui/feedback-sheet";
 import { routes } from "@/lib/routes";
 
+// Copy matches what the app actually does today (codex cross-check #5):
+// no in-app booking, no kit program, no human support desk yet.
 const FAQ = [
-  { q: "How do I book a beauty place?", a: "Open a place detail page and use the available contact or booking request action. MYSEOULDROP helps you check traveler-friendly details before you go." },
-  { q: "Can MYSEOULDROP help if a salon does not speak English?", a: "Use the place detail page to show Korean names, addresses, and service notes. For extra help, contact MYSEOULDROP support with the place name and your preferred visit time." },
-  { q: "How does the free hair kit work?", a: "Complete the short hair profile survey. If the kit program is available during your trip, MYSEOULDROP will guide you to the pickup or delivery details." },
+  { q: "Can I book through MYSEOULDROP?", a: "Not yet — MYSEOULDROP is a discovery map. Save places you like, check the details, and book at the venue or through its official channels. In-app booking is planned." },
+  { q: "Can MYSEOULDROP help if a salon does not speak English?", a: "Every place page shows the Korean name and address with one-tap copy, plus a 'show to taxi driver' card. Showing the Korean name at the front desk works well." },
   { q: "Why does the map ask for my location?", a: "Location permission is used only to show nearby beauty spots in Seoul. If you decline, the map falls back to central Seoul." },
+  { q: "Is my saved data tied to my account?", a: "Yes — favorites, ratings, and your beauty profile sync to your account when you sign in, and signing out removes them from the device." },
 ];
 
 export default function SupportPage() {

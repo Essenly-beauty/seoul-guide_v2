@@ -110,7 +110,19 @@ async function fetchServer(): Promise<FavMap | null> {
     and the consumed flag would block every future retry. */
 async function mergeLocalIntoServer(uid: string): Promise<boolean> {
   try {
-    if (localStorage.getItem(MERGED_KEY) === uid) return true;
+    const owner = localStorage.getItem(MERGED_KEY);
+    if (owner === uid) return true;
+    if (owner && owner !== uid) {
+      // The local list is a PREVIOUS account's mirror (A signed in here,
+      // session ended without our purge running — e.g. B signs in from a
+      // page where no store was mounted). Merging it into B would leak A's
+      // saves into B's account (codex cross-check #3) — purge instead.
+      localStorage.removeItem(KEY);
+      localStorage.removeItem(MERGED_KEY);
+      pending.clear();
+      cache = null;
+      notify();
+    }
   } catch { /* proceed — worst case the upsert is a no-op */ }
   const local = loadLocal();
   const rows = KINDS.flatMap((kind) =>

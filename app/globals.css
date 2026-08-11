@@ -58,16 +58,16 @@
     --bg: #f6f7f9;
     --surface: #ffffff;
     --surface-hover: #eef0f4;
-    /* #c64200: 5.0:1 on white / 4.7:1 on --bg — the old #e94f00 was 3.76:1
-       against white, under WCAG AA for the 15px buttons and small links
-       (launch audit, design blocker #3). */
-    --accent: #c64200;
-    --accent-soft: rgba(198, 66, 0, 0.09);
-    --accent-soft-2: rgba(198, 66, 0, 0.18);
-    --accent-hover: #b03a00;
+    /* #b83d00: 5.7:1 on white, and ≥4.6:1 even as text over its own 9%
+       tint (selected chips/badges) — #c64200 passed plain surfaces but
+       failed on tinted ones at ~4.4:1 (codex cross-check #4). */
+    --accent: #b83d00;
+    --accent-soft: rgba(184, 61, 0, 0.09);
+    --accent-soft-2: rgba(184, 61, 0, 0.18);
+    --accent-hover: #a63700;
     --text: #1c2431;
     --muted: #556175;
-    --dim: #67738a;
+    --dim: #5f6b82; /* 5.0:1 on --bg, 4.7:1 on --surface-hover (was 4.46) */
     --border: #e3e7ee;
     --success: #15803d;
     --success-soft: rgba(21, 128, 61, 0.1);
@@ -1378,8 +1378,10 @@
   }
   .chip[aria-pressed="true"],
   .chip.selected {
-    background: rgba(245, 88, 0, 0.1);
-    border-color: rgba(245, 88, 0, 0.65);
+    /* tokenized — the old hardcoded dark-orange rgba ignored the light
+       theme's darker accent and failed AA there (codex cross-check #4) */
+    background: var(--accent-soft);
+    border-color: color-mix(in srgb, var(--accent) 65%, transparent);
     color: var(--accent);
   }
   /* the rail's "All" reset reads as the strong state (user pick 2026-08-02) */

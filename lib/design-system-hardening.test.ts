@@ -87,8 +87,6 @@ const P3_IMPLEMENTATIONS = new Set([
 const P3_RAW_ALLOWANCES = new Map<string, number>([
   // Whole-row links and ActionButton/FeedbackLauncher wrappers.
   ["app/blog/page.tsx: listrow", 1],
-  ["app/bookings/[id]/page.tsx: listrow v2", 3],
-  ["app/bookings/page.tsx: listrow v2 top", 3],
   ["app/brand/[id]/page.tsx: listrow v2", 1],
   ["app/favorites/page.tsx: listrow", 1],
   ["app/favorites/page.tsx: listrow v2", 1],
@@ -98,7 +96,6 @@ const P3_RAW_ALLOWANCES = new Map<string, number>([
   ["app/search/page.tsx: listrow v2", 4],
   ["app/settings/page.tsx: listrow v2", 3],
   // Interactive empty state and a multi-step sheet with a bespoke header/footer.
-  ["app/trip/page.tsx: empty", 1],
   ["components/booking/booking-sheet.tsx: overlay", 1],
   ["components/booking/booking-sheet.tsx: sheet", 1],
   // Domain rows whose multiline or full-row behavior differs from ListRow v2.

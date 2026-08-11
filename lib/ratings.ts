@@ -119,7 +119,17 @@ async function fetchServer(): Promise<RatingMap | null> {
     ignoreDuplicates — an existing account rating beats an old guest one. */
 async function mergeLocalIntoServer(uid: string): Promise<boolean> {
   try {
-    if (localStorage.getItem(MERGED_KEY) === uid) return true;
+    const owner = localStorage.getItem(MERGED_KEY);
+    if (owner === uid) return true;
+    if (owner && owner !== uid) {
+      // previous account's mirror — purge, never merge into the new account
+      // (mirrors lib/favorites.ts; codex cross-check #3)
+      localStorage.removeItem(KEY);
+      localStorage.removeItem(MERGED_KEY);
+      pending.clear();
+      cache = null;
+      notify();
+    }
   } catch { /* proceed — worst case the upsert is a no-op */ }
   const local = loadLocal();
   const rows = Object.entries(local).map(([place_id, v]) => ({

@@ -27,8 +27,13 @@ function FeedbackSheet({ onClose }: { onClose: () => void }) {
 
   const submit = async () => {
     if (!category || !canSubmit) return;
-    const sent = await submitFeedback({ category, message: message.trim(), contactOk: false, page: window.location.pathname });
-    toast(sent ? "Thanks — we read every note." : "Saved offline — we'll send it with your next note.");
+    const result = await submitFeedback({ category, message: message.trim(), contactOk: false, page: window.location.pathname });
+    if (result === "lost") {
+      // nothing persisted anywhere — keep the sheet (and the text) open
+      toast("Couldn't send or save right now — please try again.");
+      return;
+    }
+    toast(result === "sent" ? "Thanks — we read every note." : "Saved offline — we'll send it with your next note.");
     onClose();
   };
 

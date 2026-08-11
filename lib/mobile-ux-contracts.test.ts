@@ -88,7 +88,8 @@ describe("dialog and form accessibility contracts", () => {
     expect(profileSource).toContain('htmlFor="current-hair-brand"');
     expect(settingsSource).toContain('htmlFor="settings-hair-brand"');
     expect(settingsSource).toContain('htmlFor="settings-country"');
-    expect(reviewSource).toContain('id="review-submit-help"');
-    expect(reviewSource).toContain('aria-describedby={!canSubmit ? "review-submit-help" : undefined}');
+    // launch scope: the mock write-review form is a redirect now — the real
+    // composer (with its own a11y contract) lives in place-detail-body
+    expect(reviewSource).toContain("redirect(");
   });
 });

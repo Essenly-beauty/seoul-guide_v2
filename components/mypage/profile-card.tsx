@@ -24,7 +24,7 @@ export function ProfileCard() {
     return (
       <Link
         className="row deal-sheen"
-        href={routes.place("dragon-hill-spa")}
+        href={routes.map}
         style={{
           ...shell,
           gap: 12,
@@ -33,10 +33,12 @@ export function ProfileCard() {
           background: "linear-gradient(135deg, var(--accent-soft-2), var(--surface-hover) 55%, var(--accent-soft))",
         }}
       >
-        <span style={{ fontSize: 20 }} aria-hidden="true">🎟</span>
+        {/* codex cross-check #1: the "passport 10% deal" was fabricated —
+            reward completion with what's actually true (tuned picks). */}
+        <span style={{ fontSize: 20 }} aria-hidden="true">✨</span>
         <div style={{ flex: 1, minWidth: 0 }}>
-          <b style={{ fontSize: 14 }}>Profile complete · Welcome deal unlocked</b>
-          <div className="t-caption">Show your passport — 10% off your first visit</div>
+          <b style={{ fontSize: 14 }}>Profile complete · Picks tuned to you</b>
+          <div className="t-caption">Your map and rankings now match your beauty profile</div>
         </div>
         <Icon name="chev" size="xs" style={{ color: "var(--dim)", flex: "none" }} />
       </Link>
