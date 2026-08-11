@@ -95,10 +95,11 @@ vercel env pull --yes  # .env.local 재생성
 - [x] ~~프로필 계정화~~ (8/10 완료 — profiles 테이블+동기화)
 - [x] ~~별점 계정화~~ (8/11 완료 — ratings 테이블+스토어. Reservations 카운트만 데모값 잔존)
 - [ ] **텍스트 리뷰 작성**: reviews/new 폼은 아직 목업 — ratings.body 컬럼 사용해 서버 저장 + 상세페이지 노출 (모더레이션 고려 필요)
-- [ ] 소셜 로그인 마무리
+- [ ] 소셜 로그인 마무리 — **범위 변경(8/11): Kakao 제외, Google+Apple 체제** (버튼도 제거됨)
   - **Google ✅ 설정 완료(8/11)** — authorize→동의화면 진입 + 앱 버튼 클릭 플로우 검증됨. 남은 건 실계정 로그인 1회 스모크(사용자)
-  - **Kakao ⬜ 미시작** — developers.kakao.com에서 앱 생성 → REST API 키/Secret → Supabase Providers → Kakao (콜백 URL은 auth-setup.md §3)
-  - 실로그인 후 확인 포인트: 메뉴에 Google 프로필 이름 표시(`user_metadata.full_name`), 게스트 데이터 계정 병합
+  - **Apple ⬜ 대기** — Apple Developer Program 가입(연 $129) 필요. 가입 후: App ID + **Services ID**(=Client ID) 생성 → Sign in with Apple 키(.p8) 발급 → Supabase Providers → Apple에 Services ID + Team ID + Key ID + .p8로 생성한 secret 등록. 그 전까지 버튼은 "준비 중" 안내
+  - 실로그인 후 확인 포인트: 메뉴에 프로필 이름 표시(`user_metadata.full_name`), 게스트 데이터 계정 병합
+- [x] ~~직접(이메일+비밀번호) 로그인 플로우 점검~~ (8/11 완료 — 프로덕션 실브라우저: 가입 폼→Supabase 응답 인라인 표시, 로그인 성공→리다이렉트, 비번 오류→인라인 에러, 비번찾기→앤티-열거 발송 안내. 참고: Supabase 공개 가입은 실존 메일 도메인만 허용 — 테스트는 admin 생성 유저로, 실가입은 실유저 검증됨)
 - [x] ~~프로필 동기화 실브라우저 e2e~~ (8/11 완료 — 프로덕션에서 헤드리스 Chrome CDP로 9/9: 실로그인 → 온보딩 답변 → profiles 행 확인 → 별점 → ratings 행 확인 → 로그아웃 시 로컬 미러 4종 퍼지 + 서버 데이터 보존. 스크립트: 세션 scratchpad `e2e-browser.mjs`)
 
 ### P2 — 품질·운영
