@@ -10,7 +10,8 @@
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
     "build:subway-data": "node scripts/fetch-subway-sources.mjs && node scripts/build-subway-data.mjs",
-    "build:subway-svg": "node scripts/fetch-subway-sources.mjs && node scripts/build-subway-svg.mjs"
+    "build:subway-svg": "node scripts/fetch-subway-sources.mjs && node scripts/build-subway-svg.mjs",
+    "e2e": "playwright test"
   },
   "dependencies": {
     "@supabase/ssr": "^0.12.4",
@@ -25,6 +26,7 @@
     "react-zoom-pan-pinch": "^4.0.3"
   },
   "devDependencies": {
+    "@playwright/test": "^1.62.1",
     "@types/leaflet": "^1.9.21",
     "@types/node": "^20",
     "@types/react": "^18",

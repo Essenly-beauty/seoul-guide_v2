@@ -45,3 +45,5 @@ scripts/.cache/
 .env
 !/docs/auth-setup.md
 !/docs/HANDOFF.md
+test-results/
+playwright-report/
