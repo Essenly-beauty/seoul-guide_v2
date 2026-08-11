@@ -2,7 +2,6 @@
 
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import Link from "next/link";
-import { KitCta } from "@/components/cards";
 import { Icon } from "@/components/icon";
 import { ProductShareButton } from "@/components/product/product-share-button";
 import { ActionButton } from "@/components/ui/action-button";
@@ -257,11 +256,6 @@ function RoutineSection({ product }: { product: Product }) {
         </span>
         <Icon name="chev" size="xs" className="chev" />
       </Link>
-      <KitCta
-        href={routes.kitSurvey}
-        title="Try this with a free MYSEOULDROP kit"
-        subtitle="Sample kit + routine card, picked up in Seoul."
-      />
     </section>
   );
 }

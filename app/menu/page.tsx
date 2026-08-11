@@ -18,13 +18,13 @@ import { useMyRatings, useMyRatingsReady } from "@/lib/ratings";
 
 type MenuRow = { icon: Parameters<typeof Icon>[0]["name"]; title: string; value?: string; href: string; badge?: string };
 
+// Launch scope (audit P0-1/P0-3): Reservations, My Trip, Beauty Kit, and
+// Notifications are prototype flows with no backend — hidden from the public
+// menu until each is real. Restore a row by adding it back here.
 const GROUPS: { title: string; rows: MenuRow[] }[] = [
   {
     title: "My activity",
     rows: [
-      { icon: "cal", title: "Reservations", value: "HOSU DOSAN · May 4", href: routes.bookings, badge: "D-5" },
-      { icon: "plane", title: "My Trip", value: "Seoul", href: routes.trip },
-      { icon: "gift", title: "Beauty Kit", value: "Survey & shipping", href: routes.kitStatus },
       { icon: "heart", title: "Saved", href: routes.favorites },
       { icon: "book", title: "My reviews", href: routes.reviews },
     ],
@@ -33,7 +33,6 @@ const GROUPS: { title: string; rows: MenuRow[] }[] = [
     title: "Preferences",
     rows: [
       { icon: "user", title: "Beauty profile", value: "Skin & hair type", href: routes.onboardingInterests },
-      { icon: "bell", title: "Notifications", href: routes.notifications },
       { icon: "mark", title: "Settings", href: routes.settings },
     ],
   },
@@ -69,7 +68,7 @@ export default function MenuPage() {
         <section className="stack">
           <MenuProfile />
           <div className="row between" style={{ textAlign: "center" }}>
-            {[["1", "Reservations"], [savedLabel, "Saved"], [ratedLabel, "My reviews"]].map(([n, l]) => (
+            {[[savedLabel, "Saved"], [ratedLabel, "My reviews"]].map(([n, l]) => (
               <div key={l} style={{ flex: 1 }}>
                 <div className="h2" style={{ color: "var(--accent)" }}>{n}</div>
                 <div className="caption muted">{l}</div>

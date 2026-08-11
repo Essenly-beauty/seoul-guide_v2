@@ -5,7 +5,6 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { ActionButton } from "@/components/ui/action-button";
 import { AnchorTabs } from "@/components/ui/anchor-tabs";
-import { Avatar } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Chip } from "@/components/ui/chip";
 import { Collapse } from "@/components/ui/collapse";
@@ -15,13 +14,10 @@ import { IconButton } from "@/components/ui/icon-button";
 import { ImgPh } from "@/components/ui/img-ph";
 import { LiveBadge } from "@/components/ui/live-badge";
 import { Notice } from "@/components/ui/notice";
-import { RatingBars } from "@/components/ui/rating-bars";
 import { RatingLine } from "@/components/ui/rating-line";
 import { SectionDivider } from "@/components/ui/section-divider";
 import { SectionHeader } from "@/components/ui/section-header";
 import { useToast } from "@/components/ui/toast";
-import { BookingSheet } from "@/components/booking/booking-sheet";
-import { ChannelSheet } from "@/components/booking/channel-sheet";
 import { Icon } from "@/components/icon";
 import { useLocation } from "@/components/map/use-location";
 import { toggleFavorite, useFavorites } from "@/lib/favorites";
@@ -42,52 +38,7 @@ const SECTIONS = [
 /** Sticky chrome height: compact bar 48 + anchor tabs ≈ 44 (§4.7). */
 const STICKY_OFFSET = 96;
 
-type Review = {
-  a: string;
-  who: string;
-  country: string;
-  date: string; // ISO — sortable
-  stars: number;
-  text: string;
-  hasPhoto: boolean;
-  helpful: number;
-  verified: boolean;
-  keywords: string[];
-};
-
-const REVIEWS: Review[] = [
-  { a: "L", who: "Lena", country: "Germany", date: "2026-04-21", stars: 4, verified: true, helpful: 5, hasPhoto: true, keywords: ["Open late"], text: "Walked in at 9pm without a booking and they still took me. Great for jet-lagged evenings." },
-  { a: "S", who: "Sarah", country: "United States", date: "2026-04-18", stars: 5, verified: true, helpful: 12, hasPhoto: true, keywords: ["English OK", "Clean facilities"], text: "Nailed my reference photo on the first try. English was good enough to walk through every step." },
-  { a: "M", who: "Mei", country: "Singapore", date: "2026-04-11", stars: 4, verified: true, helpful: 8, hasPhoto: true, keywords: ["Clean facilities"], text: "Pricey but worth it. Booking via MYSEOULDROP was smoother than calling — deposit confirmed everything." },
-  { a: "A", who: "Aiko", country: "Japan", date: "2026-04-05", stars: 5, verified: false, helpful: 3, hasPhoto: false, keywords: ["Good for groups"], text: "아주 친절했어요. 일본어 메뉴는 없지만 직원이 번역앱으로 응대." },
-  { a: "P", who: "Priya", country: "India", date: "2026-03-28", stars: 5, verified: true, helpful: 9, hasPhoto: false, keywords: ["Good for groups", "English OK"], text: "Came with three friends and they seated us all together. Staff explained aftercare in English." },
-  { a: "T", who: "Tom", country: "Australia", date: "2026-03-19", stars: 3, verified: false, helpful: 2, hasPhoto: true, keywords: ["Open late", "Clean facilities"], text: "Spotless place and open till late, but I waited 20 minutes past my slot on a Friday night." },
-];
-const REVIEW_KEYWORDS = [
-  { label: "Clean facilities", n: 41 },
-  { label: "Open late", n: 27 },
-  { label: "Good for groups", n: 18 },
-  { label: "English OK", n: 9 },
-];
-/** Reviews shown before "More reviews (N)" expands the list. */
-const REVIEWS_PREVIEW = 2;
-/** Plausible 5→1 star share of ratingCount (§4.6 Reviews). */
-const RATING_SHARES = [0.62, 0.24, 0.09, 0.03, 0.02];
-
-/** Contact mock — single source for the action strip and the Info section. */
-const PHONE = "+82 2-555-0134";
-const PHONE_DISPLAY = "02-555-0134";
-const PHONE_TEL = `tel:${PHONE.replace(/[^+\d]/g, "")}`;
-const websiteFor = (id: string) => `myseouldrop.kr/${id}`;
-
 const WEEKDAYS = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-
-/** "2026-04-18" → "Apr 18" (timezone-safe, no Date parsing). */
-const formatReviewDate = (iso: string) => {
-  const [, m, d] = iso.split("-").map(Number);
-  return `${MONTHS[(m ?? 1) - 1]} ${d}`;
-};
 
 const starsFor = (rating?: number) => {
   const filled = Math.max(0, Math.min(5, Math.round(rating ?? 0)));
@@ -145,21 +96,17 @@ function TitleBlock({ place, km }: { place: Place; km: number }) {
   );
 }
 
-// ── Kakao-style action strip: [Call][Save][Share][Website] ─
-// Sits between the title header and the anchor tabs (user decision 2026-07-25:
-// this strip owns call/save/share/website; the bottom CTA bar is route-only).
-// Save wires straight into the favorites store so hearts stay in sync with
-// the Saved tab without touching FavoriteButton.
+// ── Kakao-style action strip: [Save][Share][Copy name] ─────
+// Sits between the title header and the anchor tabs. Call/Website left the
+// strip for launch — the prototype's shared sample phone/URL misrepresented
+// real businesses (launch audit P0-2); they return per-place once verified
+// contact data exists.
 function PlaceActions({ place }: { place: Place }) {
   const favs = useFavorites();
   const { toast, share } = useToast();
   const saved = favs.place.includes(place.id);
   return (
     <div className="place-actions">
-      <a href={PHONE_TEL}>
-        <Icon name="call" />
-        <span className="lbl">Call</span>
-      </a>
       <button
         className={saved ? "saved" : undefined}
         aria-pressed={saved}
@@ -173,17 +120,16 @@ function PlaceActions({ place }: { place: Place }) {
         <Icon name="share" />
         <span className="lbl">Share</span>
       </button>
-      <a href={`https://${websiteFor(place.id)}`} target="_blank" rel="noopener noreferrer">
-        <Icon name="ext" />
-        <span className="lbl">Website</span>
-      </a>
+      <ActionButton copy={`${place.name} · ${place.nameKr}`} aria-label="Copy place name">
+        <Icon name="copy" />
+        <span className="lbl">Copy name</span>
+      </ActionButton>
     </div>
   );
 }
 
 // ── Home (d-home): visit-decision summary + actions ───────
 function HomeSection({ place }: { place: Place }) {
-  const [dealOpen, setDealOpen] = useState(false);
   const about = place.about || place.aboutKr;
   return (
     <section id="d-home" className="d-sec stack sm">
@@ -217,33 +163,9 @@ function HomeSection({ place }: { place: Place }) {
         <span className="ic"><Icon name="car" size="sm" /></span>
         <div><b>Show to taxi driver</b><div className="caption muted">{place.nameKr} · {place.address}</div></div>
       </ActionButton>
-      {/* Event banner — borderless fill (§4.6 Home-③); tap toggles the coupon row */}
-      <div style={{ background: "var(--surface-hover)", borderRadius: 12 }}>
-        <button
-          className="row"
-          style={{ width: "100%", gap: 12, textAlign: "left", padding: "12px 14px" }}
-          aria-expanded={dealOpen}
-          onClick={() => setDealOpen((v) => !v)}
-        >
-          <span style={{ fontSize: 20 }} aria-hidden="true">🎟</span>
-          <div style={{ flex: 1, minWidth: 0 }}>
-            <b style={{ fontSize: 14 }}>Foreigner welcome deal</b>
-            <div className="caption muted">Show your passport — 10% off your first visit</div>
-          </div>
-          <Icon name="chev" size="xs" style={{ color: "var(--dim)", flex: "none", transform: dealOpen ? "rotate(90deg)" : undefined, transition: "transform .2s" }} />
-        </button>
-        {dealOpen && (
-          <div className="stack" style={{ gap: 6, padding: "0 14px 12px" }}>
-            <div className="row" style={{ gap: 10 }}>
-              <b className="mono" style={{ fontSize: 15, letterSpacing: "0.06em" }}>MYSEOULDROP10</b>
-              <ActionButton className="small" style={{ color: "var(--accent)", fontWeight: 600, marginLeft: "auto" }} copy="MYSEOULDROP10">
-                Copy
-              </ActionButton>
-            </div>
-            <span className="caption muted">Show this screen at the front desk.</span>
-          </div>
-        )}
-      </div>
+      {/* Launch audit P0-1: the "welcome deal" coupon was a prototype
+          fabrication — real per-place promotions return when partnerships
+          exist. */}
     </section>
   );
 }
@@ -266,11 +188,9 @@ function ServicesSection({ place }: { place: Place }) {
           onToggle={() => setExpanded((v) => !v)}
         />
       )}
-      {place.priceConfirmedDaysAgo !== undefined && (
-        <div className="caption muted">
-          <Icon name="check" size="xs" style={{ color: "var(--accent)" }} /> Prices confirmed {place.priceConfirmedDaysAgo === 0 ? "today" : `${place.priceConfirmedDaysAgo} day${place.priceConfirmedDaysAgo === 1 ? "" : "s"} ago`}
-        </div>
-      )}
+      {/* "Prices confirmed N days ago" removed for launch — the field was
+          synthetic and a freshness claim we can't back yet (audit P0-5). */}
+      <div className="caption muted">Prices are from the source listing — confirm on visit.</div>
       {services.length === 0 ? (
         <EmptyState>Walk-in retail — no service menu.</EmptyState>
       ) : expanded ? (
@@ -304,49 +224,41 @@ function ServicesSection({ place }: { place: Place }) {
           Medical procedures require a consultation before booking. MYSEOULDROP does not provide medical advice.
         </Notice>
       )}
-      {/* Booking moved out of the CTA bar (§4.6 keeps the bar to share/save/map links). */}
-      {place.type === "skin_clinic" ? (
-        <BookingSheet triggerStyle={{ width: "100%" }} />
-      ) : isBookable(place) ? (
-        <ChannelSheet place={place} triggerStyle={{ width: "100%" }} />
-      ) : null}
+      {/* Launch scope: in-app booking (and its demo payment) is disabled
+          until real availability + payments exist (audit P0-1). Discovery
+          stays honest — save the place and book on site. */}
+      {(place.type === "skin_clinic" || isBookable(place)) && (
+        <Notice icon="cal">
+          In-app booking is coming soon — save this place and book at the
+          venue or through its official channels.
+        </Notice>
+      )}
     </section>
   );
 }
 
 // ── Photos (d-photos): grid + inline gallery expansion ────
 function PhotosSection() {
-  const [expanded, setExpanded] = useState(false);
+  // Launch audit P0-2: the fake "128 photos" count is gone — placeholders
+  // stay as layout language, honestly labeled until real photos land.
   return (
     <section id="d-photos" className="d-sec stack sm">
-      <ToggleHeader
-        title="Photos"
-        count={128}
-        expanded={expanded}
-        expandLabel="See all ›"
-        collapseLabel="Show less"
-        onToggle={() => setExpanded((v) => !v)}
-      />
+      <SectionHeader title="Photos" />
       <div style={{ display: "grid", gridTemplateColumns: "2fr 1fr", gridTemplateRows: "73px 73px", gap: 6 }}>
         <ImgPh style={{ gridRow: "1 / 3" }} />
         <ImgPh />
-        <button style={{ padding: 0, display: "block", height: "100%" }} aria-expanded={expanded} aria-label="See all photos" onClick={() => setExpanded(true)}>
-          <ImgPh style={{ height: "100%" }}><b className="muted">+125</b></ImgPh>
-        </button>
+        <ImgPh />
       </div>
-      {expanded && (
-        <>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 6 }}>
-            {Array.from({ length: 12 }, (_, i) => <ImgPh key={i} style={{ height: 96 }} />)}
-          </div>
-          <Button variant="secondary" onClick={() => setExpanded(false)}>Show less</Button>
-        </>
-      )}
+      <span className="caption muted">Real photos are on the way — we&apos;re collecting them place by place.</span>
     </section>
   );
 }
 
-// ── Reviews (d-reviews): prompt + summary + list ──────────
+// ── Reviews (d-reviews): my rating + honest summary ───────
+// Launch audit P0-2: the six sample reviews (with Verified badges, helpful
+// counts, and keyword chips) rendered identically on every place — removed.
+// What remains is real: the source listing's rating, and the visitor's own
+// rating/review (private until public reviews + moderation ship).
 function ReviewsSection({ place }: { place: Place }) {
   const { toast } = useToast();
   // Shared store — persists per place, syncs to the account when signed in.
@@ -356,11 +268,6 @@ function ReviewsSection({ place }: { place: Place }) {
   const [editing, setEditing] = useState(false);
   const [composing, setComposing] = useState(false);
   const [draft, setDraft] = useState("");
-  const [sort, setSort] = useState<"latest" | "highest">("latest");
-  const [photosOnly, setPhotosOnly] = useState(false);
-  const [keyword, setKeyword] = useState<string | null>(null);
-  const [showAll, setShowAll] = useState(false);
-  const [helpfulVotes, setHelpfulVotes] = useState<Record<string, boolean>>({});
 
   const rate = (n: number) => {
     setRating(place.id, n);
@@ -375,15 +282,6 @@ function ReviewsSection({ place }: { place: Place }) {
     toast(draft.trim() ? "Review saved — visible only to you for now" : "Review removed");
   };
 
-  const total = place.ratingCount ?? 120;
-  const dist = RATING_SHARES.map((s) => Math.round(total * s)) as [number, number, number, number, number];
-
-  const filtered = REVIEWS
-    .filter((r) => (keyword ? r.keywords.includes(keyword) : true))
-    .filter((r) => (photosOnly ? r.hasPhoto : true))
-    .sort((a, b) => (sort === "highest" ? b.stars - a.stars : b.date.localeCompare(a.date)));
-  const visible = showAll ? filtered : filtered.slice(0, REVIEWS_PREVIEW);
-  const remaining = filtered.length - visible.length;
   const canRate = myRating === null || editing;
 
   return (
@@ -448,81 +346,20 @@ function ReviewsSection({ place }: { place: Place }) {
           </div>
         )}
       </div>
-      {/* Summary: big rating + 5→1 bars + keyword chips */}
-      <div className="row" style={{ gap: 20 }}>
-        <div style={{ textAlign: "center", flex: "none" }}>
-          <div style={{ fontSize: 30, fontWeight: 800, lineHeight: 1.15 }}>{place.rating?.toFixed(1) ?? "–"}</div>
-          <div className="stars">{starsFor(place.rating)}</div>
-          <div className="caption muted">{total} reviews</div>
+      {/* Source-listing rating — the one review signal that's real data */}
+      {place.rating !== undefined && (
+        <div className="row" style={{ gap: 12, justifyContent: "center", alignItems: "baseline" }}>
+          <span style={{ fontSize: 30, fontWeight: 800, lineHeight: 1.15 }}>{place.rating.toFixed(1)}</span>
+          <span className="stars">{starsFor(place.rating)}</span>
+          {place.ratingCount !== undefined && (
+            <span className="caption muted">{place.ratingCount} ratings on the source listing</span>
+          )}
         </div>
-        <RatingBars dist={dist} />
-      </div>
-      <div className="chipwrap">
-        {REVIEW_KEYWORDS.map((k) => (
-          <Chip
-            key={k.label}
-            selected={keyword === k.label}
-            onClick={() => setKeyword((cur) => (cur === k.label ? null : k.label))}
-          >
-            {k.label} <span className={keyword === k.label ? undefined : "muted"}>{k.n}</span>
-          </Chip>
-        ))}
-      </div>
-      {/* Sort row + review list */}
-      <div className="row" style={{ gap: 14 }}>
-        <button className={"small" + (sort === "latest" ? "" : " muted")} style={sort === "latest" ? { fontWeight: 700 } : undefined} aria-pressed={sort === "latest"} onClick={() => setSort("latest")}>
-          Latest
-        </button>
-        <button className={"small" + (sort === "highest" ? "" : " muted")} style={sort === "highest" ? { fontWeight: 700 } : undefined} aria-pressed={sort === "highest"} onClick={() => setSort("highest")}>
-          Highest
-        </button>
-        <button className={"small" + (photosOnly ? "" : " muted")} style={photosOnly ? { fontWeight: 700 } : undefined} aria-pressed={photosOnly} onClick={() => setPhotosOnly((v) => !v)}>
-          With photos
-        </button>
-        <span style={{ flex: 1 }} />
-        <Link className="small" style={{ fontWeight: 600 }} href={routes.reviewNew}>✎ Write</Link>
-      </div>
-      <div>
-        {visible.length === 0 && (
-          <EmptyState>No reviews match these filters.</EmptyState>
-        )}
-        {visible.map((r) => {
-          const voted = !!helpfulVotes[r.who];
-          return (
-            <div className="review" key={r.who}>
-              <div className="head">
-                <Avatar name={r.who} />
-                <div style={{ flex: 1, minWidth: 0 }}>
-                  <div className="row" style={{ gap: 7, flexWrap: "wrap" }}>
-                    <b>{r.who}</b>
-                    <span className="stars">{starsFor(r.stars)}</span>
-                    {r.verified && <span className="caption muted">✓ Verified</span>}
-                    <span className="caption dim" style={{ marginLeft: "auto" }}>{formatReviewDate(r.date)}</span>
-                  </div>
-                  <div className="caption dim">{r.country}</div>
-                </div>
-              </div>
-              <p className="muted small" style={{ display: "-webkit-box", WebkitLineClamp: 2, WebkitBoxOrient: "vertical", overflow: "hidden" }}>
-                {r.text}
-              </p>
-              <div className="row" style={{ gap: 10, marginTop: 8 }}>
-                {r.hasPhoto && <ImgPh style={{ width: 56, height: 56, flex: "none" }} />}
-                <button
-                  className="caption"
-                  aria-pressed={voted}
-                  style={voted ? { color: "var(--accent)", fontWeight: 600 } : { color: "var(--muted)" }}
-                  onClick={() => setHelpfulVotes((v) => ({ ...v, [r.who]: !v[r.who] }))}
-                >
-                  Helpful {r.helpful + (voted ? 1 : 0)}
-                </button>
-              </div>
-            </div>
-          );
-        })}
-      </div>
-      {remaining > 0 && (
-        <Button variant="secondary" onClick={() => setShowAll(true)}>More reviews ({remaining})</Button>
       )}
+      <Notice icon="book">
+        Traveler reviews open soon — your rating and notes are saved to your
+        account in the meantime.
+      </Notice>
     </section>
   );
 }
@@ -546,33 +383,9 @@ function InfoSection({ place }: { place: Place }) {
           </div>
         </Collapse>
       )}
-      {/* Contact & links */}
-      <button className="inforow" onClick={() => toast("Opening website…")}>
-        <Icon name="ext" size="xs" />
-        <span>Website</span>
-        <span className="caption muted chev">{websiteFor(place.id)}</span>
-      </button>
-      <ActionButton className="inforow" copy={PHONE} aria-label="Copy phone number">
-        <Icon name="call" size="xs" />
-        <span>{PHONE_DISPLAY}</span>
-        <span className="caption muted chev">Copy</span>
-      </ActionButton>
-      <button className="inforow" onClick={() => toast("Opening Instagram…")}>
-        <Icon name="ig" size="xs" />
-        <span>Instagram</span>
-        <span className="caption muted chev">@{place.id.replace(/-/g, "_")}</span>
-      </button>
-      {/* Facilities & payment */}
-      <div className="inforow">
-        <Icon name="car" size="xs" />
-        <span>Parking</span>
-        <span className="caption muted chev">Paid lot next door</span>
-      </div>
-      <div className="inforow">
-        <Icon name="check" size="xs" />
-        <span>Payment</span>
-        <span className="caption muted chev">Card · GLN · Apple Pay</span>
-      </div>
+      {/* Launch audit P0-2: contact (website/phone/Instagram) and facility
+          rows (parking/payment) were shared samples shown on every place —
+          removed until per-place verified data exists. */}
       <div className="inforow">
         <Icon name="mark" size="xs" />
         <span>English</span>

@@ -233,7 +233,13 @@ function wireAuth() {
       userId = data.user.id;
       void adoptServerState(data.user.id);
     } else if (!data.user && userId === null) {
-      settleAsGuest(false);
+      // expired/revoked session left an account mirror behind — purge it
+      // (mirrors lib/favorites.ts; explicit sign-out is handled below)
+      let stale = false;
+      try {
+        stale = localStorage.getItem(MERGED_KEY) !== null;
+      } catch { /* ignore */ }
+      settleAsGuest(stale);
     }
   });
   supabase.auth.onAuthStateChange((event, session) => {

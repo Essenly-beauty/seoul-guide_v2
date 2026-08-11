@@ -9,7 +9,7 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://seoul-guide-v2.vercel.app"),
   title: "MYSEOULDROP — Seoul Beauty Guide",
   description:
-    "Seoul beauty, mapped. 600+ hair salons, Olive Young stores, and beauty spots on one map — with subway routes, filters, and a free hair kit for your trip.",
+    "Seoul beauty, mapped. 600+ hair salons, Olive Young stores, and beauty spots on one map — with subway routes and filters built for travelers.",
   applicationName: "MYSEOULDROP",
   manifest: "/manifest.json",
   appleWebApp: {

@@ -92,7 +92,6 @@ const P3_RAW_ALLOWANCES = new Map<string, number>([
   ["app/brand/[id]/page.tsx: listrow v2", 1],
   ["app/favorites/page.tsx: listrow", 1],
   ["app/favorites/page.tsx: listrow v2", 1],
-  ["app/kit/page.tsx: listrow v2", 1],
   ["app/mypage/reviews/page.tsx: listrow v2 top", 1],
   ["app/ranking/page.tsx: listrow", 1],
   ["app/ranking/page.tsx: listrow v2", 1],

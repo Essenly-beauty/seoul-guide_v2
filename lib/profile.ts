@@ -159,6 +159,10 @@ export const QUESTIONS: Question[] = [
 ];
 
 const KEY = "essenly.profile";
+// Marks that an account adopted this device's profile — lets a later visit
+// with no session (expired/revoked) know the local copy is an account mirror
+// that must be purged, not guest data.
+const ACTIVE_KEY = "essenly.profile.activeFor";
 const EMPTY: Profile = { interests: [], skinConcerns: [], hairConcerns: [] };
 
 let cache: Profile | null = null;
@@ -327,6 +331,9 @@ async function adoptServerProfile(uid: string) {
   // on total failure serverSnap stays null: pushes remain blocked and dirty
   // fields are preserved until a later load fetches the row successfully
   if (!fetched || userId !== uid) return;
+  try {
+    localStorage.setItem(ACTIVE_KEY, uid);
+  } catch { /* ignore */ }
   if (!row) {
     // first sign-in on this account: the guest's answers become the account's
     const local = load();
@@ -349,7 +356,10 @@ async function adoptServerProfile(uid: string) {
     happens to be mounted. Idempotent with the SIGNED_OUT handler below. */
 export function purgeProfileMirror(): void {
   if (pushTimer) { clearTimeout(pushTimer); pushTimer = null; }
-  try { localStorage.removeItem(KEY); } catch { /* ignore */ }
+  try {
+    localStorage.removeItem(KEY);
+    localStorage.removeItem(ACTIVE_KEY);
+  } catch { /* ignore */ }
   userId = null;
   serverSnap = null;
   dirty = new Set();
@@ -370,6 +380,13 @@ function wireAuth() {
     if (data.user && userId !== data.user.id) {
       userId = data.user.id;
       void adoptServerProfile(data.user.id);
+    } else if (!data.user && userId === null) {
+      // expired/revoked session: the local copy is a dead account's mirror
+      let stale = false;
+      try {
+        stale = localStorage.getItem(ACTIVE_KEY) !== null;
+      } catch { /* ignore */ }
+      if (stale) purgeProfileMirror();
     }
   });
   supabase.auth.onAuthStateChange((event, session) => {
@@ -381,7 +398,10 @@ function wireAuth() {
         // the local copy mirrors the signed-out account — leaving it behind
         // would expose user A's demographics to the next person on this
         // device and merge them into user B's account at B's sign-in
-        try { localStorage.removeItem(KEY); } catch { /* ignore */ }
+        try {
+          localStorage.removeItem(KEY);
+          localStorage.removeItem(ACTIVE_KEY);
+        } catch { /* ignore */ }
       }
       if (hadUser) {
         userId = null;

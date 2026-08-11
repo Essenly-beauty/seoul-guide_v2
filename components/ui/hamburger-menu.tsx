@@ -18,11 +18,11 @@ const PRIMARY: Row[] = [
   { label: "Menu", href: routes.menu, icon: "user" },
 ];
 
+// Launch scope: Notifications and Kit status are prototype-only — hidden
+// from public navigation until real (audit P0-3).
 const ACCOUNT: Row[] = [
   { label: "Favorites", href: routes.favorites, icon: "heart" },
   { label: "Settings", href: routes.settings, icon: "user" },
-  { label: "Notifications", href: routes.notifications, icon: "bell" },
-  { label: "Kit status", href: routes.kitStatus, icon: "gift" },
 ];
 
 const ABOUT: Row[] = [

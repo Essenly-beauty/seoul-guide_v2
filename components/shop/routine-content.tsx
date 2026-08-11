@@ -4,7 +4,6 @@ import { useState } from "react";
 import Link from "next/link";
 import { Icon } from "@/components/icon";
 import { ActionButton } from "@/components/ui/action-button";
-import { KitCta } from "@/components/cards";
 import { routes } from "@/lib/routes";
 import { PRODUCTS, STEP_MAP, STEP_LABEL, type StepCategory } from "@/lib/data";
 
@@ -63,9 +62,6 @@ export function RoutineContent() {
       {/* 2026-07-25: `outline` → `secondary` (identical styles; ghost/outline classes are deprecated aliases) */}
       <ActionButton variant="secondary" toast="Routine added to favorites"><Icon name="heart-o" size="sm" /> Add to Favorites</ActionButton>
 
-      {stepCount >= 5 && (
-        <KitCta href={routes.kitSurvey} title="Complete your routine with a free hair kit" subtitle="MYSEOULDROP hair pack + essence + routine card." />
-      )}
     </div>
   );
 }

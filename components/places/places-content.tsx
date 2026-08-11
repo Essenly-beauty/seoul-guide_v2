@@ -9,7 +9,6 @@ import { ImgPh } from "@/components/ui/img-ph";
 import { ListRow } from "@/components/ui/list-row";
 import { RatingLine } from "@/components/ui/rating-line";
 import { CategoryBadge } from "@/components/category/category-badge";
-import { KitCta } from "@/components/cards";
 import { routes } from "@/lib/routes";
 import {
   type Place, type PlaceType, CATEGORY_ZONES, DETAIL_CATEGORIES, PRICE_OPTIONS,
@@ -109,8 +108,6 @@ export function PlacesContent({ category, places }: { category: string; places: 
           />
         ))
       )}
-
-      <KitCta href={routes.kitSurvey} title="Get a free MYSEOULDROP hair kit" subtitle="Pair your visit with our curated hair pack." />
     </>
   );
 }

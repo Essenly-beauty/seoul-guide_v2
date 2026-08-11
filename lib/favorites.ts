@@ -226,7 +226,14 @@ function wireAuth() {
       userId = data.user.id;
       void adoptServerState(data.user.id);
     } else if (!data.user && userId === null) {
-      settleAsGuest(false);
+      // No session, but MERGED_KEY says an account was active on this device
+      // and never signed out cleanly (expired/revoked session) — purge its
+      // mirror so it can't leak to, or merge into, the next account (audit).
+      let stale = false;
+      try {
+        stale = localStorage.getItem(MERGED_KEY) !== null;
+      } catch { /* ignore */ }
+      settleAsGuest(stale);
     }
   });
   supabase.auth.onAuthStateChange((event, session) => {

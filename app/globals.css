@@ -58,10 +58,13 @@
     --bg: #f6f7f9;
     --surface: #ffffff;
     --surface-hover: #eef0f4;
-    --accent: #e94f00;
-    --accent-soft: rgba(233, 79, 0, 0.09);
-    --accent-soft-2: rgba(233, 79, 0, 0.18);
-    --accent-hover: #c94500;
+    /* #c64200: 5.0:1 on white / 4.7:1 on --bg — the old #e94f00 was 3.76:1
+       against white, under WCAG AA for the 15px buttons and small links
+       (launch audit, design blocker #3). */
+    --accent: #c64200;
+    --accent-soft: rgba(198, 66, 0, 0.09);
+    --accent-soft-2: rgba(198, 66, 0, 0.18);
+    --accent-hover: #b03a00;
     --text: #1c2431;
     --muted: #556175;
     --dim: #67738a;

@@ -1,4 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-  <rect width="512" height="512" rx="112" fill="#0C8E70"/>
-  <text x="256" y="352" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-style="italic" font-size="300" fill="#FAFBFD">E</text>
+  <rect width="512" height="512" rx="112" fill="#0b0c0f"/>
+  <g transform="translate(96 96) scale(13.333)">
+    <path d="M13 2h8v13h-12v7H4V8h9V2z" fill="#F55800"/>
+    <circle cx="16.5" cy="20" r="1.9" fill="#F55800"/>
+  </g>
 </svg>

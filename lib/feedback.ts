@@ -1,13 +1,15 @@
 "use client";
 
-// Feedback channel store (docs/user-data-strategy.md §5).
-// Append-only mirror of the `feedback` table in a DB-ready shape, persisted to
-// localStorage under "essenly.feedback" (same guarded pattern as favorites).
-// When Supabase lands, submitFeedback becomes an insert — shape stays put.
+// Feedback channel — real submissions into the Supabase `feedback` table
+// (insert-only via RLS; the team reads with the service role). If the
+// network write fails the note is queued in localStorage and retried on the
+// next submit, so nothing is lost — and the UI can say so honestly instead
+// of thanking the user for a note that went nowhere (launch audit P0-3).
+
+import { supabaseBrowser } from "./supabase/client";
 
 export type FeedbackCategory = "bug" | "idea" | "place" | "other";
 
-/** Mirrors docs §3 `feedback` columns (camelCase; snake_case when DB lands). */
 export type FeedbackEntry = {
   id: string;
   category: FeedbackCategory;
@@ -18,11 +20,12 @@ export type FeedbackEntry = {
   createdAt: number; // epoch ms (Date.now in the submit handler)
 };
 
-const KEY = "essenly.feedback";
+const QUEUE_KEY = "essenly.feedback"; // same key the prototype used — old
+// entries left in it are treated as unsent and flushed on the next submit
 
-function loadAll(): FeedbackEntry[] {
+function loadQueue(): FeedbackEntry[] {
   try {
-    const raw = localStorage.getItem(KEY);
+    const raw = localStorage.getItem(QUEUE_KEY);
     if (raw) {
       const parsed = JSON.parse(raw) as unknown;
       if (Array.isArray(parsed)) return parsed as FeedbackEntry[];
@@ -33,22 +36,43 @@ function loadAll(): FeedbackEntry[] {
   return [];
 }
 
-/** Append one feedback note; returns the stored entry. */
-export function submitFeedback(input: {
+function saveQueue(entries: FeedbackEntry[]) {
+  try {
+    localStorage.setItem(QUEUE_KEY, JSON.stringify(entries));
+  } catch {
+    // storage unavailable — nothing else we can do client-side
+  }
+}
+
+async function insertEntries(entries: FeedbackEntry[]): Promise<boolean> {
+  const supabase = supabaseBrowser();
+  const { data } = await supabase.auth.getUser();
+  const rows = entries.map((e) => ({
+    user_id: data.user?.id ?? null,
+    category: e.category,
+    message: e.message.slice(0, 2000),
+    contact_ok: e.contactOk,
+    page: e.page.slice(0, 300),
+  }));
+  const { error } = await supabase.from("feedback").insert(rows);
+  return !error;
+}
+
+/** Send one feedback note (plus any queued from earlier failures).
+    Resolves true when it reached the server, false when it was queued. */
+export async function submitFeedback(input: {
   category: FeedbackCategory;
   message: string;
   contactOk: boolean;
   page: string;
-}): FeedbackEntry {
+}): Promise<boolean> {
   const entry: FeedbackEntry = {
     id: `fb-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`,
     createdAt: Date.now(),
     ...input,
   };
-  try {
-    localStorage.setItem(KEY, JSON.stringify([...loadAll(), entry]));
-  } catch {
-    // storage unavailable — drop silently; the toast still thanks the user
-  }
-  return entry;
+  const batch = [...loadQueue(), entry];
+  const sent = await insertEntries(batch).catch(() => false);
+  saveQueue(sent ? [] : batch);
+  return sent;
 }

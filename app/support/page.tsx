@@ -39,16 +39,11 @@ export default function SupportPage() {
 
         <SectionDivider />
         <section className="stack sm">
-          <SectionHeader title="Ask MYSEOULDROP support" />
-          <p className="t-caption">We usually reply within a few hours. Include the place name, date, time, and what you need help with.</p>
-          {/* real mailto — the toast-only stub claimed to open mail and didn't (review) */}
-          <Button href="mailto:help@myseouldrop.com" external>Email help@myseouldrop.com</Button>
-        </section>
-
-        <SectionDivider />
-        <section className="stack sm">
-          <SectionHeader title="Something off?" />
-          <p className="t-caption">Spotted a bug or wrong place info? Tell us — it goes straight to the team.</p>
+          <SectionHeader title="Contact the team" />
+          {/* Launch honesty: the @myseouldrop.com inbox doesn't exist yet
+              (domain not purchased) and no reply SLA is real — feedback is
+              the one channel that actually reaches us (Supabase inbox). */}
+          <p className="t-caption">Feedback goes straight to the team&apos;s inbox. A direct support email is coming with our domain — for now this is the fastest way to reach us.</p>
           <FeedbackLauncher variant="secondary">Send feedback</FeedbackLauncher>
         </section>
       </div>

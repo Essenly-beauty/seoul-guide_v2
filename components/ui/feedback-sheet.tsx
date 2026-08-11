@@ -25,10 +25,10 @@ function FeedbackSheet({ onClose }: { onClose: () => void }) {
 
   const canSubmit = category !== null && message.trim().length > 0;
 
-  const submit = () => {
+  const submit = async () => {
     if (!category || !canSubmit) return;
-    submitFeedback({ category, message: message.trim(), contactOk: false, page: window.location.pathname });
-    toast("Thanks — we read every note.");
+    const sent = await submitFeedback({ category, message: message.trim(), contactOk: false, page: window.location.pathname });
+    toast(sent ? "Thanks — we read every note." : "Saved offline — we'll send it with your next note.");
     onClose();
   };
 

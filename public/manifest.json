@@ -1,11 +1,11 @@
 {
-  "name": "Essenly — Seoul Beauty Guide",
-  "short_name": "Essenly",
-  "description": "Free K-beauty travel guide + hair kit for your Seoul trip.",
+  "name": "MYSEOULDROP — Seoul Beauty Guide",
+  "short_name": "MYSEOULDROP",
+  "description": "Seoul beauty, mapped. Hair salons, Olive Young stores, and beauty spots with subway context.",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#FAFBFD",
-  "theme_color": "#FAFBFD",
+  "background_color": "#0b0c0f",
+  "theme_color": "#0b0c0f",
   "icons": [
     { "src": "/icon-192.png", "sizes": "192x192", "type": "image/png" },
     { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
