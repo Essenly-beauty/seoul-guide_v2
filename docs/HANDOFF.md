@@ -68,6 +68,16 @@ vercel env pull --yes  # .env.local 재생성
 - **출시 메타**: metadataBase+OG/트위터 태그, 동적 OG 카드(`app/opengraph-image.tsx`, Michroma+폴백), robots.txt(인증/계정 페이지 차단), sitemap.xml(장소 600곳 한글 id 인코딩)
 - **한글 id 상세페이지 수정**: App Router params는 인코딩된 채 전달 → 올리브영 239곳 상세가 전부 soft-404였음. `lib/data.ts` decodedFind로 해결
 
+### F. 출시 감사 대응 — Discovery-first 정직화 (8/12)
+외부 감사(NO-GO 판정) 검증 결과 P0 지적 대부분 사실 → 1차 범위를 "검증된 탐색 지도"로 좁히고 즉시 반영:
+- **가짜 신뢰 신호 제거**: 전 장소 공통 샘플 리뷰 6개·Verified 뱃지·합성 별점 분포·가짜 사진 128장 카운트·공통 전화/웹사이트/인스타·주차/결제 행·조작된 웰컴딜 쿠폰·"가격 N일 전 확인" 합성 문구 — 전부 삭제. 남은 건 실데이터(소스 평점·주소·내 별점/리뷰)
+- **가짜 거래 차단**: 인앱 예약(₩45,000 데모 결제) → "coming soon" 안내. 메뉴/햄버거에서 Reservations·My Trip·Beauty Kit·Notifications 숨김. 키트 설문(이메일·주소 수집 후 미저장) → 미수집 안내 페이지
+- **피드백 실접수**: `feedback` 테이블(insert-only RLS, 프로드 4/4 검증) + 오프라인 큐. 존재하지 않는 help@ 메일 안내 제거
+- **브랜드/디자인**: manifest·아이콘이 Essenly 그대로였음 → 리브랜드(PWA/애플 아이콘 재생성). 라이트 accent #e94f00(3.76:1)→#c64200(5.0:1 AA). 브라우저 theme-color 테마 추종
+- **보안**: 무음 세션 만료 후 재방문 시 계정 미러 퍼지(3개 스토어) — 공유기기 교차 계정 병합 갭 해소
+- 감사 지적 중 **사실과 다른 것**: Supabase 캐시 헤더 유실 주장(코드는 공식 @supabase/ssr 패턴 그대로, 유실할 헤더 없음)
+- **미반영(결정 필요)**: Next.js 15 업그레이드(major, 별도 배치), 장소 30~50곳 사람 검수 축소, 법무 검토, 계정 삭제/내보내기, CI/관측성, 실사진
+
 ### E. 리뷰(별점) 계정화 (8/11)
 - `ratings` 테이블(rating 1-5, body 컬럼은 향후 텍스트 리뷰용 예약, RLS 4종, touch 트리거) — 프로드 적용, 7/7 검증(게스트 병합 시 계정 별점 우선, 한글 id, 제약 가드)
 - `lib/ratings.ts` — favorites와 동일한 강화 패턴(pending 오버레이·병합 플래그·재시도·로그아웃 퍼지). 레거시 `essenly.myrating` 숫자 형태 읽기 시 자동 업그레이드
