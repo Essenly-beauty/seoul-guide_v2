@@ -27,7 +27,9 @@ jobs:
       - name: Production build
         run: npm run build
         env:
-          # public client config only — never secrets. Build needs them to
-          # inline the Supabase URL/key into client bundles.
-          NEXT_PUBLIC_SUPABASE_URL: ${{ vars.NEXT_PUBLIC_SUPABASE_URL }}
-          NEXT_PUBLIC_SUPABASE_ANON_KEY: ${{ vars.NEXT_PUBLIC_SUPABASE_ANON_KEY }}
+          # public client config only — never secrets (the anon key ships in
+          # every client bundle anyway). Placeholders keep the build check
+          # green when repo Variables aren't configured; prerender only
+          # constructs the client, it never calls out during build.
+          NEXT_PUBLIC_SUPABASE_URL: ${{ vars.NEXT_PUBLIC_SUPABASE_URL || 'https://ci-placeholder.supabase.co' }}
+          NEXT_PUBLIC_SUPABASE_ANON_KEY: ${{ vars.NEXT_PUBLIC_SUPABASE_ANON_KEY || 'ci-placeholder-anon-key' }}
