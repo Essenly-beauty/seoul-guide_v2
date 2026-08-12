@@ -83,7 +83,14 @@ vercel env pull --yes  # .env.local 재생성
 - **핵심 발견**: 스크래핑 장소에는 services가 전무 — 화면의 모든 서비스 메뉴/가격은 샘플 44곳의 창작물 → "Example menu for this category" 라벨로 전환. 진짜 해결은 P1 데이터 원장(G)
 - **공유기기 A→B 직접 전환 격리**: 죽은 세션의 미러를 병합 전 소유자 불일치로 퍼지(3개 스토어) + 피드백 큐 작성자 고정·저장 read-back 검증·미저장 시 시트 유지
 - **Playwright E2E 8종 정식화** (`npm run e2e`): 스모크 4 + 인증/동기화 4(공유기기 회귀 포함). GitHub Actions CI(typecheck/lint/test/build)도 커밋됨
-- 합의 우선순위(양측 스코어 병합): ①공개표면 정직화(완료) ②격리 강화(완료) ③CI+E2E(완료) ④계정 삭제/내보내기(완료 8/12) ⑤데이터 원장 슬라이스 ⑥Sentry ⑦Next15 ⑧실기기 QA
+- 합의 우선순위(양측 스코어 병합): ①공개표면 정직화 ✅ ②격리 강화 ✅ ③CI+E2E ✅ ④계정 삭제/내보내기 ✅ ⑤데이터 원장 슬라이스 ✅(8/12) ⑥오류추적 ✅(8/12) ⑦Next15 ⑧실기기 QA
+
+### I. 오류추적 + 원장 슬라이스 (8/12)
+- **자체 오류추적**: `client_errors` 테이블(insert-only RLS, 프로드 적용) + `lib/error-reporter.ts`(onerror/rejection/바운더리, 세션 10건 캡·중복제거·확장프로그램 필터) — 프로드 실브라우저 검증 통과
+- **Uptime 경보**: GitHub Actions 30분 cron이 홈/맵/함수 probe, 실패 시 소유자 메일. 봇챌린지 403은 정상 처리. 수동 dispatch로 검증됨
+- **`docs/runbook.md`**: 감지 채널·증상별 대응(롤백 절차)·조회 SQL·키 로테이션 1페이지
+- **장소 출처 필드**: 전 장소 `source: curated|creatrip|kakao|ados` — 상세페이지에서 큐레이션 44곳의 합성 평점 숨김 + 출처 공시 문구 + 근사 좌표(geoSource:area) 표시. 전체 원장(검증일·폐업 플래그)은 백로그
+- E2E 10종으로 확장 (에러 리포터 왕복 포함), CI/Uptime 모두 green
 
 ### H. 계정 삭제 + 데이터 내보내기 (8/12)
 - `GET /api/account/export` — 계정·뷰티프로필·즐겨찾기·별점 JSON 다운로드(본인 세션 RLS로 조회)
