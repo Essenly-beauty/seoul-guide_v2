@@ -1,0 +1,29 @@
+name: Uptime
+
+on:
+  schedule:
+    - cron: "*/30 * * * *" # every 30 minutes
+  workflow_dispatch:
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - name: Probe production
+        run: |
+          set -u
+          fail=0
+          probe() {
+            code=$(curl -s -o /dev/null -w '%{http_code}' --max-time 15 "$1" || echo 000)
+            # Vercel's bot challenge answers 403 — the edge is up, so it's
+            # not an outage. 000 (timeout/DNS) and 5xx are.
+            case "$code" in
+              2*|3*|401|403) echo "OK   $code $1" ;;
+              *) echo "DOWN $code $1"; fail=1 ;;
+            esac
+          }
+          probe "https://seoul-guide-v2.vercel.app/"
+          probe "https://seoul-guide-v2.vercel.app/map"
+          probe "https://seoul-guide-v2.vercel.app/api/account/export" # function layer (401 = healthy)
+          exit $fail

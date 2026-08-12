@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import { IconSprite } from "@/components/icon";
 import { RouteProgress } from "@/components/ui/route-progress";
+import { ErrorReporterInit } from "@/components/system/error-reporter-init";
 import { ThemeProvider } from "@/components/theme/theme-provider";
 import { ToastProvider } from "@/components/ui/toast";
 
@@ -53,6 +54,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </head>
       <body>
         <IconSprite />
+        <ErrorReporterInit />
         <ThemeProvider>
           <ToastProvider>
             <div className="app-shell">

@@ -2,11 +2,13 @@
 
 import { useEffect } from "react";
 import { Button } from "@/components/ui/button";
+import { reportClientError } from "@/lib/error-reporter";
 import { routes } from "@/lib/routes";
 
 export default function ErrorPage({ error, reset }: { error: Error & { digest?: string }; reset: () => void }) {
   useEffect(() => {
     console.error(error);
+    reportClientError("boundary", error.message + (error.digest ? ` [${error.digest}]` : ""), error.stack ?? null);
   }, [error]);
 
   return (
