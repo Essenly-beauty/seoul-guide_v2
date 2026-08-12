@@ -46,7 +46,7 @@ test.describe("discovery smoke (no auth needed)", () => {
     await page.goto("/place/juno-hair-gangnam");
     await expect(page.getByRole("heading", { name: "Juno Hair Gangnam" })).toBeVisible();
     await expect(page.getByText("Been here? Rate your visit")).toBeVisible();
-    for (const fake of ["Card OK", "Verified", "MYSEOULDROP10", "02-555-0134"]) {
+    for (const fake of ["Card OK", "✓ Verified", "MYSEOULDROP10", "02-555-0134"]) {
       await expect(page.getByText(fake)).toHaveCount(0);
     }
   });

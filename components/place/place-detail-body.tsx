@@ -80,7 +80,8 @@ function TitleBlock({ place, km }: { place: Place; km: number }) {
         <span className="small muted">{TYPE_LABEL[place.type]}</span>
       </div>
       <div className="row" style={{ gap: 8, marginTop: 8 }}>
-        <RatingLine rating={place.rating} count={place.ratingCount} />
+        {/* curated rows carry synthetic ratings — show real (scraped) ones only */}
+        {place.source !== "curated" && <RatingLine rating={place.rating} count={place.ratingCount} />}
         <LiveBadge hours={place.hours} />
         {place.englishOk && <span className="t-caption" style={{ flex: "none" }}>· English OK</span>}
       </div>
@@ -347,8 +348,9 @@ function ReviewsSection({ place }: { place: Place }) {
           </div>
         )}
       </div>
-      {/* Source-listing rating — the one review signal that's real data */}
-      {place.rating !== undefined && (
+      {/* Source-listing rating — the one review signal that's real data.
+          Curated rows have synthetic numbers, so they show nothing here. */}
+      {place.source !== "curated" && place.rating !== undefined && (
         <div className="row" style={{ gap: 12, justifyContent: "center", alignItems: "baseline" }}>
           <span style={{ fontSize: 30, fontWeight: 800, lineHeight: 1.15 }}>{place.rating.toFixed(1)}</span>
           <span className="stars">{starsFor(place.rating)}</span>
@@ -399,6 +401,13 @@ function InfoSection({ place }: { place: Place }) {
         <span>Price range</span>
         <span className="chev mono" style={{ fontWeight: 600 }}>{place.priceRange}</span>
       </div>
+      {/* provenance disclosure (data-ledger slice) */}
+      <p className="caption muted" style={{ marginTop: 4 }}>
+        {place.source === "curated"
+          ? "Curated pick — details compiled by our team and not yet venue-verified. Confirm before visiting."
+          : "Listed from public sources — details can change. Confirm important ones before visiting."}
+        {place.geoSource === "area" && " Map pin is approximate (neighborhood-level)."}
+      </p>
     </section>
   );
 }

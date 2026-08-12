@@ -166,9 +166,13 @@ export type Place = {
   // "A drop of Seoul" import — editorial descriptions shown on the detail page.
   about?: string;
   aboutKr?: string;
+  /** Provenance (data-ledger slice, 2026-08-12): where this row came from.
+      "curated" rows are team-compiled and may carry unverified details —
+      the detail page discloses this and hides their synthetic ratings. */
+  source?: "curated" | "creatrip" | "kakao" | "ados";
 };
 
-export const PLACES: Place[] = [
+const CURATED_PLACES: Place[] = [
   // ── Gangnam Station cluster (persona home base) ──
   { id: "oy-gangnam-town", name: "Olive Young Gangnam Town", nameKr: "올리브영 강남타운점", type: "olive_young", zone: "gangnam_station", priceRange: "₩", rating: 4.6, ratingCount: 412, tags: ["flagship", "tax-free"], nearestStation: "Gangnam", address: "서울 강남구 강남대로 429", lat: 37.5006, lng: 127.0266, englishOk: true, hours: { open: "10:00", close: "22:30" }, stationWalk: { station: "Gangnam", exit: "10", minutes: 3 }, serviceTags: ["global", "late"], badge: { cls: "accent", text: "Tax-free" } },
   { id: "oy-gangnam-stn", name: "Olive Young Gangnam Stn.", nameKr: "올리브영 강남역점", type: "olive_young", zone: "gangnam_station", priceRange: "₩", rating: 4.5, ratingCount: 288, tags: ["k-beauty", "one-stop"], nearestStation: "Gangnam", address: "서울 강남구 강남대로 396", lat: 37.4972, lng: 127.0287, englishOk: true, hours: { open: "09:00", close: "22:00" }, stationWalk: { station: "Gangnam", exit: "11", minutes: 1 }, serviceTags: ["late"] },
@@ -224,12 +228,19 @@ export const PLACES: Place[] = [
   { id: "cloud-headspa-cheongdam", name: "Cloud Head Spa Cheongdam", nameKr: "클라우드 헤드스파 청담", type: "head_spa", zone: "cheongdam", priceRange: "₩₩₩", rating: 4.7, ratingCount: 95, tags: ["scalp", "luxury"], nearestStation: "Cheongdam", address: "서울 강남구 도산대로 456", lat: 37.5252, lng: 127.0475, englishOk: true, hours: { open: "10:00", close: "21:00" }, stationWalk: { station: "Cheongdam", exit: "13", minutes: 5 }, serviceTags: ["scalp", "aroma"], bookingChannels: ["naver"], priceConfirmedDaysAgo: 5 },
   { id: "onda-scalp-myeongdong", name: "Onda Scalp Myeongdong", nameKr: "온다스캘프 명동", type: "head_spa", zone: "myeongdong", priceRange: "₩₩", rating: 4.5, ratingCount: 110, tags: ["scalp", "diagnosis"], nearestStation: "Myeongdong", address: "서울 중구 퇴계로 123", lat: 37.5622, lng: 126.9829, englishOk: true, hours: { open: "10:30", close: "21:00" }, stationWalk: { station: "Myeongdong", exit: "3", minutes: 2 }, serviceTags: ["scalp", "diagnosis"], bookingChannels: ["kakao"], priceConfirmedDaysAgo: 10 },
   { id: "siloam-sauna", name: "Siloam Sauna", nameKr: "실로암사우나", type: "etc", zone: "myeongdong", district: "Jung-gu", priceRange: "₩", rating: 4.2, ratingCount: 450, tags: ["jjimjilbang", "sauna", "24h"], nearestStation: "Seoul Station", address: "서울 중구 중림로 49", lat: 37.5554, lng: 126.9692, hours: { open: "00:00", close: "23:59" }, stationWalk: { station: "Seoul Station", exit: "15", minutes: 5 }, badge: { cls: "info", text: "24h" } },
+];
+
+const withSource = (list: Place[], source: NonNullable<Place["source"]>): Place[] =>
+  list.map((p) => ({ ...p, source }));
+
+export const PLACES: Place[] = [
+  ...withSource(CURATED_PLACES, "curated"),
   // Creatrip hair-salon import (206 rows → scripts/build-creatrip-places.mjs).
-  ...CREATRIP_PLACES,
-  // Seoul Olive Young stores from OpenStreetMap (scripts/build-oliveyoung-places.mjs).
-  ...OLIVEYOUNG_PLACES,
+  ...withSource(CREATRIP_PLACES, "creatrip"),
+  // Seoul Olive Young stores, Kakao Map capture (scripts/build-oliveyoung-kakao.mjs).
+  ...withSource(OLIVEYOUNG_PLACES, "kakao"),
   // "A drop of Seoul" attractions + towers & markets (scripts/build-ados-places.mjs).
-  ...ADOS_PLACES,
+  ...withSource(ADOS_PLACES, "ados"),
 ];
 
 // ── Products ──────────────────────────────────────────────
