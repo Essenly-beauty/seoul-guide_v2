@@ -78,6 +78,13 @@ vercel env pull --yes  # .env.local 재생성
 - 감사 지적 중 **사실과 다른 것**: Supabase 캐시 헤더 유실 주장(코드는 공식 @supabase/ssr 패턴 그대로, 유실할 헤더 없음)
 - **미반영(결정 필요)**: Next.js 15 업그레이드(major, 별도 배치), 장소 30~50곳 사람 검수 축소, 법무 검토, 계정 삭제/내보내기, CI/관측성, 실사진
 
+### L. 지도 성능 + 게스트 로그인 퍼널 (8/15)
+- **지도 성능: Lighthouse 모바일 40 → 81, LCP 12.0s → 2.5s, TBT 980 → 380ms** (시각 변화 0):
+  ① 마커 뷰포트 컬링(603→~60 divIcon, 30% 패드) ② 지하철 컨트롤러+선로 지오메트리 지연 로드(역 디스크용 STATIONS는 유지) ③ 타일 CDN preconnect + 첫 화면 타일 6장 결정적 프리로드 ④ **초기 뷰 정적 스냅샷을 SSR HTML에 포함**(fetchpriority=high, 테마 게이트) → 타일 로드 시 페이드아웃 — LCP가 FCP 시점으로 이동
+  - 스냅샷 재생성: 헤드리스 캡처(마커/UI 제거) → public/map-placeholder-{light,dark}.jpg. 초기 센터/줌 바꾸면 재생성 필요
+- **게스트→계정 퍼널**(사용자 요청): 첫 하트/첫 별점 1회 바텀시트(?next 복귀), 빈 저장 레이어 FAB은 안내로 대체, Saved 탭 게스트 배너, 메뉴 CTA primary. 회원에겐 미표시, 컨텍스트별 기기 1회 (`essenly.nudge.*`, `components/auth/signin-nudge.tsx`)
+- 잔여 성능 여지(81→90+): First Load JS 다이어트(장소 데이터 분리) — 체감 대비 공수 커서 보류
+
 ### K. 라이트 모드 기본 전환 + 플로우 맵 (8/15)
 - **서비스 기본 테마 = 라이트(화이트)** (사용자 결정). 명시적으로 다크를 저장한 사용자만 다크 유지. 부트 스크립트·ThemeProvider·viewport theme-color·PWA manifest·온보딩 피커(Light 우선) 일괄 전환
 - html에 suppressHydrationWarning — 부트 스크립트의 pre-paint 속성 스탬프가 React 19 hydration 경고를 유발하던 것 해결 (플로우 재촬영 중 dev 오버레이로 발견)

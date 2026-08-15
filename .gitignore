@@ -19,6 +19,8 @@ scripts/.cache/
 /MIGRATION.md
 /AUDIT.md
 /docs/*
+!/docs/screenshots/
+!/docs/screenshots/**
 !/docs/README.md
 !/docs/service-overview.md
 !/docs/feature-status.md
