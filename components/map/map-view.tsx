@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useId, useMemo, useRef, useState } from "react";
+import { preconnect } from "react-dom";
 import Link from "next/link";
 import { Circle, MapContainer, Polyline, TileLayer, Marker, Popup, useMapEvents } from "react-leaflet";
 import L from "leaflet";
@@ -434,6 +435,9 @@ function SelectedPlaceCallout({ place, userLoc, onDismiss }: {
 }
 
 export default function MapView({ center, places, selectedId, onSelect, userLoc, flyTarget, bottomInsetRatio, bottomInsetPx, focusZoom, focusYBias, showSelectedCallout = false, onUserMove, getBounds, radiusCircle, routePath, vividPins = false, onStationClick }: MapViewProps) {
+  // Warm the tile CDN's TLS handshake before Leaflet asks for the first
+  // tile — the tiles are the page's LCP element (React 19 dedupes these).
+  for (const s of ["a", "b", "c", "d"]) preconnect(`https://${s}.basemaps.cartocdn.com`);
   const [zoom, setZoom] = useState(INITIAL_ZOOM);
   const { theme } = useTheme();
   const mapRef = useRef<L.Map | null>(null);
@@ -476,6 +480,24 @@ export default function MapView({ center, places, selectedId, onSelect, userLoc,
   // closures here re-render MapView every effect pass → maximum update depth loop.
   const handleMap = useCallback((m: L.Map) => { mapRef.current = m; }, []);
   const handleView = useCallback(() => setViewVersion((v) => v + 1), []);
+  // Viewport cull (perf, 2026-08-15): only mount markers near the current
+  // view — off-screen pins were never visible, but their ~600 divIcons
+  // dominated hydration cost (Lighthouse TBT). 30% pad hides edge pop-in;
+  // before the map instance exists, a distance guard around the initial
+  // center keeps the first paint just as light.
+  const inView = useMemo(() => {
+    const map = mapRef.current;
+    if (!map || viewVersion < 0) {
+      return singles.filter((p) => haversineKm(center, p) < 4);
+    }
+    try {
+      const b = map.getBounds().pad(0.3);
+      return singles.filter((p) => b.contains([p.lat, p.lng]));
+    } catch {
+      return singles;
+    }
+  }, [singles, viewVersion, center]);
+
   // Also picks the accent "hero": the top-rated badge inside the current view.
   // Together with the selected pin that caps map orange at two elements.
   const { demoted, heroId } = useMemo(() => {
@@ -484,7 +506,7 @@ export default function MapView({ center, places, selectedId, onSelect, userLoc,
     let hero: string | null = null;
     if (!map || zoom < BADGE_TOP_ZOOM || viewVersion < 0) return { demoted: out, heroId: hero };
     const size = map.getSize();
-    const candidates = singles
+    const candidates = inView
       .filter((p) => pinMode(p, p.id === selectedId, zoom) === "badge")
       .sort((a, b) =>
         a.id === selectedId ? -1 : b.id === selectedId ? 1 : (b.rating ?? 0) - (a.rating ?? 0),
@@ -502,7 +524,7 @@ export default function MapView({ center, places, selectedId, onSelect, userLoc,
       }
     }
     return { demoted: out, heroId: hero };
-  }, [singles, selectedId, zoom, viewVersion]);
+  }, [inView, selectedId, zoom, viewVersion]);
 
   // Kakao-style transit layer: stations (line-colored circles + name) and
   // synthesized exit numbers, gated by zoom and limited to the viewport.
@@ -524,7 +546,7 @@ export default function MapView({ center, places, selectedId, onSelect, userLoc,
 
   const markers = useMemo(
     () =>
-      singles.map((p) => {
+      inView.map((p) => {
         const selected = selectedId === p.id;
         const mode = demoted.has(p.id) ? "dot" : pinMode(p, selected, zoom);
         const hero = p.id === heroId && mode === "badge" && !selected;
@@ -547,7 +569,7 @@ export default function MapView({ center, places, selectedId, onSelect, userLoc,
           />
         );
       }),
-    [singles, selectedId, onSelect, zoom, demoted, heroId, vividPins],
+    [inView, selectedId, onSelect, zoom, demoted, heroId, vividPins],
   );
 
   return (

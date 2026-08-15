@@ -15,9 +15,17 @@ import { applyFilters, countActiveFilters, EMPTY_FILTERS, type MapFilters } from
 import { useLocation } from "./use-location";
 import { MapSheet } from "./map-sheet";
 import { FilterSheet } from "./filter-sheet";
-import { SubwayRouteController, type SubwayPlaceCategory, type SubwaySnap } from "@/components/subway/subway-route-controller";
+import type { SubwayPlaceCategory, SubwaySnap } from "@/components/subway/subway-route-controller";
 import { findRoute, findRouteVia, nearestStation, placesNearStation, STATIONS } from "@/lib/subway";
-import { routeTrackPath } from "@/lib/subway-path";
+
+// Perf (2026-08-15): the route controller (~900 lines) and the rail
+// geometry (~30KB of line paths behind routeTrackPath) only matter once
+// subway mode opens — split them out of the /map first load. STATIONS
+// stays eager: the base map's station discs need it at first paint.
+const SubwayRouteController = dynamic(
+  () => import("@/components/subway/subway-route-controller").then((m) => m.SubwayRouteController),
+  { ssr: false },
+);
 import { useFavorites } from "@/lib/favorites";
 
 const MapView = dynamic(() => import("./map-view"), {
@@ -54,6 +62,16 @@ export function MapScreen() {
   const [stationRadius, setStationRadius] = useState(1);
   const [stationCategory, setStationCategory] = useState<SubwayPlaceCategory>("all");
   const [subwayEditing, setSubwayEditing] = useState(false);
+  // rail geometry loads on first subway use (see the dynamic import note above)
+  const [trackPath, setTrackPath] = useState<typeof import("@/lib/subway-path").routeTrackPath | null>(null);
+  useEffect(() => {
+    if (mode !== "subway" || trackPath) return;
+    let alive = true;
+    void import("@/lib/subway-path").then((m) => {
+      if (alive) setTrackPath(() => m.routeTrackPath);
+    });
+    return () => { alive = false; };
+  }, [mode, trackPath]);
   const filterBtnRef = useRef<HTMLButtonElement>(null);
   const subwayBtnRef = useRef<HTMLButtonElement>(null);
   const initialLocationHandledRef = useRef(false);
@@ -242,7 +260,7 @@ export function MapScreen() {
         radiusCircle={mode === "subway" && activeStation
           ? { center: { lat: STATIONS[activeStation].lat, lng: STATIONS[activeStation].lng }, radiusKm: stationRadius }
           : null}
-        routePath={mode === "subway" && subwayRouteReady && route ? routeTrackPath(route) : null}
+        routePath={mode === "subway" && subwayRouteReady && route && trackPath ? trackPath(route) : null}
         vividPins={mode === "map" ? cats.length > 0 : true /* station browse is a focused task */}
         onStationClick={mode === "map" ? (id) => {
           // Tapping a station disc opens the subway browse with it preset as
