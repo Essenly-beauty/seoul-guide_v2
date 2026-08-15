@@ -135,8 +135,13 @@ let cache = existsSync(CACHE) && !process.argv.includes("--refresh")
   : null;
 
 if (!cache) {
-  console.log("listing subway relations…");
-  const list = await overpass(`[out:json][timeout:90];relation["route"="subway"](${BBOX});out tags;`);
+  console.log("listing rail relations…");
+  // route=subway alone missed 9 lines: OSM tags the 광역전철 services
+  // (경의중앙/경춘/수인분당/서해/공항철도) route=train and the 경전철
+  // (우이신설/김포골드/신림/인천2) route=light_rail.
+  const list = await overpass(
+    `[out:json][timeout:120];(relation["route"="subway"](${BBOX});relation["route"="light_rail"](${BBOX});relation["route"="train"]["service"~"commuter|regional"](${BBOX});relation["route"="train"]["network"~"수도권|Seoul"](${BBOX}););out tags;`,
+  );
   cache = { relations: list.elements.map((e) => ({ id: e.id, tags: e.tags ?? {} })), geoms: {} };
   writeFileSync(CACHE, JSON.stringify(cache));
 }
