@@ -70,6 +70,14 @@ test.describe("discovery smoke (no auth needed)", () => {
 test.describe("direct auth + account sync", () => {
   test.skip(() => !adminClient(), "needs SUPABASE_SERVICE_ROLE_KEY (.env.local)");
 
+  test("returning member: welcome and login redirect straight into the app", async ({ page }) => {
+    await login(page);
+    await page.goto("/");
+    await expect(page).toHaveURL(/\/map/);
+    await page.goto("/login");
+    await expect(page).toHaveURL(/\/map/);
+  });
+
   test("wrong password shows an inline error and stays on /login", async ({ page }) => {
     await page.goto("/login");
     await page.locator(".auth-field").first().fill(EMAIL);

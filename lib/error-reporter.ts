@@ -27,6 +27,9 @@ export function reportClientError(
   try {
     if (typeof window === "undefined") return;
     const msg = (message || "unknown").slice(0, 500);
+    // Next.js control-flow "errors" leak into window.onerror during client
+    // navigation — they are not failures (first real catch of this tracker).
+    if (msg.includes("NEXT_REDIRECT") || msg.includes("NEXT_NOT_FOUND")) return;
     if (count >= SESSION_CAP || reported.has(msg)) return;
     if (stack?.includes("chrome-extension://") || stack?.includes("safari-extension://")) return;
     reported.add(msg);

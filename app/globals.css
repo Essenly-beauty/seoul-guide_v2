@@ -58,13 +58,15 @@
     --bg: #f6f7f9;
     --surface: #ffffff;
     --surface-hover: #eef0f4;
-    /* #b83d00: 5.7:1 on white, and ≥4.6:1 even as text over its own 9%
-       tint (selected chips/badges) — #c64200 passed plain surfaces but
-       failed on tinted ones at ~4.4:1 (codex cross-check #4). */
-    --accent: #b83d00;
-    --accent-soft: rgba(184, 61, 0, 0.09);
-    --accent-soft-2: rgba(184, 61, 0, 0.18);
-    --accent-hover: #a63700;
+    /* Brand decision (user, 2026-08-15): keep the original light-mode
+       orange. The audit's darker AA variants (#c64200/#b83d00) read as a
+       different brand — reverted knowingly. WCAG note: white-on-accent at
+       small sizes measures 3.76:1 (AA-large passes, AA-small doesn't);
+       revisit with a dedicated text-accent token if needed. */
+    --accent: #e94f00;
+    --accent-soft: rgba(233, 79, 0, 0.09);
+    --accent-soft-2: rgba(233, 79, 0, 0.18);
+    --accent-hover: #c94500;
     --text: #1c2431;
     --muted: #556175;
     --dim: #5f6b82; /* 5.0:1 on --bg, 4.7:1 on --surface-hover (was 4.46) */

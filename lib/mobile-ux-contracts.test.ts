@@ -18,7 +18,6 @@ const signoutSource = source("../components/ui/signout-modal.tsx");
 const filterSource = source("../components/map/filter-sheet.tsx");
 const profileSource = source("../app/onboarding/beauty-profile/page.tsx");
 const settingsSource = source("../app/settings/page.tsx");
-const reviewSource = source("../app/mypage/reviews/new/page.tsx");
 
 describe("mobile interaction contracts", () => {
   it("allows user zoom and resizes the viewport for the software keyboard", () => {
@@ -89,8 +88,7 @@ describe("dialog and form accessibility contracts", () => {
     // settings no longer hosts the demo profile form (launch scope) — it
     // links to the real, account-synced editor instead
     expect(settingsSource).toContain("Edit beauty profile");
-    // launch scope: the mock write-review form is a redirect now — the real
-    // composer (with its own a11y contract) lives in place-detail-body
-    expect(reviewSource).toContain("redirect(");
+    // launch scope: the mock write-review form route is closed via
+    // next.config redirects — the real composer lives in place-detail-body
   });
 });

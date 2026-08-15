@@ -1,13 +1,19 @@
 import Link from "next/link";
+import { redirect } from "next/navigation";
 import { BrandMark, BrandWordmark } from "@/components/brand/brand-logo";
 import { WelcomeHero } from "@/components/brand/welcome-hero";
+import { supabaseServer } from "@/lib/supabase/server";
 import { routes } from "@/lib/routes";
 
 // Welcome / auth entry, following the Figma reference (58:1239 + 58:1358):
 // lockup, pitch, a full-width visual, then one chunky brand CTA beside a
 // plain sign-in link. The reference's photo band is our map preview — it
 // shows the product instead of decorating around it. Theme-aware throughout.
-export default function WelcomePage() {
+export default async function WelcomePage() {
+  // Auto sign-in: a returning member should land in the app, not on the
+  // logged-out pitch (user report 2026-08-15 — "자동 로그인이 안 된다").
+  const { data: { user } } = await supabaseServer().auth.getUser();
+  if (user) redirect(routes.map);
   return (
     <div className="welcome-screen app-scroll">
       <div className="welcome-lockup">
