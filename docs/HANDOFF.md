@@ -78,6 +78,12 @@ vercel env pull --yes  # .env.local 재생성
 - 감사 지적 중 **사실과 다른 것**: Supabase 캐시 헤더 유실 주장(코드는 공식 @supabase/ssr 패턴 그대로, 유실할 헤더 없음)
 - **미반영(결정 필요)**: Next.js 15 업그레이드(major, 별도 배치), 장소 30~50곳 사람 검수 축소, 법무 검토, 계정 삭제/내보내기, CI/관측성, 실사진
 
+### K. 라이트 모드 기본 전환 + 플로우 맵 (8/15)
+- **서비스 기본 테마 = 라이트(화이트)** (사용자 결정). 명시적으로 다크를 저장한 사용자만 다크 유지. 부트 스크립트·ThemeProvider·viewport theme-color·PWA manifest·온보딩 피커(Light 우선) 일괄 전환
+- html에 suppressHydrationWarning — 부트 스크립트의 pre-paint 속성 스탬프가 React 19 hydration 경고를 유발하던 것 해결 (플로우 재촬영 중 dev 오버레이로 발견)
+- **화면 플로우 맵 아티팩트**: 8개 여정 44장(라이트 기본 + 다크 샘플 3장), mermaid 여정 다이어그램 포함 — 캡처 자동화 스크립트로 갱신 가능 (세션 scratchpad `capture-flows.mjs`)
+- 이후 모든 디자인/QA 작업 기준은 화이트 모드
+
 ### J. 사용성 라운드 + Next 15 (8/15)
 - **자동 로그인 체감 수정**: `/`·`/login`·`/register`가 서버에서 세션 확인 → 회원은 즉시 `/map` (login/register는 서버 래퍼 + 클라이언트 컴포넌트로 분리). 가입 확인 후 웰컴에 떨어져 "가입 안 된 듯" 보이던 문제의 근본 원인
 - **에러 페이지**: client_errors 첫 실전 수확 — 닫힌 라우트들의 NEXT_REDIRECT가 window 에러로 새던 것 확인 → next.config redirects()로 전환(페이지 파일 삭제), 리포터에 Next 제어흐름 에러 필터
