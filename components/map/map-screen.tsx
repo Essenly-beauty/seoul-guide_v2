@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { preload } from "react-dom";
 import dynamic from "next/dynamic";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
@@ -29,11 +30,37 @@ const SubwayRouteController = dynamic(
 import { useFavorites } from "@/lib/favorites";
 import { useSigninNudge } from "@/components/auth/signin-nudge";
 import { useAuthUser } from "@/lib/auth/use-auth";
+import { useTheme } from "@/components/theme/theme-provider";
 
 const MapView = dynamic(() => import("./map-view"), {
   ssr: false,
   loading: () => <div className="map-canvas hero-img" aria-label="Loading map" />,
 });
+
+// LCP: the first tiles are the largest paint, but Leaflet only requests them
+// after the MapView chunk loads and initializes. The initial center is fixed
+// (Gangnam until GPS resolves), so the first-view tiles are deterministic —
+// preload them with the page JS and they download in parallel with the chunk.
+// Matches Leaflet's URL scheme exactly (subdomain abs(x+y)%3 over a/b/c,
+// {r}='@2x' on retina) so the requests are warm cache hits.
+const TILE_STYLE = { dark: "dark_all", light: "voyager" } as const;
+const INITIAL_TILE_ZOOM = 15; // keep in sync with map-view INITIAL_ZOOM
+function preloadInitialTiles(theme: "dark" | "light", center: LatLng) {
+  const z = INITIAL_TILE_ZOOM;
+  const n = 2 ** z;
+  const x = Math.floor(((center.lng + 180) / 360) * n);
+  const latRad = (center.lat * Math.PI) / 180;
+  const y = Math.floor(((1 - Math.log(Math.tan(latRad) + 1 / Math.cos(latRad)) / Math.PI) / 2) * n);
+  const r = typeof window !== "undefined" && window.devicePixelRatio > 1 ? "@2x" : "";
+  for (let dx = -1; dx <= 1; dx++) {
+    for (let dy = 0; dy <= 1; dy++) {
+      const tx = x + dx;
+      const ty = y + dy;
+      const s = "abc"[Math.abs(tx + ty) % 3];
+      preload(`https://${s}.basemaps.cartocdn.com/rastertiles/${TILE_STYLE[theme]}/${z}/${tx}/${ty}${r}.png`, { as: "image" });
+    }
+  }
+}
 
 /** Map focus inset per route-controller snap, so the focused station clears the panel. */
 const SUBWAY_SNAP_INSET: Record<SubwaySnap, number> = { compact: 0.22, half: 0.5, full: 0.8 };
@@ -66,6 +93,8 @@ export function MapScreen() {
   const [subwayEditing, setSubwayEditing] = useState(false);
   const { user: authUser } = useAuthUser();
   const { nudge, sheet: nudgeSheet } = useSigninNudge();
+  const { theme } = useTheme();
+  preloadInitialTiles(theme, centerRef.current);
   // rail geometry loads on first subway use (see the dynamic import note above)
   const [trackPath, setTrackPath] = useState<typeof import("@/lib/subway-path").routeTrackPath | null>(null);
   useEffect(() => {
