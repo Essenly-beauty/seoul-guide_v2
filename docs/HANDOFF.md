@@ -1,4 +1,4 @@
-# MYSEOULDROP — 작업 핸드오프 (2026-08-11 기준)
+# MYSEOULDROP — 작업 핸드오프 (2026-08-15 기준)
 
 > 다음 세션에서 이 문서 하나로 바로 이어서 작업할 수 있게 정리한 문서.
 > 프로젝트 전반 문서는 `docs/README.md`, 인증 설정은 `docs/auth-setup.md` 참고.
@@ -77,6 +77,14 @@ vercel env pull --yes  # .env.local 재생성
 - **보안**: 무음 세션 만료 후 재방문 시 계정 미러 퍼지(3개 스토어) — 공유기기 교차 계정 병합 갭 해소
 - 감사 지적 중 **사실과 다른 것**: Supabase 캐시 헤더 유실 주장(코드는 공식 @supabase/ssr 패턴 그대로, 유실할 헤더 없음)
 - **미반영(결정 필요)**: Next.js 15 업그레이드(major, 별도 배치), 장소 30~50곳 사람 검수 축소, 법무 검토, 계정 삭제/내보내기, CI/관측성, 실사진
+
+### J. 사용성 라운드 + Next 15 (8/15)
+- **자동 로그인 체감 수정**: `/`·`/login`·`/register`가 서버에서 세션 확인 → 회원은 즉시 `/map` (login/register는 서버 래퍼 + 클라이언트 컴포넌트로 분리). 가입 확인 후 웰컴에 떨어져 "가입 안 된 듯" 보이던 문제의 근본 원인
+- **에러 페이지**: client_errors 첫 실전 수확 — 닫힌 라우트들의 NEXT_REDIRECT가 window 에러로 새던 것 확인 → next.config redirects()로 전환(페이지 파일 삭제), 리포터에 Next 제어흐름 에러 필터
+- **register**: "Check your email" 화면에 다른 기기에서 확인한 사용자용 Sign in 경로 추가
+- **오렌지 복원(사용자 결정)**: 라이트 accent를 원래 #e94f00으로 — AA-small 3.76:1 트레이드오프는 토큰 주석에 문서화. --dim 보정과 칩 토큰화는 유지
+- **Next.js 15 + React 19 + react-leaflet 5 업그레이드**: 격리 워크트리에서 검증(빌드+E2E 11종+지도 마커 603개) 후 --no-ff 병합. codemod로 async cookies() 자동 전환, ref 타입 2건 수동. `.eslintrc`에 root:true
+- E2E 11종 (returning-member 자동 로그인 스펙 추가)
 
 ### G. Claude×Codex 상호 검증 라운드 (8/12)
 - codex CLI(읽기 전용)로 감사 대응을 역검증 → **잔여 결함 5건 확인·전부 수정**: +12 사진 뱃지·시설 칩·프로필 완성 "여권 10% 딜"·Report-an-issue 가짜 토스트·미차단 프로토타입 라우트(/bookings, /trip, /mypage/reviews/new, /mypage/notifications → redirect)·지원 FAQ/약관의 미구현 기능 서술·라이트 틴트 위 대비(accent #b83d00, 칩 토큰화, --dim 보정)
