@@ -106,7 +106,7 @@ function StationCombobox({
   selectedId: string | null;
   nearbyStationId: string | null;
   recentIds: string[];
-  inputRef?: React.RefObject<HTMLInputElement>;
+  inputRef?: React.RefObject<HTMLInputElement | null>;
   locationStatus: "loading" | "granted" | "fallback";
   onRetryLocation: () => void;
   onSelect: (id: string | null) => void;

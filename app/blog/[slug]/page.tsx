@@ -8,7 +8,8 @@ import { Icon } from "@/components/icon";
 import { routes } from "@/lib/routes";
 import { getArticle } from "@/lib/data";
 
-export default function JournalDetailPage({ params }: { params: { slug: string } }) {
+export default async function JournalDetailPage(props: { params: Promise<{ slug: string }> }) {
+  const params = await props.params;
   const a = getArticle(params.slug);
   if (!a) notFound();
 
