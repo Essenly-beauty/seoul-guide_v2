@@ -27,6 +27,8 @@ const SubwayRouteController = dynamic(
   { ssr: false },
 );
 import { useFavorites } from "@/lib/favorites";
+import { useSigninNudge } from "@/components/auth/signin-nudge";
+import { useAuthUser } from "@/lib/auth/use-auth";
 
 const MapView = dynamic(() => import("./map-view"), {
   ssr: false,
@@ -62,6 +64,8 @@ export function MapScreen() {
   const [stationRadius, setStationRadius] = useState(1);
   const [stationCategory, setStationCategory] = useState<SubwayPlaceCategory>("all");
   const [subwayEditing, setSubwayEditing] = useState(false);
+  const { user: authUser } = useAuthUser();
+  const { nudge, sheet: nudgeSheet } = useSigninNudge();
   // rail geometry loads on first subway use (see the dynamic import note above)
   const [trackPath, setTrackPath] = useState<typeof import("@/lib/subway-path").routeTrackPath | null>(null);
   useEffect(() => {
@@ -345,6 +349,7 @@ export function MapScreen() {
         )}
       </div>
 
+      {nudgeSheet}
       {mode === "map" && (
         <button
           className={"map-fab map-fab-fav" + (favOnly ? " on" : "")}
@@ -352,6 +357,12 @@ export function MapScreen() {
           aria-pressed={favOnly}
           title="My saved places"
           onClick={() => {
+            // guests with nothing saved would just see an empty map — show
+            // the account nudge instead of a broken-looking layer
+            if (!favOnly && !authUser && favs.place.length === 0) {
+              nudge("savedLayer", { repeat: true });
+              return;
+            }
             setFavOnly((v) => !v);
             handleMapSelect(null);
           }}

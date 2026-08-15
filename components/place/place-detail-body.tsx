@@ -20,6 +20,7 @@ import { SectionHeader } from "@/components/ui/section-header";
 import { useToast } from "@/components/ui/toast";
 import { Icon } from "@/components/icon";
 import { useLocation } from "@/components/map/use-location";
+import { useSigninNudge } from "@/components/auth/signin-nudge";
 import { toggleFavorite, useFavorites } from "@/lib/favorites";
 import { REVIEW_MAX_LEN, setRating, setReview, useMyRatings } from "@/lib/ratings";
 import { routes } from "@/lib/routes";
@@ -105,14 +106,20 @@ function TitleBlock({ place, km }: { place: Place; km: number }) {
 function PlaceActions({ place }: { place: Place }) {
   const favs = useFavorites();
   const { toast, share } = useToast();
+  const { nudge, sheet } = useSigninNudge();
   const saved = favs.place.includes(place.id);
   return (
     <div className="place-actions">
+      {sheet}
       <button
         className={saved ? "saved" : undefined}
         aria-pressed={saved}
         aria-label={saved ? "Remove from favorites" : "Add to favorites"}
-        onClick={() => toast(toggleFavorite("place", place.id) ? "Saved to favorites" : "Removed")}
+        onClick={() => {
+          const next = toggleFavorite("place", place.id);
+          toast(next ? "Saved to favorites" : "Removed");
+          if (next) nudge("favorite"); // guest-only, once per device
+        }}
       >
         <Icon name={saved ? "heart" : "heart-o"} />
         <span className="lbl">Save</span>
@@ -267,6 +274,7 @@ function ReviewsSection({ place }: { place: Place }) {
   const myRatings = useMyRatings();
   const myRating = myRatings[place.id]?.rating ?? null;
   const myReview = myRatings[place.id]?.body ?? "";
+  const { nudge: nudgeRating, sheet: ratingNudgeSheet } = useSigninNudge();
   const [editing, setEditing] = useState(false);
   const [composing, setComposing] = useState(false);
   const [draft, setDraft] = useState("");
@@ -275,6 +283,7 @@ function ReviewsSection({ place }: { place: Place }) {
     setRating(place.id, n);
     setEditing(false);
     toast(`Thanks — you rated ${n} star${n === 1 ? "" : "s"}`);
+    nudgeRating("rating"); // guest-only, once per device
   };
 
   const saveReview = () => {
@@ -288,6 +297,7 @@ function ReviewsSection({ place }: { place: Place }) {
 
   return (
     <section id="d-reviews" className="d-sec stack">
+      {ratingNudgeSheet}
       {/* Rate prompt — tappable stars, persisted per place */}
       <div className="stack sm" style={{ alignItems: "center", textAlign: "center" }}>
         <b style={{ fontSize: 14.5 }}>Been here? Rate your visit</b>

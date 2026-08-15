@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { IconButton } from "@/components/ui/icon-button";
 import { useToast } from "@/components/ui/toast";
+import { useSigninNudge } from "@/components/auth/signin-nudge";
 import { toggleFavorite, useFavorites, type FavKind } from "@/lib/favorites";
 
 type FavoriteButtonProps = {
@@ -22,21 +23,27 @@ export function FavoriteButton({ kind, id, initial = false, variant = "plain", s
   const stored = kind && id ? favs[kind].includes(id) : undefined;
   const on = stored ?? localOn;
   const { toast } = useToast();
+  const { nudge, sheet } = useSigninNudge();
   return (
-    <IconButton
-      name={on ? "heart" : "heart-o"}
-      label={on ? "Remove from favorites" : "Add to favorites"}
-      variant={variant === "bordered" ? "overlay" : variant}
-      pressed={on}
-      iconSize={size}
-      style={{ color: on ? "var(--accent)" : undefined }}
-      onClick={(e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        const next = kind && id ? toggleFavorite(kind, id) : !on;
-        if (!(kind && id)) setLocalOn(next);
-        toast(next ? "Saved to favorites" : "Removed");
-      }}
-    />
+    <>
+      <IconButton
+        name={on ? "heart" : "heart-o"}
+        label={on ? "Remove from favorites" : "Add to favorites"}
+        variant={variant === "bordered" ? "overlay" : variant}
+        pressed={on}
+        iconSize={size}
+        style={{ color: on ? "var(--accent)" : undefined }}
+        onClick={(e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          const next = kind && id ? toggleFavorite(kind, id) : !on;
+          if (!(kind && id)) setLocalOn(next);
+          toast(next ? "Saved to favorites" : "Removed");
+          // guests get a one-time account nudge after their first save
+          if (next) nudge("favorite");
+        }}
+      />
+      {sheet}
+    </>
   );
 }

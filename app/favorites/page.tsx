@@ -18,6 +18,9 @@ import { Icon } from "@/components/icon";
 import { routes } from "@/lib/routes";
 import { ARTICLES, PLACES, PRODUCTS, TYPE_LABEL, zoneShort, type Article, type Place, type Product } from "@/lib/data";
 import { useFavorites, useFavoritesReady } from "@/lib/favorites";
+import { useAuthUser } from "@/lib/auth/use-auth";
+import { Button } from "@/components/ui/button";
+import { Notice } from "@/components/ui/notice";
 
 // Pulsing placeholder rows while the account's saved list is fetched —
 // flashing "nothing saved yet" on a fresh device reads as data loss.
@@ -139,6 +142,7 @@ export default function FavoritesPage() {
   // Live store — rows appear/disappear as hearts toggle anywhere in the app.
   const favs = useFavorites();
   const ready = useFavoritesReady();
+  const { user, loading: authLoading } = useAuthUser();
   const favPlaces = PLACES.filter((p) => favs.place.includes(p.id));
   const favProducts = PRODUCTS.filter((p) => favs.product.includes(p.id));
   const favArticles = ARTICLES.filter((a) => favs.article.includes(a.slug));
@@ -150,6 +154,15 @@ export default function FavoritesPage() {
           <div className="label">Saved</div>
           <div className="h1">Your <span style={{ fontStyle: "italic", color: "var(--accent)" }}>K-beauty list.</span></div>
         </div>
+        {/* guest -> account funnel: saves live on this device only until sign-in */}
+        {ready && !authLoading && !user && (
+          <Notice icon="user">
+            <span className="row" style={{ gap: 10, alignItems: "center", flexWrap: "wrap" }}>
+              <span style={{ flex: 1, minWidth: 180 }}>Saved on this device — sign in to keep your list on your account.</span>
+              <Button size="sm" href={`${routes.signIn}?next=/favorites`} style={{ flex: "none" }}>Sign in</Button>
+            </span>
+          </Notice>
+        )}
         {ready ? (
           <>
             <PlacesSection favPlaces={favPlaces} />

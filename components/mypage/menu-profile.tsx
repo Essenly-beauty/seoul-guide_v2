@@ -35,7 +35,7 @@ export function MenuProfile() {
           <b style={{ fontSize: 17 }}>Guest</b>
           <div className="caption muted">Sign in to sync your favorites</div>
         </div>
-        <Button variant="secondary" size="sm" href={routes.signIn} style={{ flex: "none" }}>
+        <Button size="sm" href={`${routes.signIn}?next=${routes.menu}`} style={{ flex: "none" }}>
           Sign in
         </Button>
       </div>
