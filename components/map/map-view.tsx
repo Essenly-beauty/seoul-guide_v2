@@ -476,6 +476,10 @@ export default function MapView({ center, places, selectedId, onSelect, userLoc,
   // greedily keep the highest-rated one per overlap region; losers demote to dots.
   // Re-runs whenever the view settles (viewVersion) so panning re-resolves overlaps.
   const [viewVersion, setViewVersion] = useState(0);
+  // static snapshot overlay until the first tile batch paints (LCP bridge —
+  // the same image the SSR fallback shows, so the hand-off is seamless)
+  const [tilesLoaded, setTilesLoaded] = useState(false);
+  const handleTilesLoaded = useCallback(() => setTilesLoaded(true), []);
   // MapWiring re-runs its wiring effect whenever these identities change; inline
   // closures here re-render MapView every effect pass → maximum update depth loop.
   const handleMap = useCallback((m: L.Map) => { mapRef.current = m; }, []);
@@ -580,7 +584,11 @@ export default function MapView({ center, places, selectedId, onSelect, userLoc,
       zoomControl={false}
       attributionControl={true}
     >
-      <TileLayer key={theme} url={TILE_URLS[theme]} attribution={ATTRIB} />
+      <TileLayer key={theme} url={TILE_URLS[theme]} attribution={ATTRIB} eventHandlers={{ load: handleTilesLoaded }} />
+      {!tilesLoaded && (
+        // eslint-disable-next-line @next/next/no-img-element
+        <img className={`map-ph map-ph-${theme} map-ph-fade`} src={`/map-placeholder-${theme}.jpg`} alt="" />
+      )}
       <MapWiring
         flyTarget={flyTarget}
         bottomInsetRatio={bottomInsetRatio}

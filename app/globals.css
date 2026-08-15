@@ -2973,6 +2973,27 @@
     z-index: 0; /* traps Leaflet's internal z-index stack (attribution is z-index: 1000) below the sheet/dialog */
     background: var(--surface-hover); /* tile-load fallback */
   }
+  /* Static initial-view snapshot — the SSR fallback (and MapView's own
+     copy until the first tiles land) paints the map area at FCP time. */
+  .map-ph {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+  [data-theme="dark"] .map-ph-light { display: none; }
+  .map-ph-dark { display: none; }
+  [data-theme="dark"] .map-ph-dark { display: block; }
+  .map-ph-fade {
+    z-index: 500; /* above tiles, below Leaflet controls/popups (600+) */
+    pointer-events: none;
+    transition: opacity 0.5s ease-out;
+  }
+  .map-ph-fade.hidden {
+    opacity: 0;
+  }
   .map-top {
     position: absolute;
     top: 0;
