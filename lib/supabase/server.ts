@@ -3,11 +3,11 @@
 // Handlers / Server Actions (Next.js forbids cookie writes during RSC render,
 // hence the try/catch — the middleware refresh keeps sessions alive anyway).
 
-import { cookies } from "next/headers";
+import { cookies, type UnsafeUnwrappedCookies } from "next/headers";
 import { createServerClient } from "@supabase/ssr";
 
 export function supabaseServer() {
-  const cookieStore = cookies();
+  const cookieStore = (cookies() as unknown as UnsafeUnwrappedCookies);
   return createServerClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,

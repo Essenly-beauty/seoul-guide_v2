@@ -8,7 +8,8 @@ import { ImgPh } from "@/components/ui/img-ph";
 import { routes } from "@/lib/routes";
 import { PRODUCTS, brandSlug } from "@/lib/data";
 
-export default function BrandPage({ params }: { params: { id: string } }) {
+export default async function BrandPage(props: { params: Promise<{ id: string }> }) {
+  const params = await props.params;
   const products = PRODUCTS.filter((p) => brandSlug(p.brand) === params.id);
   if (products.length === 0) notFound();
   const brandName = products[0].brand;

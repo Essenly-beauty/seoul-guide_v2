@@ -5,7 +5,8 @@ import { PlaceCtaBar } from "@/components/place/place-cta-bar";
 import { routes } from "@/lib/routes";
 import { getPlace } from "@/lib/data";
 
-export default function PlaceDetailPage({ params }: { params: { id: string } }) {
+export default async function PlaceDetailPage(props: { params: Promise<{ id: string }> }) {
+  const params = await props.params;
   const place = getPlace(params.id);
   if (!place) notFound();
 

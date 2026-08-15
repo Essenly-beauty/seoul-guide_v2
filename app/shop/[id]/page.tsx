@@ -5,7 +5,8 @@ import { ProductCtaBar } from "@/components/product/product-cta-bar";
 import { routes } from "@/lib/routes";
 import { getProduct } from "@/lib/data";
 
-export default function ProductDetailPage({ params }: { params: { id: string } }) {
+export default async function ProductDetailPage(props: { params: Promise<{ id: string }> }) {
+  const params = await props.params;
   const product = getProduct(params.id);
   if (!product) notFound();
 

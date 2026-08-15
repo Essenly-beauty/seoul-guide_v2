@@ -6,7 +6,8 @@ import { PlacesContent } from "@/components/places/places-content";
 import { CATEGORY_META, PLACES } from "@/lib/data";
 import { routes } from "@/lib/routes";
 
-export default function PlacesCategoryPage({ params }: { params: { category: string } }) {
+export default async function PlacesCategoryPage(props: { params: Promise<{ category: string }> }) {
+  const params = await props.params;
   const meta = CATEGORY_META[params.category];
   if (!meta) notFound();
 

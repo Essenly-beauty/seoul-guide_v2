@@ -14,7 +14,7 @@ const FOCUSABLE_SELECTOR = [
 export function useDialogFocus<T extends HTMLElement>(
   open: boolean,
   onClose: () => void,
-  initialFocusRef?: RefObject<HTMLElement>,
+  initialFocusRef?: RefObject<HTMLElement | null>,
 ) {
   const dialogRef = useRef<T>(null);
   const onCloseRef = useRef(onClose);
