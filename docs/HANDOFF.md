@@ -161,7 +161,7 @@ vercel env pull --yes  # .env.local 재생성
 - [ ] 커스텀 도메인 연결 (myseouldrop.com 등 — `vercel domains`)
 - [ ] Supabase 이메일 발신자 커스텀 (기본 noreply@mail.app.supabase.io → SMTP 설정)
 - [ ] 지도 성능: 600 마커 → 뷰포트 기반 렌더링 or canvas 렌더러 검토 (현재 무리 없음, 1000+ 대비)
-- [ ] 미확보 노선 지오메트리 (경의중앙 등 9개 — `build-subway-geometry.mjs` MATCHERS 보강)
+- [x] ~~미확보 노선 지오메트리~~ (8/16 완료 — **20/20 전 노선 실선로**. 원인은 매처가 아니라 발견 쿼리: 광역전철=route=train, 경전철=route=light_rail. 계약 테스트 `lib/subway-geometry.test.ts` 추가)
 - [ ] E2E 자동화: 현재 수동 스크립트(scratchpad) → Playwright 테스트로 정식화
 
 ### P3 — 제품 확장 (이전 논의)
