@@ -13,9 +13,10 @@ import { routes } from "@/lib/routes";
 export default function ChooseModePage() {
   const router = useRouter();
   const { theme, setTheme } = useTheme();
+  // light first — it's the service default (2026-08-15)
   const modes: { value: AppTheme; label: string; glyph: React.ReactNode }[] = [
-    { value: "dark", label: "Dark mode", glyph: <MoonGlyph /> },
     { value: "light", label: "Light mode", glyph: <SunGlyph /> },
+    { value: "dark", label: "Dark mode", glyph: <MoonGlyph /> },
   ];
 
   return (

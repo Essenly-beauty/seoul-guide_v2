@@ -40,15 +40,19 @@ export const viewport: Viewport = {
   initialScale: 1,
   viewportFit: "cover",
   interactiveWidget: "resizes-content",
-  themeColor: "#0b0c0f",
+  themeColor: "#f6f7f9", // light default; ThemeProvider swaps it for dark users
 };
 
 /** Applies the stored theme before first paint — no light/dark flash. */
-const THEME_BOOT = `try{if(localStorage.getItem("essenly.theme")==="light")document.documentElement.setAttribute("data-theme","light")}catch(e){}`;
+// Light is the service default (user decision 2026-08-15) — only an explicit
+// stored "dark" keeps the dark tokens; everyone else gets light pre-paint.
+const THEME_BOOT = `(function(){var d=false;try{d=localStorage.getItem("essenly.theme")==="dark"}catch(e){}if(!d)document.documentElement.setAttribute("data-theme","light")})()`;
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
+    // suppressHydrationWarning: THEME_BOOT stamps data-theme before React
+    // hydrates — the attribute mismatch is intentional (next-themes pattern)
+    <html lang="en" suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: THEME_BOOT }} />
       </head>
