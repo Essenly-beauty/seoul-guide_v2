@@ -5,11 +5,59 @@
 @tailwind utilities;
 
 @layer base {
-  /* MYSEOULDROP dark system — near-black chrome (matches the brand mark's
-     field), #F55800 signal orange as the single accent. Hovers go lighter,
-     shadows go heavier than the old light theme. .theme-dark re-applies the
-     set to a subtree — brand screens stay dark under the light theme. */
-  :root, .theme-dark {
+  /* MYSEOULDROP light system — the SERVICE DEFAULT (user decision
+     2026-08-15): paper surfaces, #e94f00 signal orange. Dark is the opt-in
+     theme below; .theme-dark re-applies it to a subtree for brand screens. */
+  :root {
+    --bg: #f6f7f9;
+    --surface: #ffffff;
+    --surface-hover: #eef0f4;
+    /* Brand decision (user, 2026-08-15): keep the original light-mode
+       orange. The audit's darker AA variants (#c64200/#b83d00) read as a
+       different brand — reverted knowingly. WCAG note: white-on-accent at
+       small sizes measures 3.76:1 (AA-large passes, AA-small doesn't);
+       revisit with a dedicated text-accent token if needed. */
+    --accent: #e94f00;
+    --accent-soft: rgba(233, 79, 0, 0.09);
+    --accent-soft-2: rgba(233, 79, 0, 0.18);
+    --accent-hover: #c94500;
+    --text: #1c2431;
+    --muted: #556175;
+    --dim: #5f6b82; /* 5.0:1 on --bg, 4.7:1 on --surface-hover (was 4.46) */
+    --border: #e3e7ee;
+    --success: #15803d;
+    --success-soft: rgba(21, 128, 61, 0.1);
+    --warning: #975a06;
+    --warning-soft: rgba(151, 90, 6, 0.1);
+    --error: #c0262d;
+    --error-soft: rgba(192, 38, 45, 0.1);
+    --info: #1d4ed8;
+    --info-soft: rgba(29, 78, 216, 0.09);
+    --scrim: rgba(15, 23, 42, 0.45);
+    --r-sm: 6px;
+    --r-md: 9px;
+    --r-lg: 14px;
+    --r-full: 9999px;
+    --shadow-sm: 0 1px 3px rgba(15, 23, 42, 0.14);
+    --shadow-card: 0 1px 2px rgba(15, 23, 42, 0.07);
+    --shadow-float: 0 10px 28px -8px rgba(15, 23, 42, 0.22);
+    --shadow-accent: 0 10px 24px -10px rgba(233, 79, 0, 0.4);
+    --serif: "Fraunces", Georgia, "Times New Roman", serif;
+    --sans: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+    --mono: "Geist Mono", ui-monospace, "SF Mono", Menlo, monospace;
+    --brand-display: "Michroma", var(--sans);
+    --pin-disc: #ffffff;
+    --pin-disc-ring: rgba(15, 23, 42, 0.22);
+    --station-halo: #ffffff;
+    --pin-shadow: 0 1px 5px rgba(15, 23, 42, 0.14);
+    --pin-shadow-c: rgba(15, 23, 42, 0.16);
+    --auth-line: rgba(15, 23, 42, 0.14);
+  }
+
+  /* Dark theme — opt-in via Settings/onboarding; the boot script stamps
+     data-theme explicitly for every visitor. .theme-dark forces the set
+     onto a subtree (brand screens stay dark under the light default). */
+  [data-theme="dark"], .theme-dark {
     --bg: #0b0c0f;
     --surface: #16181d;
     --surface-hover: #1f2229;
@@ -50,50 +98,6 @@
     --pin-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
     --pin-shadow-c: rgba(0, 0, 0, 0.4);
     --auth-line: rgba(255, 255, 255, 0.14);
-  }
-
-  /* Light theme — same orange, paper surfaces. Toggled from Settings; the
-     attribute is stamped pre-paint by the head boot script. */
-  [data-theme="light"] {
-    --bg: #f6f7f9;
-    --surface: #ffffff;
-    --surface-hover: #eef0f4;
-    /* Brand decision (user, 2026-08-15): keep the original light-mode
-       orange. The audit's darker AA variants (#c64200/#b83d00) read as a
-       different brand — reverted knowingly. WCAG note: white-on-accent at
-       small sizes measures 3.76:1 (AA-large passes, AA-small doesn't);
-       revisit with a dedicated text-accent token if needed. */
-    --accent: #e94f00;
-    --accent-soft: rgba(233, 79, 0, 0.09);
-    --accent-soft-2: rgba(233, 79, 0, 0.18);
-    --accent-hover: #c94500;
-    --text: #1c2431;
-    --muted: #556175;
-    --dim: #5f6b82; /* 5.0:1 on --bg, 4.7:1 on --surface-hover (was 4.46) */
-    --border: #e3e7ee;
-    --success: #15803d;
-    --success-soft: rgba(21, 128, 61, 0.1);
-    --warning: #975a06;
-    --warning-soft: rgba(151, 90, 6, 0.1);
-    --error: #c0262d;
-    --error-soft: rgba(192, 38, 45, 0.1);
-    --info: #1d4ed8;
-    --info-soft: rgba(29, 78, 216, 0.09);
-    --scrim: rgba(15, 23, 42, 0.45);
-    --shadow-sm: 0 1px 3px rgba(15, 23, 42, 0.14);
-    --shadow-card: 0 1px 2px rgba(15, 23, 42, 0.07);
-    --shadow-float: 0 10px 28px -8px rgba(15, 23, 42, 0.22);
-    --shadow-accent: 0 10px 24px -10px rgba(233, 79, 0, 0.4);
-  }
-
-  /* Light-theme fixes for spots that hardcode dark values */
-  [data-theme="light"] {
-    --pin-disc: #ffffff;
-    --pin-disc-ring: rgba(15, 23, 42, 0.22);
-    --station-halo: #ffffff;
-    --pin-shadow: 0 1px 5px rgba(15, 23, 42, 0.14);
-    --pin-shadow-c: rgba(15, 23, 42, 0.16);
-    --auth-line: rgba(15, 23, 42, 0.14);
   }
   [data-theme="light"] body {
     background: linear-gradient(180deg, #eef1f5, #e4e8ee);

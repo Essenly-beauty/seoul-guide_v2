@@ -44,9 +44,10 @@ export const viewport: Viewport = {
 };
 
 /** Applies the stored theme before first paint — no light/dark flash. */
-// Light is the service default (user decision 2026-08-15) — only an explicit
-// stored "dark" keeps the dark tokens; everyone else gets light pre-paint.
-const THEME_BOOT = `(function(){var d=false;try{d=localStorage.getItem("essenly.theme")==="dark"}catch(e){}if(!d)document.documentElement.setAttribute("data-theme","light")})()`;
+// Light is the code AND service default (user decision 2026-08-15): :root
+// carries light tokens, dark is the opt-in override. The attribute is always
+// stamped explicitly so per-theme component rules match either way.
+const THEME_BOOT = `(function(){var t="light";try{if(localStorage.getItem("essenly.theme")==="dark")t="dark"}catch(e){}document.documentElement.setAttribute("data-theme",t)})()`;
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
