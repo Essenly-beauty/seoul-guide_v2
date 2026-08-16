@@ -2958,23 +2958,29 @@
     50% { opacity: 0.8; }
   }
 
-  /* ── Directions taxi card ─────────────────── */
-  .taxi-big {
-    background: var(--accent-soft);
-    border: 1px solid var(--border);
-    border-radius: var(--r-lg);
-    padding: 16px;
+  /* ── "Show to taxi driver" big-text modal ──── */
+  .taxi-modal {
     text-align: center;
   }
-  .taxi-big-name {
-    font-family: var(--serif);
-    font-size: 26px;
-    margin-top: 8px;
+  .taxi-modal-kicker {
+    color: var(--accent);
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 0.01em;
   }
-  .taxi-big-addr {
-    font-size: 16px;
-    color: var(--muted);
-    margin: 4px 0 12px;
+  .taxi-modal-name {
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 1.4;
+    margin-top: 16px;
+    word-break: keep-all;
+  }
+  .taxi-modal-addr {
+    font-size: 25px;
+    font-weight: 700;
+    line-height: 1.4;
+    margin-top: 6px;
+    word-break: keep-all;
   }
 
   /* ── Map screen ────────────────────────────── */

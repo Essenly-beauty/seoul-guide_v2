@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState, type ReactNode } from "react";
+import { createPortal } from "react-dom";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { ActionButton } from "@/components/ui/action-button";
@@ -18,6 +19,7 @@ import { RatingLine } from "@/components/ui/rating-line";
 import { SectionDivider } from "@/components/ui/section-divider";
 import { SectionHeader } from "@/components/ui/section-header";
 import { useToast } from "@/components/ui/toast";
+import { useDialogFocus } from "@/components/ui/use-dialog-focus";
 import { Icon } from "@/components/icon";
 import { useLocation } from "@/components/map/use-location";
 import { useSigninNudge } from "@/components/auth/signin-nudge";
@@ -173,14 +175,62 @@ function HomeSection({ place }: { place: Place }) {
           <span className="caption muted chev">{place.stationWalk.minutes} min walk</span>
         </div>
       )}
-      <ActionButton className="taxicard" copy={`${place.nameKr}, ${place.address}`}>
-        <span className="ic"><Icon name="car" size="sm" /></span>
-        <div><b>Show to taxi driver</b><div className="caption muted">{place.nameKr} · {place.address}</div></div>
-      </ActionButton>
+      <TaxiCard place={place} />
       {/* Launch audit P0-1: the "welcome deal" coupon was a prototype
           fabrication — real per-place promotions return when partnerships
           exist. */}
     </section>
+  );
+}
+
+// ── "Show to taxi driver" — tap opens a centered big-text modal ──
+// (user request 2026-08-16: name + address in Korean, readable at
+// arm's length for the driver.) 205 scraped rows carry an English-only
+// nameKr — the Korean name line appears only when it actually helps.
+function TaxiCard({ place }: { place: Place }) {
+  const [open, setOpen] = useState(false);
+  // portal to .app-shell — inline, the detail page's sticky/transform
+  // ancestors trap the scrim in a lower stacking context (same reason
+  // BottomSheet portals)
+  const [host, setHost] = useState<Element | null>(null);
+  useEffect(() => { setHost(document.querySelector(".app-shell")); }, []);
+  const closeRef = useRef<HTMLButtonElement>(null);
+  const dialogRef = useDialogFocus<HTMLDivElement>(open, () => setOpen(false), closeRef);
+  const krName = /[가-힣]/.test(place.nameKr) ? place.nameKr : null;
+  return (
+    <>
+      <button className="taxicard" onClick={() => setOpen(true)}>
+        <span className="ic"><Icon name="car" size="sm" /></span>
+        <div>
+          <b>Show to taxi driver</b>
+          <div className="caption muted">{krName ?? place.name} · {place.address}</div>
+        </div>
+      </button>
+      {open && host && createPortal(
+        <div className="modal" onClick={(e) => e.target === e.currentTarget && setOpen(false)}>
+          <div
+            ref={dialogRef}
+            className="box taxi-modal"
+            role="dialog"
+            aria-modal="true"
+            aria-label="Show this screen to the taxi driver"
+            tabIndex={-1}
+          >
+            <div className="taxi-modal-kicker">이 주소로 가주세요</div>
+            <div className="caption muted">Please take me to this address</div>
+            <div className="taxi-modal-name">{krName ?? place.name}</div>
+            <div className="taxi-modal-addr">{place.address}</div>
+            <div className="row" style={{ gap: 8, marginTop: 18 }}>
+              <ActionButton variant="secondary" style={{ flex: 1 }} copy={`${krName ?? place.name}, ${place.address}`}>
+                Copy
+              </ActionButton>
+              <Button buttonRef={closeRef} style={{ flex: 1 }} onClick={() => setOpen(false)}>Close</Button>
+            </div>
+          </div>
+        </div>,
+        host,
+      )}
+    </>
   );
 }
 
