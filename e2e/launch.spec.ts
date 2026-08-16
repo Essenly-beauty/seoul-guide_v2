@@ -176,6 +176,46 @@ test.describe("direct auth + account sync", () => {
     }
   });
 
+  test("public review round-trip: consented note shows to guests, private stays private", async ({ page, browser, baseURL }) => {
+    await login(page);
+    await page.goto("/place/glow-skin-clinic");
+    await page.getByRole("button", { name: "Rate 4 stars" }).click();
+    await page.getByRole("button", { name: "Write a review" }).click();
+    await page.getByLabel("Your review").fill("Great aqua peel, English-friendly staff.");
+    // consent checkbox defaults ON for a new review
+    await expect(page.getByRole("checkbox")).toBeChecked();
+    await page.getByRole("button", { name: "Save review" }).click();
+    await expect(page.getByText("Your review · public")).toBeVisible();
+
+    // a guest sees it, masked to the first name (test user has none → Member)
+    const guestCtx = await browser.newContext();
+    const guest = await guestCtx.newPage();
+    try {
+      await guest.goto(`${baseURL}/place/glow-skin-clinic`);
+      await expect(guest.getByText("Great aqua peel, English-friendly staff.")).toBeVisible({ timeout: 20_000 });
+      await expect(guest.getByText("Member", { exact: true })).toBeVisible();
+      // guest report path asks for an account
+      await guest.getByRole("button", { name: "Report" }).click();
+      await guest.getByRole("button", { name: "Spam or ad" }).click();
+      await expect(guest.getByText("Sign in to report reviews")).toBeVisible();
+
+      // flipping the note private removes it from the public view
+      await page.getByRole("button", { name: "Edit review" }).click();
+      await page.getByRole("checkbox").uncheck();
+      await page.getByRole("button", { name: "Save review" }).click();
+      await expect(page.getByText("Your review · private note")).toBeVisible();
+      await expect
+        .poll(async () => {
+          await guest.reload();
+          return guest.getByText("Great aqua peel, English-friendly staff.").count();
+        }, { timeout: 20_000 })
+        .toBe(0);
+    } finally {
+      await guestCtx.close();
+      await admin!.from("ratings").delete().eq("user_id", uid!).eq("place_id", "glow-skin-clinic");
+    }
+  });
+
   test("shared device: next account never inherits the previous mirror", async ({ page }) => {
     // simulate account A's dead session leaving a mirror behind
     await page.goto("/menu");
