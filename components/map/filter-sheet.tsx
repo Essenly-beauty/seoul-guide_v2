@@ -37,6 +37,12 @@ export function FilterSheet({ cats, filters, onApply, onClose }: {
       title={cats.length === 0 ? "All categories" : cats.map((c) => TYPE_LABEL[c]).join(" · ")}
       kicker="Filters"
       onClose={onClose}
+      footer={
+        <div className="row" style={{ gap: 8 }}>
+          <Button variant="secondary" style={{ flex: 1 }} onClick={() => setDraft(EMPTY_FILTERS)}>Reset</Button>
+          <Button style={{ flex: 2 }} onClick={() => { onApply(draft); onClose(); }}>Apply filters</Button>
+        </div>
+      }
     >
       <div className="filtersheet stack">
       <div>
@@ -83,10 +89,6 @@ export function FilterSheet({ cats, filters, onApply, onClose }: {
           </div>
         </div>
       ))}
-      <div className="row" style={{ gap: 8, marginTop: 4 }}>
-        <Button variant="secondary" style={{ flex: 1 }} onClick={() => setDraft(EMPTY_FILTERS)}>Reset</Button>
-        <Button style={{ flex: 2 }} onClick={() => { onApply(draft); onClose(); }}>Apply filters</Button>
-      </div>
       </div>
     </BottomSheet>
   );
