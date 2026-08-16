@@ -138,7 +138,9 @@ test.describe("direct auth + account sync", () => {
   test("shared list round-trip: member shares, guest opens it on the map", async ({ page, browser, baseURL }) => {
     await login(page);
     // heart two places through the UI so the Saved tab has a list to share
-    for (const id of ["juno-hair-gangnam", "colorlab-gangnam"]) {
+    // (ids no other spec touches — the account may already carry hearts from
+    // earlier specs in this suite, so all assertions below stay count-agnostic)
+    for (const id of ["glow-skin-clinic", "chahong-apgujeong"]) {
       await page.goto(`/place/${id}`);
       const save = page.getByRole("button", { name: "Add to favorites" });
       await save.waitFor({ timeout: 20_000 });
@@ -156,16 +158,17 @@ test.describe("direct auth + account sync", () => {
       }, { timeout: 15_000 })
       .toBe(1);
     const { data: lists } = await admin!.from("shared_lists").select("id, title, place_ids").eq("owner", uid!);
-    expect(lists![0].place_ids.sort()).toEqual(["colorlab-gangnam", "juno-hair-gangnam"]);
+    expect(lists![0].place_ids).toEqual(expect.arrayContaining(["glow-skin-clinic", "chahong-apgujeong"]));
+    const count = lists![0].place_ids.length;
 
     // a guest (fresh context) opens the link: banner + Save all + join sheet
     const guestCtx = await browser.newContext();
     const guest = await guestCtx.newPage();
     try {
       await guest.goto(`${baseURL}/map?list=${lists![0].id}`);
-      await expect(guest.locator(".map-banner")).toContainText(`${lists![0].title} · 2 places`, { timeout: 20_000 });
+      await expect(guest.locator(".map-banner")).toContainText(`${lists![0].title} · ${count} places`, { timeout: 20_000 });
       await guest.getByRole("button", { name: "Save all" }).click();
-      await expect(guest.getByText("Saved 2 places to your list")).toBeVisible();
+      await expect(guest.getByText(`Saved ${count} place${count === 1 ? "" : "s"} to your list`)).toBeVisible();
       await expect(guest.getByText("Save it to your account")).toBeVisible(); // guest funnel
     } finally {
       await guestCtx.close();
