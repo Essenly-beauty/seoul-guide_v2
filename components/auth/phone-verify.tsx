@@ -38,13 +38,18 @@ export function PhoneVerify({ onDone }: { onDone?: () => void }) {
   // yank the code entry away under the user
   if (user.phone && step === "input" && !changing && !unavailable) {
     return (
-      <p className="small" role="status">
-        <span style={{ color: "var(--success)", fontWeight: 600 }}>✓ Verified</span>{" "}
-        <span className="mono">{formatPhone(`+${user.phone}`)}</span>{" "}
-        <button className="caption" style={{ color: "var(--accent)", fontWeight: 600 }} onClick={() => setChanging(true)}>
-          Change number
-        </button>
-      </p>
+      <div className="stack sm">
+        <p className="small" role="status" style={{ margin: 0 }}>
+          <span style={{ color: "var(--success)", fontWeight: 600 }}>✓ Verified</span>{" "}
+          <span className="mono">{formatPhone(`+${user.phone}`)}</span>{" "}
+          <button className="caption" style={{ color: "var(--accent)", fontWeight: 600 }} onClick={() => setChanging(true)}>
+            Change number
+          </button>
+        </p>
+        {/* onboarding renders this already-verified — give it a real next
+            step instead of a near-empty page (auth doc issue #1) */}
+        {onDone && <Button size="sm" onClick={onDone}>Continue</Button>}
+      </div>
     );
   }
 

@@ -14,16 +14,27 @@ export function useAuthUser(): { user: User | null; loading: boolean } {
 
   useEffect(() => {
     let cancelled = false;
-    // Ordering guard (review): once an auth event lands, an in-flight
-    // getUser() resolution must not overwrite the newer state.
+    // Ordering guard (review): once a REAL auth event lands, an in-flight
+    // getUser() resolution must not overwrite the newer state. But
+    // INITIAL_SESSION merely replays the locally cached user — treating it
+    // as newer kept stale identity data (e.g. a phone number changed
+    // server-side) alive across reloads (auth doc issue #3, 2026-08-16).
     let sawAuthEvent = false;
+    let sawServerUser = false;
     supabase.auth.getUser().then(({ data }) => {
       if (cancelled) return;
+      sawServerUser = true;
       if (!sawAuthEvent) setUser(data.user ?? null);
       setLoading(false);
     });
-    const { data: sub } = supabase.auth.onAuthStateChange((_event, session) => {
+    const { data: sub } = supabase.auth.onAuthStateChange((event, session) => {
       if (cancelled) return;
+      if (event === "INITIAL_SESSION") {
+        // cached replay: fill the gap until the server answers, never after
+        if (!sawServerUser && !sawAuthEvent) setUser(session?.user ?? null);
+        setLoading(false);
+        return;
+      }
       sawAuthEvent = true;
       setUser(session?.user ?? null);
       setLoading(false);
