@@ -26,6 +26,7 @@ scripts/.cache/
 !/docs/feature-status.md
 !/docs/data-and-integrations.md
 !/docs/launch-readiness.md
+!/docs/launch-checklist.md
 !/docs/decisions-and-history.md
 !/docs/design-system.md
 !/docs/map-first-v2-spec.md
