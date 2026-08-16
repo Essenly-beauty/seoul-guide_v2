@@ -166,6 +166,8 @@ test.describe("direct auth + account sync", () => {
     const guest = await guestCtx.newPage();
     try {
       await guest.goto(`${baseURL}/map?list=${lists![0].id}`);
+      // link unfurls with the list name (OG/head title from generateMetadata)
+      await expect(guest).toHaveTitle(new RegExp(lists![0].title));
       await expect(guest.locator(".map-banner")).toContainText(`${lists![0].title} · ${count} places`, { timeout: 20_000 });
       await guest.getByRole("button", { name: "Save all" }).click();
       await expect(guest.getByText(`Saved ${count} place${count === 1 ? "" : "s"} to your list`)).toBeVisible();
