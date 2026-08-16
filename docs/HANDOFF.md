@@ -165,7 +165,7 @@ vercel env pull --yes  # .env.local 재생성
 - [x] ~~E2E 자동화 정식화~~ (8/15 완료 — Playwright `e2e/` 13 specs + GitHub Actions CI)
 
 ### P3 — 제품 확장 (이전 논의)
-- [x] ~~공유 즐겨찾기 리스트 → 지도 뷰~~ (8/16 v1 코드 완료 — `shared_lists` 스냅샷 테이블+RLS(`0006_shared_lists.sql`), Saved 탭 "Share this list"(게스트=join sheet), `/map?list={uuid}` 핀 레이어+배너+Save all, 깨진 링크는 토스트+일반 지도 폴백. **⚠️ 마이그레이션 0006 적용 대기** — 세션 권한 분류기가 DB 스크립트 실행을 차단, 오너가 `node <scratchpad>/apply-0006.js` 실행 필요. 백로그 잔여: OG 미리보기 카드, 리스트 이름 직접 입력)
+- [x] ~~공유 즐겨찾기 리스트 → 지도 뷰~~ (8/16 v1 완료 — `shared_lists` 스냅샷 테이블+RLS(`0006_shared_lists.sql`, 오너가 직접 적용), Saved 탭 "Share this list"(게스트=join sheet), `/map?list={uuid}` 핀 레이어+배너+Save all, 깨진 링크는 토스트+일반 지도 폴백. **프로덕션 왕복 E2E 통과** — 회원 공유→게스트 열람→Save all→가입 유도. 백로그 잔여: OG 미리보기 카드, 리스트 이름 직접 입력)
 - [ ] **한글 상호명 백필**: creatrip 205곳 전부 `nameKr`가 영어 그대로 (예: KKAL SALON). 택시 모달·카드가 한글 상호를 우선 표시하도록 되어 있어 데이터만 채우면 됨 — Kakao Local REST 키워드 검색(좌표+상호 매칭)으로 파이프라인에서 백필 (ados는 111/112 한글 보유)
 - [ ] 장소 데이터 DB 이전 (지금은 `lib/generated/*.ts` 정적 — 운영 편집 필요 시)
 - [ ] 리뷰 수 기반 인기 표시 재검토 (한 번 뺐던 기능 — 데이터는 ratingCount로 보존됨)
