@@ -2176,11 +2176,13 @@
     font-weight: 700;
   }
   .welcome-guest { display: inline-block; margin-top: 18px; text-decoration: underline; }
-  /* guest entry as a real choice — bordered secondary, full width under the CTA row */
-  .welcome-guest-btn {
-    display: block;
+  /* welcome funnel: labeled social buttons first (user decision 2026-08-16) */
+  .welcome-social {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
     width: 100%;
-    margin-top: 12px;
     padding: 13px 16px;
     border: 1px solid var(--border);
     border-radius: var(--r-md);
@@ -2188,11 +2190,25 @@
     color: var(--text);
     font-size: 15px;
     font-weight: 600;
-    text-align: center;
   }
-  .welcome-guest-btn:focus-visible {
-    outline: 2px solid var(--accent);
-    outline-offset: 2px;
+  .welcome-social svg { width: 18px; height: 18px; flex: none; }
+  .welcome-social:disabled { opacity: 0.6; }
+  .welcome-social:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .welcome-social-apple { background: #000; color: #fff; border-color: #000; }
+  [data-theme="dark"] .welcome-social-apple { background: #fff; color: #0b0c0f; border-color: #fff; }
+  .welcome-cta-full {
+    /* match the social buttons' scale — the auth-page CTA's 76px hero
+       height overpowers the welcome stack */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    min-height: 0;
+    margin-top: 10px;
+    padding: 13px 16px;
+    border-radius: var(--r-md);
+    font-size: 15px;
+    text-align: center;
   }
   .welcome-terms { margin-top: 16px; }
   .welcome-terms a { text-decoration: underline; }

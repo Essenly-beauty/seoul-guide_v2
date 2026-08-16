@@ -1,24 +1,18 @@
 import Link from "next/link";
-import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { BrandMark, BrandWordmark } from "@/components/brand/brand-logo";
-import { GuestEntryButton } from "@/components/auth/guest-entry";
+import { WelcomeSocials } from "@/components/auth/welcome-socials";
 import { WelcomeHero } from "@/components/brand/welcome-hero";
 import { supabaseServer } from "@/lib/supabase/server";
 import { routes } from "@/lib/routes";
 
-// Welcome / auth entry, following the Figma reference (58:1239 + 58:1358):
-// lockup, pitch, a full-width visual, then one chunky brand CTA beside a
-// plain sign-in link. The reference's photo band is our map preview — it
-// shows the product instead of decorating around it. Theme-aware throughout.
+// Welcome / auth entry. Funnel order (user decision 2026-08-16): social
+// sign-in first, email signup second, guest as a quiet escape hatch — the
+// app works without an account, but the front door sells the account.
 export default async function WelcomePage() {
-  // Auto sign-in: a returning member should land in the app, not on the
-  // logged-out pitch (user report 2026-08-15 — "자동 로그인이 안 된다").
+  // Auto sign-in: a returning member lands in the app, not on the pitch.
   const { data: { user } } = await supabaseServer().auth.getUser();
   if (user) redirect(routes.map);
-  // Returning guests skip the pitch too — "continue as guest" is a remembered
-  // choice, not a toll booth on every visit (user request 2026-08-16).
-  if ((await cookies()).get("essenly_guest")?.value === "1") redirect(routes.map);
   return (
     <div className="welcome-screen app-scroll">
       <div className="welcome-lockup">
@@ -38,11 +32,15 @@ export default async function WelcomePage() {
       </div>
 
       <div className="welcome-actions">
-        <div className="welcome-cta-row">
-          <Link className="auth-cta welcome-cta" href={routes.register}>Get started</Link>
-          <Link className="welcome-signin" href={routes.signIn}>Sign in</Link>
-        </div>
-        <GuestEntryButton />
+        <WelcomeSocials />
+        <Link className="auth-cta welcome-cta-full" href={routes.register}>
+          Sign up with email
+        </Link>
+        <p className="caption muted" style={{ textAlign: "center", marginTop: 14 }}>
+          <Link className="auth-link" href={routes.signIn}>Sign in</Link>
+          <span className="dim" aria-hidden="true"> · </span>
+          <Link className="welcome-guest" style={{ margin: 0 }} href={routes.map}>Continue as guest</Link>
+        </p>
         <p className="caption dim welcome-terms">
           By continuing you agree to the{" "}
           <Link href={routes.legalTerms}>Terms</Link> and{" "}
