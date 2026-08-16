@@ -162,7 +162,15 @@ function HomeSection({ place }: { place: Place }) {
       <div className="inforow">
         <Icon name="pin" size="xs" />
         <span style={{ minWidth: 0 }}>{place.address}</span>
-        <ActionButton className="small chev" style={{ color: "var(--accent)", fontWeight: 600 }} copy={place.address} aria-label="Copy address">
+        <Link
+          className="small chev"
+          style={{ color: "var(--accent)", fontWeight: 600 }}
+          href={`${routes.map}?place=${encodeURIComponent(place.id)}`}
+          aria-label="View on the MYSEOULDROP map"
+        >
+          Map
+        </Link>
+        <ActionButton className="small" style={{ color: "var(--accent)", fontWeight: 600, flex: "none" }} copy={place.address} aria-label="Copy address">
           Copy
         </ActionButton>
       </div>
