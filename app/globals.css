@@ -2176,6 +2176,24 @@
     font-weight: 700;
   }
   .welcome-guest { display: inline-block; margin-top: 18px; text-decoration: underline; }
+  /* guest entry as a real choice — bordered secondary, full width under the CTA row */
+  .welcome-guest-btn {
+    display: block;
+    width: 100%;
+    margin-top: 12px;
+    padding: 13px 16px;
+    border: 1px solid var(--border);
+    border-radius: var(--r-md);
+    background: var(--surface);
+    color: var(--text);
+    font-size: 15px;
+    font-weight: 600;
+    text-align: center;
+  }
+  .welcome-guest-btn:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
   .welcome-terms { margin-top: 16px; }
   .welcome-terms a { text-decoration: underline; }
 

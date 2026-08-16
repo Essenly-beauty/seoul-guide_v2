@@ -1,6 +1,8 @@
 import Link from "next/link";
+import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { BrandMark, BrandWordmark } from "@/components/brand/brand-logo";
+import { GuestEntryButton } from "@/components/auth/guest-entry";
 import { WelcomeHero } from "@/components/brand/welcome-hero";
 import { supabaseServer } from "@/lib/supabase/server";
 import { routes } from "@/lib/routes";
@@ -14,6 +16,9 @@ export default async function WelcomePage() {
   // logged-out pitch (user report 2026-08-15 — "자동 로그인이 안 된다").
   const { data: { user } } = await supabaseServer().auth.getUser();
   if (user) redirect(routes.map);
+  // Returning guests skip the pitch too — "continue as guest" is a remembered
+  // choice, not a toll booth on every visit (user request 2026-08-16).
+  if ((await cookies()).get("essenly_guest")?.value === "1") redirect(routes.map);
   return (
     <div className="welcome-screen app-scroll">
       <div className="welcome-lockup">
@@ -37,9 +42,7 @@ export default async function WelcomePage() {
           <Link className="auth-cta welcome-cta" href={routes.register}>Get started</Link>
           <Link className="welcome-signin" href={routes.signIn}>Sign in</Link>
         </div>
-        <Link className="login-guest caption muted welcome-guest" href={routes.map}>
-          Continue as guest
-        </Link>
+        <GuestEntryButton />
         <p className="caption dim welcome-terms">
           By continuing you agree to the{" "}
           <Link href={routes.legalTerms}>Terms</Link> and{" "}

@@ -51,6 +51,14 @@ test.describe("discovery smoke (no auth needed)", () => {
     }
   });
 
+  test("guest choice is remembered: welcome skips straight to the map", async ({ page }) => {
+    await page.goto("/");
+    await page.getByRole("button", { name: "Continue as guest" }).click();
+    await page.waitForURL(/\/map/, { timeout: 20_000 });
+    await page.goto("/"); // revisit — no pitch toll booth for known guests
+    await expect(page).toHaveURL(/\/map/);
+  });
+
   test("prototype routes stay closed (redirects)", async ({ page }) => {
     await page.goto("/bookings");
     await expect(page).toHaveURL(/\/menu/);
