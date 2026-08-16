@@ -52,7 +52,23 @@ SMTP 연결 후 Dashboard → Authentication → Email Templates에서 링크 �
    카카오 로그인 → 보안 → Client Secret 발급 → Supabase의 Client Secret으로
 5. 동의 항목: 닉네임/이메일 설정 (이메일은 비즈 앱 전환 필요할 수 있음)
 
-## 4. Apple 로그인 (보류 권장)
+## 4. SMS 전화 인증 (Twilio) — 코드는 배포됨, 계정 연결만 필요
+
+앱에는 온보딩·설정에 전화 인증 UI가 이미 배포돼 있고(미설정 시 "준비 중"
+안내), 아래만 연결하면 즉시 활성화된다:
+
+1. [Twilio](https://www.twilio.com) 가입 → 전화번호(발신용) 구매 또는 Messaging Service 생성
+   - 무료 체험 크레딧으로 시작 가능. 국제 SMS 단가는 국가별 상이(건당 $0.05~0.5)
+2. Console에서 **Account SID / Auth Token / Message Service SID** 확보
+3. Supabase Dashboard → Authentication → Sign In / Providers → **Phone** 활성화
+   → SMS provider = Twilio → 위 3개 값 입력 → Save
+4. 확인: 설정 → Phone verification에서 실번호로 코드 수신 테스트
+
+구현 방식: 이메일 계정에 번호를 부착·인증(phone_change OTP). 전화번호 단독
+로그인은 아님(이메일/Google이 primary). 온보딩 단계는 건너뛰기 가능 —
+국제 SMS 도달 실패로 가입이 막히면 안 되기 때문.
+
+## 5. Apple 로그인 (보류 권장)
 
 Apple Developer Program **연 $129 유료**. 결제 전까지 앱의 Apple 버튼은
 "준비 중" 에러 메시지를 표시한다 (AuthShell이 처리).

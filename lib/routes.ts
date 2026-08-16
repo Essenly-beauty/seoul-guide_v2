@@ -9,6 +9,7 @@ export const routes = {
   resetPassword: "/reset-password",
   onboardingMode: "/onboarding/mode",
   onboardingBasics: "/onboarding/basics",
+  onboardingPhone: "/onboarding/phone",
   onboardingInterests: "/onboarding/interests",
   onboardingProfile: "/onboarding/beauty-profile",
 

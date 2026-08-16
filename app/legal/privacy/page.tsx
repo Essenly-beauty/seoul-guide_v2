@@ -6,7 +6,7 @@ export const metadata: Metadata = { title: "Privacy Policy — MYSEOULDROP" };
 // NOTE: Draft copy. Must pass legal review before public launch.
 const SECTIONS = [
   { heading: "What we collect", body: [
-    "Account basics (name, email), your beauty profile (hair and skin type, concerns, interests), your saved places and ratings, and — only while the map is open and with your permission — your device location.",
+    "Account basics (name, email, and — only if you verify one — your phone number), your beauty profile (hair and skin type, concerns, interests), your saved places and ratings, and — only while the map is open and with your permission — your device location.",
   ]},
   { heading: "How we use it", body: [
     "To personalize recommendations and show nearby places on the map. We do not sell your personal data, and we do not share it with venues — MYSEOULDROP currently has no booking features.",

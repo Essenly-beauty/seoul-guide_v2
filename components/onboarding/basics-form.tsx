@@ -57,10 +57,10 @@ export function BasicsForm() {
         </div>
       </div>
 
-      <Button href={routes.onboardingInterests} style={{ marginTop: 4 }}>
+      <Button href={routes.onboardingPhone} style={{ marginTop: 4 }}>
         Next <Icon name="chev" size="sm" />
       </Button>
-      <Link className="caption muted" href={routes.onboardingInterests} style={{ textAlign: "center", textDecoration: "underline" }}>
+      <Link className="caption muted" href={routes.onboardingPhone} style={{ textAlign: "center", textDecoration: "underline" }}>
         Skip for now
       </Link>
     </div>
