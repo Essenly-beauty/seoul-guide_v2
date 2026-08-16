@@ -14,6 +14,9 @@ import { Icon } from "@/components/icon";
 import { routes } from "@/lib/routes";
 import { ARTICLES, PLACES, PRODUCTS, getPlace } from "@/lib/data";
 import { useFavorites, useFavoritesReady } from "@/lib/favorites";
+import { useSigninNudge } from "@/components/auth/signin-nudge";
+import { useAuthUser } from "@/lib/auth/use-auth";
+import { useEffect } from "react";
 import { useMyRatings, useMyRatingsReady } from "@/lib/ratings";
 
 type MenuRow = { icon: Parameters<typeof Icon>[0]["name"]; title: string; value?: string; href: string; badge?: string };
@@ -58,11 +61,19 @@ export default function MenuPage() {
   const savedLabel = favsReady ? String(savedCount) : "–";
   const ratings = useMyRatings();
   const ratingsReady = useMyRatingsReady();
+  // guests entering My get the join sheet (user decision 2026-08-16) —
+  // dismissible; the guest menu stays usable underneath
+  const { user, loading: authLoading } = useAuthUser();
+  const { nudge, sheet: joinSheet } = useSigninNudge();
+  useEffect(() => {
+    if (!authLoading && !user) nudge("menu");
+  }, [authLoading, user, nudge]);
   const ratedCount = Object.keys(ratings).filter((id) => getPlace(id)).length;
   const ratedLabel = ratingsReady ? String(ratedCount) : "–";
   return (
     <>
       <TopBar title="Menu" />
+      {joinSheet}
       <div className="app-scroll pad stack pagev2">
         {/* Profile header block — live session state */}
         <section className="stack">

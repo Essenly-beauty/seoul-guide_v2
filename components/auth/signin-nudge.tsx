@@ -1,71 +1,100 @@
 "use client";
 
-// Guest → account funnel (user request 2026-08-15): a small bottom sheet at
-// moments where an account genuinely adds value — first save, first rating,
-// the saved-places map layer. Never a wall: the guest action has already
-// happened locally, and dismissing keeps full guest mode. Each context shows
-// at most once per device (the map layer repeats while it has nothing to
-// show, since the empty layer would otherwise just look broken).
+// The join prompt — one shared signup funnel sheet (user decision
+// 2026-08-16: the welcome gateway is gone; everyone lands on the map and
+// the account is sold contextually). Guests meet it on the My tab, on
+// place-detail views, and on account-value actions (heart, rating, saved
+// layer). Always dismissible: the guest action itself has already
+// completed locally, so "Continue as guest" never loses anything.
+//
+// Frequency by context:
+//  - menu, favorite, rating, savedLayer: every time (deliberate,
+//    account-value moments)
+//  - detail: once per session (it's the core browsing loop — a prompt per
+//    view would kill discovery)
 
-import { useCallback, useState, type ReactNode } from "react";
+import { useCallback, useEffect, useState, type ReactNode } from "react";
+import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { BottomSheet } from "@/components/ui/bottom-sheet";
 import { Button } from "@/components/ui/button";
-import { Icon } from "@/components/icon";
+import { GoogleGlyph } from "@/components/brand/auth-glyphs";
 import { useAuthUser } from "@/lib/auth/use-auth";
+import { supabaseBrowser } from "@/lib/supabase/client";
 import { routes } from "@/lib/routes";
 
-export type NudgeContext = "favorite" | "rating" | "savedLayer";
+export type NudgeContext = "favorite" | "rating" | "savedLayer" | "menu" | "detail";
 
-const COPY: Record<NudgeContext, { icon: "heart" | "book" | "user"; title: string; body: string }> = {
+const COPY: Record<NudgeContext, { title: string; body: string }> = {
   favorite: {
-    icon: "heart",
-    title: "Saved on this device",
-    body: "Sign in and your saved places move to your account — backed up, and on every device you use.",
+    title: "Save it to your account",
+    body: "This heart lives only on this device. Join and your saved places follow you — any phone, safely backed up.",
   },
   rating: {
-    icon: "book",
-    title: "Rating kept on this device",
-    body: "Sign in to keep your ratings and review notes on your account across devices.",
+    title: "Keep your ratings",
+    body: "Join and your ratings and review notes stay on your account across devices.",
   },
   savedLayer: {
-    icon: "heart",
     title: "Your saved-places layer",
-    body: "Tap ♥ on any place to collect it here. Sign in and the collection follows your account.",
+    body: "Tap ♥ on any place to collect it here. Join and the collection follows your account.",
+  },
+  menu: {
+    title: "Make MYSEOULDROP yours",
+    body: "Saved places, ratings, and your beauty profile sync to your account — free, takes a minute.",
+  },
+  detail: {
+    title: "Planning to visit?",
+    body: "Join to save places like this, rate your visits, and keep everything across devices.",
   },
 };
 
-const seenKey = (c: NudgeContext) => `essenly.nudge.${c}`;
+const SESSION_KEY = (c: NudgeContext) => `essenly.nudge.session.${c}`;
 
-/** Call `nudge(context)` after a guest action; render `{sheet}` nearby. */
-export function useSigninNudge(): { nudge: (c: NudgeContext, opts?: { repeat?: boolean }) => void; sheet: ReactNode } {
+export function useSigninNudge(): { nudge: (c: NudgeContext) => void; sheet: ReactNode } {
   const { user, loading } = useAuthUser();
   const pathname = usePathname();
   const [ctx, setCtx] = useState<NudgeContext | null>(null);
+  const [busy, setBusy] = useState(false);
 
   const nudge = useCallback(
-    (c: NudgeContext, opts?: { repeat?: boolean }) => {
+    (c: NudgeContext) => {
       if (loading || user) return; // members never see it
-      if (!opts?.repeat) {
+      if (c === "detail") {
         try {
-          if (localStorage.getItem(seenKey(c))) return;
-          localStorage.setItem(seenKey(c), "1");
-        } catch { /* storage unavailable — still show once this session */ }
+          if (sessionStorage.getItem(SESSION_KEY(c))) return;
+          sessionStorage.setItem(SESSION_KEY(c), "1");
+        } catch { /* storage unavailable — still show */ }
       }
       setCtx(c);
     },
     [loading, user],
   );
 
+  const google = async () => {
+    if (busy) return;
+    setBusy(true);
+    const { error } = await supabaseBrowser().auth.signInWithOAuth({
+      provider: "google",
+      options: { redirectTo: `${window.location.origin}/auth/callback?next=${encodeURIComponent(pathname)}` },
+    });
+    if (error) setBusy(false); // fall through to the email options below
+  };
+
+  const nextParam = `?next=${encodeURIComponent(pathname)}`;
   const sheet = ctx ? (
     <BottomSheet title={COPY[ctx].title} kicker="MYSEOULDROP account" onClose={() => setCtx(null)}>
-      <div className="row" style={{ gap: 12, alignItems: "flex-start" }}>
-        <span className="ic" aria-hidden="true"><Icon name={COPY[ctx].icon} size="sm" /></span>
-        <p className="small muted" style={{ margin: 0, lineHeight: 1.55 }}>{COPY[ctx].body}</p>
-      </div>
+      <p className="small muted" style={{ margin: 0, lineHeight: 1.55 }}>{COPY[ctx].body}</p>
       <div className="stack sm" style={{ marginTop: 16 }}>
-        <Button href={`${routes.signIn}?next=${encodeURIComponent(pathname)}`}>Sign in</Button>
-        <Button variant="secondary" onClick={() => setCtx(null)}>Keep browsing as guest</Button>
+        <button type="button" className="welcome-social welcome-social-google" disabled={busy} aria-busy={busy} onClick={google}>
+          <GoogleGlyph />
+          <span>Continue with Google</span>
+        </button>
+        <Button href={`${routes.register}${nextParam}`}>Sign up with email</Button>
+        <p className="caption muted" style={{ textAlign: "center", margin: "2px 0 0" }}>
+          <Link className="auth-link" href={`${routes.signIn}${nextParam}`}>Sign in</Link>
+          <span className="dim" aria-hidden="true"> · </span>
+          <button className="auth-link" style={{ font: "inherit" }} onClick={() => setCtx(null)}>Continue as guest</button>
+        </p>
       </div>
     </BottomSheet>
   ) : null;

@@ -389,7 +389,7 @@ export function MapScreen() {
             // guests with nothing saved would just see an empty map — show
             // the account nudge instead of a broken-looking layer
             if (!favOnly && !authUser && favs.place.length === 0) {
-              nudge("savedLayer", { repeat: true });
+              nudge("savedLayer");
               return;
             }
             setFavOnly((v) => !v);

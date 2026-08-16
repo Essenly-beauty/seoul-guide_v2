@@ -108,6 +108,10 @@ function PlaceActions({ place }: { place: Place }) {
   const { toast, share } = useToast();
   const { nudge, sheet } = useSigninNudge();
   const saved = favs.place.includes(place.id);
+  // viewing a detail as a guest pitches the account once per session
+  useEffect(() => {
+    nudge("detail");
+  }, [nudge]);
   return (
     <div className="place-actions">
       {sheet}

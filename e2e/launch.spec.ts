@@ -51,12 +51,15 @@ test.describe("discovery smoke (no auth needed)", () => {
     }
   });
 
-  test("welcome funnels to social/signup; guest stays a quiet escape hatch", async ({ page }) => {
+  test("no gateway: root lands everyone on the map; My tab pitches the account", async ({ page }) => {
     await page.goto("/");
-    await expect(page.getByRole("button", { name: "Continue with Google" })).toBeVisible();
+    await expect(page).toHaveURL(/\/map/);
+    await page.goto("/menu");
+    // guest join sheet: Google + email signup + dismiss
+    await expect(page.getByRole("button", { name: "Continue with Google" })).toBeVisible({ timeout: 15_000 });
     await expect(page.getByRole("link", { name: "Sign up with email" })).toBeVisible();
-    await page.getByRole("link", { name: "Continue as guest" }).click();
-    await page.waitForURL(/\/map/, { timeout: 20_000 });
+    await page.getByRole("button", { name: "Continue as guest" }).click();
+    await expect(page.getByText("Saved", { exact: true }).first()).toBeVisible();
   });
 
   test("prototype routes stay closed (redirects)", async ({ page }) => {
@@ -78,10 +81,8 @@ test.describe("discovery smoke (no auth needed)", () => {
 test.describe("direct auth + account sync", () => {
   test.skip(() => !adminClient(), "needs SUPABASE_SERVICE_ROLE_KEY (.env.local)");
 
-  test("returning member: welcome and login redirect straight into the app", async ({ page }) => {
+  test("returning member: login page redirects straight into the app", async ({ page }) => {
     await login(page);
-    await page.goto("/");
-    await expect(page).toHaveURL(/\/map/);
     await page.goto("/login");
     await expect(page).toHaveURL(/\/map/);
   });
