@@ -3,7 +3,41 @@ import { Suspense } from "react";
 import { MapScreen } from "@/components/map/map-screen";
 import { BottomNav } from "@/components/ui/bottom-nav";
 
-export const metadata: Metadata = { title: "Map — MYSEOULDROP" };
+const BASE_META: Metadata = { title: "Map — MYSEOULDROP" };
+
+// Shared-list links (/map?list={uuid}) get a real preview card in
+// KakaoTalk/iMessage — title + place count from the snapshot row.
+// Anon REST read of the public-select table; any failure falls back
+// to the plain map meta.
+export async function generateMetadata(
+  { searchParams }: { searchParams: Promise<{ list?: string }> },
+): Promise<Metadata> {
+  const { list } = await searchParams;
+  if (!list || !/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(list)) return BASE_META;
+  const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const key = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+  if (!url || !key) return BASE_META;
+  try {
+    const res = await fetch(
+      `${url}/rest/v1/shared_lists?id=eq.${list}&select=title,place_ids`,
+      { headers: { apikey: key, Authorization: `Bearer ${key}` }, next: { revalidate: 300 } },
+    );
+    if (!res.ok) return BASE_META;
+    const row = (await res.json() as Array<{ title: string; place_ids: string[] }>)[0];
+    if (!row) return BASE_META;
+    const count = row.place_ids?.length ?? 0;
+    const title = `${row.title} — MYSEOULDROP`;
+    const description = `${count} saved place${count === 1 ? "" : "s"} in Seoul, shared with you — open the list on the map.`;
+    return {
+      title,
+      description,
+      openGraph: { title, description },
+      twitter: { card: "summary", title, description },
+    };
+  } catch {
+    return BASE_META;
+  }
+}
 
 export default function MapPage() {
   return (
