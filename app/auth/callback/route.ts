@@ -50,6 +50,11 @@ export async function GET(request: Request) {
     },
   );
 
+  // On failure, keep the intended destination: the login page honors ?next=,
+  // so the manual sign-in that follows still finishes the original journey
+  // (mail-app confirmations otherwise skipped onboarding — found 2026-08-16).
+  const errorSuffix = `&next=${encodeURIComponent(next)}`;
+
   if (tokenHash && otpType) {
     const { error } = await supabase.auth.verifyOtp({ token_hash: tokenHash, type: otpType });
     if (!error) {
@@ -57,7 +62,7 @@ export async function GET(request: Request) {
       return NextResponse.redirect(new URL(target, url.origin));
     }
     const reason = error.code === "otp_expired" ? "expired" : "auth";
-    return NextResponse.redirect(new URL(`/login?error=${reason}`, url.origin));
+    return NextResponse.redirect(new URL(`/login?error=${reason}${errorSuffix}`, url.origin));
   }
 
   if (code) {
@@ -68,11 +73,11 @@ export async function GET(request: Request) {
     // PKCE exchange fails when the link is opened in a different browser than
     // the one that started the flow — surface that case distinctly.
     const reason = error.code === "validation_failed" ? "browser" : "auth";
-    return NextResponse.redirect(new URL(`/login?error=${reason}`, url.origin));
+    return NextResponse.redirect(new URL(`/login?error=${reason}${errorSuffix}`, url.origin));
   }
 
   // Supabase can also land here with error params and no code at all.
   const errCode = url.searchParams.get("error_code");
   const reason = errCode === "otp_expired" ? "expired" : "auth";
-  return NextResponse.redirect(new URL(`/login?error=${reason}`, url.origin));
+  return NextResponse.redirect(new URL(`/login?error=${reason}${errorSuffix}`, url.origin));
 }

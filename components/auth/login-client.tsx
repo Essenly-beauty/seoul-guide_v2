@@ -35,9 +35,13 @@ function SignInForm() {
     return code ? CALLBACK_ERRORS[code] ?? CALLBACK_ERRORS.auth : null;
   });
 
-  // The callback-error banner should show once, not resurrect on reload/back.
+  // The callback-error banner should show once, not resurrect on reload/back —
+  // but keep ?next= so the sign-in that follows still finishes the journey.
   useEffect(() => {
-    if (searchParams.get("error")) router.replace(routes.signIn);
+    if (searchParams.get("error")) {
+      const next = searchParams.get("next");
+      router.replace(next ? `${routes.signIn}?next=${encodeURIComponent(next)}` : routes.signIn);
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
