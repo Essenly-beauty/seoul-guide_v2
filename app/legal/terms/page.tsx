@@ -15,7 +15,7 @@ const SECTIONS = [
     "Content about clinics and procedures is informational only and is not medical advice. Medical procedures in Korea require an in-person consultation with a licensed practitioner. Always consult the clinic directly about suitability and risks.",
   ]},
   { heading: "Your content", body: [
-    "Ratings and review notes you save must reflect your genuine experience. They are currently visible only to you; if public reviews launch, we may display them with your consent and may remove content that is fraudulent, offensive, or unrelated.",
+    "Ratings and review notes you save must reflect your genuine experience. Review notes stay private unless you choose to post them publicly; public reviews show your first name. We may hide or remove public reviews that are fraudulent, offensive, or unrelated — including automatically after user reports.",
   ]},
   { heading: "Liability", body: [
     "Services are provided \"as is\". To the extent permitted by law, MYSEOULDROP is not liable for the acts or omissions of venues, nor for indirect damages arising from use of the app.",

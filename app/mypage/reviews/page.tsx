@@ -42,7 +42,7 @@ export default function MyReviewsPage() {
       <div className="app-scroll pad stack pagev2">
         <section className="stack sm">
           <SectionHeader title="Your ratings" count={ready ? rated.length : undefined} />
-          <p className="t-caption">Rate places you&apos;ve visited and add review notes — synced to your account, visible only to you until public reviews launch.</p>
+          <p className="t-caption">Rate places you&apos;ve visited and add review notes — synced to your account. Post a note publicly to share it with other travelers, or keep it private.</p>
         </section>
 
         <SectionDivider />

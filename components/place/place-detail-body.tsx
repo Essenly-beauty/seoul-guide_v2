@@ -25,6 +25,7 @@ import { useLocation } from "@/components/map/use-location";
 import { useSigninNudge } from "@/components/auth/signin-nudge";
 import { toggleFavorite, useFavorites } from "@/lib/favorites";
 import { REVIEW_MAX_LEN, setRating, setReview, useMyRatings } from "@/lib/ratings";
+import { fetchPlaceReviews, REPORT_REASONS, reportReview, timeAgo, type PublicReview } from "@/lib/reviews";
 import { routes } from "@/lib/routes";
 import { PLACES, PRODUCTS, TYPE_LABEL, zoneShort, type Place } from "@/lib/data";
 import { GANGNAM_STATION, formatDistance, haversineKm } from "@/lib/geo";
@@ -365,11 +366,70 @@ function PhotosSection() {
   );
 }
 
-// ── Reviews (d-reviews): my rating + honest summary ───────
+// ── Public traveler reviews — masked view + report flow ───
+// (리뷰 공개 전환 2026-08-16.) Only reviews whose author ticked "Post
+// publicly" appear; first names only; 3 distinct reports auto-hide a row.
+function TravelerReviews({ placeId, refreshKey }: { placeId: string; refreshKey: number }) {
+  const { toast } = useToast();
+  const [reviews, setReviews] = useState<PublicReview[] | null>(null);
+  const [reporting, setReporting] = useState<string | null>(null);
+  useEffect(() => {
+    let alive = true;
+    void fetchPlaceReviews(placeId).then((r) => { if (alive) setReviews(r); });
+    return () => { alive = false; };
+  }, [placeId, refreshKey]);
+  if (reviews === null) return null; // quiet while loading
+  return (
+    <div className="stack sm">
+      <b style={{ fontSize: 14.5 }}>Traveler reviews{reviews.length > 0 ? ` · ${reviews.length}` : ""}</b>
+      {reviews.length === 0 ? (
+        <p className="caption muted" style={{ margin: 0 }}>No traveler reviews yet — rate your visit and be the first.</p>
+      ) : reviews.map((r) => (
+        <div key={r.id} className="stack" style={{ gap: 4, background: "var(--surface)", border: "1px solid var(--border)", borderRadius: 12, padding: "10px 12px" }}>
+          <div className="row" style={{ gap: 8 }}>
+            <b style={{ fontSize: 13 }}>{r.displayName}{r.mine ? " (you)" : ""}</b>
+            <span className="stars" style={{ fontSize: 12 }}>{starsFor(r.rating)}</span>
+            <span className="caption muted chev">{timeAgo(r.at)}</span>
+          </div>
+          <p className="small" style={{ margin: 0, whiteSpace: "pre-wrap" }}>{r.body}</p>
+          {!r.mine && (reporting === r.id ? (
+            <div className="row" style={{ gap: 6, flexWrap: "wrap" }}>
+              {REPORT_REASONS.map((reason) => (
+                <button
+                  key={reason.key}
+                  className="caption"
+                  style={{ color: "var(--muted)", border: "1px solid var(--border)", borderRadius: 999, padding: "3px 10px" }}
+                  onClick={async () => {
+                    setReporting(null);
+                    const res = await reportReview(r.id, reason.key);
+                    toast(res === "reported"
+                      ? "Reported — our team will take a look"
+                      : res === "already"
+                        ? "You already reported this review"
+                        : "Sign in to report reviews");
+                  }}
+                >
+                  {reason.label}
+                </button>
+              ))}
+              <button className="caption muted" onClick={() => setReporting(null)}>Cancel</button>
+            </div>
+          ) : (
+            <button className="caption" style={{ color: "var(--dim)", alignSelf: "flex-start" }} onClick={() => setReporting(r.id)}>
+              Report
+            </button>
+          ))}
+        </div>
+      ))}
+    </div>
+  );
+}
+
+// ── Reviews (d-reviews): my rating + traveler reviews ─────
 // Launch audit P0-2: the six sample reviews (with Verified badges, helpful
 // counts, and keyword chips) rendered identically on every place — removed.
-// What remains is real: the source listing's rating, and the visitor's own
-// rating/review (private until public reviews + moderation ship).
+// What shows is real: the source listing's rating, the visitor's own
+// rating/review, and consented public traveler reviews.
 function ReviewsSection({ place }: { place: Place }) {
   const { toast } = useToast();
   // Shared store — persists per place, syncs to the account when signed in.
@@ -380,6 +440,9 @@ function ReviewsSection({ place }: { place: Place }) {
   const [editing, setEditing] = useState(false);
   const [composing, setComposing] = useState(false);
   const [draft, setDraft] = useState("");
+  // consent default: new reviews public, an existing note keeps its choice
+  const [postPublic, setPostPublic] = useState(true);
+  const [reviewBump, setReviewBump] = useState(0);
 
   const rate = (n: number) => {
     setRating(place.id, n);
@@ -390,9 +453,13 @@ function ReviewsSection({ place }: { place: Place }) {
 
   const saveReview = () => {
     if (myRating === null) return;
-    setReview(place.id, myRating, draft);
+    setReview(place.id, myRating, draft, postPublic);
     setComposing(false);
-    toast(draft.trim() ? "Review saved — visible only to you for now" : "Review removed");
+    toast(draft.trim()
+      ? postPublic ? "Review posted — travelers can now see it" : "Review saved as a private note"
+      : "Review removed");
+    // the upsert is fire-and-forget — refresh the public list after it lands
+    setTimeout(() => setReviewBump((b) => b + 1), 1500);
   };
 
   const canRate = myRating === null || editing;
@@ -428,15 +495,15 @@ function ReviewsSection({ place }: { place: Place }) {
         {myRating !== null && !composing && (
           myReview ? (
             <div className="stack sm" style={{ width: "100%", textAlign: "left", background: "var(--surface)", border: "1px solid var(--border)", borderRadius: 12, padding: "10px 12px" }}>
-              <span className="t-caption">Your review · only visible to you</span>
+              <span className="t-caption">Your review · {myRatings[place.id]?.isPublic ? "public" : "private note"}</span>
               <p className="small" style={{ whiteSpace: "pre-wrap" }}>{myReview}</p>
-              <button className="caption" style={{ color: "var(--accent)", fontWeight: 600, alignSelf: "flex-start" }} onClick={() => { setDraft(myReview); setComposing(true); }}>
+              <button className="caption" style={{ color: "var(--accent)", fontWeight: 600, alignSelf: "flex-start" }} onClick={() => { setDraft(myReview); setPostPublic(myRatings[place.id]?.isPublic === true); setComposing(true); }}>
                 Edit review
               </button>
             </div>
           ) : (
-            <button className="caption" style={{ color: "var(--accent)", fontWeight: 600 }} onClick={() => { setDraft(""); setComposing(true); }}>
-              Write a review (only visible to you)
+            <button className="caption" style={{ color: "var(--accent)", fontWeight: 600 }} onClick={() => { setDraft(""); setPostPublic(true); setComposing(true); }}>
+              Write a review
             </button>
           )
         )}
@@ -445,7 +512,7 @@ function ReviewsSection({ place }: { place: Place }) {
             <textarea
               className="input"
               aria-label="Your review"
-              placeholder="How was your visit? Notes stay private until public reviews launch."
+              placeholder="How was your visit? Tips for other travelers welcome."
               rows={4}
               maxLength={REVIEW_MAX_LEN}
               value={draft}
@@ -453,6 +520,11 @@ function ReviewsSection({ place }: { place: Place }) {
               style={{ resize: "none", minHeight: 88, lineHeight: 1.45 }}
               autoFocus
             />
+            {/* terms promise consent-first publishing — this checkbox IS the consent */}
+            <label className="row caption" style={{ gap: 8, alignItems: "flex-start", cursor: "pointer" }}>
+              <input type="checkbox" checked={postPublic} onChange={(e) => setPostPublic(e.target.checked)} style={{ marginTop: 1 }} />
+              <span className="muted">Post publicly — travelers see it with your first name. Uncheck to keep it as a private note.</span>
+            </label>
             <div className="row" style={{ gap: 8 }}>
               <Button variant="secondary" size="sm" style={{ flex: 1 }} onClick={() => setComposing(false)}>Cancel</Button>
               <Button size="sm" style={{ flex: 1 }} onClick={saveReview}>Save review</Button>
@@ -471,10 +543,7 @@ function ReviewsSection({ place }: { place: Place }) {
           )}
         </div>
       )}
-      <Notice icon="book">
-        Traveler reviews open soon — your rating and notes are saved to your
-        account in the meantime.
-      </Notice>
+      <TravelerReviews placeId={place.id} refreshKey={reviewBump} />
     </section>
   );
 }

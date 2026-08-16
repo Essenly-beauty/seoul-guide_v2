@@ -14,7 +14,7 @@
 import { useSyncExternalStore } from "react";
 import { supabaseBrowser } from "./supabase/client";
 
-export type MyRating = { rating: number; body?: string; at?: string };
+export type MyRating = { rating: number; body?: string; isPublic?: boolean; at?: string };
 export type RatingMap = Record<string, MyRating>;
 
 /** ratings.body DB check is 2000 chars — mirror it client-side. */
@@ -31,7 +31,8 @@ let hydrating = true;
 let syncToken = 0;
 let syncing = false;
 // body: undefined = leave the server column untouched; null = clear it.
-type PendingOp = { placeId: string; rating: number; body?: string | null; at: string; seq: number };
+// isPublic rides along only on body ops (consent is chosen in the composer).
+type PendingOp = { placeId: string; rating: number; body?: string | null; isPublic?: boolean; at: string; seq: number };
 let opSeq = 0;
 const pending = new Map<string, PendingOp>();
 const listeners = new Set<() => void>();
@@ -54,10 +55,11 @@ export function parseRatings(raw: unknown): RatingMap {
   for (const [id, v] of Object.entries(raw as Record<string, unknown>)) {
     if (validRating(v)) out[id] = { rating: v };
     else if (v && typeof v === "object" && validRating((v as MyRating).rating)) {
-      const { body, at } = v as MyRating;
+      const { body, isPublic, at } = v as MyRating;
       out[id] = {
         rating: (v as MyRating).rating,
         ...(validBody(body) ? { body } : {}),
+        ...(validBody(body) && isPublic === true ? { isPublic: true } : {}),
         ...(typeof at === "string" ? { at } : {}),
       };
     }
@@ -96,7 +98,7 @@ function write(next: RatingMap) {
 async function fetchServer(): Promise<RatingMap | null> {
   const supabase = supabaseBrowser();
   for (let attempt = 0; attempt < 3; attempt++) {
-    const { data, error } = await supabase.from("ratings").select("place_id, rating, body, updated_at");
+    const { data, error } = await supabase.from("ratings").select("place_id, rating, body, is_public, updated_at");
     if (!error) {
       const map: RatingMap = {};
       for (const row of data ?? []) {
@@ -104,6 +106,7 @@ async function fetchServer(): Promise<RatingMap | null> {
           map[row.place_id] = {
             rating: row.rating,
             ...(validBody(row.body) ? { body: row.body } : {}),
+            ...(validBody(row.body) && row.is_public === true ? { isPublic: true } : {}),
             at: row.updated_at,
           };
         }
@@ -136,7 +139,7 @@ async function mergeLocalIntoServer(uid: string): Promise<boolean> {
     user_id: uid,
     place_id,
     rating: v.rating,
-    ...(validBody(v.body) ? { body: v.body } : {}),
+    ...(validBody(v.body) ? { body: v.body, is_public: v.isPublic === true } : {}),
   }));
   if (rows.length > 0) {
     const supabase = supabaseBrowser();
@@ -156,7 +159,8 @@ function overlayPending(server: RatingMap): RatingMap {
   pending.forEach((op) => {
     // an op that doesn't touch the body keeps whatever the server had
     const body = op.body === undefined ? map[op.placeId]?.body : op.body ?? undefined;
-    map[op.placeId] = { rating: op.rating, ...(body ? { body } : {}), at: op.at };
+    const isPublic = op.body === undefined ? map[op.placeId]?.isPublic : op.isPublic;
+    map[op.placeId] = { rating: op.rating, ...(body ? { body } : {}), ...(body && isPublic ? { isPublic: true } : {}), at: op.at };
   });
   return map;
 }
@@ -171,7 +175,7 @@ function sendOp(uid: string, op: PendingOp, prev: MyRating | undefined) {
         place_id: op.placeId,
         rating: op.rating,
         // omit body entirely on stars-only ops so an existing review survives
-        ...(op.body !== undefined ? { body: op.body } : {}),
+        ...(op.body !== undefined ? { body: op.body, is_public: op.body !== null && op.isPublic === true } : {}),
       },
       { onConflict: "user_id,place_id" },
     )
@@ -271,22 +275,25 @@ export function setRating(placeId: string, rating: number): void {
   const cur = load();
   const prev = cur[placeId];
   const at = new Date().toISOString();
-  write({ ...cur, [placeId]: { rating, ...(prev?.body ? { body: prev.body } : {}), at } });
+  write({ ...cur, [placeId]: { rating, ...(prev?.body ? { body: prev.body } : {}), ...(prev?.body && prev.isPublic ? { isPublic: true } : {}), at } });
 
   const op: PendingOp = { placeId, rating, at, seq: ++opSeq };
   pending.set(placeId, op);
   if (userId) sendOp(userId, op, prev);
 }
 
-/** Save (or clear, with an empty string) my review text for a rated place. */
-export function setReview(placeId: string, rating: number, body: string): void {
+/** Save (or clear, with an empty string) my review text for a rated place.
+    isPublic is the composer's explicit consent — public reviews show the
+    author's first name to other travelers. */
+export function setReview(placeId: string, rating: number, body: string, isPublic = false): void {
   const cur = load();
   const prev = cur[placeId];
   const trimmed = body.trim().slice(0, REVIEW_MAX_LEN);
+  const share = Boolean(trimmed) && isPublic;
   const at = new Date().toISOString();
-  write({ ...cur, [placeId]: { rating, ...(trimmed ? { body: trimmed } : {}), at } });
+  write({ ...cur, [placeId]: { rating, ...(trimmed ? { body: trimmed } : {}), ...(share ? { isPublic: true } : {}), at } });
 
-  const op: PendingOp = { placeId, rating, body: trimmed || null, at, seq: ++opSeq };
+  const op: PendingOp = { placeId, rating, body: trimmed || null, isPublic: share, at, seq: ++opSeq };
   pending.set(placeId, op);
   if (userId) sendOp(userId, op, prev);
 }
