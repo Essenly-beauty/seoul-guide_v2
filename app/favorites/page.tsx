@@ -21,7 +21,7 @@ import { useFavorites, useFavoritesReady } from "@/lib/favorites";
 import { useAuthUser } from "@/lib/auth/use-auth";
 import { useSigninNudge } from "@/components/auth/signin-nudge";
 import { useToast } from "@/components/ui/toast";
-import { createSharedList, sanitizeListTitle, sharedListUrl } from "@/lib/shared-lists";
+import { createSharedList, LIST_TITLE_MAX, sanitizeListTitle, sharedListUrl } from "@/lib/shared-lists";
 import { Button } from "@/components/ui/button";
 import { Notice } from "@/components/ui/notice";
 
@@ -52,35 +52,65 @@ function LoadingRows() {
 
 // ── Share the saved-places list as a /map?list= link ──────
 // (user request 2026-08-16 — Kakao/Naver shared-folder pattern.)
-// Members snapshot their hearts into a link; guests get the join sheet.
+// Members name the snapshot before it becomes a link (v1.1: the auto
+// title was the only option); guests get the join sheet.
 function ShareListButton({ placeIds }: { placeIds: string[] }) {
   const { user } = useAuthUser();
   const { nudge, sheet } = useSigninNudge();
   const { toast, share } = useToast();
+  const [naming, setNaming] = useState(false);
+  const [title, setTitle] = useState("");
   const [busy, setBusy] = useState(false);
+
+  const shareNow = async () => {
+    setBusy(true);
+    try {
+      const finalTitle = sanitizeListTitle(title);
+      const id = await createSharedList(finalTitle, placeIds);
+      setNaming(false);
+      share({ title: finalTitle, text: "My saved places on MYSEOULDROP — open them on the map:", url: sharedListUrl(window.location.origin, id) });
+    } catch (e) {
+      toast(e instanceof Error && e.message === "Nothing to share yet" ? e.message : "Couldn't create the share link — try again");
+    } finally {
+      setBusy(false);
+    }
+  };
+
+  if (naming) {
+    return (
+      <div className="stack sm" style={{ background: "var(--surface)", border: "1px solid var(--border)", borderRadius: 12, padding: "12px" }}>
+        <label className="caption muted" htmlFor="share-list-name">Name your list — friends see this title on the link</label>
+        <input
+          id="share-list-name"
+          className="input"
+          maxLength={LIST_TITLE_MAX}
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+          onKeyDown={(e) => { if (e.key === "Enter" && !busy) void shareNow(); }}
+          autoFocus
+        />
+        <div className="row" style={{ gap: 8 }}>
+          <Button variant="secondary" size="sm" style={{ flex: 1 }} disabled={busy} onClick={() => setNaming(false)}>Cancel</Button>
+          <Button size="sm" style={{ flex: 1 }} disabled={busy} onClick={() => void shareNow()}>Share link</Button>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <>
       {sheet}
       <Button
         variant="secondary"
         size="sm"
-        disabled={busy}
-        onClick={async () => {
+        onClick={() => {
           if (!user) {
             nudge("shareList");
             return;
           }
-          setBusy(true);
-          try {
-            const fullName = (user.user_metadata as { full_name?: string } | null)?.full_name;
-            const title = sanitizeListTitle(fullName ? `${fullName}'s Seoul list` : null);
-            const id = await createSharedList(title, placeIds);
-            share({ title, text: "My saved places on MYSEOULDROP — open them on the map:", url: sharedListUrl(window.location.origin, id) });
-          } catch (e) {
-            toast(e instanceof Error && e.message === "Nothing to share yet" ? e.message : "Couldn't create the share link — try again");
-          } finally {
-            setBusy(false);
-          }
+          const fullName = (user.user_metadata as { full_name?: string } | null)?.full_name;
+          setTitle(sanitizeListTitle(fullName ? `${fullName}'s Seoul list` : null));
+          setNaming(true);
         }}
       >
         <Icon name="share" size="xs" /> Share this list

@@ -149,6 +149,9 @@ test.describe("direct auth + account sync", () => {
     }
     await page.goto("/favorites");
     await page.getByRole("button", { name: "Share this list" }).click();
+    // v1.1: the list gets named before it becomes a link
+    await page.getByLabel(/Name your list/).fill("Gangnam glow day");
+    await page.getByRole("button", { name: "Share link" }).click();
     // navigator.share may or may not exist headless — the durable effect
     // either way is the snapshot row, so assert on that
     await expect
@@ -158,6 +161,7 @@ test.describe("direct auth + account sync", () => {
       }, { timeout: 15_000 })
       .toBe(1);
     const { data: lists } = await admin!.from("shared_lists").select("id, title, place_ids").eq("owner", uid!);
+    expect(lists![0].title).toBe("Gangnam glow day");
     expect(lists![0].place_ids).toEqual(expect.arrayContaining(["glow-skin-clinic", "chahong-apgujeong"]));
     const count = lists![0].place_ids.length;
 
