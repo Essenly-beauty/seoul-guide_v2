@@ -6,14 +6,23 @@ import { useEffect, useRef, useState } from "react";
 import { AuthShell } from "@/components/auth/auth-shell";
 import { EyeGlyph } from "@/components/brand/auth-glyphs";
 import { supabaseBrowser } from "@/lib/supabase/client";
+import { updateProfile } from "@/lib/profile";
 import { routes } from "@/lib/routes";
+
+// Mirrors the onboarding question so the answer pre-fills the profile.
+const COUNTRIES = [
+  ["US", "United States"], ["JP", "Japan"], ["CN", "China"], ["TW", "Taiwan"],
+  ["TH", "Thailand"], ["KR", "South Korea"], ["OTHER", "Other"],
+] as const;
 
 const RESEND_COOLDOWN_S = 60;
 
 export function RegisterClient() {
   const router = useRouter();
   const [reveal, setReveal] = useState(false);
-  const [form, setForm] = useState({ name: "", email: "", password: "" });
+  const [form, setForm] = useState({ name: "", email: "", password: "", confirm: "", country: "" });
+  const [consent, setConsent] = useState(false);
+  const [marketing, setMarketing] = useState(false);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [sentTo, setSentTo] = useState<string | null>(null);
@@ -39,14 +48,25 @@ export function RegisterClient() {
   const submit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (busy) return;
+    if (form.password !== form.confirm) {
+      setError("Passwords don't match — check both fields.");
+      return;
+    }
     setBusy(true);
     setError(null);
+    // country pre-fills the beauty profile (guest-local now, merged into the
+    // account after confirmation by the profile store)
+    if (form.country) updateProfile({ countryCode: form.country });
     const supabase = supabaseBrowser();
     const { data, error: err } = await supabase.auth.signUp({
       email: form.email.trim(),
       password: form.password,
       options: {
-        data: { full_name: form.name.trim() },
+        data: {
+          full_name: form.name.trim(),
+          marketing_opt_in: marketing,
+          consented_at: new Date().toISOString(),
+        },
         emailRedirectTo: `${window.location.origin}/auth/callback?next=${encodeURIComponent(routes.onboardingMode)}`,
       },
     });
@@ -182,6 +202,57 @@ export function RegisterClient() {
               <EyeGlyph off={!reveal} />
             </button>
           </div>
+          <input
+            className="auth-field"
+            type={reveal ? "text" : "password"}
+            autoComplete="new-password"
+            placeholder="Confirm password"
+            aria-label="Confirm password"
+            aria-invalid={!!error && error.includes("match")}
+            required
+            minLength={6}
+            value={form.confirm}
+            onChange={set("confirm")}
+          />
+          <select
+            className="auth-field"
+            aria-label="Country (optional)"
+            value={form.country}
+            onChange={(e) => setForm((f) => ({ ...f, country: e.target.value }))}
+            style={{ color: form.country ? undefined : "var(--dim)" }}
+          >
+            <option value="">Where are you visiting from? (optional)</option>
+            {COUNTRIES.map(([code, label]) => (
+              <option key={code} value={code}>{label}</option>
+            ))}
+          </select>
+        </div>
+
+        <div className="stack" style={{ gap: 10, marginTop: 16 }}>
+          <label className="row caption" style={{ gap: 10, alignItems: "flex-start", cursor: "pointer" }}>
+            <input
+              type="checkbox"
+              required
+              checked={consent}
+              onChange={(e) => setConsent(e.target.checked)}
+              aria-label="Agree to the Terms and Privacy Policy"
+              style={{ marginTop: 2, width: 16, height: 16, accentColor: "var(--accent)" }}
+            />
+            <span style={{ flex: 1 }}>
+              I agree to the <Link className="auth-link" href={routes.legalTerms}>Terms of Service</Link> and{" "}
+              <Link className="auth-link" href={routes.legalPrivacy}>Privacy Policy</Link>. (required)
+            </span>
+          </label>
+          <label className="row caption muted" style={{ gap: 10, alignItems: "flex-start", cursor: "pointer" }}>
+            <input
+              type="checkbox"
+              checked={marketing}
+              onChange={(e) => setMarketing(e.target.checked)}
+              aria-label="Receive tips and updates by email"
+              style={{ marginTop: 2, width: 16, height: 16, accentColor: "var(--accent)" }}
+            />
+            <span style={{ flex: 1 }}>Send me Seoul beauty tips and app updates. (optional)</span>
+          </label>
         </div>
 
         {error && (

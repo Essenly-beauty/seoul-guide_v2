@@ -62,7 +62,12 @@ export default function SettingsPage() {
           </div>
         </section>
 
-        <SignoutModal />
+        <div className="stack sm">
+          <Button variant="secondary" href="/login?switch=1">
+            Log in with a different account
+          </Button>
+          <SignoutModal />
+        </div>
       </div>
       <BottomNav active="menu" />
     </>
