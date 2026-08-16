@@ -32,10 +32,36 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
   const [theme, setThemeState] = useState<AppTheme>("light");
 
   useEffect(() => {
-    // boot script stamps "light" unless the user explicitly chose dark
-    const current = document.documentElement.getAttribute("data-theme");
-    if (current !== "light") setThemeState("dark");
-    applyMetaTheme(current === "light" ? "light" : "dark");
+    // boot script stamps the attribute pre-paint; if anything ever strips it
+    // mid-session, self-heal from storage and DEFAULT TO LIGHT — a missing
+    // attribute must never flip tiles/controls dark (mixed-theme bug,
+    // user report 2026-08-16)
+    let current = document.documentElement.getAttribute("data-theme");
+    if (current !== "light" && current !== "dark") {
+      let stored: AppTheme = "light";
+      try {
+        stored = window.localStorage.getItem(THEME_KEY) === "dark" ? "dark" : "light";
+      } catch { /* default light */ }
+      document.documentElement.setAttribute("data-theme", stored);
+      current = stored;
+    }
+    if (current === "dark") setThemeState("dark");
+    applyMetaTheme(current === "dark" ? "dark" : "light");
+    // last line of defense: if ANYTHING strips the attribute mid-session,
+    // restore it immediately from storage (the mixed-theme bug's true fix is
+    // the :not([data-theme="dark"]) CSS, this keeps context/tiles honest too)
+    const el = document.documentElement;
+    const observer = new MutationObserver(() => {
+      const now = el.getAttribute("data-theme");
+      if (now === "light" || now === "dark") return;
+      let stored: AppTheme = "light";
+      try {
+        stored = window.localStorage.getItem(THEME_KEY) === "dark" ? "dark" : "light";
+      } catch { /* default light */ }
+      el.setAttribute("data-theme", stored);
+    });
+    observer.observe(el, { attributes: true, attributeFilter: ["data-theme"] });
+    return () => observer.disconnect();
   }, []);
 
   const setTheme = useCallback((next: AppTheme) => {

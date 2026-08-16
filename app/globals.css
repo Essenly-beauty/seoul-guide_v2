@@ -99,71 +99,71 @@
     --pin-shadow-c: rgba(0, 0, 0, 0.4);
     --auth-line: rgba(255, 255, 255, 0.14);
   }
-  [data-theme="light"] body {
+  :root:not([data-theme="dark"]) body {
     background: linear-gradient(180deg, #eef1f5, #e4e8ee);
   }
-  [data-theme="light"] body::after {
+  :root:not([data-theme="dark"]) body::after {
     opacity: 0.02;
     filter: invert(1);
   }
-  [data-theme="light"] .topbar {
+  :root:not([data-theme="dark"]) .topbar {
     background: rgba(246, 247, 249, 0.92);
   }
-  [data-theme="light"] .sec-divider {
+  :root:not([data-theme="dark"]) .sec-divider {
     background: #eaedf2;
     border-top: 1px solid rgba(15, 23, 42, 0.06);
     border-bottom: 0;
     box-shadow: none;
   }
-  [data-theme="light"] .map-top::before {
+  :root:not([data-theme="dark"]) .map-top::before {
     background: linear-gradient(180deg, rgba(246, 247, 249, 0.92), rgba(246, 247, 249, 0.6) 55%, rgba(246, 247, 249, 0));
   }
-  [data-theme="light"] .map-searchpill,
-  [data-theme="light"] .map-avatar,
-  [data-theme="light"] .map-modebtn,
-  [data-theme="light"] .map-fab,
-  [data-theme="light"] .map-top .chip:not(.selected) {
+  :root:not([data-theme="dark"]) .map-searchpill,
+  :root:not([data-theme="dark"]) .map-avatar,
+  :root:not([data-theme="dark"]) .map-modebtn,
+  :root:not([data-theme="dark"]) .map-fab,
+  :root:not([data-theme="dark"]) .map-top .chip:not(.selected) {
     background: rgba(255, 255, 255, 0.82);
   }
-  [data-theme="light"] .map-top .chip.selected {
+  :root:not([data-theme="dark"]) .map-top .chip.selected {
     background: rgba(255, 239, 230, 0.9);
   }
-  [data-theme="light"] .pin-dot {
+  :root:not([data-theme="dark"]) .pin-dot {
     border-color: #ffffff;
   }
-  [data-theme="light"] .pin-cluster {
+  :root:not([data-theme="dark"]) .pin-cluster {
     background: #1e293b;
     color: #ffffff;
     border-color: #ffffff;
   }
-  [data-theme="light"] .station-marker-name {
+  :root:not([data-theme="dark"]) .station-marker-name {
     text-shadow: 0 1px 0 #fff, 0 -1px 0 #fff, 1px 0 0 #fff, -1px 0 0 #fff, 0 0 4px #fff;
   }
-  [data-theme="light"] .banner.warning { color: #92600b; }
-  [data-theme="light"] .banner.info { color: #1e40af; }
-  [data-theme="light"] .banner.accent { color: var(--accent-hover); }
-  [data-theme="light"] .hero-img {
+  :root:not([data-theme="dark"]) .banner.warning { color: #92600b; }
+  :root:not([data-theme="dark"]) .banner.info { color: #1e40af; }
+  :root:not([data-theme="dark"]) .banner.accent { color: var(--accent-hover); }
+  :root:not([data-theme="dark"]) .hero-img {
     background: linear-gradient(135deg, #f2f4f8, #eaeef3 55%, #f4f6f9);
   }
-  [data-theme="light"] .subway-nearby-controls {
+  :root:not([data-theme="dark"]) .subway-nearby-controls {
     box-shadow: 0 8px 16px -10px rgba(15, 23, 42, 0.18);
   }
-  [data-theme="light"] .imgph { color: var(--dim); }
-  [data-theme="light"] .iconbtn.soft {
+  :root:not([data-theme="dark"]) .imgph { color: var(--dim); }
+  :root:not([data-theme="dark"]) .iconbtn.soft {
     background: var(--surface);
     border: 1px solid var(--border);
     color: var(--muted);
   }
-  [data-theme="light"] .bottomnav { box-shadow: 0 -6px 18px rgba(15, 23, 42, 0.07); }
-  [data-theme="light"] .mapsheet,
-  [data-theme="light"] .subway-controller { box-shadow: 0 -10px 26px rgba(15, 23, 42, 0.12); }
-  [data-theme="light"] .subway-search-footer { box-shadow: 0 -6px 16px rgba(15, 23, 42, 0.08); }
+  :root:not([data-theme="dark"]) .bottomnav { box-shadow: 0 -6px 18px rgba(15, 23, 42, 0.07); }
+  :root:not([data-theme="dark"]) .mapsheet,
+  :root:not([data-theme="dark"]) .subway-controller { box-shadow: 0 -10px 26px rgba(15, 23, 42, 0.12); }
+  :root:not([data-theme="dark"]) .subway-search-footer { box-shadow: 0 -6px 16px rgba(15, 23, 42, 0.08); }
 
   /* The rail's "All" reset keeps its strong fill in every context/theme —
      placed late so map-top/light translucent overrides can't outrank it. */
   .chip.chip-all.selected,
   .map-top .chip.chip-all.selected,
-  [data-theme="light"] .map-top .chip.chip-all.selected {
+  :root:not([data-theme="dark"]) .map-top .chip.chip-all.selected {
     background: var(--accent);
     border-color: var(--accent);
     color: #fff;

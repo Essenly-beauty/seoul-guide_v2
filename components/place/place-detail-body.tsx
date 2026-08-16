@@ -24,7 +24,7 @@ import { useSigninNudge } from "@/components/auth/signin-nudge";
 import { toggleFavorite, useFavorites } from "@/lib/favorites";
 import { REVIEW_MAX_LEN, setRating, setReview, useMyRatings } from "@/lib/ratings";
 import { routes } from "@/lib/routes";
-import { PLACES, TYPE_LABEL, zoneShort, type Place } from "@/lib/data";
+import { PLACES, PRODUCTS, TYPE_LABEL, zoneShort, type Place } from "@/lib/data";
 import { GANGNAM_STATION, formatDistance, haversineKm } from "@/lib/geo";
 import { isBookable, statusLabel } from "@/lib/places";
 
@@ -108,13 +108,15 @@ function PlaceActions({ place }: { place: Place }) {
   const { toast, share } = useToast();
   const { nudge, sheet } = useSigninNudge();
   const saved = favs.place.includes(place.id);
-  // viewing a detail as a guest pitches the account once per session
-  useEffect(() => {
-    nudge("detail");
-  }, [nudge]);
   return (
     <div className="place-actions">
       {sheet}
+      {/* our own map first — external Google/Kakao/Naver live in the CTA bar
+          (user report 2026-08-16: no in-app path from detail to the map) */}
+      <Link href={`${routes.map}?place=${encodeURIComponent(place.id)}`} aria-label="View on the MYSEOULDROP map">
+        <Icon name="pin" />
+        <span className="lbl">Map</span>
+      </Link>
       <button
         className={saved ? "saved" : undefined}
         aria-pressed={saved}
@@ -182,10 +184,48 @@ function HomeSection({ place }: { place: Place }) {
   );
 }
 
+// ── Olive Young stores: bestsellers instead of a service menu ──
+// (user request 2026-08-16: the store page should route to the products
+// sold there — the chart is chain-wide, so it's labeled honestly.)
+function OliveYoungPicks() {
+  const picks = PRODUCTS
+    .filter((p) => p.channel === "olive_young" && p.salesRank !== undefined)
+    .sort((a, b) => (a.salesRank ?? 99) - (b.salesRank ?? 99))
+    .slice(0, 4);
+  return (
+    <>
+      <div className="caption muted">Olive Young bestsellers — chain-wide chart, stock varies by branch.</div>
+      <div>
+        {picks.map((p, i) => (
+          <Link key={p.id} className="listrow" href={routes.shopItem(p.id)}>
+            <b className="mono num" style={{ width: 22, flex: "none", color: i === 0 ? "var(--accent)" : "var(--muted)" }}>{i + 1}</b>
+            <div style={{ flex: 1, minWidth: 0 }}>
+              <b style={{ display: "block", fontSize: 13.5, lineHeight: 1.3, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{p.name}</b>
+              <div className="caption muted" style={{ overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{p.brand} · {p.nameKr}</div>
+            </div>
+            <Icon name="chev" size="xs" className="chev" style={{ color: "var(--dim)" }} />
+          </Link>
+        ))}
+      </div>
+      <Button variant="secondary" size="sm" href={routes.ranking}>
+        See the full product ranking
+      </Button>
+    </>
+  );
+}
+
 // ── Services (d-services): menu rail ↔ full vertical menu ──
 function ServicesSection({ place }: { place: Place }) {
   const [expanded, setExpanded] = useState(false);
   const services = place.services ?? [];
+  if (place.type === "olive_young") {
+    return (
+      <section id="d-services" className="d-sec stack sm">
+        <SectionHeader title="Products" actionLabel="Ranking" href={routes.ranking} />
+        <OliveYoungPicks />
+      </section>
+    );
+  }
   return (
     <section id="d-services" className="d-sec stack sm">
       {services.length === 0 ? (

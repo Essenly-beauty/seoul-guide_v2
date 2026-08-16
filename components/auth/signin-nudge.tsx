@@ -9,9 +9,8 @@
 //
 // Frequency by context:
 //  - menu, favorite, rating, savedLayer: every time (deliberate,
-//    account-value moments)
-//  - detail: once per session (it's the core browsing loop — a prompt per
-//    view would kill discovery)
+//    account-value moments). Detail views stay prompt-free — the ask
+//    happens on Save, not on looking (user decision 2026-08-16).
 
 import { useCallback, useEffect, useState, type ReactNode } from "react";
 import Link from "next/link";
@@ -23,7 +22,7 @@ import { useAuthUser } from "@/lib/auth/use-auth";
 import { supabaseBrowser } from "@/lib/supabase/client";
 import { routes } from "@/lib/routes";
 
-export type NudgeContext = "favorite" | "rating" | "savedLayer" | "menu" | "detail";
+export type NudgeContext = "favorite" | "rating" | "savedLayer" | "menu";
 
 const COPY: Record<NudgeContext, { title: string; body: string }> = {
   favorite: {
@@ -42,13 +41,7 @@ const COPY: Record<NudgeContext, { title: string; body: string }> = {
     title: "Make MYSEOULDROP yours",
     body: "Saved places, ratings, and your beauty profile sync to your account — free, takes a minute.",
   },
-  detail: {
-    title: "Planning to visit?",
-    body: "Join to save places like this, rate your visits, and keep everything across devices.",
-  },
 };
-
-const SESSION_KEY = (c: NudgeContext) => `essenly.nudge.session.${c}`;
 
 export function useSigninNudge(): { nudge: (c: NudgeContext) => void; sheet: ReactNode } {
   const { user, loading } = useAuthUser();
@@ -59,12 +52,6 @@ export function useSigninNudge(): { nudge: (c: NudgeContext) => void; sheet: Rea
   const nudge = useCallback(
     (c: NudgeContext) => {
       if (loading || user) return; // members never see it
-      if (c === "detail") {
-        try {
-          if (sessionStorage.getItem(SESSION_KEY(c))) return;
-          sessionStorage.setItem(SESSION_KEY(c), "1");
-        } catch { /* storage unavailable — still show */ }
-      }
       setCtx(c);
     },
     [loading, user],
