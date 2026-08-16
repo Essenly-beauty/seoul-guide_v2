@@ -165,6 +165,7 @@ vercel env pull --yes  # .env.local 재생성
 - [ ] E2E 자동화: 현재 수동 스크립트(scratchpad) → Playwright 테스트로 정식화
 
 ### P3 — 제품 확장 (이전 논의)
+- [ ] **공유 즐겨찾기 리스트 → 지도 뷰** (사용자 요청 2026-08-16, "나중에"): 카카오맵/네이버지도 공유 폴더처럼, 다른 사람이 공유한 즐겨찾기 리스트를 링크로 받아 우리 지도 위에 핀 레이어로 표시. 구현 스케치 — ① `favorite_lists` 테이블(id, owner, title, place_ids[], is_public) + RLS(공개 리스트는 anon select 허용) ② Saved 탭에 "Share this list" → `/list/[id]` 공유 URL(OG 미리보기 포함) ③ `/list/[id]`는 지도에 해당 핀들 + 리스트 시트 렌더 + "Save all to my favorites" CTA(게스트면 join sheet). 선행 조건: 즐겨찾기 계정화 완료(✅), 커스텀 도메인(공유 URL 신뢰도)
 - [ ] 장소 데이터 DB 이전 (지금은 `lib/generated/*.ts` 정적 — 운영 편집 필요 시)
 - [ ] 리뷰 수 기반 인기 표시 재검토 (한 번 뺐던 기능 — 데이터는 ratingCount로 보존됨)
 - [ ] Apple 로그인 (Developer Program 가입 후)
