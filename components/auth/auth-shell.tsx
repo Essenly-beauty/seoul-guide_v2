@@ -15,11 +15,13 @@ type SocialProvider = "google" | "apple";
     back + lockup, title, support line, the caller's form, then real social
     OAuth via Supabase. Providers not yet configured in the Supabase
     dashboard surface the provider error inline instead of failing silently. */
-export function AuthShell({ title, support, children, foot }: {
+export function AuthShell({ title, support, children, cta, foot }: {
   title: string;
   support?: ReactNode;
   children: ReactNode;
-  foot: ReactNode;
+  /** Prominent block under the socials (e.g. the login page's register button). */
+  cta?: ReactNode;
+  foot?: ReactNode;
 }) {
   const [socialError, setSocialError] = useState<string | null>(null);
   const [socialBusy, setSocialBusy] = useState<SocialProvider | null>(null);
@@ -67,7 +69,8 @@ export function AuthShell({ title, support, children, foot }: {
         <p className="auth-error" role="alert">{socialError}</p>
       )}
 
-      <p className="auth-foot">{foot}</p>
+      {cta}
+      {foot && <p className="auth-foot">{foot}</p>}
     </div>
   );
 }

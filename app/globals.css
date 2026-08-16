@@ -2018,6 +2018,22 @@
     box-shadow: var(--shadow-accent);
   }
   .auth-cta:hover { background: var(--accent-hover); }
+  /* outline twin of .auth-cta — the login page's register entry (user
+     report 2026-08-16: the foot link alone buried the signup path) */
+  .auth-cta-secondary {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    min-height: 76px;
+    border-radius: 30px;
+    border: 2px solid var(--accent);
+    color: var(--accent);
+    background: transparent;
+    font-size: 19px;
+    font-weight: 700;
+  }
+  .auth-cta-secondary:hover { background: var(--accent-soft); }
   .auth-or {
     display: flex;
     align-items: center;

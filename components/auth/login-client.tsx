@@ -122,12 +122,30 @@ function SignInForm() {
   );
 }
 
+// Full-width outline button — the foot link alone buried the signup path
+// (user report 2026-08-16). Carries ?next= so the funnel round-trips.
+function RegisterCta() {
+  const searchParams = useSearchParams();
+  const next = safeNext(searchParams.get("next"));
+  const href = next ? `${routes.register}?next=${encodeURIComponent(next)}` : routes.register;
+  return (
+    <div style={{ display: "grid", gap: 10, marginTop: 26, textAlign: "center" }}>
+      <span className="small muted">Not a member yet?</span>
+      <Link className="auth-cta-secondary" href={href}>Create an account</Link>
+    </div>
+  );
+}
+
 export function LoginClient() {
   return (
     <AuthShell
       title="Sign in"
       support={<>If you need any support <Link className="auth-link" href={routes.support}>click here</Link></>}
-      foot={<>Not a member? <Link className="auth-link" href={routes.register}>Register now</Link></>}
+      cta={
+        <Suspense fallback={null}>
+          <RegisterCta />
+        </Suspense>
+      }
     >
       {/* useSearchParams needs a Suspense boundary in app router pages */}
       <Suspense fallback={null}>
