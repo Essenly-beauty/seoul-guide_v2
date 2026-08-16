@@ -78,7 +78,10 @@ export function MapScreen() {
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const { loc, status, retry } = useLocation();
   const [flyTarget, setFlyTarget] = useState<LatLng | null>(null);
-  const [bannerDismissed, setBannerDismissed] = useState(false);
+  // Location-off banner is feedback for the locate FAB only — it must never
+  // greet people on entry (user report 2026-08-16). Starts dismissed; the
+  // FAB un-dismisses it when tapped without a fix.
+  const [bannerDismissed, setBannerDismissed] = useState(true);
   const centerRef = useRef(loc ?? GANGNAM_STATION); // 최초 마운트 center 고정용
   const [moved, setMoved] = useState(false);
   const [area, setArea] = useState<{ south: number; west: number; north: number; east: number } | null>(null);
@@ -265,6 +268,11 @@ export function MapScreen() {
     const station = STATIONS[activeStation];
     if (station) setFlyTarget({ lat: station.lat, lng: station.lng });
   }, [activeStation, mode]);
+
+  // A fix arriving (FAB retry granted) makes the banner stale — hide it.
+  useEffect(() => {
+    if (loc) setBannerDismissed(true);
+  }, [loc]);
 
   useEffect(() => {
     // A ?place= deep link owns the camera — don't let the GPS auto-fly steal it.
