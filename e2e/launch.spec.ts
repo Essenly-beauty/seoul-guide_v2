@@ -76,6 +76,13 @@ test.describe("discovery smoke (no auth needed)", () => {
     await expect(page.getByRole("heading", { name: /학동중앙점/ })).toBeVisible();
     await expect(page.getByText(/wandered off/)).toHaveCount(0); // not the 404 page
   });
+
+  test("broken shared-list link falls back to the normal map", async ({ page }) => {
+    await page.goto("/map?list=not-a-real-id");
+    await expect(page.getByText("That shared list link isn't available")).toBeVisible({ timeout: 20_000 });
+    await expect(page).toHaveURL(/\/map$/);
+    await expect(page.locator(".leaflet-marker-icon").first()).toBeVisible({ timeout: 20_000 });
+  });
 });
 
 test.describe("direct auth + account sync", () => {

@@ -19,6 +19,9 @@ import { routes } from "@/lib/routes";
 import { ARTICLES, PLACES, PRODUCTS, TYPE_LABEL, zoneShort, type Article, type Place, type Product } from "@/lib/data";
 import { useFavorites, useFavoritesReady } from "@/lib/favorites";
 import { useAuthUser } from "@/lib/auth/use-auth";
+import { useSigninNudge } from "@/components/auth/signin-nudge";
+import { useToast } from "@/components/ui/toast";
+import { createSharedList, sanitizeListTitle, sharedListUrl } from "@/lib/shared-lists";
 import { Button } from "@/components/ui/button";
 import { Notice } from "@/components/ui/notice";
 
@@ -44,6 +47,45 @@ function LoadingRows() {
         </div>
       ))}
     </div>
+  );
+}
+
+// ── Share the saved-places list as a /map?list= link ──────
+// (user request 2026-08-16 — Kakao/Naver shared-folder pattern.)
+// Members snapshot their hearts into a link; guests get the join sheet.
+function ShareListButton({ placeIds }: { placeIds: string[] }) {
+  const { user } = useAuthUser();
+  const { nudge, sheet } = useSigninNudge();
+  const { toast, share } = useToast();
+  const [busy, setBusy] = useState(false);
+  return (
+    <>
+      {sheet}
+      <Button
+        variant="secondary"
+        size="sm"
+        disabled={busy}
+        onClick={async () => {
+          if (!user) {
+            nudge("shareList");
+            return;
+          }
+          setBusy(true);
+          try {
+            const fullName = (user.user_metadata as { full_name?: string } | null)?.full_name;
+            const title = sanitizeListTitle(fullName ? `${fullName}'s Seoul list` : null);
+            const id = await createSharedList(title, placeIds);
+            share({ title, text: "My saved places on MYSEOULDROP — open them on the map:", url: sharedListUrl(window.location.origin, id) });
+          } catch (e) {
+            toast(e instanceof Error && e.message === "Nothing to share yet" ? e.message : "Couldn't create the share link — try again");
+          } finally {
+            setBusy(false);
+          }
+        }}
+      >
+        <Icon name="share" size="xs" /> Share this list
+      </Button>
+    </>
   );
 }
 
@@ -83,6 +125,7 @@ function PlacesSection({ favPlaces }: { favPlaces: Place[] }) {
           ))}
         </div>
       )}
+      {favPlaces.length > 0 && <ShareListButton placeIds={favPlaces.map((p) => p.id)} />}
     </section>
   );
 }

@@ -22,7 +22,7 @@ import { useAuthUser } from "@/lib/auth/use-auth";
 import { supabaseBrowser } from "@/lib/supabase/client";
 import { routes } from "@/lib/routes";
 
-export type NudgeContext = "favorite" | "rating" | "savedLayer" | "menu";
+export type NudgeContext = "favorite" | "rating" | "savedLayer" | "menu" | "shareList";
 
 const COPY: Record<NudgeContext, { title: string; body: string }> = {
   favorite: {
@@ -40,6 +40,10 @@ const COPY: Record<NudgeContext, { title: string; body: string }> = {
   menu: {
     title: "Make MYSEOULDROP yours",
     body: "Saved places, ratings, and your beauty profile sync to your account — free, takes a minute.",
+  },
+  shareList: {
+    title: "Share your list with a link",
+    body: "Join and your saved places become a link — friends open it right on the map.",
   },
 };
 

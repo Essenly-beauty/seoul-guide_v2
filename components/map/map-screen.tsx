@@ -4,7 +4,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { preload } from "react-dom";
 import dynamic from "next/dynamic";
 import Link from "next/link";
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { Icon } from "@/components/icon";
 import { Chip } from "@/components/ui/chip";
 import { IconButton } from "@/components/ui/icon-button";
@@ -27,10 +27,13 @@ const SubwayRouteController = dynamic(
   () => import("@/components/subway/subway-route-controller").then((m) => m.SubwayRouteController),
   { ssr: false },
 );
-import { useFavorites } from "@/lib/favorites";
+import { toggleFavorite, useFavorites } from "@/lib/favorites";
+import { fetchSharedList, type SharedList } from "@/lib/shared-lists";
 import { useSigninNudge } from "@/components/auth/signin-nudge";
 import { useAuthUser } from "@/lib/auth/use-auth";
 import { useTheme } from "@/components/theme/theme-provider";
+import { useToast } from "@/components/ui/toast";
+import { Button } from "@/components/ui/button";
 
 const MapView = dynamic(() => import("./map-view"), {
   ssr: false,
@@ -112,7 +115,58 @@ export function MapScreen() {
   const subwayBtnRef = useRef<HTMLButtonElement>(null);
   const initialLocationHandledRef = useRef(false);
   const searchParams = useSearchParams();
+  const router = useRouter();
+  const { toast } = useToast();
   const deepLinkedPlace = searchParams.get("place");
+  const listParam = searchParams.get("list");
+
+  // Shared favorite list `/map?list={uuid}` (user request 2026-08-16):
+  // narrow the map to the shared pins with a banner naming the list.
+  const [sharedList, setSharedList] = useState<SharedList | null>(null);
+  useEffect(() => {
+    if (!listParam) {
+      setSharedList(null);
+      return;
+    }
+    let alive = true;
+    void fetchSharedList(listParam).then((list) => {
+      if (!alive) return;
+      if (list) {
+        setSharedList(list);
+        return;
+      }
+      toast("That shared list link isn't available");
+      router.replace(routes.map);
+    });
+    return () => { alive = false; };
+  }, [listParam, router, toast]);
+
+  // Camera: center on the shared pins, and don't let GPS auto-fly steal it.
+  useEffect(() => {
+    if (!sharedList) return;
+    initialLocationHandledRef.current = true;
+    const pts = sharedList.placeIds.map((id) => getPlace(id)).filter((p): p is NonNullable<typeof p> => Boolean(p));
+    if (pts.length === 0) return;
+    setFlyTarget({
+      lat: pts.reduce((s, p) => s + p.lat, 0) / pts.length,
+      lng: pts.reduce((s, p) => s + p.lng, 0) / pts.length,
+    });
+  }, [sharedList]);
+
+  const saveAllShared = useCallback(() => {
+    if (!sharedList) return;
+    const have = new Set(favs.place);
+    let added = 0;
+    for (const id of sharedList.placeIds) {
+      if (!have.has(id)) {
+        toggleFavorite("place", id);
+        added += 1;
+      }
+    }
+    toast(added > 0 ? `Saved ${added} place${added === 1 ? "" : "s"} to your list` : "Already in your list");
+    // guests keep the local save (consistent with hearts) and meet the funnel
+    if (!authUser && added > 0) nudge("favorite");
+  }, [authUser, favs.place, nudge, sharedList, toast]);
 
   // Search flow entry `/map?place={id}` (spec §2, §4.4): select the place and
   // fly to its pin so the B-1 sheet opens over the right spot.
@@ -220,15 +274,18 @@ export function MapScreen() {
     }
 
     let list = applyFilters(PLACES, cats, filters, loc ?? GANGNAM_STATION);
-    // Kakao-style saved layer: the heart FAB narrows the map to favorites
-    // (still combines with category chips and detail filters).
-    if (favOnly) {
+    // A shared list owns the layer (the recipient came to see it); otherwise
+    // the Kakao-style heart FAB narrows the map to the viewer's favorites.
+    if (sharedList) {
+      const shared = new Set(sharedList.placeIds);
+      list = list.filter((p) => shared.has(p.id));
+    } else if (favOnly) {
       const saved = new Set(favs.place);
       list = list.filter((p) => saved.has(p.id));
     }
     if (area) list = list.filter((p) => p.lat >= area.south && p.lat <= area.north && p.lng >= area.west && p.lng <= area.east);
     return list;
-  }, [activeStation, area, cats, favOnly, favs.place, filters, loc, mode, stationCategory, stationRadius]);
+  }, [activeStation, area, cats, favOnly, favs.place, filters, loc, mode, sharedList, stationCategory, stationRadius]);
 
   const nearbyStationId = useMemo(() => {
     if (!loc) return null;
@@ -280,8 +337,8 @@ export function MapScreen() {
     // from the station selected in the bottom controller.
     if (status !== "granted" || !loc || initialLocationHandledRef.current) return;
     initialLocationHandledRef.current = true;
-    if (mode === "map" && !deepLinkedPlace) setFlyTarget(loc);
-  }, [status, loc, deepLinkedPlace, mode]);
+    if (mode === "map" && !deepLinkedPlace && !listParam) setFlyTarget(loc);
+  }, [status, loc, deepLinkedPlace, listParam, mode]);
 
   return (
     <div className={`map-screen${mode === "subway" ? ` subway-mode${subwayRouteReady ? " subway-route-ready" : ""}${subwayEditing ? " subway-editing" : ""}` : ""}`}>
@@ -302,7 +359,7 @@ export function MapScreen() {
           ? { center: { lat: STATIONS[activeStation].lat, lng: STATIONS[activeStation].lng }, radiusKm: stationRadius }
           : null}
         routePath={mode === "subway" && subwayRouteReady && route && trackPath ? trackPath(route) : null}
-        vividPins={mode === "map" ? cats.length > 0 : true /* station browse is a focused task */}
+        vividPins={mode === "map" ? cats.length > 0 || Boolean(sharedList) : true /* station browse is a focused task */}
         onStationClick={mode === "map" ? (id) => {
           // Tapping a station disc opens the subway browse with it preset as
           // departure — the editor's "Near {station}" list shows radius shops.
@@ -387,7 +444,7 @@ export function MapScreen() {
       </div>
 
       {nudgeSheet}
-      {mode === "map" && (
+      {mode === "map" && !sharedList && (
         <button
           className={"map-fab map-fab-fav" + (favOnly ? " on" : "")}
           aria-label={favOnly ? "Show all places" : "Show only my saved places"}
@@ -503,7 +560,18 @@ export function MapScreen() {
         />
       )}
 
-      {mode === "map" && status === "fallback" && !bannerDismissed && (
+      {mode === "map" && sharedList && (
+        <div className="map-banner" role="status">
+          <Icon name="heart" size="xs" style={{ color: "var(--accent)", flex: "none" }} aria-hidden="true" />
+          <span className="small" style={{ flex: 1, minWidth: 0, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
+            <b>{sharedList.title}</b> · {sharedList.placeIds.length} places
+          </span>
+          <Button size="sm" style={{ flex: "none" }} onClick={saveAllShared}>Save all</Button>
+          <IconButton name="x" label="Close shared list" size={32} iconSize="xs" onClick={() => router.replace(routes.map)} />
+        </div>
+      )}
+
+      {mode === "map" && !sharedList && status === "fallback" && !bannerDismissed && (
         <div className="map-banner" role="status">
           <span className="small">Location is off — showing <b>Gangnam Station</b> as your starting point.</span>
           <IconButton name="x" label="Dismiss" size={32} iconSize="xs" onClick={() => setBannerDismissed(true)} />

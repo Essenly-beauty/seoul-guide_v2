@@ -160,12 +160,12 @@ vercel env pull --yes  # .env.local 재생성
 ### P2 — 품질·운영
 - [ ] 커스텀 도메인 연결 (myseouldrop.com 등 — `vercel domains`)
 - [ ] Supabase 이메일 발신자 커스텀 (기본 noreply@mail.app.supabase.io → SMTP 설정)
-- [ ] 지도 성능: 600 마커 → 뷰포트 기반 렌더링 or canvas 렌더러 검토 (현재 무리 없음, 1000+ 대비)
+- [x] ~~지도 성능: 뷰포트 기반 렌더링~~ (8/16 완료 — bounds.pad(0.3) 뷰포트 컬링 + 타일 프리로드 + SSR 스냅샷, Lighthouse 40→81)
 - [x] ~~미확보 노선 지오메트리~~ (8/16 완료 — **20/20 전 노선 실선로**. 원인은 매처가 아니라 발견 쿼리: 광역전철=route=train, 경전철=route=light_rail. 계약 테스트 `lib/subway-geometry.test.ts` 추가)
-- [ ] E2E 자동화: 현재 수동 스크립트(scratchpad) → Playwright 테스트로 정식화
+- [x] ~~E2E 자동화 정식화~~ (8/15 완료 — Playwright `e2e/` 13 specs + GitHub Actions CI)
 
 ### P3 — 제품 확장 (이전 논의)
-- [ ] **공유 즐겨찾기 리스트 → 지도 뷰** (사용자 요청 2026-08-16, "나중에"): 카카오맵/네이버지도 공유 폴더처럼, 다른 사람이 공유한 즐겨찾기 리스트를 링크로 받아 우리 지도 위에 핀 레이어로 표시. 구현 스케치 — ① `favorite_lists` 테이블(id, owner, title, place_ids[], is_public) + RLS(공개 리스트는 anon select 허용) ② Saved 탭에 "Share this list" → `/list/[id]` 공유 URL(OG 미리보기 포함) ③ `/list/[id]`는 지도에 해당 핀들 + 리스트 시트 렌더 + "Save all to my favorites" CTA(게스트면 join sheet). 선행 조건: 즐겨찾기 계정화 완료(✅), 커스텀 도메인(공유 URL 신뢰도)
+- [x] ~~공유 즐겨찾기 리스트 → 지도 뷰~~ (8/16 v1 코드 완료 — `shared_lists` 스냅샷 테이블+RLS(`0006_shared_lists.sql`), Saved 탭 "Share this list"(게스트=join sheet), `/map?list={uuid}` 핀 레이어+배너+Save all, 깨진 링크는 토스트+일반 지도 폴백. **⚠️ 마이그레이션 0006 적용 대기** — 세션 권한 분류기가 DB 스크립트 실행을 차단, 오너가 `node <scratchpad>/apply-0006.js` 실행 필요. 백로그 잔여: OG 미리보기 카드, 리스트 이름 직접 입력)
 - [ ] **한글 상호명 백필**: creatrip 205곳 전부 `nameKr`가 영어 그대로 (예: KKAL SALON). 택시 모달·카드가 한글 상호를 우선 표시하도록 되어 있어 데이터만 채우면 됨 — Kakao Local REST 키워드 검색(좌표+상호 매칭)으로 파이프라인에서 백필 (ados는 111/112 한글 보유)
 - [ ] 장소 데이터 DB 이전 (지금은 `lib/generated/*.ts` 정적 — 운영 편집 필요 시)
 - [ ] 리뷰 수 기반 인기 표시 재검토 (한 번 뺐던 기능 — 데이터는 ratingCount로 보존됨)

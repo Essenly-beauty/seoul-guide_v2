@@ -53,7 +53,7 @@ export function ToastProvider({ children }: { children: React.ReactNode }) {
         return;
       }
       navigator.clipboard?.writeText(fallbackText).catch(() => {});
-      toast(data.url ? "Product link copied" : "Copied: " + fallbackText);
+      toast(data.url ? "Link copied" : "Copied: " + fallbackText);
     },
     [toast],
   );
