@@ -135,6 +135,44 @@ test.describe("direct auth + account sync", () => {
     expect(mirrors).toEqual({ favs: null, profile: null, ratings: null, merged: null });
   });
 
+  test("shared list round-trip: member shares, guest opens it on the map", async ({ page, browser, baseURL }) => {
+    await login(page);
+    // heart two places through the UI so the Saved tab has a list to share
+    for (const id of ["juno-hair-gangnam", "colorlab-gangnam"]) {
+      await page.goto(`/place/${id}`);
+      const save = page.getByRole("button", { name: "Add to favorites" });
+      await save.waitFor({ timeout: 20_000 });
+      await save.click();
+      await expect(page.getByRole("button", { name: "Remove from favorites" })).toBeVisible();
+    }
+    await page.goto("/favorites");
+    await page.getByRole("button", { name: "Share this list" }).click();
+    // navigator.share may or may not exist headless — the durable effect
+    // either way is the snapshot row, so assert on that
+    await expect
+      .poll(async () => {
+        const { data } = await admin!.from("shared_lists").select("id").eq("owner", uid!);
+        return data?.length ?? 0;
+      }, { timeout: 15_000 })
+      .toBe(1);
+    const { data: lists } = await admin!.from("shared_lists").select("id, title, place_ids").eq("owner", uid!);
+    expect(lists![0].place_ids.sort()).toEqual(["colorlab-gangnam", "juno-hair-gangnam"]);
+
+    // a guest (fresh context) opens the link: banner + Save all + join sheet
+    const guestCtx = await browser.newContext();
+    const guest = await guestCtx.newPage();
+    try {
+      await guest.goto(`${baseURL}/map?list=${lists![0].id}`);
+      await expect(guest.locator(".map-banner")).toContainText(`${lists![0].title} · 2 places`, { timeout: 20_000 });
+      await guest.getByRole("button", { name: "Save all" }).click();
+      await expect(guest.getByText("Saved 2 places to your list")).toBeVisible();
+      await expect(guest.getByText("Save it to your account")).toBeVisible(); // guest funnel
+    } finally {
+      await guestCtx.close();
+      await admin!.from("shared_lists").delete().eq("owner", uid!);
+    }
+  });
+
   test("shared device: next account never inherits the previous mirror", async ({ page }) => {
     // simulate account A's dead session leaving a mirror behind
     await page.goto("/menu");
