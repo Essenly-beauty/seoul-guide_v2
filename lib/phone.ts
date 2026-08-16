@@ -37,3 +37,22 @@ export function formatPhone(e164: string): string {
         : [rest];
   return `${dial} ${groups.join("-")}`;
 }
+
+/** True only for genuine "the owner hasn't connected an SMS provider yet"
+    errors. A runtime send failure (bad number, carrier, rate limit) must
+    NOT match — telling those users the feature doesn't exist is a silent
+    churn path (auth doc issue #2, 2026-08-16). */
+export function smsProviderNotReady(msg: string): boolean {
+  return /(phone|sms)[^.]*(disabled|not enabled)|(disabled|not enabled)[^.]*(phone|sms)|sms provider[^.]*(missing|not|could not be found)|no sms provider|error finding sms provider/i.test(msg);
+}
+
+/** Actionable copy for SMS send failures, by failure class. */
+export function smsSendErrorCopy(msg: string): string {
+  if (/invalid|unsupported|not a valid|format/i.test(msg)) {
+    return "That number doesn't look right — double-check the country code and digits.";
+  }
+  if (/rate|too many|frequency|security purposes|seconds/i.test(msg)) {
+    return "Too many attempts — wait a minute and try again.";
+  }
+  return "Couldn't send the code right now — try again in a moment.";
+}

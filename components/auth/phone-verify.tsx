@@ -11,7 +11,7 @@ import { Button } from "@/components/ui/button";
 import { Notice } from "@/components/ui/notice";
 import { useToast } from "@/components/ui/toast";
 import { useAuthUser } from "@/lib/auth/use-auth";
-import { DIAL_CODES, formatPhone, toE164 } from "@/lib/phone";
+import { DIAL_CODES, formatPhone, smsProviderNotReady, smsSendErrorCopy, toE164 } from "@/lib/phone";
 import { supabaseBrowser } from "@/lib/supabase/client";
 
 type Step = "input" | "code" | "done";
@@ -26,23 +26,27 @@ export function PhoneVerify({ onDone }: { onDone?: () => void }) {
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [unavailable, setUnavailable] = useState(false);
+  // a verified account can swap numbers (auth doc issue #1, 2026-08-16)
+  const [changing, setChanging] = useState(false);
   const phone = toE164(dial, local);
 
   if (loading) return null;
   if (!user) {
     return <p className="t-caption">Sign in first — the number is verified against your account.</p>;
   }
-  if (user.phone && step !== "done") {
+  // gate on step === "input" so a mid-flow USER_UPDATED event can never
+  // yank the code entry away under the user
+  if (user.phone && step === "input" && !changing && !unavailable) {
     return (
       <p className="small" role="status">
         <span style={{ color: "var(--success)", fontWeight: 600 }}>✓ Verified</span>{" "}
-        <span className="mono">{formatPhone(`+${user.phone}`)}</span>
+        <span className="mono">{formatPhone(`+${user.phone}`)}</span>{" "}
+        <button className="caption" style={{ color: "var(--accent)", fontWeight: 600 }} onClick={() => setChanging(true)}>
+          Change number
+        </button>
       </p>
     );
   }
-
-  const providerNotReady = (msg: string) =>
-    /provider|not enabled|unsupported|disabled|not configured|missing/i.test(msg);
 
   const sendCode = async () => {
     if (!phone || busy) return;
@@ -51,8 +55,11 @@ export function PhoneVerify({ onDone }: { onDone?: () => void }) {
     const { error: err } = await supabaseBrowser().auth.updateUser({ phone });
     setBusy(false);
     if (err) {
-      if (providerNotReady(err.message)) setUnavailable(true);
-      else setError(err.message);
+      // config gap → honest "not live yet"; send failure → actionable retry
+      // (auth doc issue #2: the old catch-all read every failure as
+      // "feature doesn't exist" — a silent churn path)
+      if (smsProviderNotReady(err.message)) setUnavailable(true);
+      else setError(smsSendErrorCopy(err.message));
       return;
     }
     setStep("code");
@@ -76,10 +83,16 @@ export function PhoneVerify({ onDone }: { onDone?: () => void }) {
 
   if (unavailable) {
     return (
-      <Notice icon="call">
-        SMS verification isn&apos;t switched on yet — you can add your number
-        later from Settings once it&apos;s live.
-      </Notice>
+      <div className="stack sm">
+        <Notice icon="call">
+          SMS verification isn&apos;t switched on yet — you can add your number
+          later from Settings once it&apos;s live.
+        </Notice>
+        {/* never a dead end — the state may be transient */}
+        <button className="caption" style={{ color: "var(--accent)", fontWeight: 600, alignSelf: "flex-start" }} onClick={() => setUnavailable(false)}>
+          Try again
+        </button>
+      </div>
     );
   }
 
