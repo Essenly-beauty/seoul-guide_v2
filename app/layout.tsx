@@ -3,6 +3,7 @@ import "./globals.css";
 import { IconSprite } from "@/components/icon";
 import { RouteProgress } from "@/components/ui/route-progress";
 import { ErrorReporterInit } from "@/components/system/error-reporter-init";
+import { PwaRegister } from "@/components/system/pwa-register";
 import { ThemeProvider } from "@/components/theme/theme-provider";
 import { ToastProvider } from "@/components/ui/toast";
 
@@ -60,6 +61,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body>
         <IconSprite />
         <ErrorReporterInit />
+        <PwaRegister />
         <ThemeProvider>
           <ToastProvider>
             <div className="app-shell">
