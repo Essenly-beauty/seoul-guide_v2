@@ -1,5 +1,16 @@
 import { describe, it, expect } from "vitest";
-import { haversineKm, formatDistance, walkMinutes, kakaoMapUrl, naverMapUrl, googleMapsUrl, MYEONGDONG, GANGNAM_STATION } from "./geo";
+import {
+  haversineKm,
+  formatDistance,
+  walkMinutes,
+  kakaoMapUrl,
+  naverMapUrl,
+  naverAppRouteUrl,
+  naverAndroidIntentUrl,
+  googleMapsUrl,
+  MYEONGDONG,
+  GANGNAM_STATION,
+} from "./geo";
 
 describe("haversineKm", () => {
   it("returns 0 for identical points", () => {
@@ -45,6 +56,32 @@ describe("map URLs (no API keys)", () => {
     expect(googleMapsUrl(37.524, 127.038)).toBe(
       "https://www.google.com/maps/search/?api=1&query=37.524%2C127.038",
     );
+  });
+
+  it("creates a native Naver Map route URL with the page that initiated it", () => {
+    const href = naverAppRouteUrl(
+      "호수 도산점",
+      { lat: 37.524, lng: 127.038 },
+      { lat: 37.52, lng: 127.03 },
+      "https://myseouldrop.example",
+    );
+    expect(href).toContain("nmap://route/public?");
+    expect(href).toContain("slat=37.52");
+    expect(href).toContain("dlat=37.524");
+    expect(href).toContain(`dname=${encodeURIComponent("호수 도산점")}`);
+    expect(href).toContain("appname=https%3A%2F%2Fmyseouldrop.example");
+  });
+
+  it("creates an Android intent URL so a missing Naver Map falls back to Play Store", () => {
+    const href = naverAndroidIntentUrl(
+      "호수 도산점",
+      { lat: 37.524, lng: 127.038 },
+      null,
+      "https://myseouldrop.example",
+    );
+    expect(href).toContain("intent://route/public?");
+    expect(href).toContain("scheme=nmap");
+    expect(href).toContain("package=com.nhn.android.nmap");
   });
 });
 
