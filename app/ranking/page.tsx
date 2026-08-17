@@ -11,7 +11,8 @@ import { EmptyState } from "@/components/ui/empty-state";
 import { SearchField } from "@/components/ui/search-field";
 import { SectionHeader } from "@/components/ui/section-header";
 import { SectionDivider } from "@/components/ui/section-divider";
-import { BrandMark, Icon } from "@/components/icon";
+import { BrandMark } from "@/components/brand/brand-logo";
+import { Icon } from "@/components/icon";
 import { routes } from "@/lib/routes";
 import { PRODUCTS, SHOP_CATEGORIES, brandSlug, type Product, type ProductCategory } from "@/lib/data";
 
