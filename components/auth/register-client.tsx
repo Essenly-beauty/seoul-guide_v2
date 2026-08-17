@@ -88,7 +88,7 @@ export function RegisterClient() {
     }
     if (data.session) {
       // Email confirmation disabled — signed in right away.
-      router.push(routes.onboardingMode);
+      router.push(routes.onboardingBasics);
       router.refresh();
       return;
     }
