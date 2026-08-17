@@ -14,6 +14,12 @@ export const DIAL_CODES = [
   { code: "+61", label: "Australia (+61)" },
 ] as const;
 
+/** SMS is intentionally opt-in at deployment time. A configured provider is
+    not enough on its own: keep the UI closed until the owner has completed a
+    real send/receive check and explicitly enabled the production flag. */
+export const PHONE_VERIFICATION_AVAILABLE =
+  process.env.NEXT_PUBLIC_PHONE_VERIFICATION_ENABLED === "true";
+
 /** Digits only, drops one leading 0 (E.164 style: 010-1234-5678 → +821012345678). */
 export function toE164(dial: string, local: string): string | null {
   const digits = local.replace(/[^\d]/g, "").replace(/^0/, "");
