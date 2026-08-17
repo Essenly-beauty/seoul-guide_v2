@@ -10,14 +10,16 @@ import { purgeProfileMirror } from "@/lib/profile";
 import { purgeRatingsMirror } from "@/lib/ratings";
 import { useDialogFocus } from "@/components/ui/use-dialog-focus";
 
-export function SignoutModal() {
+export function SignoutModal({ compact = false }: { compact?: boolean }) {
   const [open, setOpen] = useState(false);
   const cancelRef = useRef<HTMLButtonElement>(null);
   const dialogRef = useDialogFocus<HTMLDivElement>(open, () => setOpen(false), cancelRef);
   const router = useRouter();
   return (
     <>
-      <Button variant="danger" onClick={() => setOpen(true)}>Sign Out</Button>
+      <Button variant="danger" size={compact ? "sm" : "md"} icon={compact ? "door" : undefined} onClick={() => setOpen(true)}>
+        {compact ? "Sign out" : "Sign Out"}
+      </Button>
       {open && (
         <div className="modal" onClick={(e) => e.target === e.currentTarget && setOpen(false)}>
           <div
