@@ -20,7 +20,7 @@ function release(): string | null {
 }
 
 export function reportClientError(
-  kind: "error" | "unhandledrejection" | "boundary",
+  kind: "error" | "unhandledrejection" | "boundary" | "csp",
   message: string,
   stack?: string | null,
 ): void {
@@ -61,5 +61,14 @@ export function initErrorReporter(): void {
     const reason = event.reason;
     const message = reason instanceof Error ? reason.message : String(reason ?? "unhandled rejection");
     reportClientError("unhandledrejection", message, reason instanceof Error ? reason.stack ?? null : null);
+  });
+  // CSP is enforced (next.config B10) — a violated directive doesn't throw,
+  // it silently blocks. Surface regressions in client_errors instead.
+  window.addEventListener("securitypolicyviolation", (event) => {
+    reportClientError(
+      "csp",
+      `CSP blocked ${event.violatedDirective}: ${event.blockedURI || "inline"}`,
+      `${event.sourceFile ?? ""}:${event.lineNumber ?? 0}`,
+    );
   });
 }
