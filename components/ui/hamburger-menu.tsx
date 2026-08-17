@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 import { Icon, type IconName } from "@/components/icon";
 import { IconButton } from "@/components/ui/icon-button";
 import { routes } from "@/lib/routes";
@@ -34,7 +34,6 @@ export function HamburgerMenu() {
   const [open, setOpen] = useState(false);
   const [host, setHost] = useState<Element | null>(null);
   const pathname = usePathname();
-  const router = useRouter();
 
   // Anchor the overlay to .app-shell (full height), not the sticky topbar it lives in.
   useEffect(() => {
@@ -75,9 +74,6 @@ export function HamburgerMenu() {
                 <Icon name={r.icon} size="sm" />{r.label}
               </Link>
             ))}
-            <button className="drow danger" onClick={() => { setOpen(false); router.push(routes.splash); }}>
-              <Icon name="door" size="sm" />Sign out
-            </button>
           </div>
         </>,
         host,
