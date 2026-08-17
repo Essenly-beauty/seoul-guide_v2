@@ -1,56 +1,51 @@
-# Essenly — Seoul Beauty Guide
+# MYSEOULDROP — Seoul K-Beauty Map
 
-Mobile-webview prototype for foreign visitors to Seoul: discover beauty places in English, explore them by current location or subway station, browse K-beauty products, and hand navigation off to KakaoMap / Naver Map / Google Maps. The current product uses a map-first IA with a 5-tab footer (Map · Stories · Ranking · Saved · My).
+Production web app for foreign visitors to Seoul (formerly “Essenly”): a map-first guide to ~600 verified beauty places — Olive Young, skin clinics, hair salons, nail & lash, personal color — in English, with subway-based exploration and honest handoff to KakaoMap / Naver Map / Google Maps for navigation. Live at https://seoul-guide-v2.vercel.app.
 
-> Baseline: commit `563950d` (2026-07-26). This repository currently validates the client UX and navigation logic. It is not yet connected to production authentication, venue data, booking, payment, reviews, or store inventory.
+> Scope honesty (launch decision 2026-08): this is a **discovery map**. Bookings/payments stay with the venue's own channels; we don't fabricate reviews, photos, or contact data we don't have. Traveler reviews are consent-first (posted publicly only when the author opts in) with report-based moderation.
+
+## What's real today
+
+- **Accounts** — Supabase auth: email+password and Google OAuth (Kakao provider configured server-side; Apple pending enrollment). Guest mode covers the whole app; hearts/ratings/profile merge into the account on sign-up.
+- **Map home (`/`→`/map`)** — GPS with Gangnam fallback, 8 categories + detail filters, viewport-culled markers, Kakao-style subway layer with 20/20 real line geometries, station-radius browsing, saved-places layer.
+- **Place detail** — real source ratings only, services labeled as category examples where scraped data has none, taxi big-text modal (Korean name/address), in-app map focus + external map links.
+- **Accountized data** — favorites, beauty profile, ratings & reviews sync to Supabase (RLS row-scoped) with hardened guest→member merge and shared-device purge.
+- **Shared lists** — snapshot your saved places into a link (`/map?list=…`) friends open on the map; OG preview card included.
+- **Public reviews** — consent checkbox at save, first-name-only masked view, per-user reports, auto-hide at 3 distinct reporters.
+- **Ops** — self-hosted client error tracking (incl. CSP violations), uptime cron, GitHub Actions CI, 15 Playwright E2E specs, enforced CSP + security headers, Lighthouse mobile 81.
 
 ## Stack
 
-- Next.js 14 (App Router) · TypeScript · Tailwind + CSS-variable design tokens
-- Leaflet + react-leaflet (English CARTO tiles) for the map screen
-- Vitest for the pure-logic layer (`lib/geo`, `lib/search`, `lib/subway`)
+- Next.js 15 (App Router) + React 19 · TypeScript · CSS-variable design tokens (light default / dark opt-in)
+- Supabase (auth, Postgres + RLS) via `@supabase/ssr` cookie sessions
+- Leaflet + react-leaflet 5 (English CARTO tiles)
+- Vitest (225 unit) + Playwright (15 E2E)
 
 ## Getting started
 
 ```bash
 npm install
-npm run dev   # http://localhost:3000
+npm run dev   # http://localhost:3000  (owner setup: start-essenly.command)
 ```
 
 | Command | What it does |
 |---|---|
 | `npm run dev` | Dev server |
-| `npm run build` | Production build |
+| `npm run build` | Production build (⚠️ shares `.next` with a running dev server — restart it after) |
 | `npm test` | Vitest unit tests |
-| `npm run typecheck` | `tsc --noEmit` |
-| `npm run lint` | ESLint |
-| `npm run build:subway-data` | Rebuild `lib/subway-data.json` from public sources (see Data sources below) |
-| `npm run build:subway-svg` | Rebuild the processed metro SVG (`components/subway/seoul-metro.svg` + `metro-svg.ts`) from the Wikimedia base map (see Data sources below) |
+| `npm run e2e` | Playwright E2E (needs `.env.local` service key for auth specs; they self-skip without it) |
+| `npm run typecheck` / `npm run lint` | `tsc --noEmit` / ESLint |
+| `npm run build:subway-data` / `build:subway-svg` | Rebuild committed subway artifacts (see Data sources) |
 
 ## Documentation
 
-- [`docs/README.md`](docs/README.md) — documentation index and source-of-truth order
-- [`docs/service-overview.md`](docs/service-overview.md) — audience, product scope, IA, and core journeys
-- [`docs/feature-status.md`](docs/feature-status.md) — implemented/prototype/missing status by feature
-- [`docs/data-and-integrations.md`](docs/data-and-integrations.md) — data coverage, storage, and external integrations
-- [`docs/launch-readiness.md`](docs/launch-readiness.md) — P0/P1/P2 work required before launch
-- [`docs/design-system.md`](docs/design-system.md) — UI tokens, components, states, and contribution rules
-
-## Highlights
-
-- **Login shell → Map home** — Google, Apple, Kakao, and guest actions currently link directly to `/map`. Authentication, sessions, and one-time onboarding gating are not implemented.
-- `/map` — full-screen map home: GPS with Gangnam Station fallback, rating bubble markers, All plus 8 place categories (Olive Young · Skin Clinic · Hair Salon · Nail & Lash · Personal Color · Head Spa · Mall & Gifts · Etc), rating / English OK / Bookable / price / service-tag filters, a draggable distance-ranked bottom sheet, and a search pill that hands off to `/search?cat=<active category>`.
-- **Subway route explorer** — station search and Departure / Via / Arrival planning live in the bottom controller. Moving the active station recenters the geographic map and refreshes nearby places within 500m / 1km / 2km. Subway lines are not drawn on the geographic map.
-- **Place detail** (`/place/[id]`) — overview, services, reviews, nearby places, Korean-name/address copy, local favorite/rating state, and keyless directions links. Booking channels and several venue details remain demo data.
-- `/ranking` — Olive-Young-style product rankings (Sales Best / Review Best / Brands) with brand search.
-- `/blog` — beauty articles and guides (formerly "Journal").
-- `/favorites` — saved places/products/blog posts across Map, Products, and Blog tabs with a category rail.
-- `/menu` — account hub: profile, bookings, reviews, notifications, settings, support, legal.
-- `/search` — unified English + 한글 search across places, products and blog articles; pre-query state shows a "Top picks" list and quick links back to Map / Ranking / Blog. The map currently passes `?cat=`, but search does not yet apply it as a result filter.
-- **5-tab bottom nav** — Map · Stories · Ranking · Saved · My (`components/ui/bottom-nav.tsx`).
-- `/legal/terms`, `/legal/privacy` — draft legal pages (require counsel review before launch)
-
-> Prototype status: venue, product, article, booking, and review content is an in-memory sample layer (`lib/data.ts` and page-local arrays). Favorites, profile answers, recent searches/stations, ratings, and feedback use browser-local state. The subway network is a committed public-data artifact, but it has no live arrivals or service alerts. Legacy route keys remain as aliases in `lib/routes.ts` for old deep links.
+- [`docs/HANDOFF.md`](docs/HANDOFF.md) — **current state source of truth**: what shipped, decisions, traps, backlog
+- [`docs/launch-checklist.md`](docs/launch-checklist.md) — pre-open gates, owner/AI task split
+- [`docs/auth-setup.md`](docs/auth-setup.md) — Supabase/OAuth/SMS provider setup + incident notes
+- [`docs/runbook.md`](docs/runbook.md) — error tracking, uptime, rollback
+- [`docs/README.md`](docs/README.md) — full documentation index
+- [`docs/design-system.md`](docs/design-system.md) — UI tokens, components, contribution rules
+- [`docs/feature-status.md`](docs/feature-status.md) — ⚠️ 2026-07-26 prototype snapshot, superseded by HANDOFF (kept for history)
 
 ## Data sources
 
