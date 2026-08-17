@@ -1,7 +1,8 @@
 "use client";
 
 // Menu profile header — real session state instead of the old "Sarah" mock.
-// Guests get a sign-in nudge; members see their name and email.
+// Visitors can explore freely and keep device-local saves; members see their
+// name and email.
 
 import { Avatar } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
@@ -31,10 +32,9 @@ export function MenuProfile() {
   if (!user) {
     return (
       <div className="row" style={{ gap: 14 }}>
-        <Avatar name="?" size={52} />
         <div style={{ flex: 1, minWidth: 0 }}>
-          <b style={{ fontSize: 17 }}>Guest</b>
-          <div className="caption muted">Sign in to sync your favorites</div>
+          <b style={{ fontSize: 17 }}>Keep your Seoul picks</b>
+          <div className="caption muted">Explore freely — saved places stay on this device until you sign in.</div>
         </div>
         <Button size="sm" href={`${routes.signIn}?next=${routes.menu}`} style={{ flex: "none" }}>
           Sign in
