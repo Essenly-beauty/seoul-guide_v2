@@ -34,6 +34,7 @@ export const routes = {
   placesCategory: (cat: string) => `/places/${cat}`,
   place: (id: string) => `/place/${id}`,
   search: "/search",
+  download: "/download",
   blogArticle: (slug: string) => `/blog/${slug}`,
   journalArticle: (slug: string) => `/blog/${slug}`, // legacy alias
 
