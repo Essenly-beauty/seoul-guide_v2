@@ -1,7 +1,9 @@
 import type { MetadataRoute } from "next";
 import { ARTICLES, PLACES, PRODUCTS } from "@/lib/data";
 
-const BASE = "https://seoul-guide-v2.vercel.app";
+
+const BASE = "https://myseouldrop.app";
+
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const statics: MetadataRoute.Sitemap = [
@@ -25,3 +27,4 @@ export default function sitemap(): MetadataRoute.Sitemap {
   }));
   return [...statics, ...places, ...products, ...articles];
 }
+
