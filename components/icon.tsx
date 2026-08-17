@@ -291,23 +291,6 @@ export function IconSprite() {
         <path d="m8 19-2 3" />
         <path d="m16 19 2 3" />
       </symbol>
-      {/* Brand leaf — NOT lucide; the product's own mark. currentColor so the
-          glyph inherits (BrandMark supplies its own green). Kept separate from
-          i-mark, which is now the lucide palette used for the personal-color
-          category. */}
-      <symbol id="i-mark-brand" viewBox="0 0 40 40">
-        <path d="M20 4c-9 0-16 6.5-16 16 0 3 1 5.6 2.8 7.6C9 22 14 18 20.5 18c-4 2-7 5.5-8.4 10.4C14 30.6 16.8 32 20 32c9 0 16-6.5 16-16S29 4 20 4z" fill="currentColor" />
-        <circle cx="27" cy="26" r="3.2" fill="currentColor" />
-      </symbol>
-    </svg>
-  );
-}
-
-/** The brand mark, sized independently of the icon utility classes. */
-export function BrandMark({ size = 24, className, style }: { size?: number; className?: string; style?: CSSProperties }) {
-  return (
-    <svg viewBox="0 0 40 40" width={size} height={size} className={className} style={{ color: "var(--accent)", ...style }} aria-hidden="true">
-      <use href="#i-mark-brand" />
     </svg>
   );
 }
