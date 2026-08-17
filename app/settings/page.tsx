@@ -10,6 +10,7 @@ import { SignoutModal } from "@/components/ui/signout-modal";
 import { ThemeToggle } from "@/components/theme/theme-toggle";
 import { AccountDataControls } from "@/components/settings/account-data-controls";
 import { PhoneVerify } from "@/components/auth/phone-verify";
+import { PwaInstallControl } from "@/components/pwa/pwa-install-control";
 import { Icon } from "@/components/icon";
 import { routes } from "@/lib/routes";
 
@@ -27,6 +28,13 @@ export default function SettingsPage() {
           <Button variant="secondary" size="sm" href={routes.onboardingInterests} style={{ alignSelf: "flex-start" }}>
             Edit beauty profile
           </Button>
+        </section>
+
+        <SectionDivider />
+        <section className="stack sm">
+          <SectionHeader title="Install app" />
+          <p className="t-caption">Save MYSEOULDROP to your phone or desktop for an app-like, full-screen experience.</p>
+          <PwaInstallControl />
         </section>
 
         <SectionDivider />
