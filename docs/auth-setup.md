@@ -278,6 +278,11 @@ Twilio, Vonage, MessageBird, Infobip, Plivo, Telnyx, AWS SNS를 모두 확인했
 2. **Supabase의 Test Phone Numbers and OTPs 비우기** (우회 경로 제거)
 3. 앱에서 실번호로 인증 → SMS 수신 확인
 4. Twilio Console → Monitor에서 발송 로그 확인
+5. Vercel Production 환경 변수 `NEXT_PUBLIC_PHONE_VERIFICATION_ENABLED=true` 설정 후 재배포
+
+> 이 토글 전에는 앱이 전화번호 입력란 대신 “Phone verification is coming
+> soon” 안내를 보여 준다. 공급자 설정만으로 미완료된 기능을 사용자에게
+> 노출하지 않기 위한 출시 게이트다.
 
 ### 4.7 알아둘 제약 사항
 
