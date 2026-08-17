@@ -75,3 +75,48 @@ export function naverRouteUrl(nameKr: string, dest: LatLng, origin?: LatLng | nu
   const goal = `${dest.lng},${dest.lat},${encodeURIComponent(nameKr)}`;
   return `https://map.naver.com/p/directions/${start}/${goal}/-/transit`;
 }
+
+/** App Store fallback used after an iOS browser attempts the NAVER Map URL scheme. */
+export const NAVER_MAP_IOS_APP_STORE_URL = "http://itunes.apple.com/app/id311867728?mt=8";
+
+/**
+ * NAVER Map's documented native public-transit route scheme.
+ *
+ * `appname` is mandatory for a web page using the scheme. Callers should pass
+ * their current origin so this keeps working when the production domain changes.
+ * NAVER Map itself owns the UI language; its app setting determines English,
+ * Korean, Simplified Chinese, or Japanese.
+ */
+export function naverAppRouteUrl(
+  nameKr: string,
+  dest: LatLng,
+  origin: LatLng | null | undefined,
+  appName: string,
+): string {
+  const params = [
+    ["dlat", String(dest.lat)],
+    ["dlng", String(dest.lng)],
+    ["dname", nameKr],
+    ["appname", appName],
+  ];
+
+  if (origin) {
+    params.push(["slat", String(origin.lat)], ["slng", String(origin.lng)], ["sname", "My location"]);
+  }
+
+  return `nmap://route/public?${params.map(([key, value]) => `${key}=${encodeURIComponent(value)}`).join("&")}`;
+}
+
+/**
+ * Android Chrome intent form of the NAVER Map scheme. Android opens the app
+ * when installed and falls back to its Google Play listing otherwise.
+ */
+export function naverAndroidIntentUrl(
+  nameKr: string,
+  dest: LatLng,
+  origin: LatLng | null | undefined,
+  appName: string,
+): string {
+  const route = naverAppRouteUrl(nameKr, dest, origin, appName).replace("nmap://", "intent://");
+  return `${route}#Intent;scheme=nmap;action=android.intent.action.VIEW;category=android.intent.category.BROWSABLE;package=com.nhn.android.nmap;end`;
+}
