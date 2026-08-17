@@ -551,16 +551,19 @@ function ReviewsSection({ place }: { place: Place }) {
 // ── Info (d-info): full details — Naver home/info split ───
 function InfoSection({ place }: { place: Place }) {
   const { toast } = useToast();
-  const today = new Date().getDay();
+  // A Vercel server's date can differ from the visitor's local date. Delay
+  // today/open-state decoration until hydration has completed on the device.
+  const [today, setToday] = useState<number | null>(null);
+  useEffect(() => setToday(new Date().getDay()), []);
   return (
     <section id="d-info" className="d-sec stack sm">
       <h2 className="h2" style={{ fontFamily: "var(--sans)", fontSize: 16, fontWeight: 700 }}>Information</h2>
       {place.hours && (
-        <Collapse summary={<b>Hours · {statusLabel(place.hours)}</b>}>
+        <Collapse summary={<b>Hours{today !== null ? ` · ${statusLabel(place.hours)}` : ""}</b>}>
           <div className="stack" style={{ gap: 4, padding: "8px 4px" }}>
             {WEEKDAYS.map((d, i) => (
-              <div key={d} className="row between small" style={{ fontWeight: i === today ? 700 : 400, color: i === today ? "var(--text)" : "var(--muted)" }}>
-                <span>{d}{i === today ? " (today)" : ""}</span>
+              <div key={d} className="row between small" style={{ fontWeight: today !== null && i === today ? 700 : 400, color: today !== null && i === today ? "var(--text)" : "var(--muted)" }}>
+                <span>{d}{today !== null && i === today ? " (today)" : ""}</span>
                 <span className="mono">{place.hours!.open} – {place.hours!.close}</span>
               </div>
             ))}
