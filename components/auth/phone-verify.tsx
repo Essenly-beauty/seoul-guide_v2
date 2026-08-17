@@ -11,7 +11,7 @@ import { Button } from "@/components/ui/button";
 import { Notice } from "@/components/ui/notice";
 import { useToast } from "@/components/ui/toast";
 import { useAuthUser } from "@/lib/auth/use-auth";
-import { DIAL_CODES, formatPhone, smsProviderNotReady, smsSendErrorCopy, toE164 } from "@/lib/phone";
+import { DIAL_CODES, formatPhone, PHONE_VERIFICATION_AVAILABLE, smsProviderNotReady, smsSendErrorCopy, toE164 } from "@/lib/phone";
 import { supabaseBrowser } from "@/lib/supabase/client";
 
 type Step = "input" | "code" | "done";
@@ -86,17 +86,20 @@ export function PhoneVerify({ onDone }: { onDone?: () => void }) {
     onDone?.();
   };
 
-  if (unavailable) {
+  if (!PHONE_VERIFICATION_AVAILABLE || unavailable) {
     return (
       <div className="stack sm">
         <Notice icon="call">
-          SMS verification isn&apos;t switched on yet — you can add your number
-          later from Settings once it&apos;s live.
+          {PHONE_VERIFICATION_AVAILABLE
+            ? "SMS verification isn’t switched on yet — you can add your number later from Settings once it’s live."
+            : "Phone verification is coming soon. You can keep using the app without it and add a number later from Settings."}
         </Notice>
-        {/* never a dead end — the state may be transient */}
-        <button className="caption" style={{ color: "var(--accent)", fontWeight: 600, alignSelf: "flex-start" }} onClick={() => setUnavailable(false)}>
-          Try again
-        </button>
+        {/* A provider error may be transient, unlike the deliberate launch gate. */}
+        {PHONE_VERIFICATION_AVAILABLE && unavailable && (
+          <button className="caption" style={{ color: "var(--accent)", fontWeight: 600, alignSelf: "flex-start" }} onClick={() => setUnavailable(false)}>
+            Try again
+          </button>
+        )}
       </div>
     );
   }
