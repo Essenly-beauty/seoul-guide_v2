@@ -1,9 +1,12 @@
 import { defineConfig } from "@playwright/test";
 
+const externalOnly = process.env.E2E_EXTERNAL_ONLY === "1";
+
 // Local runs reuse the developer's dev server (start-essenly.command) and the
 // installed Chrome — no browser download. CI builds first, then starts the
 // production server. Auth-dependent specs self-skip when the Supabase
-// service-role key isn't available (e.g. on CI without secrets).
+// service-role key isn't available (e.g. on CI without secrets). A production
+// smoke run can target an already-deployed URL without starting a second app.
 export default defineConfig({
   testDir: "./e2e",
   timeout: 90_000,
@@ -18,10 +21,12 @@ export default defineConfig({
     channel: process.env.CI ? undefined : "chrome",
     trace: "retain-on-failure",
   },
-  webServer: {
-    command: process.env.CI ? "npm run start" : "npm run dev",
-    url: "http://localhost:3000",
-    reuseExistingServer: true,
-    timeout: 120_000,
-  },
+  webServer: externalOnly
+    ? undefined
+    : {
+        command: process.env.CI ? "npm run start" : "npm run dev",
+        url: "http://localhost:3000",
+        reuseExistingServer: true,
+        timeout: 120_000,
+      },
 });
