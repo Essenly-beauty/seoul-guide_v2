@@ -123,11 +123,16 @@ function SignInForm() {
 }
 
 // Full-width outline button — the foot link alone buried the signup path
-// (user report 2026-08-16). Carries ?next= so the funnel round-trips.
+// (user report 2026-08-16). Carries ?next= and account-switch intent so the
+// funnel round-trips even when the browser is already signed in.
 function RegisterCta() {
   const searchParams = useSearchParams();
   const next = safeNext(searchParams.get("next"));
-  const href = next ? `${routes.register}?next=${encodeURIComponent(next)}` : routes.register;
+  const params = new URLSearchParams();
+  if (next) params.set("next", next);
+  if (searchParams.get("switch") === "1") params.set("switch", "1");
+  const query = params.toString();
+  const href = query ? `${routes.register}?${query}` : routes.register;
   return (
     <div style={{ display: "grid", gap: 10, marginTop: 26, textAlign: "center" }}>
       <span className="small muted">Not a member yet?</span>
