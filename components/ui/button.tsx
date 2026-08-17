@@ -22,6 +22,8 @@ type ButtonProps = AriaProps & {
   /** Renders a Link (internal) or <a> (with `external`) instead of <button>. */
   href?: string;
   external?: boolean;
+  /** Keeps an external URL in the current tab (required by app URL schemes). */
+  newTab?: boolean;
   disabled?: boolean;
   /** Native button ref for dialog focus management; ignored by link branches. */
   buttonRef?: Ref<HTMLButtonElement>;
@@ -39,6 +41,7 @@ export function Button({
   icon,
   href,
   external,
+  newTab = true,
   disabled,
   buttonRef,
   onClick,
@@ -60,7 +63,7 @@ export function Button({
 
   if (href && !disabled) {
     return external ? (
-      <a className={cls} style={style} href={href} target="_blank" rel="noopener noreferrer" onClick={onClick} {...rest}>
+      <a className={cls} style={style} href={href} target={newTab ? "_blank" : undefined} rel={newTab ? "noopener noreferrer" : undefined} onClick={onClick} {...rest}>
         {content}
       </a>
     ) : (
