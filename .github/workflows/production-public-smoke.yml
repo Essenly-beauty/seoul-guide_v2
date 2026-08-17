@@ -8,6 +8,11 @@ on:
         required: false
         default: "https://seoul-guide-v2.vercel.app"
         type: string
+      include_account_data:
+        description: "Run throwaway-account data lifecycle checks (requires Supabase Secrets)"
+        required: false
+        default: false
+        type: boolean
 
 permissions:
   contents: read
@@ -32,3 +37,27 @@ jobs:
           CI: "true"
           E2E_EXTERNAL_ONLY: "1"
           E2E_BASE_URL: ${{ inputs.base_url }}
+
+  account-data-smoke:
+    name: Throwaway account data smoke
+    if: ${{ inputs.include_account_data }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - run: npm ci
+      - name: Install Chromium
+        run: npx playwright install --with-deps chromium
+      - name: Test member data paths with disposable accounts
+        run: npm run e2e -- --grep "account sync|account data lifecycle|client error tracking"
+        env:
+          CI: "true"
+          E2E_EXTERNAL_ONLY: "1"
+          E2E_BASE_URL: ${{ inputs.base_url }}
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_ANON_KEY: ${{ secrets.SUPABASE_ANON_KEY }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
