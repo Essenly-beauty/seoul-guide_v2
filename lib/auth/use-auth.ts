@@ -1,7 +1,7 @@
 "use client";
 
 // Client-side auth state: current Supabase user + live updates on
-// sign-in/sign-out. `loading` distinguishes "checking" from "guest".
+// sign-in/sign-out. `loading` distinguishes "checking" from a visitor.
 
 import { useEffect, useMemo, useState } from "react";
 import type { User } from "@supabase/supabase-js";
@@ -50,7 +50,7 @@ export function useAuthUser(): { user: User | null; loading: boolean } {
 
 /** Best display name we can derive from a Supabase user. */
 export function displayName(user: User | null): string {
-  if (!user) return "Guest";
+  if (!user) return "Visitor";
   const meta = user.user_metadata as Record<string, unknown> | undefined;
   const name = (meta?.full_name ?? meta?.name) as string | undefined;
   return name?.trim() || user.email?.split("@")[0] || "Member";
