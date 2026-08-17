@@ -2,10 +2,10 @@
 
 // The join prompt — one shared signup funnel sheet (user decision
 // 2026-08-16: the welcome gateway is gone; everyone lands on the map and
-// the account is sold contextually). Guests meet it on the My tab, on
+// the account is sold contextually). Visitors meet it on the My tab, on
 // place-detail views, and on account-value actions (heart, rating, saved
-// layer). Always dismissible: the guest action itself has already
-// completed locally, so "Continue as guest" never loses anything.
+// layer). Always dismissible: the visitor action itself has already
+// completed locally, so "Keep exploring" never loses anything.
 //
 // Frequency by context:
 //  - menu, favorite, rating, savedLayer: every time (deliberate,
@@ -38,8 +38,8 @@ const COPY: Record<NudgeContext, { title: string; body: string }> = {
     body: "Tap ♥ on any place to collect it here. Join and the collection follows your account.",
   },
   menu: {
-    title: "Make MYSEOULDROP yours",
-    body: "Saved places, ratings, and your beauty profile sync to your account — free, takes a minute.",
+    title: "Keep your Seoul list",
+    body: "Explore freely. Sign in when you want saved places, ratings, and your beauty profile to follow you across devices.",
   },
   shareList: {
     title: "Share your list with a link",
@@ -84,7 +84,7 @@ export function useSigninNudge(): { nudge: (c: NudgeContext) => void; sheet: Rea
         <p className="caption muted" style={{ textAlign: "center", margin: "2px 0 0" }}>
           <Link className="auth-link" href={`${routes.signIn}${nextParam}`}>Sign in</Link>
           <span className="dim" aria-hidden="true"> · </span>
-          <button className="auth-link" style={{ font: "inherit" }} onClick={() => setCtx(null)}>Continue as guest</button>
+          <button className="auth-link" style={{ font: "inherit" }} onClick={() => setCtx(null)}>Keep exploring</button>
         </p>
       </div>
     </BottomSheet>
