@@ -1,5 +1,5 @@
 // Auth landing for OAuth and email links. Handles both flows:
-//  - `code`        — PKCE exchange (OAuth, same-browser email links)
+//  - `code`        — PKCE exchange (OAuth and same-browser recovery links)
 //  - `token_hash`  — verifyOtp (email links opened in ANY browser — set the
 //                    Supabase email templates to token_hash links, docs/auth-setup.md)
 // Errors forward to /login with a coarse reason the page can translate.
@@ -8,6 +8,7 @@ import { NextResponse } from "next/server";
 import { createServerClient } from "@supabase/ssr";
 import { cookies } from "next/headers";
 import type { EmailOtpType } from "@supabase/supabase-js";
+import { routes } from "@/lib/routes";
 
 /** Same-origin relative paths only — reject anything a browser could coerce
     into an absolute/protocol-relative hop (backslashes, //, control chars). */
@@ -58,7 +59,7 @@ export async function GET(request: Request) {
   if (tokenHash && otpType) {
     const { error } = await supabase.auth.verifyOtp({ token_hash: tokenHash, type: otpType });
     if (!error) {
-      const target = otpType === "recovery" ? "/reset-password" : next;
+      const target = otpType === "recovery" ? routes.resetPassword : next;
       return NextResponse.redirect(new URL(target, url.origin));
     }
     const reason = error.code === "otp_expired" ? "expired" : "auth";
