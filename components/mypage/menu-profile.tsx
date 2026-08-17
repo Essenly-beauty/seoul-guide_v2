@@ -6,6 +6,7 @@
 import { Avatar } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { IconButton } from "@/components/ui/icon-button";
+import { SignoutModal } from "@/components/ui/signout-modal";
 import { displayName, useAuthUser } from "@/lib/auth/use-auth";
 import { routes } from "@/lib/routes";
 
@@ -51,7 +52,10 @@ export function MenuProfile() {
           {user?.email ?? "Member"}
         </div>
       </div>
-      <IconButton name="user" label="Edit profile" variant="soft" href={routes.settings} />
+      <div className="row" style={{ gap: 8, flex: "none" }}>
+        <IconButton name="user" label="Edit profile" variant="soft" href={routes.settings} />
+        <SignoutModal compact />
+      </div>
     </div>
   );
 }
