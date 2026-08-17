@@ -21,8 +21,12 @@ import { GoogleGlyph } from "@/components/brand/auth-glyphs";
 import { useAuthUser } from "@/lib/auth/use-auth";
 import { supabaseBrowser } from "@/lib/supabase/client";
 import { routes } from "@/lib/routes";
+import { setPendingFavoriteReturn } from "@/lib/signup-return";
 
 export type NudgeContext = "favorite" | "rating" | "savedLayer" | "menu" | "shareList";
+type SavedPlace = { id: string; name: string };
+type NudgeOptions = { savedPlace?: SavedPlace };
+type ActiveNudge = { context: NudgeContext; savedPlace?: SavedPlace };
 
 const COPY: Record<NudgeContext, { title: string; body: string }> = {
   favorite: {
@@ -47,44 +51,56 @@ const COPY: Record<NudgeContext, { title: string; body: string }> = {
   },
 };
 
-export function useSigninNudge(): { nudge: (c: NudgeContext) => void; sheet: ReactNode } {
+export function useSigninNudge(): { nudge: (c: NudgeContext, options?: NudgeOptions) => void; sheet: ReactNode } {
   const { user, loading } = useAuthUser();
   const pathname = usePathname();
-  const [ctx, setCtx] = useState<NudgeContext | null>(null);
+  const [active, setActive] = useState<ActiveNudge | null>(null);
   const [busy, setBusy] = useState(false);
+  // `usePathname` is intentionally used instead of reading `window.location`
+  // during render so the server and hydrated sheet agree on the redirect.
+  const returnTo = pathname || routes.map;
+  const onboardingTarget = `${routes.onboardingBasics}?next=${encodeURIComponent(returnTo)}`;
 
   const nudge = useCallback(
-    (c: NudgeContext) => {
+    (context: NudgeContext, options: NudgeOptions = {}) => {
       if (loading || user) return; // members never see it
-      setCtx(c);
+      setActive({ context, savedPlace: options.savedPlace });
     },
     [loading, user],
   );
 
+  const rememberSavedPlace = () => {
+    if (active?.savedPlace) {
+      setPendingFavoriteReturn({ placeId: active.savedPlace.id, placeName: active.savedPlace.name });
+    }
+  };
+
   const google = async () => {
     if (busy) return;
     setBusy(true);
+    rememberSavedPlace();
     const { error } = await supabaseBrowser().auth.signInWithOAuth({
       provider: "google",
-      options: { redirectTo: `${window.location.origin}/auth/callback?next=${encodeURIComponent(pathname)}` },
+      options: { redirectTo: `${window.location.origin}/auth/callback?next=${encodeURIComponent(onboardingTarget)}` },
     });
     if (error) setBusy(false); // fall through to the email options below
   };
 
-  const nextParam = `?next=${encodeURIComponent(pathname)}`;
-  const sheet = ctx ? (
-    <BottomSheet title={COPY[ctx].title} kicker="MYSEOULDROP account" onClose={() => setCtx(null)}>
-      <p className="small muted" style={{ margin: 0, lineHeight: 1.55 }}>{COPY[ctx].body}</p>
+  const signInParam = `?next=${encodeURIComponent(returnTo)}`;
+  const registerParam = `?next=${encodeURIComponent(onboardingTarget)}`;
+  const sheet = active ? (
+    <BottomSheet title={COPY[active.context].title} kicker="MYSEOULDROP account" onClose={() => setActive(null)}>
+      <p className="small muted" style={{ margin: 0, lineHeight: 1.55 }}>{COPY[active.context].body}</p>
       <div className="stack sm" style={{ marginTop: 16 }}>
         <button type="button" className="welcome-social welcome-social-google" disabled={busy} aria-busy={busy} onClick={google}>
           <GoogleGlyph />
           <span>Continue with Google</span>
         </button>
-        <Button href={`${routes.register}${nextParam}`}>Sign up with email</Button>
+        <Button href={`${routes.register}${registerParam}`} onClick={rememberSavedPlace}>Sign up with email</Button>
         <p className="caption muted" style={{ textAlign: "center", margin: "2px 0 0" }}>
-          <Link className="auth-link" href={`${routes.signIn}${nextParam}`}>Sign in</Link>
+          <Link className="auth-link" href={`${routes.signIn}${signInParam}`}>Sign in</Link>
           <span className="dim" aria-hidden="true"> · </span>
-          <button className="auth-link" style={{ font: "inherit" }} onClick={() => setCtx(null)}>Keep exploring</button>
+          <button className="auth-link" style={{ font: "inherit" }} onClick={() => setActive(null)}>Keep exploring</button>
         </p>
       </div>
     </BottomSheet>

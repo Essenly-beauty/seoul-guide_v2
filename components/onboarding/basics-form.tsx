@@ -1,50 +1,43 @@
 "use client";
 
-// T1 screen ① (docs/user-data-strategy.md §2): country + Seoul stay type.
-// All tap-select and skippable; every tap writes straight to the profile
-// store, so leaving mid-way still keeps whatever was answered.
+// The only post-signup screen. It stores the two high-signal answers now and
+// leaves all detailed beauty preferences to the My tab's progressive profile.
 
-import Link from "next/link";
-import { Icon } from "@/components/icon";
+import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Chip } from "@/components/ui/chip";
 import { routes } from "@/lib/routes";
-import { answerQuestion, questionFor, useProfile } from "@/lib/profile";
+import { INTEREST_OPTIONS, answerQuestion, questionFor, useProfile } from "@/lib/profile";
 
-export function BasicsForm() {
+function safeNext(raw: string | undefined): string {
+  if (!raw || !raw.startsWith("/") || raw.startsWith("//") || raw.includes("\\")) return routes.map;
+  return raw;
+}
+
+export function BasicsForm({ next }: { next?: string }) {
+  const router = useRouter();
   const profile = useProfile();
-  const country = questionFor("countryCode");
   const stay = questionFor("stayType");
+  const nextTarget = safeNext(next);
+
+  const finish = () => {
+    router.push(nextTarget);
+    router.refresh();
+  };
 
   return (
     <div className="stack">
       <div>
-        <div className="label">Step 1 · Your trip</div>
+        <div className="label">OPTIONAL · ABOUT 20 SECONDS</div>
         <div className="h1">
-          Where are you<br />
-          <span style={{ fontStyle: "italic", color: "var(--accent)" }}>joining us from?</span>
+          Make it<br />
+          <span style={{ fontStyle: "italic", color: "var(--accent)" }}>yours.</span>
         </div>
-        <p className="muted" style={{ marginTop: 6 }}>Two taps — everything here is optional.</p>
-      </div>
-
-      <div>
-        <div className="label">{country.title}</div>
-        <div className="t-caption" style={{ marginTop: 2 }}>Why we ask · {country.why}</div>
-        <div className="chipwrap" style={{ marginTop: 8 }}>
-          {country.options.map((o) => {
-            const on = profile.countryCode === o.value;
-            return (
-              <Chip key={o.value} selected={on} onClick={() => answerQuestion("countryCode", o.value)}>
-                {o.label}
-              </Chip>
-            );
-          })}
-        </div>
+        <p className="muted" style={{ marginTop: 6 }}>We’ll use this to put the most useful Seoul picks first.</p>
       </div>
 
       <div>
         <div className="label">{stay.title}</div>
-        <div className="t-caption" style={{ marginTop: 2 }}>Why we ask · {stay.why}</div>
         <div className="chipwrap" style={{ marginTop: 8 }}>
           {stay.options.map((o) => {
             const on = profile.stayType === o.value;
@@ -57,12 +50,27 @@ export function BasicsForm() {
         </div>
       </div>
 
-      <Button href={routes.onboardingInterests} style={{ marginTop: 4 }}>
-        Next <Icon name="chev" size="sm" />
+      <div>
+        <div className="label">What are you interested in?</div>
+        <div className="chipwrap" style={{ marginTop: 8 }}>
+          {INTEREST_OPTIONS.map((interest) => (
+            <Chip
+              key={interest.key}
+              selected={profile.interests.includes(interest.key)}
+              onClick={() => answerQuestion("interests", interest.key)}
+            >
+              {interest.label}
+            </Chip>
+          ))}
+        </div>
+      </div>
+
+      <Button onClick={finish} style={{ marginTop: 4 }}>
+        Personalize my Seoul Drop
       </Button>
-      <Link className="caption muted" href={routes.onboardingInterests} style={{ textAlign: "center", textDecoration: "underline" }}>
-        Skip for now
-      </Link>
+      <button type="button" className="caption muted" onClick={finish} style={{ textAlign: "center", textDecoration: "underline" }}>
+        Skip
+      </button>
     </div>
   );
 }

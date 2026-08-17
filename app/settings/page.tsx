@@ -25,7 +25,7 @@ export default function SettingsPage() {
         <section className="stack sm">
           <SectionHeader title="Beauty profile" />
           <p className="t-caption">Your hair, skin, and trip answers tune the map and rankings. Edit them from the profile card on the Menu tab.</p>
-          <Button variant="secondary" size="sm" href={routes.onboardingInterests} style={{ alignSelf: "flex-start" }}>
+          <Button variant="secondary" size="sm" href={routes.onboardingProfile} style={{ alignSelf: "flex-start" }}>
             Edit beauty profile
           </Button>
         </section>

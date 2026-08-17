@@ -9,7 +9,7 @@ export type SharePayload = {
 };
 
 type ToastContextValue = {
-  toast: (message: string) => void;
+  toast: (message: string, durationMs?: number) => void;
   copy: (text: string) => void;
   share: (payload: string | SharePayload) => void;
 };
@@ -27,11 +27,11 @@ export function ToastProvider({ children }: { children: React.ReactNode }) {
   const [show, setShow] = useState(false);
   const timer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  const toast = useCallback((msg: string) => {
+  const toast = useCallback((msg: string, durationMs = 1700) => {
     setMessage(msg);
     setShow(true);
     if (timer.current) clearTimeout(timer.current);
-    timer.current = setTimeout(() => setShow(false), 1700);
+    timer.current = setTimeout(() => setShow(false), durationMs);
   }, []);
 
   const copy = useCallback(

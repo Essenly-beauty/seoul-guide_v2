@@ -30,6 +30,10 @@ function SignInForm() {
   const [id, setId] = useState("");
   const [pw, setPw] = useState("");
   const [busy, setBusy] = useState(false);
+  const [unconfirmed, setUnconfirmed] = useState(false);
+  const [resendBusy, setResendBusy] = useState(false);
+  const [resendIn, setResendIn] = useState(0);
+  const [resendNote, setResendNote] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(() => {
     const code = searchParams.get("error");
     return code ? CALLBACK_ERRORS[code] ?? CALLBACK_ERRORS.auth : null;
@@ -45,11 +49,19 @@ function SignInForm() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  useEffect(() => {
+    if (resendIn <= 0) return;
+    const timer = window.setTimeout(() => setResendIn((seconds) => Math.max(0, seconds - 1)), 1000);
+    return () => window.clearTimeout(timer);
+  }, [resendIn]);
+
   const submit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (busy) return;
     setBusy(true);
     setError(null);
+    setUnconfirmed(false);
+    setResendNote(null);
     const supabase = supabaseBrowser();
     const { error: err } = await supabase.auth.signInWithPassword({
       email: id.trim(),
@@ -57,10 +69,12 @@ function SignInForm() {
     });
     if (err) {
       setBusy(false);
+      const isUnconfirmed = err.message === "Email not confirmed";
+      setUnconfirmed(isUnconfirmed);
       setError(
         err.message === "Invalid login credentials"
           ? "Email or password doesn't match — please try again."
-          : err.message === "Email not confirmed"
+          : isUnconfirmed
             ? "Please confirm your email first — check your inbox for our link."
             : err.message,
       );
@@ -68,6 +82,28 @@ function SignInForm() {
     }
     router.push(nextTarget);
     router.refresh();
+  };
+
+  const resendConfirmation = async () => {
+    if (resendBusy || resendIn > 0 || !id.trim()) return;
+    setResendBusy(true);
+    setResendNote(null);
+    const { error: err } = await supabaseBrowser().auth.resend({
+      type: "signup",
+      email: id.trim(),
+      options: {
+        emailRedirectTo: `${window.location.origin}/auth/callback?next=${encodeURIComponent(nextTarget)}`,
+      },
+    });
+    setResendBusy(false);
+    if (err) {
+      setResendNote(err.message.toLowerCase().includes("rate limit")
+        ? "Too many emails — please wait a minute before trying again."
+        : "We couldn't send another link right now. Please try again shortly.");
+      return;
+    }
+    setResendNote("Confirmation email sent again — check spam too.");
+    setResendIn(60);
   };
 
   return (
@@ -113,6 +149,14 @@ function SignInForm() {
       </div>
 
       {error && <p id="signin-error" className="auth-error" role="alert">{error}</p>}
+      {unconfirmed && (
+        <div className="stack sm" style={{ marginTop: 2 }}>
+          <button type="button" className="auth-cta-secondary" disabled={resendBusy || resendIn > 0} onClick={resendConfirmation}>
+            {resendBusy ? "Sending…" : resendIn > 0 ? `Resend available in ${resendIn}s` : "Resend confirmation email"}
+          </button>
+          {resendNote && <p className="auth-support" role="status">{resendNote}</p>}
+        </div>
+      )}
 
       <Link className="auth-aside" href={routes.forgotPassword}>Forgot password?</Link>
       <button className="auth-cta" type="submit" disabled={busy}>

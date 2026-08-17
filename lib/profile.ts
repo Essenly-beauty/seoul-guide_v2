@@ -13,7 +13,7 @@ import { useSyncExternalStore } from "react";
 import { supabaseBrowser } from "./supabase/client";
 import { MAP_CATEGORIES, type PlaceType } from "./data";
 
-export type StayType = "tourist" | "resident" | "planning";
+export type StayType = "tourist" | "resident" | "planning" | "exploring";
 export type AgeBand = "18-24" | "25-34" | "35-44" | "45+";
 export type Gender = "female" | "male" | "other";
 
@@ -78,12 +78,13 @@ export const QUESTIONS: Question[] = [
   },
   {
     key: "stayType",
-    title: "How long are you in Seoul?",
-    why: "Tunes the map radius and picks between trip deals and local spots.",
+    title: "Where are you in your Seoul journey?",
+    why: "Tunes the map for your trip stage and the places you want to find.",
     options: [
-      { value: "tourist", label: "Traveling now" },
-      { value: "resident", label: "Living here" },
-      { value: "planning", label: "Planning a trip" },
+      { value: "tourist", label: "I’m in Seoul now" },
+      { value: "planning", label: "I’m planning a trip" },
+      { value: "resident", label: "I live in Seoul" },
+      { value: "exploring", label: "Just exploring" },
     ],
   },
   {
@@ -188,7 +189,7 @@ const oneOf = <T extends string>(v: unknown, allowed: readonly T[]): T | undefin
 function sanitize(p: Partial<Profile>): Profile {
   return {
     countryCode: str(p.countryCode),
-    stayType: oneOf(p.stayType, ["tourist", "resident", "planning"]),
+    stayType: oneOf(p.stayType, ["tourist", "resident", "planning", "exploring"]),
     stayUntil: str(p.stayUntil),
     interests: strList(p.interests).filter((x): x is PlaceType => (INTEREST_KEYS as string[]).includes(x)),
     ageBand: oneOf(p.ageBand, ["18-24", "25-34", "35-44", "45+"]),

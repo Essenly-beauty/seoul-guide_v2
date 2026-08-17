@@ -127,7 +127,7 @@ function PlaceActions({ place }: { place: Place }) {
         onClick={() => {
           const next = toggleFavorite("place", place.id);
           toast(next ? "Saved to favorites" : "Removed");
-          if (next) nudge("favorite"); // guest-only, once per device
+          if (next) nudge("favorite", { savedPlace: { id: place.id, name: place.name } }); // guest-only, once per device
         }}
       >
         <Icon name={saved ? "heart" : "heart-o"} />

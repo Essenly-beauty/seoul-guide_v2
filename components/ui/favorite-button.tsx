@@ -5,6 +5,7 @@ import { IconButton } from "@/components/ui/icon-button";
 import { useToast } from "@/components/ui/toast";
 import { useSigninNudge } from "@/components/auth/signin-nudge";
 import { toggleFavorite, useFavorites, type FavKind } from "@/lib/favorites";
+import { getPlace } from "@/lib/data";
 
 type FavoriteButtonProps = {
   /** Wire to the shared store — hearts sync across screens and the Saved tab. */
@@ -40,7 +41,8 @@ export function FavoriteButton({ kind, id, initial = false, variant = "plain", s
           if (!(kind && id)) setLocalOn(next);
           toast(next ? "Saved to favorites" : "Removed");
           // guests get a one-time account nudge after their first save
-          if (next) nudge("favorite");
+          const place = kind === "place" && id ? getPlace(id) : null;
+          if (next) nudge("favorite", place ? { savedPlace: { id: place.id, name: place.name } } : undefined);
         }}
       />
       {sheet}

@@ -12,5 +12,6 @@ export default async function RegisterPage({ searchParams }: { searchParams: Pro
     const { data: { user } } = await supabaseServer().auth.getUser();
     if (user) redirect(routes.map);
   }
-  return <RegisterClient />;
+  const next = typeof params.next === "string" ? params.next : undefined;
+  return <RegisterClient next={next} />;
 }

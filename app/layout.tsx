@@ -6,6 +6,7 @@ import { ErrorReporterInit } from "@/components/system/error-reporter-init";
 import { PwaRegister } from "@/components/system/pwa-register";
 import { ThemeProvider } from "@/components/theme/theme-provider";
 import { ToastProvider } from "@/components/ui/toast";
+import { SignupReturnNotice } from "@/components/auth/signup-return-notice";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://myseouldrop.app"),
@@ -66,6 +67,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <ToastProvider>
             <div className="app-shell">
               <RouteProgress />
+              <SignupReturnNotice />
               {children}
             </div>
           </ToastProvider>

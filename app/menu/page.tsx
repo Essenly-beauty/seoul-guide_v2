@@ -35,7 +35,7 @@ const GROUPS: { title: string; rows: MenuRow[] }[] = [
   {
     title: "Preferences",
     rows: [
-      { icon: "user", title: "Beauty profile", value: "Skin & hair type", href: routes.onboardingInterests },
+      { icon: "user", title: "Beauty profile", value: "Skin & hair type", href: routes.onboardingProfile },
       { icon: "mark", title: "Settings", href: routes.settings },
     ],
   },

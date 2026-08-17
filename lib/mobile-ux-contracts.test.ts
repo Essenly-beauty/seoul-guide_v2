@@ -83,10 +83,11 @@ describe("dialog and form accessibility contracts", () => {
     expect(bottomSheetSource).toContain("tabIndex={-1}");
   });
 
-  it("links profile labels and review validation help to their controls", () => {
-    expect(profileSource).toContain('htmlFor="current-hair-brand"');
-    // settings no longer hosts the demo profile form (launch scope) — it
-    // links to the real, account-synced editor instead
+  it("keeps the post-signup profile entrypoint account-synced", () => {
+    // Detailed questions now use the real, account-synced progressive card;
+    // the old free-text demo field was not saved anywhere.
+    expect(profileSource).toContain("<ProfileCard />");
+    expect(profileSource).not.toContain('id="current-hair-brand"');
     expect(settingsSource).toContain("Edit beauty profile");
     // launch scope: the mock write-review form route is closed via
     // next.config redirects — the real composer lives in place-detail-body

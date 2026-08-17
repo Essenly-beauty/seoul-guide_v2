@@ -17,8 +17,14 @@ const COUNTRIES = [
 
 const RESEND_COOLDOWN_S = 60;
 
-export function RegisterClient() {
+function safeNext(raw: string | undefined): string | null {
+  if (!raw || !raw.startsWith("/") || raw.startsWith("//") || raw.includes("\\")) return null;
+  return raw;
+}
+
+export function RegisterClient({ next }: { next?: string }) {
   const router = useRouter();
+  const onboardingTarget = safeNext(next) ?? routes.onboardingBasics;
   const [reveal, setReveal] = useState(false);
   const [form, setForm] = useState({ name: "", email: "", password: "", confirm: "", country: "" });
   const [consent, setConsent] = useState(false);
@@ -67,7 +73,7 @@ export function RegisterClient() {
           marketing_opt_in: marketing,
           consented_at: new Date().toISOString(),
         },
-        emailRedirectTo: `${window.location.origin}/auth/callback?next=${encodeURIComponent(routes.onboardingMode)}`,
+        emailRedirectTo: `${window.location.origin}/auth/callback?next=${encodeURIComponent(onboardingTarget)}`,
       },
     });
     if (err) {
@@ -88,7 +94,7 @@ export function RegisterClient() {
     }
     if (data.session) {
       // Email confirmation disabled — signed in right away.
-      router.push(routes.onboardingBasics);
+      router.push(onboardingTarget);
       router.refresh();
       return;
     }
@@ -105,7 +111,7 @@ export function RegisterClient() {
       type: "signup",
       email: sentTo,
       options: {
-        emailRedirectTo: `${window.location.origin}/auth/callback?next=${encodeURIComponent(routes.onboardingMode)}`,
+        emailRedirectTo: `${window.location.origin}/auth/callback?next=${encodeURIComponent(onboardingTarget)}`,
       },
     });
     if (err) {

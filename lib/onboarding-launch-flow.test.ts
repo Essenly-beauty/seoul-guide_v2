@@ -8,13 +8,19 @@ const basicsForm = source("components/onboarding/basics-form.tsx");
 const phoneVerify = source("components/auth/phone-verify.tsx");
 
 describe("launch onboarding flow", () => {
-  it("starts new email accounts at the first of the three profile steps, without asking for a theme", () => {
+  it("starts new email accounts at the single optional onboarding screen, without asking for a theme", () => {
     expect(modePage).toContain("redirect(routes.onboardingBasics)");
-    expect(registerClient).toContain("router.push(routes.onboardingBasics)");
+    expect(registerClient).toContain("const onboardingTarget");
+    expect(registerClient).toContain("router.push(onboardingTarget)");
   });
 
-  it("takes step one to the stated step two instead of the optional phone screen", () => {
-    expect(basicsForm).toContain("href={routes.onboardingInterests}");
+  it("keeps journey and interests together instead of continuing into a second step or phone screen", () => {
+    expect(basicsForm).toContain('questionFor("stayType")');
+    expect(basicsForm).toContain("What are you interested in?");
+    expect(basicsForm).toContain("Personalize my Seoul Drop");
+    expect(basicsForm).toContain("Skip");
+    expect(basicsForm).not.toContain("Step 1");
+    expect(basicsForm).not.toContain("routes.onboardingInterests");
     expect(basicsForm).not.toContain("href={routes.onboardingPhone}");
   });
 
