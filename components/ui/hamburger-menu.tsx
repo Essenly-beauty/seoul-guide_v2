@@ -26,6 +26,7 @@ const ACCOUNT: Row[] = [
 ];
 
 const ABOUT: Row[] = [
+  { label: "Install app", href: routes.download, icon: "home" },
   { label: "Terms of Service", href: routes.legalTerms, icon: "book" },
   { label: "Privacy Policy", href: routes.legalPrivacy, icon: "lock" },
 ];
