@@ -2,7 +2,7 @@
 
 // Real password recovery (review finding: the old "Recovery password" link
 // dead-ended at the FAQ). Sends a reset email; the link lands on
-// /auth/callback (recovery type) which forwards to /reset-password.
+// /auth/callback, explicitly targeting /reset-password after PKCE exchange.
 
 import Link from "next/link";
 import { useState } from "react";
@@ -23,7 +23,7 @@ export default function ForgotPasswordPage() {
     setError(null);
     const supabase = supabaseBrowser();
     const { error: err } = await supabase.auth.resetPasswordForEmail(email.trim(), {
-      redirectTo: `${window.location.origin}/auth/callback`,
+      redirectTo: `${window.location.origin}/auth/callback?next=${encodeURIComponent(routes.resetPassword)}`,
     });
     setBusy(false);
     if (err) {
