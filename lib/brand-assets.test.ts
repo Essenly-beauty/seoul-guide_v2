@@ -13,4 +13,11 @@ describe("brand asset contract", () => {
     expect(existsSync(new URL("../app/apple-icon.tsx", import.meta.url))).toBe(true);
     expect(source("app/apple-icon.tsx")).toContain("M203.5 78.3301H147.27");
   });
+
+  it("uses the supplied SVG mark in every header and ships no legacy leaf brand mark", () => {
+    const ranking = source("app/ranking/page.tsx");
+    expect(ranking).toContain('from "@/components/brand/brand-logo"');
+    expect(ranking).not.toContain('BrandMark, Icon } from "@/components/icon"');
+    expect(source("components/icon.tsx")).not.toContain("i-mark-brand");
+  });
 });
