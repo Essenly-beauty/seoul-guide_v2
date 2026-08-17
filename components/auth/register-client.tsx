@@ -150,7 +150,7 @@ export function RegisterClient() {
   return (
     <AuthShell
       title="Register"
-      support={<>If you need any support <Link className="auth-link" href={routes.support}>click here</Link></>}
+      support={<>Create your free account and start saving places right away. Need help? <Link className="auth-link" href={routes.support}>Contact us</Link></>}
       foot={<>Do you have an account? <Link className="auth-link" href={routes.signIn}>Sign in</Link></>}
     >
       <form onSubmit={submit} style={{ display: "contents" }}>
