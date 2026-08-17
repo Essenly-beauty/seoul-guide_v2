@@ -1,0 +1,34 @@
+name: Production public smoke
+
+on:
+  workflow_dispatch:
+    inputs:
+      base_url:
+        description: "Deployed URL to test"
+        required: false
+        default: "https://seoul-guide-v2.vercel.app"
+        type: string
+
+permissions:
+  contents: read
+
+jobs:
+  public-smoke:
+    name: Visitor discovery smoke
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - run: npm ci
+      - name: Install Chromium
+        run: npx playwright install --with-deps chromium
+      - name: Test deployed visitor paths
+        run: npm run e2e -- --grep "discovery smoke"
+        env:
+          CI: "true"
+          E2E_EXTERNAL_ONLY: "1"
+          E2E_BASE_URL: ${{ inputs.base_url }}
