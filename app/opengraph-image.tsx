@@ -1,4 +1,4 @@
-// Social share card — dark brand canvas, stepped mark, two-tone wordmark.
+// Social share card — dark brand canvas, supplied Seoul mark, two-tone wordmark.
 // Michroma is fetched from Google Fonts at render time (Satori needs raw
 // TTF bytes); if that fetch ever fails we fall back to a text-free card
 // rather than erroring the crawler.
@@ -28,9 +28,8 @@ async function loadMichroma(): Promise<ArrayBuffer | null> {
 
 function Mark({ px }: { px: number }) {
   return (
-    <svg viewBox="0 0 24 24" width={px} height={px}>
-      <path d="M13 2h8v13h-12v7H4V8h9V2z" fill={ORANGE} />
-      <circle cx="16.5" cy="20" r="1.9" fill={ORANGE} />
+    <svg viewBox="0 0 207 209" width={px} height={px}>
+      <path d="M203.5 78.3301H147.27C140.861 78.3301 134.925 80.1518 130.067 83.25H176V121.25C176 165.433 136.28 201.25 87.2822 201.25H3V122.25H62.8848C69.5256 122.25 75.1239 120.299 79.4473 117H31.5V79.3223C31.5 35.5139 70.9908 1.75625e-05 119.705 0H203.5V78.3301Z" fill={ORANGE} />
     </svg>
   );
 }

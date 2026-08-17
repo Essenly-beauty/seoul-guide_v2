@@ -1,17 +1,16 @@
-// MYSEOULDROP brand assets — the stepped mark and the two-tone wordmark
-// (MY + DROP in text color, SEOUL + the period in signal orange).
+// MYSEOULDROP brand assets — the supplied Seoul mark and the two-tone
+// wordmark (MY + DROP in text color, SEOUL + the period in signal orange).
 // Wordmark type is Michroma (--brand-display), the squared techno face
 // closest to the reference logotype.
 
 const ORANGE = "var(--accent)";
 
-/** Stepped geometric mark with the signature dot, drawn on a 24 grid. */
+/** Supplied Seoul mark, shared with the browser and PWA app icon. */
 export function BrandMark({ size = 28 }: { size?: number }) {
   return (
-    <svg viewBox="0 0 24 24" width={size} height={size} aria-hidden="true">
-      <path d="M13 2h8v13h-12v7H4V8h9V2z" fill={ORANGE} />
-      <circle cx="16.5" cy="20" r="1.9" fill={ORANGE} />
-    </svg>
+    // The mark is decorative here; the adjacent wordmark carries the brand name.
+    // eslint-disable-next-line @next/next/no-img-element
+    <img src="/icon.svg" alt="" aria-hidden="true" width={size} height={size} style={{ display: "block" }} />
   );
 }
 
