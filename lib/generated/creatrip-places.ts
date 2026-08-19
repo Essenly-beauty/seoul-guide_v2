@@ -204,7 +204,7 @@ export const CREATRIP_PLACES: Place[] = [
   {
     id: "ct-juno-hair-seomyeon-1st-branch",
     name: "JUNO HAIR | Seomyeon 1st Branch",
-    nameKr: "JUNO HAIR | Seomyeon 1st Branch",
+    nameKr: "준오헤어 서면1호점",
     type: "hair_salon",
     zone: "busan",
     priceRange: "₩₩₩",
@@ -229,7 +229,7 @@ export const CREATRIP_PLACES: Place[] = [
   {
     id: "ct-juno-hair-seomyeon-station-branch",
     name: "JUNO HAIR | Seomyeon Station Branch",
-    nameKr: "JUNO HAIR | Seomyeon Station Branch",
+    nameKr: "준오헤어 서면역점",
     type: "hair_salon",
     zone: "busan",
     priceRange: "₩₩₩",
@@ -300,7 +300,7 @@ export const CREATRIP_PLACES: Place[] = [
   {
     id: "ct-chop-hair-bundang-branch",
     name: "Chop Hair | Bundang Branch",
-    nameKr: "Chop Hair | Bundang Branch",
+    nameKr: "CHOP헤어 분당점",
     type: "hair_salon",
     zone: "gyeonggi",
     priceRange: "₩",
@@ -372,7 +372,7 @@ export const CREATRIP_PLACES: Place[] = [
   {
     id: "ct-more-on-hair-hapjeong-branch",
     name: "More On Hair | Hapjeong Branch",
-    nameKr: "More On Hair | Hapjeong Branch",
+    nameKr: "모어온헤어 합정점",
     type: "hair_salon",
     zone: "hongdae",
     priceRange: "₩",
@@ -422,7 +422,7 @@ export const CREATRIP_PLACES: Place[] = [
   {
     id: "ct-la-maison-beauty-apgujeong-k-beauty-hair-makeup",
     name: "LA MAISON Beauty Apgujeong | K-Beauty Hair & Makeup Salon",
-    nameKr: "LA MAISON Beauty Apgujeong | K-Beauty Hair & Makeup Salon",
+    nameKr: "라메종뷰티",
     type: "hair_salon",
     zone: "apgujeong",
     priceRange: "₩₩",
@@ -445,7 +445,7 @@ export const CREATRIP_PLACES: Place[] = [
   {
     id: "ct-hosu-dosan-hair-makeup-studio",
     name: "HOSU DOSAN | Hair & Makeup & Studio",
-    nameKr: "HOSU DOSAN | Hair & Makeup & Studio",
+    nameKr: "호수도산",
     type: "hair_salon",
     zone: "apgujeong",
     priceRange: "₩",
@@ -516,7 +516,7 @@ export const CREATRIP_PLACES: Place[] = [
   {
     id: "ct-dakyo-cheongdam-branch",
     name: "DAKYO | Cheongdam Branch",
-    nameKr: "DAKYO | Cheongdam Branch",
+    nameKr: "다교 청담점",
     type: "hair_salon",
     zone: "apgujeong",
     priceRange: "₩",
@@ -539,7 +539,7 @@ export const CREATRIP_PLACES: Place[] = [
   {
     id: "ct-gangnam-hair-makeup-salon-joy187",
     name: "Gangnam Hair & Makeup Salon | JOY187",
-    nameKr: "Gangnam Hair & Makeup Salon | JOY187",
+    nameKr: "룰루",
     type: "hair_salon",
     zone: "apgujeong",
     priceRange: "₩₩₩",
@@ -562,7 +562,7 @@ export const CREATRIP_PLACES: Place[] = [
   {
     id: "ct-hair-salon-mum-apgujeong-rodeo-branch",
     name: "Hair Salon | Mum Apgujeong Rodeo Branch",
-    nameKr: "Hair Salon | Mum Apgujeong Rodeo Branch",
+    nameKr: "꾸아트헤어 압구정로데오역점",
     type: "hair_salon",
     zone: "apgujeong",
     priceRange: "₩",
@@ -586,7 +586,7 @@ export const CREATRIP_PLACES: Place[] = [
   {
     id: "ct-juno-hair-apgujeong-rodeo-branch-1",
     name: "JUNO HAIR | Apgujeong Rodeo Branch 1",
-    nameKr: "JUNO HAIR | Apgujeong Rodeo Branch 1",
+    nameKr: "준오헤어 압구정로데오1호점",
     type: "hair_salon",
     zone: "apgujeong",
     priceRange: "₩₩₩",
@@ -656,7 +656,7 @@ export const CREATRIP_PLACES: Place[] = [
   {
     id: "ct-more-on-hair-dosan-park-branch",
     name: "More On Hair | Dosan Park Branch",
-    nameKr: "More On Hair | Dosan Park Branch",
+    nameKr: "모어온헤어 도산공원점",
     type: "hair_salon",
     zone: "apgujeong",
     priceRange: "₩",
@@ -680,7 +680,7 @@ export const CREATRIP_PLACES: Place[] = [
   {
     id: "ct-weneed-the-apgujeong",
     name: "WENEED THE APGUJEONG",
-    nameKr: "WENEED THE APGUJEONG",
+    nameKr: "위닛 더 압구정점",
     type: "hair_salon",
     zone: "apgujeong",
     priceRange: "₩",
@@ -704,7 +704,7 @@ export const CREATRIP_PLACES: Place[] = [
   {
     id: "ct-lee-chul-hairkerker-by-c-cica-ewha-womans-univer",
     name: "Lee Chul Hairkerker By Cécica Ewha Womans University Branch",
-    nameKr: "Lee Chul Hairkerker By Cécica Ewha Womans University Branch",
+    nameKr: "이철헤어커커 이대점",
     type: "hair_salon",
     zone: "hongdae",
     priceRange: "₩₩",
@@ -799,7 +799,7 @@ export const CREATRIP_PLACES: Place[] = [
   {
     id: "ct-eco-jardin-hyundai-department-store-cheonho-bran",
     name: "ECO JARDIN | Hyundai Department Store Cheonho Branch",
-    nameKr: "ECO JARDIN | Hyundai Department Store Cheonho Branch",
+    nameKr: "에코쟈뎅 천호점",
     type: "hair_salon",
     zone: "jamsil",
     priceRange: "₩",
@@ -871,7 +871,7 @@ export const CREATRIP_PLACES: Place[] = [
   {
     id: "ct-idhair-gangnamdaero-branch-gangnam-k-perm-hair-s",
     name: "idHair | Gangnamdaero Branch | Gangnam K-PERM Hair Salon",
-    nameKr: "idHair | Gangnamdaero Branch | Gangnam K-PERM Hair Salon",
+    nameKr: "아이디헤어 강남대로점",
     type: "hair_salon",
     zone: "gangnam_station",
     priceRange: "₩",
@@ -1058,7 +1058,7 @@ export const CREATRIP_PLACES: Place[] = [
   {
     id: "ct-cheongdam-awesome",
     name: "Cheongdam Awesome",
-    nameKr: "Cheongdam Awesome",
+    nameKr: "청담어썸",
     type: "hair_salon",
     zone: "gangnam_station",
     priceRange: "₩",
@@ -1106,7 +1106,7 @@ export const CREATRIP_PLACES: Place[] = [
   {
     id: "ct-chop-hair-sinnonhyeon-branch",
     name: "CHOP Hair | Sinnonhyeon Branch",
-    nameKr: "CHOP Hair | Sinnonhyeon Branch",
+    nameKr: "씨에이치오피헤어 신논현직영점",
     type: "hair_salon",
     zone: "gangnam_station",
     priceRange: "₩",
@@ -1130,7 +1130,7 @@ export const CREATRIP_PLACES: Place[] = [
   {
     id: "ct-chop-hair-gangnam-branch-foreigner-friendly-hair",
     name: "CHOP Hair Gangnam Branch | Foreigner-Friendly Hair Salon",
-    nameKr: "CHOP Hair Gangnam Branch | Foreigner-Friendly Hair Salon",
+    nameKr: "CHOP헤어 강남직영점",
     type: "hair_salon",
     zone: "gangnam_station",
     priceRange: "₩",
@@ -1224,7 +1224,7 @@ export const CREATRIP_PLACES: Place[] = [
   {
     id: "ct-itta-hair-seolleung-station-branch",
     name: "ITTA HAIR | Seolleung Station Branch",
-    nameKr: "ITTA HAIR | Seolleung Station Branch",
+    nameKr: "이타헤어 선릉역점",
     type: "hair_salon",
     zone: "gangnam_station",
     priceRange: "₩",
@@ -1248,7 +1248,7 @@ export const CREATRIP_PLACES: Place[] = [
   {
     id: "ct-jenny-house-celebrity-hair-makeup-studio-in-cheo",
     name: "Jenny House | Celebrity Hair & Makeup Studio in Cheongdam",
-    nameKr: "Jenny House | Celebrity Hair & Makeup Studio in Cheongdam",
+    nameKr: "제니하우스 청담힐",
     type: "hair_salon",
     zone: "gangnam_station",
     priceRange: "₩₩",
@@ -1271,7 +1271,7 @@ export const CREATRIP_PLACES: Place[] = [
   {
     id: "ct-juno-hair-gangnam-square-branch",
     name: "JUNO HAIR | Gangnam Square Branch",
-    nameKr: "JUNO HAIR | Gangnam Square Branch",
+    nameKr: "준오헤어 강남역스퀘어2호점",
     type: "hair_salon",
     zone: "gangnam_station",
     priceRange: "₩₩₩",
@@ -1296,7 +1296,7 @@ export const CREATRIP_PLACES: Place[] = [
   {
     id: "ct-juno-hair-gangnam-station-branch-1",
     name: "JUNO HAIR | Gangnam Station Branch 1",
-    nameKr: "JUNO HAIR | Gangnam Station Branch 1",
+    nameKr: "준오헤어 강남역1호점",
     type: "hair_salon",
     zone: "gangnam_station",
     priceRange: "₩₩₩",
@@ -1321,7 +1321,7 @@ export const CREATRIP_PLACES: Place[] = [
   {
     id: "ct-juno-hair-gangnam-station-branch-2",
     name: "JUNO HAIR | Gangnam Station Branch 2",
-    nameKr: "JUNO HAIR | Gangnam Station Branch 2",
+    nameKr: "준오헤어 강남역2호점",
     type: "hair_salon",
     zone: "gangnam_station",
     priceRange: "₩₩",
@@ -1345,7 +1345,7 @@ export const CREATRIP_PLACES: Place[] = [
   {
     id: "ct-juno-hair-gangnam-station-branch-4",
     name: "JUNO HAIR | Gangnam Station Branch 4",
-    nameKr: "JUNO HAIR | Gangnam Station Branch 4",
+    nameKr: "준오헤어 강남역4호점",
     type: "hair_salon",
     zone: "gangnam_station",
     priceRange: "₩₩",
@@ -1370,7 +1370,7 @@ export const CREATRIP_PLACES: Place[] = [
   {
     id: "ct-juno-hair-sinnonhyeon",
     name: "JUNO HAIR | Sinnonhyeon",
-    nameKr: "JUNO HAIR | Sinnonhyeon",
+    nameKr: "준오헤어 신논현역점",
     type: "hair_salon",
     zone: "gangnam_station",
     priceRange: "₩₩₩",
@@ -1466,7 +1466,7 @@ export const CREATRIP_PLACES: Place[] = [
   {
     id: "ct-lee-chul-hair-kerker-gangnam-branch",
     name: "Lee Chul Hair Kerker | Gangnam Branch",
-    nameKr: "Lee Chul Hair Kerker | Gangnam Branch",
+    nameKr: "이철헤어커커 강남점",
     type: "hair_salon",
     zone: "gangnam_station",
     priceRange: "₩",
@@ -1516,7 +1516,7 @@ export const CREATRIP_PLACES: Place[] = [
   {
     id: "ct-lona-apgujeong-rodeo-hair-makeup",
     name: "Lona | Apgujeong Rodeo Hair & Makeup",
-    nameKr: "Lona | Apgujeong Rodeo Hair & Makeup",
+    nameKr: "로나 청담본점",
     type: "hair_salon",
     zone: "gangnam_station",
     priceRange: "₩₩₩",
@@ -1538,7 +1538,7 @@ export const CREATRIP_PLACES: Place[] = [
   {
     id: "ct-meet-cute",
     name: "Meet Cute",
-    nameKr: "Meet Cute",
+    nameKr: "밋큐트 청담본점",
     type: "hair_salon",
     zone: "gangnam_station",
     priceRange: "₩₩",
@@ -1632,7 +1632,7 @@ export const CREATRIP_PLACES: Place[] = [
   {
     id: "ct-more-on-hair-sinnonhyeon-branch",
     name: "More On Hair | Sinnonhyeon Branch",
-    nameKr: "More On Hair | Sinnonhyeon Branch",
+    nameKr: "모어온헤어 신논현점",
     type: "hair_salon",
     zone: "gangnam_station",
     priceRange: "₩",
@@ -1725,7 +1725,7 @@ export const CREATRIP_PLACES: Place[] = [
   {
     id: "ct-oohs-cheongdam-hair-makeup",
     name: "OOHS | Cheongdam Hair & Makeup",
-    nameKr: "OOHS | Cheongdam Hair & Makeup",
+    nameKr: "우스",
     type: "hair_salon",
     zone: "gangnam_station",
     priceRange: "₩₩",
@@ -1795,7 +1795,7 @@ export const CREATRIP_PLACES: Place[] = [
   {
     id: "ct-park-jun-beauty-lab-gangnam-branch",
     name: "Park Jun Beauty Lab | Gangnam Branch",
-    nameKr: "Park Jun Beauty Lab | Gangnam Branch",
+    nameKr: "박준뷰티랩 강남점",
     type: "hair_salon",
     zone: "gangnam_station",
     priceRange: "₩₩₩",
@@ -1894,7 +1894,7 @@ export const CREATRIP_PLACES: Place[] = [
   {
     id: "ct-salon-a-gangnam-scalp-hair-vitality-care",
     name: "Salon A Gangnam | Scalp & Hair Vitality Care",
-    nameKr: "Salon A Gangnam | Scalp & Hair Vitality Care",
+    nameKr: "살롱에이 강남점",
     type: "hair_salon",
     zone: "gangnam_station",
     priceRange: "₩",
@@ -1966,7 +1966,7 @@ export const CREATRIP_PLACES: Place[] = [
   {
     id: "ct-shine-soo-hair-salon",
     name: "Shine Soo Hair Salon",
-    nameKr: "Shine Soo Hair Salon",
+    nameKr: "샤인수헤어 신논현점",
     type: "hair_salon",
     zone: "gangnam_station",
     priceRange: "₩",
@@ -2013,7 +2013,7 @@ export const CREATRIP_PLACES: Place[] = [
   {
     id: "ct-yipi-hair-hair-salon-in-apgujeong",
     name: "Yipi Hair | Hair Salon in Apgujeong",
-    nameKr: "Yipi Hair | Hair Salon in Apgujeong",
+    nameKr: "이피헤어",
     type: "hair_salon",
     zone: "gangnam_station",
     priceRange: "₩",
@@ -2318,7 +2318,7 @@ export const CREATRIP_PLACES: Place[] = [
   {
     id: "ct-am-ton-hongdae-main-branch",
     name: "AM:TON | Hongdae Main Branch",
-    nameKr: "AM:TON | Hongdae Main Branch",
+    nameKr: "에이엠톤 본점",
     type: "hair_salon",
     zone: "hongdae",
     priceRange: "₩",
@@ -2363,7 +2363,7 @@ export const CREATRIP_PLACES: Place[] = [
   {
     id: "ct-chop-hair-hongdae-branch",
     name: "CHOP Hair | Hongdae Branch",
-    nameKr: "CHOP Hair | Hongdae Branch",
+    nameKr: "CHOP헤어 홍대점",
     type: "hair_salon",
     zone: "hongdae",
     priceRange: "₩",
@@ -2410,7 +2410,7 @@ export const CREATRIP_PLACES: Place[] = [
   {
     id: "ct-juno-hair-hongdae-1st-branch",
     name: "JUNO HAIR | Hongdae 1st Branch",
-    nameKr: "JUNO HAIR | Hongdae 1st Branch",
+    nameKr: "준오헤어 홍대1호점",
     type: "hair_salon",
     zone: "hongdae",
     priceRange: "₩₩₩",
@@ -2435,7 +2435,7 @@ export const CREATRIP_PLACES: Place[] = [
   {
     id: "ct-juno-hair-hongdae-station",
     name: "JUNO HAIR | Hongdae Station",
-    nameKr: "JUNO HAIR | Hongdae Station",
+    nameKr: "준오헤어 홍대입구역점",
     type: "hair_salon",
     zone: "hongdae",
     priceRange: "₩₩₩",
@@ -2533,7 +2533,7 @@ export const CREATRIP_PLACES: Place[] = [
   {
     id: "ct-modenri-scalp-care",
     name: "modenri | Scalp Care",
-    nameKr: "modenri | Scalp Care",
+    nameKr: "모덴리",
     type: "head_spa",
     zone: "hongdae",
     priceRange: "₩₩",
@@ -2798,7 +2798,7 @@ export const CREATRIP_PLACES: Place[] = [
   {
     id: "ct-chop-hair-jamsil-branch",
     name: "CHOP Hair | Jamsil Branch",
-    nameKr: "CHOP Hair | Jamsil Branch",
+    nameKr: "찹헤어 잠실점",
     type: "hair_salon",
     zone: "jamsil",
     priceRange: "₩₩",
@@ -2871,7 +2871,7 @@ export const CREATRIP_PLACES: Place[] = [
   {
     id: "ct-dig-hair-gwanghwamun-branch",
     name: "Dig Hair | Gwanghwamun Branch",
-    nameKr: "Dig Hair | Gwanghwamun Branch",
+    nameKr: "디그헤어 광화문점",
     type: "hair_salon",
     zone: "jongno",
     priceRange: "₩₩",
@@ -2896,7 +2896,7 @@ export const CREATRIP_PLACES: Place[] = [
   {
     id: "ct-dig-hair-gyeongbokgung-branch",
     name: "Dig Hair | Gyeongbokgung Branch",
-    nameKr: "Dig Hair | Gyeongbokgung Branch",
+    nameKr: "디그헤어 종각점",
     type: "hair_salon",
     zone: "jongno",
     priceRange: "₩₩",
@@ -2921,7 +2921,7 @@ export const CREATRIP_PLACES: Place[] = [
   {
     id: "ct-eco-jardin-gyeongbokgung-branch-complete-hair-ma",
     name: "ECO JARDIN Gyeongbokgung Branch | Complete Hair & Makeup Makeover Studio",
-    nameKr: "ECO JARDIN Gyeongbokgung Branch | Complete Hair & Makeup Makeover Studio",
+    nameKr: "에코쟈뎅 경복궁점",
     type: "hair_salon",
     zone: "jongno",
     priceRange: "₩₩₩",
@@ -3088,7 +3088,7 @@ export const CREATRIP_PLACES: Place[] = [
   {
     id: "ct-juno-hair-mapo-harrington-branch-urban-forest-he",
     name: "JUNO HAIR Mapo Harrington Branch | Urban Forest Head Spa",
-    nameKr: "JUNO HAIR Mapo Harrington Branch | Urban Forest Head Spa",
+    nameKr: "준오헤어 마포해링턴점",
     type: "hair_salon",
     zone: "hongdae",
     priceRange: "₩",
@@ -3256,7 +3256,7 @@ export const CREATRIP_PLACES: Place[] = [
   {
     id: "ct-nanalog-myeongdong-largest-head-spa-salon-in-mye",
     name: "Nanalog Myeongdong | Largest Head Spa Salon in Myeongdong",
-    nameKr: "Nanalog Myeongdong | Largest Head Spa Salon in Myeongdong",
+    nameKr: "나나로그 명동점",
     type: "hair_salon",
     zone: "myeongdong",
     priceRange: "₩₩₩",
@@ -3304,7 +3304,7 @@ export const CREATRIP_PLACES: Place[] = [
   {
     id: "ct-argyol-myeongdong-hair-salon-near-myeongdong-sta",
     name: "ARGYOL Myeongdong | Hair salon near Myeongdong Station open late-night",
-    nameKr: "ARGYOL Myeongdong | Hair salon near Myeongdong Station open late-night",
+    nameKr: "아르결 명동점",
     type: "hair_salon",
     zone: "myeongdong",
     priceRange: "₩",
@@ -3398,7 +3398,7 @@ export const CREATRIP_PLACES: Place[] = [
   {
     id: "ct-juno-hair-myeongdong-1st",
     name: "JUNO HAIR | Myeongdong 1st",
-    nameKr: "JUNO HAIR | Myeongdong 1st",
+    nameKr: "준오헤어 명동4호점",
     type: "hair_salon",
     zone: "myeongdong",
     priceRange: "₩₩₩",
@@ -3423,7 +3423,7 @@ export const CREATRIP_PLACES: Place[] = [
   {
     id: "ct-juno-hair-myeongdong-2nd",
     name: "JUNO HAIR | Myeongdong 2nd",
-    nameKr: "JUNO HAIR | Myeongdong 2nd",
+    nameKr: "준오헤어 명동2호점",
     type: "hair_salon",
     zone: "myeongdong",
     priceRange: "₩₩₩",
@@ -3448,7 +3448,7 @@ export const CREATRIP_PLACES: Place[] = [
   {
     id: "ct-juno-hair-myeongdong-4th",
     name: "JUNO HAIR | Myeongdong 4th",
-    nameKr: "JUNO HAIR | Myeongdong 4th",
+    nameKr: "준오헤어 명동4호점",
     type: "hair_salon",
     zone: "myeongdong",
     priceRange: "₩₩₩",
@@ -3473,7 +3473,7 @@ export const CREATRIP_PLACES: Place[] = [
   {
     id: "ct-juno-hair-myeongdong-art-theater-branch",
     name: "JUNO HAIR | Myeongdong Art Theater Branch",
-    nameKr: "JUNO HAIR | Myeongdong Art Theater Branch",
+    nameKr: "준오헤어 명동4호점",
     type: "hair_salon",
     zone: "myeongdong",
     priceRange: "₩₩",
@@ -3497,7 +3497,7 @@ export const CREATRIP_PLACES: Place[] = [
   {
     id: "ct-juno-hair-myeongdong-street-branch-popular-forei",
     name: "JUNO Hair Myeongdong Street Branch | Popular Foreigner-friendly Salon in Myeongdong",
-    nameKr: "JUNO Hair Myeongdong Street Branch | Popular Foreigner-friendly Salon in Myeongdong",
+    nameKr: "준오헤어 명동스트리트점",
     type: "hair_salon",
     zone: "myeongdong",
     priceRange: "₩₩₩",
@@ -3523,7 +3523,7 @@ export const CREATRIP_PLACES: Place[] = [
   {
     id: "ct-lee-chul-hair-kerker-myeongdong-1st-branch",
     name: "Lee Chul Hair Kerker | Myeongdong 1st Branch",
-    nameKr: "Lee Chul Hair Kerker | Myeongdong 1st Branch",
+    nameKr: "이철헤어커커 명동1호점",
     type: "hair_salon",
     zone: "myeongdong",
     priceRange: "₩",
@@ -3573,7 +3573,7 @@ export const CREATRIP_PLACES: Place[] = [
   {
     id: "ct-leekaja-hair-myeongdong-english-speaking-hair-sa",
     name: "LEEKAJA HAIR Myeongdong | English-Speaking Hair Salon in Seoul",
-    nameKr: "LEEKAJA HAIR Myeongdong | English-Speaking Hair Salon in Seoul",
+    nameKr: "이가자헤어비스 명동점",
     type: "hair_salon",
     zone: "myeongdong",
     priceRange: "₩₩",
@@ -3624,7 +3624,7 @@ export const CREATRIP_PLACES: Place[] = [
   {
     id: "ct-ye-lead-hair-salon-myeongdong",
     name: "Ye-Lead Hair Salon Myeongdong",
-    nameKr: "Ye-Lead Hair Salon Myeongdong",
+    nameKr: "예리드",
     type: "hair_salon",
     zone: "myeongdong",
     priceRange: "₩₩",
@@ -3695,7 +3695,7 @@ export const CREATRIP_PLACES: Place[] = [
   {
     id: "ct-chahong-room-bangbae-branch",
     name: "CHAHONG ROOM | Bangbae Branch",
-    nameKr: "CHAHONG ROOM | Bangbae Branch",
+    nameKr: "차홍룸 방배점",
     type: "hair_salon",
     zone: "gangnam_station",
     priceRange: "₩",
@@ -3719,7 +3719,7 @@ export const CREATRIP_PLACES: Place[] = [
   {
     id: "ct-salon-de-by-first-perm-specialist-hair-salon",
     name: "Salon de By First | Perm Specialist Hair Salon",
-    nameKr: "Salon de By First | Perm Specialist Hair Salon",
+    nameKr: "살롱드바이퍼스트 성신여대역본점",
     type: "hair_salon",
     zone: "seoul_etc",
     priceRange: "₩₩",
@@ -3765,7 +3765,7 @@ export const CREATRIP_PLACES: Place[] = [
   {
     id: "ct-you-hair-salon-seongsu-branch",
     name: "YOU Hair Salon | Seongsu Branch",
-    nameKr: "YOU Hair Salon | Seongsu Branch",
+    nameKr: "와이오유 성수점",
     type: "hair_salon",
     zone: "seongsu",
     priceRange: "₩",
@@ -3838,7 +3838,7 @@ export const CREATRIP_PLACES: Place[] = [
   {
     id: "ct-amton-seongsu-glass-hair-color-specialist-hair-s",
     name: "AMTON Seongsu | Glass Hair & Color Specialist Hair Salon",
-    nameKr: "AMTON Seongsu | Glass Hair & Color Specialist Hair Salon",
+    nameKr: "에이엠톤 성수",
     type: "hair_salon",
     zone: "seongsu",
     priceRange: "₩",
@@ -3936,7 +3936,7 @@ export const CREATRIP_PLACES: Place[] = [
   {
     id: "ct-juno-hair-seongsu-branch",
     name: "JUNO HAIR | Seongsu Branch",
-    nameKr: "JUNO HAIR | Seongsu Branch",
+    nameKr: "준오헤어 성수역점",
     type: "hair_salon",
     zone: "seongsu",
     priceRange: "₩₩₩",
@@ -4178,7 +4178,7 @@ export const CREATRIP_PLACES: Place[] = [
   {
     id: "ct-wearhouse-seoungsu-branch",
     name: "WEARHOUSE | Seoungsu Branch",
-    nameKr: "WEARHOUSE | Seoungsu Branch",
+    nameKr: "웨어하우스 성수점",
     type: "hair_salon",
     zone: "seongsu",
     priceRange: "₩",
@@ -4249,7 +4249,7 @@ export const CREATRIP_PLACES: Place[] = [
   {
     id: "ct-juno-hair-sinchon",
     name: "JUNO HAIR | Sinchon",
-    nameKr: "JUNO HAIR | Sinchon",
+    nameKr: "준오헤어 신촌점",
     type: "hair_salon",
     zone: "hongdae",
     priceRange: "₩₩₩",
@@ -4367,7 +4367,7 @@ export const CREATRIP_PLACES: Place[] = [
   {
     id: "ct-juno-hair-garosu-gil",
     name: "JUNO HAIR | Garosu-gil",
-    nameKr: "JUNO HAIR | Garosu-gil",
+    nameKr: "준오헤어 가로수길점",
     type: "hair_salon",
     zone: "sinsa",
     priceRange: "₩₩₩",
@@ -4556,7 +4556,7 @@ export const CREATRIP_PLACES: Place[] = [
   {
     id: "ct-juno-hair-yeongdeungpo-branch",
     name: "JUNO HAIR | Yeongdeungpo Branch",
-    nameKr: "JUNO HAIR | Yeongdeungpo Branch",
+    nameKr: "준오헤어 영등포점",
     type: "hair_salon",
     zone: "yeongdeungpo",
     priceRange: "₩₩",
@@ -4653,7 +4653,7 @@ export const CREATRIP_PLACES: Place[] = [
   {
     id: "ct-hongdae-hair-salon-burning-day",
     name: "Hongdae Hair Salon | Burning Day",
-    nameKr: "Hongdae Hair Salon | Burning Day",
+    nameKr: "에드비엑스이헤어 홍대점",
     type: "hair_salon",
     zone: "hongdae",
     priceRange: "₩",
@@ -4677,7 +4677,7 @@ export const CREATRIP_PLACES: Place[] = [
   {
     id: "ct-avenue-juno-hair-the-hyundai-seoul-branch",
     name: "AVENUE JUNO HAIR | The Hyundai Seoul Branch",
-    nameKr: "AVENUE JUNO HAIR | The Hyundai Seoul Branch",
+    nameKr: "애브뉴준오 더현대서울점",
     type: "hair_salon",
     zone: "yeongdeungpo",
     priceRange: "₩₩₩",
@@ -4701,7 +4701,7 @@ export const CREATRIP_PLACES: Place[] = [
   {
     id: "ct-bloom-9-yeongdeungpo-hair-salon",
     name: "BLOOM 9 | Yeongdeungpo Hair Salon",
-    nameKr: "BLOOM 9 | Yeongdeungpo Hair Salon",
+    nameKr: "블룸9헤어 영등포신길점",
     type: "hair_salon",
     zone: "yeongdeungpo",
     priceRange: "₩₩₩",
@@ -4751,7 +4751,7 @@ export const CREATRIP_PLACES: Place[] = [
   {
     id: "ct-juno-seoul-premium-head-spa-wellness-hair-salon",
     name: "JUNO Seoul | Premium Head Spa Wellness Hair Salon",
-    nameKr: "JUNO Seoul | Premium Head Spa Wellness Hair Salon",
+    nameKr: "준오 서울",
     type: "hair_salon",
     zone: "itaewon",
     priceRange: "₩₩₩",
@@ -4873,7 +4873,7 @@ export const CREATRIP_PLACES: Place[] = [
   {
     id: "ct-recoveria-yongsan-ichon-station-main-branch",
     name: "RECOVERIA Yongsan Ichon Station Main Branch",
-    nameKr: "RECOVERIA Yongsan Ichon Station Main Branch",
+    nameKr: "리커버리아 용산이촌역본점",
     type: "head_spa",
     zone: "itaewon",
     priceRange: "₩₩₩",
