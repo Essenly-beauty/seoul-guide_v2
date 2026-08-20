@@ -55,7 +55,7 @@ test.describe("account data lifecycle", () => {
     expect(body.ratings[0]).toMatchObject({ place_id: "juno-hair-gangnam", rating: 5 });
 
     // delete through the real UI
-    await page.goto("/settings");
+    await page.goto("/settings/privacy");
     await page.getByRole("button", { name: "Delete account" }).click();
     await page.getByRole("button", { name: "Delete forever" }).click();
     await page.waitForURL((u) => u.pathname === "/", { timeout: 30_000 });

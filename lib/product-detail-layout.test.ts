@@ -56,6 +56,14 @@ describe("product detail information-page layout", () => {
     expect(ctaSource).toContain("Buy online");
   });
 
+  it("keeps an unavailable online action neutral and stable on hover", () => {
+    expect(ctaSource).toContain("Not available online");
+    expect(ctaSource).not.toContain("Online unavailable");
+    expect(cssSource).toMatch(
+      /\.btn\.primary\.product-cta-unavailable,\s*\.btn\.primary\.product-cta-unavailable:hover\s*\{[^}]*background:\s*var\(--bg-surface-sunken\)[^}]*color:\s*var\(--text-disabled\)/,
+    );
+  });
+
   it("keeps the product shell stable and scannable on a narrow mobile viewport", () => {
     expect(cssSource).toMatch(
       /\.product-detail-gallery\s*\{[^}]*grid-template-columns:\s*minmax\(0,\s*1\.4fr\) minmax\(0,\s*1fr\);[^}]*grid-template-rows:\s*82px 82px;/,
@@ -80,7 +88,7 @@ describe("product detail information-page layout", () => {
     );
   });
 
-  it("allows a long Korean product name to wrap without hiding the copy action", () => {
+  it("allows a long Korean product name to wrap without hiding the staff action", () => {
     const koreanNameRule = cssSource.match(
       /\.product-detail-copy-text\s*>\s*b\s*\{[^}]*\}/,
     )?.[0] ?? "";
@@ -88,6 +96,23 @@ describe("product detail information-page layout", () => {
     expect(koreanNameRule).toContain("-webkit-line-clamp: 2");
     expect(koreanNameRule).toContain("overflow-wrap: anywhere");
     expect(cssSource).toMatch(/\.product-detail-copy\s*\{[^}]*flex:\s*none/);
+  });
+
+  it("opens an accessible show-to-staff card with a product visual and a sans-serif location request", () => {
+    expect(dataSource).toContain("imageUrl?: string");
+    expect(bodySource).toContain("function StoreStaffCard");
+    expect(bodySource).toContain('aria-haspopup="dialog"');
+    expect(bodySource).toContain('className="box product-staff-modal"');
+    expect(bodySource).toContain('role="dialog"');
+    expect(bodySource).toContain('aria-modal="true"');
+    expect(bodySource).toContain('className="product-staff-modal-visual"');
+    expect(bodySource).toContain("product.imageUrl");
+    expect(bodySource).toContain('className="product-staff-modal-question"');
+    expect(bodySource).toContain("위치를 안내해 주세요.");
+    expect(bodySource).not.toContain('copy={product.nameKr}');
+    expect(cssSource).toMatch(
+      /\.product-staff-modal-question\s*\{[^}]*font-family:\s*var\(--sans\)/,
+    );
   });
 
   it("shares a structured canonical product URL from every product share control", () => {
@@ -114,7 +139,7 @@ describe("product detail information-page layout", () => {
     expect(bodySource).toContain("Search nearby stores");
     expect(bodySource).toContain("onlineUrlVerifiedAt");
     expect(bodySource).toContain('target="_blank"');
-    expect(ctaSource).toContain("Online unavailable");
+    expect(ctaSource).toContain("Not available online");
     expect(ctaSource).toContain("onlineUrlVerifiedAt");
     expect(ctaSource).not.toContain("Opening the online store");
     expect(bodySource).not.toContain("PARTNER_STORE");

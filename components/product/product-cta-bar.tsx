@@ -44,7 +44,7 @@ export function ProductCtaBar({ product }: { product: Product }) {
           className="product-cta-buy product-cta-unavailable"
           aria-label="Online purchase unavailable because no retailer link is verified"
         >
-          Online unavailable
+          Not available online
         </Button>
       )}
     </nav>

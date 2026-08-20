@@ -14,10 +14,21 @@ describe("brand asset contract", () => {
     expect(source("app/apple-icon.tsx")).toContain("M203.5 78.3301H147.27");
   });
 
-  it("uses the supplied SVG mark in every header and ships no legacy leaf brand mark", () => {
+  it("keeps the supplied SVG for app identity without repeating it in quiet page headers", () => {
     const ranking = source("app/ranking/page.tsx");
-    expect(ranking).toContain('from "@/components/brand/brand-logo"');
+    expect(ranking).not.toContain("BrandMark");
+    expect(ranking).toContain('<TopBar center title="Ranking" />');
     expect(ranking).not.toContain('BrandMark, Icon } from "@/components/icon"');
     expect(source("components/icon.tsx")).not.toContain("i-mark-brand");
+  });
+
+  it("uses a reusable brand icon in the ranking brand directory", () => {
+    const ranking = source("app/ranking/page.tsx");
+    const brandIcon = source("components/brand/brand-icon.tsx");
+
+    expect(ranking).toContain('import { BrandIcon } from "@/components/brand/brand-icon"');
+    expect(ranking).toContain("<BrandIcon brand={brand}");
+    expect(brandIcon).toContain("BRAND_MONOGRAMS");
+    expect(brandIcon).toContain("aria-label={`${brand} brand`}");
   });
 });

@@ -90,11 +90,9 @@ const P3_RAW_ALLOWANCES = new Map<string, number>([
   ["app/brand/[id]/page.tsx: listrow v2", 1],
   ["app/favorites/page.tsx: listrow", 1],
   ["app/favorites/page.tsx: listrow v2", 1],
-  ["app/mypage/reviews/page.tsx: listrow v2 top", 1],
   ["app/ranking/page.tsx: listrow", 1],
   ["app/ranking/page.tsx: listrow v2", 1],
   ["app/search/page.tsx: listrow v2", 4],
-  ["app/settings/page.tsx: listrow v2", 3],
   // Interactive empty state and a multi-step sheet with a bespoke header/footer.
   ["components/booking/booking-sheet.tsx: overlay", 1],
   ["components/booking/booking-sheet.tsx: sheet", 1],

@@ -68,7 +68,7 @@ function ShareListButton({ placeIds }: { placeIds: string[] }) {
       const finalTitle = sanitizeListTitle(title);
       const id = await createSharedList(finalTitle, placeIds);
       setNaming(false);
-      share({ title: finalTitle, text: "My saved places on MYSEOULDROP — open them on the map:", url: sharedListUrl(window.location.origin, id) });
+      share({ title: finalTitle, text: "My saved places on MYSEOULDROP. No app install needed — open on the web and save the places to your own list:", url: sharedListUrl(window.location.origin, id) });
     } catch (e) {
       toast(e instanceof Error && e.message === "Nothing to share yet" ? e.message : "Couldn't create the share link — try again");
     } finally {
@@ -93,6 +93,7 @@ function ShareListButton({ placeIds }: { placeIds: string[] }) {
           <Button variant="secondary" size="sm" style={{ flex: 1 }} disabled={busy} onClick={() => setNaming(false)}>Cancel</Button>
           <Button size="sm" style={{ flex: 1 }} disabled={busy} onClick={() => void shareNow()}>Share link</Button>
         </div>
+        <p className="t-caption">No app install needed. Friends can open the web link and save every place to their own list.</p>
       </div>
     );
   }
@@ -125,7 +126,7 @@ function PlacesSection({ favPlaces }: { favPlaces: Place[] }) {
   const shown = cats.length === 0 ? favPlaces : favPlaces.filter((p) => cats.includes(p.type));
   return (
     <section className="stack sm">
-      <SectionHeader title="Places" count={favPlaces.length} actionLabel="See all" href={routes.map} />
+      <SectionHeader title="Places" count={favPlaces.length} actionLabel="See all" href={routes.savedPlacesMap} />
       <CategoryChips
         selected={cats}
         onToggle={(key) => setCats((cur) => cur.includes(key) ? cur.filter((c) => c !== key) : [...cur, key])}
@@ -221,7 +222,7 @@ export default function FavoritesPage() {
   const favArticles = ARTICLES.filter((a) => favs.article.includes(a.slug));
   return (
     <>
-      <TopBar title="Saved" />
+      <TopBar center title="Saved" />
       <div className="app-scroll pad stack pagev2">
         <div>
           <div className="label">Saved</div>

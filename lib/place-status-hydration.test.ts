@@ -4,12 +4,20 @@ import { describe, expect, it } from "vitest";
 const source = (path: string) => readFileSync(new URL(`../${path}`, import.meta.url), "utf8");
 
 describe("place status hydration", () => {
-  it("waits until client mount before rendering time-dependent live status", () => {
+  it("reserves a stable status slot until client time is available", () => {
     const liveBadge = source("components/ui/live-badge.tsx");
     expect(liveBadge).toContain('useState<Date | null>(null)');
     expect(liveBadge).toContain('useEffect(() => setNow(new Date()), [])');
-    expect(liveBadge).toContain('if (!hours || !now) return null');
+    expect(liveBadge).toContain('className="livebadge loading"');
     expect(liveBadge).toContain('placeStatus(hours, now)');
+  });
+
+  it("renders textual open, closed, and unknown variants in the same badge family", () => {
+    const liveBadge = source("components/ui/live-badge.tsx");
+    expect(liveBadge).toContain('className="livebadge open"');
+    expect(liveBadge).toContain('className="livebadge closed"');
+    expect(liveBadge).toContain('className="livebadge unknown"');
+    expect(liveBadge).toContain("Hours unknown");
   });
 
   it("does not choose today's row or hours label during server render", () => {

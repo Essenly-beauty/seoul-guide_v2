@@ -29,6 +29,11 @@ export function formatDistance(km: number): string {
   return `${km.toFixed(1)} km`;
 }
 
+/** Dense map metadata keeps the numeric value and its unit as one visual token. */
+export function formatCompactDistance(km: number): string {
+  return formatDistance(km).replaceAll(" ", "");
+}
+
 /** Walking time at ~67 m/min (casual pace), minimum 1 minute. */
 export function walkMinutes(km: number): number {
   return Math.max(1, Math.round((km * 1000) / 67));

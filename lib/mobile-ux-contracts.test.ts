@@ -17,6 +17,7 @@ const bookingSource = source("../components/booking/booking-sheet.tsx");
 const signoutSource = source("../components/ui/signout-modal.tsx");
 const filterSource = source("../components/map/filter-sheet.tsx");
 const profileSource = source("../app/onboarding/beauty-profile/page.tsx");
+const profileEditorSource = source("../components/mypage/beauty-profile-editor.tsx");
 const settingsSource = source("../app/settings/page.tsx");
 
 describe("mobile interaction contracts", () => {
@@ -84,11 +85,14 @@ describe("dialog and form accessibility contracts", () => {
   });
 
   it("keeps the post-signup profile entrypoint account-synced", () => {
-    // Detailed questions now use the real, account-synced progressive card;
-    // the old free-text demo field was not saved anywhere.
-    expect(profileSource).toContain("<ProfileCard />");
+    // Detailed questions use the real, account-synced profile store and stay
+    // editable after completion; the old free-text demo field saved nowhere.
+    expect(profileSource).toContain("<BeautyProfileEditor />");
+    expect(profileEditorSource).toContain("useProfile");
+    expect(profileEditorSource).toContain("answerQuestion");
     expect(profileSource).not.toContain('id="current-hair-brand"');
-    expect(settingsSource).toContain("Edit beauty profile");
+    expect(settingsSource).toContain('title="Beauty profile"');
+    expect(settingsSource).toContain("href={routes.onboardingProfile}");
     // launch scope: the mock write-review form route is closed via
     // next.config redirects — the real composer lives in place-detail-body
   });

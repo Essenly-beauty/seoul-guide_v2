@@ -1,11 +1,11 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { placeStatus, statusLabel } from "@/lib/places";
+import { placeStatus } from "@/lib/places";
 import type { Place } from "@/lib/data";
 
-/** Open-now indicator (spec v2 §3.2). Renders `● LIVE until HH:MM` while open,
-    the muted closed label otherwise, nothing when hours are unknown. */
+/** Stable open-hours status slot. Every settled state keeps text in the same
+    badge family so map rows do not jump and color is never the only signal. */
 export function LiveBadge({ hours, showUntil = true }: { hours?: Place["hours"]; showUntil?: boolean }) {
   // Server regions and a visitor's device can be in different timezones. Keep
   // the time-sensitive content out of the shared server/first-client render,
@@ -13,14 +13,19 @@ export function LiveBadge({ hours, showUntil = true }: { hours?: Place["hours"];
   const [now, setNow] = useState<Date | null>(null);
   useEffect(() => setNow(new Date()), []);
 
-  if (!hours || !now) return null;
+  if (!now) {
+    return <span className="livebadge loading" aria-hidden="true">LIVE</span>;
+  }
+  if (!hours) {
+    return <span className="livebadge unknown">Hours unknown</span>;
+  }
   if (placeStatus(hours, now) !== "open") {
-    return <span className="small muted">{statusLabel(hours, now)}</span>;
+    return <span className="livebadge closed">Closed</span>;
   }
   return (
-    <>
-      <span className="livebadge">LIVE</span>
-      {showUntil && <b className="small">until {hours.close}</b>}
-    </>
+    <span className="livebadge open">
+      Live
+      {showUntil && <span className="livebadge-until"> until {hours.close}</span>}
+    </span>
   );
 }

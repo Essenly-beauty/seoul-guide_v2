@@ -20,6 +20,16 @@ export type RatingMap = Record<string, MyRating>;
 /** ratings.body DB check is 2000 chars — mirror it client-side. */
 export const REVIEW_MAX_LEN = 2000;
 
+/**
+ * Single policy seam for the My-review edit affordance. The current product
+ * rule is owner-only: a review can be edited only when it exists in the
+ * current account/device My-ratings store. Future time or moderation windows
+ * belong here instead of being duplicated across screens.
+ */
+export function canEditMyReview(review: MyRating | null | undefined): boolean {
+  return Boolean(review && validRating(review.rating));
+}
+
 const KEY = "essenly.myrating";
 const MERGED_KEY = "essenly.myrating.mergedFor";
 const EMPTY: RatingMap = {};
@@ -165,11 +175,11 @@ function overlayPending(server: RatingMap): RatingMap {
   return map;
 }
 
-function sendOp(uid: string, op: PendingOp, prev: MyRating | undefined) {
+async function sendOp(uid: string, op: PendingOp, prev: MyRating | undefined): Promise<boolean> {
   const supabase = supabaseBrowser();
-  void supabase
-    .from("ratings")
-    .upsert(
+  let error: unknown = null;
+  try {
+    const result = await supabase.from("ratings").upsert(
       {
         user_id: uid,
         place_id: op.placeId,
@@ -178,19 +188,24 @@ function sendOp(uid: string, op: PendingOp, prev: MyRating | undefined) {
         ...(op.body !== undefined ? { body: op.body, is_public: op.body !== null && op.isPublic === true } : {}),
       },
       { onConflict: "user_id,place_id" },
-    )
-    .then(({ error }) => {
-      const cur = pending.get(op.placeId);
-      if (cur?.seq !== op.seq) return; // superseded by a newer tap
-      pending.delete(op.placeId);
-      if (error && userId === uid) {
-        // roll the stars back to what they showed before the tap
-        const next = { ...load() };
-        if (prev) next[op.placeId] = prev;
-        else delete next[op.placeId];
-        write(next);
-      }
-    });
+    );
+    error = result.error;
+  } catch (cause) {
+    error = cause;
+  }
+
+  const cur = pending.get(op.placeId);
+  if (cur?.seq !== op.seq) return error === null; // superseded by a newer tap
+  pending.delete(op.placeId);
+  if (error && userId === uid) {
+    // Roll back only after a confirmed persistence failure. Callers that await
+    // this result keep their draft open instead of navigating away.
+    const next = { ...load() };
+    if (prev) next[op.placeId] = prev;
+    else delete next[op.placeId];
+    write(next);
+  }
+  return error === null;
 }
 
 async function adoptServerState(uid: string) {
@@ -202,7 +217,7 @@ async function adoptServerState(uid: string) {
     const server = await fetchServer();
     if (server && userId === uid && token === syncToken) {
       write(overlayPending(server));
-      pending.forEach((op) => sendOp(uid, op, server[op.placeId]));
+      pending.forEach((op) => { void sendOp(uid, op, server[op.placeId]); });
     }
   } finally {
     if (token === syncToken) syncing = false;
@@ -279,13 +294,13 @@ export function setRating(placeId: string, rating: number): void {
 
   const op: PendingOp = { placeId, rating, at, seq: ++opSeq };
   pending.set(placeId, op);
-  if (userId) sendOp(userId, op, prev);
+  if (userId) void sendOp(userId, op, prev);
 }
 
 /** Save (or clear, with an empty string) my review text for a rated place.
     isPublic is the composer's explicit consent — public reviews show the
     author's first name to other travelers. */
-export function setReview(placeId: string, rating: number, body: string, isPublic = false): void {
+export async function setReview(placeId: string, rating: number, body: string, isPublic = false): Promise<boolean> {
   const cur = load();
   const prev = cur[placeId];
   const trimmed = body.trim().slice(0, REVIEW_MAX_LEN);
@@ -295,7 +310,8 @@ export function setReview(placeId: string, rating: number, body: string, isPubli
 
   const op: PendingOp = { placeId, rating, body: trimmed || null, isPublic: share, at, seq: ++opSeq };
   pending.set(placeId, op);
-  if (userId) sendOp(userId, op, prev);
+  if (userId) return sendOp(userId, op, prev);
+  return true;
 }
 
 function subscribe(cb: () => void) {

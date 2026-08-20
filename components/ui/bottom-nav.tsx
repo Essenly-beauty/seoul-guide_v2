@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 import { Icon, type IconName } from "@/components/icon";
 import { routes } from "@/lib/routes";
@@ -23,6 +25,9 @@ export function BottomNav({ active }: { active?: NavKey }) {
           href={item.href}
           className="nav"
           aria-current={active === item.key ? "page" : undefined}
+          onClick={() => {
+            if (item.key === "map") window.dispatchEvent(new CustomEvent("myseouldrop:map-cycle"));
+          }}
         >
           <Icon name={item.icon} />
           {item.label}

@@ -2,6 +2,7 @@ import { describe, it, expect } from "vitest";
 import {
   haversineKm,
   formatDistance,
+  formatCompactDistance,
   walkMinutes,
   kakaoMapUrl,
   naverMapUrl,
@@ -31,6 +32,13 @@ describe("formatDistance", () => {
   });
   it("rounds meters up into km at the 1000m boundary", () => {
     expect(formatDistance(0.996)).toBe("1.0 km");
+  });
+});
+
+describe("formatCompactDistance", () => {
+  it("keeps the value and unit together in dense map metadata", () => {
+    expect(formatCompactDistance(0.1)).toBe("100m");
+    expect(formatCompactDistance(1.23)).toBe("1.2km");
   });
 });
 

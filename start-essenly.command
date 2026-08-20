@@ -10,16 +10,26 @@ cd "$PROJECT_DIR" || exit 1
 
 LISTENER_PID="$(lsof -nP -tiTCP:"$PORT" -sTCP:LISTEN 2>/dev/null | head -n 1)"
 
-# The page HTML can return 200 while its JS chunks 404 (stale .next after
-# file renames/deletes). Healthy means the page AND a referenced chunk load.
+# The page HTML can return 200 while its JS/CSS assets 404 (stale .next after
+# file renames/deletes). Healthy means the page AND referenced assets load.
 is_healthy() {
-  local html assets asset
+  local html assets styles asset style
   html="$(curl --silent --fail --max-time 2 "$URL" 2>/dev/null)" || return 1
   assets="$(printf '%s' "$html" | grep -oE '/_next/static/[^"]+\.js' | sort -u | head -n 5)"
   [[ -z "$assets" ]] && return 1
   while IFS= read -r asset; do
     curl --silent --fail --max-time 2 "http://127.0.0.1:${PORT}${asset}" >/dev/null 2>&1 || return 1
   done <<<"$assets"
+
+  # A page can still render its markup and JavaScript while the Next dev
+  # server has lost the virtual CSS asset (for example after an interrupted
+  # HMR compile). Without this check the launcher opens an unstyled map and
+  # reports the server as healthy. Require every referenced stylesheet too.
+  styles="$(printf '%s' "$html" | grep -oE '/_next/static/[^"]+\.css' | sort -u | head -n 5)"
+  [[ -z "$styles" ]] && return 1
+  while IFS= read -r style; do
+    curl --silent --fail --max-time 2 "http://127.0.0.1:${PORT}${style}" >/dev/null 2>&1 || return 1
+  done <<<"$styles"
   return 0
 }
 
@@ -53,7 +63,7 @@ fi
 
 # A running build can leave Next.js chunk references out of sync.
 # This directory only contains generated output and is rebuilt on startup.
-rm -rf "$PROJECT_DIR/.next"
+rm -rf "$PROJECT_DIR/.next-dev"
 
 echo "Starting Essenly at $URL"
 LOG_FILE="/tmp/essenly-dev-${PORT}.log"

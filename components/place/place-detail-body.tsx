@@ -23,12 +23,13 @@ import { useDialogFocus } from "@/components/ui/use-dialog-focus";
 import { Icon } from "@/components/icon";
 import { useLocation } from "@/components/map/use-location";
 import { useSigninNudge } from "@/components/auth/signin-nudge";
+import { PlaceCorrectionLauncher } from "@/components/place/place-correction-launcher";
 import { toggleFavorite, useFavorites } from "@/lib/favorites";
 import { REVIEW_MAX_LEN, setRating, setReview, useMyRatings } from "@/lib/ratings";
 import { fetchPlaceReviews, REPORT_REASONS, reportReview, timeAgo, type PublicReview } from "@/lib/reviews";
 import { routes } from "@/lib/routes";
 import { PLACES, PRODUCTS, TYPE_LABEL, zoneShort, type Place } from "@/lib/data";
-import { GANGNAM_STATION, formatDistance, haversineKm } from "@/lib/geo";
+import { GANGNAM_STATION, formatCompactDistance, formatDistance, haversineKm } from "@/lib/geo";
 import { isBookable, statusLabel } from "@/lib/places";
 
 /** Anchor-tab targets (spec §4.6). Ids live on the sections below. */
@@ -84,19 +85,60 @@ function TitleBlock({ place, km }: { place: Place; km: number }) {
         <span className="small muted">{TYPE_LABEL[place.type]}</span>
       </div>
       <div className="row" style={{ gap: 8, marginTop: 8 }}>
+        <LiveBadge hours={place.hours} />
         {/* curated rows carry synthetic ratings — show real (scraped) ones only */}
         {place.source !== "curated" && <RatingLine rating={place.rating} count={place.ratingCount} />}
-        <LiveBadge hours={place.hours} />
         {place.englishOk && <span className="t-caption" style={{ flex: "none" }}>· English OK</span>}
       </div>
-      <div className="row" style={{ gap: 8, marginTop: 6 }}>
-        <span className="t-caption" style={{ minWidth: 0, whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>
-          {formatDistance(km)} · {place.address}
+      <PlaceAddressDisclosure place={place} km={km} />
+    </div>
+  );
+}
+
+function PlaceAddressDisclosure({ place, km }: { place: Place; km: number }) {
+  const [expanded, setExpanded] = useState(false);
+  return (
+    <div className="place-address-disclosure">
+      <button
+        type="button"
+        className="place-address-toggle"
+        aria-expanded={expanded}
+        onClick={() => setExpanded((current) => !current)}
+      >
+        <Icon name="pin" size="xs" aria-hidden="true" />
+        <span>
+          <span className="map-meta-token mono">{formatCompactDistance(km)}</span>
+          <span aria-hidden="true"> · </span>
+          {place.address}
         </span>
-        <ActionButton className="t-caption" style={{ color: "var(--accent)", fontWeight: 600, flex: "none" }} copy={place.address} aria-label="Copy address">
-          Copy
-        </ActionButton>
-      </div>
+        <Icon
+          name="down"
+          size="xs"
+          className="place-address-chevron"
+          style={{ transform: expanded ? "rotate(180deg)" : undefined }}
+          aria-hidden="true"
+        />
+      </button>
+      {expanded && (
+        <div className="place-address-panel">
+          <div className="place-address-detail-row">
+            <span>English name</span>
+            <b>{place.name}</b>
+            <ActionButton copy={place.name} aria-label="Copy English name">Copy</ActionButton>
+          </div>
+          <div className="place-address-detail-row">
+            <span>Korean name</span>
+            <b lang="ko">{place.nameKr}</b>
+            <ActionButton copy={place.nameKr} aria-label="Copy Korean name">Copy</ActionButton>
+          </div>
+          <div className="place-address-detail-row">
+            <span>Address</span>
+            <b lang="ko">{place.address}</b>
+            <ActionButton copy={place.address} aria-label="Copy address">Copy address</ActionButton>
+          </div>
+        </div>
+      )}
+      <TaxiCard place={place} />
     </div>
   );
 }
@@ -184,7 +226,6 @@ function HomeSection({ place }: { place: Place }) {
           <span className="caption muted chev">{place.stationWalk.minutes} min walk</span>
         </div>
       )}
-      <TaxiCard place={place} />
       {/* Launch audit P0-1: the "welcome deal" coupon was a prototype
           fabrication — real per-place promotions return when partnerships
           exist. */}
@@ -443,6 +484,7 @@ function ReviewsSection({ place }: { place: Place }) {
   // consent default: new reviews public, an existing note keeps its choice
   const [postPublic, setPostPublic] = useState(true);
   const [reviewBump, setReviewBump] = useState(0);
+  const [savingReview, setSavingReview] = useState(false);
 
   const rate = (n: number) => {
     setRating(place.id, n);
@@ -451,15 +493,20 @@ function ReviewsSection({ place }: { place: Place }) {
     nudgeRating("rating"); // guest-only, once per device
   };
 
-  const saveReview = () => {
-    if (myRating === null) return;
-    setReview(place.id, myRating, draft, postPublic);
+  const saveReview = async () => {
+    if (myRating === null || savingReview) return;
+    setSavingReview(true);
+    const saved = await setReview(place.id, myRating, draft, postPublic);
+    setSavingReview(false);
+    if (!saved) {
+      toast("Couldn’t save your review. Your draft is still here — please try again.");
+      return;
+    }
     setComposing(false);
     toast(draft.trim()
       ? postPublic ? "Review posted — travelers can now see it" : "Review saved as a private note"
       : "Review removed");
-    // the upsert is fire-and-forget — refresh the public list after it lands
-    setTimeout(() => setReviewBump((b) => b + 1), 1500);
+    setReviewBump((b) => b + 1);
   };
 
   const canRate = myRating === null || editing;
@@ -527,7 +574,9 @@ function ReviewsSection({ place }: { place: Place }) {
             </label>
             <div className="row" style={{ gap: 8 }}>
               <Button variant="secondary" size="sm" style={{ flex: 1 }} onClick={() => setComposing(false)}>Cancel</Button>
-              <Button size="sm" style={{ flex: 1 }} onClick={saveReview}>Save review</Button>
+              <Button size="sm" style={{ flex: 1 }} disabled={savingReview} onClick={saveReview}>
+                {savingReview ? "Saving…" : "Save review"}
+              </Button>
             </div>
           </div>
         )}
@@ -592,6 +641,7 @@ function InfoSection({ place }: { place: Place }) {
           : "Listed from public sources — details can change. Confirm important ones before visiting."}
         {place.geoSource === "area" && " Map pin is approximate (neighborhood-level)."}
       </p>
+      <PlaceCorrectionLauncher place={place} />
     </section>
   );
 }
@@ -698,7 +748,11 @@ function MoreMenu({ place }: { place: Place }) {
     over a single scroll of divided sections, plus the D-2 compact bar (§4.7) that
     fades in once the photo header scrolls out. Header chrome (back/share/favorite)
     and the CTA bar stay with callers. */
-export function PlaceDetailBody({ place, heroOverlay }: { place: Place; heroOverlay?: ReactNode }) {
+export function PlaceDetailBody({ place, heroOverlay, onCollapse }: {
+  place: Place;
+  heroOverlay?: ReactNode;
+  onCollapse?: () => void;
+}) {
   const router = useRouter();
   const heroRef = useRef<HTMLDivElement>(null);
   const [compact, setCompact] = useState(false);
@@ -721,7 +775,7 @@ export function PlaceDetailBody({ place, heroOverlay }: { place: Place; heroOver
           the anchor tabs stick at top:48 directly beneath it (globals.css Track B block). */}
       <div className={"detail-compactwrap" + (compact ? " on" : "")}>
         <div className="detail-compactbar">
-          <IconButton name="down" label="Collapse" onClick={() => router.back()} />
+          <IconButton name="down" label="Collapse" onClick={onCollapse ?? (() => router.back())} />
           <b>{place.name}</b>
           <ActionButton
             iconAction={{ name: "share", label: "Share" }}
@@ -738,6 +792,16 @@ export function PlaceDetailBody({ place, heroOverlay }: { place: Place; heroOver
           <ImgPh />
           <ImgPh />
         </div>
+        {onCollapse && (
+          <IconButton
+            name="down"
+            label="Collapse place details"
+            variant="overlay"
+            size={44}
+            className="place-detail-collapse"
+            onClick={onCollapse}
+          />
+        )}
         {heroOverlay}
       </div>
 

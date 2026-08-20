@@ -37,6 +37,10 @@ const SECURITY_HEADERS = [
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
+  // `next dev` and `next build` must not write to the same directory.
+  // A production build can otherwise delete the live dev server's CSS chunks,
+  // leaving its HTML pointed at /_next/static/css/app/layout.css (404).
+  distDir: process.env.NODE_ENV === "development" ? ".next-dev" : ".next",
   async headers() {
     return [{ source: "/(.*)", headers: SECURITY_HEADERS }];
   },

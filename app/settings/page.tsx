@@ -1,89 +1,37 @@
-import Link from "next/link";
 import { TopBar } from "@/components/ui/top-bar";
 import { BottomNav } from "@/components/ui/bottom-nav";
 import { BackButton } from "@/components/ui/back-button";
-import { Button } from "@/components/ui/button";
 import { SectionHeader } from "@/components/ui/section-header";
-import { SectionDivider } from "@/components/ui/section-divider";
-import { FeedbackLauncher } from "@/components/ui/feedback-sheet";
-import { SignoutModal } from "@/components/ui/signout-modal";
-import { ThemeToggle } from "@/components/theme/theme-toggle";
-import { AccountDataControls } from "@/components/settings/account-data-controls";
-import { PhoneVerify } from "@/components/auth/phone-verify";
-import { PwaInstallControl } from "@/components/pwa/pwa-install-control";
-import { Icon } from "@/components/icon";
+import { SettingsRow } from "@/components/settings/settings-row";
 import { routes } from "@/lib/routes";
 
-// Launch scope: the old hair/skin/trip form here was unwired demo controls
-// with a fake "Save Changes" toast — removed. Real beauty-profile editing
-// lives in onboarding and the Menu tab's profile card (account-synced).
 export default function SettingsPage() {
   return (
     <>
       <TopBar center left={<BackButton fallback={routes.menu} />} title="Settings" />
-      <div className="app-scroll pad stack pagev2">
-        <section className="stack sm">
-          <SectionHeader title="Beauty profile" />
-          <p className="t-caption">Your hair, skin, and trip answers tune the map and rankings. Edit them from the profile card on the Menu tab.</p>
-          <Button variant="secondary" size="sm" href={routes.onboardingProfile} style={{ alignSelf: "flex-start" }}>
-            Edit beauty profile
-          </Button>
-        </section>
-
-        <SectionDivider />
-        <section className="stack sm">
-          <SectionHeader title="Install app" />
-          <p className="t-caption">Save MYSEOULDROP to your phone or desktop for an app-like, full-screen experience.</p>
-          <PwaInstallControl />
-        </section>
-
-        <SectionDivider />
-        <section className="stack sm">
-          <SectionHeader title="Appearance" />
-          <ThemeToggle />
-        </section>
-
-        <SectionDivider />
-        <section className="stack sm">
-          <SectionHeader title="Phone verification" />
-          <p className="t-caption">Optional — keeps your account recoverable and ready for bookings.</p>
-          <PhoneVerify />
-        </section>
-
-        <SectionDivider />
-        <section className="stack sm">
-          <SectionHeader title="Data & privacy" />
-          <AccountDataControls />
-        </section>
-
-        <SectionDivider />
-        <section className="stack sm">
-          <SectionHeader title="About" />
-          <div>
-            <Link className="listrow v2" href={routes.legalTerms}>
-              <span className="ic"><Icon name="lock" size="sm" /></span>
-              <b className="t-label-md" style={{ fontSize: 14, flex: 1, minWidth: 0 }}>Terms of Service</b>
-              <Icon name="chev" size="xs" className="chev" />
-            </Link>
-            <Link className="listrow v2" href={routes.legalPrivacy}>
-              <span className="ic"><Icon name="lock" size="sm" /></span>
-              <b className="t-label-md" style={{ fontSize: 14, flex: 1, minWidth: 0 }}>Privacy Policy</b>
-              <Icon name="chev" size="xs" className="chev" />
-            </Link>
-            <FeedbackLauncher className="listrow v2" style={{ width: "100%" }}>
-              <span className="ic"><Icon name="ext" size="sm" /></span>
-              <b className="t-label-md" style={{ fontSize: 14, flex: 1, minWidth: 0, textAlign: "left" }}>Send feedback</b>
-              <Icon name="chev" size="xs" className="chev" />
-            </FeedbackLauncher>
+      <div className="app-scroll pad stack pagev2 settings-hub">
+        <section className="settings-group">
+          <SectionHeader title="Personal" />
+          <div className="settings-group-list">
+            <SettingsRow icon="user" title="Account" href={routes.settingsAccount} />
+            <SettingsRow icon="spa" title="Beauty profile" value="Skin & hair" href={routes.onboardingProfile} />
           </div>
         </section>
 
-        <div className="stack sm">
-          <Button variant="secondary" href="/login?switch=1">
-            Log in with a different account
-          </Button>
-          <SignoutModal />
-        </div>
+        <section className="settings-group">
+          <SectionHeader title="App" />
+          <div className="settings-group-list">
+            <SettingsRow icon="mark" title="App preferences" value="Install, location, theme" href={routes.settingsApp} />
+          </div>
+        </section>
+
+        <section className="settings-group">
+          <SectionHeader title="Privacy & support" />
+          <div className="settings-group-list">
+            <SettingsRow icon="lock" title="Privacy & data" href={routes.settingsPrivacy} />
+            <SettingsRow icon="cross" title="Help & support" href={routes.support} />
+          </div>
+        </section>
       </div>
       <BottomNav active="menu" />
     </>

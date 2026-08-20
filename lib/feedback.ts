@@ -9,6 +9,7 @@
 import { supabaseBrowser } from "./supabase/client";
 
 export type FeedbackCategory = "bug" | "idea" | "place" | "other";
+export type FeedbackMetadata = Record<string, string>;
 
 export type FeedbackEntry = {
   id: string;
@@ -17,6 +18,8 @@ export type FeedbackEntry = {
   /** Route the sheet was opened from (auto-attached). */
   page: string;
   contactOk: boolean;
+  /** Queryable context for operational queues (for example place fixes). */
+  metadata?: FeedbackMetadata;
   createdAt: number; // epoch ms (Date.now in the submit handler)
   /** Who wrote it, captured at write time — a queued note is never later
       attributed to whichever different user happens to be signed in. */
@@ -51,6 +54,14 @@ function saveQueue(entries: FeedbackEntry[]): boolean {
   }
 }
 
+function isMissingMetadataColumn(error: unknown): boolean {
+  if (!error || typeof error !== "object") return false;
+  const value = error as { code?: unknown; message?: unknown };
+  const code = typeof value.code === "string" ? value.code : "";
+  const message = typeof value.message === "string" ? value.message.toLowerCase() : "";
+  return code === "PGRST204" || code === "42703" || (message.includes("metadata") && message.includes("column"));
+}
+
 async function insertEntries(entries: FeedbackEntry[], currentUid: string | null): Promise<boolean> {
   const supabase = supabaseBrowser();
   const rows = entries.map((e) => ({
@@ -61,9 +72,24 @@ async function insertEntries(entries: FeedbackEntry[], currentUid: string | null
     message: e.message.slice(0, 2000),
     contact_ok: e.contactOk,
     page: e.page.slice(0, 300),
+    metadata: e.metadata ?? {},
   }));
   const { error } = await supabase.from("feedback").insert(rows);
-  return !error;
+  if (!error) return true;
+  if (!isMissingMetadataColumn(error)) return false;
+
+  // A Vercel deploy can reach users before the database migration finishes
+  // propagating through PostgREST's schema cache. Keep the original message
+  // (which already embeds the correction context) writable during that window.
+  const legacyRows = entries.map((e) => ({
+    user_id: e.userId && e.userId === currentUid ? e.userId : null,
+    category: e.category,
+    message: e.message.slice(0, 2000),
+    contact_ok: e.contactOk,
+    page: e.page.slice(0, 300),
+  }));
+  const { error: legacyError } = await supabase.from("feedback").insert(legacyRows);
+  return !legacyError;
 }
 
 export type FeedbackResult = "sent" | "queued" | "lost";
@@ -74,6 +100,7 @@ export async function submitFeedback(input: {
   message: string;
   contactOk: boolean;
   page: string;
+  metadata?: FeedbackMetadata;
 }): Promise<FeedbackResult> {
   const supabase = supabaseBrowser();
   const uid = await supabase.auth.getUser().then(({ data }) => data.user?.id ?? null).catch(() => null);

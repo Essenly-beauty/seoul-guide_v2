@@ -38,7 +38,7 @@ describe("production progressive sign-up", () => {
 
   it("keeps beauty details out of onboarding but available from My after signup", () => {
     expect(menu).toContain("href: routes.onboardingProfile");
-    expect(beautyProfile).toContain("<ProfileCard />");
+    expect(beautyProfile).toContain("<BeautyProfileEditor />");
     expect(beautyProfile).not.toContain("Step 3 of 3");
   });
 });

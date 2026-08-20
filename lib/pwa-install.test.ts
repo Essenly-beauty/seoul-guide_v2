@@ -28,7 +28,8 @@ describe("installable PWA contract", () => {
   });
 
   it("offers the same install destination from the app and a shareable download page", () => {
-    expect(source("app/settings/page.tsx")).toContain("<PwaInstallControl />");
+    expect(source("app/settings/page.tsx")).toContain("href={routes.settingsApp}");
+    expect(source("app/settings/app/page.tsx")).toContain("<PwaInstallControl />");
     expect(source("components/ui/hamburger-menu.tsx")).toContain("href: routes.download");
     const download = source("app/download/page.tsx");
     expect(download).toContain("Install MYSEOULDROP");

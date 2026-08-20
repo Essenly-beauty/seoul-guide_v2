@@ -14,12 +14,17 @@ export default function ResetPasswordPage() {
   const router = useRouter();
   const [reveal, setReveal] = useState(false);
   const [pw, setPw] = useState("");
+  const [confirmPw, setConfirmPw] = useState("");
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
   const submit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (busy) return;
+    if (pw !== confirmPw) {
+      setError("Passwords don't match — check both fields.");
+      return;
+    }
     setBusy(true);
     setError(null);
     const supabase = supabaseBrowser();
@@ -74,6 +79,19 @@ export default function ResetPasswordPage() {
               <EyeGlyph off={!reveal} />
             </button>
           </div>
+          <input
+            className="auth-field"
+            type={reveal ? "text" : "password"}
+            autoComplete="new-password"
+            placeholder="Confirm new password"
+            aria-label="Confirm new password"
+            aria-invalid={Boolean(error && error.includes("match"))}
+            aria-describedby={error ? "reset-error" : undefined}
+            required
+            minLength={6}
+            value={confirmPw}
+            onChange={(e) => setConfirmPw(e.target.value)}
+          />
         </div>
         {error && <p id="reset-error" className="auth-error" role="alert">{error}</p>}
         <button className="auth-cta" type="submit" disabled={busy}>

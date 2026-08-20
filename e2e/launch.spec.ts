@@ -17,7 +17,7 @@ test.beforeAll(async ({ request, baseURL }) => {
   if (admin) uid = await ensureUser(admin, EMAIL, PASS);
   // warm the dev server's on-demand compiler so expect timeouts measure the
   // app, not the toolchain
-  for (const p of ["/login", "/map", "/menu", "/favorites", "/settings", "/place/juno-hair-gangnam"]) {
+  for (const p of ["/login", "/map", "/menu", "/favorites", "/settings", "/settings/account", "/settings/app", "/place/juno-hair-gangnam"]) {
     await request.get(`${baseURL}${p}`).catch(() => {});
   }
 });
@@ -122,7 +122,7 @@ test.describe("direct auth + account sync", () => {
     await login(page);
     await page.goto("/place/juno-hair-gangnam");
     await page.getByRole("button", { name: "Add to favorites" }).first().click();
-    await page.goto("/settings");
+    await page.goto("/settings/account");
     await page.getByRole("button", { name: "Sign Out" }).first().click();
     await page.locator(".modal").getByRole("button", { name: "Sign Out" }).click();
     await page.waitForURL((u) => u.pathname === "/", { timeout: 20_000 });

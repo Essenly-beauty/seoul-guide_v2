@@ -16,7 +16,7 @@ describe("statusLabel", () => {
   const hours = { open: "10:00", close: "21:00" };
   it("open label", () => expect(statusLabel(hours, at(12))).toBe("Open until 21:00"));
   it("closed label", () => expect(statusLabel(hours, at(22))).toBe("Closed · opens 10:00"));
-  it("empty without hours", () => expect(statusLabel(undefined, at(12))).toBe(""));
+  it("names the unknown-hours state", () => expect(statusLabel(undefined, at(12))).toBe("Hours unknown"));
 });
 
 const base: Place = {

@@ -1,18 +1,15 @@
 "use client";
 
-import { useCallback, useEffect, useId, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { preconnect } from "react-dom";
-import Link from "next/link";
-import { Circle, MapContainer, Polyline, TileLayer, Marker, Popup, useMapEvents } from "react-leaflet";
+import { Circle, MapContainer, Polyline, TileLayer, Marker, useMap, useMapEvents } from "react-leaflet";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
-import { CategoryBadge } from "@/components/category/category-badge";
 import { Icon } from "@/components/icon";
 import { TYPE_ICON, TYPE_LABEL, zoneShort, type Place } from "@/lib/data";
-import { formatDistance, googleDirectionsUrl, haversineKm, walkMinutes, type LatLng } from "@/lib/geo";
+import { haversineKm, type LatLng } from "@/lib/geo";
 import { visibleMapAnchor } from "@/lib/map-camera";
 import { useTheme } from "@/components/theme/theme-provider";
-import { routes } from "@/lib/routes";
 import { LINE_META, STATIONS, stationExits } from "@/lib/subway";
 
 export type MapViewProps = {
@@ -21,6 +18,8 @@ export type MapViewProps = {
   selectedId: string | null;
   onSelect: (id: string | null) => void;
   userLoc: LatLng | null;
+  /** Device heading in degrees clockwise from north, when available. */
+  userHeading?: number | null;
   /** When set (e.g. locate FAB), the map animates to this point. */
   flyTarget: LatLng | null;
   /** Portion of the canvas covered by a bottom controller. */
@@ -31,8 +30,6 @@ export type MapViewProps = {
   focusZoom?: number;
   /** Vertical anchor bias within the visible band (0.5 center, >0.5 lower). */
   focusYBias?: number;
-  /** Large selected-place callout is reserved for the unconstrained map view. */
-  showSelectedCallout?: boolean;
   /** Fires on user-initiated pan/zoom — parent shows "Search this area". */
   onUserMove: () => void;
   /** Parent receives a bounds getter for area re-search. */
@@ -183,7 +180,7 @@ function stationIcon(id: string, labelled: boolean) {
   const st = STATIONS[id];
   // Kakao-style: light disc ringed and numbered in the line color; the
   // station name hangs beneath in the (first) line's color.
-  const discs = st.lines.slice(0, 2).map((line) =>
+  const discs = st.lines.slice(0, 3).map((line) =>
     `<span class="station-disc" style="border-color:${LINE_META[line].color};color:${LINE_META[line].color}">${LINE_META[line].shortLabel}</span>`,
   ).join("");
   const nameColor = LINE_META[st.lines[0]].color;
@@ -210,11 +207,26 @@ function exitIcon(no: number) {
 }
 
 /** Red current-location marker (§3.2 — red is a confirmed decision). */
-const meIcon = L.divIcon({
-  className: "map-anchor",
-  html: '<div class="pin-me"></div>',
-  iconSize: [14, 14],
-});
+const meIconCache = new Map<string, L.DivIcon>();
+function meIconForHeading(heading: number | null | undefined) {
+  const normalized = typeof heading === "number" && Number.isFinite(heading)
+    ? ((heading % 360) + 360) % 360
+    : null;
+  const key = normalized === null ? "unknown" : String(Math.round(normalized));
+  const hit = meIconCache.get(key);
+  if (hit) return hit;
+  const arrow = normalized === null
+    ? ""
+    : `<span class="pin-me-arrow" style="transform:rotate(${normalized}deg)" aria-hidden="true"></span>`;
+  const icon = L.divIcon({
+    className: "map-anchor",
+    html: `<div class="pin-me">${arrow}</div>`,
+    iconSize: [24, 24],
+    iconAnchor: [12, 12],
+  });
+  meIconCache.set(key, icon);
+  return icon;
+}
 
 function mapTopInset(map: L.Map) {
   const container = map.getContainer();
@@ -235,6 +247,86 @@ function mapBottomInset(map: L.Map, fallback: number) {
   if (!overlay) return fallback;
   const overlayTop = overlay.getBoundingClientRect().top;
   return Math.max(0, Math.min(mapRect.height, mapRect.bottom - overlayTop));
+}
+
+function touchAngle(touches: TouchList) {
+  const a = touches[0];
+  const b = touches[1];
+  return Math.atan2(b.clientY - a.clientY, b.clientX - a.clientX) * (180 / Math.PI);
+}
+
+function shortestAngleDelta(next: number, start: number) {
+  return ((next - start + 540) % 360) - 180;
+}
+
+function MapRotationWiring({ bearing, onBearingChange }: { bearing: number; onBearingChange: (bearing: number) => void }) {
+  const map = useMap();
+  const bearingRef = useRef(bearing);
+  useEffect(() => { bearingRef.current = bearing; }, [bearing]);
+
+  useEffect(() => {
+    const container = map.getContainer();
+    const pane = map.getPane("mapPane");
+    if (!pane) return;
+    const gesture = { startAngle: 0, startBearing: 0, active: false };
+    const apply = (next: number) => {
+      const normalized = ((next % 360) + 360) % 360;
+      bearingRef.current = normalized;
+      pane.style.rotate = normalized === 0 ? "" : `${normalized}deg`;
+    };
+    const onTouchStart = (event: TouchEvent) => {
+      if (event.touches.length !== 2) return;
+      gesture.startAngle = touchAngle(event.touches);
+      gesture.startBearing = bearingRef.current;
+      gesture.active = true;
+    };
+    const onTouchMove = (event: TouchEvent) => {
+      if (!gesture.active || event.touches.length !== 2) return;
+      event.preventDefault();
+      apply(gesture.startBearing + shortestAngleDelta(touchAngle(event.touches), gesture.startAngle));
+    };
+    const onTouchEnd = (event: TouchEvent) => {
+      if (!gesture.active || event.touches.length >= 2) return;
+      gesture.active = false;
+      onBearingChange(bearingRef.current);
+    };
+    container.addEventListener("touchstart", onTouchStart, { passive: false });
+    container.addEventListener("touchmove", onTouchMove, { passive: false });
+    container.addEventListener("touchend", onTouchEnd, { passive: true });
+    container.addEventListener("touchcancel", onTouchEnd, { passive: true });
+    return () => {
+      container.removeEventListener("touchstart", onTouchStart);
+      container.removeEventListener("touchmove", onTouchMove);
+      container.removeEventListener("touchend", onTouchEnd);
+      container.removeEventListener("touchcancel", onTouchEnd);
+      pane.style.rotate = "";
+    };
+  }, [map, onBearingChange]);
+
+  useEffect(() => {
+    const pane = map.getPane("mapPane");
+    if (pane) pane.style.rotate = bearing === 0 ? "" : `${bearing}deg`;
+  }, [bearing, map]);
+  return null;
+}
+
+function MapRotationReset({ bearing, onReset }: { bearing: number; onReset: () => void }) {
+  if (Math.abs(bearing) < 0.5) return null;
+  return (
+    <button
+      type="button"
+      className="map-rotation-reset"
+      aria-label="Reset map rotation"
+      title="Reset map rotation"
+      style={{ transform: `rotate(${-bearing}deg)` }}
+      onClick={(event) => {
+        event.stopPropagation();
+        onReset();
+      }}
+    >
+      <span aria-hidden="true">N</span>
+    </button>
+  );
 }
 
 function MapWiring({ flyTarget, bottomInsetRatio = 0, bottomInsetPx, focusZoom, focusYBias = 0.5, onUserMove, getBounds, onZoom, onMap, onView, onBlankTap }: Pick<MapViewProps, "flyTarget" | "bottomInsetRatio" | "bottomInsetPx" | "focusZoom" | "focusYBias" | "onUserMove" | "getBounds"> & {
@@ -346,102 +438,19 @@ function labelMarker(marker: L.Marker, label: string, selected?: boolean) {
   else element.setAttribute("aria-pressed", String(selected));
 }
 
-function SelectedPlaceCallout({ place, userLoc, onDismiss }: {
-  place: Place;
-  userLoc: LatLng | null;
-  onDismiss: () => void;
-}) {
-  const closeRef = useRef<HTMLButtonElement>(null);
-  const headingId = useId();
-  const distanceKm = userLoc ? haversineKm(userLoc, place) : null;
-  const stationText = place.stationWalk
-    ? `${place.stationWalk.minutes} min from ${place.stationWalk.station}${place.stationWalk.exit ? ` Exit ${place.stationWalk.exit}` : ""}`
-    : place.address;
-
-  useEffect(() => {
-    const frame = window.requestAnimationFrame(() => {
-      closeRef.current?.focus({ preventScroll: true });
-    });
-    return () => window.cancelAnimationFrame(frame);
-  }, [place.id]);
-
-  useEffect(() => {
-    const closeOnEscape = (event: KeyboardEvent) => {
-      if (event.key !== "Escape") return;
-      if (document.querySelector('[role="dialog"][aria-modal="true"]')) return;
-      onDismiss();
-    };
-    document.addEventListener("keydown", closeOnEscape, true);
-    return () => document.removeEventListener("keydown", closeOnEscape, true);
-  }, [onDismiss]);
-
-  return (
-    <Popup
-      position={place}
-      offset={L.point(0, -32)}
-      className="map-place-popup"
-      minWidth={286}
-      maxWidth={340}
-      closeButton={false}
-      closeOnClick={false}
-      closeOnEscapeKey={false}
-      autoClose={false}
-      autoPan={false}
-    >
-      <article className="map-place-callout" aria-labelledby={headingId}>
-        <button
-          ref={closeRef}
-          className="map-place-callout-close"
-          type="button"
-          aria-label={`Close ${place.name} preview`}
-          onClick={onDismiss}
-        >
-          <Icon name="x" size="xs" />
-        </button>
-        <div className="map-place-callout-main">
-          <div className="map-place-callout-media">
-            <CategoryBadge type={place.type} size={38} />
-            <span>{TYPE_LABEL[place.type]}</span>
-          </div>
-          <div className="map-place-callout-copy">
-            <span className="map-place-callout-kicker">{TYPE_LABEL[place.type]} · {zoneShort(place.zone)}</span>
-            <h2 id={headingId}>{place.name}</h2>
-            <p>{stationText}</p>
-            <div className="map-place-callout-meta">
-              {place.rating && <b aria-label={`${place.rating} out of 5 stars`}>★ {place.rating}</b>}
-              {distanceKm !== null && (
-                <span>{formatDistance(distanceKm)} · ~{walkMinutes(distanceKm)} min walk</span>
-              )}
-              {place.englishOk && <span>English OK</span>}
-            </div>
-          </div>
-        </div>
-        <div className="map-place-callout-actions">
-          <a
-            className="map-place-callout-action secondary"
-            href={googleDirectionsUrl(place, userLoc, "walking")}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Icon name="ext" size="xs" /> Directions
-          </a>
-          <Link className="map-place-callout-action primary" href={routes.place(place.id)}>
-            View details <Icon name="chev" size="xs" />
-          </Link>
-        </div>
-      </article>
-    </Popup>
-  );
-}
-
-export default function MapView({ center, places, selectedId, onSelect, userLoc, flyTarget, bottomInsetRatio, bottomInsetPx, focusZoom, focusYBias, showSelectedCallout = false, onUserMove, getBounds, radiusCircle, routePath, vividPins = false, onStationClick }: MapViewProps) {
+export default function MapView({ center, places, selectedId, onSelect, userLoc, userHeading, flyTarget, bottomInsetRatio, bottomInsetPx, focusZoom, focusYBias, onUserMove, getBounds, radiusCircle, routePath, vividPins = false, onStationClick }: MapViewProps) {
   // Warm the tile CDN's TLS handshake before Leaflet asks for the first
   // tile — the tiles are the page's LCP element (React 19 dedupes these).
   for (const s of ["a", "b", "c", "d"]) preconnect(`https://${s}.basemaps.cartocdn.com`);
   const [zoom, setZoom] = useState(INITIAL_ZOOM);
+  const [bearing, setBearing] = useState(0);
+  // The current CSS proof-of-concept rotates Leaflet's rendered pane but not
+  // Leaflet's interaction coordinate system. Keep it opt-in until a
+  // rotation-aware map engine is wired and touch-regression tested.
+  const rotationEnabled = process.env.NEXT_PUBLIC_ENABLE_EXPERIMENTAL_MAP_ROTATION === "1";
   const { theme } = useTheme();
   const mapRef = useRef<L.Map | null>(null);
-  const selectedPlace = selectedId ? places.find((place) => place.id === selectedId) ?? null : null;
+  const meIcon = useMemo(() => meIconForHeading(userHeading), [userHeading]);
 
   // §4.2 Z ≤ 13: bucket into a lat/lng grid; cells with ≥5 places collapse into
   // one cluster pin. The selected place never clusters — it must stay a badge.
@@ -602,6 +611,12 @@ export default function MapView({ center, places, selectedId, onSelect, userLoc,
         onView={handleView}
         onBlankTap={() => { if (selectedId) onSelect(null); }}
       />
+      {rotationEnabled && (
+        <>
+          <MapRotationWiring bearing={bearing} onBearingChange={setBearing} />
+          <MapRotationReset bearing={bearing} onReset={() => setBearing(0)} />
+        </>
+      )}
       {/* Wayfinding path — the route's stations joined in the brand orange. */}
       {routePath && routePath.length >= 2 && (
         <Polyline
@@ -662,14 +677,6 @@ export default function MapView({ center, places, selectedId, onSelect, userLoc,
         />
       ))}
       {markers}
-      {showSelectedCallout && selectedPlace && (
-        <SelectedPlaceCallout
-          key={selectedPlace.id}
-          place={selectedPlace}
-          userLoc={userLoc}
-          onDismiss={() => onSelect(null)}
-        />
-      )}
       {clusters.map((c) => (
         <Marker
           key={`cluster-${c.lat.toFixed(4)}-${c.lng.toFixed(4)}-${c.count}`}

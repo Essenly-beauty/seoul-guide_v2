@@ -234,30 +234,28 @@ export function RegisterClient({ next }: { next?: string }) {
           </select>
         </div>
 
-        <div className="stack" style={{ gap: 10, marginTop: 16 }}>
-          <label className="row caption" style={{ gap: 10, alignItems: "flex-start", cursor: "pointer" }}>
+        <div className="stack auth-consents" style={{ gap: 10, marginTop: 16 }}>
+          <label className="auth-consent caption">
             <input
               type="checkbox"
               required
               checked={consent}
               onChange={(e) => setConsent(e.target.checked)}
               aria-label="Agree to the Terms and Privacy Policy"
-              style={{ marginTop: 2, width: 16, height: 16, accentColor: "var(--accent)" }}
             />
             <span style={{ flex: 1 }}>
               I agree to the <Link className="auth-link" href={routes.legalTerms}>Terms of Service</Link> and{" "}
               <Link className="auth-link" href={routes.legalPrivacy}>Privacy Policy</Link>. (required)
             </span>
           </label>
-          <label className="row caption muted" style={{ gap: 10, alignItems: "flex-start", cursor: "pointer" }}>
+          <label className="auth-consent caption muted">
             <input
               type="checkbox"
               checked={marketing}
               onChange={(e) => setMarketing(e.target.checked)}
               aria-label="Receive tips and updates by email"
-              style={{ marginTop: 2, width: 16, height: 16, accentColor: "var(--accent)" }}
             />
-            <span style={{ flex: 1 }}>Send me Seoul beauty tips and app updates. (optional)</span>
+            <span>Send me Seoul beauty tips and app updates. (optional)</span>
           </label>
         </div>
 

@@ -1,19 +1,21 @@
 "use client";
 
-import { useEffect, useRef, useState, type ReactNode } from "react";
+import { useEffect, useId, useRef, useState, type ReactNode } from "react";
+import { createPortal } from "react-dom";
 import Link from "next/link";
 import { Icon } from "@/components/icon";
 import { ProductShareButton } from "@/components/product/product-share-button";
-import { ActionButton } from "@/components/ui/action-button";
 import { AnchorTabs } from "@/components/ui/anchor-tabs";
 import { BackButton } from "@/components/ui/back-button";
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import { Chip } from "@/components/ui/chip";
 import { FavoriteButton } from "@/components/ui/favorite-button";
 import { ImgPh } from "@/components/ui/img-ph";
 import { Notice } from "@/components/ui/notice";
 import { SectionDivider } from "@/components/ui/section-divider";
 import { SectionHeader } from "@/components/ui/section-header";
+import { useDialogFocus } from "@/components/ui/use-dialog-focus";
 import { routes } from "@/lib/routes";
 import {
   CHANNEL_LABEL,
@@ -84,6 +86,80 @@ function ProductTitleBlock({ product }: { product: Product }) {
   );
 }
 
+function StoreStaffCard({ product }: { product: Product }) {
+  const [open, setOpen] = useState(false);
+  const [host, setHost] = useState<Element | null>(null);
+  const titleId = useId();
+  const closeRef = useRef<HTMLButtonElement>(null);
+  const dialogRef = useDialogFocus<HTMLDivElement>(open, () => setOpen(false), closeRef);
+
+  useEffect(() => {
+    setHost(document.querySelector(".app-shell"));
+  }, []);
+
+  return (
+    <>
+      <button
+        type="button"
+        className="inforow product-detail-copy-row"
+        aria-haspopup="dialog"
+        aria-expanded={open}
+        aria-controls={open ? titleId : undefined}
+        onClick={() => setOpen(true)}
+      >
+        <Icon name="bag" size="xs" />
+        <span className="product-detail-copy-text" style={{ minWidth: 0 }}>
+          <b>{product.nameKr}</b>
+          <span className="caption muted">Show this product to store staff.</span>
+        </span>
+        <span className="small chev product-detail-copy">Show</span>
+      </button>
+
+      {open && host && createPortal(
+        <div className="modal" onClick={(event) => event.target === event.currentTarget && setOpen(false)}>
+          <div
+            ref={dialogRef}
+            className="box product-staff-modal"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby={titleId}
+            tabIndex={-1}
+          >
+            <div className="product-staff-modal-visual">
+              {product.imageUrl ? (
+                // URLs are data-driven and may be local or externally verified, so the
+                // browser image path is intentionally used instead of Next image optimization.
+                // eslint-disable-next-line @next/next/no-img-element
+                <img src={product.imageUrl} alt={`${product.brand} ${product.name}`} />
+              ) : (
+                <div
+                  className="product-staff-modal-placeholder"
+                  role="img"
+                  aria-label={`${product.brand} ${product.name} image not available`}
+                >
+                  <Icon name="bag" style={{ width: 48, height: 48 }} aria-hidden="true" />
+                  <span className="label">{product.brand}</span>
+                  <span className="caption muted">Product image coming soon</span>
+                </div>
+              )}
+            </div>
+            <div className="product-staff-modal-copy-block">
+              <div className="product-staff-modal-kicker">직원에게 이 화면을 보여주세요</div>
+              <div className="caption muted">Show this screen to store staff</div>
+              <h2 id={titleId} className="product-staff-modal-question">
+                {product.nameKr} 위치를 안내해 주세요.
+              </h2>
+              <p className="product-staff-modal-meta">{product.brand} · {product.name}</p>
+            </div>
+            <Button buttonRef={closeRef} full onClick={() => setOpen(false)}>Close</Button>
+          </div>
+        </div>,
+        host,
+      )}
+    </>
+  );
+}
+
 function OverviewSection({ product }: { product: Product }) {
   const matchBits = [
     product.skinTypes[0] && `${product.skinTypes[0].toLowerCase()} skin`,
@@ -98,23 +174,7 @@ function OverviewSection({ product }: { product: Product }) {
           Matches your {matchBits.join(" + ")} concerns.
         </Notice>
       )}
-      <ActionButton
-        className="inforow product-detail-copy-row"
-        copy={product.nameKr}
-        aria-label="Copy Korean product name"
-      >
-        <Icon name="bag" size="xs" />
-        <span className="product-detail-copy-text" style={{ minWidth: 0 }}>
-          <b>{product.nameKr}</b>
-          <span className="caption muted">Show this name to store staff.</span>
-        </span>
-        <span
-          className="small chev product-detail-copy"
-          style={{ color: "var(--accent)", fontWeight: 700 }}
-        >
-          Copy
-        </span>
-      </ActionButton>
+      <StoreStaffCard product={product} />
       <div className="inforow">
         <Icon name="bag" size="xs" />
         <span>{CHANNEL_LABEL[product.channel]}</span>

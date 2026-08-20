@@ -11,7 +11,8 @@ import { EmptyState } from "@/components/ui/empty-state";
 import { SearchField } from "@/components/ui/search-field";
 import { SectionHeader } from "@/components/ui/section-header";
 import { SectionDivider } from "@/components/ui/section-divider";
-import { BrandMark } from "@/components/brand/brand-logo";
+import { TopBar } from "@/components/ui/top-bar";
+import { BrandIcon } from "@/components/brand/brand-icon";
 import { Icon } from "@/components/icon";
 import { routes } from "@/lib/routes";
 import { PRODUCTS, SHOP_CATEGORIES, brandSlug, type Product, type ProductCategory } from "@/lib/data";
@@ -131,7 +132,7 @@ function BrandsPanel() {
         <div>
           {brands.map(([brand, count]) => (
             <Link key={brand} className="listrow" href={routes.brand(brandSlug(brand))}>
-              <span className="ic"><b>{brand[0]}</b></span>
+              <BrandIcon brand={brand} />
               <div style={{ flex: 1, minWidth: 0 }}>
                 <b style={{ display: "block", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{brand}</b>
                 <div className="caption muted">{count} product{count === 1 ? "" : "s"}</div>
@@ -171,14 +172,7 @@ export default function RankingPage() {
 
   return (
     <>
-      <div className="topbar center">
-        <span aria-hidden="true" style={{ width: 44 }} />
-        <span className="row" style={{ flex: 1, gap: 8, justifyContent: "center" }}>
-          <BrandMark size={20} />
-          <span className="title" style={{ flex: "none" }}>Ranking</span>
-        </span>
-        <span aria-hidden="true" style={{ width: 44 }} />
-      </div>
+      <TopBar center title="Ranking" />
 
       <div className="app-scroll pad stack pagev2">
         <div className="chiprow" role="tablist" aria-label="Ranking type">

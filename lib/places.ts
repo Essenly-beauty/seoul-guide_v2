@@ -18,7 +18,7 @@ export function placeStatus(hours: Place["hours"], now: Date = new Date()): Plac
 
 export function statusLabel(hours: Place["hours"], now: Date = new Date()): string {
   const s = placeStatus(hours, now);
-  if (s === "unknown" || !hours) return "";
+  if (s === "unknown" || !hours) return "Hours unknown";
   return s === "open" ? `Open until ${hours.close}` : `Closed · opens ${hours.open}`;
 }
 

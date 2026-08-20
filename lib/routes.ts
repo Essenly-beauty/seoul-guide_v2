@@ -18,6 +18,7 @@ export const routes = {
   ranking: "/ranking",
   blog: "/blog",
   favorites: "/favorites",
+  savedPlacesMap: "/map?saved=1",
   menu: "/menu",
 
   // Legacy aliases (redirect pages keep old deep links alive)
@@ -40,9 +41,16 @@ export const routes = {
 
   // Menu-only screens
   reviews: "/mypage/reviews",
+  review: (id: string) => `/mypage/reviews/${id}`,
+  reviewEdit: (id: string) => `/mypage/reviews/${id}/edit`,
   reviewNew: "/mypage/reviews/new",
   notifications: "/mypage/notifications",
   settings: "/settings",
+  settingsAccount: "/settings/account",
+  settingsName: "/settings/account/name",
+  settingsEmail: "/settings/account/email",
+  settingsApp: "/settings/app",
+  settingsPrivacy: "/settings/privacy",
   support: "/support",
   legalTerms: "/legal/terms",
   legalPrivacy: "/legal/privacy",

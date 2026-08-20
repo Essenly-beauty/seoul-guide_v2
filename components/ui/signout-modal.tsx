@@ -4,22 +4,28 @@ import { useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { routes } from "@/lib/routes";
 import { Button } from "@/components/ui/button";
+import { Icon } from "@/components/icon";
 import { supabaseBrowser } from "@/lib/supabase/client";
 import { purgeFavoritesMirror } from "@/lib/favorites";
 import { purgeProfileMirror } from "@/lib/profile";
 import { purgeRatingsMirror } from "@/lib/ratings";
 import { useDialogFocus } from "@/components/ui/use-dialog-focus";
 
-export function SignoutModal({ compact = false }: { compact?: boolean }) {
+export function SignoutModal({ menuRow = false }: { menuRow?: boolean }) {
   const [open, setOpen] = useState(false);
   const cancelRef = useRef<HTMLButtonElement>(null);
   const dialogRef = useDialogFocus<HTMLDivElement>(open, () => setOpen(false), cancelRef);
   const router = useRouter();
   return (
     <>
-      <Button variant="danger" size={compact ? "sm" : "md"} icon={compact ? "door" : undefined} onClick={() => setOpen(true)}>
-        {compact ? "Sign out" : "Sign Out"}
-      </Button>
+      {menuRow ? (
+        <button type="button" className="inforow signout-menu-row" onClick={() => setOpen(true)}>
+          <Icon name="door" size="xs" />
+          <span>Sign out</span>
+        </button>
+      ) : (
+        <Button variant="danger" onClick={() => setOpen(true)}>Sign Out</Button>
+      )}
       {open && (
         <div className="modal" onClick={(e) => e.target === e.currentTarget && setOpen(false)}>
           <div

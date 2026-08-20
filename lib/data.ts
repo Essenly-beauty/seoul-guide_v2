@@ -162,6 +162,8 @@ export type Place = {
   // Creatrip import extras — kept so the CSV round-trips losslessly.
   priceFromUsd?: number;
   url?: string;
+  /** Optional verified storefront image; the map preview stays honest when absent. */
+  photoUrl?: string;
   geoSource?: "address" | "area"; // "area" = neighborhood-centroid fallback, pin is approximate
   // "A drop of Seoul" import — editorial descriptions shown on the detail page.
   about?: string;
@@ -249,6 +251,8 @@ export type Product = {
   brand: string;
   name: string;
   nameKr: string;
+  /** Optional verified product image. Local public paths are preferred. */
+  imageUrl?: string;
   category: ProductCategory;
   stepCategory?: StepCategory;
   channel: ProductChannel;

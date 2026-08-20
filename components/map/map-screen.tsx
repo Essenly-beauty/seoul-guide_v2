@@ -79,7 +79,7 @@ export function MapScreen() {
   const [filters, setFilters] = useState<MapFilters>(EMPTY_FILTERS);
   const [filterOpen, setFilterOpen] = useState(false);
   const [selectedId, setSelectedId] = useState<string | null>(null);
-  const { loc, status, retry } = useLocation();
+  const { loc, status, heading, retry, requestHeading } = useLocation();
   const [flyTarget, setFlyTarget] = useState<LatLng | null>(null);
   // Location-off banner is feedback for the locate FAB only — it must never
   // greet people on entry (user report 2026-08-16). Starts dismissed; the
@@ -119,6 +119,8 @@ export function MapScreen() {
   const { toast } = useToast();
   const deepLinkedPlace = searchParams.get("place");
   const listParam = searchParams.get("list");
+  const savedParam = searchParams.get("saved");
+  const savedOnly = favOnly || savedParam === "1";
 
   // Shared favorite list `/map?list={uuid}` (user request 2026-08-16):
   // narrow the map to the shared pins with a banner naming the list.
@@ -152,6 +154,20 @@ export function MapScreen() {
       lng: pts.reduce((s, p) => s + p.lng, 0) / pts.length,
     });
   }, [sharedList]);
+
+  // `/map?saved=1` is the Saved tab's scoped "See all" destination. Center
+  // the camera on those places and keep the URL as the source of truth so a
+  // reload never flashes the full catalog.
+  useEffect(() => {
+    if (savedParam !== "1" || sharedList) return;
+    initialLocationHandledRef.current = true;
+    const pts = favs.place.map((id) => getPlace(id)).filter((p): p is NonNullable<typeof p> => Boolean(p));
+    if (pts.length === 0) return;
+    setFlyTarget({
+      lat: pts.reduce((sum, place) => sum + place.lat, 0) / pts.length,
+      lng: pts.reduce((sum, place) => sum + place.lng, 0) / pts.length,
+    });
+  }, [favs.place, savedParam, sharedList]);
 
   const saveAllShared = useCallback(() => {
     if (!sharedList) return;
@@ -279,13 +295,13 @@ export function MapScreen() {
     if (sharedList) {
       const shared = new Set(sharedList.placeIds);
       list = list.filter((p) => shared.has(p.id));
-    } else if (favOnly) {
+    } else if (savedOnly) {
       const saved = new Set(favs.place);
       list = list.filter((p) => saved.has(p.id));
     }
     if (area) list = list.filter((p) => p.lat >= area.south && p.lat <= area.north && p.lng >= area.west && p.lng <= area.east);
     return list;
-  }, [activeStation, area, cats, favOnly, favs.place, filters, loc, mode, sharedList, stationCategory, stationRadius]);
+  }, [activeStation, area, cats, favs.place, filters, loc, mode, savedOnly, sharedList, stationCategory, stationRadius]);
 
   const nearbyStationId = useMemo(() => {
     if (!loc) return null;
@@ -337,8 +353,8 @@ export function MapScreen() {
     // from the station selected in the bottom controller.
     if (status !== "granted" || !loc || initialLocationHandledRef.current) return;
     initialLocationHandledRef.current = true;
-    if (mode === "map" && !deepLinkedPlace && !listParam) setFlyTarget(loc);
-  }, [status, loc, deepLinkedPlace, listParam, mode]);
+    if (mode === "map" && !deepLinkedPlace && !listParam && savedParam !== "1") setFlyTarget(loc);
+  }, [status, loc, deepLinkedPlace, listParam, mode, savedParam]);
 
   return (
     <div className={`map-screen${mode === "subway" ? ` subway-mode${subwayRouteReady ? " subway-route-ready" : ""}${subwayEditing ? " subway-editing" : ""}` : ""}`}>
@@ -348,18 +364,18 @@ export function MapScreen() {
         selectedId={selectedId}
         onSelect={handleMapSelect}
         userLoc={loc}
+        userHeading={heading}
         flyTarget={flyTarget}
         bottomInsetRatio={mode === "subway" ? subwayRouteReady ? SUBWAY_SNAP_INSET[subwaySnap] : 0.6 : 0}
         focusYBias={mode === "map" && selectedId ? 0.62 : 0.5}
         focusZoom={focusZoom}
-        showSelectedCallout={mode === "map"}
         onUserMove={() => { if (mode === "map") setMoved(true); }}
         getBounds={(fn) => { boundsGetter.current = fn; }}
         radiusCircle={mode === "subway" && activeStation
           ? { center: { lat: STATIONS[activeStation].lat, lng: STATIONS[activeStation].lng }, radiusKm: stationRadius }
           : null}
         routePath={mode === "subway" && subwayRouteReady && route && trackPath ? trackPath(route) : null}
-        vividPins={mode === "map" ? cats.length > 0 || Boolean(sharedList) : true /* station browse is a focused task */}
+        vividPins={mode === "map" ? cats.length > 0 || Boolean(sharedList) || savedOnly : true /* station browse is a focused task */}
         onStationClick={mode === "map" ? (id) => {
           // Tapping a station disc opens the subway browse with it preset as
           // departure — the editor's "Near {station}" list shows radius shops.
@@ -446,22 +462,27 @@ export function MapScreen() {
       {nudgeSheet}
       {mode === "map" && !sharedList && (
         <button
-          className={"map-fab map-fab-fav" + (favOnly ? " on" : "")}
-          aria-label={favOnly ? "Show all places" : "Show only my saved places"}
-          aria-pressed={favOnly}
+          className={"map-fab map-fab-fav" + (savedOnly ? " on" : "")}
+          aria-label={savedOnly ? "Show all places" : "Show only my saved places"}
+          aria-pressed={savedOnly}
           title="My saved places"
           onClick={() => {
             // guests with nothing saved would just see an empty map — show
             // the account nudge instead of a broken-looking layer
-            if (!favOnly && !authUser && favs.place.length === 0) {
+            if (!savedOnly && !authUser && favs.place.length === 0) {
               nudge("savedLayer");
               return;
             }
-            setFavOnly((v) => !v);
+            if (savedParam === "1") {
+              setFavOnly(false);
+              router.replace(routes.map);
+            } else {
+              setFavOnly((v) => !v);
+            }
             handleMapSelect(null);
           }}
         >
-          <Icon name={favOnly ? "heart" : "heart-o"} size="sm" />
+          <Icon name={savedOnly ? "heart" : "heart-o"} size="sm" />
         </button>
       )}
       {mode === "map" && (
@@ -470,7 +491,10 @@ export function MapScreen() {
           aria-label="Center on my location"
           onClick={() => {
             handleMapSelect(null);
-            if (loc) setFlyTarget({ ...loc });
+            if (loc) {
+              requestHeading();
+              setFlyTarget({ ...loc });
+            }
             else {
               setBannerDismissed(false);
               initialLocationHandledRef.current = false;
@@ -489,6 +513,7 @@ export function MapScreen() {
           selectedId={selectedId}
           onSelect={handleMapSelect}
           onClearSelection={() => handleMapSelect(null)}
+          moved={moved}
         />
       )}
 
@@ -571,9 +596,23 @@ export function MapScreen() {
         </div>
       )}
 
-      {mode === "map" && !sharedList && status === "fallback" && !bannerDismissed && (
+      {mode === "map" && !sharedList && savedParam === "1" && (
         <div className="map-banner" role="status">
-          <span className="small">Location is off — showing <b>Gangnam Station</b> as your starting point.</span>
+          <Icon name="heart" size="xs" style={{ color: "var(--accent)", flex: "none" }} aria-hidden="true" />
+          <span className="small" style={{ flex: 1, minWidth: 0 }}>
+            <b>Your saved places</b> · {favs.place.length} {favs.place.length === 1 ? "place" : "places"}
+          </span>
+          <IconButton name="x" label="Show all places" size={32} iconSize="xs" onClick={() => router.replace(routes.map)} />
+        </div>
+      )}
+
+      {mode === "map" && !sharedList && savedParam !== "1" && status === "fallback" && !bannerDismissed && (
+        <div className="map-banner" role="status">
+          <span className="small" style={{ flex: 1, minWidth: 0 }}>Location is off — showing <b>Gangnam Station</b> as your starting point.</span>
+          <div className="map-banner-actions">
+            <Button size="sm" variant="secondary" onClick={retry}>Enable location</Button>
+            <Link className="small map-banner-link" href={`${routes.settingsApp}#location`}>Settings</Link>
+          </div>
           <IconButton name="x" label="Dismiss" size={32} iconSize="xs" onClick={() => setBannerDismissed(true)} />
         </div>
       )}

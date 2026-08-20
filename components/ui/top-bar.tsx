@@ -8,13 +8,13 @@ type TopBarProps = {
   titleClassName?: string;
 };
 
-/** Sticky top bar. When `center` is set, an empty spacer balances the title. */
+/** Sticky page header with stable control slots and a shared mobile height. */
 export function TopBar({ left, title, right, center, titleClassName }: TopBarProps) {
   return (
     <div className={"topbar" + (center ? " center" : "")}>
-      {left}
-      {title !== undefined && <span className={"title " + (titleClassName ?? "")}>{title}</span>}
-      {right ?? (center ? <span aria-hidden="true" style={{ width: 44 }} /> : null)}
+      <span className="topbar-slot left">{left}</span>
+      <span className={"title " + (titleClassName ?? "")}>{title}</span>
+      <span className="topbar-slot right">{right}</span>
     </div>
   );
 }

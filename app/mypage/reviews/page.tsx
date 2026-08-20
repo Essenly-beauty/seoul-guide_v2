@@ -6,7 +6,6 @@ import { BottomNav } from "@/components/ui/bottom-nav";
 import { BackButton } from "@/components/ui/back-button";
 import { Button } from "@/components/ui/button";
 import { EmptyState } from "@/components/ui/empty-state";
-import { RatingLine } from "@/components/ui/rating-line";
 import { SectionHeader } from "@/components/ui/section-header";
 import { SectionDivider } from "@/components/ui/section-divider";
 import { CategoryBadge } from "@/components/category/category-badge";
@@ -63,21 +62,25 @@ export default function MyReviewsPage() {
         ) : (
           <section className="stack sm">
             <div>
-              {rated.map(({ place, rating, body, at }) => (
-                <Link key={place!.id} className="listrow v2 top" href={routes.place(place!.id)}>
+              {rated.map(({ place, rating, body, isPublic, at }) => (
+                <Link key={place!.id} className="review-list-row" href={routes.review(place!.id)}>
                   <div className="stack" style={{ flex: 1, minWidth: 0, gap: 3 }}>
-                    <div className="row" style={{ gap: 6 }}>
+                    <div className="row review-list-title">
                       <CategoryBadge type={place!.type} size={16} />
-                      <b className="t-label-md" style={{ fontSize: 14, flex: 1, minWidth: 0, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{place!.name}</b>
-                      <RatingLine rating={rating} plain />
+                      <b>{place!.name}</b>
                     </div>
                     <div className="t-caption mono">{place!.nameKr}</div>
                     {body && (
-                      <p className="small muted" style={{ display: "-webkit-box", WebkitLineClamp: 2, WebkitBoxOrient: "vertical", overflow: "hidden" }}>
+                      <p className="review-list-preview">
                         {body}
                       </p>
                     )}
-                    {formatAt(at) && <div className="t-caption num" style={{ color: "var(--dim)" }}>{formatAt(at)}</div>}
+                    <div className="review-list-meta">
+                      <span className="num">★ {rating}</span>
+                      <span aria-hidden="true">·</span>
+                      <span>{body ? isPublic ? "Public review" : "Private note" : "Rating only"}</span>
+                      {formatAt(at) && <><span aria-hidden="true">·</span><span className="num">{formatAt(at)}</span></>}
+                    </div>
                   </div>
                   <Icon name="chev" size="xs" className="chev" />
                 </Link>

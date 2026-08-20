@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { parseRatings } from "./ratings";
+import { canEditMyReview, parseRatings } from "./ratings";
 
 describe("parseRatings", () => {
   it("upgrades the legacy bare-number shape", () => {
@@ -38,5 +38,14 @@ describe("parseRatings", () => {
       old: { rating: 2 },
       new: { rating: 5, at: "2026-08-11T09:00:00Z" },
     });
+  });
+});
+
+describe("review edit policy", () => {
+  it("only offers editing for an owned rating record", () => {
+    expect(canEditMyReview({ rating: 4, body: "Careful consultation" })).toBe(true);
+    expect(canEditMyReview({ rating: 2 })).toBe(true);
+    expect(canEditMyReview(undefined)).toBe(false);
+    expect(canEditMyReview(null)).toBe(false);
   });
 });

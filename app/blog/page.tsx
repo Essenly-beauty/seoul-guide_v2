@@ -4,7 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { TopBar } from "@/components/ui/top-bar";
 import { BottomNav } from "@/components/ui/bottom-nav";
-import { Chip } from "@/components/ui/chip";
+import { TopicTag } from "@/components/ui/topic-tag";
 import { Button } from "@/components/ui/button";
 import { ImgPh } from "@/components/ui/img-ph";
 import { SectionHeader } from "@/components/ui/section-header";
@@ -30,7 +30,7 @@ export default function BlogListPage() {
   const visible = showAll ? stories : rest;
   return (
     <>
-      <TopBar title="Blog" />
+      <TopBar center title="Blog" />
       <div className="app-scroll pad stack pagev2">
         {/* Top-level page title — the one serif moment on the page */}
         <div>
@@ -49,7 +49,7 @@ export default function BlogListPage() {
             </div>
           </Link>
           <div className="chipwrap">
-            {hero.tags.slice(0, 3).map((t) => <Chip key={t}>{t}</Chip>)}
+            {hero.tags.slice(0, 3).map((t) => <TopicTag key={t}>{t}</TopicTag>)}
           </div>
         </section>
 
@@ -78,11 +78,11 @@ export default function BlogListPage() {
 
         <SectionDivider />
 
-        {/* Browse by topic — horizontal chip rail */}
+        {/* Browse by topic — static editorial metadata until filtering exists */}
         <section className="stack sm">
           <SectionHeader title="Topics" />
           <HScroll ariaLabel="Topics">
-            {topics.map((t) => <Chip key={t}>#{t}</Chip>)}
+            {topics.map((t) => <TopicTag key={t}>{t}</TopicTag>)}
           </HScroll>
         </section>
       </div>
