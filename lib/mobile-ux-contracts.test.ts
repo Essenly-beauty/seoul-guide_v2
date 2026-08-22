@@ -97,3 +97,18 @@ describe("dialog and form accessibility contracts", () => {
     // next.config redirects — the real composer lives in place-detail-body
   });
 });
+
+describe("quiet status lines stay quiet", () => {
+  const css = readFileSync(new URL("../app/globals.css", import.meta.url), "utf8");
+
+  it("the station location note is a slim line, not a filled block", () => {
+    const rule = css.slice(css.indexOf(".station-location-note {"), css.indexOf(".station-location-note button"));
+    expect(rule).toContain("background: transparent");
+    expect(rule).not.toContain("min-height: 44px");
+  });
+
+  it("but Retry keeps a full 44px tap target", () => {
+    const rule = css.slice(css.indexOf(".station-location-note button {"));
+    expect(rule.slice(0, 240)).toContain("min-height: 44px");
+  });
+});

@@ -570,22 +570,31 @@
     font-size: 11px;
     font-weight: 600;
   }
+  /* This is a quiet status line, not a callout. The solid fill made it read
+     as a heavy block and the 44px floor came from the Retry button rather
+     than the content (owner report 2026-08-22). Retry keeps its full tap
+     target via padding while the row itself stays slim. */
   .station-location-note {
-    min-height: 44px;
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 8px;
-    padding: 6px 11px;
-    background: var(--surface-hover);
-    color: var(--muted);
+    padding: 2px 11px;
+    background: transparent;
+    border-bottom: 1px solid var(--border);
+    color: var(--dim);
     font-size: 11px;
+    line-height: 1.35;
   }
   .station-location-note button {
+    /* 44px of touch target without a 44px row: the tap area overhangs the
+       slim row instead of stretching it. */
     min-width: 52px;
     min-height: 44px;
+    margin-block: -11px;
     color: var(--accent);
     font-weight: 700;
+    flex: none;
   }
   .station-result-options > button {
     width: 100%;
