@@ -44,6 +44,7 @@ scripts/.cache/
 /docs/superpowers/specs/*
 !/docs/superpowers/specs/2026-07-25-design-system-hardening-design.md
 !/docs/superpowers/specs/2026-07-26-subway-station-result-row-design.md
+!/docs/superpowers/specs/2026-08-22-subway-station-first-design.md
 .vercel
 !/docs/user-scenarios.md
 !/docs/map-first-v2-spec.md
