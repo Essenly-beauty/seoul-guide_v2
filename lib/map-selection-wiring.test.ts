@@ -229,3 +229,37 @@ describe("map place selection wiring", () => {
     expect(viewSource).toContain("station-disc-row");
   });
 });
+
+describe("selected-pin sheet owns the bottom of the screen (Kakao pattern)", () => {
+  const bar = readFileSync(new URL("../components/map/selected-place-action-bar.tsx", import.meta.url), "utf8");
+  const sheet = readFileSync(new URL("../components/map/map-sheet.tsx", import.meta.url), "utf8");
+  const styles = readFileSync(new URL("../app/globals.css", import.meta.url), "utf8");
+
+  it("offers save, share, and all three route hand-offs", () => {
+    expect(bar).toContain("FavoriteButton");
+    expect(bar).toContain("Share ${place.name}");
+    expect(bar).toContain("MapLinkButtons");
+  });
+
+  it("renders the bar outside the transformed sheet so it lands on screen", () => {
+    // .mapsheet is positioned by a transform, which makes it the containing
+    // block for fixed children — an in-sheet bar sits at the sheet's
+    // off-screen bottom instead of the visitor's.
+    const afterSection = sheet.slice(sheet.lastIndexOf("</section>"));
+    expect(afterSection).toContain("SelectedPlaceActionBar");
+    expect(styles).toContain(".selected-place-actions {\n    position: absolute;");
+  });
+
+  it("hands the tab bar's space to the sheet for any selection, not just full", () => {
+    expect(styles).toContain("body:has(.mapsheet.has-selection) .bottomnav");
+  });
+
+  it("keeps the photo rail swipeable and two-up without faking tiles", () => {
+    const summary = readFileSync(new URL("../components/map/selected-place-summary.tsx", import.meta.url), "utf8");
+    expect(styles).toContain("scroll-snap-type: x mandatory");
+    expect(styles).toContain("flex: 0 0 calc(50% - 4px)");
+    // the empty state stays a single honest block
+    expect(summary).toContain("photos.length > 0");
+    expect(summary).toContain("Photos coming soon");
+  });
+});

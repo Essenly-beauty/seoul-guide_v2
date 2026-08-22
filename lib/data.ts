@@ -164,6 +164,9 @@ export type Place = {
   url?: string;
   /** Optional verified storefront image; the map preview stays honest when absent. */
   photoUrl?: string;
+  /** Verified photos, in display order. The place sheet renders a swipeable
+      two-up rail from these; it never pads the rail to look fuller. */
+  photos?: string[];
   geoSource?: "address" | "area"; // "area" = neighborhood-centroid fallback, pin is approximate
   // "A drop of Seoul" import — editorial descriptions shown on the detail page.
   about?: string;

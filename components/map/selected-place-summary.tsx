@@ -20,6 +20,9 @@ export function SelectedPlaceSummary({
 }) {
   const titleId = `selected-place-summary-${variant}-${place.id}`;
 
+  // `photos` is the future shape; `photoUrl` is what the type carries today.
+  const photos: string[] = (place.photos ?? (place.photoUrl ? [place.photoUrl] : [])).filter(Boolean);
+
   if (variant === "compact") {
     return (
       <article className="selected-place-summary compact" aria-labelledby={titleId}>
@@ -101,19 +104,31 @@ export function SelectedPlaceSummary({
           <Icon name="x" size="xs" aria-hidden="true" />
         </button>
       </div>
-      <div className={`selected-place-summary-media-grid${place.photoUrl ? " has-photo" : " is-empty"}`}>
-        {place.photoUrl ? (
-          <div className="selected-place-summary-media">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={place.photoUrl} alt={`${place.name} storefront`} />
-          </div>
-        ) : (
+      {/* Two-up swipeable rail (owner request 2026-08-22). It renders only
+          the photos a place actually has — no place in the dataset carries
+          one yet, so today every card falls to the single honest empty
+          state rather than padding the rail with decoy tiles. */}
+      {photos.length > 0 ? (
+        <div
+          className="selected-place-summary-media-rail"
+          role="group"
+          aria-label={`${place.name} photos — swipe for more`}
+        >
+          {photos.map((src, i) => (
+            <div key={src} className="selected-place-summary-media">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src={src} alt={`${place.name} photo ${i + 1} of ${photos.length}`} />
+            </div>
+          ))}
+        </div>
+      ) : (
+        <div className="selected-place-summary-media-grid is-empty">
           <div className="selected-place-summary-media" role="img" aria-label={`${place.name} photos coming soon`}>
             <Icon name="pin" size="sm" aria-hidden="true" />
             <span>Photos coming soon</span>
           </div>
-        )}
-      </div>
+        </div>
+      )}
     </article>
   );
 }

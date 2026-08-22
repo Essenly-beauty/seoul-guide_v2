@@ -3839,6 +3839,68 @@
     font-size: 11px;
     font-weight: 650;
   }
+
+  /* Two-up swipeable photo rail in the selected-place sheet. Sized so both
+     tiles clear the action bar at the half snap without scrolling. */
+  .selected-place-summary-media-rail {
+    display: flex;
+    gap: 8px;
+    margin-top: 14px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior-x: contain;
+  }
+  .selected-place-summary-media-rail::-webkit-scrollbar { display: none; }
+  .selected-place-summary-media-rail > .selected-place-summary-media {
+    flex: 0 0 calc(50% - 4px);
+    min-height: 0;
+    height: clamp(112px, 15vh, 132px);
+    scroll-snap-align: start;
+  }
+  /* the empty state is one honest block, not two decoy tiles */
+  .selected-place-summary-media-grid.is-empty .selected-place-summary-media {
+    min-height: clamp(104px, 13vh, 124px);
+  }
+
+  .selected-place-actions {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 960; /* above .mapsheet (950) — it replaces the tab bar */
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--surface);
+    border-top: 1px solid var(--border);
+    padding: 10px 16px max(12px, env(safe-area-inset-bottom));
+  }
+  .selected-place-actions-quick { display: flex; align-items: center; gap: 8px; flex: none; }
+  .selected-place-actions-routes { display: flex; align-items: center; gap: 6px; flex: 1; min-width: 0; }
+  /* three route hand-offs share one row — keep each on a single line */
+  .selected-place-actions-routes .btn {
+    flex: 1;
+    min-width: 0;
+    padding-inline: 8px;
+    font-size: 13px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .selected-place-action-icon {
+    width: 44px;
+    height: 44px;
+    display: grid;
+    place-items: center;
+    border-radius: var(--r-md);
+    background: var(--surface-hover);
+    color: var(--muted);
+    flex: none;
+  }
+  .selected-place-action-icon:hover { color: var(--accent); }
+
   .selected-place-summary-address {
     display: flex;
     align-items: flex-start;
@@ -4008,7 +4070,11 @@
   .mapsheet.full.has-selection .bookbar {
     flex: none;
   }
-  body:has(.mapsheet.full.has-selection) .bottomnav {
+  /* Kakao pattern: an active pin gives the bottom of the screen to the sheet
+     and its action bar. Leaving the tab bar underneath clipped the card and
+     offered nothing the visitor wanted mid-decision (owner report
+     2026-08-22). Closing the sheet brings it straight back. */
+  body:has(.mapsheet.has-selection) .bottomnav {
     display: none;
   }
   /* Kakao-style place preview inside the lower map sheet. The preview keeps

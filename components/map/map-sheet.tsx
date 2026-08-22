@@ -5,6 +5,7 @@ import { Icon } from "@/components/icon";
 import { SelectedPlaceSummary } from "@/components/map/selected-place-summary";
 import { PlaceDetailBody } from "@/components/place/place-detail-body";
 import { PlaceCtaBar } from "@/components/place/place-cta-bar";
+import { SelectedPlaceActionBar } from "./selected-place-action-bar";
 import { LiveBadge } from "@/components/ui/live-badge";
 import { TYPE_LABEL, zoneShort, type Place } from "@/lib/data";
 import { formatCompactDistance, haversineKm, type LatLng } from "@/lib/geo";
@@ -218,6 +219,7 @@ export function MapSheet({ places, origin, selectedId, onSelect, onClearSelectio
   // preview. The map callout remains available above it, while scrolling the
   // preview promotes the sheet to its full-height snap.
   return (
+    <>
     <section ref={sheetRef} className={`mapsheet ${snap}${dragging ? " dragging" : ""}${selectedPlace ? " has-selection" : ""}`} aria-label="Nearby places">
       <div
         ref={handleRef}
@@ -316,5 +318,16 @@ export function MapSheet({ places, origin, selectedId, onSelect, onClearSelectio
       </div>
       {selectedPlace && selectedView === "detail" && <PlaceCtaBar place={selectedPlace} />}
     </section>
+    {/* Kakao-style: while a pin is active the sheet owns the bottom of the
+        screen — Save / Share / the three route hand-offs — instead of
+        leaving the tab bar underneath to clip the card (owner request
+        2026-08-22). It renders OUTSIDE the sheet: the sheet is positioned by
+        a transform, which makes it the containing block for anything fixed
+        inside it, so an in-sheet bar lands at the sheet's off-screen bottom
+        rather than the visitor's. The detail view keeps its own CTA bar. */}
+    {selectedPlace && selectedView !== "detail" && (
+      <SelectedPlaceActionBar place={selectedPlace} />
+    )}
+    </>
   );
 }
