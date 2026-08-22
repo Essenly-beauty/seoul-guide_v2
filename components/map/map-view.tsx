@@ -10,7 +10,7 @@ import { TYPE_ICON, TYPE_LABEL, zoneShort, type Place } from "@/lib/data";
 import { haversineKm, type LatLng } from "@/lib/geo";
 import { visibleMapAnchor } from "@/lib/map-camera";
 import { useTheme } from "@/components/theme/theme-provider";
-import { LINE_META, STATIONS, stationExits } from "@/lib/subway";
+import { LINE_META, STATIONS, loadStationExits, stationExits } from "@/lib/subway";
 
 export type MapViewProps = {
   center: LatLng;
@@ -540,7 +540,17 @@ export default function MapView({ center, places, selectedId, onSelect, userLoc,
   }, [inView, selectedId, zoom, viewVersion]);
 
   // Kakao-style transit layer: stations (line-colored circles + name) and
-  // synthesized exit numbers, gated by zoom and limited to the viewport.
+  // real exit numbers, gated by zoom and limited to the viewport.
+  // Exit coordinates are a ~200KB table that only matters at EXIT_ZOOM — pull
+  // it in the first time the user zooms that far, then re-render once it lands.
+  const [exitsLoaded, setExitsLoaded] = useState(false);
+  useEffect(() => {
+    if (zoom < EXIT_ZOOM || exitsLoaded) return;
+    let alive = true;
+    void loadStationExits().then(() => { if (alive) setExitsLoaded(true); });
+    return () => { alive = false; };
+  }, [zoom, exitsLoaded]);
+
   const transit = useMemo(() => {
     const map = mapRef.current;
     if (!map || zoom < STATION_ZOOM || viewVersion < 0) {
@@ -551,11 +561,13 @@ export default function MapView({ center, places, selectedId, onSelect, userLoc,
       const st = STATIONS[id];
       return bounds.contains([st.lat, st.lng]);
     });
-    const exits = zoom >= EXIT_ZOOM
+    // exitsLoaded is a real dependency: stationExits() reads a module-level
+    // table that is empty until the on-demand import above resolves
+    const exits = exitsLoaded && zoom >= EXIT_ZOOM
       ? stations.flatMap((id) => stationExits(id).map((e) => ({ id, ...e })))
       : [];
     return { stations, exits };
-  }, [zoom, viewVersion]);
+  }, [zoom, viewVersion, exitsLoaded]);
 
   const markers = useMemo(
     () =>

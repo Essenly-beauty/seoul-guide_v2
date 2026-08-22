@@ -54,3 +54,4 @@ scripts/.cache/
 !/docs/HANDOFF.md
 test-results/
 playwright-report/
+/scripts/.station-exits-cache.json

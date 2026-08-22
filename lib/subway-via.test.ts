@@ -123,20 +123,41 @@ describe("moveRouteWaypoint", () => {
   });
 });
 
-describe("stationExits (synthesized)", () => {
-  it("is deterministic and bounded", async () => {
-    const { stationExits, STATIONS } = await import("./subway");
-    const a = stationExits("gangnam");
-    const b = stationExits("gangnam");
-    expect(a).toEqual(b);
-    expect(a.length).toBeGreaterThanOrEqual(3);
-    expect(a.length).toBeLessThanOrEqual(8);
+describe("stationExits (real OSM data)", () => {
+  it("returns real, numbered exits placed near the station", async () => {
+    const { stationExits, loadStationExits, STATIONS } = await import("./subway");
+    await loadStationExits();
+    const gangnam = stationExits("gangnam");
+    // Gangnam genuinely has 11 numbered exits; the synthetic generator this
+    // replaced could only ever produce 3-8 on a perfect circle.
+    expect(gangnam.length).toBeGreaterThanOrEqual(10);
+    const numbers = gangnam.map((e) => e.no);
+    expect(numbers).toEqual([...numbers].sort((a, b) => a - b));
+    expect(new Set(numbers).size).toBe(numbers.length);
+
     const st = STATIONS["gangnam"];
-    for (const e of a) {
-      const dm = Math.hypot((e.lat - st.lat) * 111320, (e.lng - st.lng) * 88000);
-      expect(dm).toBeLessThan(120);
-      expect(dm).toBeGreaterThan(30);
-    }
+    const spread = gangnam.map((e) =>
+      Math.hypot((e.lat - st.lat) * 111320, (e.lng - st.lng) * 88000),
+    );
+    // real exits sit at varying distances — a constant radius means the ring
+    // generator came back
+    expect(Math.max(...spread)).toBeLessThan(400);
+    expect(Math.max(...spread) - Math.min(...spread)).toBeGreaterThan(15);
+  });
+
+  it("returns nothing rather than inventing exits for unmapped stations", async () => {
+    const { stationExits, loadStationExits } = await import("./subway");
+    await loadStationExits();
     expect(stationExits("nope")).toEqual([]);
+    // Chuncheon and the far exurban stops have no OSM entrance mapping
+    expect(stationExits("chuncheon")).toEqual([]);
+  });
+
+  it("covers the stations tourists actually use", async () => {
+    const { stationExits, loadStationExits } = await import("./subway");
+    await loadStationExits();
+    for (const id of ["gangnam", "myeongdong", "hongik_univ", "jamsil_songpa_gu_office", "seongsu"]) {
+      expect(stationExits(id).length, id).toBeGreaterThan(0);
+    }
   });
 });
