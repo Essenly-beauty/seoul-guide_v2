@@ -50,3 +50,14 @@ describe("product ranking fields", () => {
     expect(review).toEqual(expected);
   });
 });
+
+describe("place rating provenance", () => {
+  it("does not expose seed ratings from curated rows", () => {
+    const curated = PLACES.filter((p) => p.source === "curated");
+    const sourced = PLACES.filter((p) => p.source !== "curated" && p.rating !== undefined);
+
+    expect(curated.length).toBe(44);
+    expect(curated.every((p) => p.rating === undefined && p.ratingCount === undefined)).toBe(true);
+    expect(sourced.length).toBeGreaterThan(0);
+  });
+});

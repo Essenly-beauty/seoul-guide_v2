@@ -5166,6 +5166,9 @@
   }
   .product-detail-gallery-main {
     grid-row: 1 / 3;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
     background-color: var(--surface-hover);
   }
   .product-detail-gallery .label {

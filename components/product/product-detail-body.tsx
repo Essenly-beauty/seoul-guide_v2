@@ -363,6 +363,7 @@ export function ProductDetailBody({ product, heroOverlay }: {
         >
           <ImgPh className="product-detail-gallery-main">
             <Icon name="bag" style={{ width: 44, height: 44, color: "var(--dim)" }} />
+            <span className="caption muted">Product photo coming soon</span>
           </ImgPh>
           <ImgPh><span className="label">{product.brand}</span></ImgPh>
           <ImgPh>

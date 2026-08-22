@@ -233,11 +233,19 @@ const CURATED_PLACES: Place[] = [
 ];
 
 const withSource = (list: Place[], source: NonNullable<Place["source"]>): Place[] =>
-  list.map((p) => ({ ...p, source }));
+  list.map((p) => ({
+    ...p,
+    source,
+    // Curated rows carry editorial seed values for layout and local ranking
+    // demos, not venue-verified ratings. Strip them at the public data-layer
+    // boundary so map/search/list surfaces cannot accidentally present them
+    // as real customer signals.
+    ...(source === "curated" ? { rating: undefined, ratingCount: undefined } : {}),
+  }));
 
 export const PLACES: Place[] = [
   ...withSource(CURATED_PLACES, "curated"),
-  // Creatrip hair-salon import (206 rows → scripts/build-creatrip-places.mjs).
+  // Creatrip hair-salon import (205 rows → scripts/build-creatrip-places.mjs).
   ...withSource(CREATRIP_PLACES, "creatrip"),
   // Seoul Olive Young stores, Kakao Map capture (scripts/build-oliveyoung-kakao.mjs).
   ...withSource(OLIVEYOUNG_PLACES, "kakao"),

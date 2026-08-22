@@ -1,33 +1,20 @@
 "use client";
 
-import { useState } from "react";
 import Link from "next/link";
 import { TopBar } from "@/components/ui/top-bar";
 import { BottomNav } from "@/components/ui/bottom-nav";
 import { TopicTag } from "@/components/ui/topic-tag";
-import { Button } from "@/components/ui/button";
 import { ImgPh } from "@/components/ui/img-ph";
 import { SectionHeader } from "@/components/ui/section-header";
 import { SectionDivider } from "@/components/ui/section-divider";
 import { HScroll } from "@/components/ui/h-scroll";
 import { routes } from "@/lib/routes";
-import { ARTICLES, type Article } from "@/lib/data";
-
-/** Extra mock stories revealed by "More ›" — slugs reuse published articles so links resolve
-    (lib/data is owned by another workstream; local mock keeps the expansion demonstrable). */
-const MORE_ARTICLES: Article[] = [
-  { slug: "korean-glass-skin-routine", title: "Aqua Peel vs. Glass Skin Facial: Which One First?", tags: ["skincare", "clinic"], date: "Apr 2, 2026", readMin: 4 },
-  { slug: "7-step-kbeauty-guide", title: "How to Book a Korean Hair Salon Without Speaking Korean", tags: ["hair", "booking"], date: "Apr 8, 2026", readMin: 5 },
-  { slug: "seoul-beauty-hotspots-hongdae", title: "Personal Color Analysis in Seoul: What ₩120,000 Gets You", tags: ["personal-color"], date: "Apr 14, 2026", readMin: 6 },
-  { slug: "korean-glass-skin-routine", title: "Head Spas Are Seoul's Best-Kept Jet Lag Cure", tags: ["head-spa"], date: "Apr 20, 2026", readMin: 4 },
-];
+import { ARTICLES } from "@/lib/data";
 
 export default function BlogListPage() {
   const [hero, ...rest] = ARTICLES;
-  const [showAll, setShowAll] = useState(false);
   const topics = Array.from(new Set(ARTICLES.flatMap((a) => a.tags)));
-  const stories = [...rest, ...MORE_ARTICLES];
-  const visible = showAll ? stories : rest;
+  const stories = rest;
   return (
     <>
       <TopBar center title="Blog" />
@@ -59,7 +46,7 @@ export default function BlogListPage() {
         <section className="stack sm">
           <SectionHeader title="Latest stories" count={stories.length} />
           <div>
-            {visible.map((a, i) => (
+            {stories.map((a, i) => (
               <Link key={`${a.slug}-${i}`} className="listrow" href={routes.blogArticle(a.slug)}>
                 <ImgPh style={{ width: 56, height: 56, flex: "none", borderRadius: 12 }} />
                 <div style={{ flex: 1, minWidth: 0 }}>
@@ -69,11 +56,6 @@ export default function BlogListPage() {
               </Link>
             ))}
           </div>
-          {!showAll && (
-            <Button variant="secondary" size="sm" style={{ alignSelf: "center" }} aria-expanded={false} onClick={() => setShowAll(true)}>
-              More ›
-            </Button>
-          )}
         </section>
 
         <SectionDivider />
