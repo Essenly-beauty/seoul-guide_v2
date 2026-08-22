@@ -3,6 +3,7 @@
 import { Fragment, useEffect, useId, useMemo, useRef, useState } from "react";
 import Link from "next/link";
 import { CategoryBadge } from "@/components/category/category-badge";
+import { ImgPh } from "@/components/ui/img-ph";
 import { Icon } from "@/components/icon";
 import { Button } from "@/components/ui/button";
 import { IconButton } from "@/components/ui/icon-button";
@@ -398,6 +399,7 @@ export function SubwayRouteController({
   // start collapsed behind one row. Arriving with neither (the plain Subway
   // button) still opens the planner, because there is nothing else to show.
   const [routeFormOpen, setRouteFormOpen] = useState(() => !(activeStationId && !route));
+  const [radiusOpen, setRadiusOpen] = useState(false);
   const [draftDeparture, setDraftDeparture] = useState(departureId);
   const [draftArrival, setDraftArrival] = useState(arrivalId);
   const [draftVias, setDraftVias] = useState<string[]>(viaIds);
@@ -737,7 +739,7 @@ export function SubwayRouteController({
         </div>
       )}
 
-      {!(readyRoute && snap === "compact") && (
+      {!(readyRoute && snap === "compact") && !browsingStation && (
         <header className="subway-controller-header">
           <div>
             <span className="subway-controller-kicker"><Icon name="train" size="xs" /> Subway</span>
@@ -813,35 +815,108 @@ export function SubwayRouteController({
         {editing || !route ? (
           <div className="subway-search-panel">
             {browsingStation && activeStation && (
-              <div className="subway-browse-lead">
-                {/* the panel header already names the station — this line
-                    carries only what the header cannot: scope and count */}
-                <div className="subway-nearby-heading">
-                  <p>{rankedPlaces.length} places · {radiusLabel(radiusKm)} straight-line from the station center</p>
+              <div className="station-sheet">
+                <span className="station-sheet-grip" aria-hidden="true" />
+                <div className="station-sheet-head">
+                  <button
+                    type="button"
+                    className="station-sheet-title"
+                    onClick={() => { pendingFocusRef.current = "search"; setRouteFormOpen(true); }}
+                    aria-label={`${activeStation.name} station — choose a different station`}
+                  >
+                    <h2>{stationDisplayName(activeStation)}</h2>
+                    {activeStation.lines.slice(0, 3).map((line) => {
+                      const color = LINE_META[line]?.color ?? "var(--dim)";
+                      return (
+                        <span
+                          key={line}
+                          className="linebadge"
+                          style={{ background: color, color: lineTextColor(color) }}
+                          title={LINE_META[line]?.label ?? line}
+                        >
+                          {LINE_META[line]?.shortLabel ?? line}
+                        </span>
+                      );
+                    })}
+                  </button>
+                  <IconButton name="x" label="Close subway browse" iconSize="xs" onClick={onClose} />
                 </div>
-                {rankedPlaces.length > 0 ? (
-                  <div className="subway-place-list">
-                    {rankedPlaces.map(({ place, km }) => (
-                      <div
-                        key={place.id}
-                        ref={selectedPlaceId === place.id ? selectedPlaceRef : undefined}
-                        className={`subway-place-row${selectedPlaceId === place.id ? " selected" : ""}`}
-                      >
-                        <button type="button" onClick={() => onPlace(place.id)} aria-current={selectedPlaceId === place.id ? "true" : undefined}>
-                          <CategoryBadge type={place.type} size={20} />
-                          <span className="subway-place-copy">
-                            <b>{place.name}</b>
-                            <span>{TYPE_LABEL[place.type]} · {formatDistance(km)} straight-line from station center</span>
-                          </span>
-                        </button>
-                        <Link href={routes.place(place.id)} aria-label={`View ${place.name} details`}>
-                          <Icon name="chev" size="xs" />
-                        </Link>
+                <p className="station-sheet-sub">
+                  {rankedPlaces.length} places · within {radiusLabel(radiusKm)} · straight-line from the station centre
+                </p>
+
+                {/* One filter rail (owner decision 2026-08-22): radius opens a
+                    popover, categories sit beside it — replaces the stacked
+                    segmented control and tab row. */}
+                <div className="station-sheet-filters" role="group" aria-label="Filter nearby places">
+                  <div className="station-sheet-radius">
+                    <button
+                      type="button"
+                      className={`sfchip${radiusOpen || radiusKm !== 0.5 ? " on" : ""}`}
+                      aria-expanded={radiusOpen}
+                      aria-haspopup="true"
+                      onClick={() => setRadiusOpen((v) => !v)}
+                    >
+                      {radiusLabel(radiusKm)}
+                      <Icon name="chev" size="xs" style={{ transform: "rotate(90deg)" }} />
+                    </button>
+                    {radiusOpen && (
+                      <div className="station-sheet-pop" role="menu">
+                        {[0.5, 1, 2].map((r) => (
+                          <button
+                            key={r}
+                            type="button"
+                            role="menuitemradio"
+                            aria-checked={radiusKm === r}
+                            onClick={() => { onRadius(r); setRadiusOpen(false); }}
+                          >
+                            {radiusLabel(r)}
+                          </button>
+                        ))}
                       </div>
+                    )}
+                  </div>
+                  {CATEGORY_OPTIONS.map((option) => (
+                    <button
+                      key={option.key}
+                      type="button"
+                      className={`sfchip${category === option.key ? " on" : ""}`}
+                      aria-pressed={category === option.key}
+                      onClick={() => onCategory(option.key)}
+                    >
+                      {option.label}
+                    </button>
+                  ))}
+                </div>
+
+                {rankedPlaces.length > 0 ? (
+                  <div className="station-sheet-list">
+                    {rankedPlaces.map(({ place, km }) => (
+                      <button
+                        key={place.id}
+                        type="button"
+                        className={`station-row${selectedPlaceId === place.id ? " selected" : ""}`}
+                        onClick={() => onPlace(place.id)}
+                        aria-current={selectedPlaceId === place.id ? "true" : undefined}
+                      >
+                        <ImgPh className="station-row-thumb" />
+                        <span className="station-row-copy">
+                          <b>{place.name}</b>
+                          <span className="station-row-meta">
+                            {TYPE_LABEL[place.type]}
+                            {place.source !== "curated" && place.rating !== undefined && (
+                              <> · <RatingLine rating={place.rating} count={place.ratingCount} plain /></>
+                            )}
+                          </span>
+                          <span className="station-row-dist mono">{formatDistance(km)} from the station</span>
+                        </span>
+                      </button>
                     ))}
                   </div>
                 ) : (
-                  <p className="subway-search-preview-empty">No places are listed around this station in our current data.</p>
+                  <p className="subway-search-preview-empty">
+                    Nothing within {radiusLabel(radiusKm)} — widen the radius to see more.
+                  </p>
                 )}
                 <button type="button" className="subway-plan-route" onClick={() => setRouteFormOpen(true)}>
                   <Icon name="train" size="xs" /> Plan a route from here

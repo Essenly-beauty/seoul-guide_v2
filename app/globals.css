@@ -119,10 +119,15 @@
   :root:not([data-theme="dark"]) .map-top::before {
     background: linear-gradient(180deg, rgba(246, 247, 249, 0.92), rgba(246, 247, 249, 0.6) 55%, rgba(246, 247, 249, 0));
   }
+  /* :not(.on) is load-bearing. This selector outranks `.map-modebtn.on`
+     (0,3,1 vs 0,2,0), so without it an active control keeps the light surface
+     while .on still paints its glyph white — an invisible button. That shipped
+     on the Subway toggle; the .map-fab-fav.on rule below was the same bug
+     patched one control at a time. Active states own their own fill. */
   :root:not([data-theme="dark"]) .map-searchpill,
   :root:not([data-theme="dark"]) .map-avatar,
-  :root:not([data-theme="dark"]) .map-modebtn,
-  :root:not([data-theme="dark"]) .map-fab,
+  :root:not([data-theme="dark"]) .map-modebtn:not(.on),
+  :root:not([data-theme="dark"]) .map-fab:not(.on),
   :root:not([data-theme="dark"]) .map-top .chip:not(.selected) {
     background: rgba(255, 255, 255, 0.82);
   }
@@ -3434,7 +3439,7 @@
      its radius circle on screen (station-first redesign, phase 1). This is the
      state the comment above always described and nothing could reach. */
   .map-screen.subway-mode.subway-editing .subway-controller.station-browse {
-    height: min(56%, 520px);
+    height: min(60%, 560px);
     border-radius: var(--r-lg) var(--r-lg) 0 0;
     border-top: 1px solid var(--border);
   }
@@ -3444,6 +3449,82 @@
   .map-screen.subway-mode.subway-editing:has(.subway-controller.station-browse) .map-top {
     display: grid;
   }
+
+  /* ── Station sheet (station-first redesign) ──────────────
+     Grab handle, station name with line badges, ONE filter rail, then
+     thumbnail rows. Chrome above the first row stays ~121px so three rows
+     clear the fold at the landing snap. */
+  .station-sheet { display: flex; flex-direction: column; min-height: 0; margin: -4px -18px 0; }
+  .station-sheet-grip {
+    width: 36px; height: 4px; border-radius: 3px;
+    background: var(--border); margin: 7px auto 4px; flex: none;
+  }
+  .station-sheet-head { display: flex; align-items: center; gap: 8px; padding: 0 14px 0 18px; }
+  .station-sheet-title {
+    display: flex; align-items: center; gap: 8px; flex: 1; min-width: 0;
+    text-align: left; font: inherit; color: inherit; padding: 2px 0;
+  }
+  .station-sheet-title h2 {
+    margin: 0; font-family: var(--sans); font-size: 20px; font-weight: 800;
+    letter-spacing: -0.015em; line-height: 1.2;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+  .station-sheet-title .linebadge { flex: none; }
+  .station-sheet-sub { margin: 2px 0 0; padding: 0 18px; font-size: 12.5px; color: var(--muted); line-height: 1.4; }
+
+  .station-sheet-filters {
+    display: flex; align-items: center; gap: 8px; padding: 10px 18px;
+    overflow-x: auto; scrollbar-width: none; flex: none;
+    border-bottom: 1px solid var(--border);
+  }
+  .station-sheet-filters::-webkit-scrollbar { display: none; }
+  .sfchip {
+    display: inline-flex; align-items: center; gap: 5px;
+    min-height: 44px; padding: 0 18px; border-radius: 999px;
+    border: 1px solid var(--border); background: var(--surface); color: var(--muted);
+    font-size: 14px; font-weight: 650; white-space: nowrap; flex: none;
+  }
+  .sfchip.on { background: var(--accent); border-color: var(--accent); color: #fff; font-weight: 750; }
+  .station-sheet-radius { position: relative; flex: none; }
+  .station-sheet-pop {
+    position: absolute; top: calc(100% + 6px); left: 0; z-index: 5;
+    display: grid; min-width: 128px; padding: 6px;
+    border-radius: var(--r-md); border: 1px solid var(--border);
+    background: var(--surface); box-shadow: var(--shadow-float);
+  }
+  .station-sheet-pop button {
+    min-height: 44px; padding: 0 12px; border-radius: 8px;
+    text-align: left; font-size: 14px; font-weight: 600; color: var(--text);
+  }
+  .station-sheet-pop button[aria-checked="true"] { color: var(--accent); background: var(--accent-soft); }
+
+  .station-sheet-list { display: flex; flex-direction: column; }
+  .station-row {
+    display: flex; align-items: center; gap: 14px; width: 100%;
+    padding: 10px 18px; text-align: left; font: inherit; color: inherit;
+    border-bottom: 1px solid var(--border);
+  }
+  .station-row:last-child { border-bottom: 0; }
+  .station-row.selected { background: var(--accent-soft); }
+  .station-row-thumb { width: 58px; height: 58px; border-radius: 12px; flex: none; }
+  .station-row-copy { display: grid; gap: 3px; min-width: 0; flex: 1; }
+  .station-row-copy > b {
+    font-size: 15.5px; font-weight: 750; letter-spacing: -0.01em;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+  .station-row-meta {
+    display: flex; align-items: center; gap: 4px; font-size: 13px;
+    color: var(--muted); white-space: nowrap; overflow: hidden;
+  }
+  .station-row-dist { font-size: 12.5px; color: var(--dim); }
+  .subway-plan-route {
+    display: flex; align-items: center; justify-content: center; gap: 8px;
+    min-height: 44px; margin: 12px 18px 4px;
+    border: 1px solid var(--border); border-radius: var(--r-md);
+    background: var(--surface); color: var(--accent);
+    font-weight: 650; font-size: 13.5px;
+  }
+
   .map-canvas {
     position: absolute;
     inset: 0;
