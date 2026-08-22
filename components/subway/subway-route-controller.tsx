@@ -748,37 +748,40 @@ export function SubwayRouteController({
 
       {readyRoute && activeStation && activeId && (
         <>
-          {/* Ticket-style summary: endpoints at the edges, travel time in a
-              pill on a dotted connector (train-ticket reference, 2026-08-02). */}
+          {/* Our travel time is graph arithmetic — no live schedule, no service
+              gaps, no transfer walking. Printing "39 min · 3 transfers" reads
+              as a promise we cannot keep, so the number is gone and Google
+              owns timing (owner decision 2026-08-22). We hand it the whole
+              trip, waypoints included, instead of only the endpoints. */}
           <div ref={routeSummaryRef} className="subway-route-summary" tabIndex={-1} aria-live="polite">
             <div className="subway-ticket-ends">
               <b>{stationDisplayName(STATIONS[readyRoute.stations[0]])}</b>
               <b>{stationDisplayName(STATIONS[readyRoute.stations[readyRoute.stations.length - 1]])}</b>
             </div>
             <div className="subway-ticket-line" aria-hidden="true">
-              {/* endpoint dots wear their segment's line color */}
               <i className="dot" style={{ background: LINE_META[readyRoute.segments[0].line].color }} />
               <i className="dash" />
-              <span className="pill">{travelMinutes(readyRoute)} min</span>
+              <span className="pill">
+                {readyRoute.segments.length === 1
+                  ? "Direct"
+                  : `${readyRoute.segments.length - 1} transfer${readyRoute.segments.length > 2 ? "s" : ""}`}
+              </span>
               <i className="dash" />
               <i className="dot" style={{ background: LINE_META[readyRoute.segments[readyRoute.segments.length - 1].line].color }} />
             </div>
             <div className="subway-ticket-meta">
-              <span>
-                {readyRoute.segments.length === 1 ? "Direct" : `${readyRoute.segments.length - 1} transfer${readyRoute.segments.length > 2 ? "s" : ""}`}
-                {" · "}{readyRoute.stations.length - 1} stops
-              </span>
               <a
-                className="subway-live-pill"
-                href={googleDirectionsUrl(STATIONS[readyRoute.stations[readyRoute.stations.length - 1]], STATIONS[readyRoute.stations[0]])}
+                className="subway-route-open"
+                href={googleDirectionsUrl(
+                  STATIONS[readyRoute.stations[readyRoute.stations.length - 1]],
+                  STATIONS[readyRoute.stations[0]],
+                  "transit",
+                  viaIds.map((id) => STATIONS[id]).filter(Boolean),
+                )}
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label="Open this route in Google Maps for departure times"
-                title="Open this route in Google Maps for departure times"
               >
-                {/* was "Live" — we have no arrivals feed, and printing Live to
-                    someone standing on a platform is a lie (2026-08-22) */}
-                <Icon name="ext" size="xs" /> Times
+                <Icon name="ext" size="xs" /> Times &amp; platforms in Google Maps
               </a>
               {snap !== "compact" && (
                 <button
@@ -791,9 +794,6 @@ export function SubwayRouteController({
                   <Icon name="pin" size="xs" /> <span>Nearby</span>
                 </button>
               )}
-              {/* Edit and close used to sit on their own header row above a
-                  card that already names the route. Folded in here so the
-                  panel spends that row on results instead. */}
               <button type="button" className="subway-text-action" onClick={openEditor}>Edit</button>
               <IconButton name="x" label="Close subway planner" iconSize="xs" onClick={onClose} />
             </div>
@@ -1085,33 +1085,9 @@ export function SubwayRouteController({
               </div>
             )}
 
-            <div
-              className="subway-station-focus"
-              style={{
-                "--station-line": activeColor,
-                "--station-line-left": leftColor,
-                "--station-line-right": rightColor,
-                "--station-text-left": leftText,
-                "--station-text-right": rightText,
-                "--station-shadow-left": leftText === "#FFFFFF" ? "0 1px 2px rgba(15, 23, 42, 0.42)" : "none",
-                "--station-shadow-right": rightText === "#FFFFFF" ? "0 1px 2px rgba(15, 23, 42, 0.42)" : "none",
-              } as React.CSSProperties}
-            >
-              <button type="button" disabled={!previousId} aria-label={previousId ? `Previous station: ${STATIONS[previousId].name}` : "Departure"} onClick={() => previousId && selectRouteIndex(activeIndex - 1)}>
-                <Icon name="back" size="xs" />
-                <span>{previousId ? stationDisplayName(STATIONS[previousId]) : "Departure"}</span>
-              </button>
-              <div className="subway-active-station">
-                <b title={activeStation.name} aria-label={activeStation.name}>{stationDisplayName(activeStation)}</b>
-                {/* the count used to sit on its own heading row below — it
-                    belongs to the station the stepper already names */}
-                <span>{rankedPlaces.length} {rankedPlaces.length === 1 ? "place" : "places"} · {radiusLabel(radiusKm)}</span>
-              </div>
-              <button type="button" disabled={!nextId} aria-label={nextId ? `Next station: ${STATIONS[nextId].name}` : "Arrival"} onClick={() => nextId && selectRouteIndex(activeIndex + 1)}>
-                <span>{nextId ? stationDisplayName(STATIONS[nextId]) : "Arrival"}</span>
-                <Icon name="chev" size="xs" />
-              </button>
-            </div>
+            {/* the stepper moved out of the scroller to a pinned bottom bar —
+                see below. Mobile thumbs live at the bottom, and it fills the
+                space the tab bar vacated (owner decision 2026-08-22). */}
 
             {snap === "full" && (
               <RouteStrip
@@ -1202,6 +1178,35 @@ export function SubwayRouteController({
           </>
         ) : null}
       </div>
+      {readyRoute && activeStation && activeId && snap !== "compact" && (
+      <div
+          className="subway-station-focus pinned"
+              style={{
+                "--station-line": activeColor,
+                "--station-line-left": leftColor,
+                "--station-line-right": rightColor,
+                "--station-text-left": leftText,
+                "--station-text-right": rightText,
+                "--station-shadow-left": leftText === "#FFFFFF" ? "0 1px 2px rgba(15, 23, 42, 0.42)" : "none",
+                "--station-shadow-right": rightText === "#FFFFFF" ? "0 1px 2px rgba(15, 23, 42, 0.42)" : "none",
+              } as React.CSSProperties}
+            >
+      <button type="button" disabled={!previousId} aria-label={previousId ? `Previous station: ${STATIONS[previousId].name}` : "Departure"} onClick={() => previousId && selectRouteIndex(activeIndex - 1)}>
+      <Icon name="back" size="xs" />
+      <span>{previousId ? stationDisplayName(STATIONS[previousId]) : "Departure"}</span>
+      </button>
+      <div className="subway-active-station">
+      <b title={activeStation.name} aria-label={activeStation.name}>{stationDisplayName(activeStation)}</b>
+                {/* the count used to sit on its own heading row below — it
+                    belongs to the station the stepper already names */}
+      <span>{rankedPlaces.length} {rankedPlaces.length === 1 ? "place" : "places"} · {radiusLabel(radiusKm)}</span>
+      </div>
+      <button type="button" disabled={!nextId} aria-label={nextId ? `Next station: ${STATIONS[nextId].name}` : "Arrival"} onClick={() => nextId && selectRouteIndex(activeIndex + 1)}>
+      <span>{nextId ? stationDisplayName(STATIONS[nextId]) : "Arrival"}</span>
+      <Icon name="chev" size="xs" />
+      </button>
+      </div>
+      )}
       <span className="sr-only" aria-live="polite">{waypointAnnouncement}</span>
       {(editing || !route) && routeFormOpen && (
         <div className="subway-search-actions subway-search-footer">

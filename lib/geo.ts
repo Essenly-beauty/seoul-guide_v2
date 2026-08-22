@@ -61,9 +61,16 @@ export function googleDirectionsUrl(
   dest: LatLng,
   origin?: LatLng | null,
   travelMode: "transit" | "walking" = "transit",
+  /** Intermediate stops, in order. Google plans through them, so a hand-off
+      carries the whole trip the visitor built rather than only its ends
+      (owner decision 2026-08-22: Google owns timing and routing accuracy). */
+  waypoints?: LatLng[],
 ): string {
   const base = `https://www.google.com/maps/dir/?api=1&destination=${dest.lat},${dest.lng}&travelmode=${travelMode}`;
-  return origin ? `${base}&origin=${origin.lat},${origin.lng}` : base;
+  const withOrigin = origin ? `${base}&origin=${origin.lat},${origin.lng}` : base;
+  if (!waypoints || waypoints.length === 0) return withOrigin;
+  const via = waypoints.map((p) => `${p.lat},${p.lng}`).join("|");
+  return `${withOrigin}&waypoints=${encodeURIComponent(via)}`;
 }
 
 export function kakaoRouteUrl(nameKr: string, dest: LatLng, origin?: LatLng | null): string {

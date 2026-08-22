@@ -204,7 +204,10 @@ describe("route-ready panel shares the station-sheet language", () => {
   it("never prints a live-arrivals claim", () => {
     // there is no arrivals feed; the hand-off is labelled for what it does
     expect(controller).not.toContain("> Live\n");
-    expect(controller).toContain("for departure times");
+    // and no fabricated duration either — our graph arithmetic has no live
+    // schedule behind it, so Google owns timing
+    expect(controller).not.toContain("travelMinutes(readyRoute)");
+    expect(controller).toContain("Times &amp; platforms in Google Maps");
   });
 
   it("states the route once, not three times", () => {
@@ -294,5 +297,22 @@ describe("filters live on the map, panel is for results (2026-08-22)", () => {
     const meta = controller.slice(controller.indexOf('className="subway-ticket-meta"'), controller.indexOf('className="subway-ticket-meta"') + 2600);
     expect(meta).toContain("subway-text-action");
     expect(meta).toContain("Close subway planner");
+  });
+});
+
+describe("timing is Google's job, the stepper is the bottom control", () => {
+  const controller = readFileSync(new URL("../components/subway/subway-route-controller.tsx", import.meta.url), "utf8");
+  const geo = readFileSync(new URL("../lib/geo.ts", import.meta.url), "utf8");
+  const css = readFileSync(new URL("../app/globals.css", import.meta.url), "utf8");
+
+  it("hands Google the whole trip, not just the endpoints", () => {
+    expect(geo).toContain("waypoints?: LatLng[]");
+    expect(controller).toContain("viaIds.map((id) => STATIONS[id]).filter(Boolean)");
+  });
+
+  it("pins the station stepper to the bottom instead of scrolling it away", () => {
+    expect(controller).toContain('className="subway-station-focus pinned"');
+    expect(css).toContain(".subway-station-focus.pinned {");
+    expect(css).toContain("bottom: 0;");
   });
 });

@@ -3524,6 +3524,24 @@
      the panel (owner report 2026-08-22) */
   body:has(.map-screen.subway-mode) .bottomnav { display: none; }
 
+  /* The station stepper takes the space the tab bar left: pinned to the
+     bottom where a thumb reaches it, the way Kakao Metro does. It is the
+     panel's primary control while a route is up, so it must not scroll away. */
+  .subway-station-focus.pinned {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 960;
+    margin: 0;
+    border-radius: 0;
+    border-top: 1px solid var(--border);
+    border-bottom: none;
+    background: var(--surface);
+    padding: 8px 12px max(10px, env(safe-area-inset-bottom));
+    box-shadow: 0 -6px 18px -12px rgba(0, 0, 0, 0.35);
+  }
+
   .station-sheet-cats {
     display: flex; align-items: center; gap: 8px;
     flex: 1; min-width: 0;
