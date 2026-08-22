@@ -918,8 +918,19 @@ export function SubwayRouteController({
                     Nothing within {radiusLabel(radiusKm)} — widen the radius to see more.
                   </p>
                 )}
-                <button type="button" className="subway-plan-route" onClick={() => setRouteFormOpen(true)}>
-                  <Icon name="train" size="xs" /> Plan a route from here
+                <button
+                  type="button"
+                  className="subway-plan-route"
+                  onClick={() => {
+                    // "from here" has to mean it: carry the browsed station in
+                    // as the departure, otherwise the form opens blank and the
+                    // visitor retypes the station they were just looking at.
+                    if (!draftDeparture) setDraftDeparture(activeStation.id);
+                    pendingFocusRef.current = "search";
+                    setRouteFormOpen(true);
+                  }}
+                >
+                  <Icon name="train" size="xs" /> Plan a route from {stationDisplayName(activeStation)}
                 </button>
               </div>
             )}

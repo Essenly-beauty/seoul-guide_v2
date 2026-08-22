@@ -143,7 +143,7 @@ describe("station-first browse (phase 1)", () => {
 
   it("leads with the nearby list and collapses the route form", () => {
     expect(controller).toContain("station-sheet");
-    expect(controller).toContain("Plan a route from here");
+    expect(controller).toContain("Plan a route from {stationDisplayName(activeStation)}");
     // the whole list, not the old three-item teaser
     expect(controller).toContain("{rankedPlaces.map(({ place, km }) => (");
   });
@@ -169,5 +169,16 @@ describe("station-first browse (phase 1)", () => {
   it("accepts the station deep link that search results emit", () => {
     expect(mapScreen).toContain('searchParams.get("station")');
     expect(readFileSync(new URL("../lib/routes.ts", import.meta.url), "utf8")).toContain("mode=subway&station=");
+  });
+});
+
+describe("plan-a-route carries the browsed station", () => {
+  const controller = readFileSync(new URL("../components/subway/subway-route-controller.tsx", import.meta.url), "utf8");
+
+  it("names the station on the button and seeds it as the departure", () => {
+    // "Plan a route from here" that opens a blank form makes the visitor
+    // retype the station they were just looking at.
+    expect(controller).toContain("Plan a route from {stationDisplayName(activeStation)}");
+    expect(controller).toContain("if (!draftDeparture) setDraftDeparture(activeStation.id)");
   });
 });
