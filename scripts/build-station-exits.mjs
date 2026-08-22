@@ -18,6 +18,16 @@ import { execFileSync } from "node:child_process";
 import { existsSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
+// Name/distance matching lives in scripts/lib/osm-exit-match.mjs so
+// scripts/audit-station-coords.mjs can bind entrances to stations exactly the
+// way this builder does.
+import {
+  buildNameIndex,
+  exitNumber,
+  metres,
+  stationList,
+  stationNameFrom,
+} from "./lib/osm-exit-match.mjs";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 const OUT = join(ROOT, "lib", "generated", "station-exits.ts");
@@ -58,98 +68,12 @@ function overpass(query) {
   throw lastErr;
 }
 
-const metres = (a, b) => {
-  const dLat = ((b.lat - a.lat) * Math.PI) / 180;
-  const dLng = ((b.lng - a.lng) * Math.PI) / 180;
-  const la1 = (a.lat * Math.PI) / 180;
-  const la2 = (b.lat * Math.PI) / 180;
-  const h = Math.sin(dLat / 2) ** 2 + Math.cos(la1) * Math.cos(la2) * Math.sin(dLng / 2) ** 2;
-  return 2 * 6371 * Math.asin(Math.sqrt(h)) * 1000;
-};
-
-/** "3" → 3, "3-1" → 3 (sub-exits collapse onto their parent number). */
-function exitNumber(ref) {
-  const m = String(ref).match(/\d+/);
-  return m ? Number(m[0]) : null;
-}
-
-/** Fold spelling variants so "Nat'l Univ" and "National University" agree. */
-const normalizeEn = (s) =>
-  s
-    .toLowerCase()
-    .replace(/nat['’]?l\b/g, "national")
-    .replace(/\bsh/g, "s") // Shinnonhyeon ≡ Sinnonhyeon
-    .replace(/univ\b\.?/g, "university")
-    .replace(/[^a-z0-9]/g, "");
-const normalizeKo = (s) => s.replace(/\s/g, "").replace(/역$/, "");
-
-/** Candidate keys for one English station name. Seoul renames stations with a
-    parenthetical secondary name ("Jamsil (Songpa-gu Office)", "Chongshin Univ.
-    (Isu)") while OSM usually carries only one of the two parts — and numbered
-    stations differ in romanization ("Euljiro 3(sam)ga" vs "Euljiro 3-ga"). So
-    index the full string, the string with parentheses removed, AND the
-    parenthetical content on its own. */
-function englishKeys(name) {
-  if (!name) return [];
-  const keys = new Set();
-  keys.add(normalizeEn(name));
-  const withoutParens = name.replace(/\([^)]*\)/g, " ").trim();
-  if (withoutParens) keys.add(normalizeEn(withoutParens));
-  for (const m of name.matchAll(/\(([^)]*)\)/g)) {
-    const inner = m[1].trim();
-    // "(sam)"/"(il)" in "Jongno 3(sam)ga" are romanization particles, not names
-    if (inner.length > 2 && !/^(il|i|sam|sa|o|yuk|chil|pal|gu)$/i.test(inner)) keys.add(normalizeEn(inner));
-  }
-  return [...keys].filter(Boolean);
-}
-
-/** Strip the exit phrasing off an OSM description, leaving the station name.
-    "Gangnam Station gate 10" → Gangnam · "동대문역사문화공원 4번출구" → 동대문역사문화공원 */
-function stationNameFrom(tags) {
-  const en = tags["description:en"] ?? tags["name:en"];
-  if (en) {
-    const cleaned = en
-      .replace(/\b(gate|exit|entrance|출구)\b.*$/i, "")
-      .replace(/\bstations?\b/i, "")
-      .trim()
-      .replace(/[,·-]+$/, "")
-      .trim();
-    if (cleaned) return { keys: englishKeys(cleaned), raw: en };
-  }
-  const ko = tags["description:ko"] ?? tags.description ?? tags.name;
-  if (ko) {
-    const cleaned = ko
-      .replace(/\s*\d+\s*번?\s*출입?구.*$/, "")
-      .replace(/\s*\d+\s*(번)?\s*$/, "")
-      .trim();
-    if (cleaned) return { keys: [normalizeKo(cleaned)], raw: ko };
-  }
-  return null;
-}
-
 const raw = JSON.parse(readFileSync(STATION_DATA, "utf8"));
-const stationSource = raw.stations ?? raw;
-const stations = Array.isArray(stationSource)
-  ? stationSource
-  : Object.entries(stationSource).map(([id, s]) => ({ id, ...s }));
+const stations = stationList(raw);
 console.log(`stations: ${stations.length}`);
 
-// name index — English and Korean both point at the station id. Ambiguous names
-// (two stations sharing a normalized name) are dropped so they fall through to
-// proximity rather than binding to an arbitrary winner.
-const nameIndex = new Map();
-const ambiguous = new Set();
-const addName = (key, id) => {
-  if (!key) return;
-  const prev = nameIndex.get(key);
-  if (prev && prev !== id) ambiguous.add(key);
-  nameIndex.set(key, id);
-};
-for (const s of stations) {
-  for (const key of englishKeys(s.name ?? "")) addName(key, s.id);
-  addName(normalizeKo(s.nameKr ?? ""), s.id);
-}
-for (const key of ambiguous) nameIndex.delete(key);
+// name index — English and Korean both point at the station id.
+const { nameIndex, ambiguous } = buildNameIndex(stations);
 console.log(`name index: ${nameIndex.size} unique names (${ambiguous.size} ambiguous, proximity-only)`);
 
 let json;

@@ -1,0 +1,12 @@
+{
+  "ichon": {
+    "lat": 37.522228,
+    "lng": 126.974425,
+    "note": "OSM exit centroid (6 exits); KRIC row was 960 m off"
+  },
+  "magok": {
+    "lat": 37.55971,
+    "lng": 126.826178,
+    "note": "OSM exit centroid (7 exits); KRIC row was 1022 m off"
+  }
+}

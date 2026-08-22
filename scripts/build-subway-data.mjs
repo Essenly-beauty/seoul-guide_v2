@@ -28,7 +28,7 @@
 // station that doesn't exist yet), and don't count against the unresolved-
 // station fail gate below, which is reserved for *unexpected* mismatches.
 
-import { readFileSync, writeFileSync, mkdirSync } from "node:fs";
+import { existsSync, readFileSync, writeFileSync, mkdirSync } from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import XLSX from "xlsx";
@@ -37,6 +37,8 @@ import { normalizeStationNameKr, baseStationId } from "./lib/normalize.mjs";
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const CACHE_DIR = path.join(__dirname, ".cache");
 const OUT_PATH = path.join(__dirname, "..", "lib", "subway-data.json");
+
+const OUT_PATH_OVERRIDES = path.join(__dirname, "lib", "station-coord-overrides.json");
 
 const UNRESOLVED_FAIL_THRESHOLD = 5;
 
@@ -176,6 +178,20 @@ const SINBUNDANG_FUTURE_EXTENSION_NOS = new Set([
   1033, 1034, 1035, 1036, 1037, 1038, 1039, 1040, 1041, 1042, 1043, 1044, 1045, 1046, 1047,
 ]);
 
+// Two coordinate-fix mechanisms exist, and they are deliberately separate:
+//
+//   COORDINATE_CORRECTIONS (below) is KRIC-ROW-level, keyed by normalized KR
+//   name, applied before matching — for a row whose coordinate is so wrong it
+//   would break station matching itself (양원 filed 200 km away).
+//
+//   scripts/lib/station-coord-overrides.json is STATION-ID-level, applied
+//   after the station table is built (see applyCoordinateOverrides). It holds
+//   fixes derived from real OpenStreetMap exit positions by
+//   scripts/audit-station-coords.mjs, keyed by the station id this build
+//   assigns. Same convention as scripts/lib/kr-name-overrides.json: the file
+//   is the source of truth and is re-applied on every rebuild, so a pipeline
+//   rerun can never silently reintroduce the bad coordinate.
+//
 // KRIC row-level coordinate fixes: 양원역(Yangwon, Gyeongui–Jungang line,
 // station code I4108/1204) is recorded by KRIC at lat 36.9637/lng 129.0913
 // (Yeongdeok, Gyeongsangbuk-do — ~200km from Seoul), which is inconsistent
@@ -210,6 +226,34 @@ const COORDINATE_CORRECTIONS = {
 // full derivation this build's original station/edge data already reflects.
 
 const DEFAULT_EDGE_SECONDS = 120;
+
+/**
+ * Re-apply the OSM-derived coordinate overrides so a rebuild cannot regress a
+ * station back onto its bad KRIC coordinate. Keyed by the station id this
+ * build assigns; an override naming an id this build did not produce is a
+ * loud warning, not a silent no-op (the id scheme may have changed under it).
+ *
+ * Evidence and regeneration: scripts/audit-station-coords.mjs.
+ */
+function applyCoordinateOverrides(stations) {
+  if (!existsSync(OUT_PATH_OVERRIDES)) return;
+  const overrides = JSON.parse(readFileSync(OUT_PATH_OVERRIDES, "utf8"));
+  let applied = 0;
+  for (const [id, o] of Object.entries(overrides)) {
+    const station = stations[id];
+    if (!station) {
+      console.error(`[build] WARNING: coordinate override for unknown station id "${id}" — not applied`);
+      continue;
+    }
+    if (station.lat === o.lat && station.lng === o.lng) continue;
+    station.lat = o.lat;
+    station.lng = o.lng;
+    applied += 1;
+  }
+  console.error(
+    `[build] station coordinate overrides: ${applied} applied of ${Object.keys(overrides).length} (scripts/lib/station-coord-overrides.json)`,
+  );
+}
 
 function loadKric() {
   const wb = XLSX.readFile(path.join(CACHE_DIR, "kric_stations.xlsx"));
@@ -409,6 +453,9 @@ function main() {
     const [a, b, line] = key.split("|");
     return [a, b, line, seconds];
   });
+
+  // after the station table is final (ids assigned), before anything is written
+  applyCoordinateOverrides(stations);
 
   const output = { lines, stations, edges };
 
