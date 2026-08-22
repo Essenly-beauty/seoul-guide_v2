@@ -209,20 +209,46 @@ the `aria-describedby` route-help contract). Then unify the sheets. Deleting tes
 encode shipped behaviour is legitimate here but must be a stated deliverable, not a
 surprise in a diff.
 
-## Owner decisions required
+## Owner decisions — answered 2026-08-22
 
-1. **Does in-app A→B routing survive v1?** Recommendation: demote to `/map/route`
-   (phase 3), do not delete. Phases 1–2 do not depend on the answer.
-2. **Fabricated exit numbers on the map.** Commit 086a4b0 shipped exit markers driven
-   by the same hash generator. Shop rows no longer show them. Pull the map markers too,
-   or accept the fiction until a real exit dataset exists?
-3. **Keep the category chip row?** Costs ~half a shop row at half snap (3.0 vs 3.5).
-   Olive Young is the anchor brand and single-brand intent is common. Lean keep.
-4. **Radius as a chip with a <5-results auto-expand, or a first-class control?**
-5. **Subway as a mode button or a map layer chip?** Layer is architecturally cleaner
-   but collides with `MapSheet`, which is always mounted in map mode at `peek`
-   (`h − 62`), so "zero panel" isn't achievable without touching the normal map.
-   Kept as a mode; revisit post-beta.
-6. **Is any of this in the beta cut?** Phase 1 is safe for any timeline. Phase 2 is a
-   2–3 day change with a fork best not resolved under launch pressure. Recommendation:
-   ship phase 1 now, phase 2 immediately after the cut.
+1. **A→B routing in v1** → **demote, do not delete.** Route moves behind a
+   "Plan a route" action in the station header plus the new place-sheet row
+   (phase 3). The graph, via-editing and 20/20 line geometries stay.
+2. **Fabricated exit numbers** → **replaced with real data, done 2026-08-22.**
+   2805 OSM `railway=subway_entrance` nodes across 584/600 stations, matched
+   name-first (`scripts/build-station-exits.mjs`, `lib/generated/station-exits.ts`).
+   Map markers keep rendering; they are now true. Loads on demand at EXIT_ZOOM
+   so the map's first paint is unchanged.
+3. **Category chips** → **keep.** Two clarifications from the owner:
+   - The map's existing top category rail keeps working exactly as it does now.
+   - Where filters must live in a panel/popover, they collapse into **one top
+     row of chips, each opening its own popover** (owner reference: 호갱노노
+     filter pattern) — not a stacked control block inside the sheet.
+4. **Radius** → **fix the default at 500 m**, and lift radius out of subway
+   mode: normal map mode gets the same radius control **and draws the circle on
+   the map**. This makes radius a first-class map concept instead of a
+   subway-only sub-control.
+5. **Subway entry** → **stays a mode button.**
+6. Beta cut → pending; phase 1 remains safe for any timeline.
+
+### What decisions 3 and 4 change in this spec
+
+The station sheet's single 44px chip row (§Screen C) is no longer subway-only
+furniture. It becomes an instance of one shared filter rail:
+
+- **Placement**: the rail lives on the map, above the sheet, in both normal and
+  subway mode — one horizontal row, 44px, each chip opening a popover.
+- **Chips**: radius (default `500 m`), category, and the existing detail
+  filters. A chip carrying a non-default value shows that value and reads as
+  active; the current separate filter button and its bottom sheet fold into it.
+- **Radius circle**: drawn in both modes, not just when a station is active.
+  In normal map mode the circle centres on the user's location (or the map
+  centre when location is unavailable, labelled as such).
+- **Consequence for the pixel budget**: the sheet's own chip row disappears —
+  station-sheet chrome drops from 121px to **77px** (handle 20 + header 56),
+  and the half snap gains roughly half a shop row.
+
+Open sub-question for phase 2: with radius default at 500 m rather than 1 km,
+more stations will return few results. The `<5 results → auto-expand` fallback
+becomes more important, and the expansion must be visible in the header line
+("within 1 km — widened, nothing within 500 m") rather than silent.
