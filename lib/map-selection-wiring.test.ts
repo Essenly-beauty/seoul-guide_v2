@@ -263,3 +263,21 @@ describe("selected-pin sheet owns the bottom of the screen (Kakao pattern)", () 
     expect(summary).toContain("Photos coming soon");
   });
 });
+
+describe("place photo ingestion", () => {
+  it("attaches generated photos to places without touching each import", () => {
+    const data = readFileSync(new URL("../lib/data.ts", import.meta.url), "utf8");
+    expect(data).toContain("PLACE_PHOTOS[p.id]");
+    // a place with no photo must stay undefined, not become an empty array,
+    // so the sheet falls to the honest empty state
+    expect(data).toContain("PLACE_PHOTOS[p.id]?.length ?");
+  });
+
+  it("ships no placeholder photos — the empty state is the truth today", async () => {
+    const { PLACE_PHOTOS } = await import("./generated/place-photos");
+    for (const [id, list] of Object.entries(PLACE_PHOTOS)) {
+      expect(list.length, id).toBeGreaterThan(0);
+      for (const src of list) expect(src.startsWith("/places/"), src).toBe(true);
+    }
+  });
+});

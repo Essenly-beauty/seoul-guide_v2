@@ -3,6 +3,7 @@
 
 import type { IconName } from "@/components/icon";
 import { CREATRIP_PLACES } from "./generated/creatrip-places";
+import { PLACE_PHOTOS } from "./generated/place-photos";
 import { OLIVEYOUNG_PLACES } from "./generated/oliveyoung-places";
 import { ADOS_PLACES } from "./generated/ados-places";
 
@@ -239,6 +240,11 @@ const withSource = (list: Place[], source: NonNullable<Place["source"]>): Place[
   list.map((p) => ({
     ...p,
     source,
+    // Verified photos are attached here rather than baked into each import,
+    // so dropping files into public/places/<id>/ and rebuilding is the whole
+    // job (scripts/build-place-photos.mjs). A place with none keeps `photos`
+    // undefined and renders the honest empty state.
+    ...(PLACE_PHOTOS[p.id]?.length ? { photos: PLACE_PHOTOS[p.id] } : {}),
     // Curated rows carry editorial seed values for layout and local ranking
     // demos, not venue-verified ratings. Strip them at the public data-layer
     // boundary so map/search/list surfaces cannot accidentally present them
