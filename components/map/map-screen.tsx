@@ -414,10 +414,18 @@ export function MapScreen() {
               <span className="small muted">Search places, areas</span>
             </Link>
           ) : (
-            <div className="map-searchpill subway-map-context" aria-live="polite">
+            <Link
+              // The pill showed the station but did nothing, so there was no
+              // way to search again without leaving subway mode (owner report
+              // 2026-08-22). It is now the way back to station search.
+              className="map-searchpill subway-map-context"
+              href={routes.search}
+              aria-label={activeStation ? `${STATIONS[activeStation].name} Station — search for another station or place` : "Search for a station"}
+            >
               <Icon name="train" size="sm" style={{ color: "var(--accent)" }} aria-hidden="true" />
               <span className="small">{activeStation ? `${STATIONS[activeStation].name} Station` : "Choose a station below"}</span>
-            </div>
+              <Icon name="search" size="xs" style={{ color: "var(--muted)", marginLeft: "auto" }} aria-hidden="true" />
+            </Link>
           )}
           <button
             ref={subwayBtnRef}
@@ -583,7 +591,13 @@ export function MapScreen() {
             setSelectedId(null);
             if (activeStation) setFlyTarget({ lat: STATIONS[activeStation].lat, lng: STATIONS[activeStation].lng });
           }}
-          onPlace={handleMapSelect}
+          onPlace={(id) => {
+            // A place tapped in the station list has to open the place card —
+            // MapSheet only mounts in map mode, so staying in subway mode just
+            // highlighted a pin and offered nothing (owner report 2026-08-22).
+            handleMapSelect(id);
+            setMode("map");
+          }}
           onClearRoute={() => {
             setDeparture(null);
             setArrival(null);

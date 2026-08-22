@@ -212,3 +212,28 @@ describe("route-ready panel shares the station-sheet language", () => {
     expect(css).toContain(".subway-controller.route-ready.snap-half { height: min(62%, 580px); }");
   });
 });
+
+describe("subway flow: search → station → place (owner walkthrough 2026-08-22)", () => {
+  const controller = readFileSync(new URL("../components/subway/subway-route-controller.tsx", import.meta.url), "utf8");
+  const mapScreen = readFileSync(new URL("../components/map/map-screen.tsx", import.meta.url), "utf8");
+
+  it("a place tapped in the station list opens the place card", () => {
+    // MapSheet only mounts in map mode, so staying in subway mode left the
+    // tap with nothing to show but a highlighted pin
+    const handler = mapScreen.slice(mapScreen.indexOf("onPlace={"), mapScreen.indexOf("onPlace={") + 420);
+    expect(handler).toContain("handleMapSelect(id)");
+    expect(handler).toContain('setMode("map")');
+  });
+
+  it("the subway context pill leads back to search", () => {
+    // it used to be an inert <div> naming the station
+    expect(mapScreen).toContain('className="map-searchpill subway-map-context"');
+    const pill = mapScreen.slice(mapScreen.indexOf("subway-map-context") - 400, mapScreen.indexOf("subway-map-context") + 400);
+    expect(pill).toContain("href={routes.search}");
+  });
+
+  it("station results lead with the name and trail the line badges", () => {
+    const row = controller.slice(controller.indexOf('role="option"'), controller.indexOf('role="option"') + 1400);
+    expect(row.indexOf("station-result-name")).toBeLessThan(row.indexOf("<StationLineBadges"));
+  });
+});

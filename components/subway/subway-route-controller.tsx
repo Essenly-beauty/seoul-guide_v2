@@ -306,7 +306,8 @@ function StationCombobox({
                       commit(station);
                     }}
                   >
-                    <StationLineBadges station={station} />
+                    {/* Kakao Metro order: the name leads, the line badges sit
+                        at the trailing edge (owner reference 2026-08-22). */}
                     <span className="station-result-name">
                       <b>{station.name}</b>
                       <span lang="ko">{station.nameKr}</span>
@@ -317,6 +318,7 @@ function StationCombobox({
                         <span className="sr-only">{context}</span>
                       </span>
                     )}
+                    <StationLineBadges station={station} />
                   </button>
                 );
               })

@@ -3539,7 +3539,20 @@
   }
   /* the station stepper is a second navigation surface stacked on the route
      summary — shrink it to a single compact row */
-  .subway-station-focus { min-height: 48px; margin-block: 6px; }
+  /* The station stepper reads as Kakao Metro's bottom selection bar: a
+     distinct bordered strip, prev / active / next, with the active station
+     carrying its own count (owner reference 2026-08-22). */
+  .subway-station-focus {
+    min-height: 52px;
+    margin: 8px -18px 0;
+    padding-inline: 12px;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    border-radius: 0;
+    background: var(--surface-hover);
+  }
+  .subway-station-focus > button { font-size: 12px; }
+  .subway-active-station > b { font-size: 14.5px; }
   .subway-active-station > span { font-size: 11px; }
   .subway-plan-route {
     display: flex; align-items: center; justify-content: center; gap: 8px;
