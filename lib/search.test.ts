@@ -30,3 +30,26 @@ describe("searchAll", () => {
     expect(r.total).toBe(r.places.length + r.products.length + r.articles.length);
   });
 });
+
+describe("station results (station-first entry point)", () => {
+  it("surfaces stations for an area query, capped so places still fit", async () => {
+    const { searchAll, STATION_RESULT_LIMIT } = await import("./search");
+    const r = searchAll("Gangnam");
+    expect(r.stations.length).toBeGreaterThan(0);
+    expect(r.stations.length).toBeLessThanOrEqual(STATION_RESULT_LIMIT);
+    expect(r.stations[0].id).toBe("gangnam");
+    // stations must not displace the other result groups
+    expect(r.places.length).toBeGreaterThan(0);
+    expect(r.total).toBe(r.stations.length + r.places.length + r.products.length + r.articles.length);
+  });
+
+  it("matches Korean station names too", async () => {
+    const { searchAll } = await import("./search");
+    expect(searchAll("홍대").stations.some((s) => s.id === "hongik_univ")).toBe(true);
+  });
+
+  it("stays empty for a blank query", async () => {
+    const { searchAll } = await import("./search");
+    expect(searchAll("   ").stations).toEqual([]);
+  });
+});

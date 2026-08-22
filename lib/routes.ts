@@ -19,6 +19,8 @@ export const routes = {
   blog: "/blog",
   favorites: "/favorites",
   savedPlacesMap: "/map?saved=1",
+  /** Open the map in subway mode focused on one station (station-first search). */
+  subwayStation: (id: string) => `/map?mode=subway&station=${encodeURIComponent(id)}`,
   menu: "/menu",
 
   // Legacy aliases (redirect pages keep old deep links alive)

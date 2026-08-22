@@ -25,6 +25,8 @@ describe("installable PWA contract", () => {
     expect(control).toContain('window.addEventListener("beforeinstallprompt"');
     expect(control).toContain("Add to Home Screen");
     expect(control).toContain("Show iPhone install steps");
+    expect(control).toContain("KAKAOTALK|NAVER");
+    expect(control).toContain("Open in Safari or Chrome to install");
     expect(source("app/layout.tsx")).toContain("<PwaRegister />");
   });
 

@@ -135,3 +135,38 @@ describe("subway endpoint search layout", () => {
     expect(cssSource).toContain(".subway-nearby-jump > span");
   });
 });
+
+describe("station-first browse (phase 1)", () => {
+  const controller = readFileSync(new URL("../components/subway/subway-route-controller.tsx", import.meta.url), "utf8");
+  const mapScreen = readFileSync(new URL("../components/map/map-screen.tsx", import.meta.url), "utf8");
+  const css = readFileSync(new URL("../app/globals.css", import.meta.url), "utf8");
+
+  it("leads with the nearby list and collapses the route form", () => {
+    expect(controller).toContain("subway-browse-lead");
+    expect(controller).toContain("Plan a route from here");
+    // the whole list, not the old three-item teaser
+    expect(controller).toContain("{rankedPlaces.map(({ place, km }) => (");
+  });
+
+  it("keeps the map on screen while browsing a station", () => {
+    expect(controller).toContain('" station-browse"');
+    expect(css).toContain(".subway-controller.station-browse");
+    // the editor's full-screen rule must not apply to the browse state
+    expect(css).toContain(":has(.subway-controller.station-browse) .map-top");
+  });
+
+  it("never shows a disabled primary CTA during browse", () => {
+    expect(controller).toContain("{(editing || !route) && routeFormOpen && (");
+  });
+
+  it("tapping a station disc browses instead of presetting a route leg", () => {
+    const handler = mapScreen.slice(mapScreen.indexOf("onStationClick={"), mapScreen.indexOf("onStationClick={") + 600);
+    expect(handler).toContain("setActiveStation(id)");
+    expect(handler).not.toContain("setDeparture(id)");
+  });
+
+  it("accepts the station deep link that search results emit", () => {
+    expect(mapScreen).toContain('searchParams.get("station")');
+    expect(readFileSync(new URL("../lib/routes.ts", import.meta.url), "utf8")).toContain("mode=subway&station=");
+  });
+});

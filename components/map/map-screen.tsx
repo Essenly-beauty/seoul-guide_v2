@@ -94,7 +94,9 @@ export function MapScreen() {
   const [vias, setVias] = useState<string[]>([]);
   const [subwaySnap, setSubwaySnap] = useState<SubwaySnap>("half");
   const [activeStation, setActiveStation] = useState<string | null>(null);
-  const [stationRadius, setStationRadius] = useState(1);
+  // owner decision 2026-08-22: 500 m is the browse default — a walkable
+  // radius, not a "everything in the district" radius
+  const [stationRadius, setStationRadius] = useState(0.5);
   const [stationCategory, setStationCategory] = useState<SubwayPlaceCategory>("all");
   const [subwayEditing, setSubwayEditing] = useState(false);
   const { user: authUser } = useAuthUser();
@@ -196,6 +198,20 @@ export function MapScreen() {
 
   // Search shortcuts (spec §4.3): `?cat=` applies a category filter,
   // `?zone=` flies to that zone's place centroid.
+  // Station-first search lands here: /map?mode=subway&station=<id> browses the
+  // station without asking for a route (phase 1).
+  const modeParam = searchParams.get("mode");
+  const stationParam = searchParams.get("station");
+  useEffect(() => {
+    if (modeParam !== "subway" || !stationParam || !STATIONS[stationParam]) return;
+    initialLocationHandledRef.current = true; // the deep link owns the camera
+    setActiveStation(stationParam);
+    setSubwayEditing(true);
+    setSelectedId(null);
+    setMode("subway");
+    setFlyTarget({ lat: STATIONS[stationParam].lat, lng: STATIONS[stationParam].lng });
+  }, [modeParam, stationParam]);
+
   const catParam = searchParams.get("cat");
   const zoneParam = searchParams.get("zone");
   useEffect(() => {
@@ -377,10 +393,10 @@ export function MapScreen() {
         routePath={mode === "subway" && subwayRouteReady && route && trackPath ? trackPath(route) : null}
         vividPins={mode === "map" ? cats.length > 0 || Boolean(sharedList) || savedOnly : true /* station browse is a focused task */}
         onStationClick={mode === "map" ? (id) => {
-          // Tapping a station disc opens the subway browse with it preset as
-          // departure — the editor's "Near {station}" list shows radius shops.
+          // Browse what is around the station. Presetting it as a route
+          // departure (the old behaviour) turned a map tap into a form the
+          // visitor never asked for — station-first redesign, phase 1.
           setSelectedId(null);
-          setDeparture(id);
           setActiveStation(id);
           setSubwayEditing(true);
           setMode("subway");
@@ -574,7 +590,7 @@ export function MapScreen() {
             setVias([]);
             setActiveStation(null);
             setSelectedId(null);
-            setStationRadius(1);
+            setStationRadius(0.5);
             setStationCategory("all");
           }}
           onEditingChange={setSubwayEditing}

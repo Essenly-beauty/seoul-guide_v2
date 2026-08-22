@@ -8,7 +8,7 @@ type BeforeInstallPromptEvent = Event & {
   userChoice: Promise<{ outcome: "accepted" | "dismissed" }>;
 };
 
-type Platform = "checking" | "ios" | "browser" | "unsupported";
+type Platform = "checking" | "in-app" | "ios" | "browser" | "unsupported";
 
 const isStandalone = () =>
   window.matchMedia("(display-mode: standalone)").matches ||
@@ -17,6 +17,9 @@ const isStandalone = () =>
 const isIos = () =>
   /iPad|iPhone|iPod/.test(navigator.userAgent) ||
   (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+
+const isInAppBrowser = () =>
+  /KAKAOTALK|NAVER|DaumApps|Instagram|FBAN|FBAV|Line\//i.test(navigator.userAgent);
 
 /**
  * Uses the native browser install prompt where it exists and explains the
@@ -30,7 +33,7 @@ export function PwaInstallControl() {
 
   useEffect(() => {
     setInstalled(isStandalone());
-    setPlatform(isIos() ? "ios" : "browser");
+    setPlatform(isInAppBrowser() ? "in-app" : isIos() ? "ios" : "browser");
 
     const onBeforeInstallPrompt = (event: Event) => {
       event.preventDefault();
@@ -59,6 +62,17 @@ export function PwaInstallControl() {
 
   if (platform === "checking") return null;
   if (installed) return <p className="t-caption" style={{ color: "var(--accent)", fontWeight: 700 }}>Installed on this device</p>;
+
+  if (platform === "in-app") {
+    return (
+      <div className="stack xs" style={{ alignItems: "flex-start", textAlign: "left", maxWidth: 340 }}>
+        <b className="t-label-md">Open in Safari or Chrome to install</b>
+        <p className="t-caption muted" style={{ margin: 0 }}>
+          KakaoTalk and other in-app browsers cannot install web apps directly. Use the browser menu to open this link externally, then choose Add to Home Screen or Install app.
+        </p>
+      </div>
+    );
+  }
 
   if (promptEvent) {
     return (

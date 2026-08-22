@@ -17,6 +17,7 @@ import { routes } from "@/lib/routes";
 import { matchRange, rankPlaces, searchAll, type RankedPlace } from "@/lib/search";
 import { MAP_CATEGORIES, PLACES, TYPE_LABEL, ZONES, zoneShort, type Place, type PlaceType, type ZoneKey } from "@/lib/data";
 import { GANGNAM_STATION, formatDistance, haversineKm } from "@/lib/geo";
+import { LINE_META, lineTextColor, placesNearStation, stationDisplayName, type SubwayStation } from "@/lib/subway";
 
 // ── Recent searches (spec v2 §4.3-2) — localStorage, max 10, most-recent first ──
 
@@ -66,6 +67,42 @@ const rowBtn: CSSProperties = {
 };
 
 /** S-2 result row: [badge 17] name(match bold) · type / ★ · distance · address [↗ fill]. */
+/** Station result — line badges, both names, and how many places sit inside the
+    default 500 m browse radius, so the row answers "is this worth a trip?"
+    before the tap. Opens the map in subway mode focused on that station. */
+function StationRow({ station, onOpen }: { station: SubwayStation; onOpen: () => void }) {
+  const nearby = useMemo(() => placesNearStation(PLACES, station.id, 0.5).length, [station.id]);
+  return (
+    <Link className="listrow v2" href={routes.subwayStation(station.id)} onClick={onOpen}>
+      <span className="row" style={{ gap: 4, flex: "none" }}>
+        {station.lines.slice(0, 3).map((line) => {
+          const color = LINE_META[line]?.color ?? "var(--dim)";
+          return (
+            <span
+              key={line}
+              className="linebadge"
+              style={{ background: color, color: lineTextColor(color) }}
+              title={LINE_META[line]?.label ?? line}
+            >
+              {LINE_META[line]?.shortLabel ?? line}
+            </span>
+          );
+        })}
+      </span>
+      <div style={{ flex: 1, minWidth: 0 }}>
+        <b className="t-label-md" style={{ fontSize: 14, display: "block", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
+          {stationDisplayName(station)}
+        </b>
+        <div className="t-caption">
+          {station.nameKr}
+          {nearby > 0 && <> · {nearby} nearby</>}
+        </div>
+      </div>
+      <Icon name="chev" size="sm" style={{ color: "var(--dim)" }} />
+    </Link>
+  );
+}
+
 function PlaceRow({ r, query, onOpen, onFill }: {
   r: RankedPlace;
   query: string;
@@ -257,6 +294,15 @@ function SearchPageInner() {
             <p className="caption dim" style={{ marginTop: 6 }}>Try a shorter word &mdash; &quot;spa&quot;, a district like &quot;Hongdae&quot;, or the Korean name.</p>
             <Button variant="secondary" style={{ marginTop: 16 }} href={routes.map}>Browse all places</Button>
           </div>
+        )}
+
+        {extra.stations.length > 0 && (
+          <section className="stack sm">
+            <div className="label">Stations · {extra.stations.length}</div>
+            {extra.stations.map((st) => (
+              <StationRow key={st.id} station={st} onOpen={() => saveRecent(raw)} />
+            ))}
+          </section>
         )}
 
         {ranked.results.length > 0 && (

@@ -393,6 +393,11 @@ export function SubwayRouteController({
 }) {
   const [editing, setEditing] = useState(!route);
   const [snap, setSnap] = useState<SubwaySnap>("half");
+  // Station-first (phase 1): arriving with a station and no route means the
+  // visitor came to look around, not to fill a form — so the route fields
+  // start collapsed behind one row. Arriving with neither (the plain Subway
+  // button) still opens the planner, because there is nothing else to show.
+  const [routeFormOpen, setRouteFormOpen] = useState(() => !(activeStationId && !route));
   const [draftDeparture, setDraftDeparture] = useState(departureId);
   const [draftArrival, setDraftArrival] = useState(arrivalId);
   const [draftVias, setDraftVias] = useState<string[]>(viaIds);
@@ -707,9 +712,13 @@ export function SubwayRouteController({
         .join(" → ")
     : null;
 
+  /** Looking around a station rather than planning a trip: the panel leads with
+      the nearby list and keeps the map visible. */
+  const browsingStation = Boolean(!readyRoute && activeStation && !routeFormOpen);
+
   return (
     <section
-      className={`subway-controller${readyRoute ? ` route-ready snap-${snap}` : " search-ready"}`}
+      className={`subway-controller${readyRoute ? ` route-ready snap-${snap}` : " search-ready"}${browsingStation ? " station-browse" : ""}`}
       aria-label="Plan by subway stations"
     >
       {readyRoute && (
@@ -732,7 +741,9 @@ export function SubwayRouteController({
         <header className="subway-controller-header">
           <div>
             <span className="subway-controller-kicker"><Icon name="train" size="xs" /> Subway</span>
-            <h2 title={routeTitle ?? undefined}>{routeTitle ?? "Choose your route"}</h2>
+            <h2 title={routeTitle ?? undefined}>
+              {routeTitle ?? (browsingStation && activeStation ? `Near ${activeStation.name}` : "Choose your route")}
+            </h2>
           </div>
           <div className="row" style={{ gap: 4 }}>
             {route && !editing && (
@@ -801,7 +812,43 @@ export function SubwayRouteController({
       <div className="subway-controller-scroll">
         {editing || !route ? (
           <div className="subway-search-panel">
-            <div className="subway-search-fields">
+            {browsingStation && activeStation && (
+              <div className="subway-browse-lead">
+                {/* the panel header already names the station — this line
+                    carries only what the header cannot: scope and count */}
+                <div className="subway-nearby-heading">
+                  <p>{rankedPlaces.length} places · {radiusLabel(radiusKm)} straight-line from the station center</p>
+                </div>
+                {rankedPlaces.length > 0 ? (
+                  <div className="subway-place-list">
+                    {rankedPlaces.map(({ place, km }) => (
+                      <div
+                        key={place.id}
+                        ref={selectedPlaceId === place.id ? selectedPlaceRef : undefined}
+                        className={`subway-place-row${selectedPlaceId === place.id ? " selected" : ""}`}
+                      >
+                        <button type="button" onClick={() => onPlace(place.id)} aria-current={selectedPlaceId === place.id ? "true" : undefined}>
+                          <CategoryBadge type={place.type} size={20} />
+                          <span className="subway-place-copy">
+                            <b>{place.name}</b>
+                            <span>{TYPE_LABEL[place.type]} · {formatDistance(km)} straight-line from station center</span>
+                          </span>
+                        </button>
+                        <Link href={routes.place(place.id)} aria-label={`View ${place.name} details`}>
+                          <Icon name="chev" size="xs" />
+                        </Link>
+                      </div>
+                    ))}
+                  </div>
+                ) : (
+                  <p className="subway-search-preview-empty">No places are listed around this station in our current data.</p>
+                )}
+                <button type="button" className="subway-plan-route" onClick={() => setRouteFormOpen(true)}>
+                  <Icon name="train" size="xs" /> Plan a route from here
+                </button>
+              </div>
+            )}
+            <div className="subway-search-fields" hidden={!routeFormOpen}>
               <span className="subway-search-route-rail" aria-hidden="true">
                 <RailStop stationId={draftDeparture} kind="departure" />
                 {draftVias.map((id) => (
@@ -951,7 +998,7 @@ export function SubwayRouteController({
               </button>
             </div>
 
-            <div className="subway-via-editor">
+            <div className="subway-via-editor" hidden={!routeFormOpen}>
               {!viaAdding && draftVias.length < MAX_VIAS ? (
                 <button
                   ref={viaAddButtonRef}
@@ -967,7 +1014,7 @@ export function SubwayRouteController({
             {sameStation && <p className="station-search-error" role="alert">Departure and arrival must be different stations.</p>}
             {viaConflict && <p className="station-search-error" role="alert">Via stations must be different from departure, arrival, and each other.</p>}
             {routeUnavailable && <p className="station-search-error" role="alert">A route could not be found between these stations.</p>}
-            {activeStation && (!draftDeparture || !draftArrival) && (
+            {routeFormOpen && activeStation && (!draftDeparture || !draftArrival) && (
               <div className="subway-search-preview">
                 <div className="subway-nearby-heading">
                   <div>
@@ -1170,7 +1217,7 @@ export function SubwayRouteController({
         ) : null}
       </div>
       <span className="sr-only" aria-live="polite">{waypointAnnouncement}</span>
-      {(editing || !route) && (
+      {(editing || !route) && routeFormOpen && (
         <div className="subway-search-actions subway-search-footer">
           {!canApplyRoute && <p id="subway-route-help" className="subway-action-help">{routeHelp}</p>}
           {route && <Button variant="secondary" onClick={cancelEditor}>Cancel</Button>}

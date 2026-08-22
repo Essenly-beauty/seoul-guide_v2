@@ -1,8 +1,20 @@
 /** Client-side unified search over the sample data layer. */
 
 import { ARTICLES, PLACES, PRODUCTS, zoneShort, type Article, type Place, type Product } from "./data";
+import { searchStations, type SubwayStation } from "./subway";
 
-export type SearchResults = { places: Place[]; products: Product[]; articles: Article[]; total: number };
+export type SearchResults = {
+  stations: SubwayStation[];
+  places: Place[];
+  products: Product[];
+  articles: Article[];
+  total: number;
+};
+
+/** How many station hits a query may surface. Stations lead the result list —
+    a visitor searching "Gangnam" usually means the area, not one salon — but
+    they must never push the place results off the first screen. */
+export const STATION_RESULT_LIMIT = 3;
 
 const norm = (s: string) => s.toLowerCase().replace(/\s+/g, " ").trim();
 
@@ -67,7 +79,12 @@ export function matchRange(text: string, query: string): [number, number] | null
 }
 
 export function searchAll(query: string): SearchResults {
-  if (!norm(query)) return { places: [], products: [], articles: [], total: 0 };
+  if (!norm(query)) return { stations: [], places: [], products: [], articles: [], total: 0 };
+
+  // Stations were searchable in lib/subway.ts all along but nothing called it,
+  // so "show me what's near Gangnam Station" had no entry point anywhere in
+  // the app (station-first redesign, phase 1).
+  const stations = searchStations(query, STATION_RESULT_LIMIT);
 
   const places = PLACES.filter((p) =>
     matches([p.name, p.nameKr, p.tags.join(" "), zoneShort(p.zone), p.type].join(" "), query),
@@ -77,5 +94,11 @@ export function searchAll(query: string): SearchResults {
   );
   const articles = ARTICLES.filter((a) => matches([a.title, a.tags.join(" ")].join(" "), query));
 
-  return { places, products, articles, total: places.length + products.length + articles.length };
+  return {
+    stations,
+    places,
+    products,
+    articles,
+    total: stations.length + places.length + products.length + articles.length,
+  };
 }
