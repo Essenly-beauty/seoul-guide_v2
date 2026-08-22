@@ -201,7 +201,7 @@ test.describe("direct auth + account sync", () => {
       await expect(guest.getByText("Great aqua peel, English-friendly staff.")).toBeVisible({ timeout: 20_000 });
       await expect(guest.getByText("Member", { exact: true })).toBeVisible();
       // guest report path asks for an account
-      await guest.getByRole("button", { name: "Report" }).click();
+      await guest.getByRole("button", { name: "Report", exact: true }).click();
       await guest.getByRole("button", { name: "Spam or ad" }).click();
       await expect(guest.getByText("Sign in to report reviews")).toBeVisible();
 
