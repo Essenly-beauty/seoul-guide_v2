@@ -28,6 +28,7 @@ scripts/.cache/
 !/docs/data-and-integrations.md
 !/docs/launch-readiness.md
 !/docs/launch-checklist.md
+!/docs/launch-automation-plan.md
 !/docs/runbook.md
 !/docs/decisions-and-history.md
 !/docs/design-system.md

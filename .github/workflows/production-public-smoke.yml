@@ -13,6 +13,9 @@ on:
         required: false
         default: false
         type: boolean
+  schedule:
+    # Read-only visitor smoke; account-data checks remain manual.
+    - cron: "17 */6 * * *"
 
 permissions:
   contents: read
@@ -36,7 +39,7 @@ jobs:
         env:
           CI: "true"
           E2E_EXTERNAL_ONLY: "1"
-          E2E_BASE_URL: ${{ inputs.base_url }}
+          E2E_BASE_URL: ${{ inputs.base_url || 'https://seoul-guide-v2.vercel.app' }}
 
   account-data-smoke:
     name: Throwaway account data smoke
@@ -57,7 +60,7 @@ jobs:
         env:
           CI: "true"
           E2E_EXTERNAL_ONLY: "1"
-          E2E_BASE_URL: ${{ inputs.base_url }}
+          E2E_BASE_URL: ${{ inputs.base_url || 'https://seoul-guide-v2.vercel.app' }}
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
           SUPABASE_ANON_KEY: ${{ secrets.SUPABASE_ANON_KEY }}
           SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
