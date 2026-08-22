@@ -72,7 +72,7 @@ export function PwaInstallControl() {
     return (
       <div className="stack xs" style={{ alignItems: "flex-start" }}>
         <Button variant="secondary" size="sm" onClick={() => setShowIosSteps((open) => !open)} aria-expanded={showIosSteps}>
-          Add to Home Screen
+          {showIosSteps ? "Hide iPhone install steps" : "Show iPhone install steps"}
         </Button>
         {showIosSteps && (
           <ol className="t-caption muted" style={{ margin: 0, paddingLeft: 18, lineHeight: 1.55 }}>

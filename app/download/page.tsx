@@ -18,7 +18,7 @@ export default function DownloadPage() {
           <BrandWordmark size={15} />
           <h1 className="h1" style={{ marginTop: 18 }}>Install MYSEOULDROP</h1>
           <p className="t-caption muted" style={{ maxWidth: 340 }}>
-            Save Seoul beauty picks like an app. Your map, saved places, and account stay in the same service.
+            This adds a web app to your Home Screen — no App Store download is required. Your map, saved places, and account stay in the same service.
           </p>
           <PwaInstallControl />
         </div>
@@ -26,7 +26,7 @@ export default function DownloadPage() {
         <section className="stack sm" style={{ marginTop: 30, textAlign: "left" }}>
           <div>
             <b className="t-label-md">iPhone &amp; iPad</b>
-            <p className="t-caption muted">Open this page in Safari, tap Share, then choose Add to Home Screen.</p>
+            <p className="t-caption muted">Open this page in Safari, tap Share, then choose Add to Home Screen. iPhone does not show an in-page download prompt.</p>
           </div>
           <div>
             <b className="t-label-md">Android &amp; desktop</b>

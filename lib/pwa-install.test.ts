@@ -24,6 +24,7 @@ describe("installable PWA contract", () => {
     const control = source("components/pwa/pwa-install-control.tsx");
     expect(control).toContain('window.addEventListener("beforeinstallprompt"');
     expect(control).toContain("Add to Home Screen");
+    expect(control).toContain("Show iPhone install steps");
     expect(source("app/layout.tsx")).toContain("<PwaRegister />");
   });
 
