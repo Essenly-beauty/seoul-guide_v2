@@ -11,6 +11,7 @@ import { IconButton } from "@/components/ui/icon-button";
 import { routes } from "@/lib/routes";
 import { MAP_CATEGORIES, PLACES, SERVICE_FILTERS, getPlace, type PlaceType } from "@/lib/data";
 import { CategoryChips } from "@/components/category/category-chips";
+import { StationFilterRail } from "@/components/subway/station-filter-rail";
 import { GANGNAM_STATION, haversineKm, type LatLng } from "@/lib/geo";
 import { applyFilters, countActiveFilters, EMPTY_FILTERS, type MapFilters } from "@/lib/places";
 import { useLocation } from "./use-location";
@@ -445,6 +446,24 @@ export function MapScreen() {
             <span>Subway</span>
           </button>
         </div>
+        {/* Station filters ride with the map chrome, not inside the panel —
+            a filter row in the sheet cost a shop row at every snap (owner
+            decision 2026-08-22). */}
+        {mode === "subway" && activeStation && (
+          <StationFilterRail
+            radiusKm={stationRadius}
+            category={stationCategory}
+            onRadius={(radius) => {
+              setStationRadius(radius);
+              setSelectedId(null);
+              if (activeStation) setFlyTarget({ lat: STATIONS[activeStation].lat, lng: STATIONS[activeStation].lng });
+            }}
+            onCategory={(next) => {
+              setStationCategory(next);
+              setSelectedId(null);
+            }}
+          />
+        )}
         {mode === "map" && (
           <div className="row" style={{ gap: 8, alignItems: "flex-start" }}>
             <CategoryChips selected={cats} onToggle={toggleCat} onClear={clearCats} style={{ flex: 1 }} />

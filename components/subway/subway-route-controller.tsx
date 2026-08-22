@@ -724,7 +724,10 @@ export function SubwayRouteController({
         </div>
       )}
 
-      {!(readyRoute && snap === "compact") && !browsingStation && (
+      {/* No header row once a route is ready: the ticket card states the
+          route and now carries Edit and close, so this row was ~52px of
+          repetition (owner report 2026-08-22). */}
+      {!readyRoute && !browsingStation && (
         <header className="subway-controller-header">
           <div>
             <span className="subway-controller-kicker"><Icon name="train" size="xs" /> Subway</span>
@@ -788,6 +791,11 @@ export function SubwayRouteController({
                   <Icon name="pin" size="xs" /> <span>Nearby</span>
                 </button>
               )}
+              {/* Edit and close used to sit on their own header row above a
+                  card that already names the route. Folded in here so the
+                  panel spends that row on results instead. */}
+              <button type="button" className="subway-text-action" onClick={openEditor}>Edit</button>
+              <IconButton name="x" label="Close subway planner" iconSize="xs" onClick={onClose} />
             </div>
           </div>
           {snap === "compact" && (
@@ -837,49 +845,7 @@ export function SubwayRouteController({
                 {/* One filter rail (owner decision 2026-08-22): radius opens a
                     popover, categories sit beside it — replaces the stacked
                     segmented control and tab row. */}
-                <div className="station-sheet-filters" role="group" aria-label="Filter nearby places">
-                  <div className="station-sheet-radius">
-                    <button
-                      type="button"
-                      className={`sfchip${radiusOpen || radiusKm !== 0.5 ? " on" : ""}`}
-                      aria-expanded={radiusOpen}
-                      aria-haspopup="true"
-                      onClick={() => setRadiusOpen((v) => !v)}
-                    >
-                      {radiusLabel(radiusKm)}
-                      <Icon name="chev" size="xs" style={{ transform: "rotate(90deg)" }} />
-                    </button>
-                    {radiusOpen && (
-                      <div className="station-sheet-pop" role="menu">
-                        {[0.5, 1, 2].map((r) => (
-                          <button
-                            key={r}
-                            type="button"
-                            role="menuitemradio"
-                            aria-checked={radiusKm === r}
-                            onClick={() => { onRadius(r); setRadiusOpen(false); }}
-                          >
-                            {radiusLabel(r)}
-                          </button>
-                        ))}
-                      </div>
-                    )}
-                  </div>
-                  <div className="station-sheet-cats">
-                  {CATEGORY_OPTIONS.map((option) => (
-                    <button
-                      key={option.key}
-                      type="button"
-                      className={`sfchip${category === option.key ? " on" : ""}`}
-                      aria-pressed={category === option.key}
-                      onClick={() => onCategory(option.key)}
-                    >
-                      {option.label}
-                    </button>
-                  ))}
-                  </div>
-                </div>
-
+  
                 {rankedPlaces.length > 0 ? (
                   <div className="station-sheet-list">
                     {rankedPlaces.map(({ place, km }) => (
@@ -1160,42 +1126,6 @@ export function SubwayRouteController({
             {/* One filter rail, same as the station sheet. This used to stack a
                 56px segmented control on a 48px tab row, which is most of why
                 the shop list sat at the screen edge (owner report). */}
-            <div ref={nearbyControlsRef} className="station-sheet-filters" tabIndex={-1} role="group" aria-label="Filter nearby places">
-              <div className="station-sheet-radius">
-                <button
-                  type="button"
-                  className={`sfchip${radiusOpen || radiusKm !== 0.5 ? " on" : ""}`}
-                  aria-expanded={radiusOpen}
-                  aria-haspopup="true"
-                  onClick={() => setRadiusOpen((v) => !v)}
-                >
-                  {radiusLabel(radiusKm)}
-                  <Icon name="chev" size="xs" style={{ transform: "rotate(90deg)" }} />
-                </button>
-                {radiusOpen && (
-                  <div className="station-sheet-pop" role="menu">
-                    {[0.5, 1, 2].map((r) => (
-                      <button key={r} type="button" role="menuitemradio" aria-checked={radiusKm === r} onClick={() => { onRadius(r); setRadiusOpen(false); }}>
-                        {radiusLabel(r)}
-                      </button>
-                    ))}
-                  </div>
-                )}
-              </div>
-              <div className="station-sheet-cats">
-              {CATEGORY_OPTIONS.map((option) => (
-                <button
-                  key={option.key}
-                  type="button"
-                  className={`sfchip${category === option.key ? " on" : ""}`}
-                  aria-pressed={category === option.key}
-                  onClick={() => onCategory(option.key)}
-                >
-                  {option.label}
-                </button>
-              ))}
-              </div>
-            </div>
 
             {/* "Add {station} as a via stop" used to sit here, between the
                 filters and the shop list. It is route-editing power-use

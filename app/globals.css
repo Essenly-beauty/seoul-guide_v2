@@ -3499,6 +3499,31 @@
     flex: none; min-width: 0;
     border-bottom: 1px solid var(--border);
   }
+  /* The filter rail on the map, under the search row. Floating chips like
+     the category rail beside it, not a panel band. */
+  .station-filter-rail {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    min-width: 0;
+  }
+  .station-filter-rail .sfchip {
+    min-height: 40px;
+    padding: 0 14px;
+    font-size: 13px;
+    background: var(--surface);
+    box-shadow: var(--shadow-float);
+    border-color: transparent;
+  }
+  .station-filter-rail .sfchip.on {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+  }
+  /* the tab bar has nothing to offer mid-station-browse, and it was clipping
+     the panel (owner report 2026-08-22) */
+  body:has(.map-screen.subway-mode) .bottomnav { display: none; }
+
   .station-sheet-cats {
     display: flex; align-items: center; gap: 8px;
     flex: 1; min-width: 0;

@@ -192,7 +192,8 @@ describe("route-ready panel shares the station-sheet language", () => {
     // at the screen edge once a route existed
     expect(controller).not.toContain("subway-segmented");
     expect(controller).not.toContain("subway-category-tabs");
-    expect(controller).toContain('className="station-sheet-filters"');
+    // the rail now lives on the map, not in the panel
+    expect(controller).not.toContain("station-sheet-filters");
   });
 
   it("uses the same thumbnail rows as the browse sheet", () => {
@@ -252,9 +253,10 @@ describe("subway panel layout defects (owner reports 2026-08-22)", () => {
   it("keeps the filter popover out of a clipping scroll container", () => {
     // an overflow container clips absolutely positioned descendants, which
     // sliced the radius popover in half
-    expect(css).not.toMatch(/\.station-sheet-filters \{[^}]*overflow-x: auto/);
+    const rail = readFileSync(new URL("../components/subway/station-filter-rail.tsx", import.meta.url), "utf8");
+    expect(css).not.toMatch(/\.station-filter-rail \{[^}]*overflow-x: auto/);
     expect(css).toContain(".station-sheet-cats {");
-    expect(controller).toContain('className="station-sheet-cats"');
+    expect(rail).toContain('className="station-sheet-cats"');
   });
 
   it("gives the station picker real height instead of a 230px box", () => {
@@ -269,5 +271,28 @@ describe("subway panel layout defects (owner reports 2026-08-22)", () => {
 
   it("pluralises the place count", () => {
     expect(controller).toContain('rankedPlaces.length === 1 ? "place" : "places"');
+  });
+});
+
+describe("filters live on the map, panel is for results (2026-08-22)", () => {
+  const mapScreen = readFileSync(new URL("../components/map/map-screen.tsx", import.meta.url), "utf8");
+  const controller = readFileSync(new URL("../components/subway/subway-route-controller.tsx", import.meta.url), "utf8");
+  const css = readFileSync(new URL("../app/globals.css", import.meta.url), "utf8");
+
+  it("renders the filter rail with the map chrome", () => {
+    expect(mapScreen).toContain("<StationFilterRail");
+    expect(controller).not.toContain("StationFilterRail");
+  });
+
+  it("hides the tab bar in subway mode", () => {
+    // it offered nothing mid-browse and clipped the panel
+    expect(css).toContain("body:has(.map-screen.subway-mode) .bottomnav { display: none; }");
+  });
+
+  it("drops the header row once the ticket card carries Edit and close", () => {
+    expect(controller).toContain("{!readyRoute && !browsingStation && (");
+    const meta = controller.slice(controller.indexOf('className="subway-ticket-meta"'), controller.indexOf('className="subway-ticket-meta"') + 2600);
+    expect(meta).toContain("subway-text-action");
+    expect(meta).toContain("Close subway planner");
   });
 });
