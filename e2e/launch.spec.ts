@@ -57,6 +57,7 @@ test.describe("discovery smoke (no auth needed)", () => {
     await page.goto("/menu");
     // visitor join sheet: Google + email signup + dismiss
     await expect(page.getByRole("button", { name: "Continue with Google" })).toBeVisible({ timeout: 15_000 });
+    await expect(page.getByRole("button", { name: "Continue with Apple" })).toHaveCount(0);
     await expect(page.getByRole("link", { name: "Sign up with email" })).toBeVisible();
     await page.getByRole("button", { name: "Keep exploring" }).click();
     await expect(page.getByText("Saved", { exact: true }).first()).toBeVisible();
