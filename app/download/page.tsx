@@ -18,7 +18,7 @@ export default function DownloadPage() {
           <BrandWordmark size={15} />
           <h1 className="h1" style={{ marginTop: 18 }}>Install MYSEOULDROP</h1>
           <p className="t-caption muted" style={{ maxWidth: 340 }}>
-            This adds a web app to your Home Screen — no App Store download is required. Your map, saved places, and account stay in the same service.
+            There is no file to download. This adds MYSEOULDROP to your Home Screen straight from the browser, and your map, saved places, and account stay exactly where they are.
           </p>
           <PwaInstallControl />
         </div>

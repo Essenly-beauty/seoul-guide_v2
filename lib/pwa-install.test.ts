@@ -40,3 +40,30 @@ describe("installable PWA contract", () => {
     expect(download).toContain("Google Play");
   });
 });
+
+describe("iOS browser dead ends", () => {
+  const control = readFileSync(new URL("../components/pwa/pwa-install-control.tsx", import.meta.url), "utf8");
+
+  it("names the non-Safari iOS browser instead of pointing at Safari with no way there", () => {
+    // owner hit this in Chrome for iOS: told to "open in Safari", no route to Safari
+    expect(control).toContain("CriOS");
+    expect(control).toContain("FxiOS");
+    expect(control).toContain("EdgiOS");
+    expect(control).toContain("ios-other-browser");
+    expect(control).toContain("iPhone installs only from Safari");
+  });
+
+  it("always offers a copy-link escape from a browser that cannot install", () => {
+    const copyCount = control.split("Copy link").length - 1;
+    expect(copyCount).toBeGreaterThanOrEqual(2); // in-app browsers AND iOS other browsers
+  });
+
+  it("does not hide the only iOS instruction behind a closed toggle", () => {
+    expect(control).toContain("useState(true)");
+  });
+
+  it("says plainly that nothing downloads", () => {
+    const page = readFileSync(new URL("../app/download/page.tsx", import.meta.url), "utf8");
+    expect(page).toContain("There is no file to download");
+  });
+});
