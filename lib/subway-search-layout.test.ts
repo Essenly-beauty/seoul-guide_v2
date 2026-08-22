@@ -182,3 +182,33 @@ describe("plan-a-route carries the browsed station", () => {
     expect(controller).toContain("if (!draftDeparture) setDraftDeparture(activeStation.id)");
   });
 });
+
+describe("route-ready panel shares the station-sheet language", () => {
+  const controller = readFileSync(new URL("../components/subway/subway-route-controller.tsx", import.meta.url), "utf8");
+  const css = readFileSync(new URL("../app/globals.css", import.meta.url), "utf8");
+
+  it("dropped the stacked radius control and category tab row", () => {
+    // these two stacked rows (56px + 48px) were most of why the shop list sat
+    // at the screen edge once a route existed
+    expect(controller).not.toContain("subway-segmented");
+    expect(controller).not.toContain("subway-category-tabs");
+    expect(controller).toContain('className="station-sheet-filters"');
+  });
+
+  it("uses the same thumbnail rows as the browse sheet", () => {
+    expect(controller).toContain("station-row-thumb");
+    expect(controller).not.toContain("subway-place-copy");
+  });
+
+  it("never prints a live-arrivals claim", () => {
+    // there is no arrivals feed; the hand-off is labelled for what it does
+    expect(controller).not.toContain("> Live\n");
+    expect(controller).toContain("for departure times");
+  });
+
+  it("states the route once, not three times", () => {
+    // header title + ticket card + stepper all repeated the same endpoints
+    expect(controller).toContain("{!readyRoute && (");
+    expect(css).toContain(".subway-controller.route-ready.snap-half { height: min(62%, 580px); }");
+  });
+});

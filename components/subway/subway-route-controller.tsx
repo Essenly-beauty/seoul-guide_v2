@@ -743,9 +743,11 @@ export function SubwayRouteController({
         <header className="subway-controller-header">
           <div>
             <span className="subway-controller-kicker"><Icon name="train" size="xs" /> Subway</span>
-            <h2 title={routeTitle ?? undefined}>
-              {routeTitle ?? (browsingStation && activeStation ? `Near ${activeStation.name}` : "Choose your route")}
-            </h2>
+            {/* With a route ready the ticket card below states both endpoints,
+                so repeating them here cost ~52px of the shop list for nothing. */}
+            {!readyRoute && (
+              <h2>{browsingStation && activeStation ? `Near ${activeStation.name}` : "Choose your route"}</h2>
+            )}
           </div>
           <div className="row" style={{ gap: 4 }}>
             {route && !editing && (
@@ -783,10 +785,12 @@ export function SubwayRouteController({
                 href={googleDirectionsUrl(STATIONS[readyRoute.stations[readyRoute.stations.length - 1]], STATIONS[readyRoute.stations[0]])}
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label="Check live transit directions in Google Maps"
-                title="Check live transit directions in Google Maps"
+                aria-label="Open this route in Google Maps for departure times"
+                title="Open this route in Google Maps for departure times"
               >
-                <Icon name="ext" size="xs" /> Live
+                {/* was "Live" — we have no arrivals feed, and printing Live to
+                    someone standing on a platform is a lie (2026-08-22) */}
+                <Icon name="ext" size="xs" /> Times
               </a>
               {snap !== "compact" && (
                 <button
@@ -1100,41 +1104,10 @@ export function SubwayRouteController({
             {sameStation && <p className="station-search-error" role="alert">Departure and arrival must be different stations.</p>}
             {viaConflict && <p className="station-search-error" role="alert">Via stations must be different from departure, arrival, and each other.</p>}
             {routeUnavailable && <p className="station-search-error" role="alert">A route could not be found between these stations.</p>}
-            {routeFormOpen && activeStation && (!draftDeparture || !draftArrival) && (
-              <div className="subway-search-preview">
-                <div className="subway-nearby-heading">
-                  <div>
-                    <h3>Near {activeStation.name}</h3>
-                    <p>{radiusLabel(radiusKm)} straight-line radius from the station center</p>
-                  </div>
-                  <span className="mono">{rankedPlaces.length}</span>
-                </div>
-                {rankedPlaces.length > 0 ? (
-                  <div className="subway-place-list">
-                    {rankedPlaces.slice(0, 3).map(({ place, km }) => (
-                      <div
-                        key={place.id}
-                        ref={selectedPlaceId === place.id ? selectedPlaceRef : undefined}
-                        className={`subway-place-row compact${selectedPlaceId === place.id ? " selected" : ""}`}
-                      >
-                        <button type="button" onClick={() => onPlace(place.id)} aria-current={selectedPlaceId === place.id ? "true" : undefined}>
-                          <CategoryBadge type={place.type} size={20} />
-                          <span className="subway-place-copy">
-                            <b>{place.name}</b>
-                            <span>{TYPE_LABEL[place.type]} · {formatDistance(km)} straight-line from station center</span>
-                          </span>
-                        </button>
-                        <Link href={routes.place(place.id)} aria-label={`View ${place.name} details`}>
-                          <Icon name="chev" size="xs" />
-                        </Link>
-                      </div>
-                    ))}
-                  </div>
-                ) : (
-                  <p className="subway-search-preview-empty">No places are listed around this station in our current data.</p>
-                )}
-              </div>
-            )}
+            {/* The old three-item teaser lived here. It was gated on DRAFT
+                values, so it vanished the instant an arrival was typed — and
+                the browse state now leads with the whole list anyway, so a
+                truncated copy inside the form only competed with it. */}
           </div>
         ) : readyRoute && activeStation && activeId && snap !== "compact" ? (
           <>
@@ -1177,7 +1150,9 @@ export function SubwayRouteController({
               </button>
               <div className="subway-active-station">
                 <b title={activeStation.name} aria-label={activeStation.name}>{stationDisplayName(activeStation)}</b>
-                <span lang="ko">{activeStation.nameKr}</span>
+                {/* the count used to sit on its own heading row below — it
+                    belongs to the station the stepper already names */}
+                <span>{rankedPlaces.length} places · {radiusLabel(radiusKm)}</span>
               </div>
               <button type="button" disabled={!nextId} aria-label={nextId ? `Next station: ${STATIONS[nextId].name}` : "Arrival"} onClick={() => nextId && selectRouteIndex(activeIndex + 1)}>
                 <span>{nextId ? stationDisplayName(STATIONS[nextId]) : "Arrival"}</span>
@@ -1195,66 +1170,77 @@ export function SubwayRouteController({
               />
             )}
 
-            <div ref={nearbyControlsRef} className="subway-nearby-controls" tabIndex={-1}>
-              <div className="subway-segmented" role="group" aria-label="Nearby radius">
-                {[0.5, 1, 2].map((radius) => (
-                  <button key={radius} type="button" aria-pressed={radiusKm === radius} onClick={() => onRadius(radius)}>
-                    {radiusLabel(radius)}
-                  </button>
-                ))}
-              </div>
-              <div className="subway-category-tabs" role="group" aria-label="Nearby place category">
-                {CATEGORY_OPTIONS.map((option) => (
-                  <button
-                    key={option.key}
-                    type="button"
-                    aria-pressed={category === option.key}
-                    onClick={() => onCategory(option.key)}
-                  >
-                    {option.label}
-                  </button>
-                ))}
-              </div>
-            </div>
-
-            <div className="subway-nearby-heading">
-              <div>
-                <h3>Near {activeStation.name}</h3>
-                <p>{radiusLabel(radiusKm)} straight-line radius from the station center</p>
-              </div>
-              {canAddActiveVia && (
+            {/* One filter rail, same as the station sheet. This used to stack a
+                56px segmented control on a 48px tab row, which is most of why
+                the shop list sat at the screen edge (owner report). */}
+            <div ref={nearbyControlsRef} className="station-sheet-filters" tabIndex={-1} role="group" aria-label="Filter nearby places">
+              <div className="station-sheet-radius">
                 <button
                   type="button"
-                  className="subway-via-add inline"
-                  onClick={addActiveVia}
-                  aria-label={`Add ${activeStation.name} as a via station`}
+                  className={`sfchip${radiusOpen || radiusKm !== 0.5 ? " on" : ""}`}
+                  aria-expanded={radiusOpen}
+                  aria-haspopup="true"
+                  onClick={() => setRadiusOpen((v) => !v)}
                 >
-                  <Icon name="plus" size="xs" /> Add as via
+                  {radiusLabel(radiusKm)}
+                  <Icon name="chev" size="xs" style={{ transform: "rotate(90deg)" }} />
                 </button>
-              )}
-              <span className="mono">{rankedPlaces.length}</span>
+                {radiusOpen && (
+                  <div className="station-sheet-pop" role="menu">
+                    {[0.5, 1, 2].map((r) => (
+                      <button key={r} type="button" role="menuitemradio" aria-checked={radiusKm === r} onClick={() => { onRadius(r); setRadiusOpen(false); }}>
+                        {radiusLabel(r)}
+                      </button>
+                    ))}
+                  </div>
+                )}
+              </div>
+              {CATEGORY_OPTIONS.map((option) => (
+                <button
+                  key={option.key}
+                  type="button"
+                  className={`sfchip${category === option.key ? " on" : ""}`}
+                  aria-pressed={category === option.key}
+                  onClick={() => onCategory(option.key)}
+                >
+                  {option.label}
+                </button>
+              ))}
             </div>
 
+            {canAddActiveVia && (
+              <button
+                type="button"
+                className="subway-via-add inline"
+                onClick={addActiveVia}
+                aria-label={`Add ${activeStation.name} as a via station`}
+              >
+                <Icon name="plus" size="xs" /> Add {activeStation.name} as a via stop
+              </button>
+            )}
+
             {rankedPlaces.length > 0 ? (
-              <div className="subway-place-list">
+              <div className="station-sheet-list">
                 {rankedPlaces.map(({ place, km }) => (
-                  <div
+                  <button
                     key={place.id}
-                    ref={selectedPlaceId === place.id ? selectedPlaceRef : undefined}
-                    className={`subway-place-row${selectedPlaceId === place.id ? " selected" : ""}`}
+                    type="button"
+                    className={`station-row${selectedPlaceId === place.id ? " selected" : ""}`}
+                    onClick={() => onPlace(place.id)}
+                    aria-current={selectedPlaceId === place.id ? "true" : undefined}
                   >
-                    <button type="button" onClick={() => onPlace(place.id)} aria-current={selectedPlaceId === place.id ? "true" : undefined}>
-                      <CategoryBadge type={place.type} size={20} />
-                      <span className="subway-place-copy">
-                        <b>{place.name}</b>
-                        <span>{TYPE_LABEL[place.type]} · {formatDistance(km)} straight-line from station center</span>
-                        <span><RatingLine rating={place.rating} count={place.ratingCount} plain />{place.englishOk ? " · English support reported" : ""}</span>
+                    <ImgPh className="station-row-thumb" />
+                    <span className="station-row-copy">
+                      <b>{place.name}</b>
+                      <span className="station-row-meta">
+                        {TYPE_LABEL[place.type]}
+                        {place.source !== "curated" && place.rating !== undefined && (
+                          <> · <RatingLine rating={place.rating} count={place.ratingCount} plain /></>
+                        )}
                       </span>
-                    </button>
-                    <Link href={routes.place(place.id)} aria-label={`View ${place.name} details`}>
-                      <Icon name="chev" size="xs" />
-                    </Link>
-                  </div>
+                      <span className="station-row-dist mono">{formatDistance(km)} from the station</span>
+                    </span>
+                  </button>
                 ))}
               </div>
             ) : category === "daiso" ? (
