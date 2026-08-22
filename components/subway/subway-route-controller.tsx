@@ -673,26 +673,9 @@ export function SubwayRouteController({
     window.requestAnimationFrame(() => nearbyControlsRef.current?.focus({ preventScroll: true }));
   };
 
-  // "지하철 역 눌렀을때": a focused mid-route station can become a via (경유역),
-  // inserted in leg order so the recomputed route keeps the travel direction.
-  const canAddActiveVia = Boolean(
-    readyRoute && activeId && viaIds.length < MAX_VIAS
-    && activeId !== readyRoute.stations[0]
-    && activeId !== readyRoute.stations[readyRoute.stations.length - 1]
-    && !viaIds.includes(activeId),
-  );
-  const addActiveVia = () => {
-    if (!readyRoute || !activeId || !canAddActiveVia) return;
-    const next = [
-      ...viaIds.map((id) => ({ id, index: readyRoute.stations.indexOf(id) })),
-      { id: activeId, index: activeIndex },
-    ]
-      .sort((a, b) => a.index - b.index)
-      .map(({ id }) => id);
-    onVias(next);
-    setWaypointAnnouncement(`${STATIONS[activeId].name} added as a via station.`);
-    requestAnimationFrame(() => routeSummaryRef.current?.focus());
-  };
+  // The "add the focused station as a via" shortcut lived here. It was
+  // removed with its button (2026-08-22): route editing inside a shopping
+  // list had no context. Via stations are still added from the route form.
 
   const rankedPlaces = useMemo(() => {
     if (!activeStation) return [];
@@ -848,7 +831,7 @@ export function SubwayRouteController({
                   <IconButton name="x" label="Close subway browse" iconSize="xs" onClick={onClose} />
                 </div>
                 <p className="station-sheet-sub">
-                  {rankedPlaces.length} places · within {radiusLabel(radiusKm)} · straight-line from the station centre
+                  {rankedPlaces.length} {rankedPlaces.length === 1 ? "place" : "places"} · within {radiusLabel(radiusKm)} · straight-line from the station centre
                 </p>
 
                 {/* One filter rail (owner decision 2026-08-22): radius opens a
@@ -882,6 +865,7 @@ export function SubwayRouteController({
                       </div>
                     )}
                   </div>
+                  <div className="station-sheet-cats">
                   {CATEGORY_OPTIONS.map((option) => (
                     <button
                       key={option.key}
@@ -893,6 +877,7 @@ export function SubwayRouteController({
                       {option.label}
                     </button>
                   ))}
+                  </div>
                 </div>
 
                 {rankedPlaces.length > 0 ? (
@@ -1154,7 +1139,7 @@ export function SubwayRouteController({
                 <b title={activeStation.name} aria-label={activeStation.name}>{stationDisplayName(activeStation)}</b>
                 {/* the count used to sit on its own heading row below — it
                     belongs to the station the stepper already names */}
-                <span>{rankedPlaces.length} places · {radiusLabel(radiusKm)}</span>
+                <span>{rankedPlaces.length} {rankedPlaces.length === 1 ? "place" : "places"} · {radiusLabel(radiusKm)}</span>
               </div>
               <button type="button" disabled={!nextId} aria-label={nextId ? `Next station: ${STATIONS[nextId].name}` : "Arrival"} onClick={() => nextId && selectRouteIndex(activeIndex + 1)}>
                 <span>{nextId ? stationDisplayName(STATIONS[nextId]) : "Arrival"}</span>
@@ -1197,6 +1182,7 @@ export function SubwayRouteController({
                   </div>
                 )}
               </div>
+              <div className="station-sheet-cats">
               {CATEGORY_OPTIONS.map((option) => (
                 <button
                   key={option.key}
@@ -1208,19 +1194,15 @@ export function SubwayRouteController({
                   {option.label}
                 </button>
               ))}
+              </div>
             </div>
 
-            {canAddActiveVia && (
-              <button
-                type="button"
-                className="subway-via-add inline"
-                onClick={addActiveVia}
-                aria-label={`Add ${activeStation.name} as a via station`}
-              >
-                <Icon name="plus" size="xs" /> Add {activeStation.name} as a via stop
-              </button>
-            )}
-
+            {/* "Add {station} as a via stop" used to sit here, between the
+                filters and the shop list. It is route-editing power-use
+                dropped into a shopping surface with no context, and it cost a
+                row of the list (owner report 2026-08-22). Via stations are
+                edited in the route form, which is where the mental model
+                already is. */}
             {rankedPlaces.length > 0 ? (
               <div className="station-sheet-list">
                 {rankedPlaces.map(({ place, km }) => (

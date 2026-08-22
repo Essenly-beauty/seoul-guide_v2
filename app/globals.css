@@ -349,6 +349,10 @@
     flex: 1;
     min-height: 0;
     overflow-y: auto;
+    /* rows bleed to the panel edge with negative inline margins; without this
+       they overflow the padded scroller sideways and produce a stray
+       horizontal scrollbar (owner report 2026-08-22) */
+    overflow-x: hidden;
     overscroll-behavior: contain;
     -webkit-overflow-scrolling: touch;
     padding-bottom: max(18px, env(safe-area-inset-bottom));
@@ -534,7 +538,7 @@
   .station-search-results {
     position: relative;
     z-index: 10;
-    max-height: 230px;
+    max-height: clamp(240px, 46dvh, 520px);
     margin-top: 5px;
     overflow-y: auto;
     background: var(--surface);
@@ -548,11 +552,14 @@
     left: 0;
     right: 0;
     z-index: 20;
-    max-height: clamp(96px, calc(60dvh - 225px), 230px);
+    /* the picker is the whole task while it is open — let it use the space
+       the panel already reserved instead of stopping at 230px with an empty
+       half-screen underneath (owner report 2026-08-22) */
+    max-height: clamp(240px, calc(78dvh - 225px), 520px);
     margin-top: 0;
   }
   .subway-search-fields:has(.station-search-results) {
-    margin-bottom: clamp(102px, calc(60dvh - 219px), 236px);
+    margin-bottom: clamp(246px, calc(78dvh - 219px), 526px);
   }
   .subway-controller.search-ready:has(.station-search-results) {
     height: min(88%, 720px);
@@ -3472,12 +3479,21 @@
   .station-sheet-title .linebadge { flex: none; }
   .station-sheet-sub { margin: 2px 0 0; padding: 0 18px; font-size: 12.5px; color: var(--muted); line-height: 1.4; }
 
+  /* The rail itself must NOT scroll: an overflow container clips absolutely
+     positioned children, which cut the radius popover in half (owner report
+     2026-08-22). Only the category strip scrolls, and the radius chip sits
+     outside it, so it also stays reachable without scrolling back. */
   .station-sheet-filters {
     display: flex; align-items: center; gap: 8px; padding: 10px 18px;
-    overflow-x: auto; scrollbar-width: none; flex: none;
+    flex: none; min-width: 0;
     border-bottom: 1px solid var(--border);
   }
-  .station-sheet-filters::-webkit-scrollbar { display: none; }
+  .station-sheet-cats {
+    display: flex; align-items: center; gap: 8px;
+    flex: 1; min-width: 0;
+    overflow-x: auto; scrollbar-width: none;
+  }
+  .station-sheet-cats::-webkit-scrollbar { display: none; }
   .sfchip {
     display: inline-flex; align-items: center; gap: 5px;
     min-height: 44px; padding: 0 18px; border-radius: 999px;
@@ -3517,11 +3533,13 @@
     color: var(--muted); white-space: nowrap; overflow: hidden;
   }
   .station-row-dist { font-size: 12.5px; color: var(--dim); }
-  /* the route-ready panel shares the rail and rows, so it needs the same
-     edge-to-edge treatment inside its own padded scroller */
+  /* The route-ready scroller has NO horizontal padding — its children carry
+     their own. Negative inline margins here pushed every row 18px past both
+     edges and produced a stray horizontal scrollbar (owner report
+     2026-08-22). They are already edge-to-edge; they just need their padding. */
   .subway-controller.route-ready .station-sheet-filters,
   .subway-controller.route-ready .station-sheet-list,
-  .subway-controller.route-ready .station-row { margin-inline: -18px; }
+  .subway-controller.route-ready .station-row { margin-inline: 0; }
   .subway-controller.route-ready .station-sheet-filters { padding-inline: 18px; }
   .subway-controller.route-ready .subway-ticket-meta { padding-block: 2px; }
   .subway-controller.route-ready .station-sheet-filters { padding-block: 8px; }
@@ -3544,7 +3562,7 @@
      carrying its own count (owner reference 2026-08-22). */
   .subway-station-focus {
     min-height: 52px;
-    margin: 8px -18px 0;
+    margin: 8px 0 0;
     padding-inline: 12px;
     border-top: 1px solid var(--border);
     border-bottom: 1px solid var(--border);

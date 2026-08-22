@@ -237,3 +237,37 @@ describe("subway flow: search → station → place (owner walkthrough 2026-08-2
     expect(row.indexOf("station-result-name")).toBeLessThan(row.indexOf("<StationLineBadges"));
   });
 });
+
+describe("subway panel layout defects (owner reports 2026-08-22)", () => {
+  const controller = readFileSync(new URL("../components/subway/subway-route-controller.tsx", import.meta.url), "utf8");
+  const css = readFileSync(new URL("../app/globals.css", import.meta.url), "utf8");
+
+  it("does not bleed rows past a scroller that has no horizontal padding", () => {
+    // margin-inline: -18px pushed every row 18px past both edges of
+    // .subway-controller-scroll, which pads only the bottom
+    expect(css).toContain(".subway-controller.route-ready .station-row { margin-inline: 0; }");
+    expect(css).toContain("overflow-x: hidden");
+  });
+
+  it("keeps the filter popover out of a clipping scroll container", () => {
+    // an overflow container clips absolutely positioned descendants, which
+    // sliced the radius popover in half
+    expect(css).not.toMatch(/\.station-sheet-filters \{[^}]*overflow-x: auto/);
+    expect(css).toContain(".station-sheet-cats {");
+    expect(controller).toContain('className="station-sheet-cats"');
+  });
+
+  it("gives the station picker real height instead of a 230px box", () => {
+    expect(css).toContain("max-height: clamp(240px, calc(78dvh - 225px), 520px)");
+  });
+
+  it("does not put route editing inside the shop list", () => {
+    // the only surviving mention is the comment recording why it left
+    expect(controller).not.toContain("canAddActiveVia");
+    expect(controller).not.toContain('className="subway-via-add inline"');
+  });
+
+  it("pluralises the place count", () => {
+    expect(controller).toContain('rankedPlaces.length === 1 ? "place" : "places"');
+  });
+});
