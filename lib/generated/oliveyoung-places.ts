@@ -20,6 +20,38 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 강남구 도산대로 326 대동타워 1층",
     lat: 37.522348,
     lng: 127.037747,
+    hours: {
+      week: [
+        {
+          open: "10:00",
+          close: "22:30"
+        },
+        {
+          open: "09:00",
+          close: "22:30"
+        },
+        {
+          open: "09:00",
+          close: "22:30"
+        },
+        {
+          open: "09:00",
+          close: "22:30"
+        },
+        {
+          open: "09:00",
+          close: "22:30"
+        },
+        {
+          open: "09:00",
+          close: "22:30"
+        },
+        {
+          open: "10:00",
+          close: "22:30"
+        }
+      ]
+    },
     geoSource: "address"
   },
   {
@@ -37,6 +69,38 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 강남구 삼성로 716 1층",
     lat: 37.519909,
     lng: 127.050024,
+    hours: {
+      week: [
+        {
+          open: "10:00",
+          close: "22:30"
+        },
+        {
+          open: "09:00",
+          close: "22:30"
+        },
+        {
+          open: "09:00",
+          close: "22:30"
+        },
+        {
+          open: "09:00",
+          close: "22:30"
+        },
+        {
+          open: "09:00",
+          close: "22:30"
+        },
+        {
+          open: "09:00",
+          close: "22:30"
+        },
+        {
+          open: "10:00",
+          close: "22:30"
+        }
+      ]
+    },
     geoSource: "address"
   },
   {
@@ -54,6 +118,38 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 강남구 언주로30길 39 린스퀘어 1층",
     lat: 37.489093,
     lng: 127.054586,
+    hours: {
+      week: [
+        {
+          open: "10:30",
+          close: "22:30"
+        },
+        {
+          open: "09:30",
+          close: "22:30"
+        },
+        {
+          open: "09:30",
+          close: "22:30"
+        },
+        {
+          open: "09:30",
+          close: "22:30"
+        },
+        {
+          open: "09:30",
+          close: "22:30"
+        },
+        {
+          open: "09:30",
+          close: "22:30"
+        },
+        {
+          open: "10:30",
+          close: "22:30"
+        }
+      ]
+    },
     geoSource: "address"
   },
   {
@@ -71,6 +167,38 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 강남구 논현로 667 1층",
     lat: 37.513568,
     lng: 127.030541,
+    hours: {
+      week: [
+        {
+          open: "11:00",
+          close: "22:30"
+        },
+        {
+          open: "09:00",
+          close: "22:30"
+        },
+        {
+          open: "09:00",
+          close: "22:30"
+        },
+        {
+          open: "09:00",
+          close: "22:30"
+        },
+        {
+          open: "09:00",
+          close: "22:30"
+        },
+        {
+          open: "09:00",
+          close: "22:30"
+        },
+        {
+          open: "09:00",
+          close: "22:30"
+        }
+      ]
+    },
     geoSource: "address"
   },
   {
@@ -88,6 +216,38 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 강남구 테헤란로 138 성홍타워 1층",
     lat: 37.509423,
     lng: 127.064927,
+    hours: {
+      week: [
+        {
+          open: "10:30",
+          close: "20:00"
+        },
+        {
+          open: "08:00",
+          close: "22:00"
+        },
+        {
+          open: "08:00",
+          close: "22:00"
+        },
+        {
+          open: "08:00",
+          close: "22:00"
+        },
+        {
+          open: "08:00",
+          close: "22:00"
+        },
+        {
+          open: "08:00",
+          close: "22:00"
+        },
+        {
+          open: "10:30",
+          close: "20:00"
+        }
+      ]
+    },
     geoSource: "address"
   },
   {
@@ -105,6 +265,38 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 강남구 테헤란로 514 삼흥2빌딩 1층",
     lat: 37.507428,
     lng: 127.059817,
+    hours: {
+      week: [
+        {
+          open: "10:00",
+          close: "22:30"
+        },
+        {
+          open: "08:00",
+          close: "22:30"
+        },
+        {
+          open: "08:00",
+          close: "22:30"
+        },
+        {
+          open: "08:00",
+          close: "22:30"
+        },
+        {
+          open: "08:00",
+          close: "22:30"
+        },
+        {
+          open: "08:00",
+          close: "22:30"
+        },
+        {
+          open: "10:00",
+          close: "22:30"
+        }
+      ]
+    },
     geoSource: "address"
   },
   {
@@ -122,6 +314,38 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 강남구 논현로 842 압구정빌딩 1층",
     lat: 37.518172,
     lng: 127.02874,
+    hours: {
+      week: [
+        {
+          open: "11:00",
+          close: "22:30"
+        },
+        {
+          open: "09:00",
+          close: "22:30"
+        },
+        {
+          open: "09:00",
+          close: "22:30"
+        },
+        {
+          open: "09:00",
+          close: "22:30"
+        },
+        {
+          open: "09:00",
+          close: "22:30"
+        },
+        {
+          open: "09:00",
+          close: "22:30"
+        },
+        {
+          open: "09:00",
+          close: "22:30"
+        }
+      ]
+    },
     geoSource: "address"
   },
   {
@@ -139,6 +363,38 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 강남구 봉은사로 465 1층",
     lat: 37.505496,
     lng: 127.028054,
+    hours: {
+      week: [
+        {
+          open: "11:00",
+          close: "22:30"
+        },
+        {
+          open: "08:00",
+          close: "22:30"
+        },
+        {
+          open: "08:00",
+          close: "22:30"
+        },
+        {
+          open: "08:00",
+          close: "22:30"
+        },
+        {
+          open: "08:00",
+          close: "22:30"
+        },
+        {
+          open: "08:00",
+          close: "22:30"
+        },
+        {
+          open: "10:00",
+          close: "22:00"
+        }
+      ]
+    },
     geoSource: "address"
   },
   {
@@ -173,6 +429,38 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 강남구 테헤란로64길 20 원동방빌딩 1층",
     lat: 37.503915,
     lng: 127.051353,
+    hours: {
+      week: [
+        {
+          open: "11:00",
+          close: "22:30"
+        },
+        {
+          open: "10:00",
+          close: "23:00"
+        },
+        {
+          open: "10:00",
+          close: "23:00"
+        },
+        {
+          open: "10:00",
+          close: "23:00"
+        },
+        {
+          open: "10:00",
+          close: "23:00"
+        },
+        {
+          open: "10:00",
+          close: "23:00"
+        },
+        {
+          open: "11:00",
+          close: "23:00"
+        }
+      ]
+    },
     geoSource: "address"
   },
   {
@@ -190,6 +478,38 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 강남구 선릉로 703 1층",
     lat: 37.51767,
     lng: 127.040848,
+    hours: {
+      week: [
+        {
+          open: "11:00",
+          close: "22:30"
+        },
+        {
+          open: "08:00",
+          close: "22:30"
+        },
+        {
+          open: "08:00",
+          close: "22:30"
+        },
+        {
+          open: "08:00",
+          close: "22:30"
+        },
+        {
+          open: "08:00",
+          close: "22:30"
+        },
+        {
+          open: "08:00",
+          close: "22:30"
+        },
+        {
+          open: "08:00",
+          close: "22:30"
+        }
+      ]
+    },
     geoSource: "address"
   },
   {
@@ -228,6 +548,38 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 강남구 남부순환로 2615 1층",
     lat: 37.48518,
     lng: 127.035934,
+    hours: {
+      week: [
+        {
+          open: "10:00",
+          close: "22:00"
+        },
+        {
+          open: "09:00",
+          close: "22:30"
+        },
+        {
+          open: "09:00",
+          close: "22:30"
+        },
+        {
+          open: "09:00",
+          close: "22:30"
+        },
+        {
+          open: "09:00",
+          close: "22:30"
+        },
+        {
+          open: "09:00",
+          close: "22:30"
+        },
+        {
+          open: "10:00",
+          close: "22:00"
+        }
+      ]
+    },
     geoSource: "address"
   },
   {
@@ -245,6 +597,38 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 강남구 논현로175길 6 1층",
     lat: 37.52394,
     lng: 127.02423,
+    hours: {
+      week: [
+        {
+          open: "11:00",
+          close: "22:30"
+        },
+        {
+          open: "10:00",
+          close: "22:30"
+        },
+        {
+          open: "10:00",
+          close: "22:30"
+        },
+        {
+          open: "10:00",
+          close: "22:30"
+        },
+        {
+          open: "10:00",
+          close: "22:30"
+        },
+        {
+          open: "10:00",
+          close: "22:30"
+        },
+        {
+          open: "10:00",
+          close: "22:30"
+        }
+      ]
+    },
     geoSource: "address"
   },
   {
@@ -283,6 +667,38 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 강남구 도산대로 116 논현빌딩 1층",
     lat: 37.523632,
     lng: 127.043252,
+    hours: {
+      week: [
+        {
+          open: "11:00",
+          close: "22:30"
+        },
+        {
+          open: "09:00",
+          close: "22:30"
+        },
+        {
+          open: "09:00",
+          close: "22:30"
+        },
+        {
+          open: "09:00",
+          close: "22:30"
+        },
+        {
+          open: "09:00",
+          close: "22:30"
+        },
+        {
+          open: "09:00",
+          close: "22:30"
+        },
+        {
+          open: "09:00",
+          close: "22:30"
+        }
+      ]
+    },
     geoSource: "address"
   },
   {
@@ -300,6 +716,38 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 강남구 논현로 878 중산빌딩 1층",
     lat: 37.527091,
     lng: 127.028952,
+    hours: {
+      week: [
+        {
+          open: "11:00",
+          close: "22:30"
+        },
+        {
+          open: "09:00",
+          close: "22:30"
+        },
+        {
+          open: "09:00",
+          close: "22:30"
+        },
+        {
+          open: "09:00",
+          close: "22:30"
+        },
+        {
+          open: "09:00",
+          close: "22:30"
+        },
+        {
+          open: "09:00",
+          close: "22:30"
+        },
+        {
+          open: "09:00",
+          close: "22:30"
+        }
+      ]
+    },
     geoSource: "address"
   },
   {
@@ -380,6 +828,38 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 강남구 논현로 82 1층",
     lat: 37.477384,
     lng: 127.045334,
+    hours: {
+      week: [
+        {
+          open: "11:00",
+          close: "22:30"
+        },
+        {
+          open: "09:00",
+          close: "22:30"
+        },
+        {
+          open: "09:00",
+          close: "22:30"
+        },
+        {
+          open: "09:00",
+          close: "22:30"
+        },
+        {
+          open: "09:00",
+          close: "22:30"
+        },
+        {
+          open: "09:00",
+          close: "22:30"
+        },
+        {
+          open: "11:00",
+          close: "22:30"
+        }
+      ]
+    },
     geoSource: "address"
   },
   {
@@ -418,6 +898,38 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 강남구 테헤란로 411 성담빌딩 1층",
     lat: 37.505499,
     lng: 127.050883,
+    hours: {
+      week: [
+        {
+          open: "10:00",
+          close: "22:00"
+        },
+        {
+          open: "08:00",
+          close: "22:30"
+        },
+        {
+          open: "08:00",
+          close: "22:30"
+        },
+        {
+          open: "08:00",
+          close: "22:30"
+        },
+        {
+          open: "08:00",
+          close: "22:30"
+        },
+        {
+          open: "08:00",
+          close: "22:30"
+        },
+        {
+          open: "10:00",
+          close: "22:00"
+        }
+      ]
+    },
     geoSource: "address"
   },
   {
@@ -454,6 +966,38 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 강남구 테헤란로 517 9층",
     lat: 37.508494,
     lng: 127.05956,
+    hours: {
+      week: [
+        {
+          open: "10:30",
+          close: "20:30"
+        },
+        {
+          open: "10:30",
+          close: "20:00"
+        },
+        {
+          open: "10:30",
+          close: "20:00"
+        },
+        {
+          open: "10:30",
+          close: "20:00"
+        },
+        {
+          open: "10:30",
+          close: "20:00"
+        },
+        {
+          open: "10:30",
+          close: "20:30"
+        },
+        {
+          open: "10:30",
+          close: "20:30"
+        }
+      ]
+    },
     geoSource: "address"
   },
   {
@@ -492,6 +1036,38 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 강남구 헌릉로569길 21-36 1층",
     lat: 37.467872,
     lng: 127.096129,
+    hours: {
+      week: [
+        {
+          open: "11:00",
+          close: "22:00"
+        },
+        {
+          open: "10:00",
+          close: "22:30"
+        },
+        {
+          open: "10:00",
+          close: "22:30"
+        },
+        {
+          open: "10:00",
+          close: "22:30"
+        },
+        {
+          open: "10:00",
+          close: "22:30"
+        },
+        {
+          open: "10:00",
+          close: "22:30"
+        },
+        {
+          open: "10:00",
+          close: "22:30"
+        }
+      ]
+    },
     geoSource: "address"
   },
   {
@@ -550,6 +1126,38 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 서초구 강남대로 331 광일빌딩 1층",
     lat: 37.518892,
     lng: 127.018776,
+    hours: {
+      week: [
+        {
+          open: "10:00",
+          close: "22:30"
+        },
+        {
+          open: "08:00",
+          close: "22:30"
+        },
+        {
+          open: "08:00",
+          close: "22:30"
+        },
+        {
+          open: "08:00",
+          close: "22:30"
+        },
+        {
+          open: "08:00",
+          close: "22:30"
+        },
+        {
+          open: "08:00",
+          close: "22:30"
+        },
+        {
+          open: "10:00",
+          close: "22:30"
+        }
+      ]
+    },
     geoSource: "address"
   },
   {
@@ -588,6 +1196,38 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 성북구 보국문로 33 jr메디컬빌딩 103~104호",
     lat: 37.607374,
     lng: 127.010255,
+    hours: {
+      week: [
+        {
+          open: "11:00",
+          close: "22:00"
+        },
+        {
+          open: "10:00",
+          close: "22:00"
+        },
+        {
+          open: "10:00",
+          close: "22:00"
+        },
+        {
+          open: "10:00",
+          close: "22:00"
+        },
+        {
+          open: "10:00",
+          close: "22:00"
+        },
+        {
+          open: "10:00",
+          close: "22:00"
+        },
+        {
+          open: "11:00",
+          close: "22:00"
+        }
+      ]
+    },
     geoSource: "address"
   },
   {
@@ -668,6 +1308,38 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 성북구 화랑로11길 31 1층",
     lat: 37.603721,
     lng: 127.041992,
+    hours: {
+      week: [
+        {
+          open: "11:00",
+          close: "23:00"
+        },
+        {
+          open: "10:30",
+          close: "23:00"
+        },
+        {
+          open: "10:30",
+          close: "23:00"
+        },
+        {
+          open: "10:30",
+          close: "23:00"
+        },
+        {
+          open: "10:30",
+          close: "23:00"
+        },
+        {
+          open: "10:30",
+          close: "23:00"
+        },
+        {
+          open: "11:00",
+          close: "23:00"
+        }
+      ]
+    },
     geoSource: "address"
   },
   {
@@ -832,6 +1504,38 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 성북구 동소문로 118 1층",
     lat: 37.593327,
     lng: 127.018176,
+    hours: {
+      week: [
+        {
+          open: "10:00",
+          close: "23:00"
+        },
+        {
+          open: "09:00",
+          close: "23:00"
+        },
+        {
+          open: "09:00",
+          close: "23:00"
+        },
+        {
+          open: "09:00",
+          close: "23:00"
+        },
+        {
+          open: "09:00",
+          close: "23:00"
+        },
+        {
+          open: "09:00",
+          close: "23:00"
+        },
+        {
+          open: "09:00",
+          close: "23:00"
+        }
+      ]
+    },
     geoSource: "address"
   },
   {
@@ -912,6 +1616,38 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 동대문구 이문로 107 1층",
     lat: 37.597082,
     lng: 127.058741,
+    hours: {
+      week: [
+        {
+          open: "11:30",
+          close: "22:30"
+        },
+        {
+          open: "09:30",
+          close: "22:30"
+        },
+        {
+          open: "09:30",
+          close: "22:30"
+        },
+        {
+          open: "09:30",
+          close: "22:30"
+        },
+        {
+          open: "09:30",
+          close: "22:30"
+        },
+        {
+          open: "09:30",
+          close: "22:30"
+        },
+        {
+          open: "09:30",
+          close: "22:30"
+        }
+      ]
+    },
     geoSource: "address"
   },
   {
@@ -992,6 +1728,38 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 성북구 고려대로24길 44 1층",
     lat: 37.584204,
     lng: 127.029349,
+    hours: {
+      week: [
+        {
+          open: "11:00",
+          close: "23:00"
+        },
+        {
+          open: "10:00",
+          close: "23:00"
+        },
+        {
+          open: "10:00",
+          close: "23:00"
+        },
+        {
+          open: "10:00",
+          close: "23:00"
+        },
+        {
+          open: "10:00",
+          close: "23:00"
+        },
+        {
+          open: "10:00",
+          close: "23:00"
+        },
+        {
+          open: "10:00",
+          close: "23:00"
+        }
+      ]
+    },
     geoSource: "address"
   },
   {
@@ -1109,6 +1877,38 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 동대문구 망우로 78 휘경빌딩 1층",
     lat: 37.589759,
     lng: 127.06205,
+    hours: {
+      week: [
+        {
+          open: "10:00",
+          close: "22:30"
+        },
+        {
+          open: "09:00",
+          close: "22:30"
+        },
+        {
+          open: "09:00",
+          close: "22:30"
+        },
+        {
+          open: "09:00",
+          close: "22:30"
+        },
+        {
+          open: "09:00",
+          close: "22:30"
+        },
+        {
+          open: "09:00",
+          close: "22:30"
+        },
+        {
+          open: "10:00",
+          close: "22:30"
+        }
+      ]
+    },
     geoSource: "address"
   },
   {
@@ -1209,6 +2009,38 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 서초구 동작대로 118 예다인프라자빌딩 1층",
     lat: 37.487026,
     lng: 126.982816,
+    hours: {
+      week: [
+        {
+          open: "10:00",
+          close: "23:00"
+        },
+        {
+          open: "09:00",
+          close: "23:00"
+        },
+        {
+          open: "09:00",
+          close: "23:00"
+        },
+        {
+          open: "09:00",
+          close: "23:00"
+        },
+        {
+          open: "09:00",
+          close: "23:00"
+        },
+        {
+          open: "09:00",
+          close: "23:00"
+        },
+        {
+          open: "10:00",
+          close: "23:00"
+        }
+      ]
+    },
     geoSource: "address"
   },
   {
@@ -1247,6 +2079,38 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 동작구 보라매로5가길 16 1층",
     lat: 37.491321,
     lng: 126.924367,
+    hours: {
+      week: [
+        {
+          open: "10:00",
+          close: "22:30"
+        },
+        {
+          open: "09:00",
+          close: "22:30"
+        },
+        {
+          open: "09:00",
+          close: "22:30"
+        },
+        {
+          open: "09:00",
+          close: "22:30"
+        },
+        {
+          open: "09:00",
+          close: "22:30"
+        },
+        {
+          open: "09:00",
+          close: "22:30"
+        },
+        {
+          open: "10:00",
+          close: "22:30"
+        }
+      ]
+    },
     geoSource: "address"
   },
   {
@@ -1264,6 +2128,38 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 동작구 사당로 307 1층",
     lat: 37.485872,
     lng: 126.981405,
+    hours: {
+      week: [
+        {
+          open: "10:00",
+          close: "23:00"
+        },
+        {
+          open: "09:00",
+          close: "23:00"
+        },
+        {
+          open: "09:00",
+          close: "23:00"
+        },
+        {
+          open: "09:00",
+          close: "23:00"
+        },
+        {
+          open: "09:00",
+          close: "23:00"
+        },
+        {
+          open: "09:00",
+          close: "23:00"
+        },
+        {
+          open: "10:00",
+          close: "23:00"
+        }
+      ]
+    },
     geoSource: "address"
   },
   {
@@ -1302,6 +2198,38 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 동작구 흑석로 81 1층",
     lat: 37.507067,
     lng: 126.958601,
+    hours: {
+      week: [
+        {
+          open: "10:00",
+          close: "22:30"
+        },
+        {
+          open: "09:00",
+          close: "22:30"
+        },
+        {
+          open: "09:00",
+          close: "22:30"
+        },
+        {
+          open: "09:00",
+          close: "22:30"
+        },
+        {
+          open: "09:00",
+          close: "22:30"
+        },
+        {
+          open: "09:00",
+          close: "22:30"
+        },
+        {
+          open: "10:00",
+          close: "22:30"
+        }
+      ]
+    },
     geoSource: "address"
   },
   {
@@ -1340,6 +2268,38 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 서초구 과천대로 870-13 방배사옥 지하1층",
     lat: 37.468102,
     lng: 126.986801,
+    hours: {
+      week: [
+        {
+          open: "09:00",
+          close: "18:00"
+        },
+        {
+          open: "08:00",
+          close: "20:00"
+        },
+        {
+          open: "08:00",
+          close: "20:00"
+        },
+        {
+          open: "08:00",
+          close: "20:00"
+        },
+        {
+          open: "08:00",
+          close: "20:00"
+        },
+        {
+          open: "08:00",
+          close: "20:00"
+        },
+        {
+          open: "09:00",
+          close: "18:00"
+        }
+      ]
+    },
     geoSource: "address"
   },
   {
@@ -1378,6 +2338,38 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 서초구 방배로 178 1층",
     lat: 37.490213,
     lng: 126.992029,
+    hours: {
+      week: [
+        {
+          open: "11:00",
+          close: "22:30"
+        },
+        {
+          open: "10:00",
+          close: "22:30"
+        },
+        {
+          open: "10:00",
+          close: "22:30"
+        },
+        {
+          open: "10:00",
+          close: "22:30"
+        },
+        {
+          open: "10:00",
+          close: "22:30"
+        },
+        {
+          open: "10:00",
+          close: "22:30"
+        },
+        {
+          open: "11:00",
+          close: "22:30"
+        }
+      ]
+    },
     geoSource: "address"
   },
   {
@@ -1395,6 +2387,38 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 동작구 노량진로 159 1층",
     lat: 37.51366,
     lng: 126.941343,
+    hours: {
+      week: [
+        {
+          open: "10:00",
+          close: "23:00"
+        },
+        {
+          open: "09:00",
+          close: "23:00"
+        },
+        {
+          open: "09:00",
+          close: "23:00"
+        },
+        {
+          open: "09:00",
+          close: "23:00"
+        },
+        {
+          open: "09:00",
+          close: "23:00"
+        },
+        {
+          open: "09:00",
+          close: "23:00"
+        },
+        {
+          open: "10:00",
+          close: "23:00"
+        }
+      ]
+    },
     geoSource: "address"
   },
   {
@@ -1433,6 +2457,38 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 동작구 시흥대로 654 1층",
     lat: 37.49012,
     lng: 126.907545,
+    hours: {
+      week: [
+        {
+          open: "10:00",
+          close: "22:30"
+        },
+        {
+          open: "09:00",
+          close: "22:30"
+        },
+        {
+          open: "09:00",
+          close: "22:30"
+        },
+        {
+          open: "09:00",
+          close: "22:30"
+        },
+        {
+          open: "09:00",
+          close: "22:30"
+        },
+        {
+          open: "09:00",
+          close: "22:30"
+        },
+        {
+          open: "10:00",
+          close: "22:30"
+        }
+      ]
+    },
     geoSource: "address"
   },
   {
@@ -1471,6 +2527,38 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 성동구 성수이로14길 14 성수연방 A동 1층",
     lat: 37.541405,
     lng: 127.056912,
+    hours: {
+      week: [
+        {
+          open: "09:30",
+          close: "21:30"
+        },
+        {
+          open: "10:00",
+          close: "21:30"
+        },
+        {
+          open: "10:00",
+          close: "21:30"
+        },
+        {
+          open: "10:00",
+          close: "21:30"
+        },
+        {
+          open: "10:00",
+          close: "21:30"
+        },
+        {
+          open: "10:00",
+          close: "21:30"
+        },
+        {
+          open: "09:30",
+          close: "21:30"
+        }
+      ]
+    },
     geoSource: "address"
   },
   {
@@ -1551,6 +2639,38 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 강남구 영동대로 602 미켈란107빌딩 1층",
     lat: 37.514722,
     lng: 127.060484,
+    hours: {
+      week: [
+        {
+          open: "10:00",
+          close: "22:30"
+        },
+        {
+          open: "09:00",
+          close: "22:30"
+        },
+        {
+          open: "09:00",
+          close: "22:30"
+        },
+        {
+          open: "09:00",
+          close: "22:30"
+        },
+        {
+          open: "09:00",
+          close: "22:30"
+        },
+        {
+          open: "09:00",
+          close: "22:30"
+        },
+        {
+          open: "10:00",
+          close: "22:30"
+        }
+      ]
+    },
     geoSource: "address"
   },
   {
@@ -1568,6 +2688,38 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 송파구 올림픽로 269 롯데캐슬플라자 1층",
     lat: 37.514427,
     lng: 127.100611,
+    hours: {
+      week: [
+        {
+          open: "10:00",
+          close: "22:00"
+        },
+        {
+          open: "09:00",
+          close: "22:00"
+        },
+        {
+          open: "09:00",
+          close: "22:00"
+        },
+        {
+          open: "09:00",
+          close: "22:00"
+        },
+        {
+          open: "09:00",
+          close: "22:00"
+        },
+        {
+          open: "09:00",
+          close: "22:00"
+        },
+        {
+          open: "10:00",
+          close: "22:00"
+        }
+      ]
+    },
     geoSource: "address"
   },
   {
@@ -1585,6 +2737,38 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 동대문구 장한로 3 1층",
     lat: 37.578624,
     lng: 127.072214,
+    hours: {
+      week: [
+        {
+          open: "10:00",
+          close: "23:00"
+        },
+        {
+          open: "09:30",
+          close: "22:30"
+        },
+        {
+          open: "09:30",
+          close: "22:30"
+        },
+        {
+          open: "09:30",
+          close: "22:30"
+        },
+        {
+          open: "09:30",
+          close: "22:30"
+        },
+        {
+          open: "10:00",
+          close: "23:00"
+        },
+        {
+          open: "10:00",
+          close: "23:00"
+        }
+      ]
+    },
     geoSource: "address"
   },
   {
@@ -1602,6 +2786,38 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 성동구 아차산로 6 1층",
     lat: 37.547694,
     lng: 127.045124,
+    hours: {
+      week: [
+        {
+          open: "10:00",
+          close: "22:30"
+        },
+        {
+          open: "09:00",
+          close: "22:30"
+        },
+        {
+          open: "09:00",
+          close: "22:30"
+        },
+        {
+          open: "09:00",
+          close: "22:30"
+        },
+        {
+          open: "09:00",
+          close: "22:30"
+        },
+        {
+          open: "09:00",
+          close: "22:30"
+        },
+        {
+          open: "10:00",
+          close: "22:30"
+        }
+      ]
+    },
     geoSource: "address"
   },
   {
@@ -1682,6 +2898,38 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 송파구 올림픽로 240 지하1층",
     lat: 37.511703,
     lng: 127.098361,
+    hours: {
+      week: [
+        {
+          open: "10:00",
+          close: "22:00"
+        },
+        {
+          open: "10:00",
+          close: "21:30"
+        },
+        {
+          open: "10:00",
+          close: "21:30"
+        },
+        {
+          open: "10:00",
+          close: "21:30"
+        },
+        {
+          open: "10:00",
+          close: "21:30"
+        },
+        {
+          open: "10:00",
+          close: "21:30"
+        },
+        {
+          open: "10:00",
+          close: "22:00"
+        }
+      ]
+    },
     geoSource: "address"
   },
   {
@@ -1783,6 +3031,38 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 강동구 성내로 19 1층",
     lat: 37.528756,
     lng: 127.125405,
+    hours: {
+      week: [
+        {
+          open: "11:00",
+          close: "22:30"
+        },
+        {
+          open: "10:00",
+          close: "22:30"
+        },
+        {
+          open: "10:00",
+          close: "22:30"
+        },
+        {
+          open: "10:00",
+          close: "22:30"
+        },
+        {
+          open: "10:00",
+          close: "22:30"
+        },
+        {
+          open: "10:00",
+          close: "22:30"
+        },
+        {
+          open: "10:00",
+          close: "22:30"
+        }
+      ]
+    },
     geoSource: "address"
   },
   {
@@ -1901,6 +3181,38 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 강남구 압구정로 342 1-3층",
     lat: 37.526797,
     lng: 127.044539,
+    hours: {
+      week: [
+        {
+          open: "09:30",
+          close: "23:00"
+        },
+        {
+          open: "09:30",
+          close: "22:30"
+        },
+        {
+          open: "09:30",
+          close: "22:30"
+        },
+        {
+          open: "09:30",
+          close: "22:30"
+        },
+        {
+          open: "09:30",
+          close: "22:30"
+        },
+        {
+          open: "09:30",
+          close: "23:00"
+        },
+        {
+          open: "09:30",
+          close: "23:00"
+        }
+      ]
+    },
     geoSource: "address"
   },
   {
@@ -1981,6 +3293,38 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 강북구 도봉로 188 1층",
     lat: 37.637423,
     lng: 127.02517,
+    hours: {
+      week: [
+        {
+          open: "10:30",
+          close: "22:30"
+        },
+        {
+          open: "10:00",
+          close: "22:30"
+        },
+        {
+          open: "10:00",
+          close: "22:30"
+        },
+        {
+          open: "10:00",
+          close: "22:30"
+        },
+        {
+          open: "10:00",
+          close: "22:30"
+        },
+        {
+          open: "10:00",
+          close: "22:30"
+        },
+        {
+          open: "10:30",
+          close: "22:30"
+        }
+      ]
+    },
     geoSource: "address"
   },
   {
@@ -1998,6 +3342,38 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 노원구 석계로 102 1층 2호",
     lat: 37.619931,
     lng: 127.063247,
+    hours: {
+      week: [
+        {
+          open: "11:00",
+          close: "22:00"
+        },
+        {
+          open: "10:00",
+          close: "22:00"
+        },
+        {
+          open: "10:00",
+          close: "22:00"
+        },
+        {
+          open: "10:00",
+          close: "22:00"
+        },
+        {
+          open: "10:00",
+          close: "22:00"
+        },
+        {
+          open: "10:00",
+          close: "22:00"
+        },
+        {
+          open: "11:00",
+          close: "22:00"
+        }
+      ]
+    },
     geoSource: "address"
   },
   {
@@ -2120,6 +3496,38 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 중구 다산로 258 리마크빌동대문오피스텔 1층",
     lat: 37.565795,
     lng: 127.016624,
+    hours: {
+      week: [
+        {
+          open: "10:00",
+          close: "22:30"
+        },
+        {
+          open: "09:00",
+          close: "22:30"
+        },
+        {
+          open: "09:00",
+          close: "22:30"
+        },
+        {
+          open: "09:00",
+          close: "22:30"
+        },
+        {
+          open: "09:00",
+          close: "22:30"
+        },
+        {
+          open: "09:00",
+          close: "22:30"
+        },
+        {
+          open: "10:00",
+          close: "22:30"
+        }
+      ]
+    },
     geoSource: "address"
   },
   {
@@ -2219,6 +3627,38 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 중구 동호로 330 씨제이제일제당빌딩 지하 1층",
     lat: 37.563942,
     lng: 127.003278,
+    hours: {
+      week: [
+        {
+          open: "11:00",
+          close: "21:00"
+        },
+        {
+          open: "08:00",
+          close: "21:00"
+        },
+        {
+          open: "08:00",
+          close: "21:00"
+        },
+        {
+          open: "08:00",
+          close: "21:00"
+        },
+        {
+          open: "08:00",
+          close: "21:00"
+        },
+        {
+          open: "08:00",
+          close: "21:00"
+        },
+        {
+          open: "11:00",
+          close: "21:00"
+        }
+      ]
+    },
     geoSource: "address"
   },
   {
@@ -2278,6 +3718,38 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 중구 동호로 192 1-2층",
     lat: 37.559381,
     lng: 127.003595,
+    hours: {
+      week: [
+        {
+          open: "10:00",
+          close: "22:30"
+        },
+        {
+          open: "09:30",
+          close: "22:30"
+        },
+        {
+          open: "09:30",
+          close: "22:30"
+        },
+        {
+          open: "09:30",
+          close: "22:30"
+        },
+        {
+          open: "09:30",
+          close: "22:30"
+        },
+        {
+          open: "09:30",
+          close: "22:30"
+        },
+        {
+          open: "10:00",
+          close: "22:30"
+        }
+      ]
+    },
     geoSource: "address"
   },
   {
@@ -2295,6 +3767,38 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 중구 장충단로13길 20 2층",
     lat: 37.567751,
     lng: 127.008336,
+    hours: {
+      week: [
+        {
+          open: "10:30",
+          close: "21:30"
+        },
+        {
+          open: "10:30",
+          close: "21:00"
+        },
+        {
+          open: "10:30",
+          close: "21:00"
+        },
+        {
+          open: "10:30",
+          close: "21:00"
+        },
+        {
+          open: "10:30",
+          close: "21:00"
+        },
+        {
+          open: "10:30",
+          close: "21:30"
+        },
+        {
+          open: "10:30",
+          close: "21:30"
+        }
+      ]
+    },
     geoSource: "address"
   },
   {
@@ -2396,6 +3900,38 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 마포구 동교로 207 1층",
     lat: 37.55859,
     lng: 126.923227,
+    hours: {
+      week: [
+        {
+          open: "09:00",
+          close: "22:30"
+        },
+        {
+          open: "10:00",
+          close: "22:30"
+        },
+        {
+          open: "10:00",
+          close: "22:30"
+        },
+        {
+          open: "10:00",
+          close: "22:30"
+        },
+        {
+          open: "10:00",
+          close: "22:30"
+        },
+        {
+          open: "10:00",
+          close: "22:30"
+        },
+        {
+          open: "09:00",
+          close: "22:30"
+        }
+      ]
+    },
     geoSource: "address"
   },
   {
@@ -2413,6 +3949,38 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 마포구 상암산로 66 CJ E&M 센터 1층",
     lat: 37.578396,
     lng: 126.891522,
+    hours: {
+      week: [
+        {
+          open: "10:00",
+          close: "20:00"
+        },
+        {
+          open: "08:00",
+          close: "22:00"
+        },
+        {
+          open: "08:00",
+          close: "22:00"
+        },
+        {
+          open: "08:00",
+          close: "22:00"
+        },
+        {
+          open: "08:00",
+          close: "22:00"
+        },
+        {
+          open: "08:00",
+          close: "22:00"
+        },
+        {
+          open: "10:00",
+          close: "20:00"
+        }
+      ]
+    },
     geoSource: "address"
   },
   {
@@ -2451,6 +4019,38 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 마포구 홍익로 4 1층",
     lat: 37.553238,
     lng: 126.924198,
+    hours: {
+      week: [
+        {
+          open: "10:00",
+          close: "22:30"
+        },
+        {
+          open: "09:00",
+          close: "22:30"
+        },
+        {
+          open: "09:00",
+          close: "22:30"
+        },
+        {
+          open: "09:00",
+          close: "22:30"
+        },
+        {
+          open: "09:00",
+          close: "22:30"
+        },
+        {
+          open: "09:00",
+          close: "22:30"
+        },
+        {
+          open: "10:00",
+          close: "22:30"
+        }
+      ]
+    },
     geoSource: "address"
   },
   {
@@ -2468,6 +4068,38 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 마포구 마포대로 143 1층 108호",
     lat: 37.547505,
     lng: 126.953143,
+    hours: {
+      week: [
+        {
+          open: "10:00",
+          close: "22:30"
+        },
+        {
+          open: "09:00",
+          close: "22:30"
+        },
+        {
+          open: "09:00",
+          close: "22:30"
+        },
+        {
+          open: "09:00",
+          close: "22:30"
+        },
+        {
+          open: "09:00",
+          close: "22:30"
+        },
+        {
+          open: "09:00",
+          close: "22:30"
+        },
+        {
+          open: "10:00",
+          close: "22:30"
+        }
+      ]
+    },
     geoSource: "address"
   },
   {
@@ -2506,6 +4138,38 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 마포구 양화로 45 메세나폴리스몰 지하1층 B1186~B1187호",
     lat: 37.55024,
     lng: 126.913962,
+    hours: {
+      week: [
+        {
+          open: "10:00",
+          close: "22:30"
+        },
+        {
+          open: "09:30",
+          close: "22:30"
+        },
+        {
+          open: "09:30",
+          close: "22:30"
+        },
+        {
+          open: "09:30",
+          close: "22:30"
+        },
+        {
+          open: "09:30",
+          close: "22:30"
+        },
+        {
+          open: "09:30",
+          close: "22:30"
+        },
+        {
+          open: "09:30",
+          close: "22:30"
+        }
+      ]
+    },
     geoSource: "address"
   },
   {
@@ -2523,6 +4187,38 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 마포구 마포대로 201 마포트라펠리스 2차 1층",
     lat: 37.552186,
     lng: 126.955494,
+    hours: {
+      week: [
+        {
+          open: "10:00",
+          close: "22:00"
+        },
+        {
+          open: "09:00",
+          close: "22:30"
+        },
+        {
+          open: "09:00",
+          close: "22:30"
+        },
+        {
+          open: "09:00",
+          close: "22:30"
+        },
+        {
+          open: "09:00",
+          close: "22:30"
+        },
+        {
+          open: "09:00",
+          close: "22:30"
+        },
+        {
+          open: "09:00",
+          close: "22:30"
+        }
+      ]
+    },
     geoSource: "address"
   },
   {
@@ -2540,6 +4236,38 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 마포구 성암로 255 신사옥상업시설 1층",
     lat: 37.570941,
     lng: 126.90843,
+    hours: {
+      week: [
+        {
+          open: "09:00",
+          close: "22:30"
+        },
+        {
+          open: "08:00",
+          close: "22:30"
+        },
+        {
+          open: "08:00",
+          close: "22:30"
+        },
+        {
+          open: "08:00",
+          close: "22:30"
+        },
+        {
+          open: "08:00",
+          close: "22:30"
+        },
+        {
+          open: "08:00",
+          close: "22:30"
+        },
+        {
+          open: "09:00",
+          close: "22:30"
+        }
+      ]
+    },
     geoSource: "address"
   },
   {
@@ -2577,6 +4305,38 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 마포구 성암로 지하 184 지하1층",
     lat: 37.576358,
     lng: 126.89766,
+    hours: {
+      week: [
+        {
+          open: "10:00",
+          close: "21:00"
+        },
+        {
+          open: "09:00",
+          close: "22:00"
+        },
+        {
+          open: "09:00",
+          close: "22:00"
+        },
+        {
+          open: "09:00",
+          close: "22:00"
+        },
+        {
+          open: "09:00",
+          close: "22:00"
+        },
+        {
+          open: "09:00",
+          close: "22:00"
+        },
+        {
+          open: "10:00",
+          close: "21:00"
+        }
+      ]
+    },
     geoSource: "address"
   },
   {
@@ -2845,6 +4605,38 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 강서구 양천로 583 우림블루나인 1층",
     lat: 37.557108,
     lng: 126.864193,
+    hours: {
+      week: [
+        {
+          open: "11:00",
+          close: "22:00"
+        },
+        {
+          open: "10:00",
+          close: "22:00"
+        },
+        {
+          open: "10:00",
+          close: "22:00"
+        },
+        {
+          open: "10:00",
+          close: "22:00"
+        },
+        {
+          open: "10:00",
+          close: "22:00"
+        },
+        {
+          open: "10:00",
+          close: "22:00"
+        },
+        {
+          open: "11:00",
+          close: "22:00"
+        }
+      ]
+    },
     geoSource: "address"
   },
   {
@@ -3017,6 +4809,38 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 강남구 강남대로 320 황화빌딩 1층",
     lat: 37.491855,
     lng: 127.031065,
+    hours: {
+      week: [
+        {
+          open: "09:00",
+          close: "22:30"
+        },
+        {
+          open: "08:00",
+          close: "22:30"
+        },
+        {
+          open: "08:00",
+          close: "22:30"
+        },
+        {
+          open: "08:00",
+          close: "22:30"
+        },
+        {
+          open: "08:00",
+          close: "22:30"
+        },
+        {
+          open: "08:00",
+          close: "22:30"
+        },
+        {
+          open: "09:00",
+          close: "22:30"
+        }
+      ]
+    },
     geoSource: "address"
   },
   {
@@ -3034,6 +4858,38 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 강남구 테헤란로 111 대건빌딩 1층",
     lat: 37.498888,
     lng: 127.029295,
+    hours: {
+      week: [
+        {
+          open: "10:30",
+          close: "22:30"
+        },
+        {
+          open: "08:30",
+          close: "23:00"
+        },
+        {
+          open: "08:30",
+          close: "23:00"
+        },
+        {
+          open: "08:30",
+          close: "23:00"
+        },
+        {
+          open: "08:30",
+          close: "23:00"
+        },
+        {
+          open: "08:30",
+          close: "23:00"
+        },
+        {
+          open: "10:30",
+          close: "23:00"
+        }
+      ]
+    },
     geoSource: "address"
   },
   {
@@ -3051,6 +4907,38 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 강남구 테헤란로 151 1층",
     lat: 37.50098,
     lng: 127.036136,
+    hours: {
+      week: [
+        {
+          open: "10:00",
+          close: "21:30"
+        },
+        {
+          open: "08:00",
+          close: "22:00"
+        },
+        {
+          open: "08:00",
+          close: "22:00"
+        },
+        {
+          open: "08:00",
+          close: "22:00"
+        },
+        {
+          open: "08:00",
+          close: "22:00"
+        },
+        {
+          open: "08:00",
+          close: "22:00"
+        },
+        {
+          open: "10:00",
+          close: "21:30"
+        }
+      ]
+    },
     geoSource: "address"
   },
   {
@@ -3068,6 +4956,38 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 강남구 강남대로 470",
     lat: 37.514731,
     lng: 127.020057,
+    hours: {
+      week: [
+        {
+          open: "10:00",
+          close: "22:00"
+        },
+        {
+          open: "09:00",
+          close: "22:30"
+        },
+        {
+          open: "09:00",
+          close: "22:30"
+        },
+        {
+          open: "09:00",
+          close: "22:30"
+        },
+        {
+          open: "09:00",
+          close: "22:30"
+        },
+        {
+          open: "09:00",
+          close: "22:30"
+        },
+        {
+          open: "10:00",
+          close: "22:00"
+        }
+      ]
+    },
     geoSource: "address"
   },
   {
@@ -3085,6 +5005,38 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 강남구 테헤란로 316 1층",
     lat: 37.503078,
     lng: 127.045538,
+    hours: {
+      week: [
+        {
+          open: "10:00",
+          close: "22:00"
+        },
+        {
+          open: "08:00",
+          close: "22:30"
+        },
+        {
+          open: "08:00",
+          close: "22:30"
+        },
+        {
+          open: "08:00",
+          close: "22:30"
+        },
+        {
+          open: "08:00",
+          close: "22:30"
+        },
+        {
+          open: "08:00",
+          close: "22:30"
+        },
+        {
+          open: "10:00",
+          close: "22:00"
+        }
+      ]
+    },
     geoSource: "address"
   },
   {
@@ -3144,6 +5096,38 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 중구 퇴계로 222 구인빌딩 1층",
     lat: 37.561583,
     lng: 126.996252,
+    hours: {
+      week: [
+        {
+          open: "11:00",
+          close: "22:00"
+        },
+        {
+          open: "08:30",
+          close: "22:00"
+        },
+        {
+          open: "08:30",
+          close: "22:00"
+        },
+        {
+          open: "08:30",
+          close: "22:00"
+        },
+        {
+          open: "08:30",
+          close: "22:00"
+        },
+        {
+          open: "08:30",
+          close: "22:00"
+        },
+        {
+          open: "08:30",
+          close: "22:00"
+        }
+      ]
+    },
     geoSource: "address"
   },
   {
@@ -3203,6 +5187,38 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 광진구 동일로22길 115 1-2층",
     lat: 37.540764,
     lng: 127.070461,
+    hours: {
+      week: [
+        {
+          open: "10:30",
+          close: "23:00"
+        },
+        {
+          open: "10:00",
+          close: "23:30"
+        },
+        {
+          open: "10:00",
+          close: "23:30"
+        },
+        {
+          open: "10:00",
+          close: "23:30"
+        },
+        {
+          open: "10:00",
+          close: "23:30"
+        },
+        {
+          open: "10:00",
+          close: "23:30"
+        },
+        {
+          open: "10:30",
+          close: "23:30"
+        }
+      ]
+    },
     geoSource: "address"
   },
   {
@@ -3283,6 +5299,38 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 송파구 충민로 66 몰관 1층",
     lat: 37.477863,
     lng: 127.126004,
+    hours: {
+      week: [
+        {
+          open: "10:30",
+          close: "21:00"
+        },
+        {
+          open: "10:30",
+          close: "20:30"
+        },
+        {
+          open: "10:30",
+          close: "20:30"
+        },
+        {
+          open: "10:30",
+          close: "20:30"
+        },
+        {
+          open: "10:30",
+          close: "20:30"
+        },
+        {
+          open: "10:30",
+          close: "21:00"
+        },
+        {
+          open: "10:30",
+          close: "21:00"
+        }
+      ]
+    },
     geoSource: "address"
   },
   {
@@ -3342,6 +5390,38 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 강남구 밤고개로1길 10 수서현대벤쳐빌오피스텔 1층 117-6호",
     lat: 37.487818,
     lng: 127.101822,
+    hours: {
+      week: [
+        {
+          open: "10:00",
+          close: "22:00"
+        },
+        {
+          open: "08:00",
+          close: "22:30"
+        },
+        {
+          open: "08:00",
+          close: "22:30"
+        },
+        {
+          open: "08:00",
+          close: "22:30"
+        },
+        {
+          open: "08:00",
+          close: "22:30"
+        },
+        {
+          open: "08:00",
+          close: "22:30"
+        },
+        {
+          open: "09:00",
+          close: "22:00"
+        }
+      ]
+    },
     geoSource: "address"
   },
   {
@@ -3460,6 +5540,38 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 강동구 천호대로 1120 1층",
     lat: 37.534744,
     lng: 127.135284,
+    hours: {
+      week: [
+        {
+          open: "11:00",
+          close: "23:00"
+        },
+        {
+          open: "10:30",
+          close: "23:00"
+        },
+        {
+          open: "10:30",
+          close: "23:00"
+        },
+        {
+          open: "10:30",
+          close: "23:00"
+        },
+        {
+          open: "10:30",
+          close: "23:00"
+        },
+        {
+          open: "10:30",
+          close: "23:00"
+        },
+        {
+          open: "11:00",
+          close: "23:00"
+        }
+      ]
+    },
     geoSource: "address"
   },
   {
@@ -3477,6 +5589,38 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 광진구 아차산로 607 1층",
     lat: 37.555246,
     lng: 127.112539,
+    hours: {
+      week: [
+        {
+          open: "11:00",
+          close: "22:00"
+        },
+        {
+          open: "10:30",
+          close: "22:00"
+        },
+        {
+          open: "10:30",
+          close: "22:00"
+        },
+        {
+          open: "10:30",
+          close: "22:00"
+        },
+        {
+          open: "10:30",
+          close: "22:00"
+        },
+        {
+          open: "10:30",
+          close: "22:00"
+        },
+        {
+          open: "10:30",
+          close: "22:00"
+        }
+      ]
+    },
     geoSource: "address"
   },
   {
@@ -3557,6 +5701,35 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 구로구 새말로 97 지하1층 45~46호",
     lat: 37.506834,
     lng: 126.890237,
+    hours: {
+      week: [
+        {
+          open: "10:30",
+          close: "21:30"
+        },
+        {
+          open: "10:30",
+          close: "21:00"
+        },
+        null,
+        {
+          open: "10:30",
+          close: "21:00"
+        },
+        {
+          open: "10:30",
+          close: "21:00"
+        },
+        {
+          open: "10:30",
+          close: "21:30"
+        },
+        {
+          open: "10:30",
+          close: "21:30"
+        }
+      ]
+    },
     geoSource: "address"
   },
   {
@@ -3574,6 +5747,38 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 구로구 구로중앙로 152 2층",
     lat: 37.501125,
     lng: 126.882773,
+    hours: {
+      week: [
+        {
+          open: "10:30",
+          close: "22:00"
+        },
+        {
+          open: "10:30",
+          close: "21:00"
+        },
+        {
+          open: "10:30",
+          close: "21:00"
+        },
+        {
+          open: "10:30",
+          close: "21:00"
+        },
+        {
+          open: "10:30",
+          close: "21:00"
+        },
+        {
+          open: "10:30",
+          close: "22:00"
+        },
+        {
+          open: "10:30",
+          close: "22:00"
+        }
+      ]
+    },
     geoSource: "address"
   },
   {
@@ -3633,6 +5838,35 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 영등포구 당산로 42 지하1층",
     lat: 37.518242,
     lng: 126.895888,
+    hours: {
+      week: [
+        null,
+        {
+          open: "10:00",
+          close: "22:00"
+        },
+        {
+          open: "10:00",
+          close: "22:00"
+        },
+        {
+          open: "11:00",
+          close: "21:30"
+        },
+        {
+          open: "10:00",
+          close: "22:00"
+        },
+        {
+          open: "10:00",
+          close: "22:00"
+        },
+        {
+          open: "10:00",
+          close: "22:00"
+        }
+      ]
+    },
     geoSource: "address"
   },
   {
@@ -3818,6 +6052,38 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 강서구 화곡로 316 1층",
     lat: 37.555931,
     lng: 126.85234,
+    hours: {
+      week: [
+        {
+          open: "11:00",
+          close: "22:30"
+        },
+        {
+          open: "10:00",
+          close: "23:00"
+        },
+        {
+          open: "10:00",
+          close: "23:00"
+        },
+        {
+          open: "10:00",
+          close: "23:00"
+        },
+        {
+          open: "10:00",
+          close: "23:00"
+        },
+        {
+          open: "10:00",
+          close: "23:00"
+        },
+        {
+          open: "11:00",
+          close: "22:30"
+        }
+      ]
+    },
     geoSource: "address"
   },
   {
@@ -3835,6 +6101,38 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 구로구 오류로 20 1층",
     lat: 37.486174,
     lng: 126.839508,
+    hours: {
+      week: [
+        {
+          open: "11:00",
+          close: "22:30"
+        },
+        {
+          open: "10:00",
+          close: "22:30"
+        },
+        {
+          open: "10:00",
+          close: "22:30"
+        },
+        {
+          open: "10:00",
+          close: "22:30"
+        },
+        {
+          open: "10:00",
+          close: "22:30"
+        },
+        {
+          open: "10:00",
+          close: "22:30"
+        },
+        {
+          open: "11:00",
+          close: "22:30"
+        }
+      ]
+    },
     geoSource: "address"
   },
   {
@@ -3852,6 +6150,38 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 금천구 가산디지털1로 168 우림라이온스밸리 A동 1층 124~126호",
     lat: 37.479209,
     lng: 126.883048,
+    hours: {
+      week: [
+        {
+          open: "11:00",
+          close: "20:00"
+        },
+        {
+          open: "08:00",
+          close: "22:00"
+        },
+        {
+          open: "08:00",
+          close: "22:00"
+        },
+        {
+          open: "08:00",
+          close: "22:00"
+        },
+        {
+          open: "08:00",
+          close: "22:00"
+        },
+        {
+          open: "08:00",
+          close: "22:00"
+        },
+        {
+          open: "11:00",
+          close: "20:00"
+        }
+      ]
+    },
     geoSource: "address"
   },
   {
@@ -3869,6 +6199,38 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 금천구 벚꽃로 286 1층",
     lat: 37.480345,
     lng: 126.884174,
+    hours: {
+      week: [
+        {
+          open: "10:00",
+          close: "22:30"
+        },
+        {
+          open: "08:00",
+          close: "22:30"
+        },
+        {
+          open: "08:00",
+          close: "22:30"
+        },
+        {
+          open: "08:00",
+          close: "22:30"
+        },
+        {
+          open: "08:00",
+          close: "22:30"
+        },
+        {
+          open: "08:00",
+          close: "22:30"
+        },
+        {
+          open: "10:00",
+          close: "22:30"
+        }
+      ]
+    },
     geoSource: "address"
   },
   {
@@ -3928,6 +6290,38 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 구로구 디지털로 300 지밸리플라자 1층",
     lat: 37.484592,
     lng: 126.896393,
+    hours: {
+      week: [
+        {
+          open: "12:00",
+          close: "22:00"
+        },
+        {
+          open: "08:00",
+          close: "22:00"
+        },
+        {
+          open: "08:00",
+          close: "22:00"
+        },
+        {
+          open: "08:00",
+          close: "22:00"
+        },
+        {
+          open: "08:00",
+          close: "22:00"
+        },
+        {
+          open: "08:00",
+          close: "22:00"
+        },
+        {
+          open: "12:00",
+          close: "22:00"
+        }
+      ]
+    },
     geoSource: "address"
   },
   {
@@ -3945,6 +6339,38 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 용산구 한강대로 95 래미안용산 1층 101~102호",
     lat: 37.529037,
     lng: 126.966942,
+    hours: {
+      week: [
+        {
+          open: "11:00",
+          close: "22:30"
+        },
+        {
+          open: "09:00",
+          close: "22:30"
+        },
+        {
+          open: "09:00",
+          close: "22:30"
+        },
+        {
+          open: "09:00",
+          close: "22:30"
+        },
+        {
+          open: "09:00",
+          close: "22:30"
+        },
+        {
+          open: "09:00",
+          close: "22:30"
+        },
+        {
+          open: "10:00",
+          close: "22:30"
+        }
+      ]
+    },
     geoSource: "address"
   },
   {
@@ -3962,6 +6388,38 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 용산구 독서당로 65-1 1층",
     lat: 37.53765,
     lng: 127.012925,
+    hours: {
+      week: [
+        {
+          open: "10:00",
+          close: "22:30"
+        },
+        {
+          open: "09:00",
+          close: "22:30"
+        },
+        {
+          open: "09:00",
+          close: "22:30"
+        },
+        {
+          open: "09:00",
+          close: "22:30"
+        },
+        {
+          open: "09:00",
+          close: "22:30"
+        },
+        {
+          open: "09:00",
+          close: "22:30"
+        },
+        {
+          open: "10:00",
+          close: "22:30"
+        }
+      ]
+    },
     geoSource: "address"
   },
   {
@@ -4000,6 +6458,38 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 용산구 청파로45길 19 복조빌딩 1층",
     lat: 37.544605,
     lng: 126.970099,
+    hours: {
+      week: [
+        {
+          open: "10:00",
+          close: "22:30"
+        },
+        {
+          open: "09:30",
+          close: "22:30"
+        },
+        {
+          open: "09:30",
+          close: "22:30"
+        },
+        {
+          open: "09:30",
+          close: "22:30"
+        },
+        {
+          open: "09:30",
+          close: "22:30"
+        },
+        {
+          open: "09:30",
+          close: "22:30"
+        },
+        {
+          open: "10:00",
+          close: "22:30"
+        }
+      ]
+    },
     geoSource: "address"
   },
   {
@@ -4038,6 +6528,38 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 용산구 이촌로75길 16 1층",
     lat: 37.531915,
     lng: 126.993368,
+    hours: {
+      week: [
+        {
+          open: "10:00",
+          close: "22:30"
+        },
+        {
+          open: "09:30",
+          close: "22:30"
+        },
+        {
+          open: "09:30",
+          close: "22:30"
+        },
+        {
+          open: "09:30",
+          close: "22:30"
+        },
+        {
+          open: "09:30",
+          close: "22:30"
+        },
+        {
+          open: "09:30",
+          close: "22:30"
+        },
+        {
+          open: "10:00",
+          close: "22:30"
+        }
+      ]
+    },
     geoSource: "area"
   },
   {
@@ -4097,6 +6619,38 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 용산구 한강대로 366 지하1층 109~110호",
     lat: 37.550685,
     lng: 126.972674,
+    hours: {
+      week: [
+        {
+          open: "11:00",
+          close: "20:00"
+        },
+        {
+          open: "10:00",
+          close: "22:00"
+        },
+        {
+          open: "10:00",
+          close: "22:00"
+        },
+        {
+          open: "10:00",
+          close: "22:00"
+        },
+        {
+          open: "10:00",
+          close: "22:00"
+        },
+        {
+          open: "10:00",
+          close: "22:00"
+        },
+        {
+          open: "11:00",
+          close: "20:00"
+        }
+      ]
+    },
     geoSource: "address"
   },
   {
@@ -4156,6 +6710,38 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 용산구 대사관로 71 1층",
     lat: 37.534953,
     lng: 126.999294,
+    hours: {
+      week: [
+        {
+          open: "10:00",
+          close: "22:30"
+        },
+        {
+          open: "09:00",
+          close: "22:30"
+        },
+        {
+          open: "09:00",
+          close: "22:30"
+        },
+        {
+          open: "09:00",
+          close: "22:30"
+        },
+        {
+          open: "09:00",
+          close: "22:30"
+        },
+        {
+          open: "09:00",
+          close: "22:30"
+        },
+        {
+          open: "10:00",
+          close: "22:30"
+        }
+      ]
+    },
     geoSource: "address"
   },
   {
@@ -4192,6 +6778,38 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 중구 무교로 24 1층",
     lat: 37.567993,
     lng: 126.979536,
+    hours: {
+      week: [
+        {
+          open: "11:00",
+          close: "21:00"
+        },
+        {
+          open: "08:00",
+          close: "22:30"
+        },
+        {
+          open: "08:00",
+          close: "22:30"
+        },
+        {
+          open: "08:00",
+          close: "22:30"
+        },
+        {
+          open: "08:00",
+          close: "22:30"
+        },
+        {
+          open: "08:00",
+          close: "22:30"
+        },
+        {
+          open: "11:00",
+          close: "21:00"
+        }
+      ]
+    },
     geoSource: "address"
   },
   {
@@ -4230,6 +6848,38 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 중구 새문안로 26 1층",
     lat: 37.567818,
     lng: 126.968989,
+    hours: {
+      week: [
+        {
+          open: "11:00",
+          close: "22:00"
+        },
+        {
+          open: "08:00",
+          close: "22:00"
+        },
+        {
+          open: "08:00",
+          close: "22:00"
+        },
+        {
+          open: "08:00",
+          close: "22:00"
+        },
+        {
+          open: "08:00",
+          close: "22:00"
+        },
+        {
+          open: "08:00",
+          close: "22:00"
+        },
+        {
+          open: "11:00",
+          close: "22:00"
+        }
+      ]
+    },
     geoSource: "address"
   },
   {
@@ -4268,6 +6918,38 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 중구 남대문로 78 1층 108~109호",
     lat: 37.564347,
     lng: 126.982924,
+    hours: {
+      week: [
+        {
+          open: "10:00",
+          close: "22:30"
+        },
+        {
+          open: "09:30",
+          close: "22:30"
+        },
+        {
+          open: "09:30",
+          close: "22:30"
+        },
+        {
+          open: "09:30",
+          close: "22:30"
+        },
+        {
+          open: "09:30",
+          close: "22:30"
+        },
+        {
+          open: "09:30",
+          close: "22:30"
+        },
+        {
+          open: "10:00",
+          close: "22:30"
+        }
+      ]
+    },
     geoSource: "address"
   },
   {
@@ -4285,6 +6967,38 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 중구 세종대로16길 1 1층",
     lat: 37.563529,
     lng: 126.977085,
+    hours: {
+      week: [
+        {
+          open: "10:00",
+          close: "22:00"
+        },
+        {
+          open: "09:00",
+          close: "22:30"
+        },
+        {
+          open: "09:00",
+          close: "22:30"
+        },
+        {
+          open: "09:00",
+          close: "22:30"
+        },
+        {
+          open: "09:00",
+          close: "22:30"
+        },
+        {
+          open: "09:00",
+          close: "22:30"
+        },
+        {
+          open: "10:00",
+          close: "22:00"
+        }
+      ]
+    },
     geoSource: "address"
   },
   {
@@ -4365,6 +7079,38 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 중구 세종대로 91 지하1층, 1-2층",
     lat: 37.564561,
     lng: 126.976516,
+    hours: {
+      week: [
+        {
+          open: "10:00",
+          close: "22:00"
+        },
+        {
+          open: "08:00",
+          close: "22:30"
+        },
+        {
+          open: "08:00",
+          close: "22:30"
+        },
+        {
+          open: "08:00",
+          close: "22:30"
+        },
+        {
+          open: "08:00",
+          close: "22:30"
+        },
+        {
+          open: "08:00",
+          close: "22:30"
+        },
+        {
+          open: "10:00",
+          close: "22:00"
+        }
+      ]
+    },
     geoSource: "address"
   },
   {
@@ -4421,6 +7167,35 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 중구 을지로 30 11층",
     lat: 37.565151,
     lng: 126.980154,
+    hours: {
+      week: [
+        {
+          open: "10:30",
+          close: "20:30"
+        },
+        null,
+        {
+          open: "10:30",
+          close: "20:00"
+        },
+        {
+          open: "10:30",
+          close: "20:00"
+        },
+        {
+          open: "10:30",
+          close: "20:00"
+        },
+        {
+          open: "10:30",
+          close: "20:30"
+        },
+        {
+          open: "10:30",
+          close: "20:30"
+        }
+      ]
+    },
     geoSource: "address"
   },
   {
@@ -4438,6 +7213,38 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 종로구 종로 104 1층",
     lat: 37.573054,
     lng: 127.017078,
+    hours: {
+      week: [
+        {
+          open: "11:00",
+          close: "22:30"
+        },
+        {
+          open: "08:00",
+          close: "22:30"
+        },
+        {
+          open: "08:00",
+          close: "22:30"
+        },
+        {
+          open: "08:00",
+          close: "22:30"
+        },
+        {
+          open: "08:00",
+          close: "22:30"
+        },
+        {
+          open: "08:00",
+          close: "22:30"
+        },
+        {
+          open: "11:00",
+          close: "22:30"
+        }
+      ]
+    },
     geoSource: "address"
   },
   {
@@ -4455,6 +7262,38 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 종로구 종로 78 미려빌딩 1층",
     lat: 37.570635,
     lng: 126.996938,
+    hours: {
+      week: [
+        {
+          open: "10:00",
+          close: "22:30"
+        },
+        {
+          open: "09:00",
+          close: "22:30"
+        },
+        {
+          open: "09:00",
+          close: "22:30"
+        },
+        {
+          open: "09:00",
+          close: "22:30"
+        },
+        {
+          open: "09:00",
+          close: "22:30"
+        },
+        {
+          open: "09:00",
+          close: "22:30"
+        },
+        {
+          open: "10:00",
+          close: "22:30"
+        }
+      ]
+    },
     geoSource: "address"
   },
   {
@@ -4472,6 +7311,38 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 종로구 종로 61 1층",
     lat: 37.570855,
     lng: 126.997058,
+    hours: {
+      week: [
+        {
+          open: "10:00",
+          close: "22:30"
+        },
+        {
+          open: "09:00",
+          close: "22:30"
+        },
+        {
+          open: "09:00",
+          close: "22:30"
+        },
+        {
+          open: "09:00",
+          close: "22:30"
+        },
+        {
+          open: "09:00",
+          close: "22:30"
+        },
+        {
+          open: "09:00",
+          close: "22:30"
+        },
+        {
+          open: "10:00",
+          close: "22:30"
+        }
+      ]
+    },
     geoSource: "address"
   },
   {
@@ -4489,6 +7360,38 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 종로구 종로 19 르메이에르종로타운 1층",
     lat: 37.570851,
     lng: 126.979882,
+    hours: {
+      week: [
+        {
+          open: "10:00",
+          close: "22:30"
+        },
+        {
+          open: "08:00",
+          close: "22:30"
+        },
+        {
+          open: "08:00",
+          close: "22:30"
+        },
+        {
+          open: "08:00",
+          close: "22:30"
+        },
+        {
+          open: "08:00",
+          close: "22:30"
+        },
+        {
+          open: "08:00",
+          close: "22:30"
+        },
+        {
+          open: "09:00",
+          close: "22:30"
+        }
+      ]
+    },
     geoSource: "address"
   },
   {
@@ -4506,6 +7409,38 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 종로구 종로 33 지하1층 B135호",
     lat: 37.571004,
     lng: 126.981429,
+    hours: {
+      week: [
+        {
+          open: "10:00",
+          close: "21:00"
+        },
+        {
+          open: "08:00",
+          close: "21:00"
+        },
+        {
+          open: "08:00",
+          close: "21:00"
+        },
+        {
+          open: "08:00",
+          close: "21:00"
+        },
+        {
+          open: "08:00",
+          close: "21:00"
+        },
+        {
+          open: "08:00",
+          close: "21:00"
+        },
+        {
+          open: "10:00",
+          close: "21:00"
+        }
+      ]
+    },
     geoSource: "address"
   },
   {
@@ -4544,6 +7479,38 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 종로구 세종대로 161 1층",
     lat: 37.573287,
     lng: 126.977122,
+    hours: {
+      week: [
+        {
+          open: "10:00",
+          close: "22:30"
+        },
+        {
+          open: "08:00",
+          close: "22:30"
+        },
+        {
+          open: "08:00",
+          close: "22:30"
+        },
+        {
+          open: "08:00",
+          close: "22:30"
+        },
+        {
+          open: "08:00",
+          close: "22:30"
+        },
+        {
+          open: "08:00",
+          close: "22:30"
+        },
+        {
+          open: "10:00",
+          close: "22:30"
+        }
+      ]
+    },
     geoSource: "address"
   },
   {
@@ -4581,6 +7548,38 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 종로구 자하문로 9 1-2층",
     lat: 37.576916,
     lng: 126.972141,
+    hours: {
+      week: [
+        {
+          open: "10:00",
+          close: "22:30"
+        },
+        {
+          open: "09:00",
+          close: "22:30"
+        },
+        {
+          open: "09:00",
+          close: "22:30"
+        },
+        {
+          open: "09:00",
+          close: "22:30"
+        },
+        {
+          open: "09:00",
+          close: "22:30"
+        },
+        {
+          open: "09:00",
+          close: "22:30"
+        },
+        {
+          open: "10:00",
+          close: "22:30"
+        }
+      ]
+    },
     geoSource: "address"
   },
   {
@@ -4598,6 +7597,38 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 동대문구 왕산로 4 1층",
     lat: 37.574519,
     lng: 127.025447,
+    hours: {
+      week: [
+        {
+          open: "10:00",
+          close: "22:30"
+        },
+        {
+          open: "09:00",
+          close: "22:30"
+        },
+        {
+          open: "09:00",
+          close: "22:30"
+        },
+        {
+          open: "09:00",
+          close: "22:30"
+        },
+        {
+          open: "09:00",
+          close: "22:30"
+        },
+        {
+          open: "09:00",
+          close: "22:30"
+        },
+        {
+          open: "10:00",
+          close: "22:30"
+        }
+      ]
+    },
     geoSource: "address"
   }
 ];

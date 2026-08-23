@@ -1,6 +1,6 @@
 import { describe, it, expect } from "vitest";
-import { PLACES } from "./data";
-import { placeStatus } from "./places";
+import { PLACES, type DayHours } from "./data";
+import { hoursOn, placeStatus } from "./places";
 import hoursOverrides from "../scripts/lib/hours-overrides.json";
 import krNameOverrides from "../scripts/lib/kr-name-overrides.json";
 
@@ -13,13 +13,33 @@ import krNameOverrides from "../scripts/lib/kr-name-overrides.json";
  *
  *  These tests fail if a pipeline rerun ever drops them again, and — more
  *  importantly — if either backfill ever writes something the UI would show
- *  wrong. `hours` renders as a seven-identical-rows table labelled "today",
- *  and `nameKr` is what the place sheet hands to a taxi driver, so a plausible
- *  but wrong value is worse than the "HOURS UNKNOWN" / English fallback. */
+ *  wrong. `hours` renders as a weekday table labelled "today", and `nameKr` is
+ *  what the place sheet hands to a taxi driver, so a plausible but wrong value
+ *  is worse than the "HOURS UNKNOWN" / English fallback.
+ *
+ *  An hours override comes in one of two shapes and never both:
+ *    { open, close }  the week is uniform — the original single pair
+ *    { week: [...7] } the week varies — Sunday-first, null = closed that day
+ *  The second shape is what let the 122 places the first pass refused (the
+ *  Olive Young 09:00-weekday / 10:00-weekend split, mostly) be filled without
+ *  stating a false opening time. */
 
-type HoursOverride = { open: string; close: string; kakaoPlaceId: string; kakaoName: string; openDays: number };
+type Provenance = { kakaoPlaceId: string; kakaoName: string; openDays: number };
+type UniformOverride = Provenance & { open: string; close: string };
+type WeekOverride = Provenance & { week: (DayHours | null)[] };
+type HoursOverride = UniformOverride | WeekOverride;
 
-const HOURS = Object.entries(hoursOverrides) as [string, HoursOverride][];
+const HOURS = Object.entries(hoursOverrides as Record<string, HoursOverride>);
+const isWeek = (fix: HoursOverride): fix is WeekOverride => "week" in fix;
+const UNIFORM = HOURS.filter((e): e is [string, UniformOverride] => !isWeek(e[1]));
+const PER_DAY = HOURS.filter((e): e is [string, WeekOverride] => isWeek(e[1]));
+/** Every day either backfill shape claims, flattened for the range checks. */
+const ALL_RANGES: [string, DayHours][] = HOURS.flatMap(([id, fix]) =>
+  isWeek(fix)
+    ? fix.week.flatMap((d) => (d ? [[id, d] as [string, DayHours]] : []))
+    : [[id, { open: fix.open, close: fix.close }] as [string, DayHours]],
+);
+
 const KR_NAMES = Object.entries(krNameOverrides) as [string, string][];
 const BY_ID = new Map(PLACES.map((p) => [p.id, p]));
 const HHMM = /^([01]\d|2[0-3]):[0-5]\d$/;
@@ -31,9 +51,18 @@ const toMin = (t: string) => Number(t.slice(0, 2)) * 60 + Number(t.slice(3));
 describe("Kakao opening-hours backfill", () => {
   it("filled a substantial share of the scraped places", () => {
     // 224 on the first run, +21 after the second Korean-name pass unlocked
-    // more Kakao lookups. Regressions below 200 mean the loader stopped
-    // running or the resolver stopped matching.
-    expect(HOURS.length).toBeGreaterThanOrEqual(200); // 242 today
+    // more Kakao lookups, +122 once `week` could hold a non-uniform week.
+    // Regressions below 350 mean the loader stopped running or the resolver
+    // stopped matching.
+    expect(HOURS.length).toBeGreaterThanOrEqual(350); // 364 today
+  });
+
+  it("recovered the non-uniform weeks the single-pair model had to skip", () => {
+    // Exactly the 122 rows scripts/backfill-hours.mjs used to log as
+    // "varies-by-day". They are the reason `week` exists.
+    expect(PER_DAY.length).toBeGreaterThanOrEqual(120); // 122 today
+    expect(UNIFORM.length).toBeGreaterThanOrEqual(200); // 242 today
+    expect(UNIFORM.length + PER_DAY.length).toBe(HOURS.length);
   });
 
   it("every override names the Kakao place it came from", () => {
@@ -43,23 +72,51 @@ describe("Kakao opening-hours backfill", () => {
     }
   });
 
-  it("every override is a real 24h clock range that opens before it closes", () => {
+  it("carries exactly one of the two shapes — never a pair and a week", () => {
     for (const [id, fix] of HOURS) {
-      expect(fix.open, id).toMatch(HHMM);
-      expect(fix.close, id).toMatch(CLOSE_HHMM);
-      // Place.hours has no overnight representation — placeStatus() compares
-      // minutes-since-midnight, so open >= close would read as never open.
-      expect(toMin(fix.close), `${id} ${fix.open}–${fix.close}`).toBeGreaterThan(toMin(fix.open));
+      const hasPair = "open" in fix || "close" in fix;
+      expect(isWeek(fix) !== hasPair, `${id} carries both or neither shape`).toBe(true);
     }
   });
 
-  it("only accepts a week that is uniform enough to fit one open/close pair", () => {
-    // The UI prints the same pair against all seven weekdays, so a place whose
-    // Saturday differs must be skipped, not averaged. The backfill records how
-    // many days it saw agreeing; anything under 5 should never have been kept.
-    for (const [id, fix] of HOURS) {
+  it("every override is a real 24h clock range that opens before it closes", () => {
+    for (const [id, range] of ALL_RANGES) {
+      expect(range.open, id).toMatch(HHMM);
+      expect(range.close, id).toMatch(CLOSE_HHMM);
+      // Place.hours has no overnight representation — placeStatus() compares
+      // minutes-since-midnight, so open >= close would read as never open.
+      expect(toMin(range.close), `${id} ${range.open}–${range.close}`).toBeGreaterThan(toMin(range.open));
+    }
+  });
+
+  it("only accepts a single pair when the week really is uniform", () => {
+    // A pair prints against all seven weekdays, so a place whose Saturday
+    // differs must become a `week`, not an average. The backfill records how
+    // many days it saw agreeing; anything under 5 should never have been kept
+    // as a pair.
+    for (const [id, fix] of UNIFORM) {
       expect(fix.openDays, id).toBeGreaterThanOrEqual(5);
       expect(fix.openDays, id).toBeLessThanOrEqual(7);
+    }
+  });
+
+  it("gives every per-day override a full Sunday-first week", () => {
+    // A partial week is the one thing worse than no week: it would silently
+    // read as "closed" on the days Kakao simply did not list.
+    for (const [id, fix] of PER_DAY) {
+      expect(fix.week, id).toHaveLength(7);
+      expect(fix.week.filter(Boolean).length, id).toBe(fix.openDays);
+      expect(fix.openDays, id).toBeGreaterThan(0);
+    }
+  });
+
+  it("never stores a week that a single pair could have held", () => {
+    // Otherwise the two shapes would drift: the same place could be written
+    // either way depending on which branch ran.
+    for (const [id, fix] of PER_DAY) {
+      const distinct = new Set(fix.week.filter(Boolean).map((d) => `${d!.open}-${d!.close}`));
+      const skippable = distinct.size > 1 || fix.openDays < 5;
+      expect(skippable, `${id} is uniform and should be a single pair`).toBe(true);
     }
   });
 
@@ -71,14 +128,29 @@ describe("Kakao opening-hours backfill", () => {
     for (const [id, fix] of HOURS) {
       const place = BY_ID.get(id)!;
       expect(place.hours, id).toBeDefined();
-      expect(place.hours!.open, id).toBe(fix.open);
-      expect(place.hours!.close, id).toBe(fix.close);
+      const want = isWeek(fix) ? fix.week : Array(7).fill({ open: fix.open, close: fix.close });
+      for (let day = 0; day < 7; day++) {
+        expect(hoursOn(place.hours, day), `${id} day ${day}`).toEqual(want[day]);
+      }
     }
   });
 
-  it("turned 'HOURS UNKNOWN' into a real status for a third of the catalogue", () => {
+  it("shows a weekday-vs-weekend place its real hours on each side", () => {
+    // 올리브영 학동중앙점 is the canonical case the first pass refused:
+    // 09:00 Mon–Fri, 10:00 Sat/Sun. Anything that flattens it back to one pair
+    // states a false opening time on two days out of seven.
+    const oy = BY_ID.get("oy-학동중앙점")!;
+    expect(hoursOn(oy.hours, 1)).toEqual({ open: "09:00", close: "22:30" }); // Monday
+    expect(hoursOn(oy.hours, 0)).toEqual({ open: "10:00", close: "22:30" }); // Sunday
+    expect(hoursOn(oy.hours, 6)).toEqual({ open: "10:00", close: "22:30" }); // Saturday
+    // Aug 2026's weeks start on the 23rd, a Sunday.
+    expect(placeStatus(oy.hours, new Date(2026, 7, 24, 9, 30))).toBe("open");   // Mon 09:30
+    expect(placeStatus(oy.hours, new Date(2026, 7, 23, 9, 30))).toBe("closed"); // Sun 09:30
+  });
+
+  it("turned 'HOURS UNKNOWN' into a real status for most of the catalogue", () => {
     const known = PLACES.filter((p) => p.hours).length;
-    expect(known / PLACES.length).toBeGreaterThan(0.3);
+    expect(known / PLACES.length).toBeGreaterThan(0.6); // 408/600 today
   });
 
   it("reports open/closed rather than unknown for every backfilled place", () => {

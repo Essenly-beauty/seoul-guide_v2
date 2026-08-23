@@ -44,6 +44,38 @@ export const ADOS_PLACES: Place[] = [
     address: "서울 용산구 서빙고로 137",
     lat: 37.523953,
     lng: 126.98032,
+    hours: {
+      week: [
+        {
+          open: "09:30",
+          close: "17:30"
+        },
+        {
+          open: "09:30",
+          close: "17:30"
+        },
+        {
+          open: "09:30",
+          close: "17:30"
+        },
+        {
+          open: "09:30",
+          close: "21:00"
+        },
+        {
+          open: "09:30",
+          close: "17:30"
+        },
+        {
+          open: "09:30",
+          close: "17:30"
+        },
+        {
+          open: "09:30",
+          close: "21:00"
+        }
+      ]
+    },
     about: "Korea's largest national museum covering the country's full history, free admission",
     aboutKr: "한국사 전반을 아우르는 국내 최대 규모의 무료 국립박물관",
     geoSource: "address"
@@ -484,6 +516,35 @@ export const ADOS_PLACES: Place[] = [
     address: "서울 종로구 새문안로 55",
     lat: 37.570479,
     lng: 126.970526,
+    hours: {
+      week: [
+        {
+          open: "09:00",
+          close: "18:00"
+        },
+        null,
+        {
+          open: "09:00",
+          close: "18:00"
+        },
+        {
+          open: "09:00",
+          close: "18:00"
+        },
+        {
+          open: "09:00",
+          close: "18:00"
+        },
+        {
+          open: "09:00",
+          close: "21:00"
+        },
+        {
+          open: "09:00",
+          close: "18:00"
+        }
+      ]
+    },
     about: "A free museum tracing Seoul's 600-year history",
     aboutKr: "서울 600년 역사를 소개하는 무료 박물관",
     geoSource: "address"
@@ -588,6 +649,38 @@ export const ADOS_PLACES: Place[] = [
     address: "서울 중구 명동길 26 유네스코회관 3층",
     lat: 37.563452,
     lng: 126.98377,
+    hours: {
+      week: [
+        {
+          open: "14:00",
+          close: "18:30"
+        },
+        {
+          open: "17:00",
+          close: "21:30"
+        },
+        {
+          open: "17:00",
+          close: "21:30"
+        },
+        {
+          open: "17:00",
+          close: "21:30"
+        },
+        {
+          open: "17:00",
+          close: "21:30"
+        },
+        {
+          open: "17:00",
+          close: "21:30"
+        },
+        {
+          open: "14:00",
+          close: "18:30"
+        }
+      ]
+    },
     about: "A dedicated theater for the non-verbal performance NANTA",
     aboutKr: "비언어극 '난타' 전용 공연장",
     geoSource: "address"
@@ -648,6 +741,38 @@ export const ADOS_PLACES: Place[] = [
     address: "서울 종로구 효자로 12",
     lat: 37.576567,
     lng: 126.974969,
+    hours: {
+      week: [
+        {
+          open: "09:30",
+          close: "17:30"
+        },
+        {
+          open: "09:30",
+          close: "17:30"
+        },
+        {
+          open: "09:30",
+          close: "17:30"
+        },
+        {
+          open: "09:30",
+          close: "17:30"
+        },
+        {
+          open: "09:30",
+          close: "17:30"
+        },
+        {
+          open: "09:30",
+          close: "17:30"
+        },
+        {
+          open: "09:30",
+          close: "21:00"
+        }
+      ]
+    },
     about: "A museum dedicated to royal artifacts of the Joseon dynasty",
     aboutKr: "조선 왕실 유물을 전시하는 전문 박물관",
     geoSource: "address"
@@ -884,6 +1009,38 @@ export const ADOS_PLACES: Place[] = [
     address: "서울 중구 덕수궁길 15 서울시청 서소문별관 13층",
     lat: 37.564305,
     lng: 126.975572,
+    hours: {
+      week: [
+        {
+          open: "09:00",
+          close: "17:30"
+        },
+        {
+          open: "13:30",
+          close: "17:30"
+        },
+        {
+          open: "13:30",
+          close: "17:30"
+        },
+        {
+          open: "13:30",
+          close: "17:30"
+        },
+        {
+          open: "13:30",
+          close: "17:30"
+        },
+        {
+          open: "13:30",
+          close: "17:30"
+        },
+        {
+          open: "09:00",
+          close: "17:30"
+        }
+      ]
+    },
     aboutKr: "서울시청 서소문별관 13층 무료 전망 공간 겸 카페. 덕수궁을 내려다보는 숨은 명소로, 최근 운영 여부에 혼선이 있어 방문 전 확인 필요.",
     geoSource: "address"
   },
@@ -1642,6 +1799,38 @@ export const ADOS_PLACES: Place[] = [
     address: "정보 부족",
     lat: 37.595431,
     lng: 127.09952,
+    hours: {
+      week: [
+        {
+          open: "10:00",
+          close: "17:00"
+        },
+        {
+          open: "09:00",
+          close: "20:00"
+        },
+        {
+          open: "09:00",
+          close: "20:00"
+        },
+        {
+          open: "09:00",
+          close: "20:00"
+        },
+        {
+          open: "09:00",
+          close: "20:00"
+        },
+        {
+          open: "09:00",
+          close: "20:00"
+        },
+        {
+          open: "09:00",
+          close: "20:00"
+        }
+      ]
+    },
     aboutKr: "정보 부족",
     geoSource: "address"
   },
@@ -1703,6 +1892,35 @@ export const ADOS_PLACES: Place[] = [
     address: "정보 부족",
     lat: 37.482793,
     lng: 126.926789,
+    hours: {
+      week: [
+        {
+          open: "10:00",
+          close: "22:00"
+        },
+        {
+          open: "09:00",
+          close: "22:00"
+        },
+        null,
+        {
+          open: "09:00",
+          close: "22:00"
+        },
+        {
+          open: "09:00",
+          close: "22:00"
+        },
+        {
+          open: "09:00",
+          close: "22:00"
+        },
+        {
+          open: "10:00",
+          close: "22:00"
+        }
+      ]
+    },
     aboutKr: "정보 부족",
     geoSource: "address"
   },

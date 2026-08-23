@@ -70,6 +70,17 @@ export function loadHoursOverrides() {
   return JSON.parse(readFileSync(HOURS_OVERRIDES_PATH, "utf8"));
 }
 
+/** The Place.hours value an override entry stands for, or null when it carries
+    neither shape. An entry is EITHER `{ open, close }` (uniform week) or
+    `{ week: [...7] }` (per-day) — never both, so the file itself records which
+    of the two the panel actually supported. */
+export function hoursFromOverride(fix) {
+  if (!fix) return null;
+  if (Array.isArray(fix.week)) return { week: fix.week };
+  if (fix.open && fix.close) return { open: fix.open, close: fix.close };
+  return null;
+}
+
 /** Re-apply scripts/lib/hours-overrides.json to a list of places (mutating the
     array in place, replacing entries). Returns the number applied.
     Builders MUST call this so a pipeline rerun can't regress the hours —
@@ -77,9 +88,9 @@ export function loadHoursOverrides() {
 export function applyHoursOverrides(places, overrides = loadHoursOverrides()) {
   let applied = 0;
   for (let i = 0; i < places.length; i++) {
-    const fix = overrides[places[i].id];
-    if (!fix?.open || !fix?.close) continue;
-    places[i] = setOrdered(places[i], HOURS_AFTER_KEY, "hours", { open: fix.open, close: fix.close });
+    const hours = hoursFromOverride(overrides[places[i].id]);
+    if (!hours) continue;
+    places[i] = setOrdered(places[i], HOURS_AFTER_KEY, "hours", hours);
     applied += 1;
   }
   return applied;

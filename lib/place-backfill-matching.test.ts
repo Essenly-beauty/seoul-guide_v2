@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { uniformHours, weekRanges } from "../scripts/lib/kakao-local.mjs";
+import { uniformHours, weekHours, weekRanges } from "../scripts/lib/kakao-local.mjs";
 import { nameSimilarity, romanize, stripBranch, nameEvidence } from "../scripts/lib/hangul-romanize.mjs";
 
 /** The two judgement calls the Kakao backfills make, tested away from the
@@ -40,9 +40,9 @@ describe("open_hours → Place.hours", () => {
   });
 
   it("refuses a week whose weekend differs from its weekdays", () => {
-    // 올리브영 학동중앙점: Mon–Fri 09:00, Sat/Sun 10:00. Place.hours holds one
-    // pair and the UI prints it against all seven weekdays, so flattening this
-    // would state Sunday's opening time incorrectly.
+    // 올리브영 학동중앙점: Mon–Fri 09:00, Sat/Sun 10:00. A single pair prints
+    // against all seven weekdays, so flattening this would state Sunday's
+    // opening time incorrectly — it goes in as a `week` instead (below).
     const got = uniformHours(
       panel(["10:00 ~ 22:30", ...Array(5).fill("09:00 ~ 22:30"), "10:00 ~ 22:30"]),
     );
@@ -79,6 +79,92 @@ describe("open_hours → Place.hours", () => {
     expect(week![0].range).toEqual({ open: "10:00", close: "20:00" });
     expect(week![1].range).toBeNull();
     expect(week![1].raw).toBe("off");
+  });
+});
+
+// ── open_hours → Place.hours { week } ───────────────────────
+/** Kakao serves the week starting at the day it was fetched, so a real panel's
+ *  first entry is whatever today happened to be. `startAt` reproduces that
+ *  rotation; `ranges` stays in Sunday-first order for readability. */
+const KO = "일월화수목금토";
+const koPanel = (ranges: (string | null)[], startAt = 0) => ({
+  open_hours: {
+    week_from_today: {
+      week_periods: [{
+        days: ranges.map((_, i) => {
+          const d = (startAt + i) % 7;
+          return day(`${KO[d]}(8/${23 + i})`, ranges[d]);
+        }),
+      }],
+    },
+  },
+});
+
+/** 올리브영 학동중앙점 — the exact split 122 backfilled rows have. */
+const OY_WEEK = ["10:00 ~ 22:30", ...Array(5).fill("09:00 ~ 22:30"), "10:00 ~ 22:30"];
+
+describe("open_hours → Place.hours { week }", () => {
+  it("keeps a weekday/weekend split instead of throwing the row away", () => {
+    const got = weekHours(koPanel(OY_WEEK));
+    expect(got.skip).toBeUndefined();
+    expect(got.openDays).toBe(7);
+    expect(got.week).toEqual([
+      { open: "10:00", close: "22:30" }, // Sun
+      ...Array(5).fill({ open: "09:00", close: "22:30" }), // Mon–Fri
+      { open: "10:00", close: "22:30" }, // Sat
+    ]);
+  });
+
+  it("places every day by its own weekday letter, not by position", () => {
+    // The panel is "week from today": fetched on a Thursday it starts at 목.
+    // Reading it positionally would shift the whole week by four days.
+    for (let startAt = 0; startAt < 7; startAt++) {
+      expect(weekHours(koPanel(OY_WEEK, startAt)).week, `starting at ${KO[startAt]}`)
+        .toEqual(weekHours(koPanel(OY_WEEK)).week);
+    }
+  });
+
+  it("marks a closed day null rather than repeating a neighbour's hours", () => {
+    const got = weekHours(koPanel([
+      "10:30 ~ 20:00", "10:30 ~ 20:00", null, "10:30 ~ 20:00",
+      "10:30 ~ 20:00", "10:30 ~ 20:00", "10:00 ~ 20:00",
+    ]));
+    expect(got.skip).toBeUndefined();
+    expect(got.week![2]).toBeNull(); // Tuesday
+    expect(got.openDays).toBe(6);
+  });
+
+  it("accepts a week too sparse for a single pair — `week` can say it honestly", () => {
+    // uniformHours refuses this at minOpenDays; a per-day week does not have to.
+    const ranges = [null, null, null, "10:00 ~ 18:00", "10:00 ~ 18:00", null, null];
+    expect(uniformHours(panel(ranges)).skip).toBe("open-only-2-days");
+    const got = weekHours(koPanel(ranges));
+    expect(got.skip).toBeUndefined();
+    expect(got.openDays).toBe(2);
+  });
+
+  it("refuses a partial week rather than calling the missing days closed", () => {
+    const three = {
+      open_hours: { week_from_today: { week_periods: [{ days: [
+        day("목(8/27)", "10:00 ~ 18:00"), day("금(8/28)", "10:00 ~ 18:00"), day("토(8/29)", null),
+      ] }] } },
+    };
+    expect(weekHours(three).week).toBeUndefined();
+    expect(weekHours(three).skip).toBe("partial-week-3-days");
+  });
+
+  it("refuses a day it cannot place on the calendar", () => {
+    expect(weekHours(panel(Array(7).fill("10:00 ~ 20:00"))).skip).toMatch(/^unknown-weekday:/);
+  });
+
+  it("refuses free-text hours and a panel with no open_hours, same as the pair", () => {
+    expect(weekHours(koPanel([...Array(6).fill("10:00 ~ 22:00"), "24시간 영업"])).skip).toMatch(/^unparsed:/);
+    expect(weekHours({}).skip).toBe("no-open-hours");
+    expect(weekHours(null).skip).toBe("no-open-hours");
+  });
+
+  it("refuses a week with no open day at all — that is not hours, it is silence", () => {
+    expect(weekHours(koPanel(Array(7).fill(null))).skip).toBe("open-only-0-days");
   });
 });
 

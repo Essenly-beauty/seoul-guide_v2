@@ -137,6 +137,20 @@ export const CATEGORY_ZONES: Partial<Record<PlaceType, ZoneKey[]>> = {
 export type ServiceItem = { name: string; nameKr?: string; durationMin?: number; price: string };
 export type BookingChannel = "naver" | "kakao" | "instagram";
 
+/** One day's opening range, "HH:MM" on a 24h clock. "24:00" is midnight at the
+    end of that day (Kakao writes it that way and so does doota-mall below). */
+export type DayHours = { open: string; close: string };
+/** A week that is not the same every day: Sunday-first, exactly 7 entries,
+    `null` for a day the place is closed. Kakao's panel is where these come
+    from — the common Olive Young shape is 09:00 Mon–Fri and 10:00 Sat/Sun. */
+export type WeekHours = { week: (DayHours | null)[] };
+/** Either shape. Most rows keep the single pair they have always had; only a
+    place whose week actually varies carries `week`, so a caller can never read
+    a flattened pair that was never true on the day it is showing.
+    Resolve it with `hoursOn`/`hoursToday` in lib/places.ts rather than reading
+    `.open`/`.close` — those only exist on the uniform shape. */
+export type PlaceHours = DayHours | WeekHours;
+
 export type Place = {
   id: string;
   name: string;
@@ -154,7 +168,7 @@ export type Place = {
   lng: number;
   englishOk?: boolean;
   badge?: { cls: "accent" | "warning" | "info"; text: string };
-  hours?: { open: string; close: string }; // "HH:MM" 24h
+  hours?: PlaceHours; // uniform { open, close } or a per-day { week }
   stationWalk?: { station: string; exit?: string; minutes: number };
   services?: ServiceItem[];
   serviceTags?: string[];

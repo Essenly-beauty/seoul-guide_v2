@@ -320,6 +320,35 @@ export const CREATRIP_PLACES: Place[] = [
     address: "경기 성남시 분당구 성남대로 345 3F",
     lat: 37.3669,
     lng: 127.107676,
+    hours: {
+      week: [
+        {
+          open: "10:30",
+          close: "20:00"
+        },
+        {
+          open: "10:30",
+          close: "20:00"
+        },
+        null,
+        {
+          open: "10:30",
+          close: "20:00"
+        },
+        {
+          open: "10:30",
+          close: "20:00"
+        },
+        {
+          open: "10:30",
+          close: "20:00"
+        },
+        {
+          open: "10:00",
+          close: "20:00"
+        }
+      ]
+    },
     serviceTags: [
       "color",
       "perm"
@@ -875,6 +904,38 @@ export const CREATRIP_PLACES: Place[] = [
     address: "서울 강동구 천호대로 1005 9F",
     lat: 37.538938,
     lng: 127.124073,
+    hours: {
+      week: [
+        {
+          open: "10:30",
+          close: "20:30"
+        },
+        {
+          open: "10:30",
+          close: "20:00"
+        },
+        {
+          open: "10:30",
+          close: "20:00"
+        },
+        {
+          open: "10:30",
+          close: "20:00"
+        },
+        {
+          open: "10:30",
+          close: "20:00"
+        },
+        {
+          open: "10:30",
+          close: "20:30"
+        },
+        {
+          open: "10:30",
+          close: "20:30"
+        }
+      ]
+    },
     englishOk: true,
     serviceTags: [
       "color",
@@ -1190,6 +1251,38 @@ export const CREATRIP_PLACES: Place[] = [
     address: "서울 서초구 강남대로 487 2F",
     lat: 37.505778,
     lng: 127.023438,
+    hours: {
+      week: [
+        {
+          open: "10:30",
+          close: "20:00"
+        },
+        {
+          open: "10:30",
+          close: "20:00"
+        },
+        {
+          open: "10:30",
+          close: "20:00"
+        },
+        {
+          open: "10:30",
+          close: "20:00"
+        },
+        {
+          open: "10:30",
+          close: "20:00"
+        },
+        {
+          open: "10:30",
+          close: "20:00"
+        },
+        {
+          open: "10:00",
+          close: "20:00"
+        }
+      ]
+    },
     englishOk: true,
     serviceTags: [
       "color",
@@ -1214,6 +1307,38 @@ export const CREATRIP_PLACES: Place[] = [
     address: "서울 강남구 강남대로102길 16 2F",
     lat: 37.501895,
     lng: 127.027006,
+    hours: {
+      week: [
+        {
+          open: "10:30",
+          close: "19:30"
+        },
+        {
+          open: "11:00",
+          close: "20:00"
+        },
+        {
+          open: "10:30",
+          close: "20:00"
+        },
+        {
+          open: "10:30",
+          close: "20:00"
+        },
+        {
+          open: "10:30",
+          close: "20:00"
+        },
+        {
+          open: "10:30",
+          close: "20:00"
+        },
+        {
+          open: "10:00",
+          close: "20:00"
+        }
+      ]
+    },
     englishOk: true,
     serviceTags: [
       "color",
@@ -1582,6 +1707,38 @@ export const CREATRIP_PLACES: Place[] = [
     address: "서울 강남구 강남대로98길 9, 2F",
     lat: 37.500742,
     lng: 127.027347,
+    hours: {
+      week: [
+        {
+          open: "10:30",
+          close: "20:00"
+        },
+        {
+          open: "10:30",
+          close: "22:00"
+        },
+        {
+          open: "10:30",
+          close: "22:00"
+        },
+        {
+          open: "10:30",
+          close: "22:00"
+        },
+        {
+          open: "10:30",
+          close: "22:00"
+        },
+        {
+          open: "10:30",
+          close: "22:00"
+        },
+        {
+          open: "10:30",
+          close: "20:00"
+        }
+      ]
+    },
     englishOk: true,
     serviceTags: [
       "color",
@@ -1861,6 +2018,35 @@ export const CREATRIP_PLACES: Place[] = [
     address: "서울 강남구 도산대로98길 16",
     lat: 37.523541,
     lng: 127.051251,
+    hours: {
+      week: [
+        null,
+        {
+          open: "10:00",
+          close: "20:00"
+        },
+        {
+          open: "10:00",
+          close: "20:00"
+        },
+        {
+          open: "10:00",
+          close: "20:00"
+        },
+        {
+          open: "10:00",
+          close: "20:00"
+        },
+        {
+          open: "10:00",
+          close: "20:00"
+        },
+        {
+          open: "10:00",
+          close: "19:00"
+        }
+      ]
+    },
     englishOk: true,
     serviceTags: [
       "cut"
@@ -2310,6 +2496,35 @@ export const CREATRIP_PLACES: Place[] = [
     address: "서울 종로구 종로12길 23 9F",
     lat: 37.568953,
     lng: 126.985919,
+    hours: {
+      week: [
+        null,
+        {
+          open: "10:00",
+          close: "21:00"
+        },
+        {
+          open: "10:00",
+          close: "21:00"
+        },
+        {
+          open: "10:00",
+          close: "21:00"
+        },
+        {
+          open: "10:00",
+          close: "21:00"
+        },
+        {
+          open: "10:00",
+          close: "21:00"
+        },
+        {
+          open: "10:00",
+          close: "17:30"
+        }
+      ]
+    },
     serviceTags: [
       "scalp"
     ],
@@ -2332,6 +2547,38 @@ export const CREATRIP_PLACES: Place[] = [
     address: "서울 마포구 양화로 100 2F",
     lat: 37.552682,
     lng: 126.918675,
+    hours: {
+      week: [
+        {
+          open: "11:00",
+          close: "19:30"
+        },
+        {
+          open: "11:00",
+          close: "19:30"
+        },
+        {
+          open: "11:00",
+          close: "19:30"
+        },
+        {
+          open: "11:00",
+          close: "19:30"
+        },
+        {
+          open: "11:00",
+          close: "19:30"
+        },
+        {
+          open: "11:00",
+          close: "19:30"
+        },
+        {
+          open: "10:00",
+          close: "19:00"
+        }
+      ]
+    },
     englishOk: true,
     serviceTags: [
       "color",
@@ -2527,6 +2774,38 @@ export const CREATRIP_PLACES: Place[] = [
     address: "서울 마포구 어울마당로 51-1 2F",
     lat: 37.549861,
     lng: 126.920767,
+    hours: {
+      week: [
+        {
+          open: "10:30",
+          close: "20:00"
+        },
+        {
+          open: "10:30",
+          close: "20:00"
+        },
+        {
+          open: "10:30",
+          close: "20:00"
+        },
+        {
+          open: "10:30",
+          close: "20:00"
+        },
+        {
+          open: "10:30",
+          close: "20:00"
+        },
+        {
+          open: "10:30",
+          close: "20:00"
+        },
+        {
+          open: "10:00",
+          close: "20:00"
+        }
+      ]
+    },
     englishOk: true,
     serviceTags: [
       "color",
@@ -2705,6 +2984,35 @@ export const CREATRIP_PLACES: Place[] = [
     address: "서울 마포구 연남로 8 4F",
     lat: 37.560602,
     lng: 126.923481,
+    hours: {
+      week: [
+        null,
+        {
+          open: "10:00",
+          close: "20:00"
+        },
+        {
+          open: "10:00",
+          close: "20:00"
+        },
+        {
+          open: "10:00",
+          close: "20:00"
+        },
+        {
+          open: "10:00",
+          close: "20:00"
+        },
+        {
+          open: "10:00",
+          close: "20:00"
+        },
+        {
+          open: "10:00",
+          close: "17:00"
+        }
+      ]
+    },
     englishOk: true,
     serviceTags: [
       "scalp"
@@ -2963,6 +3271,35 @@ export const CREATRIP_PLACES: Place[] = [
     address: "서울 용산구 대사관로 35",
     lat: 37.533708,
     lng: 127.002049,
+    hours: {
+      week: [
+        {
+          open: "10:00",
+          close: "18:00"
+        },
+        {
+          open: "10:00",
+          close: "19:00"
+        },
+        {
+          open: "10:00",
+          close: "19:00"
+        },
+        null,
+        {
+          open: "10:00",
+          close: "19:00"
+        },
+        {
+          open: "10:00",
+          close: "19:00"
+        },
+        {
+          open: "10:00",
+          close: "19:00"
+        }
+      ]
+    },
     englishOk: true,
     serviceTags: [
       "cut"
@@ -2986,6 +3323,35 @@ export const CREATRIP_PLACES: Place[] = [
     address: "서울 송파구 올림픽로12길 4",
     lat: 37.511272,
     lng: 127.082773,
+    hours: {
+      week: [
+        {
+          open: "10:30",
+          close: "20:00"
+        },
+        {
+          open: "10:30",
+          close: "20:00"
+        },
+        null,
+        {
+          open: "10:30",
+          close: "20:00"
+        },
+        {
+          open: "10:30",
+          close: "20:00"
+        },
+        {
+          open: "10:30",
+          close: "20:00"
+        },
+        {
+          open: "10:00",
+          close: "20:00"
+        }
+      ]
+    },
     englishOk: true,
     serviceTags: [
       "color",
@@ -3059,6 +3425,35 @@ export const CREATRIP_PLACES: Place[] = [
     address: "서울 종로구 새문안로5길 5 4F",
     lat: 37.570692,
     lng: 126.974726,
+    hours: {
+      week: [
+        null,
+        {
+          open: "11:00",
+          close: "21:00"
+        },
+        {
+          open: "11:00",
+          close: "21:00"
+        },
+        {
+          open: "11:00",
+          close: "21:00"
+        },
+        {
+          open: "11:00",
+          close: "21:00"
+        },
+        {
+          open: "11:00",
+          close: "21:00"
+        },
+        {
+          open: "11:00",
+          close: "20:00"
+        }
+      ]
+    },
     englishOk: true,
     serviceTags: [
       "color",
@@ -3084,6 +3479,35 @@ export const CREATRIP_PLACES: Place[] = [
     address: "서울 종로구 삼봉로 95 대성스카이렉스 2F",
     lat: 37.572294,
     lng: 126.982509,
+    hours: {
+      week: [
+        null,
+        {
+          open: "11:00",
+          close: "21:00"
+        },
+        {
+          open: "11:00",
+          close: "21:00"
+        },
+        {
+          open: "11:00",
+          close: "21:00"
+        },
+        {
+          open: "11:00",
+          close: "21:00"
+        },
+        {
+          open: "11:00",
+          close: "21:00"
+        },
+        {
+          open: "11:00",
+          close: "20:00"
+        }
+      ]
+    },
     englishOk: true,
     serviceTags: [
       "color",
@@ -3967,6 +4391,32 @@ export const CREATRIP_PLACES: Place[] = [
     address: "서울 성북구 아리랑로 10, 2F",
     lat: 37.59377,
     lng: 127.016453,
+    hours: {
+      week: [
+        null,
+        {
+          open: "10:00",
+          close: "20:00"
+        },
+        {
+          open: "10:00",
+          close: "20:00"
+        },
+        null,
+        {
+          open: "10:00",
+          close: "20:00"
+        },
+        {
+          open: "10:00",
+          close: "20:00"
+        },
+        {
+          open: "10:00",
+          close: "19:30"
+        }
+      ]
+    },
     serviceTags: [
       "color",
       "perm"
@@ -4188,6 +4638,38 @@ export const CREATRIP_PLACES: Place[] = [
     address: "서울 성동구 아차산로 103",
     lat: 37.545048,
     lng: 127.055814,
+    hours: {
+      week: [
+        {
+          open: "11:00",
+          close: "20:00"
+        },
+        {
+          open: "11:00",
+          close: "21:00"
+        },
+        {
+          open: "11:00",
+          close: "21:00"
+        },
+        {
+          open: "11:00",
+          close: "21:00"
+        },
+        {
+          open: "11:00",
+          close: "21:00"
+        },
+        {
+          open: "11:00",
+          close: "21:00"
+        },
+        {
+          open: "11:00",
+          close: "20:00"
+        }
+      ]
+    },
     englishOk: true,
     serviceTags: [
       "color",
@@ -4808,6 +5290,38 @@ export const CREATRIP_PLACES: Place[] = [
     address: "서울 영등포구 국제금융로2길 37 에스트레뉴 B1F 104호",
     lat: 37.523103,
     lng: 126.924492,
+    hours: {
+      week: [
+        {
+          open: "10:00",
+          close: "19:30"
+        },
+        {
+          open: "10:00",
+          close: "21:00"
+        },
+        {
+          open: "10:00",
+          close: "21:00"
+        },
+        {
+          open: "10:00",
+          close: "21:00"
+        },
+        {
+          open: "10:00",
+          close: "21:00"
+        },
+        {
+          open: "10:00",
+          close: "21:00"
+        },
+        {
+          open: "10:00",
+          close: "19:30"
+        }
+      ]
+    },
     englishOk: true,
     serviceTags: [
       "color",
@@ -4832,6 +5346,38 @@ export const CREATRIP_PLACES: Place[] = [
     address: "서울 영등포구 영중로 18 B1F",
     lat: 37.517986,
     lng: 126.90622,
+    hours: {
+      week: [
+        {
+          open: "10:00",
+          close: "20:00"
+        },
+        {
+          open: "10:00",
+          close: "21:00"
+        },
+        {
+          open: "10:00",
+          close: "21:00"
+        },
+        {
+          open: "10:00",
+          close: "21:00"
+        },
+        {
+          open: "10:00",
+          close: "21:00"
+        },
+        {
+          open: "10:00",
+          close: "21:00"
+        },
+        {
+          open: "10:00",
+          close: "20:00"
+        }
+      ]
+    },
     englishOk: true,
     serviceTags: [
       "color",
@@ -4929,6 +5475,38 @@ export const CREATRIP_PLACES: Place[] = [
     address: "서울 마포구 동교로 262 4F",
     lat: 37.56297,
     lng: 126.925247,
+    hours: {
+      week: [
+        {
+          open: "11:00",
+          close: "20:00"
+        },
+        {
+          open: "11:00",
+          close: "20:00"
+        },
+        {
+          open: "11:00",
+          close: "20:00"
+        },
+        {
+          open: "12:00",
+          close: "21:00"
+        },
+        {
+          open: "12:00",
+          close: "21:00"
+        },
+        {
+          open: "11:00",
+          close: "20:00"
+        },
+        {
+          open: "11:00",
+          close: "20:00"
+        }
+      ]
+    },
     englishOk: true,
     serviceTags: [
       "color",
@@ -4953,6 +5531,38 @@ export const CREATRIP_PLACES: Place[] = [
     address: "서울 영등포구 여의대로 108 3F",
     lat: 37.525964,
     lng: 126.928418,
+    hours: {
+      week: [
+        {
+          open: "10:30",
+          close: "20:30"
+        },
+        {
+          open: "10:30",
+          close: "20:00"
+        },
+        {
+          open: "10:30",
+          close: "20:00"
+        },
+        {
+          open: "10:30",
+          close: "20:00"
+        },
+        {
+          open: "10:30",
+          close: "20:00"
+        },
+        {
+          open: "10:30",
+          close: "20:30"
+        },
+        {
+          open: "10:30",
+          close: "20:30"
+        }
+      ]
+    },
     serviceTags: [
       "color",
       "perm",

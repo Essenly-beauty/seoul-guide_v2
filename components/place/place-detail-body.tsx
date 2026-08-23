@@ -10,6 +10,7 @@ import { Button } from "@/components/ui/button";
 import { Chip } from "@/components/ui/chip";
 import { Collapse } from "@/components/ui/collapse";
 import { EmptyState } from "@/components/ui/empty-state";
+import { HoursToday } from "@/components/ui/hours-today";
 import { HScroll } from "@/components/ui/h-scroll";
 import { IconButton } from "@/components/ui/icon-button";
 import { ImgPh } from "@/components/ui/img-ph";
@@ -30,7 +31,7 @@ import { fetchPlaceReviews, REPORT_REASONS, reportReview, timeAgo, type PublicRe
 import { routes } from "@/lib/routes";
 import { PLACES, PRODUCTS, TYPE_LABEL, zoneShort, type Place } from "@/lib/data";
 import { GANGNAM_STATION, formatCompactDistance, formatDistance, haversineKm } from "@/lib/geo";
-import { isBookable, statusLabel } from "@/lib/places";
+import { hoursOn, isBookable, statusLabel } from "@/lib/places";
 
 /** Anchor-tab targets (spec §4.6). Ids live on the sections below. */
 const SECTIONS = [
@@ -214,7 +215,7 @@ function HomeSection({ place }: { place: Place }) {
         <div className="inforow">
           <Icon name="cal" size="xs" />
           <LiveBadge hours={place.hours} showUntil={false} />
-          <span className="caption muted chev">{place.hours.open} – {place.hours.close} today</span>
+          <HoursToday hours={place.hours} />
         </div>
       )}
       <div className="inforow">
@@ -630,12 +631,19 @@ function InfoSection({ place }: { place: Place }) {
       {place.hours && (
         <Collapse summary={<b>Hours{today !== null ? ` · ${statusLabel(place.hours)}` : ""}</b>}>
           <div className="stack" style={{ gap: 4, padding: "8px 4px" }}>
-            {WEEKDAYS.map((d, i) => (
-              <div key={d} className="row between small" style={{ fontWeight: today !== null && i === today ? 700 : 400, color: today !== null && i === today ? "var(--text)" : "var(--muted)" }}>
-                <span>{d}{today !== null && i === today ? " (today)" : ""}</span>
-                <span className="mono">{place.hours!.open} – {place.hours!.close}</span>
-              </div>
-            ))}
+            {WEEKDAYS.map((d, i) => {
+              // Each row reads its own day. A uniform week answers the same
+              // seven times; a per-day week gives Saturday its real opening and
+              // marks a closed day closed instead of repeating a time.
+              const dayHours = hoursOn(place.hours, i);
+              const isToday = today !== null && i === today;
+              return (
+                <div key={d} className="row between small" style={{ fontWeight: isToday ? 700 : 400, color: isToday ? "var(--text)" : "var(--muted)" }}>
+                  <span>{d}{isToday ? " (today)" : ""}</span>
+                  <span className="mono">{dayHours ? `${dayHours.open} – ${dayHours.close}` : "Closed"}</span>
+                </div>
+              );
+            })}
           </div>
         </Collapse>
       )}

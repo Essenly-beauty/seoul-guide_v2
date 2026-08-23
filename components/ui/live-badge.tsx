@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { placeStatus } from "@/lib/places";
+import { hoursToday, placeStatus } from "@/lib/places";
 import type { Place } from "@/lib/data";
 
 /** Stable open-hours status slot. Every settled state keeps text in the same
@@ -22,10 +22,13 @@ export function LiveBadge({ hours, showUntil = true }: { hours?: Place["hours"];
   if (placeStatus(hours, now) !== "open") {
     return <span className="livebadge closed">Closed</span>;
   }
+  // "until" has to be today's closing time, not a week-wide one: a place that
+  // shuts at 20:00 on Sundays must not advertise its 22:30 weekday close.
+  const until = hoursToday(hours, now);
   return (
     <span className="livebadge open">
       Live
-      {showUntil && <span className="livebadge-until"> until {hours.close}</span>}
+      {showUntil && until && <span className="livebadge-until"> until {until.close}</span>}
     </span>
   );
 }

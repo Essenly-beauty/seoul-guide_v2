@@ -10,6 +10,10 @@
 //     --only=<file>      oliveyoung | creatrip | ados (repeatable)
 //     --limit=N          stop after N rows per file (sampling)
 //     --refresh          ignore the on-disk panel cache
+//     --cache-only       never touch the network; replay what the cache already
+//                        holds (no API key needed). This is how the per-day
+//                        pass ran: every panel it needed had been fetched on
+//                        2026-08-23 and only the acceptance rule had changed.
 //
 // The REST API key is the login app's, docs/auth-setup.md §3.1.
 //
@@ -21,9 +25,10 @@
 //   1. resolve a Kakao place id via Local keyword search, accuracy-first —
 //      an exact normalized name match plus either proximity or a matching
 //      road address. A wrong id means wrong hours, which is worse than none.
-//   2. read open_hours off the place panel and keep it only when the whole
-//      week is uniform (see uniformHours) — Place.hours is a single
-//      { open, close } and must not misreport a day.
+//   2. read open_hours off the place panel. A uniform week goes in as the
+//      single { open, close } pair (uniformHours); a week that varies goes in
+//      as a Sunday-first { week: [...7] } (weekHours). Neither is ever
+//      flattened — Place.hours must not misreport a day.
 //
 // Output: scripts/lib/hours-overrides.json, re-applied by every owning builder
 // on rebuild (same contract as kr-name-overrides.json), and the generated files
@@ -37,7 +42,7 @@ import {
   writeGeneratedPlaces,
   applyHoursOverrides,
 } from "./lib/generated-places.mjs";
-import { searchKeyword, placePanel, uniformHours } from "./lib/kakao-local.mjs";
+import { searchKeyword, placePanel, uniformHours, weekHours } from "./lib/kakao-local.mjs";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 const OVERRIDES_PATH = join(ROOT, "scripts", "lib", "hours-overrides.json");
@@ -52,12 +57,18 @@ const FILES = [
 const args = process.argv.slice(2);
 const DRY = args.includes("--dry-run");
 const REFRESH = args.includes("--refresh");
+const CACHE_ONLY = args.includes("--cache-only");
 const LIMIT = Number((args.find((a) => a.startsWith("--limit=")) ?? "").split("=")[1]) || Infinity;
 const ONLY = args.filter((a) => a.startsWith("--only=")).map((a) => a.split("=")[1]);
 
 const KEY = process.env.KAKAO_REST_API_KEY;
-if (!KEY) {
+if (!KEY && !CACHE_ONLY) {
   console.error("KAKAO_REST_API_KEY missing (Kakao Developers console — REST API 키; docs/auth-setup.md §3.1)");
+  console.error("(or pass --cache-only to replay scripts/.kakao-hours-cache.json without the network)");
+  process.exit(1);
+}
+if (CACHE_ONLY && REFRESH) {
+  console.error("--cache-only and --refresh are opposites");
   process.exit(1);
 }
 
@@ -120,7 +131,10 @@ function resolveKakaoId(place) {
 const cache = !REFRESH && existsSync(CACHE_PATH) ? JSON.parse(readFileSync(CACHE_PATH, "utf8")) : {};
 const overrides = existsSync(OVERRIDES_PATH) ? JSON.parse(readFileSync(OVERRIDES_PATH, "utf8")) : {};
 const skips = [];
-const stats = { scanned: 0, alreadyHad: 0, noKakaoId: 0, noPanel: 0, notUniform: 0, filled: 0 };
+const stats = {
+  scanned: 0, alreadyHad: 0, noKakaoId: 0, noPanel: 0, uncached: 0,
+  unusableWeek: 0, filledUniform: 0, filledWeek: 0,
+};
 
 for (const file of FILES) {
   if (ONLY.length > 0 && !ONLY.includes(file.key)) continue;
@@ -142,6 +156,11 @@ for (const file of FILES) {
     // are kept as-is — re-fetching a resolved panel buys nothing.
     let entry = cache[p.id];
     if (entry && !entry.kakaoId && entry.forName !== p.nameKr) entry = null;
+    if (!entry && CACHE_ONLY) {
+      stats.uncached += 1;
+      skips.push({ id: p.id, why: "not in the panel cache" });
+      continue;
+    }
     if (!entry) {
       const hit = resolveKakaoId(p);
       if (!hit) {
@@ -171,21 +190,26 @@ for (const file of FILES) {
       skips.push({ id: p.id, why: "Kakao panel carries no open_hours" });
       continue;
     }
+    // Uniform first, so a week that fits one pair keeps writing the same bytes
+    // it always has — only a week that genuinely varies becomes a `week`.
+    const provenance = { kakaoPlaceId: entry.kakaoId, kakaoName: entry.kakaoName };
     const got = uniformHours(entry.openHours);
-    if (got.skip) {
-      stats.notUniform += 1;
-      skips.push({ id: p.id, why: got.skip });
+    if (!got.skip) {
+      overrides[p.id] = { open: got.hours.open, close: got.hours.close, ...provenance, openDays: got.openDays };
+      stats.filledUniform += 1;
+      console.log(`  ✓ ${p.id} → ${got.hours.open}–${got.hours.close} (${entry.kakaoName}, ${entry.dist}m, ${got.openDays}d)`);
       continue;
     }
-    overrides[p.id] = {
-      open: got.hours.open,
-      close: got.hours.close,
-      kakaoPlaceId: entry.kakaoId,
-      kakaoName: entry.kakaoName,
-      openDays: got.openDays,
-    };
-    stats.filled += 1;
-    console.log(`  ✓ ${p.id} → ${got.hours.open}–${got.hours.close} (${entry.kakaoName}, ${entry.dist}m, ${got.openDays}d)`);
+    const wk = weekHours(entry.openHours);
+    if (wk.skip) {
+      stats.unusableWeek += 1;
+      skips.push({ id: p.id, why: wk.skip });
+      continue;
+    }
+    overrides[p.id] = { week: wk.week, ...provenance, openDays: wk.openDays };
+    stats.filledWeek += 1;
+    const shown = wk.week.map((d) => (d ? `${d.open}-${d.close}` : "closed"));
+    console.log(`  ✓ ${p.id} → per-day [${shown.join(" ")}] (${entry.kakaoName}, ${entry.dist}m, ${wk.openDays}d)`);
   }
 }
 
@@ -208,10 +232,13 @@ for (const [kakaoId, ids] of byKakaoId) {
   console.log(`  ✗ withdrew "${name}" hours from ${ids.length} places: ${ids.join(", ")}`);
 }
 console.log(
-  `\nscanned ${stats.scanned} rows without hours — filled ${stats.filled}` +
+  `\nscanned ${stats.scanned} rows without hours — filled ${stats.filledUniform + stats.filledWeek}` +
+    ` (${stats.filledUniform} uniform, ${stats.filledWeek} per-day)` +
     (withdrawn > 0 ? `, withdrew ${withdrawn} contested` : "") +
     "; " +
-    `skipped: no-id ${stats.noKakaoId}, no-open_hours ${stats.noPanel}, non-uniform week ${stats.notUniform}`,
+    `skipped: no-id ${stats.noKakaoId}, no-open_hours ${stats.noPanel}, ` +
+    `unusable week ${stats.unusableWeek}` +
+    (CACHE_ONLY ? `, uncached ${stats.uncached}` : ""),
 );
 const byReason = {};
 for (const s of skips) {

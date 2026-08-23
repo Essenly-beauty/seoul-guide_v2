@@ -85,9 +85,14 @@ export function placePanel(kakaoId) {
 //     on_days?:  { start_end_time_desc: "10:00 ~ 22:30", last_order_times_desc?: [...] },
 //     off_days?: { ... }                        // closed that day
 //   }
-// `hours` in lib/data.ts is a single { open, close } pair, so a week that is
-// not uniform cannot be represented and MUST NOT be flattened — showing
-// Saturday's hours on a Sunday is the same class of bug as an unknown name.
+// `hours` in lib/data.ts is EITHER a single { open, close } pair (uniform week)
+// or { week: [...7 days, Sunday-first] } (per-day). A non-uniform week goes in
+// as `week` and MUST NOT be flattened to one pair — showing Saturday's hours on
+// a Sunday is the same class of bug as an unknown name.
+//
+// `week_from_today` means the days arrive rotated to start at the fetch date,
+// so nothing may be read positionally: every day carries its own Korean weekday
+// letter and that is what weekHours() indexes by.
 
 const TIME_RANGE_RE = /^(\d{1,2}:\d{2})\s*~\s*(\d{1,2}:\d{2})$/;
 const pad = (t) => (t.length === 4 ? `0${t}` : t);
@@ -124,4 +129,41 @@ export function uniformHours(panel, { minOpenDays = 5 } = {}) {
   const distinct = new Set(open.map((d) => `${d.range.open}-${d.range.close}`));
   if (distinct.size > 1) return { skip: `varies-by-day:${[...distinct].join("|")}` };
   return { hours: open[0].range, openDays: open.length };
+}
+
+/** Date#getDay() order, which is also the detail page's weekday table order. */
+const KO_WEEKDAYS = "일월화수목금토";
+
+/**
+ * The whole week as Place.hours' per-day shape: a Sunday-first array of 7,
+ * `null` for a day the place is closed. Returns { week, openDays } or
+ * { skip: <reason> }.
+ *
+ * Accuracy-first in the two ways that matter here:
+ *   - every day must be placed by its own weekday letter, and all seven must be
+ *     present exactly once. A panel that lists only three days is not a week we
+ *     know, and guessing the other four is the bug this whole model exists to
+ *     avoid.
+ *   - a free-text day ("24시간 영업") disqualifies the row, same as uniformHours.
+ * There is no minimum open-day count: unlike a single pair, `week` can say
+ * "closed Monday and Tuesday" honestly.
+ */
+export function weekHours(panel) {
+  const days = weekRanges(panel);
+  if (!days) return { skip: "no-open-hours" };
+  const unparsed = days.filter((d) => !d.range && d.raw && d.raw !== "off");
+  if (unparsed.length > 0) return { skip: `unparsed:${unparsed[0].raw}` };
+
+  const week = new Array(7).fill(undefined);
+  for (const d of days) {
+    const i = KO_WEEKDAYS.indexOf(String(d.day ?? "").trim().slice(0, 1));
+    if (i < 0) return { skip: `unknown-weekday:${d.day}` };
+    if (week[i] !== undefined) return { skip: `duplicate-weekday:${d.day}` };
+    week[i] = d.range ?? null;
+  }
+  if (week.some((d) => d === undefined)) return { skip: `partial-week-${days.length}-days` };
+
+  const openDays = week.filter(Boolean).length;
+  if (openDays === 0) return { skip: "open-only-0-days" };
+  return { week, openDays };
 }
