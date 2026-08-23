@@ -127,12 +127,14 @@ describe("subway endpoint search layout", () => {
     expect(controllerSource).toContain("viaAddButtonRef");
   });
 
-  it("simplifies the route summary before a 390px viewport can overflow", () => {
+  it("keeps the route action row on one line at 390px", () => {
     expect(controllerSource).toContain('aria-label="Show nearby places"');
-    expect(cssSource).toMatch(
-      /@media \(max-width:\s*420px\)\s*\{[^}]*\.subway-route-summary > span:nth-of-type\(2\)/,
-    );
-    expect(cssSource).toContain(".subway-nearby-jump > span");
+    // the row no longer sheds its labels at narrow widths — it lost the
+    // duration pill and the transfer sentence, so the Google link ellipsises
+    // instead of the buttons going wordless
+    const meta = cssSource.slice(cssSource.indexOf(".subway-route-summary .subway-ticket-meta {"));
+    expect(meta.slice(0, 320)).toContain("flex-wrap: nowrap");
+    expect(cssSource).toContain(".subway-route-open");
   });
 });
 
@@ -207,7 +209,7 @@ describe("route-ready panel shares the station-sheet language", () => {
     // and no fabricated duration either — our graph arithmetic has no live
     // schedule behind it, so Google owns timing
     expect(controller).not.toContain("travelMinutes(readyRoute)");
-    expect(controller).toContain("Times &amp; platforms in Google Maps");
+    expect(controller).toContain("Open in Google Maps");
   });
 
   it("states the route once, not three times", () => {

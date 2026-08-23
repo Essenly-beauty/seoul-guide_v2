@@ -754,21 +754,6 @@ export function SubwayRouteController({
               owns timing (owner decision 2026-08-22). We hand it the whole
               trip, waypoints included, instead of only the endpoints. */}
           <div ref={routeSummaryRef} className="subway-route-summary" tabIndex={-1} aria-live="polite">
-            <div className="subway-ticket-ends">
-              <b>{stationDisplayName(STATIONS[readyRoute.stations[0]])}</b>
-              <b>{stationDisplayName(STATIONS[readyRoute.stations[readyRoute.stations.length - 1]])}</b>
-            </div>
-            <div className="subway-ticket-line" aria-hidden="true">
-              <i className="dot" style={{ background: LINE_META[readyRoute.segments[0].line].color }} />
-              <i className="dash" />
-              <span className="pill">
-                {readyRoute.segments.length === 1
-                  ? "Direct"
-                  : `${readyRoute.segments.length - 1} transfer${readyRoute.segments.length > 2 ? "s" : ""}`}
-              </span>
-              <i className="dash" />
-              <i className="dot" style={{ background: LINE_META[readyRoute.segments[readyRoute.segments.length - 1].line].color }} />
-            </div>
             <div className="subway-ticket-meta">
               <a
                 className="subway-route-open"
@@ -781,7 +766,7 @@ export function SubwayRouteController({
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <Icon name="ext" size="xs" /> Times &amp; platforms in Google Maps
+                <Icon name="ext" size="xs" /> Open in Google Maps
               </a>
               {snap !== "compact" && (
                 <button
@@ -797,6 +782,41 @@ export function SubwayRouteController({
               <button type="button" className="subway-text-action" onClick={openEditor}>Edit</button>
               <IconButton name="x" label="Close subway planner" iconSize="xs" onClick={onClose} />
             </div>
+            <div className="subway-ticket-ends">
+              <b>{stationDisplayName(STATIONS[readyRoute.stations[0]])}</b>
+              <b>{stationDisplayName(STATIONS[readyRoute.stations[readyRoute.stations.length - 1]])}</b>
+            </div>
+            {/* One dot per stop, coloured by the line it is on, with transfers
+                ringed — the count and the transfers are things our data does
+                support, unlike a duration. Tapping a dot focuses that station,
+                and the stepper below drives the same index, so the two stay in
+                sync (owner request 2026-08-22). */}
+            <div className="subway-ticket-track" aria-hidden="true">
+              {readyRoute.stations.map((id, index) => {
+                const segmentIndex = Math.max(0, segmentStarts.findLastIndex((start) => start <= index));
+                const color = LINE_META[readyRoute.segments[segmentIndex].line]?.color ?? "var(--dim)";
+                const isTransfer = index > 0 && segmentStarts.includes(index);
+                const isEnd = index === 0 || index === readyRoute.stations.length - 1;
+                return (
+                  <Fragment key={`${id}-${index}`}>
+                    {index > 0 && <i className="subway-track-leg" style={{ background: color }} />}
+                    {/* Display only. Sixteen 9px targets would fail the 44px
+                        touch rule and be miserable to hit anyway — the pinned
+                        stepper below is how you move, and it drives the
+                        highlight here. */}
+                    <span
+                      className={`subway-track-stop${index === activeIndex ? " active" : ""}${isTransfer ? " transfer" : ""}${isEnd ? " end" : ""}`}
+                      style={{ "--stop-color": color } as React.CSSProperties}
+                      title={stationDisplayName(STATIONS[id])}
+                    />
+                  </Fragment>
+                );
+              })}
+            </div>
+            <p className="subway-ticket-count">
+              {readyRoute.stations.length - 1} stops
+              {readyRoute.segments.length > 1 && ` · ${readyRoute.segments.length - 1} transfer${readyRoute.segments.length > 2 ? "s" : ""}`}
+            </p>
           </div>
           {snap === "compact" && (
             <div className="subway-compact-station">

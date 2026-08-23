@@ -3527,6 +3527,73 @@
   /* The station stepper takes the space the tab bar left: pinned to the
      bottom where a thumb reaches it, the way Kakao Metro does. It is the
      panel's primary control while a route is up, so it must not scroll away. */
+  /* Route card: actions first, then the endpoints, then the track. */
+  /* One tidy row: the Google hand-off on the left, the panel controls on the
+     right, nothing wrapping (owner report 2026-08-23 — the label broke onto a
+     second line and the spacing read as random). */
+  .subway-route-summary .subway-ticket-meta {
+    display: flex;
+    align-items: center;
+    flex-wrap: nowrap;
+    gap: 10px;
+    margin-bottom: 10px;
+    font-size: 12.5px;
+    min-width: 0;
+  }
+  .subway-route-open {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    min-height: 40px;
+    margin-right: auto;
+    min-width: 0;
+    color: var(--muted);
+    font-weight: 600;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .subway-route-open .icn { color: var(--accent); flex: none; }
+  .subway-route-summary .subway-ticket-meta > .subway-nearby-jump,
+  .subway-route-summary .subway-ticket-meta > .subway-text-action {
+    flex: none;
+    white-space: nowrap;
+  }
+  .subway-route-summary .subway-ticket-meta > .iconbtn { flex: none; margin-left: 2px; }
+  .subway-ticket-track {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    margin: 10px 0 8px;
+    min-height: 14px;
+  }
+  .subway-track-leg { flex: 1; height: 3px; border-radius: 2px; opacity: 0.5; min-width: 2px; }
+  .subway-track-stop {
+    flex: none;
+    width: 9px;
+    height: 9px;
+    padding: 0;
+    border-radius: 50%;
+    background: var(--stop-color, var(--dim));
+    opacity: 0.55;
+    transition: transform 0.16s ease, opacity 0.16s ease;
+  }
+  .subway-track-stop.end { width: 11px; height: 11px; opacity: 1; }
+  .subway-track-stop.transfer {
+    width: 13px;
+    height: 13px;
+    background: var(--surface);
+    border: 3px solid var(--stop-color, var(--dim));
+    opacity: 1;
+  }
+  .subway-track-stop.active {
+    opacity: 1;
+    transform: scale(1.45);
+    box-shadow: 0 0 0 3px var(--surface), 0 0 0 5px var(--stop-color, var(--accent));
+  }
+  @media (prefers-reduced-motion: reduce) { .subway-track-stop { transition: none; } }
+  .subway-ticket-count { margin: 0; font-size: 12px; color: var(--muted); }
+
   .subway-station-focus.pinned {
     position: absolute;
     left: 0;
@@ -3859,7 +3926,9 @@
     color: var(--text);
   }
   .selected-place-summary.half {
-    padding: 4px 0 16px;
+    /* the action bar butts up against this at the half snap too — the last
+       line was touching its border (owner report 2026-08-23) */
+    padding: 4px 0 20px;
   }
   .selected-place-summary-header {
     display: flex;
@@ -4041,7 +4110,10 @@
     display: flex;
     align-items: flex-start;
     min-height: 112px;
-    padding: 4px 8px max(12px, env(safe-area-inset-bottom)) 16px;
+    /* the action bar sits right below this at the compact snap, so the
+       category line needs room to breathe against its border rather than
+       touching it (owner report 2026-08-23) */
+    padding: 8px 8px 18px 16px;
   }
   .selected-place-summary-main {
     min-width: 0;
@@ -5388,14 +5460,12 @@
 @layer components {
   .subway-route-summary > b,
   .subway-route-summary > span { white-space: nowrap; }
+  /* This used to strip the Nearby label at narrow widths because the row also
+     carried a duration pill and a transfer sentence. Those are gone, so an
+     unlabelled pin next to a worded Edit is just inconsistent — the label
+     stays and the Google link ellipsises instead if space runs out. */
   @media (max-width: 420px) {
     .subway-route-summary > span:nth-of-type(2) { display: none; }
-    .subway-nearby-jump {
-      width: 44px;
-      justify-content: center;
-      padding-inline: 0;
-    }
-    .subway-nearby-jump > span { display: none; }
   }
 }
 
