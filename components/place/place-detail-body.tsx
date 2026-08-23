@@ -109,7 +109,10 @@ function PlaceAddressDisclosure({ place, km }: { place: Place; km: number }) {
         <span>
           <span className="map-meta-token mono">{formatCompactDistance(km)}</span>
           <span aria-hidden="true"> · </span>
-          {place.address}
+          {/* upstream normalises the source's "not enough information"
+              placeholder to empty — never print it to a visitor */}
+          {place.address || "Address not listed"}
+          {place.geoSource === "area" && " · approximate pin"}
         </span>
         <Icon
           name="down"
@@ -126,16 +129,28 @@ function PlaceAddressDisclosure({ place, km }: { place: Place; km: number }) {
             <b>{place.name}</b>
             <ActionButton copy={place.name} aria-label="Copy English name">Copy</ActionButton>
           </div>
-          <div className="place-address-detail-row">
-            <span>Korean name</span>
-            <b lang="ko">{place.nameKr}</b>
-            <ActionButton copy={place.nameKr} aria-label="Copy Korean name">Copy</ActionButton>
-          </div>
-          <div className="place-address-detail-row">
-            <span>Address</span>
-            <b lang="ko">{place.address}</b>
-            <ActionButton copy={place.address} aria-label="Copy address">Copy address</ActionButton>
-          </div>
+          {/* 137 scraped rows carry the English name in the Korean field. A
+              "Korean name" row that repeats the English one is worse than no
+              row — it tells a taxi driver nothing (owner audit 2026-08-23). */}
+          {/[가-힣]/.test(place.nameKr) && (
+            <div className="place-address-detail-row">
+              <span>Korean name</span>
+              <b lang="ko">{place.nameKr}</b>
+              <ActionButton copy={place.nameKr} aria-label="Copy Korean name">Copy</ActionButton>
+            </div>
+          )}
+          {place.address ? (
+            <div className="place-address-detail-row">
+              <span>Address</span>
+              <b lang="ko">{place.address}</b>
+              <ActionButton copy={place.address} aria-label="Copy address">Copy address</ActionButton>
+            </div>
+          ) : (
+            <div className="place-address-detail-row">
+              <span>Address</span>
+              <b className="muted">Not listed in our sources yet</b>
+            </div>
+          )}
         </div>
       )}
       <TaxiCard place={place} />
@@ -204,7 +219,7 @@ function HomeSection({ place }: { place: Place }) {
       )}
       <div className="inforow">
         <Icon name="pin" size="xs" />
-        <span style={{ minWidth: 0 }}>{place.address}</span>
+        <span style={{ minWidth: 0 }}>{place.address || "Address not listed"}</span>
         <Link
           className="small chev"
           style={{ color: "var(--accent)", fontWeight: 600 }}
@@ -253,7 +268,7 @@ function TaxiCard({ place }: { place: Place }) {
         <span className="ic"><Icon name="car" size="sm" /></span>
         <div>
           <b>Show to taxi driver</b>
-          <div className="caption muted">{krName ?? place.name} · {place.address}</div>
+          <div className="caption muted">{[krName ?? place.name, place.address].filter(Boolean).join(" · ")}</div>
         </div>
       </button>
       {open && host && createPortal(
@@ -269,7 +284,12 @@ function TaxiCard({ place }: { place: Place }) {
             <div className="taxi-modal-kicker">이 주소로 가주세요</div>
             <div className="caption muted">Please take me to this address</div>
             <div className="taxi-modal-name">{krName ?? place.name}</div>
-            <div className="taxi-modal-addr">{place.address}</div>
+            {place.address
+              ? <div className="taxi-modal-addr">{place.address}</div>
+              : <p className="small muted" style={{ marginTop: 8 }}>
+                  We don&apos;t have a street address for this place yet — show the name
+                  above and the map pin.
+                </p>}
             <div className="row" style={{ gap: 8, marginTop: 18 }}>
               <ActionButton variant="secondary" style={{ flex: 1 }} copy={`${krName ?? place.name}, ${place.address}`}>
                 Copy

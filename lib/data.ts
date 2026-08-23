@@ -240,6 +240,11 @@ const withSource = (list: Place[], source: NonNullable<Place["source"]>): Place[
   list.map((p) => ({
     ...p,
     source,
+    // Some scraped rows carry the source's own placeholder instead of an
+    // address ("정보 부족" = "not enough information"). Rendering that string
+    // to a visitor is worse than showing nothing, so it is normalised away at
+    // the same boundary that strips curated ratings (owner audit 2026-08-23).
+    address: /^\s*(정보\s*부족|-|n\/a)?\s*$/i.test(p.address) ? "" : p.address,
     // Verified photos are attached here rather than baked into each import,
     // so dropping files into public/places/<id>/ and rebuilding is the whole
     // job (scripts/build-place-photos.mjs). A place with none keeps `photos`

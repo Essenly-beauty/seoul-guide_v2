@@ -48,8 +48,9 @@ export function SelectedPlaceSummary({
             </div>
             <div className="selected-place-summary-address">
               <span className="map-meta-token mono">{formatCompactDistance(km)}</span>
-              <span aria-hidden="true">·</span>
-              <span className="selected-place-summary-address-copy">{place.address}</span>
+              {place.address && <><span aria-hidden="true">·</span>
+              <span className="selected-place-summary-address-copy">{place.address}</span></>}
+              {!place.address && <span className="selected-place-summary-address-copy">Address not listed</span>}
             </div>
           </div>
         </button>
@@ -91,7 +92,10 @@ export function SelectedPlaceSummary({
             <span className="selected-place-summary-address-copy">
               <span className="map-meta-token mono">{formatCompactDistance(km)}</span>
               <span aria-hidden="true"> · </span>
-              {place.address}
+              {/* the source's own "not enough information" placeholder is
+                  normalised to empty upstream — say so plainly instead */}
+              {place.address || "Address not listed"}
+              {place.geoSource === "area" && " · approximate pin"}
             </span>
           </div>
         </div>

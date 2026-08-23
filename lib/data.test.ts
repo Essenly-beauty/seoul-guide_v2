@@ -61,3 +61,20 @@ describe("place rating provenance", () => {
     expect(sourced.length).toBeGreaterThan(0);
   });
 });
+
+describe("no source placeholders reach a visitor", () => {
+  it("normalises the scraper's own 'not enough information' address away", async () => {
+    const { PLACES } = await import("@/lib/data");
+    // 48 ados rows carried "정보 부족" as their address. Rendering a source's
+    // internal placeholder is worse than showing nothing (owner audit
+    // 2026-08-23), so it is stripped at the data-layer boundary.
+    const leaked = PLACES.filter((p) => /정보\s*부족/.test(p.address));
+    expect(leaked.map((p) => p.id)).toEqual([]);
+  });
+
+  it("leaves real addresses untouched", async () => {
+    const { PLACES, getPlace } = await import("@/lib/data");
+    expect(getPlace("juno-hair-gangnam")?.address).toContain("서울");
+    expect(PLACES.filter((p) => p.address).length).toBeGreaterThan(500);
+  });
+});
