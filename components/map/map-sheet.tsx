@@ -7,7 +7,7 @@ import { PlaceDetailBody } from "@/components/place/place-detail-body";
 import { PlaceCtaBar } from "@/components/place/place-cta-bar";
 import { SelectedPlaceActionBar } from "./selected-place-action-bar";
 import { LiveBadge } from "@/components/ui/live-badge";
-import { TYPE_LABEL, zoneShort, type Place } from "@/lib/data";
+import { getPlace, TYPE_LABEL, zoneShort, type Place } from "@/lib/data";
 import { formatCompactDistance, haversineKm, type LatLng } from "@/lib/geo";
 import {
   getMapSheetHalfOffsetRatio,
@@ -52,7 +52,14 @@ export function MapSheet({ places, origin, selectedId, onSelect, onClearSelectio
         .sort((a, b) => a.km - b.km),
     [places, origin],
   );
-  const selectedPlace = selectedId ? ranked.find(({ p }) => p.id === selectedId)?.p ?? null : null;
+  // Resolve from the catalog, not just the filtered list. A place the visitor
+  // explicitly picked — from the station browse, a deep link, a shared list —
+  // must render even when the active category filter excludes it, otherwise
+  // the tap silently does nothing and the sheet falls back to the generic
+  // nearby list (owner report 2026-08-23).
+  const selectedPlace = selectedId
+    ? ranked.find(({ p }) => p.id === selectedId)?.p ?? getPlace(selectedId) ?? null
+    : null;
   const selectedKm = selectedId ? ranked.find(({ p }) => p.id === selectedId)?.km ?? 0 : 0;
   // Snap is the single source of truth for the selected-place presentation.
   // Keeping a second "collapsed" flag allowed compact + detail views to render

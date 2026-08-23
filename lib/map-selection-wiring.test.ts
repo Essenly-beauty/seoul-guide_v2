@@ -281,3 +281,13 @@ describe("place photo ingestion", () => {
     }
   });
 });
+
+describe("an explicit selection always renders", () => {
+  it("resolves the selected place from the catalog, not the filtered list", () => {
+    // Tapping a hair salon in the station browse while the map filter was on
+    // Olive Young dropped the selection silently and fell back to the generic
+    // nearby list (owner report 2026-08-23).
+    const sheet = readFileSync(new URL("../components/map/map-sheet.tsx", import.meta.url), "utf8");
+    expect(sheet).toContain("getPlace(selectedId)");
+  });
+});

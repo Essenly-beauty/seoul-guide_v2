@@ -402,6 +402,10 @@ export function SubwayRouteController({
   // button) still opens the planner, because there is nothing else to show.
   const [routeFormOpen, setRouteFormOpen] = useState(() => !(activeStationId && !route));
   const [radiusOpen, setRadiusOpen] = useState(false);
+  // Drag the route track to move between stations (owner request
+  // 2026-08-23). The track is the control; the dots are its ticks.
+  const trackRef = useRef<HTMLDivElement>(null);
+  const trackDragging = useRef(false);
   const [draftDeparture, setDraftDeparture] = useState(departureId);
   const [draftArrival, setDraftArrival] = useState(arrivalId);
   const [draftVias, setDraftVias] = useState<string[]>(viaIds);
@@ -703,6 +707,19 @@ export function SubwayRouteController({
       the nearby list and keeps the map visible. */
   const browsingStation = Boolean(!readyRoute && activeStation && !routeFormOpen);
 
+  /** Map a pointer x to the nearest stop and focus it. Stops sit at even
+      fractions of the track, so the nearest one is a rounded ratio. */
+  const focusStopAt = (clientX: number) => {
+    const el = trackRef.current;
+    if (!el || !readyRoute) return;
+    const rect = el.getBoundingClientRect();
+    const last = readyRoute.stations.length - 1;
+    if (rect.width <= 0 || last <= 0) return;
+    const ratio = Math.min(1, Math.max(0, (clientX - rect.left) / rect.width));
+    const index = Math.round(ratio * last);
+    if (index !== activeIndex) selectRouteIndex(index);
+  };
+
   return (
     <section
       className={`subway-controller${readyRoute ? ` route-ready snap-${snap}` : " search-ready"}${browsingStation ? " station-browse" : ""}`}
@@ -791,7 +808,39 @@ export function SubwayRouteController({
                 support, unlike a duration. Tapping a dot focuses that station,
                 and the stepper below drives the same index, so the two stay in
                 sync (owner request 2026-08-22). */}
-            <div className="subway-ticket-track" aria-hidden="true">
+            <div
+              ref={trackRef}
+              className="subway-ticket-track"
+              role="slider"
+              tabIndex={0}
+              aria-label="Station on this route"
+              aria-valuemin={1}
+              aria-valuemax={readyRoute.stations.length}
+              aria-valuenow={activeIndex + 1}
+              aria-valuetext={stationDisplayName(STATIONS[readyRoute.stations[activeIndex]])}
+              onPointerDown={(event) => {
+                trackDragging.current = true;
+                event.currentTarget.setPointerCapture(event.pointerId);
+                focusStopAt(event.clientX);
+              }}
+              onPointerMove={(event) => {
+                if (trackDragging.current) focusStopAt(event.clientX);
+              }}
+              onPointerUp={(event) => {
+                trackDragging.current = false;
+                event.currentTarget.releasePointerCapture(event.pointerId);
+              }}
+              onPointerCancel={() => { trackDragging.current = false; }}
+              onKeyDown={(event) => {
+                if (event.key === "ArrowLeft" && activeIndex > 0) {
+                  event.preventDefault();
+                  selectRouteIndex(activeIndex - 1);
+                } else if (event.key === "ArrowRight" && activeIndex < readyRoute.stations.length - 1) {
+                  event.preventDefault();
+                  selectRouteIndex(activeIndex + 1);
+                }
+              }}
+            >
               {readyRoute.stations.map((id, index) => {
                 const segmentIndex = Math.max(0, segmentStarts.findLastIndex((start) => start <= index));
                 const color = LINE_META[readyRoute.segments[segmentIndex].line]?.color ?? "var(--dim)";
