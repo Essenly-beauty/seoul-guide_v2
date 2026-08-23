@@ -175,7 +175,9 @@ describe("map place selection wiring", () => {
     expect(cssSource).toMatch(/\.mapsheet\.half\.has-selection\s*\{\s*transform:\s*translateY\(52%\);/);
     expect(cssSource).toMatch(/\.mapsheet\.peek\.has-selection\s*\{[^}]*transform:\s*translateY\(calc\(100% - var\(--selected-sheet-peek-height\)\)\)/);
     expect(cssSource).not.toMatch(/\.mapsheet\.peek\s*\{[^}]*height:\s*auto/);
-    expect(sheetSource).toContain("selectedPlace ? 136 : 62");
+    // measured from content now — 136px clipped the category line whenever a
+    // long name wrapped to two lines (owner report 2026-08-23)
+    expect(sheetSource).toContain("peek: Math.max(0, h - peekContentHeight())");
     expect(cssSource).toContain(".mapsheet.dragging { transition: none; }");
   });
 

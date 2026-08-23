@@ -21,9 +21,8 @@ const isIos = () =>
 const isInAppBrowser = () =>
   /KAKAOTALK|NAVER|DaumApps|Instagram|FBAN|FBAV|Line\//i.test(navigator.userAgent);
 
-/** Chrome / Firefox / Edge / Opera on iOS. They render with WebKit but Apple
-    gives only Safari the Home Screen install, so "open this in Safari" is the
-    single honest instruction — and it needs a way to actually get there. */
+/** Browsers on iOS use WebKit, but their Home Screen flows differ. Chrome
+    exposes Add to Home Screen; other browsers get a Safari handoff. */
 const IOS_BROWSER_NAMES: [RegExp, string][] = [
   [/CriOS/, "Chrome"],
   [/FxiOS/, "Firefox"],
@@ -100,13 +99,22 @@ export function PwaInstallControl() {
     }
   };
 
-  // iPhone + a non-Safari browser: the old build showed the generic Safari
-  // steps with no way to reach Safari, so the visitor was told to go
-  // somewhere they could not get to (owner report 2026-08-22).
+  // iPhone browsers have different install menus. Chrome can add a shortcut
+  // from its own Share menu; other browsers get a copy-link Safari handoff.
   if (platform === "ios-other-browser") {
+    if (browserName === "Chrome") {
+      return (
+        <div className="stack xs" style={{ alignItems: "flex-start", textAlign: "left", maxWidth: 340 }}>
+          <b className="t-label-md">Add MYSEOULDROP from Chrome</b>
+          <p className="t-caption muted" style={{ margin: 0 }}>
+            Tap Chrome&apos;s Share icon, choose Add to Home Screen, then tap Add. The shortcut opens MYSEOULDROP like an app.
+          </p>
+        </div>
+      );
+    }
     return (
       <div className="stack xs" style={{ alignItems: "flex-start", textAlign: "left", maxWidth: 340 }}>
-        <b className="t-label-md">You’re in {browserName} — iPhone installs only from Safari</b>
+        <b className="t-label-md">You’re in {browserName} — open Safari to install</b>
         <p className="t-caption muted" style={{ margin: 0 }}>
           Apple lets only Safari add an app to the Home Screen. Copy this link,
           open Safari, paste it, then tap Share → Add to Home Screen.

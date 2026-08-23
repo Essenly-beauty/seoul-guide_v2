@@ -1,0 +1,1696 @@
+{
+  "ados-amsa-complex-market": {
+    "open": "09:00",
+    "close": "18:00",
+    "kakaoPlaceId": "18526260",
+    "kakaoName": "암사종합시장",
+    "openDays": 5
+  },
+  "ados-banghakdong-goblin-market": {
+    "open": "07:00",
+    "close": "22:00",
+    "kakaoPlaceId": "27583792",
+    "kakaoName": "방학동도깨비시장",
+    "openDays": 7
+  },
+  "ados-byeolbichnammunsijang": {
+    "open": "08:30",
+    "close": "21:00",
+    "kakaoPlaceId": "20544277",
+    "kakaoName": "별빛남문시장",
+    "openDays": 7
+  },
+  "ados-changdeokgung-palace": {
+    "open": "09:00",
+    "close": "18:30",
+    "kakaoPlaceId": "10771162",
+    "kakaoName": "창덕궁",
+    "openDays": 6
+  },
+  "ados-deoksugung-palace": {
+    "open": "09:00",
+    "close": "21:00",
+    "kakaoPlaceId": "10305191",
+    "kakaoName": "덕수궁",
+    "openDays": 6
+  },
+  "ados-donam-traditional-market": {
+    "open": "10:00",
+    "close": "20:00",
+    "kakaoPlaceId": "23287376",
+    "kakaoName": "돈암시장",
+    "openDays": 7
+  },
+  "ados-dongmyo-flea-market": {
+    "open": "10:00",
+    "close": "18:00",
+    "kakaoPlaceId": "25671601",
+    "kakaoName": "동묘벼룩시장",
+    "openDays": 7
+  },
+  "ados-dunchon-market": {
+    "open": "09:00",
+    "close": "22:00",
+    "kakaoPlaceId": "18524720",
+    "kakaoName": "둔촌역전통시장",
+    "openDays": 7
+  },
+  "ados-garak-market": {
+    "open": "00:00",
+    "close": "24:00",
+    "kakaoPlaceId": "27314504",
+    "kakaoName": "가락시장",
+    "openDays": 7
+  },
+  "ados-geumnam-market": {
+    "open": "09:00",
+    "close": "22:00",
+    "kakaoPlaceId": "11031501",
+    "kakaoName": "금남시장",
+    "openDays": 7
+  },
+  "ados-gileum-sijang": {
+    "open": "09:00",
+    "close": "20:30",
+    "kakaoPlaceId": "18524609",
+    "kakaoName": "길음시장",
+    "openDays": 7
+  },
+  "ados-gongneungdong-goblin-market": {
+    "open": "10:00",
+    "close": "20:00",
+    "kakaoPlaceId": "18524617",
+    "kakaoName": "공릉동도깨비시장",
+    "openDays": 7
+  },
+  "ados-goto-mall": {
+    "open": "10:00",
+    "close": "20:00",
+    "kakaoPlaceId": "17598642",
+    "kakaoName": "고투몰",
+    "openDays": 7
+  },
+  "ados-guro-market": {
+    "open": "09:00",
+    "close": "17:00",
+    "kakaoPlaceId": "278173084",
+    "kakaoName": "구로시장",
+    "openDays": 5
+  },
+  "ados-gyeongbokgung-palace": {
+    "open": "09:00",
+    "close": "18:30",
+    "kakaoPlaceId": "18619553",
+    "kakaoName": "경복궁",
+    "openDays": 6
+  },
+  "ados-ifc-mall": {
+    "open": "10:00",
+    "close": "22:00",
+    "kakaoPlaceId": "18203409",
+    "kakaoName": "IFC몰",
+    "openDays": 7
+  },
+  "ados-in-wang-market": {
+    "open": "05:00",
+    "close": "19:30",
+    "kakaoPlaceId": "8049579",
+    "kakaoName": "인왕시장",
+    "openDays": 6
+  },
+  "ados-inhyeon-market": {
+    "open": "17:00",
+    "close": "24:00",
+    "kakaoPlaceId": "18524694",
+    "kakaoName": "인현시장",
+    "openDays": 5
+  },
+  "ados-jangmi-jeil-sijang": {
+    "open": "09:00",
+    "close": "21:00",
+    "kakaoPlaceId": "839661856",
+    "kakaoName": "장미제일시장",
+    "openDays": 7
+  },
+  "ados-kwangjang-market": {
+    "open": "09:00",
+    "close": "18:00",
+    "kakaoPlaceId": "27383851",
+    "kakaoName": "광장시장",
+    "openDays": 7
+  },
+  "ados-leeum-museum-of-art": {
+    "open": "10:00",
+    "close": "18:00",
+    "kakaoPlaceId": "10427225",
+    "kakaoName": "리움미술관",
+    "openDays": 6
+  },
+  "ados-majang-meat-market": {
+    "open": "03:00",
+    "close": "23:00",
+    "kakaoPlaceId": "10335476",
+    "kakaoName": "마장축산물시장",
+    "openDays": 7
+  },
+  "ados-mapo-agricultural-marine-products-market": {
+    "open": "07:00",
+    "close": "20:00",
+    "kakaoPlaceId": "11085933",
+    "kakaoName": "마포농수산물시장",
+    "openDays": 7
+  },
+  "ados-n-seoul-tower": {
+    "open": "10:00",
+    "close": "23:00",
+    "kakaoPlaceId": "1629378951",
+    "kakaoName": "N서울타워",
+    "openDays": 7
+  },
+  "ados-namguro-market": {
+    "open": "09:00",
+    "close": "21:00",
+    "kakaoPlaceId": "27494423",
+    "kakaoName": "남구로시장",
+    "openDays": 6
+  },
+  "ados-namsangol-hanok-village": {
+    "open": "09:00",
+    "close": "21:00",
+    "kakaoPlaceId": "8246127",
+    "kakaoName": "남산골한옥마을",
+    "openDays": 6
+  },
+  "ados-noryangjin-fisheries-wholesale-market": {
+    "open": "04:00",
+    "close": "08:00",
+    "kakaoPlaceId": "8205369",
+    "kakaoName": "노량진수산물도매시장",
+    "openDays": 7
+  },
+  "ados-saemaul-traditional-market": {
+    "open": "09:00",
+    "close": "21:00",
+    "kakaoPlaceId": "7935045",
+    "kakaoName": "새마을전통시장",
+    "openDays": 7
+  },
+  "ados-seodaemun-prison-history-hall": {
+    "open": "09:30",
+    "close": "18:00",
+    "kakaoPlaceId": "7936297",
+    "kakaoName": "서대문형무소역사관",
+    "openDays": 6
+  },
+  "ados-seongdae-traditional-market": {
+    "open": "10:00",
+    "close": "20:00",
+    "kakaoPlaceId": "18524711",
+    "kakaoName": "성대전통시장",
+    "openDays": 7
+  },
+  "ados-seoul-central-market": {
+    "open": "07:00",
+    "close": "24:00",
+    "kakaoPlaceId": "18524630",
+    "kakaoName": "서울중앙시장",
+    "openDays": 7
+  },
+  "ados-seoul-children-s-grand-park": {
+    "open": "05:00",
+    "close": "22:00",
+    "kakaoPlaceId": "1512054004",
+    "kakaoName": "서울어린이대공원",
+    "openDays": 7
+  },
+  "ados-seoul-folk-flea-market": {
+    "open": "10:00",
+    "close": "19:00",
+    "kakaoPlaceId": "10500235",
+    "kakaoName": "서울풍물시장",
+    "openDays": 6
+  },
+  "ados-suyu-market": {
+    "open": "08:00",
+    "close": "22:00",
+    "kakaoPlaceId": "7967272",
+    "kakaoName": "수유전통시장",
+    "openDays": 7
+  },
+  "ados-times-square-mall": {
+    "open": "10:30",
+    "close": "22:00",
+    "kakaoPlaceId": "11411449",
+    "kakaoName": "타임스퀘어",
+    "openDays": 7
+  },
+  "ados-yeongdeungpo-market": {
+    "open": "12:00",
+    "close": "23:00",
+    "kakaoPlaceId": "10648197",
+    "kakaoName": "영등포중앙시장",
+    "openDays": 7
+  },
+  "ct-am-ton-hongdae-main-branch": {
+    "open": "11:00",
+    "close": "20:00",
+    "kakaoPlaceId": "1592036136",
+    "kakaoName": "에이엠톤 본점",
+    "openDays": 7
+  },
+  "ct-argyol-myeongdong-hair-salon-near-myeongdong-sta": {
+    "open": "11:00",
+    "close": "22:00",
+    "kakaoPlaceId": "1859130271",
+    "kakaoName": "아르결 명동점",
+    "openDays": 7
+  },
+  "ct-bloom-9-yeongdeungpo-hair-salon": {
+    "open": "10:00",
+    "close": "22:00",
+    "kakaoPlaceId": "401398676",
+    "kakaoName": "블룸9헤어 영등포신길점",
+    "openDays": 7
+  },
+  "ct-chahong-room-bangbae-branch": {
+    "open": "10:00",
+    "close": "19:00",
+    "kakaoPlaceId": "263159781",
+    "kakaoName": "차홍룸 방배점",
+    "openDays": 7
+  },
+  "ct-cheongdam-awesome": {
+    "open": "10:00",
+    "close": "18:00",
+    "kakaoPlaceId": "286729905",
+    "kakaoName": "청담어썸",
+    "openDays": 7
+  },
+  "ct-commenana-cheongdam-branch-hair-makeup-and-image": {
+    "open": "10:00",
+    "close": "18:30",
+    "kakaoPlaceId": "881668464",
+    "kakaoName": "꼼나나 청담점",
+    "openDays": 6
+  },
+  "ct-commenana-main-branch-hair-makeup-and-image-cons": {
+    "open": "10:00",
+    "close": "19:00",
+    "kakaoPlaceId": "284673319",
+    "kakaoName": "꼼나나",
+    "openDays": 5
+  },
+  "ct-dakyo-cheongdam-branch": {
+    "open": "05:00",
+    "close": "19:00",
+    "kakaoPlaceId": "1527211741",
+    "kakaoName": "다교 청담점",
+    "openDays": 7
+  },
+  "ct-eco-jardin-gyeongbokgung-branch-complete-hair-ma": {
+    "open": "10:00",
+    "close": "20:00",
+    "kakaoPlaceId": "1384213015",
+    "kakaoName": "에코쟈뎅 경복궁점",
+    "openDays": 7
+  },
+  "ct-gangnam-hair-makeup-salon-joy187": {
+    "open": "10:00",
+    "close": "19:00",
+    "kakaoPlaceId": "565757168",
+    "kakaoName": "룰루",
+    "openDays": 7
+  },
+  "ct-gapi-beauty-salon-hair-makeup-beauty-treatments": {
+    "open": "10:00",
+    "close": "20:00",
+    "kakaoPlaceId": "138732219",
+    "kakaoName": "가피헤어 본점",
+    "openDays": 6
+  },
+  "ct-hair-salon-mum-apgujeong-rodeo-branch": {
+    "open": "10:00",
+    "close": "19:00",
+    "kakaoPlaceId": "2078929335",
+    "kakaoName": "꾸아트헤어 압구정로데오역점",
+    "openDays": 6
+  },
+  "ct-hosu-dosan-hair-makeup-studio": {
+    "open": "07:30",
+    "close": "18:00",
+    "kakaoPlaceId": "1217684715",
+    "kakaoName": "호수도산",
+    "openDays": 6
+  },
+  "ct-id-hair-susaek-dmc-branch": {
+    "open": "10:00",
+    "close": "21:00",
+    "kakaoPlaceId": "1160367206",
+    "kakaoName": "아이디헤어 수색DMC점",
+    "openDays": 7
+  },
+  "ct-idhair-gangnamdaero-branch-gangnam-k-perm-hair-s": {
+    "open": "10:00",
+    "close": "21:30",
+    "kakaoPlaceId": "902778602",
+    "kakaoName": "아이디헤어 강남대로점",
+    "openDays": 7
+  },
+  "ct-itta-hair-seolleung-station-branch": {
+    "open": "10:00",
+    "close": "19:00",
+    "kakaoPlaceId": "974565836",
+    "kakaoName": "이타헤어 선릉역점",
+    "openDays": 7
+  },
+  "ct-jenny-house-celebrity-hair-makeup-studio-in-cheo": {
+    "open": "11:00",
+    "close": "18:00",
+    "kakaoPlaceId": "403377662",
+    "kakaoName": "제니하우스 청담힐",
+    "openDays": 7
+  },
+  "ct-juno-hair-apgujeong-rodeo-branch-1": {
+    "open": "09:30",
+    "close": "21:00",
+    "kakaoPlaceId": "11371054",
+    "kakaoName": "준오헤어 압구정로데오1호점",
+    "openDays": 7
+  },
+  "ct-juno-hair-coex-city-airport-terminal-branch": {
+    "open": "10:00",
+    "close": "21:30",
+    "kakaoPlaceId": "161913702",
+    "kakaoName": "준오헤어 코엑스몰점",
+    "openDays": 7
+  },
+  "ct-juno-hair-gangnam-square-branch": {
+    "open": "10:00",
+    "close": "21:00",
+    "kakaoPlaceId": "1727412010",
+    "kakaoName": "준오헤어 강남역스퀘어2호점",
+    "openDays": 7
+  },
+  "ct-juno-hair-gangnam-station-branch-1": {
+    "open": "10:00",
+    "close": "21:00",
+    "kakaoPlaceId": "11147801",
+    "kakaoName": "준오헤어 강남역1호점",
+    "openDays": 7
+  },
+  "ct-juno-hair-gangnam-station-branch-2": {
+    "open": "10:00",
+    "close": "21:00",
+    "kakaoPlaceId": "9416765",
+    "kakaoName": "준오헤어 강남역2호점",
+    "openDays": 7
+  },
+  "ct-juno-hair-gangnam-station-branch-4": {
+    "open": "10:00",
+    "close": "21:30",
+    "kakaoPlaceId": "27608256",
+    "kakaoName": "준오헤어 강남역4호점",
+    "openDays": 7
+  },
+  "ct-juno-hair-garosu-gil": {
+    "open": "10:00",
+    "close": "21:00",
+    "kakaoPlaceId": "12434218",
+    "kakaoName": "준오헤어 가로수길점",
+    "openDays": 7
+  },
+  "ct-juno-hair-hongdae-1st-branch": {
+    "open": "10:00",
+    "close": "21:00",
+    "kakaoPlaceId": "11154629",
+    "kakaoName": "준오헤어 홍대1호점",
+    "openDays": 6
+  },
+  "ct-juno-hair-hongdae-station": {
+    "open": "10:00",
+    "close": "21:00",
+    "kakaoPlaceId": "785375027",
+    "kakaoName": "준오헤어 홍대입구역점",
+    "openDays": 7
+  },
+  "ct-juno-hair-mapo-harrington-branch-urban-forest-he": {
+    "open": "10:00",
+    "close": "20:00",
+    "kakaoPlaceId": "777690079",
+    "kakaoName": "준오헤어 마포해링턴점",
+    "openDays": 7
+  },
+  "ct-juno-hair-myeongdong-2nd": {
+    "open": "10:00",
+    "close": "21:30",
+    "kakaoPlaceId": "13500125",
+    "kakaoName": "준오헤어 명동2호점",
+    "openDays": 7
+  },
+  "ct-juno-hair-myeongdong-street-branch-popular-forei": {
+    "open": "10:00",
+    "close": "20:30",
+    "kakaoPlaceId": "584933082",
+    "kakaoName": "준오헤어 명동스트리트점",
+    "openDays": 7
+  },
+  "ct-juno-hair-seomyeon-1st-branch": {
+    "open": "10:00",
+    "close": "21:00",
+    "kakaoPlaceId": "1785966277",
+    "kakaoName": "준오헤어 서면1호점",
+    "openDays": 7
+  },
+  "ct-juno-hair-seomyeon-station-branch": {
+    "open": "10:00",
+    "close": "21:30",
+    "kakaoPlaceId": "1055502249",
+    "kakaoName": "준오헤어 서면역점",
+    "openDays": 7
+  },
+  "ct-juno-hair-sinchon": {
+    "open": "10:00",
+    "close": "20:00",
+    "kakaoPlaceId": "15665753",
+    "kakaoName": "준오헤어 신촌점",
+    "openDays": 7
+  },
+  "ct-juno-hair-sinnonhyeon": {
+    "open": "10:00",
+    "close": "21:00",
+    "kakaoPlaceId": "18946482",
+    "kakaoName": "준오헤어 신논현역점",
+    "openDays": 7
+  },
+  "ct-juno-seoul-premium-head-spa-wellness-hair-salon": {
+    "open": "10:00",
+    "close": "21:00",
+    "kakaoPlaceId": "327100979",
+    "kakaoName": "준오 서울",
+    "openDays": 7
+  },
+  "ct-kangeun-gangnam-hair-makeup": {
+    "open": "10:00",
+    "close": "18:30",
+    "kakaoPlaceId": "1251035707",
+    "kakaoName": "강은",
+    "openDays": 6
+  },
+  "ct-kyungza-hongdae-fab-hair-salon-expert-color-perm": {
+    "open": "10:30",
+    "close": "19:30",
+    "kakaoPlaceId": "1321272038",
+    "kakaoName": "경자 홍대페브점",
+    "openDays": 5
+  },
+  "ct-la-maison-beauty-apgujeong-k-beauty-hair-makeup": {
+    "open": "08:00",
+    "close": "18:00",
+    "kakaoPlaceId": "27549381",
+    "kakaoName": "라메종뷰티",
+    "openDays": 6
+  },
+  "ct-lee-chul-hair-kerker-myeongdong-1st-branch": {
+    "open": "10:00",
+    "close": "22:00",
+    "kakaoPlaceId": "19266522",
+    "kakaoName": "이철헤어커커 명동1호점",
+    "openDays": 7
+  },
+  "ct-lee-chul-hairkerker-by-c-cica-ewha-womans-univer": {
+    "open": "11:00",
+    "close": "20:30",
+    "kakaoPlaceId": "13096895",
+    "kakaoName": "이철헤어커커 이대점",
+    "openDays": 7
+  },
+  "ct-leekaja-hair-myeongdong-english-speaking-hair-sa": {
+    "open": "10:00",
+    "close": "20:30",
+    "kakaoPlaceId": "429174602",
+    "kakaoName": "이가자헤어비스 명동점",
+    "openDays": 7
+  },
+  "ct-lona-apgujeong-rodeo-hair-makeup": {
+    "open": "10:00",
+    "close": "19:00",
+    "kakaoPlaceId": "1107236792",
+    "kakaoName": "로나 청담본점",
+    "openDays": 6
+  },
+  "ct-meet-cute": {
+    "open": "10:00",
+    "close": "19:00",
+    "kakaoPlaceId": "1350659227",
+    "kakaoName": "밋큐트 청담본점",
+    "openDays": 7
+  },
+  "ct-more-on-hair-dosan-park-branch": {
+    "open": "10:00",
+    "close": "19:00",
+    "kakaoPlaceId": "1943217228",
+    "kakaoName": "모어온헤어 도산공원점",
+    "openDays": 5
+  },
+  "ct-more-on-hair-gangnam-branch": {
+    "open": "10:00",
+    "close": "19:00",
+    "kakaoPlaceId": "498741431",
+    "kakaoName": "모어온헤어 강남점",
+    "openDays": 5
+  },
+  "ct-more-on-hair-hapjeong-branch": {
+    "open": "10:00",
+    "close": "19:00",
+    "kakaoPlaceId": "1661257615",
+    "kakaoName": "모어온헤어 합정점",
+    "openDays": 5
+  },
+  "ct-more-on-hair-sinnonhyeon-branch": {
+    "open": "10:00",
+    "close": "19:00",
+    "kakaoPlaceId": "242795167",
+    "kakaoName": "모어온헤어 신논현점",
+    "openDays": 5
+  },
+  "ct-nanalog-hongdae-flagship": {
+    "open": "11:00",
+    "close": "19:00",
+    "kakaoPlaceId": "1850409783",
+    "kakaoName": "나나로그 홍대플래그십",
+    "openDays": 6
+  },
+  "ct-nanalog-myeongdong-largest-head-spa-salon-in-mye": {
+    "open": "10:00",
+    "close": "20:00",
+    "kakaoPlaceId": "1521443768",
+    "kakaoName": "나나로그 명동점",
+    "openDays": 7
+  },
+  "ct-nanalog-seongsu-branch-premium-hair-consulting": {
+    "open": "10:00",
+    "close": "20:00",
+    "kakaoPlaceId": "862017926",
+    "kakaoName": "나나로그 성수점",
+    "openDays": 6
+  },
+  "ct-nanalog-sinchon-branch": {
+    "open": "11:00",
+    "close": "21:00",
+    "kakaoPlaceId": "858293251",
+    "kakaoName": "나나로그 신촌점",
+    "openDays": 7
+  },
+  "ct-onyad-apgujeong-rodeo-branch-hair-salon-with-per": {
+    "open": "11:00",
+    "close": "20:00",
+    "kakaoPlaceId": "1042391200",
+    "kakaoName": "온야드 압구정로데오점",
+    "openDays": 6
+  },
+  "ct-onyad-gangnam-branch-personal-consulting-hair-sa": {
+    "open": "11:00",
+    "close": "20:00",
+    "kakaoPlaceId": "64035411",
+    "kakaoName": "온야드 강남점",
+    "openDays": 6
+  },
+  "ct-park-jun-beauty-lab-gangnam-branch": {
+    "open": "10:00",
+    "close": "20:00",
+    "kakaoPlaceId": "1708035667",
+    "kakaoName": "박준뷰티랩 강남점",
+    "openDays": 6
+  },
+  "ct-park-seung-chol-hair-studio-hongdae-book-an-appo": {
+    "open": "10:30",
+    "close": "20:30",
+    "kakaoPlaceId": "1285230492",
+    "kakaoName": "박승철헤어스투디오 홍대점",
+    "openDays": 7
+  },
+  "ct-project-hin-seongsu-hair-makeup": {
+    "open": "10:00",
+    "close": "20:00",
+    "kakaoPlaceId": "1011252497",
+    "kakaoName": "프로젝트흰",
+    "openDays": 6
+  },
+  "ct-rarien-myeongdong-branch-aveda-hair-salon": {
+    "open": "10:30",
+    "close": "20:00",
+    "kakaoPlaceId": "27234517",
+    "kakaoName": "라리엔 명동점",
+    "openDays": 6
+  },
+  "ct-rec-tor-seoul": {
+    "open": "11:00",
+    "close": "19:00",
+    "kakaoPlaceId": "1708437217",
+    "kakaoName": "렉터 서울",
+    "openDays": 5
+  },
+  "ct-recoveria-yongsan-ichon-station-main-branch": {
+    "open": "10:00",
+    "close": "19:00",
+    "kakaoPlaceId": "182821934",
+    "kakaoName": "리커버리아 용산이촌역본점",
+    "openDays": 7
+  },
+  "ct-salon-a-gangnam-scalp-hair-vitality-care": {
+    "open": "10:30",
+    "close": "20:00",
+    "kakaoPlaceId": "1897155794",
+    "kakaoName": "살롱에이 강남점",
+    "openDays": 7
+  },
+  "ct-shine-soo-hair-salon": {
+    "open": "11:00",
+    "close": "20:00",
+    "kakaoPlaceId": "872924132",
+    "kakaoName": "샤인수헤어 신논현점",
+    "openDays": 6
+  },
+  "ct-sj-hair-edae": {
+    "open": "10:00",
+    "close": "20:00",
+    "kakaoPlaceId": "2085068399",
+    "kakaoName": "SJ헤어",
+    "openDays": 7
+  },
+  "ct-soonsiki-hair-hongdae-flagship-seoul-s-top-rated": {
+    "open": "10:00",
+    "close": "19:00",
+    "kakaoPlaceId": "15618131",
+    "kakaoName": "순시키헤어 soonsikihair",
+    "openDays": 5
+  },
+  "ct-soonsiki-hair-hongdae-moment-branch-seoul-s-top": {
+    "open": "10:00",
+    "close": "19:00",
+    "kakaoPlaceId": "477650685",
+    "kakaoName": "순시키헤어 로맨티크점",
+    "openDays": 5
+  },
+  "ct-special-offer-lee-kyung-min-foret-hongdae-branch": {
+    "open": "10:00",
+    "close": "19:00",
+    "kakaoPlaceId": "18662530",
+    "kakaoName": "이경민포레 홍대점",
+    "openDays": 7
+  },
+  "ct-wearhouse-seoungsu-branch": {
+    "open": "10:00",
+    "close": "19:00",
+    "kakaoPlaceId": "2050902735",
+    "kakaoName": "웨어하우스 성수점",
+    "openDays": 7
+  },
+  "ct-weneed-the-apgujeong": {
+    "open": "10:00",
+    "close": "19:30",
+    "kakaoPlaceId": "1376857556",
+    "kakaoName": "위닛 더 압구정점",
+    "openDays": 7
+  },
+  "ct-ye-lead-hair-salon-myeongdong": {
+    "open": "10:30",
+    "close": "20:30",
+    "kakaoPlaceId": "1886596253",
+    "kakaoName": "예리드",
+    "openDays": 6
+  },
+  "ct-yipi-hair-hair-salon-in-apgujeong": {
+    "open": "11:00",
+    "close": "20:00",
+    "kakaoPlaceId": "621609012",
+    "kakaoName": "이피헤어",
+    "openDays": 6
+  },
+  "ct-you-hair-salon-seongsu-branch": {
+    "open": "11:00",
+    "close": "19:30",
+    "kakaoPlaceId": "1796458770",
+    "kakaoName": "와이오유 성수점",
+    "openDays": 6
+  },
+  "oy-강변역점": {
+    "open": "09:30",
+    "close": "22:30",
+    "kakaoPlaceId": "89045716",
+    "kakaoName": "올리브영 강변역점",
+    "openDays": 7
+  },
+  "oy-개봉역북부점": {
+    "open": "10:00",
+    "close": "22:30",
+    "kakaoPlaceId": "111506846",
+    "kakaoName": "올리브영 개봉역북부점",
+    "openDays": 7
+  },
+  "oy-개포동점": {
+    "open": "10:00",
+    "close": "22:00",
+    "kakaoPlaceId": "957237114",
+    "kakaoName": "올리브영 개포동점",
+    "openDays": 7
+  },
+  "oy-건대커먼그라운드점": {
+    "open": "11:00",
+    "close": "22:00",
+    "kakaoPlaceId": "331118497",
+    "kakaoName": "올리브영 건대커먼그라운드점",
+    "openDays": 7
+  },
+  "oy-경희대점": {
+    "open": "10:00",
+    "close": "22:30",
+    "kakaoPlaceId": "11910195",
+    "kakaoName": "올리브영 경희대점",
+    "openDays": 7
+  },
+  "oy-공릉역점": {
+    "open": "10:00",
+    "close": "22:30",
+    "kakaoPlaceId": "1603822104",
+    "kakaoName": "올리브영 공릉역점",
+    "openDays": 7
+  },
+  "oy-광장마켓점": {
+    "open": "10:00",
+    "close": "22:00",
+    "kakaoPlaceId": "685270098",
+    "kakaoName": "올리브영 광장마켓점",
+    "openDays": 7
+  },
+  "oy-구로구청점": {
+    "open": "10:00",
+    "close": "22:30",
+    "kakaoPlaceId": "1276508951",
+    "kakaoName": "올리브영 구로구청점",
+    "openDays": 7
+  },
+  "oy-구의역점": {
+    "open": "10:00",
+    "close": "22:30",
+    "kakaoPlaceId": "19755601",
+    "kakaoName": "올리브영 구의역점",
+    "openDays": 7
+  },
+  "oy-구의이스트폴점": {
+    "open": "10:00",
+    "close": "22:00",
+    "kakaoPlaceId": "902677936",
+    "kakaoName": "올리브영 구의이스트폴점",
+    "openDays": 7
+  },
+  "oy-구일역점": {
+    "open": "10:00",
+    "close": "22:30",
+    "kakaoPlaceId": "761212462",
+    "kakaoName": "올리브영 구일역점",
+    "openDays": 7
+  },
+  "oy-군자역점": {
+    "open": "10:00",
+    "close": "23:00",
+    "kakaoPlaceId": "24346647",
+    "kakaoName": "올리브영 군자역점",
+    "openDays": 7
+  },
+  "oy-금호점": {
+    "open": "10:00",
+    "close": "22:30",
+    "kakaoPlaceId": "27406779",
+    "kakaoName": "올리브영 금호점",
+    "openDays": 7
+  },
+  "oy-길동역점": {
+    "open": "10:00",
+    "close": "22:00",
+    "kakaoPlaceId": "367073914",
+    "kakaoName": "올리브영 길동역점",
+    "openDays": 7
+  },
+  "oy-길음역점": {
+    "open": "10:00",
+    "close": "22:30",
+    "kakaoPlaceId": "1609399995",
+    "kakaoName": "올리브영 길음역점",
+    "openDays": 7
+  },
+  "oy-길음점": {
+    "open": "10:00",
+    "close": "22:00",
+    "kakaoPlaceId": "20104678",
+    "kakaoName": "올리브영 길음점",
+    "openDays": 7
+  },
+  "oy-남구로점": {
+    "open": "10:00",
+    "close": "22:30",
+    "kakaoPlaceId": "533328082",
+    "kakaoName": "올리브영 남구로점",
+    "openDays": 7
+  },
+  "oy-노원공릉점": {
+    "open": "10:00",
+    "close": "22:00",
+    "kakaoPlaceId": "593351406",
+    "kakaoName": "올리브영 노원공릉점",
+    "openDays": 7
+  },
+  "oy-노원점": {
+    "open": "09:30",
+    "close": "23:00",
+    "kakaoPlaceId": "18055048",
+    "kakaoName": "올리브영 노원점",
+    "openDays": 7
+  },
+  "oy-녹두거리점": {
+    "open": "10:00",
+    "close": "22:30",
+    "kakaoPlaceId": "27319999",
+    "kakaoName": "올리브영 녹두거리점",
+    "openDays": 7
+  },
+  "oy-답십리역점": {
+    "open": "10:00",
+    "close": "22:30",
+    "kakaoPlaceId": "998824580",
+    "kakaoName": "올리브영 답십리역점",
+    "openDays": 7
+  },
+  "oy-당산대로점": {
+    "open": "10:00",
+    "close": "23:00",
+    "kakaoPlaceId": "2063340353",
+    "kakaoName": "올리브영 당산대로점",
+    "openDays": 7
+  },
+  "oy-당산역점": {
+    "open": "09:30",
+    "close": "23:00",
+    "kakaoPlaceId": "14706652",
+    "kakaoName": "올리브영 당산역점",
+    "openDays": 7
+  },
+  "oy-대치사거리점": {
+    "open": "10:00",
+    "close": "22:30",
+    "kakaoPlaceId": "726122138",
+    "kakaoName": "올리브영 대치사거리점",
+    "openDays": 7
+  },
+  "oy-대치역점": {
+    "open": "10:00",
+    "close": "22:30",
+    "kakaoPlaceId": "27467227",
+    "kakaoName": "올리브영 대치역점",
+    "openDays": 7
+  },
+  "oy-대치점": {
+    "open": "10:00",
+    "close": "22:30",
+    "kakaoPlaceId": "17592155",
+    "kakaoName": "올리브영 대치점",
+    "openDays": 7
+  },
+  "oy-대학로점": {
+    "open": "10:00",
+    "close": "22:30",
+    "kakaoPlaceId": "1900298425",
+    "kakaoName": "올리브영 대학로점",
+    "openDays": 7
+  },
+  "oy-대학로중앙점": {
+    "open": "10:00",
+    "close": "23:00",
+    "kakaoPlaceId": "26982787",
+    "kakaoName": "올리브영 대학로중앙점",
+    "openDays": 7
+  },
+  "oy-던던동대문점": {
+    "open": "10:30",
+    "close": "21:00",
+    "kakaoPlaceId": "883681849",
+    "kakaoName": "올리브영 던던동대문점",
+    "openDays": 7
+  },
+  "oy-돈암점": {
+    "open": "10:00",
+    "close": "23:00",
+    "kakaoPlaceId": "11910244",
+    "kakaoName": "올리브영 돈암점",
+    "openDays": 7
+  },
+  "oy-동대문역사문화공원사거리점": {
+    "open": "10:00",
+    "close": "23:30",
+    "kakaoPlaceId": "138063738",
+    "kakaoName": "올리브영 동대문역사문화공원사거리점",
+    "openDays": 7
+  },
+  "oy-동대문역사문화공원역점": {
+    "open": "10:00",
+    "close": "23:30",
+    "kakaoPlaceId": "25815743",
+    "kakaoName": "올리브영 동대문역사문화공원역점",
+    "openDays": 7
+  },
+  "oy-동묘앞역점": {
+    "open": "09:00",
+    "close": "22:30",
+    "kakaoPlaceId": "27437849",
+    "kakaoName": "올리브영 동묘앞역점",
+    "openDays": 7
+  },
+  "oy-두타점": {
+    "open": "10:30",
+    "close": "24:00",
+    "kakaoPlaceId": "11910202",
+    "kakaoName": "올리브영 두타점",
+    "openDays": 7
+  },
+  "oy-둔촌점": {
+    "open": "10:00",
+    "close": "22:30",
+    "kakaoPlaceId": "13033024",
+    "kakaoName": "올리브영 둔촌점",
+    "openDays": 7
+  },
+  "oy-둔촌파크포레온점": {
+    "open": "10:00",
+    "close": "22:30",
+    "kakaoPlaceId": "438133142",
+    "kakaoName": "올리브영 둔촌파크포레온점",
+    "openDays": 7
+  },
+  "oy-등촌역점": {
+    "open": "10:00",
+    "close": "22:30",
+    "kakaoPlaceId": "580711273",
+    "kakaoName": "올리브영 등촌역점",
+    "openDays": 7
+  },
+  "oy-등촌점": {
+    "open": "10:00",
+    "close": "23:00",
+    "kakaoPlaceId": "292490451",
+    "kakaoName": "올리브영 등촌점",
+    "openDays": 7
+  },
+  "oy-롯데백화점잠실점": {
+    "open": "10:00",
+    "close": "22:00",
+    "kakaoPlaceId": "1929396615",
+    "kakaoName": "올리브영 롯데백화점잠실점",
+    "openDays": 7
+  },
+  "oy-롯데월드몰점": {
+    "open": "10:30",
+    "close": "22:00",
+    "kakaoPlaceId": "1056713643",
+    "kakaoName": "올리브영 롯데월드몰점",
+    "openDays": 7
+  },
+  "oy-롯데월드몰플러스점": {
+    "open": "10:30",
+    "close": "22:00",
+    "kakaoPlaceId": "1566191789",
+    "kakaoName": "올리브영 롯데월드몰플러스점",
+    "openDays": 7
+  },
+  "oy-마들역점": {
+    "open": "10:00",
+    "close": "22:00",
+    "kakaoPlaceId": "163821158",
+    "kakaoName": "올리브영 마들역점",
+    "openDays": 7
+  },
+  "oy-마포도화점": {
+    "open": "10:00",
+    "close": "22:00",
+    "kakaoPlaceId": "127688860",
+    "kakaoName": "올리브영 마포도화점",
+    "openDays": 7
+  },
+  "oy-만리동점": {
+    "open": "10:00",
+    "close": "22:30",
+    "kakaoPlaceId": "2125887457",
+    "kakaoName": "올리브영 만리동점",
+    "openDays": 7
+  },
+  "oy-망원동점": {
+    "open": "10:00",
+    "close": "22:00",
+    "kakaoPlaceId": "1664452314",
+    "kakaoName": "올리브영 망원동점",
+    "openDays": 7
+  },
+  "oy-먹골역점": {
+    "open": "10:00",
+    "close": "22:30",
+    "kakaoPlaceId": "1204443155",
+    "kakaoName": "올리브영 먹골역점",
+    "openDays": 7
+  },
+  "oy-명동2가점": {
+    "open": "10:00",
+    "close": "22:30",
+    "kakaoPlaceId": "1652988990",
+    "kakaoName": "올리브영 명동2가점",
+    "openDays": 7
+  },
+  "oy-명동대로점": {
+    "open": "10:00",
+    "close": "22:30",
+    "kakaoPlaceId": "26470367",
+    "kakaoName": "올리브영 명동대로점",
+    "openDays": 7
+  },
+  "oy-명동역점": {
+    "open": "10:00",
+    "close": "22:30",
+    "kakaoPlaceId": "2072620170",
+    "kakaoName": "올리브영 명동역점",
+    "openDays": 7
+  },
+  "oy-명지대점": {
+    "open": "10:00",
+    "close": "22:30",
+    "kakaoPlaceId": "17450499",
+    "kakaoName": "올리브영 명지대점",
+    "openDays": 7
+  },
+  "oy-미아뉴타운점": {
+    "open": "10:00",
+    "close": "22:30",
+    "kakaoPlaceId": "1871794572",
+    "kakaoName": "올리브영 미아뉴타운점",
+    "openDays": 7
+  },
+  "oy-미아사거리역점": {
+    "open": "10:00",
+    "close": "22:30",
+    "kakaoPlaceId": "1909467644",
+    "kakaoName": "올리브영 미아사거리역점",
+    "openDays": 7
+  },
+  "oy-미아사거리점": {
+    "open": "10:00",
+    "close": "23:00",
+    "kakaoPlaceId": "24752224",
+    "kakaoName": "올리브영 미아사거리점",
+    "openDays": 7
+  },
+  "oy-방배점": {
+    "open": "10:00",
+    "close": "22:30",
+    "kakaoPlaceId": "289813593",
+    "kakaoName": "올리브영 방배점",
+    "openDays": 7
+  },
+  "oy-방이시장점": {
+    "open": "11:00",
+    "close": "22:00",
+    "kakaoPlaceId": "20104749",
+    "kakaoName": "올리브영 방이시장점",
+    "openDays": 7
+  },
+  "oy-배명사거리점": {
+    "open": "10:00",
+    "close": "22:30",
+    "kakaoPlaceId": "218665349",
+    "kakaoName": "올리브영 배명사거리점",
+    "openDays": 7
+  },
+  "oy-보라매역점": {
+    "open": "10:00",
+    "close": "22:30",
+    "kakaoPlaceId": "823088584",
+    "kakaoName": "올리브영 보라매역점",
+    "openDays": 7
+  },
+  "oy-북가좌동점": {
+    "open": "10:00",
+    "close": "22:30",
+    "kakaoPlaceId": "1426345012",
+    "kakaoName": "올리브영 북가좌동점",
+    "openDays": 7
+  },
+  "oy-사당점": {
+    "open": "10:00",
+    "close": "23:00",
+    "kakaoPlaceId": "27559946",
+    "kakaoName": "올리브영 사당점",
+    "openDays": 7
+  },
+  "oy-삼전역점": {
+    "open": "10:00",
+    "close": "22:30",
+    "kakaoPlaceId": "1003476646",
+    "kakaoName": "올리브영 삼전역점",
+    "openDays": 7
+  },
+  "oy-상계보람점": {
+    "open": "10:00",
+    "close": "22:30",
+    "kakaoPlaceId": "559642697",
+    "kakaoName": "올리브영 상계보람점",
+    "openDays": 7
+  },
+  "oy-상도역점": {
+    "open": "10:00",
+    "close": "22:30",
+    "kakaoPlaceId": "1475725868",
+    "kakaoName": "올리브영 상도역점",
+    "openDays": 7
+  },
+  "oy-서래마을점": {
+    "open": "10:00",
+    "close": "22:30",
+    "kakaoPlaceId": "20104773",
+    "kakaoName": "올리브영 서래마을점",
+    "openDays": 7
+  },
+  "oy-서울숲역점": {
+    "open": "10:00",
+    "close": "22:30",
+    "kakaoPlaceId": "338468450",
+    "kakaoName": "올리브영 서울숲역점",
+    "openDays": 7
+  },
+  "oy-서울시립대점": {
+    "open": "10:00",
+    "close": "22:00",
+    "kakaoPlaceId": "27560534",
+    "kakaoName": "올리브영 서울시립대점",
+    "openDays": 7
+  },
+  "oy-석계역점": {
+    "open": "10:00",
+    "close": "22:30",
+    "kakaoPlaceId": "373394703",
+    "kakaoName": "올리브영 석계역점",
+    "openDays": 7
+  },
+  "oy-선유도역점": {
+    "open": "10:00",
+    "close": "22:30",
+    "kakaoPlaceId": "27492280",
+    "kakaoName": "올리브영 선유도역점",
+    "openDays": 7
+  },
+  "oy-성신여대입구역점": {
+    "open": "10:00",
+    "close": "22:00",
+    "kakaoPlaceId": "1623404405",
+    "kakaoName": "올리브영 성신여대입구역점",
+    "openDays": 7
+  },
+  "oy-세로수길점": {
+    "open": "11:00",
+    "close": "22:00",
+    "kakaoPlaceId": "1629854644",
+    "kakaoName": "올리브영 세로수길점",
+    "openDays": 7
+  },
+  "oy-센트럴-명동-타운": {
+    "open": "10:00",
+    "close": "22:30",
+    "kakaoPlaceId": "1176440931",
+    "kakaoName": "올리브영 센트럴명동타운",
+    "openDays": 7
+  },
+  "oy-송파구청점": {
+    "open": "10:00",
+    "close": "23:00",
+    "kakaoPlaceId": "1050695383",
+    "kakaoName": "올리브영 송파구청점",
+    "openDays": 7
+  },
+  "oy-수락산역점": {
+    "open": "10:00",
+    "close": "22:30",
+    "kakaoPlaceId": "1064140019",
+    "kakaoName": "올리브영 수락산역점",
+    "openDays": 7
+  },
+  "oy-수색점": {
+    "open": "10:00",
+    "close": "22:30",
+    "kakaoPlaceId": "597152876",
+    "kakaoName": "올리브영 수색점",
+    "openDays": 7
+  },
+  "oy-숙대입구역점": {
+    "open": "10:00",
+    "close": "22:30",
+    "kakaoPlaceId": "604131395",
+    "kakaoName": "올리브영 숙대입구역점",
+    "openDays": 7
+  },
+  "oy-숭실대입구역점": {
+    "open": "10:00",
+    "close": "22:30",
+    "kakaoPlaceId": "796629691",
+    "kakaoName": "올리브영 숭실대입구역점",
+    "openDays": 7
+  },
+  "oy-스타시티점": {
+    "open": "10:30",
+    "close": "22:30",
+    "kakaoPlaceId": "11910264",
+    "kakaoName": "올리브영 스타시티점",
+    "openDays": 7
+  },
+  "oy-신강남점": {
+    "open": "10:00",
+    "close": "23:00",
+    "kakaoPlaceId": "2088307487",
+    "kakaoName": "올리브영 신강남점",
+    "openDays": 7
+  },
+  "oy-신금호역점": {
+    "open": "10:00",
+    "close": "22:30",
+    "kakaoPlaceId": "552252688",
+    "kakaoName": "올리브영 신금호역점",
+    "openDays": 7
+  },
+  "oy-신대방삼거리역점": {
+    "open": "10:00",
+    "close": "23:00",
+    "kakaoPlaceId": "1387690340",
+    "kakaoName": "올리브영 신대방삼거리역점",
+    "openDays": 7
+  },
+  "oy-신대방역점": {
+    "open": "10:00",
+    "close": "22:30",
+    "kakaoPlaceId": "842177703",
+    "kakaoName": "올리브영 신대방역점",
+    "openDays": 7
+  },
+  "oy-신천중앙점": {
+    "open": "10:00",
+    "close": "23:00",
+    "kakaoPlaceId": "2107975207",
+    "kakaoName": "올리브영 신천중앙점",
+    "openDays": 7
+  },
+  "oy-신촌대로점": {
+    "open": "10:00",
+    "close": "22:30",
+    "kakaoPlaceId": "11910216",
+    "kakaoName": "올리브영 신촌대로점",
+    "openDays": 7
+  },
+  "oy-신촌로터리점": {
+    "open": "10:00",
+    "close": "22:30",
+    "kakaoPlaceId": "1289330977",
+    "kakaoName": "올리브영 신촌로터리점",
+    "openDays": 7
+  },
+  "oy-신촌명물거리점": {
+    "open": "10:00",
+    "close": "23:00",
+    "kakaoPlaceId": "18355817",
+    "kakaoName": "올리브영 신촌명물거리점",
+    "openDays": 7
+  },
+  "oy-신촌연세점": {
+    "open": "10:00",
+    "close": "23:00",
+    "kakaoPlaceId": "18355818",
+    "kakaoName": "올리브영 신촌연세점",
+    "openDays": 7
+  },
+  "oy-신촌중앙점": {
+    "open": "10:00",
+    "close": "23:00",
+    "kakaoPlaceId": "1053036121",
+    "kakaoName": "올리브영 신촌중앙점",
+    "openDays": 7
+  },
+  "oy-신풍역점": {
+    "open": "10:00",
+    "close": "22:30",
+    "kakaoPlaceId": "647095013",
+    "kakaoName": "올리브영 신풍역점",
+    "openDays": 7
+  },
+  "oy-씨제이남산더센터점": {
+    "open": "08:00",
+    "close": "18:00",
+    "kakaoPlaceId": "108193192",
+    "kakaoName": "올리브영 씨제이남산더센터점",
+    "openDays": 5
+  },
+  "oy-안국역점": {
+    "open": "10:00",
+    "close": "22:00",
+    "kakaoPlaceId": "901627935",
+    "kakaoName": "올리브영 안국역점",
+    "openDays": 7
+  },
+  "oy-어린이대공원역점": {
+    "open": "10:00",
+    "close": "22:30",
+    "kakaoPlaceId": "1054161682",
+    "kakaoName": "올리브영 어린이대공원역점",
+    "openDays": 7
+  },
+  "oy-연희점": {
+    "open": "10:00",
+    "close": "22:30",
+    "kakaoPlaceId": "26407034",
+    "kakaoName": "올리브영 연희점",
+    "openDays": 7
+  },
+  "oy-염창역점": {
+    "open": "10:00",
+    "close": "23:00",
+    "kakaoPlaceId": "26588196",
+    "kakaoName": "올리브영 염창역점",
+    "openDays": 7
+  },
+  "oy-영등포역사점": {
+    "open": "08:30",
+    "close": "22:30",
+    "kakaoPlaceId": "105673859",
+    "kakaoName": "올리브영 영등포역사점",
+    "openDays": 7
+  },
+  "oy-영등포역점": {
+    "open": "10:00",
+    "close": "23:00",
+    "kakaoPlaceId": "25766935",
+    "kakaoName": "올리브영 영등포역점",
+    "openDays": 7
+  },
+  "oy-영등포타임스퀘어점": {
+    "open": "10:30",
+    "close": "22:00",
+    "kakaoPlaceId": "11910214",
+    "kakaoName": "올리브영 영등포타임스퀘어점",
+    "openDays": 7
+  },
+  "oy-오류동역점": {
+    "open": "10:00",
+    "close": "22:30",
+    "kakaoPlaceId": "27354895",
+    "kakaoName": "올리브영 오류동역점",
+    "openDays": 7
+  },
+  "oy-올림픽대교북단점": {
+    "open": "10:00",
+    "close": "22:30",
+    "kakaoPlaceId": "1988576447",
+    "kakaoName": "올리브영 올림픽대교북단점",
+    "openDays": 7
+  },
+  "oy-용산리첸시아점": {
+    "open": "10:00",
+    "close": "22:30",
+    "kakaoPlaceId": "238406310",
+    "kakaoName": "올리브영 용산리첸시아점",
+    "openDays": 7
+  },
+  "oy-용산아이파크몰더센터점": {
+    "open": "10:00",
+    "close": "22:00",
+    "kakaoPlaceId": "165518307",
+    "kakaoName": "올리브영 용산아이파크몰더센터점",
+    "openDays": 7
+  },
+  "oy-용산아이파크몰점": {
+    "open": "10:30",
+    "close": "22:00",
+    "kakaoPlaceId": "20244918",
+    "kakaoName": "올리브영 용산아이파크몰점",
+    "openDays": 7
+  },
+  "oy-우장산역점": {
+    "open": "10:00",
+    "close": "23:00",
+    "kakaoPlaceId": "20104864",
+    "kakaoName": "올리브영 우장산역점",
+    "openDays": 7
+  },
+  "oy-위례아이파크점": {
+    "open": "10:00",
+    "close": "22:30",
+    "kakaoPlaceId": "996300695",
+    "kakaoName": "올리브영 위례아이파크점",
+    "openDays": 7
+  },
+  "oy-은행사거리점": {
+    "open": "10:00",
+    "close": "23:00",
+    "kakaoPlaceId": "20104872",
+    "kakaoName": "올리브영 은행사거리점",
+    "openDays": 7
+  },
+  "oy-이태원입구점": {
+    "open": "11:00",
+    "close": "22:00",
+    "kakaoPlaceId": "27187290",
+    "kakaoName": "올리브영 이태원입구점",
+    "openDays": 7
+  },
+  "oy-인사동점": {
+    "open": "10:30",
+    "close": "21:30",
+    "kakaoPlaceId": "1739086681",
+    "kakaoName": "올리브영 인사동점",
+    "openDays": 7
+  },
+  "oy-일원역점": {
+    "open": "10:00",
+    "close": "22:00",
+    "kakaoPlaceId": "536490119",
+    "kakaoName": "올리브영 일원역점",
+    "openDays": 7
+  },
+  "oy-자양역점": {
+    "open": "10:00",
+    "close": "22:30",
+    "kakaoPlaceId": "284892082",
+    "kakaoName": "올리브영 자양역점",
+    "openDays": 7
+  },
+  "oy-잠실역8호선점": {
+    "open": "10:00",
+    "close": "22:30",
+    "kakaoPlaceId": "121836696",
+    "kakaoName": "올리브영 잠실역8호선점",
+    "openDays": 7
+  },
+  "oy-잠실장미상가점": {
+    "open": "10:00",
+    "close": "22:00",
+    "kakaoPlaceId": "829741523",
+    "kakaoName": "올리브영 잠실장미상가점",
+    "openDays": 5
+  },
+  "oy-잠실학원사거리점": {
+    "open": "10:00",
+    "close": "22:30",
+    "kakaoPlaceId": "928497207",
+    "kakaoName": "올리브영 잠실학원사거리점",
+    "openDays": 7
+  },
+  "oy-장승배기역점": {
+    "open": "10:00",
+    "close": "22:30",
+    "kakaoPlaceId": "2032172065",
+    "kakaoName": "올리브영 장승배기역점",
+    "openDays": 7
+  },
+  "oy-장안동사거리점": {
+    "open": "10:00",
+    "close": "22:30",
+    "kakaoPlaceId": "149414033",
+    "kakaoName": "올리브영 장안동사거리점",
+    "openDays": 7
+  },
+  "oy-장위뉴타운점": {
+    "open": "10:00",
+    "close": "22:00",
+    "kakaoPlaceId": "1387521876",
+    "kakaoName": "올리브영 장위뉴타운점",
+    "openDays": 7
+  },
+  "oy-종암점": {
+    "open": "10:00",
+    "close": "22:00",
+    "kakaoPlaceId": "1300369397",
+    "kakaoName": "올리브영 종암점",
+    "openDays": 7
+  },
+  "oy-중랑점": {
+    "open": "10:00",
+    "close": "22:30",
+    "kakaoPlaceId": "18049983",
+    "kakaoName": "올리브영 중랑점",
+    "openDays": 7
+  },
+  "oy-중화역점": {
+    "open": "10:00",
+    "close": "22:30",
+    "kakaoPlaceId": "1261114793",
+    "kakaoName": "올리브영 중화역점",
+    "openDays": 7
+  },
+  "oy-창천점": {
+    "open": "10:00",
+    "close": "23:00",
+    "kakaoPlaceId": "465189903",
+    "kakaoName": "올리브영 창천점",
+    "openDays": 7
+  },
+  "oy-천호역점": {
+    "open": "10:00",
+    "close": "22:30",
+    "kakaoPlaceId": "1299186942",
+    "kakaoName": "올리브영 천호역점",
+    "openDays": 7
+  },
+  "oy-천호중앙점": {
+    "open": "10:00",
+    "close": "23:00",
+    "kakaoPlaceId": "18355808",
+    "kakaoName": "올리브영 천호중앙점",
+    "openDays": 7
+  },
+  "oy-청량리역사점": {
+    "open": "09:00",
+    "close": "22:00",
+    "kakaoPlaceId": "1908688486",
+    "kakaoName": "올리브영 청량리역사점",
+    "openDays": 7
+  },
+  "oy-청량리중앙점": {
+    "open": "10:00",
+    "close": "22:30",
+    "kakaoPlaceId": "1031753597",
+    "kakaoName": "올리브영 청량리중앙점",
+    "openDays": 7
+  },
+  "oy-타임스퀘어아트리움점": {
+    "open": "10:30",
+    "close": "22:00",
+    "kakaoPlaceId": "11427151",
+    "kakaoName": "올리브영 타임스퀘어아트리움점",
+    "openDays": 7
+  },
+  "oy-파르나스몰점": {
+    "open": "10:00",
+    "close": "22:00",
+    "kakaoPlaceId": "326841913",
+    "kakaoName": "올리브영 파르나스몰점",
+    "openDays": 7
+  },
+  "oy-파르나스삼성-타운": {
+    "open": "10:00",
+    "close": "22:00",
+    "kakaoPlaceId": "388290530",
+    "kakaoName": "올리브영 파르나스삼성 타운",
+    "openDays": 7
+  },
+  "oy-플러스점": {
+    "open": "08:00",
+    "close": "20:00",
+    "kakaoPlaceId": "448010824",
+    "kakaoName": "올리브영 플러스점",
+    "openDays": 5
+  },
+  "oy-한성대입구역점": {
+    "open": "10:00",
+    "close": "22:00",
+    "kakaoPlaceId": "1650877136",
+    "kakaoName": "올리브영 한성대입구역점",
+    "openDays": 7
+  },
+  "oy-한티역점": {
+    "open": "10:00",
+    "close": "23:00",
+    "kakaoPlaceId": "17137473",
+    "kakaoName": "올리브영 한티역점",
+    "openDays": 7
+  },
+  "oy-합정교보점": {
+    "open": "10:30",
+    "close": "22:00",
+    "kakaoPlaceId": "1509671394",
+    "kakaoName": "올리브영 합정교보점",
+    "openDays": 7
+  },
+  "oy-혜화역점": {
+    "open": "10:00",
+    "close": "22:30",
+    "kakaoPlaceId": "18960502",
+    "kakaoName": "올리브영 혜화역점",
+    "openDays": 7
+  },
+  "oy-홈플러스월드컵점": {
+    "open": "10:00",
+    "close": "22:00",
+    "kakaoPlaceId": "888275661",
+    "kakaoName": "올리브영 홈플러스월드컵점",
+    "openDays": 6
+  },
+  "oy-홍대대학로점": {
+    "open": "10:00",
+    "close": "22:00",
+    "kakaoPlaceId": "19191694",
+    "kakaoName": "올리브영 홍대대학로점",
+    "openDays": 7
+  },
+  "oy-홍제역점": {
+    "open": "10:00",
+    "close": "22:30",
+    "kakaoPlaceId": "20104965",
+    "kakaoName": "올리브영 홍제역점",
+    "openDays": 7
+  },
+  "oy-화곡역사거리점": {
+    "open": "10:00",
+    "close": "23:00",
+    "kakaoPlaceId": "354546059",
+    "kakaoName": "올리브영 화곡역사거리점",
+    "openDays": 7
+  },
+  "oy-화곡역점": {
+    "open": "10:30",
+    "close": "23:00",
+    "kakaoPlaceId": "61733419",
+    "kakaoName": "올리브영 화곡역점",
+    "openDays": 7
+  },
+  "oy-황학사거리점": {
+    "open": "10:00",
+    "close": "23:00",
+    "kakaoPlaceId": "576745756",
+    "kakaoName": "올리브영 황학사거리점",
+    "openDays": 7
+  },
+  "oy-회기중앙점": {
+    "open": "10:00",
+    "close": "23:00",
+    "kakaoPlaceId": "741733435",
+    "kakaoName": "올리브영 회기중앙점",
+    "openDays": 7
+  },
+  "oy-n성수": {
+    "open": "10:00",
+    "close": "22:00",
+    "kakaoPlaceId": "1287282217",
+    "kakaoName": "올리브영 N성수",
+    "openDays": 7
+  }
+}

@@ -1,0 +1,8569 @@
+{
+ "ct-suyb-busan-jeonpo-custom-hair-salon": [
+  {
+   "id": "2026108294",
+   "place_name": "아타르",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 30
+  },
+  {
+   "id": "1045300654",
+   "place_name": "비주얼살롱 서면전포점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 38
+  },
+  {
+   "id": "356519412",
+   "place_name": "울트라살롱",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 44
+  },
+  {
+   "id": "20630735",
+   "place_name": "그린나래",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 44
+  },
+  {
+   "id": "1104661576",
+   "place_name": "크레이지드레드 부산서면점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 45
+  },
+  {
+   "id": "389193439",
+   "place_name": "코리",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 47
+  },
+  {
+   "id": "972903730",
+   "place_name": "무브헤어 전포2호점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 51
+  },
+  {
+   "id": "147426875",
+   "place_name": "위주헤어",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 51
+  },
+  {
+   "id": "2030456450",
+   "place_name": "라이크헤어",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 58
+  },
+  {
+   "id": "433814263",
+   "place_name": "더헤담 서면점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 66
+  },
+  {
+   "id": "750474875",
+   "place_name": "아카이빙",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 70
+  },
+  {
+   "id": "740239742",
+   "place_name": "유메노헤어붙임머리",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 71
+  },
+  {
+   "id": "1998417599",
+   "place_name": "공삼코스트",
+   "category_name": "가정,생활 > 미용 > 미용실 > 바버샵",
+   "distance": 78
+  },
+  {
+   "id": "1973145459",
+   "place_name": "피플샵",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 88
+  },
+  {
+   "id": "2056567077",
+   "place_name": "헤이온",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 89
+  },
+  {
+   "id": "26582373",
+   "place_name": "붐메이크업",
+   "category_name": "가정,생활 > 미용 > 메이크업",
+   "distance": 58
+  },
+  {
+   "id": "1269438875",
+   "place_name": "수묵메이크업",
+   "category_name": "가정,생활 > 미용 > 메이크업",
+   "distance": 81
+  }
+ ],
+ "ct-juno-hair-busan-dongnae-sajik-branch": [
+  {
+   "id": "263105217",
+   "place_name": "빛날희헤어",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 40
+  },
+  {
+   "id": "1025858619",
+   "place_name": "구피샵 부산사직점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 85
+  },
+  {
+   "id": "2091398686",
+   "place_name": "구연지헤어",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 100
+  },
+  {
+   "id": "19756890",
+   "place_name": "헤어팡",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 113
+  },
+  {
+   "id": "16216604",
+   "place_name": "다모아 헤어&스킨케어",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 144
+  }
+ ],
+ "ct-byus-hair-makeup": [
+  {
+   "id": "267206596",
+   "place_name": "제이어스헤어 해운대마린시티점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 41
+  },
+  {
+   "id": "138758407",
+   "place_name": "더레가헤어 마린시티점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 43
+  },
+  {
+   "id": "1536012118",
+   "place_name": "골드레인헤어",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 43
+  },
+  {
+   "id": "17433906",
+   "place_name": "더민 마린시티점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 46
+  },
+  {
+   "id": "19163820",
+   "place_name": "비즈아띠헤어아트홀",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 70
+  },
+  {
+   "id": "20022461",
+   "place_name": "레브",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 77
+  },
+  {
+   "id": "927274539",
+   "place_name": "디오헤어아베다 마린시티점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 82
+  },
+  {
+   "id": "702751932",
+   "place_name": "미션베이",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 88
+  },
+  {
+   "id": "511531520",
+   "place_name": "마노드제이미 해운대마린시티점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 90
+  },
+  {
+   "id": "406394851",
+   "place_name": "오엠오",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 90
+  },
+  {
+   "id": "1639350073",
+   "place_name": "유니르 해운대 마린시티점",
+   "category_name": "가정,생활 > 미용 > 미용실 > 바버샵",
+   "distance": 91
+  },
+  {
+   "id": "126564553",
+   "place_name": "히나",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 93
+  },
+  {
+   "id": "24449237",
+   "place_name": "제니하우스 마린시티점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 98
+  },
+  {
+   "id": "148063490",
+   "place_name": "박인지메이크업",
+   "category_name": "가정,생활 > 미용 > 메이크업",
+   "distance": 85
+  }
+ ],
+ "ct-juno-hair-centum-city-station-branch-busan-premi": [
+  {
+   "id": "489585079",
+   "place_name": "센텀미용실 하이엔드헤어",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 14
+  },
+  {
+   "id": "1851747760",
+   "place_name": "준오헤어 센텀시티역점",
+   "category_name": "가정,생활 > 미용 > 미용실 > 준오헤어",
+   "distance": 36
+  },
+  {
+   "id": "735313528",
+   "place_name": "하둔헤어 해운대센텀점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 99
+  },
+  {
+   "id": "827961551",
+   "place_name": "에이원헤어",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 106
+  },
+  {
+   "id": "1835312051",
+   "place_name": "박승철헤어스투디오 센텀직영점",
+   "category_name": "가정,생활 > 미용 > 미용실 > 박승철헤어스투디오",
+   "distance": 132
+  },
+  {
+   "id": "699673507",
+   "place_name": "르에보 센텀점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 140
+  },
+  {
+   "id": "16245201",
+   "place_name": "황서영의자연크리닉 헤어ISHOP",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 146
+  },
+  {
+   "id": "487389166",
+   "place_name": "미장원가꿈",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 146
+  }
+ ],
+ "ct-lee-kyungmin-foret-garden-busan-hair-salon": [
+  {
+   "id": "17899949",
+   "place_name": "홍실미용실",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 79
+  },
+  {
+   "id": "9919125",
+   "place_name": "이재현헤어그룹",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 83
+  },
+  {
+   "id": "2144969857",
+   "place_name": "이경민포레가든",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 87
+  }
+ ],
+ "ct-weneed-seomyeon-lotte-branch": [
+  {
+   "id": "1635549875",
+   "place_name": "킹스맨바버샵",
+   "category_name": "가정,생활 > 미용 > 미용실 > 바버샵",
+   "distance": 121
+  }
+ ],
+ "ct-de-la-foret-busan-nampo-branch": [
+  {
+   "id": "729371275",
+   "place_name": "모스트헤어",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 68
+  },
+  {
+   "id": "781498948",
+   "place_name": "뉴헤어삽",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 111
+  }
+ ],
+ "ct-articre-busan-seomyeon-branch": [
+  {
+   "id": "610879839",
+   "place_name": "어도러블헤어샵 서면점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 6
+  },
+  {
+   "id": "16227318",
+   "place_name": "백승옥헤어미용실",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 20
+  },
+  {
+   "id": "886549700",
+   "place_name": "NH미장원",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 29
+  },
+  {
+   "id": "2053388509",
+   "place_name": "마벨헤어가넷",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 29
+  },
+  {
+   "id": "1085058693",
+   "place_name": "아티크레 부산서면점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 34
+  },
+  {
+   "id": "1276506720",
+   "place_name": "서면 원썸헤어스튜디오",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 50
+  },
+  {
+   "id": "878422951",
+   "place_name": "윈썸헤어스튜디오 서면점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 50
+  },
+  {
+   "id": "1586214254",
+   "place_name": "이인자커트박사미용실",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 106
+  },
+  {
+   "id": "1000710104",
+   "place_name": "어반트랜드헤어 서면점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 123
+  },
+  {
+   "id": "2017542801",
+   "place_name": "피트",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 137
+  },
+  {
+   "id": "1961664666",
+   "place_name": "진짜사나이",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 143
+  },
+  {
+   "id": "827473723",
+   "place_name": "텔리가발",
+   "category_name": "가정,생활 > 미용 > 가발",
+   "distance": 129
+  }
+ ],
+ "ct-salon-de-won-busan": [
+  {
+   "id": "2017542801",
+   "place_name": "피트",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 50
+  },
+  {
+   "id": "16227318",
+   "place_name": "백승옥헤어미용실",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 80
+  },
+  {
+   "id": "878422951",
+   "place_name": "윈썸헤어스튜디오 서면점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 86
+  },
+  {
+   "id": "1276506720",
+   "place_name": "서면 원썸헤어스튜디오",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 86
+  },
+  {
+   "id": "610879839",
+   "place_name": "어도러블헤어샵 서면점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 90
+  },
+  {
+   "id": "2053388509",
+   "place_name": "마벨헤어가넷",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 122
+  },
+  {
+   "id": "886549700",
+   "place_name": "NH미장원",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 123
+  },
+  {
+   "id": "1085058693",
+   "place_name": "아티크레 부산서면점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 125
+  },
+  {
+   "id": "761573693",
+   "place_name": "타샤헤어스튜디오",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 140
+  },
+  {
+   "id": "1688461801",
+   "place_name": "샤이니헤어클리닉 전포점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 147
+  },
+  {
+   "id": "827473723",
+   "place_name": "텔리가발",
+   "category_name": "가정,생활 > 미용 > 가발",
+   "distance": 103
+  }
+ ],
+ "ct-b-beauty-be-a-star-for-a-day-one-day-tour-hair-m": [],
+ "ct-commenanabien-pangyo-branch-hair-makeup-and-imag": [
+  {
+   "id": "18584757",
+   "place_name": "이세비헤어샵",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 66
+  },
+  {
+   "id": "14566498",
+   "place_name": "여우머리",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 102
+  },
+  {
+   "id": "12663398",
+   "place_name": "박승철헤어스투디오 성남이마트점",
+   "category_name": "가정,생활 > 미용 > 미용실 > 박승철헤어스투디오",
+   "distance": 112
+  },
+  {
+   "id": "1335912636",
+   "place_name": "YJ헤어샵",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 133
+  },
+  {
+   "id": "16279421",
+   "place_name": "수앤수헤어샵",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 139
+  }
+ ],
+ "ct-hosu-dosan-konkuk-seongsu-branch-k-pop-hair-ccl": [
+  {
+   "id": "519146050",
+   "place_name": "창성헤어라인",
+   "category_name": "가정,생활 > 미용 > 가발",
+   "distance": 95
+  }
+ ],
+ "ct-the-day-s-hair-grove-hongdae-expert-color-perm-h": [
+  {
+   "id": "474098893",
+   "place_name": "슈네크 연남점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 27
+  },
+  {
+   "id": "623389006",
+   "place_name": "험블바버샵",
+   "category_name": "가정,생활 > 미용 > 미용실 > 바버샵",
+   "distance": 33
+  },
+  {
+   "id": "15104538",
+   "place_name": "미누",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 55
+  },
+  {
+   "id": "1212891808",
+   "place_name": "루크미",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 61
+  },
+  {
+   "id": "1821077267",
+   "place_name": "살롱드문 동교점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 82
+  },
+  {
+   "id": "1822612325",
+   "place_name": "혼키",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 84
+  },
+  {
+   "id": "654880418",
+   "place_name": "더 부띠끄 연남점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 90
+  },
+  {
+   "id": "138165525",
+   "place_name": "머리합니다",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 95
+  },
+  {
+   "id": "234508489",
+   "place_name": "맨드살롱 연남점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 96
+  },
+  {
+   "id": "1172364228",
+   "place_name": "멜카헤어",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 96
+  },
+  {
+   "id": "1511598054",
+   "place_name": "유니브 연남점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 101
+  },
+  {
+   "id": "2035227030",
+   "place_name": "엘로엔",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 102
+  },
+  {
+   "id": "1653105717",
+   "place_name": "희오",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 119
+  },
+  {
+   "id": "2034206943",
+   "place_name": "살롱발레아쥬",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 128
+  },
+  {
+   "id": "72508482",
+   "place_name": "오름헤어",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 130
+  }
+ ],
+ "ct-commenana-cheongdam-branch-hair-makeup-and-image": [
+  {
+   "id": "881668464",
+   "place_name": "꼼나나 청담점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 0
+  },
+  {
+   "id": "1858370283",
+   "place_name": "코스모 센트",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 81
+  },
+  {
+   "id": "239082391",
+   "place_name": "프리티살롱 청담점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 92
+  },
+  {
+   "id": "798971015",
+   "place_name": "르보청담",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 97
+  },
+  {
+   "id": "1722526728",
+   "place_name": "제이와이",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 107
+  },
+  {
+   "id": "57986780",
+   "place_name": "리프 청담",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 108
+  },
+  {
+   "id": "11645171",
+   "place_name": "김활란뮤제네프 청담부티끄점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 114
+  },
+  {
+   "id": "557296243",
+   "place_name": "아도르 청담",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 121
+  },
+  {
+   "id": "573088180",
+   "place_name": "V9",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 139
+  },
+  {
+   "id": "11259168",
+   "place_name": "알트앤노이",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 139
+  }
+ ],
+ "ct-commenana-main-branch-hair-makeup-and-image-cons": [
+  {
+   "id": "284673319",
+   "place_name": "꼼나나",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 1
+  },
+  {
+   "id": "1264737064",
+   "place_name": "차홍아르더 청담점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 34
+  },
+  {
+   "id": "16589735",
+   "place_name": "아우라뷰티",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 35
+  },
+  {
+   "id": "1107236792",
+   "place_name": "로나 청담본점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 36
+  },
+  {
+   "id": "24924771",
+   "place_name": "블로우블러쉬 청담점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 45
+  },
+  {
+   "id": "1432969977",
+   "place_name": "위위아뜰리에",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 47
+  },
+  {
+   "id": "137394646",
+   "place_name": "치치라보",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 58
+  },
+  {
+   "id": "11645171",
+   "place_name": "김활란뮤제네프 청담부티끄점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 74
+  },
+  {
+   "id": "1872297644",
+   "place_name": "보이드에이치 청담본점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 76
+  },
+  {
+   "id": "1651396993",
+   "place_name": "미장원바이태현",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 77
+  },
+  {
+   "id": "26883160",
+   "place_name": "플랫폼드지",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 81
+  },
+  {
+   "id": "57986780",
+   "place_name": "리프 청담",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 81
+  },
+  {
+   "id": "27228555",
+   "place_name": "헤어주치의",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 82
+  },
+  {
+   "id": "825596447",
+   "place_name": "이프디온",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 84
+  },
+  {
+   "id": "476653460",
+   "place_name": "컷루스",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 95
+  },
+  {
+   "id": "18193622",
+   "place_name": "김청경헤어페이스",
+   "category_name": "가정,생활 > 미용 > 메이크업",
+   "distance": 44
+  }
+ ],
+ "ct-lepic-cheongdam-hair-makeup-salon-visited-by-glo": [
+  {
+   "id": "622049803",
+   "place_name": "르픽",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 3
+  },
+  {
+   "id": "783096265",
+   "place_name": "이스트엔드",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 26
+  },
+  {
+   "id": "420273298",
+   "place_name": "서울베이스",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 29
+  },
+  {
+   "id": "1884088959",
+   "place_name": "이국화아뜰리에",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 41
+  },
+  {
+   "id": "16036512",
+   "place_name": "최영희뷰티살롱",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 42
+  },
+  {
+   "id": "1619391871",
+   "place_name": "재클린헤어메이크업",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 43
+  },
+  {
+   "id": "701218765",
+   "place_name": "지모먼트헤어살롱",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 53
+  },
+  {
+   "id": "198190890",
+   "place_name": "비올 청담점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 56
+  },
+  {
+   "id": "9578992",
+   "place_name": "함가본태",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 74
+  },
+  {
+   "id": "12795977",
+   "place_name": "아티디",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 81
+  },
+  {
+   "id": "1491990781",
+   "place_name": "뷰티진동회 그랜드점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 81
+  },
+  {
+   "id": "733935979",
+   "place_name": "멜르",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 84
+  },
+  {
+   "id": "984551110",
+   "place_name": "체체쌀롱",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 100
+  },
+  {
+   "id": "2125277655",
+   "place_name": "바이어스컷 헤어앤라이프 본점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 105
+  },
+  {
+   "id": "136172013",
+   "place_name": "리연헤어",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 114
+  }
+ ],
+ "ct-mimm-hair-celebrity-style-k-beauty-hair-makeup": [
+  {
+   "id": "2145115522",
+   "place_name": "선화 청담",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 36
+  },
+  {
+   "id": "50297573",
+   "place_name": "더블앤",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 71
+  },
+  {
+   "id": "74920200",
+   "place_name": "더블유앤더블유",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 71
+  },
+  {
+   "id": "474896801",
+   "place_name": "에이바이봄",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 74
+  },
+  {
+   "id": "790084612",
+   "place_name": "재스트더힙",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 83
+  },
+  {
+   "id": "1238404358",
+   "place_name": "드레스먼",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 84
+  },
+  {
+   "id": "1722526728",
+   "place_name": "제이와이",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 90
+  },
+  {
+   "id": "17688445",
+   "place_name": "컨셉피 청담본점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 96
+  },
+  {
+   "id": "242767944",
+   "place_name": "설영",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 102
+  },
+  {
+   "id": "16790575",
+   "place_name": "케이엘",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 103
+  },
+  {
+   "id": "1846719932",
+   "place_name": "위닛블랙 더청담점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 108
+  },
+  {
+   "id": "979151063",
+   "place_name": "살롱드플로리",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 108
+  },
+  {
+   "id": "1407891413",
+   "place_name": "조이187 스타점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 108
+  },
+  {
+   "id": "1119851551",
+   "place_name": "뷰티진동희 청담점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 110
+  },
+  {
+   "id": "4822577",
+   "place_name": "더헤메스",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 120
+  },
+  {
+   "id": "565757168",
+   "place_name": "룰루",
+   "category_name": "가정,생활 > 미용",
+   "distance": 55
+  }
+ ],
+ "ct-sj-hair-edae": [
+  {
+   "id": "2085068399",
+   "place_name": "SJ헤어",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 6
+  },
+  {
+   "id": "393705961",
+   "place_name": "다비움헤어",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 6
+  },
+  {
+   "id": "974373091",
+   "place_name": "머리쟁이 이대본점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 62
+  },
+  {
+   "id": "12095389",
+   "place_name": "헤어꼬뜰레",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 64
+  },
+  {
+   "id": "303539060",
+   "place_name": "살롱YL",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 67
+  },
+  {
+   "id": "658210155",
+   "place_name": "SAYE",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 84
+  },
+  {
+   "id": "15868049",
+   "place_name": "헤어솔제",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 86
+  },
+  {
+   "id": "761385157",
+   "place_name": "로뮨헤어 이대점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 89
+  },
+  {
+   "id": "8630965",
+   "place_name": "하이디뉴욕",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 89
+  },
+  {
+   "id": "13096895",
+   "place_name": "이철헤어커커 이대점",
+   "category_name": "가정,생활 > 미용 > 미용실 > 이철헤어커커",
+   "distance": 101
+  },
+  {
+   "id": "22993779",
+   "place_name": "헤나미용실",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 114
+  },
+  {
+   "id": "14715088",
+   "place_name": "Y헤어라운지",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 125
+  },
+  {
+   "id": "27029373",
+   "place_name": "코난헤어",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 127
+  },
+  {
+   "id": "538194191",
+   "place_name": "라비에벨헤어",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 135
+  },
+  {
+   "id": "16041438",
+   "place_name": "김경란헤어",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 139
+  },
+  {
+   "id": "1191474359",
+   "place_name": "더클래스 이화점",
+   "category_name": "가정,생활 > 미용 > 메이크업",
+   "distance": 89
+  },
+  {
+   "id": "1814819449",
+   "place_name": "미뉴메이크업",
+   "category_name": "가정,생활 > 미용 > 메이크업",
+   "distance": 123
+  }
+ ],
+ "ct-id-hair-susaek-dmc-branch": [
+  {
+   "id": "1160367206",
+   "place_name": "아이디헤어 수색DMC점",
+   "category_name": "가정,생활 > 미용 > 미용실 > 아이디헤어",
+   "distance": 101
+  }
+ ],
+ "ct-roenne-hair-salon": [
+  {
+   "id": "338704842",
+   "place_name": "로엔느",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 0
+  },
+  {
+   "id": "1756952850",
+   "place_name": "디크맨즈헤어 수유역점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 51
+  },
+  {
+   "id": "1491203755",
+   "place_name": "지커헤어",
+   "category_name": "가정,생활 > 미용",
+   "distance": 77
+  },
+  {
+   "id": "17958002",
+   "place_name": "라모맨즈헤어",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 78
+  },
+  {
+   "id": "2044779730",
+   "place_name": "어반트랜드 수유역점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 85
+  },
+  {
+   "id": "1905590296",
+   "place_name": "원살롱",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 114
+  },
+  {
+   "id": "949799499",
+   "place_name": "헤어앤네일루",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 118
+  },
+  {
+   "id": "386679797",
+   "place_name": "라오브헤어",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 120
+  },
+  {
+   "id": "248584053",
+   "place_name": "클릭",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 120
+  },
+  {
+   "id": "1077252489",
+   "place_name": "준오헤어 수유역점",
+   "category_name": "가정,생활 > 미용 > 미용실 > 준오헤어",
+   "distance": 120
+  },
+  {
+   "id": "1144714821",
+   "place_name": "마하맨즈헤어 수유점",
+   "category_name": "가정,생활 > 미용 > 미용실 > 바버샵",
+   "distance": 123
+  },
+  {
+   "id": "12069329",
+   "place_name": "젠헤어",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 125
+  },
+  {
+   "id": "475067840",
+   "place_name": "헤어스테이",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 127
+  },
+  {
+   "id": "2050874227",
+   "place_name": "그리다헤어 수유역점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 129
+  },
+  {
+   "id": "856414776",
+   "place_name": "살롱드채 헤어",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 137
+  }
+ ],
+ "ct-kkal-salon-apgujeong-rodeo-branch-hair-coloring": [
+  {
+   "id": "162686505",
+   "place_name": "준오헤어",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 8
+  },
+  {
+   "id": "568818101",
+   "place_name": "인플러",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 19
+  },
+  {
+   "id": "1220329847",
+   "place_name": "디엘헤어",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 24
+  },
+  {
+   "id": "1824060655",
+   "place_name": "루아붙임머리",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 33
+  },
+  {
+   "id": "1957568783",
+   "place_name": "커브",
+   "category_name": "가정,생활 > 미용 > 미용실 > 바버샵",
+   "distance": 37
+  },
+  {
+   "id": "2078929335",
+   "place_name": "꾸아트헤어 압구정로데오역점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 42
+  },
+  {
+   "id": "1462320234",
+   "place_name": "비하인드헤어 압구정로데오점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 48
+  },
+  {
+   "id": "25744490",
+   "place_name": "오랑헤어 압구정점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 63
+  },
+  {
+   "id": "1308609097",
+   "place_name": "말랑",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 67
+  },
+  {
+   "id": "1566397530",
+   "place_name": "초이진헤어 압구정로데오 본점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 72
+  },
+  {
+   "id": "1213140254",
+   "place_name": "류헤어",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 74
+  },
+  {
+   "id": "338018661",
+   "place_name": "아크미 압구정로데오점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 76
+  },
+  {
+   "id": "1565655626",
+   "place_name": "꾸띠원",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 78
+  },
+  {
+   "id": "1956836400",
+   "place_name": "위에뜰헤어 압구정점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 79
+  },
+  {
+   "id": "468328801",
+   "place_name": "아데르 압구정로데오점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 82
+  },
+  {
+   "id": "479883744",
+   "place_name": "말랑",
+   "category_name": "문화,예술 > 사진 > 사진관,포토스튜디오",
+   "distance": 67
+  }
+ ],
+ "ct-soonsoo-celebrity-hair-makeup-salon-in-cheongdam": [
+  {
+   "id": "1119851551",
+   "place_name": "뷰티진동희 청담점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 23
+  },
+  {
+   "id": "474896801",
+   "place_name": "에이바이봄",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 37
+  },
+  {
+   "id": "2145115522",
+   "place_name": "선화 청담",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 66
+  },
+  {
+   "id": "4822577",
+   "place_name": "더헤메스",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 85
+  },
+  {
+   "id": "1419592461",
+   "place_name": "아디도",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 101
+  },
+  {
+   "id": "1407891413",
+   "place_name": "조이187 스타점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 101
+  },
+  {
+   "id": "790084612",
+   "place_name": "재스트더힙",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 103
+  },
+  {
+   "id": "1846719932",
+   "place_name": "위닛블랙 더청담점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 106
+  },
+  {
+   "id": "979151063",
+   "place_name": "살롱드플로리",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 106
+  },
+  {
+   "id": "272463017",
+   "place_name": "아티시차차 청담",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 107
+  },
+  {
+   "id": "1238404358",
+   "place_name": "드레스먼",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 109
+  },
+  {
+   "id": "50297573",
+   "place_name": "더블앤",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 112
+  },
+  {
+   "id": "74920200",
+   "place_name": "더블유앤더블유",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 112
+  },
+  {
+   "id": "259256097",
+   "place_name": "한희철 H RECIPE 청담본점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 122
+  },
+  {
+   "id": "16790575",
+   "place_name": "케이엘",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 127
+  },
+  {
+   "id": "565757168",
+   "place_name": "룰루",
+   "category_name": "가정,생활 > 미용",
+   "distance": 82
+  }
+ ],
+ "ct-idhair-gangnam-branch-gangnam-k-perm-hair-salon": [
+  {
+   "id": "519396109",
+   "place_name": "아이디헤어 강남511타워점",
+   "category_name": "가정,생활 > 미용 > 미용실 > 아이디헤어",
+   "distance": 10
+  },
+  {
+   "id": "1524807068",
+   "place_name": "비엠커트전문점 강남점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 26
+  },
+  {
+   "id": "10611680",
+   "place_name": "실버박",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 28
+  },
+  {
+   "id": "1839529024",
+   "place_name": "비엠헤어다이스 8호점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 29
+  },
+  {
+   "id": "12733634",
+   "place_name": "아르헤헤어 강남역점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 35
+  },
+  {
+   "id": "309800008",
+   "place_name": "봄밤붙임머리 강남",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 123
+  },
+  {
+   "id": "26355177",
+   "place_name": "루디아뷰티 랩(메이크업헤어) X 어나더블랙(두피컬러링)",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 131
+  },
+  {
+   "id": "9886991",
+   "place_name": "예지미용실",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 131
+  },
+  {
+   "id": "1727805052",
+   "place_name": "모습",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 133
+  },
+  {
+   "id": "21828571",
+   "place_name": "임은주헤어살롱",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 138
+  },
+  {
+   "id": "27469430",
+   "place_name": "아이롱헤어엘티",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 138
+  },
+  {
+   "id": "844753097",
+   "place_name": "나인헤어",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 141
+  },
+  {
+   "id": "1268767144",
+   "place_name": "오니드헤어",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 141
+  },
+  {
+   "id": "1878417292",
+   "place_name": "뮤에이룸헤어",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 141
+  },
+  {
+   "id": "116872423",
+   "place_name": "데꼬헤살롱 강남점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 142
+  },
+  {
+   "id": "1264212149",
+   "place_name": "브롤리맨즈헤어",
+   "category_name": "가정,생활 > 이발소",
+   "distance": 134
+  }
+ ],
+ "ct-void-cheongdam-by-park-chul-makeup-salon": [
+  {
+   "id": "17338842",
+   "place_name": "보이드바이박철",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 4
+  },
+  {
+   "id": "1835859966",
+   "place_name": "빌라 보이드",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 4
+  },
+  {
+   "id": "11840483",
+   "place_name": "마샬 프랜차이즈코리아",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 10
+  },
+  {
+   "id": "12638446",
+   "place_name": "루체헤어",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 143
+  },
+  {
+   "id": "1428646725",
+   "place_name": "아베르미용실",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 149
+  },
+  {
+   "id": "16474130",
+   "place_name": "이문원헤어랩",
+   "category_name": "가정,생활 > 미용 > 두피,탈모관리",
+   "distance": 135
+  }
+ ],
+ "ct-rolling-jay-cheongdam-makeup": [
+  {
+   "id": "18781291",
+   "place_name": "라뷰티헤어",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 55
+  },
+  {
+   "id": "1333333919",
+   "place_name": "1981수헤어",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 73
+  },
+  {
+   "id": "1087835002",
+   "place_name": "나이스가이 프리미엄 논현점",
+   "category_name": "가정,생활 > 미용 > 미용실 > 나이스가이",
+   "distance": 141
+  },
+  {
+   "id": "1662568431",
+   "place_name": "리안헤어 강남논현아이파크점",
+   "category_name": "가정,생활 > 미용 > 미용실 > 리안헤어",
+   "distance": 145
+  },
+  {
+   "id": "935074815",
+   "place_name": "어니스트헤어",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 145
+  }
+ ],
+ "ct-cconte-apgujeong-rodeo-flagship-foreigner-friend": [
+  {
+   "id": "338018661",
+   "place_name": "아크미 압구정로데오점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 24
+  },
+  {
+   "id": "1956836400",
+   "place_name": "위에뜰헤어 압구정점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 24
+  },
+  {
+   "id": "1308609097",
+   "place_name": "말랑",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 40
+  },
+  {
+   "id": "1566397530",
+   "place_name": "초이진헤어 압구정로데오 본점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 40
+  },
+  {
+   "id": "1886264950",
+   "place_name": "준오헤어 압구정로데오2호점",
+   "category_name": "가정,생활 > 미용 > 미용실 > 준오헤어",
+   "distance": 44
+  },
+  {
+   "id": "162686505",
+   "place_name": "준오헤어",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 45
+  },
+  {
+   "id": "568818101",
+   "place_name": "인플러",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 46
+  },
+  {
+   "id": "12381514",
+   "place_name": "제오헤어 압구정점",
+   "category_name": "가정,생활 > 미용 > 미용실 > 제오헤어",
+   "distance": 49
+  },
+  {
+   "id": "1738181695",
+   "place_name": "비오른헤어 압구정로데오점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 50
+  },
+  {
+   "id": "1220329847",
+   "place_name": "디엘헤어",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 51
+  },
+  {
+   "id": "1957568783",
+   "place_name": "커브",
+   "category_name": "가정,생활 > 미용 > 미용실 > 바버샵",
+   "distance": 58
+  },
+  {
+   "id": "2078929335",
+   "place_name": "꾸아트헤어 압구정로데오역점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 60
+  },
+  {
+   "id": "2056456748",
+   "place_name": "타이퍼하우스 도산점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 62
+  },
+  {
+   "id": "447099921",
+   "place_name": "아티스타 압구정로데오점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 62
+  },
+  {
+   "id": "725496455",
+   "place_name": "해피니언 압구정로데오역점",
+   "category_name": "가정,생활 > 미용 > 미용실 > 해피니언",
+   "distance": 63
+  },
+  {
+   "id": "479883744",
+   "place_name": "말랑",
+   "category_name": "문화,예술 > 사진 > 사진관,포토스튜디오",
+   "distance": 40
+  }
+ ],
+ "ct-aknack-tool-cheongdam-branch": [
+  {
+   "id": "451084120",
+   "place_name": "어낵툴",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 0
+  },
+  {
+   "id": "4005951",
+   "place_name": "챠이 청담점",
+   "category_name": "가정,생활 > 미용 > 메이크업",
+   "distance": 12
+  },
+  {
+   "id": "1924368024",
+   "place_name": "오보테 청담점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 54
+  },
+  {
+   "id": "1499035113",
+   "place_name": "클라우티",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 85
+  },
+  {
+   "id": "1250236256",
+   "place_name": "메이븐",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 89
+  },
+  {
+   "id": "14093114",
+   "place_name": "애브뉴준오",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 137
+  },
+  {
+   "id": "398580950",
+   "place_name": "청담오케이성형외과의원 모발이식클리닉",
+   "category_name": "의료,건강 > 병원 > 성형외과",
+   "distance": 30
+  },
+  {
+   "id": "1127403675",
+   "place_name": "유림메이크업&헤어",
+   "category_name": "가정,생활 > 미용 > 메이크업",
+   "distance": 74
+  }
+ ],
+ "ct-ashu-gangnam-unisex-hair-salon-flat-rate-pricing": [
+  {
+   "id": "1357027684",
+   "place_name": "살롱애드",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 66
+  },
+  {
+   "id": "177644511",
+   "place_name": "살롱애드by유리",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 66
+  },
+  {
+   "id": "1120048152",
+   "place_name": "잎유&모어헤어",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 80
+  },
+  {
+   "id": "18326102",
+   "place_name": "헤어3115",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 102
+  },
+  {
+   "id": "658162639",
+   "place_name": "레미유 아르떼",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 111
+  },
+  {
+   "id": "1238930086",
+   "place_name": "120에비뉴&부치리",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 117
+  },
+  {
+   "id": "753307676",
+   "place_name": "더클라시",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 117
+  },
+  {
+   "id": "1235898956",
+   "place_name": "부치리",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 118
+  },
+  {
+   "id": "682791402",
+   "place_name": "하루이",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 138
+  }
+ ],
+ "ct-c-plot-gangnam-men-s-hair-salon": [
+  {
+   "id": "22251636",
+   "place_name": "준오헤어 삼성역점",
+   "category_name": "가정,생활 > 미용 > 미용실 > 준오헤어",
+   "distance": 132
+  }
+ ],
+ "ct-cheongdam-lovey-hair-makeup-salon": [
+  {
+   "id": "13114363",
+   "place_name": "엘로이",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 13
+  },
+  {
+   "id": "182942273",
+   "place_name": "쌤시크 블랙",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 19
+  },
+  {
+   "id": "712998403",
+   "place_name": "윤다",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 49
+  },
+  {
+   "id": "1730386585",
+   "place_name": "아나 바이 레이",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 63
+  },
+  {
+   "id": "11077400",
+   "place_name": "라움12",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 65
+  },
+  {
+   "id": "27549968",
+   "place_name": "모트헤어",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 66
+  },
+  {
+   "id": "973288219",
+   "place_name": "모스살롱",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 70
+  },
+  {
+   "id": "19148359",
+   "place_name": "커즈헤어",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 71
+  },
+  {
+   "id": "1192578648",
+   "place_name": "커뮌",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 81
+  },
+  {
+   "id": "802366246",
+   "place_name": "히나프",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 91
+  },
+  {
+   "id": "56268263",
+   "place_name": "사우트아뜰리에",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 98
+  },
+  {
+   "id": "1612253720",
+   "place_name": "조이187인스타",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 106
+  },
+  {
+   "id": "1880931661",
+   "place_name": "고바이씬",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 110
+  },
+  {
+   "id": "27391279",
+   "place_name": "알루 본점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 118
+  },
+  {
+   "id": "10911586",
+   "place_name": "헤어인러브",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 121
+  }
+ ],
+ "ct-coo-hair-gangnam-head-spa": [],
+ "ct-ecojardin-coex-samsung-branch-k-beauty-hair-make": [
+  {
+   "id": "2050638534",
+   "place_name": "헤어카페",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 72
+  },
+  {
+   "id": "1111955906",
+   "place_name": "하브삼성",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 132
+  },
+  {
+   "id": "1521393978",
+   "place_name": "발망헤어 현대백화점 무역센터점",
+   "category_name": "가정,생활 > 미용 > 화장품",
+   "distance": 131
+  }
+ ],
+ "ct-haut-beaute": [
+  {
+   "id": "1924368024",
+   "place_name": "오보테 청담점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 1
+  },
+  {
+   "id": "1250236256",
+   "place_name": "메이븐",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 39
+  },
+  {
+   "id": "1499035113",
+   "place_name": "클라우티",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 47
+  },
+  {
+   "id": "451084120",
+   "place_name": "어낵툴",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 54
+  },
+  {
+   "id": "4005951",
+   "place_name": "챠이 청담점",
+   "category_name": "가정,생활 > 미용 > 메이크업",
+   "distance": 66
+  },
+  {
+   "id": "14093114",
+   "place_name": "애브뉴준오",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 104
+  },
+  {
+   "id": "398580950",
+   "place_name": "청담오케이성형외과의원 모발이식클리닉",
+   "category_name": "의료,건강 > 병원 > 성형외과",
+   "distance": 54
+  },
+  {
+   "id": "1127403675",
+   "place_name": "유림메이크업&헤어",
+   "category_name": "가정,생활 > 미용 > 메이크업",
+   "distance": 84
+  }
+ ],
+ "ct-junohair-garden-gangnam-gu-office-station-branch": [
+  {
+   "id": "500954659",
+   "place_name": "준오헤어 가든강남구청역점",
+   "category_name": "가정,생활 > 미용 > 미용실 > 준오헤어",
+   "distance": 8
+  },
+  {
+   "id": "2056819878",
+   "place_name": "주노헤어",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 30
+  },
+  {
+   "id": "26934066",
+   "place_name": "프롬제이헤어살롱 강남구청역점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 33
+  },
+  {
+   "id": "17408385",
+   "place_name": "오성현살롱드에뜨알 논현점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 45
+  },
+  {
+   "id": "480504839",
+   "place_name": "초이진헤어 강남구청역점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 62
+  },
+  {
+   "id": "504231749",
+   "place_name": "비오른헤어 청담점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 79
+  },
+  {
+   "id": "277890681",
+   "place_name": "나나붙임머리",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 94
+  },
+  {
+   "id": "1634886864",
+   "place_name": "헤어벨류 강남점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 104
+  },
+  {
+   "id": "771488512",
+   "place_name": "큐피헤어위그",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 104
+  },
+  {
+   "id": "138551996",
+   "place_name": "이진헤어 강남점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 105
+  },
+  {
+   "id": "56170480",
+   "place_name": "Oh헤어 강남구청역점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 106
+  },
+  {
+   "id": "1421727225",
+   "place_name": "해피니언 강남구청 스타트점",
+   "category_name": "가정,생활 > 미용 > 미용실 > 해피니언",
+   "distance": 106
+  },
+  {
+   "id": "88899577",
+   "place_name": "벨리티헤어",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 121
+  },
+  {
+   "id": "2125632330",
+   "place_name": "롤링제이 청담",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 122
+  },
+  {
+   "id": "1487589066",
+   "place_name": "스페이스뷰티 강남청담점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 128
+  },
+  {
+   "id": "454940820",
+   "place_name": "이스타일메이크업",
+   "category_name": "가정,생활 > 미용 > 메이크업",
+   "distance": 75
+  }
+ ],
+ "ct-kangeun-gangnam-hair-makeup": [
+  {
+   "id": "1251035707",
+   "place_name": "강은",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 0
+  },
+  {
+   "id": "1609850156",
+   "place_name": "블레스바버샵",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 16
+  }
+ ],
+ "ct-kkal-salon-gangnam-station-branch-hair-color-spe": [
+  {
+   "id": "717160325",
+   "place_name": "에이브릿 강남점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 35
+  },
+  {
+   "id": "701663480",
+   "place_name": "앙벨르",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 52
+  },
+  {
+   "id": "1158249869",
+   "place_name": "헤어더뷰 강남스트리트점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 56
+  },
+  {
+   "id": "350327563",
+   "place_name": "해피니언 강남역 시크릿점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 58
+  },
+  {
+   "id": "26625700",
+   "place_name": "쿠헤어",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 70
+  },
+  {
+   "id": "11147801",
+   "place_name": "준오헤어 강남역1호점",
+   "category_name": "가정,생활 > 미용 > 미용실 > 준오헤어",
+   "distance": 78
+  },
+  {
+   "id": "64035411",
+   "place_name": "온야드 강남점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 79
+  },
+  {
+   "id": "11834565",
+   "place_name": "이철헤어커커 강남점",
+   "category_name": "가정,생활 > 미용 > 미용실 > 이철헤어커커",
+   "distance": 86
+  },
+  {
+   "id": "19109647",
+   "place_name": "샬롱드에르모스",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 99
+  },
+  {
+   "id": "756633142",
+   "place_name": "디탐헤어 강남본점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 106
+  },
+  {
+   "id": "1728807236",
+   "place_name": "아르결 강남점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 140
+  },
+  {
+   "id": "807039421",
+   "place_name": "제이디로얄 맨즈헤어 강남점",
+   "category_name": "가정,생활 > 이발소",
+   "distance": 60
+  },
+  {
+   "id": "27476193",
+   "place_name": "키썸메이크업",
+   "category_name": "가정,생활 > 미용 > 메이크업",
+   "distance": 90
+  },
+  {
+   "id": "10344256",
+   "place_name": "메이크업하이힐",
+   "category_name": "가정,생활 > 미용 > 메이크업",
+   "distance": 103
+  }
+ ],
+ "ct-lee-kyung-min-foret-cheongdam-headquarters": [
+  {
+   "id": "8042352",
+   "place_name": "이경민포레 청담본점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 2
+  },
+  {
+   "id": "170137073",
+   "place_name": "유니크헤어",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 23
+  },
+  {
+   "id": "1907917890",
+   "place_name": "헤츠",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 31
+  },
+  {
+   "id": "1508992915",
+   "place_name": "트루핏앤힐",
+   "category_name": "가정,생활 > 미용 > 미용실 > 바버샵",
+   "distance": 32
+  },
+  {
+   "id": "905523789",
+   "place_name": "H스타일헤어살롱 에비뉴청담점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 45
+  },
+  {
+   "id": "1374637851",
+   "place_name": "대얼씨",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 56
+  },
+  {
+   "id": "610220091",
+   "place_name": "아브라보",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 67
+  },
+  {
+   "id": "1527211741",
+   "place_name": "다교 청담점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 80
+  },
+  {
+   "id": "582100032",
+   "place_name": "다교 청담본점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 80
+  },
+  {
+   "id": "1946179226",
+   "place_name": "청담라이온헤어",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 88
+  },
+  {
+   "id": "123220652",
+   "place_name": "오웨이 청담퍼스트라운지",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 91
+  },
+  {
+   "id": "1542739798",
+   "place_name": "해피니언 청담점",
+   "category_name": "가정,생활 > 미용 > 미용실 > 해피니언",
+   "distance": 96
+  },
+  {
+   "id": "505307814",
+   "place_name": "드 이희",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 97
+  },
+  {
+   "id": "1625128463",
+   "place_name": "살롱드르몽",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 106
+  },
+  {
+   "id": "17688445",
+   "place_name": "컨셉피 청담본점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 109
+  }
+ ],
+ "ct-moclock-gangnam-main-branch-head-spa": [],
+ "ct-more-on-hair-gangnam-branch": [
+  {
+   "id": "498741431",
+   "place_name": "모어온헤어 강남점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 5
+  },
+  {
+   "id": "1688549142",
+   "place_name": "이훈ALL30000 강남점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 97
+  },
+  {
+   "id": "14879778",
+   "place_name": "씨에이치오피헤어 신논현직영점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 120
+  },
+  {
+   "id": "1197985898",
+   "place_name": "빈샵",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 141
+  }
+ ],
+ "ct-more-on-hair-gangnam-main-branch": [
+  {
+   "id": "148995680",
+   "place_name": "모어온헤어 본점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 0
+  },
+  {
+   "id": "994163746",
+   "place_name": "제이디아트헤어 신논현점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 13
+  },
+  {
+   "id": "19101489",
+   "place_name": "인존뷰티탑",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 46
+  },
+  {
+   "id": "1201948669",
+   "place_name": "차심 신논현",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 64
+  },
+  {
+   "id": "316263223",
+   "place_name": "매스티지헤어 강남점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 78
+  },
+  {
+   "id": "1711532803",
+   "place_name": "닥터포헤어 케어랩 강남본점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 88
+  },
+  {
+   "id": "930163801",
+   "place_name": "헤어바이로",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 94
+  },
+  {
+   "id": "1688549142",
+   "place_name": "이훈ALL30000 강남점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 99
+  },
+  {
+   "id": "630594899",
+   "place_name": "아스카헤어 강남점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 128
+  },
+  {
+   "id": "18481308",
+   "place_name": "탈모닥터모생모두피 신논현점",
+   "category_name": "가정,생활 > 미용 > 두피,탈모관리",
+   "distance": 64
+  }
+ ],
+ "ct-mosh-gangnam-branch-k-trend-coloring-women-frien": [
+  {
+   "id": "1700138652",
+   "place_name": "모쉬 강남점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 5
+  },
+  {
+   "id": "456035215",
+   "place_name": "해피니언 강남역미라클점",
+   "category_name": "가정,생활 > 미용 > 미용실 > 해피니언",
+   "distance": 29
+  },
+  {
+   "id": "16038024",
+   "place_name": "비욘드스타일티",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 48
+  },
+  {
+   "id": "156767151",
+   "place_name": "맨드살롱 강남점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 53
+  },
+  {
+   "id": "243692308",
+   "place_name": "해피니언 강남본점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 60
+  },
+  {
+   "id": "1928940868",
+   "place_name": "희올헤어 본점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 64
+  },
+  {
+   "id": "957667406",
+   "place_name": "킨헤어 강남살롱점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 67
+  },
+  {
+   "id": "1881782028",
+   "place_name": "엥비떼헤어 신논현점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 73
+  },
+  {
+   "id": "21936837",
+   "place_name": "포레스트 신논현역점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 79
+  },
+  {
+   "id": "1897155794",
+   "place_name": "살롱에이 강남점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 84
+  },
+  {
+   "id": "25629489",
+   "place_name": "CHOP헤어 강남직영점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 89
+  },
+  {
+   "id": "906511209",
+   "place_name": "샵오오티디",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 90
+  },
+  {
+   "id": "1675489678",
+   "place_name": "어몽헤어 신논현점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 92
+  },
+  {
+   "id": "2142933663",
+   "place_name": "반함헤어",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 96
+  },
+  {
+   "id": "1172513002",
+   "place_name": "데이미헤어",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 100
+  },
+  {
+   "id": "547658784",
+   "place_name": "오키드",
+   "category_name": "가정,생활 > 미용 > 메이크업",
+   "distance": 90
+  }
+ ],
+ "ct-olly-shop-cheongdam-hair-makeup-salon": [
+  {
+   "id": "36496932",
+   "place_name": "올리 본점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 0
+  },
+  {
+   "id": "16790575",
+   "place_name": "케이엘",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 20
+  },
+  {
+   "id": "242767944",
+   "place_name": "설영",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 27
+  },
+  {
+   "id": "1238404358",
+   "place_name": "드레스먼",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 41
+  },
+  {
+   "id": "17688445",
+   "place_name": "컨셉피 청담본점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 48
+  },
+  {
+   "id": "50297573",
+   "place_name": "더블앤",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 50
+  },
+  {
+   "id": "74920200",
+   "place_name": "더블유앤더블유",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 50
+  },
+  {
+   "id": "1407891413",
+   "place_name": "조이187 스타점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 53
+  },
+  {
+   "id": "2042501503",
+   "place_name": "H레시피",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 73
+  },
+  {
+   "id": "610220091",
+   "place_name": "아브라보",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 75
+  },
+  {
+   "id": "1419592461",
+   "place_name": "아디도",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 76
+  },
+  {
+   "id": "1625128463",
+   "place_name": "살롱드르몽",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 82
+  },
+  {
+   "id": "1374637851",
+   "place_name": "대얼씨",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 89
+  },
+  {
+   "id": "474896801",
+   "place_name": "에이바이봄",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 110
+  },
+  {
+   "id": "26841416",
+   "place_name": "컬렉션위드챨리정",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 116
+  },
+  {
+   "id": "565757168",
+   "place_name": "룰루",
+   "category_name": "가정,생활 > 미용",
+   "distance": 74
+  },
+  {
+   "id": "12783189",
+   "place_name": "헤어플러스",
+   "category_name": "가정,생활 > 미용 > 두피,탈모관리",
+   "distance": 91
+  }
+ ],
+ "ct-onyad-gangnam-branch-personal-consulting-hair-sa": [
+  {
+   "id": "64035411",
+   "place_name": "온야드 강남점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 2
+  },
+  {
+   "id": "350327563",
+   "place_name": "해피니언 강남역 시크릿점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 40
+  },
+  {
+   "id": "19109647",
+   "place_name": "샬롱드에르모스",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 47
+  },
+  {
+   "id": "717160325",
+   "place_name": "에이브릿 강남점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 58
+  },
+  {
+   "id": "26625700",
+   "place_name": "쿠헤어",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 59
+  },
+  {
+   "id": "11834565",
+   "place_name": "이철헤어커커 강남점",
+   "category_name": "가정,생활 > 미용 > 미용실 > 이철헤어커커",
+   "distance": 117
+  },
+  {
+   "id": "701663480",
+   "place_name": "앙벨르",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 121
+  },
+  {
+   "id": "1158249869",
+   "place_name": "헤어더뷰 강남스트리트점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 139
+  },
+  {
+   "id": "27476193",
+   "place_name": "키썸메이크업",
+   "category_name": "가정,생활 > 미용 > 메이크업",
+   "distance": 93
+  },
+  {
+   "id": "10344256",
+   "place_name": "메이크업하이힐",
+   "category_name": "가정,생활 > 미용 > 메이크업",
+   "distance": 122
+  },
+  {
+   "id": "807039421",
+   "place_name": "제이디로얄 맨즈헤어 강남점",
+   "category_name": "가정,생활 > 이발소",
+   "distance": 137
+  }
+ ],
+ "ct-orare-cheongdam-hair-makeup-salon": [
+  {
+   "id": "963283448",
+   "place_name": "오레어",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 1
+  },
+  {
+   "id": "16847936",
+   "place_name": "에끌라",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 41
+  },
+  {
+   "id": "1148737799",
+   "place_name": "헤어바이강",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 47
+  },
+  {
+   "id": "2012763893",
+   "place_name": "플러피애견미용실",
+   "category_name": "가정,생활 > 반려동물 > 반려동물미용",
+   "distance": 48
+  },
+  {
+   "id": "476670300",
+   "place_name": "홍미",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 59
+  },
+  {
+   "id": "642466771",
+   "place_name": "오버마스",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 72
+  },
+  {
+   "id": "1505861129",
+   "place_name": "이유",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 80
+  },
+  {
+   "id": "12760245",
+   "place_name": "남경희스타일웍스",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 90
+  },
+  {
+   "id": "1641962360",
+   "place_name": "슈이 청담",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 123
+  },
+  {
+   "id": "1350659227",
+   "place_name": "밋큐트 청담본점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 135
+  },
+  {
+   "id": "1045026310",
+   "place_name": "라라피엠",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 136
+  },
+  {
+   "id": "370273779",
+   "place_name": "희원헤어&메이크업 청담점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 136
+  },
+  {
+   "id": "1914880777",
+   "place_name": "엠유비유티샵",
+   "category_name": "가정,생활 > 미용 > 메이크업",
+   "distance": 47
+  },
+  {
+   "id": "1455345488",
+   "place_name": "플럼헤어메이크업스튜디오",
+   "category_name": "가정,생활 > 미용 > 메이크업",
+   "distance": 106
+  }
+ ],
+ "ct-park-jun-beauty-lab-cheongdam-station-branch": [
+  {
+   "id": "1599179685",
+   "place_name": "라르크 앙 시엘 본점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 76
+  },
+  {
+   "id": "1259214191",
+   "place_name": "프린 청담점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 81
+  },
+  {
+   "id": "561813190",
+   "place_name": "삼성동미용실",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 125
+  }
+ ],
+ "ct-personalized-hair-color-head-spa-experts-texture": [
+  {
+   "id": "337168479",
+   "place_name": "텍스처 압구정로데오점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 12
+  },
+  {
+   "id": "935220686",
+   "place_name": "리챠드프로헤어 압구정점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 24
+  },
+  {
+   "id": "7906355",
+   "place_name": "뷰티살롱 0809더클래식점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 36
+  },
+  {
+   "id": "144837499",
+   "place_name": "이라헤어",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 60
+  },
+  {
+   "id": "1461571980",
+   "place_name": "너드맨즈헤어",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 60
+  },
+  {
+   "id": "26520746",
+   "place_name": "킹스턴맨즈헤어 압구정로데오본점",
+   "category_name": "가정,생활 > 미용 > 미용실 > 바버샵",
+   "distance": 70
+  },
+  {
+   "id": "2065843563",
+   "place_name": "로블리샵 강남점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 75
+  },
+  {
+   "id": "1542111176",
+   "place_name": "에뮤EMU붙임머리",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 76
+  },
+  {
+   "id": "1533912034",
+   "place_name": "멈",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 81
+  },
+  {
+   "id": "1494879435",
+   "place_name": "더칼라라운지",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 92
+  },
+  {
+   "id": "671942845",
+   "place_name": "비젠트헤어",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 96
+  },
+  {
+   "id": "1491992986",
+   "place_name": "젠틀가이헤어샵",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 100
+  },
+  {
+   "id": "1960050521",
+   "place_name": "차홍룸 압구정점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 111
+  },
+  {
+   "id": "616282069",
+   "place_name": "해피니언 압구정플래그십",
+   "category_name": "가정,생활 > 미용 > 미용실 > 해피니언",
+   "distance": 114
+  },
+  {
+   "id": "1628188626",
+   "place_name": "이철헤어커커 마끼에",
+   "category_name": "가정,생활 > 미용 > 미용실 > 이철헤어커커",
+   "distance": 132
+  }
+ ],
+ "ct-rarien-gangnam-branch-aveda-hair-salon": [
+  {
+   "id": "1464314544",
+   "place_name": "살롱드얼루어",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 56
+  },
+  {
+   "id": "305983995",
+   "place_name": "헤어더뷰 강남점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 59
+  },
+  {
+   "id": "1304172948",
+   "place_name": "퍼스트제이헤어",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 86
+  },
+  {
+   "id": "1586215690",
+   "place_name": "제이스타일플라워 강남점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 109
+  },
+  {
+   "id": "1029786547",
+   "place_name": "위아피스 헤어 강남점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 137
+  },
+  {
+   "id": "1040266420",
+   "place_name": "엣더제이 헤어라운지",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 137
+  },
+  {
+   "id": "943171919",
+   "place_name": "키튼헤어&메이크업",
+   "category_name": "가정,생활 > 미용 > 메이크업",
+   "distance": 43
+  },
+  {
+   "id": "1215706878",
+   "place_name": "엣더제이메이크업",
+   "category_name": "가정,생활 > 미용 > 메이크업",
+   "distance": 137
+  }
+ ],
+ "ct-riahn-hair-premium-apgujeong-rodeo-branch": [
+  {
+   "id": "815454197",
+   "place_name": "리안헤어 블랙 압구정로데오점",
+   "category_name": "가정,생활 > 미용 > 미용실 > 리안헤어",
+   "distance": 2
+  },
+  {
+   "id": "1643763578",
+   "place_name": "그날",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 24
+  },
+  {
+   "id": "1025406157",
+   "place_name": "얼웨이즈",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 48
+  },
+  {
+   "id": "511593198",
+   "place_name": "유밍",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 64
+  },
+  {
+   "id": "9468865",
+   "place_name": "최봉관프로헤어",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 65
+  },
+  {
+   "id": "9613342",
+   "place_name": "헤어마지코 본점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 66
+  },
+  {
+   "id": "25744490",
+   "place_name": "오랑헤어 압구정점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 85
+  },
+  {
+   "id": "1131419959",
+   "place_name": "바버브로",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 93
+  },
+  {
+   "id": "1213140254",
+   "place_name": "류헤어",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 95
+  },
+  {
+   "id": "1462320234",
+   "place_name": "비하인드헤어 압구정로데오점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 98
+  },
+  {
+   "id": "2078929335",
+   "place_name": "꾸아트헤어 압구정로데오역점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 102
+  },
+  {
+   "id": "1957568783",
+   "place_name": "커브",
+   "category_name": "가정,생활 > 미용 > 미용실 > 바버샵",
+   "distance": 103
+  },
+  {
+   "id": "1307055829",
+   "place_name": "해피니언 압구정 엘",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 110
+  },
+  {
+   "id": "1220329847",
+   "place_name": "디엘헤어",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 110
+  },
+  {
+   "id": "2023312782",
+   "place_name": "이아이에",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 113
+  },
+  {
+   "id": "1546428822",
+   "place_name": "프롬헤어메이크업",
+   "category_name": "가정,생활 > 미용 > 메이크업",
+   "distance": 96
+  }
+ ],
+ "ct-salon-a-samsung-customized-cut-perm-hair-salon-w": [
+  {
+   "id": "1662568431",
+   "place_name": "리안헤어 강남논현아이파크점",
+   "category_name": "가정,생활 > 미용 > 미용실 > 리안헤어",
+   "distance": 107
+  },
+  {
+   "id": "935074815",
+   "place_name": "어니스트헤어",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 107
+  },
+  {
+   "id": "1023035374",
+   "place_name": "성수미용실",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 113
+  },
+  {
+   "id": "2071616693",
+   "place_name": "주니헤어",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 126
+  }
+ ],
+ "ct-scatter-lounge-premium-head-spa-skin-care-in-gan": [
+  {
+   "id": "1736390344",
+   "place_name": "스카터 라운지 강남 본점",
+   "category_name": "가정,생활 > 미용 > 두피,탈모관리",
+   "distance": 2
+  }
+ ],
+ "ct-vin-hair-makeup-salon": [
+  {
+   "id": "579639829",
+   "place_name": "노멀샵",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 50
+  },
+  {
+   "id": "26326020",
+   "place_name": "드엔",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 60
+  },
+  {
+   "id": "1657737322",
+   "place_name": "르솝",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 61
+  },
+  {
+   "id": "1537122060",
+   "place_name": "단헤어디자인 청담플래그쉽",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 77
+  },
+  {
+   "id": "17627094",
+   "place_name": "컬처앤네이처 본점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 84
+  },
+  {
+   "id": "372473899",
+   "place_name": "오직헤어살롱 청담점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 108
+  },
+  {
+   "id": "1162693818",
+   "place_name": "유란",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 110
+  },
+  {
+   "id": "14567709",
+   "place_name": "청담111",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 129
+  },
+  {
+   "id": "2061717086",
+   "place_name": "Z헤어",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 136
+  },
+  {
+   "id": "20944070",
+   "place_name": "임영실",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 136
+  },
+  {
+   "id": "1612253720",
+   "place_name": "조이187인스타",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 137
+  },
+  {
+   "id": "1217684715",
+   "place_name": "호수도산",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 141
+  },
+  {
+   "id": "27440741",
+   "place_name": "제이콥뷰티",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 144
+  },
+  {
+   "id": "27292138",
+   "place_name": "퓨에르옴므",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 145
+  },
+  {
+   "id": "21878079",
+   "place_name": "빈헤어앤메이크업 본점",
+   "category_name": "가정,생활 > 미용",
+   "distance": 2
+  },
+  {
+   "id": "286729905",
+   "place_name": "청담어썸",
+   "category_name": "가정,생활 > 미용 > 메이크업",
+   "distance": 98
+  }
+ ],
+ "ct-onyad-apgujeong-rodeo-branch-hair-salon-with-per": [
+  {
+   "id": "1042391200",
+   "place_name": "온야드 압구정로데오점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 0
+  },
+  {
+   "id": "1806922684",
+   "place_name": "모아위",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 23
+  },
+  {
+   "id": "27191915",
+   "place_name": "스틸엔스톤",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 23
+  },
+  {
+   "id": "27437739",
+   "place_name": "류현주헤어",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 44
+  },
+  {
+   "id": "1943217228",
+   "place_name": "모어온헤어 도산공원점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 61
+  },
+  {
+   "id": "274284069",
+   "place_name": "인디비주얼",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 61
+  },
+  {
+   "id": "1975520178",
+   "place_name": "디오니",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 73
+  },
+  {
+   "id": "836760711",
+   "place_name": "에스토브",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 73
+  },
+  {
+   "id": "18225079",
+   "place_name": "디오드뷰티살롱 청담점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 73
+  },
+  {
+   "id": "15731967",
+   "place_name": "클래식",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 74
+  },
+  {
+   "id": "642730390",
+   "place_name": "칼라빈",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 88
+  },
+  {
+   "id": "1726994612",
+   "place_name": "피피피",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 91
+  },
+  {
+   "id": "2023312782",
+   "place_name": "이아이에",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 94
+  },
+  {
+   "id": "1436640840",
+   "place_name": "이븐비 강남점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 102
+  },
+  {
+   "id": "80739539",
+   "place_name": "이븐비 강남점evenbe",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 102
+  }
+ ],
+ "ct-flair-beauty-salon-gongdeok-makeup-head-spa": [
+  {
+   "id": "15736739",
+   "place_name": "베리따헤어",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 86
+  },
+  {
+   "id": "464785856",
+   "place_name": "마리&두헤어 공덕본점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 135
+  },
+  {
+   "id": "193918623",
+   "place_name": "플레어",
+   "category_name": "가정,생활 > 미용 > 메이크업",
+   "distance": 135
+  }
+ ],
+ "ct-shim-mapo-gongdeok-branch-hair": [
+  {
+   "id": "828354018",
+   "place_name": "쉼 마포공덕점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 0
+  },
+  {
+   "id": "439595399",
+   "place_name": "아우라헤어",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 33
+  },
+  {
+   "id": "24482544",
+   "place_name": "제오헤어 마포점",
+   "category_name": "가정,생활 > 미용 > 미용실 > 제오헤어",
+   "distance": 52
+  },
+  {
+   "id": "103612826",
+   "place_name": "제오헤어 마포공덕점",
+   "category_name": "가정,생활 > 미용 > 미용실 > 제오헤어",
+   "distance": 54
+  },
+  {
+   "id": "1006426240",
+   "place_name": "더 영주",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 54
+  },
+  {
+   "id": "548191363",
+   "place_name": "오이드헤어 공덕점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 54
+  },
+  {
+   "id": "1650269193",
+   "place_name": "살롱드미카 붙임머리 본점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 54
+  },
+  {
+   "id": "226546693",
+   "place_name": "보보헤어",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 100
+  },
+  {
+   "id": "56943788",
+   "place_name": "보그헤어 로윈마포공덕점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 101
+  },
+  {
+   "id": "1497925048",
+   "place_name": "살롱드로렌",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 106
+  },
+  {
+   "id": "27469319",
+   "place_name": "이니지오 마포역점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 114
+  },
+  {
+   "id": "9148388",
+   "place_name": "성심헤어갤러리",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 122
+  },
+  {
+   "id": "8057928",
+   "place_name": "자이헤어",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 131
+  },
+  {
+   "id": "16296096",
+   "place_name": "뷰티 언보그",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 131
+  },
+  {
+   "id": "1357181682",
+   "place_name": "봄헤어샾",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 138
+  }
+ ],
+ "ct-shim-mapo-gongdeok-branch-makeup": [
+  {
+   "id": "828354018",
+   "place_name": "쉼 마포공덕점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 0
+  },
+  {
+   "id": "439595399",
+   "place_name": "아우라헤어",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 33
+  },
+  {
+   "id": "24482544",
+   "place_name": "제오헤어 마포점",
+   "category_name": "가정,생활 > 미용 > 미용실 > 제오헤어",
+   "distance": 52
+  },
+  {
+   "id": "103612826",
+   "place_name": "제오헤어 마포공덕점",
+   "category_name": "가정,생활 > 미용 > 미용실 > 제오헤어",
+   "distance": 54
+  },
+  {
+   "id": "1006426240",
+   "place_name": "더 영주",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 54
+  },
+  {
+   "id": "548191363",
+   "place_name": "오이드헤어 공덕점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 54
+  },
+  {
+   "id": "1650269193",
+   "place_name": "살롱드미카 붙임머리 본점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 54
+  },
+  {
+   "id": "226546693",
+   "place_name": "보보헤어",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 100
+  },
+  {
+   "id": "56943788",
+   "place_name": "보그헤어 로윈마포공덕점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 101
+  },
+  {
+   "id": "1497925048",
+   "place_name": "살롱드로렌",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 106
+  },
+  {
+   "id": "27469319",
+   "place_name": "이니지오 마포역점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 114
+  },
+  {
+   "id": "9148388",
+   "place_name": "성심헤어갤러리",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 122
+  },
+  {
+   "id": "8057928",
+   "place_name": "자이헤어",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 131
+  },
+  {
+   "id": "16296096",
+   "place_name": "뷰티 언보그",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 131
+  },
+  {
+   "id": "1357181682",
+   "place_name": "봄헤어샾",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 138
+  }
+ ],
+ "ct-exclusive-offer-hosu-dosan-konkuk-seongsu-branch": [
+  {
+   "id": "815701883",
+   "place_name": "에르아룸",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 15
+  },
+  {
+   "id": "1007653698",
+   "place_name": "차심 성수",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 99
+  }
+ ],
+ "ct-wellkin-scalp-clinique-jongno-branch-professiona": [
+  {
+   "id": "13577772",
+   "place_name": "웰킨 서울종로점",
+   "category_name": "가정,생활 > 미용 > 두피,탈모관리 > 웰킨",
+   "distance": 0
+  }
+ ],
+ "ct-ravi-hair-hongdae-main-branch": [
+  {
+   "id": "13138973",
+   "place_name": "라비헤어 홍대본점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 7
+  },
+  {
+   "id": "1493367548",
+   "place_name": "카이정헤어 마포서교점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 13
+  },
+  {
+   "id": "1432325051",
+   "place_name": "모노톤",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 31
+  },
+  {
+   "id": "846275512",
+   "place_name": "에토바버샵",
+   "category_name": "가정,생활 > 미용 > 미용실 > 바버샵",
+   "distance": 88
+  },
+  {
+   "id": "841473332",
+   "place_name": "온리유헤어",
+   "category_name": "가정,생활 > 미용 > 미용실 > 바버샵",
+   "distance": 99
+  },
+  {
+   "id": "1912202048",
+   "place_name": "데이민 플래그십",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 116
+  },
+  {
+   "id": "1994615201",
+   "place_name": "데이민모먼트",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 121
+  },
+  {
+   "id": "20745782",
+   "place_name": "여은미헤어샾",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 123
+  },
+  {
+   "id": "1708437217",
+   "place_name": "렉터 서울",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 128
+  },
+  {
+   "id": "1303152443",
+   "place_name": "이토",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 137
+  },
+  {
+   "id": "1251334971",
+   "place_name": "샵꽁뜨 홍대합정역점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 145
+  },
+  {
+   "id": "8015593",
+   "place_name": "올헤어갤러리",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 146
+  },
+  {
+   "id": "335268868",
+   "place_name": "아데르헤어",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 148
+  },
+  {
+   "id": "900254481",
+   "place_name": "스웨거 바버숍",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 149
+  },
+  {
+   "id": "1399247331",
+   "place_name": "데이포유 홍대점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 149
+  }
+ ],
+ "ct-cconte-hongdae-yeonam-branch-color-specialist-ha": [
+  {
+   "id": "1984691656",
+   "place_name": "살롱드혜윰 홍대입구역점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 47
+  },
+  {
+   "id": "11842849",
+   "place_name": "리안헤어 홍대점",
+   "category_name": "가정,생활 > 미용 > 미용실 > 리안헤어",
+   "distance": 55
+  },
+  {
+   "id": "1855026613",
+   "place_name": "제오헤어 홍대점",
+   "category_name": "가정,생활 > 미용 > 미용실 > 제오헤어",
+   "distance": 93
+  },
+  {
+   "id": "17133983",
+   "place_name": "에떼르넬헤어살롱 홍대점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 94
+  },
+  {
+   "id": "394158432",
+   "place_name": "붙이다니 홍대점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 99
+  },
+  {
+   "id": "1627393229",
+   "place_name": "유니브",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 105
+  },
+  {
+   "id": "1876339246",
+   "place_name": "형D 머리방",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 105
+  },
+  {
+   "id": "1135756813",
+   "place_name": "더리아",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 105
+  },
+  {
+   "id": "777852767",
+   "place_name": "무릇서울",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 105
+  },
+  {
+   "id": "1867280314",
+   "place_name": "아데르 홍대점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 105
+  },
+  {
+   "id": "1269499366",
+   "place_name": "아데르 홍대3호점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 105
+  },
+  {
+   "id": "248162306",
+   "place_name": "디엑스헤어",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 107
+  },
+  {
+   "id": "216256537",
+   "place_name": "바이디",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 108
+  },
+  {
+   "id": "794092936",
+   "place_name": "하우스뱅 아데르홍대점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 108
+  },
+  {
+   "id": "863720658",
+   "place_name": "에이아킨 홍대본점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 122
+  }
+ ],
+ "ct-cconte-seogyo-branch-english-speaking-hair-color": [
+  {
+   "id": "1413749046",
+   "place_name": "샵꽁뜨 홍대서교점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 6
+  },
+  {
+   "id": "1134290726",
+   "place_name": "순시키헤어 한옥점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 33
+  },
+  {
+   "id": "45889675",
+   "place_name": "더데이즈헤어 홍대점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 43
+  },
+  {
+   "id": "2055613508",
+   "place_name": "로이드밤 홍대점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 59
+  },
+  {
+   "id": "682044910",
+   "place_name": "에이치헤어룸",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 59
+  },
+  {
+   "id": "2085089177",
+   "place_name": "하다비",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 64
+  },
+  {
+   "id": "216256537",
+   "place_name": "바이디",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 98
+  },
+  {
+   "id": "794092936",
+   "place_name": "하우스뱅 아데르홍대점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 99
+  },
+  {
+   "id": "248162306",
+   "place_name": "디엑스헤어",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 100
+  },
+  {
+   "id": "1867280314",
+   "place_name": "아데르 홍대점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 103
+  },
+  {
+   "id": "1269499366",
+   "place_name": "아데르 홍대3호점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 103
+  },
+  {
+   "id": "1627393229",
+   "place_name": "유니브",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 103
+  },
+  {
+   "id": "1876339246",
+   "place_name": "형D 머리방",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 103
+  },
+  {
+   "id": "1135756813",
+   "place_name": "더리아",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 103
+  },
+  {
+   "id": "777852767",
+   "place_name": "무릇서울",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 103
+  }
+ ],
+ "ct-special-offer-lee-kyung-min-foret-hongdae-branch": [
+  {
+   "id": "18662530",
+   "place_name": "이경민포레 홍대점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 1
+  },
+  {
+   "id": "1214787643",
+   "place_name": "매직팩토리",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 73
+  },
+  {
+   "id": "22731526",
+   "place_name": "가온헤어",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 77
+  },
+  {
+   "id": "569610750",
+   "place_name": "비헤어샵",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 93
+  },
+  {
+   "id": "254808999",
+   "place_name": "유니크바이 합정점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 93
+  },
+  {
+   "id": "458008158",
+   "place_name": "헤이메이",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 106
+  },
+  {
+   "id": "1965685739",
+   "place_name": "에이치앤헤어",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 117
+  },
+  {
+   "id": "1717233039",
+   "place_name": "그레",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 124
+  },
+  {
+   "id": "486471829",
+   "place_name": "누레터",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 130
+  },
+  {
+   "id": "16647422",
+   "place_name": "머리하는날",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 131
+  }
+ ],
+ "ct-aceumdu-by-soonsiki-hair": [
+  {
+   "id": "1134290726",
+   "place_name": "순시키헤어 한옥점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 2
+  },
+  {
+   "id": "45889675",
+   "place_name": "더데이즈헤어 홍대점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 23
+  },
+  {
+   "id": "1413749046",
+   "place_name": "샵꽁뜨 홍대서교점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 35
+  },
+  {
+   "id": "682044910",
+   "place_name": "에이치헤어룸",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 54
+  },
+  {
+   "id": "2085089177",
+   "place_name": "하다비",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 56
+  },
+  {
+   "id": "2055613508",
+   "place_name": "로이드밤 홍대점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 59
+  },
+  {
+   "id": "216256537",
+   "place_name": "바이디",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 67
+  },
+  {
+   "id": "794092936",
+   "place_name": "하우스뱅 아데르홍대점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 68
+  },
+  {
+   "id": "248162306",
+   "place_name": "디엑스헤어",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 69
+  },
+  {
+   "id": "1867280314",
+   "place_name": "아데르 홍대점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 72
+  },
+  {
+   "id": "1269499366",
+   "place_name": "아데르 홍대3호점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 72
+  },
+  {
+   "id": "1627393229",
+   "place_name": "유니브",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 72
+  },
+  {
+   "id": "1876339246",
+   "place_name": "형D 머리방",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 72
+  },
+  {
+   "id": "1135756813",
+   "place_name": "더리아",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 72
+  },
+  {
+   "id": "777852767",
+   "place_name": "무릇서울",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 72
+  }
+ ],
+ "ct-am-ton-hongdae-branch": [
+  {
+   "id": "1979815911",
+   "place_name": "도어 서교점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 24
+  },
+  {
+   "id": "1413749046",
+   "place_name": "샵꽁뜨 홍대서교점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 76
+  },
+  {
+   "id": "335268868",
+   "place_name": "아데르헤어",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 82
+  },
+  {
+   "id": "976098883",
+   "place_name": "우아한헤어 홍대서교점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 83
+  },
+  {
+   "id": "682044910",
+   "place_name": "에이치헤어룸",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 98
+  },
+  {
+   "id": "2085089177",
+   "place_name": "하다비",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 102
+  },
+  {
+   "id": "45889675",
+   "place_name": "더데이즈헤어 홍대점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 110
+  },
+  {
+   "id": "1134290726",
+   "place_name": "순시키헤어 한옥점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 113
+  },
+  {
+   "id": "8015593",
+   "place_name": "올헤어갤러리",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 127
+  },
+  {
+   "id": "2055613508",
+   "place_name": "로이드밤 홍대점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 130
+  },
+  {
+   "id": "415552131",
+   "place_name": "허지회관",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 138
+  },
+  {
+   "id": "1399247331",
+   "place_name": "데이포유 홍대점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 141
+  },
+  {
+   "id": "26952189",
+   "place_name": "호시헤어",
+   "category_name": "가정,생활 > 미용 > 가발",
+   "distance": 92
+  },
+  {
+   "id": "2115966617",
+   "place_name": "룩바이메이크업",
+   "category_name": "가정,생활 > 미용 > 메이크업",
+   "distance": 113
+  },
+  {
+   "id": "1493316386",
+   "place_name": "HEYHAE붙임머리",
+   "category_name": "가정,생활 > 미용 > 가발",
+   "distance": 141
+  }
+ ],
+ "ct-buddy-men-s-hair-hapjeong-branch": [
+  {
+   "id": "707404353",
+   "place_name": "버디맨즈헤어",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 0
+  },
+  {
+   "id": "2009468666",
+   "place_name": "애채 합정",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 43
+  },
+  {
+   "id": "1067942067",
+   "place_name": "어몽헤어 홍대합정점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 51
+  },
+  {
+   "id": "1767688091",
+   "place_name": "슬릭헤어살롱",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 51
+  },
+  {
+   "id": "12152186",
+   "place_name": "탄포포헤어 홍대점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 53
+  },
+  {
+   "id": "1514849144",
+   "place_name": "제오헤어 합정역점",
+   "category_name": "가정,생활 > 미용 > 미용실 > 제오헤어",
+   "distance": 59
+  },
+  {
+   "id": "26070546",
+   "place_name": "준오헤어 합정메세나폴리스점",
+   "category_name": "가정,생활 > 미용 > 미용실 > 준오헤어",
+   "distance": 78
+  },
+  {
+   "id": "229628880",
+   "place_name": "카이정헤어 합정메세나폴리스점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 83
+  },
+  {
+   "id": "7915423",
+   "place_name": "빈도해미장원",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 84
+  },
+  {
+   "id": "405746179",
+   "place_name": "오유헤어디자인 홍대점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 98
+  },
+  {
+   "id": "1602690097",
+   "place_name": "헤어퍼디",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 104
+  },
+  {
+   "id": "1630986148",
+   "place_name": "W아뜰리에 합정점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 110
+  },
+  {
+   "id": "1234887570",
+   "place_name": "꼼드쉐헤어살롱",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 117
+  },
+  {
+   "id": "93237943",
+   "place_name": "살롱드레드 홍대본점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 124
+  },
+  {
+   "id": "894522488",
+   "place_name": "르소피 합정",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 130
+  }
+ ],
+ "ct-ecojardin-hongdae-personal-color-makeup-head-spa": [
+  {
+   "id": "848371633",
+   "place_name": "니지(Nizi)",
+   "category_name": "가정,생활 > 미용 > 미용실 > 바버샵",
+   "distance": 13
+  },
+  {
+   "id": "944694923",
+   "place_name": "마모사이드",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 20
+  },
+  {
+   "id": "386948113",
+   "place_name": "에코쟈뎅 홍대점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 53
+  },
+  {
+   "id": "1883522928",
+   "place_name": "아르틱",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 79
+  },
+  {
+   "id": "20743952",
+   "place_name": "진미용실",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 90
+  },
+  {
+   "id": "1200515468",
+   "place_name": "젠트서울",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 100
+  },
+  {
+   "id": "408912361",
+   "place_name": "원웨이 홍대",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 140
+  },
+  {
+   "id": "176473807",
+   "place_name": "어헤스에살롱",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 147
+  },
+  {
+   "id": "59906213",
+   "place_name": "데이린",
+   "category_name": "가정,생활 > 미용 > 메이크업",
+   "distance": 13
+  },
+  {
+   "id": "27321412",
+   "place_name": "메이크업한다",
+   "category_name": "가정,생활 > 미용 > 메이크업",
+   "distance": 149
+  }
+ ],
+ "ct-juno-hair-hongdae-seogyo-tower-hair-color-bleach": [
+  {
+   "id": "217124752",
+   "place_name": "이이이이이 합정역점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 40
+  },
+  {
+   "id": "742360396",
+   "place_name": "도심 합정점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 42
+  },
+  {
+   "id": "1602690097",
+   "place_name": "헤어퍼디",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 45
+  },
+  {
+   "id": "27321289",
+   "place_name": "달콤한게으름",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 61
+  },
+  {
+   "id": "2093610787",
+   "place_name": "올랑 새로이점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 68
+  },
+  {
+   "id": "1234887570",
+   "place_name": "꼼드쉐헤어살롱",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 72
+  },
+  {
+   "id": "15865675",
+   "place_name": "헤어드헤레나",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 73
+  },
+  {
+   "id": "1514849144",
+   "place_name": "제오헤어 합정역점",
+   "category_name": "가정,생활 > 미용 > 미용실 > 제오헤어",
+   "distance": 87
+  },
+  {
+   "id": "894522488",
+   "place_name": "르소피 합정",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 89
+  },
+  {
+   "id": "12152186",
+   "place_name": "탄포포헤어 홍대점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 90
+  },
+  {
+   "id": "1676725047",
+   "place_name": "로위 합정점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 97
+  },
+  {
+   "id": "1412614357",
+   "place_name": "템드헤어룸 합정역점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 109
+  },
+  {
+   "id": "263426874",
+   "place_name": "유키니언 합정점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 121
+  },
+  {
+   "id": "1885519428",
+   "place_name": "어 리틀 빗 합정본점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 121
+  },
+  {
+   "id": "2009468666",
+   "place_name": "애채 합정",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 126
+  }
+ ],
+ "ct-lowe-hongik-univ-station-branch-healing-head-spa": [
+  {
+   "id": "83977741",
+   "place_name": "로위 홍대입구역점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 2
+  },
+  {
+   "id": "20027169",
+   "place_name": "헤어큐브 홍대역점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 64
+  },
+  {
+   "id": "2055613508",
+   "place_name": "로이드밤 홍대점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 69
+  },
+  {
+   "id": "2136037225",
+   "place_name": "준오헤어 홍대서교타워점",
+   "category_name": "가정,생활 > 미용 > 미용실 > 준오헤어",
+   "distance": 81
+  },
+  {
+   "id": "1196718777",
+   "place_name": "코이헤어",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 84
+  },
+  {
+   "id": "1134290726",
+   "place_name": "순시키헤어 한옥점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 127
+  },
+  {
+   "id": "1413749046",
+   "place_name": "샵꽁뜨 홍대서교점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 130
+  },
+  {
+   "id": "335268868",
+   "place_name": "아데르헤어",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 132
+  },
+  {
+   "id": "2099788429",
+   "place_name": "에이엠톤 홍대점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 142
+  },
+  {
+   "id": "216256537",
+   "place_name": "바이디",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 145
+  },
+  {
+   "id": "248162306",
+   "place_name": "디엑스헤어",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 148
+  },
+  {
+   "id": "1139798522",
+   "place_name": "리어드 본점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 148
+  },
+  {
+   "id": "794092936",
+   "place_name": "하우스뱅 아데르홍대점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 148
+  },
+  {
+   "id": "1270664139",
+   "place_name": "오늘메이크업",
+   "category_name": "가정,생활 > 미용 > 메이크업",
+   "distance": 67
+  }
+ ],
+ "ct-mareroom": [
+  {
+   "id": "396284664",
+   "place_name": "아티즘",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 25
+  },
+  {
+   "id": "863831341",
+   "place_name": "키시헤어숍",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 33
+  },
+  {
+   "id": "853173064",
+   "place_name": "풀앤드바이뷰티 홍대입구역점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 37
+  },
+  {
+   "id": "2035227030",
+   "place_name": "엘로엔",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 43
+  },
+  {
+   "id": "72508482",
+   "place_name": "오름헤어",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 52
+  },
+  {
+   "id": "87410385",
+   "place_name": "틴서울",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 55
+  },
+  {
+   "id": "1172364228",
+   "place_name": "멜카헤어",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 59
+  },
+  {
+   "id": "138165525",
+   "place_name": "머리합니다",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 59
+  },
+  {
+   "id": "1613575265",
+   "place_name": "핀헤어",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 66
+  },
+  {
+   "id": "30655901",
+   "place_name": "잭맨즈스튜디오",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 72
+  },
+  {
+   "id": "15104538",
+   "place_name": "미누",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 90
+  },
+  {
+   "id": "15972722",
+   "place_name": "퀸즈헤어",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 94
+  },
+  {
+   "id": "1947377755",
+   "place_name": "보잉 본점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 116
+  },
+  {
+   "id": "15496730",
+   "place_name": "서희헤어샵",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 119
+  },
+  {
+   "id": "2034206943",
+   "place_name": "살롱발레아쥬",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 149
+  },
+  {
+   "id": "1241051573",
+   "place_name": "치요붙임머리",
+   "category_name": "가정,생활 > 미용",
+   "distance": 26
+  },
+  {
+   "id": "126960988",
+   "place_name": "니어메이크업&붙임머리",
+   "category_name": "가정,생활 > 미용",
+   "distance": 61
+  },
+  {
+   "id": "1391575819",
+   "place_name": "앨리연남 메이크업",
+   "category_name": "가정,생활 > 미용 > 메이크업",
+   "distance": 88
+  }
+ ],
+ "ct-mosh-hongdae-k-trend-coloring-women-friendly-hai": [
+  {
+   "id": "18768573",
+   "place_name": "메이크어노이즈",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 7
+  },
+  {
+   "id": "294322691",
+   "place_name": "오뷰",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 12
+  },
+  {
+   "id": "12814878",
+   "place_name": "모즈헤어 아뜰리에점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 33
+  },
+  {
+   "id": "1725876889",
+   "place_name": "봄오후2시",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 61
+  },
+  {
+   "id": "10582451",
+   "place_name": "양리헤어 홍대점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 62
+  },
+  {
+   "id": "674440781",
+   "place_name": "노마즈",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 66
+  },
+  {
+   "id": "175222187",
+   "place_name": "쉬폰붙임머리&헤어 홍대점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 67
+  },
+  {
+   "id": "1271414969",
+   "place_name": "힐끗",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 69
+  },
+  {
+   "id": "1383262207",
+   "place_name": "쉬폰헤어테크",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 70
+  },
+  {
+   "id": "8987827",
+   "place_name": "미스터송헤어",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 78
+  },
+  {
+   "id": "2119159983",
+   "place_name": "헤리떼",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 78
+  },
+  {
+   "id": "166579853",
+   "place_name": "플랜에이치 연남22호점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 84
+  },
+  {
+   "id": "735068532",
+   "place_name": "모쉬 홍대점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 97
+  },
+  {
+   "id": "364588959",
+   "place_name": "누이",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 100
+  },
+  {
+   "id": "445075109",
+   "place_name": "오브무아 홍대점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 105
+  },
+  {
+   "id": "644245174",
+   "place_name": "원피스붙임머리",
+   "category_name": "가정,생활 > 미용 > 가발",
+   "distance": 54
+  },
+  {
+   "id": "1833203333",
+   "place_name": "파스텔무드",
+   "category_name": "가정,생활 > 미용 > 메이크업",
+   "distance": 54
+  },
+  {
+   "id": "751062129",
+   "place_name": "꼼마헤어&메이크업",
+   "category_name": "가정,생활 > 미용 > 메이크업",
+   "distance": 63
+  },
+  {
+   "id": "1922131420",
+   "place_name": "이미헤어&메이크업",
+   "category_name": "가정,생활 > 미용",
+   "distance": 66
+  }
+ ],
+ "ct-nanalog-hongdae-flagship": [
+  {
+   "id": "1850409783",
+   "place_name": "나나로그 홍대플래그십",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 6
+  },
+  {
+   "id": "13725181",
+   "place_name": "헤어앤타쿠미 홍대점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 70
+  },
+  {
+   "id": "26811010",
+   "place_name": "준오헤어 홍대상수점",
+   "category_name": "가정,생활 > 미용 > 미용실 > 준오헤어",
+   "distance": 72
+  },
+  {
+   "id": "334693428",
+   "place_name": "애드온맨즈헤어",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 91
+  },
+  {
+   "id": "681882006",
+   "place_name": "스테이나인 홍대점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 92
+  },
+  {
+   "id": "14523168",
+   "place_name": "마실 홍대점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 102
+  },
+  {
+   "id": "128374713",
+   "place_name": "킨트헤어",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 112
+  },
+  {
+   "id": "15618131",
+   "place_name": "순시키헤어 soonsikihair",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 112
+  },
+  {
+   "id": "1951222968",
+   "place_name": "서브서울",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 113
+  },
+  {
+   "id": "19188708",
+   "place_name": "켄지스타일 홍대점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 120
+  },
+  {
+   "id": "589322218",
+   "place_name": "136524유니크",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 125
+  },
+  {
+   "id": "146201069",
+   "place_name": "오버마운트 홍대점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 126
+  },
+  {
+   "id": "538351436",
+   "place_name": "살롱칠 홍대",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 128
+  },
+  {
+   "id": "1287910499",
+   "place_name": "발렌헤어 상수역점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 147
+  },
+  {
+   "id": "915842580",
+   "place_name": "타입 홍대점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 148
+  },
+  {
+   "id": "1552772261",
+   "place_name": "홍대 붙임머리",
+   "category_name": "가정,생활 > 미용 > 가발",
+   "distance": 55
+  }
+ ],
+ "ct-park-seung-chol-hair-studio-hongdae-book-an-appo": [
+  {
+   "id": "1285230492",
+   "place_name": "박승철헤어스투디오 홍대점",
+   "category_name": "가정,생활 > 미용 > 미용실 > 박승철헤어스투디오",
+   "distance": 3
+  },
+  {
+   "id": "910000720",
+   "place_name": "더원스헤어 홍대점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 52
+  },
+  {
+   "id": "2104456989",
+   "place_name": "보그헤어 홍대점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 60
+  },
+  {
+   "id": "250378201",
+   "place_name": "아르결 홍대점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 65
+  },
+  {
+   "id": "1097759321",
+   "place_name": "픽시스맨즈헤어",
+   "category_name": "가정,생활 > 미용 > 미용실 > 바버샵",
+   "distance": 65
+  },
+  {
+   "id": "477650685",
+   "place_name": "순시키헤어 로맨티크점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 67
+  },
+  {
+   "id": "27609209",
+   "place_name": "홍대앤붙임머리",
+   "category_name": "가정,생활 > 미용 > 미용실 > 바버샵",
+   "distance": 86
+  },
+  {
+   "id": "1781234620",
+   "place_name": "유아트헤어 홍대점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 87
+  },
+  {
+   "id": "1794639180",
+   "place_name": "무진",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 90
+  },
+  {
+   "id": "918177631",
+   "place_name": "주빈헤어",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 90
+  },
+  {
+   "id": "1515004301",
+   "place_name": "베베뷰",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 91
+  },
+  {
+   "id": "794520193",
+   "place_name": "베이바이허슬기 스파앤블리치점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 93
+  },
+  {
+   "id": "14824251",
+   "place_name": "세마헤어 홍대점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 98
+  },
+  {
+   "id": "27212795",
+   "place_name": "뷰티살롱 메이듀 홍대본점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 106
+  },
+  {
+   "id": "1627604222",
+   "place_name": "데몬헤어 홍대점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 107
+  },
+  {
+   "id": "562870562",
+   "place_name": "붙임머리아지트",
+   "category_name": "가정,생활 > 미용",
+   "distance": 89
+  }
+ ],
+ "ct-soonsiki-hair-hongdae-flagship-seoul-s-top-rated": [
+  {
+   "id": "15618131",
+   "place_name": "순시키헤어 soonsikihair",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 4
+  },
+  {
+   "id": "19188708",
+   "place_name": "켄지스타일 홍대점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 16
+  },
+  {
+   "id": "14523168",
+   "place_name": "마실 홍대점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 34
+  },
+  {
+   "id": "14950763",
+   "place_name": "엘레강스미용실",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 83
+  },
+  {
+   "id": "128374713",
+   "place_name": "킨트헤어",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 90
+  },
+  {
+   "id": "26811010",
+   "place_name": "준오헤어 홍대상수점",
+   "category_name": "가정,생활 > 미용 > 미용실 > 준오헤어",
+   "distance": 106
+  },
+  {
+   "id": "1313876306",
+   "place_name": "우아한 홍대러브점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 106
+  },
+  {
+   "id": "1886244792",
+   "place_name": "미뉴잇",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 118
+  },
+  {
+   "id": "1850409783",
+   "place_name": "나나로그 홍대플래그십",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 119
+  },
+  {
+   "id": "13725181",
+   "place_name": "헤어앤타쿠미 홍대점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 124
+  },
+  {
+   "id": "1951222968",
+   "place_name": "서브서울",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 130
+  },
+  {
+   "id": "790248699",
+   "place_name": "베이바이허슬기 블랑점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 135
+  },
+  {
+   "id": "1708820171",
+   "place_name": "샌디에고 마포점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 148
+  },
+  {
+   "id": "507772423",
+   "place_name": "커터스맨즈헤어",
+   "category_name": "가정,생활 > 이발소",
+   "distance": 81
+  },
+  {
+   "id": "1769182646",
+   "place_name": "이지헤어 본점 주차장",
+   "category_name": "교통,수송 > 교통시설 > 주차장",
+   "distance": 88
+  },
+  {
+   "id": "1552772261",
+   "place_name": "홍대 붙임머리",
+   "category_name": "가정,생활 > 미용 > 가발",
+   "distance": 123
+  }
+ ],
+ "ct-soonsiki-hair-hongdae-hanok-branch-global-custom": [
+  {
+   "id": "1134290726",
+   "place_name": "순시키헤어 한옥점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 2
+  },
+  {
+   "id": "45889675",
+   "place_name": "더데이즈헤어 홍대점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 23
+  },
+  {
+   "id": "1413749046",
+   "place_name": "샵꽁뜨 홍대서교점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 35
+  },
+  {
+   "id": "682044910",
+   "place_name": "에이치헤어룸",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 54
+  },
+  {
+   "id": "2085089177",
+   "place_name": "하다비",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 56
+  },
+  {
+   "id": "2055613508",
+   "place_name": "로이드밤 홍대점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 59
+  },
+  {
+   "id": "216256537",
+   "place_name": "바이디",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 67
+  },
+  {
+   "id": "794092936",
+   "place_name": "하우스뱅 아데르홍대점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 68
+  },
+  {
+   "id": "248162306",
+   "place_name": "디엑스헤어",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 69
+  },
+  {
+   "id": "1867280314",
+   "place_name": "아데르 홍대점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 72
+  },
+  {
+   "id": "1269499366",
+   "place_name": "아데르 홍대3호점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 72
+  },
+  {
+   "id": "1627393229",
+   "place_name": "유니브",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 72
+  },
+  {
+   "id": "1876339246",
+   "place_name": "형D 머리방",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 72
+  },
+  {
+   "id": "1135756813",
+   "place_name": "더리아",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 72
+  },
+  {
+   "id": "777852767",
+   "place_name": "무릇서울",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 72
+  }
+ ],
+ "ct-soonsiki-hair-hongdae-moment-branch-seoul-s-top": [
+  {
+   "id": "477650685",
+   "place_name": "순시키헤어 로맨티크점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 3
+  },
+  {
+   "id": "910000720",
+   "place_name": "더원스헤어 홍대점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 40
+  },
+  {
+   "id": "794520193",
+   "place_name": "베이바이허슬기 스파앤블리치점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 64
+  },
+  {
+   "id": "642907035",
+   "place_name": "하이니헤어 홍대 LG팰리스점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 67
+  },
+  {
+   "id": "114926693",
+   "place_name": "보그헤어 케이뷰티 홍대라운지점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 67
+  },
+  {
+   "id": "22581329",
+   "place_name": "스타일간지",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 69
+  },
+  {
+   "id": "1285230492",
+   "place_name": "박승철헤어스투디오 홍대점",
+   "category_name": "가정,생활 > 미용 > 미용실 > 박승철헤어스투디오",
+   "distance": 70
+  },
+  {
+   "id": "1627604222",
+   "place_name": "데몬헤어 홍대점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 76
+  },
+  {
+   "id": "250378201",
+   "place_name": "아르결 홍대점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 89
+  },
+  {
+   "id": "1097759321",
+   "place_name": "픽시스맨즈헤어",
+   "category_name": "가정,생활 > 미용 > 미용실 > 바버샵",
+   "distance": 89
+  },
+  {
+   "id": "1921249608",
+   "place_name": "오늘도공간헤어",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 96
+  },
+  {
+   "id": "27609209",
+   "place_name": "홍대앤붙임머리",
+   "category_name": "가정,생활 > 미용 > 미용실 > 바버샵",
+   "distance": 100
+  },
+  {
+   "id": "1781234620",
+   "place_name": "유아트헤어 홍대점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 101
+  },
+  {
+   "id": "2104456989",
+   "place_name": "보그헤어 홍대점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 102
+  },
+  {
+   "id": "27212795",
+   "place_name": "뷰티살롱 메이듀 홍대본점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 119
+  },
+  {
+   "id": "26088258",
+   "place_name": "핑크파우더",
+   "category_name": "가정,생활 > 미용 > 메이크업",
+   "distance": 63
+  },
+  {
+   "id": "276594910",
+   "place_name": "바이비메이크업",
+   "category_name": "가정,생활 > 미용 > 메이크업",
+   "distance": 67
+  }
+ ],
+ "ct-the-day-s-hair-english-friendly-hair-salon-in-ho": [
+  {
+   "id": "45889675",
+   "place_name": "더데이즈헤어 홍대점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 1
+  },
+  {
+   "id": "1134290726",
+   "place_name": "순시키헤어 한옥점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 25
+  },
+  {
+   "id": "682044910",
+   "place_name": "에이치헤어룸",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 32
+  },
+  {
+   "id": "2085089177",
+   "place_name": "하다비",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 34
+  },
+  {
+   "id": "1413749046",
+   "place_name": "샵꽁뜨 홍대서교점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 43
+  },
+  {
+   "id": "1708820171",
+   "place_name": "샌디에고 마포점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 71
+  },
+  {
+   "id": "794092936",
+   "place_name": "하우스뱅 아데르홍대점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 72
+  },
+  {
+   "id": "216256537",
+   "place_name": "바이디",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 72
+  },
+  {
+   "id": "2063131037",
+   "place_name": "도깨비붙임머리",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 73
+  },
+  {
+   "id": "248162306",
+   "place_name": "디엑스헤어",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 73
+  },
+  {
+   "id": "1867280314",
+   "place_name": "아데르 홍대점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 75
+  },
+  {
+   "id": "1269499366",
+   "place_name": "아데르 홍대3호점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 75
+  },
+  {
+   "id": "1627393229",
+   "place_name": "유니브",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 76
+  },
+  {
+   "id": "1876339246",
+   "place_name": "형D 머리방",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 76
+  },
+  {
+   "id": "1135756813",
+   "place_name": "더리아",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 76
+  }
+ ],
+ "ct-the-seol-ha-hanok-organic-vegan-head-spa-private": [],
+ "ct-ttbt-hapjeong-personal-hair-consulting": [
+  {
+   "id": "1694125997",
+   "place_name": "TTBT",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 2
+  },
+  {
+   "id": "193648281",
+   "place_name": "베이바이허슬기 미투미점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 34
+  },
+  {
+   "id": "1164715167",
+   "place_name": "여우짓붙임머리 홍대점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 35
+  },
+  {
+   "id": "1916585546",
+   "place_name": "레뮤즈",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 40
+  },
+  {
+   "id": "81674977",
+   "place_name": "미즈카헤어",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 46
+  },
+  {
+   "id": "1555533902",
+   "place_name": "시놉",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 51
+  },
+  {
+   "id": "830216613",
+   "place_name": "아리쉬",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 53
+  },
+  {
+   "id": "27269120",
+   "place_name": "이키헤어(IKIHAIR)",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 54
+  },
+  {
+   "id": "2039483822",
+   "place_name": "오롯이빛나는",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 57
+  },
+  {
+   "id": "725333885",
+   "place_name": "살리고헤어살롱",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 65
+  },
+  {
+   "id": "27405242",
+   "place_name": "아이엠디헤어",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 67
+  },
+  {
+   "id": "53118631",
+   "place_name": "하임",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 69
+  },
+  {
+   "id": "648948106",
+   "place_name": "메이킹톤 홍대점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 70
+  },
+  {
+   "id": "1597223606",
+   "place_name": "더부띠끄 합정점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 86
+  },
+  {
+   "id": "650300884",
+   "place_name": "리씨즈",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 87
+  },
+  {
+   "id": "1993511646",
+   "place_name": "그리고알리스",
+   "category_name": "가정,생활 > 미용 > 메이크업",
+   "distance": 45
+  }
+ ],
+ "ct-commenanabien-hannam-branch-hair-makeup-and-imag": [
+  {
+   "id": "1807743290",
+   "place_name": "꼼나나 비앙 한남점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 7
+  },
+  {
+   "id": "746176116",
+   "place_name": "오뷔르x쉐어스팟사운즈 한남점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 10
+  },
+  {
+   "id": "272346553",
+   "place_name": "토와에 한남",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 64
+  },
+  {
+   "id": "2048312065",
+   "place_name": "어낵 한남점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 84
+  },
+  {
+   "id": "27376388",
+   "place_name": "아티스트태양 한남점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 117
+  }
+ ],
+ "ct-eco-jardin-jamsil-lotte-tower-branch-head-spa": [
+  {
+   "id": "442064417",
+   "place_name": "박승철헤어스투디오 잠실르엘점",
+   "category_name": "가정,생활 > 미용 > 미용실 > 박승철헤어스투디오",
+   "distance": 95
+  },
+  {
+   "id": "954192474",
+   "place_name": "에이치플레이스 잠실르엘점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 95
+  },
+  {
+   "id": "130288525",
+   "place_name": "살롱에이 잠실르엘점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 95
+  }
+ ],
+ "ct-mine-d-hair-salon-jamsil-branch": [
+  {
+   "id": "1778787178",
+   "place_name": "마인디 잠실",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 0
+  },
+  {
+   "id": "10354776",
+   "place_name": "리드헤어모드",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 121
+  },
+  {
+   "id": "16054390",
+   "place_name": "마리헤어",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 135
+  },
+  {
+   "id": "934575860",
+   "place_name": "디머드헤어 잠실송파점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 141
+  },
+  {
+   "id": "9886340",
+   "place_name": "예림미용실",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 145
+  }
+ ],
+ "ct-juno-hair-starfield-avenue-grand-seoul-branch-ex": [
+  {
+   "id": "38842824",
+   "place_name": "준오헤어 스타필드애비뉴그랑서울점",
+   "category_name": "가정,생활 > 미용 > 미용실 > 준오헤어",
+   "distance": 53
+  },
+  {
+   "id": "1486334964",
+   "place_name": "비비스헤어",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 134
+  },
+  {
+   "id": "1465293488",
+   "place_name": "도로시앳홈",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 134
+  },
+  {
+   "id": "18174373",
+   "place_name": "더스타일헤어",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 134
+  },
+  {
+   "id": "841266368",
+   "place_name": "아너디헤어",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 134
+  },
+  {
+   "id": "582667766",
+   "place_name": "지가헤어",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 141
+  }
+ ],
+ "ct-dears-hair-hwanghak-lotte-castle-branch": [
+  {
+   "id": "1429041878",
+   "place_name": "은자살롱",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 8
+  },
+  {
+   "id": "1676805954",
+   "place_name": "이철헤어커커 청계천이마트점",
+   "category_name": "가정,생활 > 미용 > 미용실 > 이철헤어커커",
+   "distance": 60
+  },
+  {
+   "id": "119000397",
+   "place_name": "스타일바이에스 청계천점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 69
+  },
+  {
+   "id": "11841222",
+   "place_name": "박승철헤어스투디오 청계천이마트점",
+   "category_name": "가정,생활 > 미용 > 미용실 > 박승철헤어스투디오",
+   "distance": 70
+  },
+  {
+   "id": "14607753",
+   "place_name": "마르떼헤어",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 70
+  },
+  {
+   "id": "1425913090",
+   "place_name": "디얼스 황학롯데캐슬점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 134
+  },
+  {
+   "id": "1825843049",
+   "place_name": "루이민헤어 청계천이마트점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 145
+  }
+ ],
+ "ct-eco-jardin-myeongdong-branch": [
+  {
+   "id": "77123259",
+   "place_name": "문헤어살롱 명동점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 18
+  },
+  {
+   "id": "11834584",
+   "place_name": "이철헤어커커 명동2호점",
+   "category_name": "가정,생활 > 미용 > 미용실 > 이철헤어커커",
+   "distance": 31
+  },
+  {
+   "id": "8528339",
+   "place_name": "준오헤어 명동1호점",
+   "category_name": "가정,생활 > 미용 > 미용실 > 준오헤어",
+   "distance": 40
+  },
+  {
+   "id": "659423607",
+   "place_name": "박준뷰티랩 명동2호점",
+   "category_name": "가정,생활 > 미용 > 미용실 > 박준뷰티랩",
+   "distance": 45
+  },
+  {
+   "id": "19266522",
+   "place_name": "이철헤어커커 명동1호점",
+   "category_name": "가정,생활 > 미용 > 미용실 > 이철헤어커커",
+   "distance": 61
+  },
+  {
+   "id": "566468614",
+   "place_name": "헤어더뷰 명동점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 73
+  },
+  {
+   "id": "13500125",
+   "place_name": "준오헤어 명동2호점",
+   "category_name": "가정,생활 > 미용 > 미용실 > 준오헤어",
+   "distance": 81
+  },
+  {
+   "id": "601618399",
+   "place_name": "박준뷰티랩 명동점",
+   "category_name": "가정,생활 > 미용 > 미용실 > 박준뷰티랩",
+   "distance": 84
+  },
+  {
+   "id": "1272428284",
+   "place_name": "에이바헤어 명동센터점",
+   "category_name": "가정,생활 > 미용 > 미용실 > 에이바헤어",
+   "distance": 85
+  },
+  {
+   "id": "1017145552",
+   "place_name": "파리지엔헤어 명동점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 86
+  },
+  {
+   "id": "477577602",
+   "place_name": "모녹",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 87
+  },
+  {
+   "id": "25887025",
+   "place_name": "김선영미용실",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 91
+  },
+  {
+   "id": "584933082",
+   "place_name": "준오헤어 명동스트리트점",
+   "category_name": "가정,생활 > 미용 > 미용실 > 준오헤어",
+   "distance": 92
+  },
+  {
+   "id": "8274712",
+   "place_name": "두가헤어",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 103
+  },
+  {
+   "id": "1909576754",
+   "place_name": "킴스헤어 명동점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 114
+  }
+ ],
+ "ct-special-event-dayday-hair-makeup": [
+  {
+   "id": "96271462",
+   "place_name": "바이 서울",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 32
+  },
+  {
+   "id": "1225448730",
+   "place_name": "더모담탈모두피센터 시청점",
+   "category_name": "가정,생활 > 미용 > 두피,탈모관리",
+   "distance": 32
+  }
+ ],
+ "ct-the-dears-lotte-department-store-star-city-konku": [
+  {
+   "id": "24158250",
+   "place_name": "장루이다비드 건대스타시티점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 1
+  },
+  {
+   "id": "8051230",
+   "place_name": "토니앤가이 건대이마트점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 94
+  },
+  {
+   "id": "24944826",
+   "place_name": "디탐헤어 건대점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 123
+  },
+  {
+   "id": "275410649",
+   "place_name": "에이바헤어 건대입구역점",
+   "category_name": "가정,생활 > 미용 > 미용실 > 에이바헤어",
+   "distance": 135
+  },
+  {
+   "id": "1917447807",
+   "place_name": "토니앤가이 건대점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 146
+  }
+ ],
+ "ct-mercy-hair-3rd-branch": [
+  {
+   "id": "24059575",
+   "place_name": "머시헤어 3호점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 6
+  },
+  {
+   "id": "2086344885",
+   "place_name": "앤써헤어",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 24
+  },
+  {
+   "id": "9355536",
+   "place_name": "이즈헤어 본점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 36
+  },
+  {
+   "id": "858283672",
+   "place_name": "지노헤어 경희대점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 40
+  },
+  {
+   "id": "26817879",
+   "place_name": "이철헤어커커 경희대점",
+   "category_name": "가정,생활 > 미용 > 미용실 > 이철헤어커커",
+   "distance": 52
+  },
+  {
+   "id": "450479951",
+   "place_name": "공간헤어 경희대점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 53
+  },
+  {
+   "id": "11842746",
+   "place_name": "리안헤어 경희대점",
+   "category_name": "가정,생활 > 미용 > 미용실 > 리안헤어",
+   "distance": 59
+  },
+  {
+   "id": "1784828186",
+   "place_name": "낭만헤어 경희대점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 70
+  },
+  {
+   "id": "2080871816",
+   "place_name": "살롱드리본",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 74
+  },
+  {
+   "id": "47245914",
+   "place_name": "세르피에 시크릿점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 84
+  },
+  {
+   "id": "1651873581",
+   "place_name": "스티즈",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 98
+  },
+  {
+   "id": "549372320",
+   "place_name": "맨드살롱 경희대점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 101
+  },
+  {
+   "id": "15449840",
+   "place_name": "머시헤어 2호 유니크점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 110
+  },
+  {
+   "id": "871439521",
+   "place_name": "모코지헤어샵",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 110
+  },
+  {
+   "id": "532769009",
+   "place_name": "SM헤어 회기점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 111
+  }
+ ],
+ "ct-kyungza-hongdae-fab-hair-salon-expert-color-perm": [
+  {
+   "id": "1321272038",
+   "place_name": "경자 홍대페브점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 9
+  },
+  {
+   "id": "8957584",
+   "place_name": "린다헤어",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 36
+  },
+  {
+   "id": "120489342",
+   "place_name": "올댓무드",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 105
+  },
+  {
+   "id": "452595945",
+   "place_name": "우아한헤어 연남점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 105
+  },
+  {
+   "id": "11617273",
+   "place_name": "헤어오클리",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 106
+  },
+  {
+   "id": "14164430",
+   "place_name": "누스헤어",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 120
+  },
+  {
+   "id": "271534847",
+   "place_name": "경자 연남점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 124
+  },
+  {
+   "id": "1236731217",
+   "place_name": "자스민헤어",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 140
+  },
+  {
+   "id": "1713755661",
+   "place_name": "카브",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 145
+  },
+  {
+   "id": "665390862",
+   "place_name": "오아주헤어",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 146
+  },
+  {
+   "id": "128441022",
+   "place_name": "뷰티샵",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 147
+  },
+  {
+   "id": "25918047",
+   "place_name": "이훈헤어칼라 본사",
+   "category_name": "서비스,산업 > 기업",
+   "distance": 51
+  },
+  {
+   "id": "1744846474",
+   "place_name": "비비엔느메이크업",
+   "category_name": "가정,생활 > 미용 > 메이크업",
+   "distance": 107
+  }
+ ],
+ "ct-kyungza-hongdae-main-branch-expert-color-perm-wi": [
+  {
+   "id": "753642509",
+   "place_name": "앤디스붙임머리",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 65
+  },
+  {
+   "id": "965698025",
+   "place_name": "미용사 김현아",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 67
+  },
+  {
+   "id": "404993634",
+   "place_name": "박선정헤어클럽",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 72
+  },
+  {
+   "id": "20536798",
+   "place_name": "배일미용실",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 78
+  },
+  {
+   "id": "1645930020",
+   "place_name": "다미헤어",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 79
+  },
+  {
+   "id": "20524057",
+   "place_name": "주영헤어샵",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 90
+  },
+  {
+   "id": "1818013269",
+   "place_name": "비비살롱",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 93
+  },
+  {
+   "id": "1586294049",
+   "place_name": "마센느 홍대숲길점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 114
+  },
+  {
+   "id": "1343484525",
+   "place_name": "라비앙르로즈 신촌",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 119
+  },
+  {
+   "id": "116409525",
+   "place_name": "이끼헤어 홍대점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 130
+  }
+ ],
+ "ct-lowe-hapjeong-lounge-a-hair-salon-for-your-perfe": [
+  {
+   "id": "1296873805",
+   "place_name": "아쭈헤어 상수역점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 47
+  },
+  {
+   "id": "17074616",
+   "place_name": "비에이헤어",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 50
+  },
+  {
+   "id": "468643568",
+   "place_name": "호미방",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 54
+  },
+  {
+   "id": "2108461792",
+   "place_name": "랑데자뷰살롱 상수점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 63
+  },
+  {
+   "id": "2106028422",
+   "place_name": "카이정헤어 홍대상수점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 79
+  },
+  {
+   "id": "1031759813",
+   "place_name": "동경하다 홍대상수점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 81
+  },
+  {
+   "id": "589786684",
+   "place_name": "ZIYA(지야)",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 86
+  },
+  {
+   "id": "1281391697",
+   "place_name": "카이정헤어 홍대상수역점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 87
+  },
+  {
+   "id": "1466500554",
+   "place_name": "비도트",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 87
+  },
+  {
+   "id": "330116998",
+   "place_name": "벨로헤어 상수역점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 89
+  },
+  {
+   "id": "554425374",
+   "place_name": "블루아 붙임머리",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 90
+  },
+  {
+   "id": "222388131",
+   "place_name": "뉴올",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 96
+  },
+  {
+   "id": "88733906",
+   "place_name": "어쏘",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 103
+  },
+  {
+   "id": "140805185",
+   "place_name": "파커헤어 홍대서교점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 116
+  },
+  {
+   "id": "1937501661",
+   "place_name": "살롱 드 샤린",
+   "category_name": "가정,생활 > 미용 > 미용실 > 바버샵",
+   "distance": 118
+  },
+  {
+   "id": "404304418",
+   "place_name": "픽컬러브랜딩센터 홍대점",
+   "category_name": "가정,생활 > 미용 > 메이크업",
+   "distance": 75
+  },
+  {
+   "id": "1602627105",
+   "place_name": "H헤어룸",
+   "category_name": "가정,생활 > 이발소",
+   "distance": 86
+  }
+ ],
+ "ct-rec-tor-seoul": [
+  {
+   "id": "1708437217",
+   "place_name": "렉터 서울",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 0
+  },
+  {
+   "id": "1251334971",
+   "place_name": "샵꽁뜨 홍대합정역점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 17
+  },
+  {
+   "id": "20745782",
+   "place_name": "여은미헤어샾",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 32
+  },
+  {
+   "id": "12558508",
+   "place_name": "헤어블로썸",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 101
+  },
+  {
+   "id": "900254481",
+   "place_name": "스웨거 바버숍",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 112
+  },
+  {
+   "id": "13138973",
+   "place_name": "라비헤어 홍대본점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 132
+  },
+  {
+   "id": "1493367548",
+   "place_name": "카이정헤어 마포서교점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 134
+  }
+ ],
+ "ct-ri-art-sinchon-branch-2-head-spa-relaxation-expe": [
+  {
+   "id": "1547955996",
+   "place_name": "리아트헤어2",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 0
+  },
+  {
+   "id": "190739866",
+   "place_name": "이유정헤어",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 15
+  },
+  {
+   "id": "2059479804",
+   "place_name": "리아트헤어",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 29
+  },
+  {
+   "id": "43313239",
+   "place_name": "제니스헤어",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 57
+  },
+  {
+   "id": "20520613",
+   "place_name": "조희미용실",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 65
+  },
+  {
+   "id": "65561805",
+   "place_name": "아브르",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 75
+  },
+  {
+   "id": "730119424",
+   "place_name": "아이디헤어 이대역점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 83
+  },
+  {
+   "id": "1232224092",
+   "place_name": "토마토헤어샵 아현역점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 112
+  },
+  {
+   "id": "2122405835",
+   "place_name": "머리방",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 122
+  },
+  {
+   "id": "2126410900",
+   "place_name": "리안헤어 아현역점",
+   "category_name": "가정,생활 > 미용 > 미용실 > 리안헤어",
+   "distance": 124
+  },
+  {
+   "id": "484139467",
+   "place_name": "이레미용실",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 125
+  },
+  {
+   "id": "2035356817",
+   "place_name": "루시헤어",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 139
+  },
+  {
+   "id": "870397339",
+   "place_name": "JN헤어",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 140
+  }
+ ],
+ "ct-ryun-t-yeonnam-customized-hair-designs-for-women": [
+  {
+   "id": "1487137455",
+   "place_name": "더시즌헤어",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 17
+  },
+  {
+   "id": "1982785187",
+   "place_name": "킷하우스",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 44
+  },
+  {
+   "id": "214527760",
+   "place_name": "몬트",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 83
+  },
+  {
+   "id": "1637835835",
+   "place_name": "헤어바이차",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 86
+  },
+  {
+   "id": "153583432",
+   "place_name": "샵꽁뜨 연남점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 88
+  },
+  {
+   "id": "1790173589",
+   "place_name": "르로헤어",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 97
+  },
+  {
+   "id": "715515323",
+   "place_name": "탄헤어스튜디오",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 105
+  },
+  {
+   "id": "1399689901",
+   "place_name": "에드비엑스이헤어 홍대점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 107
+  },
+  {
+   "id": "372203907",
+   "place_name": "살롱드티에드",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 108
+  },
+  {
+   "id": "1463628495",
+   "place_name": "이오브 도큐먼트",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 109
+  },
+  {
+   "id": "1096723004",
+   "place_name": "에크루헤어",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 115
+  },
+  {
+   "id": "1760834189",
+   "place_name": "목화헤어",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 122
+  },
+  {
+   "id": "804950505",
+   "place_name": "이오브",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 124
+  },
+  {
+   "id": "90624688",
+   "place_name": "하이에이치",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 134
+  },
+  {
+   "id": "1564149296",
+   "place_name": "더블브이디",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 136
+  }
+ ],
+ "ct-a-muu-hair-salon": [
+  {
+   "id": "11834584",
+   "place_name": "이철헤어커커 명동2호점",
+   "category_name": "가정,생활 > 미용 > 미용실 > 이철헤어커커",
+   "distance": 0
+  },
+  {
+   "id": "19266522",
+   "place_name": "이철헤어커커 명동1호점",
+   "category_name": "가정,생활 > 미용 > 미용실 > 이철헤어커커",
+   "distance": 35
+  },
+  {
+   "id": "8528339",
+   "place_name": "준오헤어 명동1호점",
+   "category_name": "가정,생활 > 미용 > 미용실 > 준오헤어",
+   "distance": 42
+  },
+  {
+   "id": "77123259",
+   "place_name": "문헤어살롱 명동점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 49
+  },
+  {
+   "id": "13500125",
+   "place_name": "준오헤어 명동2호점",
+   "category_name": "가정,생활 > 미용 > 미용실 > 준오헤어",
+   "distance": 51
+  },
+  {
+   "id": "1272428284",
+   "place_name": "에이바헤어 명동센터점",
+   "category_name": "가정,생활 > 미용 > 미용실 > 에이바헤어",
+   "distance": 61
+  },
+  {
+   "id": "659423607",
+   "place_name": "박준뷰티랩 명동2호점",
+   "category_name": "가정,생활 > 미용 > 미용실 > 박준뷰티랩",
+   "distance": 74
+  },
+  {
+   "id": "1017145552",
+   "place_name": "파리지엔헤어 명동점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 77
+  },
+  {
+   "id": "477577602",
+   "place_name": "모녹",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 99
+  },
+  {
+   "id": "566468614",
+   "place_name": "헤어더뷰 명동점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 104
+  },
+  {
+   "id": "1909576754",
+   "place_name": "킴스헤어 명동점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 104
+  },
+  {
+   "id": "601618399",
+   "place_name": "박준뷰티랩 명동점",
+   "category_name": "가정,생활 > 미용 > 미용실 > 박준뷰티랩",
+   "distance": 111
+  },
+  {
+   "id": "1859130271",
+   "place_name": "아르결 명동점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 119
+  },
+  {
+   "id": "18902139",
+   "place_name": "샹스헤어",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 121
+  },
+  {
+   "id": "1009238922",
+   "place_name": "온헤어 명동점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 121
+  },
+  {
+   "id": "398046295",
+   "place_name": "그린두피탈모센터 명동점",
+   "category_name": "가정,생활 > 미용 > 두피,탈모관리",
+   "distance": 99
+  }
+ ],
+ "ct-gapi-beauty-salon-hair-makeup-beauty-treatments": [
+  {
+   "id": "138732219",
+   "place_name": "가피헤어 본점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 0
+  },
+  {
+   "id": "1828005040",
+   "place_name": "루회리",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 13
+  },
+  {
+   "id": "18946023",
+   "place_name": "헤어아쿠아",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 13
+  },
+  {
+   "id": "1457838206",
+   "place_name": "크레이지레드 명동본점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 99
+  },
+  {
+   "id": "1482801327",
+   "place_name": "주니크살롱 명동점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 101
+  },
+  {
+   "id": "12390125",
+   "place_name": "크레이지드레드 명동본점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 103
+  },
+  {
+   "id": "1886596253",
+   "place_name": "예리드",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 107
+  },
+  {
+   "id": "429174602",
+   "place_name": "이가자헤어비스 명동점",
+   "category_name": "가정,생활 > 미용 > 미용실 > 이가자헤어비스",
+   "distance": 107
+  },
+  {
+   "id": "466492753",
+   "place_name": "까 명동본점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 122
+  }
+ ],
+ "ct-green-scalp-clinique-25-years-practice-of-hair-l": [
+  {
+   "id": "9011091",
+   "place_name": "백명기의원",
+   "category_name": "의료,건강 > 병원 > 신경과",
+   "distance": 44
+  },
+  {
+   "id": "1949152088",
+   "place_name": "리디아153 명동점",
+   "category_name": "가정,생활 > 미용 > 두피,탈모관리",
+   "distance": 90
+  },
+  {
+   "id": "628887529",
+   "place_name": "쓰담 스칼프",
+   "category_name": "가정,생활 > 미용 > 두피,탈모관리",
+   "distance": 104
+  },
+  {
+   "id": "977730330",
+   "place_name": "은은한결",
+   "category_name": "가정,생활 > 미용 > 두피,탈모관리",
+   "distance": 106
+  },
+  {
+   "id": "398046295",
+   "place_name": "그린두피탈모센터 명동점",
+   "category_name": "가정,생활 > 미용 > 두피,탈모관리",
+   "distance": 138
+  }
+ ],
+ "ct-hair-the-beau-myeongdong-branch": [
+  {
+   "id": "9208363",
+   "place_name": "아뜰리에in7",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 12
+  },
+  {
+   "id": "8274712",
+   "place_name": "두가헤어",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 14
+  },
+  {
+   "id": "601618399",
+   "place_name": "박준뷰티랩 명동점",
+   "category_name": "가정,생활 > 미용 > 미용실 > 박준뷰티랩",
+   "distance": 34
+  },
+  {
+   "id": "25887025",
+   "place_name": "김선영미용실",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 39
+  },
+  {
+   "id": "566468614",
+   "place_name": "헤어더뷰 명동점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 46
+  },
+  {
+   "id": "67326965",
+   "place_name": "헤리크 명동점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 51
+  },
+  {
+   "id": "584933082",
+   "place_name": "준오헤어 명동스트리트점",
+   "category_name": "가정,생활 > 미용 > 미용실 > 준오헤어",
+   "distance": 61
+  },
+  {
+   "id": "1128996196",
+   "place_name": "자연주의먹는펌헤어",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 62
+  },
+  {
+   "id": "8334535",
+   "place_name": "살롱드마샬 명동점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 67
+  },
+  {
+   "id": "619555570",
+   "place_name": "김춘희미용실",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 85
+  },
+  {
+   "id": "477577602",
+   "place_name": "모녹",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 90
+  },
+  {
+   "id": "659423607",
+   "place_name": "박준뷰티랩 명동2호점",
+   "category_name": "가정,생활 > 미용 > 미용실 > 박준뷰티랩",
+   "distance": 94
+  },
+  {
+   "id": "77123259",
+   "place_name": "문헤어살롱 명동점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 96
+  },
+  {
+   "id": "19699660",
+   "place_name": "준오헤어 명동4호점",
+   "category_name": "가정,생활 > 미용 > 미용실 > 준오헤어",
+   "distance": 116
+  },
+  {
+   "id": "8528339",
+   "place_name": "준오헤어 명동1호점",
+   "category_name": "가정,생활 > 미용 > 미용실 > 준오헤어",
+   "distance": 116
+  }
+ ],
+ "ct-lee-chul-hair-kerker-myeongdong-2-branch": [
+  {
+   "id": "19266522",
+   "place_name": "이철헤어커커 명동1호점",
+   "category_name": "가정,생활 > 미용 > 미용실 > 이철헤어커커",
+   "distance": 5
+  },
+  {
+   "id": "11834584",
+   "place_name": "이철헤어커커 명동2호점",
+   "category_name": "가정,생활 > 미용 > 미용실 > 이철헤어커커",
+   "distance": 41
+  },
+  {
+   "id": "13500125",
+   "place_name": "준오헤어 명동2호점",
+   "category_name": "가정,생활 > 미용 > 미용실 > 준오헤어",
+   "distance": 48
+  },
+  {
+   "id": "1272428284",
+   "place_name": "에이바헤어 명동센터점",
+   "category_name": "가정,생활 > 미용 > 미용실 > 에이바헤어",
+   "distance": 74
+  },
+  {
+   "id": "1009238922",
+   "place_name": "온헤어 명동점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 82
+  },
+  {
+   "id": "8528339",
+   "place_name": "준오헤어 명동1호점",
+   "category_name": "가정,생활 > 미용 > 미용실 > 준오헤어",
+   "distance": 82
+  },
+  {
+   "id": "1859130271",
+   "place_name": "아르결 명동점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 83
+  },
+  {
+   "id": "77123259",
+   "place_name": "문헤어살롱 명동점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 85
+  },
+  {
+   "id": "18902139",
+   "place_name": "샹스헤어",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 98
+  },
+  {
+   "id": "659423607",
+   "place_name": "박준뷰티랩 명동2호점",
+   "category_name": "가정,생활 > 미용 > 미용실 > 박준뷰티랩",
+   "distance": 100
+  },
+  {
+   "id": "1017145552",
+   "place_name": "파리지엔헤어 명동점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 107
+  },
+  {
+   "id": "12131508",
+   "place_name": "꽁지머리 명동점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 114
+  },
+  {
+   "id": "18905412",
+   "place_name": "조성기헤어젯",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 119
+  },
+  {
+   "id": "1482801327",
+   "place_name": "주니크살롱 명동점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 127
+  },
+  {
+   "id": "1909576754",
+   "place_name": "킴스헤어 명동점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 131
+  },
+  {
+   "id": "398046295",
+   "place_name": "그린두피탈모센터 명동점",
+   "category_name": "가정,생활 > 미용 > 두피,탈모관리",
+   "distance": 62
+  }
+ ],
+ "ct-rarien-myeongdong-branch-aveda-hair-salon": [
+  {
+   "id": "1781297478",
+   "place_name": "준오헤어 명동예술극장점",
+   "category_name": "가정,생활 > 미용 > 미용실 > 준오헤어",
+   "distance": 58
+  },
+  {
+   "id": "27234517",
+   "place_name": "라리엔 명동점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 62
+  },
+  {
+   "id": "8334535",
+   "place_name": "살롱드마샬 명동점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 81
+  },
+  {
+   "id": "1521443768",
+   "place_name": "나나로그 명동점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 83
+  },
+  {
+   "id": "619555570",
+   "place_name": "김춘희미용실",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 90
+  },
+  {
+   "id": "1046756639",
+   "place_name": "에코쟈뎅 명동점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 98
+  },
+  {
+   "id": "19699660",
+   "place_name": "준오헤어 명동4호점",
+   "category_name": "가정,생활 > 미용 > 미용실 > 준오헤어",
+   "distance": 101
+  },
+  {
+   "id": "67326965",
+   "place_name": "헤리크 명동점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 101
+  },
+  {
+   "id": "1473286016",
+   "place_name": "그라벨르헤어 을지로점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 108
+  },
+  {
+   "id": "1128996196",
+   "place_name": "자연주의먹는펌헤어",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 110
+  },
+  {
+   "id": "9208363",
+   "place_name": "아뜰리에in7",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 137
+  },
+  {
+   "id": "11842865",
+   "place_name": "리안헤어 명동1호점",
+   "category_name": "가정,생활 > 미용 > 미용실 > 리안헤어",
+   "distance": 138
+  },
+  {
+   "id": "26580513",
+   "place_name": "아퀴라헤어",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 141
+  },
+  {
+   "id": "1028545144",
+   "place_name": "카스트로폴로스",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 141
+  },
+  {
+   "id": "477577602",
+   "place_name": "모녹",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 148
+  }
+ ],
+ "ct-juno-hair-coex-city-airport-terminal-branch": [
+  {
+   "id": "161913702",
+   "place_name": "준오헤어 코엑스몰점",
+   "category_name": "가정,생활 > 미용 > 미용실 > 준오헤어",
+   "distance": 124
+  },
+  {
+   "id": "20349877",
+   "place_name": "꾸아퍼스트 현대백화점무역센터점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 51
+  },
+  {
+   "id": "629174759",
+   "place_name": "리베르떼뷰티살롱 강남벨라점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 114
+  },
+  {
+   "id": "1521393978",
+   "place_name": "발망헤어 현대백화점 무역센터점",
+   "category_name": "가정,생활 > 미용 > 화장품",
+   "distance": 69
+  }
+ ],
+ "ct-avail-hair-hair-salon-in-sangsu-hongdae": [
+  {
+   "id": "27272083",
+   "place_name": "어베일헤어드레싱",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 72
+  },
+  {
+   "id": "1670385781",
+   "place_name": "서연헤어",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 109
+  }
+ ],
+ "ct-id-hair-oksu-branch": [],
+ "ct-cconte-seongsu-trendy-hair-color-perm-with-perso": [
+  {
+   "id": "702971102",
+   "place_name": "샵꽁뜨 성수점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 0
+  },
+  {
+   "id": "489825815",
+   "place_name": "컨젝쳐",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 33
+  },
+  {
+   "id": "2107085418",
+   "place_name": "베이바이허슬기 서울숲",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 50
+  },
+  {
+   "id": "1145685792",
+   "place_name": "에이쓰리맨즈헤어 성수점",
+   "category_name": "가정,생활 > 미용 > 미용실 > 바버샵",
+   "distance": 71
+  },
+  {
+   "id": "238351196",
+   "place_name": "에이엠톤 성수",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 74
+  },
+  {
+   "id": "1710849213",
+   "place_name": "우이즈헤어 서울숲점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 94
+  },
+  {
+   "id": "1902307423",
+   "place_name": "선므",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 96
+  },
+  {
+   "id": "2050902735",
+   "place_name": "웨어하우스 성수점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 123
+  },
+  {
+   "id": "1530244002",
+   "place_name": "페버",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 123
+  },
+  {
+   "id": "146966841",
+   "place_name": "나바호 성수",
+   "category_name": "가정,생활 > 미용 > 미용실 > 바버샵",
+   "distance": 129
+  },
+  {
+   "id": "1499728798",
+   "place_name": "에이치포레",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 143
+  },
+  {
+   "id": "1561149956",
+   "place_name": "앤트맨즈헤어 성수",
+   "category_name": "가정,생활 > 이발소",
+   "distance": 52
+  },
+  {
+   "id": "328125",
+   "place_name": "르솔아뜰리에",
+   "category_name": "가정,생활 > 미용 > 메이크업",
+   "distance": 125
+  }
+ ],
+ "ct-aknack-seongsu-trendy-hair-salon-in-seoul-for-cu": [
+  {
+   "id": "813446349",
+   "place_name": "메르끄디",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 47
+  },
+  {
+   "id": "1180956048",
+   "place_name": "늘샵",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 49
+  },
+  {
+   "id": "804809735",
+   "place_name": "어낵",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 57
+  },
+  {
+   "id": "206031587",
+   "place_name": "레브도레",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 96
+  },
+  {
+   "id": "500776133",
+   "place_name": "김송정머리터 성수점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 96
+  },
+  {
+   "id": "2015442912",
+   "place_name": "민트컨디션",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 126
+  },
+  {
+   "id": "1652435266",
+   "place_name": "아띠엠헤어",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 129
+  },
+  {
+   "id": "1628870687",
+   "place_name": "CHOP헤어 성수플래그십",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 147
+  },
+  {
+   "id": "1963796813",
+   "place_name": "라베이스",
+   "category_name": "가정,생활 > 미용",
+   "distance": 63
+  }
+ ],
+ "ct-argyol-seongsu-late-night-hair-salon-scalp-care": [
+  {
+   "id": "766076359",
+   "place_name": "아르결 성수점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 0
+  },
+  {
+   "id": "1812292047",
+   "place_name": "어바이브헤어",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 14
+  },
+  {
+   "id": "2031389744",
+   "place_name": "비주얼살롱 성수점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 60
+  },
+  {
+   "id": "1889803092",
+   "place_name": "어반그라운드헤어 성수점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 111
+  },
+  {
+   "id": "1913554934",
+   "place_name": "살롱드아월",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 116
+  },
+  {
+   "id": "725351990",
+   "place_name": "남성컷트타임 뚝섬역점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 141
+  },
+  {
+   "id": "1577331667",
+   "place_name": "무에",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 142
+  },
+  {
+   "id": "740774363",
+   "place_name": "성수살롱",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 143
+  },
+  {
+   "id": "484093901",
+   "place_name": "세턴헤어",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 148
+  }
+ ],
+ "ct-fuss-seongsu-a-hair-salon-featuring-specialized": [
+  {
+   "id": "20747521",
+   "place_name": "경일헤어코디",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 5
+  },
+  {
+   "id": "1680637832",
+   "place_name": "오앤오",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 49
+  },
+  {
+   "id": "1324778023",
+   "place_name": "헤어바이반룬하우트 오앤오점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 51
+  },
+  {
+   "id": "117975711",
+   "place_name": "소프레사헤어살롱 성수점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 104
+  },
+  {
+   "id": "27161241",
+   "place_name": "미코헤어",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 111
+  },
+  {
+   "id": "16055411",
+   "place_name": "헤어짱",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 113
+  },
+  {
+   "id": "500776133",
+   "place_name": "김송정머리터 성수점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 116
+  },
+  {
+   "id": "661968770",
+   "place_name": "시드더뷰티",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 141
+  },
+  {
+   "id": "27161427",
+   "place_name": "세련헤어",
+   "category_name": "가정,생활 > 미용",
+   "distance": 88
+  }
+ ],
+ "ct-idhair-seoul-forest-branch": [
+  {
+   "id": "1595855225",
+   "place_name": "아이디헤어 서울숲점",
+   "category_name": "가정,생활 > 미용 > 미용실 > 아이디헤어",
+   "distance": 15
+  },
+  {
+   "id": "207452126",
+   "place_name": "시하",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 89
+  },
+  {
+   "id": "10956606",
+   "place_name": "효춘미용실",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 96
+  },
+  {
+   "id": "34269972",
+   "place_name": "온야드 서울숲본점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 146
+  }
+ ],
+ "ct-leanon-hair": [
+  {
+   "id": "1068223365",
+   "place_name": "린온 성수",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 38
+  },
+  {
+   "id": "9587259",
+   "place_name": "하나미용실",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 84
+  },
+  {
+   "id": "725351990",
+   "place_name": "남성컷트타임 뚝섬역점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 102
+  },
+  {
+   "id": "16874817",
+   "place_name": "헤어매니아",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 118
+  },
+  {
+   "id": "568889739",
+   "place_name": "공오이이 성수점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 119
+  },
+  {
+   "id": "1302890283",
+   "place_name": "맨",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 134
+  }
+ ],
+ "ct-lowe-seongsu-black-korean-sleek-perm-hair-salon": [
+  {
+   "id": "466385603",
+   "place_name": "로위 성수블랙점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 0
+  },
+  {
+   "id": "1797695383",
+   "place_name": "이블룸",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 20
+  },
+  {
+   "id": "1239563908",
+   "place_name": "온야드 성수점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 71
+  },
+  {
+   "id": "16272554",
+   "place_name": "블루클럽 성수역점",
+   "category_name": "가정,생활 > 미용 > 미용실 > 블루클럽",
+   "distance": 88
+  },
+  {
+   "id": "1077614955",
+   "place_name": "쿤스트파브",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 90
+  },
+  {
+   "id": "1009899921",
+   "place_name": "스텐스",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 110
+  },
+  {
+   "id": "868625878",
+   "place_name": "준오헤어 성수역2호점",
+   "category_name": "가정,생활 > 미용 > 미용실 > 준오헤어",
+   "distance": 119
+  },
+  {
+   "id": "16531778",
+   "place_name": "김성기미용실",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 122
+  },
+  {
+   "id": "1536744439",
+   "place_name": "동백 성수",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 134
+  },
+  {
+   "id": "1942366869",
+   "place_name": "로위 성수점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 137
+  },
+  {
+   "id": "507832163",
+   "place_name": "은지헤어",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 149
+  }
+ ],
+ "ct-more-on-hair-seongsu-branch": [
+  {
+   "id": "1597651149",
+   "place_name": "갤러리헤어",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 107
+  },
+  {
+   "id": "16035244",
+   "place_name": "온리맨",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 112
+  },
+  {
+   "id": "146966841",
+   "place_name": "나바호 성수",
+   "category_name": "가정,생활 > 미용 > 미용실 > 바버샵",
+   "distance": 136
+  },
+  {
+   "id": "16055267",
+   "place_name": "임마누엘미용실",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 139
+  },
+  {
+   "id": "1437415466",
+   "place_name": "닥터포헤어 서울숲점",
+   "category_name": "가정,생활 > 미용 > 두피,탈모관리",
+   "distance": 57
+  }
+ ],
+ "ct-nanalog-seongsu-branch-premium-hair-consulting": [
+  {
+   "id": "862017926",
+   "place_name": "나나로그 성수점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 7
+  },
+  {
+   "id": "34269972",
+   "place_name": "온야드 서울숲본점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 13
+  },
+  {
+   "id": "207452126",
+   "place_name": "시하",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 75
+  }
+ ],
+ "ct-onyad-hair-personalized-hair-consultation-stylin": [
+  {
+   "id": "1597651149",
+   "place_name": "갤러리헤어",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 107
+  },
+  {
+   "id": "16035244",
+   "place_name": "온리맨",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 112
+  },
+  {
+   "id": "146966841",
+   "place_name": "나바호 성수",
+   "category_name": "가정,생활 > 미용 > 미용실 > 바버샵",
+   "distance": 136
+  },
+  {
+   "id": "16055267",
+   "place_name": "임마누엘미용실",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 139
+  },
+  {
+   "id": "1437415466",
+   "place_name": "닥터포헤어 서울숲점",
+   "category_name": "가정,생활 > 미용 > 두피,탈모관리",
+   "distance": 57
+  }
+ ],
+ "ct-onyad-hair-seongsu-branch-2": [
+  {
+   "id": "1536744439",
+   "place_name": "동백 성수",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 52
+  },
+  {
+   "id": "466385603",
+   "place_name": "로위 성수블랙점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 110
+  },
+  {
+   "id": "1797695383",
+   "place_name": "이블룸",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 119
+  }
+ ],
+ "ct-onyad-hair-seongsu-branch-3": [
+  {
+   "id": "715366648",
+   "place_name": "에프에프 성수",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 11
+  },
+  {
+   "id": "628672139",
+   "place_name": "더부띠끄 성수점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 81
+  }
+ ],
+ "ct-project-hin-seongsu-hair-makeup": [
+  {
+   "id": "1011252497",
+   "place_name": "프로젝트흰",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 77
+  },
+  {
+   "id": "1757966303",
+   "place_name": "위닝에이치",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 79
+  },
+  {
+   "id": "1548043354",
+   "place_name": "얼터",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 79
+  },
+  {
+   "id": "445364564",
+   "place_name": "맨드살롱 13호점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 103
+  },
+  {
+   "id": "1669344924",
+   "place_name": "오늘도봄",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 120
+  },
+  {
+   "id": "852705240",
+   "place_name": "리우 메이크업 by성수",
+   "category_name": "가정,생활 > 미용 > 메이크업",
+   "distance": 79
+  },
+  {
+   "id": "519146050",
+   "place_name": "창성헤어라인",
+   "category_name": "가정,생활 > 미용 > 가발",
+   "distance": 131
+  }
+ ],
+ "ct-soonsiki-hair-seongsu-seoul-s-most-booked-salon": [
+  {
+   "id": "310129698",
+   "place_name": "순시키헤어 성수점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 52
+  },
+  {
+   "id": "1505028060",
+   "place_name": "뷰티포스마일",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 57
+  },
+  {
+   "id": "1796458770",
+   "place_name": "와이오유 성수점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 125
+  }
+ ],
+ "ct-foreigner-friendly-popular-korean-hair-salon-jun": [],
+ "ct-hair-the-beau-sinchon-branch": [
+  {
+   "id": "1845238440",
+   "place_name": "헤어더뷰 신촌점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 2
+  },
+  {
+   "id": "23121432",
+   "place_name": "메시헤어",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 22
+  },
+  {
+   "id": "1778186014",
+   "place_name": "헤어디하트 신촌점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 59
+  },
+  {
+   "id": "683207516",
+   "place_name": "카누헤어 신촌점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 60
+  },
+  {
+   "id": "1418650869",
+   "place_name": "요한헤어 신촌역점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 72
+  },
+  {
+   "id": "2073747416",
+   "place_name": "손탄헤어",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 77
+  },
+  {
+   "id": "681900951",
+   "place_name": "에이바헤어 신촌점",
+   "category_name": "가정,생활 > 미용 > 미용실 > 에이바헤어",
+   "distance": 80
+  },
+  {
+   "id": "681331555",
+   "place_name": "제오헤어 신촌점",
+   "category_name": "가정,생활 > 미용 > 미용실 > 제오헤어",
+   "distance": 104
+  },
+  {
+   "id": "1273353817",
+   "place_name": "리소헤어 신촌점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 122
+  },
+  {
+   "id": "1314026274",
+   "place_name": "샾머무르다 신촌명물거리점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 122
+  },
+  {
+   "id": "1326810432",
+   "place_name": "샾머무르다 맨즈 신촌점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 126
+  },
+  {
+   "id": "15665753",
+   "place_name": "준오헤어 신촌점",
+   "category_name": "가정,생활 > 미용 > 미용실 > 준오헤어",
+   "distance": 127
+  },
+  {
+   "id": "858293251",
+   "place_name": "나나로그 신촌점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 144
+  }
+ ],
+ "ct-lowe-sinchon-branch-private-hair-salon": [
+  {
+   "id": "1427697335",
+   "place_name": "로위 신촌점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 2
+  },
+  {
+   "id": "1067387349",
+   "place_name": "마끼에 현대백화점 신촌점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 42
+  },
+  {
+   "id": "14525800",
+   "place_name": "라뷰티코아 신촌점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 67
+  },
+  {
+   "id": "2115331194",
+   "place_name": "샾머무르다 신촌역점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 77
+  },
+  {
+   "id": "20745447",
+   "place_name": "권태복헤어",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 79
+  },
+  {
+   "id": "10874905",
+   "place_name": "하나헤어",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 90
+  },
+  {
+   "id": "27321400",
+   "place_name": "데몬헤어 신촌점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 111
+  },
+  {
+   "id": "15649382",
+   "place_name": "루시헤어",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 111
+  },
+  {
+   "id": "14663578",
+   "place_name": "세마헤어 신촌점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 111
+  },
+  {
+   "id": "9120253",
+   "place_name": "산타클로스헤어 신촌점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 111
+  },
+  {
+   "id": "2103675796",
+   "place_name": "모닉헤어",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 114
+  },
+  {
+   "id": "355001983",
+   "place_name": "하치헤어 스튜디오 신촌점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 116
+  },
+  {
+   "id": "2090077337",
+   "place_name": "에이픽헤어 신촌점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 123
+  },
+  {
+   "id": "800503071",
+   "place_name": "이가자헤어비스 신촌이마트점",
+   "category_name": "가정,생활 > 미용 > 미용실 > 이가자헤어비스",
+   "distance": 128
+  },
+  {
+   "id": "24691463",
+   "place_name": "미즈헤어",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 136
+  },
+  {
+   "id": "26068322",
+   "place_name": "보나헤어",
+   "category_name": "가정,생활 > 미용 > 가발",
+   "distance": 73
+  }
+ ],
+ "ct-nanalog-sinchon-branch": [
+  {
+   "id": "858293251",
+   "place_name": "나나로그 신촌점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 2
+  },
+  {
+   "id": "1273353817",
+   "place_name": "리소헤어 신촌점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 22
+  },
+  {
+   "id": "15665753",
+   "place_name": "준오헤어 신촌점",
+   "category_name": "가정,생활 > 미용 > 미용실 > 준오헤어",
+   "distance": 41
+  },
+  {
+   "id": "681331555",
+   "place_name": "제오헤어 신촌점",
+   "category_name": "가정,생활 > 미용 > 미용실 > 제오헤어",
+   "distance": 59
+  },
+  {
+   "id": "1977968697",
+   "place_name": "이안헤어",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 67
+  },
+  {
+   "id": "1418650869",
+   "place_name": "요한헤어 신촌역점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 72
+  },
+  {
+   "id": "1812086266",
+   "place_name": "카이정헤어 연세신촌점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 79
+  },
+  {
+   "id": "681900951",
+   "place_name": "에이바헤어 신촌점",
+   "category_name": "가정,생활 > 미용 > 미용실 > 에이바헤어",
+   "distance": 82
+  },
+  {
+   "id": "1778186014",
+   "place_name": "헤어디하트 신촌점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 84
+  },
+  {
+   "id": "1314026274",
+   "place_name": "샾머무르다 신촌명물거리점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 94
+  },
+  {
+   "id": "683207516",
+   "place_name": "카누헤어 신촌점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 103
+  },
+  {
+   "id": "2090077337",
+   "place_name": "에이픽헤어 신촌점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 107
+  },
+  {
+   "id": "1065735152",
+   "place_name": "맨드살롱 신촌점",
+   "category_name": "가정,생활 > 미용 > 미용실 > 바버샵",
+   "distance": 127
+  },
+  {
+   "id": "1221915390",
+   "place_name": "인히어센트 연세신촌점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 132
+  },
+  {
+   "id": "2073747416",
+   "place_name": "손탄헤어",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 138
+  },
+  {
+   "id": "2106786660",
+   "place_name": "헤어루아브 신촌연대점",
+   "category_name": "가정,생활 > 미용",
+   "distance": 59
+  }
+ ],
+ "ct-ahead-head-spa-premium-hand-performed-scalp-care": [
+  {
+   "id": "1413668625",
+   "place_name": "브로우기프트",
+   "category_name": "가정,생활 > 미용 > 두피,탈모관리",
+   "distance": 42
+  },
+  {
+   "id": "342829898",
+   "place_name": "두피본당",
+   "category_name": "가정,생활 > 미용 > 두피,탈모관리",
+   "distance": 58
+  },
+  {
+   "id": "9406514",
+   "place_name": "에이아이갤러리",
+   "category_name": "가정,생활 > 미용 > 두피,탈모관리",
+   "distance": 106
+  },
+  {
+   "id": "1815328171",
+   "place_name": "엘리나의헤어스파",
+   "category_name": "가정,생활 > 미용 > 두피,탈모관리",
+   "distance": 125
+  },
+  {
+   "id": "572435902",
+   "place_name": "누보뷰티",
+   "category_name": "가정,생활 > 미용 > 화장품",
+   "distance": 65
+  }
+ ],
+ "ct-shejac-hair-makeup-sinsa-premium-scalp-hair-care": [
+  {
+   "id": "1557172314",
+   "place_name": "쉬작",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 0
+  },
+  {
+   "id": "2144965027",
+   "place_name": "리베르신사",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 14
+  },
+  {
+   "id": "1664810787",
+   "place_name": "씬스페이스 본점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 24
+  },
+  {
+   "id": "256112394",
+   "place_name": "깔살롱",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 37
+  },
+  {
+   "id": "862495080",
+   "place_name": "마돈나헤어",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 61
+  },
+  {
+   "id": "150440939",
+   "place_name": "피움부티크",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 62
+  },
+  {
+   "id": "1159871944",
+   "place_name": "이퀄다이아몬드 가로수길점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 62
+  },
+  {
+   "id": "885660582",
+   "place_name": "디스탠다드",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 66
+  },
+  {
+   "id": "1151059786",
+   "place_name": "리티티",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 75
+  },
+  {
+   "id": "387464975",
+   "place_name": "기억헤어메이크업 신사본점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 81
+  },
+  {
+   "id": "2108086446",
+   "place_name": "뉴이드헤어",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 82
+  },
+  {
+   "id": "1679966343",
+   "place_name": "맨드살롱 신사점",
+   "category_name": "가정,생활 > 미용 > 미용실 > 바버샵",
+   "distance": 87
+  },
+  {
+   "id": "16704033",
+   "place_name": "토트하헤어커커",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 97
+  },
+  {
+   "id": "1088003769",
+   "place_name": "아뜰랑 맨즈헤어 신사역점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 111
+  },
+  {
+   "id": "1499077955",
+   "place_name": "디벨르맨즈헤어",
+   "category_name": "가정,생활 > 미용 > 미용실 > 바버샵",
+   "distance": 111
+  },
+  {
+   "id": "766017259",
+   "place_name": "튜이메이크업",
+   "category_name": "가정,생활 > 미용 > 메이크업",
+   "distance": 60
+  },
+  {
+   "id": "144641208",
+   "place_name": "레브메이크업",
+   "category_name": "가정,생활 > 미용 > 메이크업",
+   "distance": 72
+  }
+ ],
+ "ct-korean-style-hair-coloring-in-sinsa-kkal-salon": [
+  {
+   "id": "256112394",
+   "place_name": "깔살롱",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 2
+  },
+  {
+   "id": "2144965027",
+   "place_name": "리베르신사",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 27
+  },
+  {
+   "id": "885660582",
+   "place_name": "디스탠다드",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 27
+  },
+  {
+   "id": "1557172314",
+   "place_name": "쉬작",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 38
+  },
+  {
+   "id": "1664810787",
+   "place_name": "씬스페이스 본점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 42
+  },
+  {
+   "id": "1159871944",
+   "place_name": "이퀄다이아몬드 가로수길점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 46
+  },
+  {
+   "id": "150440939",
+   "place_name": "피움부티크",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 63
+  },
+  {
+   "id": "1151059786",
+   "place_name": "리티티",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 75
+  },
+  {
+   "id": "2108086446",
+   "place_name": "뉴이드헤어",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 76
+  },
+  {
+   "id": "27510732",
+   "place_name": "꾸밈",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 80
+  },
+  {
+   "id": "862495080",
+   "place_name": "마돈나헤어",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 89
+  },
+  {
+   "id": "130699927",
+   "place_name": "엣트",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 91
+  },
+  {
+   "id": "1628074159",
+   "place_name": "준오헤어 신사역점",
+   "category_name": "가정,생활 > 미용 > 미용실 > 준오헤어",
+   "distance": 99
+  },
+  {
+   "id": "121148793",
+   "place_name": "그로잉살롱 본점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 104
+  },
+  {
+   "id": "1959151738",
+   "place_name": "나나헤어",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 106
+  },
+  {
+   "id": "144641208",
+   "place_name": "레브메이크업",
+   "category_name": "가정,생활 > 미용 > 메이크업",
+   "distance": 51
+  },
+  {
+   "id": "766017259",
+   "place_name": "튜이메이크업",
+   "category_name": "가정,생활 > 미용 > 메이크업",
+   "distance": 94
+  }
+ ],
+ "ct-u-itda-gangnam-branch-korean-hair-extension": [
+  {
+   "id": "272497389",
+   "place_name": "구르미그린",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 27
+  },
+  {
+   "id": "346949946",
+   "place_name": "쥬라엘드살롱 가로수길점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 27
+  },
+  {
+   "id": "1088003769",
+   "place_name": "아뜰랑 맨즈헤어 신사역점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 55
+  },
+  {
+   "id": "1499077955",
+   "place_name": "디벨르맨즈헤어",
+   "category_name": "가정,생활 > 미용 > 미용실 > 바버샵",
+   "distance": 55
+  },
+  {
+   "id": "1973300716",
+   "place_name": "오초헤어하우스",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 97
+  },
+  {
+   "id": "387464975",
+   "place_name": "기억헤어메이크업 신사본점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 99
+  },
+  {
+   "id": "12434218",
+   "place_name": "준오헤어 가로수길점",
+   "category_name": "가정,생활 > 미용 > 미용실 > 준오헤어",
+   "distance": 107
+  },
+  {
+   "id": "147729769",
+   "place_name": "헤어컨설팅 신사본점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 113
+  },
+  {
+   "id": "2108086446",
+   "place_name": "뉴이드헤어",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 119
+  },
+  {
+   "id": "1679966343",
+   "place_name": "맨드살롱 신사점",
+   "category_name": "가정,생활 > 미용 > 미용실 > 바버샵",
+   "distance": 121
+  },
+  {
+   "id": "27146375",
+   "place_name": "반에스",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 135
+  },
+  {
+   "id": "1823238244",
+   "place_name": "언노운",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 144
+  },
+  {
+   "id": "26983117",
+   "place_name": "가로수헤어",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 145
+  },
+  {
+   "id": "1664810787",
+   "place_name": "씬스페이스 본점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 146
+  },
+  {
+   "id": "16704033",
+   "place_name": "토트하헤어커커",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 147
+  },
+  {
+   "id": "44619521",
+   "place_name": "유잇다붙임머리 강남점",
+   "category_name": "가정,생활 > 미용 > 가발",
+   "distance": 52
+  },
+  {
+   "id": "20373453",
+   "place_name": "더마힐두피탈모",
+   "category_name": "가정,생활 > 미용 > 화장품",
+   "distance": 86
+  },
+  {
+   "id": "766017259",
+   "place_name": "튜이메이크업",
+   "category_name": "가정,생활 > 미용 > 메이크업",
+   "distance": 122
+  }
+ ],
+ "ct-eco-jardin-bs-124-k-premium-head-spa-custom-desi": [
+  {
+   "id": "1645282184",
+   "place_name": "채룸헤어",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 34
+  },
+  {
+   "id": "1274541615",
+   "place_name": "성원미용실",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 37
+  },
+  {
+   "id": "859296031",
+   "place_name": "비비룸",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 62
+  },
+  {
+   "id": "1144955653",
+   "place_name": "소희살롱",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 62
+  },
+  {
+   "id": "1652800237",
+   "place_name": "메이드인 영헤어 위례점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 63
+  },
+  {
+   "id": "1334087229",
+   "place_name": "로그헤어앤스파",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 67
+  },
+  {
+   "id": "1224434975",
+   "place_name": "장미살롱",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 70
+  },
+  {
+   "id": "512057203",
+   "place_name": "오늘은헤어",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 106
+  },
+  {
+   "id": "697884273",
+   "place_name": "헤메드헤어스튜디오",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 117
+  },
+  {
+   "id": "1294782759",
+   "place_name": "Hair by 선물",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 126
+  },
+  {
+   "id": "1275348246",
+   "place_name": "살롱드에스더",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 134
+  },
+  {
+   "id": "19155550",
+   "place_name": "최가을헤어드레서 본사",
+   "category_name": "서비스,산업 > 기업",
+   "distance": 37
+  },
+  {
+   "id": "1634799491",
+   "place_name": "위즈덤뷰티",
+   "category_name": "가정,생활 > 미용 > 메이크업",
+   "distance": 111
+  }
+ ],
+ "ct-duvel-hair-sungshin-women-s-university-branch-af": [
+  {
+   "id": "2002064036",
+   "place_name": "에이픽헤어 듀벨성신점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 0
+  },
+  {
+   "id": "1642703017",
+   "place_name": "에센슈얼 듀벨성신점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 0
+  },
+  {
+   "id": "156685991",
+   "place_name": "스타일마스타 이즈 어반 성신여대점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 18
+  },
+  {
+   "id": "1671954305",
+   "place_name": "우주헤어 성신여대입구역점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 34
+  },
+  {
+   "id": "901557880",
+   "place_name": "달밤헤어 성신여대점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 34
+  },
+  {
+   "id": "1924899868",
+   "place_name": "멜우드 맨즈헤어",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 35
+  },
+  {
+   "id": "17320475",
+   "place_name": "한스헤어",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 49
+  },
+  {
+   "id": "854673147",
+   "place_name": "궁서채헤어 성신여대점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 55
+  },
+  {
+   "id": "967050752",
+   "place_name": "헤어더뷰 성신여대점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 55
+  },
+  {
+   "id": "11833536",
+   "place_name": "최가을헤어드레서 돈암점",
+   "category_name": "가정,생활 > 미용 > 미용실 > 최가을헤어드레서",
+   "distance": 62
+  },
+  {
+   "id": "15962782",
+   "place_name": "민호헤어",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 71
+  },
+  {
+   "id": "1476744711",
+   "place_name": "컬루",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 72
+  },
+  {
+   "id": "1128308148",
+   "place_name": "헬로헤어 고져스.네일",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 74
+  },
+  {
+   "id": "992886787",
+   "place_name": "무트나인헤어",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 75
+  },
+  {
+   "id": "2093188664",
+   "place_name": "G9헤어 성신여대점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 75
+  }
+ ],
+ "ct-hair-the-beau-wangsimni-station-branch": [
+  {
+   "id": "1146944169",
+   "place_name": "맨드살롱 왕십리역점(12호점)",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 119
+  },
+  {
+   "id": "1356140428",
+   "place_name": "앙꼬네강아지미용실",
+   "category_name": "가정,생활 > 반려동물 > 반려동물미용",
+   "distance": 135
+  },
+  {
+   "id": "16328434",
+   "place_name": "강헤어샵",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 137
+  },
+  {
+   "id": "562023202",
+   "place_name": "준오헤어 왕십리역점",
+   "category_name": "가정,생활 > 미용 > 미용실 > 준오헤어",
+   "distance": 142
+  },
+  {
+   "id": "1890127856",
+   "place_name": "헤어더뷰 퍼스트 왕십리역점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 142
+  },
+  {
+   "id": "20747430",
+   "place_name": "한양미용실",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 142
+  }
+ ],
+ "ct-lee-chul-hair-kerker-haengdang-branch": [
+  {
+   "id": "1762002598",
+   "place_name": "블로비헤어 행당역점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 17
+  },
+  {
+   "id": "1378932270",
+   "place_name": "헤어살롱코라 행당점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 17
+  },
+  {
+   "id": "16376598",
+   "place_name": "블루클럽 행당점",
+   "category_name": "가정,생활 > 미용 > 미용실 > 블루클럽",
+   "distance": 43
+  },
+  {
+   "id": "2021654854",
+   "place_name": "행당남성컷",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 46
+  },
+  {
+   "id": "433097149",
+   "place_name": "토니앤가이 행당점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 64
+  },
+  {
+   "id": "1032555134",
+   "place_name": "쎄븐미용실",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 132
+  },
+  {
+   "id": "1016412662",
+   "place_name": "현경헤어",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 132
+  },
+  {
+   "id": "20346198",
+   "place_name": "머리못하는집",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 133
+  },
+  {
+   "id": "10661941",
+   "place_name": "여정헤어샵",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 134
+  },
+  {
+   "id": "1015900934",
+   "place_name": "진재화헤어쑈",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 139
+  },
+  {
+   "id": "16379803",
+   "place_name": "대림 헤어모드",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 149
+  },
+  {
+   "id": "8815032",
+   "place_name": "김정숙미용실",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 149
+  },
+  {
+   "id": "354636352",
+   "place_name": "릴리프헤어",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 149
+  },
+  {
+   "id": "165464604",
+   "place_name": "헤어코스",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 149
+  }
+ ],
+ "ct-aeer-hair-yeouido-english-speaking-hair-salon-ne": [
+  {
+   "id": "1046560882",
+   "place_name": "아에르헤어 여의도점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 4
+  },
+  {
+   "id": "680004225",
+   "place_name": "차홍룸 여의도점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 137
+  }
+ ],
+ "ct-the-dears-lotte-department-store-yeongdeungpo-br": [
+  {
+   "id": "338081758",
+   "place_name": "더디얼스 롯데백화점 영등포점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 73
+  },
+  {
+   "id": "18169617",
+   "place_name": "블루클럽 영등포역점",
+   "category_name": "가정,생활 > 미용 > 미용실 > 블루클럽",
+   "distance": 102
+  },
+  {
+   "id": "16331305",
+   "place_name": "달려라레게",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 128
+  }
+ ],
+ "ct-weneed-black-forena-dangsan": [
+  {
+   "id": "232698273",
+   "place_name": "위닛블랙 포레나당산점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 19
+  },
+  {
+   "id": "20906357",
+   "place_name": "스타일헤어",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 79
+  },
+  {
+   "id": "234081796",
+   "place_name": "어센틱바버샵",
+   "category_name": "가정,생활 > 미용 > 미용실 > 바버샵",
+   "distance": 112
+  },
+  {
+   "id": "1886117385",
+   "place_name": "디뮤어헤어살롱 영등포구청역점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 114
+  },
+  {
+   "id": "2036417054",
+   "place_name": "블루원컷",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 114
+  },
+  {
+   "id": "8302606",
+   "place_name": "다크헤어",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 144
+  },
+  {
+   "id": "948994452",
+   "place_name": "붙임머리앤뷰티위그",
+   "category_name": "가정,생활 > 미용 > 가발",
+   "distance": 95
+  }
+ ],
+ "ct-eof-yeonnam-main-branch": [
+  {
+   "id": "804950505",
+   "place_name": "이오브",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 3
+  },
+  {
+   "id": "1790173589",
+   "place_name": "르로헤어",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 62
+  },
+  {
+   "id": "1063059488",
+   "place_name": "봉살롱",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 80
+  },
+  {
+   "id": "1463628495",
+   "place_name": "이오브 도큐먼트",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 86
+  },
+  {
+   "id": "968268312",
+   "place_name": "보니따헤어",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 108
+  },
+  {
+   "id": "1564149296",
+   "place_name": "더블브이디",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 113
+  },
+  {
+   "id": "1059201651",
+   "place_name": "태후사랑 연남점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 118
+  },
+  {
+   "id": "214527760",
+   "place_name": "몬트",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 134
+  },
+  {
+   "id": "1982785187",
+   "place_name": "킷하우스",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 137
+  },
+  {
+   "id": "1487137455",
+   "place_name": "더시즌헤어",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 139
+  },
+  {
+   "id": "1262982750",
+   "place_name": "디자이너 김쌤",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 141
+  },
+  {
+   "id": "2057623991",
+   "place_name": "살롱고요히",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 143
+  },
+  {
+   "id": "1076998273",
+   "place_name": "인노브",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 144
+  },
+  {
+   "id": "372203907",
+   "place_name": "살롱드티에드",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 145
+  },
+  {
+   "id": "1010017087",
+   "place_name": "메이헤어",
+   "category_name": "가정,생활 > 미용",
+   "distance": 80
+  }
+ ],
+ "ct-idhair-brighten-yeouido-place": [
+  {
+   "id": "1032475251",
+   "place_name": "아이디헤어 브라이튼여의도점",
+   "category_name": "가정,생활 > 미용 > 미용실 > 아이디헤어",
+   "distance": 54
+  }
+ ],
+ "ct-aknack-hannam-trendy-hair-salon-in-seoul-for-cut": [
+  {
+   "id": "2048312065",
+   "place_name": "어낵 한남점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 4
+  },
+  {
+   "id": "746176116",
+   "place_name": "오뷔르x쉐어스팟사운즈 한남점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 80
+  },
+  {
+   "id": "1807743290",
+   "place_name": "꼼나나 비앙 한남점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 81
+  },
+  {
+   "id": "272346553",
+   "place_name": "토와에 한남",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 83
+  },
+  {
+   "id": "27376388",
+   "place_name": "아티스트태양 한남점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 148
+  }
+ ],
+ "ct-aucalme-hair-yongsan-i-park-mall-branch": [
+  {
+   "id": "2002495377",
+   "place_name": "오컴헤어",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 53
+  },
+  {
+   "id": "214170231",
+   "place_name": "준오헤어 가든준오용산아이파크몰점",
+   "category_name": "가정,생활 > 미용 > 미용실 > 준오헤어",
+   "distance": 55
+  },
+  {
+   "id": "1874718308",
+   "place_name": "이가자헤어비스 용산아이파크몰점",
+   "category_name": "가정,생활 > 미용 > 미용실 > 이가자헤어비스",
+   "distance": 57
+  },
+  {
+   "id": "1576848234",
+   "place_name": "살롱드블루 용산아이파크몰점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 58
+  },
+  {
+   "id": "562734000",
+   "place_name": "오캄 용산아이파크몰점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 76
+  }
+ ],
+ "ct-leekaja-hairbis-yongsan-i-park-mall-branch-head": [
+  {
+   "id": "646498608",
+   "place_name": "닥터모락 용산점",
+   "category_name": "가정,생활 > 미용 > 두피,탈모관리",
+   "distance": 54
+  },
+  {
+   "id": "416036906",
+   "place_name": "WT메소드 신용산점",
+   "category_name": "가정,생활 > 미용 > 두피,탈모관리 > WT메소드",
+   "distance": 63
+  }
+ ],
+ "ct-mood-e-hair-yongsan": [
+  {
+   "id": "1913925703",
+   "place_name": "무드에",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 86
+  },
+  {
+   "id": "24768652",
+   "place_name": "머리하는날",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 135
+  },
+  {
+   "id": "800995972",
+   "place_name": "얼굴은몰라도머리는됩니다 신용산점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 142
+  }
+ ],
+ "ct-hair-salon-ham-starfield-suwon-branch": [
+  {
+   "id": "11841157",
+   "place_name": "박승철헤어스투디오 동수원홈플러스점",
+   "category_name": "가정,생활 > 미용 > 미용실 > 박승철헤어스투디오",
+   "distance": 29
+  },
+  {
+   "id": "83171258",
+   "place_name": "살롱애뜰 인계점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 110
+  },
+  {
+   "id": "546192413",
+   "place_name": "신파람24시붙임머리 수원인계점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 110
+  },
+  {
+   "id": "300240963",
+   "place_name": "멘즈헤어",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 133
+  },
+  {
+   "id": "1502114709",
+   "place_name": "헤어더봄 인계점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 133
+  },
+  {
+   "id": "625790213",
+   "place_name": "베이블룸",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 135
+  },
+  {
+   "id": "920815367",
+   "place_name": "플랜에이치 수원인계점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 143
+  },
+  {
+   "id": "25465875",
+   "place_name": "넘버원붙임머리 수원점",
+   "category_name": "가정,생활 > 미용 > 미용용품",
+   "distance": 132
+  }
+ ],
+ "ados-myeongdong-night-market": [],
+ "ct-juno-hair-myeongdong-1st": [
+  {
+   "id": "19699660",
+   "place_name": "준오헤어 명동4호점",
+   "category_name": "가정,생활 > 미용 > 미용실 > 준오헤어",
+   "distance": 50
+  },
+  {
+   "id": "8528339",
+   "place_name": "준오헤어 명동1호점",
+   "category_name": "가정,생활 > 미용 > 미용실 > 준오헤어",
+   "distance": 70
+  },
+  {
+   "id": "13500125",
+   "place_name": "준오헤어 명동2호점",
+   "category_name": "가정,생활 > 미용 > 미용실 > 준오헤어",
+   "distance": 118
+  },
+  {
+   "id": "477577602",
+   "place_name": "모녹",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 33
+  },
+  {
+   "id": "1017145552",
+   "place_name": "파리지엔헤어 명동점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 46
+  },
+  {
+   "id": "1909576754",
+   "place_name": "킴스헤어 명동점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 47
+  },
+  {
+   "id": "1128996196",
+   "place_name": "자연주의먹는펌헤어",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 71
+  },
+  {
+   "id": "619555570",
+   "place_name": "김춘희미용실",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 71
+  },
+  {
+   "id": "11842865",
+   "place_name": "리안헤어 명동1호점",
+   "category_name": "가정,생활 > 미용 > 미용실 > 리안헤어",
+   "distance": 71
+  },
+  {
+   "id": "363098610",
+   "place_name": "서민호헤어",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 80
+  },
+  {
+   "id": "1046756639",
+   "place_name": "에코쟈뎅 명동점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 85
+  },
+  {
+   "id": "601618399",
+   "place_name": "박준뷰티랩 명동점",
+   "category_name": "가정,생활 > 미용 > 미용실 > 박준뷰티랩",
+   "distance": 93
+  },
+  {
+   "id": "1272428284",
+   "place_name": "에이바헤어 명동센터점",
+   "category_name": "가정,생활 > 미용 > 미용실 > 에이바헤어",
+   "distance": 93
+  },
+  {
+   "id": "67326965",
+   "place_name": "헤리크 명동점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 96
+  },
+  {
+   "id": "1521443768",
+   "place_name": "나나로그 명동점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 106
+  },
+  {
+   "id": "77123259",
+   "place_name": "문헤어살롱 명동점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 108
+  }
+ ],
+ "ct-juno-hair-myeongdong-4th": [
+  {
+   "id": "19699660",
+   "place_name": "준오헤어 명동4호점",
+   "category_name": "가정,생활 > 미용 > 미용실 > 준오헤어",
+   "distance": 43
+  },
+  {
+   "id": "8528339",
+   "place_name": "준오헤어 명동1호점",
+   "category_name": "가정,생활 > 미용 > 미용실 > 준오헤어",
+   "distance": 104
+  },
+  {
+   "id": "584933082",
+   "place_name": "준오헤어 명동스트리트점",
+   "category_name": "가정,생활 > 미용 > 미용실 > 준오헤어",
+   "distance": 125
+  },
+  {
+   "id": "1781297478",
+   "place_name": "준오헤어 명동예술극장점",
+   "category_name": "가정,생활 > 미용 > 미용실 > 준오헤어",
+   "distance": 144
+  },
+  {
+   "id": "1128996196",
+   "place_name": "자연주의먹는펌헤어",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 11
+  },
+  {
+   "id": "619555570",
+   "place_name": "김춘희미용실",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 14
+  },
+  {
+   "id": "67326965",
+   "place_name": "헤리크 명동점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 30
+  },
+  {
+   "id": "8334535",
+   "place_name": "살롱드마샬 명동점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 49
+  },
+  {
+   "id": "477577602",
+   "place_name": "모녹",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 49
+  },
+  {
+   "id": "601618399",
+   "place_name": "박준뷰티랩 명동점",
+   "category_name": "가정,생활 > 미용 > 미용실 > 박준뷰티랩",
+   "distance": 61
+  },
+  {
+   "id": "9208363",
+   "place_name": "아뜰리에in7",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 62
+  },
+  {
+   "id": "8274712",
+   "place_name": "두가헤어",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 82
+  },
+  {
+   "id": "1046756639",
+   "place_name": "에코쟈뎅 명동점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 89
+  },
+  {
+   "id": "566468614",
+   "place_name": "헤어더뷰 명동점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 97
+  },
+  {
+   "id": "1521443768",
+   "place_name": "나나로그 명동점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 99
+  },
+  {
+   "id": "25887025",
+   "place_name": "김선영미용실",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 103
+  },
+  {
+   "id": "11842865",
+   "place_name": "리안헤어 명동1호점",
+   "category_name": "가정,생활 > 미용 > 미용실 > 리안헤어",
+   "distance": 105
+  }
+ ],
+ "ct-juno-hair-myeongdong-art-theater-branch": [
+  {
+   "id": "19699660",
+   "place_name": "준오헤어 명동4호점",
+   "category_name": "가정,생활 > 미용 > 미용실 > 준오헤어",
+   "distance": 49
+  },
+  {
+   "id": "8528339",
+   "place_name": "준오헤어 명동1호점",
+   "category_name": "가정,생활 > 미용 > 미용실 > 준오헤어",
+   "distance": 109
+  },
+  {
+   "id": "13500125",
+   "place_name": "준오헤어 명동2호점",
+   "category_name": "가정,생활 > 미용 > 미용실 > 준오헤어",
+   "distance": 146
+  },
+  {
+   "id": "11842865",
+   "place_name": "리안헤어 명동1호점",
+   "category_name": "가정,생활 > 미용 > 미용실 > 리안헤어",
+   "distance": 30
+  },
+  {
+   "id": "363098610",
+   "place_name": "서민호헤어",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 39
+  },
+  {
+   "id": "1046756639",
+   "place_name": "에코쟈뎅 명동점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 55
+  },
+  {
+   "id": "1909576754",
+   "place_name": "킴스헤어 명동점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 58
+  },
+  {
+   "id": "477577602",
+   "place_name": "모녹",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 72
+  },
+  {
+   "id": "1017145552",
+   "place_name": "파리지엔헤어 명동점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 74
+  },
+  {
+   "id": "1521443768",
+   "place_name": "나나로그 명동점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 78
+  },
+  {
+   "id": "619555570",
+   "place_name": "김춘희미용실",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 84
+  },
+  {
+   "id": "1128996196",
+   "place_name": "자연주의먹는펌헤어",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 95
+  },
+  {
+   "id": "67326965",
+   "place_name": "헤리크 명동점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 118
+  },
+  {
+   "id": "1272428284",
+   "place_name": "에이바헤어 명동센터점",
+   "category_name": "가정,생활 > 미용 > 미용실 > 에이바헤어",
+   "distance": 118
+  },
+  {
+   "id": "601618399",
+   "place_name": "박준뷰티랩 명동점",
+   "category_name": "가정,생활 > 미용 > 미용실 > 박준뷰티랩",
+   "distance": 130
+  },
+  {
+   "id": "8334535",
+   "place_name": "살롱드마샬 명동점",
+   "category_name": "가정,생활 > 미용 > 미용실",
+   "distance": 132
+  }
+ ]
+}

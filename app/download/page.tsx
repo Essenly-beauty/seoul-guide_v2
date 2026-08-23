@@ -26,7 +26,7 @@ export default function DownloadPage() {
         <section className="stack sm" style={{ marginTop: 30, textAlign: "left" }}>
           <div>
             <b className="t-label-md">iPhone &amp; iPad</b>
-            <p className="t-caption muted">Open this page in Safari, tap Share, then choose Add to Home Screen. iPhone does not show an in-page download prompt.</p>
+            <p className="t-caption muted">Open this page in Safari or Chrome, tap Share, then choose Add to Home Screen. iPhone does not show an in-page download prompt.</p>
           </div>
           <div>
             <b className="t-label-md">Android &amp; desktop</b>

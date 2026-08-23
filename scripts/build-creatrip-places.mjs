@@ -10,6 +10,7 @@
 import { readFileSync, writeFileSync, existsSync, mkdirSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
+import { applyHoursOverrides } from "./lib/generated-places.mjs";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 const CSV_PATH = process.argv[2] ?? join(process.env.HOME, "Downloads", "creatrip_hair_salons_v3.csv");
@@ -285,6 +286,9 @@ if (existsSync(OVERRIDES_PATH)) {
   }
   console.log(`kr-name overrides applied: ${applied}`);
 }
+// …and the same for the Kakao-sourced opening hours (2026-08-23) —
+// scripts/backfill-hours.mjs owns scripts/lib/hours-overrides.json
+console.log(`hours overrides applied: ${applyHoursOverrides(places)}`);
 
 writeFileSync(OUT_PATH, header + JSON.stringify(places, null, 2).replace(/"([a-zA-Z][a-zA-Z0-9]*)":/g, "$1:") + ";\n");
 

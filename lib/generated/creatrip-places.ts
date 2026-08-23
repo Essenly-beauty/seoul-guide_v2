@@ -216,6 +216,10 @@ export const CREATRIP_PLACES: Place[] = [
     address: "부산 부산진구 중앙대로692번길 13 3F",
     lat: 35.154575,
     lng: 129.060027,
+    hours: {
+      open: "10:00",
+      close: "21:00"
+    },
     englishOk: true,
     serviceTags: [
       "color",
@@ -241,6 +245,10 @@ export const CREATRIP_PLACES: Place[] = [
     address: "부산 부산진구 서면로 71",
     lat: 35.157138,
     lng: 129.057603,
+    hours: {
+      open: "10:00",
+      close: "21:30"
+    },
     englishOk: true,
     serviceTags: [
       "color",
@@ -384,6 +392,10 @@ export const CREATRIP_PLACES: Place[] = [
     address: "서울 마포구 독막로3길 45 2F",
     lat: 37.550317,
     lng: 126.917629,
+    hours: {
+      open: "10:00",
+      close: "19:00"
+    },
     englishOk: true,
     serviceTags: [
       "color",
@@ -434,6 +446,10 @@ export const CREATRIP_PLACES: Place[] = [
     address: "서울 강남구 도산대로55길 49 B1F",
     lat: 37.526826,
     lng: 127.040971,
+    hours: {
+      open: "08:00",
+      close: "18:00"
+    },
     englishOk: true,
     serviceTags: [
       "cut"
@@ -457,6 +473,10 @@ export const CREATRIP_PLACES: Place[] = [
     address: "서울 강남구 도산대로50길 13 4F",
     lat: 37.521582,
     lng: 127.037701,
+    hours: {
+      open: "07:30",
+      close: "18:00"
+    },
     englishOk: true,
     serviceTags: [
       "color",
@@ -470,7 +490,7 @@ export const CREATRIP_PLACES: Place[] = [
   {
     id: "ct-commenana-cheongdam-branch-hair-makeup-and-image",
     name: "Commenana Cheongdam Branch | Hair, Makeup, and Image Consulting",
-    nameKr: "Commenana Cheongdam Branch | Hair, Makeup, and Image Consulting",
+    nameKr: "꼼나나 청담점",
     type: "hair_salon",
     zone: "apgujeong",
     priceRange: "₩₩",
@@ -482,6 +502,10 @@ export const CREATRIP_PLACES: Place[] = [
     address: "서울 강남구 선릉로 162길39 2F",
     lat: 37.526433,
     lng: 127.043714,
+    hours: {
+      open: "10:00",
+      close: "18:30"
+    },
     englishOk: true,
     serviceTags: [
       "cut"
@@ -493,7 +517,7 @@ export const CREATRIP_PLACES: Place[] = [
   {
     id: "ct-commenana-main-branch-hair-makeup-and-image-cons",
     name: "Commenana Main Branch | Hair, Makeup, and Image Consulting",
-    nameKr: "Commenana Main Branch | Hair, Makeup, and Image Consulting",
+    nameKr: "꼼나나",
     type: "hair_salon",
     zone: "apgujeong",
     priceRange: "₩₩",
@@ -505,6 +529,10 @@ export const CREATRIP_PLACES: Place[] = [
     address: "서울 강남구 압구정로72길 19",
     lat: 37.525247,
     lng: 127.045222,
+    hours: {
+      open: "10:00",
+      close: "19:00"
+    },
     englishOk: true,
     serviceTags: [
       "cut"
@@ -528,6 +556,10 @@ export const CREATRIP_PLACES: Place[] = [
     address: "서울 강남구 선릉로160길 5 MM빌딩 2,3F",
     lat: 37.526418,
     lng: 127.040772,
+    hours: {
+      open: "05:00",
+      close: "19:00"
+    },
     englishOk: true,
     serviceTags: [
       "cut"
@@ -551,6 +583,10 @@ export const CREATRIP_PLACES: Place[] = [
     address: "서울 강남구 선릉로152길 30 3F",
     lat: 37.524121,
     lng: 127.041888,
+    hours: {
+      open: "10:00",
+      close: "19:00"
+    },
     englishOk: true,
     serviceTags: [
       "cut"
@@ -574,6 +610,10 @@ export const CREATRIP_PLACES: Place[] = [
     address: "서울 강남구 언주로172길 60 2F",
     lat: 37.526748,
     lng: 127.038539,
+    hours: {
+      open: "10:00",
+      close: "19:00"
+    },
     englishOk: true,
     serviceTags: [
       "color",
@@ -598,6 +638,10 @@ export const CREATRIP_PLACES: Place[] = [
     address: "서울 강남구 선릉로 843",
     lat: 37.527216,
     lng: 127.040208,
+    hours: {
+      open: "09:30",
+      close: "21:00"
+    },
     englishOk: true,
     serviceTags: [
       "color",
@@ -668,6 +712,10 @@ export const CREATRIP_PLACES: Place[] = [
     address: "서울 강남구 선릉로153길 12 2F",
     lat: 37.524959,
     lng: 127.038562,
+    hours: {
+      open: "10:00",
+      close: "19:00"
+    },
     englishOk: true,
     serviceTags: [
       "color",
@@ -692,6 +740,10 @@ export const CREATRIP_PLACES: Place[] = [
     address: "서울 강남구 압구정로54길 5 2F",
     lat: 37.527469,
     lng: 127.039782,
+    hours: {
+      open: "10:00",
+      close: "19:30"
+    },
     englishOk: true,
     serviceTags: [
       "color",
@@ -716,6 +768,10 @@ export const CREATRIP_PLACES: Place[] = [
     address: "서울 서대문구 신촌로 163 2F",
     lat: 37.556976,
     lng: 126.944041,
+    hours: {
+      open: "11:00",
+      close: "20:30"
+    },
     serviceTags: [
       "color",
       "perm"
@@ -727,7 +783,7 @@ export const CREATRIP_PLACES: Place[] = [
   {
     id: "ct-sj-hair-edae",
     name: "SJ Hair Edae",
-    nameKr: "SJ Hair Edae",
+    nameKr: "SJ헤어",
     type: "hair_salon",
     zone: "hongdae",
     priceRange: "₩",
@@ -739,6 +795,10 @@ export const CREATRIP_PLACES: Place[] = [
     address: "서울 마포구 신촌로 160 2F",
     lat: 37.556303,
     lng: 126.94336,
+    hours: {
+      open: "10:00",
+      close: "20:00"
+    },
     englishOk: true,
     serviceTags: [
       "color",
@@ -751,7 +811,7 @@ export const CREATRIP_PLACES: Place[] = [
   {
     id: "ct-id-hair-susaek-dmc-branch",
     name: "id Hair | Susaek DMC Branch",
-    nameKr: "id Hair | Susaek DMC Branch",
+    nameKr: "아이디헤어 수색DMC점",
     type: "head_spa",
     zone: "seoul_etc",
     priceRange: "₩₩₩",
@@ -763,6 +823,10 @@ export const CREATRIP_PLACES: Place[] = [
     address: "서울 은평구 수색로 216 2F 202~204호",
     lat: 37.580848,
     lng: 126.900048,
+    hours: {
+      open: "10:00",
+      close: "21:00"
+    },
     englishOk: true,
     serviceTags: [
       "scalp"
@@ -883,6 +947,10 @@ export const CREATRIP_PLACES: Place[] = [
     address: "서울 강남구 강남대로 340 2F",
     lat: 37.493543,
     lng: 127.030224,
+    hours: {
+      open: "10:00",
+      close: "21:30"
+    },
     englishOk: true,
     serviceTags: [
       "color",
@@ -1070,6 +1138,10 @@ export const CREATRIP_PLACES: Place[] = [
     address: "서울 강남구 도산대로54길 32, 3F",
     lat: 37.52097,
     lng: 127.038957,
+    hours: {
+      open: "10:00",
+      close: "18:00"
+    },
     englishOk: true,
     serviceTags: [
       "color",
@@ -1236,6 +1308,10 @@ export const CREATRIP_PLACES: Place[] = [
     address: "서울 강남구 테헤란로63길 8 2F",
     lat: 37.505854,
     lng: 127.050548,
+    hours: {
+      open: "10:00",
+      close: "19:00"
+    },
     englishOk: true,
     serviceTags: [
       "color",
@@ -1260,6 +1336,10 @@ export const CREATRIP_PLACES: Place[] = [
     address: "서울 강남구 선릉로146길 56",
     lat: 37.521364,
     lng: 127.044332,
+    hours: {
+      open: "11:00",
+      close: "18:00"
+    },
     englishOk: true,
     serviceTags: [
       "cut"
@@ -1283,6 +1363,10 @@ export const CREATRIP_PLACES: Place[] = [
     address: "서울 강남구 테헤란로 101 3F",
     lat: 37.498616,
     lng: 127.027955,
+    hours: {
+      open: "10:00",
+      close: "21:00"
+    },
     englishOk: true,
     serviceTags: [
       "color",
@@ -1308,6 +1392,10 @@ export const CREATRIP_PLACES: Place[] = [
     address: "서울 강남구 강남대로96길 5 3F",
     lat: 37.499857,
     lng: 127.027735,
+    hours: {
+      open: "10:00",
+      close: "21:00"
+    },
     englishOk: true,
     serviceTags: [
       "color",
@@ -1333,6 +1421,10 @@ export const CREATRIP_PLACES: Place[] = [
     address: "서울 서초구 강남대로 441 3F",
     lat: 37.50174,
     lng: 127.025291,
+    hours: {
+      open: "10:00",
+      close: "21:00"
+    },
     englishOk: true,
     serviceTags: [
       "color",
@@ -1357,6 +1449,10 @@ export const CREATRIP_PLACES: Place[] = [
     address: "서울 강남구 테헤란로4길 25 2F",
     lat: 37.496852,
     lng: 127.030452,
+    hours: {
+      open: "10:00",
+      close: "21:30"
+    },
     englishOk: true,
     serviceTags: [
       "color",
@@ -1382,6 +1478,10 @@ export const CREATRIP_PLACES: Place[] = [
     address: "서울 강남구 강남대로 442 2F",
     lat: 37.502062,
     lng: 127.026081,
+    hours: {
+      open: "10:00",
+      close: "21:00"
+    },
     englishOk: true,
     serviceTags: [
       "color",
@@ -1420,7 +1520,7 @@ export const CREATRIP_PLACES: Place[] = [
   {
     id: "ct-kangeun-gangnam-hair-makeup",
     name: "KANGEUN | Gangnam Hair & Makeup",
-    nameKr: "KANGEUN | Gangnam Hair & Makeup",
+    nameKr: "강은",
     type: "hair_salon",
     zone: "gangnam_station",
     priceRange: "₩₩",
@@ -1432,6 +1532,10 @@ export const CREATRIP_PLACES: Place[] = [
     address: "서울 강남구 언주로126길 25 3F",
     lat: 37.513967,
     lng: 127.037538,
+    hours: {
+      open: "10:00",
+      close: "18:30"
+    },
     serviceTags: [
       "cut"
     ],
@@ -1528,6 +1632,10 @@ export const CREATRIP_PLACES: Place[] = [
     address: "서울 강남구 도산대로75길 19",
     lat: 37.52517,
     lng: 127.045888,
+    hours: {
+      open: "10:00",
+      close: "19:00"
+    },
     serviceTags: [
       "cut"
     ],
@@ -1550,6 +1658,10 @@ export const CREATRIP_PLACES: Place[] = [
     address: "서울 강남구 압구정로79길 37-1 1,2F",
     lat: 37.525552,
     lng: 127.050265,
+    hours: {
+      open: "10:00",
+      close: "19:00"
+    },
     englishOk: true,
     serviceTags: [
       "cut"
@@ -1584,7 +1696,7 @@ export const CREATRIP_PLACES: Place[] = [
   {
     id: "ct-more-on-hair-gangnam-branch",
     name: "More On Hair | Gangnam Branch",
-    nameKr: "More On Hair | Gangnam Branch",
+    nameKr: "모어온헤어 강남점",
     type: "hair_salon",
     zone: "gangnam_station",
     priceRange: "₩",
@@ -1596,6 +1708,10 @@ export const CREATRIP_PLACES: Place[] = [
     address: "서울 서초구 강남대로 475 3F",
     lat: 37.504736,
     lng: 127.023836,
+    hours: {
+      open: "10:00",
+      close: "19:00"
+    },
     englishOk: true,
     serviceTags: [
       "color",
@@ -1644,6 +1760,10 @@ export const CREATRIP_PLACES: Place[] = [
     address: "서울 서초구 사평대로56길 12 2F",
     lat: 37.502937,
     lng: 127.023135,
+    hours: {
+      open: "10:00",
+      close: "19:00"
+    },
     englishOk: true,
     serviceTags: [
       "color",
@@ -1702,7 +1822,7 @@ export const CREATRIP_PLACES: Place[] = [
   {
     id: "ct-onyad-gangnam-branch-personal-consulting-hair-sa",
     name: "ONYAD Gangnam Branch | Personal Consulting Hair Salon",
-    nameKr: "ONYAD Gangnam Branch | Personal Consulting Hair Salon",
+    nameKr: "온야드 강남점",
     type: "hair_salon",
     zone: "gangnam_station",
     priceRange: "₩",
@@ -1713,6 +1833,10 @@ export const CREATRIP_PLACES: Place[] = [
     address: "서울 강남구 강남대로98길 28 2F",
     lat: 37.500881,
     lng: 127.028679,
+    hours: {
+      open: "11:00",
+      close: "20:00"
+    },
     englishOk: true,
     serviceTags: [
       "color",
@@ -1807,6 +1931,10 @@ export const CREATRIP_PLACES: Place[] = [
     address: "서울 강남구 강남대로110길 14 2F",
     lat: 37.50383,
     lng: 127.026013,
+    hours: {
+      open: "10:00",
+      close: "20:00"
+    },
     englishOk: true,
     serviceTags: [
       "color",
@@ -1906,6 +2034,10 @@ export const CREATRIP_PLACES: Place[] = [
     address: "서울 강남구 강남대로106길 11, 5F",
     lat: 37.503055,
     lng: 127.026516,
+    hours: {
+      open: "10:30",
+      close: "20:00"
+    },
     englishOk: true,
     serviceTags: [
       "color",
@@ -1978,6 +2110,10 @@ export const CREATRIP_PLACES: Place[] = [
     address: "서울 강남구 봉은사로4길 17 2F",
     lat: 37.50373,
     lng: 127.026473,
+    hours: {
+      open: "11:00",
+      close: "20:00"
+    },
     englishOk: true,
     serviceTags: [
       "color",
@@ -2025,6 +2161,10 @@ export const CREATRIP_PLACES: Place[] = [
     address: "서울 강남구 논현로136길 7 B1",
     lat: 37.516079,
     lng: 127.031073,
+    hours: {
+      open: "11:00",
+      close: "20:00"
+    },
     serviceTags: [
       "color",
       "perm"
@@ -2036,7 +2176,7 @@ export const CREATRIP_PLACES: Place[] = [
   {
     id: "ct-onyad-apgujeong-rodeo-branch-hair-salon-with-per",
     name: "ONYAD Apgujeong Rodeo Branch | Hair Salon with Personal Styling Consultation",
-    nameKr: "ONYAD Apgujeong Rodeo Branch | Hair Salon with Personal Styling Consultation",
+    nameKr: "온야드 압구정로데오점",
     type: "hair_salon",
     zone: "apgujeong",
     priceRange: "₩",
@@ -2048,6 +2188,10 @@ export const CREATRIP_PLACES: Place[] = [
     address: "서울 강남구 도산대로53길 19 2F",
     lat: 37.524423,
     lng: 127.038373,
+    hours: {
+      open: "11:00",
+      close: "20:00"
+    },
     englishOk: true,
     serviceTags: [
       "color",
@@ -2154,7 +2298,7 @@ export const CREATRIP_PLACES: Place[] = [
   {
     id: "ct-wellkin-scalp-clinique-jongno-branch-professiona",
     name: "Wellkin Scalp Clinique Jongno Branch | Professional Hair Loss and Scalp Care",
-    nameKr: "Wellkin Scalp Clinique Jongno Branch | Professional Hair Loss and Scalp Care",
+    nameKr: "웰킨 서울종로점",
     type: "head_spa",
     zone: "jongno",
     priceRange: "₩₩",
@@ -2176,7 +2320,7 @@ export const CREATRIP_PLACES: Place[] = [
   {
     id: "ct-ravi-hair-hongdae-main-branch",
     name: "Ravi Hair Hongdae Main Branch",
-    nameKr: "Ravi Hair Hongdae Main Branch",
+    nameKr: "라비헤어 홍대본점",
     type: "hair_salon",
     zone: "hongdae",
     priceRange: "₩",
@@ -2248,7 +2392,7 @@ export const CREATRIP_PLACES: Place[] = [
   {
     id: "ct-special-offer-lee-kyung-min-foret-hongdae-branch",
     name: "Special Offer Lee Kyung Min Foret Hongdae Branch | Makeup",
-    nameKr: "Special Offer Lee Kyung Min Foret Hongdae Branch | Makeup",
+    nameKr: "이경민포레 홍대점",
     type: "hair_salon",
     zone: "hongdae",
     priceRange: "₩₩",
@@ -2260,6 +2404,10 @@ export const CREATRIP_PLACES: Place[] = [
     address: "서울 마포구 월드컵로5길 10",
     lat: 37.551907,
     lng: 126.911655,
+    hours: {
+      open: "10:00",
+      close: "19:00"
+    },
     englishOk: true,
     serviceTags: [
       "cut"
@@ -2330,6 +2478,10 @@ export const CREATRIP_PLACES: Place[] = [
     address: "서울 마포구 잔다리로3안길 40",
     lat: 37.550579,
     lng: 126.919296,
+    hours: {
+      open: "11:00",
+      close: "20:00"
+    },
     englishOk: true,
     serviceTags: [
       "color",
@@ -2422,6 +2574,10 @@ export const CREATRIP_PLACES: Place[] = [
     address: "서울 마포구 홍익로 17, 3F",
     lat: 37.553898,
     lng: 126.922736,
+    hours: {
+      open: "10:00",
+      close: "21:00"
+    },
     englishOk: true,
     serviceTags: [
       "color",
@@ -2447,6 +2603,10 @@ export const CREATRIP_PLACES: Place[] = [
     address: "서울 마포구 양화로 175",
     lat: 37.557754,
     lng: 126.924371,
+    hours: {
+      open: "10:00",
+      close: "21:00"
+    },
     englishOk: true,
     serviceTags: [
       "color",
@@ -2578,7 +2738,7 @@ export const CREATRIP_PLACES: Place[] = [
   {
     id: "ct-nanalog-hongdae-flagship",
     name: "NaNalog Hongdae Flagship",
-    nameKr: "NaNalog Hongdae Flagship",
+    nameKr: "나나로그 홍대플래그십",
     type: "hair_salon",
     zone: "hongdae",
     priceRange: "₩",
@@ -2590,6 +2750,10 @@ export const CREATRIP_PLACES: Place[] = [
     address: "서울 마포구 와우산로19길 11",
     lat: 37.551175,
     lng: 126.922455,
+    hours: {
+      open: "11:00",
+      close: "19:00"
+    },
     serviceTags: [
       "color",
       "perm"
@@ -2601,7 +2765,7 @@ export const CREATRIP_PLACES: Place[] = [
   {
     id: "ct-park-seung-chol-hair-studio-hongdae-book-an-appo",
     name: "Park Seung Chol Hair Studio Hongdae | Book an Appointment",
-    nameKr: "Park Seung Chol Hair Studio Hongdae | Book an Appointment",
+    nameKr: "박승철헤어스투디오 홍대점",
     type: "hair_salon",
     zone: "hongdae",
     priceRange: "₩",
@@ -2613,6 +2777,10 @@ export const CREATRIP_PLACES: Place[] = [
     address: "서울 마포구 어울마당로 135 3F",
     lat: 37.556358,
     lng: 126.924802,
+    hours: {
+      open: "10:30",
+      close: "20:30"
+    },
     englishOk: true,
     serviceTags: [
       "color",
@@ -2626,7 +2794,7 @@ export const CREATRIP_PLACES: Place[] = [
   {
     id: "ct-soonsiki-hair-hongdae-flagship-seoul-s-top-rated",
     name: "SOONSIKI Hair Hongdae Flagship | Seoul's Top-Rated Salon for International Guests",
-    nameKr: "SOONSIKI Hair Hongdae Flagship | Seoul's Top-Rated Salon for International Guests",
+    nameKr: "순시키헤어 soonsikihair",
     type: "hair_salon",
     zone: "hongdae",
     priceRange: "₩",
@@ -2639,6 +2807,10 @@ export const CREATRIP_PLACES: Place[] = [
     address: "서울 마포구 와우산로21길 29 5F",
     lat: 37.552191,
     lng: 126.92232,
+    hours: {
+      open: "10:00",
+      close: "19:00"
+    },
     englishOk: true,
     serviceTags: [
       "color",
@@ -2677,7 +2849,7 @@ export const CREATRIP_PLACES: Place[] = [
   {
     id: "ct-soonsiki-hair-hongdae-moment-branch-seoul-s-top",
     name: "SOONSIKI Hair Hongdae MOMENT Branch | Seoul's Top-Rated Salon for International Guests",
-    nameKr: "SOONSIKI Hair Hongdae MOMENT Branch | Seoul's Top-Rated Salon for International Guests",
+    nameKr: "순시키헤어 로맨티크점",
     type: "hair_salon",
     zone: "hongdae",
     priceRange: "₩",
@@ -2690,6 +2862,10 @@ export const CREATRIP_PLACES: Place[] = [
     address: "서울 마포구 양화로 164 8F",
     lat: 37.556515,
     lng: 126.924023,
+    hours: {
+      open: "10:00",
+      close: "19:00"
+    },
     englishOk: true,
     serviceTags: [
       "color",
@@ -2775,7 +2951,7 @@ export const CREATRIP_PLACES: Place[] = [
   {
     id: "ct-commenanabien-hannam-branch-hair-makeup-and-imag",
     name: "Commenanabien Hannam Branch | Hair, Makeup, and Image Consulting in Itaewon",
-    nameKr: "Commenanabien Hannam Branch | Hair, Makeup, and Image Consulting in Itaewon",
+    nameKr: "꼼나나 비앙 한남점",
     type: "hair_salon",
     zone: "itaewon",
     priceRange: "₩",
@@ -2933,6 +3109,10 @@ export const CREATRIP_PLACES: Place[] = [
     address: "서울 종로구 자하문로 9 3F",
     lat: 37.576916,
     lng: 126.972141,
+    hours: {
+      open: "10:00",
+      close: "20:00"
+    },
     englishOk: true,
     serviceTags: [
       "cut"
@@ -3099,6 +3279,10 @@ export const CREATRIP_PLACES: Place[] = [
     address: "서울 마포구 마포대로 92 공덕 효성해링턴스퀘어 B동 2F",
     lat: 37.542587,
     lng: 126.952147,
+    hours: {
+      open: "10:00",
+      close: "20:00"
+    },
     englishOk: true,
     serviceTags: [
       "color",
@@ -3112,7 +3296,7 @@ export const CREATRIP_PLACES: Place[] = [
   {
     id: "ct-kyungza-hongdae-fab-hair-salon-expert-color-perm",
     name: "KYUNGZA Hongdae FAB Hair Salon | Expert Color & Perm with Minimal Damage",
-    nameKr: "KYUNGZA Hongdae FAB Hair Salon | Expert Color & Perm with Minimal Damage",
+    nameKr: "경자 홍대페브점",
     type: "hair_salon",
     zone: "hongdae",
     priceRange: "₩",
@@ -3124,6 +3308,10 @@ export const CREATRIP_PLACES: Place[] = [
     address: "서울 마포구 월드컵북로6길 78",
     lat: 37.559727,
     lng: 126.92235,
+    hours: {
+      open: "10:30",
+      close: "19:30"
+    },
     englishOk: true,
     serviceTags: [
       "color",
@@ -3184,7 +3372,7 @@ export const CREATRIP_PLACES: Place[] = [
   {
     id: "ct-rec-tor-seoul",
     name: "REC-TOR Seoul",
-    nameKr: "REC-TOR Seoul",
+    nameKr: "렉터 서울",
     type: "hair_salon",
     zone: "hongdae",
     priceRange: "₩",
@@ -3196,6 +3384,10 @@ export const CREATRIP_PLACES: Place[] = [
     address: "서울 마포구 잔다리로 61 1F",
     lat: 37.553212,
     lng: 126.917374,
+    hours: {
+      open: "11:00",
+      close: "19:00"
+    },
     englishOk: true,
     serviceTags: [
       "color",
@@ -3268,6 +3460,10 @@ export const CREATRIP_PLACES: Place[] = [
     address: "서울 중구 명동길 32 6F",
     lat: 37.563555,
     lng: 126.984188,
+    hours: {
+      open: "10:00",
+      close: "20:00"
+    },
     englishOk: true,
     serviceTags: [
       "color",
@@ -3316,6 +3512,10 @@ export const CREATRIP_PLACES: Place[] = [
     address: "서울 중구 퇴계로 116-1, 4F",
     lat: 37.560772,
     lng: 126.984781,
+    hours: {
+      open: "11:00",
+      close: "22:00"
+    },
     englishOk: true,
     serviceTags: [
       "color",
@@ -3329,7 +3529,7 @@ export const CREATRIP_PLACES: Place[] = [
   {
     id: "ct-gapi-beauty-salon-hair-makeup-beauty-treatments",
     name: "Gapi Beauty Salon | Hair & Makeup & Beauty Treatments in Myeongdong",
-    nameKr: "Gapi Beauty Salon | Hair & Makeup & Beauty Treatments in Myeongdong",
+    nameKr: "가피헤어 본점",
     type: "hair_salon",
     zone: "myeongdong",
     priceRange: "₩",
@@ -3341,6 +3541,10 @@ export const CREATRIP_PLACES: Place[] = [
     address: "서울 중구 퇴계로22길 5",
     lat: 37.56064,
     lng: 126.986523,
+    hours: {
+      open: "10:00",
+      close: "20:00"
+    },
     serviceTags: [
       "cut"
     ],
@@ -3398,7 +3602,7 @@ export const CREATRIP_PLACES: Place[] = [
   {
     id: "ct-juno-hair-myeongdong-1st",
     name: "JUNO HAIR | Myeongdong 1st",
-    nameKr: "준오헤어 명동4호점",
+    nameKr: "JUNO HAIR | Myeongdong 1st",
     type: "hair_salon",
     zone: "myeongdong",
     priceRange: "₩₩₩",
@@ -3435,6 +3639,10 @@ export const CREATRIP_PLACES: Place[] = [
     address: "서울 중구 명동8나길 18 3F",
     lat: 37.561567,
     lng: 126.984003,
+    hours: {
+      open: "10:00",
+      close: "21:30"
+    },
     englishOk: true,
     serviceTags: [
       "color",
@@ -3448,7 +3656,7 @@ export const CREATRIP_PLACES: Place[] = [
   {
     id: "ct-juno-hair-myeongdong-4th",
     name: "JUNO HAIR | Myeongdong 4th",
-    nameKr: "준오헤어 명동4호점",
+    nameKr: "JUNO HAIR | Myeongdong 4th",
     type: "hair_salon",
     zone: "myeongdong",
     priceRange: "₩₩₩",
@@ -3473,7 +3681,7 @@ export const CREATRIP_PLACES: Place[] = [
   {
     id: "ct-juno-hair-myeongdong-art-theater-branch",
     name: "JUNO HAIR | Myeongdong Art Theater Branch",
-    nameKr: "준오헤어 명동4호점",
+    nameKr: "JUNO HAIR | Myeongdong Art Theater Branch",
     type: "hair_salon",
     zone: "myeongdong",
     priceRange: "₩₩",
@@ -3510,6 +3718,10 @@ export const CREATRIP_PLACES: Place[] = [
     address: "서울 중구 명동10길 41 7F",
     lat: 37.561587,
     lng: 126.986025,
+    hours: {
+      open: "10:00",
+      close: "20:30"
+    },
     englishOk: true,
     serviceTags: [
       "color",
@@ -3535,6 +3747,10 @@ export const CREATRIP_PLACES: Place[] = [
     address: "서울 중구 명동8나길 9 5F",
     lat: 37.561329,
     lng: 126.984449,
+    hours: {
+      open: "10:00",
+      close: "22:00"
+    },
     englishOk: true,
     serviceTags: [
       "color",
@@ -3586,6 +3802,10 @@ export const CREATRIP_PLACES: Place[] = [
     address: "서울 중구 명동8가길 22 3F",
     lat: 37.561578,
     lng: 126.986227,
+    hours: {
+      open: "10:00",
+      close: "20:30"
+    },
     englishOk: true,
     serviceTags: [
       "color",
@@ -3599,7 +3819,7 @@ export const CREATRIP_PLACES: Place[] = [
   {
     id: "ct-rarien-myeongdong-branch-aveda-hair-salon",
     name: "RARIEN Myeongdong Branch | AVEDA Hair Salon",
-    nameKr: "RARIEN Myeongdong Branch | AVEDA Hair Salon",
+    nameKr: "라리엔 명동점",
     type: "hair_salon",
     zone: "myeongdong",
     priceRange: "₩₩",
@@ -3611,6 +3831,10 @@ export const CREATRIP_PLACES: Place[] = [
     address: "서울 중구 명동길 60 7F",
     lat: 37.563841,
     lng: 126.985049,
+    hours: {
+      open: "10:30",
+      close: "20:00"
+    },
     englishOk: true,
     serviceTags: [
       "color",
@@ -3636,6 +3860,10 @@ export const CREATRIP_PLACES: Place[] = [
     address: "서울 중구 명동8가길 26",
     lat: 37.562014,
     lng: 126.986499,
+    hours: {
+      open: "10:30",
+      close: "20:30"
+    },
     englishOk: true,
     serviceTags: [
       "color",
@@ -3648,7 +3876,7 @@ export const CREATRIP_PLACES: Place[] = [
   {
     id: "ct-juno-hair-coex-city-airport-terminal-branch",
     name: "JUNO HAIR | COEX City Airport Terminal Branch",
-    nameKr: "JUNO HAIR | COEX City Airport Terminal Branch",
+    nameKr: "준오헤어 코엑스몰점",
     type: "hair_salon",
     zone: "samsung",
     priceRange: "₩₩₩",
@@ -3660,6 +3888,10 @@ export const CREATRIP_PLACES: Place[] = [
     address: "서울 강남구 테헤란로87길 36 B2",
     lat: 37.508617,
     lng: 127.05898,
+    hours: {
+      open: "10:00",
+      close: "21:30"
+    },
     englishOk: true,
     serviceTags: [
       "color",
@@ -3707,6 +3939,10 @@ export const CREATRIP_PLACES: Place[] = [
     address: "서울 서초구 방배로 103 2F",
     lat: 37.483277,
     lng: 126.996089,
+    hours: {
+      open: "10:00",
+      close: "19:00"
+    },
     englishOk: true,
     serviceTags: [
       "color",
@@ -3777,6 +4013,10 @@ export const CREATRIP_PLACES: Place[] = [
     address: "서울 성동구 연무장5길 14 B1F",
     lat: 37.544578,
     lng: 127.053175,
+    hours: {
+      open: "11:00",
+      close: "19:30"
+    },
     englishOk: true,
     serviceTags: [
       "color",
@@ -4033,7 +4273,7 @@ export const CREATRIP_PLACES: Place[] = [
   {
     id: "ct-nanalog-seongsu-branch-premium-hair-consulting",
     name: "NaNalog Seongsu Branch | Premium Hair Consulting",
-    nameKr: "NaNalog Seongsu Branch | Premium Hair Consulting",
+    nameKr: "나나로그 성수점",
     type: "hair_salon",
     zone: "seongsu",
     priceRange: "₩",
@@ -4045,6 +4285,10 @@ export const CREATRIP_PLACES: Place[] = [
     address: "서울 성동구 왕십리로 64 2F",
     lat: 37.543327,
     lng: 127.044915,
+    hours: {
+      open: "10:00",
+      close: "20:00"
+    },
     englishOk: true,
     serviceTags: [
       "color",
@@ -4129,7 +4373,7 @@ export const CREATRIP_PLACES: Place[] = [
   {
     id: "ct-project-hin-seongsu-hair-makeup",
     name: "PROJECT HIN | Seongsu Hair & Makeup",
-    nameKr: "PROJECT HIN | Seongsu Hair & Makeup",
+    nameKr: "프로젝트흰",
     type: "hair_salon",
     zone: "seongsu",
     priceRange: "₩₩",
@@ -4141,6 +4385,10 @@ export const CREATRIP_PLACES: Place[] = [
     address: "서울 성동구 성수이로7길 30 3F",
     lat: 37.541247,
     lng: 127.054267,
+    hours: {
+      open: "10:00",
+      close: "20:00"
+    },
     englishOk: true,
     serviceTags: [
       "cut"
@@ -4152,7 +4400,7 @@ export const CREATRIP_PLACES: Place[] = [
   {
     id: "ct-soonsiki-hair-seongsu-seoul-s-most-booked-salon",
     name: "SOONSIKI Hair Seongsu | Seoul's Most-Booked Salon for International Visitors",
-    nameKr: "SOONSIKI Hair Seongsu | Seoul's Most-Booked Salon for International Visitors",
+    nameKr: "순시키헤어 성수점",
     type: "hair_salon",
     zone: "seongsu",
     priceRange: "₩",
@@ -4190,6 +4438,10 @@ export const CREATRIP_PLACES: Place[] = [
     address: "서울 성동구 서울숲2길 24-7 2~3F",
     lat: 37.546728,
     lng: 127.042065,
+    hours: {
+      open: "10:00",
+      close: "19:00"
+    },
     englishOk: true,
     serviceTags: [
       "color",
@@ -4261,6 +4513,10 @@ export const CREATRIP_PLACES: Place[] = [
     address: "서울 서대문구 연세로 24 3,4F",
     lat: 37.557774,
     lng: 126.937094,
+    hours: {
+      open: "10:00",
+      close: "20:00"
+    },
     englishOk: true,
     serviceTags: [
       "color",
@@ -4298,7 +4554,7 @@ export const CREATRIP_PLACES: Place[] = [
   {
     id: "ct-nanalog-sinchon-branch",
     name: "NaNalog Sinchon Branch",
-    nameKr: "NaNalog Sinchon Branch",
+    nameKr: "나나로그 신촌점",
     type: "hair_salon",
     zone: "hongdae",
     priceRange: "₩",
@@ -4310,6 +4566,10 @@ export const CREATRIP_PLACES: Place[] = [
     address: "서울 서대문구 연세로 21 4F",
     lat: 37.557575,
     lng: 126.936713,
+    hours: {
+      open: "11:00",
+      close: "21:00"
+    },
     serviceTags: [
       "color",
       "perm"
@@ -4379,6 +4639,10 @@ export const CREATRIP_PLACES: Place[] = [
     address: "서울 강남구 도산대로 127 2F",
     lat: 37.517626,
     lng: 127.022333,
+    hours: {
+      open: "10:00",
+      close: "21:00"
+    },
     englishOk: true,
     serviceTags: [
       "color",
@@ -4533,7 +4797,7 @@ export const CREATRIP_PLACES: Place[] = [
   {
     id: "ct-aeer-hair-yeouido-english-speaking-hair-salon-ne",
     name: "Aeer Hair Yeouido | English-Speaking Hair Salon Near Yeouido Station",
-    nameKr: "Aeer Hair Yeouido | English-Speaking Hair Salon Near Yeouido Station",
+    nameKr: "아에르헤어 여의도점",
     type: "hair_salon",
     zone: "yeongdeungpo",
     priceRange: "₩",
@@ -4713,6 +4977,10 @@ export const CREATRIP_PLACES: Place[] = [
     address: "서울 영등포구 신풍로 39",
     lat: 37.500285,
     lng: 126.910595,
+    hours: {
+      open: "10:00",
+      close: "22:00"
+    },
     englishOk: true,
     serviceTags: [
       "color",
@@ -4763,6 +5031,10 @@ export const CREATRIP_PLACES: Place[] = [
     address: "서울 용산구 이태원로45길 14 2F",
     lat: 37.536416,
     lng: 126.998975,
+    hours: {
+      open: "10:00",
+      close: "21:00"
+    },
     englishOk: true,
     serviceTags: [
       "color",
@@ -4885,6 +5157,10 @@ export const CREATRIP_PLACES: Place[] = [
     address: "서울 용산구 이촌로88길 8 2F",
     lat: 37.518255,
     lng: 126.977757,
+    hours: {
+      open: "10:00",
+      close: "19:00"
+    },
     serviceTags: [
       "scalp"
     ],

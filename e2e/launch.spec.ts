@@ -74,7 +74,9 @@ test.describe("discovery smoke (no auth needed)", () => {
 
   test("hangul place ids resolve", async ({ page }) => {
     await page.goto(`/place/${encodeURIComponent("oy-학동중앙점")}`);
-    await expect(page.getByRole("heading", { name: /학동중앙점/ })).toBeVisible();
+    // the id stays hangul; the title is English now (English-first titles,
+    // 2026-08-23) — this spec is about the id resolving, not the copy
+    await expect(page.getByRole("heading", { name: /Hakdongjungang/ })).toBeVisible();
     await expect(page.getByText(/wandered off/)).toHaveCount(0); // not the 404 page
   });
 

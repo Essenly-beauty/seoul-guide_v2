@@ -7,7 +7,7 @@ import type { Place } from "../data";
 export const OLIVEYOUNG_PLACES: Place[] = [
   {
     id: "oy-학동중앙점",
-    name: "Olive Young 학동중앙점",
+    name: "Olive Young Hakdongjungang",
     nameKr: "올리브영 학동중앙점",
     type: "olive_young",
     zone: "apgujeong",
@@ -24,7 +24,7 @@ export const OLIVEYOUNG_PLACES: Place[] = [
   },
   {
     id: "oy-청담역점",
-    name: "Olive Young 청담역점",
+    name: "Olive Young Cheongdam Stn.",
     nameKr: "올리브영 청담역점",
     type: "olive_young",
     zone: "cheongdam",
@@ -41,7 +41,7 @@ export const OLIVEYOUNG_PLACES: Place[] = [
   },
   {
     id: "oy-타워팰리스점",
-    name: "Olive Young 타워팰리스점",
+    name: "Olive Young Tawopaelriseu",
     nameKr: "올리브영 타워팰리스점",
     type: "olive_young",
     zone: "samsung",
@@ -58,7 +58,7 @@ export const OLIVEYOUNG_PLACES: Place[] = [
   },
   {
     id: "oy-학동역점",
-    name: "Olive Young 학동역점",
+    name: "Olive Young Hakdong Stn.",
     nameKr: "올리브영 학동역점",
     type: "olive_young",
     zone: "sinsa",
@@ -75,7 +75,7 @@ export const OLIVEYOUNG_PLACES: Place[] = [
   },
   {
     id: "oy-역삼역점",
-    name: "Olive Young 역삼역점",
+    name: "Olive Young Yeoksam Stn.",
     nameKr: "올리브영 역삼역점",
     type: "olive_young",
     zone: "samsung",
@@ -92,7 +92,7 @@ export const OLIVEYOUNG_PLACES: Place[] = [
   },
   {
     id: "oy-테헤란로점",
-    name: "Olive Young 테헤란로점",
+    name: "Olive Young Teheranro",
     nameKr: "올리브영 테헤란로점",
     type: "olive_young",
     zone: "samsung",
@@ -109,7 +109,7 @@ export const OLIVEYOUNG_PLACES: Place[] = [
   },
   {
     id: "oy-압구정중앙점",
-    name: "Olive Young 압구정중앙점",
+    name: "Olive Young Apgujeongjungang",
     nameKr: "올리브영 압구정중앙점",
     type: "olive_young",
     zone: "sinsa",
@@ -126,7 +126,7 @@ export const OLIVEYOUNG_PLACES: Place[] = [
   },
   {
     id: "oy-삼성중앙역점",
-    name: "Olive Young 삼성중앙역점",
+    name: "Olive Young Samseongjungang Stn.",
     nameKr: "올리브영 삼성중앙역점",
     type: "olive_young",
     zone: "gangnam_station",
@@ -143,7 +143,7 @@ export const OLIVEYOUNG_PLACES: Place[] = [
   },
   {
     id: "oy-코엑스몰점",
-    name: "Olive Young 코엑스몰점",
+    name: "Olive Young Koekseumol",
     nameKr: "올리브영 코엑스몰점",
     type: "olive_young",
     zone: "cheongdam",
@@ -160,7 +160,7 @@ export const OLIVEYOUNG_PLACES: Place[] = [
   },
   {
     id: "oy-선릉로점",
-    name: "Olive Young 선릉로점",
+    name: "Olive Young Seonreungro",
     nameKr: "올리브영 선릉로점",
     type: "olive_young",
     zone: "samsung",
@@ -177,7 +177,7 @@ export const OLIVEYOUNG_PLACES: Place[] = [
   },
   {
     id: "oy-강남구청역점",
-    name: "Olive Young 강남구청역점",
+    name: "Olive Young Gangnamgucheong Stn.",
     nameKr: "올리브영 강남구청역점",
     type: "olive_young",
     zone: "cheongdam",
@@ -194,7 +194,7 @@ export const OLIVEYOUNG_PLACES: Place[] = [
   },
   {
     id: "oy-한티역점",
-    name: "Olive Young 한티역점",
+    name: "Olive Young Hanti Stn.",
     nameKr: "올리브영 한티역점",
     type: "olive_young",
     zone: "samsung",
@@ -207,11 +207,15 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 강남구 선릉로 312 1층",
     lat: 37.497546,
     lng: 127.052643,
+    hours: {
+      open: "10:00",
+      close: "23:00"
+    },
     geoSource: "address"
   },
   {
     id: "oy-양재스타클래스점",
-    name: "Olive Young 양재스타클래스점",
+    name: "Olive Young Yangjaeseutakeulraeseu",
     nameKr: "올리브영 양재스타클래스점",
     type: "olive_young",
     zone: "gangnam_station",
@@ -228,7 +232,7 @@ export const OLIVEYOUNG_PLACES: Place[] = [
   },
   {
     id: "oy-압구정점",
-    name: "Olive Young 압구정점",
+    name: "Olive Young Apgujeong",
     nameKr: "올리브영 압구정점",
     type: "olive_young",
     zone: "apgujeong",
@@ -245,7 +249,7 @@ export const OLIVEYOUNG_PLACES: Place[] = [
   },
   {
     id: "oy-신강남점",
-    name: "Olive Young 신강남점",
+    name: "Olive Young Singangnam",
     nameKr: "올리브영 신강남점",
     type: "olive_young",
     zone: "gangnam_station",
@@ -258,11 +262,15 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 강남구 봉은사로2길 31 1층",
     lat: 37.503181,
     lng: 127.026029,
+    hours: {
+      open: "10:00",
+      close: "23:00"
+    },
     geoSource: "address"
   },
   {
     id: "oy-신사점",
-    name: "Olive Young 신사점",
+    name: "Olive Young Sinsa",
     nameKr: "올리브영 신사점",
     type: "olive_young",
     zone: "cheongdam",
@@ -279,7 +287,7 @@ export const OLIVEYOUNG_PLACES: Place[] = [
   },
   {
     id: "oy-압구정역점",
-    name: "Olive Young 압구정역점",
+    name: "Olive Young Apgujeong Stn.",
     nameKr: "올리브영 압구정역점",
     type: "olive_young",
     zone: "apgujeong",
@@ -296,7 +304,7 @@ export const OLIVEYOUNG_PLACES: Place[] = [
   },
   {
     id: "oy-대치역점",
-    name: "Olive Young 대치역점",
+    name: "Olive Young Daechi Stn.",
     nameKr: "올리브영 대치역점",
     type: "olive_young",
     zone: "samsung",
@@ -309,11 +317,15 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 강남구 남부순환로 2936 1-2층",
     lat: 37.493348,
     lng: 127.061881,
+    hours: {
+      open: "10:00",
+      close: "22:30"
+    },
     geoSource: "address"
   },
   {
     id: "oy-파르나스삼성-타운",
-    name: "Olive Young 파르나스삼성 타운",
+    name: "Olive Young Pareunaseusamseong Town",
     nameKr: "올리브영 파르나스삼성 타운",
     type: "olive_young",
     zone: "samsung",
@@ -326,11 +338,15 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 강남구 테헤란로 521 파르나스몰 지하1층 R6~7호",
     lat: 37.509073,
     lng: 127.060719,
+    hours: {
+      open: "10:00",
+      close: "22:00"
+    },
     geoSource: "address"
   },
   {
     id: "oy-대치점",
-    name: "Olive Young 대치점",
+    name: "Olive Young Daechi",
     nameKr: "올리브영 대치점",
     type: "olive_young",
     zone: "samsung",
@@ -343,11 +359,15 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 강남구 도곡로 448 동서빌딩 1층",
     lat: 37.498113,
     lng: 127.059615,
+    hours: {
+      open: "10:00",
+      close: "22:30"
+    },
     geoSource: "address"
   },
   {
     id: "oy-포이사거리점",
-    name: "Olive Young 포이사거리점",
+    name: "Olive Young Poisa St.",
     nameKr: "올리브영 포이사거리점",
     type: "olive_young",
     zone: "gangnam_station",
@@ -364,7 +384,7 @@ export const OLIVEYOUNG_PLACES: Place[] = [
   },
   {
     id: "oy-대치사거리점",
-    name: "Olive Young 대치사거리점",
+    name: "Olive Young Daechisa St.",
     nameKr: "올리브영 대치사거리점",
     type: "olive_young",
     zone: "samsung",
@@ -377,11 +397,15 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 강남구 삼성로 342 1층",
     lat: 37.502837,
     lng: 127.058863,
+    hours: {
+      open: "10:00",
+      close: "22:30"
+    },
     geoSource: "address"
   },
   {
     id: "oy-선릉타운점",
-    name: "Olive Young 선릉타운점",
+    name: "Olive Young Seonreungtaun",
     nameKr: "올리브영 선릉타운점",
     type: "olive_young",
     zone: "samsung",
@@ -398,7 +422,7 @@ export const OLIVEYOUNG_PLACES: Place[] = [
   },
   {
     id: "oy-일원역점",
-    name: "Olive Young 일원역점",
+    name: "Olive Young Ilwon Stn.",
     nameKr: "올리브영 일원역점",
     type: "olive_young",
     zone: "samsung",
@@ -411,11 +435,15 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 강남구 일원로 115 삼성생명빌딩 B동 1층 114호",
     lat: 37.483814,
     lng: 127.084236,
+    hours: {
+      open: "10:00",
+      close: "22:00"
+    },
     geoSource: "address"
   },
   {
     id: "oy-현대백화점무역센터점",
-    name: "Olive Young 현대백화점무역센터점",
+    name: "Olive Young Hyeondaebaekhwajeommuyeoksenteo",
     nameKr: "올리브영 현대백화점무역센터점",
     type: "olive_young",
     zone: "samsung",
@@ -430,7 +458,7 @@ export const OLIVEYOUNG_PLACES: Place[] = [
   },
   {
     id: "oy-개포동점",
-    name: "Olive Young 개포동점",
+    name: "Olive Young Gaepodong",
     nameKr: "올리브영 개포동점",
     type: "olive_young",
     zone: "samsung",
@@ -443,11 +471,15 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 강남구 선릉로 26 지하1층",
     lat: 37.482245,
     lng: 127.061473,
+    hours: {
+      open: "10:00",
+      close: "22:00"
+    },
     geoSource: "address"
   },
   {
     id: "oy-세곡동점",
-    name: "Olive Young 세곡동점",
+    name: "Olive Young Segokdong",
     nameKr: "올리브영 세곡동점",
     type: "olive_young",
     zone: "seoul_etc",
@@ -464,7 +496,7 @@ export const OLIVEYOUNG_PLACES: Place[] = [
   },
   {
     id: "oy-세로수길점",
-    name: "Olive Young 세로수길점",
+    name: "Olive Young Serosugil",
     nameKr: "올리브영 세로수길점",
     type: "olive_young",
     zone: "sinsa",
@@ -476,11 +508,15 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 강남구 강남대로160길 45 1-3층",
     lat: 37.519858,
     lng: 127.020902,
+    hours: {
+      open: "11:00",
+      close: "22:00"
+    },
     geoSource: "address"
   },
   {
     id: "oy-삼전역점",
-    name: "Olive Young 삼전역점",
+    name: "Olive Young Samjeon Stn.",
     nameKr: "올리브영 삼전역점",
     type: "olive_young",
     zone: "jamsil",
@@ -493,11 +529,15 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 송파구 백제고분로 196 1층",
     lat: 37.503989,
     lng: 127.088313,
+    hours: {
+      open: "10:00",
+      close: "22:30"
+    },
     geoSource: "address"
   },
   {
     id: "oy-서초우성점",
-    name: "Olive Young 서초우성점",
+    name: "Olive Young Seochouseong",
     nameKr: "올리브영 서초우성점",
     type: "olive_young",
     zone: "sinsa",
@@ -514,7 +554,7 @@ export const OLIVEYOUNG_PLACES: Place[] = [
   },
   {
     id: "oy-노원점",
-    name: "Olive Young 노원점",
+    name: "Olive Young Nowon",
     nameKr: "올리브영 노원점",
     type: "olive_young",
     zone: "seoul_etc",
@@ -527,11 +567,15 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 노원구 상계로 65 1층 105~106호",
     lat: 37.656358,
     lng: 127.062246,
+    hours: {
+      open: "09:30",
+      close: "23:00"
+    },
     geoSource: "address"
   },
   {
     id: "oy-정릉점",
-    name: "Olive Young 정릉점",
+    name: "Olive Young Jeongreung",
     nameKr: "올리브영 정릉점",
     type: "olive_young",
     zone: "seoul_etc",
@@ -548,7 +592,7 @@ export const OLIVEYOUNG_PLACES: Place[] = [
   },
   {
     id: "oy-길음점",
-    name: "Olive Young 길음점",
+    name: "Olive Young Gileum",
     nameKr: "올리브영 길음점",
     type: "olive_young",
     zone: "seoul_etc",
@@ -561,11 +605,15 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 성북구 길음로 11 롯데캐슬 상가 1층 160~162호",
     lat: 37.603851,
     lng: 127.022462,
+    hours: {
+      open: "10:00",
+      close: "22:00"
+    },
     geoSource: "address"
   },
   {
     id: "oy-마들역점",
-    name: "Olive Young 마들역점",
+    name: "Olive Young Madeul Stn.",
     nameKr: "올리브영 마들역점",
     type: "olive_young",
     zone: "seoul_etc",
@@ -578,11 +626,15 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 노원구 동일로 1532 거북빌딩 1층",
     lat: 37.620159,
     lng: 127.074291,
+    hours: {
+      open: "10:00",
+      close: "22:00"
+    },
     geoSource: "address"
   },
   {
     id: "oy-길음역점",
-    name: "Olive Young 길음역점",
+    name: "Olive Young Gileum Stn.",
     nameKr: "올리브영 길음역점",
     type: "olive_young",
     zone: "seoul_etc",
@@ -595,11 +647,15 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 성북구 정릉로 376 BR빌딩 지하2층",
     lat: 37.608114,
     lng: 127.003925,
+    hours: {
+      open: "10:00",
+      close: "22:30"
+    },
     geoSource: "address"
   },
   {
     id: "oy-동덕여대점",
-    name: "Olive Young 동덕여대점",
+    name: "Olive Young Dongdeokyeodae",
     nameKr: "올리브영 동덕여대점",
     type: "olive_young",
     zone: "seoul_etc",
@@ -616,7 +672,7 @@ export const OLIVEYOUNG_PLACES: Place[] = [
   },
   {
     id: "oy-석계역점",
-    name: "Olive Young 석계역점",
+    name: "Olive Young Seokgye Stn.",
     nameKr: "올리브영 석계역점",
     type: "olive_young",
     zone: "seoul_etc",
@@ -629,11 +685,15 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 노원구 석계로1길 14 1층",
     lat: 37.615555,
     lng: 127.063914,
+    hours: {
+      open: "10:00",
+      close: "22:30"
+    },
     geoSource: "address"
   },
   {
     id: "oy-노원공릉점",
-    name: "Olive Young 노원공릉점",
+    name: "Olive Young Nowongongreung",
     nameKr: "올리브영 노원공릉점",
     type: "olive_young",
     zone: "seoul_etc",
@@ -646,11 +706,15 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 노원구 동일로 1083 1층",
     lat: 37.626555,
     lng: 127.072186,
+    hours: {
+      open: "10:00",
+      close: "22:00"
+    },
     geoSource: "address"
   },
   {
     id: "oy-종암점",
-    name: "Olive Young 종암점",
+    name: "Olive Young Jongam",
     nameKr: "올리브영 종암점",
     type: "olive_young",
     zone: "seoul_etc",
@@ -663,11 +727,15 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 성북구 종암로 123 우영타워 1층 102호",
     lat: 37.601014,
     lng: 127.033166,
+    hours: {
+      open: "10:00",
+      close: "22:00"
+    },
     geoSource: "address"
   },
   {
     id: "oy-상계보람점",
-    name: "Olive Young 상계보람점",
+    name: "Olive Young Sanggyeboram",
     nameKr: "올리브영 상계보람점",
     type: "olive_young",
     zone: "seoul_etc",
@@ -680,11 +748,15 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 노원구 한글비석로 471 1층",
     lat: 37.664096,
     lng: 127.065413,
+    hours: {
+      open: "10:00",
+      close: "22:30"
+    },
     geoSource: "address"
   },
   {
     id: "oy-은행사거리점",
-    name: "Olive Young 은행사거리점",
+    name: "Olive Young Eunhaengsa St.",
     nameKr: "올리브영 은행사거리점",
     type: "olive_young",
     zone: "seoul_etc",
@@ -697,11 +769,15 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 노원구 한글비석로 264 중계그랜드프라자 1층",
     lat: 37.666106,
     lng: 127.069486,
+    hours: {
+      open: "10:00",
+      close: "23:00"
+    },
     geoSource: "address"
   },
   {
     id: "oy-성신여대입구역점",
-    name: "Olive Young 성신여대입구역점",
+    name: "Olive Young Seongsinyeodaeipgu Stn.",
     nameKr: "올리브영 성신여대입구역점",
     type: "olive_young",
     zone: "jongno",
@@ -714,11 +790,15 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 성북구 아리랑로 9 1층",
     lat: 37.59373,
     lng: 127.015979,
+    hours: {
+      open: "10:00",
+      close: "22:00"
+    },
     geoSource: "address"
   },
   {
     id: "oy-공릉역점",
-    name: "Olive Young 공릉역점",
+    name: "Olive Young Gongreung Stn.",
     nameKr: "올리브영 공릉역점",
     type: "olive_young",
     zone: "seoul_etc",
@@ -731,11 +811,15 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 노원구 동일로192길 74 1층",
     lat: 37.627098,
     lng: 127.077079,
+    hours: {
+      open: "10:00",
+      close: "22:30"
+    },
     geoSource: "address"
   },
   {
     id: "oy-돈암중앙점",
-    name: "Olive Young 돈암중앙점",
+    name: "Olive Young Donamjungang",
     nameKr: "올리브영 돈암중앙점",
     type: "olive_young",
     zone: "jongno",
@@ -752,7 +836,7 @@ export const OLIVEYOUNG_PLACES: Place[] = [
   },
   {
     id: "oy-수락산역점",
-    name: "Olive Young 수락산역점",
+    name: "Olive Young Suraksan Stn.",
     nameKr: "올리브영 수락산역점",
     type: "olive_young",
     zone: "seoul_etc",
@@ -765,11 +849,15 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 노원구 동일로 1660 1층",
     lat: 37.676624,
     lng: 127.055656,
+    hours: {
+      open: "10:00",
+      close: "22:30"
+    },
     geoSource: "address"
   },
   {
     id: "oy-먹골역점",
-    name: "Olive Young 먹골역점",
+    name: "Olive Young Meokgol Stn.",
     nameKr: "올리브영 먹골역점",
     type: "olive_young",
     zone: "seoul_etc",
@@ -782,11 +870,15 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 중랑구 공릉로2길 7 1-2층",
     lat: 37.612101,
     lng: 127.079602,
+    hours: {
+      open: "10:00",
+      close: "22:30"
+    },
     geoSource: "address"
   },
   {
     id: "oy-돈암점",
-    name: "Olive Young 돈암점",
+    name: "Olive Young Donam",
     nameKr: "올리브영 돈암점",
     type: "olive_young",
     zone: "jongno",
@@ -799,11 +891,15 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 성북구 동소문로22길 39 1층",
     lat: 37.592804,
     lng: 127.01745,
+    hours: {
+      open: "10:00",
+      close: "23:00"
+    },
     geoSource: "address"
   },
   {
     id: "oy-외대정문점",
-    name: "Olive Young 외대정문점",
+    name: "Olive Young Oedaejeongmun",
     nameKr: "올리브영 외대정문점",
     type: "olive_young",
     zone: "seoul_etc",
@@ -820,7 +916,7 @@ export const OLIVEYOUNG_PLACES: Place[] = [
   },
   {
     id: "oy-한성대입구역점",
-    name: "Olive Young 한성대입구역점",
+    name: "Olive Young Hanseongdaeipgu Stn.",
     nameKr: "올리브영 한성대입구역점",
     type: "olive_young",
     zone: "jongno",
@@ -833,11 +929,15 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 성북구 삼선교로 12 1층",
     lat: 37.587578,
     lng: 127.007603,
+    hours: {
+      open: "10:00",
+      close: "22:00"
+    },
     geoSource: "address"
   },
   {
     id: "oy-경희대점",
-    name: "Olive Young 경희대점",
+    name: "Olive Young Gyeonghuidae",
     nameKr: "올리브영 경희대점",
     type: "olive_young",
     zone: "seoul_etc",
@@ -850,11 +950,15 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 동대문구 경희대로 2 1층",
     lat: 37.592625,
     lng: 127.052526,
+    hours: {
+      open: "10:00",
+      close: "22:30"
+    },
     geoSource: "address"
   },
   {
     id: "oy-중화역점",
-    name: "Olive Young 중화역점",
+    name: "Olive Young Junghwa Stn.",
     nameKr: "올리브영 중화역점",
     type: "olive_young",
     zone: "seoul_etc",
@@ -867,11 +971,15 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 중랑구 동일로 802 1층",
     lat: 37.602012,
     lng: 127.079729,
+    hours: {
+      open: "10:00",
+      close: "22:30"
+    },
     geoSource: "address"
   },
   {
     id: "oy-안암점",
-    name: "Olive Young 안암점",
+    name: "Olive Young Anam",
     nameKr: "올리브영 안암점",
     type: "olive_young",
     zone: "seoul_etc",
@@ -888,7 +996,7 @@ export const OLIVEYOUNG_PLACES: Place[] = [
   },
   {
     id: "oy-회기중앙점",
-    name: "Olive Young 회기중앙점",
+    name: "Olive Young Hoegijungang",
     nameKr: "올리브영 회기중앙점",
     type: "olive_young",
     zone: "seoul_etc",
@@ -901,11 +1009,15 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 동대문구 이문로 30 1층",
     lat: 37.601608,
     lng: 127.062056,
+    hours: {
+      open: "10:00",
+      close: "23:00"
+    },
     geoSource: "address"
   },
   {
     id: "oy-대학로중앙점",
-    name: "Olive Young 대학로중앙점",
+    name: "Olive Young Daehakrojungang",
     nameKr: "올리브영 대학로중앙점",
     type: "olive_young",
     zone: "jongno",
@@ -918,11 +1030,15 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 종로구 대학로 144 1층",
     lat: 37.58399,
     lng: 127.002071,
+    hours: {
+      open: "10:00",
+      close: "23:00"
+    },
     geoSource: "address"
   },
   {
     id: "oy-혜화역점",
-    name: "Olive Young 혜화역점",
+    name: "Olive Young Hyehwa Stn.",
     nameKr: "올리브영 혜화역점",
     type: "olive_young",
     zone: "jongno",
@@ -935,11 +1051,15 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 종로구 대학로 122 흥사단회관 1층",
     lat: 37.582114,
     lng: 127.002272,
+    hours: {
+      open: "10:00",
+      close: "22:30"
+    },
     geoSource: "address"
   },
   {
     id: "oy-종로평창점",
-    name: "Olive Young 종로평창점",
+    name: "Olive Young Jongropyeongchang",
     nameKr: "올리브영 종로평창점",
     type: "olive_young",
     zone: "seoul_etc",
@@ -956,7 +1076,7 @@ export const OLIVEYOUNG_PLACES: Place[] = [
   },
   {
     id: "oy-중랑점",
-    name: "Olive Young 중랑점",
+    name: "Olive Young Jungrang",
     nameKr: "올리브영 중랑점",
     type: "olive_young",
     zone: "seoul_etc",
@@ -969,11 +1089,15 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 중랑구 망우로32길 6 1층",
     lat: 37.593563,
     lng: 127.076338,
+    hours: {
+      open: "10:00",
+      close: "22:30"
+    },
     geoSource: "address"
   },
   {
     id: "oy-휘경동점",
-    name: "Olive Young 휘경동점",
+    name: "Olive Young Hwigyeongdong",
     nameKr: "올리브영 휘경동점",
     type: "olive_young",
     zone: "seoul_etc",
@@ -989,7 +1113,7 @@ export const OLIVEYOUNG_PLACES: Place[] = [
   },
   {
     id: "oy-청량리중앙점",
-    name: "Olive Young 청량리중앙점",
+    name: "Olive Young Cheongryangrijungang",
     nameKr: "올리브영 청량리중앙점",
     type: "olive_young",
     zone: "seoul_etc",
@@ -1002,11 +1126,15 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 동대문구 왕산로 194 1-2층",
     lat: 37.58047,
     lng: 127.045737,
+    hours: {
+      open: "10:00",
+      close: "22:30"
+    },
     geoSource: "address"
   },
   {
     id: "oy-서울시립대점",
-    name: "Olive Young 서울시립대점",
+    name: "Olive Young Seoulsiripdae",
     nameKr: "올리브영 서울시립대점",
     type: "olive_young",
     zone: "seoul_etc",
@@ -1019,11 +1147,15 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 동대문구 전농로 222 씨티프라자 1층 104~105호",
     lat: 37.583968,
     lng: 127.05363,
+    hours: {
+      open: "10:00",
+      close: "22:00"
+    },
     geoSource: "address"
   },
   {
     id: "oy-숭실대입구역점",
-    name: "Olive Young 숭실대입구역점",
+    name: "Olive Young Sungsildaeipgu Stn.",
     nameKr: "올리브영 숭실대입구역점",
     type: "olive_young",
     zone: "yeongdeungpo",
@@ -1036,11 +1168,15 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 동작구 상도로 358 1층",
     lat: 37.500565,
     lng: 126.949845,
+    hours: {
+      open: "10:00",
+      close: "22:30"
+    },
     geoSource: "address"
   },
   {
     id: "oy-사당점",
-    name: "Olive Young 사당점",
+    name: "Olive Young Sadang",
     nameKr: "올리브영 사당점",
     type: "olive_young",
     zone: "itaewon",
@@ -1053,11 +1189,15 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 동작구 동작대로 29 1-2층",
     lat: 37.504103,
     lng: 126.980361,
+    hours: {
+      open: "10:00",
+      close: "23:00"
+    },
     geoSource: "address"
   },
   {
     id: "oy-방배이수점",
-    name: "Olive Young 방배이수점",
+    name: "Olive Young Bangbaeisu",
     nameKr: "올리브영 방배이수점",
     type: "olive_young",
     zone: "seoul_etc",
@@ -1073,7 +1213,7 @@ export const OLIVEYOUNG_PLACES: Place[] = [
   },
   {
     id: "oy-상도역점",
-    name: "Olive Young 상도역점",
+    name: "Olive Young Sangdo Stn.",
     nameKr: "올리브영 상도역점",
     type: "olive_young",
     zone: "yeongdeungpo",
@@ -1086,11 +1226,15 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 동작구 양녕로 257 1층",
     lat: 37.51545,
     lng: 126.95718,
+    hours: {
+      open: "10:00",
+      close: "22:30"
+    },
     geoSource: "address"
   },
   {
     id: "oy-보라매병원역점",
-    name: "Olive Young 보라매병원역점",
+    name: "Olive Young Boramaebyeongwon Stn.",
     nameKr: "올리브영 보라매병원역점",
     type: "olive_young",
     zone: "yeongdeungpo",
@@ -1107,7 +1251,7 @@ export const OLIVEYOUNG_PLACES: Place[] = [
   },
   {
     id: "oy-이수역점",
-    name: "Olive Young 이수역점",
+    name: "Olive Young Isu Stn.",
     nameKr: "올리브영 이수역점",
     type: "olive_young",
     zone: "seoul_etc",
@@ -1124,7 +1268,7 @@ export const OLIVEYOUNG_PLACES: Place[] = [
   },
   {
     id: "oy-신대방삼거리역점",
-    name: "Olive Young 신대방삼거리역점",
+    name: "Olive Young Sindaebangsamgeori Stn.",
     nameKr: "올리브영 신대방삼거리역점",
     type: "olive_young",
     zone: "yeongdeungpo",
@@ -1137,11 +1281,15 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 동작구 보라매로 113 코스모빌딩 1층",
     lat: 37.499463,
     lng: 126.927897,
+    hours: {
+      open: "10:00",
+      close: "23:00"
+    },
     geoSource: "address"
   },
   {
     id: "oy-중앙대점",
-    name: "Olive Young 중앙대점",
+    name: "Olive Young Jungangdae",
     nameKr: "올리브영 중앙대점",
     type: "olive_young",
     zone: "seoul_etc",
@@ -1158,7 +1306,7 @@ export const OLIVEYOUNG_PLACES: Place[] = [
   },
   {
     id: "oy-장승배기역점",
-    name: "Olive Young 장승배기역점",
+    name: "Olive Young Jangseungbaegi Stn.",
     nameKr: "올리브영 장승배기역점",
     type: "olive_young",
     zone: "yeongdeungpo",
@@ -1171,11 +1319,15 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 동작구 장승배기로11가길 11 상도파크자이 1층",
     lat: 37.514301,
     lng: 126.937398,
+    hours: {
+      open: "10:00",
+      close: "22:30"
+    },
     geoSource: "area"
   },
   {
     id: "oy-씨제이enm커머스부문점",
-    name: "Olive Young 씨제이ENM커머스부문점",
+    name: "Olive Young SsijeiENMKeomeoseubumun",
     nameKr: "올리브영 씨제이ENM커머스부문점",
     type: "olive_young",
     zone: "seoul_etc",
@@ -1192,7 +1344,7 @@ export const OLIVEYOUNG_PLACES: Place[] = [
   },
   {
     id: "oy-보라매역점",
-    name: "Olive Young 보라매역점",
+    name: "Olive Young Boramae Stn.",
     nameKr: "올리브영 보라매역점",
     type: "olive_young",
     zone: "yeongdeungpo",
@@ -1205,11 +1357,15 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 동작구 여의대방로 142 1층",
     lat: 37.499729,
     lng: 126.92068,
+    hours: {
+      open: "10:00",
+      close: "22:30"
+    },
     geoSource: "address"
   },
   {
     id: "oy-내방역점",
-    name: "Olive Young 내방역점",
+    name: "Olive Young Naebang Stn.",
     nameKr: "올리브영 내방역점",
     type: "olive_young",
     zone: "gangnam_station",
@@ -1226,7 +1382,7 @@ export const OLIVEYOUNG_PLACES: Place[] = [
   },
   {
     id: "oy-노량진역점",
-    name: "Olive Young 노량진역점",
+    name: "Olive Young Noryangjin Stn.",
     nameKr: "올리브영 노량진역점",
     type: "olive_young",
     zone: "yeongdeungpo",
@@ -1243,7 +1399,7 @@ export const OLIVEYOUNG_PLACES: Place[] = [
   },
   {
     id: "oy-방배점",
-    name: "Olive Young 방배점",
+    name: "Olive Young Bangbae",
     nameKr: "올리브영 방배점",
     type: "olive_young",
     zone: "gangnam_station",
@@ -1256,11 +1412,15 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 서초구 방배로 83 1층",
     lat: 37.481886,
     lng: 126.997042,
+    hours: {
+      open: "10:00",
+      close: "22:30"
+    },
     geoSource: "address"
   },
   {
     id: "oy-대림성모점",
-    name: "Olive Young 대림성모점",
+    name: "Olive Young Daerimseongmo",
     nameKr: "올리브영 대림성모점",
     type: "olive_young",
     zone: "yeongdeungpo",
@@ -1277,7 +1437,7 @@ export const OLIVEYOUNG_PLACES: Place[] = [
   },
   {
     id: "oy-n성수",
-    name: "Olive Young N성수",
+    name: "Olive Young NSeongsu",
     nameKr: "올리브영 N성수",
     type: "olive_young",
     zone: "seongsu",
@@ -1290,11 +1450,15 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 성동구 연무장7길 13 팩토리얼 성수 1-5층",
     lat: 37.544207,
     lng: 127.054377,
+    hours: {
+      open: "10:00",
+      close: "22:00"
+    },
     geoSource: "address"
   },
   {
     id: "oy-성수연방점",
-    name: "Olive Young 성수연방점",
+    name: "Olive Young Seongsuyeonbang",
     nameKr: "올리브영 성수연방점",
     type: "olive_young",
     zone: "seongsu",
@@ -1311,7 +1475,7 @@ export const OLIVEYOUNG_PLACES: Place[] = [
   },
   {
     id: "oy-서울숲역점",
-    name: "Olive Young 서울숲역점",
+    name: "Olive Young Seoulsup Stn.",
     nameKr: "올리브영 서울숲역점",
     type: "olive_young",
     zone: "seongsu",
@@ -1324,11 +1488,15 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 성동구 왕십리로 50 1층",
     lat: 37.5419,
     lng: 127.044976,
+    hours: {
+      open: "10:00",
+      close: "22:30"
+    },
     geoSource: "address"
   },
   {
     id: "oy-잠실장미상가점",
-    name: "Olive Young 잠실장미상가점",
+    name: "Olive Young Jamsiljangmisangga",
     nameKr: "올리브영 잠실장미상가점",
     type: "olive_young",
     zone: "jamsil",
@@ -1341,11 +1509,15 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 송파구 올림픽로35길 124 장미아파트 A상가 1동 101,107,124~129호",
     lat: 37.518243,
     lng: 127.101149,
+    hours: {
+      open: "10:00",
+      close: "22:00"
+    },
     geoSource: "address"
   },
   {
     id: "oy-신천중앙점",
-    name: "Olive Young 신천중앙점",
+    name: "Olive Young Sincheonjungang",
     nameKr: "올리브영 신천중앙점",
     type: "olive_young",
     zone: "jamsil",
@@ -1358,11 +1530,15 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 송파구 올림픽로 114 서경빌딩 1-2층",
     lat: 37.511392,
     lng: 127.08319,
+    hours: {
+      open: "10:00",
+      close: "23:00"
+    },
     geoSource: "address"
   },
   {
     id: "oy-봉은사역점",
-    name: "Olive Young 봉은사역점",
+    name: "Olive Young Bongeunsa Stn.",
     nameKr: "올리브영 봉은사역점",
     type: "olive_young",
     zone: "samsung",
@@ -1379,7 +1555,7 @@ export const OLIVEYOUNG_PLACES: Place[] = [
   },
   {
     id: "oy-잠실점",
-    name: "Olive Young 잠실점",
+    name: "Olive Young Jamsil",
     nameKr: "올리브영 잠실점",
     type: "olive_young",
     zone: "jamsil",
@@ -1396,7 +1572,7 @@ export const OLIVEYOUNG_PLACES: Place[] = [
   },
   {
     id: "oy-장한평역점",
-    name: "Olive Young 장한평역점",
+    name: "Olive Young Janghanpyeong Stn.",
     nameKr: "올리브영 장한평역점",
     type: "olive_young",
     zone: "seoul_etc",
@@ -1413,7 +1589,7 @@ export const OLIVEYOUNG_PLACES: Place[] = [
   },
   {
     id: "oy-뚝섬역점",
-    name: "Olive Young 뚝섬역점",
+    name: "Olive Young Ttukseom Stn.",
     nameKr: "올리브영 뚝섬역점",
     type: "olive_young",
     zone: "seongsu",
@@ -1430,7 +1606,7 @@ export const OLIVEYOUNG_PLACES: Place[] = [
   },
   {
     id: "oy-송파구청점",
-    name: "Olive Young 송파구청점",
+    name: "Olive Young Songpa-gu Office",
     nameKr: "올리브영 송파구청점",
     type: "olive_young",
     zone: "jamsil",
@@ -1443,11 +1619,15 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 송파구 오금로 87 잠실리시온 1층",
     lat: 37.514585,
     lng: 127.10747,
+    hours: {
+      open: "10:00",
+      close: "23:00"
+    },
     geoSource: "address"
   },
   {
     id: "oy-롯데백화점잠실점",
-    name: "Olive Young 롯데백화점잠실점",
+    name: "Olive Young Rotdebaekhwajeomjamsil",
     nameKr: "올리브영 롯데백화점잠실점",
     type: "olive_young",
     zone: "jamsil",
@@ -1460,11 +1640,15 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 송파구 올림픽로 240 지하1층",
     lat: 37.511483,
     lng: 127.098241,
+    hours: {
+      open: "10:00",
+      close: "22:00"
+    },
     geoSource: "address"
   },
   {
     id: "oy-롯데월드몰점",
-    name: "Olive Young 롯데월드몰점",
+    name: "Olive Young Rotdewoldeumol",
     nameKr: "올리브영 롯데월드몰점",
     type: "olive_young",
     zone: "jamsil",
@@ -1477,11 +1661,15 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 송파구 올림픽로 300 5층",
     lat: 37.513742,
     lng: 127.104247,
+    hours: {
+      open: "10:30",
+      close: "22:00"
+    },
     geoSource: "address"
   },
   {
     id: "oy-롯데월드점",
-    name: "Olive Young 롯데월드점",
+    name: "Olive Young Rotdewoldeu",
     nameKr: "올리브영 롯데월드점",
     type: "olive_young",
     zone: "jamsil",
@@ -1498,7 +1686,7 @@ export const OLIVEYOUNG_PLACES: Place[] = [
   },
   {
     id: "oy-잠실역8호선점",
-    name: "Olive Young 잠실역8호선점",
+    name: "Olive Young Jamsilyeok8hoseon",
     nameKr: "올리브영 잠실역8호선점",
     type: "olive_young",
     zone: "jamsil",
@@ -1511,11 +1699,15 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 송파구 올림픽로 305 지하상가 지하1층 H7~10호",
     lat: 37.511086,
     lng: 127.087679,
+    hours: {
+      open: "10:00",
+      close: "22:30"
+    },
     geoSource: "address"
   },
   {
     id: "oy-롯데월드몰플러스점",
-    name: "Olive Young 롯데월드몰플러스점",
+    name: "Olive Young Rotdewoldeumolpeulreoseu",
     nameKr: "올리브영 롯데월드몰플러스점",
     type: "olive_young",
     zone: "jamsil",
@@ -1528,11 +1720,15 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 송파구 올림픽로 300 2층",
     lat: 37.513962,
     lng: 127.104367,
+    hours: {
+      open: "10:30",
+      close: "22:00"
+    },
     geoSource: "address"
   },
   {
     id: "oy-잠실학원사거리점",
-    name: "Olive Young 잠실학원사거리점",
+    name: "Olive Young Jamsilhakwonsa St.",
     nameKr: "올리브영 잠실학원사거리점",
     type: "olive_young",
     zone: "jamsil",
@@ -1545,11 +1741,15 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 송파구 석촌호수로 130 1층",
     lat: 37.507194,
     lng: 127.091385,
+    hours: {
+      open: "10:00",
+      close: "22:30"
+    },
     geoSource: "address"
   },
   {
     id: "oy-천호역점",
-    name: "Olive Young 천호역점",
+    name: "Olive Young Cheonho Stn.",
     nameKr: "올리브영 천호역점",
     type: "olive_young",
     zone: "jamsil",
@@ -1562,11 +1762,15 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 강동구 올림픽로 659 1층",
     lat: 37.540299,
     lng: 127.12356,
+    hours: {
+      open: "10:00",
+      close: "22:30"
+    },
     geoSource: "address"
   },
   {
     id: "oy-강동구청점",
-    name: "Olive Young 강동구청점",
+    name: "Olive Young Gangdong-gu Office",
     nameKr: "올리브영 강동구청점",
     type: "olive_young",
     zone: "jamsil",
@@ -1583,7 +1787,7 @@ export const OLIVEYOUNG_PLACES: Place[] = [
   },
   {
     id: "oy-파르나스몰점",
-    name: "Olive Young 파르나스몰점",
+    name: "Olive Young Pareunaseumol",
     nameKr: "올리브영 파르나스몰점",
     type: "olive_young",
     zone: "samsung",
@@ -1596,11 +1800,15 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 강남구 테헤란로 521 지하1층 R-37호",
     lat: 37.509293,
     lng: 127.060839,
+    hours: {
+      open: "10:00",
+      close: "22:00"
+    },
     geoSource: "address"
   },
   {
     id: "oy-천호엔터식스점",
-    name: "Olive Young 천호엔터식스점",
+    name: "Olive Young Cheonhoenteosikseu",
     nameKr: "올리브영 천호엔터식스점",
     type: "olive_young",
     zone: "seoul_etc",
@@ -1617,7 +1825,7 @@ export const OLIVEYOUNG_PLACES: Place[] = [
   },
   {
     id: "oy-답십리역점",
-    name: "Olive Young 답십리역점",
+    name: "Olive Young Dapsipri Stn.",
     nameKr: "올리브영 답십리역점",
     type: "olive_young",
     zone: "seongsu",
@@ -1630,11 +1838,15 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 동대문구 고미술로 81 1층 103호",
     lat: 37.56561,
     lng: 127.055611,
+    hours: {
+      open: "10:00",
+      close: "22:30"
+    },
     geoSource: "address"
   },
   {
     id: "oy-천호중앙점",
-    name: "Olive Young 천호중앙점",
+    name: "Olive Young Cheonhojungang",
     nameKr: "올리브영 천호중앙점",
     type: "olive_young",
     zone: "jamsil",
@@ -1647,11 +1859,15 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 강동구 천호대로 1027 일동빌딩 1층",
     lat: 37.538108,
     lng: 127.126396,
+    hours: {
+      open: "10:00",
+      close: "23:00"
+    },
     geoSource: "address"
   },
   {
     id: "oy-장안동사거리점",
-    name: "Olive Young 장안동사거리점",
+    name: "Olive Young Jangandongsa St.",
     nameKr: "올리브영 장안동사거리점",
     type: "olive_young",
     zone: "seongsu",
@@ -1664,11 +1880,15 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 동대문구 답십리로 268 해림빌딩 1층",
     lat: 37.57676,
     lng: 127.046034,
+    hours: {
+      open: "10:00",
+      close: "22:30"
+    },
     geoSource: "address"
   },
   {
     id: "oy-압구정로데오점",
-    name: "Olive Young 압구정로데오점",
+    name: "Olive Young Apgujeongrodeo",
     nameKr: "올리브영 압구정로데오점",
     type: "olive_young",
     zone: "cheongdam",
@@ -1685,7 +1905,7 @@ export const OLIVEYOUNG_PLACES: Place[] = [
   },
   {
     id: "oy-신대방역점",
-    name: "Olive Young 신대방역점",
+    name: "Olive Young Sindaebang Stn.",
     nameKr: "올리브영 신대방역점",
     type: "olive_young",
     zone: "yeongdeungpo",
@@ -1698,11 +1918,15 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 관악구 난곡로 357 1층",
     lat: 37.485956,
     lng: 126.913512,
+    hours: {
+      open: "10:00",
+      close: "22:30"
+    },
     geoSource: "address"
   },
   {
     id: "oy-남구로점",
-    name: "Olive Young 남구로점",
+    name: "Olive Young Namguro",
     nameKr: "올리브영 남구로점",
     type: "olive_young",
     zone: "seoul_etc",
@@ -1715,11 +1939,15 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 구로구 도림로 81 1층",
     lat: 37.486733,
     lng: 126.887826,
+    hours: {
+      open: "10:00",
+      close: "22:30"
+    },
     geoSource: "address"
   },
   {
     id: "oy-녹두거리점",
-    name: "Olive Young 녹두거리점",
+    name: "Olive Young Nokdu St.",
     nameKr: "올리브영 녹두거리점",
     type: "olive_young",
     zone: "seoul_etc",
@@ -1732,11 +1960,15 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 관악구 신림로 127 1층",
     lat: 37.470923,
     lng: 126.94212,
+    hours: {
+      open: "10:00",
+      close: "22:30"
+    },
     geoSource: "address"
   },
   {
     id: "oy-미아역점",
-    name: "Olive Young 미아역점",
+    name: "Olive Young Mia Stn.",
     nameKr: "올리브영 미아역점",
     type: "olive_young",
     zone: "seoul_etc",
@@ -1753,7 +1985,7 @@ export const OLIVEYOUNG_PLACES: Place[] = [
   },
   {
     id: "oy-광운대역점",
-    name: "Olive Young 광운대역점",
+    name: "Olive Young Gwangundae Stn.",
     nameKr: "올리브영 광운대역점",
     type: "olive_young",
     zone: "seoul_etc",
@@ -1770,7 +2002,7 @@ export const OLIVEYOUNG_PLACES: Place[] = [
   },
   {
     id: "oy-장위뉴타운점",
-    name: "Olive Young 장위뉴타운점",
+    name: "Olive Young Jangwinyutaun",
     nameKr: "올리브영 장위뉴타운점",
     type: "olive_young",
     zone: "seoul_etc",
@@ -1783,11 +2015,15 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 성북구 돌곶이로40길 46 꿈의숲아이파크 717동 1층",
     lat: 37.619745,
     lng: 127.049263,
+    hours: {
+      open: "10:00",
+      close: "22:00"
+    },
     geoSource: "address"
   },
   {
     id: "oy-미아뉴타운점",
-    name: "Olive Young 미아뉴타운점",
+    name: "Olive Young Mianyutaun",
     nameKr: "올리브영 미아뉴타운점",
     type: "olive_young",
     zone: "seoul_etc",
@@ -1800,11 +2036,15 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 강북구 삼양로27길 19 204동 상가 1층 115~117호",
     lat: 37.617561,
     lng: 127.02137,
+    hours: {
+      open: "10:00",
+      close: "22:30"
+    },
     geoSource: "address"
   },
   {
     id: "oy-미아사거리점",
-    name: "Olive Young 미아사거리점",
+    name: "Olive Young Miasa St.",
     nameKr: "올리브영 미아사거리점",
     type: "olive_young",
     zone: "seoul_etc",
@@ -1817,11 +2057,15 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 강북구 도봉로10길 6 1층",
     lat: 37.614682,
     lng: 127.030849,
+    hours: {
+      open: "10:00",
+      close: "23:00"
+    },
     geoSource: "address"
   },
   {
     id: "oy-미아사거리역점",
-    name: "Olive Young 미아사거리역점",
+    name: "Olive Young Miasageori Stn.",
     nameKr: "올리브영 미아사거리역점",
     type: "olive_young",
     zone: "seoul_etc",
@@ -1834,11 +2078,15 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 강북구 도봉로 53 1층",
     lat: 37.635722,
     lng: 127.0235,
+    hours: {
+      open: "10:00",
+      close: "22:30"
+    },
     geoSource: "address"
   },
   {
     id: "oy-동묘앞역점",
-    name: "Olive Young 동묘앞역점",
+    name: "Olive Young Dongmyoap Stn.",
     nameKr: "올리브영 동묘앞역점",
     type: "olive_young",
     zone: "jongno",
@@ -1851,11 +2099,15 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 종로구 종로 346 1-2층",
     lat: 37.570131,
     lng: 126.985482,
+    hours: {
+      open: "09:00",
+      close: "22:30"
+    },
     geoSource: "address"
   },
   {
     id: "oy-신당역점",
-    name: "Olive Young 신당역점",
+    name: "Olive Young Sindang Stn.",
     nameKr: "올리브영 신당역점",
     type: "olive_young",
     zone: "myeongdong",
@@ -1872,7 +2124,7 @@ export const OLIVEYOUNG_PLACES: Place[] = [
   },
   {
     id: "oy-동대문역사문화공원역점",
-    name: "Olive Young 동대문역사문화공원역점",
+    name: "Olive Young Dongdaemunyeoksamunhwagongwon Stn.",
     nameKr: "올리브영 동대문역사문화공원역점",
     type: "olive_young",
     zone: "myeongdong",
@@ -1885,11 +2137,15 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 중구 장충단로 251 1층",
     lat: 37.554752,
     lng: 127.003335,
+    hours: {
+      open: "10:00",
+      close: "23:30"
+    },
     geoSource: "address"
   },
   {
     id: "oy-두타점",
-    name: "Olive Young 두타점",
+    name: "Olive Young Duta",
     nameKr: "올리브영 두타점",
     type: "olive_young",
     zone: "myeongdong",
@@ -1902,11 +2158,15 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 중구 장충단로 275 지하2층",
     lat: 37.55287,
     lng: 127.000131,
+    hours: {
+      open: "10:30",
+      close: "24:00"
+    },
     geoSource: "address"
   },
   {
     id: "oy-신금호역점",
-    name: "Olive Young 신금호역점",
+    name: "Olive Young Singeumho Stn.",
     nameKr: "올리브영 신금호역점",
     type: "olive_young",
     zone: "hannam",
@@ -1919,11 +2179,15 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 성동구 무수막길 95 1층",
     lat: 37.554229,
     lng: 127.019817,
+    hours: {
+      open: "10:00",
+      close: "22:30"
+    },
     geoSource: "address"
   },
   {
     id: "oy-동대문역사문화공원사거리점",
-    name: "Olive Young 동대문역사문화공원사거리점",
+    name: "Olive Young Dongdaemunyeoksamunhwagongwonsa St.",
     nameKr: "올리브영 동대문역사문화공원사거리점",
     type: "olive_young",
     zone: "myeongdong",
@@ -1934,11 +2198,15 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 중구 을지로 255 1층",
     lat: 37.565761,
     lng: 127.006991,
+    hours: {
+      open: "10:00",
+      close: "23:30"
+    },
     geoSource: "address"
   },
   {
     id: "oy-제일제당센터점",
-    name: "Olive Young 제일제당센터점",
+    name: "Olive Young Jeiljedangsenteo",
     nameKr: "올리브영 제일제당센터점",
     type: "olive_young",
     zone: "myeongdong",
@@ -1955,7 +2223,7 @@ export const OLIVEYOUNG_PLACES: Place[] = [
   },
   {
     id: "oy-던던동대문점",
-    name: "Olive Young 던던동대문점",
+    name: "Olive Young Deondeondongdaemun",
     nameKr: "올리브영 던던동대문점",
     type: "olive_young",
     zone: "myeongdong",
@@ -1968,11 +2236,15 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 중구 을지로 264 지하2층",
     lat: 37.566036,
     lng: 127.007157,
+    hours: {
+      open: "10:30",
+      close: "21:00"
+    },
     geoSource: "address"
   },
   {
     id: "oy-금호점",
-    name: "Olive Young 금호점",
+    name: "Olive Young Geumho",
     nameKr: "올리브영 금호점",
     type: "olive_young",
     zone: "hannam",
@@ -1985,11 +2257,15 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 성동구 독서당로 302 1층",
     lat: 37.547091,
     lng: 127.019425,
+    hours: {
+      open: "10:00",
+      close: "22:30"
+    },
     geoSource: "address"
   },
   {
     id: "oy-약수역점",
-    name: "Olive Young 약수역점",
+    name: "Olive Young Yaksu Stn.",
     nameKr: "올리브영 약수역점",
     type: "olive_young",
     zone: "myeongdong",
@@ -2006,7 +2282,7 @@ export const OLIVEYOUNG_PLACES: Place[] = [
   },
   {
     id: "oy-현대시티아울렛동대문점",
-    name: "Olive Young 현대시티아울렛동대문점",
+    name: "Olive Young Hyeondaesitiaulretdongdaemun",
     nameKr: "올리브영 현대시티아울렛동대문점",
     type: "olive_young",
     zone: "myeongdong",
@@ -2023,7 +2299,7 @@ export const OLIVEYOUNG_PLACES: Place[] = [
   },
   {
     id: "oy-홍대대학로점",
-    name: "Olive Young 홍대대학로점",
+    name: "Olive Young Hongdaedaehakro",
     nameKr: "올리브영 홍대대학로점",
     type: "olive_young",
     zone: "jongno",
@@ -2036,11 +2312,15 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 종로구 대학로 57 1층",
     lat: 37.576525,
     lng: 127.001582,
+    hours: {
+      open: "10:00",
+      close: "22:00"
+    },
     geoSource: "address"
   },
   {
     id: "oy-광장마켓점",
-    name: "Olive Young 광장마켓점",
+    name: "Olive Young Gwangjangmaket",
     nameKr: "올리브영 광장마켓점",
     type: "olive_young",
     zone: "myeongdong",
@@ -2053,11 +2333,15 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 종로구 창경궁로 88 광장시장 2층",
     lat: 37.570097,
     lng: 126.999828,
+    hours: {
+      open: "10:00",
+      close: "22:00"
+    },
     geoSource: "address"
   },
   {
     id: "oy-대학로점",
-    name: "Olive Young 대학로점",
+    name: "Olive Young Daehakro",
     nameKr: "올리브영 대학로점",
     type: "olive_young",
     zone: "jongno",
@@ -2070,11 +2354,15 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 종로구 창경궁로 237 1-3층",
     lat: 37.585503,
     lng: 127.001271,
+    hours: {
+      open: "10:00",
+      close: "22:30"
+    },
     geoSource: "address"
   },
   {
     id: "oy-합정교보점",
-    name: "Olive Young 합정교보점",
+    name: "Olive Young Hapjeonggyobo",
     nameKr: "올리브영 합정교보점",
     type: "olive_young",
     zone: "hongdae",
@@ -2087,11 +2375,15 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 마포구 월드컵로1길 14 딜라이트스퀘어1차 지하2층",
     lat: 37.549901,
     lng: 126.912076,
+    hours: {
+      open: "10:30",
+      close: "22:00"
+    },
     geoSource: "address"
   },
   {
     id: "oy-동교동점",
-    name: "Olive Young 동교동점",
+    name: "Olive Young Donggyodong",
     nameKr: "올리브영 동교동점",
     type: "olive_young",
     zone: "hongdae",
@@ -2108,7 +2400,7 @@ export const OLIVEYOUNG_PLACES: Place[] = [
   },
   {
     id: "oy-상암enm점",
-    name: "Olive Young 상암ENM점",
+    name: "Olive Young SangamENM",
     nameKr: "올리브영 상암ENM점",
     type: "olive_young",
     zone: "hongdae",
@@ -2125,7 +2417,7 @@ export const OLIVEYOUNG_PLACES: Place[] = [
   },
   {
     id: "oy-마포도화점",
-    name: "Olive Young 마포도화점",
+    name: "Olive Young Mapodohwa",
     nameKr: "올리브영 마포도화점",
     type: "olive_young",
     zone: "hongdae",
@@ -2138,11 +2430,15 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 마포구 삼개로 20 근신빌딩 별관 1층",
     lat: 37.538508,
     lng: 126.947205,
+    hours: {
+      open: "10:00",
+      close: "22:00"
+    },
     geoSource: "address"
   },
   {
     id: "oy-홍대정문점",
-    name: "Olive Young 홍대정문점",
+    name: "Olive Young Hongdaejeongmun",
     nameKr: "올리브영 홍대정문점",
     type: "olive_young",
     zone: "hongdae",
@@ -2159,7 +2455,7 @@ export const OLIVEYOUNG_PLACES: Place[] = [
   },
   {
     id: "oy-공덕파크팰리스점",
-    name: "Olive Young 공덕파크팰리스점",
+    name: "Olive Young Gongdeokpakeupaelriseu",
     nameKr: "올리브영 공덕파크팰리스점",
     type: "olive_young",
     zone: "hongdae",
@@ -2176,7 +2472,7 @@ export const OLIVEYOUNG_PLACES: Place[] = [
   },
   {
     id: "oy-신촌로터리점",
-    name: "Olive Young 신촌로터리점",
+    name: "Olive Young Sinchonroteori",
     nameKr: "올리브영 신촌로터리점",
     type: "olive_young",
     zone: "hongdae",
@@ -2189,11 +2485,15 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 마포구 서강로 133 1층",
     lat: 37.554403,
     lng: 126.93527,
+    hours: {
+      open: "10:00",
+      close: "22:30"
+    },
     geoSource: "address"
   },
   {
     id: "oy-합정메세나폴리스점",
-    name: "Olive Young 합정메세나폴리스점",
+    name: "Olive Young Hapjeongmesenapolriseu",
     nameKr: "올리브영 합정메세나폴리스점",
     type: "olive_young",
     zone: "hongdae",
@@ -2210,7 +2510,7 @@ export const OLIVEYOUNG_PLACES: Place[] = [
   },
   {
     id: "oy-애오개역점",
-    name: "Olive Young 애오개역점",
+    name: "Olive Young Aeogae Stn.",
     nameKr: "올리브영 애오개역점",
     type: "olive_young",
     zone: "myeongdong",
@@ -2227,7 +2527,7 @@ export const OLIVEYOUNG_PLACES: Place[] = [
   },
   {
     id: "oy-상암mbc점",
-    name: "Olive Young 상암MBC점",
+    name: "Olive Young SangamMBC",
     nameKr: "올리브영 상암MBC점",
     type: "olive_young",
     zone: "hongdae",
@@ -2244,7 +2544,7 @@ export const OLIVEYOUNG_PLACES: Place[] = [
   },
   {
     id: "oy-망원동점",
-    name: "Olive Young 망원동점",
+    name: "Olive Young Mangwondong",
     nameKr: "올리브영 망원동점",
     type: "olive_young",
     zone: "hongdae",
@@ -2257,11 +2557,15 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 마포구 망원로 71 1층",
     lat: 37.557498,
     lng: 126.904773,
+    hours: {
+      open: "10:00",
+      close: "22:00"
+    },
     geoSource: "address"
   },
   {
     id: "oy-디지털미디어시티역점",
-    name: "Olive Young 디지털미디어시티역점",
+    name: "Olive Young Dijiteolmidieositi Stn.",
     nameKr: "올리브영 디지털미디어시티역점",
     type: "olive_young",
     zone: "hongdae",
@@ -2277,7 +2581,7 @@ export const OLIVEYOUNG_PLACES: Place[] = [
   },
   {
     id: "oy-홈플러스월드컵점",
-    name: "Olive Young 홈플러스월드컵점",
+    name: "Olive Young Hompeulreoseuwoldeukeop",
     nameKr: "올리브영 홈플러스월드컵점",
     type: "olive_young",
     zone: "hongdae",
@@ -2289,11 +2593,15 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 마포구 월드컵로 240 2층",
     lat: 37.569436,
     lng: 126.89789,
+    hours: {
+      open: "10:00",
+      close: "22:00"
+    },
     geoSource: "address"
   },
   {
     id: "oy-북가좌동점",
-    name: "Olive Young 북가좌동점",
+    name: "Olive Young Bukgajwadong",
     nameKr: "올리브영 북가좌동점",
     type: "olive_young",
     zone: "hongdae",
@@ -2306,11 +2614,15 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 서대문구 거북골로 191 1층",
     lat: 37.577899,
     lng: 126.909397,
+    hours: {
+      open: "10:00",
+      close: "22:30"
+    },
     geoSource: "address"
   },
   {
     id: "oy-수색점",
-    name: "Olive Young 수색점",
+    name: "Olive Young Susaek",
     nameKr: "올리브영 수색점",
     type: "olive_young",
     zone: "hongdae",
@@ -2323,11 +2635,15 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 은평구 수색로 216 1층",
     lat: 37.580848,
     lng: 126.900048,
+    hours: {
+      open: "10:00",
+      close: "22:30"
+    },
     geoSource: "address"
   },
   {
     id: "oy-연희점",
-    name: "Olive Young 연희점",
+    name: "Olive Young Yeonhui",
     nameKr: "올리브영 연희점",
     type: "olive_young",
     zone: "hongdae",
@@ -2340,11 +2656,15 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 서대문구 연희로 97 1층",
     lat: 37.566795,
     lng: 126.930563,
+    hours: {
+      open: "10:00",
+      close: "22:30"
+    },
     geoSource: "address"
   },
   {
     id: "oy-창천점",
-    name: "Olive Young 창천점",
+    name: "Olive Young Changcheon",
     nameKr: "올리브영 창천점",
     type: "olive_young",
     zone: "hongdae",
@@ -2357,11 +2677,15 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 서대문구 신촌로 17 1층",
     lat: 37.558203,
     lng: 126.929011,
+    hours: {
+      open: "10:00",
+      close: "23:00"
+    },
     geoSource: "address"
   },
   {
     id: "oy-명지대점",
-    name: "Olive Young 명지대점",
+    name: "Olive Young Myeongjidae",
     nameKr: "올리브영 명지대점",
     type: "olive_young",
     zone: "hongdae",
@@ -2374,11 +2698,15 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 서대문구 거북골로 34 교육문화복합시설 1층 MCC관",
     lat: 37.579611,
     lng: 126.922773,
+    hours: {
+      open: "10:00",
+      close: "22:30"
+    },
     geoSource: "address"
   },
   {
     id: "oy-신촌중앙점",
-    name: "Olive Young 신촌중앙점",
+    name: "Olive Young Sinchonjungang",
     nameKr: "올리브영 신촌중앙점",
     type: "olive_young",
     zone: "myeongdong",
@@ -2391,11 +2719,15 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 서대문구 신촌로 93 광신빌딩 1층",
     lat: 37.557374,
     lng: 126.957981,
+    hours: {
+      open: "10:00",
+      close: "23:00"
+    },
     geoSource: "address"
   },
   {
     id: "oy-염창역점",
-    name: "Olive Young 염창역점",
+    name: "Olive Young Yeomchang Stn.",
     nameKr: "올리브영 염창역점",
     type: "olive_young",
     zone: "seoul_etc",
@@ -2408,11 +2740,15 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 강서구 공항대로 637 1층",
     lat: 37.54762,
     lng: 126.875617,
+    hours: {
+      open: "10:00",
+      close: "23:00"
+    },
     geoSource: "address"
   },
   {
     id: "oy-신촌연세점",
-    name: "Olive Young 신촌연세점",
+    name: "Olive Young Sinchonyeonse",
     nameKr: "올리브영 신촌연세점",
     type: "olive_young",
     zone: "hongdae",
@@ -2425,11 +2761,15 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 서대문구 연세로 37 1층",
     lat: 37.55887,
     lng: 126.936702,
+    hours: {
+      open: "10:00",
+      close: "23:00"
+    },
     geoSource: "address"
   },
   {
     id: "oy-선유도역점",
-    name: "Olive Young 선유도역점",
+    name: "Olive Young Seonyudo Stn.",
     nameKr: "올리브영 선유도역점",
     type: "olive_young",
     zone: "yeongdeungpo",
@@ -2442,11 +2782,15 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 영등포구 양평로 115 1층",
     lat: 37.534778,
     lng: 126.900157,
+    hours: {
+      open: "10:00",
+      close: "22:30"
+    },
     geoSource: "address"
   },
   {
     id: "oy-신촌명물거리점",
-    name: "Olive Young 신촌명물거리점",
+    name: "Olive Young Sinchonmyeongmul St.",
     nameKr: "올리브영 신촌명물거리점",
     type: "olive_young",
     zone: "hongdae",
@@ -2459,11 +2803,15 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 서대문구 명물길 54 1층",
     lat: 37.558797,
     lng: 126.939327,
+    hours: {
+      open: "10:00",
+      close: "23:00"
+    },
     geoSource: "address"
   },
   {
     id: "oy-신촌대로점",
-    name: "Olive Young 신촌대로점",
+    name: "Olive Young Sinchondaero",
     nameKr: "올리브영 신촌대로점",
     type: "olive_young",
     zone: "hongdae",
@@ -2476,11 +2824,15 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 서대문구 신촌로 121 1층",
     lat: 37.556155,
     lng: 126.939311,
+    hours: {
+      open: "10:00",
+      close: "22:30"
+    },
     geoSource: "address"
   },
   {
     id: "oy-증미역점",
-    name: "Olive Young 증미역점",
+    name: "Olive Young Jeungmi Stn.",
     nameKr: "올리브영 증미역점",
     type: "olive_young",
     zone: "seoul_etc",
@@ -2497,7 +2849,7 @@ export const OLIVEYOUNG_PLACES: Place[] = [
   },
   {
     id: "oy-당산대로점",
-    name: "Olive Young 당산대로점",
+    name: "Olive Young Dangsandaero",
     nameKr: "올리브영 당산대로점",
     type: "olive_young",
     zone: "yeongdeungpo",
@@ -2509,11 +2861,15 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 영등포구 양평로 58 그랜드컨벤션센터 1층",
     lat: 37.535065,
     lng: 126.90067,
+    hours: {
+      open: "10:00",
+      close: "23:00"
+    },
     geoSource: "address"
   },
   {
     id: "oy-염창역9호선점",
-    name: "Olive Young 염창역9호선점",
+    name: "Olive Young Yeomchangyeok9hoseon",
     nameKr: "올리브영 염창역9호선점",
     type: "olive_young",
     zone: "seoul_etc",
@@ -2530,7 +2886,7 @@ export const OLIVEYOUNG_PLACES: Place[] = [
   },
   {
     id: "oy-등촌역점",
-    name: "Olive Young 등촌역점",
+    name: "Olive Young Deungchon Stn.",
     nameKr: "올리브영 등촌역점",
     type: "olive_young",
     zone: "seoul_etc",
@@ -2543,11 +2899,15 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 강서구 공항대로 543 센터스퀘어 1층",
     lat: 37.550799,
     lng: 126.866123,
+    hours: {
+      open: "10:00",
+      close: "22:30"
+    },
     geoSource: "address"
   },
   {
     id: "oy-당산역점",
-    name: "Olive Young 당산역점",
+    name: "Olive Young Dangsan Stn.",
     nameKr: "올리브영 당산역점",
     type: "olive_young",
     zone: "yeongdeungpo",
@@ -2560,11 +2920,15 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 영등포구 당산로 223 태영스타밸류 1층",
     lat: 37.533735,
     lng: 126.901161,
+    hours: {
+      open: "09:30",
+      close: "23:00"
+    },
     geoSource: "address"
   },
   {
     id: "oy-등촌점",
-    name: "Olive Young 등촌점",
+    name: "Olive Young Deungchon",
     nameKr: "올리브영 등촌점",
     type: "olive_young",
     zone: "seoul_etc",
@@ -2577,11 +2941,15 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 양천구 목동중앙북로7길 20 1층",
     lat: 37.54875,
     lng: 126.867606,
+    hours: {
+      open: "10:00",
+      close: "23:00"
+    },
     geoSource: "address"
   },
   {
     id: "oy-양재역점",
-    name: "Olive Young 양재역점",
+    name: "Olive Young Yangjae Stn.",
     nameKr: "올리브영 양재역점",
     type: "olive_young",
     zone: "gangnam_station",
@@ -2598,7 +2966,7 @@ export const OLIVEYOUNG_PLACES: Place[] = [
   },
   {
     id: "oy-서래마을점",
-    name: "Olive Young 서래마을점",
+    name: "Olive Young Seoraemaeul",
     nameKr: "올리브영 서래마을점",
     type: "olive_young",
     zone: "gangnam_station",
@@ -2611,11 +2979,15 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 서초구 서래로 39 1층",
     lat: 37.498513,
     lng: 126.998209,
+    hours: {
+      open: "10:00",
+      close: "22:30"
+    },
     geoSource: "address"
   },
   {
     id: "oy-강남엔터식스점",
-    name: "Olive Young 강남엔터식스점",
+    name: "Olive Young Gangnamenteosikseu",
     nameKr: "올리브영 강남엔터식스점",
     type: "olive_young",
     zone: "sinsa",
@@ -2632,7 +3004,7 @@ export const OLIVEYOUNG_PLACES: Place[] = [
   },
   {
     id: "oy-강남우성점",
-    name: "Olive Young 강남우성점",
+    name: "Olive Young Gangnamuseong",
     nameKr: "올리브영 강남우성점",
     type: "olive_young",
     zone: "gangnam_station",
@@ -2649,7 +3021,7 @@ export const OLIVEYOUNG_PLACES: Place[] = [
   },
   {
     id: "oy-역삼점",
-    name: "Olive Young 역삼점",
+    name: "Olive Young Yeoksam",
     nameKr: "올리브영 역삼점",
     type: "olive_young",
     zone: "gangnam_station",
@@ -2666,7 +3038,7 @@ export const OLIVEYOUNG_PLACES: Place[] = [
   },
   {
     id: "oy-역삼중앙점",
-    name: "Olive Young 역삼중앙점",
+    name: "Olive Young Yeoksamjungang",
     nameKr: "올리브영 역삼중앙점",
     type: "olive_young",
     zone: "gangnam_station",
@@ -2683,7 +3055,7 @@ export const OLIVEYOUNG_PLACES: Place[] = [
   },
   {
     id: "oy-신논현역점",
-    name: "Olive Young 신논현역점",
+    name: "Olive Young Sinnonhyeon Stn.",
     nameKr: "올리브영 신논현역점",
     type: "olive_young",
     zone: "sinsa",
@@ -2700,7 +3072,7 @@ export const OLIVEYOUNG_PLACES: Place[] = [
   },
   {
     id: "oy-선릉중앙점",
-    name: "Olive Young 선릉중앙점",
+    name: "Olive Young Seonreungjungang",
     nameKr: "올리브영 선릉중앙점",
     type: "olive_young",
     zone: "gangnam_station",
@@ -2717,7 +3089,7 @@ export const OLIVEYOUNG_PLACES: Place[] = [
   },
   {
     id: "oy-청량리역사점",
-    name: "Olive Young 청량리역사점",
+    name: "Olive Young Cheongryangriyeoksa",
     nameKr: "올리브영 청량리역사점",
     type: "olive_young",
     zone: "seoul_etc",
@@ -2730,11 +3102,15 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 동대문구 왕산로 214 3층 맞이방",
     lat: 37.580669,
     lng: 127.048208,
+    hours: {
+      open: "09:00",
+      close: "22:00"
+    },
     geoSource: "address"
   },
   {
     id: "oy-건대커먼그라운드점",
-    name: "Olive Young 건대커먼그라운드점",
+    name: "Olive Young Geondaekeomeongeuraundeu",
     nameKr: "올리브영 건대커먼그라운드점",
     type: "olive_young",
     zone: "seongsu",
@@ -2747,11 +3123,15 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 광진구 아차산로 200 MH동 1층",
     lat: 37.541327,
     lng: 127.06535,
+    hours: {
+      open: "11:00",
+      close: "22:00"
+    },
     geoSource: "address"
   },
   {
     id: "oy-충무로역점",
-    name: "Olive Young 충무로역점",
+    name: "Olive Young Chungmuro Stn.",
     nameKr: "올리브영 충무로역점",
     type: "olive_young",
     zone: "myeongdong",
@@ -2768,7 +3148,7 @@ export const OLIVEYOUNG_PLACES: Place[] = [
   },
   {
     id: "oy-어린이대공원역점",
-    name: "Olive Young 어린이대공원역점",
+    name: "Olive Young Eorinidaegongwon Stn.",
     nameKr: "올리브영 어린이대공원역점",
     type: "olive_young",
     zone: "jamsil",
@@ -2781,11 +3161,15 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 광진구 광나루로 388 1-2층",
     lat: 37.540033,
     lng: 127.097277,
+    hours: {
+      open: "10:00",
+      close: "22:30"
+    },
     geoSource: "address"
   },
   {
     id: "oy-군자역점",
-    name: "Olive Young 군자역점",
+    name: "Olive Young Gunja Stn.",
     nameKr: "올리브영 군자역점",
     type: "olive_young",
     zone: "seongsu",
@@ -2798,11 +3182,15 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 광진구 천호대로 548 1-2층",
     lat: 37.556827,
     lng: 127.078992,
+    hours: {
+      open: "10:00",
+      close: "23:00"
+    },
     geoSource: "address"
   },
   {
     id: "oy-건대입구점",
-    name: "Olive Young 건대입구점",
+    name: "Olive Young Geondaeipgu",
     nameKr: "올리브영 건대입구점",
     type: "olive_young",
     zone: "seongsu",
@@ -2819,7 +3207,7 @@ export const OLIVEYOUNG_PLACES: Place[] = [
   },
   {
     id: "oy-방이시장점",
-    name: "Olive Young 방이시장점",
+    name: "Olive Young Bangisijang",
     nameKr: "올리브영 방이시장점",
     type: "olive_young",
     zone: "jamsil",
@@ -2832,11 +3220,15 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 송파구 백제고분로 460 쿠피아타워 1층",
     lat: 37.51338,
     lng: 127.114121,
+    hours: {
+      open: "11:00",
+      close: "22:00"
+    },
     geoSource: "address"
   },
   {
     id: "oy-배명사거리점",
-    name: "Olive Young 배명사거리점",
+    name: "Olive Young Baemyeongsa St.",
     nameKr: "올리브영 배명사거리점",
     type: "olive_young",
     zone: "jamsil",
@@ -2849,11 +3241,15 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 송파구 백제고분로 276 공익빌딩 1층",
     lat: 37.504353,
     lng: 127.088237,
+    hours: {
+      open: "10:00",
+      close: "22:30"
+    },
     geoSource: "address"
   },
   {
     id: "oy-위례아이파크점",
-    name: "Olive Young 위례아이파크점",
+    name: "Olive Young Wiryeaipakeu",
     nameKr: "올리브영 위례아이파크점",
     type: "olive_young",
     zone: "seoul_etc",
@@ -2866,11 +3262,15 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 송파구 위례광장로 136",
     lat: 37.475679,
     lng: 127.142144,
+    hours: {
+      open: "10:00",
+      close: "22:30"
+    },
     geoSource: "address"
   },
   {
     id: "oy-현대시티몰가든파이브점",
-    name: "Olive Young 현대시티몰가든파이브점",
+    name: "Olive Young Hyeondaesitimolgadeunpaibeu",
     nameKr: "올리브영 현대시티몰가든파이브점",
     type: "olive_young",
     zone: "seoul_etc",
@@ -2887,7 +3287,7 @@ export const OLIVEYOUNG_PLACES: Place[] = [
   },
   {
     id: "oy-강변역점",
-    name: "Olive Young 강변역점",
+    name: "Olive Young Gangbyeon Stn.",
     nameKr: "올리브영 강변역점",
     type: "olive_young",
     zone: "jamsil",
@@ -2900,11 +3300,15 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 광진구 강변역로4길 10 1층",
     lat: 37.535382,
     lng: 127.093472,
+    hours: {
+      open: "09:30",
+      close: "22:30"
+    },
     geoSource: "address"
   },
   {
     id: "oy-둔촌점",
-    name: "Olive Young 둔촌점",
+    name: "Olive Young Dunchon",
     nameKr: "올리브영 둔촌점",
     type: "olive_young",
     zone: "jamsil",
@@ -2917,11 +3321,15 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 강동구 양재대로 1317 경일빌딩 1층",
     lat: 37.531332,
     lng: 127.137566,
+    hours: {
+      open: "10:00",
+      close: "22:30"
+    },
     geoSource: "address"
   },
   {
     id: "oy-수서역점",
-    name: "Olive Young 수서역점",
+    name: "Olive Young Suseo Stn.",
     nameKr: "올리브영 수서역점",
     type: "olive_young",
     zone: "jamsil",
@@ -2938,7 +3346,7 @@ export const OLIVEYOUNG_PLACES: Place[] = [
   },
   {
     id: "oy-강변엔터식스점",
-    name: "Olive Young 강변엔터식스점",
+    name: "Olive Young Gangbyeonenteosikseu",
     nameKr: "올리브영 강변엔터식스점",
     type: "olive_young",
     zone: "jamsil",
@@ -2955,7 +3363,7 @@ export const OLIVEYOUNG_PLACES: Place[] = [
   },
   {
     id: "oy-구의이스트폴점",
-    name: "Olive Young 구의이스트폴점",
+    name: "Olive Young Guuiiseuteupol",
     nameKr: "올리브영 구의이스트폴점",
     type: "olive_young",
     zone: "seoul_etc",
@@ -2968,11 +3376,15 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 광진구 아차산로 402 판매시설 L1층",
     lat: 37.554806,
     lng: 127.112299,
+    hours: {
+      open: "10:00",
+      close: "22:00"
+    },
     geoSource: "address"
   },
   {
     id: "oy-둔촌파크포레온점",
-    name: "Olive Young 둔촌파크포레온점",
+    name: "Olive Young Dunchonpakeuporeon",
     nameKr: "올리브영 둔촌파크포레온점",
     type: "olive_young",
     zone: "jamsil",
@@ -2985,11 +3397,15 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 강동구 양재대로 1360 지하2층 212호",
     lat: 37.527476,
     lng: 127.137046,
+    hours: {
+      open: "10:00",
+      close: "22:30"
+    },
     geoSource: "address"
   },
   {
     id: "oy-올림픽대교북단점",
-    name: "Olive Young 올림픽대교북단점",
+    name: "Olive Young Olrimpikdaegyobukdan",
     nameKr: "올리브영 올림픽대교북단점",
     type: "olive_young",
     zone: "seoul_etc",
@@ -3002,11 +3418,15 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 광진구 아차산로 484 1층",
     lat: 37.555026,
     lng: 127.112419,
+    hours: {
+      open: "10:00",
+      close: "22:30"
+    },
     geoSource: "address"
   },
   {
     id: "oy-구의역점",
-    name: "Olive Young 구의역점",
+    name: "Olive Young Guui Stn.",
     nameKr: "올리브영 구의역점",
     type: "olive_young",
     zone: "seongsu",
@@ -3019,11 +3439,15 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 광진구 아차산로 378 한승빌딩 1층",
     lat: 37.536547,
     lng: 127.084753,
+    hours: {
+      open: "10:00",
+      close: "22:30"
+    },
     geoSource: "address"
   },
   {
     id: "oy-길동사거리점",
-    name: "Olive Young 길동사거리점",
+    name: "Olive Young Gildongsa St.",
     nameKr: "올리브영 길동사거리점",
     type: "olive_young",
     zone: "jamsil",
@@ -3040,7 +3464,7 @@ export const OLIVEYOUNG_PLACES: Place[] = [
   },
   {
     id: "oy-광나루역점",
-    name: "Olive Young 광나루역점",
+    name: "Olive Young Gwangnaru Stn.",
     nameKr: "올리브영 광나루역점",
     type: "olive_young",
     zone: "seoul_etc",
@@ -3057,7 +3481,7 @@ export const OLIVEYOUNG_PLACES: Place[] = [
   },
   {
     id: "oy-길동역점",
-    name: "Olive Young 길동역점",
+    name: "Olive Young Gildong Stn.",
     nameKr: "올리브영 길동역점",
     type: "olive_young",
     zone: "jamsil",
@@ -3070,11 +3494,15 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 강동구 양재대로 1481 1층",
     lat: 37.526789,
     lng: 127.13584,
+    hours: {
+      open: "10:00",
+      close: "22:00"
+    },
     geoSource: "address"
   },
   {
     id: "oy-자양역점",
-    name: "Olive Young 자양역점",
+    name: "Olive Young Jayang Stn.",
     nameKr: "올리브영 자양역점",
     type: "olive_young",
     zone: "seongsu",
@@ -3087,11 +3515,15 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 광진구 능동로 7 1층",
     lat: 37.53243,
     lng: 127.066799,
+    hours: {
+      open: "10:00",
+      close: "22:30"
+    },
     geoSource: "address"
   },
   {
     id: "oy-스타시티점",
-    name: "Olive Young 스타시티점",
+    name: "Olive Young Seutasiti",
     nameKr: "올리브영 스타시티점",
     type: "olive_young",
     zone: "seongsu",
@@ -3104,11 +3536,15 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 광진구 아차산로 272 스타시티가 1층",
     lat: 37.538408,
     lng: 127.07317,
+    hours: {
+      open: "10:30",
+      close: "22:30"
+    },
     geoSource: "address"
   },
   {
     id: "oy-신도림테크노마트점",
-    name: "Olive Young 신도림테크노마트점",
+    name: "Olive Young Sindorimtekeunomateu",
     nameKr: "올리브영 신도림테크노마트점",
     type: "olive_young",
     zone: "yeongdeungpo",
@@ -3125,7 +3561,7 @@ export const OLIVEYOUNG_PLACES: Place[] = [
   },
   {
     id: "oy-nc신구로점",
-    name: "Olive Young NC신구로점",
+    name: "Olive Young NCSinguro",
     nameKr: "올리브영 NC신구로점",
     type: "olive_young",
     zone: "yeongdeungpo",
@@ -3142,7 +3578,7 @@ export const OLIVEYOUNG_PLACES: Place[] = [
   },
   {
     id: "oy-구일역점",
-    name: "Olive Young 구일역점",
+    name: "Olive Young Guil Stn.",
     nameKr: "올리브영 구일역점",
     type: "olive_young",
     zone: "seoul_etc",
@@ -3155,11 +3591,15 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 구로구 구일로10길 49 다원그린빌 1층 101-2,102-1호",
     lat: 37.495517,
     lng: 126.875888,
+    hours: {
+      open: "10:00",
+      close: "22:30"
+    },
     geoSource: "address"
   },
   {
     id: "oy-개봉역북부점",
-    name: "Olive Young 개봉역북부점",
+    name: "Olive Young Gaebongyeokbukbu",
     nameKr: "올리브영 개봉역북부점",
     type: "olive_young",
     zone: "seoul_etc",
@@ -3172,11 +3612,15 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 구로구 경인로40길 41 2층",
     lat: 37.495026,
     lng: 126.859029,
+    hours: {
+      open: "10:00",
+      close: "22:30"
+    },
     geoSource: "address"
   },
   {
     id: "oy-홈플러스영등포점",
-    name: "Olive Young 홈플러스영등포점",
+    name: "Olive Young Hompeulreoseuyeongdeungpo",
     nameKr: "올리브영 홈플러스영등포점",
     type: "olive_young",
     zone: "yeongdeungpo",
@@ -3193,7 +3637,7 @@ export const OLIVEYOUNG_PLACES: Place[] = [
   },
   {
     id: "oy-오류동역점",
-    name: "Olive Young 오류동역점",
+    name: "Olive Young Oryudong Stn.",
     nameKr: "올리브영 오류동역점",
     type: "olive_young",
     zone: "yeongdeungpo",
@@ -3206,11 +3650,15 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 구로구 경인로 204 1층",
     lat: 37.502198,
     lng: 126.878868,
+    hours: {
+      open: "10:00",
+      close: "22:30"
+    },
     geoSource: "address"
   },
   {
     id: "oy-구로구청점",
-    name: "Olive Young 구로구청점",
+    name: "Olive Young Guro-gu Office",
     nameKr: "올리브영 구로구청점",
     type: "olive_young",
     zone: "yeongdeungpo",
@@ -3223,11 +3671,15 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 구로구 구로중앙로 68 신안타워 1층 102-3호",
     lat: 37.49586,
     lng: 126.888813,
+    hours: {
+      open: "10:00",
+      close: "22:30"
+    },
     geoSource: "address"
   },
   {
     id: "oy-영등포타임스퀘어점",
-    name: "Olive Young 영등포타임스퀘어점",
+    name: "Olive Young Yeongdeungpotaimseukweeo",
     nameKr: "올리브영 영등포타임스퀘어점",
     type: "olive_young",
     zone: "yeongdeungpo",
@@ -3240,11 +3692,15 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 영등포구 영중로 15 지하1층",
     lat: 37.517162,
     lng: 126.903811,
+    hours: {
+      open: "10:30",
+      close: "22:00"
+    },
     geoSource: "address"
   },
   {
     id: "oy-타임스퀘어아트리움점",
-    name: "Olive Young 타임스퀘어아트리움점",
+    name: "Olive Young Taimseukweeoateurium",
     nameKr: "올리브영 타임스퀘어아트리움점",
     type: "olive_young",
     zone: "yeongdeungpo",
@@ -3257,11 +3713,15 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 영등포구 영중로 15 3층 315호",
     lat: 37.517382,
     lng: 126.903931,
+    hours: {
+      open: "10:30",
+      close: "22:00"
+    },
     geoSource: "address"
   },
   {
     id: "oy-영등포역점",
-    name: "Olive Young 영등포역점",
+    name: "Olive Young Yeongdeungpo Stn.",
     nameKr: "올리브영 영등포역점",
     type: "olive_young",
     zone: "yeongdeungpo",
@@ -3274,11 +3734,15 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 영등포구 영중로 6 키스톤타워 1층",
     lat: 37.516973,
     lng: 126.906639,
+    hours: {
+      open: "10:00",
+      close: "23:00"
+    },
     geoSource: "address"
   },
   {
     id: "oy-화곡역사거리점",
-    name: "Olive Young 화곡역사거리점",
+    name: "Olive Young Hwagokyeoksa St.",
     nameKr: "올리브영 화곡역사거리점",
     type: "olive_young",
     zone: "seoul_etc",
@@ -3291,11 +3755,15 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 강서구 강서로 163 1층",
     lat: 37.539713,
     lng: 126.841845,
+    hours: {
+      open: "10:00",
+      close: "23:00"
+    },
     geoSource: "address"
   },
   {
     id: "oy-화곡역점",
-    name: "Olive Young 화곡역점",
+    name: "Olive Young Hwagok Stn.",
     nameKr: "올리브영 화곡역점",
     type: "olive_young",
     zone: "seoul_etc",
@@ -3308,11 +3776,15 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 강서구 화곡로 149 심당빌딩 1층",
     lat: 37.541286,
     lng: 126.8381,
+    hours: {
+      open: "10:30",
+      close: "23:00"
+    },
     geoSource: "address"
   },
   {
     id: "oy-영등포역사점",
-    name: "Olive Young 영등포역사점",
+    name: "Olive Young Yeongdeungpoyeoksa",
     nameKr: "올리브영 영등포역사점",
     type: "olive_young",
     zone: "yeongdeungpo",
@@ -3325,11 +3797,15 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 영등포구 경인로 846 3층",
     lat: 37.516202,
     lng: 126.908732,
+    hours: {
+      open: "08:30",
+      close: "22:30"
+    },
     geoSource: "address"
   },
   {
     id: "oy-강서구청점",
-    name: "Olive Young 강서구청점",
+    name: "Olive Young Gangseo-gu Office",
     nameKr: "올리브영 강서구청점",
     type: "olive_young",
     zone: "seoul_etc",
@@ -3346,7 +3822,7 @@ export const OLIVEYOUNG_PLACES: Place[] = [
   },
   {
     id: "oy-천왕역점",
-    name: "Olive Young 천왕역점",
+    name: "Olive Young Cheonwang Stn.",
     nameKr: "올리브영 천왕역점",
     type: "olive_young",
     zone: "seoul_etc",
@@ -3363,7 +3839,7 @@ export const OLIVEYOUNG_PLACES: Place[] = [
   },
   {
     id: "oy-가산점",
-    name: "Olive Young 가산점",
+    name: "Olive Young Gasan",
     nameKr: "올리브영 가산점",
     type: "olive_young",
     zone: "seoul_etc",
@@ -3380,7 +3856,7 @@ export const OLIVEYOUNG_PLACES: Place[] = [
   },
   {
     id: "oy-가산디지털단지역점",
-    name: "Olive Young 가산디지털단지역점",
+    name: "Olive Young Gasandijiteoldanji Stn.",
     nameKr: "올리브영 가산디지털단지역점",
     type: "olive_young",
     zone: "seoul_etc",
@@ -3397,7 +3873,7 @@ export const OLIVEYOUNG_PLACES: Place[] = [
   },
   {
     id: "oy-우장산역점",
-    name: "Olive Young 우장산역점",
+    name: "Olive Young Ujangsan Stn.",
     nameKr: "올리브영 우장산역점",
     type: "olive_young",
     zone: "seoul_etc",
@@ -3410,11 +3886,15 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 강서구 강서로 242 강서힐스테이트 1층 118~122호",
     lat: 37.547086,
     lng: 126.836753,
+    hours: {
+      open: "10:00",
+      close: "23:00"
+    },
     geoSource: "address"
   },
   {
     id: "oy-신풍역점",
-    name: "Olive Young 신풍역점",
+    name: "Olive Young Sinpung Stn.",
     nameKr: "올리브영 신풍역점",
     type: "olive_young",
     zone: "yeongdeungpo",
@@ -3427,11 +3907,15 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 영등포구 신풍로 28 비스타동원 1층 110~113호",
     lat: 37.499911,
     lng: 126.909029,
+    hours: {
+      open: "10:00",
+      close: "22:30"
+    },
     geoSource: "address"
   },
   {
     id: "oy-구로지밸리몰점",
-    name: "Olive Young 구로지밸리몰점",
+    name: "Olive Young Gurojibaelrimol",
     nameKr: "올리브영 구로지밸리몰점",
     type: "olive_young",
     zone: "seoul_etc",
@@ -3448,7 +3932,7 @@ export const OLIVEYOUNG_PLACES: Place[] = [
   },
   {
     id: "oy-신용산역점",
-    name: "Olive Young 신용산역점",
+    name: "Olive Young Sinyongsan Stn.",
     nameKr: "올리브영 신용산역점",
     type: "olive_young",
     zone: "itaewon",
@@ -3465,7 +3949,7 @@ export const OLIVEYOUNG_PLACES: Place[] = [
   },
   {
     id: "oy-한남오거리점",
-    name: "Olive Young 한남오거리점",
+    name: "Olive Young Hannamo St.",
     nameKr: "올리브영 한남오거리점",
     type: "olive_young",
     zone: "hannam",
@@ -3482,7 +3966,7 @@ export const OLIVEYOUNG_PLACES: Place[] = [
   },
   {
     id: "oy-플러스점",
-    name: "Olive Young 플러스점",
+    name: "Olive Young Peulreoseu",
     nameKr: "올리브영 플러스점",
     type: "olive_young",
     zone: "myeongdong",
@@ -3495,11 +3979,15 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 용산구 한강대로 372 KDB생명타워 지하1층 B114~B115호",
     lat: 37.551616,
     lng: 126.972844,
+    hours: {
+      open: "08:00",
+      close: "20:00"
+    },
     geoSource: "address"
   },
   {
     id: "oy-숙대점",
-    name: "Olive Young 숙대점",
+    name: "Olive Young Sukdae",
     nameKr: "올리브영 숙대점",
     type: "olive_young",
     zone: "itaewon",
@@ -3516,7 +4004,7 @@ export const OLIVEYOUNG_PLACES: Place[] = [
   },
   {
     id: "oy-용산리첸시아점",
-    name: "Olive Young 용산리첸시아점",
+    name: "Olive Young Yongsanrichensia",
     nameKr: "올리브영 용산리첸시아점",
     type: "olive_young",
     zone: "itaewon",
@@ -3529,11 +4017,15 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 용산구 백범로 341 A동 1층 103~105호,112호",
     lat: 37.538295,
     lng: 126.96759,
+    hours: {
+      open: "10:00",
+      close: "22:30"
+    },
     geoSource: "address"
   },
   {
     id: "oy-동부이촌점",
-    name: "Olive Young 동부이촌점",
+    name: "Olive Young Dongbuichon",
     nameKr: "올리브영 동부이촌점",
     type: "olive_young",
     zone: "itaewon",
@@ -3550,7 +4042,7 @@ export const OLIVEYOUNG_PLACES: Place[] = [
   },
   {
     id: "oy-용산아이파크몰점",
-    name: "Olive Young 용산아이파크몰점",
+    name: "Olive Young Yongsanaipakeumol",
     nameKr: "올리브영 용산아이파크몰점",
     type: "olive_young",
     zone: "itaewon",
@@ -3563,11 +4055,15 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 용산구 한강대로23길 55 HDC 아이파크몰 패션파크 4층",
     lat: 37.52925,
     lng: 126.964178,
+    hours: {
+      open: "10:30",
+      close: "22:00"
+    },
     geoSource: "address"
   },
   {
     id: "oy-용산아이파크몰더센터점",
-    name: "Olive Young 용산아이파크몰더센터점",
+    name: "Olive Young Yongsanaipakeumoldeosenteo",
     nameKr: "올리브영 용산아이파크몰더센터점",
     type: "olive_young",
     zone: "itaewon",
@@ -3580,11 +4076,15 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 용산구 한강대로23길 55 지하1층",
     lat: 37.52947,
     lng: 126.964298,
+    hours: {
+      open: "10:00",
+      close: "22:00"
+    },
     geoSource: "address"
   },
   {
     id: "oy-트윈시티점",
-    name: "Olive Young 트윈시티점",
+    name: "Olive Young Teuwinsiti",
     nameKr: "올리브영 트윈시티점",
     type: "olive_young",
     zone: "myeongdong",
@@ -3601,7 +4101,7 @@ export const OLIVEYOUNG_PLACES: Place[] = [
   },
   {
     id: "oy-이태원입구점",
-    name: "Olive Young 이태원입구점",
+    name: "Olive Young Itaewonipgu",
     nameKr: "올리브영 이태원입구점",
     type: "olive_young",
     zone: "itaewon",
@@ -3614,11 +4114,15 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 용산구 이태원로 145 1층",
     lat: 37.53459,
     lng: 126.989908,
+    hours: {
+      open: "11:00",
+      close: "22:00"
+    },
     geoSource: "address"
   },
   {
     id: "oy-숙대입구역점",
-    name: "Olive Young 숙대입구역점",
+    name: "Olive Young Sukdaeipgu Stn.",
     nameKr: "올리브영 숙대입구역점",
     type: "olive_young",
     zone: "myeongdong",
@@ -3631,11 +4135,15 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 용산구 한강대로 285 1층",
     lat: 37.552035,
     lng: 126.97229,
+    hours: {
+      open: "10:00",
+      close: "22:30"
+    },
     geoSource: "address"
   },
   {
     id: "oy-순천향입구점",
-    name: "Olive Young 순천향입구점",
+    name: "Olive Young Suncheonhyangipgu",
     nameKr: "올리브영 순천향입구점",
     type: "olive_young",
     zone: "hannam",
@@ -3652,7 +4160,7 @@ export const OLIVEYOUNG_PLACES: Place[] = [
   },
   {
     id: "oy-인사동점",
-    name: "Olive Young 인사동점",
+    name: "Olive Young Insadong",
     nameKr: "올리브영 인사동점",
     type: "olive_young",
     zone: "jongno",
@@ -3663,11 +4171,15 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 종로구 인사동길 49 안녕인사동 1층 12번, M층 3~4번",
     lat: 37.574558,
     lng: 126.983825,
+    hours: {
+      open: "10:30",
+      close: "21:30"
+    },
     geoSource: "address"
   },
   {
     id: "oy-무교동점",
-    name: "Olive Young 무교동점",
+    name: "Olive Young Mugyodong",
     nameKr: "올리브영 무교동점",
     type: "olive_young",
     zone: "myeongdong",
@@ -3684,7 +4196,7 @@ export const OLIVEYOUNG_PLACES: Place[] = [
   },
   {
     id: "oy-홍제역점",
-    name: "Olive Young 홍제역점",
+    name: "Olive Young Hongje Stn.",
     nameKr: "올리브영 홍제역점",
     type: "olive_young",
     zone: "jongno",
@@ -3697,11 +4209,15 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 서대문구 통일로 446 1층",
     lat: 37.589425,
     lng: 126.942898,
+    hours: {
+      open: "10:00",
+      close: "22:30"
+    },
     geoSource: "address"
   },
   {
     id: "oy-정동점",
-    name: "Olive Young 정동점",
+    name: "Olive Young Jeongdong",
     nameKr: "올리브영 정동점",
     type: "olive_young",
     zone: "myeongdong",
@@ -3718,7 +4234,7 @@ export const OLIVEYOUNG_PLACES: Place[] = [
   },
   {
     id: "oy-센트럴-명동-타운",
-    name: "Olive Young 센트럴 명동 타운",
+    name: "Olive Young Senteureol Myeongdong Town",
     nameKr: "올리브영 센트럴 명동 타운",
     type: "olive_young",
     zone: "myeongdong",
@@ -3731,11 +4247,15 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 중구 명동8길 27 엠플라자 지하1층, 1-3층",
     lat: 37.561639,
     lng: 126.98491,
+    hours: {
+      open: "10:00",
+      close: "22:30"
+    },
     geoSource: "address"
   },
   {
     id: "oy-명동타임워크점",
-    name: "Olive Young 명동타임워크점",
+    name: "Olive Young Myeongdongtaimwokeu",
     nameKr: "올리브영 명동타임워크점",
     type: "olive_young",
     zone: "myeongdong",
@@ -3752,7 +4272,7 @@ export const OLIVEYOUNG_PLACES: Place[] = [
   },
   {
     id: "oy-시청역점",
-    name: "Olive Young 시청역점",
+    name: "Olive Young Sicheong Stn.",
     nameKr: "올리브영 시청역점",
     type: "olive_young",
     zone: "myeongdong",
@@ -3769,7 +4289,7 @@ export const OLIVEYOUNG_PLACES: Place[] = [
   },
   {
     id: "oy-명동역점",
-    name: "Olive Young 명동역점",
+    name: "Olive Young Myeongdong Stn.",
     nameKr: "올리브영 명동역점",
     type: "olive_young",
     zone: "myeongdong",
@@ -3782,11 +4302,15 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 중구 퇴계로 115 밀리오레 1층",
     lat: 37.561031,
     lng: 126.984686,
+    hours: {
+      open: "10:00",
+      close: "22:30"
+    },
     geoSource: "address"
   },
   {
     id: "oy-명동2가점",
-    name: "Olive Young 명동2가점",
+    name: "Olive Young Myeongdong2ga",
     nameKr: "올리브영 명동2가점",
     type: "olive_young",
     zone: "myeongdong",
@@ -3799,11 +4323,15 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 중구 남대문로 68-1",
     lat: 37.563232,
     lng: 126.982281,
+    hours: {
+      open: "10:00",
+      close: "22:30"
+    },
     geoSource: "address"
   },
   {
     id: "oy-명동대로점",
-    name: "Olive Young 명동대로점",
+    name: "Olive Young Myeongdongdaero",
     nameKr: "올리브영 명동대로점",
     type: "olive_young",
     zone: "myeongdong",
@@ -3816,11 +4344,15 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 중구 퇴계로 120 1층",
     lat: 37.565374,
     lng: 127.02244,
+    hours: {
+      open: "10:00",
+      close: "22:30"
+    },
     geoSource: "address"
   },
   {
     id: "oy-덕수궁점",
-    name: "Olive Young 덕수궁점",
+    name: "Olive Young Deoksugung",
     nameKr: "올리브영 덕수궁점",
     type: "olive_young",
     zone: "myeongdong",
@@ -3837,7 +4369,7 @@ export const OLIVEYOUNG_PLACES: Place[] = [
   },
   {
     id: "oy-만리동점",
-    name: "Olive Young 만리동점",
+    name: "Olive Young Manridong",
     nameKr: "올리브영 만리동점",
     type: "olive_young",
     zone: "myeongdong",
@@ -3850,11 +4382,15 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 중구 만리재로 175 센트럴자이 상가 1층",
     lat: 37.553418,
     lng: 126.963062,
+    hours: {
+      open: "10:00",
+      close: "22:30"
+    },
     geoSource: "address"
   },
   {
     id: "oy-씨제이남산더센터점",
-    name: "Olive Young 씨제이남산더센터점",
+    name: "Olive Young Ssijeinamsandeosenteo",
     nameKr: "올리브영 씨제이남산더센터점",
     type: "olive_young",
     zone: "myeongdong",
@@ -3865,11 +4401,15 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 중구 소월로2길 12 CJ빌딩 로비층",
     lat: 37.553832,
     lng: 126.97579,
+    hours: {
+      open: "08:00",
+      close: "18:00"
+    },
     geoSource: "address"
   },
   {
     id: "oy-롯데백화점본점면세점",
-    name: "Olive Young 롯데백화점본점면세점",
+    name: "Olive Young Rotdebaekhwajeombonjeommyeonse",
     nameKr: "올리브영 롯데백화점본점면세점",
     type: "olive_young",
     zone: "myeongdong",
@@ -3885,7 +4425,7 @@ export const OLIVEYOUNG_PLACES: Place[] = [
   },
   {
     id: "oy-종로ybm점",
-    name: "Olive Young 종로YBM점",
+    name: "Olive Young JongroYBM",
     nameKr: "올리브영 종로YBM점",
     type: "olive_young",
     zone: "jongno",
@@ -3902,7 +4442,7 @@ export const OLIVEYOUNG_PLACES: Place[] = [
   },
   {
     id: "oy-종로점",
-    name: "Olive Young 종로점",
+    name: "Olive Young Jongro",
     nameKr: "올리브영 종로점",
     type: "olive_young",
     zone: "jongno",
@@ -3919,7 +4459,7 @@ export const OLIVEYOUNG_PLACES: Place[] = [
   },
   {
     id: "oy-종각점",
-    name: "Olive Young 종각점",
+    name: "Olive Young Jonggak",
     nameKr: "올리브영 종각점",
     type: "olive_young",
     zone: "jongno",
@@ -3936,7 +4476,7 @@ export const OLIVEYOUNG_PLACES: Place[] = [
   },
   {
     id: "oy-종로1가점",
-    name: "Olive Young 종로1가점",
+    name: "Olive Young Jongro1ga",
     nameKr: "올리브영 종로1가점",
     type: "olive_young",
     zone: "jongno",
@@ -3953,7 +4493,7 @@ export const OLIVEYOUNG_PLACES: Place[] = [
   },
   {
     id: "oy-스타필드애비뉴그랑서울점",
-    name: "Olive Young 스타필드애비뉴그랑서울점",
+    name: "Olive Young Seutapildeuaebinyugeurangseoul",
     nameKr: "올리브영 스타필드애비뉴그랑서울점",
     type: "olive_young",
     zone: "jongno",
@@ -3970,7 +4510,7 @@ export const OLIVEYOUNG_PLACES: Place[] = [
   },
   {
     id: "oy-안국역점",
-    name: "Olive Young 안국역점",
+    name: "Olive Young Anguk Stn.",
     nameKr: "올리브영 안국역점",
     type: "olive_young",
     zone: "jongno",
@@ -3983,11 +4523,15 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 종로구 북촌로 1",
     lat: 37.585356,
     lng: 126.985495,
+    hours: {
+      open: "10:00",
+      close: "22:00"
+    },
     geoSource: "address"
   },
   {
     id: "oy-세종로점",
-    name: "Olive Young 세종로점",
+    name: "Olive Young Sejongro",
     nameKr: "올리브영 세종로점",
     type: "olive_young",
     zone: "jongno",
@@ -4004,7 +4548,7 @@ export const OLIVEYOUNG_PLACES: Place[] = [
   },
   {
     id: "oy-황학사거리점",
-    name: "Olive Young 황학사거리점",
+    name: "Olive Young Hwanghaksa St.",
     nameKr: "올리브영 황학사거리점",
     type: "olive_young",
     zone: "myeongdong",
@@ -4016,11 +4560,15 @@ export const OLIVEYOUNG_PLACES: Place[] = [
     address: "서울 성동구 왕십리로 410 센트라스 1층 158호",
     lat: 37.566434,
     lng: 127.024785,
+    hours: {
+      open: "10:00",
+      close: "23:00"
+    },
     geoSource: "address"
   },
   {
     id: "oy-경복궁역점",
-    name: "Olive Young 경복궁역점",
+    name: "Olive Young Gyeongbokgung Stn.",
     nameKr: "올리브영 경복궁역점",
     type: "olive_young",
     zone: "jongno",
@@ -4037,7 +4585,7 @@ export const OLIVEYOUNG_PLACES: Place[] = [
   },
   {
     id: "oy-신설동역점",
-    name: "Olive Young 신설동역점",
+    name: "Olive Young Sinseoldong Stn.",
     nameKr: "올리브영 신설동역점",
     type: "olive_young",
     zone: "jongno",

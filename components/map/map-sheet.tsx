@@ -118,6 +118,18 @@ export function MapSheet({ places, origin, selectedId, onSelect, onClearSelectio
     }
   }, [moved, selectedId]);
 
+  /** Height the peek snap must reveal: the compact summary plus the action
+      bar pinned under it. Falls back to the old constant before first paint. */
+  const peekContentHeight = () => {
+    const summary = sheetRef.current?.querySelector(".selected-place-summary.compact")
+      ?? sheetRef.current?.querySelector(".selected-place-summary");
+    const bar = sheetRef.current?.parentElement?.querySelector(".selected-place-actions");
+    if (!selectedPlace) return 62;
+    const content = summary instanceof HTMLElement ? summary.scrollHeight : 0;
+    const barHeight = bar instanceof HTMLElement ? bar.offsetHeight : 0;
+    return content > 0 ? content + barHeight + 8 : 136;
+  };
+
   const snapOffsets = () => {
     // Every snap keeps the same outer sheet height; only translateY changes.
     // This avoids a layout jump when half/full settles into the compact peek.
@@ -129,7 +141,12 @@ export function MapSheet({ places, origin, selectedId, onSelect, onClearSelectio
     return {
       full: 0,
       half: h * getMapSheetHalfOffsetRatio(Boolean(selectedPlace)),
-      peek: Math.max(0, h - (selectedPlace ? 136 : 62)),
+      // Measure the peek content instead of assuming 136px. A long name wraps
+      // to two lines and the category line fell below the cut, half-clipped by
+      // the action bar (owner report 2026-08-23). Measuring means any content
+      // — longer names, a new metadata row — sizes itself instead of silently
+      // losing its last line.
+      peek: Math.max(0, h - peekContentHeight()),
     } as const;
   };
   const currentOffset = () => offset ?? snapOffsets()[snap];

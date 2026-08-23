@@ -27,6 +27,7 @@ describe("installable PWA contract", () => {
     expect(control).toContain("Show iPhone install steps");
     expect(control).toContain("KAKAOTALK|NAVER");
     expect(control).toContain("Open in Safari or Chrome to install");
+    expect(control).toContain("Add MYSEOULDROP from Chrome");
     expect(source("app/layout.tsx")).toContain("<PwaRegister />");
   });
 
@@ -50,7 +51,7 @@ describe("iOS browser dead ends", () => {
     expect(control).toContain("FxiOS");
     expect(control).toContain("EdgiOS");
     expect(control).toContain("ios-other-browser");
-    expect(control).toContain("iPhone installs only from Safari");
+    expect(control).toContain("open Safari to install");
   });
 
   it("always offers a copy-link escape from a browser that cannot install", () => {

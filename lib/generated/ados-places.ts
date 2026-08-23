@@ -20,6 +20,10 @@ export const ADOS_PLACES: Place[] = [
     address: "서울 종로구 사직로 161",
     lat: 37.575919,
     lng: 126.976816,
+    hours: {
+      open: "09:00",
+      close: "18:30"
+    },
     about: "The main royal palace of the Joseon dynasty, popular for hanbok photo experiences",
     aboutKr: "조선 왕조의 정궁으로 한복 체험과 근정전 등을 볼 수 있는 대표 고궁",
     geoSource: "address"
@@ -121,6 +125,10 @@ export const ADOS_PLACES: Place[] = [
     address: "서울 용산구 남산공원길 105",
     lat: 37.551269,
     lng: 126.988296,
+    hours: {
+      open: "10:00",
+      close: "23:00"
+    },
     about: "A hilltop observation tower on Namsan famous for city views and love locks",
     aboutKr: "남산 정상의 전망타워, 서울 야경과 사랑의 자물쇠로 유명",
     geoSource: "address"
@@ -163,6 +171,10 @@ export const ADOS_PLACES: Place[] = [
     address: "서울 종로구 율곡로 99",
     lat: 37.582387,
     lng: 126.991701,
+    hours: {
+      open: "09:00",
+      close: "18:30"
+    },
     about: "A UNESCO World Heritage palace; its rear garden requires reservation",
     aboutKr: "유네스코 세계유산 궁궐, 후원은 예약제 관람",
     geoSource: "address"
@@ -225,6 +237,10 @@ export const ADOS_PLACES: Place[] = [
     address: "서울 서초구 신반포로 194",
     lat: 37.505042,
     lng: 127.005657,
+    hours: {
+      open: "10:00",
+      close: "20:00"
+    },
     about: "One of Seoul's largest underground shopping arcades",
     aboutKr: "서울 최대 규모의 지하 상가",
     geoSource: "address"
@@ -245,6 +261,10 @@ export const ADOS_PLACES: Place[] = [
     address: "서울 영등포구 일대",
     lat: 37.517209,
     lng: 126.904037,
+    hours: {
+      open: "10:30",
+      close: "22:00"
+    },
     about: "A large complex mall with a cinema, bookstore and various shops",
     aboutKr: "영화관·서점 등이 입점한 대형 복합쇼핑몰",
     geoSource: "address"
@@ -285,6 +305,10 @@ export const ADOS_PLACES: Place[] = [
     address: "서울 영등포구 여의도동 국제금융로 10",
     lat: 37.525389,
     lng: 126.926633,
+    hours: {
+      open: "10:00",
+      close: "22:00"
+    },
     about: "A major shopping mall in Seoul's Yeouido financial district",
     aboutKr: "여의도의 대표적인 복합 쇼핑몰",
     geoSource: "address"
@@ -306,6 +330,10 @@ export const ADOS_PLACES: Place[] = [
     address: "서울 종로구 창경궁로 88",
     lat: 37.570097,
     lng: 126.999828,
+    hours: {
+      open: "09:00",
+      close: "18:00"
+    },
     about: "A traditional market famous for Korean street food like bindaetteok",
     aboutKr: "빈대떡 등 전통 길거리 음식으로 유명한 재래시장",
     geoSource: "address"
@@ -327,6 +355,10 @@ export const ADOS_PLACES: Place[] = [
     address: "서울 동작구 노들로 674",
     lat: 37.514716,
     lng: 126.937737,
+    hours: {
+      open: "04:00",
+      close: "08:00"
+    },
     about: "A wholesale seafood market known for fresh raw fish",
     aboutKr: "신선한 활어회를 맛볼 수 있는 수산물 도매시장",
     geoSource: "address"
@@ -428,6 +460,10 @@ export const ADOS_PLACES: Place[] = [
     address: "서울 서대문구 통일로 251",
     lat: 37.574537,
     lng: 126.956317,
+    hours: {
+      open: "09:30",
+      close: "18:00"
+    },
     about: "A memorial hall documenting Korea's colonial-era prison history",
     aboutKr: "일제강점기 수난의 역사를 기록한 전시관",
     geoSource: "address"
@@ -468,6 +504,10 @@ export const ADOS_PLACES: Place[] = [
     address: "서울 용산구 이태원로55길 60-16",
     lat: 37.538345,
     lng: 127.000107,
+    hours: {
+      open: "10:00",
+      close: "18:00"
+    },
     about: "A private museum spanning traditional and contemporary Korean art",
     aboutKr: "고미술과 현대미술을 아우르는 사립 미술관",
     geoSource: "address"
@@ -669,6 +709,10 @@ export const ADOS_PLACES: Place[] = [
     address: "서울 중구 세종대로 99",
     lat: 37.566167,
     lng: 126.97517,
+    hours: {
+      open: "09:00",
+      close: "21:00"
+    },
     about: "A palace tied to the Korean Empire era, open for night viewing",
     aboutKr: "대한제국의 역사가 깃든 궁궐, 야간개장 운영",
     geoSource: "address"
@@ -690,6 +734,10 @@ export const ADOS_PLACES: Place[] = [
     address: "서울 중구 퇴계로34길 28",
     lat: 37.558737,
     lng: 126.993745,
+    hours: {
+      open: "09:00",
+      close: "21:00"
+    },
     about: "A recreated hanok village with five restored traditional houses",
     aboutKr: "전통 한옥 5채를 복원한 도심 속 한옥마을",
     geoSource: "address"
@@ -731,6 +779,10 @@ export const ADOS_PLACES: Place[] = [
     address: "서울 광진구 능동로 216",
     lat: 37.549193,
     lng: 127.083689,
+    hours: {
+      open: "05:00",
+      close: "22:00"
+    },
     about: "A free park featuring a zoo and amusement rides",
     aboutKr: "동물원과 놀이시설을 갖춘 무료 공원",
     geoSource: "address"
@@ -946,6 +998,10 @@ export const ADOS_PLACES: Place[] = [
     address: "서울 성동구 마장로31길 40",
     lat: 37.569794,
     lng: 127.038406,
+    hours: {
+      open: "03:00",
+      close: "23:00"
+    },
     aboutKr: "국내 최대 축산물 유통시장. 저렴하게 한우 구매 후 바로 구워먹기 가능.",
     geoSource: "address"
   },
@@ -984,6 +1040,10 @@ export const ADOS_PLACES: Place[] = [
     address: "서울 송파구 양재대로 932",
     lat: 37.494155,
     lng: 127.107531,
+    hours: {
+      open: "00:00",
+      close: "24:00"
+    },
     aboutKr: "국내 최대 농수산물 도매시장.",
     geoSource: "address"
   },
@@ -1003,6 +1063,10 @@ export const ADOS_PLACES: Place[] = [
     address: "서울 동대문구 천호대로4길 21",
     lat: 37.572752,
     lng: 127.02558,
+    hours: {
+      open: "10:00",
+      close: "19:00"
+    },
     aboutKr: "신설동 인근 실내 골동품·구제 시장.",
     geoSource: "address"
   },
@@ -1022,6 +1086,10 @@ export const ADOS_PLACES: Place[] = [
     address: "서울 종로구 숭인동(동묘앞역 3번 출구 인근)",
     lat: 37.57648,
     lng: 127.01848,
+    hours: {
+      open: "10:00",
+      close: "18:00"
+    },
     aboutKr: "구제·빈티지 벼룩시장, 골동품과 중고의류 판매.",
     geoSource: "address"
   },
@@ -1041,6 +1109,10 @@ export const ADOS_PLACES: Place[] = [
     address: "서울 마포구 월드컵로 235",
     lat: 37.565199,
     lng: 126.898483,
+    hours: {
+      open: "07:00",
+      close: "20:00"
+    },
     aboutKr: "마포월드컵경기장 인근 도매시장. 노량진시장의 저렴한 대안으로 언급됨.",
     geoSource: "address"
   },
@@ -1079,6 +1151,10 @@ export const ADOS_PLACES: Place[] = [
     address: "서울 영등포구 영등포로 225",
     lat: 37.51992,
     lng: 126.906655,
+    hours: {
+      open: "12:00",
+      close: "23:00"
+    },
     aboutKr: "영등포 대표 재래시장, 순댓국 거리로 유명.",
     geoSource: "address"
   },
@@ -1117,6 +1193,10 @@ export const ADOS_PLACES: Place[] = [
     address: "서울 노원구 동일로180길 37",
     lat: 37.622526,
     lng: 127.076071,
+    hours: {
+      open: "10:00",
+      close: "20:00"
+    },
     aboutKr: "경춘선숲길과 연결된 아담한 시장, 닭강정·만두 등.",
     geoSource: "address"
   },
@@ -1174,6 +1254,10 @@ export const ADOS_PLACES: Place[] = [
     address: "정보 부족",
     lat: 37.549875,
     lng: 127.128203,
+    hours: {
+      open: "09:00",
+      close: "18:00"
+    },
     aboutKr: "정보 부족",
     geoSource: "address"
   },
@@ -1193,6 +1277,10 @@ export const ADOS_PLACES: Place[] = [
     address: "정보 부족",
     lat: 37.567027,
     lng: 127.01974,
+    hours: {
+      open: "07:00",
+      close: "24:00"
+    },
     aboutKr: "정보 부족",
     geoSource: "address"
   },
@@ -1212,6 +1300,10 @@ export const ADOS_PLACES: Place[] = [
     address: "정보 부족",
     lat: 37.564184,
     lng: 126.995313,
+    hours: {
+      open: "17:00",
+      close: "24:00"
+    },
     aboutKr: "정보 부족",
     geoSource: "address"
   },
@@ -1231,6 +1323,10 @@ export const ADOS_PLACES: Place[] = [
     address: "정보 부족",
     lat: 37.508972,
     lng: 127.085007,
+    hours: {
+      open: "09:00",
+      close: "21:00"
+    },
     aboutKr: "정보 부족",
     geoSource: "address"
   },
@@ -1250,6 +1346,10 @@ export const ADOS_PLACES: Place[] = [
     address: "정보 부족",
     lat: 37.489332,
     lng: 126.891298,
+    hours: {
+      open: "09:00",
+      close: "21:00"
+    },
     aboutKr: "정보 부족",
     geoSource: "address"
   },
@@ -1307,6 +1407,10 @@ export const ADOS_PLACES: Place[] = [
     address: "정보 부족",
     lat: 37.63098,
     lng: 127.02404,
+    hours: {
+      open: "08:00",
+      close: "22:00"
+    },
     aboutKr: "정보 부족",
     geoSource: "address"
   },
@@ -1326,6 +1430,10 @@ export const ADOS_PLACES: Place[] = [
     address: "정보 부족",
     lat: 37.488907,
     lng: 126.885122,
+    hours: {
+      open: "09:00",
+      close: "17:00"
+    },
     aboutKr: "정보 부족",
     geoSource: "address"
   },
@@ -1364,6 +1472,10 @@ export const ADOS_PLACES: Place[] = [
     address: "정보 부족",
     lat: 37.66529,
     lng: 127.03564,
+    hours: {
+      open: "07:00",
+      close: "22:00"
+    },
     aboutKr: "정보 부족",
     geoSource: "address"
   },
@@ -1400,6 +1512,10 @@ export const ADOS_PLACES: Place[] = [
     address: "정보 부족",
     lat: 37.591328,
     lng: 127.016661,
+    hours: {
+      open: "10:00",
+      close: "20:00"
+    },
     aboutKr: "정보 부족",
     geoSource: "address"
   },
@@ -1417,6 +1533,10 @@ export const ADOS_PLACES: Place[] = [
     address: "정보 부족",
     lat: 37.60298,
     lng: 127.02354,
+    hours: {
+      open: "09:00",
+      close: "20:30"
+    },
     aboutKr: "정보 부족",
     geoSource: "address"
   },
@@ -1436,6 +1556,10 @@ export const ADOS_PLACES: Place[] = [
     address: "정보 부족",
     lat: 37.605089,
     lng: 127.076478,
+    hours: {
+      open: "09:00",
+      close: "21:00"
+    },
     aboutKr: "정보 부족",
     geoSource: "address"
   },
@@ -1474,6 +1598,10 @@ export const ADOS_PLACES: Place[] = [
     address: "정보 부족",
     lat: 37.52719,
     lng: 127.135174,
+    hours: {
+      open: "09:00",
+      close: "22:00"
+    },
     aboutKr: "정보 부족",
     geoSource: "address"
   },
@@ -1491,6 +1619,10 @@ export const ADOS_PLACES: Place[] = [
     address: "정보 부족",
     lat: 37.591354,
     lng: 126.943366,
+    hours: {
+      open: "05:00",
+      close: "19:30"
+    },
     aboutKr: "정보 부족",
     geoSource: "address"
   },
@@ -1548,6 +1680,10 @@ export const ADOS_PLACES: Place[] = [
     address: "정보 부족",
     lat: 37.499281,
     lng: 126.931153,
+    hours: {
+      open: "10:00",
+      close: "20:00"
+    },
     aboutKr: "정보 부족",
     geoSource: "address"
   },
@@ -1603,6 +1739,10 @@ export const ADOS_PLACES: Place[] = [
     address: "정보 부족",
     lat: 37.473683,
     lng: 126.903208,
+    hours: {
+      open: "08:30",
+      close: "21:00"
+    },
     aboutKr: "정보 부족",
     geoSource: "address"
   },
@@ -1620,6 +1760,10 @@ export const ADOS_PLACES: Place[] = [
     address: "정보 부족",
     lat: 37.54824,
     lng: 127.02173,
+    hours: {
+      open: "09:00",
+      close: "22:00"
+    },
     aboutKr: "정보 부족",
     geoSource: "address"
   },
