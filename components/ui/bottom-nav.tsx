@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { Icon, type IconName } from "@/components/icon";
+import { rememberRankingReturnRoute } from "@/lib/ranking-return-route";
 import { routes } from "@/lib/routes";
 
 export type NavKey = "map" | "ranking" | "blog" | "saved" | "menu";
@@ -26,6 +27,9 @@ export function BottomNav({ active }: { active?: NavKey }) {
           className="nav"
           aria-current={active === item.key ? "page" : undefined}
           onClick={() => {
+            if (item.key === "ranking") {
+              rememberRankingReturnRoute(window.sessionStorage, window.location);
+            }
             if (item.key === "map") window.dispatchEvent(new CustomEvent("myseouldrop:map-cycle"));
           }}
         >

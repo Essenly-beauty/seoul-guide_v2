@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { Icon } from "@/components/icon";
-import type { SubwayPlaceCategory } from "./subway-route-controller";
+import type { SubwayPlaceCategory } from "@/lib/subway-place-filter";
 
 export const SUBWAY_CATEGORY_OPTIONS: { key: SubwayPlaceCategory; label: string }[] = [
   { key: "all", label: "All" },

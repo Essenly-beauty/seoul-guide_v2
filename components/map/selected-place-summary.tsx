@@ -19,6 +19,9 @@ export function SelectedPlaceSummary({
   onDismiss?: () => void;
 }) {
   const titleId = `selected-place-summary-${variant}-${place.id}`;
+  const accessibleName = place.nameKr && place.nameKr !== place.name
+    ? `${place.name}, ${place.nameKr}`
+    : place.name;
 
   // `photos` is the future shape; `photoUrl` is what the type carries today.
   const photos: string[] = (place.photos ?? (place.photoUrl ? [place.photoUrl] : [])).filter(Boolean);
@@ -30,13 +33,18 @@ export function SelectedPlaceSummary({
           type="button"
           className="selected-place-summary-main"
           onClick={onOpen}
-          aria-label={`Open ${place.name}`}
+          aria-label={`Open ${accessibleName}`}
         >
           <div className="selected-place-summary-copy">
             <div className="selected-place-summary-title-row">
-              <h2 id={titleId} className="selected-place-summary-title">{place.name}</h2>
+              <h2 id={titleId} className="selected-place-summary-title">
+                <span className="place-name-primary">{place.name}</span>
+              </h2>
               <span className="selected-place-summary-category">{TYPE_LABEL[place.type]}</span>
             </div>
+            {place.nameKr && place.nameKr !== place.name && (
+              <div className="place-name-secondary" lang="ko">{place.nameKr}</div>
+            )}
             <div className="selected-place-summary-meta" aria-label="Place summary">
               <LiveBadge hours={place.hours} />
               {place.rating !== undefined && (
@@ -58,7 +66,7 @@ export function SelectedPlaceSummary({
           type="button"
           className="selected-place-summary-close"
           onClick={onDismiss}
-          aria-label={`Close ${place.name}`}
+          aria-label={`Close ${accessibleName}`}
         >
           <Icon name="x" size="xs" aria-hidden="true" />
         </button>
@@ -71,11 +79,13 @@ export function SelectedPlaceSummary({
       <div className="selected-place-summary-header">
         <div className="selected-place-summary-copy">
           <div className="selected-place-summary-title-row">
-            <h2 id={titleId} className="selected-place-summary-title">{place.name}</h2>
+            <h2 id={titleId} className="selected-place-summary-title">
+              <span className="place-name-primary">{place.name}</span>
+            </h2>
             <span className="selected-place-summary-category">{TYPE_LABEL[place.type]}</span>
           </div>
           {place.nameKr && place.nameKr !== place.name && (
-            <div className="selected-place-summary-name-kr">{place.nameKr}</div>
+            <div className="place-name-secondary" lang="ko">{place.nameKr}</div>
           )}
           <div className="selected-place-summary-meta" aria-label="Place summary">
             <LiveBadge hours={place.hours} />
@@ -103,7 +113,7 @@ export function SelectedPlaceSummary({
           type="button"
           className="selected-place-summary-close"
           onClick={onDismiss}
-          aria-label={`Close ${place.name}`}
+          aria-label={`Close ${accessibleName}`}
         >
           <Icon name="x" size="xs" aria-hidden="true" />
         </button>

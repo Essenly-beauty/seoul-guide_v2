@@ -96,7 +96,14 @@ export function PlacesContent({ category, places }: { category: string; places: 
             href={routes.place(p.id)}
             media={<ImgPh className="thumb56" />}
             titleAccessory={<CategoryBadge type={p.type} size={16} />}
-            title={p.name}
+            title={(
+              <span className="place-name-stack">
+                <span className="place-name-primary">{p.name}</span>
+                {p.nameKr !== p.name && (
+                  <span className="place-name-secondary" lang="ko">{p.nameKr}</span>
+                )}
+              </span>
+            )}
             caption={`${TYPE_LABEL[p.type]} · ${placeDistrict(p)} · ${p.priceRange}`}
             meta={(
               <>

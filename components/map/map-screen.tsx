@@ -14,10 +14,12 @@ import { CategoryChips } from "@/components/category/category-chips";
 import { StationFilterRail } from "@/components/subway/station-filter-rail";
 import { GANGNAM_STATION, haversineKm, type LatLng } from "@/lib/geo";
 import { applyFilters, countActiveFilters, EMPTY_FILTERS, type MapFilters } from "@/lib/places";
+import { includeSelectedPlace } from "@/lib/map-place-visibility";
+import { filterSubwayPlaces, type SubwayPlaceCategory } from "@/lib/subway-place-filter";
 import { useLocation } from "./use-location";
 import { MapSheet } from "./map-sheet";
 import { FilterSheet } from "./filter-sheet";
-import type { SubwayPlaceCategory, SubwaySnap } from "@/components/subway/subway-route-controller";
+import type { SubwaySnap } from "@/components/subway/subway-route-controller";
 import { findRoute, findRouteVia, nearestStation, placesNearStation, STATIONS } from "@/lib/subway";
 
 // Perf (2026-08-15): the route controller (~900 lines) and the rail
@@ -80,6 +82,7 @@ export function MapScreen() {
   const [filters, setFilters] = useState<MapFilters>(EMPTY_FILTERS);
   const [filterOpen, setFilterOpen] = useState(false);
   const [selectedId, setSelectedId] = useState<string | null>(null);
+  const [selectedGroupIds, setSelectedGroupIds] = useState<string[]>([]);
   const { loc, status, heading, retry, requestHeading } = useLocation();
   const [flyTarget, setFlyTarget] = useState<LatLng | null>(null);
   // Location-off banner is feedback for the locate FAB only — it must never
@@ -193,6 +196,7 @@ export function MapScreen() {
     if (!deepLinkedPlace) return;
     const p = getPlace(deepLinkedPlace);
     if (!p) return;
+    setSelectedGroupIds([]);
     setSelectedId(p.id);
     setFlyTarget({ lat: p.lat, lng: p.lng });
   }, [deepLinkedPlace]);
@@ -208,6 +212,7 @@ export function MapScreen() {
     initialLocationHandledRef.current = true; // the deep link owns the camera
     setActiveStation(stationParam);
     setSubwayEditing(true);
+    setSelectedGroupIds([]);
     setSelectedId(null);
     setMode("subway");
     setFlyTarget({ lat: STATIONS[stationParam].lat, lng: STATIONS[stationParam].lng });
@@ -234,11 +239,13 @@ export function MapScreen() {
   // each other; narrowing categories prunes now-invalid service tag filters.
   const toggleCat = useCallback((key: PlaceType) => {
     setCats((cur) => (cur.includes(key) ? cur.filter((c) => c !== key) : [...cur, key]));
+    setSelectedGroupIds([]);
     setSelectedId(null);
     setFlyTarget(null);
   }, []);
   const clearCats = useCallback(() => {
     setCats([]);
+    setSelectedGroupIds([]);
     setSelectedId(null);
     setFlyTarget(null);
   }, []);
@@ -267,6 +274,7 @@ export function MapScreen() {
       setActiveStation(null);
       setFlyTarget(null);
     }
+    setSelectedGroupIds([]);
     setSelectedId(null);
     setSubwayEditing(false);
     setMode("map");
@@ -296,14 +304,7 @@ export function MapScreen() {
     if (mode === "subway") {
       if (!activeStation) return [];
       const nearby = placesNearStation(PLACES, activeStation, stationRadius);
-      if (stationCategory === "olive_young") return nearby.filter((place) => place.type === "olive_young");
-      if (stationCategory === "personal_color") return nearby.filter((place) => place.type === "personal_color");
-      if (stationCategory === "mall") return nearby.filter((place) => place.type === "mall");
-      if (stationCategory === "daiso") return [];
-      if (stationCategory === "beauty") {
-        return nearby.filter((place) => place.type !== "olive_young" && place.type !== "etc" && place.type !== "mall");
-      }
-      return nearby;
+      return filterSubwayPlaces(nearby, stationCategory);
     }
 
     let list = applyFilters(PLACES, cats, filters, loc ?? GANGNAM_STATION);
@@ -319,6 +320,18 @@ export function MapScreen() {
     if (area) list = list.filter((p) => p.lat >= area.south && p.lat <= area.north && p.lng >= area.west && p.lng <= area.east);
     return list;
   }, [activeStation, area, cats, favs.place, filters, loc, mode, savedOnly, sharedList, stationCategory, stationRadius]);
+
+  useEffect(() => {
+    setSelectedGroupIds((current) => current.length === 0 ? current : []);
+  }, [area, cats, filters, savedOnly, sharedList]);
+
+  // Selection and marker visibility must stay atomic. The sheet deliberately
+  // resolves an explicit selection from the full catalog, so the marker layer
+  // must do the same when a stale category/saved/area filter excludes it.
+  const markerPlaces = useMemo(
+    () => includeSelectedPlace(places, selectedId, getPlace),
+    [places, selectedId],
+  );
 
   const nearbyStationId = useMemo(() => {
     if (!loc) return null;
@@ -340,6 +353,7 @@ export function MapScreen() {
     ? "Detail filters, none active"
     : `Detail filters, ${activeFilterCount} active filter${activeFilterCount === 1 ? "" : "s"}`;
   const handleMapSelect = useCallback((id: string | null) => {
+    setSelectedGroupIds([]);
     setSelectedId(id);
     if (!id) {
       setFlyTarget(null);
@@ -352,6 +366,22 @@ export function MapScreen() {
       setFlyTarget({ lat: place.lat, lng: place.lng });
     }
   }, []);
+
+  const handleMapGroupSelect = useCallback((ids: string[]) => {
+    const places = ids.map((id) => getPlace(id)).filter((place): place is NonNullable<typeof place> => Boolean(place));
+    if (places.length < 2) {
+      handleMapSelect(places[0]?.id ?? null);
+      return;
+    }
+    // The lower branch chooser only exists in map mode. Switch first so a
+    // grouped pin tapped while station browsing cannot open into empty UI.
+    setMode("map");
+    setSelectedId(null);
+    setSelectedGroupIds(places.map((place) => place.id));
+    setMoved(false);
+    initialLocationHandledRef.current = true;
+    setFlyTarget({ lat: places[0].lat, lng: places[0].lng });
+  }, [handleMapSelect]);
 
   useEffect(() => {
     if (mode !== "subway" || !activeStation) return;
@@ -377,9 +407,10 @@ export function MapScreen() {
     <div className={`map-screen${mode === "subway" ? ` subway-mode${subwayRouteReady ? " subway-route-ready" : ""}${subwayEditing ? " subway-editing" : ""}` : ""}`}>
       <MapView
         center={centerRef.current}
-        places={places}
+        places={markerPlaces}
         selectedId={selectedId}
         onSelect={handleMapSelect}
+        onSelectGroup={handleMapGroupSelect}
         userLoc={loc}
         userHeading={heading}
         flyTarget={flyTarget}
@@ -397,6 +428,7 @@ export function MapScreen() {
           // Browse what is around the station. Presetting it as a route
           // departure (the old behaviour) turned a map tap into a form the
           // visitor never asked for — station-first redesign, phase 1.
+          setSelectedGroupIds([]);
           setSelectedId(null);
           setActiveStation(id);
           setSubwayEditing(true);
@@ -437,6 +469,7 @@ export function MapScreen() {
             onClick={() => {
               if (mode === "subway") closeSubway();
               else {
+                setSelectedGroupIds([]);
                 setSubwayEditing(!route);
                 setMode("subway");
               }
@@ -554,6 +587,7 @@ export function MapScreen() {
           places={places}
           origin={loc ?? GANGNAM_STATION}
           selectedId={selectedId}
+          groupPlaceIds={selectedGroupIds}
           onSelect={handleMapSelect}
           onClearSelection={() => handleMapSelect(null)}
           moved={moved}

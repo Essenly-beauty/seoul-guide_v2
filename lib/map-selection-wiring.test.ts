@@ -11,6 +11,36 @@ const summaryUrl = new URL("../components/map/selected-place-summary.tsx", impor
 const summarySource = existsSync(summaryUrl) ? readFileSync(summaryUrl, "utf8") : "";
 
 describe("map place selection wiring", () => {
+  it("shows an honest chain-wide Daiso ranking preview in Daiso store details", () => {
+    expect(detailSource).toContain("function DaisoPicks");
+    expect(detailSource).toContain('<SectionHeader title="Daiso Ranking"');
+    expect(detailSource).toContain('selectDaisoRanking("daily").slice(0, 4)');
+    expect(detailSource).toContain("Daiso Mall ranking — chain-wide chart, stock varies by branch.");
+    expect(detailSource).toContain("routes.daisoProduct(p.productNo)");
+    expect(detailSource).toContain('routes.rankingRetailer("daiso")');
+    expect(detailSource).toContain('place.type === "daiso"');
+  });
+  it("wires exact-coordinate group selection from the map into the sheet", () => {
+    const groupHandler = screenSource.match(
+      /const handleMapGroupSelect[\s\S]*?\n  \}, \[[^\]]*\]\);/,
+    )?.[0] ?? "";
+
+    expect(viewSource).toContain("onSelectGroup: (ids: string[]) => void");
+    expect(viewSource).toContain("groupPlacesByCoordinate");
+    expect(viewSource).toContain("`${group.ids.length} places at this pin`");
+    expect(viewSource).toContain("click: () => onSelectGroup(group.ids)");
+    expect(screenSource).toContain("const [selectedGroupIds, setSelectedGroupIds]");
+    expect(groupHandler).toContain('setMode("map")');
+    expect(groupHandler.indexOf('setMode("map")')).toBeLessThan(
+      groupHandler.indexOf("setSelectedGroupIds(places.map"),
+    );
+    expect(screenSource).toContain("onSelectGroup={handleMapGroupSelect}");
+    expect(screenSource).toContain("groupPlaceIds={selectedGroupIds}");
+    expect(sheetSource).toContain("groupPlaceIds?: string[]");
+    expect(sheetSource).toContain("places at this pin");
+    expect(sheetSource).toContain("onSelect(place.id)");
+  });
+
   it("routes list selection through the camera-aware place handler", () => {
     const handler = screenSource.match(/const handleMapSelect[\s\S]*?\n  \}, \[[^\]]*\]\);/)?.[0] ?? "";
 
@@ -20,6 +50,11 @@ describe("map place selection wiring", () => {
     expect(handler).toContain("setMoved(false)");
     expect(handler).toContain("setFlyTarget(null)");
     expect(handler).toContain("initialLocationHandledRef.current = true");
+  });
+
+  it("keeps an explicitly selected place on the marker layer when filters exclude it", () => {
+    expect(screenSource).toContain("includeSelectedPlace(places, selectedId, getPlace)");
+    expect(screenSource).toContain("places={markerPlaces}");
   });
 
   it("measures the live sheet overlap and biases the anchor for callout headroom", () => {
@@ -47,6 +82,22 @@ describe("map place selection wiring", () => {
   it("exposes each place marker's category and selected state", () => {
     expect(viewSource).toContain('element.setAttribute("aria-pressed", String(selected))');
     expect(viewSource).toMatch(/labelMarker\([\s\S]*?TYPE_LABEL\[p\.type\][\s\S]*?selected,/);
+  });
+
+  it("announces both the English and official Korean place names from map markers", () => {
+    expect(viewSource).toContain("function placeAccessibleName(place: Place)");
+    expect(viewSource).toContain('`${place.name}, ${place.nameKr}`');
+    expect(viewSource).toContain("title={`${placeAccessibleName(p)}, ${TYPE_LABEL[p.type]}`}");
+    expect(viewSource).toContain("alt={`${placeAccessibleName(p)}, ${TYPE_LABEL[p.type]}`}");
+    expect(viewSource).toMatch(/labelMarker\([\s\S]*?placeAccessibleName\(p\)[\s\S]*?selected,/);
+  });
+
+  it("keeps both names reachable when multiple official branches share a marker", () => {
+    expect(viewSource).toContain("function coordinateGroupAccessibleName(group: PlaceCoordinateGroup, places: Place[])");
+    expect(viewSource).toContain(".map((place) => placeAccessibleName(place))");
+    expect(viewSource).toContain("title={coordinateGroupAccessibleName(group, places)}");
+    expect(viewSource).toContain("alt={coordinateGroupAccessibleName(group, places)}");
+    expect(viewSource).toContain("labelMarker(event.target as L.Marker, coordinateGroupAccessibleName(group, places))");
   });
 
   it("describes the map sheet snap and controlled places list", () => {
@@ -98,9 +149,52 @@ describe("map place selection wiring", () => {
     const compactBranch = summarySource.match(/if \(variant === "compact"\)[\s\S]*?\n  }\n\n  return/)?.[0] ?? "";
 
     expect(compactBranch).toContain("selected-place-summary-title-row");
+    expect(compactBranch).toContain('className="place-name-secondary"');
+    expect(compactBranch).toContain("{place.nameKr}");
     expect(compactBranch).toContain("selected-place-summary-address");
     expect(compactBranch).toContain("formatCompactDistance(km)");
     expect(compactBranch).not.toContain("selected-place-summary-media-grid");
+  });
+
+  it("renders English first and Korean second in every map sheet place row", () => {
+    const generalRows = sheetSource.slice(sheetSource.indexOf(": !selectedPlace ? ranked.map"));
+
+    expect(sheetSource.match(/className="place-name-primary"/g)?.length).toBeGreaterThanOrEqual(2);
+    expect(sheetSource.match(/className="place-name-secondary"/g)?.length).toBeGreaterThanOrEqual(2);
+    expect(generalRows.indexOf("{p.name}")).toBeLessThan(generalRows.indexOf("{p.nameKr}"));
+    expect(generalRows).toContain('lang="ko"');
+  });
+
+  it("renders English first and Korean second in both selected summary densities", () => {
+    expect(summarySource.match(/className="place-name-primary"/g)?.length).toBeGreaterThanOrEqual(2);
+    expect(summarySource.match(/className="place-name-secondary"/g)?.length).toBeGreaterThanOrEqual(2);
+    expect(summarySource.match(/lang="ko"/g)?.length).toBeGreaterThanOrEqual(2);
+  });
+
+  it("does not let compact-summary labels hide the official Korean name from assistive technology", () => {
+    expect(summarySource).toContain("const accessibleName = place.nameKr && place.nameKr !== place.name");
+    expect(summarySource).toContain("aria-label={`Open ${accessibleName}`}");
+    expect(summarySource).toContain("aria-label={`Close ${accessibleName}`}");
+  });
+
+  it("renders the same English-primary, Korean-secondary hierarchy on place details", () => {
+    const titleBlock = detailSource.slice(
+      detailSource.indexOf("function TitleBlock"),
+      detailSource.indexOf("function PlaceAddressDisclosure"),
+    );
+
+    expect(titleBlock).toContain('className="place-name-primary"');
+    expect(titleBlock).toContain('className="place-name-secondary"');
+    expect(titleBlock).toContain('lang="ko"');
+    expect(titleBlock.indexOf("{place.name}")).toBeLessThan(titleBlock.indexOf("{place.nameKr}"));
+  });
+
+  it("discloses official Daiso provenance without treating name verification as English support", () => {
+    expect(detailSource).toContain('place.source === "daiso"');
+    expect(detailSource).toContain('place.nameVerification === "provisional"');
+    expect(detailSource).toContain("Official Daiso store listing");
+    expect(detailSource).toContain("not yet been verified on Naver Map or Google");
+    expect(detailSource).not.toMatch(/nameVerification[\s\S]{0,120}englishOk|englishOk[\s\S]{0,120}nameVerification/);
   });
 
   it("does not show walking duration in the nearby-place list", () => {

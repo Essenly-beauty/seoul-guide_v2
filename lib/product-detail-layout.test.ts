@@ -6,6 +6,9 @@ const readSource = (url: URL) => existsSync(url) ? readFileSync(url, "utf8") : "
 const routeSource = readSource(new URL("../app/shop/[id]/page.tsx", import.meta.url));
 const bodySource = readSource(new URL("../components/product/product-detail-body.tsx", import.meta.url));
 const ctaSource = readSource(new URL("../components/product/product-cta-bar.tsx", import.meta.url));
+const daisoBodySource = readSource(new URL("../components/product/daiso-product-detail-body.tsx", import.meta.url));
+const daisoCtaSource = readSource(new URL("../components/product/daiso-product-cta-bar.tsx", import.meta.url));
+const scrollHeaderSource = readSource(new URL("../components/product/product-detail-scroll-header.tsx", import.meta.url));
 const shareSource = readSource(new URL("../components/product/product-share-button.tsx", import.meta.url));
 const toastSource = readSource(new URL("../components/ui/toast.tsx", import.meta.url));
 const dataSource = readSource(new URL("./data.ts", import.meta.url));
@@ -16,18 +19,41 @@ describe("product detail information-page layout", () => {
     expect(routeSource).toContain("ProductDetailBody");
     expect(routeSource).toContain("ProductCtaBar");
     expect(routeSource).toContain('className="statusbar-photo"');
-    expect(routeSource).toContain("heroOverlay=");
+    expect(routeSource).not.toContain("heroOverlay=");
     expect(routeSource).not.toContain("BottomNav");
   });
 
-  it("renders a collage with a back-only hero overlay (2026-07-26: share/save live in the CTA bar)", () => {
+  it("branches the existing detail route for strict Daiso ids without changing Olive Young lookup", () => {
+    expect(routeSource).toContain("const product = getProduct(params.id)");
+    expect(routeSource).toContain("parseDaisoProductRouteId(params.id)");
+    expect(routeSource).toContain("getDaisoProduct(daisoProductNo)");
+    expect(routeSource).toContain("DaisoProductDetailBody");
+    expect(routeSource).toContain("DaisoProductCtaBar");
+    expect(routeSource).toContain("notFound()");
+  });
+
+  it("shows only verified Daiso facts and retailer actions", () => {
+    for (const field of ["nameKr", "brand", "categoryKr", "subcategoryKr", "priceWon"]) {
+      expect(daisoBodySource).toContain(`product.${field}`);
+    }
+    expect(daisoBodySource).toContain("product.rating");
+    expect(daisoBodySource).toContain("product.reviewCountText");
+    expect(daisoBodySource).toContain("optionalDaisoDeliveryTags");
+    expect(daisoBodySource).not.toContain("collectedAt");
+    expect(daisoBodySource).not.toContain("skinTypes");
+    expect(daisoBodySource).not.toContain("Stock not verified");
+    expect(daisoCtaSource).toContain("Find nearby Daiso");
+    expect(daisoCtaSource).toContain("Buy on Daiso Mall");
+    expect(daisoCtaSource).toContain('external');
+    expect(daisoCtaSource).toContain('cat=daiso');
+  });
+
+  it("renders a collage with shared progressive back/share chrome", () => {
     expect(bodySource).toContain('className="product-detail-gallery"');
     expect(bodySource.match(/<ImgPh/g)?.length ?? 0).toBeGreaterThanOrEqual(3);
-    expect(bodySource).toContain("{heroOverlay}");
-    expect(routeSource).toContain("BackButtonBordered");
-    // duplicated top share/heart removed — they painted over the back control
-    expect(routeSource).not.toContain("ProductShareButton");
-    expect(routeSource).not.toContain("FavoriteButton");
+    expect(bodySource).toContain("ProductDetailScrollHeader");
+    expect(daisoBodySource).toContain("ProductDetailScrollHeader");
+    expect(routeSource).not.toContain("heroOverlay=");
   });
 
   it("uses the information-page title and anchored section hierarchy", () => {
@@ -116,8 +142,7 @@ describe("product detail information-page layout", () => {
   });
 
   it("shares a structured canonical product URL from every product share control", () => {
-    // route hero no longer carries a share control (2026-07-26) — compact bar + CTA bar do
-    expect(bodySource).toContain("ProductShareButton");
+    expect(scrollHeaderSource).toContain("ProductShareButton");
     expect(ctaSource).toContain("ProductShareButton");
     expect(shareSource).toContain("title:");
     expect(shareSource).toContain("text:");
@@ -127,9 +152,10 @@ describe("product detail information-page layout", () => {
   });
 
   it("uses fallback-aware back navigation in the compact header", () => {
-    expect(bodySource).toContain("<BackButton fallback={routes.ranking}");
-    expect(bodySource).not.toContain("router.back()");
-    expect(bodySource).not.toContain("useRouter");
+    expect(scrollHeaderSource).toContain("<BackButton fallback={fallback}");
+    expect(scrollHeaderSource).toContain("<BackButtonBordered fallback={fallback}");
+    expect(scrollHeaderSource).not.toContain("router.back()");
+    expect(scrollHeaderSource).not.toContain("useRouter");
   });
 
   it("does not claim an unverified purchase, store, or inventory success", () => {

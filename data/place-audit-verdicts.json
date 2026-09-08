@@ -1,0 +1,274 @@
+{
+  "schemaVersion": 1,
+  "places": {
+    "ados-daelimjung-angsijang": {
+      "identity": "matched",
+      "name": "differs",
+      "address": "missing",
+      "pin": "mismatch",
+      "hours": "missing",
+      "naverEnglish": "not_found",
+      "proposedAction": "investigate",
+      "reviewedAt": "2026-08-25",
+      "reviewer": "Codex-assisted Naver Map live review",
+      "notes": "Naver Map confirms 대림중앙시장 (place 19015917) at 서울 영등포구 디지털로37나길 21. The '(2)' suffix is not part of the listing name and the exact service English name 'Daelimjung_angsijang' returns no business result. Naver coordinates are 37.4910328, 126.8993823; the catalogue pin 37.568162, 126.975264 is incorrect. This remains a duplicate candidate for ados-daerim-central-market.",
+      "naverPlaceId": "19015917",
+      "evidenceLinks": [
+        "https://map.naver.com/p/entry/place/19015917",
+        "https://daerimmarket.co.kr/"
+      ]
+    },
+    "ados-daerim-central-market": {
+      "identity": "matched",
+      "name": "matched",
+      "address": "missing",
+      "pin": "mismatch",
+      "hours": "missing",
+      "proposedAction": "correct",
+      "reviewedAt": "2026-08-25",
+      "reviewer": "Codex-assisted Naver Map live review",
+      "notes": "Official and Naver evidence confirms 서울 영등포구 디지털로37나길 21. Naver place 19015917 is at 37.4910328, 126.8993823, so the source pin 37.523632, 126.897255 is incorrect. Keep this row as the canonical duplicate and use the verified public override applied 2026-08-30.",
+      "naverPlaceId": "19015917",
+      "evidenceLinks": [
+        "https://map.naver.com/p/entry/place/19015917",
+        "https://daerimmarket.co.kr/"
+      ]
+    },
+    "ados-haebangchon-sinheungsijang": {
+      "identity": "matched",
+      "name": "differs",
+      "address": "missing",
+      "pin": "mismatch",
+      "hours": "missing",
+      "naverEnglish": "not_found",
+      "proposedAction": "correct",
+      "reviewedAt": "2026-08-25",
+      "reviewer": "Codex-assisted Naver Map live review",
+      "notes": "Naver Map confirms 해방촌 신흥시장 (place 21856732) at 서울 용산구 신흥로 95-9 2층. '(추가등록)' is an internal suffix and the exact service English name 'haebangchon sinheungsijang' returns no business result. Naver coordinates are 37.5454213, 126.9850088; the catalogue pin 37.563752, 126.978655 is incorrect.",
+      "naverPlaceId": "21856732",
+      "evidenceLinks": [
+        "https://map.naver.com/p/entry/place/21856732",
+        "https://mediahub.seoul.go.kr/archives/2008539"
+      ]
+    },
+    "ados-jongmyo-shrine": {
+      "identity": "matched",
+      "name": "matched",
+      "address": "matched",
+      "pin": "mismatch",
+      "naverEnglish": "matched",
+      "proposedAction": "correct",
+      "reviewedAt": "2026-08-25",
+      "reviewer": "Codex-assisted Naver Map live review",
+      "notes": "Naver Map resolves both 종묘 and the exact service name 'Jongmyo Shrine' to place 11620940 at 서울 종로구 종로 157. Naver coordinates are 37.5758018, 126.9939555; the catalogue pin 37.570131, 126.985482 is incorrect and was shared with Olive Young Dongmyoap Stn.",
+      "naverPlaceId": "11620940",
+      "evidenceLinks": [
+        "https://map.naver.com/p/entry/place/11620940"
+      ]
+    },
+    "ados-seoul-bamdokkaebi-night-market-yeouido": {
+      "identity": "ambiguous",
+      "name": "differs",
+      "address": "missing",
+      "pin": "mismatch",
+      "hours": "missing",
+      "naverEnglish": "not_found",
+      "proposedAction": "investigate",
+      "reviewedAt": "2026-08-25",
+      "reviewer": "Codex-assisted Naver Map live review",
+      "notes": "Searching the Korean service title resolves 여의도월드나이트마켓 (place 514068102), a seasonal venue at 서울 영등포구 여의동로 330 여의도한강공원 물빛광장. The exact English service name returns no business result. Naver coordinates are 37.5306495, 126.9289125; the catalogue pin 37.569223, 126.97721 is incorrect. Because the current listing name and 2026 operating status differ from the historical service title, identity remains ambiguous pending an event-status decision.",
+      "evidenceLinks": [
+        "https://map.naver.com/p/entry/place/514068102",
+        "https://gov.seoul.go.kr/festa/hangang/y2026/introduce",
+        "https://mediahub.seoul.go.kr/archives/2005484"
+      ]
+    },
+    "colorlab-gangnam": {
+      "identity": "not_found",
+      "naverEnglish": "not_found",
+      "hours": "unchecked",
+      "proposedAction": "investigate",
+      "reviewedAt": "2026-08-25",
+      "reviewer": "Codex-assisted Naver Map live review",
+      "notes": "Naver Map returns no target for the exact Korean name 컬러랩 서울 강남. The exact address 서울 강남구 테헤란로4길 27 contains 15 listed businesses, none named ColorLab/컬러랩. The exact English service name 'ColorLab Seoul' also returns no business result. Keep under investigation until another provider corroborates it; do not publish as verified.",
+      "evidenceLinks": [
+        "https://map.naver.com/p/search/%EC%BB%AC%EB%9F%AC%EB%9E%A9%20%EC%84%9C%EC%9A%B8%20%EA%B0%95%EB%82%A8%20%EC%84%9C%EC%9A%B8%20%EA%B0%95%EB%82%A8%EA%B5%AC%20%ED%85%8C%ED%97%A4%EB%9E%80%EB%A1%9C4%EA%B8%B8%2027",
+        "https://map.naver.com/p/search/ColorLab%20Seoul"
+      ]
+    },
+    "chahong-apgujeong": {
+      "identity": "ambiguous",
+      "name": "differs",
+      "address": "differs",
+      "pin": "unchecked",
+      "naverEnglish": "ambiguous",
+      "proposedAction": "hide",
+      "reviewedAt": "2026-08-30",
+      "reviewer": "Codex-assisted Naver Map live review",
+      "notes": "The service name 차홍아르더 압구정 is not a current Naver listing. Korean search returns three real candidates: 차홍아르더 본점, 아뜰리에 도산, and 청담점. The likely main listing is 차홍아르더 본점 at 서울 강남구 언주로152길 10, but the service address 서울 강남구 압구정로 200 does not resolve; Naver substitutes nearby 압구정로 201. The exact English name 'Chahong Ardor' also returns all three branches, so this row cannot identify one venue safely and must remain hidden pending an owner choice.",
+      "evidenceLinks": [
+        "https://map.naver.com/p/search/%EC%B0%A8%ED%99%8D%EC%95%84%EB%A5%B4%EB%8D%94%20%EC%95%95%EA%B5%AC%EC%A0%95%20%EC%84%9C%EC%9A%B8%20%EA%B0%95%EB%82%A8%EA%B5%AC%20%EC%95%95%EA%B5%AC%EC%A0%95%EB%A1%9C%20200",
+        "https://map.naver.com/p/search/Chahong%20Ardor"
+      ]
+    },
+    "ct-more-on-hair-seongsu-branch": {
+      "identity": "matched",
+      "name": "differs",
+      "address": "matched",
+      "pin": "mismatch",
+      "naverEnglish": "not_found",
+      "proposedAction": "correct",
+      "reviewedAt": "2026-08-25",
+      "reviewer": "Codex-assisted Naver Map live review",
+      "notes": "Naver Map lists the venue as 모어온헤어 성수점 (place 1249522455) at 서울 성동구 왕십리로 106 3층. The exact service title and 'More On Hair Seongsu' returned no business result. Naver coordinates are 37.5470168, 127.0448258; the catalogue pin 37.545616, 127.04475 is incorrect and was shared with ONYAD.",
+      "naverPlaceId": "1249522455",
+      "evidenceLinks": [
+        "https://map.naver.com/p/entry/place/1249522455"
+      ]
+    },
+    "ct-onyad-hair-personalized-hair-consultation-stylin": {
+      "identity": "matched",
+      "name": "differs",
+      "address": "matched",
+      "pin": "mismatch",
+      "naverEnglish": "not_found",
+      "proposedAction": "correct",
+      "reviewedAt": "2026-08-25",
+      "reviewer": "Codex-assisted Naver Map live review",
+      "notes": "Naver Map lists the target as 온야드 서울숲본점 (place 1185833950) at 서울 성동구 왕십리로 66-10 2층, 3층. The exact long service title returned no business result; 'ONYAD HAIR' returned five branches and is ambiguous without the address. Naver coordinates are 37.5432321, 127.0449469; the catalogue pin 37.545616, 127.04475 is incorrect and was shared with More On Hair.",
+      "naverPlaceId": "1185833950",
+      "evidenceLinks": [
+        "https://map.naver.com/p/entry/place/1185833950"
+      ]
+    },
+    "dragon-hill-spa": {
+      "identity": "not_found",
+      "name": "differs",
+      "address": "differs",
+      "pin": "unchecked",
+      "hours": "stale",
+      "naverEnglish": "not_found",
+      "proposedAction": "investigate",
+      "reviewedAt": "2026-08-25",
+      "reviewer": "Codex-assisted Naver Map live review",
+      "notes": "Final live Naver check found no exact 드래곤힐 스파 or 'Dragon Hill Spa' business listing, and the catalogue address 서울 용산구 한강대로21길 60 also returns no result. The Korean name instead resolves the different business 드래곤휘트니스 at 한강대로21나길 40, so it must not be treated as the spa. Keep under investigation for a hide/decommission decision rather than redirecting to the gym.",
+      "evidenceLinks": [
+        "https://map.naver.com/p/search/%EB%93%9C%EB%9E%98%EA%B3%A4%ED%9E%90%20%EC%8A%A4%ED%8C%8C%20%EC%84%9C%EC%9A%B8%20%EC%9A%A9%EC%82%B0%EA%B5%AC%20%ED%95%9C%EA%B0%95%EB%8C%80%EB%A1%9C%2021%EA%B8%B8%2060",
+        "https://map.naver.com/p/search/Dragon%20Hill%20Spa",
+        "https://dragonhillspa.net/",
+        "https://luwei.kr/guides/closed-korean-saunas-still-online"
+      ]
+    },
+    "glow-skin-clinic": {
+      "identity": "not_found",
+      "naverEnglish": "not_found",
+      "hours": "unchecked",
+      "proposedAction": "investigate",
+      "reviewedAt": "2026-08-25",
+      "reviewer": "Codex-assisted Naver Map live review",
+      "notes": "Naver Map returns no business for the exact Korean name 글로우앤코 피부과 강남. The exact address 서울 강남구 테헤란로 107 resolves 메디타워 with 23 listed businesses, none containing 글로우/Glow. The exact English service name 'Glow & Co. Skin Clinic' also returns no business result. Keep under investigation until another provider corroborates it; do not publish as verified.",
+      "evidenceLinks": [
+        "https://map.naver.com/p/search/%EA%B8%80%EB%A1%9C%EC%9A%B0%EC%95%A4%EC%BD%94%20%ED%94%BC%EB%B6%80%EA%B3%BC%20%EA%B0%95%EB%82%A8%20%EC%84%9C%EC%9A%B8%20%EA%B0%95%EB%82%A8%EA%B5%AC%20%ED%85%8C%ED%97%A4%EB%9E%80%EB%A1%9C%20107",
+        "https://map.naver.com/p/search/Glow%20%26%20Co.%20Skin%20Clinic"
+      ]
+    },
+    "glow-myeongdong": {
+      "identity": "not_found",
+      "naverEnglish": "not_found",
+      "hours": "unchecked",
+      "proposedAction": "investigate",
+      "reviewedAt": "2026-08-30",
+      "reviewer": "Codex-assisted Naver Map live review",
+      "notes": "Naver Map returns no business for the exact Korean name 글로우서울의원 명동. The exact address 서울 중구 명동길 43 resolves 11 listed businesses, but none is named 글로우서울/Glow Seoul; the medical listing at that building is 클림의원 명동점. The exact English service name 'Glow Seoul Clinic Myeongdong' also returns no business result. Keep under investigation and do not publish as verified.",
+      "evidenceLinks": [
+        "https://map.naver.com/p/search/%EA%B8%80%EB%A1%9C%EC%9A%B0%EC%84%9C%EC%9A%B8%EC%9D%98%EC%9B%90%20%EB%AA%85%EB%8F%99%20%EC%84%9C%EC%9A%B8%20%EC%A4%91%EA%B5%AC%20%EB%AA%85%EB%8F%99%EA%B8%B8%2043",
+        "https://map.naver.com/p/search/Glow%20Seoul%20Clinic%20Myeongdong"
+      ]
+    },
+    "hongdae-derma": {
+      "identity": "not_found",
+      "naverEnglish": "not_found",
+      "hours": "unchecked",
+      "proposedAction": "investigate",
+      "reviewedAt": "2026-08-30",
+      "reviewer": "Codex-assisted Naver Map live review",
+      "notes": "Naver Map returns no business for the exact Korean name 홍대 더마랩의원. The exact address 서울 마포구 홍익로 25 resolves 24 listed businesses across two result pages, but none is named 더마랩/Derma Lab; the medical listing at that building is 리즈온의원 홍대점. The exact English service name 'Hongdae Derma Lab' also returns no business result. Keep under investigation and do not publish as verified.",
+      "evidenceLinks": [
+        "https://map.naver.com/p/search/%ED%99%8D%EB%8C%80%20%EB%8D%94%EB%A7%88%EB%9E%A9%EC%9D%98%EC%9B%90%20%EC%84%9C%EC%9A%B8%20%EB%A7%88%ED%8F%AC%EA%B5%AC%20%ED%99%8D%EC%9D%B5%EB%A1%9C%2025",
+        "https://map.naver.com/p/search/Hongdae%20Derma%20Lab"
+      ]
+    },
+    "hosu-dosan": {
+      "identity": "matched",
+      "name": "differs",
+      "address": "differs",
+      "pin": "mismatch",
+      "naverEnglish": "matched",
+      "proposedAction": "hide",
+      "reviewedAt": "2026-08-30",
+      "reviewer": "Codex-assisted Naver Map live review",
+      "notes": "Naver Map confirms the intended venue as 호수도산 (place 37903600) at 서울 강남구 도산대로50길 13 4층, coordinates 37.5215823, 127.0376996. The exact English service name 'HOSU DOSAN' resolves the same listing. The curated row's Korean suffix, address 서울 강남구 도산대로 123, and pin are wrong. The sourced record ct-hosu-dosan-hair-makeup-studio already represents the canonical venue with the verified address and coordinates, so this duplicate curated row must remain hidden.",
+      "naverPlaceId": "37903600",
+      "evidenceLinks": [
+        "https://map.naver.com/p/entry/place/37903600"
+      ]
+    },
+    "juno-hair-gangnam": {
+      "identity": "ambiguous",
+      "name": "differs",
+      "address": "differs",
+      "pin": "unchecked",
+      "naverEnglish": "ambiguous",
+      "proposedAction": "hide",
+      "reviewedAt": "2026-08-30",
+      "reviewer": "Codex-assisted Naver Map live review",
+      "notes": "The exact Korean service name 준오헤어 강남점 does not identify a current Naver listing; search returns multiple different JUNO branches. The service address 서울특별시 강남구 테헤란로 123 is a 52-business office building, and all three address-list pages contain no 준오헤어. The exact English name 'Juno Hair Gangnam' likewise returns several real branches including 강남역스퀘어2호점, 강남역4호점, and 강남우성사거리점. Because the brand exists but the row cannot be mapped to one branch, keep this curated aggregate hidden rather than guessing a replacement.",
+      "evidenceLinks": [
+        "https://map.naver.com/p/search/%EC%A4%80%EC%98%A4%ED%97%A4%EC%96%B4%20%EA%B0%95%EB%82%A8%EC%A0%90%20%EC%84%9C%EC%9A%B8%ED%8A%B9%EB%B3%84%EC%8B%9C%20%EA%B0%95%EB%82%A8%EA%B5%AC%20%ED%85%8C%ED%97%A4%EB%9E%80%EB%A1%9C%20123",
+        "https://map.naver.com/p/search/Juno%20Hair%20Gangnam"
+      ]
+    },
+    "lumiere-derma": {
+      "identity": "not_found",
+      "naverEnglish": "not_found",
+      "hours": "unchecked",
+      "proposedAction": "investigate",
+      "reviewedAt": "2026-08-25",
+      "reviewer": "Codex-assisted Naver Map live review",
+      "notes": "Naver Map returns no business for the exact Korean name 뤼미에르 피부과. The exact address 서울 강남구 강남대로 468 has 24 listed businesses across two result pages, none named 뤼미에르/Lumière. The exact English service name 'Lumière Dermatology' also returns no business result. Keep under investigation until another provider corroborates it; do not publish as verified.",
+      "evidenceLinks": [
+        "https://map.naver.com/p/search/%EB%A4%BC%EB%AF%B8%EC%97%90%EB%A5%B4%20%ED%94%BC%EB%B6%80%EA%B3%BC%20%EC%84%9C%EC%9A%B8%20%EA%B0%95%EB%82%A8%EA%B5%AC%20%EA%B0%95%EB%82%A8%EB%8C%80%EB%A1%9C%20468",
+        "https://map.naver.com/p/search/Lumi%C3%A8re%20Dermatology"
+      ]
+    },
+    "oy-동묘앞역점": {
+      "identity": "matched",
+      "name": "matched",
+      "address": "matched",
+      "pin": "mismatch",
+      "naverEnglish": "not_found",
+      "proposedAction": "correct",
+      "reviewedAt": "2026-08-25",
+      "reviewer": "Codex-assisted Naver Map live review",
+      "notes": "Naver Map confirms 올리브영 동묘앞역점 (place 37591650) at 서울 종로구 종로 346. The exact service name 'Olive Young Dongmyoap Stn.' returned no business result. Naver coordinates are 37.5729505, 127.0162282; the catalogue pin 37.570131, 126.985482 is incorrect and was shared with Jongmyo Shrine.",
+      "naverPlaceId": "37591650",
+      "evidenceLinks": [
+        "https://map.naver.com/p/entry/place/37591650"
+      ]
+    },
+    "sulwha-clinic": {
+      "identity": "not_found",
+      "address": "differs",
+      "naverEnglish": "not_found",
+      "hours": "unchecked",
+      "proposedAction": "investigate",
+      "reviewedAt": "2026-08-25",
+      "reviewer": "Codex-assisted Naver Map live review",
+      "notes": "Naver Map returns no business for the exact Korean name 설화 피부과 or the exact English service name 'Sulwha Skin Clinic'. The catalogue address 서울 강남구 강남대로 400 is not resolved as an exact road address; Naver only suggests nearby 396 and 402. Keep under investigation until another provider corroborates it; do not publish as verified.",
+      "evidenceLinks": [
+        "https://map.naver.com/p/search/%EC%84%A4%ED%99%94%20%ED%94%BC%EB%B6%80%EA%B3%BC%20%EC%84%9C%EC%9A%B8%20%EA%B0%95%EB%82%A8%EA%B5%AC%20%EA%B0%95%EB%82%A8%EB%8C%80%EB%A1%9C%20400",
+        "https://map.naver.com/p/search/Sulwha%20Skin%20Clinic"
+      ]
+    }
+  }
+}

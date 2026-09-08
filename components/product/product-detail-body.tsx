@@ -1,16 +1,14 @@
 "use client";
 
-import { useEffect, useId, useRef, useState, type ReactNode } from "react";
+import { useEffect, useId, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import Link from "next/link";
 import { Icon } from "@/components/icon";
-import { ProductShareButton } from "@/components/product/product-share-button";
+import { ProductDetailScrollHeader } from "@/components/product/product-detail-scroll-header";
 import { AnchorTabs } from "@/components/ui/anchor-tabs";
-import { BackButton } from "@/components/ui/back-button";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Chip } from "@/components/ui/chip";
-import { FavoriteButton } from "@/components/ui/favorite-button";
 import { ImgPh } from "@/components/ui/img-ph";
 import { Notice } from "@/components/ui/notice";
 import { SectionDivider } from "@/components/ui/section-divider";
@@ -320,41 +318,14 @@ function RoutineSection({ product }: { product: Product }) {
   );
 }
 
-export function ProductDetailBody({ product, heroOverlay }: {
-  product: Product;
-  heroOverlay?: ReactNode;
-}) {
-  const heroRef = useRef<HTMLDivElement>(null);
-  const [compact, setCompact] = useState(false);
-
-  useEffect(() => {
-    const hero = heroRef.current;
-    if (!hero) return;
-    const observer = new IntersectionObserver(
-      ([entry]) => setCompact(!entry.isIntersecting),
-      { threshold: 0 },
-    );
-    observer.observe(hero);
-    return () => observer.disconnect();
-  }, []);
-
+export function ProductDetailBody({ product }: { product: Product }) {
   return (
     <div className="detail-scroll product-detail-scroll">
-      <div className={"detail-compactwrap" + (compact ? " on" : "")}>
-        <div className="detail-compactbar product-detail-compactbar">
-          <BackButton fallback={routes.ranking} />
-          <b>{product.name}</b>
-          <ProductShareButton
-            aria-label="Share product"
-            product={product}
-          />
-          <FavoriteButton kind="product" id={product.id} />
-        </div>
-      </div>
-
-      <div
-        ref={heroRef}
-        className="product-detail-hero"
+      <ProductDetailScrollHeader
+        title={product.name}
+        product={product}
+        fallback={routes.rankingRetailer("olive_young")}
+        rankingHref={routes.rankingRetailer("olive_young")}
       >
         <div
           className="product-detail-gallery"
@@ -372,8 +343,7 @@ export function ProductDetailBody({ product, heroOverlay }: {
             </span>
           </ImgPh>
         </div>
-        {heroOverlay}
-      </div>
+      </ProductDetailScrollHeader>
 
       <div className="pad" style={{ paddingTop: 8, paddingBottom: 12 }}>
         <ProductTitleBlock product={product} />

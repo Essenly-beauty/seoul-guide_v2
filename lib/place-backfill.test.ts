@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { PLACES, type DayHours } from "./data";
+import { CATALOGUE_PLACES, PLACES, type DayHours } from "./data";
 import { hoursOn, placeStatus } from "./places";
 import hoursOverrides from "../scripts/lib/hours-overrides.json";
 import krNameOverrides from "../scripts/lib/kr-name-overrides.json";
@@ -41,7 +41,7 @@ const ALL_RANGES: [string, DayHours][] = HOURS.flatMap(([id, fix]) =>
 );
 
 const KR_NAMES = Object.entries(krNameOverrides) as [string, string][];
-const BY_ID = new Map(PLACES.map((p) => [p.id, p]));
+const CATALOGUE_BY_ID = new Map(CATALOGUE_PLACES.map((p) => [p.id, p]));
 const HHMM = /^([01]\d|2[0-3]):[0-5]\d$/;
 /** Kakao writes midnight as "24:00" and so does lib/data.ts (doota-mall), and
  *  placeStatus reads it as minute 1440 — i.e. open right up to midnight. */
@@ -121,12 +121,12 @@ describe("Kakao opening-hours backfill", () => {
   });
 
   it("targets a place that still exists after a rebuild", () => {
-    for (const [id] of HOURS) expect(BY_ID.has(id), `${id} has no place`).toBe(true);
+    for (const [id] of HOURS) expect(CATALOGUE_BY_ID.has(id), `${id} has no catalogue place`).toBe(true);
   });
 
-  it("serves the backfilled hours from PLACES, not the pre-backfill blank", () => {
+  it("serves the backfilled hours from the catalogue, not the pre-backfill blank", () => {
     for (const [id, fix] of HOURS) {
-      const place = BY_ID.get(id)!;
+      const place = CATALOGUE_BY_ID.get(id)!;
       expect(place.hours, id).toBeDefined();
       const want = isWeek(fix) ? fix.week : Array(7).fill({ open: fix.open, close: fix.close });
       for (let day = 0; day < 7; day++) {
@@ -139,7 +139,7 @@ describe("Kakao opening-hours backfill", () => {
     // 올리브영 학동중앙점 is the canonical case the first pass refused:
     // 09:00 Mon–Fri, 10:00 Sat/Sun. Anything that flattens it back to one pair
     // states a false opening time on two days out of seven.
-    const oy = BY_ID.get("oy-학동중앙점")!;
+    const oy = CATALOGUE_BY_ID.get("oy-학동중앙점")!;
     expect(hoursOn(oy.hours, 1)).toEqual({ open: "09:00", close: "22:30" }); // Monday
     expect(hoursOn(oy.hours, 0)).toEqual({ open: "10:00", close: "22:30" }); // Sunday
     expect(hoursOn(oy.hours, 6)).toEqual({ open: "10:00", close: "22:30" }); // Saturday
@@ -156,7 +156,7 @@ describe("Kakao opening-hours backfill", () => {
   it("reports open/closed rather than unknown for every backfilled place", () => {
     const noon = new Date(2026, 7, 24, 12, 0);
     for (const [id] of HOURS) {
-      expect(placeStatus(BY_ID.get(id)!.hours, noon), id).not.toBe("unknown");
+      expect(placeStatus(CATALOGUE_BY_ID.get(id)!.hours, noon), id).not.toBe("unknown");
     }
   });
 
@@ -174,11 +174,13 @@ describe("Kakao opening-hours backfill", () => {
 
   it("leaves places without an override showing no hours at all", () => {
     // Honesty check: the backfill must never have invented a pair for a place
-    // it could not resolve. Everything with hours is either an override or one
-    // of the 44 hand-curated rows in lib/data.ts.
+    // it could not resolve. Everything with hours is either an override, one
+    // of the hand-curated rows, or an official Daiso source value.
     const overridden = new Set(HOURS.map(([id]) => id));
-    const curated = PLACES.filter((p) => p.hours && !overridden.has(p.id));
-    expect(curated.every((p) => p.source === "curated" || p.source === undefined)).toBe(true);
+    const sourceHours = PLACES.filter((p) => p.hours && !overridden.has(p.id));
+    expect(sourceHours.every((p) =>
+      p.source === "curated" || p.source === "daiso" || p.source === undefined,
+    )).toBe(true);
   });
 });
 
@@ -198,12 +200,12 @@ describe("Kakao Korean-name backfill", () => {
   });
 
   it("targets a place that still exists after a rebuild", () => {
-    for (const [id] of KR_NAMES) expect(BY_ID.has(id), `${id} has no place`).toBe(true);
+    for (const [id] of KR_NAMES) expect(CATALOGUE_BY_ID.has(id), `${id} has no catalogue place`).toBe(true);
   });
 
-  it("serves the Korean name from PLACES, not the English fallback", () => {
+  it("serves the Korean name from the catalogue, not the English fallback", () => {
     for (const [id, kr] of KR_NAMES) {
-      expect(BY_ID.get(id)!.nameKr, id).toBe(kr);
+      expect(CATALOGUE_BY_ID.get(id)!.nameKr, id).toBe(kr);
     }
   });
 

@@ -8,7 +8,7 @@ function source(path: string) {
 const layoutSource = source("../app/layout.tsx");
 const cssSource = source("../app/globals.css");
 const searchSource = source("../app/search/page.tsx");
-const rankingSource = source("../app/ranking/page.tsx");
+const rankingSource = source("../components/ranking/ranking-page-client.tsx");
 const searchFieldSource = source("../components/ui/search-field.tsx");
 const subwaySource = source("../components/subway/subway-route-controller.tsx");
 const dialogHookSource = source("../components/ui/use-dialog-focus.ts");

@@ -12,6 +12,7 @@ export default async function PlacesCategoryPage(props: { params: Promise<{ cate
   if (!meta) notFound();
 
   const places = PLACES.filter((p) => meta.types.includes(p.type));
+  if (places.length === 0) notFound();
 
   return (
     <>

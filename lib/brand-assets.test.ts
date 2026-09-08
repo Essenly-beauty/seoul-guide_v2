@@ -15,15 +15,19 @@ describe("brand asset contract", () => {
   });
 
   it("keeps the supplied SVG for app identity without repeating it in quiet page headers", () => {
-    const ranking = source("app/ranking/page.tsx");
+    const ranking = source("components/ranking/ranking-page-client.tsx");
     expect(ranking).not.toContain("BrandMark");
-    expect(ranking).toContain('<TopBar center title="Ranking" />');
+    expect(ranking).toContain(
+      'const rankingTitle = initialRetailer === "daiso" ? "DAISO Ranking" : "OLIVE YOUNG Ranking"',
+    );
+    expect(ranking).toContain('<TopBar center title={rankingTitle} />');
+    expect(ranking).not.toContain('<TopBar center title="Ranking" />');
     expect(ranking).not.toContain('BrandMark, Icon } from "@/components/icon"');
     expect(source("components/icon.tsx")).not.toContain("i-mark-brand");
   });
 
   it("uses a reusable brand icon in the ranking brand directory", () => {
-    const ranking = source("app/ranking/page.tsx");
+    const ranking = source("components/ranking/ranking-page-client.tsx");
     const brandIcon = source("components/brand/brand-icon.tsx");
 
     expect(ranking).toContain('import { BrandIcon } from "@/components/brand/brand-icon"');

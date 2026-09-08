@@ -6,12 +6,12 @@ describe("searchAll", () => {
     expect(searchAll("  ").total).toBe(0);
   });
   it("matches places by English name, case-insensitive", () => {
-    const r = searchAll("juno");
-    expect(r.places.map((p) => p.id)).toContain("juno-hair-gangnam");
+    const r = searchAll("more on hair seongsu");
+    expect(r.places.map((p) => p.id)).toContain("ct-more-on-hair-seongsu-branch");
   });
   it("matches places by Korean name (tourist pastes 한글 상호)", () => {
-    const r = searchAll("호수");
-    expect(r.places.map((p) => p.id)).toContain("hosu-dosan");
+    const r = searchAll("모어온헤어");
+    expect(r.places.map((p) => p.id)).toContain("ct-more-on-hair-seongsu-branch");
   });
   it("matches places by tag and zone label", () => {
     expect(searchAll("scalp").places.length).toBeGreaterThan(0);

@@ -203,6 +203,13 @@ describe("route-ready panel shares the station-sheet language", () => {
     expect(controller).not.toContain("subway-place-copy");
   });
 
+  it("shows English primary and official Korean secondary names in both nearby-list variants", () => {
+    expect(controller.match(/className="place-name-primary"/g)?.length).toBeGreaterThanOrEqual(2);
+    expect(controller.match(/className="place-name-secondary"/g)?.length).toBeGreaterThanOrEqual(2);
+    expect(controller.match(/\{place\.nameKr\}/g)?.length).toBeGreaterThanOrEqual(2);
+    expect(controller.match(/lang="ko"/g)?.length).toBeGreaterThanOrEqual(2);
+  });
+
   it("never prints a live-arrivals claim", () => {
     // there is no arrivals feed; the hand-off is labelled for what it does
     expect(controller).not.toContain("> Live\n");

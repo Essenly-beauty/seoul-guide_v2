@@ -30,6 +30,7 @@ import { REVIEW_MAX_LEN, setRating, setReview, useMyRatings } from "@/lib/rating
 import { fetchPlaceReviews, REPORT_REASONS, reportReview, timeAgo, type PublicReview } from "@/lib/reviews";
 import { routes } from "@/lib/routes";
 import { PLACES, PRODUCTS, TYPE_LABEL, zoneShort, type Place } from "@/lib/data";
+import { selectDaisoRanking } from "@/lib/daiso-ranking";
 import { GANGNAM_STATION, formatCompactDistance, formatDistance, haversineKm } from "@/lib/geo";
 import { hoursOn, isBookable, statusLabel } from "@/lib/places";
 
@@ -80,9 +81,15 @@ function ToggleHeader({ title, count, expanded, expandLabel, collapseLabel, onTo
 function TitleBlock({ place, km }: { place: Place; km: number }) {
   return (
     <div>
-      <span className="t-caption">{place.nameKr}</span>
-      <div className="row" style={{ gap: 8, alignItems: "baseline", flexWrap: "wrap" }}>
-        <h1 className="h1" style={{ fontSize: 21, letterSpacing: "-0.01em", fontFamily: "var(--sans)", fontWeight: 700 }}>{place.name}</h1>
+      <div className="row" style={{ gap: 8, alignItems: "flex-start", flexWrap: "wrap" }}>
+        <div className="place-detail-name-stack">
+          <h1 className="h1" style={{ fontSize: 21, letterSpacing: "-0.01em", fontFamily: "var(--sans)", fontWeight: 700 }}>
+            <span className="place-name-primary">{place.name}</span>
+          </h1>
+          {place.nameKr !== place.name && (
+            <span className="place-name-secondary" lang="ko">{place.nameKr}</span>
+          )}
+        </div>
         <span className="small muted">{TYPE_LABEL[place.type]}</span>
       </div>
       <div className="row" style={{ gap: 8, marginTop: 8 }}>
@@ -335,6 +342,31 @@ function OliveYoungPicks() {
   );
 }
 
+function DaisoPicks() {
+  const picks = selectDaisoRanking("daily").slice(0, 4);
+  return (
+    <>
+      <div className="caption muted">Daiso Mall ranking — chain-wide chart, stock varies by branch.</div>
+      <div>
+        {picks.map(({ product: p, rank }) => (
+          <Link key={p.id} className="listrow" href={routes.daisoProduct(p.productNo)}>
+            <b className="mono num" style={{ width: 22, flex: "none", color: rank === 1 ? "var(--accent)" : "var(--muted)" }}>{rank}</b>
+            <ImgPh style={{ width: 44, height: 44, flex: "none" }} />
+            <div style={{ flex: 1, minWidth: 0 }}>
+              <b lang="ko" style={{ display: "block", fontSize: 13.5, lineHeight: 1.3, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{p.nameKr}</b>
+              <div className="caption muted" style={{ overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{p.brand} · {p.subcategoryKr}</div>
+            </div>
+            <Icon name="chev" size="xs" className="chev" style={{ color: "var(--dim)" }} />
+          </Link>
+        ))}
+      </div>
+      <Button variant="secondary" size="sm" href={routes.rankingRetailer("daiso")}>
+        See the full Daiso ranking
+      </Button>
+    </>
+  );
+}
+
 // ── Services (d-services): menu rail ↔ full vertical menu ──
 function ServicesSection({ place }: { place: Place }) {
   const [expanded, setExpanded] = useState(false);
@@ -344,6 +376,14 @@ function ServicesSection({ place }: { place: Place }) {
       <section id="d-services" className="d-sec stack sm">
         <SectionHeader title="Products" actionLabel="Ranking" href={routes.ranking} />
         <OliveYoungPicks />
+      </section>
+    );
+  }
+  if (place.type === "daiso") {
+    return (
+      <section id="d-services" className="d-sec stack sm">
+        <SectionHeader title="Daiso Ranking" actionLabel="See all" href={routes.rankingRetailer("daiso")} />
+        <DaisoPicks />
       </section>
     );
   }
@@ -664,9 +704,13 @@ function InfoSection({ place }: { place: Place }) {
       </div>
       {/* provenance disclosure (data-ledger slice) */}
       <p className="caption muted" style={{ marginTop: 4 }}>
-        {place.source === "curated"
-          ? "Curated pick — details compiled by our team and not yet venue-verified. Confirm before visiting."
-          : "Listed from public sources — details can change. Confirm important ones before visiting."}
+        {place.source === "daiso"
+          ? place.nameVerification === "provisional"
+            ? "Official Daiso store listing — the English display name is provisional and has not yet been verified on Naver Map or Google. Confirm important details before visiting."
+            : "Official Daiso store listing — details can change. Confirm important ones before visiting."
+          : place.source === "curated"
+            ? "Curated pick — details compiled by our team and not yet venue-verified. Confirm before visiting."
+            : "Listed from public sources — details can change. Confirm important ones before visiting."}
         {place.geoSource === "area" && " Map pin is approximate (neighborhood-level)."}
       </p>
       <PlaceCorrectionLauncher place={place} />

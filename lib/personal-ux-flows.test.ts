@@ -15,10 +15,11 @@ const ratings = source("lib/ratings.ts");
 const routes = source("lib/routes.ts");
 const favorites = source("app/favorites/page.tsx");
 const mapScreen = source("components/map/map-screen.tsx");
+const mapSheet = source("components/map/map-sheet.tsx");
 const menu = source("app/menu/page.tsx");
 const blog = source("app/blog/page.tsx");
 const saved = source("app/favorites/page.tsx");
-const ranking = source("app/ranking/page.tsx");
+const ranking = source("components/ranking/ranking-page-client.tsx");
 const topBar = source("components/ui/top-bar.tsx");
 const css = source("app/globals.css");
 
@@ -84,7 +85,11 @@ describe("shared page header rhythm", () => {
   it("uses the same quiet centered header across Blog, Ranking, and Saved", () => {
     expect(blog).toContain('<TopBar center title="Blog" />');
     expect(saved).toContain('<TopBar center title="Saved" />');
-    expect(ranking).toContain('<TopBar center title="Ranking" />');
+    expect(ranking).toContain(
+      'const rankingTitle = initialRetailer === "daiso" ? "DAISO Ranking" : "OLIVE YOUNG Ranking"',
+    );
+    expect(ranking).toContain('<TopBar center title={rankingTitle} />');
+    expect(ranking).not.toContain('<TopBar center title="Ranking" />');
     expect(ranking).not.toContain("<BrandMark");
     expect(ranking).not.toContain('<div className="topbar center">');
   });
@@ -110,6 +115,17 @@ describe("saved and shared place journeys", () => {
     expect(css).toMatch(
       /\.mapsheet\.half:not\(\.has-selection\) \.mapsheet-body\s*\{[^}]*max-height:\s*calc\(48vh - 128px - env\(safe-area-inset-bottom\)\)[^}]*padding-bottom:\s*12px/,
     );
+  });
+
+  it("keeps long bilingual map rows inside the sheet width", () => {
+    expect(mapSheet).toContain('className="maprow-copy"');
+    expect(css).toMatch(
+      /\.maprow-copy\s*\{[^}]*flex:\s*1[^}]*min-width:\s*0[^}]*text-align:\s*left/,
+    );
+  });
+
+  it("never exposes horizontal scrolling in the map list viewport", () => {
+    expect(css).toMatch(/\.mapsheet-body\s*\{[^}]*overflow-y:\s*auto[^}]*overflow-x:\s*hidden/);
   });
 });
 

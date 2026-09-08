@@ -18,10 +18,11 @@ import {
 
 type Snap = MapSheetSnap;
 
-export function MapSheet({ places, origin, selectedId, onSelect, onClearSelection, moved = false }: {
+export function MapSheet({ places, origin, selectedId, groupPlaceIds = [], onSelect, onClearSelection, moved = false }: {
   places: Place[];
   origin: LatLng;
   selectedId: string | null;
+  groupPlaceIds?: string[];
   onSelect: (id: string) => void;
   onClearSelection: () => void;
   /** True after the map camera has moved away from the selected pin. */
@@ -44,6 +45,7 @@ export function MapSheet({ places, origin, selectedId, onSelect, onClearSelectio
   const rowRefs = useRef(new Map<string, HTMLButtonElement>());
   const returnPlaceId = useRef<string | null>(null);
   const previousSelectedId = useRef<string | null>(selectedId);
+  const previousGroupKey = useRef("");
 
   const ranked = useMemo(
     () =>
@@ -61,12 +63,20 @@ export function MapSheet({ places, origin, selectedId, onSelect, onClearSelectio
     ? ranked.find(({ p }) => p.id === selectedId)?.p ?? getPlace(selectedId) ?? null
     : null;
   const selectedKm = selectedId ? ranked.find(({ p }) => p.id === selectedId)?.km ?? 0 : 0;
+  const groupPlaces = useMemo(
+    () => groupPlaceIds.map((id) => getPlace(id)).filter((place): place is Place => Boolean(place)),
+    [groupPlaceIds],
+  );
+  const groupKey = groupPlaces.map((place) => place.id).join(":");
+  const groupTitle = `${groupPlaces.length} places at this pin`;
   // Snap is the single source of truth for the selected-place presentation.
   // Keeping a second "collapsed" flag allowed compact + detail views to render
   // together when the two states disagreed during a drag or Map-tab cycle.
   const selectedView = resolveSelectedPlaceView(snap);
   const snapLabel = selectedPlace && selectedView === "compact"
     ? `Selected place preview collapsed. ${selectedPlace?.name ?? "Place"}. Press to reopen.`
+    : groupPlaces.length > 1
+      ? `${groupTitle}. Press to fully expand.`
     : snap === "peek"
     ? `Nearby places list, collapsed. ${ranked.length} places. Press to expand halfway.`
     : snap === "half"
@@ -98,6 +108,14 @@ export function MapSheet({ places, origin, selectedId, onSelect, onClearSelectio
     });
     return () => window.cancelAnimationFrame(frame);
   }, [selectedId]);
+
+  useEffect(() => {
+    const previous = previousGroupKey.current;
+    previousGroupKey.current = groupKey;
+    if (!groupKey || groupKey === previous) return;
+    setOffset(null);
+    setSnap("half");
+  }, [groupKey]);
 
   // A newly selected place starts at the top of its detail preview. This also
   // prevents the previous place's scroll position from carrying over when a
@@ -262,8 +280,13 @@ export function MapSheet({ places, origin, selectedId, onSelect, onClearSelectio
       >
         <span className="mapsheet-grip" aria-hidden="true" />
         {!selectedPlace && (
-          <div className="small" style={{ fontWeight: 600 }}>
-            {`${ranked.length} places near you`}
+          <div
+            className="small"
+            style={{ fontWeight: 600 }}
+            role={groupPlaces.length > 1 ? "heading" : undefined}
+            aria-level={groupPlaces.length > 1 ? 2 : undefined}
+          >
+            {groupPlaces.length > 1 ? groupTitle : `${ranked.length} places near you`}
           </div>
         )}
       </div>
@@ -298,7 +321,47 @@ export function MapSheet({ places, origin, selectedId, onSelect, onClearSelectio
             place={selectedPlace}
             onCollapse={() => collapseFullDetail()}
           />
-        ) : !selectedPlace ? ranked.map(({ p, km }) => (
+        ) : !selectedPlace && groupPlaces.length > 1 ? groupPlaces.map((place) => {
+          const km = haversineKm(origin, { lat: place.lat, lng: place.lng });
+          return (
+            <button
+              key={place.id}
+              ref={(node) => {
+                if (node) rowRefs.current.set(place.id, node);
+                else rowRefs.current.delete(place.id);
+              }}
+              type="button"
+              className="maprow maprow-coordinate-choice"
+              onClick={() => {
+                returnPlaceId.current = place.id;
+                onSelect(place.id);
+              }}
+            >
+              <div className="thumb hero-img maprow-thumb">
+                {place.photoUrl ? (
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img className="maprow-photo" src={place.photoUrl} alt="" />
+                ) : (
+                  <span className="maprow-photo-fallback">
+                    <Icon name="pin" size="sm" aria-hidden="true" />
+                  </span>
+                )}
+              </div>
+              <div className="maprow-copy">
+                <span className="label">{TYPE_LABEL[place.type]} · {zoneShort(place.zone)}</span>
+                <div className="place-name-primary">{place.name}</div>
+                {place.nameKr !== place.name && (
+                  <div className="place-name-secondary" lang="ko">{place.nameKr}</div>
+                )}
+                <div className="caption muted maprow-meta">
+                  <LiveBadge hours={place.hours} showUntil={false} />
+                  <span className="map-meta-token mono">{formatCompactDistance(km)}</span>
+                  <span>{place.address}</span>
+                </div>
+              </div>
+            </button>
+          );
+        }) : !selectedPlace ? ranked.map(({ p, km }) => (
             <button
               key={p.id}
               ref={(node) => {
@@ -325,9 +388,12 @@ export function MapSheet({ places, origin, selectedId, onSelect, onClearSelectio
                   </span>
                 )}
               </div>
-              <div style={{ flex: 1, textAlign: "left" }}>
+              <div className="maprow-copy">
                 <span className="label">{TYPE_LABEL[p.type]} · {zoneShort(p.zone)}</span>
-                <div style={{ fontWeight: 600 }}>{p.name}</div>
+                <div className="place-name-primary">{p.name}</div>
+                {p.nameKr !== p.name && (
+                  <div className="place-name-secondary" lang="ko">{p.nameKr}</div>
+                )}
                 <div className="caption muted maprow-meta">
                   <LiveBadge hours={p.hours} showUntil={false} />
                   <span className="map-meta-token mono">{formatCompactDistance(km)}</span>

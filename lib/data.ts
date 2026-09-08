@@ -6,10 +6,15 @@ import { CREATRIP_PLACES } from "./generated/creatrip-places";
 import { PLACE_PHOTOS } from "./generated/place-photos";
 import { OLIVEYOUNG_PLACES } from "./generated/oliveyoung-places";
 import { ADOS_PLACES } from "./generated/ados-places";
+import { DAISO_PLACES } from "./generated/daiso-places";
+
+if (DAISO_PLACES.length !== 251) {
+  throw new Error(`Expected exactly 251 generated Daiso stores, received ${DAISO_PLACES.length}`);
+}
 
 // ── Taxonomy (matches real app enums) ─────────────────────
 export type PlaceType =
-  | "olive_young" | "skin_clinic" | "hair_salon" | "nail_lash"
+  | "olive_young" | "daiso" | "skin_clinic" | "hair_salon" | "nail_lash"
   | "personal_color" | "head_spa" | "mall" | "etc";
 export type PriceRange = "₩" | "₩₩" | "₩₩₩";
 export type ProductCategory = "skincare" | "haircare" | "makeup" | "nail" | "bodycare" | "tools" | "fragrance";
@@ -17,6 +22,8 @@ export type StepCategory =
   | "cleanser" | "toner" | "essence" | "serum" | "moisturizer" | "sunscreen" | "mask_pack"
   | "shampoo" | "conditioner" | "hair_treatment";
 export type ProductChannel = "olive_young" | "korea_exclusive";
+export type PlaceSource = "curated" | "creatrip" | "kakao" | "ados" | "daiso";
+export type PlaceNameVerification = "verified" | "provisional";
 
 export type ZoneKey =
   | "myeongdong" | "hongdae" | "gangnam_station" | "apgujeong" | "cheongdam"
@@ -60,12 +67,12 @@ export function districtOf(zone: string): string {
 }
 
 export const TYPE_LABEL: Record<PlaceType, string> = {
-  olive_young: "Olive Young", skin_clinic: "Skin Clinic", hair_salon: "Hair Salon",
+  olive_young: "Olive Young", daiso: "Daiso", skin_clinic: "Skin Clinic", hair_salon: "Hair Salon",
   nail_lash: "Nail & Lash", personal_color: "Personal Color", head_spa: "Head Spa",
   mall: "Mall & Gifts", etc: "Etc",
 };
 export const TYPE_ICON: Record<PlaceType, IconName> = {
-  olive_young: "bag", skin_clinic: "cross", hair_salon: "scissors",
+  olive_young: "bag", daiso: "gift", skin_clinic: "cross", hair_salon: "scissors",
   nail_lash: "spa", personal_color: "mark", head_spa: "spa", mall: "gift", etc: "pin",
 };
 
@@ -75,15 +82,16 @@ export const OY_BRAND_GREEN = "#9bce26";
 /** Category accent colors (spec v2 §3.1) — shared by filter chips, map pins, and search rows.
  *  Mirrored as --c-* custom properties in globals.css for CSS-only consumers. */
 export const TYPE_COLOR: Record<PlaceType, string> = {
-  olive_young: "#3f9d4e", skin_clinic: "#4a7ddc", hair_salon: "#8e5bd8",
+  olive_young: "#3f9d4e", daiso: "#d64b5f", skin_clinic: "#4a7ddc", hair_salon: "#8e5bd8",
   nail_lash: "#e0559b", personal_color: "#dd9422", head_spa: "#2ba6a0",
   mall: "#a61e4d", etc: "#8b9098",
 };
 
 /** Map filter chip row (spec decision #5) — order matters. */
-export const MAP_CATEGORIES: { key: "all" | PlaceType; label: string }[] = [
+export const CATEGORY_DEFINITIONS = [
   { key: "all", label: "All" },
   { key: "olive_young", label: "Olive Young" },
+  { key: "daiso", label: "Daiso" },
   { key: "skin_clinic", label: "Skin Clinic" },
   { key: "hair_salon", label: "Hair Salon" },
   { key: "nail_lash", label: "Nail & Lash" },
@@ -91,7 +99,7 @@ export const MAP_CATEGORIES: { key: "all" | PlaceType; label: string }[] = [
   { key: "head_spa", label: "Head Spa" },
   { key: "mall", label: "Mall & Gifts" },
   { key: "etc", label: "Etc" },
-];
+] as const satisfies readonly { key: "all" | PlaceType; label: string }[];
 
 /** Per-category detail-filter service tags (spec §4.2). Keys match Place.serviceTags. */
 export const SERVICE_FILTERS: Partial<Record<PlaceType, { key: string; label: string }[]>> = {
@@ -123,6 +131,7 @@ export const SERVICE_FILTERS: Partial<Record<PlaceType, { key: string; label: st
 };
 
 export const CATEGORY_ZONES: Partial<Record<PlaceType, ZoneKey[]>> = {
+  daiso: ["myeongdong", "hongdae", "gangnam_station", "apgujeong", "cheongdam", "sinsa", "seongsu", "samsung", "jongno", "hannam", "itaewon", "hangang", "jamsil", "yeongdeungpo", "seoul_etc"],
   hair_salon: ["gangnam_station", "apgujeong", "cheongdam", "hongdae", "myeongdong", "itaewon", "seongsu", "sinsa", "samsung", "jongno", "jamsil", "yeongdeungpo", "busan"],
   skin_clinic: ["gangnam_station", "apgujeong", "cheongdam", "myeongdong"],
   head_spa: ["apgujeong", "cheongdam", "gangnam_station", "hongdae", "myeongdong", "hannam", "jongno"],
@@ -186,10 +195,11 @@ export type Place = {
   // "A drop of Seoul" import — editorial descriptions shown on the detail page.
   about?: string;
   aboutKr?: string;
+  nameVerification?: PlaceNameVerification;
   /** Provenance (data-ledger slice, 2026-08-12): where this row came from.
       "curated" rows are team-compiled and may carry unverified details —
       the detail page discloses this and hides their synthetic ratings. */
-  source?: "curated" | "creatrip" | "kakao" | "ados";
+  source?: PlaceSource;
 };
 
 const CURATED_PLACES: Place[] = [
@@ -250,7 +260,7 @@ const CURATED_PLACES: Place[] = [
   { id: "siloam-sauna", name: "Siloam Sauna", nameKr: "실로암사우나", type: "etc", zone: "myeongdong", district: "Jung-gu", priceRange: "₩", rating: 4.2, ratingCount: 450, tags: ["jjimjilbang", "sauna", "24h"], nearestStation: "Seoul Station", address: "서울 중구 중림로 49", lat: 37.5554, lng: 126.9692, hours: { open: "00:00", close: "23:59" }, stationWalk: { station: "Seoul Station", exit: "15", minutes: 5 }, badge: { cls: "info", text: "24h" } },
 ];
 
-const withSource = (list: Place[], source: NonNullable<Place["source"]>): Place[] =>
+const withSource = (list: Place[], source: PlaceSource): Place[] =>
   list.map((p) => ({
     ...p,
     source,
@@ -271,7 +281,12 @@ const withSource = (list: Place[], source: NonNullable<Place["source"]>): Place[
     ...(source === "curated" ? { rating: undefined, ratingCount: undefined } : {}),
   }));
 
-export const PLACES: Place[] = [
+/**
+ * Complete source catalogue used by the internal audit. Records stay here even
+ * when publication is paused, so a reversible safety decision never deletes
+ * source data or its human-review trail.
+ */
+export const CATALOGUE_PLACES: Place[] = [
   ...withSource(CURATED_PLACES, "curated"),
   // Creatrip hair-salon import (205 rows → scripts/build-creatrip-places.mjs).
   ...withSource(CREATRIP_PLACES, "creatrip"),
@@ -279,7 +294,93 @@ export const PLACES: Place[] = [
   ...withSource(OLIVEYOUNG_PLACES, "kakao"),
   // "A drop of Seoul" attractions + towers & markets (scripts/build-ados-places.mjs).
   ...withSource(ADOS_PLACES, "ados"),
+  // Official Seoul Daiso stores (scripts/build-daiso-places.ts).
+  ...withSource(DAISO_PLACES, "daiso"),
 ];
+
+type VerifiedPlacePatch = Partial<Pick<
+  Place,
+  "name" | "nameKr" | "address" | "lat" | "lng" | "geoSource"
+>>;
+
+/**
+ * Human-verified corrections live outside generated source files so the next
+ * importer rebuild cannot silently restore a bad listing name or pin.
+ */
+const VERIFIED_PLACE_PATCHES: Record<string, VerifiedPlacePatch> = {
+  "ados-daerim-central-market": {
+    address: "서울 영등포구 디지털로37나길 21",
+    lat: 37.4910328,
+    lng: 126.8993823,
+    geoSource: "address",
+  },
+  "ados-haebangchon-sinheungsijang": {
+    name: "Haebangchon Sinheung Market",
+    nameKr: "해방촌 신흥시장",
+    address: "서울 용산구 신흥로 95-9 2층",
+    lat: 37.5454213,
+    lng: 126.9850088,
+    geoSource: "address",
+  },
+  "ados-jongmyo-shrine": {
+    address: "서울 종로구 종로 157",
+    lat: 37.5758018,
+    lng: 126.9939555,
+  },
+  "ct-more-on-hair-seongsu-branch": {
+    name: "More On Hair Seongsu",
+    nameKr: "모어온헤어 성수점",
+    address: "서울 성동구 왕십리로 106 3층",
+    lat: 37.5470168,
+    lng: 127.0448258,
+  },
+  "ct-onyad-hair-personalized-hair-consultation-stylin": {
+    name: "ONYAD Seoul Forest",
+    nameKr: "온야드 서울숲본점",
+    address: "서울 성동구 왕십리로 66-10 2층, 3층 온야드",
+    lat: 37.5432321,
+    lng: 127.0449469,
+  },
+  "oy-동묘앞역점": {
+    name: "Olive Young Dongmyo Station",
+    nameKr: "올리브영 동묘앞역점",
+    address: "서울 종로구 종로 346",
+    lat: 37.5729505,
+    lng: 127.0162282,
+  },
+};
+
+/** Records that were manually resolved as stale, ambiguous, or duplicated. */
+const HIDDEN_PLACE_IDS = new Set([
+  "ados-daelimjung-angsijang",
+  "ados-seoul-bamdokkaebi-night-market-yeouido",
+]);
+
+/**
+ * Public discovery catalogue. Hand-curated prototype rows remain internal
+ * until venue verification; sourced rows remain public unless a human review
+ * explicitly pauses them. All public consumers import this single boundary.
+ */
+export const PLACES: Place[] = CATALOGUE_PLACES
+  .map((place) => VERIFIED_PLACE_PATCHES[place.id]
+    ? { ...place, ...VERIFIED_PLACE_PATCHES[place.id] }
+    : place)
+  .filter((place) =>
+    place.source !== "curated" &&
+    !HIDDEN_PLACE_IDS.has(place.id) &&
+    place.zone !== "busan" &&
+    place.zone !== "gyeonggi" &&
+    !/^(부산|경기)\s/.test(place.address) &&
+    Boolean(place.address) &&
+    place.geoSource !== "area"
+  );
+
+const PUBLISHED_PLACE_TYPES = new Set(PLACES.map((place) => place.type));
+
+/** Do not offer a discovery filter that can only lead to an empty result. */
+export const MAP_CATEGORIES = CATEGORY_DEFINITIONS.filter(
+  (category) => category.key === "all" || PUBLISHED_PLACE_TYPES.has(category.key),
+);
 
 // ── Products ──────────────────────────────────────────────
 export type Product = {
@@ -394,7 +495,8 @@ export const getArticle = (slug: string) => decodedFind(ARTICLES, (a) => a.slug,
 export const brandSlug = (brand: string) => brand.toLowerCase().replace(/\s+/g, "-");
 
 export const CATEGORY_META: Record<string, { title: string; eyebrow: string; line1: string; line2: string; blurb: string; types: PlaceType[] }> = {
-  spot: { title: "Browse", eyebrow: "SEOUL BEAUTY", line1: "Beauty spots", line2: "by district.", blurb: "Browse Seoul by district first, then narrow into clinics, salons, nail and color studios.", types: ["olive_young", "skin_clinic", "hair_salon", "nail_lash", "personal_color", "head_spa", "etc"] },
+  spot: { title: "Browse", eyebrow: "SEOUL BEAUTY", line1: "Beauty spots", line2: "by district.", blurb: "Browse Seoul by district first, then narrow into clinics, salons, nail and color studios.", types: ["olive_young", "daiso", "skin_clinic", "hair_salon", "nail_lash", "personal_color", "head_spa", "etc"] },
+  daiso: { title: "Daiso", eyebrow: "VALUE SHOPPING", line1: "Daiso", line2: "stores in Seoul", blurb: "Officially sourced Seoul store listings for travel essentials, gifts, and everyday finds. Products and inventory vary by store.", types: ["daiso"] },
   hair_salon: { title: "Hair Salon", eyebrow: "HAIR", line1: "Hair", line2: "Salon", blurb: "K-pop styles, color, and signature cuts. English-friendly stylists curated for visitors.", types: ["hair_salon"] },
   skin_clinic: { title: "Skin Clinic", eyebrow: "CLINIC", line1: "Skin", line2: "Clinic", blurb: "Dermatology, skin boosters, facials, and non-surgical aesthetic treatments.", types: ["skin_clinic"] },
   nail_lash: { title: "Nail & Lash", eyebrow: "NAIL · LASH", line1: "Nail &", line2: "Lash", blurb: "K-nail art, 3D gems, pedicure, lash lifts and extensions.", types: ["nail_lash"] },

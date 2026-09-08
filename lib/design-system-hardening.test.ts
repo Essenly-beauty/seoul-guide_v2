@@ -90,15 +90,16 @@ const P3_RAW_ALLOWANCES = new Map<string, number>([
   ["app/brand/[id]/page.tsx: listrow v2", 1],
   ["app/favorites/page.tsx: listrow", 1],
   ["app/favorites/page.tsx: listrow v2", 1],
-  ["app/ranking/page.tsx: listrow", 1],
-  ["app/ranking/page.tsx: listrow v2", 1],
+  ["components/ranking/ranking-page-client.tsx: listrow", 1],
+  ["components/ranking/ranking-page-client.tsx: listrow v2", 2],
   ["app/search/page.tsx: listrow v2", 5],
   // Interactive empty state and a multi-step sheet with a bespoke header/footer.
   ["components/booking/booking-sheet.tsx: overlay", 1],
   ["components/booking/booking-sheet.tsx: sheet", 1],
   // Domain rows whose multiline or full-row behavior differs from ListRow v2.
   ["components/mypage/notifications-form.tsx: listrow v2", 1],
-  ["components/place/place-detail-body.tsx: listrow", 3],
+  // Includes retailer-specific chain-wide product previews for Olive Young and Daiso.
+  ["components/place/place-detail-body.tsx: listrow", 4],
   ["components/product/product-detail-body.tsx: listrow product-detail-routine-link", 1],
 ]);
 

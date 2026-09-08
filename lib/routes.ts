@@ -16,6 +16,8 @@ export const routes = {
   // Footer 5 tabs
   map: "/map",
   ranking: "/ranking",
+  rankingRetailer: (retailer: "olive_young" | "daiso") =>
+    `/ranking?retailer=${encodeURIComponent(retailer)}`,
   blog: "/blog",
   favorites: "/favorites",
   savedPlacesMap: "/map?saved=1",
@@ -32,6 +34,8 @@ export const routes = {
 
   // Details
   shopItem: (id: string) => `/shop/${id}`,
+  daisoProduct: (productNo: string) =>
+    `/shop/${encodeURIComponent(`daiso:${productNo}`)}`,
   routine: "/shop/routine-filter",
   brand: (id: string) => `/brand/${id}`,
   placesCategory: (cat: string) => `/places/${cat}`,

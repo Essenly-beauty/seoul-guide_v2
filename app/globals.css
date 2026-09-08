@@ -1723,6 +1723,47 @@
     outline-offset: 2px;
     box-shadow: 0 0 0 6px var(--focus-ring-outer);
   }
+  /* Daiso's secondary category rail keeps the full 44px touch target while
+     painting a smaller 36px pill inside it. Focus remains on the outer button. */
+  .chip.daiso-category-chip {
+    --daiso-category-text: #b83d00;
+    --daiso-category-focus-ring: #1c2431;
+    min-height: 44px;
+    padding: 4px 0;
+    background: transparent;
+    border-color: transparent;
+    color: var(--text);
+  }
+  .daiso-category-chip-visual {
+    min-height: 36px;
+    display: inline-flex;
+    align-items: center;
+    padding: 0 12px;
+    border: 1px solid var(--border);
+    border-radius: var(--r-full);
+    font-size: 12px;
+    font-weight: 500;
+    color: inherit;
+    white-space: nowrap;
+  }
+  .chip.daiso-category-chip.selected .daiso-category-chip-visual,
+  .chip.daiso-category-chip[aria-pressed="true"] .daiso-category-chip-visual {
+    background: var(--accent-soft);
+    border-color: var(--accent);
+    color: var(--daiso-category-text);
+  }
+  [data-theme="dark"] .chip.daiso-category-chip,
+  .theme-dark .chip.daiso-category-chip {
+    --daiso-category-text: #ff8a5c;
+    --daiso-category-focus-ring: #f2f3f5;
+  }
+  .chip.daiso-category-chip:focus-visible {
+    outline: none;
+    box-shadow: none;
+  }
+  .chip.daiso-category-chip:focus-visible .daiso-category-chip-visual {
+    box-shadow: inset 0 0 0 2px var(--daiso-category-focus-ring);
+  }
   .chiprow {
     display: flex;
     gap: 8px;
@@ -2688,6 +2729,69 @@
     height: 2px;
     border-radius: 999px;
     background: var(--accent);
+  }
+  .ranking-footer {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  .ranking-footer .nav {
+    min-width: 0;
+    padding-inline: 6px;
+  }
+  .ranking-footer-retailer {
+    color: var(--dim);
+  }
+  .ranking-footer-mark {
+    display: block;
+    filter: grayscale(1);
+    opacity: 0.72;
+  }
+  .ranking-footer-olive-young {
+    /* Contrast-adjusted text companion to Olive Young Green (#9bce26).
+       The original in-app mark keeps the bright source color. */
+    --ranking-retailer-active: #526c13;
+  }
+  .ranking-footer-daiso {
+    --ranking-retailer-active: #d70011;
+  }
+  [data-theme="dark"] .ranking-footer-olive-young,
+  .theme-dark .ranking-footer-olive-young {
+    --ranking-retailer-active: #9bce26;
+  }
+  [data-theme="dark"] .ranking-footer-daiso,
+  .theme-dark .ranking-footer-daiso {
+    /* A brighter Daiso-red companion keeps 11px labels above 4.5:1 on
+       dark surfaces; the mark itself retains the documented brand red. */
+    --ranking-retailer-active: #ff5d64;
+  }
+  .ranking-footer-retailer[aria-pressed="true"] {
+    color: var(--ranking-retailer-active);
+    font-weight: 700;
+  }
+  .ranking-footer-retailer[aria-pressed="true"] .ranking-footer-mark {
+    filter: grayscale(0);
+    opacity: 1;
+  }
+  .daiso-ranking-name {
+    display: -webkit-box;
+    overflow: hidden;
+    line-height: 1.3;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+  }
+  .daiso-ranking-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+  }
+  .daiso-ranking-tags > span {
+    padding: 2px 6px;
+    border-radius: 999px;
+    background: var(--surface-hover);
+    color: var(--muted);
+    font-size: 10px;
+    font-weight: 650;
+    line-height: 1.3;
   }
 
   /* sticky book bar */
@@ -3657,7 +3761,8 @@
   .station-row.selected { background: var(--accent-soft); }
   .station-row-thumb { width: 58px; height: 58px; border-radius: 12px; flex: none; }
   .station-row-copy { display: grid; gap: 3px; min-width: 0; flex: 1; }
-  .station-row-copy > b {
+  .station-row-copy > b,
+  .station-row-copy > .place-name-primary {
     font-size: 15.5px; font-weight: 750; letter-spacing: -0.01em;
     white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
   }
@@ -3981,14 +4086,35 @@
     text-overflow: ellipsis;
     white-space: nowrap;
   }
-  .selected-place-summary-name-kr {
-    margin-top: 4px;
+  /* Shared map/place name hierarchy: the tourist-facing English name leads,
+     and the source's official Korean name stays on its own quieter line. */
+  .place-name-stack,
+  .place-detail-name-stack {
+    display: grid;
+    min-width: 0;
+    gap: 3px;
+  }
+  .place-detail-name-stack { flex: 1; }
+  .place-name-primary {
+    display: block;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .place-name-secondary {
+    display: block;
+    min-width: 0;
     overflow: hidden;
     color: var(--muted);
     font-size: 12px;
+    font-weight: 500;
     line-height: 1.35;
     text-overflow: ellipsis;
     white-space: nowrap;
+  }
+  .selected-place-summary .place-name-secondary {
+    margin-top: 4px;
   }
   .selected-place-summary-meta {
     display: flex;
@@ -4206,6 +4332,7 @@
   .mapsheet-body {
     flex: 1;
     overflow-y: auto;
+    overflow-x: hidden;
     overscroll-behavior: contain;
     padding: 0 16px calc(16px + env(safe-area-inset-bottom));
   }
@@ -4218,6 +4345,13 @@
     border-bottom: 1px solid var(--border);
   }
   .maprow:last-child { border-bottom: none; }
+  .maprow-copy {
+    flex: 1;
+    min-width: 0;
+    text-align: left;
+  }
+  .maprow .place-name-primary { font-weight: 600; }
+  .maprow .place-name-secondary { margin-top: 2px; }
   .maprow .thumb {
     width: 44px;
     height: 44px;
@@ -4574,6 +4708,7 @@
   :root {
     /* Category accents (§3.1) — keep in sync with TYPE_COLOR in lib/data.ts */
     --c-oy: #3f9d4e;
+    --c-daiso: #d64b5f;
     --c-sc: #4a7ddc;
     --c-hs: #8e5bd8;
     --c-nl: #e0559b;
@@ -5529,7 +5664,53 @@
   }
   .product-detail-hero-actions {
     top: max(14px, calc(env(safe-area-inset-top) + 6px));
+    position: absolute;
+    left: 14px;
+    right: 14px;
     z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 44px;
+  }
+  .product-detail-progress-bar {
+    display: grid;
+    grid-template-columns: 88px minmax(0, 1fr) 88px;
+    gap: 0;
+    will-change: opacity, transform;
+  }
+  .product-detail-compact-leading,
+  .product-detail-compact-actions {
+    display: flex;
+    align-items: center;
+  }
+  .product-detail-compact-leading { justify-content: flex-start; }
+  .product-detail-compact-actions { justify-content: flex-end; }
+  .product-detail-compact-title {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .product-detail-overflow {
+    position: relative;
+    flex: none;
+  }
+  .product-detail-overflow .detail-menucard a {
+    display: flex;
+    align-items: center;
+    min-height: 44px;
+    padding: 9px 10px;
+    border-radius: 8px;
+    font-size: 13.5px;
+  }
+  .product-detail-overflow .detail-menucard a:hover {
+    background: var(--surface-hover);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .product-detail-progress-bar {
+      transition: none !important;
+    }
   }
   .product-detail-title-block,
   .product-detail-title-row {
@@ -5539,6 +5720,13 @@
     min-width: 0;
     overflow-wrap: anywhere;
     letter-spacing: 0;
+  }
+  .daiso-product-title {
+    margin-top: 4px;
+    font-family: var(--sans);
+    font-size: 21px;
+    font-weight: 700;
+    line-height: 1.3;
   }
   .product-detail-meta {
     line-height: 1.35;

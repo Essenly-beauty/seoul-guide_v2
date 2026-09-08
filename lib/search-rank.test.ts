@@ -12,21 +12,21 @@ describe("rankPlaces (spec v2 §4.4)", () => {
   });
 
   it("puts an exact name match first", () => {
-    const { results } = rankPlaces("Dragon Hill Spa", ORIGIN);
-    expect(results[0]?.place.id).toBe("dragon-hill-spa");
+    const { results } = rankPlaces("Jongmyo Shrine", ORIGIN);
+    expect(results[0]?.place.id).toBe("ados-jongmyo-shrine");
     expect(results[0]?.score).toBe(100);
   });
 
   it("ranks prefix matches above substring/tag matches", () => {
-    const { results } = rankPlaces("dragon", ORIGIN);
-    expect(results[0]?.place.id).toBe("dragon-hill-spa");
+    const { results } = rankPlaces("jongmyo", ORIGIN);
+    expect(results[0]?.place.id).toBe("ados-jongmyo-shrine");
     for (let i = 1; i < results.length; i++) {
       expect(results[i - 1].score).toBeGreaterThanOrEqual(results[i].score);
     }
   });
 
   it("suggests same-category places as similar, excluding direct hits", () => {
-    const { results, similar } = rankPlaces("dragon hill", ORIGIN);
+    const { results, similar } = rankPlaces("jongmyo shrine", ORIGIN);
     const topType = results[0].place.type;
     const hitIds = new Set(results.map((r) => r.place.id));
     for (const s of similar) {
@@ -76,6 +76,10 @@ describe("route deep links (spec v2 §6)", () => {
 });
 
 describe("TYPE_COLOR", () => {
+  it("gives Daiso its category accent color", () => {
+    expect(TYPE_COLOR.daiso).toBe("#d64b5f");
+  });
+
   it("covers every map category", () => {
     for (const c of MAP_CATEGORIES) {
       if (c.key === "all") continue;

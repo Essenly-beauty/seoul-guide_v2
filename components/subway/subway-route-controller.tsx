@@ -9,8 +9,9 @@ import { Button } from "@/components/ui/button";
 import { IconButton } from "@/components/ui/icon-button";
 import { RatingLine } from "@/components/ui/rating-line";
 import { PRODUCTS, TYPE_LABEL, type Place } from "@/lib/data";
-import { formatDistance, googleDirectionsUrl, haversineKm, naverMapUrl } from "@/lib/geo";
+import { formatDistance, googleDirectionsUrl, haversineKm } from "@/lib/geo";
 import { routes } from "@/lib/routes";
+import type { SubwayPlaceCategory } from "@/lib/subway-place-filter";
 import {
   LINE_META,
   STATIONS,
@@ -28,7 +29,6 @@ import {
 } from "@/lib/subway";
 import { RouteStrip } from "./route-strip";
 
-export type SubwayPlaceCategory = "all" | "beauty" | "olive_young" | "personal_color" | "mall" | "daiso";
 /** Route-panel snap tiers — content is curated per tier, not just clipped. */
 export type SubwaySnap = "compact" | "half" | "full";
 
@@ -332,14 +332,14 @@ function StationCombobox({
   );
 }
 
-const CATEGORY_OPTIONS: { key: SubwayPlaceCategory; label: string }[] = [
-  { key: "all", label: "All" },
-  { key: "beauty", label: "Beauty" },
-  { key: "olive_young", label: "Olive Young" },
-  { key: "personal_color", label: "Personal Color" },
-  { key: "mall", label: "Mall & Gifts" },
-  { key: "daiso", label: "Daiso" },
-];
+const EMPTY_CATEGORY_LABEL: Record<SubwayPlaceCategory, string> = {
+  all: "places",
+  beauty: "beauty places",
+  olive_young: "Olive Young stores",
+  personal_color: "personal color studios",
+  mall: "malls and gift shops",
+  daiso: "Daiso stores",
+};
 
 function radiusLabel(radiusKm: number) {
   return radiusKm < 1 ? `${Math.round(radiusKm * 1000)} m` : `${radiusKm} km`;
@@ -927,7 +927,10 @@ export function SubwayRouteController({
                       >
                         <ImgPh className="station-row-thumb" />
                         <span className="station-row-copy">
-                          <b>{place.name}</b>
+                          <span className="place-name-primary">{place.name}</span>
+                          {place.nameKr !== place.name && (
+                            <span className="place-name-secondary" lang="ko">{place.nameKr}</span>
+                          )}
                           <span className="station-row-meta">
                             {TYPE_LABEL[place.type]}
                             {place.source !== "curated" && place.rating !== undefined && (
@@ -1190,7 +1193,10 @@ export function SubwayRouteController({
                   >
                     <ImgPh className="station-row-thumb" />
                     <span className="station-row-copy">
-                      <b>{place.name}</b>
+                      <span className="place-name-primary">{place.name}</span>
+                      {place.nameKr !== place.name && (
+                        <span className="place-name-secondary" lang="ko">{place.nameKr}</span>
+                      )}
                       <span className="station-row-meta">
                         {TYPE_LABEL[place.type]}
                         {place.source !== "curated" && place.rating !== undefined && (
@@ -1202,22 +1208,9 @@ export function SubwayRouteController({
                   </button>
                 ))}
               </div>
-            ) : category === "daiso" ? (
-              <div className="subway-empty-state" role="status">
-                <b>Daiso location data is not connected yet</b>
-                <p>Search around {activeStation.name} Station in Naver Map.</p>
-                <Button
-                  size="sm"
-                  className="auto"
-                  href={naverMapUrl(`다이소 ${activeStation.nameKr}역`)}
-                  external
-                >
-                  Search Naver Map
-                </Button>
-              </div>
             ) : (
               <div className="subway-empty-state" role="status">
-                <b>No {category === "all" ? "places" : category === "beauty" ? "beauty places" : "Olive Young stores"} in our current data</b>
+                <b>No {EMPTY_CATEGORY_LABEL[category]} in our current data</b>
                 <p>Nothing is listed within {radiusLabel(radiusKm)} of {activeStation.name} Station.</p>
                 <div className="row" style={{ gap: 8, justifyContent: "center" }}>
                   {radiusKm < 2 && <Button variant="secondary" size="sm" onClick={() => onRadius(2)}>Expand to 2 km</Button>}

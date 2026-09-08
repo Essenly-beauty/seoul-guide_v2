@@ -9,6 +9,7 @@ import { Icon } from "@/components/icon";
 import { TYPE_ICON, TYPE_LABEL, zoneShort, type Place } from "@/lib/data";
 import { haversineKm, type LatLng } from "@/lib/geo";
 import { visibleMapAnchor } from "@/lib/map-camera";
+import { groupPlacesByCoordinate, type PlaceCoordinateGroup } from "@/lib/place-coordinate-groups";
 import { useTheme } from "@/components/theme/theme-provider";
 import { LINE_META, STATIONS, loadStationExits, stationExits } from "@/lib/subway";
 
@@ -17,6 +18,8 @@ export type MapViewProps = {
   places: Place[];
   selectedId: string | null;
   onSelect: (id: string | null) => void;
+  /** Opens a branch chooser when multiple official places share one pin. */
+  onSelectGroup: (ids: string[]) => void;
   userLoc: LatLng | null;
   /** Device heading in degrees clockwise from north, when available. */
   userHeading?: number | null;
@@ -76,6 +79,7 @@ type PinMode = "dot" | "badge";
     top-rated badge currently in view (see heroId). */
 const MUTED_PIN_COLOR: Record<Place["type"], string> = {
   olive_young: "#75854a",
+  daiso: "#895d65",
   skin_clinic: "#54687f",
   hair_salon: "#6d6390",
   nail_lash: "#8f6076",
@@ -88,6 +92,7 @@ const MUTED_PIN_COLOR: Record<Place["type"], string> = {
     calm, focus mode lights the chosen category up (user decision 2026-08-02). */
 const VIVID_PIN_COLOR: Record<Place["type"], string> = {
   olive_young: "#9bce26",
+  daiso: "#d64b5f",
   skin_clinic: "#4a7ddc",
   hair_salon: "#8e5bd8",
   nail_lash: "#e0559b",
@@ -169,6 +174,20 @@ function clusterIcon(count: number) {
     iconAnchor: [22, 22],
   });
   clusterIconCache.set(count, icon);
+  return icon;
+}
+
+const coordinateGroupIconCache = new Map<number, L.DivIcon>();
+function coordinateGroupIcon(count: number) {
+  const hit = coordinateGroupIconCache.get(count);
+  if (hit) return hit;
+  const icon = L.divIcon({
+    className: "map-anchor",
+    html: `<div class="pin-hitarea"><div class="pin-cluster pin-coordinate-group">${count}</div></div>`,
+    iconSize: [44, 44],
+    iconAnchor: [22, 22],
+  });
+  coordinateGroupIconCache.set(count, icon);
   return icon;
 }
 
@@ -438,7 +457,22 @@ function labelMarker(marker: L.Marker, label: string, selected?: boolean) {
   else element.setAttribute("aria-pressed", String(selected));
 }
 
-export default function MapView({ center, places, selectedId, onSelect, userLoc, userHeading, flyTarget, bottomInsetRatio, bottomInsetPx, focusZoom, focusYBias, onUserMove, getBounds, radiusCircle, routePath, vividPins = false, onStationClick }: MapViewProps) {
+function placeAccessibleName(place: Place) {
+  return place.nameKr && place.nameKr !== place.name
+    ? `${place.name}, ${place.nameKr}`
+    : place.name;
+}
+
+function coordinateGroupAccessibleName(group: PlaceCoordinateGroup, places: Place[]) {
+  const names = group.ids
+    .map((id) => places.find((place) => place.id === id))
+    .filter((place): place is Place => Boolean(place))
+    .map((place) => placeAccessibleName(place));
+  const countLabel = `${group.ids.length} places at this pin`;
+  return names.length > 0 ? `${countLabel}: ${names.join("; ")}` : countLabel;
+}
+
+export default function MapView({ center, places, selectedId, onSelect, onSelectGroup, userLoc, userHeading, flyTarget, bottomInsetRatio, bottomInsetPx, focusZoom, focusYBias, onUserMove, getBounds, radiusCircle, routePath, vividPins = false, onStationClick }: MapViewProps) {
   // Warm the tile CDN's TLS handshake before Leaflet asks for the first
   // tile — the tiles are the page's LCP element (React 19 dedupes these).
   for (const s of ["a", "b", "c", "d"]) preconnect(`https://${s}.basemaps.cartocdn.com`);
@@ -452,20 +486,31 @@ export default function MapView({ center, places, selectedId, onSelect, userLoc,
   const mapRef = useRef<L.Map | null>(null);
   const meIcon = useMemo(() => meIconForHeading(userHeading), [userHeading]);
 
-  // §4.2 Z ≤ 13: bucket into a lat/lng grid; cells with ≥5 places collapse into
-  // one cluster pin. The selected place never clusters — it must stay a badge.
+  // Exact fixed-six matches are not spatial-density clusters: they are distinct
+  // official branches sharing one real pin. Keep them out of the zoom cluster
+  // pass so their branch chooser stays reachable at every zoom level.
+  const { markerCandidates, coordinateGroups } = useMemo(() => {
+    const grouped = groupPlacesByCoordinate(places.filter((place) => place.id !== selectedId));
+    const coordinateGroups = grouped.filter((group) => group.ids.length > 1);
+    const singletonIds = new Set(grouped.filter((group) => group.ids.length === 1).map((group) => group.ids[0]));
+    const markerCandidates = places.filter((place) => place.id === selectedId || singletonIds.has(place.id));
+    return { markerCandidates, coordinateGroups };
+  }, [places, selectedId]);
+
+  // §4.2 Z ≤ 13: bucket remaining single pins into a lat/lng grid; cells with
+  // ≥5 places collapse into one cluster pin. The selected place never clusters.
   const { singles, clusters } = useMemo(() => {
-    if (zoom > CLUSTER_MAX_ZOOM) return { singles: places, clusters: [] as { lat: number; lng: number; count: number }[] };
+    if (zoom > CLUSTER_MAX_ZOOM) return { singles: markerCandidates, clusters: [] as { lat: number; lng: number; count: number }[] };
     const size = cellSize(zoom);
     const cells = new Map<string, Place[]>();
-    for (const p of places) {
+    for (const p of markerCandidates) {
       if (p.id === selectedId) continue;
       const key = `${Math.floor(p.lat / size)}:${Math.floor(p.lng / size)}`;
       const cell = cells.get(key);
       if (cell) cell.push(p);
       else cells.set(key, [p]);
     }
-    const singles: Place[] = places.filter((p) => p.id === selectedId);
+    const singles: Place[] = markerCandidates.filter((p) => p.id === selectedId);
     const clusters: { lat: number; lng: number; count: number }[] = [];
     for (const members of cells.values()) {
       if (members.length >= CLUSTER_MIN) {
@@ -479,7 +524,7 @@ export default function MapView({ center, places, selectedId, onSelect, userLoc,
       }
     }
     return { singles, clusters };
-  }, [places, selectedId, zoom]);
+  }, [markerCandidates, selectedId, zoom]);
 
   // §4.2 badge collision pass: project badge candidates to container pixels and
   // greedily keep the highest-rated one per overlap region; losers demote to dots.
@@ -510,6 +555,19 @@ export default function MapView({ center, places, selectedId, onSelect, userLoc,
       return singles;
     }
   }, [singles, viewVersion, center]);
+
+  const coordinateGroupsInView = useMemo(() => {
+    const map = mapRef.current;
+    if (!map || viewVersion < 0) {
+      return coordinateGroups.filter((group) => haversineKm(center, group) < 4);
+    }
+    try {
+      const bounds = map.getBounds().pad(0.3);
+      return coordinateGroups.filter((group) => bounds.contains([group.lat, group.lng]));
+    } catch {
+      return coordinateGroups;
+    }
+  }, [center, coordinateGroups, viewVersion]);
 
   // Also picks the accent "hero": the top-rated badge inside the current view.
   // Together with the selected pin that caps map orange at two elements.
@@ -580,12 +638,12 @@ export default function MapView({ center, places, selectedId, onSelect, userLoc,
             key={`${p.id}-${mode}-${selected}-${hero}-${vividPins}`}
             position={[p.lat, p.lng]}
             icon={pinIcon(p, selected, mode, hero, vividPins)}
-            title={`${p.name}, ${TYPE_LABEL[p.type]}`}
-            alt={`${p.name}, ${TYPE_LABEL[p.type]}`}
+            title={`${placeAccessibleName(p)}, ${TYPE_LABEL[p.type]}`}
+            alt={`${placeAccessibleName(p)}, ${TYPE_LABEL[p.type]}`}
             eventHandlers={{
               add: (event) => labelMarker(
                 event.target as L.Marker,
-                `${p.name}, ${TYPE_LABEL[p.type]}, ${zoneShort(p.zone)}, ${p.rating ? `${p.rating} out of 5 stars` : "unrated"}`,
+                `${placeAccessibleName(p)}, ${TYPE_LABEL[p.type]}, ${zoneShort(p.zone)}, ${p.rating ? `${p.rating} out of 5 stars` : "unrated"}`,
                 selected,
               ),
               click: () => onSelect(p.id),
@@ -621,7 +679,7 @@ export default function MapView({ center, places, selectedId, onSelect, userLoc,
         onZoom={setZoom}
         onMap={handleMap}
         onView={handleView}
-        onBlankTap={() => { if (selectedId) onSelect(null); }}
+        onBlankTap={() => onSelect(null)}
       />
       {rotationEnabled && (
         <>
@@ -689,6 +747,20 @@ export default function MapView({ center, places, selectedId, onSelect, userLoc,
         />
       ))}
       {markers}
+      {coordinateGroupsInView.map((group: PlaceCoordinateGroup) => (
+        <Marker
+          key={`coordinate-group-${group.key}-${group.ids.join("-")}`}
+          position={[group.lat, group.lng]}
+          icon={coordinateGroupIcon(group.ids.length)}
+          title={coordinateGroupAccessibleName(group, places)}
+          alt={coordinateGroupAccessibleName(group, places)}
+          eventHandlers={{
+            add: (event) => labelMarker(event.target as L.Marker, coordinateGroupAccessibleName(group, places)),
+            click: () => onSelectGroup(group.ids),
+          }}
+          zIndexOffset={100}
+        />
+      ))}
       {clusters.map((c) => (
         <Marker
           key={`cluster-${c.lat.toFixed(4)}-${c.lng.toFixed(4)}-${c.count}`}
