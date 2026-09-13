@@ -202,12 +202,19 @@ describe("map place selection wiring", () => {
     expect(sheetSource).not.toMatch(/min walk/);
   });
 
-  it("shows a store thumbnail when available and keeps the pin as an honest fallback", () => {
-    expect(sheetSource).toContain("p.photoUrl ? (");
+  it("shows a store thumbnail when available, else the brand mark or the category's map-pin glyph", () => {
+    expect(sheetSource).toContain("function MapRowThumb");
+    expect(sheetSource).toContain("{placePhoto ? (");
     expect(sheetSource).toContain('className="maprow-photo"');
     expect(sheetSource).toContain('alt=""');
-    expect(sheetSource).toContain('className="maprow-photo-fallback"');
-    expect(sheetSource).toContain('<Icon name="pin"');
+    // Known retailers get their own mark (public/brands), never a generic pin.
+    expect(sheetSource).toContain("const brandMark = BRAND_MARK_SRC[place.type]");
+    expect(sheetSource).toContain('<img className="maprow-brand-mark" src={brandMark} alt="" />');
+    // Everything else mirrors the map pin: TYPE_ICON glyph in TYPE_COLOR.
+    expect(sheetSource).toContain('className="maprow-photo-fallback" style={{ color: TYPE_COLOR[place.type] }}');
+    expect(sheetSource).toContain("<Icon name={TYPE_ICON[place.type]}");
+    // Both row kinds share the one component.
+    expect(sheetSource.match(/<MapRowThumb place=/g)).toHaveLength(2);
   });
 
   it("reuses the direct place-detail body and CTA at the full snap", () => {
@@ -262,7 +269,8 @@ describe("map place selection wiring", () => {
   it("uses a fast transform-only snap animation without changing selected-sheet height", () => {
     const sheetRule = cssSource.match(/\.mapsheet \{[\s\S]*?\n  \}/)?.[0] ?? "";
 
-    expect(sheetRule).toContain("transition: transform 0.24s cubic-bezier(0.22, 1, 0.36, 1)");
+    // iOS sheet curve for programmatic snaps; a finger release uses a velocity-driven spring instead
+    expect(sheetRule).toContain("transition: transform 0.42s cubic-bezier(0.32, 0.72, 0, 1)");
     expect(sheetRule).not.toMatch(/transition:\s*(?:all|height)/);
     expect(sheetRule).toContain("--sheet-peek-height: 62px");
     expect(cssSource).toMatch(/\.mapsheet\.has-selection\s*\{[^}]*height:\s*100%;/);
@@ -271,7 +279,9 @@ describe("map place selection wiring", () => {
     expect(cssSource).not.toMatch(/\.mapsheet\.peek\s*\{[^}]*height:\s*auto/);
     // measured from content now — 136px clipped the category line whenever a
     // long name wrapped to two lines (owner report 2026-08-23)
-    expect(sheetSource).toContain("peek: Math.max(0, h - peekContentHeight())");
+    expect(sheetSource).toContain("peek: Math.max(0, h - peekVisibleHeight())");
+    // …and the class rule is handed that measurement so settle target and resting position agree
+    expect(sheetSource).toContain('el.style.setProperty("--selected-sheet-peek-height", `${peekVisibleHeight()}px`)');
     expect(cssSource).toContain(".mapsheet.dragging { transition: none; }");
   });
 
@@ -283,13 +293,37 @@ describe("map place selection wiring", () => {
     expect(screenSource).not.toContain('showSelectedCallout=');
   });
 
-  it("snaps a released drag to the nearest full, half, or peek height", () => {
-    const releaseHandler = sheetSource.match(/const onPointerUp[\s\S]*?\n  };/)?.[0] ?? "";
+  it("releases a drag by velocity into a spring settle, then hands the position back to the snap classes", () => {
+    const releaseHandler = sheetSource.match(/const finishGesture[\s\S]*?\n  };/)?.[0] ?? "";
+    expect(releaseHandler).toContain("resolveReleaseSnap({ offsets: so, position: g.position, velocity })");
+    expect(releaseHandler).toContain("settleTo(target, so[target], g.position, velocity)");
+    expect(releaseHandler).not.toContain("setOffset(");
 
-    expect(releaseHandler).toContain("const nearest");
-    expect(releaseHandler).toContain("setSnap(nearest)");
-    expect(releaseHandler).toContain("setOffset(null)");
-    expect(releaseHandler).not.toContain("setOffset(d.last)");
+    const commit = sheetSource.match(/const commitSnap[\s\S]*?\n  };/)?.[0] ?? "";
+    expect(commit).toContain("setOffset(null)");
+    expect(commit).toContain("setSnap(target)");
+    expect(commit).toContain("setDragging(false)");
+
+    // The settle is a spring that inherits the release velocity — not a fixed-duration transition.
+    expect(sheetSource).toContain("springKeyframes({ from, to, velocity })");
+    expect(sheetSource).toContain('easing: "linear", fill: "forwards"');
+    expect(sheetSource).toContain('"(prefers-reduced-motion: reduce)"');
+  });
+
+  it("drags from anywhere on the sheet without stealing taps or the body's scroll", () => {
+    // The whole sheet listens; the handle keeps only its click/keyboard affordance.
+    expect(sheetSource).toContain("onPointerDown={onSheetPointerDown}");
+    expect(sheetSource).toContain("onClickCapture={onSheetClickCapture}");
+    expect(sheetSource).not.toContain("onPointerDown={onPointerDown}");
+    // A drag is confirmed only after slop, and only then captures the pointer.
+    expect(sheetSource).toContain("if (Math.abs(dy) < DRAG_SLOP) return;");
+    expect(sheetSource).toContain("el.setPointerCapture(e.pointerId)");
+    // Scroll vs sheet: pull down from the top, or lift a sheet whose content cannot scroll.
+    expect(sheetSource).toContain("|| (dy > 0 && atTop)");
+    expect(sheetSource).toContain('|| (dy < 0 && snap !== "full" && (!canScroll || selectedPlace !== null))');
+    // Native scroll is held off only while the sheet owns the touch.
+    expect(sheetSource).toContain('el.addEventListener("touchmove", onTouchMove, { passive: false })');
+    expect(sheetSource).toContain("rubberBand(g.startOffset + (e.clientY - g.y0), g.min, g.max, g.dimension)");
   });
 
   it("offers a location retry and a settings guidance link when location is off", () => {
@@ -358,12 +392,46 @@ describe("selected-pin sheet owns the bottom of the screen (Kakao pattern)", () 
     expect(summary).toContain("photos.length > 0");
     expect(summary).toContain("Photos coming soon");
   });
+
+  it("lets half-sheet photos consume the visible space above the action bar", () => {
+    expect(styles).toContain("--selected-action-bar-height:");
+    expect(styles).toContain(".mapsheet.half.has-selection .mapsheet-detail-body {");
+    expect(styles).toContain("flex-basis: calc(48% - 44px - var(--selected-action-bar-height));");
+    expect(styles).toContain(".mapsheet.half.has-selection .selected-place-summary.half {");
+    expect(styles).toContain("flex: 1;");
+    expect(styles).toContain(".mapsheet.half.has-selection .selected-place-summary-media-rail {");
+    expect(styles).toContain("min-height: 0;");
+    expect(styles).toContain("height: auto;");
+  });
+
+  it("anchors photos to the flex-sized half-sheet tiles", () => {
+    const tileRule = styles.match(
+      /\.selected-place-summary-media-rail > \.selected-place-summary-media \{([\s\S]*?)\}/,
+    )?.[1] ?? "";
+    const imageRule = styles.match(
+      /\.selected-place-summary-media-rail > \.selected-place-summary-media img \{([\s\S]*?)\}/,
+    )?.[1] ?? "";
+
+    expect(tileRule).toContain("position: relative;");
+    expect(imageRule).toContain("position: absolute;");
+    expect(imageRule).toContain("inset: 0;");
+  });
+
+  it("caps the half-sheet photo rail at the full-detail collage height", () => {
+    const halfRailRule = styles.match(
+      /\.mapsheet\.half\.has-selection \.selected-place-summary-media-rail \{([\s\S]*?)\}/,
+    )?.[1] ?? "";
+
+    expect(halfRailRule).toContain("max-height: 170px;");
+  });
 });
 
 describe("place photo ingestion", () => {
   it("attaches generated photos to places without touching each import", () => {
     const data = readFileSync(new URL("../lib/data.ts", import.meta.url), "utf8");
     expect(data).toContain("PLACE_PHOTOS[p.id]");
+    expect(data).toContain("PLACE_PHOTO_THUMBNAILS[p.id]");
+    expect(data).toContain("photoThumbnail?: string");
     // a place with no photo must stay undefined, not become an empty array,
     // so the sheet falls to the honest empty state
     expect(data).toContain("PLACE_PHOTOS[p.id]?.length ?");
@@ -375,6 +443,29 @@ describe("place photo ingestion", () => {
       expect(list.length, id).toBeGreaterThan(0);
       for (const src of list) expect(src.startsWith("/places/"), src).toBe(true);
     }
+  });
+
+  it("uses dedicated small thumbnails for map rows and defers their decoding offscreen", () => {
+    const sheet = readFileSync(new URL("../components/map/map-sheet.tsx", import.meta.url), "utf8");
+    expect(sheet).toContain("const placePhoto = place.photoThumbnail ?? place.photos?.[0] ?? place.photoUrl");
+    expect(sheet).toContain('loading="lazy"');
+    expect(sheet).toContain('decoding="async"');
+    expect(sheet).toContain("width={84}");
+    expect(sheet).toContain("height={84}");
+  });
+
+  it("loads only the initially visible selected-place photos eagerly", () => {
+    const summary = readFileSync(new URL("../components/map/selected-place-summary.tsx", import.meta.url), "utf8");
+    expect(summary).toContain('loading={i < 2 ? "eager" : "lazy"}');
+    expect(summary).toContain('decoding="async"');
+  });
+
+  it("renders real place photos in both the detail hero and Photos section", () => {
+    const detail = readFileSync(new URL("../components/place/place-detail-body.tsx", import.meta.url), "utf8");
+    expect(detail).toContain("function PlacePhotoCollage");
+    expect(detail).toContain("photos.slice(0, 3)");
+    expect(detail).toContain("<PlacePhotoCollage photos={place.photos ?? []}");
+    expect(detail).toContain("<PhotosSection place={place}");
   });
 });
 

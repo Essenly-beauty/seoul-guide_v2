@@ -4170,10 +4170,15 @@
   }
   .selected-place-summary-media-rail::-webkit-scrollbar { display: none; }
   .selected-place-summary-media-rail > .selected-place-summary-media {
+    position: relative;
     flex: 0 0 calc(50% - 4px);
     min-height: 0;
     height: clamp(112px, 15vh, 132px);
     scroll-snap-align: start;
+  }
+  .selected-place-summary-media-rail > .selected-place-summary-media img {
+    position: absolute;
+    inset: 0;
   }
   /* the empty state is one honest block, not two decoy tiles */
   .selected-place-summary-media-grid.is-empty .selected-place-summary-media {
@@ -4294,7 +4299,11 @@
     flex-direction: column;
     height: 82%;
     transform: translateY(calc(100% - var(--sheet-peek-height)));
-    transition: transform 0.24s cubic-bezier(0.22, 1, 0.36, 1);
+    /* Programmatic snaps (handle tap, Map tab, selecting a pin) ride the iOS
+       sheet curve: quick off the line, long soft landing. A finger release
+       uses a spring driven from the component instead. */
+    transition: transform 0.42s cubic-bezier(0.32, 0.72, 0, 1);
+    will-change: transform;
   }
   .mapsheet-handle { touch-action: none; }
   .mapsheet.selected { transform: translateY(calc(100% - 72px)); }
@@ -4304,6 +4313,10 @@
      transform changes, so expanding never jumps while its content swaps. */
   .mapsheet.has-selection {
     --selected-sheet-peek-height: 136px;
+    /* 44px controls + top/bottom padding + hairline. Keeping this in one
+       variable lets the half-sheet media use only the space that is truly
+       visible above the independently positioned action bar. */
+    --selected-action-bar-height: calc(55px + max(12px, env(safe-area-inset-bottom)));
     height: 100%;
   }
   .mapsheet.half.has-selection {
@@ -4337,7 +4350,12 @@
     padding: 0 16px calc(16px + env(safe-area-inset-bottom));
   }
   .maprow {
+    /* The media square spans the row's full height: a four-line row (label,
+       name, Korean name, meta) measures 81–83px, so the square sets the row
+       height and shorter copy centres against it (owner request 2026-09-12). */
+    --maprow-thumb: 84px;
     display: flex;
+    align-items: center;
     gap: 12px;
     width: 100%;
     padding: 10px 0;
@@ -4353,9 +4371,9 @@
   .maprow .place-name-primary { font-weight: 600; }
   .maprow .place-name-secondary { margin-top: 2px; }
   .maprow .thumb {
-    width: 44px;
-    height: 44px;
-    border-radius: var(--r-sm);
+    width: var(--maprow-thumb);
+    height: var(--maprow-thumb);
+    border-radius: var(--r-md);
     flex: none;
     overflow: hidden;
     background: var(--surface-hover);
@@ -4373,6 +4391,18 @@
     display: grid;
     place-items: center;
     color: var(--accent);
+  }
+  /* Brand mark ≈ 46% of the square; category glyph a touch smaller so its
+     lighter stroke reads at the same visual weight. */
+  .maprow-brand-mark {
+    display: block;
+    width: 46%;
+    height: 46%;
+  }
+  .maprow-photo-fallback .maprow-fallback-glyph {
+    width: 34px;
+    height: 34px;
+    stroke-width: 1.8;
   }
   .maprow-meta {
     display: flex;
@@ -4409,6 +4439,41 @@
      visitor commits to the full place route. */
   .mapsheet-detail-body {
     touch-action: pan-y;
+  }
+  /* The selected half sheet exposes 48% of its full-height surface. Give its
+     body exactly that visible height minus the grip and fixed action bar, then
+     let the photo rail absorb every remaining pixel below the variable-height
+     title/address block. This removes the hard-coded photo height and the
+     empty band it left on taller screens. */
+  .mapsheet.half.has-selection .mapsheet-detail-body {
+    display: flex;
+    flex-direction: column;
+    flex-basis: calc(48% - 44px - var(--selected-action-bar-height));
+    min-height: 0;
+    padding-bottom: 0;
+  }
+  .mapsheet.half.has-selection .mapsheet-view-enter {
+    display: flex;
+    flex: 1;
+    min-height: 0;
+  }
+  .mapsheet.half.has-selection .selected-place-summary.half {
+    display: flex;
+    flex: 1;
+    min-height: 0;
+    flex-direction: column;
+  }
+  .mapsheet.half.has-selection .selected-place-summary-media-rail {
+    flex: 1;
+    min-height: 0;
+    /* Match the full-detail collage instead of magnifying two preview tiles
+       to consume every spare pixel on tall viewports. */
+    max-height: 170px;
+  }
+  .mapsheet.half.has-selection .selected-place-summary-media-rail > .selected-place-summary-media {
+    align-self: stretch;
+    height: auto;
+    min-height: 96px;
   }
   .mapsheet.selected .mapsheet-body { display: none; }
   .mapsheet.peek .mapsheet-body {
@@ -5230,8 +5295,10 @@
     border-color: var(--accent);
     color: #fff;
   }
-  /* B-1 half sheet ≈ 50% of the screen (board §4.5); list mode shares the snap */
-  .mapsheet.half { transform: translateY(42%); }
+  /* B-1 half sheet ≈ 50% of the screen (board §4.5); list mode shares the snap.
+     The offset is shared with the list body's spacer (see the reachability
+     block) so the two cannot drift apart. */
+  .mapsheet.half { transform: translateY(var(--sheet-half-offset, 42%)); }
 }
 
 /* v2 soft icon buttons — reference-app CTA bar (soft fill, no border, brand-color glyph) */
@@ -6043,18 +6110,28 @@
     -webkit-overflow-scrolling: touch;
   }
   /* The transformed sheet used to fake reachability with a large blank
-     tail. Give the list its actual visible viewport instead, so scrolling
-     stops at the final row while the bottom navigation remains clear. */
+     tail, then with a `vh` guess at the visible height. Both left a strip of
+     empty sheet between the last row and the tab bar (36px at half, 13px at
+     full — owner report 2026-09-12). Size the list from the sheet's own
+     geometry instead: the body fills the sheet, and the half snap adds a
+     spacer exactly as tall as the part translated below the screen, so the
+     scrollable area ends where the visitor can actually see it. The tab bar
+     is a sibling below the map screen, so it needs no clearance here and it
+     already carries the safe-area inset. */
+  .mapsheet {
+    --sheet-half-offset: 42%;
+  }
+  .mapsheet-handle {
+    flex: none; /* a long list must never squeeze the grip and its caption */
+  }
   .mapsheet:not(.has-selection) .mapsheet-body {
-    flex: 0 1 auto;
-  }
-  .mapsheet.half:not(.has-selection) .mapsheet-body {
-    max-height: calc(48vh - 128px - env(safe-area-inset-bottom));
+    flex: 1 1 0;
+    min-height: 0;
     padding-bottom: 12px;
   }
-  .mapsheet.full:not(.has-selection) .mapsheet-body {
-    max-height: calc(82vh - 128px - env(safe-area-inset-bottom));
-    padding-bottom: 12px;
+  .mapsheet.half:not(.has-selection)::after {
+    content: "";
+    flex: 0 0 var(--sheet-half-offset);
   }
   .maprow.on {
     background: var(--accent-soft);
@@ -6066,10 +6143,36 @@
   }
 }
 
-/* Direct sheet drag: no transition while the finger drives the transform;
-   release returns to the nearest full / half / peek snap. */
+/* Direct sheet drag: no transition while the finger (or the spring that
+   inherits its velocity) drives the transform; the snap classes take over
+   only once the sheet has come to rest. */
 @layer components {
   .mapsheet.dragging { transition: none; }
+  .mapsheet.dragging {
+    user-select: none;
+    -webkit-user-select: none;
+  }
+  /* While the finger has the list, let it fill the whole sheet so lifting
+     towards full reveals more rows instead of a blank tail. */
+  .mapsheet.half.dragging:not(.has-selection)::after { flex-basis: 0; }
+  /* A view that replaces another (summary ↔ detail ↔ compact) fades in
+     while the sheet settles instead of cutting. */
+  .mapsheet-view-enter {
+    animation: mapsheet-view-in 0.22s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  }
+  @keyframes mapsheet-view-in {
+    from { opacity: 0; transform: translateY(6px); }
+    to { opacity: 1; transform: none; }
+  }
+  /* Map actions ride along with the sheet's snap instead of jumping. */
+  .map-fab {
+    transition: bottom 0.42s cubic-bezier(0.32, 0.72, 0, 1), opacity 0.18s ease, visibility 0.18s;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .mapsheet,
+    .map-fab { transition: none; }
+    .mapsheet-view-enter { animation: none; }
+  }
 }
 
 /* Place detail sits on surface white end-to-end — without this the title

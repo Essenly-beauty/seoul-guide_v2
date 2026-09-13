@@ -2,6 +2,19 @@
 
 ## Outcome
 
+- UPDATED 2026-09-12: all 613 owner-provided photos from 160 source folders are
+  published across 159 canonical map places. SPA 1899/1978 are one current
+  venue, so no duplicate pin was created.
+- UPDATED 2026-09-12: the public map contains 845 places from an internal
+  catalogue of 962. Ninety-nine public places have explicitly provisional,
+  neighborhood-level pins and visible disclosure; unverified ratings, review
+  counts, prices, hours, and English-service claims remain unset.
+- UPDATED 2026-09-12: current place audit reports `total=962`,
+  `approximatePins=138`, `missingHours=305`, `cachedKakao=364`,
+  `naverEnglishUnchecked=945`, and `uncheckedIdentity=944`.
+- PASS 2026-09-12: `npm run verify:predeploy` completed end to end: typecheck,
+  ESLint, 69 Vitest files with 712/712 tests, current place-audit reports, and
+  the Next.js production build with 44/44 static pages generated.
 - PASS 2026-09-07: `npm run verify:predeploy` completed end to end.
 - PASS 2026-09-07: TypeScript typecheck and ESLint, with no warnings or errors.
 - PASS 2026-09-07: full Vitest reported 65 files and 688/688 tests passed.
@@ -140,20 +153,24 @@ Run these against the exact deployment SHA before public launch:
 
 ## Data quality gates
 
-The generated place audit currently reports:
+The generated place audit currently reports (refreshed 2026-09-12):
 
-- 851 total places, including 251 official Seoul Daiso stores;
-- 8 manually corroborated identity matches and 833 unchecked identities;
+- 962 total places, including 251 official Seoul Daiso stores, 15 newly
+  admitted owner-photo venues with independently reviewed address-level pins,
+  and 96 owner-photo venues with explicitly provisional neighborhood pins;
+- 8 manually corroborated identity matches and 944 unchecked identities;
 - 364 cached Kakao-hours records kept as supporting evidence only, not identity matches;
-- 2 matched and 834 unchecked Naver English-name searches;
+- 2 matched and 945 unchecked Naver English-name searches;
 - 172 promotional/marketing-style English display names;
-- 115 missing Korean listing names;
+- 119 missing Korean listing names;
 - 239 generated English romanizations needing review;
-- 251 provisional English place names;
-- 42 approximate pins and 36 places sharing an exact coordinate;
+- 347 provisional English place names;
+- 138 approximate pins and 38 places sharing an exact coordinate;
 - 16 places outside the Seoul service area (one source row has a misclassified zone);
-- 194 missing opening-hour records;
-- 0 of 851 places with a confirmed licensed photo.
+- 305 missing opening-hour records;
+- 159 of 962 places with all 613 owner-provided photos whose publication rights were confirmed;
+- 99 of the 845 public places carry an explicit provisional-location warning
+  until Korean/English listing, branch, address, and storefront pin checks finish.
 
 Use `reports/place-audit.md` as the review queue. `unchecked` is not invalid,
 and the audit never deletes or hides a place automatically.

@@ -3,9 +3,11 @@
 
 import type { IconName } from "@/components/icon";
 import { CREATRIP_PLACES } from "./generated/creatrip-places";
-import { PLACE_PHOTOS } from "./generated/place-photos";
+import { PLACE_PHOTOS, PLACE_PHOTO_THUMBNAILS } from "./generated/place-photos";
 import { OLIVEYOUNG_PLACES } from "./generated/oliveyoung-places";
 import { ADOS_PLACES } from "./generated/ados-places";
+import { ADOS_PHOTO_PLACES } from "./generated/ados-photo-places";
+import { ADOS_PHOTO_PROVISIONAL_PLACES } from "./generated/ados-photo-provisional-places";
 import { DAISO_PLACES } from "./generated/daiso-places";
 
 if (DAISO_PLACES.length !== 251) {
@@ -24,6 +26,7 @@ export type StepCategory =
 export type ProductChannel = "olive_young" | "korea_exclusive";
 export type PlaceSource = "curated" | "creatrip" | "kakao" | "ados" | "daiso";
 export type PlaceNameVerification = "verified" | "provisional";
+export type PlaceLocationVerification = "verified" | "provisional";
 
 export type ZoneKey =
   | "myeongdong" | "hongdae" | "gangnam_station" | "apgujeong" | "cheongdam"
@@ -78,6 +81,14 @@ export const TYPE_ICON: Record<PlaceType, IconName> = {
 
 /** Olive Young's brand lime — used by the OY brand mark on chips and map pins. */
 export const OY_BRAND_GREEN = "#9bce26";
+
+/** Same-origin brand marks (public/brands). Rows without a verified photo
+ *  show the retailer's mark instead of a generic pin; categories without a
+ *  mark fall back to their TYPE_ICON glyph in TYPE_COLOR. */
+export const BRAND_MARK_SRC: Partial<Record<PlaceType, string>> = {
+  olive_young: "/brands/olive-young-mark.svg",
+  daiso: "/brands/daiso-mark.svg",
+};
 
 /** Category accent colors (spec v2 §3.1) — shared by filter chips, map pins, and search rows.
  *  Mirrored as --c-* custom properties in globals.css for CSS-only consumers. */
@@ -167,7 +178,8 @@ export type Place = {
   type: PlaceType;
   zone: ZoneKey;
   district?: string;
-  priceRange: PriceRange;
+  /** Omitted when no venue-specific price tier has been verified. */
+  priceRange?: PriceRange;
   rating?: number;
   ratingCount?: number;
   tags: string[];
@@ -191,11 +203,15 @@ export type Place = {
   /** Verified photos, in display order. The place sheet renders a swipeable
       two-up rail from these; it never pads the rail to look fuller. */
   photos?: string[];
+  /** Small first-photo variant used by dense map lists only. */
+  photoThumbnail?: string;
   geoSource?: "address" | "area"; // "area" = neighborhood-centroid fallback, pin is approximate
   // "A drop of Seoul" import — editorial descriptions shown on the detail page.
   about?: string;
   aboutKr?: string;
   nameVerification?: PlaceNameVerification;
+  /** Explicitly provisional pins may be published only with an on-screen warning. */
+  locationVerification?: PlaceLocationVerification;
   /** Provenance (data-ledger slice, 2026-08-12): where this row came from.
       "curated" rows are team-compiled and may carry unverified details —
       the detail page discloses this and hides their synthetic ratings. */
@@ -274,6 +290,7 @@ const withSource = (list: Place[], source: PlaceSource): Place[] =>
     // job (scripts/build-place-photos.mjs). A place with none keeps `photos`
     // undefined and renders the honest empty state.
     ...(PLACE_PHOTOS[p.id]?.length ? { photos: PLACE_PHOTOS[p.id] } : {}),
+    ...(PLACE_PHOTO_THUMBNAILS[p.id] ? { photoThumbnail: PLACE_PHOTO_THUMBNAILS[p.id] } : {}),
     // Curated rows carry editorial seed values for layout and local ranking
     // demos, not venue-verified ratings. Strip them at the public data-layer
     // boundary so map/search/list surfaces cannot accidentally present them
@@ -294,13 +311,17 @@ export const CATALOGUE_PLACES: Place[] = [
   ...withSource(OLIVEYOUNG_PLACES, "kakao"),
   // "A drop of Seoul" attractions + towers & markets (scripts/build-ados-places.mjs).
   ...withSource(ADOS_PLACES, "ados"),
+  // Owner-photo venues with independently reviewed, address-level pins.
+  ...withSource(ADOS_PHOTO_PLACES, "ados"),
+  // Owner-approved photo venues awaiting exact storefront-pin verification.
+  ...withSource(ADOS_PHOTO_PROVISIONAL_PLACES, "ados"),
   // Official Seoul Daiso stores (scripts/build-daiso-places.ts).
   ...withSource(DAISO_PLACES, "daiso"),
 ];
 
 type VerifiedPlacePatch = Partial<Pick<
   Place,
-  "name" | "nameKr" | "address" | "lat" | "lng" | "geoSource"
+  "name" | "nameKr" | "address" | "lat" | "lng" | "zone" | "geoSource" | "aboutKr" | "locationVerification"
 >>;
 
 /**
@@ -308,6 +329,73 @@ type VerifiedPlacePatch = Partial<Pick<
  * importer rebuild cannot silently restore a bad listing name or pin.
  */
 const VERIFIED_PLACE_PATCHES: Record<string, VerifiedPlacePatch> = {
+  "ados-cultural-complex-j-bug": {
+    name: "Hangang Play Place",
+    nameKr: "한강플플",
+    address: "서울 광진구 강변북로 2202 뚝섬 자벌레 1·3층",
+    lat: 37.5309294,
+    lng: 127.0659973939,
+    geoSource: "address",
+  },
+  "ados-chaeseokjang-observatory": {
+    name: "Changsin-Sungin Quarry Observatory",
+    nameKr: "채석장 전망대",
+    address: "서울 종로구 낙산5길 51",
+    lat: 37.578309028,
+    lng: 127.0116121139,
+    geoSource: "address",
+  },
+  "ados-jongno-3-ga-stalls-alley": {
+    name: "Jongno 3-ga Pojangmacha Street",
+    nameKr: "종로3가 포장마차 거리",
+    address: "서울 종로구 종로 132",
+    lat: 37.5696013025,
+    lng: 126.989097746,
+    geoSource: "address",
+  },
+  "ados-gimpo-int-l-airport-observatory-deck": {
+    name: "Gimpo Airport Observatory",
+    nameKr: "김포공항 전망대",
+    address: "서울 강서구 하늘길 78 한국공항공사 본사 6층",
+    lat: 37.560748,
+    lng: 126.798851,
+    aboutKr: "한국공항공사 본사 6층에서 김포공항 활주로와 항공기 이동을 조망할 수 있는 전망 공간. 운영 여부와 관람 시간은 방문 전 공항 공식 안내에서 확인 필요.",
+    geoSource: "address",
+  },
+  "ssamziegil": {
+    name: "Ssamzigil",
+    nameKr: "쌈지길",
+    address: "서울 종로구 인사동길 44",
+    lat: 37.5743062352,
+    lng: 126.9848674428,
+    geoSource: "address",
+  },
+  "starfield-coex": {
+    name: "Starfield COEX Mall",
+    nameKr: "스타필드 코엑스몰",
+    address: "서울 강남구 영동대로 513",
+    lat: 37.5119175967,
+    lng: 127.059217995,
+    geoSource: "address",
+  },
+  "namdaemun-market": {
+    locationVerification: "provisional",
+    geoSource: "area",
+  },
+  "seongsu-cafe": {
+    locationVerification: "provisional",
+    geoSource: "area",
+  },
+  "ct-rolling-jay-cheongdam-makeup": {
+    name: "ROLLING JAY Cheongdam",
+    nameKr: "롤링제이",
+    address: "서울 강남구 청담동 39-14 1·2층",
+    zone: "cheongdam",
+    lat: 37.5248,
+    lng: 127.0443,
+    locationVerification: "provisional",
+    geoSource: "area",
+  },
   "ados-daerim-central-market": {
     address: "서울 영등포구 디지털로37나길 21",
     lat: 37.4910328,
@@ -356,6 +444,16 @@ const HIDDEN_PLACE_IDS = new Set([
   "ados-seoul-bamdokkaebi-night-market-yeouido",
 ]);
 
+/** Curated prototypes remain private unless official location evidence has
+ * explicitly promoted the canonical record here. Their seed ratings are still
+ * stripped by `withSource`, so verification cannot publish demo review data. */
+const VERIFIED_CURATED_PLACE_IDS = new Set([
+  "namdaemun-market",
+  "seongsu-cafe",
+  "ssamziegil",
+  "starfield-coex",
+]);
+
 /**
  * Public discovery catalogue. Hand-curated prototype rows remain internal
  * until venue verification; sourced rows remain public unless a human review
@@ -366,13 +464,13 @@ export const PLACES: Place[] = CATALOGUE_PLACES
     ? { ...place, ...VERIFIED_PLACE_PATCHES[place.id] }
     : place)
   .filter((place) =>
-    place.source !== "curated" &&
+    (place.source !== "curated" || VERIFIED_CURATED_PLACE_IDS.has(place.id)) &&
     !HIDDEN_PLACE_IDS.has(place.id) &&
     place.zone !== "busan" &&
     place.zone !== "gyeonggi" &&
     !/^(부산|경기)\s/.test(place.address) &&
     Boolean(place.address) &&
-    place.geoSource !== "area"
+    (place.geoSource !== "area" || place.locationVerification === "provisional")
   );
 
 const PUBLISHED_PLACE_TYPES = new Set(PLACES.map((place) => place.type));

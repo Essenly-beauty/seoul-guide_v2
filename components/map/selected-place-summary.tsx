@@ -52,7 +52,10 @@ export function SelectedPlaceSummary({
                   ★{place.rating}{place.ratingCount !== undefined ? ` (${place.ratingCount})` : ""}
                 </span>
               )}
-              <span className="map-meta-token mono">{place.priceRange}</span>
+              {place.priceRange && <span className="map-meta-token mono">{place.priceRange}</span>}
+              {place.locationVerification === "provisional" && (
+                <span className="map-meta-token">Approximate pin</span>
+              )}
             </div>
             <div className="selected-place-summary-address">
               <span className="map-meta-token mono">{formatCompactDistance(km)}</span>
@@ -94,8 +97,11 @@ export function SelectedPlaceSummary({
                 ★{place.rating}{place.ratingCount !== undefined ? ` (${place.ratingCount})` : ""}
               </span>
             )}
-            <span className="map-meta-token mono">{place.priceRange}</span>
+            {place.priceRange && <span className="map-meta-token mono">{place.priceRange}</span>}
             {place.englishOk && <span>English OK</span>}
+            {place.locationVerification === "provisional" && (
+              <span className="map-meta-token">Approximate pin</span>
+            )}
           </div>
           <div className="selected-place-summary-address">
             <Icon name="pin" size="xs" aria-hidden="true" />
@@ -105,7 +111,6 @@ export function SelectedPlaceSummary({
               {/* the source's own "not enough information" placeholder is
                   normalised to empty upstream — say so plainly instead */}
               {place.address || "Address not listed"}
-              {place.geoSource === "area" && " · approximate pin"}
             </span>
           </div>
         </div>
@@ -131,7 +136,12 @@ export function SelectedPlaceSummary({
           {photos.map((src, i) => (
             <div key={src} className="selected-place-summary-media">
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={src} alt={`${place.name} photo ${i + 1} of ${photos.length}`} />
+              <img
+                src={src}
+                alt={`${place.name} photo ${i + 1} of ${photos.length}`}
+                loading={i < 2 ? "eager" : "lazy"}
+                decoding="async"
+              />
             </div>
           ))}
         </div>

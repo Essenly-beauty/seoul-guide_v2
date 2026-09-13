@@ -1,0 +1,146 @@
+{
+  "schemaVersion": 1,
+  "aliases": [
+    {
+      "sourcePlaceId": "ados-gimpo-intl-airport-observatory-deck",
+      "targetPlaceId": "ados-gimpo-int-l-airport-observatory-deck",
+      "reason": "The photo source fixes only the legacy slug punctuation; Korean name and airport address identify the same observatory.",
+      "evidence": ["https://www.airport.co.kr/gimpo/index.do"]
+    },
+    {
+      "sourcePlaceId": "ados-hosu-dosan",
+      "targetPlaceId": "ct-hosu-dosan-hair-makeup-studio",
+      "reason": "Same HOSU DOSAN branch and exact Dosan-daero 50-gil 13 address.",
+      "evidence": ["https://creatrip.com/en/spot/13165"]
+    },
+    {
+      "sourcePlaceId": "ados-soonsoo-cheongdam",
+      "targetPlaceId": "ct-soonsoo-celebrity-hair-makeup-salon-in-cheongdam",
+      "reason": "Same Soonsoo Cheongdam venue and exact Dosan-daero 61-gil 4 address.",
+      "evidence": ["https://creatrip.com/en/spot/13574"]
+    },
+    {
+      "sourcePlaceId": "ados-a-muu-hair-salon",
+      "targetPlaceId": "ct-a-muu-hair-salon",
+      "reason": "Same A:MUU Myeongdong branch and exact Myeongdong 8na-gil 47 third-floor address.",
+      "evidence": ["https://creatrip.com/en/spot/13932"]
+    },
+    {
+      "sourcePlaceId": "ados-ccl-color-lab-seongsu",
+      "targetPlaceId": "ct-hosu-dosan-konkuk-seongsu-branch-k-pop-hair-ccl",
+      "reason": "The existing record explicitly includes CCL Color Image Convergence Lab at the same Seongsu branch address.",
+      "evidence": ["https://www.cclcolor.co.kr/default/company/company_6.php?sub=06&tit=01"]
+    },
+    {
+      "sourcePlaceId": "ados-ecojardin-stem-cell-head-spa",
+      "targetPlaceId": "ct-eco-jardin-jamsil-lotte-tower-branch-head-spa",
+      "reason": "Same ECO JARDIN Jamsil Lotte Tower branch and exact Lotte World Mall B1 address.",
+      "evidence": ["https://www.ecojardin-jamsil.com/location"]
+    },
+    {
+      "sourcePlaceId": "ados-juno-hair-myeongdong-street",
+      "targetPlaceId": "ct-juno-hair-myeongdong-street-branch-popular-forei",
+      "reason": "Same JUNO Hair Myeongdong Street branch.",
+      "evidence": ["https://creatrip.com/en/spot/13466"]
+    },
+    {
+      "sourcePlaceId": "ados-jenny-house-celeb-hair-styling",
+      "targetPlaceId": "ct-jenny-house-celebrity-hair-makeup-studio-in-cheo",
+      "reason": "Same Jenny House Cheongdam Hill branch and exact Seolleung-ro 146-gil 56 address.",
+      "evidence": ["https://www.ifamily.co.kr/m/sub/view_map?code=co_sl_m056"]
+    },
+    {
+      "sourcePlaceId": "ados-lovey-hair-makeup",
+      "targetPlaceId": "ct-cheongdam-lovey-hair-makeup-salon",
+      "reason": "Same Cheongdam Lovey salon and exact Seolleung-ro 146-gil 25 address.",
+      "evidence": ["https://cheongdamlovey.com/ja/contact/"]
+    },
+    {
+      "sourcePlaceId": "ados-ye-lead-hair-styling",
+      "targetPlaceId": "ct-ye-lead-hair-salon-myeongdong",
+      "reason": "Same Ye-Lead Myeongdong salon and exact Myeongdong 8ga-gil 26 address.",
+      "evidence": ["https://creatrip.com/en/spot/13286"]
+    },
+    {
+      "sourcePlaceId": "ados-juno-hair-garosugil",
+      "targetPlaceId": "ct-juno-hair-garosu-gil",
+      "reason": "Same JUNO Hair Garosu-gil branch.",
+      "evidence": ["https://creatrip.com/en/spot/11340"]
+    },
+    {
+      "sourcePlaceId": "ados-olive-young-n-seongsu",
+      "targetPlaceId": "oy-n성수",
+      "reason": "Same Olive Young N Seongsu store and exact Yeonmujang 7-gil 13 address.",
+      "evidence": ["https://m.oliveyoung.co.kr/m/mtn/store/information/DE25"]
+    },
+    {
+      "sourcePlaceId": "ados-soonsiki-seongsu",
+      "targetPlaceId": "ct-soonsiki-hair-seongsu-seoul-s-most-booked-salon",
+      "reason": "Same SOONSIKI Hair Seongsu branch; the salon's reservation notice and Creatrip listing identify the same venue.",
+      "evidence": [
+        "https://www.soonsiki.com/article/reservation/1002/16749/",
+        "https://creatrip.com/en/spot/14835"
+      ]
+    },
+    {
+      "sourcePlaceId": "ados-ssamzigil",
+      "targetPlaceId": "ssamziegil",
+      "reason": "Same Ssamzigil venue at the official tourism listing's Insadong-gil 44 address.",
+      "evidence": ["https://data.visitkorea.or.kr/page/128553"]
+    },
+    {
+      "sourcePlaceId": "ados-starfield-coex-mall",
+      "targetPlaceId": "starfield-coex",
+      "reason": "Same Starfield COEX Mall at the official tourism listing's Yeongdong-daero 513 address.",
+      "evidence": ["https://data.visitkorea.or.kr/page/1984944"]
+    },
+    {
+      "sourcePlaceId": "ados-texture-apgujeong-rodeo",
+      "targetPlaceId": "ct-personalized-hair-color-head-spa-experts-texture",
+      "reason": "Same Texture Apgujeong Rodeo salon represented by the existing Creatrip catalogue record.",
+      "evidence": ["https://creatrip.com/en/spot/14724"]
+    },
+    {
+      "sourcePlaceId": "ados-void-cheongdam-hair-makeup",
+      "targetPlaceId": "ct-void-cheongdam-by-park-chul-makeup-salon",
+      "reason": "Same VOID Cheongdam hair and makeup salon represented by the existing Creatrip catalogue record.",
+      "evidence": ["https://creatrip.com/en/spot/14762"]
+    },
+    {
+      "sourcePlaceId": "ados-you-hair-salon-seongsu",
+      "targetPlaceId": "ct-you-hair-salon-seongsu-branch",
+      "reason": "Same YOU Hair Salon Seongsu branch represented by the existing Creatrip catalogue record.",
+      "evidence": ["https://creatrip.com/en/spot/14730"]
+    },
+    {
+      "sourcePlaceId": "ados-namdaemun-market",
+      "targetPlaceId": "namdaemun-market",
+      "reason": "Same Namdaemun Market at the Jung-gu market address; reuse the existing canonical market record.",
+      "evidence": ["https://www.junggu.seoul.kr/tour/content.do?cmsid=14863"]
+    },
+    {
+      "sourcePlaceId": "ados-onion-seongsu",
+      "targetPlaceId": "seongsu-cafe",
+      "reason": "Same Cafe Onion Seongsu venue at Achasan-ro 9-gil 8; reuse the existing canonical record.",
+      "evidence": [
+        "https://m.onionkr.com/artfinger/offline.html?cate_no=26",
+        "https://english.visitseoul.net/area/Cafe-Onion/ENP020587"
+      ]
+    },
+    {
+      "sourcePlaceId": "ados-rolling-jay",
+      "targetPlaceId": "ct-rolling-jay-cheongdam-makeup",
+      "reason": "Same ROLLING JAY Cheongdam salon represented by the existing Creatrip catalogue record.",
+      "evidence": ["https://creatrip.com/en/spot/14803"]
+    },
+    {
+      "sourcePlaceId": "ados-spa-1899-donginbi",
+      "targetPlaceId": "ados-spa-1978-red-ginseng-ritual",
+      "reason": "SPA 1899 was renamed SPA 1978 at the same KT&G Tower B2 venue; merge former-name photos into the current canonical record.",
+      "evidence": [
+        "https://donginbi.com/spa_g/spa_g.php",
+        "https://english.visitkorea.or.kr/svc/contents/contentsView.do?vcontsId=194598"
+      ]
+    }
+  ]
+}

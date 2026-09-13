@@ -86,8 +86,8 @@ describe("Daiso publication", () => {
   });
 
   it("keeps the audited launch totals in sync with Daiso publication", () => {
-    expect(CATALOGUE_PLACES).toHaveLength(851);
-    expect(PLACES).toHaveLength(726);
+    expect(CATALOGUE_PLACES).toHaveLength(962);
+    expect(PLACES).toHaveLength(845);
   });
 
   it("describes provisional names as officially sourced instead of verified", () => {
@@ -107,11 +107,17 @@ describe("product ranking fields", () => {
 });
 
 describe("place rating provenance", () => {
-  it("does not publish hand-curated prototype rows before venue verification", () => {
+  it("publishes only explicitly verified curated rows and strips their prototype ratings", () => {
     const curated = PLACES.filter((p) => p.source === "curated");
     const sourced = PLACES.filter((p) => p.source !== "curated" && p.rating !== undefined);
 
-    expect(curated).toEqual([]);
+    expect(curated.map((place) => place.id).sort()).toEqual([
+      "namdaemun-market",
+      "seongsu-cafe",
+      "ssamziegil",
+      "starfield-coex",
+    ]);
+    expect(curated.every((place) => place.rating === undefined && place.ratingCount === undefined)).toBe(true);
     expect(sourced.length).toBeGreaterThan(0);
   });
 
@@ -138,28 +144,61 @@ describe("place rating provenance", () => {
 
     expect(PLACES.filter(outsideSeoul).map((place) => place.id))
       .toEqual([]);
-    expect(PLACES.filter((place) => !place.address || place.geoSource === "area").map((place) => place.id))
+    expect(PLACES.filter((place) =>
+      !place.address ||
+      (place.geoSource === "area" && place.locationVerification !== "provisional")
+    ).map((place) => place.id))
       .toEqual([]);
   });
 
   it("publishes manually verified Korean listings at their corrected addresses and pins", () => {
     const expected = {
-      "ados-daerim-central-market": ["대림중앙시장", "서울 영등포구 디지털로37나길 21", 37.4910328, 126.8993823],
-      "ados-haebangchon-sinheungsijang": ["해방촌 신흥시장", "서울 용산구 신흥로 95-9 2층", 37.5454213, 126.9850088],
-      "ados-jongmyo-shrine": ["종묘", "서울 종로구 종로 157", 37.5758018, 126.9939555],
-      "ct-more-on-hair-seongsu-branch": ["모어온헤어 성수점", "서울 성동구 왕십리로 106 3층", 37.5470168, 127.0448258],
-      "ct-onyad-hair-personalized-hair-consultation-stylin": ["온야드 서울숲본점", "서울 성동구 왕십리로 66-10 2층, 3층 온야드", 37.5432321, 127.0449469],
-      "oy-동묘앞역점": ["올리브영 동묘앞역점", "서울 종로구 종로 346", 37.5729505, 127.0162282],
+      "ados-cultural-complex-j-bug": ["Hangang Play Place", "한강플플", "서울 광진구 강변북로 2202 뚝섬 자벌레 1·3층", 37.5309294, 127.0659973939],
+      "ados-chaeseokjang-observatory": ["Changsin-Sungin Quarry Observatory", "채석장 전망대", "서울 종로구 낙산5길 51", 37.578309028, 127.0116121139],
+      "ados-jongno-3-ga-stalls-alley": ["Jongno 3-ga Pojangmacha Street", "종로3가 포장마차 거리", "서울 종로구 종로 132", 37.5696013025, 126.989097746],
+      "ados-gimpo-int-l-airport-observatory-deck": ["Gimpo Airport Observatory", "김포공항 전망대", "서울 강서구 하늘길 78 한국공항공사 본사 6층", 37.560748, 126.798851],
+      "ssamziegil": ["Ssamzigil", "쌈지길", "서울 종로구 인사동길 44", 37.5743062352, 126.9848674428],
+      "starfield-coex": ["Starfield COEX Mall", "스타필드 코엑스몰", "서울 강남구 영동대로 513", 37.5119175967, 127.059217995],
+      "ados-daerim-central-market": ["Daerim Central Market", "대림중앙시장", "서울 영등포구 디지털로37나길 21", 37.4910328, 126.8993823],
+      "ados-haebangchon-sinheungsijang": ["Haebangchon Sinheung Market", "해방촌 신흥시장", "서울 용산구 신흥로 95-9 2층", 37.5454213, 126.9850088],
+      "ados-jongmyo-shrine": ["Jongmyo Shrine", "종묘", "서울 종로구 종로 157", 37.5758018, 126.9939555],
+      "ct-more-on-hair-seongsu-branch": ["More On Hair Seongsu", "모어온헤어 성수점", "서울 성동구 왕십리로 106 3층", 37.5470168, 127.0448258],
+      "ct-onyad-hair-personalized-hair-consultation-stylin": ["ONYAD Seoul Forest", "온야드 서울숲본점", "서울 성동구 왕십리로 66-10 2층, 3층 온야드", 37.5432321, 127.0449469],
+      "oy-동묘앞역점": ["Olive Young Dongmyo Station", "올리브영 동묘앞역점", "서울 종로구 종로 346", 37.5729505, 127.0162282],
     } as const;
 
-    for (const [id, [nameKr, address, lat, lng]] of Object.entries(expected)) {
+    for (const [id, [name, nameKr, address, lat, lng]] of Object.entries(expected)) {
       const place = PLACES.find((candidate) => candidate.id === id);
       expect(place, id).toBeDefined();
+      expect(place?.name, `${id} English name`).toBe(name);
       expect(place?.nameKr, `${id} Korean name`).toBe(nameKr);
       expect(place?.address, `${id} address`).toBe(address);
       expect(place?.lat, `${id} latitude`).toBe(lat);
       expect(place?.lng, `${id} longitude`).toBe(lng);
     }
+
+    expect(PLACES.find((place) => place.id === "ados-gimpo-int-l-airport-observatory-deck")?.aboutKr)
+      .not.toContain("국내선 청사 4층");
+  });
+
+  it("publishes every approved owner-photo folder on a public place", () => {
+    const placesWithPhotos = PLACES.filter((place) => place.photos?.length);
+    const photoCount = placesWithPhotos.reduce(
+      (total, place) => total + (place.photos?.length ?? 0),
+      0,
+    );
+
+    expect(placesWithPhotos).toHaveLength(159);
+    expect(photoCount).toBe(613);
+  });
+
+  it("publishes only explicitly labeled provisional area pins", () => {
+    const provisional = PLACES.filter((place) => place.locationVerification === "provisional");
+    const approximate = PLACES.filter((place) => place.geoSource === "area");
+
+    expect(provisional).toHaveLength(99);
+    expect(approximate.map((place) => place.id).sort())
+      .toEqual(provisional.map((place) => place.id).sort());
   });
 });
 

@@ -101,7 +101,7 @@ export function applyFilters(
   return places.filter((p) => {
     if (cats.length > 0 && !cats.includes(p.type)) return false;
     if (f.minRating4 && (p.rating ?? 0) < 4.0) return false;
-    if (f.prices.length > 0 && !f.prices.includes(p.priceRange)) return false;
+    if (f.prices.length > 0 && (!p.priceRange || !f.prices.includes(p.priceRange))) return false;
     if (f.englishOnly && !p.englishOk) return false;
     if (f.bookableOnly && (p.bookingChannels?.length ?? 0) === 0) return false;
     if (f.serviceTags.length > 0 && !f.serviceTags.some((t) => p.serviceTags?.includes(t))) return false;

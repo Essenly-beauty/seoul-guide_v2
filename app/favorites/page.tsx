@@ -143,7 +143,7 @@ function PlacesSection({ favPlaces }: { favPlaces: Place[] }) {
               media={<ImgPh className="thumb56" />}
               title={p.name}
               titleAccessory={<CategoryBadge type={p.type} size={16} />}
-              caption={<>{TYPE_LABEL[p.type]} · {zoneShort(p.zone)} · {p.priceRange}</>}
+              caption={<>{[TYPE_LABEL[p.type], zoneShort(p.zone), p.priceRange].filter(Boolean).join(" · ")}</>}
               meta={(
                 <>
                   <RatingLine rating={p.rating} count={p.ratingCount} plain />

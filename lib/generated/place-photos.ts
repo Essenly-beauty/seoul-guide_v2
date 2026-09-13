@@ -3,4 +3,1099 @@
 // Places absent from this map have no verified photo and must render the
 // honest empty state — never a placeholder tile dressed up as a gallery.
 
-export const PLACE_PHOTOS: Record<string, string[]> = {};
+export const PLACE_PHOTOS: Record<string, string[]> = {
+  "ados-5x5-nail-studio-seongsu": [
+    "/places/ados-5x5-nail-studio-seongsu/1.webp",
+    "/places/ados-5x5-nail-studio-seongsu/2.webp",
+    "/places/ados-5x5-nail-studio-seongsu/3.webp"
+  ],
+  "ados-63-skypicnic": [
+    "/places/ados-63-skypicnic/1.webp",
+    "/places/ados-63-skypicnic/2.webp",
+    "/places/ados-63-skypicnic/3.webp",
+    "/places/ados-63-skypicnic/4.webp",
+    "/places/ados-63-skypicnic/5.webp"
+  ],
+  "ados-a-knack": [
+    "/places/ados-a-knack/1.webp",
+    "/places/ados-a-knack/2.webp",
+    "/places/ados-a-knack/3.webp"
+  ],
+  "ados-a3-nature-private-body-scrub": [
+    "/places/ados-a3-nature-private-body-scrub/1.webp",
+    "/places/ados-a3-nature-private-body-scrub/2.webp",
+    "/places/ados-a3-nature-private-body-scrub/3.webp"
+  ],
+  "ados-ader-error-seongsu": [
+    "/places/ados-ader-error-seongsu/1.webp",
+    "/places/ados-ader-error-seongsu/2.webp",
+    "/places/ados-ader-error-seongsu/3.webp",
+    "/places/ados-ader-error-seongsu/4.webp",
+    "/places/ados-ader-error-seongsu/5.webp"
+  ],
+  "ados-amore-seongsu": [
+    "/places/ados-amore-seongsu/1.webp",
+    "/places/ados-amore-seongsu/2.webp",
+    "/places/ados-amore-seongsu/3.webp"
+  ],
+  "ados-amuse-seongsu": [
+    "/places/ados-amuse-seongsu/1.webp",
+    "/places/ados-amuse-seongsu/2.webp",
+    "/places/ados-amuse-seongsu/3.webp",
+    "/places/ados-amuse-seongsu/4.webp"
+  ],
+  "ados-anskin-myeongdong": [
+    "/places/ados-anskin-myeongdong/1.webp",
+    "/places/ados-anskin-myeongdong/2.webp",
+    "/places/ados-anskin-myeongdong/3.webp",
+    "/places/ados-anskin-myeongdong/4.webp",
+    "/places/ados-anskin-myeongdong/5.webp"
+  ],
+  "ados-apm-place": [
+    "/places/ados-apm-place/1.webp",
+    "/places/ados-apm-place/2.webp",
+    "/places/ados-apm-place/3.webp",
+    "/places/ados-apm-place/4.webp"
+  ],
+  "ados-argyol-seongsu": [
+    "/places/ados-argyol-seongsu/1.webp",
+    "/places/ados-argyol-seongsu/2.webp",
+    "/places/ados-argyol-seongsu/3.webp",
+    "/places/ados-argyol-seongsu/4.webp",
+    "/places/ados-argyol-seongsu/5.webp"
+  ],
+  "ados-aroma-thai-spa-gongdeok": [
+    "/places/ados-aroma-thai-spa-gongdeok/1.webp",
+    "/places/ados-aroma-thai-spa-gongdeok/2.webp",
+    "/places/ados-aroma-thai-spa-gongdeok/3.webp",
+    "/places/ados-aroma-thai-spa-gongdeok/4.webp"
+  ],
+  "ados-art-de-la-peau": [
+    "/places/ados-art-de-la-peau/1.webp",
+    "/places/ados-art-de-la-peau/2.webp",
+    "/places/ados-art-de-la-peau/3.webp",
+    "/places/ados-art-de-la-peau/4.webp"
+  ],
+  "ados-arz-make-up-cheongdam": [
+    "/places/ados-arz-make-up-cheongdam/1.webp",
+    "/places/ados-arz-make-up-cheongdam/2.webp",
+    "/places/ados-arz-make-up-cheongdam/3.webp",
+    "/places/ados-arz-make-up-cheongdam/4.webp",
+    "/places/ados-arz-make-up-cheongdam/5.webp"
+  ],
+  "ados-beauty-for-smile": [
+    "/places/ados-beauty-for-smile/1.webp",
+    "/places/ados-beauty-for-smile/2.webp",
+    "/places/ados-beauty-for-smile/3.webp",
+    "/places/ados-beauty-for-smile/4.webp",
+    "/places/ados-beauty-for-smile/5.webp"
+  ],
+  "ados-chaeseokjang-observatory": [
+    "/places/ados-chaeseokjang-observatory/1.webp",
+    "/places/ados-chaeseokjang-observatory/2.webp",
+    "/places/ados-chaeseokjang-observatory/3.webp",
+    "/places/ados-chaeseokjang-observatory/4.webp",
+    "/places/ados-chaeseokjang-observatory/5.webp"
+  ],
+  "ados-cocorea-makeup-hair": [
+    "/places/ados-cocorea-makeup-hair/1.webp",
+    "/places/ados-cocorea-makeup-hair/2.webp",
+    "/places/ados-cocorea-makeup-hair/3.webp",
+    "/places/ados-cocorea-makeup-hair/4.webp"
+  ],
+  "ados-cocorea-spa-myeongdong": [
+    "/places/ados-cocorea-spa-myeongdong/1.webp",
+    "/places/ados-cocorea-spa-myeongdong/2.webp",
+    "/places/ados-cocorea-spa-myeongdong/3.webp",
+    "/places/ados-cocorea-spa-myeongdong/4.webp",
+    "/places/ados-cocorea-spa-myeongdong/5.webp"
+  ],
+  "ados-color-of-you-personal-color-analysis": [
+    "/places/ados-color-of-you-personal-color-analysis/1.webp",
+    "/places/ados-color-of-you-personal-color-analysis/2.webp",
+    "/places/ados-color-of-you-personal-color-analysis/3.webp",
+    "/places/ados-color-of-you-personal-color-analysis/4.webp"
+  ],
+  "ados-color-place-k-pop-celeb-personal-color": [
+    "/places/ados-color-place-k-pop-celeb-personal-color/1.webp",
+    "/places/ados-color-place-k-pop-celeb-personal-color/2.webp",
+    "/places/ados-color-place-k-pop-celeb-personal-color/3.webp"
+  ],
+  "ados-color-signal-personal-color-makeup": [
+    "/places/ados-color-signal-personal-color-makeup/1.webp",
+    "/places/ados-color-signal-personal-color-makeup/2.webp",
+    "/places/ados-color-signal-personal-color-makeup/3.webp"
+  ],
+  "ados-colorize-personal-color-analysis-makeup": [
+    "/places/ados-colorize-personal-color-analysis-makeup/1.webp",
+    "/places/ados-colorize-personal-color-analysis-makeup/2.webp",
+    "/places/ados-colorize-personal-color-analysis-makeup/3.webp"
+  ],
+  "ados-colorize-personal-color-makeup-gangnam": [
+    "/places/ados-colorize-personal-color-makeup-gangnam/1.webp",
+    "/places/ados-colorize-personal-color-makeup-gangnam/2.webp",
+    "/places/ados-colorize-personal-color-makeup-gangnam/3.webp"
+  ],
+  "ados-common-ground": [
+    "/places/ados-common-ground/1.webp",
+    "/places/ados-common-ground/2.webp",
+    "/places/ados-common-ground/3.webp",
+    "/places/ados-common-ground/4.webp",
+    "/places/ados-common-ground/5.webp"
+  ],
+  "ados-create-wellness-center": [
+    "/places/ados-create-wellness-center/1.webp",
+    "/places/ados-create-wellness-center/2.webp",
+    "/places/ados-create-wellness-center/3.webp"
+  ],
+  "ados-cultural-complex-j-bug": [
+    "/places/ados-cultural-complex-j-bug/1.webp",
+    "/places/ados-cultural-complex-j-bug/2.webp",
+    "/places/ados-cultural-complex-j-bug/3.webp"
+  ],
+  "ados-cutloose-k-pop-hair-makeup": [
+    "/places/ados-cutloose-k-pop-hair-makeup/1.webp",
+    "/places/ados-cutloose-k-pop-hair-makeup/2.webp",
+    "/places/ados-cutloose-k-pop-hair-makeup/3.webp"
+  ],
+  "ados-dakyo-nail-apgujeong": [
+    "/places/ados-dakyo-nail-apgujeong/1.webp",
+    "/places/ados-dakyo-nail-apgujeong/2.webp",
+    "/places/ados-dakyo-nail-apgujeong/3.webp",
+    "/places/ados-dakyo-nail-apgujeong/4.webp",
+    "/places/ados-dakyo-nail-apgujeong/5.webp"
+  ],
+  "ados-dakyo-nail-seongsu": [
+    "/places/ados-dakyo-nail-seongsu/1.webp",
+    "/places/ados-dakyo-nail-seongsu/2.webp",
+    "/places/ados-dakyo-nail-seongsu/3.webp",
+    "/places/ados-dakyo-nail-seongsu/4.webp",
+    "/places/ados-dakyo-nail-seongsu/5.webp"
+  ],
+  "ados-damda-private-korean-bath-body-scrub": [
+    "/places/ados-damda-private-korean-bath-body-scrub/1.webp",
+    "/places/ados-damda-private-korean-bath-body-scrub/2.webp",
+    "/places/ados-damda-private-korean-bath-body-scrub/3.webp"
+  ],
+  "ados-dior-cafe-seongsu-concept-store": [
+    "/places/ados-dior-cafe-seongsu-concept-store/1.webp",
+    "/places/ados-dior-cafe-seongsu-concept-store/2.webp",
+    "/places/ados-dior-cafe-seongsu-concept-store/3.webp",
+    "/places/ados-dior-cafe-seongsu-concept-store/4.webp",
+    "/places/ados-dior-cafe-seongsu-concept-store/5.webp"
+  ],
+  "ados-dongmyo-flea-market": [
+    "/places/ados-dongmyo-flea-market/1.webp",
+    "/places/ados-dongmyo-flea-market/2.webp",
+    "/places/ados-dongmyo-flea-market/3.webp",
+    "/places/ados-dongmyo-flea-market/4.webp"
+  ],
+  "ados-earthness-spa-aroma-massage": [
+    "/places/ados-earthness-spa-aroma-massage/1.webp",
+    "/places/ados-earthness-spa-aroma-massage/2.webp",
+    "/places/ados-earthness-spa-aroma-massage/3.webp"
+  ],
+  "ados-eco-jardin-aeogae-branch": [
+    "/places/ados-eco-jardin-aeogae-branch/1.webp",
+    "/places/ados-eco-jardin-aeogae-branch/2.webp",
+    "/places/ados-eco-jardin-aeogae-branch/3.webp",
+    "/places/ados-eco-jardin-aeogae-branch/4.webp"
+  ],
+  "ados-eql-grove-seongsu": [
+    "/places/ados-eql-grove-seongsu/1.webp",
+    "/places/ados-eql-grove-seongsu/2.webp",
+    "/places/ados-eql-grove-seongsu/3.webp",
+    "/places/ados-eql-grove-seongsu/4.webp"
+  ],
+  "ados-eungbongsan-palgakjeong": [
+    "/places/ados-eungbongsan-palgakjeong/1.webp",
+    "/places/ados-eungbongsan-palgakjeong/2.webp",
+    "/places/ados-eungbongsan-palgakjeong/3.webp",
+    "/places/ados-eungbongsan-palgakjeong/4.webp",
+    "/places/ados-eungbongsan-palgakjeong/5.webp"
+  ],
+  "ados-fleur-jardin-myeongdong": [
+    "/places/ados-fleur-jardin-myeongdong/1.webp",
+    "/places/ados-fleur-jardin-myeongdong/2.webp",
+    "/places/ados-fleur-jardin-myeongdong/3.webp"
+  ],
+  "ados-forena-clinic": [
+    "/places/ados-forena-clinic/1.webp",
+    "/places/ados-forena-clinic/2.webp",
+    "/places/ados-forena-clinic/3.webp",
+    "/places/ados-forena-clinic/4.webp"
+  ],
+  "ados-fwee-seongsu": [
+    "/places/ados-fwee-seongsu/1.webp",
+    "/places/ados-fwee-seongsu/2.webp",
+    "/places/ados-fwee-seongsu/3.webp"
+  ],
+  "ados-garak-market": [
+    "/places/ados-garak-market/1.webp",
+    "/places/ados-garak-market/2.webp",
+    "/places/ados-garak-market/3.webp",
+    "/places/ados-garak-market/4.webp"
+  ],
+  "ados-garden-5": [
+    "/places/ados-garden-5/1.webp",
+    "/places/ados-garden-5/2.webp",
+    "/places/ados-garden-5/3.webp"
+  ],
+  "ados-gimpo-int-l-airport-observatory-deck": [
+    "/places/ados-gimpo-int-l-airport-observatory-deck/1.webp",
+    "/places/ados-gimpo-int-l-airport-observatory-deck/2.webp",
+    "/places/ados-gimpo-int-l-airport-observatory-deck/3.webp",
+    "/places/ados-gimpo-int-l-airport-observatory-deck/4.webp",
+    "/places/ados-gimpo-int-l-airport-observatory-deck/5.webp"
+  ],
+  "ados-gold-spa": [
+    "/places/ados-gold-spa/1.webp",
+    "/places/ados-gold-spa/2.webp",
+    "/places/ados-gold-spa/3.webp"
+  ],
+  "ados-gongdeok-market": [
+    "/places/ados-gongdeok-market/1.webp",
+    "/places/ados-gongdeok-market/2.webp",
+    "/places/ados-gongdeok-market/3.webp"
+  ],
+  "ados-gonggan-nail-hongdae": [
+    "/places/ados-gonggan-nail-hongdae/1.webp",
+    "/places/ados-gonggan-nail-hongdae/2.webp",
+    "/places/ados-gonggan-nail-hongdae/3.webp",
+    "/places/ados-gonggan-nail-hongdae/4.webp"
+  ],
+  "ados-gongneungdong-goblin-market": [
+    "/places/ados-gongneungdong-goblin-market/1.webp",
+    "/places/ados-gongneungdong-goblin-market/2.webp",
+    "/places/ados-gongneungdong-goblin-market/3.webp"
+  ],
+  "ados-goto-mall": [
+    "/places/ados-goto-mall/1.webp",
+    "/places/ados-goto-mall/2.webp",
+    "/places/ados-goto-mall/3.webp"
+  ],
+  "ados-hana-mud-spa": [
+    "/places/ados-hana-mud-spa/1.webp",
+    "/places/ados-hana-mud-spa/2.webp",
+    "/places/ados-hana-mud-spa/3.webp",
+    "/places/ados-hana-mud-spa/4.webp"
+  ],
+  "ados-hanji-makeup-glow-makeup": [
+    "/places/ados-hanji-makeup-glow-makeup/1.webp",
+    "/places/ados-hanji-makeup-glow-makeup/2.webp",
+    "/places/ados-hanji-makeup-glow-makeup/3.webp",
+    "/places/ados-hanji-makeup-glow-makeup/4.webp",
+    "/places/ados-hanji-makeup-glow-makeup/5.webp"
+  ],
+  "ados-hautbeaute": [
+    "/places/ados-hautbeaute/1.webp",
+    "/places/ados-hautbeaute/2.webp",
+    "/places/ados-hautbeaute/3.webp",
+    "/places/ados-hautbeaute/4.webp",
+    "/places/ados-hautbeaute/5.webp"
+  ],
+  "ados-hello-apm": [
+    "/places/ados-hello-apm/1.webp",
+    "/places/ados-hello-apm/2.webp",
+    "/places/ados-hello-apm/3.webp",
+    "/places/ados-hello-apm/4.webp"
+  ],
+  "ados-hera": [
+    "/places/ados-hera/1.webp",
+    "/places/ados-hera/2.webp",
+    "/places/ados-hera/3.webp",
+    "/places/ados-hera/4.webp",
+    "/places/ados-hera/5.webp"
+  ],
+  "ados-hera-spa-esthetic": [
+    "/places/ados-hera-spa-esthetic/1.webp",
+    "/places/ados-hera-spa-esthetic/2.webp",
+    "/places/ados-hera-spa-esthetic/3.webp",
+    "/places/ados-hera-spa-esthetic/4.webp",
+    "/places/ados-hera-spa-esthetic/5.webp"
+  ],
+  "ados-herique-hair": [
+    "/places/ados-herique-hair/1.webp",
+    "/places/ados-herique-hair/2.webp",
+    "/places/ados-herique-hair/3.webp"
+  ],
+  "ados-hikari-skin-massage": [
+    "/places/ados-hikari-skin-massage/1.webp",
+    "/places/ados-hikari-skin-massage/2.webp",
+    "/places/ados-hikari-skin-massage/3.webp"
+  ],
+  "ados-hyze-clinic": [
+    "/places/ados-hyze-clinic/1.webp",
+    "/places/ados-hyze-clinic/2.webp",
+    "/places/ados-hyze-clinic/3.webp",
+    "/places/ados-hyze-clinic/4.webp",
+    "/places/ados-hyze-clinic/5.webp"
+  ],
+  "ados-ifc-mall": [
+    "/places/ados-ifc-mall/1.webp",
+    "/places/ados-ifc-mall/2.webp",
+    "/places/ados-ifc-mall/3.webp"
+  ],
+  "ados-iimi-hair-makeup": [
+    "/places/ados-iimi-hair-makeup/1.webp",
+    "/places/ados-iimi-hair-makeup/2.webp",
+    "/places/ados-iimi-hair-makeup/3.webp",
+    "/places/ados-iimi-hair-makeup/4.webp",
+    "/places/ados-iimi-hair-makeup/5.webp"
+  ],
+  "ados-image-ho-personal-color": [
+    "/places/ados-image-ho-personal-color/1.webp",
+    "/places/ados-image-ho-personal-color/2.webp",
+    "/places/ados-image-ho-personal-color/3.webp",
+    "/places/ados-image-ho-personal-color/4.webp",
+    "/places/ados-image-ho-personal-color/5.webp"
+  ],
+  "ados-in-spa-premium-hotel-spa": [
+    "/places/ados-in-spa-premium-hotel-spa/1.webp",
+    "/places/ados-in-spa-premium-hotel-spa/2.webp",
+    "/places/ados-in-spa-premium-hotel-spa/3.webp"
+  ],
+  "ados-in-the-pink-seongsu": [
+    "/places/ados-in-the-pink-seongsu/1.webp",
+    "/places/ados-in-the-pink-seongsu/2.webp",
+    "/places/ados-in-the-pink-seongsu/3.webp",
+    "/places/ados-in-the-pink-seongsu/4.webp",
+    "/places/ados-in-the-pink-seongsu/5.webp"
+  ],
+  "ados-individuel-geneve": [
+    "/places/ados-individuel-geneve/1.webp",
+    "/places/ados-individuel-geneve/2.webp",
+    "/places/ados-individuel-geneve/3.webp",
+    "/places/ados-individuel-geneve/4.webp"
+  ],
+  "ados-ipark-mall": [
+    "/places/ados-ipark-mall/1.webp",
+    "/places/ados-ipark-mall/2.webp",
+    "/places/ados-ipark-mall/3.webp"
+  ],
+  "ados-jeongdong-observatory": [
+    "/places/ados-jeongdong-observatory/1.webp",
+    "/places/ados-jeongdong-observatory/2.webp",
+    "/places/ados-jeongdong-observatory/3.webp",
+    "/places/ados-jeongdong-observatory/4.webp"
+  ],
+  "ados-jongno-3-ga-stalls-alley": [
+    "/places/ados-jongno-3-ga-stalls-alley/1.webp",
+    "/places/ados-jongno-3-ga-stalls-alley/2.webp",
+    "/places/ados-jongno-3-ga-stalls-alley/3.webp"
+  ],
+  "ados-jungbu-market": [
+    "/places/ados-jungbu-market/1.webp",
+    "/places/ados-jungbu-market/2.webp",
+    "/places/ados-jungbu-market/3.webp",
+    "/places/ados-jungbu-market/4.webp"
+  ],
+  "ados-juno-hair-gangseo-office": [
+    "/places/ados-juno-hair-gangseo-office/1.webp",
+    "/places/ados-juno-hair-gangseo-office/2.webp",
+    "/places/ados-juno-hair-gangseo-office/3.webp"
+  ],
+  "ados-kwangjang-market": [
+    "/places/ados-kwangjang-market/1.webp",
+    "/places/ados-kwangjang-market/2.webp",
+    "/places/ados-kwangjang-market/3.webp"
+  ],
+  "ados-laurel-studio": [
+    "/places/ados-laurel-studio/1.webp",
+    "/places/ados-laurel-studio/2.webp",
+    "/places/ados-laurel-studio/3.webp",
+    "/places/ados-laurel-studio/4.webp"
+  ],
+  "ados-lavish-spa": [
+    "/places/ados-lavish-spa/1.webp",
+    "/places/ados-lavish-spa/2.webp",
+    "/places/ados-lavish-spa/3.webp"
+  ],
+  "ados-lcdc-seoul": [
+    "/places/ados-lcdc-seoul/1.webp",
+    "/places/ados-lcdc-seoul/2.webp",
+    "/places/ados-lcdc-seoul/3.webp",
+    "/places/ados-lcdc-seoul/4.webp"
+  ],
+  "ados-lee-chul-hair-kerker": [
+    "/places/ados-lee-chul-hair-kerker/1.webp",
+    "/places/ados-lee-chul-hair-kerker/2.webp",
+    "/places/ados-lee-chul-hair-kerker/3.webp",
+    "/places/ados-lee-chul-hair-kerker/4.webp",
+    "/places/ados-lee-chul-hair-kerker/5.webp"
+  ],
+  "ados-line-esthe-facial-care": [
+    "/places/ados-line-esthe-facial-care/1.webp",
+    "/places/ados-line-esthe-facial-care/2.webp",
+    "/places/ados-line-esthe-facial-care/3.webp",
+    "/places/ados-line-esthe-facial-care/4.webp"
+  ],
+  "ados-lotte-outlets-seoul-station": [
+    "/places/ados-lotte-outlets-seoul-station/1.webp",
+    "/places/ados-lotte-outlets-seoul-station/2.webp",
+    "/places/ados-lotte-outlets-seoul-station/3.webp"
+  ],
+  "ados-lotte-world-tower-mall": [
+    "/places/ados-lotte-world-tower-mall/1.webp",
+    "/places/ados-lotte-world-tower-mall/2.webp",
+    "/places/ados-lotte-world-tower-mall/3.webp",
+    "/places/ados-lotte-world-tower-mall/4.webp"
+  ],
+  "ados-majang-meat-market": [
+    "/places/ados-majang-meat-market/1.webp",
+    "/places/ados-majang-meat-market/2.webp",
+    "/places/ados-majang-meat-market/3.webp"
+  ],
+  "ados-mangwon-market": [
+    "/places/ados-mangwon-market/1.webp",
+    "/places/ados-mangwon-market/2.webp",
+    "/places/ados-mangwon-market/3.webp",
+    "/places/ados-mangwon-market/4.webp"
+  ],
+  "ados-mapo-agricultural-marine-products-market": [
+    "/places/ados-mapo-agricultural-marine-products-market/1.webp",
+    "/places/ados-mapo-agricultural-marine-products-market/2.webp",
+    "/places/ados-mapo-agricultural-marine-products-market/3.webp",
+    "/places/ados-mapo-agricultural-marine-products-market/4.webp"
+  ],
+  "ados-mariem-hair-head-spa": [
+    "/places/ados-mariem-hair-head-spa/1.webp",
+    "/places/ados-mariem-hair-head-spa/2.webp",
+    "/places/ados-mariem-hair-head-spa/3.webp",
+    "/places/ados-mariem-hair-head-spa/4.webp"
+  ],
+  "ados-marzia-healing-spa-cheongdam": [
+    "/places/ados-marzia-healing-spa-cheongdam/1.webp",
+    "/places/ados-marzia-healing-spa-cheongdam/2.webp",
+    "/places/ados-marzia-healing-spa-cheongdam/3.webp"
+  ],
+  "ados-matin-kim-seongsu": [
+    "/places/ados-matin-kim-seongsu/1.webp",
+    "/places/ados-matin-kim-seongsu/2.webp",
+    "/places/ados-matin-kim-seongsu/3.webp"
+  ],
+  "ados-mecenatpolis-mall": [
+    "/places/ados-mecenatpolis-mall/1.webp",
+    "/places/ados-mecenatpolis-mall/2.webp",
+    "/places/ados-mecenatpolis-mall/3.webp"
+  ],
+  "ados-mesh-coffee": [
+    "/places/ados-mesh-coffee/1.webp",
+    "/places/ados-mesh-coffee/2.webp",
+    "/places/ados-mesh-coffee/3.webp",
+    "/places/ados-mesh-coffee/4.webp",
+    "/places/ados-mesh-coffee/5.webp"
+  ],
+  "ados-mizo-esthe-salon": [
+    "/places/ados-mizo-esthe-salon/1.webp",
+    "/places/ados-mizo-esthe-salon/2.webp",
+    "/places/ados-mizo-esthe-salon/3.webp"
+  ],
+  "ados-mizo-massage-rooftop-spa": [
+    "/places/ados-mizo-massage-rooftop-spa/1.webp",
+    "/places/ados-mizo-massage-rooftop-spa/2.webp",
+    "/places/ados-mizo-massage-rooftop-spa/3.webp"
+  ],
+  "ados-moclock-scalp-hair-loss-care": [
+    "/places/ados-moclock-scalp-hair-loss-care/1.webp",
+    "/places/ados-moclock-scalp-hair-loss-care/2.webp",
+    "/places/ados-moclock-scalp-hair-loss-care/3.webp"
+  ],
+  "ados-moi-hair-makeup": [
+    "/places/ados-moi-hair-makeup/1.webp",
+    "/places/ados-moi-hair-makeup/2.webp",
+    "/places/ados-moi-hair-makeup/3.webp",
+    "/places/ados-moi-hair-makeup/4.webp",
+    "/places/ados-moi-hair-makeup/5.webp"
+  ],
+  "ados-musinsa-standard-seongsu": [
+    "/places/ados-musinsa-standard-seongsu/1.webp",
+    "/places/ados-musinsa-standard-seongsu/2.webp",
+    "/places/ados-musinsa-standard-seongsu/3.webp",
+    "/places/ados-musinsa-standard-seongsu/4.webp"
+  ],
+  "ados-myeongdong-beauty-skyview-spa": [
+    "/places/ados-myeongdong-beauty-skyview-spa/1.webp",
+    "/places/ados-myeongdong-beauty-skyview-spa/2.webp",
+    "/places/ados-myeongdong-beauty-skyview-spa/3.webp"
+  ],
+  "ados-myeongdong-condition-body-head-massage": [
+    "/places/ados-myeongdong-condition-body-head-massage/1.webp",
+    "/places/ados-myeongdong-condition-body-head-massage/2.webp",
+    "/places/ados-myeongdong-condition-body-head-massage/3.webp",
+    "/places/ados-myeongdong-condition-body-head-massage/4.webp",
+    "/places/ados-myeongdong-condition-body-head-massage/5.webp"
+  ],
+  "ados-myeongdong-migliore": [
+    "/places/ados-myeongdong-migliore/1.webp",
+    "/places/ados-myeongdong-migliore/2.webp",
+    "/places/ados-myeongdong-migliore/3.webp"
+  ],
+  "ados-myeongdong-night-market": [
+    "/places/ados-myeongdong-night-market/1.webp",
+    "/places/ados-myeongdong-night-market/2.webp",
+    "/places/ados-myeongdong-night-market/3.webp"
+  ],
+  "ados-myeongdong-skinspa": [
+    "/places/ados-myeongdong-skinspa/1.webp",
+    "/places/ados-myeongdong-skinspa/2.webp",
+    "/places/ados-myeongdong-skinspa/3.webp",
+    "/places/ados-myeongdong-skinspa/4.webp",
+    "/places/ados-myeongdong-skinspa/5.webp"
+  ],
+  "ados-myeongdong-underground-shopping-center": [
+    "/places/ados-myeongdong-underground-shopping-center/1.webp",
+    "/places/ados-myeongdong-underground-shopping-center/2.webp",
+    "/places/ados-myeongdong-underground-shopping-center/3.webp",
+    "/places/ados-myeongdong-underground-shopping-center/4.webp"
+  ],
+  "ados-myshopper-personal-color-shopping-guide": [
+    "/places/ados-myshopper-personal-color-shopping-guide/1.webp",
+    "/places/ados-myshopper-personal-color-shopping-guide/2.webp",
+    "/places/ados-myshopper-personal-color-shopping-guide/3.webp"
+  ],
+  "ados-n-seoul-tower": [
+    "/places/ados-n-seoul-tower/1.webp",
+    "/places/ados-n-seoul-tower/2.webp",
+    "/places/ados-n-seoul-tower/3.webp",
+    "/places/ados-n-seoul-tower/4.webp"
+  ],
+  "ados-nailkimlee": [
+    "/places/ados-nailkimlee/1.webp",
+    "/places/ados-nailkimlee/2.webp",
+    "/places/ados-nailkimlee/3.webp"
+  ],
+  "ados-nampyeonghwa-sangga": [
+    "/places/ados-nampyeonghwa-sangga/1.webp",
+    "/places/ados-nampyeonghwa-sangga/2.webp",
+    "/places/ados-nampyeonghwa-sangga/3.webp",
+    "/places/ados-nampyeonghwa-sangga/4.webp"
+  ],
+  "ados-nonfiction-seongsu": [
+    "/places/ados-nonfiction-seongsu/1.webp",
+    "/places/ados-nonfiction-seongsu/2.webp",
+    "/places/ados-nonfiction-seongsu/3.webp",
+    "/places/ados-nonfiction-seongsu/4.webp"
+  ],
+  "ados-normalshop": [
+    "/places/ados-normalshop/1.webp",
+    "/places/ados-normalshop/2.webp",
+    "/places/ados-normalshop/3.webp"
+  ],
+  "ados-noryangjin-fisheries-wholesale-market": [
+    "/places/ados-noryangjin-fisheries-wholesale-market/1.webp",
+    "/places/ados-noryangjin-fisheries-wholesale-market/2.webp",
+    "/places/ados-noryangjin-fisheries-wholesale-market/3.webp"
+  ],
+  "ados-nudake-tea-house": [
+    "/places/ados-nudake-tea-house/1.webp",
+    "/places/ados-nudake-tea-house/2.webp",
+    "/places/ados-nudake-tea-house/3.webp",
+    "/places/ados-nudake-tea-house/4.webp",
+    "/places/ados-nudake-tea-house/5.webp"
+  ],
+  "ados-o-hui-whoo-spa-massage": [
+    "/places/ados-o-hui-whoo-spa-massage/1.webp",
+    "/places/ados-o-hui-whoo-spa-massage/2.webp",
+    "/places/ados-o-hui-whoo-spa-massage/3.webp",
+    "/places/ados-o-hui-whoo-spa-massage/4.webp",
+    "/places/ados-o-hui-whoo-spa-massage/5.webp"
+  ],
+  "ados-olrang-hair-styling": [
+    "/places/ados-olrang-hair-styling/1.webp",
+    "/places/ados-olrang-hair-styling/2.webp",
+    "/places/ados-olrang-hair-styling/3.webp"
+  ],
+  "ados-parkjun-beautylab": [
+    "/places/ados-parkjun-beautylab/1.webp",
+    "/places/ados-parkjun-beautylab/2.webp",
+    "/places/ados-parkjun-beautylab/3.webp",
+    "/places/ados-parkjun-beautylab/4.webp",
+    "/places/ados-parkjun-beautylab/5.webp"
+  ],
+  "ados-provence-spa-by-loccitane": [
+    "/places/ados-provence-spa-by-loccitane/1.webp",
+    "/places/ados-provence-spa-by-loccitane/2.webp",
+    "/places/ados-provence-spa-by-loccitane/3.webp"
+  ],
+  "ados-renk-euljiro": [
+    "/places/ados-renk-euljiro/1.webp",
+    "/places/ados-renk-euljiro/2.webp",
+    "/places/ados-renk-euljiro/3.webp"
+  ],
+  "ados-riverside-spa-land": [
+    "/places/ados-riverside-spa-land/1.webp",
+    "/places/ados-riverside-spa-land/2.webp",
+    "/places/ados-riverside-spa-land/3.webp"
+  ],
+  "ados-riverview-8th-avenue": [
+    "/places/ados-riverview-8th-avenue/1.webp",
+    "/places/ados-riverview-8th-avenue/2.webp",
+    "/places/ados-riverview-8th-avenue/3.webp",
+    "/places/ados-riverview-8th-avenue/4.webp",
+    "/places/ados-riverview-8th-avenue/5.webp"
+  ],
+  "ados-roa-makeup": [
+    "/places/ados-roa-makeup/1.webp",
+    "/places/ados-roa-makeup/2.webp",
+    "/places/ados-roa-makeup/3.webp"
+  ],
+  "ados-season-of-you": [
+    "/places/ados-season-of-you/1.webp",
+    "/places/ados-season-of-you/2.webp",
+    "/places/ados-season-of-you/3.webp",
+    "/places/ados-season-of-you/4.webp"
+  ],
+  "ados-seoul-city-wall": [
+    "/places/ados-seoul-city-wall/1.webp",
+    "/places/ados-seoul-city-wall/2.webp",
+    "/places/ados-seoul-city-wall/3.webp",
+    "/places/ados-seoul-city-wall/4.webp"
+  ],
+  "ados-seoul-folk-flea-market": [
+    "/places/ados-seoul-folk-flea-market/1.webp",
+    "/places/ados-seoul-folk-flea-market/2.webp",
+    "/places/ados-seoul-folk-flea-market/3.webp",
+    "/places/ados-seoul-folk-flea-market/4.webp",
+    "/places/ados-seoul-folk-flea-market/5.webp"
+  ],
+  "ados-seoul-sky": [
+    "/places/ados-seoul-sky/1.webp",
+    "/places/ados-seoul-sky/2.webp",
+    "/places/ados-seoul-sky/3.webp",
+    "/places/ados-seoul-sky/4.webp"
+  ],
+  "ados-seoulistique-skin": [
+    "/places/ados-seoulistique-skin/1.webp",
+    "/places/ados-seoulistique-skin/2.webp",
+    "/places/ados-seoulistique-skin/3.webp",
+    "/places/ados-seoulistique-skin/4.webp",
+    "/places/ados-seoulistique-skin/5.webp"
+  ],
+  "ados-shinheung-market": [
+    "/places/ados-shinheung-market/1.webp",
+    "/places/ados-shinheung-market/2.webp",
+    "/places/ados-shinheung-market/3.webp"
+  ],
+  "ados-signicho-nail-hongdae": [
+    "/places/ados-signicho-nail-hongdae/1.webp",
+    "/places/ados-signicho-nail-hongdae/2.webp",
+    "/places/ados-signicho-nail-hongdae/3.webp"
+  ],
+  "ados-spa-1978-red-ginseng-ritual": [
+    "/places/ados-spa-1978-red-ginseng-ritual/1.webp",
+    "/places/ados-spa-1978-red-ginseng-ritual/2.webp",
+    "/places/ados-spa-1978-red-ginseng-ritual/3.webp",
+    "/places/ados-spa-1978-red-ginseng-ritual/4.webp",
+    "/places/ados-spa-1978-red-ginseng-ritual/5.webp",
+    "/places/ados-spa-1978-red-ginseng-ritual/6.webp",
+    "/places/ados-spa-1978-red-ginseng-ritual/7.webp",
+    "/places/ados-spa-1978-red-ginseng-ritual/8.webp"
+  ],
+  "ados-spa-gogyeol": [
+    "/places/ados-spa-gogyeol/1.webp",
+    "/places/ados-spa-gogyeol/2.webp",
+    "/places/ados-spa-gogyeol/3.webp"
+  ],
+  "ados-sparex-sauna": [
+    "/places/ados-sparex-sauna/1.webp",
+    "/places/ados-sparex-sauna/2.webp",
+    "/places/ados-sparex-sauna/3.webp",
+    "/places/ados-sparex-sauna/4.webp"
+  ],
+  "ados-sparex-sauna-good-morning-city-dongmyo": [
+    "/places/ados-sparex-sauna-good-morning-city-dongmyo/1.webp",
+    "/places/ados-sparex-sauna-good-morning-city-dongmyo/2.webp",
+    "/places/ados-sparex-sauna-good-morning-city-dongmyo/3.webp"
+  ],
+  "ados-stylenanda-pink-hotel-flagship-store": [
+    "/places/ados-stylenanda-pink-hotel-flagship-store/1.webp",
+    "/places/ados-stylenanda-pink-hotel-flagship-store/2.webp",
+    "/places/ados-stylenanda-pink-hotel-flagship-store/3.webp",
+    "/places/ados-stylenanda-pink-hotel-flagship-store/4.webp"
+  ],
+  "ados-sulwhasoo-spa": [
+    "/places/ados-sulwhasoo-spa/1.webp",
+    "/places/ados-sulwhasoo-spa/2.webp",
+    "/places/ados-sulwhasoo-spa/3.webp",
+    "/places/ados-sulwhasoo-spa/4.webp",
+    "/places/ados-sulwhasoo-spa/5.webp"
+  ],
+  "ados-supsok-hanbang-land": [
+    "/places/ados-supsok-hanbang-land/1.webp",
+    "/places/ados-supsok-hanbang-land/2.webp",
+    "/places/ados-supsok-hanbang-land/3.webp"
+  ],
+  "ados-tamburins-seongsu": [
+    "/places/ados-tamburins-seongsu/1.webp",
+    "/places/ados-tamburins-seongsu/2.webp",
+    "/places/ados-tamburins-seongsu/3.webp"
+  ],
+  "ados-the-bom-personal-color-makeup": [
+    "/places/ados-the-bom-personal-color-makeup/1.webp",
+    "/places/ados-the-bom-personal-color-makeup/2.webp",
+    "/places/ados-the-bom-personal-color-makeup/3.webp"
+  ],
+  "ados-the-boutique-hauve-dosan": [
+    "/places/ados-the-boutique-hauve-dosan/1.webp",
+    "/places/ados-the-boutique-hauve-dosan/2.webp",
+    "/places/ados-the-boutique-hauve-dosan/3.webp"
+  ],
+  "ados-the-foot-shop-body-foot-care": [
+    "/places/ados-the-foot-shop-body-foot-care/1.webp",
+    "/places/ados-the-foot-shop-body-foot-care/2.webp",
+    "/places/ados-the-foot-shop-body-foot-care/3.webp",
+    "/places/ados-the-foot-shop-body-foot-care/4.webp",
+    "/places/ados-the-foot-shop-body-foot-care/5.webp"
+  ],
+  "ados-the-foret-spa-seoul-forest": [
+    "/places/ados-the-foret-spa-seoul-forest/1.webp",
+    "/places/ados-the-foret-spa-seoul-forest/2.webp",
+    "/places/ados-the-foret-spa-seoul-forest/3.webp",
+    "/places/ados-the-foret-spa-seoul-forest/4.webp",
+    "/places/ados-the-foret-spa-seoul-forest/5.webp"
+  ],
+  "ados-the-gravel-cheongdam": [
+    "/places/ados-the-gravel-cheongdam/1.webp",
+    "/places/ados-the-gravel-cheongdam/2.webp",
+    "/places/ados-the-gravel-cheongdam/3.webp",
+    "/places/ados-the-gravel-cheongdam/4.webp",
+    "/places/ados-the-gravel-cheongdam/5.webp"
+  ],
+  "ados-the-spa-grand-hyatt-seoul": [
+    "/places/ados-the-spa-grand-hyatt-seoul/1.webp",
+    "/places/ados-the-spa-grand-hyatt-seoul/2.webp",
+    "/places/ados-the-spa-grand-hyatt-seoul/3.webp"
+  ],
+  "ados-tirtir-seongsu": [
+    "/places/ados-tirtir-seongsu/1.webp",
+    "/places/ados-tirtir-seongsu/2.webp",
+    "/places/ados-tirtir-seongsu/3.webp"
+  ],
+  "ados-triomphe-esthetic": [
+    "/places/ados-triomphe-esthetic/1.webp",
+    "/places/ados-triomphe-esthetic/2.webp",
+    "/places/ados-triomphe-esthetic/3.webp"
+  ],
+  "ados-typer-haus": [
+    "/places/ados-typer-haus/1.webp",
+    "/places/ados-typer-haus/2.webp",
+    "/places/ados-typer-haus/3.webp"
+  ],
+  "ados-unique-by-hair-styling": [
+    "/places/ados-unique-by-hair-styling/1.webp",
+    "/places/ados-unique-by-hair-styling/2.webp",
+    "/places/ados-unique-by-hair-styling/3.webp"
+  ],
+  "ados-vog-hair-hongdae": [
+    "/places/ados-vog-hair-hongdae/1.webp",
+    "/places/ados-vog-hair-hongdae/2.webp",
+    "/places/ados-vog-hair-hongdae/3.webp",
+    "/places/ados-vog-hair-hongdae/4.webp",
+    "/places/ados-vog-hair-hongdae/5.webp"
+  ],
+  "ados-weneedblack-cheongdam": [
+    "/places/ados-weneedblack-cheongdam/1.webp",
+    "/places/ados-weneedblack-cheongdam/2.webp",
+    "/places/ados-weneedblack-cheongdam/3.webp"
+  ],
+  "ados-yeongcheon-market": [
+    "/places/ados-yeongcheon-market/1.webp",
+    "/places/ados-yeongcheon-market/2.webp",
+    "/places/ados-yeongcheon-market/3.webp"
+  ],
+  "ados-yeongdeungpo-market": [
+    "/places/ados-yeongdeungpo-market/1.webp",
+    "/places/ados-yeongdeungpo-market/2.webp",
+    "/places/ados-yeongdeungpo-market/3.webp",
+    "/places/ados-yeongdeungpo-market/4.webp",
+    "/places/ados-yeongdeungpo-market/5.webp"
+  ],
+  "ados-yoning": [
+    "/places/ados-yoning/1.webp",
+    "/places/ados-yoning/2.webp",
+    "/places/ados-yoning/3.webp",
+    "/places/ados-yoning/4.webp",
+    "/places/ados-yoning/5.webp"
+  ],
+  "ct-a-muu-hair-salon": [
+    "/places/ct-a-muu-hair-salon/1.webp",
+    "/places/ct-a-muu-hair-salon/2.webp",
+    "/places/ct-a-muu-hair-salon/3.webp"
+  ],
+  "ct-cheongdam-lovey-hair-makeup-salon": [
+    "/places/ct-cheongdam-lovey-hair-makeup-salon/1.webp",
+    "/places/ct-cheongdam-lovey-hair-makeup-salon/2.webp",
+    "/places/ct-cheongdam-lovey-hair-makeup-salon/3.webp",
+    "/places/ct-cheongdam-lovey-hair-makeup-salon/4.webp",
+    "/places/ct-cheongdam-lovey-hair-makeup-salon/5.webp"
+  ],
+  "ct-eco-jardin-jamsil-lotte-tower-branch-head-spa": [
+    "/places/ct-eco-jardin-jamsil-lotte-tower-branch-head-spa/1.webp",
+    "/places/ct-eco-jardin-jamsil-lotte-tower-branch-head-spa/2.webp",
+    "/places/ct-eco-jardin-jamsil-lotte-tower-branch-head-spa/3.webp",
+    "/places/ct-eco-jardin-jamsil-lotte-tower-branch-head-spa/4.webp",
+    "/places/ct-eco-jardin-jamsil-lotte-tower-branch-head-spa/5.webp"
+  ],
+  "ct-hosu-dosan-hair-makeup-studio": [
+    "/places/ct-hosu-dosan-hair-makeup-studio/1.webp",
+    "/places/ct-hosu-dosan-hair-makeup-studio/2.webp",
+    "/places/ct-hosu-dosan-hair-makeup-studio/3.webp"
+  ],
+  "ct-hosu-dosan-konkuk-seongsu-branch-k-pop-hair-ccl": [
+    "/places/ct-hosu-dosan-konkuk-seongsu-branch-k-pop-hair-ccl/1.webp",
+    "/places/ct-hosu-dosan-konkuk-seongsu-branch-k-pop-hair-ccl/2.webp",
+    "/places/ct-hosu-dosan-konkuk-seongsu-branch-k-pop-hair-ccl/3.webp",
+    "/places/ct-hosu-dosan-konkuk-seongsu-branch-k-pop-hair-ccl/4.webp",
+    "/places/ct-hosu-dosan-konkuk-seongsu-branch-k-pop-hair-ccl/5.webp"
+  ],
+  "ct-jenny-house-celebrity-hair-makeup-studio-in-cheo": [
+    "/places/ct-jenny-house-celebrity-hair-makeup-studio-in-cheo/1.webp",
+    "/places/ct-jenny-house-celebrity-hair-makeup-studio-in-cheo/2.webp",
+    "/places/ct-jenny-house-celebrity-hair-makeup-studio-in-cheo/3.webp"
+  ],
+  "ct-juno-hair-garosu-gil": [
+    "/places/ct-juno-hair-garosu-gil/1.webp",
+    "/places/ct-juno-hair-garosu-gil/2.webp",
+    "/places/ct-juno-hair-garosu-gil/3.webp"
+  ],
+  "ct-juno-hair-myeongdong-street-branch-popular-forei": [
+    "/places/ct-juno-hair-myeongdong-street-branch-popular-forei/1.webp",
+    "/places/ct-juno-hair-myeongdong-street-branch-popular-forei/2.webp",
+    "/places/ct-juno-hair-myeongdong-street-branch-popular-forei/3.webp",
+    "/places/ct-juno-hair-myeongdong-street-branch-popular-forei/4.webp",
+    "/places/ct-juno-hair-myeongdong-street-branch-popular-forei/5.webp"
+  ],
+  "ct-personalized-hair-color-head-spa-experts-texture": [
+    "/places/ct-personalized-hair-color-head-spa-experts-texture/1.webp",
+    "/places/ct-personalized-hair-color-head-spa-experts-texture/2.webp",
+    "/places/ct-personalized-hair-color-head-spa-experts-texture/3.webp",
+    "/places/ct-personalized-hair-color-head-spa-experts-texture/4.webp",
+    "/places/ct-personalized-hair-color-head-spa-experts-texture/5.webp"
+  ],
+  "ct-rolling-jay-cheongdam-makeup": [
+    "/places/ct-rolling-jay-cheongdam-makeup/1.webp",
+    "/places/ct-rolling-jay-cheongdam-makeup/2.webp",
+    "/places/ct-rolling-jay-cheongdam-makeup/3.webp"
+  ],
+  "ct-soonsiki-hair-seongsu-seoul-s-most-booked-salon": [
+    "/places/ct-soonsiki-hair-seongsu-seoul-s-most-booked-salon/1.webp",
+    "/places/ct-soonsiki-hair-seongsu-seoul-s-most-booked-salon/2.webp",
+    "/places/ct-soonsiki-hair-seongsu-seoul-s-most-booked-salon/3.webp",
+    "/places/ct-soonsiki-hair-seongsu-seoul-s-most-booked-salon/4.webp"
+  ],
+  "ct-soonsoo-celebrity-hair-makeup-salon-in-cheongdam": [
+    "/places/ct-soonsoo-celebrity-hair-makeup-salon-in-cheongdam/1.webp",
+    "/places/ct-soonsoo-celebrity-hair-makeup-salon-in-cheongdam/2.webp",
+    "/places/ct-soonsoo-celebrity-hair-makeup-salon-in-cheongdam/3.webp",
+    "/places/ct-soonsoo-celebrity-hair-makeup-salon-in-cheongdam/4.webp",
+    "/places/ct-soonsoo-celebrity-hair-makeup-salon-in-cheongdam/5.webp"
+  ],
+  "ct-void-cheongdam-by-park-chul-makeup-salon": [
+    "/places/ct-void-cheongdam-by-park-chul-makeup-salon/1.webp",
+    "/places/ct-void-cheongdam-by-park-chul-makeup-salon/2.webp",
+    "/places/ct-void-cheongdam-by-park-chul-makeup-salon/3.webp",
+    "/places/ct-void-cheongdam-by-park-chul-makeup-salon/4.webp"
+  ],
+  "ct-ye-lead-hair-salon-myeongdong": [
+    "/places/ct-ye-lead-hair-salon-myeongdong/1.webp",
+    "/places/ct-ye-lead-hair-salon-myeongdong/2.webp",
+    "/places/ct-ye-lead-hair-salon-myeongdong/3.webp"
+  ],
+  "ct-you-hair-salon-seongsu-branch": [
+    "/places/ct-you-hair-salon-seongsu-branch/1.webp",
+    "/places/ct-you-hair-salon-seongsu-branch/2.webp",
+    "/places/ct-you-hair-salon-seongsu-branch/3.webp"
+  ],
+  "namdaemun-market": [
+    "/places/namdaemun-market/1.webp",
+    "/places/namdaemun-market/2.webp",
+    "/places/namdaemun-market/3.webp"
+  ],
+  "oy-n성수": [
+    "/places/oy-n성수/1.webp",
+    "/places/oy-n성수/2.webp",
+    "/places/oy-n성수/3.webp"
+  ],
+  "seongsu-cafe": [
+    "/places/seongsu-cafe/1.webp",
+    "/places/seongsu-cafe/2.webp",
+    "/places/seongsu-cafe/3.webp",
+    "/places/seongsu-cafe/4.webp"
+  ],
+  "ssamziegil": [
+    "/places/ssamziegil/1.webp",
+    "/places/ssamziegil/2.webp",
+    "/places/ssamziegil/3.webp"
+  ],
+  "starfield-coex": [
+    "/places/starfield-coex/1.webp",
+    "/places/starfield-coex/2.webp",
+    "/places/starfield-coex/3.webp",
+    "/places/starfield-coex/4.webp",
+    "/places/starfield-coex/5.webp"
+  ]
+};
+
+/** Small first-photo variants used only by dense map lists. */
+export const PLACE_PHOTO_THUMBNAILS: Record<string, string> = {
+  "ados-5x5-nail-studio-seongsu": "/places/ados-5x5-nail-studio-seongsu/1.thumb.webp",
+  "ados-63-skypicnic": "/places/ados-63-skypicnic/1.thumb.webp",
+  "ados-a-knack": "/places/ados-a-knack/1.thumb.webp",
+  "ados-a3-nature-private-body-scrub": "/places/ados-a3-nature-private-body-scrub/1.thumb.webp",
+  "ados-ader-error-seongsu": "/places/ados-ader-error-seongsu/1.thumb.webp",
+  "ados-amore-seongsu": "/places/ados-amore-seongsu/1.thumb.webp",
+  "ados-amuse-seongsu": "/places/ados-amuse-seongsu/1.thumb.webp",
+  "ados-anskin-myeongdong": "/places/ados-anskin-myeongdong/1.thumb.webp",
+  "ados-apm-place": "/places/ados-apm-place/1.thumb.webp",
+  "ados-argyol-seongsu": "/places/ados-argyol-seongsu/1.thumb.webp",
+  "ados-aroma-thai-spa-gongdeok": "/places/ados-aroma-thai-spa-gongdeok/1.thumb.webp",
+  "ados-art-de-la-peau": "/places/ados-art-de-la-peau/1.thumb.webp",
+  "ados-arz-make-up-cheongdam": "/places/ados-arz-make-up-cheongdam/1.thumb.webp",
+  "ados-beauty-for-smile": "/places/ados-beauty-for-smile/1.thumb.webp",
+  "ados-chaeseokjang-observatory": "/places/ados-chaeseokjang-observatory/1.thumb.webp",
+  "ados-cocorea-makeup-hair": "/places/ados-cocorea-makeup-hair/1.thumb.webp",
+  "ados-cocorea-spa-myeongdong": "/places/ados-cocorea-spa-myeongdong/1.thumb.webp",
+  "ados-color-of-you-personal-color-analysis": "/places/ados-color-of-you-personal-color-analysis/1.thumb.webp",
+  "ados-color-place-k-pop-celeb-personal-color": "/places/ados-color-place-k-pop-celeb-personal-color/1.thumb.webp",
+  "ados-color-signal-personal-color-makeup": "/places/ados-color-signal-personal-color-makeup/1.thumb.webp",
+  "ados-colorize-personal-color-analysis-makeup": "/places/ados-colorize-personal-color-analysis-makeup/1.thumb.webp",
+  "ados-colorize-personal-color-makeup-gangnam": "/places/ados-colorize-personal-color-makeup-gangnam/1.thumb.webp",
+  "ados-common-ground": "/places/ados-common-ground/1.thumb.webp",
+  "ados-create-wellness-center": "/places/ados-create-wellness-center/1.thumb.webp",
+  "ados-cultural-complex-j-bug": "/places/ados-cultural-complex-j-bug/1.thumb.webp",
+  "ados-cutloose-k-pop-hair-makeup": "/places/ados-cutloose-k-pop-hair-makeup/1.thumb.webp",
+  "ados-dakyo-nail-apgujeong": "/places/ados-dakyo-nail-apgujeong/1.thumb.webp",
+  "ados-dakyo-nail-seongsu": "/places/ados-dakyo-nail-seongsu/1.thumb.webp",
+  "ados-damda-private-korean-bath-body-scrub": "/places/ados-damda-private-korean-bath-body-scrub/1.thumb.webp",
+  "ados-dior-cafe-seongsu-concept-store": "/places/ados-dior-cafe-seongsu-concept-store/1.thumb.webp",
+  "ados-dongmyo-flea-market": "/places/ados-dongmyo-flea-market/1.thumb.webp",
+  "ados-earthness-spa-aroma-massage": "/places/ados-earthness-spa-aroma-massage/1.thumb.webp",
+  "ados-eco-jardin-aeogae-branch": "/places/ados-eco-jardin-aeogae-branch/1.thumb.webp",
+  "ados-eql-grove-seongsu": "/places/ados-eql-grove-seongsu/1.thumb.webp",
+  "ados-eungbongsan-palgakjeong": "/places/ados-eungbongsan-palgakjeong/1.thumb.webp",
+  "ados-fleur-jardin-myeongdong": "/places/ados-fleur-jardin-myeongdong/1.thumb.webp",
+  "ados-forena-clinic": "/places/ados-forena-clinic/1.thumb.webp",
+  "ados-fwee-seongsu": "/places/ados-fwee-seongsu/1.thumb.webp",
+  "ados-garak-market": "/places/ados-garak-market/1.thumb.webp",
+  "ados-garden-5": "/places/ados-garden-5/1.thumb.webp",
+  "ados-gimpo-int-l-airport-observatory-deck": "/places/ados-gimpo-int-l-airport-observatory-deck/1.thumb.webp",
+  "ados-gold-spa": "/places/ados-gold-spa/1.thumb.webp",
+  "ados-gongdeok-market": "/places/ados-gongdeok-market/1.thumb.webp",
+  "ados-gonggan-nail-hongdae": "/places/ados-gonggan-nail-hongdae/1.thumb.webp",
+  "ados-gongneungdong-goblin-market": "/places/ados-gongneungdong-goblin-market/1.thumb.webp",
+  "ados-goto-mall": "/places/ados-goto-mall/1.thumb.webp",
+  "ados-hana-mud-spa": "/places/ados-hana-mud-spa/1.thumb.webp",
+  "ados-hanji-makeup-glow-makeup": "/places/ados-hanji-makeup-glow-makeup/1.thumb.webp",
+  "ados-hautbeaute": "/places/ados-hautbeaute/1.thumb.webp",
+  "ados-hello-apm": "/places/ados-hello-apm/1.thumb.webp",
+  "ados-hera": "/places/ados-hera/1.thumb.webp",
+  "ados-hera-spa-esthetic": "/places/ados-hera-spa-esthetic/1.thumb.webp",
+  "ados-herique-hair": "/places/ados-herique-hair/1.thumb.webp",
+  "ados-hikari-skin-massage": "/places/ados-hikari-skin-massage/1.thumb.webp",
+  "ados-hyze-clinic": "/places/ados-hyze-clinic/1.thumb.webp",
+  "ados-ifc-mall": "/places/ados-ifc-mall/1.thumb.webp",
+  "ados-iimi-hair-makeup": "/places/ados-iimi-hair-makeup/1.thumb.webp",
+  "ados-image-ho-personal-color": "/places/ados-image-ho-personal-color/1.thumb.webp",
+  "ados-in-spa-premium-hotel-spa": "/places/ados-in-spa-premium-hotel-spa/1.thumb.webp",
+  "ados-in-the-pink-seongsu": "/places/ados-in-the-pink-seongsu/1.thumb.webp",
+  "ados-individuel-geneve": "/places/ados-individuel-geneve/1.thumb.webp",
+  "ados-ipark-mall": "/places/ados-ipark-mall/1.thumb.webp",
+  "ados-jeongdong-observatory": "/places/ados-jeongdong-observatory/1.thumb.webp",
+  "ados-jongno-3-ga-stalls-alley": "/places/ados-jongno-3-ga-stalls-alley/1.thumb.webp",
+  "ados-jungbu-market": "/places/ados-jungbu-market/1.thumb.webp",
+  "ados-juno-hair-gangseo-office": "/places/ados-juno-hair-gangseo-office/1.thumb.webp",
+  "ados-kwangjang-market": "/places/ados-kwangjang-market/1.thumb.webp",
+  "ados-laurel-studio": "/places/ados-laurel-studio/1.thumb.webp",
+  "ados-lavish-spa": "/places/ados-lavish-spa/1.thumb.webp",
+  "ados-lcdc-seoul": "/places/ados-lcdc-seoul/1.thumb.webp",
+  "ados-lee-chul-hair-kerker": "/places/ados-lee-chul-hair-kerker/1.thumb.webp",
+  "ados-line-esthe-facial-care": "/places/ados-line-esthe-facial-care/1.thumb.webp",
+  "ados-lotte-outlets-seoul-station": "/places/ados-lotte-outlets-seoul-station/1.thumb.webp",
+  "ados-lotte-world-tower-mall": "/places/ados-lotte-world-tower-mall/1.thumb.webp",
+  "ados-majang-meat-market": "/places/ados-majang-meat-market/1.thumb.webp",
+  "ados-mangwon-market": "/places/ados-mangwon-market/1.thumb.webp",
+  "ados-mapo-agricultural-marine-products-market": "/places/ados-mapo-agricultural-marine-products-market/1.thumb.webp",
+  "ados-mariem-hair-head-spa": "/places/ados-mariem-hair-head-spa/1.thumb.webp",
+  "ados-marzia-healing-spa-cheongdam": "/places/ados-marzia-healing-spa-cheongdam/1.thumb.webp",
+  "ados-matin-kim-seongsu": "/places/ados-matin-kim-seongsu/1.thumb.webp",
+  "ados-mecenatpolis-mall": "/places/ados-mecenatpolis-mall/1.thumb.webp",
+  "ados-mesh-coffee": "/places/ados-mesh-coffee/1.thumb.webp",
+  "ados-mizo-esthe-salon": "/places/ados-mizo-esthe-salon/1.thumb.webp",
+  "ados-mizo-massage-rooftop-spa": "/places/ados-mizo-massage-rooftop-spa/1.thumb.webp",
+  "ados-moclock-scalp-hair-loss-care": "/places/ados-moclock-scalp-hair-loss-care/1.thumb.webp",
+  "ados-moi-hair-makeup": "/places/ados-moi-hair-makeup/1.thumb.webp",
+  "ados-musinsa-standard-seongsu": "/places/ados-musinsa-standard-seongsu/1.thumb.webp",
+  "ados-myeongdong-beauty-skyview-spa": "/places/ados-myeongdong-beauty-skyview-spa/1.thumb.webp",
+  "ados-myeongdong-condition-body-head-massage": "/places/ados-myeongdong-condition-body-head-massage/1.thumb.webp",
+  "ados-myeongdong-migliore": "/places/ados-myeongdong-migliore/1.thumb.webp",
+  "ados-myeongdong-night-market": "/places/ados-myeongdong-night-market/1.thumb.webp",
+  "ados-myeongdong-skinspa": "/places/ados-myeongdong-skinspa/1.thumb.webp",
+  "ados-myeongdong-underground-shopping-center": "/places/ados-myeongdong-underground-shopping-center/1.thumb.webp",
+  "ados-myshopper-personal-color-shopping-guide": "/places/ados-myshopper-personal-color-shopping-guide/1.thumb.webp",
+  "ados-n-seoul-tower": "/places/ados-n-seoul-tower/1.thumb.webp",
+  "ados-nailkimlee": "/places/ados-nailkimlee/1.thumb.webp",
+  "ados-nampyeonghwa-sangga": "/places/ados-nampyeonghwa-sangga/1.thumb.webp",
+  "ados-nonfiction-seongsu": "/places/ados-nonfiction-seongsu/1.thumb.webp",
+  "ados-normalshop": "/places/ados-normalshop/1.thumb.webp",
+  "ados-noryangjin-fisheries-wholesale-market": "/places/ados-noryangjin-fisheries-wholesale-market/1.thumb.webp",
+  "ados-nudake-tea-house": "/places/ados-nudake-tea-house/1.thumb.webp",
+  "ados-o-hui-whoo-spa-massage": "/places/ados-o-hui-whoo-spa-massage/1.thumb.webp",
+  "ados-olrang-hair-styling": "/places/ados-olrang-hair-styling/1.thumb.webp",
+  "ados-parkjun-beautylab": "/places/ados-parkjun-beautylab/1.thumb.webp",
+  "ados-provence-spa-by-loccitane": "/places/ados-provence-spa-by-loccitane/1.thumb.webp",
+  "ados-renk-euljiro": "/places/ados-renk-euljiro/1.thumb.webp",
+  "ados-riverside-spa-land": "/places/ados-riverside-spa-land/1.thumb.webp",
+  "ados-riverview-8th-avenue": "/places/ados-riverview-8th-avenue/1.thumb.webp",
+  "ados-roa-makeup": "/places/ados-roa-makeup/1.thumb.webp",
+  "ados-season-of-you": "/places/ados-season-of-you/1.thumb.webp",
+  "ados-seoul-city-wall": "/places/ados-seoul-city-wall/1.thumb.webp",
+  "ados-seoul-folk-flea-market": "/places/ados-seoul-folk-flea-market/1.thumb.webp",
+  "ados-seoul-sky": "/places/ados-seoul-sky/1.thumb.webp",
+  "ados-seoulistique-skin": "/places/ados-seoulistique-skin/1.thumb.webp",
+  "ados-shinheung-market": "/places/ados-shinheung-market/1.thumb.webp",
+  "ados-signicho-nail-hongdae": "/places/ados-signicho-nail-hongdae/1.thumb.webp",
+  "ados-spa-1978-red-ginseng-ritual": "/places/ados-spa-1978-red-ginseng-ritual/1.thumb.webp",
+  "ados-spa-gogyeol": "/places/ados-spa-gogyeol/1.thumb.webp",
+  "ados-sparex-sauna": "/places/ados-sparex-sauna/1.thumb.webp",
+  "ados-sparex-sauna-good-morning-city-dongmyo": "/places/ados-sparex-sauna-good-morning-city-dongmyo/1.thumb.webp",
+  "ados-stylenanda-pink-hotel-flagship-store": "/places/ados-stylenanda-pink-hotel-flagship-store/1.thumb.webp",
+  "ados-sulwhasoo-spa": "/places/ados-sulwhasoo-spa/1.thumb.webp",
+  "ados-supsok-hanbang-land": "/places/ados-supsok-hanbang-land/1.thumb.webp",
+  "ados-tamburins-seongsu": "/places/ados-tamburins-seongsu/1.thumb.webp",
+  "ados-the-bom-personal-color-makeup": "/places/ados-the-bom-personal-color-makeup/1.thumb.webp",
+  "ados-the-boutique-hauve-dosan": "/places/ados-the-boutique-hauve-dosan/1.thumb.webp",
+  "ados-the-foot-shop-body-foot-care": "/places/ados-the-foot-shop-body-foot-care/1.thumb.webp",
+  "ados-the-foret-spa-seoul-forest": "/places/ados-the-foret-spa-seoul-forest/1.thumb.webp",
+  "ados-the-gravel-cheongdam": "/places/ados-the-gravel-cheongdam/1.thumb.webp",
+  "ados-the-spa-grand-hyatt-seoul": "/places/ados-the-spa-grand-hyatt-seoul/1.thumb.webp",
+  "ados-tirtir-seongsu": "/places/ados-tirtir-seongsu/1.thumb.webp",
+  "ados-triomphe-esthetic": "/places/ados-triomphe-esthetic/1.thumb.webp",
+  "ados-typer-haus": "/places/ados-typer-haus/1.thumb.webp",
+  "ados-unique-by-hair-styling": "/places/ados-unique-by-hair-styling/1.thumb.webp",
+  "ados-vog-hair-hongdae": "/places/ados-vog-hair-hongdae/1.thumb.webp",
+  "ados-weneedblack-cheongdam": "/places/ados-weneedblack-cheongdam/1.thumb.webp",
+  "ados-yeongcheon-market": "/places/ados-yeongcheon-market/1.thumb.webp",
+  "ados-yeongdeungpo-market": "/places/ados-yeongdeungpo-market/1.thumb.webp",
+  "ados-yoning": "/places/ados-yoning/1.thumb.webp",
+  "ct-a-muu-hair-salon": "/places/ct-a-muu-hair-salon/1.thumb.webp",
+  "ct-cheongdam-lovey-hair-makeup-salon": "/places/ct-cheongdam-lovey-hair-makeup-salon/1.thumb.webp",
+  "ct-eco-jardin-jamsil-lotte-tower-branch-head-spa": "/places/ct-eco-jardin-jamsil-lotte-tower-branch-head-spa/1.thumb.webp",
+  "ct-hosu-dosan-hair-makeup-studio": "/places/ct-hosu-dosan-hair-makeup-studio/1.thumb.webp",
+  "ct-hosu-dosan-konkuk-seongsu-branch-k-pop-hair-ccl": "/places/ct-hosu-dosan-konkuk-seongsu-branch-k-pop-hair-ccl/1.thumb.webp",
+  "ct-jenny-house-celebrity-hair-makeup-studio-in-cheo": "/places/ct-jenny-house-celebrity-hair-makeup-studio-in-cheo/1.thumb.webp",
+  "ct-juno-hair-garosu-gil": "/places/ct-juno-hair-garosu-gil/1.thumb.webp",
+  "ct-juno-hair-myeongdong-street-branch-popular-forei": "/places/ct-juno-hair-myeongdong-street-branch-popular-forei/1.thumb.webp",
+  "ct-personalized-hair-color-head-spa-experts-texture": "/places/ct-personalized-hair-color-head-spa-experts-texture/1.thumb.webp",
+  "ct-rolling-jay-cheongdam-makeup": "/places/ct-rolling-jay-cheongdam-makeup/1.thumb.webp",
+  "ct-soonsiki-hair-seongsu-seoul-s-most-booked-salon": "/places/ct-soonsiki-hair-seongsu-seoul-s-most-booked-salon/1.thumb.webp",
+  "ct-soonsoo-celebrity-hair-makeup-salon-in-cheongdam": "/places/ct-soonsoo-celebrity-hair-makeup-salon-in-cheongdam/1.thumb.webp",
+  "ct-void-cheongdam-by-park-chul-makeup-salon": "/places/ct-void-cheongdam-by-park-chul-makeup-salon/1.thumb.webp",
+  "ct-ye-lead-hair-salon-myeongdong": "/places/ct-ye-lead-hair-salon-myeongdong/1.thumb.webp",
+  "ct-you-hair-salon-seongsu-branch": "/places/ct-you-hair-salon-seongsu-branch/1.thumb.webp",
+  "namdaemun-market": "/places/namdaemun-market/1.thumb.webp",
+  "oy-n성수": "/places/oy-n성수/1.thumb.webp",
+  "seongsu-cafe": "/places/seongsu-cafe/1.thumb.webp",
+  "ssamziegil": "/places/ssamziegil/1.thumb.webp",
+  "starfield-coex": "/places/starfield-coex/1.thumb.webp"
+};

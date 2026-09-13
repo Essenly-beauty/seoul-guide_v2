@@ -85,12 +85,14 @@ describe("place launch audit", () => {
     expect(summary.total).toBe(CATALOGUE_PLACES.length);
     expect(summary.bySource).toEqual(expectedSourceCounts);
     expect(summary.bySource.daiso).toBe(251);
-    expect(summary.findings.provisional_english_name).toBe(251);
-    expect(summary.findings.approximate_pin).toBe(42);
+    expect(summary.findings.provisional_english_name).toBe(347);
+    expect(summary.findings.approximate_pin).toBe(138);
     expect(summary.findings.outside_service_area).toBe(16);
-    expect(summary.findings.no_licensed_photo).toBe(CATALOGUE_PLACES.length);
+    expect(summary.findings.no_licensed_photo).toBe(
+      CATALOGUE_PLACES.filter((place) => !(place.photos?.length || place.photoUrl)).length,
+    );
     expect(summary.findings.duplicate_coordinate).toBe(expectedDuplicateCoordinates);
-    expect(summary.findings.missing_korean_listing_name).toBe(115);
+    expect(summary.findings.missing_korean_listing_name).toBe(119);
     expect(summary.findings.generated_english_romanization).toBe(239);
     expect(summary.findings.cached_kakao_match).toBeGreaterThanOrEqual(350);
     expect(summary.byIdentity.matched).toBeUndefined();
@@ -137,7 +139,7 @@ describe("place launch audit", () => {
     expect(markdown).toContain("| Identity matched | 0 |");
     expect(markdown).toContain(`| Identity unchecked | ${CATALOGUE_PLACES.length} |`);
     expect(markdown).toContain("| Outside Seoul service area | 16 |");
-    expect(markdown).toContain("| Provisional English place names | 251 |");
+    expect(markdown).toContain("| Provisional English place names | 347 |");
     expect(markdown).toContain("## Priority review queue");
     expect(markdown).toContain("| Naver English-name matched | 0 |");
     expect(markdown).toContain("| Place | Source | Identity | Naver EN | Action | Findings | Google | Naver (KO) | Naver (EN) | Kakao |");
@@ -172,8 +174,8 @@ describe("place launch audit", () => {
     expect(checklist).toContain("reports/place-audit.md");
     expect(checklist).toContain("unchecked does not mean invalid");
     expect(checklist).toContain("no automatic deletion");
-    expect(checklist).toContain("내부 카탈로그는 851곳");
-    expect(checklist).toContain("공개 카탈로그는 726곳");
+    expect(checklist).toContain("내부 카탈로그는 962곳");
+    expect(checklist).toContain("공개 카탈로그는 845곳");
     expect(checklist).toContain("nameVerification: provisional");
   });
 });

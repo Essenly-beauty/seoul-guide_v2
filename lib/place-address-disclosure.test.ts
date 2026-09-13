@@ -2,6 +2,7 @@ import { readFileSync } from "node:fs";
 import { describe, expect, it } from "vitest";
 
 const detailSource = readFileSync(new URL("../components/place/place-detail-body.tsx", import.meta.url), "utf8");
+const mapSummarySource = readFileSync(new URL("../components/map/selected-place-summary.tsx", import.meta.url), "utf8");
 const css = readFileSync(new URL("../app/globals.css", import.meta.url), "utf8");
 
 describe("place address disclosure", () => {
@@ -19,5 +20,11 @@ describe("place address disclosure", () => {
     expect(css).toContain(".place-address-panel");
     expect(css).toContain(".place-address-detail-row");
     expect(css).toContain(".place-address-disclosure > .taxicard");
+  });
+
+  it("labels owner-approved approximate locations on both map preview and detail", () => {
+    expect(mapSummarySource).toContain('place.locationVerification === "provisional"');
+    expect(mapSummarySource).toContain("Approximate pin");
+    expect(detailSource).toContain("Provisional location — the map pin is neighborhood-level");
   });
 });

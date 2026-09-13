@@ -112,8 +112,15 @@ describe("saved and shared place journeys", () => {
 
   it("limits map-list scrolling to the visible rows instead of a padded blank tail", () => {
     expect(css).not.toContain("34.5vh");
+    expect(css).not.toContain("max-height: calc(48vh - 128px");
     expect(css).toMatch(
-      /\.mapsheet\.half:not\(\.has-selection\) \.mapsheet-body\s*\{[^}]*max-height:\s*calc\(48vh - 128px - env\(safe-area-inset-bottom\)\)[^}]*padding-bottom:\s*12px/,
+      /\.mapsheet\s*\{[^}]*--sheet-half-offset:\s*42%/,
+    );
+    expect(css).toMatch(
+      /\.mapsheet:not\(\.has-selection\) \.mapsheet-body\s*\{[^}]*flex:\s*1 1 0[^}]*min-height:\s*0[^}]*padding-bottom:\s*12px/,
+    );
+    expect(css).toMatch(
+      /\.mapsheet\.half:not\(\.has-selection\)::after\s*\{[^}]*flex:\s*0 0 var\(--sheet-half-offset\)/,
     );
   });
 

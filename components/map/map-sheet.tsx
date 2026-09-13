@@ -1,22 +1,30 @@
 "use client";
 
-import { useCallback, useEffect, useId, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useId, useLayoutEffect, useMemo, useRef, useState } from "react";
 import { Icon } from "@/components/icon";
 import { SelectedPlaceSummary } from "@/components/map/selected-place-summary";
 import { PlaceDetailBody } from "@/components/place/place-detail-body";
 import { PlaceCtaBar } from "@/components/place/place-cta-bar";
 import { SelectedPlaceActionBar } from "./selected-place-action-bar";
 import { LiveBadge } from "@/components/ui/live-badge";
-import { getPlace, TYPE_LABEL, zoneShort, type Place } from "@/lib/data";
+import { BRAND_MARK_SRC, getPlace, TYPE_COLOR, TYPE_ICON, TYPE_LABEL, zoneShort, type Place } from "@/lib/data";
 import { formatCompactDistance, haversineKm, type LatLng } from "@/lib/geo";
 import {
   getMapSheetHalfOffsetRatio,
   nextMapSheetSnap,
+  resolveReleaseSnap,
   resolveSelectedPlaceView,
+  rubberBand,
+  springKeyframes,
   type MapSheetSnap,
 } from "@/lib/map-sheet-state";
 
 type Snap = MapSheetSnap;
+
+/** Vertical travel before a touch counts as a drag rather than a tap. */
+const DRAG_SLOP = 4;
+/** Only the last stretch of the gesture decides its release velocity. */
+const VELOCITY_WINDOW_MS = 80;
 
 export function MapSheet({ places, origin, selectedId, groupPlaceIds = [], onSelect, onClearSelection, moved = false }: {
   places: Place[];
@@ -38,7 +46,6 @@ export function MapSheet({ places, origin, selectedId, groupPlaceIds = [], onSel
   const [dragging, setDragging] = useState(false);
   const listId = useId();
   const sheetRef = useRef<HTMLElement>(null);
-  const dragStart = useRef<{ y: number; startOffset: number; min: number; max: number; last: number } | null>(null);
   const dragMoved = useRef(false); // suppresses the native click that follows a drag release
   const handleRef = useRef<HTMLDivElement>(null);
   const detailBodyRef = useRef<HTMLDivElement>(null);
@@ -136,17 +143,23 @@ export function MapSheet({ places, origin, selectedId, groupPlaceIds = [], onSel
     }
   }, [moved, selectedId]);
 
-  /** Height the peek snap must reveal: the compact summary plus the action
-      bar pinned under it. Falls back to the old constant before first paint. */
-  const peekContentHeight = () => {
-    const summary = sheetRef.current?.querySelector(".selected-place-summary.compact")
-      ?? sheetRef.current?.querySelector(".selected-place-summary");
-    const bar = sheetRef.current?.parentElement?.querySelector(".selected-place-actions");
+  /** Height the peek snap must reveal: the slim handle, the compact summary
+      and the action bar pinned under it. The compact card is only in the DOM
+      at peek, so the last measurement is remembered for the drag that heads
+      there; before any measurement a typical card is assumed. */
+  const lastPeekHeight = useRef<number | null>(null);
+  const peekVisibleHeight = useCallback(() => {
     if (!selectedPlace) return 62;
-    const content = summary instanceof HTMLElement ? summary.scrollHeight : 0;
-    const barHeight = bar instanceof HTMLElement ? bar.offsetHeight : 0;
-    return content > 0 ? content + barHeight + 8 : 136;
-  };
+    const sheet = sheetRef.current;
+    const summary = sheet?.querySelector(".selected-place-summary.compact");
+    if (summary instanceof HTMLElement) {
+      const bar = sheet?.parentElement?.querySelector(".selected-place-actions");
+      const barHeight = bar instanceof HTMLElement ? bar.offsetHeight : 0;
+      // 20px = the peek handle (.mapsheet.peek.has-selection .mapsheet-handle).
+      lastPeekHeight.current = 20 + summary.offsetHeight + barHeight;
+    }
+    return lastPeekHeight.current ?? 236;
+  }, [selectedPlace]);
 
   const snapOffsets = () => {
     // Every snap keeps the same outer sheet height; only translateY changes.
@@ -164,10 +177,19 @@ export function MapSheet({ places, origin, selectedId, groupPlaceIds = [], onSel
       // the action bar (owner report 2026-08-23). Measuring means any content
       // — longer names, a new metadata row — sizes itself instead of silently
       // losing its last line.
-      peek: Math.max(0, h - peekContentHeight()),
+      peek: Math.max(0, h - peekVisibleHeight()),
     } as const;
   };
-  const currentOffset = () => offset ?? snapOffsets()[snap];
+
+  // The resting peek position comes from a CSS class. Hand it the measured
+  // height so a drag's settle target and the class position are the same
+  // pixel — otherwise the sheet twitched once the class took over, and the
+  // compact card's last line sat under the action bar.
+  useLayoutEffect(() => {
+    const el = sheetRef.current;
+    if (!el || snap !== "peek" || !selectedPlace) return;
+    el.style.setProperty("--selected-sheet-peek-height", `${peekVisibleHeight()}px`);
+  }, [snap, selectedPlace, peekVisibleHeight]);
 
   const cycle = useCallback(() => {
     setOffset(null); // snap classes take over again
@@ -191,43 +213,183 @@ export function MapSheet({ places, origin, selectedId, groupPlaceIds = [], onSel
     return () => window.removeEventListener("myseouldrop:map-cycle", onMapCycle);
   }, [cycle]);
 
-  // Committed position → element style (skipped mid-drag; the move handler
-  // writes the transform directly so the sheet tracks the finger without renders).
+  // Committed position → element style (skipped while a gesture or its settle
+  // animation owns the transform; those write to the element directly so the
+  // sheet tracks the finger without a render per move).
   useEffect(() => {
     const el = sheetRef.current;
     if (!el || dragging) return;
     el.style.transform = offset !== null ? `translateY(${offset}px)` : "";
   }, [offset, snap, dragging]);
 
-  const onPointerDown = (e: React.PointerEvent) => {
-    dragMoved.current = false;
-    const so = snapOffsets();
-    dragStart.current = { y: e.clientY, startOffset: currentOffset(), min: so.full, max: so.peek, last: currentOffset() };
-    setDragging(true);
-    (e.target as HTMLElement).setPointerCapture(e.pointerId);
+  // ── Drag from anywhere on the sheet ──────────────────────────────────
+  // A touch becomes a sheet drag only after DRAG_SLOP px of vertical travel,
+  // so taps on rows and buttons keep their click and pointer capture is
+  // never taken from them. Inside the scrollable body the finger scrolls,
+  // except when it pulls down from the very top or lifts a sheet whose
+  // content has nothing to scroll — then the sheet follows the finger (the
+  // rule Apple Maps and Kakao use). Release picks a snap from the finger's
+  // velocity and settles there with a spring that inherits that velocity;
+  // grabbing mid-flight freezes the sheet under the finger and carries on.
+  type SheetGesture = {
+    pointerId: number;
+    downX: number;
+    downY: number;
+    /** clientY at the moment the drag was confirmed, not at pointerdown. */
+    y0: number;
+    startOffset: number;
+    min: number;
+    max: number;
+    dimension: number;
+    scroller: HTMLElement | null;
+    active: boolean;
+    position: number;
+    samples: { t: number; y: number }[];
   };
-  const onPointerMove = (e: React.PointerEvent) => {
-    const d = dragStart.current;
+  const gesture = useRef<SheetGesture | null>(null);
+  const settle = useRef<Animation | null>(null);
+  const claimTouch = useRef(false); // while true the sheet owns the touch and native scroll is held off
+
+  const readTranslateY = () => {
     const el = sheetRef.current;
-    if (!d || !el) return;
-    const next = Math.min(d.max, Math.max(d.min, d.startOffset + (e.clientY - d.y)));
-    d.last = next;
-    el.style.transform = `translateY(${next}px)`;
+    if (!el) return 0;
+    const t = getComputedStyle(el).transform;
+    return !t || t === "none" ? 0 : new DOMMatrixReadOnly(t).m42;
   };
-  const onPointerUp = (e: React.PointerEvent) => {
-    const d = dragStart.current;
-    dragStart.current = null;
+
+  /** Hand the position back to the snap classes without a visible hop. */
+  const commitSnap = (target: Snap, at: number) => {
+    const el = sheetRef.current;
+    settle.current?.cancel();
+    settle.current = null;
+    if (el) el.style.transform = `translateY(${at}px)`;
+    setOffset(null);
+    setSnap(target);
     setDragging(false);
-    if (!d) return;
-    const dy = e.clientY - d.y;
-    if (Math.abs(dy) > 6) {
-      dragMoved.current = true;
-      const so = snapOffsets();
-      const nearest = (Object.keys(so) as Snap[]).reduce((a, b) =>
-        Math.abs(so[a] - d.last) <= Math.abs(so[b] - d.last) ? a : b);
-      setOffset(null);
-      setSnap(nearest);
+  };
+
+  const settleTo = (target: Snap, to: number, from: number, velocity: number) => {
+    const el = sheetRef.current;
+    if (!el) return;
+    const reduceMotion = window.matchMedia?.("(prefers-reduced-motion: reduce)").matches ?? false;
+    const negligible = Math.abs(to - from) < 0.5 && Math.abs(velocity) < 0.05;
+    if (reduceMotion || negligible || typeof el.animate !== "function") {
+      commitSnap(target, to);
+      return;
     }
+    const { frames, duration } = springKeyframes({ from, to, velocity });
+    settle.current?.cancel();
+    const animation = el.animate(
+      frames.map((y) => ({ transform: `translateY(${y}px)` })),
+      { duration, easing: "linear", fill: "forwards" },
+    );
+    settle.current = animation;
+    animation.onfinish = () => {
+      if (settle.current === animation) commitSnap(target, to);
+    };
+  };
+
+  const onSheetPointerDown = (e: React.PointerEvent) => {
+    if (e.pointerType === "mouse" && e.button !== 0) return;
+    dragMoved.current = false;
+    const body = detailBodyRef.current;
+    const target = e.target as HTMLElement;
+    gesture.current = {
+      pointerId: e.pointerId,
+      downX: e.clientX,
+      downY: e.clientY,
+      y0: e.clientY,
+      startOffset: 0,
+      min: 0,
+      max: 0,
+      dimension: 1,
+      scroller: body && body.contains(target) ? body : null,
+      active: false,
+      position: 0,
+      samples: [],
+    };
+  };
+
+  const onSheetPointerMove = (e: React.PointerEvent) => {
+    const g = gesture.current;
+    const el = sheetRef.current;
+    if (!g || !el || g.pointerId !== e.pointerId) return;
+    if (!g.active) {
+      const dx = e.clientX - g.downX;
+      const dy = e.clientY - g.downY;
+      if (Math.abs(dy) < DRAG_SLOP) return;
+      if (Math.abs(dx) > Math.abs(dy)) { gesture.current = null; return; } // a sideways swipe (photo rail) is not ours
+      const { scroller } = g;
+      const canScroll = scroller !== null && scroller.scrollHeight > scroller.clientHeight + 1;
+      const atTop = scroller === null || scroller.scrollTop <= 0;
+      const sheetWantsIt =
+        scroller === null
+        || (dy > 0 && atTop)
+        || (dy < 0 && snap !== "full" && (!canScroll || selectedPlace !== null));
+      if (!sheetWantsIt) { gesture.current = null; return; }
+      // Confirmed. Freeze whatever motion is in flight and continue from there.
+      const so = snapOffsets();
+      const from = readTranslateY();
+      settle.current?.cancel();
+      settle.current = null;
+      el.classList.add("dragging"); // transition off before the first follow-frame; React re-applies it
+      el.style.transform = `translateY(${from}px)`;
+      g.active = true;
+      g.y0 = e.clientY;
+      g.startOffset = from;
+      g.position = from;
+      g.min = so.full;
+      g.max = so.peek;
+      g.dimension = Math.max(1, el.offsetHeight);
+      claimTouch.current = true;
+      dragMoved.current = true;
+      try { el.setPointerCapture(e.pointerId); } catch { /* pointer already gone */ }
+      setDragging(true);
+    }
+    const position = rubberBand(g.startOffset + (e.clientY - g.y0), g.min, g.max, g.dimension);
+    g.position = position;
+    g.samples.push({ t: e.timeStamp, y: position });
+    while (g.samples.length > 2 && e.timeStamp - g.samples[0].t > VELOCITY_WINDOW_MS) g.samples.shift();
+    el.style.transform = `translateY(${position}px)`;
+  };
+
+  const finishGesture = (e: React.PointerEvent, cancelled = false) => {
+    const g = gesture.current;
+    if (!g || g.pointerId !== e.pointerId) return;
+    gesture.current = null;
+    claimTouch.current = false;
+    if (!g.active) return; // a tap — its click goes through untouched
+    const so = snapOffsets();
+    const first = g.samples[0];
+    const last = g.samples[g.samples.length - 1];
+    const stale = !first || !last || last.t - first.t < 1 || e.timeStamp - last.t > VELOCITY_WINDOW_MS;
+    const velocity = cancelled || stale ? 0 : (last.y - first.y) / (last.t - first.t);
+    const target = resolveReleaseSnap({ offsets: so, position: g.position, velocity });
+    settleTo(target, so[target], g.position, velocity);
+  };
+
+  // Chrome and Safari start a native scroll (and cancel our pointer stream)
+  // on the first touchmove unless it is prevented, so the body's touchmove
+  // is claimed here while a sheet drag is in progress. `passive: false` is
+  // what makes that preventDefault count.
+  useEffect(() => {
+    const el = sheetRef.current;
+    if (!el) return;
+    const onTouchMove = (e: TouchEvent) => {
+      if (claimTouch.current && e.cancelable) e.preventDefault();
+    };
+    el.addEventListener("touchmove", onTouchMove, { passive: false });
+    return () => {
+      el.removeEventListener("touchmove", onTouchMove);
+      settle.current?.cancel();
+    };
+  }, []);
+
+  const onSheetClickCapture = (e: React.MouseEvent) => {
+    if (!dragMoved.current) return;
+    dragMoved.current = false;
+    e.preventDefault();
+    e.stopPropagation();
   };
   const onHandleClick = () => {
     if (dragMoved.current) { dragMoved.current = false; return; }
@@ -262,7 +424,16 @@ export function MapSheet({ places, origin, selectedId, groupPlaceIds = [], onSel
   // preview promotes the sheet to its full-height snap.
   return (
     <>
-    <section ref={sheetRef} className={`mapsheet ${snap}${dragging ? " dragging" : ""}${selectedPlace ? " has-selection" : ""}`} aria-label="Nearby places">
+    <section
+      ref={sheetRef}
+      className={`mapsheet ${snap}${dragging ? " dragging" : ""}${selectedPlace ? " has-selection" : ""}`}
+      aria-label="Nearby places"
+      onPointerDown={onSheetPointerDown}
+      onPointerMove={onSheetPointerMove}
+      onPointerUp={finishGesture}
+      onPointerCancel={(e) => finishGesture(e, true)}
+      onClickCapture={onSheetClickCapture}
+    >
       <div
         ref={handleRef}
         className="mapsheet-handle"
@@ -271,10 +442,6 @@ export function MapSheet({ places, origin, selectedId, groupPlaceIds = [], onSel
         aria-label={snapLabel}
         aria-expanded={snap !== "peek"}
         aria-controls={listId}
-        onPointerDown={onPointerDown}
-        onPointerMove={onPointerMove}
-        onPointerUp={onPointerUp}
-        onPointerCancel={() => { dragStart.current = null; setDragging(false); }}
         onClick={onHandleClick}
         onKeyDown={onHandleKeyDown}
       >
@@ -292,13 +459,15 @@ export function MapSheet({ places, origin, selectedId, groupPlaceIds = [], onSel
       </div>
 
       {selectedPlace && selectedView === "compact" && (
-        <SelectedPlaceSummary
-          place={selectedPlace}
-          km={selectedKm}
-          variant="compact"
-          onOpen={openSelectedSummary}
-          onDismiss={dismissSelectedSummary}
-        />
+        <div key={`compact:${selectedPlace.id}`} className="mapsheet-view-enter">
+          <SelectedPlaceSummary
+            place={selectedPlace}
+            km={selectedKm}
+            variant="compact"
+            onOpen={openSelectedSummary}
+            onDismiss={dismissSelectedSummary}
+          />
+        </div>
       )}
 
       <div
@@ -310,17 +479,21 @@ export function MapSheet({ places, origin, selectedId, groupPlaceIds = [], onSel
         onWheel={selectedPlace ? (e) => { if (Math.abs(e.deltaY) > 4) promoteDetailToFull(); } : undefined}
       >
         {selectedPlace && selectedView === "summary" ? (
-          <SelectedPlaceSummary
-            place={selectedPlace}
-            km={selectedKm}
-            variant="half"
-            onDismiss={dismissSelectedSummary}
-          />
+          <div key={`summary:${selectedPlace.id}`} className="mapsheet-view-enter">
+            <SelectedPlaceSummary
+              place={selectedPlace}
+              km={selectedKm}
+              variant="half"
+              onDismiss={dismissSelectedSummary}
+            />
+          </div>
         ) : selectedPlace && selectedView === "detail" ? (
-          <PlaceDetailBody
-            place={selectedPlace}
-            onCollapse={() => collapseFullDetail()}
-          />
+          <div key={`detail:${selectedPlace.id}`} className="mapsheet-view-enter">
+            <PlaceDetailBody
+              place={selectedPlace}
+              onCollapse={() => collapseFullDetail()}
+            />
+          </div>
         ) : !selectedPlace && groupPlaces.length > 1 ? groupPlaces.map((place) => {
           const km = haversineKm(origin, { lat: place.lat, lng: place.lng });
           return (
@@ -337,16 +510,7 @@ export function MapSheet({ places, origin, selectedId, groupPlaceIds = [], onSel
                 onSelect(place.id);
               }}
             >
-              <div className="thumb hero-img maprow-thumb">
-                {place.photoUrl ? (
-                  // eslint-disable-next-line @next/next/no-img-element
-                  <img className="maprow-photo" src={place.photoUrl} alt="" />
-                ) : (
-                  <span className="maprow-photo-fallback">
-                    <Icon name="pin" size="sm" aria-hidden="true" />
-                  </span>
-                )}
-              </div>
+              <MapRowThumb place={place} />
               <div className="maprow-copy">
                 <span className="label">{TYPE_LABEL[place.type]} · {zoneShort(place.zone)}</span>
                 <div className="place-name-primary">{place.name}</div>
@@ -376,18 +540,7 @@ export function MapSheet({ places, origin, selectedId, groupPlaceIds = [], onSel
                 onSelect(p.id);
               }}
             >
-              <div className="thumb hero-img maprow-thumb">
-                {p.photoUrl ? (
-                  // Storefront URLs come from verified place data and are not limited to
-                  // one image host, so keep this thumbnail browser-native.
-                  // eslint-disable-next-line @next/next/no-img-element
-                  <img className="maprow-photo" src={p.photoUrl} alt="" />
-                ) : (
-                  <span className="maprow-photo-fallback">
-                    <Icon name="pin" size="sm" aria-hidden="true" />
-                  </span>
-                )}
-              </div>
+              <MapRowThumb place={p} />
               <div className="maprow-copy">
                 <span className="label">{TYPE_LABEL[p.type]} · {zoneShort(p.zone)}</span>
                 <div className="place-name-primary">{p.name}</div>
@@ -419,5 +572,42 @@ export function MapSheet({ places, origin, selectedId, groupPlaceIds = [], onSel
       <SelectedPlaceActionBar place={selectedPlace} />
     )}
     </>
+  );
+}
+
+/** Square media slot at the head of every list row. A verified photo wins;
+    otherwise the retailer's own mark (Daiso, Olive Young) or the category's
+    map-pin glyph in its category colour — the same marker language the map
+    uses, so the list never shows a generic pin for a known brand (owner
+    request 2026-09-12). */
+function MapRowThumb({ place }: { place: Place }) {
+  const placePhoto = place.photoThumbnail ?? place.photos?.[0] ?? place.photoUrl;
+  const brandMark = BRAND_MARK_SRC[place.type];
+  return (
+    <div className="thumb hero-img maprow-thumb">
+      {placePhoto ? (
+        // Storefront URLs come from verified place data and are not limited to
+        // one image host, so keep this thumbnail browser-native.
+        // eslint-disable-next-line @next/next/no-img-element
+        <img
+          className="maprow-photo"
+          src={placePhoto}
+          alt=""
+          width={84}
+          height={84}
+          loading="lazy"
+          decoding="async"
+        />
+      ) : brandMark ? (
+        <span className="maprow-photo-fallback maprow-brand-fallback">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img className="maprow-brand-mark" src={brandMark} alt="" />
+        </span>
+      ) : (
+        <span className="maprow-photo-fallback" style={{ color: TYPE_COLOR[place.type] }}>
+          <Icon name={TYPE_ICON[place.type]} className="maprow-fallback-glyph" />
+        </span>
+      )}
+    </div>
   );
 }
