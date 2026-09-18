@@ -52,6 +52,8 @@ scripts/.cache/
 .env
 !/docs/auth-setup.md
 !/docs/HANDOFF.md
+# provenance notes that tests read (lib/ranking-retailer-contract.test.ts)
+!/docs/assets/
 test-results/
 playwright-report/
 /scripts/.station-exits-cache.json
