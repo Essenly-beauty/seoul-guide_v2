@@ -127,7 +127,7 @@ export async function optimizePlacePhotoTree(inputRoot, outputRoot, options = {}
   return results;
 }
 
-async function readApplicationPlaceIds(root) {
+export async function readApplicationPlaceIds(root) {
   const knownIds = new Set();
   const sources = [
     join(root, "lib", "data.ts"),

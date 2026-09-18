@@ -912,10 +912,682 @@ export const PLACE_PHOTOS: Record<string, string[]> = {
     "/places/namdaemun-market/2.webp",
     "/places/namdaemun-market/3.webp"
   ],
+  "oy-nc신구로점": [
+    "/places/oy-nc신구로점/1.webp"
+  ],
   "oy-n성수": [
     "/places/oy-n성수/1.webp",
     "/places/oy-n성수/2.webp",
     "/places/oy-n성수/3.webp"
+  ],
+  "oy-가산디지털단지역점": [
+    "/places/oy-가산디지털단지역점/1.webp"
+  ],
+  "oy-가산점": [
+    "/places/oy-가산점/1.webp"
+  ],
+  "oy-강남구청역점": [
+    "/places/oy-강남구청역점/1.webp"
+  ],
+  "oy-강남엔터식스점": [
+    "/places/oy-강남엔터식스점/1.webp"
+  ],
+  "oy-강남우성점": [
+    "/places/oy-강남우성점/1.webp"
+  ],
+  "oy-강동구청점": [
+    "/places/oy-강동구청점/1.webp"
+  ],
+  "oy-강변역점": [
+    "/places/oy-강변역점/1.webp"
+  ],
+  "oy-강서구청점": [
+    "/places/oy-강서구청점/1.webp"
+  ],
+  "oy-개봉역북부점": [
+    "/places/oy-개봉역북부점/1.webp"
+  ],
+  "oy-개포동점": [
+    "/places/oy-개포동점/1.webp"
+  ],
+  "oy-건대입구점": [
+    "/places/oy-건대입구점/1.webp"
+  ],
+  "oy-건대커먼그라운드점": [
+    "/places/oy-건대커먼그라운드점/1.webp"
+  ],
+  "oy-경복궁역점": [
+    "/places/oy-경복궁역점/1.webp"
+  ],
+  "oy-경희대점": [
+    "/places/oy-경희대점/1.webp"
+  ],
+  "oy-공덕파크팰리스점": [
+    "/places/oy-공덕파크팰리스점/1.webp"
+  ],
+  "oy-공릉역점": [
+    "/places/oy-공릉역점/1.webp"
+  ],
+  "oy-광운대역점": [
+    "/places/oy-광운대역점/1.webp"
+  ],
+  "oy-광장마켓점": [
+    "/places/oy-광장마켓점/1.webp"
+  ],
+  "oy-구로구청점": [
+    "/places/oy-구로구청점/1.webp"
+  ],
+  "oy-구로지밸리몰점": [
+    "/places/oy-구로지밸리몰점/1.webp"
+  ],
+  "oy-구의역점": [
+    "/places/oy-구의역점/1.webp"
+  ],
+  "oy-구의이스트폴점": [
+    "/places/oy-구의이스트폴점/1.webp"
+  ],
+  "oy-구일역점": [
+    "/places/oy-구일역점/1.webp"
+  ],
+  "oy-군자역점": [
+    "/places/oy-군자역점/1.webp"
+  ],
+  "oy-금호점": [
+    "/places/oy-금호점/1.webp"
+  ],
+  "oy-길동사거리점": [
+    "/places/oy-길동사거리점/1.webp"
+  ],
+  "oy-길동역점": [
+    "/places/oy-길동역점/1.webp"
+  ],
+  "oy-길음역점": [
+    "/places/oy-길음역점/1.webp"
+  ],
+  "oy-길음점": [
+    "/places/oy-길음점/1.webp"
+  ],
+  "oy-남구로점": [
+    "/places/oy-남구로점/1.webp"
+  ],
+  "oy-내방역점": [
+    "/places/oy-내방역점/1.webp"
+  ],
+  "oy-노량진역점": [
+    "/places/oy-노량진역점/1.webp"
+  ],
+  "oy-노원공릉점": [
+    "/places/oy-노원공릉점/1.webp"
+  ],
+  "oy-노원점": [
+    "/places/oy-노원점/1.webp"
+  ],
+  "oy-녹두거리점": [
+    "/places/oy-녹두거리점/1.webp"
+  ],
+  "oy-답십리역점": [
+    "/places/oy-답십리역점/1.webp"
+  ],
+  "oy-당산대로점": [
+    "/places/oy-당산대로점/1.webp"
+  ],
+  "oy-당산역점": [
+    "/places/oy-당산역점/1.webp"
+  ],
+  "oy-대림성모점": [
+    "/places/oy-대림성모점/1.webp"
+  ],
+  "oy-대치사거리점": [
+    "/places/oy-대치사거리점/1.webp"
+  ],
+  "oy-대치역점": [
+    "/places/oy-대치역점/1.webp"
+  ],
+  "oy-대치점": [
+    "/places/oy-대치점/1.webp"
+  ],
+  "oy-대학로점": [
+    "/places/oy-대학로점/1.webp"
+  ],
+  "oy-대학로중앙점": [
+    "/places/oy-대학로중앙점/1.webp"
+  ],
+  "oy-덕수궁점": [
+    "/places/oy-덕수궁점/1.webp"
+  ],
+  "oy-던던동대문점": [
+    "/places/oy-던던동대문점/1.webp"
+  ],
+  "oy-돈암점": [
+    "/places/oy-돈암점/1.webp"
+  ],
+  "oy-돈암중앙점": [
+    "/places/oy-돈암중앙점/1.webp"
+  ],
+  "oy-동교동점": [
+    "/places/oy-동교동점/1.webp"
+  ],
+  "oy-동대문역사문화공원사거리점": [
+    "/places/oy-동대문역사문화공원사거리점/1.webp"
+  ],
+  "oy-동대문역사문화공원역점": [
+    "/places/oy-동대문역사문화공원역점/1.webp"
+  ],
+  "oy-동덕여대점": [
+    "/places/oy-동덕여대점/1.webp"
+  ],
+  "oy-동묘앞역점": [
+    "/places/oy-동묘앞역점/1.webp"
+  ],
+  "oy-두타점": [
+    "/places/oy-두타점/1.webp"
+  ],
+  "oy-둔촌점": [
+    "/places/oy-둔촌점/1.webp"
+  ],
+  "oy-둔촌파크포레온점": [
+    "/places/oy-둔촌파크포레온점/1.webp"
+  ],
+  "oy-등촌역점": [
+    "/places/oy-등촌역점/1.webp"
+  ],
+  "oy-등촌점": [
+    "/places/oy-등촌점/1.webp"
+  ],
+  "oy-디지털미디어시티역점": [
+    "/places/oy-디지털미디어시티역점/1.webp"
+  ],
+  "oy-뚝섬역점": [
+    "/places/oy-뚝섬역점/1.webp"
+  ],
+  "oy-롯데백화점잠실점": [
+    "/places/oy-롯데백화점잠실점/1.webp"
+  ],
+  "oy-롯데월드몰점": [
+    "/places/oy-롯데월드몰점/1.webp"
+  ],
+  "oy-롯데월드몰플러스점": [
+    "/places/oy-롯데월드몰플러스점/1.webp"
+  ],
+  "oy-롯데월드점": [
+    "/places/oy-롯데월드점/1.webp"
+  ],
+  "oy-마들역점": [
+    "/places/oy-마들역점/1.webp"
+  ],
+  "oy-마포도화점": [
+    "/places/oy-마포도화점/1.webp"
+  ],
+  "oy-만리동점": [
+    "/places/oy-만리동점/1.webp"
+  ],
+  "oy-망원동점": [
+    "/places/oy-망원동점/1.webp"
+  ],
+  "oy-먹골역점": [
+    "/places/oy-먹골역점/1.webp"
+  ],
+  "oy-명동2가점": [
+    "/places/oy-명동2가점/1.webp"
+  ],
+  "oy-명동대로점": [
+    "/places/oy-명동대로점/1.webp"
+  ],
+  "oy-명동역점": [
+    "/places/oy-명동역점/1.webp"
+  ],
+  "oy-명동타임워크점": [
+    "/places/oy-명동타임워크점/1.webp"
+  ],
+  "oy-명지대점": [
+    "/places/oy-명지대점/1.webp"
+  ],
+  "oy-무교동점": [
+    "/places/oy-무교동점/1.webp"
+  ],
+  "oy-미아뉴타운점": [
+    "/places/oy-미아뉴타운점/1.webp"
+  ],
+  "oy-미아사거리역점": [
+    "/places/oy-미아사거리역점/1.webp"
+  ],
+  "oy-미아사거리점": [
+    "/places/oy-미아사거리점/1.webp"
+  ],
+  "oy-미아역점": [
+    "/places/oy-미아역점/1.webp"
+  ],
+  "oy-방배이수점": [
+    "/places/oy-방배이수점/1.webp"
+  ],
+  "oy-방배점": [
+    "/places/oy-방배점/1.webp"
+  ],
+  "oy-방이시장점": [
+    "/places/oy-방이시장점/1.webp"
+  ],
+  "oy-배명사거리점": [
+    "/places/oy-배명사거리점/1.webp"
+  ],
+  "oy-보라매병원역점": [
+    "/places/oy-보라매병원역점/1.webp"
+  ],
+  "oy-보라매역점": [
+    "/places/oy-보라매역점/1.webp"
+  ],
+  "oy-봉은사역점": [
+    "/places/oy-봉은사역점/1.webp"
+  ],
+  "oy-북가좌동점": [
+    "/places/oy-북가좌동점/1.webp"
+  ],
+  "oy-사당점": [
+    "/places/oy-사당점/1.webp"
+  ],
+  "oy-삼성중앙역점": [
+    "/places/oy-삼성중앙역점/1.webp"
+  ],
+  "oy-삼전역점": [
+    "/places/oy-삼전역점/1.webp"
+  ],
+  "oy-상계보람점": [
+    "/places/oy-상계보람점/1.webp"
+  ],
+  "oy-상도역점": [
+    "/places/oy-상도역점/1.webp"
+  ],
+  "oy-상암enm점": [
+    "/places/oy-상암enm점/1.webp"
+  ],
+  "oy-상암mbc점": [
+    "/places/oy-상암mbc점/1.webp"
+  ],
+  "oy-서래마을점": [
+    "/places/oy-서래마을점/1.webp"
+  ],
+  "oy-서울숲역점": [
+    "/places/oy-서울숲역점/1.webp"
+  ],
+  "oy-서울시립대점": [
+    "/places/oy-서울시립대점/1.webp"
+  ],
+  "oy-서초우성점": [
+    "/places/oy-서초우성점/1.webp"
+  ],
+  "oy-석계역점": [
+    "/places/oy-석계역점/1.webp"
+  ],
+  "oy-선릉로점": [
+    "/places/oy-선릉로점/1.webp"
+  ],
+  "oy-선릉중앙점": [
+    "/places/oy-선릉중앙점/1.webp"
+  ],
+  "oy-선릉타운점": [
+    "/places/oy-선릉타운점/1.webp"
+  ],
+  "oy-선유도역점": [
+    "/places/oy-선유도역점/1.webp"
+  ],
+  "oy-성수연방점": [
+    "/places/oy-성수연방점/1.webp"
+  ],
+  "oy-성신여대입구역점": [
+    "/places/oy-성신여대입구역점/1.webp"
+  ],
+  "oy-세곡동점": [
+    "/places/oy-세곡동점/1.webp"
+  ],
+  "oy-세로수길점": [
+    "/places/oy-세로수길점/1.webp"
+  ],
+  "oy-세종로점": [
+    "/places/oy-세종로점/1.webp"
+  ],
+  "oy-송파구청점": [
+    "/places/oy-송파구청점/1.webp"
+  ],
+  "oy-수락산역점": [
+    "/places/oy-수락산역점/1.webp"
+  ],
+  "oy-수색점": [
+    "/places/oy-수색점/1.webp"
+  ],
+  "oy-수서역점": [
+    "/places/oy-수서역점/1.webp"
+  ],
+  "oy-숙대입구역점": [
+    "/places/oy-숙대입구역점/1.webp"
+  ],
+  "oy-숙대점": [
+    "/places/oy-숙대점/1.webp"
+  ],
+  "oy-순천향입구점": [
+    "/places/oy-순천향입구점/1.webp"
+  ],
+  "oy-숭실대입구역점": [
+    "/places/oy-숭실대입구역점/1.webp"
+  ],
+  "oy-스타시티점": [
+    "/places/oy-스타시티점/1.webp"
+  ],
+  "oy-스타필드애비뉴그랑서울점": [
+    "/places/oy-스타필드애비뉴그랑서울점/1.webp"
+  ],
+  "oy-시청역점": [
+    "/places/oy-시청역점/1.webp"
+  ],
+  "oy-신강남점": [
+    "/places/oy-신강남점/1.webp"
+  ],
+  "oy-신금호역점": [
+    "/places/oy-신금호역점/1.webp"
+  ],
+  "oy-신논현역점": [
+    "/places/oy-신논현역점/1.webp"
+  ],
+  "oy-신당역점": [
+    "/places/oy-신당역점/1.webp"
+  ],
+  "oy-신대방삼거리역점": [
+    "/places/oy-신대방삼거리역점/1.webp"
+  ],
+  "oy-신대방역점": [
+    "/places/oy-신대방역점/1.webp"
+  ],
+  "oy-신도림테크노마트점": [
+    "/places/oy-신도림테크노마트점/1.webp"
+  ],
+  "oy-신사점": [
+    "/places/oy-신사점/1.webp"
+  ],
+  "oy-신설동역점": [
+    "/places/oy-신설동역점/1.webp"
+  ],
+  "oy-신용산역점": [
+    "/places/oy-신용산역점/1.webp"
+  ],
+  "oy-신천중앙점": [
+    "/places/oy-신천중앙점/1.webp"
+  ],
+  "oy-신촌대로점": [
+    "/places/oy-신촌대로점/1.webp"
+  ],
+  "oy-신촌로터리점": [
+    "/places/oy-신촌로터리점/1.webp"
+  ],
+  "oy-신촌명물거리점": [
+    "/places/oy-신촌명물거리점/1.webp"
+  ],
+  "oy-신촌연세점": [
+    "/places/oy-신촌연세점/1.webp"
+  ],
+  "oy-신촌중앙점": [
+    "/places/oy-신촌중앙점/1.webp"
+  ],
+  "oy-신풍역점": [
+    "/places/oy-신풍역점/1.webp"
+  ],
+  "oy-씨제이enm커머스부문점": [
+    "/places/oy-씨제이enm커머스부문점/1.webp"
+  ],
+  "oy-씨제이남산더센터점": [
+    "/places/oy-씨제이남산더센터점/1.webp"
+  ],
+  "oy-안암점": [
+    "/places/oy-안암점/1.webp"
+  ],
+  "oy-압구정로데오점": [
+    "/places/oy-압구정로데오점/1.webp"
+  ],
+  "oy-압구정역점": [
+    "/places/oy-압구정역점/1.webp"
+  ],
+  "oy-압구정점": [
+    "/places/oy-압구정점/1.webp"
+  ],
+  "oy-압구정중앙점": [
+    "/places/oy-압구정중앙점/1.webp"
+  ],
+  "oy-애오개역점": [
+    "/places/oy-애오개역점/1.webp"
+  ],
+  "oy-약수역점": [
+    "/places/oy-약수역점/1.webp"
+  ],
+  "oy-양재스타클래스점": [
+    "/places/oy-양재스타클래스점/1.webp"
+  ],
+  "oy-양재역점": [
+    "/places/oy-양재역점/1.webp"
+  ],
+  "oy-어린이대공원역점": [
+    "/places/oy-어린이대공원역점/1.webp"
+  ],
+  "oy-역삼역점": [
+    "/places/oy-역삼역점/1.webp"
+  ],
+  "oy-역삼점": [
+    "/places/oy-역삼점/1.webp"
+  ],
+  "oy-역삼중앙점": [
+    "/places/oy-역삼중앙점/1.webp"
+  ],
+  "oy-연희점": [
+    "/places/oy-연희점/1.webp"
+  ],
+  "oy-염창역9호선점": [
+    "/places/oy-염창역9호선점/1.webp"
+  ],
+  "oy-염창역점": [
+    "/places/oy-염창역점/1.webp"
+  ],
+  "oy-영등포역사점": [
+    "/places/oy-영등포역사점/1.webp"
+  ],
+  "oy-영등포역점": [
+    "/places/oy-영등포역점/1.webp"
+  ],
+  "oy-영등포타임스퀘어점": [
+    "/places/oy-영등포타임스퀘어점/1.webp"
+  ],
+  "oy-오류동역점": [
+    "/places/oy-오류동역점/1.webp"
+  ],
+  "oy-올림픽대교북단점": [
+    "/places/oy-올림픽대교북단점/1.webp"
+  ],
+  "oy-외대정문점": [
+    "/places/oy-외대정문점/1.webp"
+  ],
+  "oy-용산리첸시아점": [
+    "/places/oy-용산리첸시아점/1.webp"
+  ],
+  "oy-용산아이파크몰더센터점": [
+    "/places/oy-용산아이파크몰더센터점/1.webp"
+  ],
+  "oy-용산아이파크몰점": [
+    "/places/oy-용산아이파크몰점/1.webp"
+  ],
+  "oy-우장산역점": [
+    "/places/oy-우장산역점/1.webp"
+  ],
+  "oy-위례아이파크점": [
+    "/places/oy-위례아이파크점/1.webp"
+  ],
+  "oy-은행사거리점": [
+    "/places/oy-은행사거리점/1.webp"
+  ],
+  "oy-이수역점": [
+    "/places/oy-이수역점/1.webp"
+  ],
+  "oy-이태원입구점": [
+    "/places/oy-이태원입구점/1.webp"
+  ],
+  "oy-인사동점": [
+    "/places/oy-인사동점/1.webp"
+  ],
+  "oy-일원역점": [
+    "/places/oy-일원역점/1.webp"
+  ],
+  "oy-자양역점": [
+    "/places/oy-자양역점/1.webp"
+  ],
+  "oy-잠실역8호선점": [
+    "/places/oy-잠실역8호선점/1.webp"
+  ],
+  "oy-잠실점": [
+    "/places/oy-잠실점/1.webp"
+  ],
+  "oy-잠실학원사거리점": [
+    "/places/oy-잠실학원사거리점/1.webp"
+  ],
+  "oy-장안동사거리점": [
+    "/places/oy-장안동사거리점/1.webp"
+  ],
+  "oy-장위뉴타운점": [
+    "/places/oy-장위뉴타운점/1.webp"
+  ],
+  "oy-장한평역점": [
+    "/places/oy-장한평역점/1.webp"
+  ],
+  "oy-정동점": [
+    "/places/oy-정동점/1.webp"
+  ],
+  "oy-정릉점": [
+    "/places/oy-정릉점/1.webp"
+  ],
+  "oy-제일제당센터점": [
+    "/places/oy-제일제당센터점/1.webp"
+  ],
+  "oy-종각점": [
+    "/places/oy-종각점/1.webp"
+  ],
+  "oy-종로1가점": [
+    "/places/oy-종로1가점/1.webp"
+  ],
+  "oy-종로ybm점": [
+    "/places/oy-종로ybm점/1.webp"
+  ],
+  "oy-종로점": [
+    "/places/oy-종로점/1.webp"
+  ],
+  "oy-종암점": [
+    "/places/oy-종암점/1.webp"
+  ],
+  "oy-중랑점": [
+    "/places/oy-중랑점/1.webp"
+  ],
+  "oy-중앙대점": [
+    "/places/oy-중앙대점/1.webp"
+  ],
+  "oy-중화역점": [
+    "/places/oy-중화역점/1.webp"
+  ],
+  "oy-증미역점": [
+    "/places/oy-증미역점/1.webp"
+  ],
+  "oy-창천점": [
+    "/places/oy-창천점/1.webp"
+  ],
+  "oy-천왕역점": [
+    "/places/oy-천왕역점/1.webp"
+  ],
+  "oy-천호엔터식스점": [
+    "/places/oy-천호엔터식스점/1.webp"
+  ],
+  "oy-천호역점": [
+    "/places/oy-천호역점/1.webp"
+  ],
+  "oy-천호중앙점": [
+    "/places/oy-천호중앙점/1.webp"
+  ],
+  "oy-청담역점": [
+    "/places/oy-청담역점/1.webp"
+  ],
+  "oy-청량리역사점": [
+    "/places/oy-청량리역사점/1.webp"
+  ],
+  "oy-청량리중앙점": [
+    "/places/oy-청량리중앙점/1.webp"
+  ],
+  "oy-충무로역점": [
+    "/places/oy-충무로역점/1.webp"
+  ],
+  "oy-타워팰리스점": [
+    "/places/oy-타워팰리스점/1.webp"
+  ],
+  "oy-타임스퀘어아트리움점": [
+    "/places/oy-타임스퀘어아트리움점/1.webp"
+  ],
+  "oy-테헤란로점": [
+    "/places/oy-테헤란로점/1.webp"
+  ],
+  "oy-트윈시티점": [
+    "/places/oy-트윈시티점/1.webp"
+  ],
+  "oy-파르나스몰점": [
+    "/places/oy-파르나스몰점/1.webp"
+  ],
+  "oy-포이사거리점": [
+    "/places/oy-포이사거리점/1.webp"
+  ],
+  "oy-플러스점": [
+    "/places/oy-플러스점/1.webp"
+  ],
+  "oy-학동역점": [
+    "/places/oy-학동역점/1.webp"
+  ],
+  "oy-학동중앙점": [
+    "/places/oy-학동중앙점/1.webp"
+  ],
+  "oy-한남오거리점": [
+    "/places/oy-한남오거리점/1.webp"
+  ],
+  "oy-한성대입구역점": [
+    "/places/oy-한성대입구역점/1.webp"
+  ],
+  "oy-한티역점": [
+    "/places/oy-한티역점/1.webp"
+  ],
+  "oy-합정교보점": [
+    "/places/oy-합정교보점/1.webp"
+  ],
+  "oy-합정메세나폴리스점": [
+    "/places/oy-합정메세나폴리스점/1.webp"
+  ],
+  "oy-현대시티몰가든파이브점": [
+    "/places/oy-현대시티몰가든파이브점/1.webp"
+  ],
+  "oy-현대시티아울렛동대문점": [
+    "/places/oy-현대시티아울렛동대문점/1.webp"
+  ],
+  "oy-혜화역점": [
+    "/places/oy-혜화역점/1.webp"
+  ],
+  "oy-홍대대학로점": [
+    "/places/oy-홍대대학로점/1.webp"
+  ],
+  "oy-홍대정문점": [
+    "/places/oy-홍대정문점/1.webp"
+  ],
+  "oy-홍제역점": [
+    "/places/oy-홍제역점/1.webp"
+  ],
+  "oy-화곡역사거리점": [
+    "/places/oy-화곡역사거리점/1.webp"
+  ],
+  "oy-화곡역점": [
+    "/places/oy-화곡역점/1.webp"
+  ],
+  "oy-황학사거리점": [
+    "/places/oy-황학사거리점/1.webp"
+  ],
+  "oy-회기중앙점": [
+    "/places/oy-회기중앙점/1.webp"
+  ],
+  "oy-휘경동점": [
+    "/places/oy-휘경동점/1.webp"
   ],
   "seongsu-cafe": [
     "/places/seongsu-cafe/1.webp",
@@ -1094,7 +1766,231 @@ export const PLACE_PHOTO_THUMBNAILS: Record<string, string> = {
   "ct-ye-lead-hair-salon-myeongdong": "/places/ct-ye-lead-hair-salon-myeongdong/1.thumb.webp",
   "ct-you-hair-salon-seongsu-branch": "/places/ct-you-hair-salon-seongsu-branch/1.thumb.webp",
   "namdaemun-market": "/places/namdaemun-market/1.thumb.webp",
+  "oy-nc신구로점": "/places/oy-nc신구로점/1.thumb.webp",
   "oy-n성수": "/places/oy-n성수/1.thumb.webp",
+  "oy-가산디지털단지역점": "/places/oy-가산디지털단지역점/1.thumb.webp",
+  "oy-가산점": "/places/oy-가산점/1.thumb.webp",
+  "oy-강남구청역점": "/places/oy-강남구청역점/1.thumb.webp",
+  "oy-강남엔터식스점": "/places/oy-강남엔터식스점/1.thumb.webp",
+  "oy-강남우성점": "/places/oy-강남우성점/1.thumb.webp",
+  "oy-강동구청점": "/places/oy-강동구청점/1.thumb.webp",
+  "oy-강변역점": "/places/oy-강변역점/1.thumb.webp",
+  "oy-강서구청점": "/places/oy-강서구청점/1.thumb.webp",
+  "oy-개봉역북부점": "/places/oy-개봉역북부점/1.thumb.webp",
+  "oy-개포동점": "/places/oy-개포동점/1.thumb.webp",
+  "oy-건대입구점": "/places/oy-건대입구점/1.thumb.webp",
+  "oy-건대커먼그라운드점": "/places/oy-건대커먼그라운드점/1.thumb.webp",
+  "oy-경복궁역점": "/places/oy-경복궁역점/1.thumb.webp",
+  "oy-경희대점": "/places/oy-경희대점/1.thumb.webp",
+  "oy-공덕파크팰리스점": "/places/oy-공덕파크팰리스점/1.thumb.webp",
+  "oy-공릉역점": "/places/oy-공릉역점/1.thumb.webp",
+  "oy-광운대역점": "/places/oy-광운대역점/1.thumb.webp",
+  "oy-광장마켓점": "/places/oy-광장마켓점/1.thumb.webp",
+  "oy-구로구청점": "/places/oy-구로구청점/1.thumb.webp",
+  "oy-구로지밸리몰점": "/places/oy-구로지밸리몰점/1.thumb.webp",
+  "oy-구의역점": "/places/oy-구의역점/1.thumb.webp",
+  "oy-구의이스트폴점": "/places/oy-구의이스트폴점/1.thumb.webp",
+  "oy-구일역점": "/places/oy-구일역점/1.thumb.webp",
+  "oy-군자역점": "/places/oy-군자역점/1.thumb.webp",
+  "oy-금호점": "/places/oy-금호점/1.thumb.webp",
+  "oy-길동사거리점": "/places/oy-길동사거리점/1.thumb.webp",
+  "oy-길동역점": "/places/oy-길동역점/1.thumb.webp",
+  "oy-길음역점": "/places/oy-길음역점/1.thumb.webp",
+  "oy-길음점": "/places/oy-길음점/1.thumb.webp",
+  "oy-남구로점": "/places/oy-남구로점/1.thumb.webp",
+  "oy-내방역점": "/places/oy-내방역점/1.thumb.webp",
+  "oy-노량진역점": "/places/oy-노량진역점/1.thumb.webp",
+  "oy-노원공릉점": "/places/oy-노원공릉점/1.thumb.webp",
+  "oy-노원점": "/places/oy-노원점/1.thumb.webp",
+  "oy-녹두거리점": "/places/oy-녹두거리점/1.thumb.webp",
+  "oy-답십리역점": "/places/oy-답십리역점/1.thumb.webp",
+  "oy-당산대로점": "/places/oy-당산대로점/1.thumb.webp",
+  "oy-당산역점": "/places/oy-당산역점/1.thumb.webp",
+  "oy-대림성모점": "/places/oy-대림성모점/1.thumb.webp",
+  "oy-대치사거리점": "/places/oy-대치사거리점/1.thumb.webp",
+  "oy-대치역점": "/places/oy-대치역점/1.thumb.webp",
+  "oy-대치점": "/places/oy-대치점/1.thumb.webp",
+  "oy-대학로점": "/places/oy-대학로점/1.thumb.webp",
+  "oy-대학로중앙점": "/places/oy-대학로중앙점/1.thumb.webp",
+  "oy-덕수궁점": "/places/oy-덕수궁점/1.thumb.webp",
+  "oy-던던동대문점": "/places/oy-던던동대문점/1.thumb.webp",
+  "oy-돈암점": "/places/oy-돈암점/1.thumb.webp",
+  "oy-돈암중앙점": "/places/oy-돈암중앙점/1.thumb.webp",
+  "oy-동교동점": "/places/oy-동교동점/1.thumb.webp",
+  "oy-동대문역사문화공원사거리점": "/places/oy-동대문역사문화공원사거리점/1.thumb.webp",
+  "oy-동대문역사문화공원역점": "/places/oy-동대문역사문화공원역점/1.thumb.webp",
+  "oy-동덕여대점": "/places/oy-동덕여대점/1.thumb.webp",
+  "oy-동묘앞역점": "/places/oy-동묘앞역점/1.thumb.webp",
+  "oy-두타점": "/places/oy-두타점/1.thumb.webp",
+  "oy-둔촌점": "/places/oy-둔촌점/1.thumb.webp",
+  "oy-둔촌파크포레온점": "/places/oy-둔촌파크포레온점/1.thumb.webp",
+  "oy-등촌역점": "/places/oy-등촌역점/1.thumb.webp",
+  "oy-등촌점": "/places/oy-등촌점/1.thumb.webp",
+  "oy-디지털미디어시티역점": "/places/oy-디지털미디어시티역점/1.thumb.webp",
+  "oy-뚝섬역점": "/places/oy-뚝섬역점/1.thumb.webp",
+  "oy-롯데백화점잠실점": "/places/oy-롯데백화점잠실점/1.thumb.webp",
+  "oy-롯데월드몰점": "/places/oy-롯데월드몰점/1.thumb.webp",
+  "oy-롯데월드몰플러스점": "/places/oy-롯데월드몰플러스점/1.thumb.webp",
+  "oy-롯데월드점": "/places/oy-롯데월드점/1.thumb.webp",
+  "oy-마들역점": "/places/oy-마들역점/1.thumb.webp",
+  "oy-마포도화점": "/places/oy-마포도화점/1.thumb.webp",
+  "oy-만리동점": "/places/oy-만리동점/1.thumb.webp",
+  "oy-망원동점": "/places/oy-망원동점/1.thumb.webp",
+  "oy-먹골역점": "/places/oy-먹골역점/1.thumb.webp",
+  "oy-명동2가점": "/places/oy-명동2가점/1.thumb.webp",
+  "oy-명동대로점": "/places/oy-명동대로점/1.thumb.webp",
+  "oy-명동역점": "/places/oy-명동역점/1.thumb.webp",
+  "oy-명동타임워크점": "/places/oy-명동타임워크점/1.thumb.webp",
+  "oy-명지대점": "/places/oy-명지대점/1.thumb.webp",
+  "oy-무교동점": "/places/oy-무교동점/1.thumb.webp",
+  "oy-미아뉴타운점": "/places/oy-미아뉴타운점/1.thumb.webp",
+  "oy-미아사거리역점": "/places/oy-미아사거리역점/1.thumb.webp",
+  "oy-미아사거리점": "/places/oy-미아사거리점/1.thumb.webp",
+  "oy-미아역점": "/places/oy-미아역점/1.thumb.webp",
+  "oy-방배이수점": "/places/oy-방배이수점/1.thumb.webp",
+  "oy-방배점": "/places/oy-방배점/1.thumb.webp",
+  "oy-방이시장점": "/places/oy-방이시장점/1.thumb.webp",
+  "oy-배명사거리점": "/places/oy-배명사거리점/1.thumb.webp",
+  "oy-보라매병원역점": "/places/oy-보라매병원역점/1.thumb.webp",
+  "oy-보라매역점": "/places/oy-보라매역점/1.thumb.webp",
+  "oy-봉은사역점": "/places/oy-봉은사역점/1.thumb.webp",
+  "oy-북가좌동점": "/places/oy-북가좌동점/1.thumb.webp",
+  "oy-사당점": "/places/oy-사당점/1.thumb.webp",
+  "oy-삼성중앙역점": "/places/oy-삼성중앙역점/1.thumb.webp",
+  "oy-삼전역점": "/places/oy-삼전역점/1.thumb.webp",
+  "oy-상계보람점": "/places/oy-상계보람점/1.thumb.webp",
+  "oy-상도역점": "/places/oy-상도역점/1.thumb.webp",
+  "oy-상암enm점": "/places/oy-상암enm점/1.thumb.webp",
+  "oy-상암mbc점": "/places/oy-상암mbc점/1.thumb.webp",
+  "oy-서래마을점": "/places/oy-서래마을점/1.thumb.webp",
+  "oy-서울숲역점": "/places/oy-서울숲역점/1.thumb.webp",
+  "oy-서울시립대점": "/places/oy-서울시립대점/1.thumb.webp",
+  "oy-서초우성점": "/places/oy-서초우성점/1.thumb.webp",
+  "oy-석계역점": "/places/oy-석계역점/1.thumb.webp",
+  "oy-선릉로점": "/places/oy-선릉로점/1.thumb.webp",
+  "oy-선릉중앙점": "/places/oy-선릉중앙점/1.thumb.webp",
+  "oy-선릉타운점": "/places/oy-선릉타운점/1.thumb.webp",
+  "oy-선유도역점": "/places/oy-선유도역점/1.thumb.webp",
+  "oy-성수연방점": "/places/oy-성수연방점/1.thumb.webp",
+  "oy-성신여대입구역점": "/places/oy-성신여대입구역점/1.thumb.webp",
+  "oy-세곡동점": "/places/oy-세곡동점/1.thumb.webp",
+  "oy-세로수길점": "/places/oy-세로수길점/1.thumb.webp",
+  "oy-세종로점": "/places/oy-세종로점/1.thumb.webp",
+  "oy-송파구청점": "/places/oy-송파구청점/1.thumb.webp",
+  "oy-수락산역점": "/places/oy-수락산역점/1.thumb.webp",
+  "oy-수색점": "/places/oy-수색점/1.thumb.webp",
+  "oy-수서역점": "/places/oy-수서역점/1.thumb.webp",
+  "oy-숙대입구역점": "/places/oy-숙대입구역점/1.thumb.webp",
+  "oy-숙대점": "/places/oy-숙대점/1.thumb.webp",
+  "oy-순천향입구점": "/places/oy-순천향입구점/1.thumb.webp",
+  "oy-숭실대입구역점": "/places/oy-숭실대입구역점/1.thumb.webp",
+  "oy-스타시티점": "/places/oy-스타시티점/1.thumb.webp",
+  "oy-스타필드애비뉴그랑서울점": "/places/oy-스타필드애비뉴그랑서울점/1.thumb.webp",
+  "oy-시청역점": "/places/oy-시청역점/1.thumb.webp",
+  "oy-신강남점": "/places/oy-신강남점/1.thumb.webp",
+  "oy-신금호역점": "/places/oy-신금호역점/1.thumb.webp",
+  "oy-신논현역점": "/places/oy-신논현역점/1.thumb.webp",
+  "oy-신당역점": "/places/oy-신당역점/1.thumb.webp",
+  "oy-신대방삼거리역점": "/places/oy-신대방삼거리역점/1.thumb.webp",
+  "oy-신대방역점": "/places/oy-신대방역점/1.thumb.webp",
+  "oy-신도림테크노마트점": "/places/oy-신도림테크노마트점/1.thumb.webp",
+  "oy-신사점": "/places/oy-신사점/1.thumb.webp",
+  "oy-신설동역점": "/places/oy-신설동역점/1.thumb.webp",
+  "oy-신용산역점": "/places/oy-신용산역점/1.thumb.webp",
+  "oy-신천중앙점": "/places/oy-신천중앙점/1.thumb.webp",
+  "oy-신촌대로점": "/places/oy-신촌대로점/1.thumb.webp",
+  "oy-신촌로터리점": "/places/oy-신촌로터리점/1.thumb.webp",
+  "oy-신촌명물거리점": "/places/oy-신촌명물거리점/1.thumb.webp",
+  "oy-신촌연세점": "/places/oy-신촌연세점/1.thumb.webp",
+  "oy-신촌중앙점": "/places/oy-신촌중앙점/1.thumb.webp",
+  "oy-신풍역점": "/places/oy-신풍역점/1.thumb.webp",
+  "oy-씨제이enm커머스부문점": "/places/oy-씨제이enm커머스부문점/1.thumb.webp",
+  "oy-씨제이남산더센터점": "/places/oy-씨제이남산더센터점/1.thumb.webp",
+  "oy-안암점": "/places/oy-안암점/1.thumb.webp",
+  "oy-압구정로데오점": "/places/oy-압구정로데오점/1.thumb.webp",
+  "oy-압구정역점": "/places/oy-압구정역점/1.thumb.webp",
+  "oy-압구정점": "/places/oy-압구정점/1.thumb.webp",
+  "oy-압구정중앙점": "/places/oy-압구정중앙점/1.thumb.webp",
+  "oy-애오개역점": "/places/oy-애오개역점/1.thumb.webp",
+  "oy-약수역점": "/places/oy-약수역점/1.thumb.webp",
+  "oy-양재스타클래스점": "/places/oy-양재스타클래스점/1.thumb.webp",
+  "oy-양재역점": "/places/oy-양재역점/1.thumb.webp",
+  "oy-어린이대공원역점": "/places/oy-어린이대공원역점/1.thumb.webp",
+  "oy-역삼역점": "/places/oy-역삼역점/1.thumb.webp",
+  "oy-역삼점": "/places/oy-역삼점/1.thumb.webp",
+  "oy-역삼중앙점": "/places/oy-역삼중앙점/1.thumb.webp",
+  "oy-연희점": "/places/oy-연희점/1.thumb.webp",
+  "oy-염창역9호선점": "/places/oy-염창역9호선점/1.thumb.webp",
+  "oy-염창역점": "/places/oy-염창역점/1.thumb.webp",
+  "oy-영등포역사점": "/places/oy-영등포역사점/1.thumb.webp",
+  "oy-영등포역점": "/places/oy-영등포역점/1.thumb.webp",
+  "oy-영등포타임스퀘어점": "/places/oy-영등포타임스퀘어점/1.thumb.webp",
+  "oy-오류동역점": "/places/oy-오류동역점/1.thumb.webp",
+  "oy-올림픽대교북단점": "/places/oy-올림픽대교북단점/1.thumb.webp",
+  "oy-외대정문점": "/places/oy-외대정문점/1.thumb.webp",
+  "oy-용산리첸시아점": "/places/oy-용산리첸시아점/1.thumb.webp",
+  "oy-용산아이파크몰더센터점": "/places/oy-용산아이파크몰더센터점/1.thumb.webp",
+  "oy-용산아이파크몰점": "/places/oy-용산아이파크몰점/1.thumb.webp",
+  "oy-우장산역점": "/places/oy-우장산역점/1.thumb.webp",
+  "oy-위례아이파크점": "/places/oy-위례아이파크점/1.thumb.webp",
+  "oy-은행사거리점": "/places/oy-은행사거리점/1.thumb.webp",
+  "oy-이수역점": "/places/oy-이수역점/1.thumb.webp",
+  "oy-이태원입구점": "/places/oy-이태원입구점/1.thumb.webp",
+  "oy-인사동점": "/places/oy-인사동점/1.thumb.webp",
+  "oy-일원역점": "/places/oy-일원역점/1.thumb.webp",
+  "oy-자양역점": "/places/oy-자양역점/1.thumb.webp",
+  "oy-잠실역8호선점": "/places/oy-잠실역8호선점/1.thumb.webp",
+  "oy-잠실점": "/places/oy-잠실점/1.thumb.webp",
+  "oy-잠실학원사거리점": "/places/oy-잠실학원사거리점/1.thumb.webp",
+  "oy-장안동사거리점": "/places/oy-장안동사거리점/1.thumb.webp",
+  "oy-장위뉴타운점": "/places/oy-장위뉴타운점/1.thumb.webp",
+  "oy-장한평역점": "/places/oy-장한평역점/1.thumb.webp",
+  "oy-정동점": "/places/oy-정동점/1.thumb.webp",
+  "oy-정릉점": "/places/oy-정릉점/1.thumb.webp",
+  "oy-제일제당센터점": "/places/oy-제일제당센터점/1.thumb.webp",
+  "oy-종각점": "/places/oy-종각점/1.thumb.webp",
+  "oy-종로1가점": "/places/oy-종로1가점/1.thumb.webp",
+  "oy-종로ybm점": "/places/oy-종로ybm점/1.thumb.webp",
+  "oy-종로점": "/places/oy-종로점/1.thumb.webp",
+  "oy-종암점": "/places/oy-종암점/1.thumb.webp",
+  "oy-중랑점": "/places/oy-중랑점/1.thumb.webp",
+  "oy-중앙대점": "/places/oy-중앙대점/1.thumb.webp",
+  "oy-중화역점": "/places/oy-중화역점/1.thumb.webp",
+  "oy-증미역점": "/places/oy-증미역점/1.thumb.webp",
+  "oy-창천점": "/places/oy-창천점/1.thumb.webp",
+  "oy-천왕역점": "/places/oy-천왕역점/1.thumb.webp",
+  "oy-천호엔터식스점": "/places/oy-천호엔터식스점/1.thumb.webp",
+  "oy-천호역점": "/places/oy-천호역점/1.thumb.webp",
+  "oy-천호중앙점": "/places/oy-천호중앙점/1.thumb.webp",
+  "oy-청담역점": "/places/oy-청담역점/1.thumb.webp",
+  "oy-청량리역사점": "/places/oy-청량리역사점/1.thumb.webp",
+  "oy-청량리중앙점": "/places/oy-청량리중앙점/1.thumb.webp",
+  "oy-충무로역점": "/places/oy-충무로역점/1.thumb.webp",
+  "oy-타워팰리스점": "/places/oy-타워팰리스점/1.thumb.webp",
+  "oy-타임스퀘어아트리움점": "/places/oy-타임스퀘어아트리움점/1.thumb.webp",
+  "oy-테헤란로점": "/places/oy-테헤란로점/1.thumb.webp",
+  "oy-트윈시티점": "/places/oy-트윈시티점/1.thumb.webp",
+  "oy-파르나스몰점": "/places/oy-파르나스몰점/1.thumb.webp",
+  "oy-포이사거리점": "/places/oy-포이사거리점/1.thumb.webp",
+  "oy-플러스점": "/places/oy-플러스점/1.thumb.webp",
+  "oy-학동역점": "/places/oy-학동역점/1.thumb.webp",
+  "oy-학동중앙점": "/places/oy-학동중앙점/1.thumb.webp",
+  "oy-한남오거리점": "/places/oy-한남오거리점/1.thumb.webp",
+  "oy-한성대입구역점": "/places/oy-한성대입구역점/1.thumb.webp",
+  "oy-한티역점": "/places/oy-한티역점/1.thumb.webp",
+  "oy-합정교보점": "/places/oy-합정교보점/1.thumb.webp",
+  "oy-합정메세나폴리스점": "/places/oy-합정메세나폴리스점/1.thumb.webp",
+  "oy-현대시티몰가든파이브점": "/places/oy-현대시티몰가든파이브점/1.thumb.webp",
+  "oy-현대시티아울렛동대문점": "/places/oy-현대시티아울렛동대문점/1.thumb.webp",
+  "oy-혜화역점": "/places/oy-혜화역점/1.thumb.webp",
+  "oy-홍대대학로점": "/places/oy-홍대대학로점/1.thumb.webp",
+  "oy-홍대정문점": "/places/oy-홍대정문점/1.thumb.webp",
+  "oy-홍제역점": "/places/oy-홍제역점/1.thumb.webp",
+  "oy-화곡역사거리점": "/places/oy-화곡역사거리점/1.thumb.webp",
+  "oy-화곡역점": "/places/oy-화곡역점/1.thumb.webp",
+  "oy-황학사거리점": "/places/oy-황학사거리점/1.thumb.webp",
+  "oy-회기중앙점": "/places/oy-회기중앙점/1.thumb.webp",
+  "oy-휘경동점": "/places/oy-휘경동점/1.thumb.webp",
   "seongsu-cafe": "/places/seongsu-cafe/1.thumb.webp",
   "ssamziegil": "/places/ssamziegil/1.thumb.webp",
   "starfield-coex": "/places/starfield-coex/1.thumb.webp"

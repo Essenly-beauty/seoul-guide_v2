@@ -42,6 +42,22 @@ public/places/
   omit unverified ratings/prices/hours, and direct visitors to a map service for
   confirmation. Replace the area pin with address-level coordinates after the
   Korean/English listing and branch are verified.
+- **Olive Young official store photos**: the owner compiled one
+  representative image per Seoul store from the Olive Young store finder
+  (Drive folder + spreadsheet, 2026-09-18) and confirmed on 2026-09-18 that
+  publishing them is permitted. The reviewed store → place mapping
+  is `data/oliveyoung-store-photos.json`; event posters, Olive Better stores,
+  places that already carry owner photos and places that are not published
+  yet are listed under `excluded` with a reason, and
+  the 127 stores missing from the catalogue under `notInCatalogue`. Re-import:
+
+  ```bash
+  node scripts/stage-oliveyoung-photos.mjs --photos <extracted-zip>/photos
+  node scripts/optimize-place-photos.mjs \
+    --input scripts/.cache/oliveyoung-photo-downloads \
+    --report scripts/.cache/oliveyoung-photo-optimization.json --known-only true
+  node scripts/build-place-photos.mjs
+  ```
 - **Rights**: only use photos we are allowed to publish — our own shots, or
   ones the venue has given us permission for. Do not copy images from
   Creatrip, Naver, Instagram, or Google listings; the copyright sits with

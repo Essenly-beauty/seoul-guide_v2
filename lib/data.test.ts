@@ -188,8 +188,10 @@ describe("place rating provenance", () => {
       0,
     );
 
-    expect(placesWithPhotos).toHaveLength(159);
-    expect(photoCount).toBe(613);
+    // 159 owner-photo venues (613 photos) + 224 Olive Young stores with one
+    // official store-finder image each (data/oliveyoung-store-photos.json).
+    expect(placesWithPhotos).toHaveLength(159 + 224);
+    expect(photoCount).toBe(613 + 224);
   });
 
   it("publishes only explicitly labeled provisional area pins", () => {

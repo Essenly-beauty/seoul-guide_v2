@@ -1,0 +1,3294 @@
+{
+  "schemaVersion": 1,
+  "source": {
+    "title": "올리브영 서울 매장 주소록 · 매장 사진 (2026-09-18)",
+    "driveFolder": "https://drive.google.com/drive/folders/1Nq9SfGC1YjQ7KvFBUOOc-5fZfNvwvR-Z",
+    "archive": "올리브영_서울_매장사진_368개_2026-09-18.zip",
+    "spreadsheet": "올리브영_서울_매장주소_사진목록_2026-09-18.xlsx",
+    "officialListing": "https://www.oliveyoung.co.kr/store/store/getStoreInfoMain.do",
+    "confirmedOn": "2026-09-18",
+    "coverage": "One official representative image per store, as shown on the Olive Young store finder; not a full gallery.",
+    "matching": "A store maps to a catalogue place only when its official store name equals the place's Korean name (올리브영 prefix and spacing ignored) and the road-name address agrees. Event posters and Olive Better stores are excluded; a place that already carries owner photos is left untouched. Stores whose catalogue place is not published yet (district-level fallback pins, unverified curated rows) are excluded until the pin is verified; their official address is kept for that follow-up.",
+    "rights": "Images are the brand's own store-listing photos compiled by the owner. The owner confirmed on 2026-09-18 that publishing them in the app is permitted; they are not user or third-party listing photos."
+  },
+  "photos": [
+    {
+      "storeCode": "B007",
+      "storeName": "씨제이ENM커머스부문점",
+      "district": "서초구",
+      "officialAddress": "서울특별시 서초구 과천대로 870-13 지하1층",
+      "file": "B007_씨제이ENM커머스부문점.webp",
+      "placeId": "oy-씨제이enm커머스부문점",
+      "catalogueAddress": "서울 서초구 과천대로 870-13 방배사옥 지하1층",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/B007_1.jpg?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "B037",
+      "storeName": "건대입구점",
+      "district": "광진구",
+      "officialAddress": "서울특별시 광진구 동일로22길 115 1,2층",
+      "file": "B037_건대입구점.webp",
+      "placeId": "oy-건대입구점",
+      "catalogueAddress": "서울 광진구 동일로22길 115 1-2층",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/B037_1.jpg?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "B054",
+      "storeName": "중앙대점",
+      "district": "동작구",
+      "officialAddress": "서울특별시 동작구 흑석로 81",
+      "file": "B054_중앙대점.webp",
+      "placeId": "oy-중앙대점",
+      "catalogueAddress": "서울 동작구 흑석로 81 1층",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/B054_1.jpg?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "B060",
+      "storeName": "강남구청역점",
+      "district": "강남구",
+      "officialAddress": "서울특별시 강남구 선릉로 703 1층",
+      "file": "B060_강남구청역점.webp",
+      "placeId": "oy-강남구청역점",
+      "catalogueAddress": "서울 강남구 선릉로 703 1층",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/B060_1.jpg?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "B086",
+      "storeName": "중랑점",
+      "district": "중랑구",
+      "officialAddress": "서울특별시 중랑구 망우로32길 6",
+      "file": "B086_중랑점.webp",
+      "placeId": "oy-중랑점",
+      "catalogueAddress": "서울 중랑구 망우로32길 6 1층",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/B086_1.jpg?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "B091",
+      "storeName": "동덕여대점",
+      "district": "성북구",
+      "officialAddress": "서울특별시 성북구 화랑로11길 31",
+      "file": "B091_동덕여대점.webp",
+      "placeId": "oy-동덕여대점",
+      "catalogueAddress": "서울 성북구 화랑로11길 31 1층",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/B091_1.jpg?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "B092",
+      "storeName": "화곡역점",
+      "district": "강서구",
+      "officialAddress": "서울특별시 강서구 화곡로 149 심당빌딩 1층",
+      "file": "B092_화곡역점.webp",
+      "placeId": "oy-화곡역점",
+      "catalogueAddress": "서울 강서구 화곡로 149 심당빌딩 1층",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/B092_1.jpg?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "B096",
+      "storeName": "길동사거리점",
+      "district": "강동구",
+      "officialAddress": "서울특별시 강동구 천호대로 1120 1층",
+      "file": "B096_길동사거리점.webp",
+      "placeId": "oy-길동사거리점",
+      "catalogueAddress": "서울 강동구 천호대로 1120 1층",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/B096_202501212358531.png?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "B107",
+      "storeName": "노원점",
+      "district": "노원구",
+      "officialAddress": "서울특별시 노원구 상계로 65 105호,106호",
+      "file": "B107_노원점.webp",
+      "placeId": "oy-노원점",
+      "catalogueAddress": "서울 노원구 상계로 65 1층 105~106호",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/B107_1.jpg?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "B197",
+      "storeName": "청담역점",
+      "district": "강남구",
+      "officialAddress": "서울특별시 강남구 삼성로 716",
+      "file": "B197_청담역점.webp",
+      "placeId": "oy-청담역점",
+      "catalogueAddress": "서울 강남구 삼성로 716 1층",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/B197_1.jpg?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "B205",
+      "storeName": "외대정문점",
+      "district": "동대문구",
+      "officialAddress": "서울특별시 동대문구 이문로 107",
+      "file": "B205_외대정문점.webp",
+      "placeId": "oy-외대정문점",
+      "catalogueAddress": "서울 동대문구 이문로 107 1층",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/B205_1.jpg?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "B212",
+      "storeName": "등촌점",
+      "district": "양천구",
+      "officialAddress": "서울특별시 양천구 목동중앙북로7길 20, 1층",
+      "file": "B212_등촌점.webp",
+      "placeId": "oy-등촌점",
+      "catalogueAddress": "서울 양천구 목동중앙북로7길 20 1층",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/B212_1.jpg?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "BA3E",
+      "storeName": "잠실역8호선점",
+      "district": "송파구",
+      "officialAddress": "서울특별시 송파구 올림픽로 305 잠실역8호선 지하상가 H7~10호",
+      "file": "BA3E_잠실역8호선점.webp",
+      "placeId": "oy-잠실역8호선점",
+      "catalogueAddress": "서울 송파구 올림픽로 305 지하상가 지하1층 H7~10호",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/BA3E_1.jpg?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "BA57",
+      "storeName": "강서구청점",
+      "district": "강서구",
+      "officialAddress": "서울특별시 강서구 화곡로 316 1층 (화곡동)",
+      "file": "BA57_강서구청점.webp",
+      "placeId": "oy-강서구청점",
+      "catalogueAddress": "서울 강서구 화곡로 316 1층",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/BA57_1.jpg?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "BA7C",
+      "storeName": "길동역점",
+      "district": "강동구",
+      "officialAddress": "서울특별시 강동구 양재대로 1481 1층",
+      "file": "BA7C_길동역점.webp",
+      "placeId": "oy-길동역점",
+      "catalogueAddress": "서울 강동구 양재대로 1481 1층",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/BA7C_202604980910461.jpg?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "BA9B",
+      "storeName": "당산역점",
+      "district": "영등포구",
+      "officialAddress": "서울특별시 영등포구 당산로 223",
+      "file": "BA9B_당산역점.webp",
+      "placeId": "oy-당산역점",
+      "catalogueAddress": "서울 영등포구 당산로 223 태영스타밸류 1층",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/BA9B_202501091001221.png?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "BAC6",
+      "storeName": "구의역점",
+      "district": "광진구",
+      "officialAddress": "서울특별시 광진구 아차산로 378",
+      "file": "BAC6_구의역점.webp",
+      "placeId": "oy-구의역점",
+      "catalogueAddress": "서울 광진구 아차산로 378 한승빌딩 1층",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/BAC6_2025113082311441.png?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "D001",
+      "storeName": "신사점",
+      "district": "강남구",
+      "officialAddress": "서울특별시 강남구 도산대로 116 논현빌딩 1층",
+      "file": "D001_신사점.webp",
+      "placeId": "oy-신사점",
+      "catalogueAddress": "서울 강남구 도산대로 116 논현빌딩 1층",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/D001_1.jpg?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "D004",
+      "storeName": "압구정점",
+      "district": "강남구",
+      "officialAddress": "서울특별시 강남구 논현로175길 6 1층",
+      "file": "D004_압구정점.webp",
+      "placeId": "oy-압구정점",
+      "catalogueAddress": "서울 강남구 논현로175길 6 1층",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/D004_1.jpg?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "D008",
+      "storeName": "경희대점",
+      "district": "동대문구",
+      "officialAddress": "서울특별시 동대문구 경희대로 2",
+      "file": "D008_경희대점.webp",
+      "placeId": "oy-경희대점",
+      "catalogueAddress": "서울 동대문구 경희대로 2 1층",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/D008_1.jpg?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "D018",
+      "storeName": "돈암점",
+      "district": "성북구",
+      "officialAddress": "서울특별시 성북구 동소문로22길 39",
+      "file": "D018_돈암점.webp",
+      "placeId": "oy-돈암점",
+      "catalogueAddress": "서울 성북구 동소문로22길 39 1층",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/D018_1.jpg?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "D031",
+      "storeName": "충무로역점",
+      "district": "중구",
+      "officialAddress": "서울특별시 중구 퇴계로 222 구인빌딩 1층",
+      "file": "D031_충무로역점.webp",
+      "placeId": "oy-충무로역점",
+      "catalogueAddress": "서울 중구 퇴계로 222 구인빌딩 1층",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/D031_1.jpg?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "D032",
+      "storeName": "선릉로점",
+      "district": "강남구",
+      "officialAddress": "서울특별시 강남구 테헤란로64길 20 원동방빌딩 1층",
+      "file": "D032_선릉로점.webp",
+      "placeId": "oy-선릉로점",
+      "catalogueAddress": "서울 강남구 테헤란로64길 20 원동방빌딩 1층",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/D032_1.jpg?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "D033",
+      "storeName": "시청역점",
+      "district": "중구",
+      "officialAddress": "서울특별시 중구 세종대로16길 1 1층",
+      "file": "D033_시청역점.webp",
+      "placeId": "oy-시청역점",
+      "catalogueAddress": "서울 중구 세종대로16길 1 1층",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/D033_2025051271024011.png?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "D041",
+      "storeName": "스타시티점",
+      "district": "광진구",
+      "officialAddress": "서울특별시 광진구 아차산로 272 스타시티가 1층",
+      "file": "D041_스타시티점.webp",
+      "placeId": "oy-스타시티점",
+      "catalogueAddress": "서울 광진구 아차산로 272 스타시티가 1층",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/D041_1.jpg?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "D050",
+      "storeName": "압구정역점",
+      "district": "강남구",
+      "officialAddress": "서울특별시 강남구 논현로 878 중산빌딩 1층",
+      "file": "D050_압구정역점.webp",
+      "placeId": "oy-압구정역점",
+      "catalogueAddress": "서울 강남구 논현로 878 중산빌딩 1층",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/D050_1.jpg?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "D052",
+      "storeName": "신촌대로점",
+      "district": "서대문구",
+      "officialAddress": "서울특별시 서대문구 신촌로 121 1층",
+      "file": "D052_신촌대로점.webp",
+      "placeId": "oy-신촌대로점",
+      "catalogueAddress": "서울 서대문구 신촌로 121 1층",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/D052_1.jpg?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "D072",
+      "storeName": "타임스퀘어아트리움점",
+      "district": "영등포구",
+      "officialAddress": "서울특별시 영등포구 영중로 15 타임스퀘어 3층 315호",
+      "file": "D072_타임스퀘어아트리움점.webp",
+      "placeId": "oy-타임스퀘어아트리움점",
+      "catalogueAddress": "서울 영등포구 영중로 15 3층 315호",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/D072_1.jpg?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "D092",
+      "storeName": "종각점",
+      "district": "종로구",
+      "officialAddress": "서울특별시 종로구 종로 61 1층",
+      "file": "D092_종각점.webp",
+      "placeId": "oy-종각점",
+      "catalogueAddress": "서울 종로구 종로 61 1층",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/D092_1.jpg?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "D094",
+      "storeName": "세종로점",
+      "district": "종로구",
+      "officialAddress": "서울특별시 종로구 세종대로 161 1층",
+      "file": "D094_세종로점.webp",
+      "placeId": "oy-세종로점",
+      "catalogueAddress": "서울 종로구 세종대로 161 1층",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/D094_1.jpg?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "D102",
+      "storeName": "둔촌점",
+      "district": "강동구",
+      "officialAddress": "서울특별시 강동구 양재대로 1317 경일빌딩 1층",
+      "file": "D102_둔촌점.webp",
+      "placeId": "oy-둔촌점",
+      "catalogueAddress": "서울 강동구 양재대로 1317 경일빌딩 1층",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/D102_202504990933241.png?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "D107",
+      "storeName": "제일제당센터점",
+      "district": "중구",
+      "officialAddress": "서울특별시 중구 동호로 330 지하1층",
+      "file": "D107_제일제당센터점.webp",
+      "placeId": "oy-제일제당센터점",
+      "catalogueAddress": "서울 중구 동호로 330 씨제이제일제당빌딩 지하 1층",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/D107_1.jpg?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "D122",
+      "storeName": "역삼역점",
+      "district": "강남구",
+      "officialAddress": "서울특별시 강남구 테헤란로 138 성홍타워 1층",
+      "file": "D122_역삼역점.webp",
+      "placeId": "oy-역삼역점",
+      "catalogueAddress": "서울 강남구 테헤란로 138 성홍타워 1층",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/D122_1.jpg?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "D130",
+      "storeName": "광운대역점",
+      "district": "노원구",
+      "officialAddress": "서울특별시 노원구 석계로 102 1층 2호",
+      "file": "D130_광운대역점.webp",
+      "placeId": "oy-광운대역점",
+      "catalogueAddress": "서울 노원구 석계로 102 1층 2호",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/D130_1.jpg?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "D138",
+      "storeName": "종로YBM점",
+      "district": "종로구",
+      "officialAddress": "서울특별시 종로구 종로 104",
+      "file": "D138_종로YBM점.webp",
+      "placeId": "oy-종로ybm점",
+      "catalogueAddress": "서울 종로구 종로 104 1층",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/D138_2024113091329311.png?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "D141",
+      "storeName": "방배이수점",
+      "district": "서초구",
+      "officialAddress": "서울특별시 서초구 동작대로 118 예다인프라자빌딩 1층",
+      "file": "D141_방배이수점.webp",
+      "placeId": "oy-방배이수점",
+      "catalogueAddress": "서울 서초구 동작대로 118 예다인프라자빌딩 1층",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/D141_1.jpg?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "D146",
+      "storeName": "천호중앙점",
+      "district": "강동구",
+      "officialAddress": "서울특별시 강동구 천호대로 1027 일동빌딩 1층",
+      "file": "D146_천호중앙점.webp",
+      "placeId": "oy-천호중앙점",
+      "catalogueAddress": "서울 강동구 천호대로 1027 일동빌딩 1층",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/D146_1.jpg?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "D147",
+      "storeName": "신촌연세점",
+      "district": "서대문구",
+      "officialAddress": "서울특별시 서대문구 연세로 37 1층",
+      "file": "D147_신촌연세점.webp",
+      "placeId": "oy-신촌연세점",
+      "catalogueAddress": "서울 서대문구 연세로 37 1층",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/D147_1.jpg?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "D154",
+      "storeName": "서래마을점",
+      "district": "서초구",
+      "officialAddress": "서울특별시 서초구 서래로 39 1층",
+      "file": "D154_서래마을점.webp",
+      "placeId": "oy-서래마을점",
+      "catalogueAddress": "서울 서초구 서래로 39 1층",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/D154_1.jpg?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "D164",
+      "storeName": "돈암중앙점",
+      "district": "성북구",
+      "officialAddress": "서울특별시 성북구 동소문로 118 1층",
+      "file": "D164_돈암중앙점.webp",
+      "placeId": "oy-돈암중앙점",
+      "catalogueAddress": "서울 성북구 동소문로 118 1층",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/D164_202502410920151.png?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "D171",
+      "storeName": "종로1가점",
+      "district": "종로구",
+      "officialAddress": "서울특별시 종로구 종로 19 르미에르종로타운 1층",
+      "file": "D171_종로1가점.webp",
+      "placeId": "oy-종로1가점",
+      "catalogueAddress": "서울 종로구 종로 19 르메이에르종로타운 1층",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/D171_1.jpg?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "D173",
+      "storeName": "홍대정문점",
+      "district": "마포구",
+      "officialAddress": "서울특별시 마포구 홍익로 4 1층",
+      "file": "D173_홍대정문점.webp",
+      "placeId": "oy-홍대정문점",
+      "catalogueAddress": "서울 마포구 홍익로 4 1층",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/D173_202502510921111.png?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "D181",
+      "storeName": "혜화역점",
+      "district": "종로구",
+      "officialAddress": "서울특별시 종로구 대학로 122 흥사단회관 1층",
+      "file": "D181_혜화역점.webp",
+      "placeId": "oy-혜화역점",
+      "catalogueAddress": "서울 종로구 대학로 122 흥사단회관 1층",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/D181_1.jpg?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "D192",
+      "storeName": "양재스타클래스점",
+      "district": "강남구",
+      "officialAddress": "서울특별시 강남구 남부순환로 2615",
+      "file": "D192_양재스타클래스점.webp",
+      "placeId": "oy-양재스타클래스점",
+      "catalogueAddress": "서울 강남구 남부순환로 2615 1층",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/D192_1.jpg?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "D193",
+      "storeName": "홍대대학로점",
+      "district": "종로구",
+      "officialAddress": "서울특별시 종로구 대학로 57 홍익대대학로캠퍼스 내 1층",
+      "file": "D193_홍대대학로점.webp",
+      "placeId": "oy-홍대대학로점",
+      "catalogueAddress": "서울 종로구 대학로 57 1층",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/D193_1.jpg?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "D202",
+      "storeName": "은행사거리점",
+      "district": "노원구",
+      "officialAddress": "서울특별시 노원구 한글비석로 264 중계그랜드프라자 1층",
+      "file": "D202_은행사거리점.webp",
+      "placeId": "oy-은행사거리점",
+      "catalogueAddress": "서울 노원구 한글비석로 264 중계그랜드프라자 1층",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/D202_1.jpg?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "D215",
+      "storeName": "증미역점",
+      "district": "강서구",
+      "officialAddress": "서울특별시 강서구 양천로 583 우림블루나인 1층",
+      "file": "D215_증미역점.webp",
+      "placeId": "oy-증미역점",
+      "catalogueAddress": "서울 강서구 양천로 583 우림블루나인 1층",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/D215_1.jpg?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "D259",
+      "storeName": "신촌명물거리점",
+      "district": "서대문구",
+      "officialAddress": "서울특별시 서대문구 명물길 54",
+      "file": "D259_신촌명물거리점.webp",
+      "placeId": "oy-신촌명물거리점",
+      "catalogueAddress": "서울 서대문구 명물길 54 1층",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/D259_1.jpg?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "D264",
+      "storeName": "압구정중앙점",
+      "district": "강남구",
+      "officialAddress": "서울특별시 강남구 논현로 842 압구정빌딩 1층",
+      "file": "D264_압구정중앙점.webp",
+      "placeId": "oy-압구정중앙점",
+      "catalogueAddress": "서울 강남구 논현로 842 압구정빌딩 1층",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/D264_1.jpg?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "D278",
+      "storeName": "상암MBC점",
+      "district": "마포구",
+      "officialAddress": "서울특별시 마포구 성암로 267 MBC 신사옥상업시설 1층",
+      "file": "D278_상암MBC점.webp",
+      "placeId": "oy-상암mbc점",
+      "catalogueAddress": "서울 마포구 성암로 255 신사옥상업시설 1층",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/D278_202502480933521.jpg?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "D295",
+      "storeName": "동대문역사문화공원역점",
+      "district": "중구",
+      "officialAddress": "서울특별시 중구 장충단로 251 1층",
+      "file": "D295_동대문역사문화공원역점.webp",
+      "placeId": "oy-동대문역사문화공원역점",
+      "catalogueAddress": "서울 중구 장충단로 251 1층",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/D295_2025041131051421.jpeg?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "D316",
+      "storeName": "명동대로점",
+      "district": "중구",
+      "officialAddress": "서울특별시 중구 퇴계로 120 1층",
+      "file": "D316_명동대로점.webp",
+      "placeId": "oy-명동대로점",
+      "catalogueAddress": "서울 중구 퇴계로 120 1층",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/D316_202502520942011.png?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "D335",
+      "storeName": "염창역점",
+      "district": "강서구",
+      "officialAddress": "서울특별시 강서구 공항대로 637 1층",
+      "file": "D335_염창역점.webp",
+      "placeId": "oy-염창역점",
+      "catalogueAddress": "서울 강서구 공항대로 637 1층",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/D335_1.jpg?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "D345",
+      "storeName": "가산디지털단지역점",
+      "district": "금천구",
+      "officialAddress": "서울특별시 금천구 벚꽃로 286",
+      "file": "D345_가산디지털단지역점.webp",
+      "placeId": "oy-가산디지털단지역점",
+      "catalogueAddress": "서울 금천구 벚꽃로 286 1층",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/D345_1.jpg?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "D372",
+      "storeName": "보라매병원역점",
+      "district": "동작구",
+      "officialAddress": "서울특별시 동작구 보라매로 5가길 16",
+      "file": "D372_보라매병원역점.webp",
+      "placeId": "oy-보라매병원역점",
+      "catalogueAddress": "서울 동작구 보라매로5가길 16 1층",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/D372_1.jpg?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "D382",
+      "storeName": "수서역점",
+      "district": "강남구",
+      "officialAddress": "서울특별시 강남구 밤고개로1길 10",
+      "file": "D382_수서역점.webp",
+      "placeId": "oy-수서역점",
+      "catalogueAddress": "서울 강남구 밤고개로1길 10 수서현대벤쳐빌오피스텔 1층 117-6호",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/D382_1.jpg?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "D383",
+      "storeName": "대학로중앙점",
+      "district": "종로구",
+      "officialAddress": "서울특별시 종로구 대학로 144 1층",
+      "file": "D383_대학로중앙점.webp",
+      "placeId": "oy-대학로중앙점",
+      "catalogueAddress": "서울 종로구 대학로 144 1층",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/D383_1.jpg?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "D403",
+      "storeName": "이태원입구점",
+      "district": "용산구",
+      "officialAddress": "서울특별시 용산구 이태원로 145",
+      "file": "D403_이태원입구점.webp",
+      "placeId": "oy-이태원입구점",
+      "catalogueAddress": "서울 용산구 이태원로 145 1층",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/D403_1.jpg?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "D424",
+      "storeName": "녹두거리점",
+      "district": "관악구",
+      "officialAddress": "서울특별시 관악구 신림로 127 1층",
+      "file": "D424_녹두거리점.webp",
+      "placeId": "oy-녹두거리점",
+      "catalogueAddress": "서울 관악구 신림로 127 1층",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/D424_1.jpg?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "D448",
+      "storeName": "금호점",
+      "district": "성동구",
+      "officialAddress": "서울특별시 성동구 독서당로 302 1층",
+      "file": "D448_금호점.webp",
+      "placeId": "oy-금호점",
+      "catalogueAddress": "서울 성동구 독서당로 302 1층",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/D448_1.jpg?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "D480",
+      "storeName": "서울시립대점",
+      "district": "동대문구",
+      "officialAddress": "서울특별시 동대문구 전농로 222 씨티프라자 104~105호",
+      "file": "D480_서울시립대점.webp",
+      "placeId": "oy-서울시립대점",
+      "catalogueAddress": "서울 동대문구 전농로 222 씨티프라자 1층 104~105호",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/D480_1.jpg?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "D514",
+      "storeName": "강변역점",
+      "district": "광진구",
+      "officialAddress": "서울특별시 광진구 강변역로4길 10",
+      "file": "D514_강변역점.webp",
+      "placeId": "oy-강변역점",
+      "catalogueAddress": "서울 광진구 강변역로4길 10 1층",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/D514_1.jpg?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "D519",
+      "storeName": "보라매역점",
+      "district": "동작구",
+      "officialAddress": "서울특별시 동작구 여의대방로 142",
+      "file": "D519_보라매역점.webp",
+      "placeId": "oy-보라매역점",
+      "catalogueAddress": "서울 동작구 여의대방로 142 1층",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/D519_1.jpg?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "D528",
+      "storeName": "위례아이파크점",
+      "district": "송파구",
+      "officialAddress": "서울특별시 송파구 위례광장로 136",
+      "file": "D528_위례아이파크점.webp",
+      "placeId": "oy-위례아이파크점",
+      "catalogueAddress": "서울 송파구 위례광장로 136",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/D528_1.jpg?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "D529",
+      "storeName": "강동구청점",
+      "district": "강동구",
+      "officialAddress": "서울특별시 강동구 성내로 19",
+      "file": "D529_강동구청점.webp",
+      "placeId": "oy-강동구청점",
+      "catalogueAddress": "서울 강동구 성내로 19 1층",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/D529_1.jpg?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "D534",
+      "storeName": "마포도화점",
+      "district": "마포구",
+      "officialAddress": "서울특별시 마포구 삼개로 20",
+      "file": "D534_마포도화점.webp",
+      "placeId": "oy-마포도화점",
+      "catalogueAddress": "서울 마포구 삼개로 20 근신빌딩 별관 1층",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/D534_1.jpg?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "D544",
+      "storeName": "신당역점",
+      "district": "중구",
+      "officialAddress": "서울특별시 중구 다산로 258",
+      "file": "D544_신당역점.webp",
+      "placeId": "oy-신당역점",
+      "catalogueAddress": "서울 중구 다산로 258 리마크빌동대문오피스텔 1층",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/D544_1.jpg?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "D548",
+      "storeName": "숭실대입구역점",
+      "district": "동작구",
+      "officialAddress": "서울특별시 동작구 상도로 358",
+      "file": "D548_숭실대입구역점.webp",
+      "placeId": "oy-숭실대입구역점",
+      "catalogueAddress": "서울 동작구 상도로 358 1층",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/D548_1.jpg?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "D555",
+      "storeName": "휘경동점",
+      "district": "동대문구",
+      "officialAddress": "서울특별시 동대문구 망우로 78, 휘경빌딩 1층",
+      "file": "D555_휘경동점.webp",
+      "placeId": "oy-휘경동점",
+      "catalogueAddress": "서울 동대문구 망우로 78 휘경빌딩 1층",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/D555_2024113251756021.png?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "D562",
+      "storeName": "신대방역점",
+      "district": "관악구",
+      "officialAddress": "서울특별시 관악구 난곡로 357 1층",
+      "file": "D562_신대방역점.webp",
+      "placeId": "oy-신대방역점",
+      "catalogueAddress": "서울 관악구 난곡로 357 1층",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/D562_1.jpg?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "D578",
+      "storeName": "타워팰리스점",
+      "district": "강남구",
+      "officialAddress": "서울특별시 강남구 언주로30길 39 Lynn Square(린스퀘어) 1층",
+      "file": "D578_타워팰리스점.webp",
+      "placeId": "oy-타워팰리스점",
+      "catalogueAddress": "서울 강남구 언주로30길 39 린스퀘어 1층",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/D578_2026051400922471.jpg?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "DA48",
+      "storeName": "동교동점",
+      "district": "마포구",
+      "officialAddress": "서울특별시 마포구 동교로 207",
+      "file": "DA48_동교동점.webp",
+      "placeId": "oy-동교동점",
+      "catalogueAddress": "서울 마포구 동교로 207 1층",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/DA48_1.jpg?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "DA49",
+      "storeName": "순천향입구점",
+      "district": "용산구",
+      "officialAddress": "서울특별시 용산구 대사관로 71",
+      "file": "DA49_순천향입구점.webp",
+      "placeId": "oy-순천향입구점",
+      "catalogueAddress": "서울 용산구 대사관로 71 1층",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/DA49_1.jpg?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "DA54",
+      "storeName": "봉은사역점",
+      "district": "강남구",
+      "officialAddress": "서울특별시 강남구 영동대로 602",
+      "file": "DA54_봉은사역점.webp",
+      "placeId": "oy-봉은사역점",
+      "catalogueAddress": "서울 강남구 영동대로 602 미켈란107빌딩 1층",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/DA54_1.jpg?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "DA57",
+      "storeName": "창천점",
+      "district": "서대문구",
+      "officialAddress": "서울특별시 서대문구 신촌로 17",
+      "file": "DA57_창천점.webp",
+      "placeId": "oy-창천점",
+      "catalogueAddress": "서울 서대문구 신촌로 17 1층",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/DA57_1.jpg?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "DA62",
+      "storeName": "신설동역점",
+      "district": "동대문구",
+      "officialAddress": "서울특별시 동대문구 왕산로 4 1층",
+      "file": "DA62_신설동역점.webp",
+      "placeId": "oy-신설동역점",
+      "catalogueAddress": "서울 동대문구 왕산로 4 1층",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/DA62_1.jpg?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "DA6F",
+      "storeName": "상도역점",
+      "district": "동작구",
+      "officialAddress": "서울특별시 동작구 양녕로 257",
+      "file": "DA6F_상도역점.webp",
+      "placeId": "oy-상도역점",
+      "catalogueAddress": "서울 동작구 양녕로 257 1층",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/DA6F_1.jpg?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "DA7B",
+      "storeName": "정동점",
+      "district": "중구",
+      "officialAddress": "서울특별시 중구 새문안로 26",
+      "file": "DA7B_정동점.webp",
+      "placeId": "oy-정동점",
+      "catalogueAddress": "서울 중구 새문안로 26 1층",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/DA7B_1.jpg?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "DA89",
+      "storeName": "장한평역점",
+      "district": "동대문구",
+      "officialAddress": "서울특별시 동대문구 장한로 3",
+      "file": "DA89_장한평역점.webp",
+      "placeId": "oy-장한평역점",
+      "catalogueAddress": "서울 동대문구 장한로 3 1층",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/DA89_1.jpg?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "DA90",
+      "storeName": "중화역점",
+      "district": "중랑구",
+      "officialAddress": "서울특별시 중랑구 동일로 802 1층",
+      "file": "DA90_중화역점.webp",
+      "placeId": "oy-중화역점",
+      "catalogueAddress": "서울 중랑구 동일로 802 1층",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/DA90_1.jpg?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "DA99",
+      "storeName": "석계역점",
+      "district": "노원구",
+      "officialAddress": "서울특별시 노원구 석계로1길 14",
+      "file": "DA99_석계역점.webp",
+      "placeId": "oy-석계역점",
+      "catalogueAddress": "서울 노원구 석계로1길 14 1층",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/DA99_1.jpg?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "DA9E",
+      "storeName": "미아역점",
+      "district": "강북구",
+      "officialAddress": "서울특별시 강북구 도봉로 188",
+      "file": "DA9E_미아역점.webp",
+      "placeId": "oy-미아역점",
+      "catalogueAddress": "서울 강북구 도봉로 188 1층",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/DA9E_1.jpg?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "DAA3",
+      "storeName": "숙대점",
+      "district": "용산구",
+      "officialAddress": "서울특별시 용산구 청파로45길 19 복조빌딩 1층(올리브영 숙대점)",
+      "file": "DAA3_숙대점.webp",
+      "placeId": "oy-숙대점",
+      "catalogueAddress": "서울 용산구 청파로45길 19 복조빌딩 1층",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/DAA3_1.jpg?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "DAAC",
+      "storeName": "신대방삼거리역점",
+      "district": "동작구",
+      "officialAddress": "서울특별시 동작구 보라매로 113",
+      "file": "DAAC_신대방삼거리역점.webp",
+      "placeId": "oy-신대방삼거리역점",
+      "catalogueAddress": "서울 동작구 보라매로 113 코스모빌딩 1층",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/DAAC_1.jpg?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "DABB",
+      "storeName": "영등포역사점",
+      "district": "영등포구",
+      "officialAddress": "서울특별시 영등포구 경인로 846 3층 맞이방 올리브영 영등포역사점",
+      "file": "DABB_영등포역사점.webp",
+      "placeId": "oy-영등포역사점",
+      "catalogueAddress": "서울 영등포구 경인로 846 3층",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/DABB_1.jpg?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "DAC0",
+      "storeName": "천왕역점",
+      "district": "구로구",
+      "officialAddress": "서울특별시 구로구 오류로 20 (오류동 173-47 )",
+      "file": "DAC0_천왕역점.webp",
+      "placeId": "oy-천왕역점",
+      "catalogueAddress": "서울 구로구 오류로 20 1층",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/DAC0_1.jpg?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "DAD2",
+      "storeName": "신촌로터리점",
+      "district": "마포구",
+      "officialAddress": "서울특별시 마포구 서강로 133 1층",
+      "file": "DAD2_신촌로터리점.webp",
+      "placeId": "oy-신촌로터리점",
+      "catalogueAddress": "서울 마포구 서강로 133 1층",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/DAD2_1.jpg?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "DAD8",
+      "storeName": "학동중앙점",
+      "district": "강남구",
+      "officialAddress": "서울특별시 강남구 도산대로 326",
+      "file": "DAD8_학동중앙점.webp",
+      "placeId": "oy-학동중앙점",
+      "catalogueAddress": "서울 강남구 도산대로 326 대동타워 1층",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/DAD8_1.jpg?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "DAD9",
+      "storeName": "합정교보점",
+      "district": "마포구",
+      "officialAddress": "서울특별시 마포구 월드컵로1길 14 올리브영 합정교보점",
+      "file": "DAD9_합정교보점.webp",
+      "placeId": "oy-합정교보점",
+      "catalogueAddress": "서울 마포구 월드컵로1길 14 딜라이트스퀘어1차 지하2층",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/DAD9_1.jpg?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "DADA",
+      "storeName": "자양역점",
+      "district": "광진구",
+      "officialAddress": "서울특별시 광진구 능동로 7",
+      "file": "DADA_자양역점.webp",
+      "placeId": "oy-자양역점",
+      "catalogueAddress": "서울 광진구 능동로 7 1층",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/DADA_1.jpg?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "DB16",
+      "storeName": "한남오거리점",
+      "district": "용산구",
+      "officialAddress": "서울특별시 용산구 독서당로 65-1",
+      "file": "DB16_한남오거리점.webp",
+      "placeId": "oy-한남오거리점",
+      "catalogueAddress": "서울 용산구 독서당로 65-1 1층",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/DB16_1.jpg?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "DB28",
+      "storeName": "만리동점",
+      "district": "중구",
+      "officialAddress": "서울특별시 중구 만리재로 175 서울역센트럴자이 상가 1층",
+      "file": "DB28_만리동점.webp",
+      "placeId": "oy-만리동점",
+      "catalogueAddress": "서울 중구 만리재로 175 센트럴자이 상가 1층",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/DB28_1.jpg?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "DB33",
+      "storeName": "애오개역점",
+      "district": "마포구",
+      "officialAddress": "서울특별시 마포구 마포대로 201 마포트라펠리스 2차 1층",
+      "file": "DB33_애오개역점.webp",
+      "placeId": "oy-애오개역점",
+      "catalogueAddress": "서울 마포구 마포대로 201 마포트라펠리스 2차 1층",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/DB33_1.jpg?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "DB35",
+      "storeName": "상계보람점",
+      "district": "노원구",
+      "officialAddress": "서울특별시 노원구 한글비석로 471",
+      "file": "DB35_상계보람점.webp",
+      "placeId": "oy-상계보람점",
+      "catalogueAddress": "서울 노원구 한글비석로 471 1층",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/DB35_1.jpg?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "DB41",
+      "storeName": "황학사거리점",
+      "district": "성동구",
+      "officialAddress": "서울특별시 성동구 왕십리로 410 센트라스 1층 158호",
+      "file": "DB41_황학사거리점.webp",
+      "placeId": "oy-황학사거리점",
+      "catalogueAddress": "서울 성동구 왕십리로 410 센트라스 1층 158호",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/DB41_1.jpg?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "DB48",
+      "storeName": "잠실학원사거리점",
+      "district": "송파구",
+      "officialAddress": "서울특별시 송파구 석촌호수로 130",
+      "file": "DB48_잠실학원사거리점.webp",
+      "placeId": "oy-잠실학원사거리점",
+      "catalogueAddress": "서울 송파구 석촌호수로 130 1층",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/DB48_1.jpg?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "DB67",
+      "storeName": "트윈시티점",
+      "district": "용산구",
+      "officialAddress": "서울특별시 용산구 한강대로 366 B1 109,110호",
+      "file": "DB67_트윈시티점.webp",
+      "placeId": "oy-트윈시티점",
+      "catalogueAddress": "서울 용산구 한강대로 366 지하1층 109~110호",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/DB67_2024102852220331.jpg?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "DB68",
+      "storeName": "성신여대입구역점",
+      "district": "성북구",
+      "officialAddress": "서울특별시 성북구 아리랑로 9",
+      "file": "DB68_성신여대입구역점.webp",
+      "placeId": "oy-성신여대입구역점",
+      "catalogueAddress": "서울 성북구 아리랑로 9 1층",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/DB68_1.jpg?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "DB7B",
+      "storeName": "배명사거리점",
+      "district": "송파구",
+      "officialAddress": "서울특별시 송파구 백제고분로 276 공익빌딩 1층",
+      "file": "DB7B_배명사거리점.webp",
+      "placeId": "oy-배명사거리점",
+      "catalogueAddress": "서울 송파구 백제고분로 276 공익빌딩 1층",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/DB7B_1.jpg?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "DB7E",
+      "storeName": "구일역점",
+      "district": "구로구",
+      "officialAddress": "서울특별시 구로구 구일로10길 49 (구로동, 다원그린빌) 1층 제101-2호, 제102-1호",
+      "file": "DB7E_구일역점.webp",
+      "placeId": "oy-구일역점",
+      "catalogueAddress": "서울 구로구 구일로10길 49 다원그린빌 1층 101-2,102-1호",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/DB7E_1.jpg?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "DB89",
+      "storeName": "공릉역점",
+      "district": "노원구",
+      "officialAddress": "서울특별시 노원구 동일로192길 74 (공릉동 441-92, 93)",
+      "file": "DB89_공릉역점.webp",
+      "placeId": "oy-공릉역점",
+      "catalogueAddress": "서울 노원구 동일로192길 74 1층",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/DB89_1.jpg?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "DB92",
+      "storeName": "북가좌동점",
+      "district": "서대문구",
+      "officialAddress": "서울특별시 서대문구 거북골로 191",
+      "file": "DB92_북가좌동점.webp",
+      "placeId": "oy-북가좌동점",
+      "catalogueAddress": "서울 서대문구 거북골로 191 1층",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/DB92_1.jpg?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "DB96",
+      "storeName": "신용산역점",
+      "district": "용산구",
+      "officialAddress": "서울특별시 용산구 한강대로 95 (한강로2가, 래미안용산) 101호,102호",
+      "file": "DB96_신용산역점.webp",
+      "placeId": "oy-신용산역점",
+      "catalogueAddress": "서울 용산구 한강대로 95 래미안용산 1층 101~102호",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/DB96_1.jpg?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "DBA3",
+      "storeName": "강남엔터식스점",
+      "district": "서초구",
+      "officialAddress": "서울특별시 서초구 신반포로 지하 188 엔터식스 강남점 26, 27호",
+      "file": "DBA3_강남엔터식스점.webp",
+      "placeId": "oy-강남엔터식스점",
+      "catalogueAddress": "서울 서초구 신반포로 지하 188 26~27호",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/DBA3_1.jpg?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "DBA7",
+      "storeName": "종암점",
+      "district": "성북구",
+      "officialAddress": "서울특별시 성북구 종암로 123 우영타워 102호",
+      "file": "DBA7_종암점.webp",
+      "placeId": "oy-종암점",
+      "catalogueAddress": "서울 성북구 종암로 123 우영타워 1층 102호",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/DBA7_1.jpg?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "DBA8",
+      "storeName": "용산리첸시아점",
+      "district": "용산구",
+      "officialAddress": "서울특별시 용산구 백범로 341 외 1필지(원효로1가, 리첸시아 용산) 리첸시아 에이동 103호, 104호, 105호, 112호",
+      "file": "DBA8_용산리첸시아점.webp",
+      "placeId": "oy-용산리첸시아점",
+      "catalogueAddress": "서울 용산구 백범로 341 A동 1층 103~105호,112호",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/DBA8_1.jpg?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "DBBC",
+      "storeName": "공덕파크팰리스점",
+      "district": "마포구",
+      "officialAddress": "서울특별시 마포구 마포대로 143 마포공덕파크팰리스 108호",
+      "file": "DBBC_공덕파크팰리스점.webp",
+      "placeId": "oy-공덕파크팰리스점",
+      "catalogueAddress": "서울 마포구 마포대로 143 1층 108호",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/DBBC_1.jpg?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "DBCF",
+      "storeName": "포이사거리점",
+      "district": "강남구",
+      "officialAddress": "서울특별시 강남구 논현로 82",
+      "file": "DBCF_포이사거리점.webp",
+      "placeId": "oy-포이사거리점",
+      "catalogueAddress": "서울 강남구 논현로 82 1층",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/DBCF_1.jpg?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "DBE3",
+      "storeName": "홍제역점",
+      "district": "서대문구",
+      "officialAddress": "서울특별시 서대문구 통일로 446",
+      "file": "DBE3_홍제역점.webp",
+      "placeId": "oy-홍제역점",
+      "catalogueAddress": "서울 서대문구 통일로 446 1층",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/DBE3_1.jpg?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "DBE5",
+      "storeName": "송파구청점",
+      "district": "송파구",
+      "officialAddress": "서울특별시 송파구 오금로 87 잠실리시온 1층",
+      "file": "DBE5_송파구청점.webp",
+      "placeId": "oy-송파구청점",
+      "catalogueAddress": "서울 송파구 오금로 87 잠실리시온 1층",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/DBE5_2025113321022061.jpg?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "DBE8",
+      "storeName": "회기중앙점",
+      "district": "동대문구",
+      "officialAddress": "서울특별시 동대문구 이문로 30 올리브영",
+      "file": "DBE8_회기중앙점.webp",
+      "placeId": "oy-회기중앙점",
+      "catalogueAddress": "서울 동대문구 이문로 30 1층",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/DBE8_1.jpg?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "DBEF",
+      "storeName": "일원역점",
+      "district": "강남구",
+      "officialAddress": "서울특별시 강남구 일원로 115 삼성생명 일원역빌딩 B동 1층",
+      "file": "DBEF_일원역점.webp",
+      "placeId": "oy-일원역점",
+      "catalogueAddress": "서울 강남구 일원로 115 삼성생명빌딩 B동 1층 114호",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/DBEF_1.jpg?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "DBF1",
+      "storeName": "길음역점",
+      "district": "성북구",
+      "officialAddress": "서울특별시 성북구 정릉로 376 BR빌딩 지하  2층",
+      "file": "DBF1_길음역점.webp",
+      "placeId": "oy-길음역점",
+      "catalogueAddress": "서울 성북구 정릉로 376 BR빌딩 지하2층",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/DBF1_2024102881325201.png?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "DBF5",
+      "storeName": "올림픽대교북단점",
+      "district": "광진구",
+      "officialAddress": "서울특별시 광진구 아차산로 484",
+      "file": "DBF5_올림픽대교북단점.webp",
+      "placeId": "oy-올림픽대교북단점",
+      "catalogueAddress": "서울 광진구 아차산로 484 1층",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/DBF5_1.jpg?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "DC07",
+      "storeName": "씨제이남산더센터점",
+      "district": "중구",
+      "officialAddress": "서울특별시 중구 소월로2길 12 CJ빌딩",
+      "file": "DC07_씨제이남산더센터점.webp",
+      "placeId": "oy-씨제이남산더센터점",
+      "catalogueAddress": "서울 중구 소월로2길 12 CJ빌딩 로비층",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/DC07_1.jpg?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "DC1F",
+      "storeName": "숙대입구역점",
+      "district": "용산구",
+      "officialAddress": "서울특별시 용산구 한강대로 285 (갈월동)",
+      "file": "DC1F_숙대입구역점.webp",
+      "placeId": "oy-숙대입구역점",
+      "catalogueAddress": "서울 용산구 한강대로 285 1층",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/DC1F_1.jpg?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "DC27",
+      "storeName": "선릉타운점",
+      "district": "강남구",
+      "officialAddress": "서울특별시 강남구 테헤란로 411 성담빌딩 1층",
+      "file": "DC27_선릉타운점.webp",
+      "placeId": "oy-선릉타운점",
+      "catalogueAddress": "서울 강남구 테헤란로 411 성담빌딩 1층",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/DC27_2025071950933591.png?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "DC2F",
+      "storeName": "신도림테크노마트점",
+      "district": "구로구",
+      "officialAddress": "서울특별시 구로구 새말로 97 신도림테크노마트 B1층 45호, 일부 46호",
+      "file": "DC2F_신도림테크노마트점.webp",
+      "placeId": "oy-신도림테크노마트점",
+      "catalogueAddress": "서울 구로구 새말로 97 지하1층 45~46호",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/DC2F_1.jpg?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "DC36",
+      "storeName": "대치점",
+      "district": "강남구",
+      "officialAddress": "서울특별시 강남구 도곡로 448 동서빌딩",
+      "file": "DC36_대치점.webp",
+      "placeId": "oy-대치점",
+      "catalogueAddress": "서울 강남구 도곡로 448 동서빌딩 1층",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/DC36_2024113191322051.png?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "DC37",
+      "storeName": "노원공릉점",
+      "district": "노원구",
+      "officialAddress": "서울특별시 노원구 동일로 1083",
+      "file": "DC37_노원공릉점.webp",
+      "placeId": "oy-노원공릉점",
+      "catalogueAddress": "서울 노원구 동일로 1083 1층",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/DC37_1.jpg?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "DC55",
+      "storeName": "개봉역북부점",
+      "district": "구로구",
+      "officialAddress": "서울특별시 구로구 경인로40길 41 181-5번지 외 2필지",
+      "file": "DC55_개봉역북부점.webp",
+      "placeId": "oy-개봉역북부점",
+      "catalogueAddress": "서울 구로구 경인로40길 41 2층",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/DC55_1.jpg?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "DC65",
+      "storeName": "세곡동점",
+      "district": "강남구",
+      "officialAddress": "서울특별시 강남구 헌릉로569길 21-36",
+      "file": "DC65_세곡동점.webp",
+      "placeId": "oy-세곡동점",
+      "catalogueAddress": "서울 강남구 헌릉로569길 21-36 1층",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/DC65_202501241554221.png?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "DC69",
+      "storeName": "서울숲역점",
+      "district": "성동구",
+      "officialAddress": "서울특별시 성동구 왕십리로 50 (성수동1가 656-335 1층)",
+      "file": "DC69_서울숲역점.webp",
+      "placeId": "oy-서울숲역점",
+      "catalogueAddress": "서울 성동구 왕십리로 50 1층",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/DC69_202501061022481.png?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "DC6B",
+      "storeName": "망원동점",
+      "district": "마포구",
+      "officialAddress": "서울특별시 마포구 망원로 71 (망원동 423-4번지 1층)",
+      "file": "DC6B_망원동점.webp",
+      "placeId": "oy-망원동점",
+      "catalogueAddress": "서울 마포구 망원로 71 1층",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/DC6B_1.jpg?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "DC74",
+      "storeName": "방배점",
+      "district": "서초구",
+      "officialAddress": "서울특별시 서초구 방배로 83 (방배동 909-6)",
+      "file": "DC74_방배점.webp",
+      "placeId": "oy-방배점",
+      "catalogueAddress": "서울 서초구 방배로 83 1층",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/DC74_2025092441451331.png?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "DC7D",
+      "storeName": "강남우성점",
+      "district": "강남구",
+      "officialAddress": "서울특별시 강남구 강남대로 320 황화빌딩 1층 일부",
+      "file": "DC7D_강남우성점.webp",
+      "placeId": "oy-강남우성점",
+      "catalogueAddress": "서울 강남구 강남대로 320 황화빌딩 1층",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/DC7D_2024113181028301.png?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "DCAA",
+      "storeName": "청량리역사점",
+      "district": "동대문구",
+      "officialAddress": "서울특별시 동대문구 왕산로 214 청량리역 3층 맞이방 올리브영",
+      "file": "DCAA_청량리역사점.webp",
+      "placeId": "oy-청량리역사점",
+      "catalogueAddress": "서울 동대문구 왕산로 214 3층 맞이방",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/DCAA_1.jpg?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "DCC6",
+      "storeName": "답십리역점",
+      "district": "동대문구",
+      "officialAddress": "서울특별시 동대문구 고미술로 81 1층 103호",
+      "file": "DCC6_답십리역점.webp",
+      "placeId": "oy-답십리역점",
+      "catalogueAddress": "서울 동대문구 고미술로 81 1층 103호",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/DCC6_1.jpg?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "DCC9",
+      "storeName": "두타점",
+      "district": "중구",
+      "officialAddress": "서울특별시 중구 장충단로 275 두산타워빌딩 지하 2층",
+      "file": "DCC9_두타점.webp",
+      "placeId": "oy-두타점",
+      "catalogueAddress": "서울 중구 장충단로 275 지하2층",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/DCC9_202602592348091.jpg?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "DCDE",
+      "storeName": "파르나스몰점",
+      "district": "강남구",
+      "officialAddress": "서울특별시 강남구 테헤란로 521 지하1층 파르나스몰 R-37",
+      "file": "DCDE_파르나스몰점.webp",
+      "placeId": "oy-파르나스몰점",
+      "catalogueAddress": "서울 강남구 테헤란로 521 지하1층 R-37호",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/DCDE_1.jpg?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "DCDF",
+      "storeName": "신강남점",
+      "district": "강남구",
+      "officialAddress": "서울특별시 강남구 봉은사로2길 31",
+      "file": "DCDF_신강남점.webp",
+      "placeId": "oy-신강남점",
+      "catalogueAddress": "서울 강남구 봉은사로2길 31 1층",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/DCDF_1.jpg?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "DCF5",
+      "storeName": "방이시장점",
+      "district": "송파구",
+      "officialAddress": "서울특별시 송파구 백제고분로 460 (방이동, 쿠피아타워)",
+      "file": "DCF5_방이시장점.webp",
+      "placeId": "oy-방이시장점",
+      "catalogueAddress": "서울 송파구 백제고분로 460 쿠피아타워 1층",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/DCF5_1.jpg?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "DD0F",
+      "storeName": "명지대점",
+      "district": "서대문구",
+      "officialAddress": "서울특별시 서대문구 거북골로 34 명지대학교 인문캠퍼스 교육문화복합시설 1층MCC관",
+      "file": "DD0F_명지대점.webp",
+      "placeId": "oy-명지대점",
+      "catalogueAddress": "서울 서대문구 거북골로 34 교육문화복합시설 1층 MCC관",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/DD0F_1.jpg?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "DD13",
+      "storeName": "디지털미디어시티역점",
+      "district": "마포구",
+      "officialAddress": "서울특별시 마포구 성암로 지하 184 디지털미디어시티역점 지하1층",
+      "file": "DD13_디지털미디어시티역점.webp",
+      "placeId": "oy-디지털미디어시티역점",
+      "catalogueAddress": "서울 마포구 성암로 지하 184 지하1층",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/DD13_1.jpg?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "DD15",
+      "storeName": "양재역점",
+      "district": "서초구",
+      "officialAddress": "서울특별시 서초구 남부순환로 지하 2585 신분당선 양재역",
+      "file": "DD15_양재역점.webp",
+      "placeId": "oy-양재역점",
+      "catalogueAddress": "서울 서초구 남부순환로 지하 2585 신분당선 지하상가 2~4호",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/DD15_1.jpg?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "DD1F",
+      "storeName": "롯데백화점잠실점",
+      "district": "송파구",
+      "officialAddress": "서울특별시 송파구 올림픽로 240 롯데백화점잠실점 지하1층",
+      "file": "DD1F_롯데백화점잠실점.webp",
+      "placeId": "oy-롯데백화점잠실점",
+      "catalogueAddress": "서울 송파구 올림픽로 240 지하1층",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/DD1F_1.jpg?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "DD20",
+      "storeName": "오류동역점",
+      "district": "구로구",
+      "officialAddress": "서울특별시 구로구 경인로 204",
+      "file": "DD20_오류동역점.webp",
+      "placeId": "oy-오류동역점",
+      "catalogueAddress": "서울 구로구 경인로 204 1층",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/DD20_1.jpg?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "DD29",
+      "storeName": "수색점",
+      "district": "은평구",
+      "officialAddress": "서울특별시 은평구 수색로 216",
+      "file": "DD29_수색점.webp",
+      "placeId": "oy-수색점",
+      "catalogueAddress": "서울 은평구 수색로 216 1층",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/DD29_1.jpg?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "DD30",
+      "storeName": "군자역점",
+      "district": "광진구",
+      "officialAddress": "서울특별시 광진구 천호대로 548 1층, 2층",
+      "file": "DD30_군자역점.webp",
+      "placeId": "oy-군자역점",
+      "catalogueAddress": "서울 광진구 천호대로 548 1-2층",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/DD30_1.jpg?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "DD43",
+      "storeName": "구로구청점",
+      "district": "구로구",
+      "officialAddress": "서울특별시 구로구 구로중앙로 68 신안타워 1층 102-3호",
+      "file": "DD43_구로구청점.webp",
+      "placeId": "oy-구로구청점",
+      "catalogueAddress": "서울 구로구 구로중앙로 68 신안타워 1층 102-3호",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/DD43_1.jpg?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "DD48",
+      "storeName": "대학로점",
+      "district": "종로구",
+      "officialAddress": "서울특별시 종로구 창경궁로 237 1~3층",
+      "file": "DD48_대학로점.webp",
+      "placeId": "oy-대학로점",
+      "catalogueAddress": "서울 종로구 창경궁로 237 1-3층",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/DD48_1.jpg?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "DD49",
+      "storeName": "롯데월드몰점",
+      "district": "송파구",
+      "officialAddress": "서울특별시 송파구 올림픽로 300 롯데월드몰 5층",
+      "file": "DD49_롯데월드몰점.webp",
+      "placeId": "oy-롯데월드몰점",
+      "catalogueAddress": "서울 송파구 올림픽로 300 5층",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/DD49_1.jpg?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "DD4C",
+      "storeName": "미아뉴타운점",
+      "district": "강북구",
+      "officialAddress": "서울특별시 강북구 삼양로27길 19 204동 115~117호",
+      "file": "DD4C_미아뉴타운점.webp",
+      "placeId": "oy-미아뉴타운점",
+      "catalogueAddress": "서울 강북구 삼양로27길 19 204동 상가 1층 115~117호",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/DD4C_1.jpg?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "DD4F",
+      "storeName": "우장산역점",
+      "district": "강서구",
+      "officialAddress": "서울특별시 강서구 강서로 242 강서힐스테이트 118~122호",
+      "file": "DD4F_우장산역점.webp",
+      "placeId": "oy-우장산역점",
+      "catalogueAddress": "서울 강서구 강서로 242 강서힐스테이트 1층 118~122호",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/DD4F_1.jpg?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "DD51",
+      "storeName": "테헤란로점",
+      "district": "강남구",
+      "officialAddress": "서울특별시 강남구 테헤란로 514 1층",
+      "file": "DD51_테헤란로점.webp",
+      "placeId": "oy-테헤란로점",
+      "catalogueAddress": "서울 강남구 테헤란로 514 삼흥2빌딩 1층",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/DD51_1.jpg?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "DD52",
+      "storeName": "염창역9호선점",
+      "district": "강서구",
+      "officialAddress": "서울특별시 강서구 공항대로 지하 631 염창역 지하1층",
+      "file": "DD52_염창역9호선점.webp",
+      "placeId": "oy-염창역9호선점",
+      "catalogueAddress": "서울 강서구 공항대로 지하 631 지하1층",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/DD52_1.jpg?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "DD61",
+      "storeName": "역삼점",
+      "district": "강남구",
+      "officialAddress": "서울특별시 강남구 테헤란로 111 대건빌딩 1층",
+      "file": "DD61_역삼점.webp",
+      "placeId": "oy-역삼점",
+      "catalogueAddress": "서울 강남구 테헤란로 111 대건빌딩 1층",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/DD61_1.jpg?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "DD6F",
+      "storeName": "명동타임워크점",
+      "district": "중구",
+      "officialAddress": "서울특별시 중구 남대문로 78 타임워크명동 108호, 109호",
+      "file": "DD6F_명동타임워크점.webp",
+      "placeId": "oy-명동타임워크점",
+      "catalogueAddress": "서울 중구 남대문로 78 1층 108~109호",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/DD6F_1.jpg?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "DD72",
+      "storeName": "개포동점",
+      "district": "강남구",
+      "officialAddress": "서울특별시 강남구 선릉로 26 지하1층",
+      "file": "DD72_개포동점.webp",
+      "placeId": "oy-개포동점",
+      "catalogueAddress": "서울 강남구 선릉로 26 지하1층",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/DD72_1.jpg?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "DD82",
+      "storeName": "장위뉴타운점",
+      "district": "성북구",
+      "officialAddress": "서울특별시 성북구 돌곶이로40길 46 꿈의숲아이파크 717동",
+      "file": "DD82_장위뉴타운점.webp",
+      "placeId": "oy-장위뉴타운점",
+      "catalogueAddress": "서울 성북구 돌곶이로40길 46 꿈의숲아이파크 717동 1층",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/DD82_1.jpg?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "DD9A",
+      "storeName": "천호엔터식스점",
+      "district": "강동구",
+      "officialAddress": "서울특별시 강동구 천호대로 지하 997 지하1층",
+      "file": "DD9A_천호엔터식스점.webp",
+      "placeId": "oy-천호엔터식스점",
+      "catalogueAddress": "서울 강동구 천호대로 지하 997 지하1층 012호",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/DD9A_1.jpg?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "DD9E",
+      "storeName": "남구로점",
+      "district": "구로구",
+      "officialAddress": "서울특별시 구로구 도림로 81",
+      "file": "DD9E_남구로점.webp",
+      "placeId": "oy-남구로점",
+      "catalogueAddress": "서울 구로구 도림로 81 1층",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/DD9E_1.jpg?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "DDAA",
+      "storeName": "플러스점",
+      "district": "용산구",
+      "officialAddress": "서울특별시 용산구 한강대로 372 KDB생명타워 B114~B115",
+      "file": "DDAA_플러스점.webp",
+      "placeId": "oy-플러스점",
+      "catalogueAddress": "서울 용산구 한강대로 372 KDB생명타워 지하1층 B114~B115호",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/DDAA_1.jpg?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "DDAC",
+      "storeName": "화곡역사거리점",
+      "district": "강서구",
+      "officialAddress": "서울특별시 강서구 강서로 163",
+      "file": "DDAC_화곡역사거리점.webp",
+      "placeId": "oy-화곡역사거리점",
+      "catalogueAddress": "서울 강서구 강서로 163 1층",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/DDAC_1.jpg?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "DDAE",
+      "storeName": "삼성중앙역점",
+      "district": "강남구",
+      "officialAddress": "서울특별시 강남구 봉은사로 465 올리브영",
+      "file": "DDAE_삼성중앙역점.webp",
+      "placeId": "oy-삼성중앙역점",
+      "catalogueAddress": "서울 강남구 봉은사로 465 1층",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/DDAE_1.jpg?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "DDB1",
+      "storeName": "미아사거리역점",
+      "district": "강북구",
+      "officialAddress": "서울특별시 강북구 도봉로 53 1층",
+      "file": "DDB1_미아사거리역점.webp",
+      "placeId": "oy-미아사거리역점",
+      "catalogueAddress": "서울 강북구 도봉로 53 1층",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/DDB1_1.jpg?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "DDC0",
+      "storeName": "무교동점",
+      "district": "중구",
+      "officialAddress": "서울특별시 중구 무교로 24 1층",
+      "file": "DDC0_무교동점.webp",
+      "placeId": "oy-무교동점",
+      "catalogueAddress": "서울 중구 무교로 24 1층",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/DDC0_1.jpg?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "DDC9",
+      "storeName": "어린이대공원역점",
+      "district": "광진구",
+      "officialAddress": "서울특별시 광진구 광나루로 388 1,2층",
+      "file": "DDC9_어린이대공원역점.webp",
+      "placeId": "oy-어린이대공원역점",
+      "catalogueAddress": "서울 광진구 광나루로 388 1-2층",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/DDC9_1.jpg?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "DDCA",
+      "storeName": "신금호역점",
+      "district": "성동구",
+      "officialAddress": "서울특별시 성동구 무수막길 95",
+      "file": "DDCA_신금호역점.webp",
+      "placeId": "oy-신금호역점",
+      "catalogueAddress": "서울 성동구 무수막길 95 1층",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/DDCA_1.jpg?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "DDE1",
+      "storeName": "대림성모점",
+      "district": "동작구",
+      "officialAddress": "서울특별시 동작구 시흥대로 654",
+      "file": "DDE1_대림성모점.webp",
+      "placeId": "oy-대림성모점",
+      "catalogueAddress": "서울 동작구 시흥대로 654 1층",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/DDE1_1.jpg?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "DDF5",
+      "storeName": "건대커먼그라운드점",
+      "district": "광진구",
+      "officialAddress": "서울특별시 광진구 아차산로 200 커먼그라운드",
+      "file": "DDF5_건대커먼그라운드점.webp",
+      "placeId": "oy-건대커먼그라운드점",
+      "catalogueAddress": "서울 광진구 아차산로 200 MH동 1층",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/DDF5_2025113211613131.jpg?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "DDFF",
+      "storeName": "가산점",
+      "district": "금천구",
+      "officialAddress": "서울특별시 금천구 가산디지털1로 168 우림라온스밸리 A동 124~126호",
+      "file": "DDFF_가산점.webp",
+      "placeId": "oy-가산점",
+      "catalogueAddress": "서울 금천구 가산디지털1로 168 우림라이온스밸리 A동 1층 124~126호",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/DDFF_1.jpg?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "DE02",
+      "storeName": "경복궁역점",
+      "district": "종로구",
+      "officialAddress": "서울특별시 종로구 자하문로 9 1,2층",
+      "file": "DE02_경복궁역점.webp",
+      "placeId": "oy-경복궁역점",
+      "catalogueAddress": "서울 종로구 자하문로 9 1-2층",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/DE02_2024102851909081.jpg?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "DE03",
+      "storeName": "종로점",
+      "district": "종로구",
+      "officialAddress": "서울특별시 종로구 종로 78 미려빌딩 1층 일부",
+      "file": "DE03_종로점.webp",
+      "placeId": "oy-종로점",
+      "catalogueAddress": "서울 종로구 종로 78 미려빌딩 1층",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/DE03_1.jpg?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "DE04",
+      "storeName": "미아사거리점",
+      "district": "강북구",
+      "officialAddress": "서울특별시 강북구 도봉로10길 6 올리브영",
+      "file": "DE04_미아사거리점.webp",
+      "placeId": "oy-미아사거리점",
+      "catalogueAddress": "서울 강북구 도봉로10길 6 1층",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/DE04_1.jpg?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "DE08",
+      "storeName": "대치역점",
+      "district": "강남구",
+      "officialAddress": "서울특별시 강남구 남부순환로 2936 1,2층",
+      "file": "DE08_대치역점.webp",
+      "placeId": "oy-대치역점",
+      "catalogueAddress": "서울 강남구 남부순환로 2936 1-2층",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/DE08_1.jpg?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "DE0A",
+      "storeName": "신천중앙점",
+      "district": "송파구",
+      "officialAddress": "서울특별시 송파구 올림픽로 114 1층, 2층",
+      "file": "DE0A_신천중앙점.webp",
+      "placeId": "oy-신천중앙점",
+      "catalogueAddress": "서울 송파구 올림픽로 114 서경빌딩 1-2층",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/DE0A_1.jpg?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "DE1C",
+      "storeName": "이수역점",
+      "district": "동작구",
+      "officialAddress": "서울특별시 동작구 사당로 307",
+      "file": "DE1C_이수역점.webp",
+      "placeId": "oy-이수역점",
+      "catalogueAddress": "서울 동작구 사당로 307 1층",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/DE1C_1.jpg?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "DE26",
+      "storeName": "신촌중앙점",
+      "district": "서대문구",
+      "officialAddress": "서울특별시 서대문구 신촌로 93 광신빌딩 1층",
+      "file": "DE26_신촌중앙점.webp",
+      "placeId": "oy-신촌중앙점",
+      "catalogueAddress": "서울 서대문구 신촌로 93 광신빌딩 1층",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/DE26_1.jpg?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "DE29",
+      "storeName": "천호역점",
+      "district": "강동구",
+      "officialAddress": "서울특별시 강동구 올림픽로 659 1층",
+      "file": "DE29_천호역점.webp",
+      "placeId": "oy-천호역점",
+      "catalogueAddress": "서울 강동구 올림픽로 659 1층",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/DE29_1.jpg?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "DE39",
+      "storeName": "정릉점",
+      "district": "성북구",
+      "officialAddress": "서울특별시 성북구 보국문로 33",
+      "file": "DE39_정릉점.webp",
+      "placeId": "oy-정릉점",
+      "catalogueAddress": "서울 성북구 보국문로 33 jr메디컬빌딩 103~104호",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/DE39_1.jpg?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "DE44",
+      "storeName": "삼전역점",
+      "district": "송파구",
+      "officialAddress": "서울특별시 송파구 백제고분로 196 1층",
+      "file": "DE44_삼전역점.webp",
+      "placeId": "oy-삼전역점",
+      "catalogueAddress": "서울 송파구 백제고분로 196 1층",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/DE44_1.jpg?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "DE49",
+      "storeName": "노량진역점",
+      "district": "동작구",
+      "officialAddress": "서울특별시 동작구 노량진로 159",
+      "file": "DE49_노량진역점.webp",
+      "placeId": "oy-노량진역점",
+      "catalogueAddress": "서울 동작구 노량진로 159 1층",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/DE49_1.jpg?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "DE4B",
+      "storeName": "마들역점",
+      "district": "노원구",
+      "officialAddress": "서울특별시 노원구 동일로 1532 거북빌딩 1층",
+      "file": "DE4B_마들역점.webp",
+      "placeId": "oy-마들역점",
+      "catalogueAddress": "서울 노원구 동일로 1532 거북빌딩 1층",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/DE4B_1.jpg?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "DE50",
+      "storeName": "학동역점",
+      "district": "강남구",
+      "officialAddress": "서울특별시 강남구 논현로 667",
+      "file": "DE50_학동역점.webp",
+      "placeId": "oy-학동역점",
+      "catalogueAddress": "서울 강남구 논현로 667 1층",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/DE50_2024123551501541.png?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "DE52",
+      "storeName": "선유도역점",
+      "district": "영등포구",
+      "officialAddress": "서울특별시 영등포구 양평로 115",
+      "file": "DE52_선유도역점.webp",
+      "placeId": "oy-선유도역점",
+      "catalogueAddress": "서울 영등포구 양평로 115 1층",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/DE52_1.jpg?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "DE54",
+      "storeName": "영등포역점",
+      "district": "영등포구",
+      "officialAddress": "서울특별시 영등포구 영중로 6",
+      "file": "DE54_영등포역점.webp",
+      "placeId": "oy-영등포역점",
+      "catalogueAddress": "서울 영등포구 영중로 6 키스톤타워 1층",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/DE54_2024102942051551.png?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "DE55",
+      "storeName": "뚝섬역점",
+      "district": "성동구",
+      "officialAddress": "서울특별시 성동구 아차산로 6",
+      "file": "DE55_뚝섬역점.webp",
+      "placeId": "oy-뚝섬역점",
+      "catalogueAddress": "서울 성동구 아차산로 6 1층",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/DE55_1.jpg?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "DE5A",
+      "storeName": "길음점",
+      "district": "성북구",
+      "officialAddress": "서울특별시 성북구 길음로 11 롯데캐슬 상가 160~162호",
+      "file": "DE5A_길음점.webp",
+      "placeId": "oy-길음점",
+      "catalogueAddress": "서울 성북구 길음로 11 롯데캐슬 상가 1층 160~162호",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/DE5A_1.jpg?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "DE65",
+      "storeName": "상암ENM점",
+      "district": "마포구",
+      "officialAddress": "서울특별시 마포구 상암산로 66 CJ E&M 센터 1층",
+      "file": "DE65_상암ENM점.webp",
+      "placeId": "oy-상암enm점",
+      "catalogueAddress": "서울 마포구 상암산로 66 CJ E&M 센터 1층",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/DE65_1.jpg?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "DE72",
+      "storeName": "선릉중앙점",
+      "district": "강남구",
+      "officialAddress": "서울특별시 강남구 테헤란로 316",
+      "file": "DE72_선릉중앙점.webp",
+      "placeId": "oy-선릉중앙점",
+      "catalogueAddress": "서울 강남구 테헤란로 316 1층",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/DE72_2024102901024501.jpg?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "DE80",
+      "storeName": "성수연방점",
+      "district": "성동구",
+      "officialAddress": "서울특별시 성동구 성수이로14길 14",
+      "file": "DE80_성수연방점.webp",
+      "placeId": "oy-성수연방점",
+      "catalogueAddress": "서울 성동구 성수이로14길 14 성수연방 A동 1층",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/DE80_2024102921450261.jpg?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "DE88",
+      "storeName": "동묘앞역점",
+      "district": "종로구",
+      "officialAddress": "서울특별시 종로구 종로 346",
+      "file": "DE88_동묘앞역점.webp",
+      "placeId": "oy-동묘앞역점",
+      "catalogueAddress": "서울 종로구 종로 346 1-2층",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/DE88_2024123511046021.png?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "DE8F",
+      "storeName": "연희점",
+      "district": "서대문구",
+      "officialAddress": "서울특별시 서대문구 연희로 97 올리브영",
+      "file": "DE8F_연희점.webp",
+      "placeId": "oy-연희점",
+      "catalogueAddress": "서울 서대문구 연희로 97 1층",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/DE8F_202504981038371.png?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "DE93",
+      "storeName": "명동역점",
+      "district": "중구",
+      "officialAddress": "서울특별시 중구 퇴계로 115 밀리오레 1층",
+      "file": "DE93_명동역점.webp",
+      "placeId": "oy-명동역점",
+      "catalogueAddress": "서울 중구 퇴계로 115 밀리오레 1층",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/DE93_2024102971353051.jpg?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "DE9D",
+      "storeName": "장안동사거리점",
+      "district": "동대문구",
+      "officialAddress": "서울특별시 동대문구 답십리로 268 해림빌딩 1층",
+      "file": "DE9D_장안동사거리점.webp",
+      "placeId": "oy-장안동사거리점",
+      "catalogueAddress": "서울 동대문구 답십리로 268 해림빌딩 1층",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/DE9D_2024102851142561.jpg?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "DEA9",
+      "storeName": "현대시티몰가든파이브점",
+      "district": "송파구",
+      "officialAddress": "서울특별시 송파구 충민로 66 현대시티몰가든파이브점 몰관 1층",
+      "file": "DEA9_현대시티몰가든파이브점.webp",
+      "placeId": "oy-현대시티몰가든파이브점",
+      "catalogueAddress": "서울 송파구 충민로 66 몰관 1층",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/DEA9_2024102881431481.jpeg?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "DEAE",
+      "storeName": "한티역점",
+      "district": "강남구",
+      "officialAddress": "서울특별시 강남구 선릉로 312 1층 한티역점",
+      "file": "DEAE_한티역점.webp",
+      "placeId": "oy-한티역점",
+      "catalogueAddress": "서울 강남구 선릉로 312 1층",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/DEAE_202501240926071.png?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "DEB2",
+      "storeName": "먹골역점",
+      "district": "중랑구",
+      "officialAddress": "서울특별시 중랑구 공릉로2길 7 1~2층",
+      "file": "DEB2_먹골역점.webp",
+      "placeId": "oy-먹골역점",
+      "catalogueAddress": "서울 중랑구 공릉로2길 7 1-2층",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/DEB2_2024102921206381.jpeg?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "DEB9",
+      "storeName": "구로지밸리몰점",
+      "district": "구로구",
+      "officialAddress": "서울특별시 구로구 디지털로 300 지밸리플라자 1층",
+      "file": "DEB9_구로지밸리몰점.webp",
+      "placeId": "oy-구로지밸리몰점",
+      "catalogueAddress": "서울 구로구 디지털로 300 지밸리플라자 1층",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/DEB9_202501240916091.jpeg?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "DEBD",
+      "storeName": "청량리중앙점",
+      "district": "동대문구",
+      "officialAddress": "서울특별시 동대문구 왕산로 194 1~2층",
+      "file": "DEBD_청량리중앙점.webp",
+      "placeId": "oy-청량리중앙점",
+      "catalogueAddress": "서울 동대문구 왕산로 194 1-2층",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/DEBD_2024123511107033.png?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "DED3",
+      "storeName": "구의이스트폴점",
+      "district": "광진구",
+      "officialAddress": "서울특별시 광진구 아차산로 402 판매시설 L1층",
+      "file": "DED3_구의이스트폴점.webp",
+      "placeId": "oy-구의이스트폴점",
+      "catalogueAddress": "서울 광진구 아차산로 402 판매시설 L1층",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/DED3_2025051430945131.png?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "DED6",
+      "storeName": "던던동대문점",
+      "district": "중구",
+      "officialAddress": "서울특별시 중구 을지로 264 지하2층",
+      "file": "DED6_던던동대문점.webp",
+      "placeId": "oy-던던동대문점",
+      "catalogueAddress": "서울 중구 을지로 264 지하2층",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/DED6_202502341747031.png?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "DEDB",
+      "storeName": "당산대로점",
+      "district": "영등포구",
+      "officialAddress": "서울특별시 영등포구 양평로 58 1층, 올리브영",
+      "file": "DEDB_당산대로점.webp",
+      "placeId": "oy-당산대로점",
+      "catalogueAddress": "서울 영등포구 양평로 58 그랜드컨벤션센터 1층",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/DEDB_2025061641713281.png?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "DEDC",
+      "storeName": "영등포타임스퀘어점",
+      "district": "영등포구",
+      "officialAddress": "서울특별시 영등포구 영중로 15 타임스퀘어 지하 1층",
+      "file": "DEDC_영등포타임스퀘어점.webp",
+      "placeId": "oy-영등포타임스퀘어점",
+      "catalogueAddress": "서울 영등포구 영중로 15 지하1층",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/DEDC_2024113321123581.png?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "DEDE",
+      "storeName": "대치사거리점",
+      "district": "강남구",
+      "officialAddress": "서울특별시 강남구 삼성로 342",
+      "file": "DEDE_대치사거리점.webp",
+      "placeId": "oy-대치사거리점",
+      "catalogueAddress": "서울 강남구 삼성로 342 1층",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/DEDE_202501240917361.png?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "DEDF",
+      "storeName": "약수역점",
+      "district": "중구",
+      "officialAddress": "서울특별시 중구 동호로 192",
+      "file": "DEDF_약수역점.webp",
+      "placeId": "oy-약수역점",
+      "catalogueAddress": "서울 중구 동호로 192 1-2층",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/DEDF_202503631019021.png?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "DEE7",
+      "storeName": "내방역점",
+      "district": "서초구",
+      "officialAddress": "서울특별시 서초구 방배로 178 1층",
+      "file": "DEE7_내방역점.webp",
+      "placeId": "oy-내방역점",
+      "catalogueAddress": "서울 서초구 방배로 178 1층",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/DEE7_202504971859531.jpeg?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "DEEA",
+      "storeName": "용산아이파크몰더센터점",
+      "district": "용산구",
+      "officialAddress": "서울특별시 용산구 한강대로23길 55 용산아이파크몰 지하1층",
+      "file": "DEEA_용산아이파크몰더센터점.webp",
+      "placeId": "oy-용산아이파크몰더센터점",
+      "catalogueAddress": "서울 용산구 한강대로23길 55 지하1층",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/DEEA_202501240938421.jpg?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "DEF3",
+      "storeName": "롯데월드몰플러스점",
+      "district": "송파구",
+      "officialAddress": "서울특별시 송파구 올림픽로 300 롯데월드몰 2층",
+      "file": "DEF3_롯데월드몰플러스점.webp",
+      "placeId": "oy-롯데월드몰플러스점",
+      "catalogueAddress": "서울 송파구 올림픽로 300 2층",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/DEF3_2024113341048495.png?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "DF08",
+      "storeName": "한성대입구역점",
+      "district": "성북구",
+      "officialAddress": "서울특별시 성북구 삼선교로 12 1층",
+      "file": "DF08_한성대입구역점.webp",
+      "placeId": "oy-한성대입구역점",
+      "catalogueAddress": "서울 성북구 삼선교로 12 1층",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/DF08_202501240923211.png?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "DF09",
+      "storeName": "역삼중앙점",
+      "district": "강남구",
+      "officialAddress": "서울특별시 강남구 테헤란로 151",
+      "file": "DF09_역삼중앙점.webp",
+      "placeId": "oy-역삼중앙점",
+      "catalogueAddress": "서울 강남구 테헤란로 151 1층",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/DF09_202502441739311.png?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "DF15",
+      "storeName": "서초우성점",
+      "district": "서초구",
+      "officialAddress": "서울특별시 서초구 강남대로 331 광일빌딩 1층",
+      "file": "DF15_서초우성점.webp",
+      "placeId": "oy-서초우성점",
+      "catalogueAddress": "서울 서초구 강남대로 331 광일빌딩 1층",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/DF15_2025051220934451.png?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "DF1B",
+      "storeName": "압구정로데오점",
+      "district": "강남구",
+      "officialAddress": "서울특별시 강남구 압구정로 342",
+      "file": "DF1B_압구정로데오점.webp",
+      "placeId": "oy-압구정로데오점",
+      "catalogueAddress": "서울 강남구 압구정로 342 1-3층",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/DF1B_2025102740918001.jpg?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "DF1E",
+      "storeName": "안암점",
+      "district": "성북구",
+      "officialAddress": "서울특별시 성북구 고려대로24길 44 1층",
+      "file": "DF1E_안암점.webp",
+      "placeId": "oy-안암점",
+      "catalogueAddress": "서울 성북구 고려대로24길 44 1층",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/DF1E_2025071831620161.png?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "DF23",
+      "storeName": "명동2가점",
+      "district": "중구",
+      "officialAddress": "서울특별시 중구 남대문로 68-1",
+      "file": "DF23_명동2가점.webp",
+      "placeId": "oy-명동2가점",
+      "catalogueAddress": "서울 중구 남대문로 68-1",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/DF23_2025071831621131.png?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "DF28",
+      "storeName": "용산아이파크몰점",
+      "district": "용산구",
+      "officialAddress": "서울특별시 용산구 한강대로23길 55 HDC 아이파크몰 패션파크 4F",
+      "file": "DF28_용산아이파크몰점.webp",
+      "placeId": "oy-용산아이파크몰점",
+      "catalogueAddress": "서울 용산구 한강대로23길 55 HDC 아이파크몰 패션파크 4층",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/DF28_202502501518081.png?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "DF2A",
+      "storeName": "현대시티아울렛동대문점",
+      "district": "중구",
+      "officialAddress": "서울특별시 중구 장충단로13길 20 2층",
+      "file": "DF2A_현대시티아울렛동대문점.webp",
+      "placeId": "oy-현대시티아울렛동대문점",
+      "catalogueAddress": "서울 중구 장충단로13길 20 2층",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/DF2A_202503631007131.png?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "DF2B",
+      "storeName": "합정메세나폴리스점",
+      "district": "마포구",
+      "officialAddress": "서울특별시 마포구 양화로 45 메세나폴리스몰 B1186~1187",
+      "file": "DF2B_합정메세나폴리스점.webp",
+      "placeId": "oy-합정메세나폴리스점",
+      "catalogueAddress": "서울 마포구 양화로 45 메세나폴리스몰 지하1층 B1186~B1187호",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/DF2B_2025041061631021.png?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "DF2E",
+      "storeName": "NC신구로점",
+      "district": "구로구",
+      "officialAddress": "서울특별시 구로구 구로중앙로 152",
+      "file": "DF2E_NC신구로점.webp",
+      "placeId": "oy-nc신구로점",
+      "catalogueAddress": "서울 구로구 구로중앙로 152 2층",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/DF2E_202501211016061.jpeg?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "DF34",
+      "storeName": "수락산역점",
+      "district": "노원구",
+      "officialAddress": "서울특별시 노원구 동일로 1660",
+      "file": "DF34_수락산역점.webp",
+      "placeId": "oy-수락산역점",
+      "catalogueAddress": "서울 노원구 동일로 1660 1층",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/DF34_2025041131039471.png?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "DF3B",
+      "storeName": "덕수궁점",
+      "district": "중구",
+      "officialAddress": "서울특별시 중구 세종대로 91",
+      "file": "DF3B_덕수궁점.webp",
+      "placeId": "oy-덕수궁점",
+      "catalogueAddress": "서울 중구 세종대로 91 지하1층, 1-2층",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/DF3B_2025113171426341.jpeg?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "DF3F",
+      "storeName": "롯데월드점",
+      "district": "송파구",
+      "officialAddress": "서울특별시 송파구 올림픽로 240 (롯데월드 어드벤쳐 지하1층 매표소 인근)",
+      "file": "DF3F_롯데월드점.webp",
+      "placeId": "oy-롯데월드점",
+      "catalogueAddress": "서울 송파구 올림픽로 240 지하1층",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/DF3F_2025041121010221.png?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "DF42",
+      "storeName": "신논현역점",
+      "district": "강남구",
+      "officialAddress": "서울특별시 강남구 강남대로 470",
+      "file": "DF42_신논현역점.webp",
+      "placeId": "oy-신논현역점",
+      "catalogueAddress": "서울 강남구 강남대로 470",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/DF42_2025082331318481.png?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "DF47",
+      "storeName": "신풍역점",
+      "district": "영등포구",
+      "officialAddress": "서울특별시 영등포구 신풍로 28 비스타동원 110~113호",
+      "file": "DF47_신풍역점.webp",
+      "placeId": "oy-신풍역점",
+      "catalogueAddress": "서울 영등포구 신풍로 28 비스타동원 1층 110~113호",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/DF47_2025041051842131.png?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "DF4E",
+      "storeName": "동대문역사문화공원사거리점",
+      "district": "중구",
+      "officialAddress": "서울특별시 중구 을지로 255",
+      "file": "DF4E_동대문역사문화공원사거리점.webp",
+      "placeId": "oy-동대문역사문화공원사거리점",
+      "catalogueAddress": "서울 중구 을지로 255 1층",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/DF4E_2025082161741551.png?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "DF65",
+      "storeName": "세로수길점",
+      "district": "강남구",
+      "officialAddress": "서울특별시 강남구 강남대로160길 45",
+      "file": "DF65_세로수길점.webp",
+      "placeId": "oy-세로수길점",
+      "catalogueAddress": "서울 강남구 강남대로160길 45 1-3층",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/DF65_2026051500923521.jpg?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "DF92",
+      "storeName": "잠실점",
+      "district": "송파구",
+      "officialAddress": "서울특별시 송파구 올림픽로 269 롯데캐슬플라자 1층",
+      "file": "DF92_잠실점.webp",
+      "placeId": "oy-잠실점",
+      "catalogueAddress": "서울 송파구 올림픽로 269 롯데캐슬플라자 1층",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/DF92_2025123371931221.jpg?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "DF9A",
+      "storeName": "스타필드애비뉴그랑서울점",
+      "district": "종로구",
+      "officialAddress": "서울특별시 종로구 종로 33 스타필드애비뉴그랑서울 올리브영 타워1 상업시설 B1층 B135호",
+      "file": "DF9A_스타필드애비뉴그랑서울점.webp",
+      "placeId": "oy-스타필드애비뉴그랑서울점",
+      "catalogueAddress": "서울 종로구 종로 33 지하1층 B135호",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/DF9A_2025103011628381.jpg?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "DF9F",
+      "storeName": "광장마켓점",
+      "district": "종로구",
+      "officialAddress": "서울특별시 종로구 창경궁로 88 2층 올리브영",
+      "file": "DF9F_광장마켓점.webp",
+      "placeId": "oy-광장마켓점",
+      "catalogueAddress": "서울 종로구 창경궁로 88 광장시장 2층",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/DF9F_2026041201015351.png?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "DFA6",
+      "storeName": "둔촌파크포레온점",
+      "district": "강동구",
+      "officialAddress": "서울특별시 강동구 양재대로 1360 포레온스테이션5 B2F 212호",
+      "file": "DFA6_둔촌파크포레온점.webp",
+      "placeId": "oy-둔촌파크포레온점",
+      "catalogueAddress": "서울 강동구 양재대로 1360 지하2층 212호",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/DFA6_2025113251350481.jpg?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "DFD0",
+      "storeName": "사당점",
+      "district": "동작구",
+      "officialAddress": "서울특별시 동작구 동작대로 29",
+      "file": "DFD0_사당점.webp",
+      "placeId": "oy-사당점",
+      "catalogueAddress": "서울 동작구 동작대로 29 1-2층",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/DFD0_202603751752341.jpg?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "DFDD",
+      "storeName": "등촌역점",
+      "district": "강서구",
+      "officialAddress": "서울특별시 강서구 공항대로 543",
+      "file": "DFDD_등촌역점.webp",
+      "placeId": "oy-등촌역점",
+      "catalogueAddress": "서울 강서구 공항대로 543 센터스퀘어 1층",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/DFDD_2026051270904281.jpg?rs=800x0&SF=webp&autoorient=y"
+    },
+    {
+      "storeCode": "DG01",
+      "storeName": "인사동점",
+      "district": "종로구",
+      "officialAddress": "서울특별시 종로구 인사동길 49 안녕인사동 올리브영 지상1층 12번, 지상M층 3번, 4번",
+      "file": "DG01_인사동점.webp",
+      "placeId": "oy-인사동점",
+      "catalogueAddress": "서울 종로구 인사동길 49 안녕인사동 1층 12번, M층 3~4번",
+      "imageUrl": "https://image.oliveyoung.co.kr/cfimages/oystore/DG01_2026072091432311.png?rs=800x0&SF=webp&autoorient=y"
+    }
+  ],
+  "excluded": [
+    {
+      "storeCode": "D127",
+      "storeName": "올리브영 목동 타운",
+      "district": "양천구",
+      "officialAddress": "서울특별시 양천구 목동서로 159-1 CBS방송국 내 1층",
+      "file": "D127_올리브영 목동 타운.webp",
+      "reason": "event_poster"
+    },
+    {
+      "storeCode": "D176",
+      "storeName": "올리브영 명동 타운",
+      "district": "중구",
+      "officialAddress": "서울특별시 중구 명동길 53 1~2층",
+      "file": "D176_올리브영 명동 타운.webp",
+      "reason": "event_poster"
+    },
+    {
+      "storeCode": "D321",
+      "storeName": "코엑스몰점",
+      "district": "강남구",
+      "officialAddress": "서울특별시 강남구 테헤란로87길 22",
+      "file": "D321_코엑스몰점.webp",
+      "placeId": "oy-코엑스몰점",
+      "catalogueAddress": "서울 강남구 삼성동 159-6 지하1층",
+      "reason": "place_not_public"
+    },
+    {
+      "storeCode": "D405",
+      "storeName": "성수역점",
+      "district": "성동구",
+      "officialAddress": "서울특별시 성동구 아차산로 91",
+      "file": "D405_성수역점.webp",
+      "placeId": "oy-seongsu",
+      "catalogueAddress": "서울 성동구 왕십리로 115",
+      "reason": "place_not_public"
+    },
+    {
+      "storeCode": "DA22",
+      "storeName": "장승배기역점",
+      "district": "동작구",
+      "officialAddress": "서울특별시 동작구 장승배기로11가길 11 (상도동, 상도파크자이)",
+      "file": "DA22_장승배기역점.webp",
+      "placeId": "oy-장승배기역점",
+      "catalogueAddress": "서울 동작구 장승배기로11가길 11 상도파크자이 1층",
+      "reason": "place_not_public"
+    },
+    {
+      "storeCode": "DA5F",
+      "storeName": "동부이촌점",
+      "district": "용산구",
+      "officialAddress": "서울특별시 용산구 이촌로75길 16",
+      "file": "DA5F_동부이촌점.webp",
+      "placeId": "oy-동부이촌점",
+      "catalogueAddress": "서울 용산구 이촌로75길 16 1층",
+      "reason": "place_not_public"
+    },
+    {
+      "storeCode": "DAEA",
+      "storeName": "올리브영 강남 타운",
+      "district": "서초구",
+      "officialAddress": "서울특별시 서초구 강남대로 429 동일빌딩 1~3층",
+      "file": "DAEA_올리브영 강남 타운.webp",
+      "reason": "event_poster"
+    },
+    {
+      "storeCode": "DB3D",
+      "storeName": "올리브영 가로수길 타운",
+      "district": "강남구",
+      "officialAddress": "서울특별시 강남구 도산대로 133",
+      "file": "DB3D_올리브영 가로수길 타운.webp",
+      "reason": "event_poster"
+    },
+    {
+      "storeCode": "DDD9",
+      "storeName": "올리브영 관악 타운",
+      "district": "관악구",
+      "officialAddress": "서울특별시 관악구 관악로 173",
+      "file": "DDD9_올리브영 관악 타운.webp",
+      "reason": "event_poster"
+    },
+    {
+      "storeCode": "DDF4",
+      "storeName": "올리브영 건대 타운",
+      "district": "광진구",
+      "officialAddress": "서울특별시 광진구 아차산로 244 1,2층",
+      "file": "DDF4_올리브영 건대 타운.webp",
+      "reason": "event_poster"
+    },
+    {
+      "storeCode": "DE25",
+      "storeName": "올리브영N 성수",
+      "district": "성동구",
+      "officialAddress": "서울특별시 성동구 연무장7길 13 팩토리얼 성수",
+      "file": "DE25_올리브영N 성수.webp",
+      "placeId": "oy-n성수",
+      "reason": "already_has_owner_photos"
+    },
+    {
+      "storeCode": "DE9F",
+      "storeName": "올리브영 파르나스삼성 타운",
+      "district": "강남구",
+      "officialAddress": "서울특별시 강남구 테헤란로 521 파르나스몰 지하1층 R6, 7호",
+      "file": "DE9F_올리브영 파르나스삼성 타운.webp",
+      "reason": "event_poster"
+    },
+    {
+      "storeCode": "DF26",
+      "storeName": "올리브영 센트럴 강남 타운",
+      "district": "서초구",
+      "officialAddress": "서울특별시 서초구 강남대로 403 지하1층~지상4층",
+      "file": "DF26_올리브영 센트럴 강남 타운.webp",
+      "reason": "event_poster"
+    },
+    {
+      "storeCode": "DF89",
+      "storeName": "안국역점",
+      "district": "종로구",
+      "officialAddress": "서울특별시 종로구 북촌로 1",
+      "file": "DF89_안국역점.webp",
+      "reason": "event_poster"
+    },
+    {
+      "storeCode": "DF9C",
+      "storeName": "올리브영 센트럴 명동 타운",
+      "district": "중구",
+      "officialAddress": "서울특별시 중구 명동8길 27 엠플라자 B1층~3층",
+      "file": "DF9C_올리브영 센트럴 명동 타운.webp",
+      "reason": "event_poster"
+    },
+    {
+      "storeCode": "DFCF",
+      "storeName": "올리브베러 광화문점",
+      "district": "종로구",
+      "officialAddress": "서울특별시 종로구 종로3길 17 D타워",
+      "file": "DFCF_올리브베러 광화문점.webp",
+      "reason": "different_brand"
+    },
+    {
+      "storeCode": "DFE1",
+      "storeName": "올리브베러 강남역점",
+      "district": "강남구",
+      "officialAddress": "서울특별시 강남구 강남대로 374",
+      "file": "DFE1_올리브베러 강남역점.webp",
+      "reason": "different_brand"
+    }
+  ],
+  "notInCatalogue": [
+    {
+      "storeCode": "DE71",
+      "storeName": "강남논현점",
+      "district": "강남구",
+      "officialAddress": "서울특별시 강남구 강남대로118길 11",
+      "file": "DE71_강남논현점.webp"
+    },
+    {
+      "storeCode": "DF40",
+      "storeName": "선릉점",
+      "district": "강남구",
+      "officialAddress": "서울특별시 강남구 테헤란로 424 1층 일부",
+      "file": "DF40_선릉점.webp"
+    },
+    {
+      "storeCode": "DE17",
+      "storeName": "압구정로데오역점",
+      "district": "강남구",
+      "officialAddress": "서울특별시 강남구 선릉로 817 캠포츠빌딩",
+      "file": "DE17_압구정로데오역점.webp"
+    },
+    {
+      "storeCode": "DA9B",
+      "storeName": "언주역점",
+      "district": "강남구",
+      "officialAddress": "서울특별시 강남구 봉은사로 209",
+      "file": "DA9B_언주역점.webp"
+    },
+    {
+      "storeCode": "D400",
+      "storeName": "고덕점",
+      "district": "강동구",
+      "officialAddress": "서울특별시 강동구 동남로75길 13-15 성은빌딩 1층",
+      "file": "D400_고덕점.webp"
+    },
+    {
+      "storeCode": "D160",
+      "storeName": "명일역점",
+      "district": "강동구",
+      "officialAddress": "서울특별시 강동구 양재대로 1637 1층 2호~4호",
+      "file": "D160_명일역점.webp"
+    },
+    {
+      "storeCode": "DC98",
+      "storeName": "상일동역점",
+      "district": "강동구",
+      "officialAddress": "서울특별시 강동구 고덕로 399 고덕동 210-1 고덕센트럴푸르지오 메가스퀘어 102,103, 104호",
+      "file": "DC98_상일동역점.webp"
+    },
+    {
+      "storeCode": "DE45",
+      "storeName": "암사역점",
+      "district": "강동구",
+      "officialAddress": "서울특별시 강동구 올림픽로 774 1층",
+      "file": "DE45_암사역점.webp"
+    },
+    {
+      "storeCode": "DE79",
+      "storeName": "이케아강동점",
+      "district": "강동구",
+      "officialAddress": "서울특별시 강동구 고덕비즈밸리로 51 1층",
+      "file": "DE79_이케아강동점.webp"
+    },
+    {
+      "storeCode": "DE14",
+      "storeName": "수유역점",
+      "district": "강북구",
+      "officialAddress": "서울특별시 강북구 도봉로 329 동오빌딩 1층",
+      "file": "DE14_수유역점.webp"
+    },
+    {
+      "storeCode": "DA0D",
+      "storeName": "수유중앙점",
+      "district": "강북구",
+      "officialAddress": "서울특별시 강북구 도봉로 336 (번동)",
+      "file": "DA0D_수유중앙점.webp"
+    },
+    {
+      "storeCode": "DAE8",
+      "storeName": "가양역점",
+      "district": "강서구",
+      "officialAddress": "서울특별시 강서구 양천로 476 금부빌딩 지상1층",
+      "file": "DAE8_가양역점.webp"
+    },
+    {
+      "storeCode": "DD74",
+      "storeName": "김포공항국내선청사점",
+      "district": "강서구",
+      "officialAddress": "서울특별시 강서구 하늘길 112 김포공항국내선청사 동편 2층",
+      "file": "DD74_김포공항국내선청사점.webp"
+    },
+    {
+      "storeCode": "B214",
+      "storeName": "까치산역점",
+      "district": "강서구",
+      "officialAddress": "서울특별시 강서구 강서로13길 3, 지하 1층",
+      "file": "B214_까치산역점.webp"
+    },
+    {
+      "storeCode": "DFAB",
+      "storeName": "롯데몰김포공항점",
+      "district": "강서구",
+      "officialAddress": "서울특별시 강서구 하늘길 38 롯데몰 김포공항점 MF층",
+      "file": "DFAB_롯데몰김포공항점.webp"
+    },
+    {
+      "storeCode": "DD46",
+      "storeName": "마곡나루역점",
+      "district": "강서구",
+      "officialAddress": "서울특별시 강서구 마곡중앙5로 18 1층",
+      "file": "DD46_마곡나루역점.webp"
+    },
+    {
+      "storeCode": "DD09",
+      "storeName": "목동사거리점",
+      "district": "강서구",
+      "officialAddress": "서울특별시 강서구 등촌로 25 (화곡동)",
+      "file": "DD09_목동사거리점.webp"
+    },
+    {
+      "storeCode": "DACB",
+      "storeName": "발산역점",
+      "district": "강서구",
+      "officialAddress": "서울특별시 강서구 강서로 385 우성에스비타워 107호,108호,109호",
+      "file": "DACB_발산역점.webp"
+    },
+    {
+      "storeCode": "DA61",
+      "storeName": "발산점",
+      "district": "강서구",
+      "officialAddress": "서울특별시 강서구 강서로 360",
+      "file": "DA61_발산점.webp"
+    },
+    {
+      "storeCode": "DAED",
+      "storeName": "방화역점",
+      "district": "강서구",
+      "officialAddress": "서울특별시 강서구 금낭화로 292",
+      "file": "DAED_방화역점.webp"
+    },
+    {
+      "storeCode": "D297",
+      "storeName": "송정역점",
+      "district": "강서구",
+      "officialAddress": "서울특별시 강서구 공항대로 28 1층",
+      "file": "D297_송정역점.webp"
+    },
+    {
+      "storeCode": "DAF8",
+      "storeName": "신방화역점",
+      "district": "강서구",
+      "officialAddress": "서울특별시 강서구 방화대로 294 마곡더블유타워 121호,122호",
+      "file": "DAF8_신방화역점.webp"
+    },
+    {
+      "storeCode": "DA74",
+      "storeName": "양천향교역점",
+      "district": "강서구",
+      "officialAddress": "서울특별시 강서구 양천로 344",
+      "file": "DA74_양천향교역점.webp"
+    },
+    {
+      "storeCode": "DF12",
+      "storeName": "원그로브점",
+      "district": "강서구",
+      "officialAddress": "서울특별시 강서구 공항대로 165 지하1층 EB129호",
+      "file": "DF12_원그로브점.webp"
+    },
+    {
+      "storeCode": "DCEE",
+      "storeName": "구로디지털단지역점",
+      "district": "관악구",
+      "officialAddress": "서울특별시 관악구 시흥대로 576",
+      "file": "DCEE_구로디지털단지역점.webp"
+    },
+    {
+      "storeCode": "BAB2",
+      "storeName": "낙성대인헌점",
+      "district": "관악구",
+      "officialAddress": "서울특별시 관악구 남부순환로248길 3 1층",
+      "file": "BAB2_낙성대인헌점.webp"
+    },
+    {
+      "storeCode": "DD47",
+      "storeName": "낙성대점",
+      "district": "관악구",
+      "officialAddress": "서울특별시 관악구 남부순환로 1908 대원빌딩 올리브영",
+      "file": "DD47_낙성대점.webp"
+    },
+    {
+      "storeCode": "DEEB",
+      "storeName": "난곡사거리점",
+      "district": "관악구",
+      "officialAddress": "서울특별시 관악구 남부순환로 1474 1층",
+      "file": "DEEB_난곡사거리점.webp"
+    },
+    {
+      "storeCode": "B208",
+      "storeName": "봉천역점",
+      "district": "관악구",
+      "officialAddress": "서울특별시 관악구 남부순환로 1735",
+      "file": "B208_봉천역점.webp"
+    },
+    {
+      "storeCode": "B206",
+      "storeName": "사당역점",
+      "district": "관악구",
+      "officialAddress": "서울특별시 관악구 과천대로 941 지산빌딩",
+      "file": "B206_사당역점.webp"
+    },
+    {
+      "storeCode": "DD0D",
+      "storeName": "서울대입구역점",
+      "district": "관악구",
+      "officialAddress": "서울특별시 관악구 남부순환로 1840",
+      "file": "DD0D_서울대입구역점.webp"
+    },
+    {
+      "storeCode": "DDC2",
+      "storeName": "신림역점",
+      "district": "관악구",
+      "officialAddress": "서울특별시 관악구 신림로 350",
+      "file": "DDC2_신림역점.webp"
+    },
+    {
+      "storeCode": "D530",
+      "storeName": "신림점",
+      "district": "관악구",
+      "officialAddress": "서울특별시 관악구 신림로 353",
+      "file": "D530_신림점.webp"
+    },
+    {
+      "storeCode": "DD1E",
+      "storeName": "신림중앙점",
+      "district": "관악구",
+      "officialAddress": "서울특별시 관악구 신림로 321",
+      "file": "DD1E_신림중앙점.webp"
+    },
+    {
+      "storeCode": "D064",
+      "storeName": "신림타임스트림점",
+      "district": "관악구",
+      "officialAddress": "서울특별시 관악구 신림로 330 타임스트림점 지하1층",
+      "file": "D064_신림타임스트림점.webp"
+    },
+    {
+      "storeCode": "D404",
+      "storeName": "아차산역점",
+      "district": "광진구",
+      "officialAddress": "서울특별시 광진구 천호대로 671",
+      "file": "D404_아차산역점.webp"
+    },
+    {
+      "storeCode": "DD27",
+      "storeName": "중곡역점",
+      "district": "광진구",
+      "officialAddress": "서울특별시 광진구 능동로 400",
+      "file": "DD27_중곡역점.webp"
+    },
+    {
+      "storeCode": "DD7A",
+      "storeName": "고척아이파크몰점",
+      "district": "구로구",
+      "officialAddress": "서울특별시 구로구 경인로43길 49",
+      "file": "DD7A_고척아이파크몰점.webp"
+    },
+    {
+      "storeCode": "DDF7",
+      "storeName": "구로디지털대로점",
+      "district": "구로구",
+      "officialAddress": "서울특별시 구로구 시흥대로 561 동해빌딩 1층",
+      "file": "DDF7_구로디지털대로점.webp"
+    },
+    {
+      "storeCode": "DC5D",
+      "storeName": "구로호텔점",
+      "district": "구로구",
+      "officialAddress": "서울특별시 구로구 디지털로32길 72 1층",
+      "file": "DC5D_구로호텔점.webp"
+    },
+    {
+      "storeCode": "D359",
+      "storeName": "신도림점",
+      "district": "구로구",
+      "officialAddress": "서울특별시 구로구 경인로 661",
+      "file": "D359_신도림점.webp"
+    },
+    {
+      "storeCode": "D214",
+      "storeName": "시흥사거리점",
+      "district": "금천구",
+      "officialAddress": "서울특별시 금천구 시흥대로 228 1층",
+      "file": "D214_시흥사거리점.webp"
+    },
+    {
+      "storeCode": "DAB3",
+      "storeName": "은행나무사거리점",
+      "district": "금천구",
+      "officialAddress": "서울특별시 금천구 금하로 705",
+      "file": "DAB3_은행나무사거리점.webp"
+    },
+    {
+      "storeCode": "DEAD",
+      "storeName": "현대아울렛가산점",
+      "district": "금천구",
+      "officialAddress": "서울특별시 금천구 디지털로10길 9 지하 1층",
+      "file": "DEAD_현대아울렛가산점.webp"
+    },
+    {
+      "storeCode": "DD4D",
+      "storeName": "노원역사거리점",
+      "district": "노원구",
+      "officialAddress": "서울특별시 노원구 노해로 480 조광빌딩 1층,2층",
+      "file": "DD4D_노원역사거리점.webp"
+    },
+    {
+      "storeCode": "DG10",
+      "storeName": "스타필드마켓월계점",
+      "district": "노원구",
+      "officialAddress": "서울특별시 노원구 마들로3길 15 1층",
+      "file": "DG10_스타필드마켓월계점.webp"
+    },
+    {
+      "storeCode": "DB25",
+      "storeName": "중계역점",
+      "district": "노원구",
+      "officialAddress": "서울특별시 노원구 동일로 1335 (상계동)",
+      "file": "DB25_중계역점.webp"
+    },
+    {
+      "storeCode": "D435",
+      "storeName": "방학역점",
+      "district": "도봉구",
+      "officialAddress": "서울특별시 도봉구 도봉로150길 28",
+      "file": "D435_방학역점.webp"
+    },
+    {
+      "storeCode": "B191",
+      "storeName": "쌍문역점",
+      "district": "도봉구",
+      "officialAddress": "서울특별시 도봉구 도봉로 480 1층",
+      "file": "B191_쌍문역점.webp"
+    },
+    {
+      "storeCode": "DCEC",
+      "storeName": "쌍문점",
+      "district": "도봉구",
+      "officialAddress": "서울특별시 도봉구 도당로 2 2층",
+      "file": "DCEC_쌍문점.webp"
+    },
+    {
+      "storeCode": "D454",
+      "storeName": "창동역점",
+      "district": "도봉구",
+      "officialAddress": "서울특별시 도봉구 노해로63길 84-16",
+      "file": "D454_창동역점.webp"
+    },
+    {
+      "storeCode": "DE07",
+      "storeName": "창동점",
+      "district": "도봉구",
+      "officialAddress": "서울특별시 도봉구 마들로13길 61 시드큐브 창동 1층 106-4, 5호",
+      "file": "DE07_창동점.webp"
+    },
+    {
+      "storeCode": "D523",
+      "storeName": "남성역점",
+      "district": "동작구",
+      "officialAddress": "서울특별시 동작구 사당로 228",
+      "file": "D523_남성역점.webp"
+    },
+    {
+      "storeCode": "D222",
+      "storeName": "공덕역점",
+      "district": "마포구",
+      "officialAddress": "서울특별시 마포구 백범로 199 메트로디오빌 1층",
+      "file": "D222_공덕역점.webp"
+    },
+    {
+      "storeCode": "DD14",
+      "storeName": "광흥창역점",
+      "district": "마포구",
+      "officialAddress": "서울특별시 마포구 서강로 75-16 PEER 1층",
+      "file": "DD14_광흥창역점.webp"
+    },
+    {
+      "storeCode": "DA78",
+      "storeName": "대흥역점",
+      "district": "마포구",
+      "officialAddress": "서울특별시 마포구 백범로 91",
+      "file": "DA78_대흥역점.webp"
+    },
+    {
+      "storeCode": "DF93",
+      "storeName": "마포공덕점",
+      "district": "마포구",
+      "officialAddress": "서울특별시 마포구 마포대로 78 자람빌딩 1층",
+      "file": "DF93_마포공덕점.webp"
+    },
+    {
+      "storeCode": "DAE2",
+      "storeName": "마포구청역점",
+      "district": "마포구",
+      "officialAddress": "서울특별시 마포구 월드컵로 196 대명비첸시티 1층 제102,103,105,106호",
+      "file": "DAE2_마포구청역점.webp"
+    },
+    {
+      "storeCode": "BA46",
+      "storeName": "마포역점",
+      "district": "마포구",
+      "officialAddress": "서울특별시 마포구 마포대로 53 마포트라팰리스상가 115호",
+      "file": "BA46_마포역점.webp"
+    },
+    {
+      "storeCode": "DE4C",
+      "storeName": "망원역점",
+      "district": "마포구",
+      "officialAddress": "서울특별시 마포구 월드컵로 75",
+      "file": "DE4C_망원역점.webp"
+    },
+    {
+      "storeCode": "D322",
+      "storeName": "상수역점",
+      "district": "마포구",
+      "officialAddress": "서울특별시 마포구 와우산로 49 상수아뜨리에 1층",
+      "file": "D322_상수역점.webp"
+    },
+    {
+      "storeCode": "DE3C",
+      "storeName": "올리브영 홍대 타운",
+      "district": "마포구",
+      "officialAddress": "서울특별시 마포구 홍익로6길 57 올리브영 홍대 타운",
+      "file": "DE3C_올리브영 홍대 타운.webp"
+    },
+    {
+      "storeCode": "DE90",
+      "storeName": "트렌드팟 바이 올리브영홍대",
+      "district": "마포구",
+      "officialAddress": "서울특별시 마포구 와우산로21길 37",
+      "file": "DE90_트렌드팟 바이 올리브영홍대.webp"
+    },
+    {
+      "storeCode": "D433",
+      "storeName": "합정카페거리점",
+      "district": "마포구",
+      "officialAddress": "서울특별시 마포구 독막로 13",
+      "file": "D433_합정카페거리점.webp"
+    },
+    {
+      "storeCode": "DC57",
+      "storeName": "홍대공항철도역점",
+      "district": "마포구",
+      "officialAddress": "서울특별시 마포구 양화로 183",
+      "file": "DC57_홍대공항철도역점.webp"
+    },
+    {
+      "storeCode": "DF31",
+      "storeName": "홍대놀이터점",
+      "district": "마포구",
+      "officialAddress": "서울특별시 마포구 와우산로21길 29 석전빌딩 1층~3층",
+      "file": "DF31_홍대놀이터점.webp"
+    },
+    {
+      "storeCode": "DE18",
+      "storeName": "홍대사거리점",
+      "district": "마포구",
+      "officialAddress": "서울특별시 마포구 양화로 140",
+      "file": "DE18_홍대사거리점.webp"
+    },
+    {
+      "storeCode": "D203",
+      "storeName": "홍대입구역점",
+      "district": "마포구",
+      "officialAddress": "서울특별시 마포구 양화로 156 엘지팰리스 1층",
+      "file": "D203_홍대입구역점.webp"
+    },
+    {
+      "storeCode": "DB6D",
+      "storeName": "아현역점",
+      "district": "서대문구",
+      "officialAddress": "서울특별시 서대문구 신촌로35길 10 103호",
+      "file": "DB6D_아현역점.webp"
+    },
+    {
+      "storeCode": "DF69",
+      "storeName": "이대중앙점",
+      "district": "서대문구",
+      "officialAddress": "서울특별시 서대문구 이화여대길 12",
+      "file": "DF69_이대중앙점.webp"
+    },
+    {
+      "storeCode": "DFCE",
+      "storeName": "NC강남점",
+      "district": "서초구",
+      "officialAddress": "서울특별시 서초구 잠원로 37-6 뉴코아아울렛강남점 1층",
+      "file": "DFCE_NC강남점.webp"
+    },
+    {
+      "storeCode": "D046",
+      "storeName": "남부터미널점",
+      "district": "서초구",
+      "officialAddress": "서울특별시 서초구 효령로 283 서경빌딩 1층",
+      "file": "D046_남부터미널점.webp"
+    },
+    {
+      "storeCode": "DA21",
+      "storeName": "서초대로점",
+      "district": "서초구",
+      "officialAddress": "서울특별시 서초구 서초대로 314 정보통신공제조합회관",
+      "file": "DA21_서초대로점.webp"
+    },
+    {
+      "storeCode": "D483",
+      "storeName": "서초역점",
+      "district": "서초구",
+      "officialAddress": "서울특별시 서초구 반포대로 110",
+      "file": "D483_서초역점.webp"
+    },
+    {
+      "storeCode": "DF64",
+      "storeName": "서초타운점",
+      "district": "서초구",
+      "officialAddress": "서울특별시 서초구 서초대로78길 32",
+      "file": "DF64_서초타운점.webp"
+    },
+    {
+      "storeCode": "DF87",
+      "storeName": "신논현점",
+      "district": "서초구",
+      "officialAddress": "서울특별시 서초구 강남대로 483",
+      "file": "DF87_신논현점.webp"
+    },
+    {
+      "storeCode": "DD75",
+      "storeName": "신사서초점",
+      "district": "서초구",
+      "officialAddress": "서울특별시 서초구 강남대로 589 1층 106~108호",
+      "file": "DD75_신사서초점.webp"
+    },
+    {
+      "storeCode": "BA9C",
+      "storeName": "양재하나로클럽점",
+      "district": "서초구",
+      "officialAddress": "서울특별시 서초구 청계산로 10 1층",
+      "file": "BA9C_양재하나로클럽점.webp"
+    },
+    {
+      "storeCode": "DAAB",
+      "storeName": "상왕십리역점",
+      "district": "성동구",
+      "officialAddress": "서울특별시 성동구 왕십리로 382",
+      "file": "DAAB_상왕십리역점.webp"
+    },
+    {
+      "storeCode": "DF81",
+      "storeName": "올리브영 뷰티 맨션 성수",
+      "district": "성동구",
+      "officialAddress": "서울특별시 성동구 성수이로 108 B1F~4F",
+      "file": "DF81_올리브영 뷰티 맨션 성수.webp"
+    },
+    {
+      "storeCode": "DD2D",
+      "storeName": "왕십리역사점",
+      "district": "성동구",
+      "officialAddress": "서울특별시 성동구 왕십리광장로 17 2층",
+      "file": "DD2D_왕십리역사점.webp"
+    },
+    {
+      "storeCode": "D151",
+      "storeName": "가락시장역점",
+      "district": "송파구",
+      "officialAddress": "서울특별시 송파구 중대로 105 가락 ID타워 1층",
+      "file": "D151_가락시장역점.webp"
+    },
+    {
+      "storeCode": "DF94",
+      "storeName": "개롱역점",
+      "district": "송파구",
+      "officialAddress": "서울특별시 송파구 오금로 404",
+      "file": "DF94_개롱역점.webp"
+    },
+    {
+      "storeCode": "DE06",
+      "storeName": "거여역점",
+      "district": "송파구",
+      "officialAddress": "서울특별시 송파구 오금로 509 1층",
+      "file": "DE06_거여역점.webp"
+    },
+    {
+      "storeCode": "DAAA",
+      "storeName": "문정역점",
+      "district": "송파구",
+      "officialAddress": "서울특별시 송파구 송파대로 167 B동 지하1층 G127,128호",
+      "file": "DAAA_문정역점.webp"
+    },
+    {
+      "storeCode": "D499",
+      "storeName": "방이역점",
+      "district": "송파구",
+      "officialAddress": "서울특별시 송파구 마천로 41",
+      "file": "D499_방이역점.webp"
+    },
+    {
+      "storeCode": "D547",
+      "storeName": "석촌역점",
+      "district": "송파구",
+      "officialAddress": "서울특별시 송파구 백제고분로 387",
+      "file": "D547_석촌역점.webp"
+    },
+    {
+      "storeCode": "DE89",
+      "storeName": "송리단길점",
+      "district": "송파구",
+      "officialAddress": "서울특별시 송파구 백제고분로 425 1층",
+      "file": "DE89_송리단길점.webp"
+    },
+    {
+      "storeCode": "DE87",
+      "storeName": "송파하비오점",
+      "district": "송파구",
+      "officialAddress": "서울특별시 송파구 송파대로 111 올리브영 송파하비오점",
+      "file": "DE87_송파하비오점.webp"
+    },
+    {
+      "storeCode": "DD97",
+      "storeName": "헬리오시티점",
+      "district": "송파구",
+      "officialAddress": "서울특별시 송파구 송파대로 345 1041~1043",
+      "file": "DD97_헬리오시티점.webp"
+    },
+    {
+      "storeCode": "D378",
+      "storeName": "목동역점",
+      "district": "양천구",
+      "officialAddress": "서울특별시 양천구 목동로 203",
+      "file": "D378_목동역점.webp"
+    },
+    {
+      "storeCode": "DD31",
+      "storeName": "목동파리공원점",
+      "district": "양천구",
+      "officialAddress": "서울특별시 양천구 목동서로 65 목동가든스위트 113호",
+      "file": "DD31_목동파리공원점.webp"
+    },
+    {
+      "storeCode": "DD2C",
+      "storeName": "서서울호수공원점",
+      "district": "양천구",
+      "officialAddress": "서울특별시 양천구 남부순환로 424 올리브영 서서울호수공원점",
+      "file": "DD2C_서서울호수공원점.webp"
+    },
+    {
+      "storeCode": "DA2D",
+      "storeName": "신정네거리역점",
+      "district": "양천구",
+      "officialAddress": "서울특별시 양천구 중앙로 252",
+      "file": "DA2D_신정네거리역점.webp"
+    },
+    {
+      "storeCode": "DA34",
+      "storeName": "양천구청점",
+      "district": "양천구",
+      "officialAddress": "서울특별시 양천구 목동동로 73 1층",
+      "file": "DA34_양천구청점.webp"
+    },
+    {
+      "storeCode": "D513",
+      "storeName": "오목교역점",
+      "district": "양천구",
+      "officialAddress": "서울특별시 양천구 오목로 344 청학빌딩",
+      "file": "D513_오목교역점.webp"
+    },
+    {
+      "storeCode": "DF6D",
+      "storeName": "이마트목동점",
+      "district": "양천구",
+      "officialAddress": "서울특별시 양천구 오목로 299",
+      "file": "DF6D_이마트목동점.webp"
+    },
+    {
+      "storeCode": "DF77",
+      "storeName": "현대백화점목동점",
+      "district": "양천구",
+      "officialAddress": "서울특별시 양천구 목동동로 257 현대백화점 지하 2층",
+      "file": "DF77_현대백화점목동점.webp"
+    },
+    {
+      "storeCode": "DDA9",
+      "storeName": "국회의사당역점",
+      "district": "영등포구",
+      "officialAddress": "서울특별시 영등포구 국회대로 지하 758 9호선 지하2층",
+      "file": "DDA9_국회의사당역점.webp"
+    },
+    {
+      "storeCode": "DCCA",
+      "storeName": "동여의도점",
+      "district": "영등포구",
+      "officialAddress": "서울특별시 영등포구 의사당대로1길 25",
+      "file": "DCCA_동여의도점.webp"
+    },
+    {
+      "storeCode": "D109",
+      "storeName": "문래점",
+      "district": "영등포구",
+      "officialAddress": "서울특별시 영등포구 선유로 63 1층",
+      "file": "D109_문래점.webp"
+    },
+    {
+      "storeCode": "DE5E",
+      "storeName": "서여의도점",
+      "district": "영등포구",
+      "officialAddress": "서울특별시 영등포구 국회대로74길 19 동우국제빌딩 1층",
+      "file": "DE5E_서여의도점.webp"
+    },
+    {
+      "storeCode": "DBF7",
+      "storeName": "신길점",
+      "district": "영등포구",
+      "officialAddress": "서울특별시 영등포구 영등포로 358 대윤메디컬센터 1층",
+      "file": "DBF7_신길점.webp"
+    },
+    {
+      "storeCode": "DF70",
+      "storeName": "여의도IFC점",
+      "district": "영등포구",
+      "officialAddress": "서울특별시 영등포구 국제금융로 10",
+      "file": "DF70_여의도IFC점.webp"
+    },
+    {
+      "storeCode": "D030",
+      "storeName": "여의도역점",
+      "district": "영등포구",
+      "officialAddress": "서울특별시 영등포구 여의나루로 61 한영회계법인빌딩 1층",
+      "file": "D030_여의도역점.webp"
+    },
+    {
+      "storeCode": "DG27",
+      "storeName": "롯데아울렛서울역점",
+      "district": "용산구",
+      "officialAddress": "서울특별시 용산구 한강대로 405 롯데아울렛 서울역점 2층 일부",
+      "file": "DG27_롯데아울렛서울역점.webp"
+    },
+    {
+      "storeCode": "DD5E",
+      "storeName": "이태원중앙점",
+      "district": "용산구",
+      "officialAddress": "서울특별시 용산구 이태원로 179 해밀톤쇼핑센터 1층",
+      "file": "DD5E_이태원중앙점.webp"
+    },
+    {
+      "storeCode": "DB39",
+      "storeName": "구산역점",
+      "district": "은평구",
+      "officialAddress": "서울특별시 은평구 서오릉로 137 (역촌동)",
+      "file": "DB39_구산역점.webp"
+    },
+    {
+      "storeCode": "DD3C",
+      "storeName": "구파발점",
+      "district": "은평구",
+      "officialAddress": "서울특별시 은평구 진관2로 15-40 3호",
+      "file": "DD3C_구파발점.webp"
+    },
+    {
+      "storeCode": "DCBE",
+      "storeName": "녹번역점",
+      "district": "은평구",
+      "officialAddress": "서울특별시 은평구 은평로 240 힐스테이트녹번역 상가 B3층 308 ~ 311호",
+      "file": "DCBE_녹번역점.webp"
+    },
+    {
+      "storeCode": "DD5B",
+      "storeName": "롯데몰은평점",
+      "district": "은평구",
+      "officialAddress": "서울특별시 은평구 통일로 1050 롯데쇼핑 롯데몰은평점 지하1층",
+      "file": "DD5B_롯데몰은평점.webp"
+    },
+    {
+      "storeCode": "DF29",
+      "storeName": "불광역점",
+      "district": "은평구",
+      "officialAddress": "서울특별시 은평구 통일로 741",
+      "file": "DF29_불광역점.webp"
+    },
+    {
+      "storeCode": "DFFB",
+      "storeName": "연신내로데오점",
+      "district": "은평구",
+      "officialAddress": "서울특별시 은평구 연서로 221",
+      "file": "DFFB_연신내로데오점.webp"
+    },
+    {
+      "storeCode": "DFAD",
+      "storeName": "연신내연서점",
+      "district": "은평구",
+      "officialAddress": "서울특별시 은평구 연서로 212",
+      "file": "DFAD_연신내연서점.webp"
+    },
+    {
+      "storeCode": "D036",
+      "storeName": "연신내점",
+      "district": "은평구",
+      "officialAddress": "서울특별시 은평구 통일로 857 1층",
+      "file": "D036_연신내점.webp"
+    },
+    {
+      "storeCode": "DB93",
+      "storeName": "응암역점",
+      "district": "은평구",
+      "officialAddress": "서울특별시 은평구 증산로 475 (신사동)",
+      "file": "DB93_응암역점.webp"
+    },
+    {
+      "storeCode": "DCE5",
+      "storeName": "응암점",
+      "district": "은평구",
+      "officialAddress": "서울특별시 은평구 은평로 102 연합빌딩 1 ~ 2층",
+      "file": "DCE5_응암점.webp"
+    },
+    {
+      "storeCode": "DA7A",
+      "storeName": "독립문점",
+      "district": "종로구",
+      "officialAddress": "서울특별시 종로구 송월길 99 경희궁 자이 2132, 2133, 2134호",
+      "file": "DA7A_독립문점.webp"
+    },
+    {
+      "storeCode": "DF3C",
+      "storeName": "명동거리점",
+      "district": "중구",
+      "officialAddress": "서울특별시 중구 명동8나길 9",
+      "file": "DF3C_명동거리점.webp"
+    },
+    {
+      "storeCode": "DDEC",
+      "storeName": "명동점",
+      "district": "중구",
+      "officialAddress": "서울특별시 중구 명동8길 14",
+      "file": "DDEC_명동점.webp"
+    },
+    {
+      "storeCode": "DD1D",
+      "storeName": "서울역점",
+      "district": "중구",
+      "officialAddress": "서울특별시 중구 한강대로 405",
+      "file": "DD1D_서울역점.webp"
+    },
+    {
+      "storeCode": "D324",
+      "storeName": "사가정역점",
+      "district": "중랑구",
+      "officialAddress": "서울특별시 중랑구 면목로 310 극장빌딩 1층",
+      "file": "D324_사가정역점.webp"
+    },
+    {
+      "storeCode": "DA69",
+      "storeName": "상봉듀오트리스점",
+      "district": "중랑구",
+      "officialAddress": "서울특별시 중랑구 상봉로 131 (상봉동, 상봉 듀오트리스)",
+      "file": "DA69_상봉듀오트리스점.webp"
+    },
+    {
+      "storeCode": "DF71",
+      "storeName": "상봉엔터식스점",
+      "district": "중랑구",
+      "officialAddress": "서울특별시 중랑구 망우로 353",
+      "file": "DF71_상봉엔터식스점.webp"
+    },
+    {
+      "storeCode": "DE5B",
+      "storeName": "상봉역점",
+      "district": "중랑구",
+      "officialAddress": "서울특별시 중랑구 망우로 307 리베로빌딩 1층",
+      "file": "DE5B_상봉역점.webp"
+    },
+    {
+      "storeCode": "D390",
+      "storeName": "신내점",
+      "district": "중랑구",
+      "officialAddress": "서울특별시 중랑구 신내로72",
+      "file": "D390_신내점.webp"
+    },
+    {
+      "storeCode": "DD80",
+      "storeName": "양원역점",
+      "district": "중랑구",
+      "officialAddress": "서울특별시 중랑구 양원역로10길 17 제이메디컬 101호",
+      "file": "DD80_양원역점.webp"
+    }
+  ]
+}
