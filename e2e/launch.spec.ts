@@ -17,7 +17,7 @@ test.beforeAll(async ({ request, baseURL }) => {
   if (admin) uid = await ensureUser(admin, EMAIL, PASS);
   // warm the dev server's on-demand compiler so expect timeouts measure the
   // app, not the toolchain
-  for (const p of ["/login", "/map", "/menu", "/favorites", "/settings", "/settings/account", "/settings/app", "/place/juno-hair-gangnam"]) {
+  for (const p of ["/login", "/map", "/menu", "/favorites", "/settings", "/settings/account", "/settings/app", "/place/ct-juno-hair-gangnam-station-branch-1"]) {
     await request.get(`${baseURL}${p}`).catch(() => {});
   }
 });
@@ -43,8 +43,10 @@ test.describe("discovery smoke (no auth needed)", () => {
   });
 
   test("place page shows real data and no fabricated trust signals", async ({ page }) => {
-    await page.goto("/place/juno-hair-gangnam");
-    await expect(page.getByRole("heading", { name: "Juno Hair Gangnam" })).toBeVisible();
+    // A Creatrip-sourced salon: the hand-curated prototype rows (e.g. the old
+    // juno-hair-gangnam) are no longer published, so they 404 on production.
+    await page.goto("/place/ct-juno-hair-gangnam-station-branch-1");
+    await expect(page.getByRole("heading", { name: /JUNO HAIR \| Gangnam Station Branch 1/ })).toBeVisible();
     await expect(page.getByText("Been here? Rate your visit")).toBeVisible();
     for (const fake of ["Card OK", "✓ Verified", "MYSEOULDROP10", "02-555-0134"]) {
       await expect(page.getByText(fake)).toHaveCount(0);
