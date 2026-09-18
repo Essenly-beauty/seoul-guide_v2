@@ -110,12 +110,12 @@ test.describe("direct auth + account sync", () => {
 
   test("login -> rate a place -> rating lands on the server and survives reload", async ({ page }) => {
     await login(page);
-    await page.goto("/place/juno-hair-gangnam");
+    await page.goto("/place/ct-juno-hair-gangnam-station-branch-1");
     await page.getByRole("button", { name: "Rate 4 stars" }).click();
     await expect(page.getByText(/You rated 4 stars/)).toBeVisible();
     await expect
       .poll(async () => {
-        const { data } = await admin!.from("ratings").select("rating").eq("user_id", uid!).eq("place_id", "juno-hair-gangnam").maybeSingle();
+        const { data } = await admin!.from("ratings").select("rating").eq("user_id", uid!).eq("place_id", "ct-juno-hair-gangnam-station-branch-1").maybeSingle();
         return data?.rating ?? null;
       }, { timeout: 15_000 })
       .toBe(4);
@@ -125,7 +125,7 @@ test.describe("direct auth + account sync", () => {
 
   test("sign-out purges every account mirror from the device", async ({ page }) => {
     await login(page);
-    await page.goto("/place/juno-hair-gangnam");
+    await page.goto("/place/ct-juno-hair-gangnam-station-branch-1");
     await page.getByRole("button", { name: "Add to favorites" }).first().click();
     await page.goto("/settings/account");
     await page.getByRole("button", { name: "Sign Out" }).first().click();

@@ -35,7 +35,7 @@ test.describe("account data lifecycle", () => {
     await page.locator(".auth-cta").click();
     await page.waitForURL((u) => !u.pathname.startsWith("/login"), { timeout: 30_000 });
 
-    await page.goto("/place/juno-hair-gangnam");
+    await page.goto("/place/ct-juno-hair-gangnam-station-branch-1");
     await page.getByRole("button", { name: "Add to favorites" }).first().click();
     await page.getByRole("button", { name: "Rate 5 stars" }).click();
     await expect
@@ -51,8 +51,8 @@ test.describe("account data lifecycle", () => {
     expect(res.headers()["content-disposition"]).toContain("myseouldrop-data.json");
     const body = await res.json();
     expect(body.account.email).toBe(EMAIL);
-    expect(body.favorites.map((f: { item_id: string }) => f.item_id)).toContain("juno-hair-gangnam");
-    expect(body.ratings[0]).toMatchObject({ place_id: "juno-hair-gangnam", rating: 5 });
+    expect(body.favorites.map((f: { item_id: string }) => f.item_id)).toContain("ct-juno-hair-gangnam-station-branch-1");
+    expect(body.ratings[0]).toMatchObject({ place_id: "ct-juno-hair-gangnam-station-branch-1", rating: 5 });
 
     // delete through the real UI
     await page.goto("/settings/privacy");
