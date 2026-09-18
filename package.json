@@ -15,6 +15,7 @@
     "build:photo-places": "vite-node scripts/build-ados-photo-provisional-places.ts",
     "collect:daiso-data": "vite-node --script scripts/collect-daiso-seoul.ts",
     "build:daiso-data": "vite-node --script scripts/build-daiso-places.ts",
+    "build:daiso-supplement": "vite-node --script scripts/build-daiso-supplement-places.ts",
     "build:daiso-ranking": "vite-node --script scripts/build-daiso-ranking.ts",
     "verify:predeploy": "npm run typecheck && npm run lint && npm test && npm run audit:data:check && npm run build",
     "build:subway-data": "node scripts/fetch-subway-sources.mjs && node scripts/build-subway-data.mjs",

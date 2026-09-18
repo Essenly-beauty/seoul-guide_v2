@@ -88,6 +88,22 @@ describe("Daiso official-source import", () => {
     expect({ lat: store.lat, lng: store.lng }).toEqual({ lat: 37.511111, lng: 127.022222 });
   });
 
+  it("reads hours from data-start/data-end when the card carries no hours text (official markup since 2026-09)", () => {
+    const html = `
+      <div class="bx-store" data-start="1000" data-end="2200" data-lat="37.4840224010593" data-lng="127.084459720088" data-opnday="20220714">
+        <a href="#"><h4 class="place">일원역점</h4><em class="phone">T.1522-4400</em>
+        <p class="addr">서울특별시 강남구 일원로 115(일원동)B1층</p>
+        <ul class="opts"><li><span>주차</span></li><li><span>현금없는매장</span></li><li><span>매장픽업</span></li></ul></a>
+      </div>`;
+
+    const [store] = parseDaisoStoreCards(html, { district: "강남구", neighborhood: "일원동", requestUrl: officialStoreRequestUrl("강남구", "일원동") });
+    expect(store.nameKr).toBe("일원역점");
+    expect(store.address).toBe("서울특별시 강남구 일원로 115(일원동)B1층");
+    expect(store.hours).toEqual({ open: "10:00", close: "22:00" });
+    expect(store.facilities).toEqual(["parking"]);
+    expect(store.serviceTags).toEqual(["cashless-store", "store-pickup"]);
+  });
+
   it("rejects blank coordinate attributes when no fallback coordinates exist", () => {
     expect(() => parseDaisoStoreCards(`
       <div class="bx-store" data-lat="" data-lng="   ">

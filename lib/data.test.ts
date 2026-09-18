@@ -70,24 +70,28 @@ describe("category taxonomy", () => {
 });
 
 describe("Daiso publication", () => {
-  it("publishes all 251 official stores through the public place boundary", () => {
+  // 251 approved daiso.co.kr stores + 33 shop-in-shop counters from the owner's
+  // 2026-09-18 list (lib/generated/daiso-supplement-places.ts) = 284 Seoul stores.
+  const DAISO_STORES = 251 + 33;
+
+  it("publishes all 284 official stores through the public place boundary", () => {
     const daisoPlaces = PLACES.filter((place) => place.type === "daiso");
 
-    expect(daisoPlaces).toHaveLength(251);
+    expect(daisoPlaces).toHaveLength(DAISO_STORES);
     expect(daisoPlaces.every((place) => place.source === "daiso")).toBe(true);
   });
 
-  it("adds the 251 stores to catalogue and public totals without hardcoding unrelated counts", () => {
+  it("adds the 284 stores to catalogue and public totals without hardcoding unrelated counts", () => {
     const catalogueWithoutDaiso = CATALOGUE_PLACES.filter((place) => place.type !== "daiso");
     const publicWithoutDaiso = PLACES.filter((place) => place.type !== "daiso");
 
-    expect(CATALOGUE_PLACES).toHaveLength(catalogueWithoutDaiso.length + 251);
-    expect(PLACES).toHaveLength(publicWithoutDaiso.length + 251);
+    expect(CATALOGUE_PLACES).toHaveLength(catalogueWithoutDaiso.length + DAISO_STORES);
+    expect(PLACES).toHaveLength(publicWithoutDaiso.length + DAISO_STORES);
   });
 
   it("keeps the audited launch totals in sync with Daiso publication", () => {
-    expect(CATALOGUE_PLACES).toHaveLength(962);
-    expect(PLACES).toHaveLength(845);
+    expect(CATALOGUE_PLACES).toHaveLength(962 + 33);
+    expect(PLACES).toHaveLength(845 + 33);
   });
 
   it("describes provisional names as officially sourced instead of verified", () => {
@@ -181,7 +185,7 @@ describe("place rating provenance", () => {
       .not.toContain("국내선 청사 4층");
   });
 
-  it("publishes every approved owner-photo folder on a public place", () => {
+  it("publishes every approved photo source on a public place", () => {
     const placesWithPhotos = PLACES.filter((place) => place.photos?.length);
     const photoCount = placesWithPhotos.reduce(
       (total, place) => total + (place.photos?.length ?? 0),
@@ -198,7 +202,9 @@ describe("place rating provenance", () => {
     const provisional = PLACES.filter((place) => place.locationVerification === "provisional");
     const approximate = PLACES.filter((place) => place.geoSource === "area");
 
-    expect(provisional).toHaveLength(99);
+    // 99 owner-photo area pins + 9 shop-in-shop Daiso counters whose address
+    // geocoded only to road level (scripts/build-daiso-supplement-places.ts).
+    expect(provisional).toHaveLength(99 + 9);
     expect(approximate.map((place) => place.id).sort())
       .toEqual(provisional.map((place) => place.id).sort());
   });

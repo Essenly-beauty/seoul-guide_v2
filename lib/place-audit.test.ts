@@ -84,9 +84,9 @@ describe("place launch audit", () => {
 
     expect(summary.total).toBe(CATALOGUE_PLACES.length);
     expect(summary.bySource).toEqual(expectedSourceCounts);
-    expect(summary.bySource.daiso).toBe(251);
-    expect(summary.findings.provisional_english_name).toBe(347);
-    expect(summary.findings.approximate_pin).toBe(138);
+    expect(summary.bySource.daiso).toBe(251 + 33); // approved snapshot + 2026-09-18 shop-in-shop supplement
+    expect(summary.findings.provisional_english_name).toBe(347 + 33); // + supplement Daiso names
+    expect(summary.findings.approximate_pin).toBe(138 + 9); // + road-level supplement pins
     expect(summary.findings.outside_service_area).toBe(16);
     expect(summary.findings.no_licensed_photo).toBe(
       CATALOGUE_PLACES.filter((place) => !(place.photos?.length || place.photoUrl)).length,
@@ -139,7 +139,7 @@ describe("place launch audit", () => {
     expect(markdown).toContain("| Identity matched | 0 |");
     expect(markdown).toContain(`| Identity unchecked | ${CATALOGUE_PLACES.length} |`);
     expect(markdown).toContain("| Outside Seoul service area | 16 |");
-    expect(markdown).toContain("| Provisional English place names | 347 |");
+    expect(markdown).toContain("| Provisional English place names | 380 |");
     expect(markdown).toContain("## Priority review queue");
     expect(markdown).toContain("| Naver English-name matched | 0 |");
     expect(markdown).toContain("| Place | Source | Identity | Naver EN | Action | Findings | Google | Naver (KO) | Naver (EN) | Kakao |");
@@ -174,8 +174,8 @@ describe("place launch audit", () => {
     expect(checklist).toContain("reports/place-audit.md");
     expect(checklist).toContain("unchecked does not mean invalid");
     expect(checklist).toContain("no automatic deletion");
-    expect(checklist).toContain("내부 카탈로그는 962곳");
-    expect(checklist).toContain("공개 카탈로그는 845곳");
+    expect(checklist).toContain("내부 카탈로그는 995곳");
+    expect(checklist).toContain("공개 카탈로그는 878곳");
     expect(checklist).toContain("nameVerification: provisional");
   });
 });

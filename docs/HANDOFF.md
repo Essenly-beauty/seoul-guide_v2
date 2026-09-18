@@ -188,6 +188,8 @@ vercel env pull --yes  # .env.local 재생성
 node scripts/build-creatrip-places.mjs      # 미용실 (CSV 경로 인자 가능)
 ./scripts/capture-kakao-oy.sh && node scripts/build-oliveyoung-kakao.mjs  # 올리브영
 node scripts/build-ados-places.mjs          # 관광지·시장
+npm run build:daiso-data                    # 다이소 251곳 (승인 스냅샷 data/sources/daiso-seoul-2026-09-03.json)
+npm run build:daiso-supplement              # 다이소 마트 입점 33곳 (오너 목록 + 다이소몰 API 스냅샷, 지오코딩 캐시 커밋됨)
 node scripts/build-subway-geometry.mjs      # 선로 지오메트리 (--refresh로 OSM 재조회)
 npm run build:subway-data                   # 지하철 그래프
 ```

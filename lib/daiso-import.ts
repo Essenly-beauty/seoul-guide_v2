@@ -141,9 +141,14 @@ function parseHours(value: string): { open: string; close: string } {
   return { open: parseKoreanTime(match[2], openPeriod), close: parseKoreanTime(match[4], closePeriod) };
 }
 
-function availableLabels(text: string, labels: ReadonlyMap<string, string>): string[] {
+function availableLabels(text: string, labels: ReadonlyMap<string, string>, items: readonly string[] = []): string[] {
   const normalized = normalizeText(text);
-  return [...labels].filter(([label]) => new RegExp(`${label}\\s*(?:가능|제공|운영)`).test(normalized)).map(([, value]) => value);
+  // Older cards spell out "주차 가능"; since 2026-09 the official card lists bare
+  // labels ("<li><span>주차</span></li>") and simply omits what a store lacks.
+  const bare = new Set(items.map(normalizeText));
+  return [...labels]
+    .filter(([label]) => bare.has(label) || new RegExp(`${label}\\s*(?:가능|제공|운영)`).test(normalized))
+    .map(([, value]) => value);
 }
 
 function coordinateFromAttributes(
@@ -182,6 +187,15 @@ export function parseDaisoStoreCards(html: string, provenance: DaisoProvenance):
       const label = card.find("dt, th, span, strong").filter((_, node) => normalizeText($(node).text()) === "영업시간").first();
       hoursText = normalizeText((label.is("dt, th") ? label.next() : label.parent().next()).text());
     }
+    if (!hoursText) {
+      // Since 2026-09 the official card carries hours only as data-start="1000" data-end="2200".
+      const start = card.attr("data-start")?.trim();
+      const end = card.attr("data-end")?.trim();
+      if (start && end && /^\d{3,4}$/.test(start) && /^\d{3,4}$/.test(end)) {
+        const clock = (value: string) => `${value.slice(0, -2).padStart(2, "0")}:${value.slice(-2)}`;
+        hoursText = `${clock(start)} ~ ${clock(end)}`;
+      }
+    }
 
     const attributeSets = card.find("*").addBack().toArray().map((node) => "attribs" in node ? node.attribs : {});
     let lat = coordinateFromAttributes(attributeSets, ["data-lat", "data-latitude", "data-y", "lat", "latitude"]);
@@ -196,6 +210,7 @@ export function parseDaisoStoreCards(html: string, provenance: DaisoProvenance):
     }
 
     const optionText = card.find(".store-options, .options, .facility, .facilities, .service, .services").text() || card.text();
+    const optionItems = card.find(".opts li, .store-options li, .options li").toArray().map((node) => $(node).text());
     const store: DaisoSnapshotStore = {
       sourceId: "",
       nameKr,
@@ -204,8 +219,8 @@ export function parseDaisoStoreCards(html: string, provenance: DaisoProvenance):
       lat,
       lng,
       hours: parseHours(hoursText),
-      facilities: availableLabels(optionText, FACILITY_LABELS),
-      serviceTags: availableLabels(optionText, SERVICE_LABELS),
+      facilities: availableLabels(optionText, FACILITY_LABELS, optionItems),
+      serviceTags: availableLabels(optionText, SERVICE_LABELS, optionItems),
       officialUrl: DAISO_OFFICIAL_SOURCE_URL,
       provenance: [provenance],
       naver: null,
@@ -273,7 +288,7 @@ function validateProvenanceRequestUrl(requestUrl: string, district: string, neig
   }
 }
 
-function zoneForAddress(address: string): ZoneKey {
+export function zoneForAddress(address: string): ZoneKey {
   if (/강남구/.test(address)) {
     if (/압구정/.test(address)) return "apgujeong";
     if (/청담/.test(address)) return "cheongdam";

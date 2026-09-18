@@ -9,6 +9,7 @@ import { ADOS_PLACES } from "./generated/ados-places";
 import { ADOS_PHOTO_PLACES } from "./generated/ados-photo-places";
 import { ADOS_PHOTO_PROVISIONAL_PLACES } from "./generated/ados-photo-provisional-places";
 import { DAISO_PLACES } from "./generated/daiso-places";
+import { DAISO_SUPPLEMENT_PLACES } from "./generated/daiso-supplement-places";
 
 if (DAISO_PLACES.length !== 251) {
   throw new Error(`Expected exactly 251 generated Daiso stores, received ${DAISO_PLACES.length}`);
@@ -317,6 +318,9 @@ export const CATALOGUE_PLACES: Place[] = [
   ...withSource(ADOS_PHOTO_PROVISIONAL_PLACES, "ados"),
   // Official Seoul Daiso stores (scripts/build-daiso-places.ts).
   ...withSource(DAISO_PLACES, "daiso"),
+  // Shop-in-shop Daiso counters the store finder lists but the approved
+  // snapshot lacks (owner list 2026-09-18, scripts/build-daiso-supplement-places.ts).
+  ...withSource(DAISO_SUPPLEMENT_PLACES, "daiso"),
 ];
 
 type VerifiedPlacePatch = Partial<Pick<
