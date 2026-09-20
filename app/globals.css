@@ -245,10 +245,37 @@
     letter-spacing: 0;
     line-height: 1.2;
   }
+  /* Touch devices never fire :hover, so a control that only reacts on hover
+     reads as dead under a finger. These two lines make room for the pressed
+     states at the end of this file: the grey iOS/Android flash is replaced by
+     our own feedback, and `manipulation` drops the double-tap-zoom wait.
+     Scoped to real controls — body text keeps double-tap zoom (2026-07-25
+     mobile-ux spec §10). The drag handles re-declare `touch-action: none`
+     in @layer components, which wins on source order. */
+  button,
+  a,
+  [role="button"] {
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+  }
   @media (prefers-reduced-motion: reduce) {
     * {
       animation: none !important;
       transition: none !important;
+    }
+    /* `transition: none` above would turn the pressed scale into a hard jump
+       rather than removing it, so drop the transform itself. !important in a
+       layer beats the unlayered pressed rules (layer order reverses for
+       important declarations). */
+    .maprow:active,
+    .drow:active,
+    .chip:active,
+    .sfchip:active,
+    .bottomnav .nav:active,
+    .card.tap:active,
+    .listrow:active,
+    .selected-place-summary-main:active {
+      transform: none !important;
     }
   }
 }
@@ -770,7 +797,7 @@
     font-size: 11px;
     white-space: nowrap;
   }
-  .subway-route-steps > span { min-height: 38px; }
+  .subway-route-steps > span { min-height: 44px; }
   .subway-route-steps b { color: var(--text); }
   .subway-route-leg { display: flex; align-items: center; gap: 7px; }
   .subway-route-leg > .linebadge { flex: none; font-style: normal; }
@@ -820,7 +847,9 @@
   .subway-active-station { position: relative; z-index: 1; }
   .subway-station-focus > button {
     min-width: 0;
-    min-height: 34px;
+    /* 44px floor (2026-08-22 spec:105). The container is an 80px-tall grid
+       with centred items, so the panel height is unchanged. */
+    min-height: 44px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1094,7 +1123,7 @@
     .subway-controller.search-ready { height: 58%; }
     .subway-station-focus { min-height: 78px; padding-block: 8px; }
     .subway-route-steps { gap: 10px; padding-block: 5px; }
-    .subway-route-steps > span { min-height: 34px; }
+    .subway-route-steps > span { min-height: 44px; }
     .subway-route-leg small { display: none; }
   }
 }
@@ -1590,7 +1619,9 @@
     background: var(--accent);
     color: #fff;
     width: 100%;
-    transition: background 0.15s;
+    /* the shorthand replaces the base transition, so the pressed filter has
+       to be declared here or it snaps */
+    transition: background 0.15s, filter 90ms linear;
   }
   .btn:hover {
     background: var(--accent-hover);
@@ -1733,7 +1764,7 @@
     color: var(--text);
   }
   .daiso-category-chip-visual {
-    min-height: 36px;
+    min-height: 44px;
     display: inline-flex;
     align-items: center;
     padding: 0 12px;
@@ -2289,7 +2320,7 @@
   }
   .filtersheet .chipwrap { gap: 6px; margin-top: 5px !important; }
   .filtersheet .chip {
-    min-height: 38px;
+    min-height: 44px;
     padding: 6px 13px;
     font-size: 12.5px;
   }
@@ -3610,7 +3641,8 @@
     min-width: 0;
   }
   .station-filter-rail .sfchip {
-    min-height: 40px;
+    /* inherits the 44px floor from .sfchip; a 40px override here used to beat
+       it on specificity */
     padding: 0 14px;
     font-size: 13px;
     background: var(--surface);
@@ -3709,10 +3741,14 @@
   .subway-ticket-count { margin: 0; font-size: 12px; color: var(--muted); }
 
   .subway-station-focus.pinned {
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 0;
+    /* In the panel's flex column, after the scroller — not floating over it.
+       Taken out of the absolutely-positioned overlay: this bar used to cover
+       the last ~80px of the place list permanently (its min-height resolves to 80px at :5693, while the
+       scroller reserved only max(18px, safe-area)), so the final rows could
+       never be reached or focused: WCAG 2.4.11 Focus Not Obscured.
+       The 2026-08-22 decision was "bottom of the panel, in the thumb zone,
+       must not scroll away" — an in-flow last child keeps all three. */
+    flex: none;
     z-index: 960;
     margin: 0;
     border-radius: 0;
@@ -3900,7 +3936,7 @@
   }
   .map-top .chip {
     box-shadow: var(--shadow-card);
-    min-height: 36px;
+    min-height: 44px;
   }
   /* :not(.selected) — .chip.selected (earlier in the cascade) sets the same
      specificity; without this guard this rule's background would win and
@@ -5465,10 +5501,24 @@
   }
   .subway-snap-handle {
     flex: none;
+    /* The visible strip stays thin because the half-snap chrome budget
+       reserves ~20px for it (2026-08-22 spec:93/206); the touch target is
+       widened by the pseudo element below instead of by growing the strip. */
+    position: relative;
     display: grid;
     justify-items: center;
     padding: 8px 16px 4px;
     cursor: grab;
+    touch-action: none;
+  }
+  .subway-snap-handle::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 50%;
+    height: 44px;
+    transform: translateY(-50%);
     touch-action: none;
   }
   .subway-snap-handle:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
@@ -6404,4 +6454,37 @@
     box-shadow: var(--shadow-sm);
     pointer-events: none;
   }
+}
+
+
+/* ── Pressed states ───────────────────────────────────────────────────────
+   Unlayered and last on purpose: `.chip` sets `background: transparent` in
+   @layer components, so a pressed rule inside the same layer would lose.
+   Only `transform` and `background`/`filter` are touched, which stay on the
+   compositor. 90ms keeps the acknowledgement inside NN/g's 0.1s "instant"
+   limit. Reduced motion drops the transform in @layer base above. */
+.maprow:active,
+.drow:active,
+.listrow:active,
+.chip:active,
+.sfchip:active,
+.bottomnav .nav:active,
+.card.tap:active,
+.selected-place-summary-main:active {
+  background: var(--surface-hover);
+  transform: scale(0.98);
+  transition: transform 90ms cubic-bezier(0.2, 0, 0, 1), background 90ms linear;
+}
+
+/* Full-width buttons already paint a brand background, so darken instead of
+   swapping it. */
+.btn:active {
+  filter: brightness(0.94);
+}
+
+/* The selected station row owns its background through aria-selected at the
+   same specificity — darken rather than fight it. */
+.station-result-options > button:active {
+  filter: brightness(0.96);
+  transition: filter 90ms linear;
 }
