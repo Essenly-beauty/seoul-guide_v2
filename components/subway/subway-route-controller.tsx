@@ -108,7 +108,7 @@ function StationCombobox({
   nearbyStationId: string | null;
   recentIds: string[];
   inputRef?: React.RefObject<HTMLInputElement | null>;
-  locationStatus: "loading" | "granted" | "fallback";
+  locationStatus: "idle" | "loading" | "granted" | "fallback";
   onRetryLocation: () => void;
   onSelect: (id: string | null) => void;
 }) {
@@ -268,6 +268,12 @@ function StationCombobox({
           {!query.trim() && locationStatus === "loading" && (
             <div className="station-location-note" role="status">Finding a nearby station...</div>
           )}
+          {!query.trim() && locationStatus === "idle" && (
+            <div className="station-location-note">
+              <span>Use your location to find the nearest station.</span>
+              <button type="button" onClick={onRetryLocation}>Use location</button>
+            </div>
+          )}
           {!query.trim() && locationStatus === "fallback" && (
             <div className="station-location-note">
               <span>Location is unavailable. Showing popular stations.</span>
@@ -390,7 +396,7 @@ export function SubwayRouteController({
   onClearRoute: () => void;
   onEditingChange: (editing: boolean) => void;
   onSnapChange: (snap: SubwaySnap) => void;
-  locationStatus: "loading" | "granted" | "fallback";
+  locationStatus: "idle" | "loading" | "granted" | "fallback";
   onRetryLocation: () => void;
   onClose: () => void;
 }) {
