@@ -319,9 +319,15 @@ describe("timing is Google's job, the stepper is the bottom control", () => {
     expect(controller).toContain("viaIds.map((id) => STATIONS[id]).filter(Boolean)");
   });
 
-  it("pins the station stepper to the bottom instead of scrolling it away", () => {
+  it("keeps the station stepper at the bottom of the panel without covering the list", () => {
     expect(controller).toContain('className="subway-station-focus pinned"');
-    expect(css).toContain(".subway-station-focus.pinned {");
-    expect(css).toContain("bottom: 0;");
+    const rule = css.slice(css.indexOf(".subway-station-focus.pinned {"));
+    const body = rule.slice(0, rule.indexOf("}"));
+    expect(body).toBeTruthy();
+    // It stays last in the panel's flex column instead of floating over the
+    // scroller: `position: absolute` made the stepper hide the final ~80px of
+    // the place list for good (WCAG 2.4.11 Focus Not Obscured).
+    expect(body).not.toMatch(/position:\s*absolute/);
+    expect(body).toMatch(/flex:\s*none/);
   });
 });
