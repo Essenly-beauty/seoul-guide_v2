@@ -1,4 +1,5 @@
 import { describe, expect, it } from "vitest";
+import { didDrag } from "./map-sheet-state";
 
 describe("map sheet selected-place state", () => {
   it("resolves each snap to exactly one selected-place presentation", async () => {
@@ -103,5 +104,30 @@ describe("map sheet drag physics", () => {
     const still = springKeyframes({ from: 100, to: 400, velocity: 0 });
     expect(still.frames[still.frames.length - 1]).toBe(400);
     expect(still.frames[1]).toBeGreaterThan(100);
+  });
+});
+
+/** R7 (docs/research/ux-interaction-review-2026-09.md): the sheet confirmed a
+ *  drag after 4px and immediately marked the gesture as "moved", so its click
+ *  handler swallowed the following tap. Walking with the phone shakes a finger
+ *  several pixels, so place rows stopped opening while the sheet visibly went
+ *  nowhere. Apple's WWDC18 "Designing Fluid Interfaces" puts the swipe
+ *  hysteresis at ~10pt; Android's touch slop is 8dp. */
+describe("didDrag", () => {
+  it("is false for a gesture that neither travelled nor changed the snap", () => {
+    expect(didDrag({ travel: 5, target: "half", snap: "half", slop: 8 })).toBe(false);
+  });
+
+  it("is true whenever the release lands on a different snap, however short the flick", () => {
+    expect(didDrag({ travel: 9, target: "full", snap: "half", slop: 8 })).toBe(true);
+  });
+
+  it("is true for a long drag that returns to the same snap", () => {
+    expect(didDrag({ travel: 120, target: "half", snap: "half", slop: 8 })).toBe(true);
+  });
+
+  it("gives the finger headroom past the slop before it counts as a drag", () => {
+    expect(didDrag({ travel: 13, target: "half", snap: "half", slop: 8 })).toBe(false);
+    expect(didDrag({ travel: 15, target: "half", snap: "half", slop: 8 })).toBe(true);
   });
 });

@@ -501,7 +501,7 @@ export function SubwayRouteController({
     onSnapChange(next);
   };
 
-  // Grip drag mirrors MapSheet: 40px threshold, click-to-cycle, Enter/Space.
+  // Grip drag mirrors MapSheet: 40px threshold; unlike MapSheet it has no pointermove yet (R4), click-to-cycle, Enter/Space.
   const onGripPointerDown = (event: React.PointerEvent) => {
     snapDragMoved.current = false;
     snapDragStart.current = { y: event.clientY, snap };
