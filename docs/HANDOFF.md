@@ -162,7 +162,12 @@ vercel env pull --yes  # .env.local 재생성
 
 0. ~~[긴급] Supabase 프로젝트 접근 불가~~ — ✅ **9/20 16:10 해결**. 원인: Free 플랜 **자동 일시중지**(대시보드 "Project is paused", 재개 기한 2027-10-06). 9/18 15:09Z 스모크 실패 메일이 첫 신호였고, 예약 스모크는 계정 잡을 skip해서 ~40시간 미감지. 오너가 백업 다운로드 후 Resume → DNS·Auth health·REST·풀러 접속·데이터(auth.users 5, favorites 10, ratings 3, client_errors 37) 전부 정상 확인 → 마이그레이션 **0009·0010 적용 완료**(검증: csp kind 허용, web_vitals RLS+insert 정책) → `Production public smoke`(계정 잡 포함) **9/9 통과**(run 35496788579). 재발 방지로 uptime cron에 Supabase Auth health + REST 핑 추가(커밋 ef8c9ea, 30분마다 API 활동 발생 → 유휴 정지 방지). 스모크 스펙 2개가 미게재 샘플 장소를 쓰던 것도 수정(15f3b1c)
 0-1. **[보류 — 오너 결정 2026-09-20] Supabase Auth 비밀번호 최소 길이 상향은 하지 않는다.** 근거: 전체 5개 계정 중 비밀번호를 가진 것은 **2개뿐**이고(나머지 3개는 Google 신원으로 비밀번호가 아예 없음), 클라이언트가 `lib/auth-policy.ts`로 이미 8자·72바이트를 강제하므로 정상 경로 사용자는 6자를 만들 수 없다. 서버가 6자를 받는 것은 9/20 실측으로 확인했으나(테스트 계정 즉시 삭제), 그 구멍에 닿으려면 폼을 우회해 API를 직접 호출해야 하고 피해는 본인 계정에 한정된다. **되살릴 조건**: 이메일 가입 비중이 늘거나, 비밀번호 계정에 결제·민감정보가 붙으면 그때 Dashboard → Authentication에서 8로 올린다(소급 적용 안 되므로 그때 해도 마이그레이션·공지 불필요). 문자 조합 요건은 그때도 켜지 말 것(NIST SP 800-63B-4).
-0-1-b. **[미완] Supabase에서 Kakao 프로바이더 끄기** (Dashboard → Authentication → Providers → Kakao → Disable) — 9/20 `/auth/v1/settings`에서 `kakao: true` 확인. 그런데 8/11 결정(§4 P1)으로 **카카오는 범위에서 제외**됐고 앱의 카카오 버튼도 제거된 상태다. 즉 UI에 진입로가 없는 인증 경로가 서버에 열려 있다. 당장 악용 경로는 아니지만(콜백 URL과 클라이언트 자격증명이 필요) 쓰지 않는 인증 표면은 닫는 편이 맞다. 되살릴 생각이 있으면 §3-3의 Kakao Developers 등록 항목과 함께 결정할 것
+0-1-b. **[미완] Supabase에서 Kakao 프로바이더 끄기** (Dashboard → Authentication → Providers → Kakao → Disable) — 9/20 `/auth/v1/settings`에서 `kakao: true` 확인. 8/11 결정(§4 P1)으로 **카카오는 범위에서 제외**됐고 앱의 카카오 버튼도 제거된 상태라, UI에 진입로가 없는 인증 경로만 서버에 열려 있다. 악용 경로는 아니지만(콜백 URL과 클라이언트 자격증명 필요) 쓰지 않는 인증 표면은 닫는 편이 맞다.
+   - **영향 범위 — 이름만 같은 별개 3가지다(9/20 코드 확인, 헷갈리기 쉬움):**
+     1. **카카오맵 길찾기 버튼은 무관.** `lib/geo.ts`의 `kakaoRouteUrl()`은 `https://map.kakao.com/link/to/…` 평문 링크일 뿐 인증·키·SDK를 쓰지 않는다. 프로바이더를 꺼도 그대로 동작한다
+     2. **`KAKAO_REST_API_KEY`도 무관.** `scripts/backfill-hours.mjs`·`backfill-kr-names-2.mjs`가 로컬에서 쓰는 데이터 파이프라인용 키이고 앱 번들에 들어가지 않는다(`.env.local`에 카카오 변수 없음, 브라우저에 카카오 스크립트 0건)
+     3. **닫히는 것은 카카오 계정 로그인 경로 하나뿐.** 해당 신원을 가진 계정은 `gk***@naver.com` 1개인데 같은 계정에 email+비밀번호가 살아 있어 접근을 잃지 않는다
+   - 되살릴 생각이면 §3-3의 Kakao Developers 등록 항목과 함께 결정할 것
 0-2. ~~CARTO API 키~~ — ✅ 9/20 완료. 오너가 발급 후 Vercel env `NEXT_PUBLIC_CARTO_API_KEY`(Production+Preview, Development 제외)에 저장. Referer 제한 4개(`myseouldrop.app`, `www.myseouldrop.app`, `seoul-guide-v2.vercel.app`, `*.vercel.app`) — localhost는 폼이 거부해 제외했고, Development에 키를 두지 않으므로 로컬은 무키로 동작(워터마크만, 정상)
 0-3. ~~`feat/p0-best-practices` 브랜치 리뷰·머지~~ — ✅ 9/20 PR #2로 머지·배포 완료
 
