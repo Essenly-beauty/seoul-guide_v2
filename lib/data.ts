@@ -10,6 +10,7 @@ import { ADOS_PHOTO_PLACES } from "./generated/ados-photo-places";
 import { ADOS_PHOTO_PROVISIONAL_PLACES } from "./generated/ados-photo-provisional-places";
 import { DAISO_PLACES } from "./generated/daiso-places";
 import { DAISO_SUPPLEMENT_PLACES } from "./generated/daiso-supplement-places";
+import { applyEnglishNameOverrides } from "./place-name-en";
 
 if (DAISO_PLACES.length !== 251) {
   throw new Error(`Expected exactly 251 generated Daiso stores, received ${DAISO_PLACES.length}`);
@@ -463,10 +464,11 @@ const VERIFIED_CURATED_PLACE_IDS = new Set([
  * until venue verification; sourced rows remain public unless a human review
  * explicitly pauses them. All public consumers import this single boundary.
  */
-export const PLACES: Place[] = CATALOGUE_PLACES
-  .map((place) => VERIFIED_PLACE_PATCHES[place.id]
-    ? { ...place, ...VERIFIED_PLACE_PATCHES[place.id] }
-    : place)
+export const PLACES: Place[] = applyEnglishNameOverrides(
+  CATALOGUE_PLACES
+    .map((place) => VERIFIED_PLACE_PATCHES[place.id]
+      ? { ...place, ...VERIFIED_PLACE_PATCHES[place.id] }
+      : place))
   .filter((place) =>
     (place.source !== "curated" || VERIFIED_CURATED_PLACE_IDS.has(place.id)) &&
     !HIDDEN_PLACE_IDS.has(place.id) &&
