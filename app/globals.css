@@ -1125,8 +1125,8 @@
     grid-template-columns: 1fr auto auto;
     align-items: center;
     gap: 4px 9px;
-    margin: 0 16px;
-    padding: 9px 0;
+    margin: 0;
+    padding: 9px 16px;
     border-bottom: 1px solid var(--border);
   }
   .subway-product-picks > a > span:first-child { grid-column: 1 / 2; color: var(--muted); font-size: 10px; }
@@ -3862,7 +3862,13 @@
     align-items: baseline;
     justify-content: space-between;
     gap: 8px;
-    padding: 10px 0 6px;
+    /* Block axis only. The 16px inline gutter comes from the
+       `.subway-controller .subway-nearby-heading` rule, so this heading lands
+       on the same line as .station-row and .subway-product-picks > a. A
+       `padding` shorthand here re-zeroes the sides at higher specificity —
+       that was the regression reported 2026-09-20. Do not delete that base
+       rule: this one now depends on it. */
+    padding-block: 10px 6px;
   }
   .subway-controller.route-ready .subway-nearby-heading p {
     margin: 0;
@@ -3888,7 +3894,7 @@
   .subway-active-station > span { font-size: 11px; }
   .subway-plan-route {
     display: flex; align-items: center; justify-content: center; gap: 8px;
-    min-height: 44px; margin: 12px 18px 4px;
+    min-height: 44px; margin: 12px 16px 4px;
     border: 1px solid var(--border); border-radius: var(--r-md);
     background: var(--surface); color: var(--accent);
     font-weight: 650; font-size: 13.5px;
@@ -3928,7 +3934,7 @@
     left: 0;
     right: 0;
     z-index: 900;
-    padding: max(12px, env(safe-area-inset-top)) 14px 0;
+    padding: max(12px, env(safe-area-inset-top)) 16px 0;
     display: grid;
     grid-template-columns: 1fr;
     gap: 8px;
@@ -4022,7 +4028,7 @@
   .leaflet-container { font-family: var(--sans); }
   .map-fab {
     position: absolute;
-    right: 14px;
+    right: 16px;
     bottom: calc(74px + env(safe-area-inset-bottom)); /* 62px peek + 12px */
     z-index: 900;
     width: 44px;
@@ -4066,7 +4072,7 @@
   }
   .map-rotation-reset {
     position: absolute;
-    right: 14px;
+    right: 16px;
     top: calc(max(12px, env(safe-area-inset-top)) + 104px);
     z-index: 700;
     width: 36px;
@@ -4086,8 +4092,8 @@
   }
   .map-banner {
     position: absolute;
-    left: 14px;
-    right: 14px;
+    left: 16px;
+    right: 16px;
     top: calc(max(12px, env(safe-area-inset-top)) + 96px);
     z-index: 900;
     display: flex;
@@ -4774,7 +4780,7 @@
   /* Zoom +/- buttons — desktop fallback for pinch, sits above the locate FAB. */
   .metro-zoombtn {
     position: absolute;
-    right: 14px;
+    right: 16px;
     bottom: calc(176px + env(safe-area-inset-bottom));
     z-index: 12;
     display: flex;
@@ -6052,7 +6058,7 @@
   }
   .product-cta-bar {
     gap: 8px;
-    padding: 10px 12px max(10px, env(safe-area-inset-bottom));
+    padding: 10px 16px max(10px, env(safe-area-inset-bottom));
   }
   .product-cta-bar .iconbtn {
     flex: none;
