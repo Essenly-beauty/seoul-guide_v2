@@ -37,6 +37,7 @@ import { useAuthUser } from "@/lib/auth/use-auth";
 import { useTheme } from "@/components/theme/theme-provider";
 import { useToast } from "@/components/ui/toast";
 import { Button } from "@/components/ui/button";
+import { withTileKey } from "@/lib/map-tiles";
 
 const MapView = dynamic(() => import("./map-view"), {
   ssr: false,
@@ -63,7 +64,17 @@ function preloadInitialTiles(theme: "dark" | "light", center: LatLng) {
       const tx = x + dx;
       const ty = y + dy;
       const s = "abc"[Math.abs(tx + ty) % 3];
-      preload(`https://${s}.basemaps.cartocdn.com/rastertiles/${TILE_STYLE[theme]}/${z}/${tx}/${ty}${r}.png`, { as: "image" });
+      // Must go through withTileKey: the preload is only useful while its URL
+      // is byte-identical to the one Leaflet later requests. When the API key
+      // was added to the tile layer alone, the browser downloaded these six
+      // tiles, never matched them, and fetched them again with the key.
+      preload(
+        withTileKey(
+          `https://${s}.basemaps.cartocdn.com/rastertiles/${TILE_STYLE[theme]}/${z}/${tx}/${ty}${r}.png`,
+          process.env.NEXT_PUBLIC_CARTO_API_KEY,
+        ),
+        { as: "image" },
+      );
     }
   }
 }

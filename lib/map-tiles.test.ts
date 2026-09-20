@@ -26,3 +26,36 @@ describe("withTileKey", () => {
     expect(withTileKey(template, "a b&c")).toBe(`${template}?key=a%20b%26c`);
   });
 });
+
+describe("tile URL callers stay in step", () => {
+  const { readFileSync } = require("node:fs") as typeof import("node:fs");
+  const { join } = require("node:path") as typeof import("node:path");
+  const read = (p: string) => readFileSync(join(process.cwd(), p), "utf8");
+
+  /** The first-screen tiles are preloaded by hand so they download in
+   *  parallel with the Leaflet chunk. That only works while the preloaded URL
+   *  is byte-identical to the one Leaflet later requests — the moment the key
+   *  was added to one and not the other, the browser fetched six tiles it
+   *  never used and then fetched them again. Every builder of a CARTO URL
+   *  must go through withTileKey. */
+  it("preloads the first tiles through the same key helper the tile layer uses", () => {
+    const screen = read("components/map/map-screen.tsx");
+    expect(screen).toMatch(/withTileKey\(/);
+    expect(screen).toMatch(/NEXT_PUBLIC_CARTO_API_KEY/);
+  });
+
+  it("has no CARTO tile URL built outside the helper", () => {
+    for (const path of ["components/map/map-screen.tsx", "components/map/map-view.tsx"]) {
+      const src = read(path).replace(/\/\*[\s\S]*?\*\//g, "").replace(/^\s*\/\/.*$/gm, "");
+      // Every tile-path URL in these files must sit inside a withTileKey call
+      // or be the TILE_URLS template that the tile layer passes to it.
+      for (const m of src.matchAll(/rastertiles/g)) {
+        const before = src.slice(Math.max(0, m.index! - 260), m.index!);
+        expect(
+          /withTileKey\(\s*$|withTileKey\([^)]*$|TILE_URLS\s*=\s*\{[\s\S]*$/.test(before),
+          `${path}: tile URL at offset ${m.index} is not built through withTileKey`,
+        ).toBe(true);
+      }
+    }
+  });
+});
