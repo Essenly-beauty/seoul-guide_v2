@@ -7,6 +7,7 @@ import { usePathname } from "next/navigation";
 import { Icon, type IconName } from "@/components/icon";
 import { IconButton } from "@/components/ui/icon-button";
 import { routes } from "@/lib/routes";
+import { useExitTransition } from "@/components/ui/use-exit-transition";
 
 type Row = { label: string; href: string; icon: IconName; danger?: boolean };
 
@@ -35,6 +36,16 @@ export function HamburgerMenu() {
   const [open, setOpen] = useState(false);
   const [host, setHost] = useState<Element | null>(null);
   const pathname = usePathname();
+  // Stay mounted while the drawer animates out (R6).
+  const { mounted, closing } = useExitTransition(open);
+
+  // This drawer never used the shared dialog hook, so Escape did nothing.
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") setOpen(false); };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [open]);
 
   // Anchor the overlay to .app-shell (full height), not the sticky topbar it lives in.
   useEffect(() => {
@@ -47,10 +58,13 @@ export function HamburgerMenu() {
     <>
       <IconButton name="menu" label="Menu" iconSize="md" onClick={() => setOpen(true)} />
 
-      {open && host && createPortal(
+      {mounted && host && createPortal(
         <>
-          <div className="drawer-scrim" onClick={() => setOpen(false)} />
-          <div className="drawer" role="dialog" aria-label="Menu">
+          <div
+            className={closing ? "drawer-scrim closing" : "drawer-scrim"}
+            onClick={() => setOpen(false)}
+          />
+          <div className={closing ? "drawer closing" : "drawer"} role="dialog" aria-label="Menu">
             <div className="dhead">
               <span className="label">Menu</span>
               <IconButton name="x" label="Close" onClick={() => setOpen(false)} />
