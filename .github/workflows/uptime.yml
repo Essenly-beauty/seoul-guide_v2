@@ -11,6 +11,9 @@ jobs:
     timeout-minutes: 3
     steps:
       - name: Probe production
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_ANON_KEY: ${{ secrets.SUPABASE_ANON_KEY }}
         run: |
           set -u
           fail=0
@@ -26,4 +29,24 @@ jobs:
           probe "https://seoul-guide-v2.vercel.app/"
           probe "https://seoul-guide-v2.vercel.app/map"
           probe "https://seoul-guide-v2.vercel.app/api/account/export" # function layer (401 = healthy)
+
+          # Supabase — the Free project auto-paused after 7 idle days on
+          # 2026-09-18 and sign-in was dead ~40h while this job stayed green
+          # (it only probed Vercel). Auth health + one REST call: any non-2xx
+          # (DNS NXDOMAIN → 000, paused → 5xx) is DOWN, and the REST hit
+          # counts as API activity, which is what prevents the idle pause.
+          probe_supabase() {
+            code=$(curl -s -o /dev/null -w '%{http_code}' --max-time 15 \
+              -H "apikey: $SUPABASE_ANON_KEY" -H "Authorization: Bearer $SUPABASE_ANON_KEY" "$1" || echo 000)
+            case "$code" in
+              2*) echo "OK   $code $1" ;;
+              *) echo "DOWN $code $1"; fail=1 ;;
+            esac
+          }
+          if [ -n "${SUPABASE_URL:-}" ] && [ -n "${SUPABASE_ANON_KEY:-}" ]; then
+            probe_supabase "$SUPABASE_URL/auth/v1/health"
+            probe_supabase "$SUPABASE_URL/rest/v1/client_errors?select=id&limit=1" # RLS: 200 + [] for anon
+          else
+            echo "DOWN --- Supabase secrets missing in this repository"; fail=1
+          fi
           exit $fail
