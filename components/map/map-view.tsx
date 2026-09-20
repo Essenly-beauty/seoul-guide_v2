@@ -1,5 +1,6 @@
 "use client";
 
+import { withTileKey } from "@/lib/map-tiles";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { preconnect } from "react-dom";
 import { Circle, MapContainer, Polyline, TileLayer, Marker, useMap, useMapEvents } from "react-leaflet";
@@ -663,7 +664,7 @@ export default function MapView({ center, places, selectedId, onSelect, onSelect
       zoomControl={false}
       attributionControl={true}
     >
-      <TileLayer key={theme} url={TILE_URLS[theme]} attribution={ATTRIB} eventHandlers={{ load: handleTilesLoaded }} />
+      <TileLayer key={theme} url={withTileKey(TILE_URLS[theme], process.env.NEXT_PUBLIC_CARTO_API_KEY)} attribution={ATTRIB} eventHandlers={{ load: handleTilesLoaded }} />
       {!tilesLoaded && (
         // eslint-disable-next-line @next/next/no-img-element
         <img className={`map-ph map-ph-${theme} map-ph-fade`} src={`/map-placeholder-${theme}.jpg`} alt="" />
