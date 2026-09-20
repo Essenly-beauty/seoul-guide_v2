@@ -33,6 +33,7 @@ import { PLACES, PRODUCTS, TYPE_LABEL, zoneShort, type Place } from "@/lib/data"
 import { selectDaisoRanking } from "@/lib/daiso-ranking";
 import { GANGNAM_STATION, formatCompactDistance, formatDistance, haversineKm } from "@/lib/geo";
 import { hoursOn, isBookable, statusLabel } from "@/lib/places";
+import { daisoBrandEn, daisoNameEn, daisoSubcategoryEn } from "@/lib/daiso-ranking-en";
 
 /** Anchor-tab targets (spec §4.6). Ids live on the sections below. */
 const SECTIONS = [
@@ -353,8 +354,8 @@ function DaisoPicks() {
             <b className="mono num" style={{ width: 22, flex: "none", color: rank === 1 ? "var(--accent)" : "var(--muted)" }}>{rank}</b>
             <ImgPh style={{ width: 44, height: 44, flex: "none" }} />
             <div style={{ flex: 1, minWidth: 0 }}>
-              <b lang="ko" style={{ display: "block", fontSize: 13.5, lineHeight: 1.3, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{p.nameKr}</b>
-              <div className="caption muted" style={{ overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{p.brand} · {p.subcategoryKr}</div>
+              <b style={{ display: "block", fontSize: 13.5, lineHeight: 1.3, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{daisoNameEn(p.productNo) || p.nameKr}</b>
+              <div className="caption muted" style={{ overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{daisoBrandEn(p.productNo) || p.brand} · {daisoSubcategoryEn(p.subcategoryKr)}</div>
             </div>
             <Icon name="chev" size="xs" className="chev" style={{ color: "var(--dim)" }} />
           </Link>

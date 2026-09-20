@@ -61,8 +61,11 @@ describe("retailer-specific ranking presentation", () => {
     expect(clientSource).not.toContain("categoriesForDaisoRank");
     expect(clientSource).toContain("{row.rank}");
     expect(clientSource).toContain("<ImgPh className=\"thumb56\" />");
-    expect(clientSource).toContain("{product.nameKr}");
-    expect(clientSource).toContain("{product.subcategoryKr}");
+    // English leads for the visitor, Korean stays underneath so it can be
+    // shown in store (2026-09-20); the subcategory is translated too.
+    expect(clientSource).toContain("daisoNameEn(product.productNo) || product.nameKr");
+    expect(clientSource).toContain('className="t-caption" lang="ko">{product.nameKr}');
+    expect(clientSource).toContain("daisoSubcategoryEn(product.subcategoryKr)");
     expect(clientSource).not.toContain("WON.format(product.priceWon)");
     expect(clientSource).not.toContain("product.rating !== null");
     expect(clientSource).not.toContain("product.reviewCountText");
