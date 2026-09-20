@@ -90,6 +90,10 @@ describe("place page wiring", () => {
     const src = readFileSync(join(process.cwd(), "app/place/[id]/page.tsx"), "utf8");
     expect(src).toMatch(/export async function generateMetadata/);
     expect(src).toMatch(/placeMetadata\(/);
+    // generateMetadata runs before the shell streams (app/loading.tsx wraps
+    // the page in Suspense), so only a notFound() HERE yields a real 404 —
+    // the page-level notFound() after flush is a soft 404 with status 200.
+    expect(src).toMatch(/if \(!place\) notFound\(\);[\s\S]*return placeMetadata/);
     expect(src).toMatch(/application\/ld\+json/);
     expect(src).toMatch(/placeJsonLd\(/);
   });

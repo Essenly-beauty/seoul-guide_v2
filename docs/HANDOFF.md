@@ -90,6 +90,8 @@ vercel env pull --yes  # .env.local 재생성
   - 에러 리포터 마스킹 `lib/redact.ts`(토큰 쿼리/프래그먼트·JWT·이메일) + **버그 수정**: `client_errors.kind` 제약에 `'csp'`가 없어 CSP 위반 리포트가 전부 DB에서 거부되던 것(`0009`) — 계약 테스트로 고정
   - 개인정보처리방침 갱신: 수탁자(Supabase **AWS us-east-1**·Vercel·Google)·국외이전·보관기간(진단 데이터 12개월)·권리 행사·PIPC/EU DPA 진정 — 여전히 "법무 검토 전 초안" 표시
 - **보류(사용자 결정 필요)**: ① 장소 데이터 ~1MB 번들 분리(리서치 D1 설계는 문서에 있음 — 검색·즐겨찾기·지하철이 동기 배열에 의존해 대규모 리팩터) ② 오렌지 본문 텍스트 대비 3.76:1(8/15 사용자 결정으로 복원한 색 — 토큰 분리 제안만)
+- **검증(9/20, `next build` + `next start -p 3001`)**: 한글 id 상세 title/description/canonical(percent-encoded)/JSON-LD 정상, 장소 OG PNG 1200×630(한글명 렌더 확인), `/api/vitals` 204/400/403/405, 폰트 `/_next/static/media` 셀프호스팅·HTML에 googleapis 0건·CSP 축소 확인, E2E `daiso-map` 4/4 통과(스펙의 낡은 251 기대값 → 게재 다이소 수로 수정). `launch`·`account`·`error-tracking` 스펙은 Supabase 접근 불가로 실행 불가
+- **확인된 한계**: ① 없는 장소 id는 `generateMetadata`에서 `notFound()`를 던져도 **HTTP 200**(루트 `app/loading.tsx` Suspense 셸이 먼저 flush — Twitterbot UA도 동일). 본문에 `<meta name="robots" content="noindex">`가 자동 삽입되어 색인은 안 되지만 진짜 404는 아님 → 진짜 404가 필요하면 loading.tsx 범위 재설계 필요 ② 한글 id의 `og:image` URL이 Next 파일 규약에서 이중 인코딩(`%25ED…`)됨 — 해당 URL로 요청해도 PNG 정상 반환(기능상 문제 없음, 미관상만)
 - ⚠️ **마이그레이션 0009·0010은 프로덕션 DB에 아직 미적용** — 9/20 적용 시도 시 Supabase 프로젝트가 응답하지 않음(아래 §3-0)
 
 ### L. 지도 성능 + 게스트 로그인 퍼널 (8/15)

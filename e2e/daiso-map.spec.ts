@@ -100,10 +100,13 @@ test("all Daiso stores stay responsive through map pan and All-Daiso-All filteri
   await daisoFilter.click();
   await expect(daisoFilter).toHaveAttribute("aria-pressed", "true");
   await expect(allFilter).toHaveAttribute("aria-pressed", "false");
-  await expect(handle).toHaveAttribute("aria-label", new RegExp(`\\b${DAISO_PLACES.length} places\\b`));
+  // Published Daiso rows = the 251 standalone stores + the shop-in-shop
+  // counters (build:daiso-supplement), so count what the catalogue publishes.
+  const publishedDaiso = PLACES.filter((place) => place.type === "daiso").length;
+  await expect(handle).toHaveAttribute("aria-label", new RegExp(`\\b${publishedDaiso} places\\b`));
 
   const rows = sheet.locator(".mapsheet-body > .maprow");
-  await expect(rows).toHaveCount(DAISO_PLACES.length);
+  await expect(rows).toHaveCount(publishedDaiso);
   await expect(rows.first().locator(".label")).toContainText("Daiso");
   await expect(rows.last().locator(".label")).toContainText("Daiso");
 
