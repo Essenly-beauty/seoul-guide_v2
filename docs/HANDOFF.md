@@ -1,4 +1,4 @@
-# MYSEOULDROP — 작업 핸드오프 (2026-09-20 기준)
+# MYSEOULDROP — 작업 핸드오프 (2026-09-20 기준, PR #2 배포 완료)
 
 > 다음 세션에서 이 문서 하나로 바로 이어서 작업할 수 있게 정리한 문서.
 > 프로젝트 전반 문서는 `docs/README.md`, 인증 설정은 `docs/auth-setup.md` 참고.
@@ -78,6 +78,16 @@ vercel env pull --yes  # .env.local 재생성
 - 감사 지적 중 **사실과 다른 것**: Supabase 캐시 헤더 유실 주장(코드는 공식 @supabase/ssr 패턴 그대로, 유실할 헤더 없음)
 - **미반영(결정 필요)**: Next.js 15 업그레이드(major, 별도 배치), 장소 30~50곳 사람 검수 축소, 법무 검토, 계정 삭제/내보내기, CI/관측성, 실사진
 
+### N. UX·인터랙션 / 텍스트 오버플로 / 여백 / 다이소 영문화 (9/20, **PR #2로 main 배포 완료**)
+- 배포: PR #2 머지(`4d09379`) → Vercel 프로덕션. CI green, `Production public smoke`(계정 잡 포함) **9/9 통과**, 프로덕션 실측 검증 완료
+- **UX 인터랙션**(`docs/research/ux-interaction-review-2026-09.md` R1~R8, 작업기록 `ux-implementation-2026-09.md`): 눌림 상태(6,400줄에 `:active` 2개뿐이었음) · 역 스테퍼가 목록 ~80px 영구 가림(WCAG 2.4.11) · 키보드 올라오면 결과 6개 중 1개만 보임 → `--kb` 훅으로 패널 축소 · 44px 미만 5계열 + 계약 테스트 무력화 2중 결함(뮤테이션 테스트로 확인) · 퇴장 애니메이션(타이머 기반, `animationend`는 reduced-motion에서 영영 안 옴) · 드래그 슬롭 4→8px + 릴리즈 시점 판정
+- **긴 이름 오버플로**(`long-title-policy-2026-09.md`): 닫기 버튼이 x=413.8로 **화면 밖에서 잘려 도달 불가**였음. 원인은 `nowrap`의 min-content + row flex item `min-width:auto`. **덤으로 2줄 클램프가 원래부터 무효**였음을 발견(h2가 flex item이라 `-webkit-box`가 blockify). 전 라우트 390/360/320 스윕 → 하드 컷은 설정 행 제목 1건뿐이었고 수정
+- **여백 정렬**(`gutter-alignment-2026-09.md`): 표준 16px. 신고된 "Products to look for"는 `padding` 단축이 좌우를 0으로 덮은 회귀(1df220d). 맵 크롬 5개 14→16 동시 이동(단독 이동 시 같은 결함 재생산)
+- **다이소 랭킹 영문화**: 38개 전부 다이소몰 대조 + 적대적 재검증. 브랜드 오류 12건 교정("두꺼운"/"삼각"/"엠보싱"은 브랜드가 아니었음). `scripts/lib/daiso-ranking-en-overrides.json`(검증 시점 nameKr 동봉 → 재빌드 드리프트 시 테스트 실패)
+- **자체 회귀 수정**: `/api/vitals`가 Next.js 자체 타이밍까지 받아 매 로드 400 반환하던 것
+- 테스트 749 → 842
+- **미착수(사유 기록)**: 뒤로가기 오버레이 해제(네비 회귀 위험 최고, 실기기 필요) · 지하철 그립 제스처(2026-08-22 스펙상 post-beta) · `.pad` 18→16 전면 통일(31화면 + 음수 블리드 5곳, bee7057이 같은 산술로 프로덕션 가로 스크롤바를 냄)
+
 ### M. 웹앱 베스트프랙티스 리서치 → P0 조치 배치 (9/20, 브랜치 `feat/p0-best-practices`, 미머지)
 - **리서치**: `docs/research/web-app-best-practices-2026-09.md`(요약·우선순위) + `docs/research/raw/01~06`(원문 6편). W3C/WCAG 2.2·web.dev·MDN·Next.js/Vercel·Apple HIG/WebKit·Material 3·NN/g·Baymard·OWASP Top 10:2025·NIST 800-63B-4·Supabase·HTTP Archive 2025·HN 체크리스트를 코드와 대조해 P0 10건 확정
 - **구현(커밋 7개, 테스트 749→780)**:
@@ -151,9 +161,9 @@ vercel env pull --yes  # .env.local 재생성
 > 상세 절차: `docs/auth-setup.md`
 
 0. ~~[긴급] Supabase 프로젝트 접근 불가~~ — ✅ **9/20 16:10 해결**. 원인: Free 플랜 **자동 일시중지**(대시보드 "Project is paused", 재개 기한 2027-10-06). 9/18 15:09Z 스모크 실패 메일이 첫 신호였고, 예약 스모크는 계정 잡을 skip해서 ~40시간 미감지. 오너가 백업 다운로드 후 Resume → DNS·Auth health·REST·풀러 접속·데이터(auth.users 5, favorites 10, ratings 3, client_errors 37) 전부 정상 확인 → 마이그레이션 **0009·0010 적용 완료**(검증: csp kind 허용, web_vitals RLS+insert 정책) → `Production public smoke`(계정 잡 포함) **9/9 통과**(run 35496788579). 재발 방지로 uptime cron에 Supabase Auth health + REST 핑 추가(커밋 ef8c9ea, 30분마다 API 활동 발생 → 유휴 정지 방지). 스모크 스펙 2개가 미게재 샘플 장소를 쓰던 것도 수정(15f3b1c)
-0-1. **Supabase Auth 비밀번호 최소 길이 8로 상향** (Dashboard → Authentication → Password) — 클라이언트는 8 강제, 서버 정책도 맞춰야 일관
-0-2. **CARTO API 키 발급** → Vercel env `NEXT_PUBLIC_CARTO_API_KEY`(Production+Preview) — 없으면 현행 무키 타일 유지(약관상 워터마크 가능)
-0-3. **`feat/p0-best-practices` 브랜치 리뷰·머지** (main 직푸시 대신 PR)
+0-1. **[미완] Supabase Auth 비밀번호 최소 길이 8로 상향** (Dashboard → Authentication → Password) — 클라이언트는 8 강제, 서버 정책도 맞춰야 일관
+0-2. **[미완·눈에 보임] CARTO API 키 발급** — 지도 타일에 "API KEY" 워터마크가 실제로 찍히고 있음(9/20 오너 스크린샷 확인). https://carto.com/basemaps/apikey 에서 무료 발급(계정 불필요, 월 500만 타일) → Vercel env `NEXT_PUBLIC_CARTO_API_KEY`(Production+Preview). 코드는 이미 반영됨 → Vercel env `NEXT_PUBLIC_CARTO_API_KEY`(Production+Preview) — 없으면 현행 무키 타일 유지(약관상 워터마크 가능)
+0-3. ~~`feat/p0-best-practices` 브랜치 리뷰·머지~~ — ✅ 9/20 PR #2로 머지·배포 완료
 
 1. ~~[필수] Supabase Site URL~~ — ✅ 8/11 완료 (Site URL + Redirect 3개 등록 확인)
 2. **[보류] 이메일 템플릿 token_hash 교체** — Supabase가 내장 메일러 사용 중엔 템플릿 편집을 잠금 → **커스텀 SMTP 선행 필요**, SMTP는 발신 도메인 필요. 순서: 도메인 구매(P2) → Resend 등 도메인 인증 → SMTP 연결 → 템플릿 교체 (auth-setup.md §1.5)
