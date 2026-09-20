@@ -161,13 +161,14 @@ vercel env pull --yes  # .env.local 재생성
 > 상세 절차: `docs/auth-setup.md`
 
 0. ~~[긴급] Supabase 프로젝트 접근 불가~~ — ✅ **9/20 16:10 해결**. 원인: Free 플랜 **자동 일시중지**(대시보드 "Project is paused", 재개 기한 2027-10-06). 9/18 15:09Z 스모크 실패 메일이 첫 신호였고, 예약 스모크는 계정 잡을 skip해서 ~40시간 미감지. 오너가 백업 다운로드 후 Resume → DNS·Auth health·REST·풀러 접속·데이터(auth.users 5, favorites 10, ratings 3, client_errors 37) 전부 정상 확인 → 마이그레이션 **0009·0010 적용 완료**(검증: csp kind 허용, web_vitals RLS+insert 정책) → `Production public smoke`(계정 잡 포함) **9/9 통과**(run 35496788579). 재발 방지로 uptime cron에 Supabase Auth health + REST 핑 추가(커밋 ef8c9ea, 30분마다 API 활동 발생 → 유휴 정지 방지). 스모크 스펙 2개가 미게재 샘플 장소를 쓰던 것도 수정(15f3b1c)
-0-1. **[미완] Supabase Auth 비밀번호 최소 길이 8로 상향** (Dashboard → Authentication → Password) — 클라이언트는 8 강제, 서버 정책도 맞춰야 일관
+0-1. **[미완·급하지 않음] Supabase Auth 비밀번호 최소 길이 8로 상향** (Dashboard → Authentication → Policies / Providers → Email) — **9/20 실측: 서버는 아직 6자를 받아들임**(`/auth/v1/signup`에 6자로 가입 성공, 테스트 계정은 즉시 삭제해 사용자 수 5명 복구). 클라이언트는 `lib/auth-policy.ts`로 8자·72바이트를 이미 강제하므로 **정상 경로 사용자는 6자를 만들 수 없고**, 남은 구멍은 폼을 우회해 API를 직접 호출하는 경우뿐이다(피해 대상은 본인 계정). 기존 5개 계정은 영향 없음 — 최소 길이 상향은 소급 적용되지 않고 다음 변경부터 걸린다. 마이그레이션·공지 불필요. **문자 조합 요건은 켜지 말 것**(NIST SP 800-63B-4: 길이 우선, 조합 규칙 금지)
+0-1-b. **[미완] Supabase에서 Kakao 프로바이더 끄기** (Dashboard → Authentication → Providers → Kakao → Disable) — 9/20 `/auth/v1/settings`에서 `kakao: true` 확인. 그런데 8/11 결정(§4 P1)으로 **카카오는 범위에서 제외**됐고 앱의 카카오 버튼도 제거된 상태다. 즉 UI에 진입로가 없는 인증 경로가 서버에 열려 있다. 당장 악용 경로는 아니지만(콜백 URL과 클라이언트 자격증명이 필요) 쓰지 않는 인증 표면은 닫는 편이 맞다. 되살릴 생각이 있으면 §3-3의 Kakao Developers 등록 항목과 함께 결정할 것
 0-2. ~~CARTO API 키~~ — ✅ 9/20 완료. 오너가 발급 후 Vercel env `NEXT_PUBLIC_CARTO_API_KEY`(Production+Preview, Development 제외)에 저장. Referer 제한 4개(`myseouldrop.app`, `www.myseouldrop.app`, `seoul-guide-v2.vercel.app`, `*.vercel.app`) — localhost는 폼이 거부해 제외했고, Development에 키를 두지 않으므로 로컬은 무키로 동작(워터마크만, 정상)
 0-3. ~~`feat/p0-best-practices` 브랜치 리뷰·머지~~ — ✅ 9/20 PR #2로 머지·배포 완료
 
 1. ~~[필수] Supabase Site URL~~ — ✅ 8/11 완료 (Site URL + Redirect 3개 등록 확인)
 2. **[보류] 이메일 템플릿 token_hash 교체** — Supabase가 내장 메일러 사용 중엔 템플릿 편집을 잠금 → **커스텀 SMTP 선행 필요**, SMTP는 발신 도메인 필요. 순서: 도메인 구매(P2) → Resend 등 도메인 인증 → SMTP 연결 → 템플릿 교체 (auth-setup.md §1.5)
-3. **소셜 로그인 콘솔 등록** — Google Cloud Console, Kakao Developers (각 ~10분, 무료). Apple은 연 $129라 보류 중 (버튼은 "준비 중" 안내)
+3. **소셜 로그인 콘솔 등록** — Google Cloud Console. Apple은 연 $129라 보류 중 (버튼은 "준비 중" 안내). **Kakao는 8/11에 범위에서 제외됨**(§4 P1) — 이 항목의 Kakao 부분은 그 결정 이전에 쓰인 것이므로 유효하지 않다. 서버 프로바이더는 아직 켜져 있으니 0-1-b 참조
    - 두 콘솔 모두에 등록할 **콜백 URL**: `https://njsocpyuesntblifpips.supabase.co/auth/v1/callback`
    - 발급받은 Client ID/Secret은 Supabase Dashboard → Authentication → Providers → Google/Kakao에 붙여넣고 Enable
 
