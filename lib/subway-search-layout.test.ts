@@ -272,7 +272,11 @@ describe("subway panel layout defects (owner reports 2026-08-22)", () => {
   });
 
   it("gives the station picker real height instead of a 230px box", () => {
-    expect(css).toContain("max-height: clamp(240px, calc(78dvh - 225px), 520px)");
+    // Still the panel-aware clamp the 2026-08-22 owner report asked for; it is
+    // now also capped by the live viewport so the 240px floor cannot outgrow
+    // the space left when the software keyboard is up (R3).
+    expect(css).toContain("clamp(240px, calc(78dvh - 225px), 520px)");
+    expect(css).toMatch(/\.station-search-results[^{]*\{[^}]*max-height:\s*min\(clamp\(240px[^}]*var\(--kb/);
   });
 
   it("does not put route editing inside the shop list", () => {

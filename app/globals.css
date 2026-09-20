@@ -313,7 +313,13 @@
     position: absolute;
     left: 0;
     right: 0;
-    bottom: 0;
+    /* The software keyboard shrinks the visual viewport, not the layout one,
+       so this panel must give up height or its lower half hides behind the
+       keyboard. It SHRINKS rather than moving up: .map-screen is
+       overflow:hidden, so pushing it would clip the input fields off the top.
+       --kb is published by components/ui/use-keyboard-inset.ts. */
+    bottom: var(--kb, 0px);
+    max-height: calc(100% - var(--kb, 0px));
     z-index: 950;
     display: flex;
     flex-direction: column;
@@ -580,11 +586,13 @@
     /* the picker is the whole task while it is open — let it use the space
        the panel already reserved instead of stopping at 230px with an empty
        half-screen underneath (owner report 2026-08-22) */
-    max-height: clamp(240px, calc(78dvh - 225px), 520px);
+    /* the clamp's 240px floor cannot drop below the space that is actually
+       left once the keyboard is up, so cap it by the live viewport too */
+    max-height: min(clamp(240px, calc(78dvh - 225px), 520px), calc(100dvh - var(--kb, 0px) - 200px));
     margin-top: 0;
   }
   .subway-search-fields:has(.station-search-results) {
-    margin-bottom: clamp(246px, calc(78dvh - 219px), 526px);
+    margin-bottom: clamp(0px, calc(78dvh - 219px - var(--kb, 0px)), 526px);
   }
   .subway-controller.search-ready:has(.station-search-results) {
     height: min(88%, 720px);
@@ -3090,8 +3098,8 @@
     position: absolute;
     left: 0;
     right: 0;
-    bottom: 0;
-    max-height: 92%;
+    bottom: var(--kb, 0px);
+    max-height: calc(92% - var(--kb, 0px));
     background: var(--surface);
     border-radius: 24px 24px 0 0;
     display: flex;

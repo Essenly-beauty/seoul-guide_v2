@@ -28,6 +28,7 @@ import {
   type SubwayStation,
 } from "@/lib/subway";
 import { RouteStrip } from "./route-strip";
+import { useKeyboardInset } from "@/components/ui/use-keyboard-inset";
 
 /** Route-panel snap tiers — content is curated per tier, not just clipped. */
 export type SubwaySnap = "compact" | "half" | "full";
@@ -400,6 +401,9 @@ export function SubwayRouteController({
   onRetryLocation: () => void;
   onClose: () => void;
 }) {
+  // Publishes the keyboard height as --kb so this panel can shrink around
+  // the on-screen keyboard instead of hiding its results behind it (R3).
+  useKeyboardInset();
   const [editing, setEditing] = useState(!route);
   const [snap, setSnap] = useState<SubwaySnap>("half");
   // Station-first (phase 1): arriving with a station and no route means the
