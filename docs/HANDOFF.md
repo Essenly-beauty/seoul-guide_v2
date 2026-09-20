@@ -92,7 +92,7 @@ vercel env pull --yes  # .env.local 재생성
 - **보류(사용자 결정 필요)**: ① 장소 데이터 ~1MB 번들 분리(리서치 D1 설계는 문서에 있음 — 검색·즐겨찾기·지하철이 동기 배열에 의존해 대규모 리팩터) ② 오렌지 본문 텍스트 대비 3.76:1(8/15 사용자 결정으로 복원한 색 — 토큰 분리 제안만)
 - **검증(9/20, `next build` + `next start -p 3001`)**: 한글 id 상세 title/description/canonical(percent-encoded)/JSON-LD 정상, 장소 OG PNG 1200×630(한글명 렌더 확인), `/api/vitals` 204/400/403/405, 폰트 `/_next/static/media` 셀프호스팅·HTML에 googleapis 0건·CSP 축소 확인, E2E `daiso-map` 4/4 통과(스펙의 낡은 251 기대값 → 게재 다이소 수로 수정). `launch`·`account`·`error-tracking` 스펙은 Supabase 접근 불가로 실행 불가
 - **확인된 한계**: ① 없는 장소 id는 `generateMetadata`에서 `notFound()`를 던져도 **HTTP 200**(루트 `app/loading.tsx` Suspense 셸이 먼저 flush — Twitterbot UA도 동일). 본문에 `<meta name="robots" content="noindex">`가 자동 삽입되어 색인은 안 되지만 진짜 404는 아님 → 진짜 404가 필요하면 loading.tsx 범위 재설계 필요 ② 한글 id의 `og:image` URL이 Next 파일 규약에서 이중 인코딩(`%25ED…`)됨 — 해당 URL로 요청해도 PNG 정상 반환(기능상 문제 없음, 미관상만)
-- ⚠️ **마이그레이션 0009·0010은 프로덕션 DB에 아직 미적용** — 9/20 적용 시도 시 Supabase 프로젝트가 응답하지 않음(아래 §3-0)
+- ✅ 마이그레이션 0009·0010 프로덕션 적용 완료(9/20 16:1x, Supabase 재개 직후 — §3-0)
 
 ### L. 지도 성능 + 게스트 로그인 퍼널 (8/15)
 - **지도 성능: Lighthouse 모바일 40 → 81, LCP 12.0s → 2.5s, TBT 980 → 380ms** (시각 변화 0):
@@ -150,7 +150,7 @@ vercel env pull --yes  # .env.local 재생성
 
 > 상세 절차: `docs/auth-setup.md`
 
-0. **[긴급 확인 — 9/20] Supabase 프로젝트 접근 불가 의심**: `njsocpyuesntblifpips.supabase.co`가 DNS에서 해석되지 않고(1.1.1.1·8.8.8.8 동일), 풀러는 `tenant/user postgres.<ref> not found` — **무료 티어 자동 일시중지(pause)** 패턴. Uptime cron은 Vercel 라우트만 probe해서 감지 못함. 대시보드에서 프로젝트 상태 확인 → Restore → 이어서 `supabase/migrations/0009_client_errors_csp_kind.sql`, `0010_web_vitals.sql` 적용(§5 마이그레이션 절차). 백로그에 "Supabase health probe를 uptime에 추가" 등록됨
+0. ~~[긴급] Supabase 프로젝트 접근 불가~~ — ✅ **9/20 16:10 해결**. 원인: Free 플랜 **자동 일시중지**(대시보드 "Project is paused", 재개 기한 2027-10-06). 9/18 15:09Z 스모크 실패 메일이 첫 신호였고, 예약 스모크는 계정 잡을 skip해서 ~40시간 미감지. 오너가 백업 다운로드 후 Resume → DNS·Auth health·REST·풀러 접속·데이터(auth.users 5, favorites 10, ratings 3, client_errors 37) 전부 정상 확인 → 마이그레이션 **0009·0010 적용 완료**(검증: csp kind 허용, web_vitals RLS+insert 정책) → `Production public smoke`(계정 잡 포함) **9/9 통과**(run 35496788579). 재발 방지로 uptime cron에 Supabase Auth health + REST 핑 추가(커밋 ef8c9ea, 30분마다 API 활동 발생 → 유휴 정지 방지). 스모크 스펙 2개가 미게재 샘플 장소를 쓰던 것도 수정(15f3b1c)
 0-1. **Supabase Auth 비밀번호 최소 길이 8로 상향** (Dashboard → Authentication → Password) — 클라이언트는 8 강제, 서버 정책도 맞춰야 일관
 0-2. **CARTO API 키 발급** → Vercel env `NEXT_PUBLIC_CARTO_API_KEY`(Production+Preview) — 없으면 현행 무키 타일 유지(약관상 워터마크 가능)
 0-3. **`feat/p0-best-practices` 브랜치 리뷰·머지** (main 직푸시 대신 PR)
@@ -167,7 +167,7 @@ vercel env pull --yes  # .env.local 재생성
 
 ### P1 — 리서치 후속 (9/20, `docs/research/web-app-best-practices-2026-09.md` §5)
 - [ ] 장소 데이터 번들 분리 — `public/data/places-index.<hash>.json` + `headers()` immutable, 클라이언트는 hydration 후 fetch (리서치 D1). 보류 사유: 검색·즐겨찾기·지하철 근처 목록이 동기 `PLACES` 배열 의존
-- [ ] Uptime 워크플로에 Supabase health probe(`/auth/v1/health`, `/rest/v1/` 200/401) 추가 — 9/20 pause 의심 사례가 미감지
+- [x] ~~Uptime 워크플로에 Supabase health probe 추가~~ (9/20 완료 — Auth health + REST 핑, 비-2xx = DOWN)
 - [ ] 진단 데이터 12개월 정리 잡(정책에 명시함): `delete from client_errors|web_vitals where created_at < now() - interval '12 months'` — GitHub Actions cron 또는 pg_cron
 - [ ] 접근성 axe 4스펙(홈 시트 닫힘/열림·상세·로그인·지하철) + 결과 수 `role=status` + 리스트 시트 비모달(`aria-modal` 제거) 정리
 - [ ] SW: 업데이트 토스트(무조건 `skipWaiting` 제거) + navigation preload + 빌드 ID 캐시 정리

@@ -37,9 +37,9 @@
 | 4 | ⏸ 보류 | 대규모 리팩터 — HANDOFF P1 백로그 |
 | 5 | ✅ 반영 | `lib/auth-policy.ts` 8자+/72바이트 — Supabase 대시보드 최소 길이 동기화는 오너 액션 |
 | 6 | ✅ 코드 반영 | `NEXT_PUBLIC_CARTO_API_KEY` 주입 — 키 발급은 오너 액션 |
-| 7 | ✅ 반영 | `/api/vitals` + `web_vitals`(0010) — **프로덕션 DB 적용 대기**(Supabase 접근 불가 상태) |
+| 7 | ✅ 반영 | `/api/vitals` + `web_vitals`(0010) — 프로덕션 DB 적용 완료(9/20) |
 | 8 | ✅ 초안 반영 | 개인정보처리방침 갱신 — 법무 검토 전 |
-| 9 | ✅ 반영 | `lib/redact.ts` + `client_errors` csp kind 버그 수정(0009, 적용 대기) |
+| 9 | ✅ 반영 | `lib/redact.ts` + `client_errors` csp kind 버그 수정(0009, 프로덕션 적용 완료) |
 | 10 | ⏸ 보류 | 8/15 사용자 디자인 결정 — 토큰 분리 제안만 |
 
 ---
