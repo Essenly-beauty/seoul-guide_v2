@@ -4122,6 +4122,10 @@
      compact states. Full height reuses the direct detail composition below. */
   .selected-place-summary {
     position: relative;
+    /* A flex item defaults to min-width:auto, which resolves to min-content —
+       so an unbreakable name became this card's floor and pushed the close
+       button off screen, where overflow-x:hidden clipped it (2026-09-20). */
+    min-width: 0;
     color: var(--text);
   }
   .selected-place-summary.half {
@@ -4155,7 +4159,8 @@
     font-weight: 750;
     letter-spacing: -.02em;
     line-height: 1.2;
-    text-overflow: ellipsis;
+    /* no text-overflow here: it does nothing on a -webkit-box, and the clamp
+       on .place-name-primary below is what actually truncates */
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 2;
   }
@@ -4177,12 +4182,30 @@
     gap: 3px;
   }
   .place-detail-name-stack { flex: 1; }
+  /* The grid track is only as narrow as its widest item allows, so the h1
+     needs its own zero floor — without it the detail title ran 114px past the
+     viewport and overprinted the category badge. */
+  .place-detail-name-stack > h1 { min-width: 0; }
   .place-name-primary {
     display: block;
     min-width: 0;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+  }
+  /* Scoped deliberately: on the compact/peek card a wrapped two-line clamp
+     collapses the row to "Daiso …", so only the half card and the detail page
+     wrap. `anywhere` rather than `break-word` — only `anywhere` lowers the
+     min-content width, which is what stops the box inflating in the first
+     place. Korean keeps `word-break: keep-all` from the base layer. */
+  .selected-place-summary.half .place-name-primary,
+  .place-detail-name-stack .place-name-primary {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    white-space: normal;
+    overflow-wrap: anywhere;
+    overflow: hidden;
   }
   .place-name-secondary {
     display: block;
@@ -4536,6 +4559,9 @@
   }
   .mapsheet.half.has-selection .mapsheet-view-enter {
     display: flex;
+    /* Without a direction this was a ROW, which made the card a horizontal
+       flex item and let its min-content width set the floor. */
+    flex-direction: column;
     flex: 1;
     min-height: 0;
   }
@@ -5274,6 +5300,10 @@
   .settings-row-title {
     min-width: 0;
     flex: 1;
+    /* At 320px this box is narrower than the word "preferences", which then
+       painted outside it over the value and the chevron. Break as a last
+       resort rather than overflow. */
+    overflow-wrap: anywhere;
     font-size: 14px;
     font-weight: 600;
   }
