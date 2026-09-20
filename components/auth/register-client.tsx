@@ -6,6 +6,7 @@ import { useEffect, useRef, useState } from "react";
 import { AuthShell } from "@/components/auth/auth-shell";
 import { EyeGlyph } from "@/components/brand/auth-glyphs";
 import { supabaseBrowser } from "@/lib/supabase/client";
+import { PASSWORD_MIN_LENGTH, passwordProblem } from "@/lib/auth-policy";
 import { updateProfile } from "@/lib/profile";
 import { routes } from "@/lib/routes";
 
@@ -58,6 +59,11 @@ export function RegisterClient({ next }: { next?: string }) {
       setError("Passwords don't match — check both fields.");
       return;
     }
+    const problem = passwordProblem(form.password);
+    if (problem) {
+      setError(problem);
+      return;
+    }
     setBusy(true);
     setError(null);
     // country pre-fills the beauty profile (guest-local now, merged into the
@@ -79,8 +85,8 @@ export function RegisterClient({ next }: { next?: string }) {
     if (err) {
       setBusy(false);
       setError(
-        err.message.includes("at least 6 characters")
-          ? "Password needs at least 6 characters."
+        /at least \d+ characters/.test(err.message)
+          ? passwordProblem("") ?? err.message
           : err.message,
       );
       return;
@@ -193,7 +199,7 @@ export function RegisterClient({ next }: { next?: string }) {
               aria-invalid={!!error}
               aria-describedby={error ? "register-error" : undefined}
               required
-              minLength={6}
+              minLength={PASSWORD_MIN_LENGTH}
               value={form.password}
               onChange={set("password")}
               style={{ paddingRight: 58 }}
@@ -216,7 +222,7 @@ export function RegisterClient({ next }: { next?: string }) {
             aria-label="Confirm password"
             aria-invalid={!!error && error.includes("match")}
             required
-            minLength={6}
+            minLength={PASSWORD_MIN_LENGTH}
             value={form.confirm}
             onChange={set("confirm")}
           />

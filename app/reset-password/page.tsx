@@ -8,6 +8,7 @@ import { useState } from "react";
 import { AuthShell } from "@/components/auth/auth-shell";
 import { EyeGlyph } from "@/components/brand/auth-glyphs";
 import { supabaseBrowser } from "@/lib/supabase/client";
+import { PASSWORD_MIN_LENGTH, passwordProblem } from "@/lib/auth-policy";
 import { routes } from "@/lib/routes";
 
 export default function ResetPasswordPage() {
@@ -23,6 +24,11 @@ export default function ResetPasswordPage() {
     if (busy) return;
     if (pw !== confirmPw) {
       setError("Passwords don't match — check both fields.");
+      return;
+    }
+    const problem = passwordProblem(pw);
+    if (problem) {
+      setError(problem);
       return;
     }
     setBusy(true);
@@ -64,7 +70,7 @@ export default function ResetPasswordPage() {
               aria-invalid={!!error}
               aria-describedby={error ? "reset-error" : undefined}
               required
-              minLength={6}
+              minLength={PASSWORD_MIN_LENGTH}
               value={pw}
               onChange={(e) => setPw(e.target.value)}
               style={{ paddingRight: 58 }}
@@ -88,7 +94,7 @@ export default function ResetPasswordPage() {
             aria-invalid={Boolean(error && error.includes("match"))}
             aria-describedby={error ? "reset-error" : undefined}
             required
-            minLength={6}
+            minLength={PASSWORD_MIN_LENGTH}
             value={confirmPw}
             onChange={(e) => setConfirmPw(e.target.value)}
           />
