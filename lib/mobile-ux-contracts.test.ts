@@ -5,6 +5,18 @@ function source(path: string) {
   return readFileSync(new URL(path, import.meta.url), "utf8");
 }
 
+/** The body of the rule whose selector is exactly `selector` — anchored at a
+ *  line start so `.chip` cannot match `.filtersheet .chip`, and stopped at the
+ *  closing brace so it cannot bleed into the next rule. The previous
+ *  `[\s\S]*?` form did both and passed against non-compliant CSS
+ *  (mutation-tested 2026-09-20). */
+function ruleBody(css: string, selector: string): string {
+  const escaped = selector.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  const match = new RegExp(`(?:^|\\n)\\s*${escaped}\\s*\\{([^}]*)\\}`).exec(css);
+  if (!match) throw new Error(`no rule for selector ${selector}`);
+  return match[1];
+}
+
 const layoutSource = source("../app/layout.tsx");
 const cssSource = source("../app/globals.css");
 const searchSource = source("../app/search/page.tsx");
@@ -27,10 +39,10 @@ describe("mobile interaction contracts", () => {
   });
 
   it("keeps shared touch targets large enough to use reliably", () => {
-    expect(cssSource).toMatch(/\.iconbtn\s*\{[\s\S]*?width:\s*44px;[\s\S]*?height:\s*44px;/);
-    expect(cssSource).toMatch(/\.chip\s*\{[\s\S]*?min-height:\s*44px;/);
-    expect(cssSource).toMatch(/\.input\s*\{[\s\S]*?min-height:\s*48px;[\s\S]*?font-size:\s*16px;/);
-    expect(cssSource).toMatch(/\.bottomnav\s+\.nav\s*\{[\s\S]*?min-height:\s*48px;/);
+    expect(ruleBody(cssSource, ".iconbtn")).toMatch(/width:\s*44px;[^]*height:\s*44px;/);
+    expect(ruleBody(cssSource, ".chip")).toMatch(/min-height:\s*44px;/);
+    expect(ruleBody(cssSource, ".input")).toMatch(/min-height:\s*48px;[^]*font-size:\s*16px;/);
+    expect(ruleBody(cssSource, ".bottomnav .nav")).toMatch(/min-height:\s*48px;/);
     expect(cssSource).toMatch(/button\s*\{[^}]*min-width:\s*44px;[^}]*min-height:\s*44px;/);
     expect(cssSource).toMatch(/\.subway-live-pill\s*\{[^}]*min-height:\s*44px;/);
   });
