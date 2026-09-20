@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { normalizeVitalsPayload, VITAL_NAMES } from "./web-vitals-payload";
+import { isVitalName, normalizeVitalsPayload, VITAL_NAMES } from "./web-vitals-payload";
 
 /** Core Web Vitals are judged on FIELD data at p75 (web.dev). The browser
  *  beacons useReportWebVitals metrics to /api/vitals, which is a public,
@@ -73,5 +73,31 @@ describe("web vitals wiring", () => {
     expect(sql).toMatch(/enable row level security/);
     expect(sql).toMatch(/for insert/);
     expect(sql).not.toMatch(/for select/);
+  });
+});
+
+
+/** Next.js's useReportWebVitals also emits its own framework timings
+ *  (Next.js-hydration, Next.js-route-change-to-render, Next.js-render) which
+ *  carry no `rating` and are not Core Web Vitals. Beaconing them made
+ *  /api/vitals answer 400 on every page load (caught by the 2026-09-20 UX
+ *  probe), so the reporter must drop them before the network call. */
+describe("isVitalName", () => {
+  it("accepts exactly the five Core Web Vitals the table stores", () => {
+    for (const name of VITAL_NAMES) expect(isVitalName(name)).toBe(true);
+  });
+
+  it("rejects Next.js framework timings and anything else", () => {
+    for (const name of ["Next.js-hydration", "Next.js-route-change-to-render", "Next.js-render", "FID", "lcp", "", "TTF"]) {
+      expect(isVitalName(name), name).toBe(false);
+    }
+  });
+
+  it("is what the reporter gates on, so no unsupported metric is ever beaconed", () => {
+    const { readFileSync } = require("node:fs") as typeof import("node:fs");
+    const { join } = require("node:path") as typeof import("node:path");
+    const src = readFileSync(join(process.cwd(), "components/system/web-vitals-reporter.tsx"), "utf8");
+    expect(src).toMatch(/import \{ isVitalName \} from "@\/lib\/web-vitals-payload"/);
+    expect(src).toMatch(/if \(!isVitalName\(metric\.name\)\) return;/);
   });
 });

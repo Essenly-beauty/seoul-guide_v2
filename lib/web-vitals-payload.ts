@@ -7,6 +7,14 @@ export type VitalName = (typeof VITAL_NAMES)[number];
 const RATINGS = ["good", "needs-improvement", "poor"] as const;
 const MAX_VALUE = 600_000; // 10 minutes in ms; CLS is unitless and tiny
 
+/** Next.js's useReportWebVitals also emits framework timings
+ *  (Next.js-hydration, Next.js-route-change-to-render, Next.js-render) that
+ *  carry no rating and are not Core Web Vitals — the reporter drops them
+ *  rather than making the endpoint answer 400 on every page load. */
+export function isVitalName(name: string): name is VitalName {
+  return (VITAL_NAMES as readonly string[]).includes(name);
+}
+
 export type VitalsRow = {
   name: VitalName;
   value: number;

@@ -1,6 +1,7 @@
 "use client";
 
 import { useReportWebVitals } from "next/web-vitals";
+import { isVitalName } from "@/lib/web-vitals-payload";
 
 // Real-user Core Web Vitals → /api/vitals. Kept as its own tiny client
 // component so the root layout stays a server component (Next.js docs).
@@ -26,6 +27,9 @@ function targetSelector(entries: PerformanceEntry[] | undefined): string | undef
 
 function send(metric: VitalsMetric) {
   if (process.env.NODE_ENV !== "production") return;
+  // Next.js mixes its own framework timings into this callback; they are not
+  // Core Web Vitals and the endpoint rejects them (400 on every load).
+  if (!isVitalName(metric.name)) return;
   const body = JSON.stringify({
     name: metric.name,
     value: metric.value,
