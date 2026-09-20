@@ -12,7 +12,7 @@ Next.js 14 App Router + Supabase(인증/DB) + Vercel 배포. 실데이터 ~600�
 
 | 항목 | 값 |
 |---|---|
-| **프로덕션** | https://seoul-guide-v2.vercel.app |
+| **프로덕션** | https://myseouldrop.app (커스텀 도메인) · https://seoul-guide-v2.vercel.app (Vercel 기본) |
 | GitHub | `Essenly-beauty/seoul-guide_v2` (main 브랜치가 배포 기준) |
 | Vercel 프로젝트 | `seoul-guide-v2` (팀 admin-28156576s-projects, CLI 로그인 유지 중) |
 | Supabase | `supabase-indigo-mountain` (Vercel Marketplace 연동, 무료 티어) |
@@ -162,7 +162,7 @@ vercel env pull --yes  # .env.local 재생성
 
 0. ~~[긴급] Supabase 프로젝트 접근 불가~~ — ✅ **9/20 16:10 해결**. 원인: Free 플랜 **자동 일시중지**(대시보드 "Project is paused", 재개 기한 2027-10-06). 9/18 15:09Z 스모크 실패 메일이 첫 신호였고, 예약 스모크는 계정 잡을 skip해서 ~40시간 미감지. 오너가 백업 다운로드 후 Resume → DNS·Auth health·REST·풀러 접속·데이터(auth.users 5, favorites 10, ratings 3, client_errors 37) 전부 정상 확인 → 마이그레이션 **0009·0010 적용 완료**(검증: csp kind 허용, web_vitals RLS+insert 정책) → `Production public smoke`(계정 잡 포함) **9/9 통과**(run 35496788579). 재발 방지로 uptime cron에 Supabase Auth health + REST 핑 추가(커밋 ef8c9ea, 30분마다 API 활동 발생 → 유휴 정지 방지). 스모크 스펙 2개가 미게재 샘플 장소를 쓰던 것도 수정(15f3b1c)
 0-1. **[미완] Supabase Auth 비밀번호 최소 길이 8로 상향** (Dashboard → Authentication → Password) — 클라이언트는 8 강제, 서버 정책도 맞춰야 일관
-0-2. **[미완·눈에 보임] CARTO API 키 발급** — 지도 타일에 "API KEY" 워터마크가 실제로 찍히고 있음(9/20 오너 스크린샷 확인). https://carto.com/basemaps/apikey 에서 무료 발급(계정 불필요, 월 500만 타일) → Vercel env `NEXT_PUBLIC_CARTO_API_KEY`(Production+Preview). 코드는 이미 반영됨 → Vercel env `NEXT_PUBLIC_CARTO_API_KEY`(Production+Preview) — 없으면 현행 무키 타일 유지(약관상 워터마크 가능)
+0-2. ~~CARTO API 키~~ — ✅ 9/20 완료. 오너가 발급 후 Vercel env `NEXT_PUBLIC_CARTO_API_KEY`(Production+Preview, Development 제외)에 저장. Referer 제한 4개(`myseouldrop.app`, `www.myseouldrop.app`, `seoul-guide-v2.vercel.app`, `*.vercel.app`) — localhost는 폼이 거부해 제외했고, Development에 키를 두지 않으므로 로컬은 무키로 동작(워터마크만, 정상)
 0-3. ~~`feat/p0-best-practices` 브랜치 리뷰·머지~~ — ✅ 9/20 PR #2로 머지·배포 완료
 
 1. ~~[필수] Supabase Site URL~~ — ✅ 8/11 완료 (Site URL + Redirect 3개 등록 확인)
@@ -201,7 +201,7 @@ vercel env pull --yes  # .env.local 재생성
 - [x] ~~프로필 동기화 실브라우저 e2e~~ (8/11 완료 — 프로덕션에서 헤드리스 Chrome CDP로 9/9: 실로그인 → 온보딩 답변 → profiles 행 확인 → 별점 → ratings 행 확인 → 로그아웃 시 로컬 미러 4종 퍼지 + 서버 데이터 보존. 스크립트: 세션 scratchpad `e2e-browser.mjs`)
 
 ### P2 — 품질·운영
-- [ ] 커스텀 도메인 연결 (myseouldrop.com 등 — `vercel domains`)
+- [x] ~~커스텀 도메인 연결~~ — **이미 연결되어 있음**(9/20 확인): `https://myseouldrop.app` 200으로 실앱 서빙, `www.`는 308 리다이렉트. `metadataBase`/canonical/OG가 가리키는 도메인과 일치. 백로그에 미완으로 남아 있던 것을 정정
 - [ ] Supabase 이메일 발신자 커스텀 (기본 noreply@mail.app.supabase.io → SMTP 설정)
 - [x] ~~지도 성능: 뷰포트 기반 렌더링~~ (8/16 완료 — bounds.pad(0.3) 뷰포트 컬링 + 타일 프리로드 + SSR 스냅샷, Lighthouse 40→81)
 - [x] ~~미확보 노선 지오메트리~~ (8/16 완료 — **20/20 전 노선 실선로**. 원인은 매처가 아니라 발견 쿼리: 광역전철=route=train, 경전철=route=light_rail. 계약 테스트 `lib/subway-geometry.test.ts` 추가)
