@@ -1,4 +1,4 @@
-# MYSEOULDROP — 작업 핸드오프 (2026-08-15 기준)
+# MYSEOULDROP — 작업 핸드오프 (2026-09-20 기준)
 
 > 다음 세션에서 이 문서 하나로 바로 이어서 작업할 수 있게 정리한 문서.
 > 프로젝트 전반 문서는 `docs/README.md`, 인증 설정은 `docs/auth-setup.md` 참고.
@@ -78,6 +78,20 @@ vercel env pull --yes  # .env.local 재생성
 - 감사 지적 중 **사실과 다른 것**: Supabase 캐시 헤더 유실 주장(코드는 공식 @supabase/ssr 패턴 그대로, 유실할 헤더 없음)
 - **미반영(결정 필요)**: Next.js 15 업그레이드(major, 별도 배치), 장소 30~50곳 사람 검수 축소, 법무 검토, 계정 삭제/내보내기, CI/관측성, 실사진
 
+### M. 웹앱 베스트프랙티스 리서치 → P0 조치 배치 (9/20, 브랜치 `feat/p0-best-practices`, 미머지)
+- **리서치**: `docs/research/web-app-best-practices-2026-09.md`(요약·우선순위) + `docs/research/raw/01~06`(원문 6편). W3C/WCAG 2.2·web.dev·MDN·Next.js/Vercel·Apple HIG/WebKit·Material 3·NN/g·Baymard·OWASP Top 10:2025·NIST 800-63B-4·Supabase·HTTP Archive 2025·HN 체크리스트를 코드와 대조해 P0 10건 확정
+- **구현(커밋 7개, 테스트 749→780)**:
+  - 장소 상세 ~600p `generateMetadata`(고유 title/description/canonical/og:url) + `app/place/[id]/opengraph-image.tsx`(한글 상호는 Noto Sans KR glyph-subset으로 렌더, `revalidate` 1일) + schema.org LocalBusiness JSON-LD(`lib/place-seo.ts` — HairSalon/MedicalClinic/Store/TouristAttraction 매핑, **aggregateRating 미출력**은 정책상 의도)
+  - 폰트 셀프호스팅 `app/fonts.ts`(next/font: Fraunces·Plus Jakarta Sans·Geist Mono·Michroma) — `globals.css` Google Fonts `@import` 제거, CSP에서 googleapis/gstatic 삭제. 한글은 시스템 폰트 유지(로밍 데이터)
+  - 위치 권한: 마운트 즉시 `getCurrentPosition` → **이미 granted일 때만** 자동, 아니면 FAB/지하철 "Use location" 탭에서만 프롬프트(`lib/geolocation-policy.ts`, `useLocation` status에 `idle` 추가)
+  - 비밀번호 정책 `lib/auth-policy.ts`(최소 8자, bcrypt 72바이트 상한, 조합 규칙 없음) — 가입·재설정 `minLength={6}` 교체
+  - CARTO 타일 키: `NEXT_PUBLIC_CARTO_API_KEY` 있으면 `?key=` 부착(`lib/map-tiles.ts`) — 2026-08-26 약관상 키 필수
+  - RUM: `components/system/web-vitals-reporter.tsx` → `POST /api/vitals`(same-origin·검증·no-store) → `web_vitals` 테이블(`0010`, insert-only RLS)
+  - 에러 리포터 마스킹 `lib/redact.ts`(토큰 쿼리/프래그먼트·JWT·이메일) + **버그 수정**: `client_errors.kind` 제약에 `'csp'`가 없어 CSP 위반 리포트가 전부 DB에서 거부되던 것(`0009`) — 계약 테스트로 고정
+  - 개인정보처리방침 갱신: 수탁자(Supabase **AWS us-east-1**·Vercel·Google)·국외이전·보관기간(진단 데이터 12개월)·권리 행사·PIPC/EU DPA 진정 — 여전히 "법무 검토 전 초안" 표시
+- **보류(사용자 결정 필요)**: ① 장소 데이터 ~1MB 번들 분리(리서치 D1 설계는 문서에 있음 — 검색·즐겨찾기·지하철이 동기 배열에 의존해 대규모 리팩터) ② 오렌지 본문 텍스트 대비 3.76:1(8/15 사용자 결정으로 복원한 색 — 토큰 분리 제안만)
+- ⚠️ **마이그레이션 0009·0010은 프로덕션 DB에 아직 미적용** — 9/20 적용 시도 시 Supabase 프로젝트가 응답하지 않음(아래 §3-0)
+
 ### L. 지도 성능 + 게스트 로그인 퍼널 (8/15)
 - **지도 성능: Lighthouse 모바일 40 → 81, LCP 12.0s → 2.5s, TBT 980 → 380ms** (시각 변화 0):
   ① 마커 뷰포트 컬링(603→~60 divIcon, 30% 패드) ② 지하철 컨트롤러+선로 지오메트리 지연 로드(역 디스크용 STATIONS는 유지) ③ 타일 CDN preconnect + 첫 화면 타일 6장 결정적 프리로드 ④ **초기 뷰 정적 스냅샷을 SSR HTML에 포함**(fetchpriority=high, 테마 게이트) → 타일 로드 시 페이드아웃 — LCP가 FCP 시점으로 이동
@@ -134,6 +148,11 @@ vercel env pull --yes  # .env.local 재생성
 
 > 상세 절차: `docs/auth-setup.md`
 
+0. **[긴급 확인 — 9/20] Supabase 프로젝트 접근 불가 의심**: `njsocpyuesntblifpips.supabase.co`가 DNS에서 해석되지 않고(1.1.1.1·8.8.8.8 동일), 풀러는 `tenant/user postgres.<ref> not found` — **무료 티어 자동 일시중지(pause)** 패턴. Uptime cron은 Vercel 라우트만 probe해서 감지 못함. 대시보드에서 프로젝트 상태 확인 → Restore → 이어서 `supabase/migrations/0009_client_errors_csp_kind.sql`, `0010_web_vitals.sql` 적용(§5 마이그레이션 절차). 백로그에 "Supabase health probe를 uptime에 추가" 등록됨
+0-1. **Supabase Auth 비밀번호 최소 길이 8로 상향** (Dashboard → Authentication → Password) — 클라이언트는 8 강제, 서버 정책도 맞춰야 일관
+0-2. **CARTO API 키 발급** → Vercel env `NEXT_PUBLIC_CARTO_API_KEY`(Production+Preview) — 없으면 현행 무키 타일 유지(약관상 워터마크 가능)
+0-3. **`feat/p0-best-practices` 브랜치 리뷰·머지** (main 직푸시 대신 PR)
+
 1. ~~[필수] Supabase Site URL~~ — ✅ 8/11 완료 (Site URL + Redirect 3개 등록 확인)
 2. **[보류] 이메일 템플릿 token_hash 교체** — Supabase가 내장 메일러 사용 중엔 템플릿 편집을 잠금 → **커스텀 SMTP 선행 필요**, SMTP는 발신 도메인 필요. 순서: 도메인 구매(P2) → Resend 등 도메인 인증 → SMTP 연결 → 템플릿 교체 (auth-setup.md §1.5)
 3. **소셜 로그인 콘솔 등록** — Google Cloud Console, Kakao Developers (각 ~10분, 무료). Apple은 연 $129라 보류 중 (버튼은 "준비 중" 안내)
@@ -143,6 +162,18 @@ vercel env pull --yes  # .env.local 재생성
 ---
 
 ## 4. 다음 작업 백로그 (우선순위순)
+
+### P1 — 리서치 후속 (9/20, `docs/research/web-app-best-practices-2026-09.md` §5)
+- [ ] 장소 데이터 번들 분리 — `public/data/places-index.<hash>.json` + `headers()` immutable, 클라이언트는 hydration 후 fetch (리서치 D1). 보류 사유: 검색·즐겨찾기·지하철 근처 목록이 동기 `PLACES` 배열 의존
+- [ ] Uptime 워크플로에 Supabase health probe(`/auth/v1/health`, `/rest/v1/` 200/401) 추가 — 9/20 pause 의심 사례가 미감지
+- [ ] 진단 데이터 12개월 정리 잡(정책에 명시함): `delete from client_errors|web_vitals where created_at < now() - interval '12 months'` — GitHub Actions cron 또는 pg_cron
+- [ ] 접근성 axe 4스펙(홈 시트 닫힘/열림·상세·로그인·지하철) + 결과 수 `role=status` + 리스트 시트 비모달(`aria-modal` 제거) 정리
+- [ ] SW: 업데이트 토스트(무조건 `skipWaiting` 제거) + navigation preload + 빌드 ID 캐시 정리
+- [ ] 필터 시트 "Show N places" 스티키 + 적용 필터 칩 개별 해제 + 0건 "반경 확대"
+- [ ] 분석 도구(언어·국가·길찾기 앱 선택 비율) — 도입 시 EU opt-in 배너 필요
+- [ ] Turnstile(가입/로그인/재설정) + Vercel WAF `/api/account/*` 레이트리밋 1규칙
+- [ ] ITP 7일 대비 게스트 저장 N개↑ 시 "계정에 저장/홈 화면 추가" 넛지
+- [ ] 위치 프라이밍 한 줄 시트(FAB 첫 탭 시) — 현재는 바로 브라우저 프롬프트
 
 ### P1 — 계정 기능 마무리
 - [x] ~~Saved 탭 서버 우선 로딩~~ (8/10 완료 — useFavoritesReady + 스켈레톤)
@@ -177,6 +208,8 @@ vercel env pull --yes  # .env.local 재생성
 
 - **`.next` 공유 충돌**: `npm run build`나 두 번째 dev 서버는 실행 중인 dev 서버의 캐시를 깨뜨림 → 500/404. 빌드 후엔 `start-essenly.command` 재실행. dev 서버는 **하나만**.
 - **환경변수**: dev 서버는 시작 시점의 `.env.local`만 읽음 — env 바뀌면 재시작.
+- **`NEXT_PUBLIC_CARTO_API_KEY`**(9/20 추가, 선택): CARTO 베이스맵 키. 없으면 무키 URL 그대로.
+- **`.next` vs `.next-dev`**: `next.config.mjs`가 dev는 `.next-dev`, build는 `.next`로 분리(9/20 확인) — 빌드가 dev 서버를 깨뜨리는 문제는 해소됨. 단 포트 3000은 다른 프로젝트(sj-studio)가 점유 중일 수 있음 → 이 앱 검증은 `next start -p 3200` 등 다른 포트.
 - **스토리지 키는 essenly.* 유지** (`essenly.favorites`, `essenly.theme` 등) — 리브랜딩 시 의도적으로 남긴 내부 식별자. 바꾸면 기존 사용자 로컬 데이터 끊김.
 - **DB 마이그레이션**: `supabase/migrations/*.sql` 순번 파일 + node pg로 적용 (예시는 git log의 favorites 커밋 참고). `POSTGRES_URL_NON_POOLING` 사용, URL의 `sslmode` 파라미터 제거 후 `ssl:{rejectUnauthorized:false}`.
 - **관리자 테스트 유저**: service role로 `admin.createUser({email_confirm:true})` → 테스트 → `deleteUser` 정리. `@myseouldrop.app` 도메인 사용 (가짜 TLD는 Supabase가 거부).

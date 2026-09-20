@@ -27,6 +27,21 @@
 | 9 | **에러 리포터에 토큰/쿼리 마스킹 없음** | OWASP Logging CS: 세션ID·액세스토큰·이메일 기록 금지, CR/LF 제거 | `lib/error-reporter.ts`에 mask/redact/strip 로직 미검출 | URL의 `?code=`·`#access_token`·쿠키·이메일·좌표 마스킹, 메시지 길이 상한 |
 | 10 | **브랜드 오렌지 본문 텍스트 3.76:1** | WCAG 1.4.3 텍스트 4.5:1(큰 텍스트·아이콘·UI 3:1), Apple HIG·Android 동일 | 사용자 결정으로 유지, 토큰 주석에 문서화 ✅ | 결정 유지 시 **토큰 분리**: `--brand`(#e94f00: 아이콘·마커·큰 제목·채움) / `--brand-text`(#c24100 5.19:1: 작은 텍스트·링크·칩 라벨) — 결정을 뒤집지 않고 범위만 좁힘 |
 
+### 반영 현황 (2026-09-20, 브랜치 `feat/p0-best-practices`)
+
+| # | 상태 | 비고 |
+|---|---|---|
+| 1 | ✅ 반영 | `lib/place-seo.ts`, `app/place/[id]/{page,opengraph-image}.tsx` — aggregateRating 미출력 |
+| 2 | ✅ 반영 | `app/fonts.ts`(next/font), CSP 축소 |
+| 3 | ✅ 반영 | `lib/geolocation-policy.ts` — granted일 때만 자동, 아니면 탭 시 요청 |
+| 4 | ⏸ 보류 | 대규모 리팩터 — HANDOFF P1 백로그 |
+| 5 | ✅ 반영 | `lib/auth-policy.ts` 8자+/72바이트 — Supabase 대시보드 최소 길이 동기화는 오너 액션 |
+| 6 | ✅ 코드 반영 | `NEXT_PUBLIC_CARTO_API_KEY` 주입 — 키 발급은 오너 액션 |
+| 7 | ✅ 반영 | `/api/vitals` + `web_vitals`(0010) — **프로덕션 DB 적용 대기**(Supabase 접근 불가 상태) |
+| 8 | ✅ 초안 반영 | 개인정보처리방침 갱신 — 법무 검토 전 |
+| 9 | ✅ 반영 | `lib/redact.ts` + `client_errors` csp kind 버그 수정(0009, 적용 대기) |
+| 10 | ⏸ 보류 | 8/15 사용자 디자인 결정 — 토큰 분리 제안만 |
+
 ---
 
 ## 2. 이미 잘 되어 있는 것 (코드에서 확인)
