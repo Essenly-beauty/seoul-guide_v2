@@ -26,6 +26,7 @@ import {
   type DaisoRankingProduct,
   type DaisoRankingRow,
 } from "@/lib/daiso-ranking";
+import { daisoBrandEn, daisoNameEn, daisoSubcategoryEn } from "@/lib/daiso-ranking-en";
 import {
   DAISO_RANKING_CONFIG,
   OLIVE_YOUNG_RANKING_CONFIG,
@@ -279,15 +280,18 @@ function DaisoRankRow({ row }: { row: DaisoRankingRow }) {
       data-source-rank={row.rank}
       data-product-no={product.productNo}
       href={routes.daisoProduct(product.productNo)}
-      aria-label={`${row.rank}. ${product.nameKr} — view product details`}
+      aria-label={`${row.rank}. ${daisoNameEn(product.productNo) || product.nameKr} — view product details`}
     >
       <span className="mono num" style={{ width: 24, fontSize: 15, fontWeight: 700, flex: "none", textAlign: "center", color: row.rank <= 3 ? "var(--accent)" : "var(--dim)" }}>
         {row.rank}
       </span>
       <ImgPh className="thumb56" />
       <div className="stack" style={{ flex: 1, minWidth: 0, gap: 2 }}>
-        <b className="t-label-md daiso-ranking-name">{product.nameKr}</b>
-        <div className="t-caption">{product.brand} · {product.subcategoryKr}</div>
+        {/* English leads for the visitor; the Korean original stays so it
+            can be shown to a shop assistant (same rule as place names). */}
+        <b className="t-label-md daiso-ranking-name">{daisoNameEn(product.productNo) || product.nameKr}</b>
+        <div className="t-caption" lang="ko">{product.nameKr}</div>
+        <div className="t-caption">{daisoBrandEn(product.productNo) || product.brand} · {daisoSubcategoryEn(product.subcategoryKr)}</div>
         {deliveryTags.length > 0 && (
           <div className="daiso-ranking-tags" aria-label="Available fulfillment options">
             {deliveryTags.map((tag) => <span key={tag}>{tag}</span>)}

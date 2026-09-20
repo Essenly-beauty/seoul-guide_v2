@@ -46,6 +46,8 @@ from feedback order by created_at desc limit 50;
 ```sql
 -- 30일 지난 에러 로그 정리 (필요 시 수동)
 delete from client_errors where created_at < now() - interval '30 days';
+-- 개인정보처리방침(9/20)이 진단 데이터 보관 상한을 12개월로 명시 — 최소 이 주기로 실행
+delete from web_vitals where created_at < now() - interval '12 months';
 ```
 
 ## 키/시크릿
@@ -95,3 +97,23 @@ group by reporter having count(*) > 10 order by count(*) desc;
   반복 오신고가 확인되면 해당 신고 행을 삭제해 카운트를 리셋:
   `delete from review_reports where rating_id='<id>' and reporter='<uid>';`
 - 판정 SLA·금지 기준은 오너 결정 대기 (launch-checklist B12)
+
+## 실사용자 Core Web Vitals (web_vitals — 9/20)
+
+브라우저 `useReportWebVitals` → `POST /api/vitals` → `web_vitals`(insert-only, 식별자 없음). p75가 기준(LCP ≤ 2.5s · INP ≤ 200ms · CLS ≤ 0.1):
+
+```sql
+select name, page,
+       percentile_cont(0.75) within group (order by value) as p75,
+       count(*) as n
+from web_vitals
+where created_at > now() - interval '28 days'
+group by name, page order by name, n desc;
+
+-- INP를 망치는 요소: target 셀렉터별
+select target, percentile_cont(0.75) within group (order by value) as p75, count(*) n
+from web_vitals where name = 'INP' and created_at > now() - interval '28 days'
+group by target order by p75 desc limit 20;
+```
+
+참고: `client_errors.kind = 'csp'`는 0009 마이그레이션 이후에만 저장됨(그 전에는 제약 위반으로 전부 거부됨 — CSP 위반 이력이 비어 있어도 "없었다"는 뜻이 아님).

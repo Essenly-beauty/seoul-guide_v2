@@ -2,8 +2,11 @@
 
 import { useCallback, useEffect, useState } from "react";
 import type { LatLng } from "@/lib/geo";
+import { autoRequestAllowed, readGeolocationPermission } from "@/lib/geolocation-policy";
 
-type Status = "loading" | "granted" | "fallback";
+/** idle = nothing asked yet (permission not pre-granted); the locate button
+    is the only thing that may trigger the browser prompt. */
+type Status = "idle" | "loading" | "granted" | "fallback";
 type OrientationEventConstructor = typeof DeviceOrientationEvent & {
   requestPermission?: () => Promise<"granted" | "denied">;
 };
@@ -15,7 +18,11 @@ function orientationConstructor(): OrientationEventConstructor | null {
   return window.DeviceOrientationEvent as OrientationEventConstructor;
 }
 
-/** Browser geolocation with an 8s timeout; falls back gracefully. */
+/** Browser geolocation with an 8s timeout; falls back gracefully.
+    On mount it only reads the position when permission is ALREADY granted
+    (no prompt possible). Otherwise it stays idle until `retry` — a page-load
+    prompt converts ~12% vs ~30% from a gesture (web.dev), and Apple HIG /
+    Android guidance both say to ask in context. */
 export function useLocation(): {
   loc: LatLng | null;
   status: Status;
@@ -24,7 +31,7 @@ export function useLocation(): {
   requestHeading: () => void;
 } {
   const [loc, setLoc] = useState<LatLng | null>(null);
-  const [status, setStatus] = useState<Status>("loading");
+  const [status, setStatus] = useState<Status>("idle");
   const [heading, setHeading] = useState<number | null>(null);
   const [orientationAllowed, setOrientationAllowed] = useState(false);
 
@@ -87,7 +94,14 @@ export function useLocation(): {
     );
   }, [enableOrientation]);
 
-  useEffect(() => { request(); }, [request]);
+  useEffect(() => {
+    let cancelled = false;
+    void readGeolocationPermission(typeof navigator === "undefined" ? undefined : navigator).then((state) => {
+      if (cancelled) return;
+      if (autoRequestAllowed(state)) request();
+    });
+    return () => { cancelled = true; };
+  }, [request]);
 
   const retry = useCallback(() => request(true), [request]);
   const requestHeading = useCallback(() => { void enableOrientation(); }, [enableOrientation]);

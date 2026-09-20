@@ -4,8 +4,9 @@ import { AnchorTabs } from "@/components/ui/anchor-tabs";
 import { ImgPh } from "@/components/ui/img-ph";
 import { SectionDivider } from "@/components/ui/section-divider";
 import { SectionHeader } from "@/components/ui/section-header";
-import { optionalDaisoDeliveryTags, type DaisoRankingProduct } from "@/lib/daiso-ranking";
+import { optionalDaisoDeliveryTags, type DaisoRankingProduct, DAISO_CATEGORY_LABELS } from "@/lib/daiso-ranking";
 import { routes } from "@/lib/routes";
+import { daisoBrandEn, daisoNameEn, daisoSubcategoryEn } from "@/lib/daiso-ranking-en";
 
 const WON = new Intl.NumberFormat("ko-KR");
 const SECTIONS = [
@@ -20,36 +21,41 @@ export function DaisoProductDetailBody({
   product: DaisoRankingProduct;
 }) {
   const deliveryTags = optionalDaisoDeliveryTags(product.delivery);
+  // English is what the visitor reads; the Korean original stays on screen
+  // so it can be shown in store.
+  const nameEn = daisoNameEn(product.productNo) || product.nameKr;
+  const brandEn = daisoBrandEn(product.productNo) || product.brand;
 
   return (
     <div className="detail-scroll product-detail-scroll daiso-product-detail">
       <ProductDetailScrollHeader
-        title={product.nameKr}
-        product={{ id: product.id, brand: product.brand, name: product.nameKr }}
+        title={nameEn}
+        product={{ id: product.id, brand: brandEn, name: nameEn }}
         fallback={routes.rankingRetailer("daiso")}
         rankingHref={routes.rankingRetailer("daiso")}
       >
         <div
           className="product-detail-gallery"
           role="img"
-          aria-label={`${product.nameKr} product gallery`}
+          aria-label={`${nameEn} product gallery`}
         >
           <ImgPh className="product-detail-gallery-main">
             <Icon name="bag" style={{ width: 44, height: 44, color: "var(--dim)" }} />
             <span className="caption muted">Product photo coming soon</span>
           </ImgPh>
-          <ImgPh><span className="label">{product.brand}</span></ImgPh>
-          <ImgPh><span className="label">{product.categoryKr}</span></ImgPh>
+          <ImgPh><span className="label">{brandEn}</span></ImgPh>
+          <ImgPh><span className="label">{DAISO_CATEGORY_LABELS[product.categoryKr as keyof typeof DAISO_CATEGORY_LABELS] ?? product.categoryKr}</span></ImgPh>
         </div>
       </ProductDetailScrollHeader>
 
       <div className="pad product-detail-title-block" style={{ paddingTop: 8, paddingBottom: 12 }}>
         <span className="caption muted">Daiso Mall ranking product</span>
-        <h1 className="h1 product-detail-title daiso-product-title">{product.nameKr}</h1>
+        <h1 className="h1 product-detail-title daiso-product-title">{nameEn}</h1>
+        <p lang="ko" className="small muted" style={{ margin: "4px 0 0" }}>{product.nameKr}</p>
         <div className="row small muted product-detail-meta" style={{ gap: 8, marginTop: 8, flexWrap: "wrap" }}>
-          <b style={{ color: "var(--text)" }}>{product.brand}</b>
+          <b style={{ color: "var(--text)" }}>{brandEn}</b>
           <span aria-hidden="true">·</span>
-          <span>{product.subcategoryKr}</span>
+          <span>{daisoSubcategoryEn(product.subcategoryKr)}</span>
           <span aria-hidden="true">·</span>
           <b className="mono" style={{ color: "var(--text)" }}>₩{WON.format(product.priceWon)}</b>
         </div>
@@ -82,9 +88,10 @@ export function DaisoProductDetailBody({
           <SectionHeader title="Details" />
           <dl className="product-detail-facts">
             {[
-              ["Brand", product.brand],
-              ["Category", product.categoryKr],
-              ["Subcategory", product.subcategoryKr],
+              ["Brand", brandEn],
+              ["Category", DAISO_CATEGORY_LABELS[product.categoryKr as keyof typeof DAISO_CATEGORY_LABELS] ?? product.categoryKr],
+              ["Subcategory", daisoSubcategoryEn(product.subcategoryKr)],
+              ["Korean name", product.nameKr],
               ["Price", `₩${WON.format(product.priceWon)}`],
             ].map(([label, value]) => (
               <div key={label} className="inforow product-detail-fact">

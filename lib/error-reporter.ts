@@ -9,6 +9,8 @@
 //  - reporting failures are swallowed (never recurse)
 
 import { supabaseBrowser } from "./supabase/client";
+import { redactSensitive } from "./redact";
+import type { ClientErrorKind } from "./client-error-kinds";
 
 const SESSION_CAP = 10;
 const reported = new Set<string>();
@@ -20,18 +22,21 @@ function release(): string | null {
 }
 
 export function reportClientError(
-  kind: "error" | "unhandledrejection" | "boundary" | "csp",
+  kind: ClientErrorKind,
   message: string,
   stack?: string | null,
 ): void {
   try {
     if (typeof window === "undefined") return;
-    const msg = (message || "unknown").slice(0, 500);
+    // Credentials can ride along in error text (callback URLs, bearer
+    // headers) — mask before anything is persisted (OWASP Logging CS).
+    const msg = redactSensitive(message || "unknown").slice(0, 500);
+    const safeStack = stack ? redactSensitive(stack).slice(0, 4000) : null;
     // Next.js control-flow "errors" leak into window.onerror during client
     // navigation — they are not failures (first real catch of this tracker).
     if (msg.includes("NEXT_REDIRECT") || msg.includes("NEXT_NOT_FOUND")) return;
     if (count >= SESSION_CAP || reported.has(msg)) return;
-    if (stack?.includes("chrome-extension://") || stack?.includes("safari-extension://")) return;
+    if (safeStack?.includes("chrome-extension://") || safeStack?.includes("safari-extension://")) return;
     reported.add(msg);
     count++;
     const supabase = supabaseBrowser();
@@ -39,7 +44,7 @@ export function reportClientError(
     void supabase.from("client_errors").insert({
       kind,
       message: msg,
-      stack: stack ? stack.slice(0, 4000) : null,
+      stack: safeStack,
       page: window.location.pathname.slice(0, 300),
       user_agent: navigator.userAgent.slice(0, 300),
       release: release(),

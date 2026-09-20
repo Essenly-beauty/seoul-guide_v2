@@ -17,12 +17,16 @@ import {
   rubberBand,
   springKeyframes,
   type MapSheetSnap,
+  didDrag,
 } from "@/lib/map-sheet-state";
 
 type Snap = MapSheetSnap;
 
-/** Vertical travel before a touch counts as a drag rather than a tap. */
-const DRAG_SLOP = 4;
+/** Vertical travel before a touch counts as a drag rather than a tap.
+    8px matches Android's touch slop; Apple's WWDC18 "Designing Fluid
+    Interfaces" puts the swipe hysteresis around 10pt. 4px was inside the
+    shake of a hand walking down the street. */
+const DRAG_SLOP = 8;
 /** Only the last stretch of the gesture decides its release velocity. */
 const VELOCITY_WINDOW_MS = 80;
 
@@ -244,6 +248,7 @@ export function MapSheet({ places, origin, selectedId, groupPlaceIds = [], onSel
     scroller: HTMLElement | null;
     active: boolean;
     position: number;
+    travel: number;
     samples: { t: number; y: number }[];
   };
   const gesture = useRef<SheetGesture | null>(null);
@@ -306,6 +311,7 @@ export function MapSheet({ places, origin, selectedId, groupPlaceIds = [], onSel
       scroller: body && body.contains(target) ? body : null,
       active: false,
       position: 0,
+      travel: 0,
       samples: [],
     };
   };
@@ -342,10 +348,13 @@ export function MapSheet({ places, origin, selectedId, groupPlaceIds = [], onSel
       g.max = so.peek;
       g.dimension = Math.max(1, el.offsetHeight);
       claimTouch.current = true;
-      dragMoved.current = true;
+      // Whether this counts as a drag is decided at release (didDrag) — a
+      // confirmed gesture that goes nowhere must not eat the row's tap.
+      dragMoved.current = false;
       try { el.setPointerCapture(e.pointerId); } catch { /* pointer already gone */ }
       setDragging(true);
     }
+    g.travel = Math.max(g.travel, Math.abs(e.clientY - g.downY));
     const position = rubberBand(g.startOffset + (e.clientY - g.y0), g.min, g.max, g.dimension);
     g.position = position;
     g.samples.push({ t: e.timeStamp, y: position });
@@ -365,6 +374,7 @@ export function MapSheet({ places, origin, selectedId, groupPlaceIds = [], onSel
     const stale = !first || !last || last.t - first.t < 1 || e.timeStamp - last.t > VELOCITY_WINDOW_MS;
     const velocity = cancelled || stale ? 0 : (last.y - first.y) / (last.t - first.t);
     const target = resolveReleaseSnap({ offsets: so, position: g.position, velocity });
+    dragMoved.current = didDrag({ travel: g.travel, target, snap, slop: DRAG_SLOP });
     settleTo(target, so[target], g.position, velocity);
   };
 

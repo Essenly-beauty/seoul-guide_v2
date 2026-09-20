@@ -57,3 +57,6 @@ scripts/.cache/
 test-results/
 playwright-report/
 /scripts/.station-exits-cache.json
+# 2026-09 web-app best-practices research (summary + raw reports)
+!/docs/research/
+!/docs/research/**

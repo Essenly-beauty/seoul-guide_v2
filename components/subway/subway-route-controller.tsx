@@ -28,6 +28,7 @@ import {
   type SubwayStation,
 } from "@/lib/subway";
 import { RouteStrip } from "./route-strip";
+import { useKeyboardInset } from "@/components/ui/use-keyboard-inset";
 
 /** Route-panel snap tiers — content is curated per tier, not just clipped. */
 export type SubwaySnap = "compact" | "half" | "full";
@@ -108,7 +109,7 @@ function StationCombobox({
   nearbyStationId: string | null;
   recentIds: string[];
   inputRef?: React.RefObject<HTMLInputElement | null>;
-  locationStatus: "loading" | "granted" | "fallback";
+  locationStatus: "idle" | "loading" | "granted" | "fallback";
   onRetryLocation: () => void;
   onSelect: (id: string | null) => void;
 }) {
@@ -268,6 +269,12 @@ function StationCombobox({
           {!query.trim() && locationStatus === "loading" && (
             <div className="station-location-note" role="status">Finding a nearby station...</div>
           )}
+          {!query.trim() && locationStatus === "idle" && (
+            <div className="station-location-note">
+              <span>Use your location to find the nearest station.</span>
+              <button type="button" onClick={onRetryLocation}>Use location</button>
+            </div>
+          )}
           {!query.trim() && locationStatus === "fallback" && (
             <div className="station-location-note">
               <span>Location is unavailable. Showing popular stations.</span>
@@ -390,10 +397,13 @@ export function SubwayRouteController({
   onClearRoute: () => void;
   onEditingChange: (editing: boolean) => void;
   onSnapChange: (snap: SubwaySnap) => void;
-  locationStatus: "loading" | "granted" | "fallback";
+  locationStatus: "idle" | "loading" | "granted" | "fallback";
   onRetryLocation: () => void;
   onClose: () => void;
 }) {
+  // Publishes the keyboard height as --kb so this panel can shrink around
+  // the on-screen keyboard instead of hiding its results behind it (R3).
+  useKeyboardInset();
   const [editing, setEditing] = useState(!route);
   const [snap, setSnap] = useState<SubwaySnap>("half");
   // Station-first (phase 1): arriving with a station and no route means the
@@ -491,7 +501,7 @@ export function SubwayRouteController({
     onSnapChange(next);
   };
 
-  // Grip drag mirrors MapSheet: 40px threshold, click-to-cycle, Enter/Space.
+  // Grip drag mirrors MapSheet: 40px threshold; unlike MapSheet it has no pointermove yet (R4), click-to-cycle, Enter/Space.
   const onGripPointerDown = (event: React.PointerEvent) => {
     snapDragMoved.current = false;
     snapDragStart.current = { y: event.clientY, snap };

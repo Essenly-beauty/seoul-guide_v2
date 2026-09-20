@@ -1,7 +1,7 @@
 // Security headers (launch checklist B10). The CSP is enforced, not
-// report-only: the app's external surface is exactly four hosts (Google
-// Fonts css/files, Carto map tiles, Supabase) — everything else is
-// locked down. script/style keep 'unsafe-inline' (Next.js reality
+// report-only: the app's external surface is exactly two hosts (Carto map
+// tiles, Supabase) — fonts are self-hosted via next/font — everything
+// else is locked down. script/style keep 'unsafe-inline' (Next.js reality
 // without a nonce pipeline); dev additionally needs eval for refresh.
 // error-reporter.ts listens for securitypolicyviolation, so a future
 // regression shows up in client_errors instead of silently breaking.
@@ -15,8 +15,8 @@ const SUPABASE_ORIGIN = (() => {
 const CSP = [
   "default-src 'self'",
   `script-src 'self' 'unsafe-inline'${process.env.NODE_ENV === "development" ? " 'unsafe-eval'" : ""}`,
-  "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
-  "font-src 'self' https://fonts.gstatic.com",
+  "style-src 'self' 'unsafe-inline'",
+  "font-src 'self'",
   "img-src 'self' data: blob: https://*.basemaps.cartocdn.com",
   `connect-src 'self' ${SUPABASE_ORIGIN} ${SUPABASE_ORIGIN.replace("https://", "wss://")}`,
   "object-src 'none'",

@@ -1,5 +1,3 @@
-@import url("https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Geist+Mono:wght@500;600&family=Michroma&display=swap");
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -41,12 +39,20 @@
     --shadow-sm: 0 1px 3px rgba(15, 23, 42, 0.14);
     --shadow-card: 0 1px 2px rgba(15, 23, 42, 0.07);
     --shadow-float: 0 10px 28px -8px rgba(15, 23, 42, 0.22);
+    /* Motion tokens. Exits are shorter than entrances (Material 3
+       "emphasized accelerate" 200ms) — a dismissal should feel quicker than
+       an arrival. --dur-exit must stay in step with EXIT_MS in
+       lib/overlay-dismiss.ts, which unmounts the node. */
+    --ease-sheet: cubic-bezier(0.32, 0.72, 0, 1);
+    --ease-exit: cubic-bezier(0.3, 0, 0.8, 0.15);
+    --dur-exit: 200ms;
+    --dur-micro: 90ms;
     --shadow-accent: 0 10px 24px -10px rgba(233, 79, 0, 0.4);
     --place-detail-edge-inset: 16px;
-    --serif: "Fraunces", Georgia, "Times New Roman", serif;
-    --sans: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
-    --mono: "Geist Mono", ui-monospace, "SF Mono", Menlo, monospace;
-    --brand-display: "Michroma", var(--sans);
+    --serif: var(--font-serif), Georgia, "Times New Roman", serif;
+    --sans: var(--font-sans), -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+    --mono: var(--font-mono), ui-monospace, "SF Mono", Menlo, monospace;
+    --brand-display: var(--font-display), var(--sans);
     --pin-disc: #ffffff;
     --pin-disc-ring: rgba(15, 23, 42, 0.22);
     --station-halo: #ffffff;
@@ -87,12 +93,20 @@
     /* dark elevation = shadow below + hairline light above */
     --shadow-card: 0 2px 6px -1px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.045);
     --shadow-float: 0 14px 36px -10px rgba(0, 0, 0, 0.8), 0 2px 8px rgba(0, 0, 0, 0.4);
+    /* Motion tokens. Exits are shorter than entrances (Material 3
+       "emphasized accelerate" 200ms) — a dismissal should feel quicker than
+       an arrival. --dur-exit must stay in step with EXIT_MS in
+       lib/overlay-dismiss.ts, which unmounts the node. */
+    --ease-sheet: cubic-bezier(0.32, 0.72, 0, 1);
+    --ease-exit: cubic-bezier(0.3, 0, 0.8, 0.15);
+    --dur-exit: 200ms;
+    --dur-micro: 90ms;
     /* brand-tinted lift for primary CTAs — orange light source */
     --shadow-accent: 0 10px 26px -10px rgba(245, 88, 0, 0.55);
-    --serif: "Fraunces", Georgia, "Times New Roman", serif;
-    --sans: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
-    --mono: "Geist Mono", ui-monospace, "SF Mono", Menlo, monospace;
-    --brand-display: "Michroma", var(--sans);
+    --serif: var(--font-serif), Georgia, "Times New Roman", serif;
+    --sans: var(--font-sans), -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+    --mono: var(--font-mono), ui-monospace, "SF Mono", Menlo, monospace;
+    --brand-display: var(--font-display), var(--sans);
     --pin-disc: #1a1d22;
     --pin-disc-ring: rgba(255, 255, 255, 0.28);
     --station-halo: #0b0c0f;
@@ -247,10 +261,37 @@
     letter-spacing: 0;
     line-height: 1.2;
   }
+  /* Touch devices never fire :hover, so a control that only reacts on hover
+     reads as dead under a finger. These two lines make room for the pressed
+     states at the end of this file: the grey iOS/Android flash is replaced by
+     our own feedback, and `manipulation` drops the double-tap-zoom wait.
+     Scoped to real controls — body text keeps double-tap zoom (2026-07-25
+     mobile-ux spec §10). The drag handles re-declare `touch-action: none`
+     in @layer components, which wins on source order. */
+  button,
+  a,
+  [role="button"] {
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+  }
   @media (prefers-reduced-motion: reduce) {
     * {
       animation: none !important;
       transition: none !important;
+    }
+    /* `transition: none` above would turn the pressed scale into a hard jump
+       rather than removing it, so drop the transform itself. !important in a
+       layer beats the unlayered pressed rules (layer order reverses for
+       important declarations). */
+    .maprow:active,
+    .drow:active,
+    .chip:active,
+    .sfchip:active,
+    .bottomnav .nav:active,
+    .card.tap:active,
+    .listrow:active,
+    .selected-place-summary-main:active {
+      transform: none !important;
     }
   }
 }
@@ -288,7 +329,13 @@
     position: absolute;
     left: 0;
     right: 0;
-    bottom: 0;
+    /* The software keyboard shrinks the visual viewport, not the layout one,
+       so this panel must give up height or its lower half hides behind the
+       keyboard. It SHRINKS rather than moving up: .map-screen is
+       overflow:hidden, so pushing it would clip the input fields off the top.
+       --kb is published by components/ui/use-keyboard-inset.ts. */
+    bottom: var(--kb, 0px);
+    max-height: calc(100% - var(--kb, 0px));
     z-index: 950;
     display: flex;
     flex-direction: column;
@@ -555,11 +602,13 @@
     /* the picker is the whole task while it is open — let it use the space
        the panel already reserved instead of stopping at 230px with an empty
        half-screen underneath (owner report 2026-08-22) */
-    max-height: clamp(240px, calc(78dvh - 225px), 520px);
+    /* the clamp's 240px floor cannot drop below the space that is actually
+       left once the keyboard is up, so cap it by the live viewport too */
+    max-height: min(clamp(240px, calc(78dvh - 225px), 520px), calc(100dvh - var(--kb, 0px) - 200px));
     margin-top: 0;
   }
   .subway-search-fields:has(.station-search-results) {
-    margin-bottom: clamp(246px, calc(78dvh - 219px), 526px);
+    margin-bottom: clamp(0px, calc(78dvh - 219px - var(--kb, 0px)), 526px);
   }
   .subway-controller.search-ready:has(.station-search-results) {
     height: min(88%, 720px);
@@ -772,7 +821,7 @@
     font-size: 11px;
     white-space: nowrap;
   }
-  .subway-route-steps > span { min-height: 38px; }
+  .subway-route-steps > span { min-height: 44px; }
   .subway-route-steps b { color: var(--text); }
   .subway-route-leg { display: flex; align-items: center; gap: 7px; }
   .subway-route-leg > .linebadge { flex: none; font-style: normal; }
@@ -822,7 +871,9 @@
   .subway-active-station { position: relative; z-index: 1; }
   .subway-station-focus > button {
     min-width: 0;
-    min-height: 34px;
+    /* 44px floor (2026-08-22 spec:105). The container is an 80px-tall grid
+       with centred items, so the panel height is unchanged. */
+    min-height: 44px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1074,8 +1125,8 @@
     grid-template-columns: 1fr auto auto;
     align-items: center;
     gap: 4px 9px;
-    margin: 0 16px;
-    padding: 9px 0;
+    margin: 0;
+    padding: 9px 16px;
     border-bottom: 1px solid var(--border);
   }
   .subway-product-picks > a > span:first-child { grid-column: 1 / 2; color: var(--muted); font-size: 10px; }
@@ -1096,7 +1147,7 @@
     .subway-controller.search-ready { height: 58%; }
     .subway-station-focus { min-height: 78px; padding-block: 8px; }
     .subway-route-steps { gap: 10px; padding-block: 5px; }
-    .subway-route-steps > span { min-height: 34px; }
+    .subway-route-steps > span { min-height: 44px; }
     .subway-route-leg small { display: none; }
   }
 }
@@ -1410,6 +1461,24 @@
   .app-scroll > * {
     flex-shrink: 0;
   }
+  /* `fade` also translates 6px sideways — it was written for page pushes.
+     A full-bleed scrim must not slide, so scrims use these instead. */
+  @keyframes scrim-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  @keyframes scrim-out {
+    from { opacity: 1; }
+    to { opacity: 0; }
+  }
+  @keyframes sheetdown {
+    from { transform: none; }
+    to { transform: translateY(100%); }
+  }
+  @keyframes drawerout {
+    from { transform: none; }
+    to { transform: translateX(100%); }
+  }
   @keyframes fade {
     from {
       opacity: 0;
@@ -1592,7 +1661,9 @@
     background: var(--accent);
     color: #fff;
     width: 100%;
-    transition: background 0.15s;
+    /* the shorthand replaces the base transition, so the pressed filter has
+       to be declared here or it snaps */
+    transition: background 0.15s, filter 90ms linear;
   }
   .btn:hover {
     background: var(--accent-hover);
@@ -1735,7 +1806,7 @@
     color: var(--text);
   }
   .daiso-category-chip-visual {
-    min-height: 36px;
+    min-height: 44px;
     display: inline-flex;
     align-items: center;
     padding: 0 12px;
@@ -2291,7 +2362,7 @@
   }
   .filtersheet .chipwrap { gap: 6px; margin-top: 5px !important; }
   .filtersheet .chip {
-    min-height: 38px;
+    min-height: 44px;
     padding: 6px 13px;
     font-size: 12.5px;
   }
@@ -3055,14 +3126,14 @@
     inset: 0;
     background: var(--scrim);
     z-index: 80;
-    animation: fade 0.2s;
+    animation: scrim-in 0.2s linear;
   }
   .sheet {
     position: absolute;
     left: 0;
     right: 0;
-    bottom: 0;
-    max-height: 92%;
+    bottom: var(--kb, 0px);
+    max-height: calc(92% - var(--kb, 0px));
     background: var(--surface);
     border-radius: 24px 24px 0 0;
     display: flex;
@@ -3117,7 +3188,7 @@
     justify-content: center;
     z-index: 90;
     padding: 28px;
-    animation: fade 0.2s;
+    animation: scrim-in 0.2s linear;
   }
   .modal .box {
     background: var(--surface);
@@ -3321,7 +3392,7 @@
     inset: 0;
     background: var(--scrim);
     z-index: 85;
-    animation: fade 0.2s;
+    animation: scrim-in 0.2s linear;
   }
   .drawer {
     position: absolute;
@@ -3612,7 +3683,8 @@
     min-width: 0;
   }
   .station-filter-rail .sfchip {
-    min-height: 40px;
+    /* inherits the 44px floor from .sfchip; a 40px override here used to beat
+       it on specificity */
     padding: 0 14px;
     font-size: 13px;
     background: var(--surface);
@@ -3711,10 +3783,14 @@
   .subway-ticket-count { margin: 0; font-size: 12px; color: var(--muted); }
 
   .subway-station-focus.pinned {
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 0;
+    /* In the panel's flex column, after the scroller — not floating over it.
+       Taken out of the absolutely-positioned overlay: this bar used to cover
+       the last ~80px of the place list permanently (its min-height resolves to 80px at :5693, while the
+       scroller reserved only max(18px, safe-area)), so the final rows could
+       never be reached or focused: WCAG 2.4.11 Focus Not Obscured.
+       The 2026-08-22 decision was "bottom of the panel, in the thumb zone,
+       must not scroll away" — an in-flow last child keeps all three. */
+    flex: none;
     z-index: 960;
     margin: 0;
     border-radius: 0;
@@ -3786,7 +3862,13 @@
     align-items: baseline;
     justify-content: space-between;
     gap: 8px;
-    padding: 10px 0 6px;
+    /* Block axis only. The 16px inline gutter comes from the
+       `.subway-controller .subway-nearby-heading` rule, so this heading lands
+       on the same line as .station-row and .subway-product-picks > a. A
+       `padding` shorthand here re-zeroes the sides at higher specificity —
+       that was the regression reported 2026-09-20. Do not delete that base
+       rule: this one now depends on it. */
+    padding-block: 10px 6px;
   }
   .subway-controller.route-ready .subway-nearby-heading p {
     margin: 0;
@@ -3812,7 +3894,7 @@
   .subway-active-station > span { font-size: 11px; }
   .subway-plan-route {
     display: flex; align-items: center; justify-content: center; gap: 8px;
-    min-height: 44px; margin: 12px 18px 4px;
+    min-height: 44px; margin: 12px 16px 4px;
     border: 1px solid var(--border); border-radius: var(--r-md);
     background: var(--surface); color: var(--accent);
     font-weight: 650; font-size: 13.5px;
@@ -3852,7 +3934,7 @@
     left: 0;
     right: 0;
     z-index: 900;
-    padding: max(12px, env(safe-area-inset-top)) 14px 0;
+    padding: max(12px, env(safe-area-inset-top)) 16px 0;
     display: grid;
     grid-template-columns: 1fr;
     gap: 8px;
@@ -3902,7 +3984,7 @@
   }
   .map-top .chip {
     box-shadow: var(--shadow-card);
-    min-height: 36px;
+    min-height: 44px;
   }
   /* :not(.selected) — .chip.selected (earlier in the cascade) sets the same
      specificity; without this guard this rule's background would win and
@@ -3946,7 +4028,7 @@
   .leaflet-container { font-family: var(--sans); }
   .map-fab {
     position: absolute;
-    right: 14px;
+    right: 16px;
     bottom: calc(74px + env(safe-area-inset-bottom)); /* 62px peek + 12px */
     z-index: 900;
     width: 44px;
@@ -3990,7 +4072,7 @@
   }
   .map-rotation-reset {
     position: absolute;
-    right: 14px;
+    right: 16px;
     top: calc(max(12px, env(safe-area-inset-top)) + 104px);
     z-index: 700;
     width: 36px;
@@ -4010,8 +4092,8 @@
   }
   .map-banner {
     position: absolute;
-    left: 14px;
-    right: 14px;
+    left: 16px;
+    right: 16px;
     top: calc(max(12px, env(safe-area-inset-top)) + 96px);
     z-index: 900;
     display: flex;
@@ -4040,6 +4122,10 @@
      compact states. Full height reuses the direct detail composition below. */
   .selected-place-summary {
     position: relative;
+    /* A flex item defaults to min-width:auto, which resolves to min-content —
+       so an unbreakable name became this card's floor and pushed the close
+       button off screen, where overflow-x:hidden clipped it (2026-09-20). */
+    min-width: 0;
     color: var(--text);
   }
   .selected-place-summary.half {
@@ -4073,7 +4159,8 @@
     font-weight: 750;
     letter-spacing: -.02em;
     line-height: 1.2;
-    text-overflow: ellipsis;
+    /* no text-overflow here: it does nothing on a -webkit-box, and the clamp
+       on .place-name-primary below is what actually truncates */
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 2;
   }
@@ -4095,12 +4182,30 @@
     gap: 3px;
   }
   .place-detail-name-stack { flex: 1; }
+  /* The grid track is only as narrow as its widest item allows, so the h1
+     needs its own zero floor — without it the detail title ran 114px past the
+     viewport and overprinted the category badge. */
+  .place-detail-name-stack > h1 { min-width: 0; }
   .place-name-primary {
     display: block;
     min-width: 0;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+  }
+  /* Scoped deliberately: on the compact/peek card a wrapped two-line clamp
+     collapses the row to "Daiso …", so only the half card and the detail page
+     wrap. `anywhere` rather than `break-word` — only `anywhere` lowers the
+     min-content width, which is what stops the box inflating in the first
+     place. Korean keeps `word-break: keep-all` from the base layer. */
+  .selected-place-summary.half .place-name-primary,
+  .place-detail-name-stack .place-name-primary {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    white-space: normal;
+    overflow-wrap: anywhere;
+    overflow: hidden;
   }
   .place-name-secondary {
     display: block;
@@ -4454,6 +4559,9 @@
   }
   .mapsheet.half.has-selection .mapsheet-view-enter {
     display: flex;
+    /* Without a direction this was a ROW, which made the card a horizontal
+       flex item and let its min-content width set the floor. */
+    flex-direction: column;
     flex: 1;
     min-height: 0;
   }
@@ -4698,7 +4806,7 @@
   /* Zoom +/- buttons — desktop fallback for pinch, sits above the locate FAB. */
   .metro-zoombtn {
     position: absolute;
-    right: 14px;
+    right: 16px;
     bottom: calc(176px + env(safe-area-inset-bottom));
     z-index: 12;
     display: flex;
@@ -5192,6 +5300,10 @@
   .settings-row-title {
     min-width: 0;
     flex: 1;
+    /* At 320px this box is narrower than the word "preferences", which then
+       painted outside it over the value and the chevron. Break as a last
+       resort rather than overflow. */
+    overflow-wrap: anywhere;
     font-size: 14px;
     font-weight: 600;
   }
@@ -5467,10 +5579,24 @@
   }
   .subway-snap-handle {
     flex: none;
+    /* The visible strip stays thin because the half-snap chrome budget
+       reserves ~20px for it (2026-08-22 spec:93/206); the touch target is
+       widened by the pseudo element below instead of by growing the strip. */
+    position: relative;
     display: grid;
     justify-items: center;
     padding: 8px 16px 4px;
     cursor: grab;
+    touch-action: none;
+  }
+  .subway-snap-handle::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 50%;
+    height: 44px;
+    transform: translateY(-50%);
     touch-action: none;
   }
   .subway-snap-handle:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
@@ -5962,7 +6088,7 @@
   }
   .product-cta-bar {
     gap: 8px;
-    padding: 10px 12px max(10px, env(safe-area-inset-bottom));
+    padding: 10px 16px max(10px, env(safe-area-inset-bottom));
   }
   .product-cta-bar .iconbtn {
     flex: none;
@@ -6406,4 +6532,57 @@
     box-shadow: var(--shadow-sm);
     pointer-events: none;
   }
+}
+
+
+/* ── Pressed states ───────────────────────────────────────────────────────
+   Unlayered and last on purpose: `.chip` sets `background: transparent` in
+   @layer components, so a pressed rule inside the same layer would lose.
+   Only `transform` and `background`/`filter` are touched, which stay on the
+   compositor. 90ms keeps the acknowledgement inside NN/g's 0.1s "instant"
+   limit. Reduced motion drops the transform in @layer base above. */
+.maprow:active,
+.drow:active,
+.listrow:active,
+.chip:active,
+.sfchip:active,
+.bottomnav .nav:active,
+.card.tap:active,
+.selected-place-summary-main:active {
+  background: var(--surface-hover);
+  transform: scale(0.98);
+  transition: transform 90ms cubic-bezier(0.2, 0, 0, 1), background 90ms linear;
+}
+
+/* Full-width buttons already paint a brand background, so darken instead of
+   swapping it. */
+.btn:active {
+  filter: brightness(0.94);
+}
+
+/* The selected station row owns its background through aria-selected at the
+   same specificity — darken rather than fight it. */
+.station-result-options > button:active {
+  filter: brightness(0.96);
+  transition: filter 90ms linear;
+}
+
+/* ── Exit animations ─────────────────────────────────────────────────────
+   Overlays used to animate in and then vanish in a single frame. While
+   `.closing` the node is still mounted (components/ui/use-exit-transition.ts)
+   but must not swallow taps meant for the page underneath. */
+.overlay.closing,
+.modal.closing,
+.drawer-scrim.closing {
+  animation: scrim-out var(--dur-exit, 200ms) var(--ease-exit, ease) forwards;
+  pointer-events: none;
+}
+.overlay.closing .sheet {
+  animation: sheetdown var(--dur-exit, 200ms) var(--ease-exit, ease) forwards;
+}
+.drawer.closing {
+  animation: drawerout var(--dur-exit, 200ms) var(--ease-exit, ease) forwards;
+}
+.modal.closing .box {
+  animation: scrim-out var(--dur-exit, 200ms) var(--ease-exit, ease) forwards;
 }

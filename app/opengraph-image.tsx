@@ -1,30 +1,16 @@
 // Social share card — dark brand canvas, supplied Seoul mark, two-tone wordmark.
-// Michroma is fetched from Google Fonts at render time (Satori needs raw
-// TTF bytes); if that fetch ever fails we fall back to a text-free card
-// rather than erroring the crawler.
+// Michroma is fetched from Google Fonts at render time via lib/og-fonts
+// (Satori needs raw TTF bytes); if that fetch ever fails we fall back to a
+// text-free card rather than erroring the crawler.
 
 import { ImageResponse } from "next/og";
+import { loadGoogleFont } from "@/lib/og-fonts";
 
 export const alt = "MYSEOULDROP — Seoul beauty, mapped.";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
 const ORANGE = "#F55800";
-
-async function loadMichroma(): Promise<ArrayBuffer | null> {
-  try {
-    const cssRes = await fetch("https://fonts.googleapis.com/css2?family=Michroma");
-    if (!cssRes.ok) return null;
-    const css = await cssRes.text();
-    const url = css.match(/src: url\((.+?)\) format\('(?:truetype|opentype)'\)/)?.[1];
-    if (!url) return null;
-    const fontRes = await fetch(url);
-    if (!fontRes.ok) return null;
-    return await fontRes.arrayBuffer();
-  } catch {
-    return null;
-  }
-}
 
 function Mark({ px }: { px: number }) {
   return (
@@ -35,7 +21,7 @@ function Mark({ px }: { px: number }) {
 }
 
 export default async function Image() {
-  const michroma = await loadMichroma();
+  const michroma = await loadGoogleFont("Michroma");
   return new ImageResponse(
     (
       <div

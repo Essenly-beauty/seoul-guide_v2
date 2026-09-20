@@ -1,9 +1,11 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
+import { fontVariables } from "./fonts";
 import { IconSprite } from "@/components/icon";
 import { RouteProgress } from "@/components/ui/route-progress";
 import { ErrorReporterInit } from "@/components/system/error-reporter-init";
 import { PwaRegister } from "@/components/system/pwa-register";
+import { WebVitalsReporter } from "@/components/system/web-vitals-reporter";
 import { ThemeProvider } from "@/components/theme/theme-provider";
 import { ToastProvider } from "@/components/ui/toast";
 import { SignupReturnNotice } from "@/components/auth/signup-return-notice";
@@ -55,7 +57,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     // suppressHydrationWarning: THEME_BOOT stamps data-theme before React
     // hydrates — the attribute mismatch is intentional (next-themes pattern)
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" suppressHydrationWarning className={fontVariables}>
       <head>
         <script dangerouslySetInnerHTML={{ __html: THEME_BOOT }} />
       </head>
@@ -63,6 +65,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <IconSprite />
         <ErrorReporterInit />
         <PwaRegister />
+        <WebVitalsReporter />
         <ThemeProvider>
           <ToastProvider>
             <div className="app-shell">

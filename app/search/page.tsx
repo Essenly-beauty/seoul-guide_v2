@@ -116,7 +116,7 @@ function PlaceRow({ r, query, onOpen, onFill }: {
       <button style={rowBtn} onClick={onOpen}>
         <CategoryBadge type={p.type} size={17} />
         <div style={{ flex: 1, minWidth: 0 }}>
-          <div style={{ fontWeight: 600, fontSize: 14.5 }}>
+          <div style={{ fontWeight: 600, fontSize: 14.5, display: "-webkit-box", WebkitBoxOrient: "vertical", WebkitLineClamp: 2, overflow: "hidden", overflowWrap: "anywhere" }}>
             <Highlight text={p.name} query={query} />
             <span className="muted" style={{ fontWeight: 500 }}> · {TYPE_LABEL[p.type]}</span>
           </div>
@@ -256,7 +256,7 @@ function SearchPageInner() {
                   <button className="listrow v2" style={{ cursor: "pointer", font: "inherit", color: "inherit" }} onClick={() => openPlace(p)}>
                     <span className="mono num" style={{ width: 24, fontSize: 15, fontWeight: 700, flex: "none", textAlign: "center", color: i === 0 ? "var(--accent)" : "var(--dim)" }}>{i + 1}</span>
                     <div style={{ flex: 1, minWidth: 0, textAlign: "left" }}>
-                      <div style={{ fontWeight: 600, fontSize: 14.5 }}>{p.name}</div>
+                      <div style={{ fontWeight: 600, fontSize: 14.5, display: "-webkit-box", WebkitBoxOrient: "vertical", WebkitLineClamp: 2, overflow: "hidden", overflowWrap: "anywhere" }}>{p.name}</div>
                       <div className="t-caption" style={{ marginTop: 2 }}>
                         <RatingLine rating={p.rating} count={p.ratingCount} plain />
                       </div>

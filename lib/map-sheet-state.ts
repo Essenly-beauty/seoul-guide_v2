@@ -111,3 +111,28 @@ export function springKeyframes({
   frames[frames.length - 1] = to;
   return { frames, duration: (frames.length - 1) * frameMs };
 }
+
+/** Did this gesture move the sheet enough that the click it produces should be
+ *  swallowed?
+ *
+ *  Decided at RELEASE, not when the drag is confirmed. Confirming after a few
+ *  pixels and marking the gesture "moved" there meant a hand shaken while
+ *  walking ate the tap although the sheet had gone nowhere. Position is the
+ *  wrong measure too: rubber-banding damps travel near a limit by 0.55, so a
+ *  short fast flick that does change the snap reads as almost no movement.
+ *  Finger travel plus "did the snap change" covers both. */
+export function didDrag({
+  travel,
+  target,
+  snap,
+  slop,
+}: {
+  /** Largest vertical distance the finger reached from where it went down. */
+  travel: number;
+  target: MapSheetSnap;
+  snap: MapSheetSnap;
+  slop: number;
+}): boolean {
+  if (target !== snap) return true;
+  return travel > slop + 6;
+}

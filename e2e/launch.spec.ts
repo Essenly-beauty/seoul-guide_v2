@@ -143,9 +143,10 @@ test.describe("direct auth + account sync", () => {
   test("shared list round-trip: member shares, guest opens it on the map", async ({ page, browser, baseURL }) => {
     await login(page);
     // heart two places through the UI so the Saved tab has a list to share
-    // (ids no other spec touches — the account may already carry hearts from
+    // (published Creatrip rows — the curated samples glow-skin-clinic /
+    // chahong-apgujeong are unpublished and 404 on production; ids no other spec touches — the account may already carry hearts from
     // earlier specs in this suite, so all assertions below stay count-agnostic)
-    for (const id of ["glow-skin-clinic", "chahong-apgujeong"]) {
+    for (const id of ["ct-idhair-gangnamdaero-branch-gangnam-k-perm-hair-s", "ct-idhair-gangnam-branch-gangnam-k-perm-hair-salon"]) {
       await page.goto(`/place/${id}`);
       const save = page.getByRole("button", { name: "Add to favorites" });
       await save.waitFor({ timeout: 20_000 });
@@ -167,7 +168,7 @@ test.describe("direct auth + account sync", () => {
       .toBe(1);
     const { data: lists } = await admin!.from("shared_lists").select("id, title, place_ids").eq("owner", uid!);
     expect(lists![0].title).toBe("Gangnam glow day");
-    expect(lists![0].place_ids).toEqual(expect.arrayContaining(["glow-skin-clinic", "chahong-apgujeong"]));
+    expect(lists![0].place_ids).toEqual(expect.arrayContaining(["ct-idhair-gangnamdaero-branch-gangnam-k-perm-hair-s", "ct-idhair-gangnam-branch-gangnam-k-perm-hair-salon"]));
     const count = lists![0].place_ids.length;
 
     // a guest (fresh context) opens the link: banner + Save all + join sheet
@@ -189,7 +190,7 @@ test.describe("direct auth + account sync", () => {
 
   test("public review round-trip: consented note shows to guests, private stays private", async ({ page, browser, baseURL }) => {
     await login(page);
-    await page.goto("/place/glow-skin-clinic");
+    await page.goto("/place/ct-soonsoo-celebrity-hair-makeup-salon-in-cheongdam");
     await page.getByRole("button", { name: "Rate 4 stars" }).click();
     await page.getByRole("button", { name: "Write a review" }).click();
     await page.getByLabel("Your review").fill("Great aqua peel, English-friendly staff.");
@@ -202,7 +203,7 @@ test.describe("direct auth + account sync", () => {
     const guestCtx = await browser.newContext();
     const guest = await guestCtx.newPage();
     try {
-      await guest.goto(`${baseURL}/place/glow-skin-clinic`);
+      await guest.goto(`${baseURL}/place/ct-soonsoo-celebrity-hair-makeup-salon-in-cheongdam`);
       await expect(guest.getByText("Great aqua peel, English-friendly staff.")).toBeVisible({ timeout: 20_000 });
       await expect(guest.getByText("Member", { exact: true })).toBeVisible();
       // guest report path asks for an account
@@ -223,7 +224,7 @@ test.describe("direct auth + account sync", () => {
         .toBe(0);
     } finally {
       await guestCtx.close();
-      await admin!.from("ratings").delete().eq("user_id", uid!).eq("place_id", "glow-skin-clinic");
+      await admin!.from("ratings").delete().eq("user_id", uid!).eq("place_id", "ct-soonsoo-celebrity-hair-makeup-salon-in-cheongdam");
     }
   });
 

@@ -272,7 +272,11 @@ describe("subway panel layout defects (owner reports 2026-08-22)", () => {
   });
 
   it("gives the station picker real height instead of a 230px box", () => {
-    expect(css).toContain("max-height: clamp(240px, calc(78dvh - 225px), 520px)");
+    // Still the panel-aware clamp the 2026-08-22 owner report asked for; it is
+    // now also capped by the live viewport so the 240px floor cannot outgrow
+    // the space left when the software keyboard is up (R3).
+    expect(css).toContain("clamp(240px, calc(78dvh - 225px), 520px)");
+    expect(css).toMatch(/\.station-search-results[^{]*\{[^}]*max-height:\s*min\(clamp\(240px[^}]*var\(--kb/);
   });
 
   it("does not put route editing inside the shop list", () => {
@@ -319,9 +323,15 @@ describe("timing is Google's job, the stepper is the bottom control", () => {
     expect(controller).toContain("viaIds.map((id) => STATIONS[id]).filter(Boolean)");
   });
 
-  it("pins the station stepper to the bottom instead of scrolling it away", () => {
+  it("keeps the station stepper at the bottom of the panel without covering the list", () => {
     expect(controller).toContain('className="subway-station-focus pinned"');
-    expect(css).toContain(".subway-station-focus.pinned {");
-    expect(css).toContain("bottom: 0;");
+    const rule = css.slice(css.indexOf(".subway-station-focus.pinned {"));
+    const body = rule.slice(0, rule.indexOf("}"));
+    expect(body).toBeTruthy();
+    // It stays last in the panel's flex column instead of floating over the
+    // scroller: `position: absolute` made the stepper hide the final ~80px of
+    // the place list for good (WCAG 2.4.11 Focus Not Obscured).
+    expect(body).not.toMatch(/position:\s*absolute/);
+    expect(body).toMatch(/flex:\s*none/);
   });
 });
