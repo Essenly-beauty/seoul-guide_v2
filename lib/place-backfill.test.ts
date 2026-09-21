@@ -241,7 +241,12 @@ describe("English-first titles", () => {
   it("keeps the Korean name so the taxi card still works", async () => {
     const { getPlace } = await import("@/lib/data");
     const p = getPlace("oy-학동중앙점");
-    expect(p?.name).toBe("Olive Young Hakdongjungang");
+    // The display name is English and the Korean original survives beside it.
+    // It is no longer pinned to the machine romanization: verified English
+    // names now replace those (scripts/lib/en-name-overrides.json,
+    // 2026-09-21), which is the whole point of that file.
+    expect(p?.name).toMatch(/^Olive Young /);
+    expect(p?.name).not.toMatch(/[가-힣]/);
     expect(p?.nameKr).toMatch(/[가-힣]/);
   });
 

@@ -464,11 +464,12 @@ const VERIFIED_CURATED_PLACE_IDS = new Set([
  * until venue verification; sourced rows remain public unless a human review
  * explicitly pauses them. All public consumers import this single boundary.
  */
-export const PLACES: Place[] = applyEnglishNameOverrides(
-  CATALOGUE_PLACES
-    .map((place) => VERIFIED_PLACE_PATCHES[place.id]
-      ? { ...place, ...VERIFIED_PLACE_PATCHES[place.id] }
-      : place))
+export const PLACES: Place[] = applyEnglishNameOverrides(CATALOGUE_PLACES)
+  // Hand-verified patches are applied AFTER the bulk English names, so a name
+  // a human checked against the storefront always wins over a rule-derived one.
+  .map((place) => VERIFIED_PLACE_PATCHES[place.id]
+    ? { ...place, ...VERIFIED_PLACE_PATCHES[place.id] }
+    : place)
   .filter((place) =>
     (place.source !== "curated" || VERIFIED_CURATED_PLACE_IDS.has(place.id)) &&
     !HIDDEN_PLACE_IDS.has(place.id) &&
