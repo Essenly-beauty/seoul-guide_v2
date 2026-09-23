@@ -90,8 +90,15 @@ describe("Daiso publication", () => {
   });
 
   it("keeps the audited launch totals in sync with Daiso publication", () => {
-    expect(CATALOGUE_PLACES).toHaveLength(962 + 33);
-    expect(PLACES).toHaveLength(845 + 33);
+    // +127 on 2026-09-23: the Olive Young list moved from a Kakao Map search
+    // capture (239 rows) to Olive Young's own store finder (366). 135 branches
+    // were added and 8 removed — shop-in-shop counters the retailer no longer
+    // lists, each of which returned nothing from its own search.
+    // The catalogue gains 127 and the published list 130: three of the old
+    // rows were held back as unlabelled district-centroid pins, and the
+    // rebuild resolved their addresses.
+    expect(CATALOGUE_PLACES).toHaveLength(962 + 33 + 127);
+    expect(PLACES).toHaveLength(845 + 33 + 130);
   });
 
   it("describes provisional names as officially sourced instead of verified", () => {
@@ -203,8 +210,11 @@ describe("place rating provenance", () => {
     const approximate = PLACES.filter((place) => place.geoSource === "area");
 
     // 99 owner-photo area pins + 9 shop-in-shop Daiso counters whose address
-    // geocoded only to road level (scripts/build-daiso-supplement-places.ts).
-    expect(provisional).toHaveLength(99 + 9);
+    // geocoded only to road level (scripts/build-daiso-supplement-places.ts)
+    // + 2 Olive Young branches whose address Nominatim could not resolve.
+    // Those two publish with the neighbourhood-level warning rather than not
+    // at all: the shop exists, and hiding it helps nobody.
+    expect(provisional).toHaveLength(99 + 9 + 2);
     expect(approximate.map((place) => place.id).sort())
       .toEqual(provisional.map((place) => place.id).sort());
   });

@@ -54,7 +54,7 @@ export type PlaceAuditBatch = {
   places: Record<string, PlaceAuditBatchPlace>;
 };
 
-const SOURCES = ["curated", "creatrip", "kakao", "ados", "daiso"] as const;
+const SOURCES = ["curated", "creatrip", "kakao", "ados", "daiso", "olive_young"] as const;
 const TOP_LEVEL_KEYS = ["schemaVersion", "source", "reviewedAt", "places"];
 const PLACE_KEYS = ["verdict", "observed"];
 const VERDICT_KEYS = [

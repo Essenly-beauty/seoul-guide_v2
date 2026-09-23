@@ -124,7 +124,10 @@ function automaticFindings(place: Place, kakao?: KakaoHoursEvidence, duplicateCo
     ...(!place.hours ? ["missing_hours"] : []),
     ...(place.englishOk !== true ? ["english_support_unknown"] : []),
     ...(englishNameNeedsReview(place.name) ? ["english_name_marketing_copy"] : []),
-    ...(place.source === "kakao" ? ["generated_english_romanization"] : []),
+    // Both were built by romanising the Korean branch name, so both need the
+    // reviewer to look at the English. Being on the retailer's own roster
+    // fixes which stores exist, not how their names were spelled.
+    ...(place.source === "kakao" || place.source === "olive_young" ? ["generated_english_romanization"] : []),
     ...(place.nameVerification === "provisional" ? ["provisional_english_name"] : []),
     ...(place.rating !== undefined ? ["source_rating_provenance_missing"] : []),
     ...(!(place.photos?.length || place.photoUrl) ? ["no_licensed_photo"] : []),

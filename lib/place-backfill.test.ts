@@ -58,10 +58,17 @@ describe("Kakao opening-hours backfill", () => {
   });
 
   it("recovered the non-uniform weeks the single-pair model had to skip", () => {
-    // Exactly the 122 rows scripts/backfill-hours.mjs used to log as
-    // "varies-by-day". They are the reason `week` exists.
-    expect(PER_DAY.length).toBeGreaterThanOrEqual(120); // 122 today
-    expect(UNIFORM.length).toBeGreaterThanOrEqual(200); // 242 today
+    // The rows scripts/backfill-hours.mjs used to log as "varies-by-day".
+    // They are the reason `week` exists.
+    //
+    // Was 122. Six overrides were deleted on 2026-09-23 because the branches
+    // they named are no longer on Olive Young's roster — 홈플러스월드컵,
+    // 홈플러스영등포, 강변엔터식스, 롯데백화점본점면세, 잠실장미상가, 광나루역,
+    // shop-in-shop counters whose host closed. Four of the six carried a
+    // per-day week. Losing a schedule for a shop that no longer exists is the
+    // right outcome, so the floor drops with it.
+    expect(PER_DAY.length).toBeGreaterThanOrEqual(116); // 118 today
+    expect(UNIFORM.length).toBeGreaterThanOrEqual(200); // 240 today
     expect(UNIFORM.length + PER_DAY.length).toBe(HOURS.length);
   });
 
@@ -174,13 +181,19 @@ describe("Kakao opening-hours backfill", () => {
 
   it("leaves places without an override showing no hours at all", () => {
     // Honesty check: the backfill must never have invented a pair for a place
-    // it could not resolve. Everything with hours is either an override, one
-    // of the hand-curated rows, or an official Daiso source value.
+    // it could not resolve. Every set of hours traces to a source — an
+    // override, a hand-curated row, or the retailer's own listing.
+    //
+    // "olive_young" joined that list on 2026-09-23. Those hours come from
+    // Olive Young's own store finder, but only for the ONE DAY it was
+    // captured, applied to the whole week. Right for a branch that keeps one
+    // schedule, wrong for one that opens later on Sunday. The Kakao per-day
+    // override still wins wherever it exists; the rest are owed a backfill.
     const overridden = new Set(HOURS.map(([id]) => id));
     const sourceHours = PLACES.filter((p) => p.hours && !overridden.has(p.id));
-    expect(sourceHours.every((p) =>
-      p.source === "curated" || p.source === "daiso" || p.source === undefined,
-    )).toBe(true);
+    const SOURCED = ["curated", "daiso", "olive_young", undefined];
+    const invented = sourceHours.filter((p) => !SOURCED.includes(p.source));
+    expect(invented.map((p) => `${p.name} (${p.source})`)).toEqual([]);
   });
 });
 

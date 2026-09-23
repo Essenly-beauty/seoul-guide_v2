@@ -811,7 +811,9 @@ function InfoSection({ place }: { place: Place }) {
               : "Official Daiso store listing — details can change. Confirm important ones before visiting."
           : place.source === "curated"
             ? "Curated pick — details compiled by our team and not yet venue-verified. Confirm before visiting."
-            : "Listed from public sources — details can change. Confirm important ones before visiting."}
+            : place.source === "olive_young"
+              ? "Listed on Olive Young's own store finder — the English display name is ours, not the store's sign. Details can change; confirm important ones before visiting."
+              : "Listed from public sources — details can change. Confirm important ones before visiting."}
         {place.locationVerification === "provisional"
           ? " Provisional location — the map pin is neighborhood-level; use the map-service button to confirm the storefront before visiting."
           : place.geoSource === "area"

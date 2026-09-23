@@ -36,7 +36,7 @@ vercel env pull --yes  # .env.local 재생성
 - 하단 탭바 먹통 원인 수정: `MapWiring` 인라인 콜백 무한 리렌더 → useCallback 안정화
 - 실데이터 파이프라인 3종 (지오코딩 캐시 커밋됨 → 재실행 수 초):
   - **미용실 205곳**: Creatrip CSV → `scripts/build-creatrip-places.mjs` (Nominatim, 94% 주소 정확)
-  - **올리브영 239곳**: 카카오맵 구별 캡처(`scripts/capture-kakao-oy.sh`) → `build-oliveyoung-kakao.mjs` (99% 정확, OSM 폴백 스크립트 별도)
+  - **올리브영 366곳**: 올리브영 자체 매장찾기 스냅샷(`data/sources/oliveyoung-seoul-2026-09-23.json`) → `build-oliveyoung-official.mjs`. 9/23 이전에는 카카오맵 검색 캡처였고 서울 매장의 38%를 놓치고 있었다
   - **관광지·시장 112곳**: a_drop_of_seoul CSV 2종 → `build-ados-places.mjs` (about/aboutKr 설명 포함, 상세페이지 노출)
 - 존 5개 추가(jamsil/yeongdeungpo/seoul_etc/busan/gyeonggi), 데이터 무결성 테스트 (`lib/creatrip-places.test.ts`)
 
@@ -265,7 +265,7 @@ vercel env pull --yes  # .env.local 재생성
 
 ```bash
 node scripts/build-creatrip-places.mjs      # 미용실 (CSV 경로 인자 가능)
-./scripts/capture-kakao-oy.sh && node scripts/build-oliveyoung-kakao.mjs  # 올리브영
+node scripts/build-oliveyoung-official.mjs  # 올리브영 (스냅샷 갱신은 docs/research/store-data-accuracy-2026-09-23.md §4 참조)
 node scripts/build-ados-places.mjs          # 관광지·시장
 npm run build:daiso-data                    # 다이소 251곳 (승인 스냅샷 data/sources/daiso-seoul-2026-09-03.json)
 npm run build:daiso-supplement              # 다이소 마트 입점 33곳 (오너 목록 + 다이소몰 API 스냅샷, 지오코딩 캐시 커밋됨)

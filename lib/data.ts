@@ -26,7 +26,11 @@ export type StepCategory =
   | "cleanser" | "toner" | "essence" | "serum" | "moisturizer" | "sunscreen" | "mask_pack"
   | "shampoo" | "conditioner" | "hair_treatment";
 export type ProductChannel = "olive_young" | "korea_exclusive";
-export type PlaceSource = "curated" | "creatrip" | "kakao" | "ados" | "daiso";
+/** "kakao" means a Kakao Map capture, which is a map's index rather than the
+    retailer's own list. The Olive Young rows carried it until 2026-09-23,
+    when they moved to "olive_young" — the retailer's own store finder — and
+    138 missing branches came with the move. */
+export type PlaceSource = "curated" | "creatrip" | "kakao" | "ados" | "daiso" | "olive_young";
 /** "verified" means an outside listing (Naver) confirmed the English name.
     "derived" means it was read off an authoritative table rather than a
     listing — the Seoul Metro station names in lib/subway-data.json, or a
@@ -236,6 +240,10 @@ export type Place = {
   nameVerification?: PlaceNameVerification;
   /** Explicitly provisional pins may be published only with an on-screen warning. */
   locationVerification?: PlaceLocationVerification;
+  /** The retailer's own identifier for this branch (Olive Young's store code,
+      e.g. "D176"). Stable across a rename, unlike the Korean branch name the
+      place id is derived from, so a future rebuild can match on it. */
+  storeCode?: string;
   /** Provenance (data-ledger slice, 2026-08-12): where this row came from.
       "curated" rows are team-compiled and may carry unverified details —
       the detail page discloses this and hides their synthetic ratings. */
@@ -332,7 +340,7 @@ export const CATALOGUE_PLACES: Place[] = [
   // Creatrip hair-salon import (205 rows → scripts/build-creatrip-places.mjs).
   ...withSource(CREATRIP_PLACES, "creatrip"),
   // Seoul Olive Young stores, Kakao Map capture (scripts/build-oliveyoung-kakao.mjs).
-  ...withSource(OLIVEYOUNG_PLACES, "kakao"),
+  ...withSource(OLIVEYOUNG_PLACES, "olive_young"),
   // "A drop of Seoul" attractions + towers & markets (scripts/build-ados-places.mjs).
   ...withSource(ADOS_PLACES, "ados"),
   // Owner-photo venues with independently reviewed, address-level pins.
