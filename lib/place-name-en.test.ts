@@ -24,9 +24,22 @@ const HANGUL = /[ㄱ-ㆎ가-힣]/;
 // characters, so the figure rose from 99 to 104 while the names got better.
 // What actually matters is measured instead: an unreadable token, and whether
 // the name is still ambiguous once enough of it is visible.
-const MAX_UNREADABLE = 33;        // names carrying a token > 18 chars — only ever lower
+const MAX_UNREADABLE = 0;         // names carrying a token > 18 chars — was 33, now cleared
 const MAX_COLLIDING_AT_24 = 27;   // was 32 before the verified names — only ever lower
 const MAX_COLLIDING_AT_28 = 15;   // was 19 — only ever lower
+//
+// Clearing the last 33 raised the 24-char collisions from 27 to 34 before it
+// settled back at 27. Every one of those seven was the same mistake: a correct
+// name whose branch word trailed a long host name, so truncation kept the part
+// the branches share and cut the part that tells them apart. "Daiso Good
+// Morning Mart Yujin/Hwagok/Hongje" are identical for the first 24 characters.
+// Leading with the branch word — "Daiso Yujin Good Morning Mart" — separates
+// them with no loss of meaning. Put the discriminator first when a name has a
+// long shared head.
+//
+// Measured on the real screen (390x844, 2026-09-23): a map list row gives the
+// name a 262px single-line box, which fits a median of 24 characters, and 123
+// of 878 rows are truncated. That is what these budgets model.
 
 /** Longest whitespace-free run: what makes a name unreadable and unbreakable. */
 function longestToken(name: string): number {
