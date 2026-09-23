@@ -172,8 +172,15 @@ park`), `Univ`→`Univ.`, `Seoul-forest`→`Seoul Forest`. 괄호가 답인 둘�
    이름에 계속 붙는다.
 4. **올리브영 공식 영문을 `data/sources/`로 스냅샷** 후 P0로 쓴다 — `eventNo`가 폐기될 수 있는 프로모션 페이지이므로 **빌드 시점 라이브
    페치 금지.**
-5. **`npm run audit:data` 재실행 후 리포트 커밋** — `scripts/audit-places.ts:37-45`가 리포트를 바이트 비교하고 각 항목에 `name`이 들어
-   있어, 268건 개명 후 `npm run audit:data:check`가 실패한다.
+5. ~~**`npm run audit:data` 재실행 후 리포트 커밋**~~ — **틀린 예측이었다(2026-09-23 실측).** 268건 개명 후에도
+   `npm run audit:data:check`는 통과하고, 재생성해도 리포트가 바이트 단위로 동일하다. 이유는 `scripts/audit-places.ts:29`가
+   오버라이드 적용 **전**의 `CATALOGUE_PLACES`를 읽기 때문이다. `applyEnglishNameOverrides`는 `lib/data.ts`에서 `PLACES`를
+   만들 때만 적용된다.
+
+   **다만 이것은 별개의 문제를 드러낸다**: 감사 리포트에 적힌 이름이 앱이 실제로 보여주는 이름이 아니다. `reports/place-audit.md`를
+   열어 지점을 검증하는 사람은 "Daiso Gangnam"을 보지만 앱에는 검증된 오버라이드 이름이 뜬다. 검증 산출물과 표시물이 갈라져 있으면
+   틀린 이름이 리뷰를 통과할 수 있다. 소스 데이터를 감사한다는 목적상 원본 이름을 쓰는 것 자체는 맞으므로, 고칠 곳은 리포트에
+   **두 이름을 나란히** 싣는 쪽이다. 아직 착수하지 않았다.
 
 ### 7-3. 계약 테스트 (설명만)
 
