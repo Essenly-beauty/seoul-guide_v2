@@ -755,7 +755,9 @@ function InfoSection({ place }: { place: Place }) {
         {place.source === "daiso"
           ? place.nameVerification === "provisional"
             ? "Official Daiso store listing — the English display name is provisional and has not yet been verified on Naver Map or Google. Confirm important details before visiting."
-            : "Official Daiso store listing — details can change. Confirm important ones before visiting."
+            : place.nameVerification === "derived"
+              ? "Official Daiso store listing — the English display name comes from the official station name or the chain's own English branding, not from the store's own sign. Confirm important details before visiting."
+              : "Official Daiso store listing — details can change. Confirm important ones before visiting."
           : place.source === "curated"
             ? "Curated pick — details compiled by our team and not yet venue-verified. Confirm before visiting."
             : "Listed from public sources — details can change. Confirm important ones before visiting."}

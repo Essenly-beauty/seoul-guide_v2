@@ -27,7 +27,13 @@ export type StepCategory =
   | "shampoo" | "conditioner" | "hair_treatment";
 export type ProductChannel = "olive_young" | "korea_exclusive";
 export type PlaceSource = "curated" | "creatrip" | "kakao" | "ados" | "daiso";
-export type PlaceNameVerification = "verified" | "provisional";
+/** "verified" means an outside listing (Naver) confirmed the English name.
+    "derived" means it was read off an authoritative table rather than a
+    listing — the Seoul Metro station names in lib/subway-data.json, or a
+    chain's own English brand name — and recorded with its basis in
+    scripts/lib/en-name-overrides.json. "provisional" is the machine
+    transliteration, which nobody has checked. */
+export type PlaceNameVerification = "verified" | "derived" | "provisional";
 export type PlaceLocationVerification = "verified" | "provisional";
 
 export type ZoneKey =

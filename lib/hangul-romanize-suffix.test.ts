@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-// @ts-expect-error -- plain-JS pipeline module shared with scripts/
+// Plain-JS pipeline module shared with scripts/; allowJs resolves its types.
 import { englishizeName } from "../scripts/lib/hangul-romanize.mjs";
 
 // scripts/build-oliveyoung-kakao.mjs and scripts/englishize-titles.mjs both run

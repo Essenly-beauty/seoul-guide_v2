@@ -2,7 +2,7 @@ import { readFileSync } from "node:fs";
 import { join } from "node:path";
 import { describe, expect, it } from "vitest";
 import { PLACES } from "./data";
-import { EN_NAME_OVERRIDES, truncationCollisions } from "./place-name-en";
+import { EN_NAME_OVERRIDES, applyEnglishNameOverrides, truncationCollisions } from "./place-name-en";
 
 const HANGUL = /[ㄱ-ㆎ가-힣]/;
 
@@ -101,5 +101,60 @@ describe("English name overrides", () => {
   it("is wired into the catalogue rather than sitting unused", () => {
     const src = readFileSync(join(process.cwd(), "lib/data.ts"), "utf8");
     expect(src).toMatch(/applyEnglishNameOverrides/);
+  });
+});
+
+// ── Provenance: a hand-checked name must not be labelled unverified ──
+//
+// applyEnglishNameOverrides replaced the display name but left
+// nameVerification alone, so 163 of the 268 hand-checked names kept
+// "provisional" and the place sheet told the visitor the English name "has
+// not yet been verified". That sentence was false about every one of them.
+//
+// "verified" is not the right label either: lib/daiso-import.ts:454 sets it
+// only when Naver confirms the English name, and these came from the Seoul
+// Metro station table (lib/subway-data.json) and the chains' own English
+// brand names. A third state records what actually happened.
+describe("override provenance", () => {
+  const [sampleId, sample] = Object.entries(EN_NAME_OVERRIDES)[0];
+
+  it("marks a renamed place as derived rather than provisional", () => {
+    const [place] = applyEnglishNameOverrides([
+      { id: sampleId, name: "machine name", nameKr: sample.nameKrAtVerification, nameVerification: "provisional" as const },
+    ]);
+    expect(place.name).toBe(sample.nameEn);
+    expect(place.nameVerification).toBe("derived");
+  });
+
+  it("leaves a place it did not rename alone", () => {
+    const [place] = applyEnglishNameOverrides([
+      { id: "no-such-id", name: "Untouched", nameKr: "그대로", nameVerification: "provisional" as const },
+    ]);
+    expect(place.name).toBe("Untouched");
+    expect(place.nameVerification).toBe("provisional");
+  });
+
+  it("applies that state to the places the app actually ships", () => {
+    const derived = PLACES.filter((place) => place.nameVerification === "derived");
+    expect(derived.length).toBeGreaterThan(100);
+    expect(PLACES.some((place) => place.nameVerification === "provisional")).toBe(true);
+  });
+
+  it("gives the derived name its own disclosure instead of the provisional one", () => {
+    const body = readFileSync(join(import.meta.dirname, "..", "components", "place", "place-detail-body.tsx"), "utf8");
+    // The false sentence must no longer be reachable for a derived name, and
+    // the derived case must say where the English actually came from.
+    expect(body).toMatch(/nameVerification === "derived"/);
+    const provisionalSentence = body.slice(body.indexOf('nameVerification === "provisional"'));
+    expect(provisionalSentence).toMatch(/has not yet been verified/);
+  });
+
+  it("does not report a derived name as a provisional-English audit finding", () => {
+    const audit = readFileSync(join(import.meta.dirname, "place-audit.ts"), "utf8");
+    // The finding is gated on equality with "provisional", so "derived" is
+    // excluded by construction. Pin that, so a later rewrite to
+    // `!== "verified"` cannot silently re-flag 163 checked names.
+    expect(audit).toMatch(/nameVerification === "provisional" \? \["provisional_english_name"\]/);
+    expect(audit).not.toMatch(/nameVerification !== "verified"/);
   });
 });

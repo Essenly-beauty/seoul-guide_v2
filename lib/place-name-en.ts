@@ -29,12 +29,19 @@ export type EnNameOverride = {
 export const EN_NAME_OVERRIDES = overrides as unknown as Record<string, EnNameOverride>;
 
 /** Replaces the display name where a verified English name exists AND the
-    Korean name still matches the one it was verified against. */
+    Korean name still matches the one it was verified against.
+ *
+ *  The rename also moves the place off "provisional", which is what the place
+ *  sheet reads to tell the visitor the English name has not been checked.
+ *  Leaving it put that false sentence under 163 hand-checked names. It becomes
+ *  "derived", not "verified": the basis recorded in the override file is an
+ *  authoritative table (station names, chain brand names), not the Naver
+ *  listing confirmation that lib/daiso-import.ts requires for "verified". */
 export function applyEnglishNameOverrides<T extends { id: string; name: string; nameKr: string }>(places: T[]): T[] {
   return places.map((place) => {
     const entry = EN_NAME_OVERRIDES[place.id];
     if (!entry || entry.nameKrAtVerification !== place.nameKr) return place;
-    return { ...place, name: entry.nameEn };
+    return { ...place, name: entry.nameEn, nameVerification: "derived" as const };
   });
 }
 
