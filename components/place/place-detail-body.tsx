@@ -704,6 +704,54 @@ function ReviewsSection({ place }: { place: Place }) {
   );
 }
 
+/** What the retailer's own store finder says this branch can do.
+ *
+ *  These decide a visit for a foreign visitor — whether the branch does a tax
+ *  refund, sells a SIM, or refuses cash — and until 2026-09-23 the app held
+ *  every one of them and showed none. "Card only" leads because it is the one
+ *  that turns someone away at the till. */
+const STORE_FACT_LABELS: Record<string, string> = {
+  "cashless-store": "Card only, no cash",
+  "tax-refund": "Tax refund",
+  "sim-card": "SIM cards",
+  "store-pickup": "Store pickup",
+  "photo-sticker": "Photo booth",
+  "name-sticker": "Name stickers",
+  parking: "Parking",
+  elevator: "Elevator",
+  "entrance-ramp": "Step-free entrance",
+};
+const STORE_FACT_ORDER = Object.keys(STORE_FACT_LABELS);
+
+function StoreFactsRow({ place }: { place: Place }) {
+  const facts = [...new Set([...(place.serviceTags ?? []), ...(place.facilities ?? [])])]
+    .filter((key) => key in STORE_FACT_LABELS)
+    .sort((a, b) => STORE_FACT_ORDER.indexOf(a) - STORE_FACT_ORDER.indexOf(b));
+  if (facts.length === 0) return null;
+  return (
+    <div className="inforow" style={{ alignItems: "flex-start" }}>
+      <Icon name="mark" size="xs" />
+      <span>In store</span>
+      <span className="chev" style={{ display: "flex", flexWrap: "wrap", gap: 6, justifyContent: "flex-end" }}>
+        {facts.map((key) => (
+          <span
+            key={key}
+            className="caption"
+            style={{
+              padding: "2px 8px", borderRadius: 999, whiteSpace: "nowrap",
+              border: "1px solid var(--line)",
+              color: key === "cashless-store" ? "var(--warning, var(--text))" : "var(--muted)",
+              fontWeight: key === "cashless-store" ? 600 : 400,
+            }}
+          >
+            {STORE_FACT_LABELS[key]}
+          </span>
+        ))}
+      </span>
+    </div>
+  );
+}
+
 // ── Info (d-info): full details — Naver home/info split ───
 function InfoSection({ place }: { place: Place }) {
   const { toast } = useToast();
@@ -741,8 +789,11 @@ function InfoSection({ place }: { place: Place }) {
         <span>English</span>
         <span className="caption muted chev">{place.englishOk ? "Staff can assist in English" : "Translation app recommended"}</span>
       </div>
-      {/* facility chips (Card OK / Locker / Towel rental) were invented
-          shared samples — removed until per-place verified data exists */}
+      {/* The facility chips pulled in the launch audit were one invented
+          sample repeated on every place. These are per-place and come from the
+          retailer's own store finder, which is the condition that removal was
+          waiting on. Nothing renders when a place has no such data. */}
+      <StoreFactsRow place={place} />
       {place.priceRange && (
         <div className="inforow">
           <span className="muted" style={{ width: 20, textAlign: "center", flex: "none" }} aria-hidden="true">₩</span>

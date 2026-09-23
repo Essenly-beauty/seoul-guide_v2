@@ -122,6 +122,17 @@ export const CATEGORY_DEFINITIONS = [
 
 /** Per-category detail-filter service tags (spec §4.2). Keys match Place.serviceTags. */
 export const SERVICE_FILTERS: Partial<Record<PlaceType, { key: string; label: string }[]>> = {
+  // Daiso's own store finder reports these per store (scripts/build-daiso-
+  // supplement-places.ts). A visitor could not reach any of them until
+  // 2026-09-23: the category had no entry here at all, so the 65 tax-free and
+  // 116 SIM-selling stores were unreachable. "cashless-store" is deliberately
+  // not a filter — nobody searches for a shop that refuses cash; it is a
+  // warning, and the place sheet shows it as one.
+  daiso: [
+    { key: "tax-refund", label: "Tax refund" }, { key: "sim-card", label: "SIM cards" },
+    { key: "store-pickup", label: "Store pickup" }, { key: "photo-sticker", label: "Photo booth" },
+    { key: "name-sticker", label: "Name stickers" },
+  ],
   olive_young: [
     { key: "global", label: "Global (Tax-free)" }, { key: "late", label: "Open late" },
   ],
@@ -201,6 +212,11 @@ export type Place = {
   stationWalk?: { station: string; exit?: string; minutes: number };
   services?: ServiceItem[];
   serviceTags?: string[];
+  /** Step-free access and parking, as the retailer's own store finder reports
+      them. The launch audit pulled the old facility rows because they were
+      one invented sample repeated on every place; these are per-place and
+      sourced. */
+  facilities?: string[];
   bookingChannels?: BookingChannel[];
   priceConfirmedDaysAgo?: number;
   // Creatrip import extras — kept so the CSV round-trips losslessly.
