@@ -4,9 +4,9 @@
   "caution": "이 파일은 전수 조사 큐다. 추정 필드는 공개용 태그가 아니며 사람 또는 출처 검토가 필요하다.",
   "summary": {
     "p1_identity_dedup": 37,
-    "done_or_pending_specific_check": 79,
+    "done_or_pending_specific_check": 85,
     "p3_general_review": 243,
-    "p2_editorial_potential": 95
+    "p2_editorial_potential": 89
   },
   "records": [
     {
@@ -1260,8 +1260,8 @@
       "normalized_name": "굿뉴스 카페앤모어",
       "possible_duplicate_external_ids": [],
       "content_kind_guess": "cafe_candidate",
-      "research_priority": "p2_editorial_potential",
-      "current_research_status": "not_researched"
+      "research_priority": "done_or_pending_specific_check",
+      "current_research_status": "reviewed"
     },
     {
       "external_id": "coffeelog-553d837e5e1aa8ae",
@@ -1270,8 +1270,8 @@
       "normalized_name": "오츠커피 용산점",
       "possible_duplicate_external_ids": [],
       "content_kind_guess": "cafe_candidate",
-      "research_priority": "p2_editorial_potential",
-      "current_research_status": "not_researched"
+      "research_priority": "done_or_pending_specific_check",
+      "current_research_status": "reviewed"
     },
     {
       "external_id": "coffeelog-625d73dafca55b25",
@@ -1280,8 +1280,8 @@
       "normalized_name": "로로카페 청파로점",
       "possible_duplicate_external_ids": [],
       "content_kind_guess": "cafe_candidate",
-      "research_priority": "p2_editorial_potential",
-      "current_research_status": "not_researched"
+      "research_priority": "done_or_pending_specific_check",
+      "current_research_status": "identity_verified"
     },
     {
       "external_id": "coffeelog-f0c9a97bd350937a",
@@ -1300,8 +1300,8 @@
       "normalized_name": "모르페커피 로스터리",
       "possible_duplicate_external_ids": [],
       "content_kind_guess": "cafe_candidate",
-      "research_priority": "p2_editorial_potential",
-      "current_research_status": "not_researched"
+      "research_priority": "done_or_pending_specific_check",
+      "current_research_status": "identity_verified"
     },
     {
       "external_id": "coffeelog-0f5ffd57466b8bb8",
@@ -1422,8 +1422,8 @@
       "normalized_name": "카페 르상스",
       "possible_duplicate_external_ids": [],
       "content_kind_guess": "cafe_candidate",
-      "research_priority": "p2_editorial_potential",
-      "current_research_status": "not_researched"
+      "research_priority": "done_or_pending_specific_check",
+      "current_research_status": "identity_verified"
     },
     {
       "external_id": "coffeelog-73bac24820345154",
@@ -1522,8 +1522,8 @@
       "normalized_name": "리암스 카페바",
       "possible_duplicate_external_ids": [],
       "content_kind_guess": "cafe_candidate",
-      "research_priority": "p2_editorial_potential",
-      "current_research_status": "not_researched"
+      "research_priority": "done_or_pending_specific_check",
+      "current_research_status": "identity_verified"
     },
     {
       "external_id": "coffeelog-175f4d4140a924a1",
