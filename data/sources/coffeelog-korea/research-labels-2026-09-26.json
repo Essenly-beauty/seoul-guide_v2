@@ -6,7 +6,7 @@
   "records": [
     {
       "canonical_place_id": "seoul:mapo:bean-brothers-coffeehouse-seoul",
-      "member_external_ids": ["coffeelog-cae1cbd79992c767"],
+      "member_external_ids": ["coffeelog-cae1cbd79992c767", "coffeelog-e450675948af7ed5"],
       "research_status": "reviewed", "confidence": "high",
       "verified_attributes": ["coffee-focused", "slow-coffee-experience", "tasting-program", "conversation-friendly"],
       "ados_editorial_angles": ["커피를 천천히 경험하는 오후", "상수에서 커피 취향을 넓히는 곳"],
@@ -15,7 +15,7 @@
     },
     {
       "canonical_place_id": "seoul:mapo:protokoll-sangsu",
-      "member_external_ids": ["coffeelog-699758d204b0a8ee"],
+      "member_external_ids": ["coffeelog-699758d204b0a8ee", "coffeelog-56cd0ef04fe50d72"],
       "research_status": "reviewed", "confidence": "high",
       "verified_attributes": ["specialty-coffee", "roastery", "work-friendly-concept", "coffee-first"],
       "ados_editorial_angles": ["상수에서 기록하고 집중하는 커피 시간", "공간보다 커피가 먼저 보이는 작업 카페"],
@@ -39,7 +39,7 @@
     },
     {
       "canonical_place_id": "seoul:seongdong:lowkey-seongsu",
-      "member_external_ids": ["coffeelog-7b00d651830481a6"],
+      "member_external_ids": ["coffeelog-7b00d651830481a6", "coffeelog-39f8c903029f913c", "coffeelog-16aac555f702bc17"],
       "research_status": "reviewed", "confidence": "high",
       "verified_attributes": ["specialty-coffee", "roastery", "coffee-education", "multi-branch-brand"],
       "ados_editorial_angles": ["성수에서 커피 자체에 집중하는 한 잔", "로스터리의 태도를 따라가는 서울 커피 지도"],
@@ -62,6 +62,72 @@
       "ados_editorial_angles": ["연희동 산책에 커피 한 잔을 더하는 곳"],
       "cautions": ["두 원본 행이 동일 지점인지 주소로 최종 확인", "플랫화이트는 장소의 상시 속성으로 승격하지 않음"],
       "evidence": [{ "url": "https://manufactcoffee.cafe24.com/shopinfo/company.html", "publisher": "Manufact Coffee", "source_kind": "official", "supports": ["brand-identity"] }]
+    },
+    {
+      "canonical_place_id": "seoul:seongdong:center-coffee-seoul-forest",
+      "member_external_ids": ["coffeelog-d428705c88a2a43c", "coffeelog-d0524a61d7b4aa90"],
+      "research_status": "reviewed", "confidence": "high",
+      "verified_attributes": ["specialty-coffee", "seoul-forest", "neighborhood-stop"],
+      "ados_editorial_angles": ["서울숲 산책 전후의 커피 정거장", "도심의 공원과 커피를 한 동선으로 잇기"],
+      "cautions": ["성수의 다른 센터커피 지점과 혼동하지 말 것"],
+      "evidence": [{ "url": "https://english.visitkorea.or.kr/svc/contents/contentsView.do?vcontsId=177422", "publisher": "VisitKorea", "source_kind": "public-tourism", "supports": ["place-identity", "seoul-forest-address"] }]
+    },
+    {
+      "canonical_place_id": "seoul:seongdong:mesh-coffee-seoul-forest",
+      "member_external_ids": ["coffeelog-247b4e70faa84d37"],
+      "research_status": "identity_verified", "confidence": "medium",
+      "verified_attributes": ["coffee-focused", "seoul-forest"],
+      "ados_editorial_angles": ["서울숲 골목에서 커피에 집중하는 짧은 정차"],
+      "cautions": ["현재 운영시간과 메뉴는 공식 채널로 추가 확인"],
+      "evidence": [{ "url": "https://kor.cafeshow.com/kor/cafeshow/result2018_comp_view.asp?idx=1671", "publisher": "서울카페쇼", "source_kind": "industry-directory", "supports": ["place-identity", "seongsu-address"] }]
+    },
+    {
+      "canonical_place_id": "seoul:seodaemun:anthracite-yeonhui",
+      "member_external_ids": ["coffeelog-16ae900f6f901489"],
+      "research_status": "reviewed", "confidence": "high",
+      "verified_attributes": ["roastery", "large-window", "light-and-shadow", "quiet-space"],
+      "ados_editorial_angles": ["빛과 검정이 만나는 연희동의 고요", "창으로 들어오는 빛을 보러 가는 카페"],
+      "cautions": ["혼잡도와 좌석 이용 경험은 방문 시점에 따라 달라질 수 있음"],
+      "evidence": [{ "url": "https://www.anthracitecoffee.com/yeonhui", "publisher": "Anthracite Coffee", "source_kind": "official", "supports": ["address", "large-window", "light-and-shadow", "opening-hours"] }]
+    },
+    {
+      "canonical_place_id": "seoul:jongno:fourbright-gwanghwamun",
+      "member_external_ids": ["coffeelog-ca568301a89b7701"],
+      "research_status": "reviewed", "confidence": "high",
+      "verified_attributes": ["coffee-focused", "central-seoul", "weekday-morning", "direct-operated"],
+      "ados_editorial_angles": ["광화문의 하루를 시작하는 이른 커피", "업무 지구에서 기본에 충실한 한 잔"],
+      "cautions": ["FOURB 광화문과 FOURBRIGHT 광화문은 주소가 다른 지점"],
+      "evidence": [{ "url": "https://www.fourb.co.kr/visit", "publisher": "FOURB", "source_kind": "official", "supports": ["fourbright-address", "opening-hours", "brand-concept", "direct-operated"] }]
+    },
+    {
+      "canonical_place_id": "seoul:seodaemun:cafe-pokpo",
+      "member_external_ids": ["coffeelog-27518957cc2530ac"],
+      "research_status": "reviewed", "confidence": "high",
+      "verified_attributes": ["waterfall-view", "outdoor-seating", "large-space", "public-regeneration"],
+      "ados_editorial_angles": ["서울 안에서 폭포를 바라보는 오후", "홍제천 산책과 이어지는 수변 카페"],
+      "cautions": ["인기 시간대 좌석 혼잡 가능", "원문 표기의 연희동보다 홍제천·홍제폭포 맥락이 정확함"],
+      "evidence": [{ "url": "https://mediahub.seoul.go.kr/archives/2017571", "publisher": "서울시 내 손안에 서울", "source_kind": "public-city-media", "supports": ["address", "opening-hours", "waterfall-view", "outdoor-seating", "public-regeneration"] }]
+    },
+    {
+      "canonical_place_id": "seoul:jongno:terarosa-gwanghwamun-historical",
+      "member_external_ids": ["coffeelog-3d5e96379c46b433"],
+      "research_status": "operation_needs_review", "confidence": "medium",
+      "verified_attributes": ["historical-listing-only"],
+      "ados_editorial_angles": [],
+      "cautions": ["2026년 공식 매장 목록에서 광화문점이 확인되지 않아 공개 보류", "청계광장점과 동일 지점으로 추정하지 말 것"],
+      "evidence": [{ "url": "https://terarosa.com/store/", "publisher": "TERAROSA", "source_kind": "official", "supports": ["current-store-list-does-not-confirm-gwanghwamun"] }]
+    },
+    {
+      "canonical_place_id": "seoul:seodaemun:protokoll-yeonhui",
+      "member_external_ids": ["coffeelog-aea4a9653b00ffb3", "coffeelog-5f7aa96ec5c47897"],
+      "research_status": "reviewed", "confidence": "high",
+      "verified_attributes": ["specialty-coffee", "roastery", "coffee-research", "tasting-program"],
+      "ados_editorial_angles": ["연희동에서 커피를 배우고 감각하는 시간", "기록과 실험이 쌓이는 로스터리"],
+      "cautions": ["상수점과 별도 장소 ID로 유지", "혼잡 시 이용 시간 제한 재확인"],
+      "evidence": [
+        { "url": "https://www.protokoll.kr/showroom", "publisher": "PROTOKOLL", "source_kind": "official", "supports": ["address", "coffee-programs", "opening-hours"] },
+        { "url": "https://korean.visitseoul.net/restaurants/protokoll/KOPcys3h9", "publisher": "Visit Seoul", "source_kind": "public-tourism", "supports": ["roastery", "coffee-research", "time-limit-caution"] }
+      ]
     }
   ]
 }
