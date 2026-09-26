@@ -4,8 +4,8 @@
   "caution": "이 파일은 전수 조사 큐다. 추정 필드는 공개용 태그가 아니며 사람 또는 출처 검토가 필요하다.",
   "summary": {
     "p1_identity_dedup": 39,
-    "done_or_pending_specific_check": 53,
-    "p3_general_review": 245,
+    "done_or_pending_specific_check": 54,
+    "p3_general_review": 244,
     "p2_editorial_potential": 117
   },
   "records": [
@@ -3405,8 +3405,8 @@
       "normalized_name": "스탠다드시스템",
       "possible_duplicate_external_ids": [],
       "content_kind_guess": "cafe_candidate",
-      "research_priority": "p3_general_review",
-      "current_research_status": "not_researched"
+      "research_priority": "done_or_pending_specific_check",
+      "current_research_status": "identity_verified"
     },
     {
       "external_id": "coffeelog-97b157710104dfd4",

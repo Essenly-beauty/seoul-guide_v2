@@ -15,7 +15,7 @@
     "geography": "Seoul only",
     "record_count": 454,
     "enriched_record_count": 30,
-    "researched_record_count": 53
+    "researched_record_count": 54
   },
   "import_policy": {
     "default_action": "stage_only",
@@ -12293,8 +12293,37 @@
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
       "editorial_context_provenance": null,
-      "canonical_place_id": null,
-      "research_status": "not_researched"
+      "canonical_place_id": "seoul:gangnam:standard-system-cheongdam",
+      "research_status": "identity_verified",
+      "research_confidence": "medium",
+      "verified_attributes": [
+        "roastery",
+        "specialty-coffee",
+        "quiet-space",
+        "work-friendly"
+      ],
+      "ados_editorial_angles": [
+        "청담에서 장식보다 커피에 집중하는 시간",
+        "직접 볶은 원두를 고르는 조용한 카페"
+      ],
+      "research_cautions": [
+        "주차는 매장 앞이 아닌 발렛 방식일 수 있어 방문 전 확인",
+        "공식 홈페이지 출처 추가 필요"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://dongnecoffeenote.com/c/5406",
+          "publisher": "동네 커피 노트",
+          "source_kind": "review-analysis",
+          "supports": [
+            "address",
+            "roastery",
+            "quiet-space",
+            "work-friendly",
+            "operation-signal-2026"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-97b157710104dfd4",

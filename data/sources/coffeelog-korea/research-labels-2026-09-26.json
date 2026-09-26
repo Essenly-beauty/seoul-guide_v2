@@ -392,6 +392,15 @@
       "ados_editorial_angles": ["코엑스 뒤편 주택가에서 숨을 고르는 로스터리"],
       "cautions": ["파르나스몰점 및 삼청점과 별도 장소로 유지", "공식 운영시간 추가 확인"],
       "evidence": [{ "url": "https://triple.guide/restaurants/a9939ac0-f179-4905-87da-c20d70d292ad", "publisher": "Triple", "source_kind": "travel-platform", "supports": ["place-identity", "samseong-main-branch"] }]
+    },
+    {
+      "canonical_place_id": "seoul:gangnam:standard-system-cheongdam",
+      "member_external_ids": ["coffeelog-1bd5447fa7ea9983"],
+      "research_status": "identity_verified", "confidence": "medium",
+      "verified_attributes": ["roastery", "specialty-coffee", "quiet-space", "work-friendly"],
+      "ados_editorial_angles": ["청담에서 장식보다 커피에 집중하는 시간", "직접 볶은 원두를 고르는 조용한 카페"],
+      "cautions": ["주차는 매장 앞이 아닌 발렛 방식일 수 있어 방문 전 확인", "공식 홈페이지 출처 추가 필요"],
+      "evidence": [{ "url": "https://dongnecoffeenote.com/c/5406", "publisher": "동네 커피 노트", "source_kind": "review-analysis", "supports": ["address", "roastery", "quiet-space", "work-friendly", "operation-signal-2026"] }]
     }
   ]
 }
