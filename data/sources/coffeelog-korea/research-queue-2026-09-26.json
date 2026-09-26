@@ -3,9 +3,9 @@
   "generated_on": "2026-09-26",
   "caution": "이 파일은 전수 조사 큐다. 추정 필드는 공개용 태그가 아니며 사람 또는 출처 검토가 필요하다.",
   "summary": {
-    "done_or_pending_specific_check": 123,
-    "p1_identity_dedup": 17,
+    "done_or_pending_specific_check": 133,
     "p3_general_review": 243,
+    "p1_identity_dedup": 7,
     "p2_editorial_potential": 71
   },
   "records": [
@@ -30,8 +30,8 @@
         "coffeelog-aec239b68bad4aec"
       ],
       "content_kind_guess": "cafe_candidate",
-      "research_priority": "p1_identity_dedup",
-      "current_research_status": "not_researched"
+      "research_priority": "done_or_pending_specific_check",
+      "current_research_status": "identity_verified"
     },
     {
       "external_id": "coffeelog-cae1cbd79992c767",
@@ -346,8 +346,8 @@
         "coffeelog-0f716868e46b6878"
       ],
       "content_kind_guess": "cafe_candidate",
-      "research_priority": "p1_identity_dedup",
-      "current_research_status": "not_researched"
+      "research_priority": "done_or_pending_specific_check",
+      "current_research_status": "identity_verified"
     },
     {
       "external_id": "coffeelog-e450675948af7ed5",
@@ -2163,8 +2163,8 @@
         "coffeelog-7fe71f00c29c950c"
       ],
       "content_kind_guess": "cafe_candidate",
-      "research_priority": "p1_identity_dedup",
-      "current_research_status": "not_researched"
+      "research_priority": "done_or_pending_specific_check",
+      "current_research_status": "reviewed"
     },
     {
       "external_id": "coffeelog-ca568301a89b7701",
@@ -2195,8 +2195,8 @@
         "coffeelog-d477b3d50b6b9dc3"
       ],
       "content_kind_guess": "cafe_candidate",
-      "research_priority": "p1_identity_dedup",
-      "current_research_status": "not_researched"
+      "research_priority": "done_or_pending_specific_check",
+      "current_research_status": "reviewed"
     },
     {
       "external_id": "coffeelog-c3d357fe9887f0ba",
@@ -2547,8 +2547,8 @@
         "coffeelog-e90b3f1a2f1c6109"
       ],
       "content_kind_guess": "cafe_candidate",
-      "research_priority": "p1_identity_dedup",
-      "current_research_status": "not_researched"
+      "research_priority": "done_or_pending_specific_check",
+      "current_research_status": "reviewed"
     },
     {
       "external_id": "coffeelog-a417476d19e9a7c0",
@@ -2773,8 +2773,8 @@
         "coffeelog-e6eefb0f842c40c8"
       ],
       "content_kind_guess": "cafe_candidate",
-      "research_priority": "p1_identity_dedup",
-      "current_research_status": "not_researched"
+      "research_priority": "done_or_pending_specific_check",
+      "current_research_status": "reviewed"
     },
     {
       "external_id": "coffeelog-a8170b8b5b919bce",
@@ -2927,8 +2927,8 @@
         "coffeelog-5c116508f45ed18f"
       ],
       "content_kind_guess": "cafe_candidate",
-      "research_priority": "p1_identity_dedup",
-      "current_research_status": "not_researched"
+      "research_priority": "done_or_pending_specific_check",
+      "current_research_status": "identity_verified"
     },
     {
       "external_id": "coffeelog-303ac3090471ebcf",
@@ -3031,8 +3031,8 @@
         "coffeelog-0d3d79e325f49570"
       ],
       "content_kind_guess": "cafe_candidate",
-      "research_priority": "p1_identity_dedup",
-      "current_research_status": "not_researched"
+      "research_priority": "done_or_pending_specific_check",
+      "current_research_status": "identity_verified"
     },
     {
       "external_id": "coffeelog-085e59c7fd708f6a",
@@ -4489,8 +4489,8 @@
         "coffeelog-d9a6d7b5abb0e2fe"
       ],
       "content_kind_guess": "cafe_candidate",
-      "research_priority": "p1_identity_dedup",
-      "current_research_status": "not_researched"
+      "research_priority": "done_or_pending_specific_check",
+      "current_research_status": "reviewed"
     },
     {
       "external_id": "coffeelog-2f68e806b35aeb9e",
@@ -4521,8 +4521,8 @@
         "coffeelog-1020844c2082ac58"
       ],
       "content_kind_guess": "cafe_candidate",
-      "research_priority": "p1_identity_dedup",
-      "current_research_status": "not_researched"
+      "research_priority": "done_or_pending_specific_check",
+      "current_research_status": "reviewed"
     },
     {
       "external_id": "coffeelog-987e7e51134ea8e8",
