@@ -245,6 +245,60 @@
       "ados_editorial_angles": ["한강 산책의 시작과 끝에 놓는 커피", "잠실의 강변 풍경을 오래 바라보는 곳"],
       "cautions": ["한강버스 선착장 운영과 접근 동선은 방문 전 확인"],
       "evidence": [{ "url": "https://terarosa.com/store/", "publisher": "TERAROSA", "source_kind": "official", "supports": ["current-operation", "address", "opening-hours"] }]
+    },
+    {
+      "canonical_place_id": "seoul:yongsan:el-cafe-coffee-roasters-huam",
+      "member_external_ids": ["coffeelog-ca44664a9709ded1"],
+      "research_status": "reviewed", "confidence": "high",
+      "verified_attributes": ["specialty-coffee", "roastery", "filter-coffee", "work-friendly", "early-weekday"],
+      "ados_editorial_angles": ["서울역 출발 전 커피를 제대로 고르는 법", "남산 아래에서 로스팅 공간을 바라보는 아침"],
+      "cautions": ["무단차 진입로와 엘리베이터가 없음", "평일·주말 운영시간이 다름"],
+      "evidence": [{ "url": "https://elcafe.co.kr/shopinfo/location.html", "publisher": "EL CAFE Coffee Roasters", "source_kind": "official", "supports": ["address", "opening-hours", "accessibility", "wifi-and-power", "filter-coffee", "roasting-space"] }]
+    },
+    {
+      "canonical_place_id": "seoul:jung:leesar-coffee-yaksu",
+      "member_external_ids": ["coffeelog-c9704c2c9974898c"],
+      "research_status": "identity_verified", "confidence": "medium",
+      "verified_attributes": ["espresso-bar", "capsule-shop", "standing-coffee-culture"],
+      "ados_editorial_angles": ["약수에서 짧고 진하게 마시는 에스프레소", "서울에서 만나는 이탈리아식 커피 리듬"],
+      "cautions": ["원본 무지점 표기를 약수점으로 확정하기 전 주소 대조 필요"],
+      "evidence": [{ "url": "https://leesarcoffee.com/author/alstn6823leesarcoffee-com/", "publisher": "LEESAR Coffee", "source_kind": "official", "supports": ["yaksu-branch", "capsule-shop"] }]
+    },
+    {
+      "canonical_place_id": "seoul:jung:leesar-coffee-myeongdong",
+      "member_external_ids": ["coffeelog-6d22fc436c48d974"],
+      "research_status": "identity_verified", "confidence": "medium",
+      "verified_attributes": ["espresso-bar", "myeongdong"],
+      "ados_editorial_angles": ["명동 산책 사이에 넣는 짧은 에스프레소"],
+      "cautions": ["현재 운영시간과 좌석 방식 추가 확인"],
+      "evidence": [{ "url": "https://www.jobkorea.co.kr/company/49129021/recruit", "publisher": "JobKorea", "source_kind": "recent-operation-signal", "supports": ["myeongdong-branch-operation-signal-2026"] }]
+    },
+    {
+      "canonical_place_id": "seoul:mapo:desker-lounge-hongdae",
+      "member_external_ids": ["coffeelog-8f1b4d89d7afccd5"],
+      "research_status": "reviewed", "confidence": "high",
+      "verified_attributes": ["paid-work-lounge", "work-friendly", "community-program", "reservation-required"],
+      "ados_editorial_angles": ["카페보다 확실하게 일하고 싶은 날의 홍대", "혼자 일하지만 연결될 수 있는 워크 라운지"],
+      "cautions": ["일반 카페가 아닌 유료 워크 라운지", "이용권 구매 후 예약 필요"],
+      "evidence": [{ "url": "https://differ.amado.work/event/25589", "publisher": "differ / DESKER", "source_kind": "official-program", "supports": ["address", "opening-hours", "paid-access", "work-lounge", "reservation"] }]
+    },
+    {
+      "canonical_place_id": "seoul:jung:sosu-bookshop",
+      "member_external_ids": ["coffeelog-0ff3c4995aec1e2f"],
+      "research_status": "identity_verified", "confidence": "medium",
+      "verified_attributes": ["bookshop", "reading", "digital-detox", "book-loan"],
+      "ados_editorial_angles": ["금요일엔 휴대폰을 내려놓는 작은 책방", "남산 아래에서 읽기에만 집중하는 시간"],
+      "cautions": ["카페보다 독립서점 성격이 강하므로 Places 유형 분리", "음료 판매와 현재 운영시간 추가 확인"],
+      "evidence": [{ "url": "https://www.ktriptips.com/kor/shopping/2989636", "publisher": "Korea Trip Tips", "source_kind": "tourism-directory", "supports": ["address", "bookshop", "phone-free-friday", "book-loan"] }]
+    },
+    {
+      "canonical_place_id": "seoul:yeongdeungpo:gangbyeon-seojae",
+      "member_external_ids": ["coffeelog-8507632d437ee6e9"],
+      "research_status": "identity_verified", "confidence": "medium",
+      "verified_attributes": ["hangang-view", "terrace", "garden", "book-themed"],
+      "ados_editorial_angles": ["국회 옆에서 한강을 바라보는 의외의 서재", "여의도에서 비 오는 날에도 좋은 강변 자리"],
+      "cautions": ["국회 경내 접근·휴무일을 방문 전 확인", "공식 운영 출처 추가 필요"],
+      "evidence": [{ "url": "https://www.diningcode.com/profile.php?rid=dS57ctvqMsxF", "publisher": "DiningCode", "source_kind": "place-platform", "supports": ["address", "hangang-view", "terrace", "garden", "operation-signal"] }]
     }
   ]
 }

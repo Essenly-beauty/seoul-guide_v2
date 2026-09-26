@@ -4,9 +4,9 @@
   "caution": "이 파일은 전수 조사 큐다. 추정 필드는 공개용 태그가 아니며 사람 또는 출처 검토가 필요하다.",
   "summary": {
     "p1_identity_dedup": 39,
-    "done_or_pending_specific_check": 37,
-    "p3_general_review": 251,
-    "p2_editorial_potential": 127
+    "done_or_pending_specific_check": 43,
+    "p3_general_review": 250,
+    "p2_editorial_potential": 122
   },
   "records": [
     {
@@ -782,8 +782,8 @@
       "normalized_name": "데스커 라운지 홍대",
       "possible_duplicate_external_ids": [],
       "content_kind_guess": "cafe_candidate",
-      "research_priority": "p2_editorial_potential",
-      "current_research_status": "not_researched"
+      "research_priority": "done_or_pending_specific_check",
+      "current_research_status": "reviewed"
     },
     {
       "external_id": "coffeelog-806c1c78e663bf31",
@@ -1582,8 +1582,8 @@
       "normalized_name": "엘카페 커피로스터스",
       "possible_duplicate_external_ids": [],
       "content_kind_guess": "cafe_candidate",
-      "research_priority": "p2_editorial_potential",
-      "current_research_status": "not_researched"
+      "research_priority": "done_or_pending_specific_check",
+      "current_research_status": "reviewed"
     },
     {
       "external_id": "coffeelog-de683123bd7b03b3",
@@ -1695,8 +1695,8 @@
       "normalized_name": "리사르커피",
       "possible_duplicate_external_ids": [],
       "content_kind_guess": "cafe_candidate",
-      "research_priority": "p2_editorial_potential",
-      "current_research_status": "not_researched"
+      "research_priority": "done_or_pending_specific_check",
+      "current_research_status": "identity_verified"
     },
     {
       "external_id": "coffeelog-a37d1770c142b775",
@@ -1715,8 +1715,8 @@
       "normalized_name": "리사르커피 명동점",
       "possible_duplicate_external_ids": [],
       "content_kind_guess": "cafe_candidate",
-      "research_priority": "p2_editorial_potential",
-      "current_research_status": "not_researched"
+      "research_priority": "done_or_pending_specific_check",
+      "current_research_status": "identity_verified"
     },
     {
       "external_id": "coffeelog-d62e07e39ae99327",
@@ -1858,8 +1858,8 @@
       "normalized_name": "소수책방",
       "possible_duplicate_external_ids": [],
       "content_kind_guess": "mixed_or_non_cafe_needs_review",
-      "research_priority": "p2_editorial_potential",
-      "current_research_status": "not_researched"
+      "research_priority": "done_or_pending_specific_check",
+      "current_research_status": "identity_verified"
     },
     {
       "external_id": "coffeelog-eff6e39bc5e0de71",
@@ -3835,8 +3835,8 @@
       "normalized_name": "강변서재 (여의도)",
       "possible_duplicate_external_ids": [],
       "content_kind_guess": "cafe_candidate",
-      "research_priority": "p3_general_review",
-      "current_research_status": "not_researched"
+      "research_priority": "done_or_pending_specific_check",
+      "current_research_status": "identity_verified"
     },
     {
       "external_id": "coffeelog-caf1cbc386611d48",
