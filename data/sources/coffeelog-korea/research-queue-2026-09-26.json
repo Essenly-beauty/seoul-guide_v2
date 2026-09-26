@@ -4,9 +4,9 @@
   "caution": "이 파일은 전수 조사 큐다. 추정 필드는 공개용 태그가 아니며 사람 또는 출처 검토가 필요하다.",
   "summary": {
     "p1_identity_dedup": 37,
-    "done_or_pending_specific_check": 97,
+    "done_or_pending_specific_check": 103,
     "p3_general_review": 243,
-    "p2_editorial_potential": 77
+    "p2_editorial_potential": 71
   },
   "records": [
     {
@@ -168,8 +168,8 @@
       "normalized_name": "머씨커피",
       "possible_duplicate_external_ids": [],
       "content_kind_guess": "cafe_candidate",
-      "research_priority": "p2_editorial_potential",
-      "current_research_status": "not_researched"
+      "research_priority": "done_or_pending_specific_check",
+      "current_research_status": "identity_verified"
     },
     {
       "external_id": "coffeelog-e4a8c4f67518ff79",
@@ -232,8 +232,8 @@
       "normalized_name": "바이앤드커피",
       "possible_duplicate_external_ids": [],
       "content_kind_guess": "cafe_candidate",
-      "research_priority": "p2_editorial_potential",
-      "current_research_status": "not_researched"
+      "research_priority": "done_or_pending_specific_check",
+      "current_research_status": "identity_verified"
     },
     {
       "external_id": "coffeelog-60124c44f5cb597e",
@@ -314,8 +314,8 @@
       "normalized_name": "샌드스톤커피랩 (연남)",
       "possible_duplicate_external_ids": [],
       "content_kind_guess": "cafe_candidate",
-      "research_priority": "p2_editorial_potential",
-      "current_research_status": "not_researched"
+      "research_priority": "done_or_pending_specific_check",
+      "current_research_status": "reviewed"
     },
     {
       "external_id": "coffeelog-3e5d704d27b43a31",
@@ -852,8 +852,8 @@
       "normalized_name": "미라지커피",
       "possible_duplicate_external_ids": [],
       "content_kind_guess": "cafe_candidate",
-      "research_priority": "p2_editorial_potential",
-      "current_research_status": "not_researched"
+      "research_priority": "done_or_pending_specific_check",
+      "current_research_status": "reviewed"
     },
     {
       "external_id": "coffeelog-72de4a0f7d704b3d",
@@ -962,8 +962,8 @@
       "normalized_name": "작업실01",
       "possible_duplicate_external_ids": [],
       "content_kind_guess": "cafe_candidate",
-      "research_priority": "p2_editorial_potential",
-      "current_research_status": "not_researched"
+      "research_priority": "done_or_pending_specific_check",
+      "current_research_status": "reviewed"
     },
     {
       "external_id": "coffeelog-63bb32ef28e4ef89",
@@ -1074,8 +1074,8 @@
       "normalized_name": "아이덴티티커피랩",
       "possible_duplicate_external_ids": [],
       "content_kind_guess": "cafe_candidate",
-      "research_priority": "p2_editorial_potential",
-      "current_research_status": "not_researched"
+      "research_priority": "done_or_pending_specific_check",
+      "current_research_status": "identity_verified"
     },
     {
       "external_id": "coffeelog-fe43f1b9efd39d8c",

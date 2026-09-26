@@ -752,6 +752,60 @@
       "ados_editorial_angles": ["인사동 골목에서 원두의 차이를 천천히 맛보는 커피바", "관광 동선 한가운데서 조용히 머무는 스페셜티 커피"],
       "cautions": ["에피큐어 페이지의 주소 필드가 과거 일산 주소로 남아 있어 종로 위치와 불일치", "최신 종로 주소·운영시간은 별도 장소 데이터로 교차 확인"],
       "evidence": [{ "url": "https://cafe.ambitstock.com/ikseon/cafe/%EC%95%8C%ED%86%A0%EC%BB%A4%ED%94%BC%EB%B0%94/", "publisher": "오늘의 카페", "source_kind": "review-aggregation", "supports": ["jongno-address", "opening-hours", "quiet-stay", "roastery"] }, { "url": "https://epicure.co.kr/detail?shopId=3726", "publisher": "에피큐어", "source_kind": "editorial-directory", "supports": ["specialty-coffee", "single-origin", "competition-barista", "roasting-equipment"] }]
+    },
+    {
+      "canonical_place_id": "seoul:mapo:mercy-coffee-hapjeong",
+      "member_external_ids": ["coffeelog-41a693d693f7d5c9"],
+      "research_status": "identity_verified", "confidence": "medium",
+      "verified_attributes": ["terrace", "garden", "late-hours", "signature-coffee", "pet-friendly-signal", "large-space"],
+      "ados_editorial_angles": ["합정 골목의 마당과 테라스에서 늦게까지 쉬는 곳", "반려견과 함께 넓은 공간을 찾는 오후"],
+      "cautions": ["반려동물 동반 범위와 대형견 상주 여부는 방문 전 확인", "커피 전문성보다 공간·체류 맥락을 우선 적용"],
+      "evidence": [{ "url": "https://www.diningcode.com/profile.php?rid=rHEqgG0B24jt", "publisher": "DiningCode", "source_kind": "place-platform", "supports": ["address", "opening-hours", "terrace", "large-space", "signature-coffee", "pet-friendly-signal"] }, { "url": "https://dongnecoffeenote.com/c/22704", "publisher": "동네 커피 노트", "source_kind": "review-analysis", "supports": ["address", "review-dedup", "current-place-identity"] }]
+    },
+    {
+      "canonical_place_id": "seoul:mapo:buyand-coffee",
+      "member_external_ids": ["coffeelog-5354049afe19108c"],
+      "research_status": "identity_verified", "confidence": "medium",
+      "verified_attributes": ["multi-floor", "signature-latte", "decaf-option", "pet-friendly", "lp-bar-aesthetic"],
+      "ados_editorial_angles": ["합정과 홍대 사이에서 LP 감성과 라테를 고르는 곳", "강아지와 함께 머물 수 있는 골목의 두 층"],
+      "cautions": ["실제 음악 감상 운영 방식은 방문 전 확인", "반려동물 좌석·리드줄 정책 확인"],
+      "evidence": [{ "url": "https://cafe.ambitstock.com/hongdae/cafe/%EB%B0%94%EC%9D%B4%EC%95%A4%EB%93%9C%EC%BB%A4%ED%94%BC/", "publisher": "오늘의 카페", "source_kind": "review-aggregation", "supports": ["address", "multi-floor", "signature-latte", "lp-bar-aesthetic"] }, { "url": "https://meongnyangroad.com/seoul/pet-friendly-cafe/%EB%B0%94%EC%9D%B4%EC%95%A4%EB%93%9C%EC%BB%A4%ED%94%BC-pw5rg", "publisher": "멍냥로드", "source_kind": "pet-friendly-directory", "supports": ["address", "pet-friendly", "puppuccino", "decaf-option"] }]
+    },
+    {
+      "canonical_place_id": "seoul:mapo:sandstone-coffee-lab-yeonnam",
+      "member_external_ids": ["coffeelog-3e232e7ea1cf2e86"],
+      "research_status": "reviewed", "confidence": "high",
+      "verified_attributes": ["roastery", "hand-drip", "early-opening", "terrace", "signature-cream-latte", "brunch"],
+      "ados_editorial_angles": ["연남의 붐비는 길을 벗어나 아침 핸드드립을 마시는 곳", "햇살 드는 테라스에서 커피와 가벼운 브런치를 고르는 시간"],
+      "cautions": ["주차 불가", "평일과 주말 마감시간 차이는 방문 전 확인"],
+      "evidence": [{ "url": "https://www.daangn.com/kr/local-profile/%EC%83%8C%EB%93%9C%EC%8A%A4%ED%86%A4%EC%BB%A4%ED%94%BC%EB%9E%A9-twt5jw9nz79b/", "publisher": "당근 동네업체", "source_kind": "business-profile", "supports": ["address", "opening-hours", "hand-drip", "signature-cream-latte", "brunch"] }, { "url": "https://kor.cafeshow.com/kor/cafeshow/exhibitor_view.asp?idx=4673", "publisher": "서울카페쇼", "source_kind": "official-industry-event", "supports": ["brand-identity", "address"] }]
+    },
+    {
+      "canonical_place_id": "seoul:mapo:mirage-coffee-yeonnam",
+      "member_external_ids": ["coffeelog-6ebdadd34c0952eb"],
+      "research_status": "reviewed", "confidence": "medium",
+      "verified_attributes": ["dessert-cafe", "croffle", "brownie", "late-hours", "date-friendly", "quiet-signal"],
+      "ados_editorial_angles": ["연남에서 크로플과 브라우니를 위해 찾아가는 늦은 카페", "소개팅과 대화에 어울리는 조용한 2층"],
+      "cautions": ["작업용보다는 디저트·대화 목적에 적합", "예약 가능 범위와 최신 운영시간 확인"],
+      "evidence": [{ "url": "https://www.tabling.co.kr/place/677cced166de5f0698837d66", "publisher": "테이블링", "source_kind": "place-platform", "supports": ["address", "opening-hours", "croffle", "brownie", "reservation-signal"] }, { "url": "https://dongnecoffeenote.com/c/22759", "publisher": "동네 커피 노트", "source_kind": "review-analysis", "supports": ["recent-operation-2026", "dessert-focus", "date-friendly", "quiet-signal", "work-use-caution"] }]
+    },
+    {
+      "canonical_place_id": "seoul:mapo:jakupsil-01",
+      "member_external_ids": ["coffeelog-c5fab8914d777589"],
+      "research_status": "reviewed", "confidence": "high",
+      "verified_attributes": ["work-friendly", "laptop-seating", "single-seating", "window-seating", "late-hours", "rental-available"],
+      "ados_editorial_angles": ["홍대 한복판에서 노트북을 펴고 집중하는 작은 작업실", "혼자 앉을 자리와 늦은 시간을 함께 찾는 날"],
+      "cautions": ["대관 일정과 좌석 이용 제한은 방문 전 확인", "동명의 과거 ‘작업실’ 북카페와 혼동하지 않도록 01 표기 유지"],
+      "evidence": [{ "url": "https://www.daangn.com/kr/local-profile/%EC%9E%91%EC%97%85%EC%8B%A401-pbakcvd6p3zv/", "publisher": "당근 동네업체", "source_kind": "business-profile", "supports": ["address", "current-operation-2026", "laptop-seating", "single-seating", "window-seating", "rental", "opening-hours"] }, { "url": "https://pandarank.net/contents/69c715be99c7c12d3eda4a15", "publisher": "판다랭크", "source_kind": "recent-visit", "supports": ["work-friendly", "quiet-space", "location-access"] }]
+    },
+    {
+      "canonical_place_id": "seoul:mapo:identity-coffee-lab",
+      "member_external_ids": ["coffeelog-672b9041b4a684eb"],
+      "research_status": "identity_verified", "confidence": "high",
+      "verified_attributes": ["specialty-coffee", "single-origin", "multiple-bean-choice", "decaf-option", "takeout-discount"],
+      "ados_editorial_angles": ["서교동에서 산지와 가공 방식의 차이를 골라 마시는 커피", "취향을 설명하면 원두 선택으로 답하는 커피랩"],
+      "cautions": ["주문 플랫폼의 ‘준비 중’ 표시는 영업 상태와 다를 수 있어 방문 전 확인", "가격은 테이크아웃 할인 적용 여부에 따라 달라짐"],
+      "evidence": [{ "url": "https://app.passorder.co.kr/normal/64e91007-52c9-4fa6-b2ec-aad4e14c92ab", "publisher": "패스오더", "source_kind": "ordering-platform", "supports": ["address", "specialty-coffee-mission", "single-origin", "multiple-bean-choice", "decaf-option", "takeout-discount"] }]
     }
   ]
 }
