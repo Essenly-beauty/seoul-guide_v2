@@ -4,9 +4,9 @@
   "caution": "이 파일은 전수 조사 큐다. 추정 필드는 공개용 태그가 아니며 사람 또는 출처 검토가 필요하다.",
   "summary": {
     "p1_identity_dedup": 37,
-    "done_or_pending_specific_check": 91,
+    "done_or_pending_specific_check": 97,
     "p3_general_review": 243,
-    "p2_editorial_potential": 83
+    "p2_editorial_potential": 77
   },
   "records": [
     {
@@ -2071,8 +2071,8 @@
       "normalized_name": "비엔에이치알커피",
       "possible_duplicate_external_ids": [],
       "content_kind_guess": "cafe_candidate",
-      "research_priority": "p2_editorial_potential",
-      "current_research_status": "not_researched"
+      "research_priority": "done_or_pending_specific_check",
+      "current_research_status": "reviewed"
     },
     {
       "external_id": "coffeelog-38c7e91527f314df",
@@ -2081,8 +2081,8 @@
       "normalized_name": "더소가 카페 서촌",
       "possible_duplicate_external_ids": [],
       "content_kind_guess": "cafe_candidate",
-      "research_priority": "p2_editorial_potential",
-      "current_research_status": "not_researched"
+      "research_priority": "done_or_pending_specific_check",
+      "current_research_status": "reviewed"
     },
     {
       "external_id": "coffeelog-2c1d874178fe0642",
@@ -2325,8 +2325,8 @@
       "normalized_name": "카페랑솜",
       "possible_duplicate_external_ids": [],
       "content_kind_guess": "cafe_candidate",
-      "research_priority": "p2_editorial_potential",
-      "current_research_status": "not_researched"
+      "research_priority": "done_or_pending_specific_check",
+      "current_research_status": "identity_verified"
     },
     {
       "external_id": "coffeelog-f0873b877a91cdec",
@@ -2385,8 +2385,8 @@
       "normalized_name": "커피가게 디터틀",
       "possible_duplicate_external_ids": [],
       "content_kind_guess": "cafe_candidate",
-      "research_priority": "p2_editorial_potential",
-      "current_research_status": "not_researched"
+      "research_priority": "done_or_pending_specific_check",
+      "current_research_status": "reviewed"
     },
     {
       "external_id": "coffeelog-6546e5507de85327",
@@ -2445,8 +2445,8 @@
       "normalized_name": "서울커피",
       "possible_duplicate_external_ids": [],
       "content_kind_guess": "cafe_candidate",
-      "research_priority": "p2_editorial_potential",
-      "current_research_status": "not_researched"
+      "research_priority": "done_or_pending_specific_check",
+      "current_research_status": "identity_verified"
     },
     {
       "external_id": "coffeelog-52ee413f43472f06",
@@ -2455,8 +2455,8 @@
       "normalized_name": "알토커피바",
       "possible_duplicate_external_ids": [],
       "content_kind_guess": "cafe_candidate",
-      "research_priority": "p2_editorial_potential",
-      "current_research_status": "not_researched"
+      "research_priority": "done_or_pending_specific_check",
+      "current_research_status": "reviewed"
     },
     {
       "external_id": "coffeelog-add30194575961b5",
