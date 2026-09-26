@@ -194,6 +194,57 @@
       "ados_editorial_angles": ["공연 전후 책과 함께 머무는 한강진의 라운지"],
       "cautions": ["확인된 상세 출처가 오래되어 현재 운영 여부 검증 전 공개 금지"],
       "evidence": [{ "url": "https://morningcalm.koreanair.com/media/pages/archive/dec-jan-feb-2021/b7933741fa-1743128463/morningcalm_2021-12-01-02.pdf", "publisher": "Korean Air MorningCalm", "source_kind": "editorial-archive", "supports": ["historical-location", "book-lounge-concept"] }]
+    },
+    {
+      "canonical_place_id": "seoul:mapo:coffee-libre-paran",
+      "member_external_ids": ["coffeelog-be104cac75f15c7e"],
+      "research_status": "identity_verified", "confidence": "medium",
+      "verified_attributes": ["specialty-coffee", "roastery", "single-origin", "multi-floor"],
+      "ados_editorial_angles": ["연남에서 한국 스페셜티 커피의 흐름 읽기", "커피 취향을 고르는 연남의 파란 거점"],
+      "cautions": ["운영시간과 공간 정책은 공식 채널로 재확인"],
+      "evidence": [{ "url": "https://www.diningcode.com/profile.php?rid=gwaeDVfZ8Pug", "publisher": "DiningCode", "source_kind": "place-platform", "supports": ["address", "specialty-coffee", "single-origin", "multi-floor"] }]
+    },
+    {
+      "canonical_place_id": "seoul:jung:champ-coffee-euljiro",
+      "member_external_ids": ["coffeelog-f70ac9f42766c790", "coffeelog-a37d1770c142b775"],
+      "research_status": "reviewed", "confidence": "medium",
+      "verified_attributes": ["coffee-brand", "euljiro", "sewoon-daerim-arcade"],
+      "ados_editorial_angles": ["세운상가를 걷다 만나는 을지로의 커피", "도심 산업 유산 위에 놓인 한 잔"],
+      "cautions": ["을지로점과 제3작업실 표기가 동일 지점인지 최종 주소 확인"],
+      "evidence": [
+        { "url": "https://m.champcoffee.com/", "publisher": "CHAMP COFFEE", "source_kind": "official", "supports": ["brand-identity", "coffee-philosophy"] },
+        { "url": "https://www.bccard.com/down/individual/event/event_2019100047_01.pdf", "publisher": "BC Card", "source_kind": "local-map-archive", "supports": ["euljiro-address", "daerim-arcade-location"] }
+      ]
+    },
+    {
+      "canonical_place_id": "seoul:gangdong:coffee-montage-seongnae",
+      "member_external_ids": ["coffeelog-0f81e045cdb8d44a", "coffeelog-2311fc924c13e338"],
+      "research_status": "reviewed", "confidence": "high",
+      "verified_attributes": ["specialty-coffee", "roastery", "showroom", "direct-trade"],
+      "ados_editorial_angles": ["서울 동쪽에서 로스팅의 과정을 만나는 곳", "동네 쇼룸에서 고르는 정직한 커피"],
+      "cautions": ["하남 로스팅 공장과 서울 성내 플래그십을 구분"],
+      "evidence": [{ "url": "https://www.coffeemontage.com/service/company.php", "publisher": "Coffee Montage", "source_kind": "official", "supports": ["seongnae-address", "roastery", "showroom", "direct-trade"] }]
+    },
+    {
+      "canonical_place_id": "seoul:gangnam:milestone-coffee-sinsa",
+      "member_external_ids": ["coffeelog-83702ee05ea3d201"],
+      "research_status": "reviewed", "confidence": "high",
+      "verified_attributes": ["specialty-coffee", "roastery", "australian-coffee-culture", "neighborhood-origin"],
+      "ados_editorial_angles": ["신사 골목에서 시작된 서울의 호주식 커피", "유행보다 오래 이어진 동네 로스터리"],
+      "cautions": ["공식 법인 주소는 한남이며 신사점 주소는 매장 기준으로 관리"],
+      "evidence": [
+        { "url": "https://www.milestonecoffee.kr/", "publisher": "Milestone Coffee Roasters", "source_kind": "official", "supports": ["brand-identity", "roastery"] },
+        { "url": "https://kor.cafeshow.com/kor/cafeshow/result2023_comp_view.asp?idx=4280", "publisher": "서울카페쇼", "source_kind": "industry-directory", "supports": ["sinsa-address", "specialty-coffee", "australian-coffee-culture", "opened-2014"] }
+      ]
+    },
+    {
+      "canonical_place_id": "seoul:songpa:terarosa-jamsil-hangang-park",
+      "member_external_ids": ["coffeelog-3fbbc14cf161d9c2"],
+      "research_status": "reviewed", "confidence": "high",
+      "verified_attributes": ["hangang-view", "park-stop", "roastery-brand", "late-evening"],
+      "ados_editorial_angles": ["한강 산책의 시작과 끝에 놓는 커피", "잠실의 강변 풍경을 오래 바라보는 곳"],
+      "cautions": ["한강버스 선착장 운영과 접근 동선은 방문 전 확인"],
+      "evidence": [{ "url": "https://terarosa.com/store/", "publisher": "TERAROSA", "source_kind": "official", "supports": ["current-operation", "address", "opening-hours"] }]
     }
   ]
 }
