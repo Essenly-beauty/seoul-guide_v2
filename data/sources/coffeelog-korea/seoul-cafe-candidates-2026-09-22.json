@@ -15,7 +15,7 @@
     "geography": "Seoul only",
     "record_count": 454,
     "enriched_record_count": 30,
-    "researched_record_count": 103
+    "researched_record_count": 113
   },
   "import_policy": {
     "default_action": "stage_only",
@@ -67,8 +67,56 @@
       ],
       "editorial_context_status": "source_derived",
       "editorial_context_provenance": "threads_collection_title",
-      "canonical_place_id": null,
-      "research_status": "not_researched"
+      "canonical_place_id": "seoul:mapo:hhss-house-mangwon",
+      "research_status": "reviewed",
+      "research_confidence": "high",
+      "verified_attributes": [
+        "design-studio-cafe",
+        "work-friendly",
+        "green-window-view",
+        "quiet-solo",
+        "filter-coffee",
+        "evening-alcohol",
+        "shoes-off"
+      ],
+      "ados_editorial_angles": [
+        "나무가 보이는 창 앞에서 혼자 일하는 망원의 오후",
+        "낮의 필터커피가 저녁의 술로 이어지는 디자인 스튜디오 카페"
+      ],
+      "research_cautions": [
+        "신발을 벗고 입장하는 공간",
+        "숨은 출입구와 3층 위치를 방문 안내에 명시",
+        "매장 고양이·향 사용에 민감한 방문자는 참고"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://english.visitseoul.net/area/2024-hhsshouse/ENPgqhcyc",
+          "publisher": "서울관광재단",
+          "source_kind": "official-tourism",
+          "supports": [
+            "address",
+            "design-studio-cafe",
+            "work-friendly",
+            "green-view",
+            "quiet-solo",
+            "evening-alcohol",
+            "shoes-off",
+            "opening-hours"
+          ]
+        },
+        {
+          "url": "https://www.diningcode.com/profile.php?rid=fojSxNCKyRch",
+          "publisher": "DiningCode",
+          "source_kind": "place-platform",
+          "supports": [
+            "duplicate-identity",
+            "filter-coffee",
+            "books",
+            "cat",
+            "entrance-caution"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-0f716868e46b6878",
@@ -224,8 +272,52 @@
       ],
       "editorial_context_status": "source_derived",
       "editorial_context_provenance": "threads_collection_title",
-      "canonical_place_id": null,
-      "research_status": "not_researched"
+      "canonical_place_id": "seoul:mapo:viva-bossa-mangwon",
+      "research_status": "reviewed",
+      "research_confidence": "high",
+      "verified_attributes": [
+        "work-friendly",
+        "many-outlets",
+        "wifi",
+        "large-space",
+        "late-hours",
+        "tea",
+        "brownie"
+      ],
+      "ados_editorial_angles": [
+        "망원에서 늦게까지 노트북을 펼칠 수 있는 넓은 3층",
+        "밀크티와 브라우니를 곁들여 오래 머무는 작업 시간"
+      ],
+      "research_cautions": [
+        "혼잡 시 좌석·이용시간 정책 확인",
+        "커피 전문성보다 작업 환경과 차·디저트 맥락을 우선"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://www.diningcode.com/profile.php?rid=bX1F6j8N4rNS",
+          "publisher": "DiningCode",
+          "source_kind": "place-platform",
+          "supports": [
+            "address",
+            "duplicate-identity",
+            "opening-hours",
+            "work-friendly",
+            "outlets",
+            "wifi",
+            "brownie"
+          ]
+        },
+        {
+          "url": "https://bizno.net/article/8672002340",
+          "publisher": "비즈노",
+          "source_kind": "public-business-data",
+          "supports": [
+            "business-name",
+            "address",
+            "active-business-signal"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-9414ba3ffda99ba7",
@@ -267,8 +359,53 @@
       ],
       "editorial_context_status": "source_derived",
       "editorial_context_provenance": "threads_collection_title",
-      "canonical_place_id": null,
-      "research_status": "not_researched"
+      "canonical_place_id": "seoul:mapo:rowing-coffee-mangwon",
+      "research_status": "reviewed",
+      "research_confidence": "high",
+      "verified_attributes": [
+        "fruit-sando",
+        "seasonal-dessert",
+        "work-friendly",
+        "window-seating",
+        "pet-friendly-signal",
+        "time-limit"
+      ],
+      "ados_editorial_angles": [
+        "망원 골목을 내려다보며 과일 산도와 함께 일하는 오후",
+        "비 오는 날 창가와 계절 디저트를 고르는 2층 카페"
+      ],
+      "research_cautions": [
+        "평일·주말 이용시간 제한이 다를 수 있음",
+        "로잉커피바는 별도 2호점이므로 분리 관리",
+        "반려동물 동반 정책 확인"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://www.diningcode.com/profile.php?rid=8EwP6tn6qgwo",
+          "publisher": "DiningCode",
+          "source_kind": "place-platform",
+          "supports": [
+            "address",
+            "duplicate-identity",
+            "fruit-sando",
+            "seasonal-dessert",
+            "work-friendly",
+            "time-limit",
+            "pet-friendly-signal"
+          ]
+        },
+        {
+          "url": "https://www.tabling.co.kr/place/677cd60466de5f0698903e9e",
+          "publisher": "테이블링",
+          "source_kind": "place-platform",
+          "supports": [
+            "address",
+            "opening-hours",
+            "laptop",
+            "seasonal-dessert"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-20109512ce0efd2e",
@@ -871,8 +1008,41 @@
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
       "editorial_context_provenance": null,
-      "canonical_place_id": null,
-      "research_status": "not_researched"
+      "canonical_place_id": "seoul:mapo:nuhood-hapjeong",
+      "research_status": "identity_verified",
+      "research_confidence": "medium",
+      "verified_attributes": [
+        "work-friendly",
+        "many-outlets",
+        "early-weekday",
+        "late-hours",
+        "window-bar",
+        "alcohol-menu"
+      ],
+      "ados_editorial_angles": [
+        "합정에서 콘센트와 긴 영업시간을 먼저 고르는 작업 카페",
+        "낮의 노트북 시간이 저녁 술 한 잔으로 이어지는 곳"
+      ],
+      "research_cautions": [
+        "평일·주말 오픈 시간이 다름",
+        "저녁에는 조도가 낮아질 수 있어 작업 시간대 선택 필요"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://www.diningcode.com/profile.php?rid=6wfRdo7oRSnM",
+          "publisher": "DiningCode",
+          "source_kind": "place-platform",
+          "supports": [
+            "address",
+            "duplicate-identity",
+            "opening-hours",
+            "many-outlets",
+            "work-friendly",
+            "window-bar",
+            "alcohol-menu"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-5354049afe19108c",
@@ -1073,8 +1243,53 @@
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
       "editorial_context_provenance": null,
-      "canonical_place_id": null,
-      "research_status": "not_researched"
+      "canonical_place_id": "seoul:mapo:compile-seogyo",
+      "research_status": "reviewed",
+      "research_confidence": "medium",
+      "verified_attributes": [
+        "work-friendly",
+        "concept-space",
+        "rail-delivery",
+        "dark-interior",
+        "filter-coffee",
+        "pet-friendly-signal"
+      ],
+      "ados_editorial_angles": [
+        "컨베이어 레일로 음료가 도착하는 서교동 작업 카페",
+        "어두운 공간에서 음악과 자기 일에 집중하는 시간"
+      ],
+      "research_cautions": [
+        "음료·디저트 평가는 엇갈리므로 공간 경험 중심으로 소개",
+        "조도가 낮고 계절에 따라 실내 온도 체감이 다를 수 있음",
+        "반려동물 정책 확인"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://polle.com/place/3g49Ak/%EC%BD%A4%ED%8C%8C%EC%9D%BC",
+          "publisher": "뽈레",
+          "source_kind": "review-platform",
+          "supports": [
+            "address",
+            "duplicate-identity",
+            "work-friendly",
+            "rail-delivery",
+            "filter-coffee",
+            "pet-friendly-signal",
+            "mixed-reviews"
+          ]
+        },
+        {
+          "url": "https://cloud-mom.tistory.com/111",
+          "publisher": "개인 방문기",
+          "source_kind": "visit-review",
+          "supports": [
+            "address",
+            "concept-interior",
+            "quiet-work-context",
+            "rail-system"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-45f8bc9cc091344a",
@@ -1557,8 +1772,41 @@
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
       "editorial_context_provenance": null,
-      "canonical_place_id": null,
-      "research_status": "not_researched"
+      "canonical_place_id": "seoul:mapo:nuhood-hapjeong",
+      "research_status": "identity_verified",
+      "research_confidence": "medium",
+      "verified_attributes": [
+        "work-friendly",
+        "many-outlets",
+        "early-weekday",
+        "late-hours",
+        "window-bar",
+        "alcohol-menu"
+      ],
+      "ados_editorial_angles": [
+        "합정에서 콘센트와 긴 영업시간을 먼저 고르는 작업 카페",
+        "낮의 노트북 시간이 저녁 술 한 잔으로 이어지는 곳"
+      ],
+      "research_cautions": [
+        "평일·주말 오픈 시간이 다름",
+        "저녁에는 조도가 낮아질 수 있어 작업 시간대 선택 필요"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://www.diningcode.com/profile.php?rid=6wfRdo7oRSnM",
+          "publisher": "DiningCode",
+          "source_kind": "place-platform",
+          "supports": [
+            "address",
+            "duplicate-identity",
+            "opening-hours",
+            "many-outlets",
+            "work-friendly",
+            "window-bar",
+            "alcohol-menu"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-56cd0ef04fe50d72",
@@ -1659,8 +1907,52 @@
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
       "editorial_context_provenance": null,
-      "canonical_place_id": null,
-      "research_status": "not_researched"
+      "canonical_place_id": "seoul:mapo:viva-bossa-mangwon",
+      "research_status": "reviewed",
+      "research_confidence": "high",
+      "verified_attributes": [
+        "work-friendly",
+        "many-outlets",
+        "wifi",
+        "large-space",
+        "late-hours",
+        "tea",
+        "brownie"
+      ],
+      "ados_editorial_angles": [
+        "망원에서 늦게까지 노트북을 펼칠 수 있는 넓은 3층",
+        "밀크티와 브라우니를 곁들여 오래 머무는 작업 시간"
+      ],
+      "research_cautions": [
+        "혼잡 시 좌석·이용시간 정책 확인",
+        "커피 전문성보다 작업 환경과 차·디저트 맥락을 우선"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://www.diningcode.com/profile.php?rid=bX1F6j8N4rNS",
+          "publisher": "DiningCode",
+          "source_kind": "place-platform",
+          "supports": [
+            "address",
+            "duplicate-identity",
+            "opening-hours",
+            "work-friendly",
+            "outlets",
+            "wifi",
+            "brownie"
+          ]
+        },
+        {
+          "url": "https://bizno.net/article/8672002340",
+          "publisher": "비즈노",
+          "source_kind": "public-business-data",
+          "supports": [
+            "business-name",
+            "address",
+            "active-business-signal"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-92a4303edf8d8ef5",
@@ -1725,8 +2017,56 @@
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
       "editorial_context_provenance": null,
-      "canonical_place_id": null,
-      "research_status": "not_researched"
+      "canonical_place_id": "seoul:mapo:hhss-house-mangwon",
+      "research_status": "reviewed",
+      "research_confidence": "high",
+      "verified_attributes": [
+        "design-studio-cafe",
+        "work-friendly",
+        "green-window-view",
+        "quiet-solo",
+        "filter-coffee",
+        "evening-alcohol",
+        "shoes-off"
+      ],
+      "ados_editorial_angles": [
+        "나무가 보이는 창 앞에서 혼자 일하는 망원의 오후",
+        "낮의 필터커피가 저녁의 술로 이어지는 디자인 스튜디오 카페"
+      ],
+      "research_cautions": [
+        "신발을 벗고 입장하는 공간",
+        "숨은 출입구와 3층 위치를 방문 안내에 명시",
+        "매장 고양이·향 사용에 민감한 방문자는 참고"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://english.visitseoul.net/area/2024-hhsshouse/ENPgqhcyc",
+          "publisher": "서울관광재단",
+          "source_kind": "official-tourism",
+          "supports": [
+            "address",
+            "design-studio-cafe",
+            "work-friendly",
+            "green-view",
+            "quiet-solo",
+            "evening-alcohol",
+            "shoes-off",
+            "opening-hours"
+          ]
+        },
+        {
+          "url": "https://www.diningcode.com/profile.php?rid=fojSxNCKyRch",
+          "publisher": "DiningCode",
+          "source_kind": "place-platform",
+          "supports": [
+            "duplicate-identity",
+            "filter-coffee",
+            "books",
+            "cat",
+            "entrance-caution"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-df6a925de60f316b",
@@ -1824,8 +2164,53 @@
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
       "editorial_context_provenance": null,
-      "canonical_place_id": null,
-      "research_status": "not_researched"
+      "canonical_place_id": "seoul:mapo:rowing-coffee-mangwon",
+      "research_status": "reviewed",
+      "research_confidence": "high",
+      "verified_attributes": [
+        "fruit-sando",
+        "seasonal-dessert",
+        "work-friendly",
+        "window-seating",
+        "pet-friendly-signal",
+        "time-limit"
+      ],
+      "ados_editorial_angles": [
+        "망원 골목을 내려다보며 과일 산도와 함께 일하는 오후",
+        "비 오는 날 창가와 계절 디저트를 고르는 2층 카페"
+      ],
+      "research_cautions": [
+        "평일·주말 이용시간 제한이 다를 수 있음",
+        "로잉커피바는 별도 2호점이므로 분리 관리",
+        "반려동물 동반 정책 확인"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://www.diningcode.com/profile.php?rid=8EwP6tn6qgwo",
+          "publisher": "DiningCode",
+          "source_kind": "place-platform",
+          "supports": [
+            "address",
+            "duplicate-identity",
+            "fruit-sando",
+            "seasonal-dessert",
+            "work-friendly",
+            "time-limit",
+            "pet-friendly-signal"
+          ]
+        },
+        {
+          "url": "https://www.tabling.co.kr/place/677cd60466de5f0698903e9e",
+          "publisher": "테이블링",
+          "source_kind": "place-platform",
+          "supports": [
+            "address",
+            "opening-hours",
+            "laptop",
+            "seasonal-dessert"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-9fe88bb50b38b64a",
@@ -1857,8 +2242,53 @@
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
       "editorial_context_provenance": null,
-      "canonical_place_id": null,
-      "research_status": "not_researched"
+      "canonical_place_id": "seoul:mapo:compile-seogyo",
+      "research_status": "reviewed",
+      "research_confidence": "medium",
+      "verified_attributes": [
+        "work-friendly",
+        "concept-space",
+        "rail-delivery",
+        "dark-interior",
+        "filter-coffee",
+        "pet-friendly-signal"
+      ],
+      "ados_editorial_angles": [
+        "컨베이어 레일로 음료가 도착하는 서교동 작업 카페",
+        "어두운 공간에서 음악과 자기 일에 집중하는 시간"
+      ],
+      "research_cautions": [
+        "음료·디저트 평가는 엇갈리므로 공간 경험 중심으로 소개",
+        "조도가 낮고 계절에 따라 실내 온도 체감이 다를 수 있음",
+        "반려동물 정책 확인"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://polle.com/place/3g49Ak/%EC%BD%A4%ED%8C%8C%EC%9D%BC",
+          "publisher": "뽈레",
+          "source_kind": "review-platform",
+          "supports": [
+            "address",
+            "duplicate-identity",
+            "work-friendly",
+            "rail-delivery",
+            "filter-coffee",
+            "pet-friendly-signal",
+            "mixed-reviews"
+          ]
+        },
+        {
+          "url": "https://cloud-mom.tistory.com/111",
+          "publisher": "개인 방문기",
+          "source_kind": "visit-review",
+          "supports": [
+            "address",
+            "concept-interior",
+            "quiet-work-context",
+            "rail-system"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-1e16eef486e07c6c",
