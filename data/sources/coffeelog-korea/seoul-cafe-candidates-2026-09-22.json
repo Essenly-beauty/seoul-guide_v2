@@ -15,7 +15,7 @@
     "geography": "Seoul only",
     "record_count": 454,
     "enriched_record_count": 30,
-    "researched_record_count": 43
+    "researched_record_count": 53
   },
   "import_policy": {
     "default_action": "stage_only",
@@ -6000,8 +6000,35 @@
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
       "editorial_context_provenance": null,
-      "canonical_place_id": null,
-      "research_status": "not_researched"
+      "canonical_place_id": "seoul:jung:gabaedo-city-hall",
+      "research_status": "reviewed",
+      "research_confidence": "high",
+      "verified_attributes": [
+        "coffee-brand",
+        "quiet-urban-retreat",
+        "vintage-furniture",
+        "central-seoul"
+      ],
+      "ados_editorial_angles": [
+        "시청 한복판에서 잠시 섬처럼 머무는 시간",
+        "오래된 가구와 낮은 조명 속 도심의 휴식"
+      ],
+      "research_cautions": [
+        "지점별 공간 구성이 다르므로 시청점 사진 재확인"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://gbdcoffee.com/about",
+          "publisher": "GABAEDO COFFEE",
+          "source_kind": "official",
+          "supports": [
+            "city-hall-branch",
+            "brand-concept",
+            "vintage-space",
+            "roastery"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-f1078294febdf26e",
@@ -6337,8 +6364,32 @@
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
       "editorial_context_provenance": null,
-      "canonical_place_id": null,
-      "research_status": "not_researched"
+      "canonical_place_id": "seoul:jung:koffee-sniffer-city-hall",
+      "research_status": "identity_verified",
+      "research_confidence": "high",
+      "verified_attributes": [
+        "specialty-coffee",
+        "roastery",
+        "central-seoul"
+      ],
+      "ados_editorial_angles": [
+        "시청 골목에서 향으로 기억하는 커피",
+        "업무 지구 안의 작은 스페셜티 정거장"
+      ],
+      "research_cautions": [
+        "원본 무지점 표기를 시청역점으로 확정하기 전 출처 게시물 대조"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://koffeesniffer.kr/goods",
+          "publisher": "Koffee Sniffer",
+          "source_kind": "official",
+          "supports": [
+            "city-hall-address",
+            "specialty-roastery-brand"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-c07b9cd5955d0c0a",
@@ -8226,8 +8277,34 @@
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
       "editorial_context_provenance": null,
-      "canonical_place_id": null,
-      "research_status": "not_researched"
+      "canonical_place_id": "seoul:jongno:a-round",
+      "research_status": "identity_verified",
+      "research_confidence": "medium",
+      "verified_attributes": [
+        "roastery",
+        "specialty-coffee",
+        "work-friendly",
+        "multi-floor"
+      ],
+      "ados_editorial_angles": [
+        "대학로에서 직접 볶은 커피와 오래 머무는 시간"
+      ],
+      "research_cautions": [
+        "운영시간과 노트북 정책은 공식 채널로 추가 확인"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://www.dongnecoffeenote.com/c/7167",
+          "publisher": "동네 커피 노트",
+          "source_kind": "review-analysis",
+          "supports": [
+            "address",
+            "roastery",
+            "work-friendly",
+            "coffee-focus"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-ce4c33eb4f6c0ade",
@@ -10062,8 +10139,36 @@
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
       "editorial_context_provenance": null,
-      "canonical_place_id": null,
-      "research_status": "not_researched"
+      "canonical_place_id": "seoul:songpa:cafe-pepper",
+      "research_status": "reviewed",
+      "research_confidence": "medium",
+      "verified_attributes": [
+        "gluten-free-dessert",
+        "rice-flour-bakery",
+        "reservation",
+        "songridan-gil"
+      ],
+      "ados_editorial_angles": [
+        "밀가루를 줄이고도 디저트를 즐기는 송리단길",
+        "케이크가 목적인 날의 글루텐프리 카페"
+      ],
+      "research_cautions": [
+        "일부 메뉴는 저글루텐이므로 완전 무글루텐으로 일반화하지 않음",
+        "알레르기 안전성은 매장에 직접 확인"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://gajaseoul.com/en/store/cafe_pepper",
+          "publisher": "GAJA SEOUL",
+          "source_kind": "place-guide",
+          "supports": [
+            "address",
+            "gluten-free-dessert",
+            "rice-flour",
+            "reservation"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-5e04e9c5bfe65b73",
@@ -11148,8 +11253,36 @@
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
       "editorial_context_provenance": null,
-      "canonical_place_id": null,
-      "research_status": "not_researched"
+      "canonical_place_id": "seoul:seongdong:lounge-x-24h-seongsu",
+      "research_status": "reviewed",
+      "research_confidence": "high",
+      "verified_attributes": [
+        "24-hour",
+        "unmanned-cafe",
+        "robot-barista",
+        "late-night"
+      ],
+      "ados_editorial_angles": [
+        "새벽에도 열려 있는 성수의 로봇 카페",
+        "시간보다 기술이 먼저 보이는 한 잔"
+      ],
+      "research_cautions": [
+        "일반적인 바리스타 카페 경험과 구분",
+        "정확한 주소는 공식 매장 페이지에서 재확인"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://www.loungex.co.kr/Stores",
+          "publisher": "LoungeX",
+          "source_kind": "official",
+          "supports": [
+            "seongsu-main-branch",
+            "24-hour",
+            "unmanned",
+            "robot-barista"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-7edf7852e6cf9708",
@@ -11641,8 +11774,35 @@
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
       "editorial_context_provenance": null,
-      "canonical_place_id": null,
-      "research_status": "not_researched"
+      "canonical_place_id": "seoul:seongdong:super-matcha-seongsu",
+      "research_status": "reviewed",
+      "research_confidence": "high",
+      "verified_attributes": [
+        "matcha-specialist",
+        "organic-tea",
+        "flagship",
+        "low-caffeine-choice"
+      ],
+      "ados_editorial_angles": [
+        "커피 대신 말차를 고르는 성수의 초록 휴식",
+        "카페인 섭취를 다르게 설계하는 티 바"
+      ],
+      "research_cautions": [
+        "커피 카테고리가 아닌 Tea & Matcha 보조 컬렉션으로 분리"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://supermatcha.com/",
+          "publisher": "SUPER MATCHA",
+          "source_kind": "official",
+          "supports": [
+            "seongsu-flagship",
+            "organic-tea",
+            "brand-mission",
+            "address"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-e08dc590c80626d9",
@@ -12073,8 +12233,35 @@
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
       "editorial_context_provenance": null,
-      "canonical_place_id": null,
-      "research_status": "not_researched"
+      "canonical_place_id": "seoul:gangnam:peer-coffee-coex",
+      "research_status": "reviewed",
+      "research_confidence": "high",
+      "verified_attributes": [
+        "coffee-focused",
+        "mall-stop",
+        "long-hours",
+        "takeout-friendly"
+      ],
+      "ados_editorial_angles": [
+        "코엑스 안에서 실패 없이 쉬어가는 커피",
+        "전시와 쇼핑 사이의 편안한 한 잔"
+      ],
+      "research_cautions": [
+        "독립 매장보다 몰 내 휴식·테이크아웃 맥락으로 편집"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://www.starfield.co.kr/coexmall/tenant/tenantDetail/TN202303151345500602.do",
+          "publisher": "Starfield COEX Mall",
+          "source_kind": "official-venue",
+          "supports": [
+            "current-operation",
+            "floor",
+            "opening-hours",
+            "takeout"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-1bd5447fa7ea9983",
@@ -12205,8 +12392,35 @@
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
       "editorial_context_provenance": null,
-      "canonical_place_id": null,
-      "research_status": "not_researched"
+      "canonical_place_id": "seoul:gangnam:lowide-apgujeong",
+      "research_status": "identity_verified",
+      "research_confidence": "medium",
+      "verified_attributes": [
+        "bakery-cafe",
+        "early-opening",
+        "salt-bread",
+        "showroom"
+      ],
+      "ados_editorial_angles": [
+        "압구정의 아침을 소금빵으로 시작하는 곳"
+      ],
+      "research_cautions": [
+        "검색 결과의 LOWIDE와 의류 브랜드 Low Tide를 혼동하지 말 것",
+        "공식 매장 페이지 추가 확인"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://www.gangnamfinds.com/en/place/lowide-apgujeong",
+          "publisher": "Gangnam Finds",
+          "source_kind": "place-guide",
+          "supports": [
+            "address",
+            "opening-hours",
+            "bakery-cafe",
+            "salt-bread"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-6788ac06beccc70b",
@@ -12370,8 +12584,33 @@
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
       "editorial_context_provenance": null,
-      "canonical_place_id": null,
-      "research_status": "not_researched"
+      "canonical_place_id": "seoul:gangnam:fourstones-samseong",
+      "research_status": "identity_verified",
+      "research_confidence": "medium",
+      "verified_attributes": [
+        "roastery",
+        "converted-house",
+        "quiet-space",
+        "samseong"
+      ],
+      "ados_editorial_angles": [
+        "코엑스 뒤편 주택가에서 숨을 고르는 로스터리"
+      ],
+      "research_cautions": [
+        "파르나스몰점 및 삼청점과 별도 장소로 유지",
+        "공식 운영시간 추가 확인"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://triple.guide/restaurants/a9939ac0-f179-4905-87da-c20d70d292ad",
+          "publisher": "Triple",
+          "source_kind": "travel-platform",
+          "supports": [
+            "place-identity",
+            "samseong-main-branch"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-34693471043026ba",
@@ -15777,8 +16016,46 @@
       ],
       "editorial_context_status": "source_derived",
       "editorial_context_provenance": "threads_collection_title",
-      "canonical_place_id": null,
-      "research_status": "not_researched"
+      "canonical_place_id": "seoul:gangseo:cafe-gongmyoung-magok-bookbang",
+      "research_status": "identity_verified",
+      "research_confidence": "medium",
+      "verified_attributes": [
+        "book-cafe",
+        "large-space",
+        "work-friendly",
+        "bakery"
+      ],
+      "ados_editorial_angles": [
+        "마곡에서 책과 노트북을 함께 펼치는 곳",
+        "서쪽 업무 지구의 넓은 북카페"
+      ],
+      "research_cautions": [
+        "공식 홈페이지에서 마곡 지점 상세가 노출되지 않아 운영시간 재확인"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://cafegm.kr/",
+          "publisher": "카페공명",
+          "source_kind": "official",
+          "supports": [
+            "brand-identity",
+            "coffee",
+            "bakery",
+            "space"
+          ]
+        },
+        {
+          "url": "https://pandarank.net/contents/69673eadaf6f026b467ef7b4",
+          "publisher": "PandaRank",
+          "source_kind": "editorial-review",
+          "supports": [
+            "magok-location",
+            "book-cafe",
+            "work-friendly",
+            "large-space"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-b4ac6349f2eddaa8",

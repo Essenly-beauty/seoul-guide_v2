@@ -4,9 +4,9 @@
   "caution": "이 파일은 전수 조사 큐다. 추정 필드는 공개용 태그가 아니며 사람 또는 출처 검토가 필요하다.",
   "summary": {
     "p1_identity_dedup": 39,
-    "done_or_pending_specific_check": 43,
-    "p3_general_review": 250,
-    "p2_editorial_potential": 122
+    "done_or_pending_specific_check": 53,
+    "p3_general_review": 245,
+    "p2_editorial_potential": 117
   },
   "records": [
     {
@@ -1675,8 +1675,8 @@
       "normalized_name": "가배도 시청점",
       "possible_duplicate_external_ids": [],
       "content_kind_guess": "cafe_candidate",
-      "research_priority": "p3_general_review",
-      "current_research_status": "not_researched"
+      "research_priority": "done_or_pending_specific_check",
+      "current_research_status": "reviewed"
     },
     {
       "external_id": "coffeelog-f1078294febdf26e",
@@ -1748,8 +1748,8 @@
       "normalized_name": "커피스니퍼",
       "possible_duplicate_external_ids": [],
       "content_kind_guess": "cafe_candidate",
-      "research_priority": "p2_editorial_potential",
-      "current_research_status": "not_researched"
+      "research_priority": "done_or_pending_specific_check",
+      "current_research_status": "identity_verified"
     },
     {
       "external_id": "coffeelog-c07b9cd5955d0c0a",
@@ -2305,8 +2305,8 @@
       "normalized_name": "에이라운드",
       "possible_duplicate_external_ids": [],
       "content_kind_guess": "cafe_candidate",
-      "research_priority": "p3_general_review",
-      "current_research_status": "not_researched"
+      "research_priority": "done_or_pending_specific_check",
+      "current_research_status": "identity_verified"
     },
     {
       "external_id": "coffeelog-ce4c33eb4f6c0ade",
@@ -2853,8 +2853,8 @@
       "normalized_name": "카페페퍼",
       "possible_duplicate_external_ids": [],
       "content_kind_guess": "cafe_candidate",
-      "research_priority": "p2_editorial_potential",
-      "current_research_status": "not_researched"
+      "research_priority": "done_or_pending_specific_check",
+      "current_research_status": "reviewed"
     },
     {
       "external_id": "coffeelog-5e04e9c5bfe65b73",
@@ -3145,8 +3145,8 @@
       "normalized_name": "라운지엑스24h 성수본점",
       "possible_duplicate_external_ids": [],
       "content_kind_guess": "cafe_candidate",
-      "research_priority": "p2_editorial_potential",
-      "current_research_status": "not_researched"
+      "research_priority": "done_or_pending_specific_check",
+      "current_research_status": "reviewed"
     },
     {
       "external_id": "coffeelog-7edf7852e6cf9708",
@@ -3275,8 +3275,8 @@
       "normalized_name": "슈퍼말차 성수",
       "possible_duplicate_external_ids": [],
       "content_kind_guess": "cafe_candidate",
-      "research_priority": "p3_general_review",
-      "current_research_status": "not_researched"
+      "research_priority": "done_or_pending_specific_check",
+      "current_research_status": "reviewed"
     },
     {
       "external_id": "coffeelog-e08dc590c80626d9",
@@ -3395,8 +3395,8 @@
       "normalized_name": "피어커피 코엑스",
       "possible_duplicate_external_ids": [],
       "content_kind_guess": "cafe_candidate",
-      "research_priority": "p2_editorial_potential",
-      "current_research_status": "not_researched"
+      "research_priority": "done_or_pending_specific_check",
+      "current_research_status": "reviewed"
     },
     {
       "external_id": "coffeelog-1bd5447fa7ea9983",
@@ -3435,8 +3435,8 @@
       "normalized_name": "lowide 압구정",
       "possible_duplicate_external_ids": [],
       "content_kind_guess": "cafe_candidate",
-      "research_priority": "p3_general_review",
-      "current_research_status": "not_researched"
+      "research_priority": "done_or_pending_specific_check",
+      "current_research_status": "identity_verified"
     },
     {
       "external_id": "coffeelog-6788ac06beccc70b",
@@ -3485,8 +3485,8 @@
       "normalized_name": "포스톤즈 삼성본점",
       "possible_duplicate_external_ids": [],
       "content_kind_guess": "cafe_candidate",
-      "research_priority": "p3_general_review",
-      "current_research_status": "not_researched"
+      "research_priority": "done_or_pending_specific_check",
+      "current_research_status": "identity_verified"
     },
     {
       "external_id": "coffeelog-34693471043026ba",
@@ -4437,8 +4437,8 @@
       "normalized_name": "카페공명마곡책빵",
       "possible_duplicate_external_ids": [],
       "content_kind_guess": "cafe_candidate",
-      "research_priority": "p2_editorial_potential",
-      "current_research_status": "not_researched"
+      "research_priority": "done_or_pending_specific_check",
+      "current_research_status": "identity_verified"
     },
     {
       "external_id": "coffeelog-b4ac6349f2eddaa8",
