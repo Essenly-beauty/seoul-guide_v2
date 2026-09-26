@@ -15,7 +15,7 @@
     "geography": "Seoul only",
     "record_count": 454,
     "enriched_record_count": 30,
-    "researched_record_count": 54
+    "researched_record_count": 67
   },
   "import_policy": {
     "default_action": "stage_only",
@@ -498,8 +498,35 @@
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
       "editorial_context_provenance": null,
-      "canonical_place_id": null,
-      "research_status": "not_researched"
+      "canonical_place_id": "seoul:mapo:always-august-roasters-mangwon",
+      "research_status": "identity_linked_needs_review",
+      "research_confidence": "medium",
+      "verified_attributes": [
+        "roastery",
+        "milk-coffee",
+        "seasonal-dessert",
+        "pet-friendly-signal"
+      ],
+      "ados_editorial_angles": [
+        "망원 산책 끝에 라테와 계절 디저트를 고르는 곳"
+      ],
+      "research_cautions": [
+        "‘제작소’ 표기가 동일 매장인지 최종 주소 확인",
+        "반려동물 정책은 방문 전 확인"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://www.diningcode.com/profile.php?rid=sTLwkEum9xlo",
+          "publisher": "DiningCode",
+          "source_kind": "place-platform",
+          "supports": [
+            "address",
+            "roastery",
+            "milk-coffee",
+            "seasonal-dessert"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-17a28fa647083d8f",
@@ -1992,8 +2019,35 @@
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
       "editorial_context_provenance": null,
-      "canonical_place_id": null,
-      "research_status": "not_researched"
+      "canonical_place_id": "seoul:mapo:pastel-coffee-works-hapjeong",
+      "research_status": "reviewed",
+      "research_confidence": "high",
+      "verified_attributes": [
+        "specialty-coffee",
+        "artisan-roastery",
+        "early-weekday",
+        "coffee-tasting"
+      ],
+      "ados_editorial_angles": [
+        "합정에서 2011년부터 이어진 커피 전문가들의 작업",
+        "서울 스페셜티 커피의 오래된 기준점"
+      ],
+      "research_cautions": [
+        "본점·서촌점·한남 테이스팅룸을 분리해 관리"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://pastelcoffee.com/category/store.html",
+          "publisher": "Pastel Coffee Works",
+          "source_kind": "official",
+          "supports": [
+            "hapjeong-address",
+            "opening-hours",
+            "artisan-roastery",
+            "store-network"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-7a643b012b4708da",
@@ -3833,8 +3887,35 @@
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
       "editorial_context_provenance": null,
-      "canonical_place_id": null,
-      "research_status": "not_researched"
+      "canonical_place_id": "seoul:mapo:connects-coffee-mangwon",
+      "research_status": "reviewed",
+      "research_confidence": "high",
+      "verified_attributes": [
+        "roastery",
+        "specialty-coffee",
+        "hand-drip",
+        "early-weekday",
+        "dairy-free-option"
+      ],
+      "ados_editorial_angles": [
+        "망원 출근길에도 열려 있는 동네 로스터리",
+        "원두와 우유 옵션을 취향대로 고르는 커피"
+      ],
+      "research_cautions": [
+        "평일과 주말 오픈 시간이 다름"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://connectscoffee.com/23",
+          "publisher": "Connects Coffee",
+          "source_kind": "official",
+          "supports": [
+            "address",
+            "branch-identity",
+            "roastery-network"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-fd38f84720818f1f",
@@ -3866,8 +3947,35 @@
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
       "editorial_context_provenance": null,
-      "canonical_place_id": null,
-      "research_status": "not_researched"
+      "canonical_place_id": "seoul:mapo:always-august-roasters-mangwon",
+      "research_status": "identity_linked_needs_review",
+      "research_confidence": "medium",
+      "verified_attributes": [
+        "roastery",
+        "milk-coffee",
+        "seasonal-dessert",
+        "pet-friendly-signal"
+      ],
+      "ados_editorial_angles": [
+        "망원 산책 끝에 라테와 계절 디저트를 고르는 곳"
+      ],
+      "research_cautions": [
+        "‘제작소’ 표기가 동일 매장인지 최종 주소 확인",
+        "반려동물 정책은 방문 전 확인"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://www.diningcode.com/profile.php?rid=sTLwkEum9xlo",
+          "publisher": "DiningCode",
+          "source_kind": "place-platform",
+          "supports": [
+            "address",
+            "roastery",
+            "milk-coffee",
+            "seasonal-dessert"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-18acc6fc8398e71f",
@@ -4347,8 +4455,36 @@
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
       "editorial_context_provenance": null,
-      "canonical_place_id": null,
-      "research_status": "not_researched"
+      "canonical_place_id": "seoul:yongsan:always-august-roastery-samgakji",
+      "research_status": "identity_verified",
+      "research_confidence": "medium",
+      "verified_attributes": [
+        "roastery",
+        "specialty-coffee",
+        "terrace",
+        "station-adjacent"
+      ],
+      "ados_editorial_angles": [
+        "삼각지역에서 바로 만나는 하이엔드 로스터리",
+        "용리단길 시작 전에 커피부터 고르는 곳"
+      ],
+      "research_cautions": [
+        "망원점과 별도 장소로 관리",
+        "공식 주소와 운영시간 추가 확인"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://revitguide.com/stores/2775",
+          "publisher": "Revit Guide",
+          "source_kind": "place-guide",
+          "supports": [
+            "yongsan-location",
+            "roastery",
+            "specialty-coffee",
+            "terrace"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-1baff9c599aba776",
@@ -9354,8 +9490,30 @@
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
       "editorial_context_provenance": null,
-      "canonical_place_id": null,
-      "research_status": "not_researched"
+      "canonical_place_id": "seoul:songpa:feb-roasters-songpa",
+      "research_status": "identity_verified",
+      "research_confidence": "medium",
+      "verified_attributes": [
+        "roastery-brand",
+        "songpa"
+      ],
+      "ados_editorial_angles": [
+        "송파 골목에서 로스터리의 시간을 따라가는 한 잔"
+      ],
+      "research_cautions": [
+        "공식 매장 공지가 오래되어 최신 운영시간 재확인 필요"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://febroasters.com/m/board.html?board_cate=&code=febroast&lock=N&num1=999978&num2=00000&number=20&page=2&type=v",
+          "publisher": "FEB Roasters",
+          "source_kind": "official-archive",
+          "supports": [
+            "songpa-address",
+            "branch-identity"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-114eef4522e9a3d1",
@@ -9420,8 +9578,34 @@
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
       "editorial_context_provenance": null,
-      "canonical_place_id": null,
-      "research_status": "not_researched"
+      "canonical_place_id": "seoul:songpa:sinyang-roasters",
+      "research_status": "identity_verified",
+      "research_confidence": "medium",
+      "verified_attributes": [
+        "roastery",
+        "milk-coffee",
+        "seokchon-lake-walk"
+      ],
+      "ados_editorial_angles": [
+        "석촌호수 산책 뒤 고소한 우유 커피",
+        "짧은 영업시간을 맞춰 찾아가는 송파 로스터리"
+      ],
+      "research_cautions": [
+        "영업일과 시간이 제한적이므로 방문 직전 확인"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://www.ktriptips.com/kor/food/2849578",
+          "publisher": "Korea Trip Tips",
+          "source_kind": "tourism-directory",
+          "supports": [
+            "address",
+            "opening-hours",
+            "roastery",
+            "milk-coffee"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-07df9a170cd201c6",
@@ -9809,8 +9993,34 @@
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
       "editorial_context_provenance": null,
-      "canonical_place_id": null,
-      "research_status": "not_researched"
+      "canonical_place_id": "seoul:songpa:sinyang-roasters",
+      "research_status": "identity_verified",
+      "research_confidence": "medium",
+      "verified_attributes": [
+        "roastery",
+        "milk-coffee",
+        "seokchon-lake-walk"
+      ],
+      "ados_editorial_angles": [
+        "석촌호수 산책 뒤 고소한 우유 커피",
+        "짧은 영업시간을 맞춰 찾아가는 송파 로스터리"
+      ],
+      "research_cautions": [
+        "영업일과 시간이 제한적이므로 방문 직전 확인"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://www.ktriptips.com/kor/food/2849578",
+          "publisher": "Korea Trip Tips",
+          "source_kind": "tourism-directory",
+          "supports": [
+            "address",
+            "opening-hours",
+            "roastery",
+            "milk-coffee"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-69a5d05934599293",
@@ -9842,8 +10052,30 @@
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
       "editorial_context_provenance": null,
-      "canonical_place_id": null,
-      "research_status": "not_researched"
+      "canonical_place_id": "seoul:songpa:feb-roasters-songpa",
+      "research_status": "identity_verified",
+      "research_confidence": "medium",
+      "verified_attributes": [
+        "roastery-brand",
+        "songpa"
+      ],
+      "ados_editorial_angles": [
+        "송파 골목에서 로스터리의 시간을 따라가는 한 잔"
+      ],
+      "research_cautions": [
+        "공식 매장 공지가 오래되어 최신 운영시간 재확인 필요"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://febroasters.com/m/board.html?board_cate=&code=febroast&lock=N&num1=999978&num2=00000&number=20&page=2&type=v",
+          "publisher": "FEB Roasters",
+          "source_kind": "official-archive",
+          "supports": [
+            "songpa-address",
+            "branch-identity"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-e90b3f1a2f1c6109",
@@ -14759,8 +14991,36 @@
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
       "editorial_context_provenance": null,
-      "canonical_place_id": null,
-      "research_status": "not_researched"
+      "canonical_place_id": "seoul:gangdong:memorable-moment",
+      "research_status": "reviewed",
+      "research_confidence": "medium",
+      "verified_attributes": [
+        "specialty-coffee",
+        "signature-cream-coffee",
+        "long-hours",
+        "neighborhood-cafe"
+      ],
+      "ados_editorial_angles": [
+        "성내동에서 늦게까지 머무는 크림커피 한 잔",
+        "일상의 작은 순간을 기억하게 하는 동네 카페"
+      ],
+      "research_cautions": [
+        "메모러블 크림 라떼는 메뉴 맥락으로 유지",
+        "평일과 주말 종료시간이 다름"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://www.daangn.com/kr/local-profile/%EB%A9%94%EB%AA%A8%EB%9F%AC%EB%B8%94%EB%AA%A8%EB%A8%BC%ED%8A%B8-5fpphm4peasa/",
+          "publisher": "당근 동네업체",
+          "source_kind": "business-profile",
+          "supports": [
+            "address",
+            "recent-operation-2026",
+            "specialty-coffee",
+            "signature-cream-coffee"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-e23214a4ab055774",
@@ -14924,8 +15184,36 @@
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
       "editorial_context_provenance": null,
-      "canonical_place_id": null,
-      "research_status": "not_researched"
+      "canonical_place_id": "seoul:gangdong:memorable-moment",
+      "research_status": "reviewed",
+      "research_confidence": "medium",
+      "verified_attributes": [
+        "specialty-coffee",
+        "signature-cream-coffee",
+        "long-hours",
+        "neighborhood-cafe"
+      ],
+      "ados_editorial_angles": [
+        "성내동에서 늦게까지 머무는 크림커피 한 잔",
+        "일상의 작은 순간을 기억하게 하는 동네 카페"
+      ],
+      "research_cautions": [
+        "메모러블 크림 라떼는 메뉴 맥락으로 유지",
+        "평일과 주말 종료시간이 다름"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://www.daangn.com/kr/local-profile/%EB%A9%94%EB%AA%A8%EB%9F%AC%EB%B8%94%EB%AA%A8%EB%A8%BC%ED%8A%B8-5fpphm4peasa/",
+          "publisher": "당근 동네업체",
+          "source_kind": "business-profile",
+          "supports": [
+            "address",
+            "recent-operation-2026",
+            "specialty-coffee",
+            "signature-cream-coffee"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-84eee188893ebac7",
@@ -14990,8 +15278,35 @@
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
       "editorial_context_provenance": null,
-      "canonical_place_id": null,
-      "research_status": "not_researched"
+      "canonical_place_id": "seoul:gangdong:chatswood-coffee",
+      "research_status": "identity_verified",
+      "research_confidence": "medium",
+      "verified_attributes": [
+        "australian-style-coffee",
+        "bakery",
+        "neighborhood-cafe",
+        "long-stay-signal"
+      ],
+      "ados_editorial_angles": [
+        "올림픽공원 옆에서 만나는 호주식 커피",
+        "성내동에서 여유롭게 보내는 동네 오후"
+      ],
+      "research_cautions": [
+        "최신 운영시간과 로스팅 정보는 공식 채널로 재확인"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://xn--2s2b33eb3kgvpta.com/store/S211119_1637284106347",
+          "publisher": "완벽한 하루",
+          "source_kind": "place-guide",
+          "supports": [
+            "address",
+            "australian-style",
+            "bakery",
+            "opening-hours"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-247f474afea60462",
@@ -15023,8 +15338,35 @@
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
       "editorial_context_provenance": null,
-      "canonical_place_id": null,
-      "research_status": "not_researched"
+      "canonical_place_id": "seoul:gangdong:tides-coffee",
+      "research_status": "identity_verified",
+      "research_confidence": "medium",
+      "verified_attributes": [
+        "single-origin",
+        "milk-coffee",
+        "oat-milk-option",
+        "matcha"
+      ],
+      "ados_editorial_angles": [
+        "성내동에서 싱글오리진과 라테 사이를 고르는 곳",
+        "커피와 말차를 함께 잘하는 동네 카페"
+      ],
+      "research_cautions": [
+        "주소·운영시간을 공식 채널로 추가 확인"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://www.diningcode.com/profile.php?rid=ukVJj9UFceJJ",
+          "publisher": "DiningCode",
+          "source_kind": "place-platform",
+          "supports": [
+            "single-origin-menu",
+            "milk-coffee",
+            "oat-milk",
+            "matcha"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-c858d6d43551fc04",
