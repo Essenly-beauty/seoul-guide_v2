@@ -1,5 +1,5 @@
 {
-  "schema_version": "1.1.0",
+  "schema_version": "1.2.0",
   "dataset_id": "coffeelog-korea-seoul-cafe-candidates-2026-09-22",
   "generated_at": "2026-09-26T02:53:23.768Z",
   "source": {
@@ -14,7 +14,8 @@
     "service_target": "My Seoul Drop",
     "geography": "Seoul only",
     "record_count": 454,
-    "enriched_record_count": 30
+    "enriched_record_count": 30,
+    "researched_record_count": 7
   },
   "import_policy": {
     "default_action": "stage_only",
@@ -65,7 +66,9 @@
         "mangwon"
       ],
       "editorial_context_status": "source_derived",
-      "editorial_context_provenance": "threads_collection_title"
+      "editorial_context_provenance": "threads_collection_title",
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-0f716868e46b6878",
@@ -107,7 +110,9 @@
         "hapjeong"
       ],
       "editorial_context_status": "source_derived",
-      "editorial_context_provenance": "threads_collection_title"
+      "editorial_context_provenance": "threads_collection_title",
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-cae1cbd79992c767",
@@ -149,7 +154,35 @@
         "hapjeong"
       ],
       "editorial_context_status": "source_derived",
-      "editorial_context_provenance": "threads_collection_title"
+      "editorial_context_provenance": "threads_collection_title",
+      "canonical_place_id": "seoul:mapo:bean-brothers-coffeehouse-seoul",
+      "research_status": "reviewed",
+      "research_confidence": "high",
+      "verified_attributes": [
+        "coffee-focused",
+        "slow-coffee-experience",
+        "tasting-program",
+        "conversation-friendly"
+      ],
+      "ados_editorial_angles": [
+        "커피를 천천히 경험하는 오후",
+        "상수에서 커피 취향을 넓히는 곳"
+      ],
+      "research_cautions": [
+        "층별 프로그램과 이용 가능 여부는 방문 전 재확인"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://beanbrothers.co.kr/goods/goods_view.php?goodsNo=1000001409",
+          "publisher": "Bean Brothers",
+          "source_kind": "official",
+          "supports": [
+            "opened-in-2024",
+            "slow-coffee-experience",
+            "tasting-program"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-84904313f64760cb",
@@ -190,7 +223,9 @@
         "mangwon"
       ],
       "editorial_context_status": "source_derived",
-      "editorial_context_provenance": "threads_collection_title"
+      "editorial_context_provenance": "threads_collection_title",
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-9414ba3ffda99ba7",
@@ -231,7 +266,9 @@
         "mangwon"
       ],
       "editorial_context_status": "source_derived",
-      "editorial_context_provenance": "threads_collection_title"
+      "editorial_context_provenance": "threads_collection_title",
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-20109512ce0efd2e",
@@ -262,7 +299,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-e9eb317d24b82c00",
@@ -293,7 +332,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-b71578a97fc31fa5",
@@ -324,7 +365,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-bd40f3e8da47dd91",
@@ -355,7 +398,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-f46f307da6c1012b",
@@ -386,7 +431,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-a6c1cbde3df55803",
@@ -417,7 +464,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-38bc59600e92d595",
@@ -448,7 +497,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-17a28fa647083d8f",
@@ -479,7 +530,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-e39ecd7e7b621723",
@@ -510,7 +563,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-41a693d693f7d5c9",
@@ -541,7 +596,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-e4a8c4f67518ff79",
@@ -572,7 +629,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-6f47c1a3f797e16e",
@@ -603,7 +662,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-d80508595f91ac3a",
@@ -634,7 +695,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-1d53667105fae0f0",
@@ -665,7 +728,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-b7abd35afa84e386",
@@ -696,7 +761,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-5354049afe19108c",
@@ -727,7 +794,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-60124c44f5cb597e",
@@ -758,7 +827,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-3040db6a00197b55",
@@ -789,7 +860,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-37d8ee7b240b154c",
@@ -820,7 +893,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-45f8bc9cc091344a",
@@ -851,7 +926,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-0bc6417b26473152",
@@ -882,7 +959,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-35eec384032a7a27",
@@ -913,7 +992,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-5467c4b5012772c5",
@@ -944,7 +1025,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-3e232e7ea1cf2e86",
@@ -975,7 +1058,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-3e5d704d27b43a31",
@@ -1006,7 +1091,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-69122f4a96bd360d",
@@ -1037,7 +1124,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-aec239b68bad4aec",
@@ -1068,7 +1157,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-e450675948af7ed5",
@@ -1099,7 +1190,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-c9809a13347422f7",
@@ -1130,7 +1223,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-49ca6b2fcaca7c51",
@@ -1161,7 +1256,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-56cd0ef04fe50d72",
@@ -1192,7 +1289,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-e1618dea5eca70b4",
@@ -1223,7 +1322,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-92a4303edf8d8ef5",
@@ -1254,7 +1355,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-7fbb0a1bade35cd2",
@@ -1285,7 +1388,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-df6a925de60f316b",
@@ -1316,7 +1421,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-9fd5902134afe414",
@@ -1347,7 +1454,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-73d872c043b5fd31",
@@ -1378,7 +1487,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-9fe88bb50b38b64a",
@@ -1409,7 +1520,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-1e16eef486e07c6c",
@@ -1440,7 +1553,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-1297bdc0e47ec9e6",
@@ -1471,7 +1586,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-ec89670cc1c88aa4",
@@ -1502,7 +1619,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-0c78dbf39f96b02d",
@@ -1533,7 +1652,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-5f54d253a206cb3a",
@@ -1564,7 +1685,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-3e5831d9057f738c",
@@ -1595,7 +1718,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-f73caa8c6affaafd",
@@ -1626,7 +1751,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-a29cbf4ba768dc3b",
@@ -1657,7 +1784,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-13ab909905c1ae75",
@@ -1688,7 +1817,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-7a643b012b4708da",
@@ -1719,7 +1850,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-be104cac75f15c7e",
@@ -1750,7 +1883,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-24231086009617da",
@@ -1781,7 +1916,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-7a26f6390a81ebd6",
@@ -1812,7 +1949,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-7098c0bca5e9a48c",
@@ -1843,7 +1982,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-cf6a690c210789ee",
@@ -1874,7 +2015,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-dcd647f89c4513da",
@@ -1905,7 +2048,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-0891b62911c36b6d",
@@ -1936,7 +2081,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-40a3b50d5360c12c",
@@ -1967,7 +2114,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-bd702cbcfebaedcc",
@@ -1998,7 +2147,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-d0e773a85115246c",
@@ -2029,7 +2180,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-10481027b04a8048",
@@ -2060,7 +2213,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-ef5cd56805aa1548",
@@ -2091,7 +2246,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-97aaf7139dc0f8a3",
@@ -2122,7 +2279,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-3298b72dd7e19dfa",
@@ -2153,7 +2312,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-87035c13412b25ec",
@@ -2184,7 +2345,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-cdaf2a5700233e53",
@@ -2215,7 +2378,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-5bc6ee727219d7aa",
@@ -2246,7 +2411,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-b6cf1b95f91c419d",
@@ -2277,7 +2444,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-ce710fb216d6549e",
@@ -2308,7 +2477,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-8f1b4d89d7afccd5",
@@ -2339,7 +2510,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-806c1c78e663bf31",
@@ -2370,7 +2543,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-600241c1bd425f8d",
@@ -2401,7 +2576,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-0a2116c49bde5eaf",
@@ -2432,7 +2609,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-73792df72e578b16",
@@ -2463,7 +2642,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-e11f8a4a8e57ff5a",
@@ -2494,7 +2675,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-94fa740514d14471",
@@ -2525,7 +2708,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-6ebdadd34c0952eb",
@@ -2556,7 +2741,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-72de4a0f7d704b3d",
@@ -2587,7 +2774,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-21d4665b19338b71",
@@ -2618,7 +2807,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-5c3d7256079b4281",
@@ -2649,7 +2840,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-ba21389c3af5a312",
@@ -2680,7 +2873,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-514de2061e2807f4",
@@ -2711,7 +2906,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-c996620709e25b80",
@@ -2742,7 +2939,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-5b6ad33a9bae1b1b",
@@ -2773,7 +2972,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-7126c4c2859df33b",
@@ -2804,7 +3005,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-756918425d7c503c",
@@ -2835,7 +3038,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-bcd0cb7ef76bfb20",
@@ -2866,7 +3071,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-c5fab8914d777589",
@@ -2897,7 +3104,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-63bb32ef28e4ef89",
@@ -2928,7 +3137,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-699758d204b0a8ee",
@@ -2959,7 +3170,45 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": "seoul:mapo:protokoll-sangsu",
+      "research_status": "reviewed",
+      "research_confidence": "high",
+      "verified_attributes": [
+        "specialty-coffee",
+        "roastery",
+        "work-friendly-concept",
+        "coffee-first"
+      ],
+      "ados_editorial_angles": [
+        "상수에서 기록하고 집중하는 커피 시간",
+        "공간보다 커피가 먼저 보이는 작업 카페"
+      ],
+      "research_cautions": [
+        "혼잡 시 이용 시간 제한 여부 재확인"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://www.protokoll.kr/showroom",
+          "publisher": "PROTOKOLL",
+          "source_kind": "official",
+          "supports": [
+            "sangsu-branch-address",
+            "specialty-coffee",
+            "coffee-programs"
+          ]
+        },
+        {
+          "url": "https://korean.visitseoul.net/restaurants/protokoll/KOPcys3h9",
+          "publisher": "Visit Seoul",
+          "source_kind": "public-tourism",
+          "supports": [
+            "roastery",
+            "coffee-research-concept",
+            "time-limit-caution"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-351d86fd8377b2ce",
@@ -2990,7 +3239,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-c251fe3d4886f200",
@@ -3021,7 +3272,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-b753f31d4771a237",
@@ -3052,7 +3305,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-d60871784a64e4a0",
@@ -3083,7 +3338,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-a2ee2366a072f696",
@@ -3114,7 +3371,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-ec04cd8f5fea4499",
@@ -3145,7 +3404,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-d79573429d6e8a21",
@@ -3176,7 +3437,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-51a54b2f9d99808d",
@@ -3207,7 +3470,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-672b9041b4a684eb",
@@ -3238,7 +3503,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-fe43f1b9efd39d8c",
@@ -3269,7 +3536,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-bfc151bee50c30af",
@@ -3300,7 +3569,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-22cfb24cdeec1fbc",
@@ -3331,7 +3602,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-fd38f84720818f1f",
@@ -3362,7 +3635,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-18acc6fc8398e71f",
@@ -3404,7 +3679,9 @@
         "haebangchon"
       ],
       "editorial_context_status": "source_derived",
-      "editorial_context_provenance": "threads_collection_title"
+      "editorial_context_provenance": "threads_collection_title",
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-21ad2aeb5fef86d0",
@@ -3445,7 +3722,9 @@
         "namyeong"
       ],
       "editorial_context_status": "source_derived",
-      "editorial_context_provenance": "threads_collection_title"
+      "editorial_context_provenance": "threads_collection_title",
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-3fedb4f79185a1e9",
@@ -3476,7 +3755,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-667486baa59d27c3",
@@ -3507,7 +3788,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-20966068d705a135",
@@ -3538,7 +3821,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-dc7436aab791ecc9",
@@ -3569,7 +3854,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-6d2755880e1abd36",
@@ -3609,7 +3896,9 @@
         "hannam"
       ],
       "editorial_context_status": "source_derived",
-      "editorial_context_provenance": "threads_collection_title"
+      "editorial_context_provenance": "threads_collection_title",
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-305808cb47d96c3f",
@@ -3640,7 +3929,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-a5a6b67412ac61ca",
@@ -3671,7 +3962,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-a059cb99d41ad2e7",
@@ -3702,7 +3995,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-0bcb410f11adc5ce",
@@ -3733,7 +4028,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-85fd2fd5c13f90f8",
@@ -3764,7 +4061,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-1baff9c599aba776",
@@ -3795,7 +4094,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-d076e3234dce5b91",
@@ -3826,7 +4127,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-553d837e5e1aa8ae",
@@ -3857,7 +4160,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-625d73dafca55b25",
@@ -3888,7 +4193,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-f0c9a97bd350937a",
@@ -3919,7 +4226,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-369945a0dbe42be3",
@@ -3950,7 +4259,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-0f5ffd57466b8bb8",
@@ -3981,7 +4292,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-a840e12cb9816df3",
@@ -4012,7 +4325,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-373dda06cd84d703",
@@ -4043,7 +4358,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-f9f438f33e53d844",
@@ -4074,7 +4391,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-94eb59fe73491db0",
@@ -4105,7 +4424,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-9efe6a5193923f74",
@@ -4136,7 +4457,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-944ba83a56a41ca5",
@@ -4167,7 +4490,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-052d369401681194",
@@ -4198,7 +4523,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-75ff291de9fdeff0",
@@ -4238,7 +4565,9 @@
         "hannam"
       ],
       "editorial_context_status": "source_derived",
-      "editorial_context_provenance": "threads_collection_title"
+      "editorial_context_provenance": "threads_collection_title",
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-90cbe5a9828d36f1",
@@ -4278,7 +4607,9 @@
         "hannam"
       ],
       "editorial_context_status": "source_derived",
-      "editorial_context_provenance": "threads_collection_title"
+      "editorial_context_provenance": "threads_collection_title",
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-f51852163f1dc45c",
@@ -4318,7 +4649,9 @@
         "hannam"
       ],
       "editorial_context_status": "source_derived",
-      "editorial_context_provenance": "threads_collection_title"
+      "editorial_context_provenance": "threads_collection_title",
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-0df93023d0d554c1",
@@ -4358,7 +4691,9 @@
         "hannam"
       ],
       "editorial_context_status": "source_derived",
-      "editorial_context_provenance": "threads_collection_title"
+      "editorial_context_provenance": "threads_collection_title",
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-73bac24820345154",
@@ -4398,7 +4733,9 @@
         "hannam"
       ],
       "editorial_context_status": "source_derived",
-      "editorial_context_provenance": "threads_collection_title"
+      "editorial_context_provenance": "threads_collection_title",
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-708d0b365f9909ab",
@@ -4438,7 +4775,9 @@
         "hannam"
       ],
       "editorial_context_status": "source_derived",
-      "editorial_context_provenance": "threads_collection_title"
+      "editorial_context_provenance": "threads_collection_title",
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-83dbcff6b2ad5f49",
@@ -4478,7 +4817,9 @@
         "hannam"
       ],
       "editorial_context_status": "source_derived",
-      "editorial_context_provenance": "threads_collection_title"
+      "editorial_context_provenance": "threads_collection_title",
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-d93e003e7e7e0211",
@@ -4518,7 +4859,9 @@
         "hannam"
       ],
       "editorial_context_status": "source_derived",
-      "editorial_context_provenance": "threads_collection_title"
+      "editorial_context_provenance": "threads_collection_title",
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-3b8686ea5d6e885d",
@@ -4558,7 +4901,9 @@
         "hannam"
       ],
       "editorial_context_status": "source_derived",
-      "editorial_context_provenance": "threads_collection_title"
+      "editorial_context_provenance": "threads_collection_title",
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-179a2dbc05f27093",
@@ -4589,7 +4934,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-ebdcada420a75d3f",
@@ -4620,7 +4967,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-15c29941b27e939e",
@@ -4651,7 +5000,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-c881dbbf3c037eea",
@@ -4682,7 +5033,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-1080ed10fbaa09f7",
@@ -4713,7 +5066,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-175f4d4140a924a1",
@@ -4744,7 +5099,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-c33e4332744b6522",
@@ -4775,7 +5132,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-48590d65356785e9",
@@ -4806,7 +5165,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-9fc3347637191331",
@@ -4837,7 +5198,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-e5c59d2fd12a3576",
@@ -4868,7 +5231,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-ca44664a9709ded1",
@@ -4899,7 +5264,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-de683123bd7b03b3",
@@ -4930,7 +5297,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-2a2aebaa324c2960",
@@ -4961,7 +5330,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-f70ac9f42766c790",
@@ -4992,7 +5363,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-64f3cbaecfc86861",
@@ -5023,7 +5396,42 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": "seoul:jung:horangii-euljiro",
+      "research_status": "reviewed",
+      "research_confidence": "medium",
+      "verified_attributes": [
+        "signature-latte",
+        "retro-space",
+        "euljiro-alley"
+      ],
+      "ados_editorial_angles": [
+        "을지로 골목의 짧고 진한 라테 한 잔",
+        "오래된 도심의 결을 함께 보는 카페"
+      ],
+      "research_cautions": [
+        "체류형 목적보다 골목 동선의 한 정거장으로 편집"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://english.visitkorea.or.kr/svc/contents/contentsView.do?vcontsId=186520",
+          "publisher": "VisitKorea",
+          "source_kind": "public-tourism",
+          "supports": [
+            "place-identity",
+            "euljiro-address"
+          ]
+        },
+        {
+          "url": "https://world.nol.com/en/pois/d724fa0b-6528-4c42-887c-c913b83f0298",
+          "publisher": "NOL",
+          "source_kind": "travel-platform",
+          "supports": [
+            "retro-space",
+            "signature-latte"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-ba15305be083630d",
@@ -5054,7 +5462,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-6333aa2ebab227fb",
@@ -5085,7 +5495,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-7ebe6811cadd8555",
@@ -5116,7 +5528,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-b27a06371ee7e5fd",
@@ -5147,7 +5561,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-97d47f7525955114",
@@ -5178,7 +5594,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-f1078294febdf26e",
@@ -5209,7 +5627,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-c9704c2c9974898c",
@@ -5240,7 +5660,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-a37d1770c142b775",
@@ -5271,7 +5693,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-6d22fc436c48d974",
@@ -5302,7 +5726,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-d62e07e39ae99327",
@@ -5333,7 +5759,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-3bcbfed808f1090a",
@@ -5364,7 +5792,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-1a22309d37089f17",
@@ -5395,7 +5825,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-c07b9cd5955d0c0a",
@@ -5426,7 +5858,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-02d6e580f93b5d6d",
@@ -5457,7 +5891,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-182d2ed369862133",
@@ -5488,7 +5924,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-aacb72ef36e52b29",
@@ -5519,7 +5957,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-f04140d7272e0eef",
@@ -5550,7 +5990,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-0e937da31efcdb2f",
@@ -5581,7 +6023,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-3b775fcea8c4caf7",
@@ -5612,7 +6056,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-fac405946b527f07",
@@ -5643,7 +6089,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-8dfa315495cfbe20",
@@ -5674,7 +6122,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-6ee2f92c340391c1",
@@ -5705,7 +6155,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-0ff3c4995aec1e2f",
@@ -5736,7 +6188,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-eff6e39bc5e0de71",
@@ -5767,7 +6221,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-b718bcd124207736",
@@ -5798,7 +6254,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-e525beabf2d61803",
@@ -5829,7 +6287,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-0f26356d12020c35",
@@ -5860,7 +6320,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-277fb48f31a4126f",
@@ -5891,7 +6353,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-b9b0a04510962571",
@@ -5922,7 +6386,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-51f309f75c876297",
@@ -5953,7 +6419,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-b440f7cdcdccbe93",
@@ -5984,7 +6452,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-e8ee02a91a8a8ef8",
@@ -6015,7 +6485,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-5832e807e23a24af",
@@ -6046,7 +6518,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-2e2a33015cbf47db",
@@ -6077,7 +6551,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-31e5ed73c46bb52f",
@@ -6108,7 +6584,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-050d1b748c60bfb8",
@@ -6139,7 +6617,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-eceee859d03cb87d",
@@ -6170,7 +6650,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-40db223049ef4ec2",
@@ -6201,7 +6683,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-599ed2d2ff937eea",
@@ -6232,7 +6716,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-f436b4acda8fe74e",
@@ -6263,7 +6749,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-db6e9f8c9e33f0df",
@@ -6294,7 +6782,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-ab1fb4d5fa72a5b6",
@@ -6325,7 +6815,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-c3c2b6535b7105f5",
@@ -6356,7 +6848,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-36d31e3afdfcf2e7",
@@ -6387,7 +6881,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-38c7e91527f314df",
@@ -6418,7 +6914,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-2c1d874178fe0642",
@@ -6449,7 +6947,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-0751670614b6b573",
@@ -6480,7 +6980,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-c9e5607176d64a2d",
@@ -6511,7 +7013,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-f0537eeb410c37b3",
@@ -6542,7 +7046,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-7d899c13d4beca4d",
@@ -6573,7 +7079,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-ecedb15dbb6f9ea1",
@@ -6604,7 +7112,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-3d5e96379c46b433",
@@ -6635,7 +7145,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-d477b3d50b6b9dc3",
@@ -6666,7 +7178,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-ca568301a89b7701",
@@ -6697,7 +7211,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-3ac4303f25406fe5",
@@ -6728,7 +7244,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-7fe71f00c29c950c",
@@ -6759,7 +7277,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-c3d357fe9887f0ba",
@@ -6790,7 +7310,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-aa3b1386750624df",
@@ -6821,7 +7343,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-9f219c8b04846046",
@@ -6852,7 +7376,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-9c1060f7715e824f",
@@ -6883,7 +7409,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-00e4f36283386c08",
@@ -6914,7 +7442,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-48d76f0f1c594e01",
@@ -6945,7 +7475,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-9def8771e644e200",
@@ -6976,7 +7508,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-c0395cbe253f77ab",
@@ -7007,7 +7541,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-574bfce284c31f78",
@@ -7038,7 +7574,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-a4c6e69a8e6dc934",
@@ -7069,7 +7607,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-6301c351a94e7989",
@@ -7100,7 +7640,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-ce4c33eb4f6c0ade",
@@ -7131,7 +7673,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-dbccb3db0a94b32b",
@@ -7162,7 +7706,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-f0873b877a91cdec",
@@ -7193,7 +7739,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-a1d247c6ba4ae0dc",
@@ -7224,7 +7772,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-77738d48ed81afe9",
@@ -7255,7 +7805,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-9b63987c6f0267d3",
@@ -7286,7 +7838,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-3244a62c096701ef",
@@ -7317,7 +7871,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-fb385aad3160adaf",
@@ -7348,7 +7904,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-6546e5507de85327",
@@ -7379,7 +7937,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-64b091aa61577a9d",
@@ -7410,7 +7970,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-eb792fbba7d5f3f0",
@@ -7441,7 +8003,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-63335b347c2d562a",
@@ -7472,7 +8036,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-d9b16892fe55c2c0",
@@ -7503,7 +8069,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-7bf40cff3ddf72c2",
@@ -7534,7 +8102,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-52ee413f43472f06",
@@ -7565,7 +8135,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-add30194575961b5",
@@ -7596,7 +8168,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-2477c247eebc57e8",
@@ -7627,7 +8201,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-ec554b021b91a504",
@@ -7658,7 +8234,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-f385282196d47c61",
@@ -7689,7 +8267,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-ce11af7ff29326d4",
@@ -7720,7 +8300,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-fbcbc4cc4e932847",
@@ -7751,7 +8333,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-d0c818cf521b3f01",
@@ -7782,7 +8366,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-638c58adaa14b0d7",
@@ -7813,7 +8399,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-e6eefb0f842c40c8",
@@ -7844,7 +8432,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-a417476d19e9a7c0",
@@ -7875,7 +8465,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-2ca86087bcbd7fba",
@@ -7906,7 +8498,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-f6fd1b44e8dd6929",
@@ -7937,7 +8531,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-f49a98fbd557d90a",
@@ -7968,7 +8564,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-99746f058d75aaea",
@@ -7999,7 +8597,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-90dcf2e61afa4c07",
@@ -8030,7 +8630,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-5e67e6e8fdb5898d",
@@ -8061,7 +8663,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-114eef4522e9a3d1",
@@ -8092,7 +8696,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-38c0d6aefbea1d37",
@@ -8123,7 +8729,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-07df9a170cd201c6",
@@ -8154,7 +8762,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-ac38503b3c86027a",
@@ -8185,7 +8795,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-d7730e8ba8e330c4",
@@ -8216,7 +8828,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-ee30bf5bdf23ca69",
@@ -8247,7 +8861,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-77f1469516e8c217",
@@ -8278,7 +8894,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-dc6a565c4bafcab4",
@@ -8309,7 +8927,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-3fbbc14cf161d9c2",
@@ -8340,7 +8960,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-4c3846fee2fdcde5",
@@ -8371,7 +8993,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-b24d3f8b08aa4463",
@@ -8402,7 +9026,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-c215ec7c7246a294",
@@ -8433,7 +9059,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-e52323f0088f6dbb",
@@ -8464,7 +9092,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-69a5d05934599293",
@@ -8495,7 +9125,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-e90b3f1a2f1c6109",
@@ -8526,7 +9158,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-a8170b8b5b919bce",
@@ -8557,7 +9191,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-dd567e9f152c38e2",
@@ -8588,7 +9224,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-90c64cd46ce79452",
@@ -8619,7 +9257,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-759b087a519e1ae0",
@@ -8650,7 +9290,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-3058406f837a906c",
@@ -8681,7 +9323,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-19643de2d4ec55fe",
@@ -8712,7 +9356,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-a57ac983a298c695",
@@ -8743,7 +9389,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-f401b04b96e99412",
@@ -8774,7 +9422,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-5e04e9c5bfe65b73",
@@ -8805,7 +9455,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-f5c28441211bc81a",
@@ -8836,7 +9488,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-cf1b352dc7d090c3",
@@ -8867,7 +9521,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-1a6e885a1bb6a661",
@@ -8898,7 +9554,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-c042a50d215ba065",
@@ -8940,7 +9598,9 @@
         "seoul-forest"
       ],
       "editorial_context_status": "source_derived",
-      "editorial_context_provenance": "threads_collection_title"
+      "editorial_context_provenance": "threads_collection_title",
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-47a034b4e9d43bec",
@@ -8971,7 +9631,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-0d3d79e325f49570",
@@ -9002,7 +9664,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-303ac3090471ebcf",
@@ -9033,7 +9697,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-683f99d1cf145769",
@@ -9064,7 +9730,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-3f824d9bebabec54",
@@ -9095,7 +9763,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-501df81cdc7f29d9",
@@ -9126,7 +9796,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-eba63c0e7a9aec15",
@@ -9157,7 +9829,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-9ccb9e99b1aecd91",
@@ -9188,7 +9862,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-30615038aee2932d",
@@ -9219,7 +9895,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-7133730089d72b2c",
@@ -9250,7 +9928,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-e86f6d2953afa819",
@@ -9281,7 +9961,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-5c116508f45ed18f",
@@ -9312,7 +9994,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-085e59c7fd708f6a",
@@ -9343,7 +10027,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-7b00d651830481a6",
@@ -9374,7 +10060,36 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": "seoul:seongdong:lowkey-seongsu",
+      "research_status": "reviewed",
+      "research_confidence": "high",
+      "verified_attributes": [
+        "specialty-coffee",
+        "roastery",
+        "coffee-education",
+        "multi-branch-brand"
+      ],
+      "ados_editorial_angles": [
+        "성수에서 커피 자체에 집중하는 한 잔",
+        "로스터리의 태도를 따라가는 서울 커피 지도"
+      ],
+      "research_cautions": [
+        "본사·로스팅 주소와 성수 매장 주소를 혼동하지 말 것"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://lowkeycoffee.co.kr/",
+          "publisher": "Lowkey Coffee",
+          "source_kind": "official",
+          "supports": [
+            "specialty-coffee",
+            "roastery",
+            "coffee-education",
+            "brand-history"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-d24c0603b734d57c",
@@ -9405,7 +10120,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-e548e5e1b00143d9",
@@ -9436,7 +10153,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-39f8c903029f913c",
@@ -9467,7 +10186,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-d428705c88a2a43c",
@@ -9498,7 +10219,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-247b4e70faa84d37",
@@ -9529,7 +10252,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-0d3f40f0aa79e5a1",
@@ -9560,7 +10285,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-d0524a61d7b4aa90",
@@ -9591,7 +10318,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-16aac555f702bc17",
@@ -9622,7 +10351,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-29bab3ce90bdf384",
@@ -9653,7 +10384,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-7edf7852e6cf9708",
@@ -9692,7 +10425,9 @@
         "seongsu"
       ],
       "editorial_context_status": "source_derived",
-      "editorial_context_provenance": "threads_collection_title"
+      "editorial_context_provenance": "threads_collection_title",
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-6fb7b04783fa0be2",
@@ -9731,7 +10466,9 @@
         "seongsu"
       ],
       "editorial_context_status": "source_derived",
-      "editorial_context_provenance": "threads_collection_title"
+      "editorial_context_provenance": "threads_collection_title",
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-7777e518105d49f2",
@@ -9770,7 +10507,9 @@
         "seongsu"
       ],
       "editorial_context_status": "source_derived",
-      "editorial_context_provenance": "threads_collection_title"
+      "editorial_context_provenance": "threads_collection_title",
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-057067f4aa62dcc6",
@@ -9809,7 +10548,9 @@
         "seongsu"
       ],
       "editorial_context_status": "source_derived",
-      "editorial_context_provenance": "threads_collection_title"
+      "editorial_context_provenance": "threads_collection_title",
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-e2f8e7cdb7d8d3f9",
@@ -9848,7 +10589,9 @@
         "seongsu"
       ],
       "editorial_context_status": "source_derived",
-      "editorial_context_provenance": "threads_collection_title"
+      "editorial_context_provenance": "threads_collection_title",
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-aa5bffc87789e4a1",
@@ -9887,7 +10630,9 @@
         "seongsu"
       ],
       "editorial_context_status": "source_derived",
-      "editorial_context_provenance": "threads_collection_title"
+      "editorial_context_provenance": "threads_collection_title",
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-f63d7f4937338261",
@@ -9926,7 +10671,9 @@
         "seongsu"
       ],
       "editorial_context_status": "source_derived",
-      "editorial_context_provenance": "threads_collection_title"
+      "editorial_context_provenance": "threads_collection_title",
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-f36ddda1110190d9",
@@ -9965,7 +10712,9 @@
         "seongsu"
       ],
       "editorial_context_status": "source_derived",
-      "editorial_context_provenance": "threads_collection_title"
+      "editorial_context_provenance": "threads_collection_title",
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-03430bfa74d2564d",
@@ -9996,7 +10745,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-f87e500a44e4588b",
@@ -10027,7 +10778,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-4ac6e3266dfac960",
@@ -10058,7 +10811,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-d4e43ba1a7f762ad",
@@ -10089,7 +10844,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-c7f442985b9cac4c",
@@ -10120,7 +10877,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-e08dc590c80626d9",
@@ -10151,7 +10910,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-8824341623c505a9",
@@ -10182,7 +10943,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-70dd002196d01050",
@@ -10213,7 +10976,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-1ee6d6f5e1d6fd34",
@@ -10244,7 +11009,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-4ebad3bb2730ef43",
@@ -10275,7 +11042,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-0f1f7acda4457ad4",
@@ -10306,7 +11075,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-939e186024b0689f",
@@ -10337,7 +11108,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-1e85e8fb4fcf7b1d",
@@ -10368,7 +11141,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-7748db2add0f9510",
@@ -10399,7 +11174,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-83702ee05ea3d201",
@@ -10430,7 +11207,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-b0cb1cec4f6dccc6",
@@ -10461,7 +11240,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-f36192a52032da09",
@@ -10492,7 +11273,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-1bd5447fa7ea9983",
@@ -10523,7 +11306,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-97b157710104dfd4",
@@ -10554,7 +11339,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-b590f83860e1f835",
@@ -10585,7 +11372,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-12426b657963c9ca",
@@ -10616,7 +11405,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-6788ac06beccc70b",
@@ -10647,7 +11438,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-5d0105ed07521ba4",
@@ -10678,7 +11471,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-6f6d68803cd9e174",
@@ -10709,7 +11504,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-5a07f880aef963eb",
@@ -10740,7 +11537,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-61097092ba82024d",
@@ -10771,7 +11570,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-34693471043026ba",
@@ -10802,7 +11603,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-12bd23676229335e",
@@ -10833,7 +11636,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-6fed0eaf0c832d27",
@@ -10864,7 +11669,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-4c3a2b7a69acc604",
@@ -10895,7 +11702,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-bccb98a2fa65a73f",
@@ -10926,7 +11735,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-7197a8e41dd60704",
@@ -10957,7 +11768,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-e3691750d1ccfe38",
@@ -10988,7 +11801,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-a34e25951cb21925",
@@ -11019,7 +11834,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-99a5925f67417bde",
@@ -11050,7 +11867,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-a9a31aee4f38d7d7",
@@ -11081,7 +11900,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-0954926e0b863a6e",
@@ -11112,7 +11933,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-6952e724fd626f9e",
@@ -11143,7 +11966,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-769fc58c2ac225ae",
@@ -11174,7 +11999,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-4a44cdc08b239ee3",
@@ -11205,7 +12032,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-c6326bf2e7cebadd",
@@ -11236,7 +12065,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-ddc93edf1430e41d",
@@ -11267,7 +12098,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-054087cc2fcb064a",
@@ -11298,7 +12131,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-989bc812df518894",
@@ -11329,7 +12164,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-c6d2895a06ad6bf3",
@@ -11360,7 +12197,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-575be59a137ecdc1",
@@ -11391,7 +12230,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-203e52df758221ee",
@@ -11422,7 +12263,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-a69b2d9d72ff36b1",
@@ -11453,7 +12296,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-03e261b126a0e08f",
@@ -11484,7 +12329,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-d9ef370b8df9368c",
@@ -11515,7 +12362,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-9c643b37e44b9158",
@@ -11546,7 +12395,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-d3b6c3d505e4eea5",
@@ -11577,7 +12428,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-f1596991b849ba39",
@@ -11608,7 +12461,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-7d77d125e9f6011a",
@@ -11639,7 +12494,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-54b84176cd34c63c",
@@ -11670,7 +12527,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-e2c66d4c35f7e47f",
@@ -11701,7 +12560,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-1187fae00be512f1",
@@ -11732,7 +12593,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-ea3d5babbb0bcc74",
@@ -11763,7 +12626,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-bbb2c3c7a7ba35e6",
@@ -11794,7 +12659,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-3edc3ba21c7a9406",
@@ -11825,7 +12692,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-8507632d437ee6e9",
@@ -11856,7 +12725,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-caf1cbc386611d48",
@@ -11887,7 +12758,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-94841577efc2a348",
@@ -11918,7 +12791,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-65101c1e3b00702e",
@@ -11949,7 +12824,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-000380d2534eff5c",
@@ -11980,7 +12857,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-7465799e6656ad00",
@@ -12011,7 +12890,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-44ef162172e023f0",
@@ -12042,7 +12923,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-863dbeae7f7e416c",
@@ -12073,7 +12956,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-92de13261d9a2548",
@@ -12104,7 +12989,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-968a976f027e8533",
@@ -12135,7 +13022,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-48cf4f0ad32b019f",
@@ -12166,7 +13055,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-d889f6d96ea39d21",
@@ -12197,7 +13088,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-0c9671a76fac5120",
@@ -12228,7 +13121,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-811fb4ba0f544f55",
@@ -12259,7 +13154,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-050607c581529e10",
@@ -12290,7 +13187,28 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": "seoul:gwangjin:adef-coffee-roasters",
+      "research_status": "identity_verified",
+      "research_confidence": "medium",
+      "verified_attributes": [
+        "recent-operation-signal"
+      ],
+      "ados_editorial_angles": [],
+      "research_cautions": [
+        "공간·메뉴 성격은 추가 출처 확인 전 태그하지 않음"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://50plus.or.kr/upload/im/2025/11/256e2a18-ec92-4a85-9cd4-6d440748cb1f.pdf",
+          "publisher": "서울시50플러스재단",
+          "source_kind": "public-record",
+          "supports": [
+            "operation-signal-in-2025",
+            "gwangjin-address"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-97ea43afc54796ce",
@@ -12321,7 +13239,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-c40b7bcfda4c45dc",
@@ -12352,7 +13272,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-f4bcb5fce9575f60",
@@ -12383,7 +13305,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-1c88f88e402e7210",
@@ -12414,7 +13338,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-22be360399307082",
@@ -12445,7 +13371,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-77d9f2b75b430578",
@@ -12476,7 +13404,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-93d74f8991871847",
@@ -12507,7 +13437,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-40b81db9cbd4a634",
@@ -12538,7 +13470,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-cc031d6f1c095d62",
@@ -12569,7 +13503,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-1673ddb9e973d4c1",
@@ -12600,7 +13536,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-0f81e045cdb8d44a",
@@ -12631,7 +13569,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-232c31015cd2e6ff",
@@ -12662,7 +13602,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-66f39ba4099fe079",
@@ -12693,7 +13635,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-e23214a4ab055774",
@@ -12724,7 +13668,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-d3da15a97ec2be24",
@@ -12755,7 +13701,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-0e3417186a355bca",
@@ -12786,7 +13734,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-53832a413552b8fa",
@@ -12817,7 +13767,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-646f48998a1e0da4",
@@ -12848,7 +13800,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-84eee188893ebac7",
@@ -12879,7 +13833,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-da60e7ac13a43dec",
@@ -12910,7 +13866,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-247f474afea60462",
@@ -12941,7 +13899,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-c858d6d43551fc04",
@@ -12972,7 +13932,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-72aa27cdafd9f542",
@@ -13003,7 +13965,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-2311fc924c13e338",
@@ -13034,7 +13998,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-aea4a9653b00ffb3",
@@ -13075,7 +14041,9 @@
         "yeonhui"
       ],
       "editorial_context_status": "source_derived",
-      "editorial_context_provenance": "threads_collection_title"
+      "editorial_context_provenance": "threads_collection_title",
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-cc3b41df11e862fc",
@@ -13106,7 +14074,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-a0468adcc0b373cf",
@@ -13137,7 +14107,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-27518957cc2530ac",
@@ -13168,7 +14140,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-1bc90c347eb89453",
@@ -13199,7 +14173,30 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": "seoul:seodaemun:manufact-coffee-yeonhui",
+      "research_status": "identity_linked_needs_review",
+      "research_confidence": "medium",
+      "verified_attributes": [
+        "coffee-roaster"
+      ],
+      "ados_editorial_angles": [
+        "연희동 산책에 커피 한 잔을 더하는 곳"
+      ],
+      "research_cautions": [
+        "두 원본 행이 동일 지점인지 주소로 최종 확인",
+        "플랫화이트는 장소의 상시 속성으로 승격하지 않음"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://manufactcoffee.cafe24.com/shopinfo/company.html",
+          "publisher": "Manufact Coffee",
+          "source_kind": "official",
+          "supports": [
+            "brand-identity"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-5f7aa96ec5c47897",
@@ -13230,7 +14227,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-8da126c3fccd1ad5",
@@ -13261,7 +14260,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-16ae900f6f901489",
@@ -13292,7 +14293,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-ffc19dd463842996",
@@ -13323,7 +14326,30 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": "seoul:seodaemun:manufact-coffee-yeonhui",
+      "research_status": "identity_linked_needs_review",
+      "research_confidence": "medium",
+      "verified_attributes": [
+        "coffee-roaster"
+      ],
+      "ados_editorial_angles": [
+        "연희동 산책에 커피 한 잔을 더하는 곳"
+      ],
+      "research_cautions": [
+        "두 원본 행이 동일 지점인지 주소로 최종 확인",
+        "플랫화이트는 장소의 상시 속성으로 승격하지 않음"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://manufactcoffee.cafe24.com/shopinfo/company.html",
+          "publisher": "Manufact Coffee",
+          "source_kind": "official",
+          "supports": [
+            "brand-identity"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-b7456fa5bdf8e70d",
@@ -13354,7 +14380,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-47e1e442b9af4436",
@@ -13385,7 +14413,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-90cf8b1481f222e2",
@@ -13416,7 +14446,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-a8f24823c8021d01",
@@ -13447,7 +14479,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-4b94c0111867b9e7",
@@ -13489,7 +14523,9 @@
         "sinsa"
       ],
       "editorial_context_status": "source_derived",
-      "editorial_context_provenance": "threads_collection_title"
+      "editorial_context_provenance": "threads_collection_title",
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-67e91cc315ea7ea0",
@@ -13520,7 +14556,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-9d5cb366a810d861",
@@ -13551,7 +14589,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-4854749f34136ad1",
@@ -13582,7 +14622,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-7179a2c5e379c22d",
@@ -13613,7 +14655,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-f99f84b3c0ab4772",
@@ -13644,7 +14688,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-c9ad5d211d72f5d8",
@@ -13675,7 +14721,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-f6e3f9ff7c801753",
@@ -13716,7 +14764,9 @@
         "magok"
       ],
       "editorial_context_status": "source_derived",
-      "editorial_context_provenance": "threads_collection_title"
+      "editorial_context_provenance": "threads_collection_title",
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-b4ac6349f2eddaa8",
@@ -13747,7 +14797,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-610e251645c9ec1b",
@@ -13778,7 +14830,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-8c9710a29fea7859",
@@ -13809,7 +14863,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-641279a1113d1ad1",
@@ -13840,7 +14896,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-1020844c2082ac58",
@@ -13871,7 +14929,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-2f68e806b35aeb9e",
@@ -13902,7 +14962,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-2414eb920fb8e32c",
@@ -13933,7 +14995,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-d9a6d7b5abb0e2fe",
@@ -13964,7 +15028,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-987e7e51134ea8e8",
@@ -13995,7 +15061,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-16271d17b078a205",
@@ -14036,7 +15104,9 @@
         "bulgwang"
       ],
       "editorial_context_status": "source_derived",
-      "editorial_context_provenance": "threads_collection_title"
+      "editorial_context_provenance": "threads_collection_title",
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-6c3b47b3d43ab89c",
@@ -14067,7 +15137,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-047c1763ebe81b5a",
@@ -14098,7 +15170,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-ae3e942e51f4c3c6",
@@ -14129,7 +15203,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-c59ff1b11f43574d",
@@ -14160,7 +15236,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-abf2aa80399ce075",
@@ -14191,7 +15269,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-5cc4bae0f0505156",
@@ -14222,7 +15302,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-3800cec11b5a43b5",
@@ -14253,7 +15335,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-f703147da3c0a2cd",
@@ -14284,7 +15368,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-1eb9c57b8e031416",
@@ -14315,7 +15401,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-1599d325ddd9e001",
@@ -14346,7 +15434,9 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     },
     {
       "external_id": "coffeelog-6b0fcb1afda5f6e4",
@@ -14377,12 +15467,18 @@
       "food_drink_tags": [],
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
-      "editorial_context_provenance": null
+      "editorial_context_provenance": null,
+      "canonical_place_id": null,
+      "research_status": "not_researched"
     }
   ],
   "editorial_context_policy": {
     "meaning": "Tags describe the source post's editorial framing, not independently verified venue attributes.",
     "taxonomy_document": "./EDITORIAL_CONTEXT_TAXONOMY.md",
     "collections_manifest": "./collections-2026-09-22.json"
+  },
+  "research_policy": {
+    "labels_manifest": "./research-labels-2026-09-26.json",
+    "researched_labels_are_not_endorsements": true
   }
 }

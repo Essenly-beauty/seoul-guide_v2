@@ -1,0 +1,67 @@
+{
+  "schema_version": "1.0.0",
+  "dataset_id": "coffeelog-korea-research-labels-2026-09-26",
+  "researched_on": "2026-09-26",
+  "policy": { "not_an_endorsement": true, "publish_rule": "편집 승인 전 eligible_for_ados는 false로 유지한다." },
+  "records": [
+    {
+      "canonical_place_id": "seoul:mapo:bean-brothers-coffeehouse-seoul",
+      "member_external_ids": ["coffeelog-cae1cbd79992c767"],
+      "research_status": "reviewed", "confidence": "high",
+      "verified_attributes": ["coffee-focused", "slow-coffee-experience", "tasting-program", "conversation-friendly"],
+      "ados_editorial_angles": ["커피를 천천히 경험하는 오후", "상수에서 커피 취향을 넓히는 곳"],
+      "cautions": ["층별 프로그램과 이용 가능 여부는 방문 전 재확인"],
+      "evidence": [{ "url": "https://beanbrothers.co.kr/goods/goods_view.php?goodsNo=1000001409", "publisher": "Bean Brothers", "source_kind": "official", "supports": ["opened-in-2024", "slow-coffee-experience", "tasting-program"] }]
+    },
+    {
+      "canonical_place_id": "seoul:mapo:protokoll-sangsu",
+      "member_external_ids": ["coffeelog-699758d204b0a8ee"],
+      "research_status": "reviewed", "confidence": "high",
+      "verified_attributes": ["specialty-coffee", "roastery", "work-friendly-concept", "coffee-first"],
+      "ados_editorial_angles": ["상수에서 기록하고 집중하는 커피 시간", "공간보다 커피가 먼저 보이는 작업 카페"],
+      "cautions": ["혼잡 시 이용 시간 제한 여부 재확인"],
+      "evidence": [
+        { "url": "https://www.protokoll.kr/showroom", "publisher": "PROTOKOLL", "source_kind": "official", "supports": ["sangsu-branch-address", "specialty-coffee", "coffee-programs"] },
+        { "url": "https://korean.visitseoul.net/restaurants/protokoll/KOPcys3h9", "publisher": "Visit Seoul", "source_kind": "public-tourism", "supports": ["roastery", "coffee-research-concept", "time-limit-caution"] }
+      ]
+    },
+    {
+      "canonical_place_id": "seoul:jung:horangii-euljiro",
+      "member_external_ids": ["coffeelog-64f3cbaecfc86861"],
+      "research_status": "reviewed", "confidence": "medium",
+      "verified_attributes": ["signature-latte", "retro-space", "euljiro-alley"],
+      "ados_editorial_angles": ["을지로 골목의 짧고 진한 라테 한 잔", "오래된 도심의 결을 함께 보는 카페"],
+      "cautions": ["체류형 목적보다 골목 동선의 한 정거장으로 편집"],
+      "evidence": [
+        { "url": "https://english.visitkorea.or.kr/svc/contents/contentsView.do?vcontsId=186520", "publisher": "VisitKorea", "source_kind": "public-tourism", "supports": ["place-identity", "euljiro-address"] },
+        { "url": "https://world.nol.com/en/pois/d724fa0b-6528-4c42-887c-c913b83f0298", "publisher": "NOL", "source_kind": "travel-platform", "supports": ["retro-space", "signature-latte"] }
+      ]
+    },
+    {
+      "canonical_place_id": "seoul:seongdong:lowkey-seongsu",
+      "member_external_ids": ["coffeelog-7b00d651830481a6"],
+      "research_status": "reviewed", "confidence": "high",
+      "verified_attributes": ["specialty-coffee", "roastery", "coffee-education", "multi-branch-brand"],
+      "ados_editorial_angles": ["성수에서 커피 자체에 집중하는 한 잔", "로스터리의 태도를 따라가는 서울 커피 지도"],
+      "cautions": ["본사·로스팅 주소와 성수 매장 주소를 혼동하지 말 것"],
+      "evidence": [{ "url": "https://lowkeycoffee.co.kr/", "publisher": "Lowkey Coffee", "source_kind": "official", "supports": ["specialty-coffee", "roastery", "coffee-education", "brand-history"] }]
+    },
+    {
+      "canonical_place_id": "seoul:gwangjin:adef-coffee-roasters",
+      "member_external_ids": ["coffeelog-050607c581529e10"],
+      "research_status": "identity_verified", "confidence": "medium",
+      "verified_attributes": ["recent-operation-signal"], "ados_editorial_angles": [],
+      "cautions": ["공간·메뉴 성격은 추가 출처 확인 전 태그하지 않음"],
+      "evidence": [{ "url": "https://50plus.or.kr/upload/im/2025/11/256e2a18-ec92-4a85-9cd4-6d440748cb1f.pdf", "publisher": "서울시50플러스재단", "source_kind": "public-record", "supports": ["operation-signal-in-2025", "gwangjin-address"] }]
+    },
+    {
+      "canonical_place_id": "seoul:seodaemun:manufact-coffee-yeonhui",
+      "member_external_ids": ["coffeelog-1bc90c347eb89453", "coffeelog-ffc19dd463842996"],
+      "research_status": "identity_linked_needs_review", "confidence": "medium",
+      "verified_attributes": ["coffee-roaster"],
+      "ados_editorial_angles": ["연희동 산책에 커피 한 잔을 더하는 곳"],
+      "cautions": ["두 원본 행이 동일 지점인지 주소로 최종 확인", "플랫화이트는 장소의 상시 속성으로 승격하지 않음"],
+      "evidence": [{ "url": "https://manufactcoffee.cafe24.com/shopinfo/company.html", "publisher": "Manufact Coffee", "source_kind": "official", "supports": ["brand-identity"] }]
+    }
+  ]
+}

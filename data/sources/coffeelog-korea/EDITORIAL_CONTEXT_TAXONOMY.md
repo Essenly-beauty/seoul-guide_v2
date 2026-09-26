@@ -31,6 +31,19 @@
 | `neighborhood_tags` | 동네 탐색 키 | `seongsu`, `hannam`, `mangwon` |
 | `editorial_context_status` | 분류 상태 | `source_derived`, `reviewed`, `unclassified` |
 | `editorial_context_provenance` | 태그 근거 | `threads_collection_title` |
+| `canonical_place_id` | 중복 원본 행을 묶는 안정적인 장소 ID | `seoul:mapo:protokoll-sangsu` |
+| `research_status` | 외부 출처 조사 단계 | `not_researched`, `identity_verified`, `reviewed` |
+| `verified_attributes` | 출처로 확인된 장소 속성 | `specialty-coffee`, `roastery` |
+| `ados_editorial_angles` | ADoS 문장·컬렉션으로 발전시킬 편집 각도 | `커피를 천천히 경험하는 오후` |
+| `research_evidence` | URL, 발행처, 출처 종류와 뒷받침 항목 | 공식 홈페이지, 공공 관광정보 |
+
+## 리서치와 추천의 분리
+
+- `research_status: reviewed`는 자료 검토 완료를 뜻하며 ADoS 추천 확정을 뜻하지 않는다.
+- 조사된 레코드도 편집 승인 전에는 `eligible_for_ados: false`를 유지한다.
+- 메뉴명이 붙은 중복 행은 동일 장소로 연결할 수 있지만 메뉴 맥락은 장소의 상시 속성으로 승격하지 않는다.
+- 운영 여부, 공간 성격, 노트북 정책처럼 바뀔 수 있는 정보는 확인 날짜와 출처를 함께 둔다.
+- 공식 출처를 우선하고, 공식 출처가 없을 때 공공 관광정보와 최근 운영 흔적을 보조 근거로 쓴다.
 
 ## 태그 축
 
