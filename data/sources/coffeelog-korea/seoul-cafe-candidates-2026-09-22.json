@@ -15,7 +15,7 @@
     "geography": "Seoul only",
     "record_count": 454,
     "enriched_record_count": 30,
-    "researched_record_count": 113
+    "researched_record_count": 123
   },
   "import_policy": {
     "default_action": "stage_only",
@@ -470,8 +470,48 @@
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
       "editorial_context_provenance": null,
-      "canonical_place_id": null,
-      "research_status": "not_researched"
+      "canonical_place_id": "seoul:mapo:bmuty-coffee-yeonnam",
+      "research_status": "identity_verified",
+      "research_confidence": "medium",
+      "verified_attributes": [
+        "neighborhood-cafe",
+        "pet-friendly",
+        "small-space",
+        "vintage-aesthetic",
+        "brunch-signal"
+      ],
+      "ados_editorial_angles": [
+        "연남 주택가에서 반려견과 함께 쉬는 작은 카페",
+        "빈티지한 공간에서 가벼운 브런치를 고르는 동네 시간"
+      ],
+      "research_cautions": [
+        "공간이 협소해 반려견 동반 시 보호자 관리 필요",
+        "메뉴와 운영시간은 공식 채널로 추가 확인"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://ban-life.com/store/view?id=29222&type=s",
+          "publisher": "반려생활",
+          "source_kind": "pet-friendly-directory",
+          "supports": [
+            "address",
+            "duplicate-identity",
+            "pet-friendly",
+            "small-space-caution"
+          ]
+        },
+        {
+          "url": "https://cafe.ambitstock.com/yeonhui/cafe/%EB%B9%84%EB%AE%A4%ED%8B%B0%EC%BB%A4%ED%94%BC/",
+          "publisher": "오늘의 카페",
+          "source_kind": "review-aggregation",
+          "supports": [
+            "address",
+            "vintage-aesthetic",
+            "brunch-signal",
+            "neighborhood-cafe"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-b71578a97fc31fa5",
@@ -1739,8 +1779,51 @@
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
       "editorial_context_provenance": null,
-      "canonical_place_id": null,
-      "research_status": "not_researched"
+      "canonical_place_id": "seoul:mapo:manwol-dabang-hangang",
+      "research_status": "reviewed",
+      "research_confidence": "high",
+      "verified_attributes": [
+        "han-river-view",
+        "tea-focused",
+        "hand-drip",
+        "letter-writing-experience",
+        "pet-friendly-signal",
+        "parking-signal"
+      ],
+      "ados_editorial_angles": [
+        "상수의 5층에서 한강을 보며 차를 마시는 오후",
+        "미래의 나에게 편지를 쓰며 강변 시간을 남기는 곳"
+      ],
+      "research_cautions": [
+        "작업·디저트보다 전망·차·체험 중심으로 분류",
+        "반려동물 동반 및 주차 조건은 방문 전 확인"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://dongnecoffeenote.com/c/8731",
+          "publisher": "동네 커피 노트",
+          "source_kind": "review-analysis",
+          "supports": [
+            "address",
+            "duplicate-identity",
+            "current-operation-2026",
+            "han-river-view",
+            "tea",
+            "parking-signal",
+            "pet-friendly-signal"
+          ]
+        },
+        {
+          "url": "https://honeulstudio.com/manwol-dabang-hangang-review/",
+          "publisher": "개인 방문기",
+          "source_kind": "recent-visit",
+          "supports": [
+            "fifth-floor-view",
+            "blended-tea",
+            "indoor-pet-friendly-signal"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-49ca6b2fcaca7c51",
@@ -2933,8 +3016,48 @@
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
       "editorial_context_provenance": null,
-      "canonical_place_id": null,
-      "research_status": "not_researched"
+      "canonical_place_id": "seoul:mapo:bmuty-coffee-yeonnam",
+      "research_status": "identity_verified",
+      "research_confidence": "medium",
+      "verified_attributes": [
+        "neighborhood-cafe",
+        "pet-friendly",
+        "small-space",
+        "vintage-aesthetic",
+        "brunch-signal"
+      ],
+      "ados_editorial_angles": [
+        "연남 주택가에서 반려견과 함께 쉬는 작은 카페",
+        "빈티지한 공간에서 가벼운 브런치를 고르는 동네 시간"
+      ],
+      "research_cautions": [
+        "공간이 협소해 반려견 동반 시 보호자 관리 필요",
+        "메뉴와 운영시간은 공식 채널로 추가 확인"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://ban-life.com/store/view?id=29222&type=s",
+          "publisher": "반려생활",
+          "source_kind": "pet-friendly-directory",
+          "supports": [
+            "address",
+            "duplicate-identity",
+            "pet-friendly",
+            "small-space-caution"
+          ]
+        },
+        {
+          "url": "https://cafe.ambitstock.com/yeonhui/cafe/%EB%B9%84%EB%AE%A4%ED%8B%B0%EC%BB%A4%ED%94%BC/",
+          "publisher": "오늘의 카페",
+          "source_kind": "review-aggregation",
+          "supports": [
+            "address",
+            "vintage-aesthetic",
+            "brunch-signal",
+            "neighborhood-cafe"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-dcd647f89c4513da",
@@ -3329,8 +3452,51 @@
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
       "editorial_context_provenance": null,
-      "canonical_place_id": null,
-      "research_status": "not_researched"
+      "canonical_place_id": "seoul:mapo:manwol-dabang-hangang",
+      "research_status": "reviewed",
+      "research_confidence": "high",
+      "verified_attributes": [
+        "han-river-view",
+        "tea-focused",
+        "hand-drip",
+        "letter-writing-experience",
+        "pet-friendly-signal",
+        "parking-signal"
+      ],
+      "ados_editorial_angles": [
+        "상수의 5층에서 한강을 보며 차를 마시는 오후",
+        "미래의 나에게 편지를 쓰며 강변 시간을 남기는 곳"
+      ],
+      "research_cautions": [
+        "작업·디저트보다 전망·차·체험 중심으로 분류",
+        "반려동물 동반 및 주차 조건은 방문 전 확인"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://dongnecoffeenote.com/c/8731",
+          "publisher": "동네 커피 노트",
+          "source_kind": "review-analysis",
+          "supports": [
+            "address",
+            "duplicate-identity",
+            "current-operation-2026",
+            "han-river-view",
+            "tea",
+            "parking-signal",
+            "pet-friendly-signal"
+          ]
+        },
+        {
+          "url": "https://honeulstudio.com/manwol-dabang-hangang-review/",
+          "publisher": "개인 방문기",
+          "source_kind": "recent-visit",
+          "supports": [
+            "fifth-floor-view",
+            "blended-tea",
+            "indoor-pet-friendly-signal"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-b6cf1b95f91c419d",
@@ -5082,8 +5248,50 @@
       ],
       "editorial_context_status": "source_derived",
       "editorial_context_provenance": "threads_collection_title",
-      "canonical_place_id": null,
-      "research_status": "not_researched"
+      "canonical_place_id": "seoul:yongsan:not-bad-coffee-hannam",
+      "research_status": "reviewed",
+      "research_confidence": "high",
+      "verified_attributes": [
+        "cafe-and-sandwich",
+        "early-opening",
+        "breakfast-discount",
+        "large-space",
+        "outdoor-pet-friendly",
+        "pop-up-venue"
+      ],
+      "ados_editorial_angles": [
+        "한남에서 샌드위치와 커피로 아침을 시작하는 큰 공간",
+        "카페와 팝업이 번갈아 열리는 이태원로의 목적지"
+      ],
+      "research_cautions": [
+        "반려견은 실내 불가·야외만 가능",
+        "대관과 공사로 임시 휴무가 있을 수 있어 공식 채널 확인"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://pf.kakao.com/_vkQtn",
+          "publisher": "낫배드커피 카카오 공식채널",
+          "source_kind": "official",
+          "supports": [
+            "address",
+            "duplicate-identity",
+            "opening-hours",
+            "breakfast-discount",
+            "outdoor-only-pet-policy",
+            "temporary-closure-policy"
+          ]
+        },
+        {
+          "url": "https://notbadfranchise.com/",
+          "publisher": "낫배드커피",
+          "source_kind": "official",
+          "supports": [
+            "hannam-branch",
+            "cafe-and-sandwich",
+            "brand-identity"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-305808cb47d96c3f",
@@ -5269,8 +5477,50 @@
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
       "editorial_context_provenance": null,
-      "canonical_place_id": null,
-      "research_status": "not_researched"
+      "canonical_place_id": "seoul:yongsan:not-bad-coffee-hannam",
+      "research_status": "reviewed",
+      "research_confidence": "high",
+      "verified_attributes": [
+        "cafe-and-sandwich",
+        "early-opening",
+        "breakfast-discount",
+        "large-space",
+        "outdoor-pet-friendly",
+        "pop-up-venue"
+      ],
+      "ados_editorial_angles": [
+        "한남에서 샌드위치와 커피로 아침을 시작하는 큰 공간",
+        "카페와 팝업이 번갈아 열리는 이태원로의 목적지"
+      ],
+      "research_cautions": [
+        "반려견은 실내 불가·야외만 가능",
+        "대관과 공사로 임시 휴무가 있을 수 있어 공식 채널 확인"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://pf.kakao.com/_vkQtn",
+          "publisher": "낫배드커피 카카오 공식채널",
+          "source_kind": "official",
+          "supports": [
+            "address",
+            "duplicate-identity",
+            "opening-hours",
+            "breakfast-discount",
+            "outdoor-only-pet-policy",
+            "temporary-closure-policy"
+          ]
+        },
+        {
+          "url": "https://notbadfranchise.com/",
+          "publisher": "낫배드커피",
+          "source_kind": "official",
+          "supports": [
+            "hannam-branch",
+            "cafe-and-sandwich",
+            "brand-identity"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-85fd2fd5c13f90f8",
@@ -11016,8 +11266,51 @@
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
       "editorial_context_provenance": null,
-      "canonical_place_id": null,
-      "research_status": "not_researched"
+      "canonical_place_id": "seoul:songpa:howp-songridan-gil",
+      "research_status": "reviewed",
+      "research_confidence": "high",
+      "verified_attributes": [
+        "participatory-story-space",
+        "analog-interaction",
+        "drawing-activity",
+        "signature-grain-latte",
+        "dessert",
+        "date-friendly"
+      ],
+      "ados_editorial_angles": [
+        "낯선 사람의 이야기를 읽고 내 답을 남기는 송리단길 카페",
+        "휴대폰 밖의 아날로그 콘텐츠로 시간을 보내는 데이트"
+      ],
+      "research_cautions": [
+        "좌석이 많지 않고 혼잡할 수 있음",
+        "토요일 단축 운영 여부와 체험 방식은 방문 전 확인"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://www.diningcode.com/profile.php?rid=ngLtVAYWJXgi",
+          "publisher": "DiningCode",
+          "source_kind": "place-platform",
+          "supports": [
+            "address",
+            "duplicate-identity",
+            "current-operation-2026",
+            "story-sharing",
+            "drawing",
+            "signature-grain-latte",
+            "dessert"
+          ]
+        },
+        {
+          "url": "https://www.arteriors.co.kr/REPORT/?bmode=view&idx=169831523",
+          "publisher": "아트리어",
+          "source_kind": "space-branding-feature",
+          "supports": [
+            "analog-content-platform",
+            "participatory-story-space",
+            "songridan-gil"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-f6fd1b44e8dd6929",
@@ -11651,8 +11944,51 @@
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
       "editorial_context_provenance": null,
-      "canonical_place_id": null,
-      "research_status": "not_researched"
+      "canonical_place_id": "seoul:songpa:howp-songridan-gil",
+      "research_status": "reviewed",
+      "research_confidence": "high",
+      "verified_attributes": [
+        "participatory-story-space",
+        "analog-interaction",
+        "drawing-activity",
+        "signature-grain-latte",
+        "dessert",
+        "date-friendly"
+      ],
+      "ados_editorial_angles": [
+        "낯선 사람의 이야기를 읽고 내 답을 남기는 송리단길 카페",
+        "휴대폰 밖의 아날로그 콘텐츠로 시간을 보내는 데이트"
+      ],
+      "research_cautions": [
+        "좌석이 많지 않고 혼잡할 수 있음",
+        "토요일 단축 운영 여부와 체험 방식은 방문 전 확인"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://www.diningcode.com/profile.php?rid=ngLtVAYWJXgi",
+          "publisher": "DiningCode",
+          "source_kind": "place-platform",
+          "supports": [
+            "address",
+            "duplicate-identity",
+            "current-operation-2026",
+            "story-sharing",
+            "drawing",
+            "signature-grain-latte",
+            "dessert"
+          ]
+        },
+        {
+          "url": "https://www.arteriors.co.kr/REPORT/?bmode=view&idx=169831523",
+          "publisher": "아트리어",
+          "source_kind": "space-branding-feature",
+          "supports": [
+            "analog-content-platform",
+            "participatory-story-space",
+            "songridan-gil"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-e52323f0088f6dbb",
@@ -12266,8 +12602,52 @@
       ],
       "editorial_context_status": "source_derived",
       "editorial_context_provenance": "threads_collection_title",
-      "canonical_place_id": null,
-      "research_status": "not_researched"
+      "canonical_place_id": "seoul:seongdong:plad-cafe-seoul-forest",
+      "research_status": "reviewed",
+      "research_confidence": "medium",
+      "verified_attributes": [
+        "seoul-forest-view",
+        "multi-floor",
+        "large-space",
+        "matcha",
+        "signature-cream-latte",
+        "dessert"
+      ],
+      "ados_editorial_angles": [
+        "서울숲을 여러 높이에서 바라보며 자리를 고르는 카페",
+        "말차와 고구마 디저트로 쉬어 가는 성수 산책"
+      ],
+      "research_cautions": [
+        "노키즈·반려동물 불가 정책은 방문 전 재확인",
+        "층별 개방 범위와 이용 가능 좌석이 달라질 수 있음"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://www.diningcode.com/profile.php?rid=DPlD1BxXTsLM",
+          "publisher": "DiningCode",
+          "source_kind": "place-platform",
+          "supports": [
+            "address",
+            "duplicate-identity",
+            "opening-hours",
+            "multi-floor",
+            "seoul-forest-view",
+            "matcha",
+            "dessert",
+            "access-policy-signal"
+          ]
+        },
+        {
+          "url": "https://mapz.dododo.co.kr/view.php?id=15593",
+          "publisher": "도도도맵",
+          "source_kind": "place-directory",
+          "supports": [
+            "recent-menu",
+            "signature-cream-latte",
+            "dessert"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-47a034b4e9d43bec",
@@ -12636,8 +13016,52 @@
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
       "editorial_context_provenance": null,
-      "canonical_place_id": null,
-      "research_status": "not_researched"
+      "canonical_place_id": "seoul:seongdong:plad-cafe-seoul-forest",
+      "research_status": "reviewed",
+      "research_confidence": "medium",
+      "verified_attributes": [
+        "seoul-forest-view",
+        "multi-floor",
+        "large-space",
+        "matcha",
+        "signature-cream-latte",
+        "dessert"
+      ],
+      "ados_editorial_angles": [
+        "서울숲을 여러 높이에서 바라보며 자리를 고르는 카페",
+        "말차와 고구마 디저트로 쉬어 가는 성수 산책"
+      ],
+      "research_cautions": [
+        "노키즈·반려동물 불가 정책은 방문 전 재확인",
+        "층별 개방 범위와 이용 가능 좌석이 달라질 수 있음"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://www.diningcode.com/profile.php?rid=DPlD1BxXTsLM",
+          "publisher": "DiningCode",
+          "source_kind": "place-platform",
+          "supports": [
+            "address",
+            "duplicate-identity",
+            "opening-hours",
+            "multi-floor",
+            "seoul-forest-view",
+            "matcha",
+            "dessert",
+            "access-policy-signal"
+          ]
+        },
+        {
+          "url": "https://mapz.dododo.co.kr/view.php?id=15593",
+          "publisher": "도도도맵",
+          "source_kind": "place-directory",
+          "supports": [
+            "recent-menu",
+            "signature-cream-latte",
+            "dessert"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-e86f6d2953afa819",
