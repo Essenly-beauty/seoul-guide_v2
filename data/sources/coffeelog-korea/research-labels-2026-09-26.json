@@ -536,6 +536,60 @@
       "ados_editorial_angles": ["낯선 독자의 밑줄과 메모까지 함께 읽는 연남동 책방", "책 한 권을 여러 사람의 흔적으로 다시 발견하는 곳"],
       "cautions": ["독립서점으로 분류하고 카페 목록에서는 별도 배지 필요", "음료 제공 여부와 최신 운영시간은 추가 확인"],
       "evidence": [{ "url": "https://www.kmediarods.com/fileUpload/bulletins/bulletin_2025-08-19.pdf", "publisher": "신문과방송", "source_kind": "feature-pdf", "supports": ["yeonnam-location", "annotated-books", "participatory-reading"] }]
+    },
+    {
+      "canonical_place_id": "seoul:mapo:biroso-coffee",
+      "member_external_ids": ["coffeelog-17a28fa647083d8f"],
+      "research_status": "reviewed", "confidence": "medium",
+      "verified_attributes": ["roastery", "single-origin", "filter-coffee", "work-friendly", "gyeongui-line-forest-park"],
+      "ados_editorial_angles": ["경의선숲길 산책 뒤 원두를 골라 마시는 한 잔", "대흥에서 필터커피와 함께 머무는 오후"],
+      "cautions": ["혼잡도와 반려동물 동반 정책은 방문 전 확인", "공식 채널이 아닌 복수 장소 플랫폼으로 교차 확인"],
+      "evidence": [{ "url": "https://www.brewatlas.info/seoul/cafes/biroso-coffee-mapo-gu", "publisher": "BrewAtlas", "source_kind": "specialty-coffee-directory", "supports": ["address", "roastery", "single-origin", "pour-over", "work-friendly"] }, { "url": "https://www.tabling.co.kr/place/677ccb1666de5f06987c9af6", "publisher": "테이블링", "source_kind": "place-platform", "supports": ["address", "opening-hours", "signature-einspanner"] }]
+    },
+    {
+      "canonical_place_id": "seoul:mapo:yri-cafe",
+      "member_external_ids": ["coffeelog-1297bdc0e47ec9e6"],
+      "research_status": "identity_verified", "confidence": "medium",
+      "verified_attributes": ["long-running-neighborhood-cafe", "cafe-and-bar", "books-and-comics", "terrace", "late-hours"],
+      "ados_editorial_angles": ["시간이 쌓인 상수의 예술가 아지트", "책과 맥주까지 이어지는 늦은 카페 시간"],
+      "cautions": ["공식 채널 부재로 최신 영업시간 재확인 필요", "흡연 공간 및 좌석 정책은 현장 확인"],
+      "evidence": [{ "url": "https://www.diningcode.com/profile.php?rid=7yVgUcfWkSg5", "publisher": "DiningCode", "source_kind": "place-platform", "supports": ["address", "books-comics", "cafe-and-bar", "terrace", "late-hours"] }, { "url": "https://m.menupan.com/restaurant/onepage.asp?acode=D102755", "publisher": "메뉴판닷컴", "source_kind": "place-directory", "supports": ["artist-hangout-context", "address", "cafe-and-pub"] }]
+    },
+    {
+      "canonical_place_id": "seoul:mapo:coffee-shop-tokyo-mangwon",
+      "member_external_ids": ["coffeelog-a29cbf4ba768dc3b"],
+      "research_status": "identity_verified", "confidence": "medium",
+      "verified_attributes": ["signature-einspanner", "almond-mocha-java", "hand-drip", "vintage-interior", "basement-space"],
+      "ados_editorial_angles": ["망원에서 크림커피 한 잔을 위해 찾아가는 지하 공간", "아인슈페너와 아몬드모카자바로 기억되는 오래된 취향"],
+      "cautions": ["가격·운영시간은 오래된 정보와 차이가 날 수 있어 재확인", "다른 지점과 분리해 망원점으로 관리"],
+      "evidence": [{ "url": "https://m.menupan.com/restaurant/onepage.asp?acode=D103719", "publisher": "메뉴판닷컴", "source_kind": "place-directory", "supports": ["mangwon-identity", "signature-einspanner", "almond-mocha-java", "hand-drip", "vintage-interior"] }]
+    },
+    {
+      "canonical_place_id": "seoul:yongsan:blue-door-books",
+      "member_external_ids": ["coffeelog-944ba83a56a41ca5"],
+      "research_status": "identity_verified", "confidence": "high",
+      "verified_attributes": ["independent-bookshop", "curated-books", "newsletter", "hannam"],
+      "ados_editorial_angles": ["한남동 지하에서 자기 취향의 문을 여는 독립서점", "커피 목록 안에서 발견한 책 중심의 작은 우회로"],
+      "cautions": ["카페가 아닌 독립서점으로 별도 배지 필수", "원문 후보의 지점·주소와 공식 한남동 주소 일치 여부 확인 필요"],
+      "evidence": [{ "url": "https://www.bluedoorbooks.co.kr/132", "publisher": "Bluedoor Books", "source_kind": "official", "supports": ["business-identity", "hannam-address", "newsletter"] }, { "url": "https://nzine.kpipa.or.kr/admin/data/webzine/2024_7%2B8_2411210539523_round_pdf.pdf", "publisher": "한국출판문화산업진흥원", "source_kind": "industry-feature", "supports": ["independent-bookshop", "reading-culture-context"] }]
+    },
+    {
+      "canonical_place_id": "seoul:jung:cafe-hubble-namsan-books",
+      "member_external_ids": ["coffeelog-ba15305be083630d"],
+      "research_status": "reviewed", "confidence": "high",
+      "verified_attributes": ["publisher-operated", "book-cafe", "science-and-humanities-books", "hanok-village-view", "cultural-programs"],
+      "ados_editorial_angles": ["남산골한옥마을 산책 뒤 과학과 문학을 펼치는 곳", "출판사가 만든 책과 커피의 두 층"],
+      "cautions": ["행사와 전시는 기간별로 달라지므로 상시 프로그램처럼 표기하지 않음", "최신 운영시간은 방문 전 확인"],
+      "evidence": [{ "url": "https://culture.seoul.go.kr/culture/culture/cultureEvent/view.do?cultcode=156332&menuNo=200008", "publisher": "서울문화포털", "source_kind": "official-cultural-program", "supports": ["publisher-operated", "cafe-and-book-space", "location", "book-curation", "cultural-program"] }, { "url": "https://mediahub.seoul.go.kr/archives/2013735", "publisher": "내 손안에 서울", "source_kind": "official-city-media", "supports": ["hanok-village-walk", "bookshop-view", "cafe-linkage"] }]
+    },
+    {
+      "canonical_place_id": "seoul:mapo:botong-park-mangwon",
+      "member_external_ids": ["coffeelog-7126c4c2859df33b"],
+      "research_status": "identity_verified", "confidence": "medium",
+      "verified_attributes": ["seasonal-fruit-sando", "matcha-dessert", "rice-drink", "pet-friendly-signal", "third-floor"],
+      "ados_editorial_angles": ["망원시장 건너 계절 과일 산도를 고르는 오후", "말차와 쌀 음료로 쉬어 가는 망원 3층"],
+      "cautions": ["주소가 일부 출처에서 73·79로 엇갈려 최종 확인 필요", "주말 이용시간 제한과 반려동물 정책은 방문 전 확인"],
+      "evidence": [{ "url": "https://www.tabling.co.kr/place/677cd1ab66de5f0698885484", "publisher": "테이블링", "source_kind": "place-platform", "supports": ["address-79", "opening-hours", "fruit-sando", "matcha-dessert", "pet-friendly-signal"] }, { "url": "https://www.diningcode.com/profile.php?rid=oOcKSZg17Rvp", "publisher": "DiningCode", "source_kind": "place-platform", "supports": ["third-floor", "seasonal-fruit-sando", "rice-drink", "weekend-time-limit-signal"] }]
     }
   ]
 }
