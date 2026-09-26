@@ -128,6 +128,42 @@
         { "url": "https://www.protokoll.kr/showroom", "publisher": "PROTOKOLL", "source_kind": "official", "supports": ["address", "coffee-programs", "opening-hours"] },
         { "url": "https://korean.visitseoul.net/restaurants/protokoll/KOPcys3h9", "publisher": "Visit Seoul", "source_kind": "public-tourism", "supports": ["roastery", "coffee-research", "time-limit-caution"] }
       ]
+    },
+    {
+      "canonical_place_id": "seoul:mapo:coffee-nap-roasters-yeonnam",
+      "member_external_ids": ["coffeelog-45f8bc9cc091344a", "coffeelog-1e16eef486e07c6c"],
+      "research_status": "reviewed", "confidence": "high",
+      "verified_attributes": ["roastery", "neighborhood-sensitive-design", "morning-coffee", "yeonnam"],
+      "ados_editorial_angles": ["연남의 아침을 여는 로스터리", "동네의 결에 스며든 작은 커피 공간"],
+      "cautions": ["평일과 주말 운영 시작 시간이 다름"],
+      "evidence": [{ "url": "https://www.coffeenaproasters.com/51", "publisher": "Coffee Nap Roasters", "source_kind": "official", "supports": ["address", "opening-hours", "roastery", "neighborhood-design-philosophy"] }]
+    },
+    {
+      "canonical_place_id": "seoul:mapo:cafe-comma-hapjeong",
+      "member_external_ids": ["coffeelog-0bc6417b26473152"],
+      "research_status": "reviewed", "confidence": "high",
+      "verified_attributes": ["book-cafe", "specialty-coffee", "bakery", "culture-space", "long-stay-concept"],
+      "ados_editorial_angles": ["책 사이에서 오래 머무는 합정의 쉼표", "읽기와 커피를 한 자리에서 이어가는 오후"],
+      "cautions": ["실제 노트북·좌석 정책은 방문 전 확인"],
+      "evidence": [{ "url": "https://cafecomma.imweb.me/", "publisher": "CAFE COMMA", "source_kind": "official", "supports": ["book-and-culture", "specialty-coffee", "bakery", "rest-concept"] }]
+    },
+    {
+      "canonical_place_id": "seoul:yongsan:quartz-coffee",
+      "member_external_ids": ["coffeelog-1baff9c599aba776", "coffeelog-052d369401681194"],
+      "research_status": "reviewed", "confidence": "medium",
+      "verified_attributes": ["coffee-focused", "signature-latte", "yongnidan-gil", "compact-stop"],
+      "ados_editorial_angles": ["용리단길에서 라테 한 잔만 정확히 고르기", "국립중앙박물관 동선에 붙이는 커피 정거장"],
+      "cautions": ["쿼츠라떼는 메뉴 맥락으로 유지", "운영시간은 공식 채널로 재확인"],
+      "evidence": [{ "url": "https://russian.visitkorea.or.kr/svc/contents/contentsView.do?vcontsId=204892", "publisher": "VisitKorea", "source_kind": "public-tourism", "supports": ["place-identity", "yongnidan-gil", "signature-latte", "coffee-expertise"] }]
+    },
+    {
+      "canonical_place_id": "seoul:jongno:felt-coffee-gwanghwamun",
+      "member_external_ids": ["coffeelog-3bcbfed808f1090a", "coffeelog-3244a62c096701ef"],
+      "research_status": "reviewed", "confidence": "high",
+      "verified_attributes": ["specialty-coffee", "roastery", "early-weekday", "central-seoul"],
+      "ados_editorial_angles": ["광화문 출근길에 고르는 균형 잡힌 커피", "도심 한가운데 커피에만 집중하는 짧은 시간"],
+      "cautions": ["원본의 중구 표기는 청진동·광화문 공식 주소에 따라 종로구로 정규화 필요", "청계천점과 별도 지점"],
+      "evidence": [{ "url": "https://www.feltcoffee.com/about.html", "publisher": "FELT COFFEE", "source_kind": "official", "supports": ["gwanghwamun-address", "opening-hours", "specialty-coffee", "roasting-philosophy"] }]
     }
   ]
 }

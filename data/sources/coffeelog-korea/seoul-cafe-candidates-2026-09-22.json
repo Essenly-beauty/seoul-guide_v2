@@ -15,7 +15,7 @@
     "geography": "Seoul only",
     "record_count": 454,
     "enriched_record_count": 30,
-    "researched_record_count": 20
+    "researched_record_count": 27
   },
   "import_policy": {
     "default_action": "stage_only",
@@ -927,8 +927,35 @@
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
       "editorial_context_provenance": null,
-      "canonical_place_id": null,
-      "research_status": "not_researched"
+      "canonical_place_id": "seoul:mapo:coffee-nap-roasters-yeonnam",
+      "research_status": "reviewed",
+      "research_confidence": "high",
+      "verified_attributes": [
+        "roastery",
+        "neighborhood-sensitive-design",
+        "morning-coffee",
+        "yeonnam"
+      ],
+      "ados_editorial_angles": [
+        "연남의 아침을 여는 로스터리",
+        "동네의 결에 스며든 작은 커피 공간"
+      ],
+      "research_cautions": [
+        "평일과 주말 운영 시작 시간이 다름"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://www.coffeenaproasters.com/51",
+          "publisher": "Coffee Nap Roasters",
+          "source_kind": "official",
+          "supports": [
+            "address",
+            "opening-hours",
+            "roastery",
+            "neighborhood-design-philosophy"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-0bc6417b26473152",
@@ -960,8 +987,36 @@
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
       "editorial_context_provenance": null,
-      "canonical_place_id": null,
-      "research_status": "not_researched"
+      "canonical_place_id": "seoul:mapo:cafe-comma-hapjeong",
+      "research_status": "reviewed",
+      "research_confidence": "high",
+      "verified_attributes": [
+        "book-cafe",
+        "specialty-coffee",
+        "bakery",
+        "culture-space",
+        "long-stay-concept"
+      ],
+      "ados_editorial_angles": [
+        "책 사이에서 오래 머무는 합정의 쉼표",
+        "읽기와 커피를 한 자리에서 이어가는 오후"
+      ],
+      "research_cautions": [
+        "실제 노트북·좌석 정책은 방문 전 확인"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://cafecomma.imweb.me/",
+          "publisher": "CAFE COMMA",
+          "source_kind": "official",
+          "supports": [
+            "book-and-culture",
+            "specialty-coffee",
+            "bakery",
+            "rest-concept"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-35eec384032a7a27",
@@ -1616,8 +1671,35 @@
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
       "editorial_context_provenance": null,
-      "canonical_place_id": null,
-      "research_status": "not_researched"
+      "canonical_place_id": "seoul:mapo:coffee-nap-roasters-yeonnam",
+      "research_status": "reviewed",
+      "research_confidence": "high",
+      "verified_attributes": [
+        "roastery",
+        "neighborhood-sensitive-design",
+        "morning-coffee",
+        "yeonnam"
+      ],
+      "ados_editorial_angles": [
+        "연남의 아침을 여는 로스터리",
+        "동네의 결에 스며든 작은 커피 공간"
+      ],
+      "research_cautions": [
+        "평일과 주말 운영 시작 시간이 다름"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://www.coffeenaproasters.com/51",
+          "publisher": "Coffee Nap Roasters",
+          "source_kind": "official",
+          "supports": [
+            "address",
+            "opening-hours",
+            "roastery",
+            "neighborhood-design-philosophy"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-1297bdc0e47ec9e6",
@@ -4157,8 +4239,36 @@
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
       "editorial_context_provenance": null,
-      "canonical_place_id": null,
-      "research_status": "not_researched"
+      "canonical_place_id": "seoul:yongsan:quartz-coffee",
+      "research_status": "reviewed",
+      "research_confidence": "medium",
+      "verified_attributes": [
+        "coffee-focused",
+        "signature-latte",
+        "yongnidan-gil",
+        "compact-stop"
+      ],
+      "ados_editorial_angles": [
+        "용리단길에서 라테 한 잔만 정확히 고르기",
+        "국립중앙박물관 동선에 붙이는 커피 정거장"
+      ],
+      "research_cautions": [
+        "쿼츠라떼는 메뉴 맥락으로 유지",
+        "운영시간은 공식 채널로 재확인"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://russian.visitkorea.or.kr/svc/contents/contentsView.do?vcontsId=204892",
+          "publisher": "VisitKorea",
+          "source_kind": "public-tourism",
+          "supports": [
+            "place-identity",
+            "yongnidan-gil",
+            "signature-latte",
+            "coffee-expertise"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-d076e3234dce5b91",
@@ -4586,8 +4696,36 @@
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
       "editorial_context_provenance": null,
-      "canonical_place_id": null,
-      "research_status": "not_researched"
+      "canonical_place_id": "seoul:yongsan:quartz-coffee",
+      "research_status": "reviewed",
+      "research_confidence": "medium",
+      "verified_attributes": [
+        "coffee-focused",
+        "signature-latte",
+        "yongnidan-gil",
+        "compact-stop"
+      ],
+      "ados_editorial_angles": [
+        "용리단길에서 라테 한 잔만 정확히 고르기",
+        "국립중앙박물관 동선에 붙이는 커피 정거장"
+      ],
+      "research_cautions": [
+        "쿼츠라떼는 메뉴 맥락으로 유지",
+        "운영시간은 공식 채널로 재확인"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://russian.visitkorea.or.kr/svc/contents/contentsView.do?vcontsId=204892",
+          "publisher": "VisitKorea",
+          "source_kind": "public-tourism",
+          "supports": [
+            "place-identity",
+            "yongnidan-gil",
+            "signature-latte",
+            "coffee-expertise"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-75ff291de9fdeff0",
@@ -5855,8 +5993,36 @@
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
       "editorial_context_provenance": null,
-      "canonical_place_id": null,
-      "research_status": "not_researched"
+      "canonical_place_id": "seoul:jongno:felt-coffee-gwanghwamun",
+      "research_status": "reviewed",
+      "research_confidence": "high",
+      "verified_attributes": [
+        "specialty-coffee",
+        "roastery",
+        "early-weekday",
+        "central-seoul"
+      ],
+      "ados_editorial_angles": [
+        "광화문 출근길에 고르는 균형 잡힌 커피",
+        "도심 한가운데 커피에만 집중하는 짧은 시간"
+      ],
+      "research_cautions": [
+        "원본의 중구 표기는 청진동·광화문 공식 주소에 따라 종로구로 정규화 필요",
+        "청계천점과 별도 지점"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://www.feltcoffee.com/about.html",
+          "publisher": "FELT COFFEE",
+          "source_kind": "official",
+          "supports": [
+            "gwanghwamun-address",
+            "opening-hours",
+            "specialty-coffee",
+            "roasting-philosophy"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-1a22309d37089f17",
@@ -7980,8 +8146,36 @@
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
       "editorial_context_provenance": null,
-      "canonical_place_id": null,
-      "research_status": "not_researched"
+      "canonical_place_id": "seoul:jongno:felt-coffee-gwanghwamun",
+      "research_status": "reviewed",
+      "research_confidence": "high",
+      "verified_attributes": [
+        "specialty-coffee",
+        "roastery",
+        "early-weekday",
+        "central-seoul"
+      ],
+      "ados_editorial_angles": [
+        "광화문 출근길에 고르는 균형 잡힌 커피",
+        "도심 한가운데 커피에만 집중하는 짧은 시간"
+      ],
+      "research_cautions": [
+        "원본의 중구 표기는 청진동·광화문 공식 주소에 따라 종로구로 정규화 필요",
+        "청계천점과 별도 지점"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://www.feltcoffee.com/about.html",
+          "publisher": "FELT COFFEE",
+          "source_kind": "official",
+          "supports": [
+            "gwanghwamun-address",
+            "opening-hours",
+            "specialty-coffee",
+            "roasting-philosophy"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-fb385aad3160adaf",
