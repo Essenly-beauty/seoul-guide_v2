@@ -123,7 +123,7 @@ function TrendingSection({ products }: { products: readonly Product[] }) {
   if (trending.length === 0) return null;
   return (
     <section className="stack sm">
-      <SectionHeader title="Trending now" count={trending.length} />
+      <SectionHeader title="Also popular" count={trending.length} />
       <HScroll ariaLabel="Trending products">
         {trending.map((p) => (
           <Link key={p.id} href={routes.shopItem(p.id)} style={{ width: 128 }}>
@@ -255,7 +255,11 @@ function OliveYoungRanking() {
             {/* key resets the "More ›" expansion when the ranking scope changes */}
             <RankSection
               key={`${tab}:${category}`}
-              title={tab === "sales" ? "Today's sales ranking" : "Highest-rated by reviews"}
+              // Owner decision 2026-09-23: this list is refreshed by hand every
+              // week or two, and again around a sale or a holiday. It must not
+              // borrow a live feed's vocabulary. The previous title dated a
+              // hand-made snapshot to the hour the visitor happened to open it.
+              title={tab === "sales" ? "Popular at Olive Young" : "Highest-rated by reviews"}
               products={ranked}
               emptyMessage={config.emptyMessage}
             />

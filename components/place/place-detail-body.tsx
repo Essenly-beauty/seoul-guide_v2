@@ -315,7 +315,10 @@ function TaxiCard({ place }: { place: Place }) {
 
 // ── Olive Young stores: bestsellers instead of a service menu ──
 // (user request 2026-08-16: the store page should route to the products
-// sold there — the chart is chain-wide, so it's labeled honestly.)
+// sold there. It used to be labelled "Olive Young bestsellers — chain-wide
+// chart"; the 2026-09-23 verification found no such chart on Olive Young's
+// site, and these 14 rows are hand-written samples, so the label now says what
+// the list actually is.)
 function OliveYoungPicks() {
   const picks = PRODUCTS
     .filter((p) => p.channel === "olive_young" && p.salesRank !== undefined)
@@ -323,7 +326,7 @@ function OliveYoungPicks() {
     .slice(0, 4);
   return (
     <>
-      <div className="caption muted">Olive Young bestsellers — chain-wide chart, stock varies by branch.</div>
+      <div className="caption muted">A short list we refresh every week or two. Stock varies by branch.</div>
       <div>
         {picks.map((p, i) => (
           <Link key={p.id} className="listrow" href={routes.shopItem(p.id)}>

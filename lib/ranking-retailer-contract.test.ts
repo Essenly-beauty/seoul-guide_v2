@@ -45,7 +45,11 @@ describe("retailer-specific ranking presentation", () => {
     expect(clientSource).toContain("config.categoriesForTab(tab).map");
     expect(clientSource).toContain("config.products");
     expect(clientSource).toContain("config.emptyMessage");
-    expect(clientSource).toContain('<SectionHeader title="Trending now"');
+    // Renamed 2026-09-23. The lists are refreshed by hand every week or two,
+    // so the copy may not borrow a live feed's vocabulary — see
+    // lib/ranking-freshness-copy.test.ts, which bans those words outright. The
+    // rail itself must stay, which is what this line pins.
+    expect(clientSource).toContain('<SectionHeader title="Also popular"');
     expect(clientSource).toContain('placeholder="Search brands"');
     expect(clientSource).toContain("href={routes.shopItem(p.id)}");
     expect(clientSource).not.toMatch(/import\s*\{[^}]*\bPRODUCTS\b[^}]*\}\s*from\s*["']@\/lib\/data["']/s);
