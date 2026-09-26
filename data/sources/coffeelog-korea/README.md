@@ -10,6 +10,7 @@
 - `collections-2026-09-22.json`: 원문 게시물의 상황·공간·동네 관점을 보존한 컬렉션 4개와 멤버 후보 ID.
 - `EDITORIAL_CONTEXT_TAXONOMY.md`: 컬렉션 ID와 상황·공간·계절·메뉴·동네 태그 규칙.
 - `research-labels-2026-09-26.json`: 외부 출처로 검증한 장소 속성, ADoS 편집 각도, 근거 URL.
+- `research-queue-2026-09-26.json`: 454개 전체 후보의 정규화 이름, 중복 가능성, 업종 검토 및 조사 우선순위.
 - `seoul-names-raw.md`: 서울 21개 자치구별 원문 이름 목록.
 - `outside-seoul-raw.md`: 경기·부산·제주 등 서울 이외 장소의 원문 기반 백업. 현재 import 대상은 아니다.
 
