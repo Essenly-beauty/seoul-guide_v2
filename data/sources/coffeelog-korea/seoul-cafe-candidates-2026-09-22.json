@@ -15,7 +15,7 @@
     "geography": "Seoul only",
     "record_count": 454,
     "enriched_record_count": 30,
-    "researched_record_count": 85
+    "researched_record_count": 91
   },
   "import_policy": {
     "default_action": "stage_only",
@@ -6571,8 +6571,51 @@
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
       "editorial_context_provenance": null,
-      "canonical_place_id": null,
-      "research_status": "not_researched"
+      "canonical_place_id": "seoul:jung:loiter-coffee-shelter",
+      "research_status": "reviewed",
+      "research_confidence": "high",
+      "verified_attributes": [
+        "namsan-view",
+        "rooftop",
+        "large-space",
+        "group-seating",
+        "parking",
+        "walk-route"
+      ],
+      "ados_editorial_angles": [
+        "남산 둘레길 뒤 루프톱에서 쉬어 가는 필동",
+        "도심 산책과 넓은 실내를 함께 고르는 날"
+      ],
+      "research_cautions": [
+        "루프톱 이용은 날씨에 따라 달라질 수 있음",
+        "공식 관광정보와 장소 플랫폼의 휴무일 표기가 달라 방문 전 확인"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://www.ktourmap.com/spotDetails.jsp?contentId=2914179",
+          "publisher": "한국관광공사 TourAPI 연계 지도",
+          "source_kind": "tourism-directory",
+          "supports": [
+            "address",
+            "namsan-rooftop",
+            "large-space",
+            "group-seating",
+            "parking",
+            "opening-hours"
+          ]
+        },
+        {
+          "url": "https://www.diningcode.com/profile.php?rid=qEwTCeEMS9kf",
+          "publisher": "DiningCode",
+          "source_kind": "place-platform",
+          "supports": [
+            "recent-operation",
+            "rooftop",
+            "namsan-walk-route",
+            "hours-variation"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-97d47f7525955114",
@@ -7025,8 +7068,39 @@
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
       "editorial_context_provenance": null,
-      "canonical_place_id": null,
-      "research_status": "not_researched"
+      "canonical_place_id": "seoul:jung:paint-coffee-and-bar-euljiro",
+      "research_status": "identity_verified",
+      "research_confidence": "medium",
+      "verified_attributes": [
+        "cafe-and-bar",
+        "brunch",
+        "wine",
+        "granola",
+        "concept-store-signal"
+      ],
+      "ados_editorial_angles": [
+        "을지로에서 브런치로 시작해 와인까지 이어지는 카페바",
+        "커피와 편집숍 감각을 한 자리에서 만나는 도심 정류장"
+      ],
+      "research_cautions": [
+        "편집숍 결합 여부와 최신 운영 형태는 현장 재확인",
+        "낮·저녁 메뉴 제공 시간이 다를 수 있음"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://www.cafedle.com/index/view/4865957",
+          "publisher": "카페들",
+          "source_kind": "place-directory",
+          "supports": [
+            "address",
+            "cafe-and-bar",
+            "brunch",
+            "granola",
+            "wine",
+            "concept-store-signal"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-02d6e580f93b5d6d",
@@ -7124,8 +7198,49 @@
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
       "editorial_context_provenance": null,
-      "canonical_place_id": null,
-      "research_status": "not_researched"
+      "canonical_place_id": "seoul:jung:cracking-coffee-euljiro-3ga",
+      "research_status": "reviewed",
+      "research_confidence": "medium",
+      "verified_attributes": [
+        "early-opening",
+        "french-toast",
+        "signature-latte",
+        "seasonal-dessert",
+        "terrace-signal"
+      ],
+      "ados_editorial_angles": [
+        "을지로의 아침을 프렌치토스트와 커피로 시작하는 곳",
+        "골목 약속 전 달고 고소한 브런치를 고르는 시간"
+      ],
+      "research_cautions": [
+        "플랫폼 내 영업시간 표기가 일부 달라 방문 전 확인",
+        "작업형 카페보다는 브런치·대화 목적에 적합"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://www.diningcode.com/profile.php?rid=eXshfJs09End",
+          "publisher": "DiningCode",
+          "source_kind": "place-platform",
+          "supports": [
+            "address",
+            "early-opening",
+            "french-toast",
+            "signature-latte",
+            "seasonal-dessert"
+          ]
+        },
+        {
+          "url": "https://www.dongnecoffeenote.com/c/10313",
+          "publisher": "동네 커피 노트",
+          "source_kind": "review-analysis",
+          "supports": [
+            "recent-operation",
+            "brunch-signal",
+            "waiting-signal",
+            "work-use-caution"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-f04140d7272e0eef",
@@ -7752,8 +7867,49 @@
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
       "editorial_context_provenance": null,
-      "canonical_place_id": null,
-      "research_status": "not_researched"
+      "canonical_place_id": "seoul:jung:yuwol-coffee-hoehyeon",
+      "research_status": "reviewed",
+      "research_confidence": "medium",
+      "verified_attributes": [
+        "signature-cream-coffee",
+        "flat-white",
+        "dessert",
+        "plant-filled-space",
+        "pet-friendly-signal",
+        "work-friendly-signal"
+      ],
+      "ados_editorial_angles": [
+        "회현 골목에서 부드러운 크림커피를 마시는 오후",
+        "남산 아래 식물과 빛이 있는 공간에서 잠시 머물기"
+      ],
+      "research_cautions": [
+        "역삼점과 분리해 회현점으로 관리",
+        "일요일 휴무와 반려동물 정책은 방문 전 확인"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://www.tabling.co.kr/place/677cd2f166de5f06988aa68d",
+          "publisher": "테이블링",
+          "source_kind": "place-platform",
+          "supports": [
+            "address",
+            "opening-hours",
+            "signature-cream-coffee",
+            "flat-white",
+            "pet-friendly-signal"
+          ]
+        },
+        {
+          "url": "https://www.dongnecoffeenote.com/c/26244",
+          "publisher": "동네 커피 노트",
+          "source_kind": "review-analysis",
+          "supports": [
+            "hoehyeon-branch-dedup",
+            "plant-filled-space",
+            "work-friendly-signal"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-2e2a33015cbf47db",
@@ -7851,8 +8007,47 @@
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
       "editorial_context_provenance": null,
-      "canonical_place_id": null,
-      "research_status": "not_researched"
+      "canonical_place_id": "seoul:jung:leaf-coffee-yaksu",
+      "research_status": "identity_verified",
+      "research_confidence": "medium",
+      "verified_attributes": [
+        "brunch",
+        "french-toast",
+        "early-weekday",
+        "neighborhood-cafe",
+        "terrace-signal"
+      ],
+      "ados_editorial_angles": [
+        "약수 골목에서 프렌치토스트로 천천히 시작하는 평일",
+        "대로에서 한 걸음 비켜난 붉은 벽돌 브런치 카페"
+      ],
+      "research_cautions": [
+        "요일별 영업시간이 크게 달라 방문 전 확인",
+        "광고성 체험단 출처는 주소 확인에만 제한적으로 사용"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://pandarank.net/contents/698355eb901c7203a658e577",
+          "publisher": "판다랭크",
+          "source_kind": "recent-visit",
+          "supports": [
+            "address",
+            "early-weekday",
+            "brunch",
+            "neighborhood-location"
+          ]
+        },
+        {
+          "url": "https://pandarank.net/contents/6991a3ebff7b7268eaec4584",
+          "publisher": "판다랭크",
+          "source_kind": "recent-visit",
+          "supports": [
+            "french-toast",
+            "terrace-signal",
+            "hours-variation"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-eceee859d03cb87d",
@@ -7917,8 +8112,50 @@
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
       "editorial_context_provenance": null,
-      "canonical_place_id": null,
-      "research_status": "not_researched"
+      "canonical_place_id": "seoul:jung:brooklyn-coffee-euljiro",
+      "research_status": "reviewed",
+      "research_confidence": "medium",
+      "verified_attributes": [
+        "roastery",
+        "early-opening",
+        "two-floor-space",
+        "work-friendly",
+        "bakery",
+        "station-adjacent"
+      ],
+      "ados_editorial_angles": [
+        "을지로입구 출근길에 들르는 이른 로스터리",
+        "도심 한가운데 통창과 넓은 좌석으로 잠시 숨 돌리는 곳"
+      ],
+      "research_cautions": [
+        "대방점 등 동명 지점과 분리해 관리",
+        "평일·주말 운영시간 차이 확인"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://www.diningcode.com/profile.php?rid=tlm2YZOqYsit",
+          "publisher": "DiningCode",
+          "source_kind": "place-platform",
+          "supports": [
+            "euljiro-address",
+            "opening-hours",
+            "two-floor-space",
+            "roastery",
+            "work-friendly",
+            "bakery"
+          ]
+        },
+        {
+          "url": "https://app.passorder.co.kr/normal/3c2098fa-1da0-444b-b656-98b201c5ec5e/menus",
+          "publisher": "패스오더",
+          "source_kind": "ordering-platform",
+          "supports": [
+            "euljiro-branch",
+            "signature-cream-latte",
+            "bakery"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-599ed2d2ff937eea",
