@@ -164,6 +164,36 @@
       "ados_editorial_angles": ["광화문 출근길에 고르는 균형 잡힌 커피", "도심 한가운데 커피에만 집중하는 짧은 시간"],
       "cautions": ["원본의 중구 표기는 청진동·광화문 공식 주소에 따라 종로구로 정규화 필요", "청계천점과 별도 지점"],
       "evidence": [{ "url": "https://www.feltcoffee.com/about.html", "publisher": "FELT COFFEE", "source_kind": "official", "supports": ["gwanghwamun-address", "opening-hours", "specialty-coffee", "roasting-philosophy"] }]
+    },
+    {
+      "canonical_place_id": "seoul:mapo:check-and-grow",
+      "member_external_ids": ["coffeelog-3040db6a00197b55"],
+      "research_status": "reviewed", "confidence": "high",
+      "verified_attributes": ["book-cafe", "hangang-view", "rooftop", "long-stay", "space-rental"],
+      "ados_editorial_angles": ["한강과 책 사이에서 보내는 긴 오후", "노을이 목적지가 되는 마포의 북카페"],
+      "cautions": ["음료 가격에 공간 이용 성격이 포함됨", "층과 좌석별 대화·개인 활동 규칙 재확인"],
+      "evidence": [{ "url": "https://checkngrow-mo2.imweb.me/46", "publisher": "채그로 Check & Grow", "source_kind": "official", "supports": ["address", "opening-hours", "book-cafe", "rooftop", "multi-floor-space"] }]
+    },
+    {
+      "canonical_place_id": "seoul:yongsan:ikovox-coffee-studio-itaewon",
+      "member_external_ids": ["coffeelog-a059cb99d41ad2e7"],
+      "research_status": "identity_verified", "confidence": "medium",
+      "verified_attributes": ["coffee-brand", "terrace", "itaewon"],
+      "ados_editorial_angles": ["이태원의 경사와 테라스를 함께 즐기는 커피"],
+      "cautions": ["공식 웹페이지에서 현재 매장 상세와 운영시간 추가 확인 필요"],
+      "evidence": [
+        { "url": "https://ikovoxcoffee.com/85", "publisher": "IKOVOX Coffee", "source_kind": "official", "supports": ["brand-identity", "itaewon-studio-reference"] },
+        { "url": "https://triple.guide/restaurants/4fdd636b-c426-40c9-a224-15fa4fdba19f", "publisher": "Triple", "source_kind": "travel-platform", "supports": ["address", "terrace", "specialty-coffee"] }
+      ]
+    },
+    {
+      "canonical_place_id": "seoul:yongsan:bookpark-lounge",
+      "member_external_ids": ["coffeelog-305808cb47d96c3f"],
+      "research_status": "operation_needs_review", "confidence": "low",
+      "verified_attributes": ["historical-book-lounge", "blue-square"],
+      "ados_editorial_angles": ["공연 전후 책과 함께 머무는 한강진의 라운지"],
+      "cautions": ["확인된 상세 출처가 오래되어 현재 운영 여부 검증 전 공개 금지"],
+      "evidence": [{ "url": "https://morningcalm.koreanair.com/media/pages/archive/dec-jan-feb-2021/b7933741fa-1743128463/morningcalm_2021-12-01-02.pdf", "publisher": "Korean Air MorningCalm", "source_kind": "editorial-archive", "supports": ["historical-location", "book-lounge-concept"] }]
     }
   ]
 }
