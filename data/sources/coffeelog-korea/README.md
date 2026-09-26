@@ -7,6 +7,8 @@
 ## 파일
 
 - `seoul-cafe-candidates-2026-09-22.json`: My Seoul Drop staging import용 서울 후보 454개. 30개만 주소·영문 지역·주제·원문 게시물 URL이 보강되어 있다.
+- `collections-2026-09-22.json`: 원문 게시물의 상황·공간·동네 관점을 보존한 컬렉션 4개와 멤버 후보 ID.
+- `EDITORIAL_CONTEXT_TAXONOMY.md`: 컬렉션 ID와 상황·공간·계절·메뉴·동네 태그 규칙.
 - `seoul-names-raw.md`: 서울 21개 자치구별 원문 이름 목록.
 - `outside-seoul-raw.md`: 경기·부산·제주 등 서울 이외 장소의 원문 기반 백업. 현재 import 대상은 아니다.
 
@@ -18,6 +20,7 @@
 4. 주소, 좌표, 현재 영업 여부, 장소 유형을 확인한 뒤 정식 ID를 발급한다.
 5. 확인 완료 전 `eligible_for_ados`와 `eligible_for_my_seoul_drop`을 `false`로 유지한다.
 6. Threads 계정은 발견 출처다. My Seoul Drop 자체 리뷰나 추천 근거로 표시하지 않는다.
+7. `source_collection_ids`와 다축 태그는 원문 게시물의 편집 맥락이다. 현장 검증된 장소 속성으로 간주하지 않는다.
 
 권장 검토 상태:
 
