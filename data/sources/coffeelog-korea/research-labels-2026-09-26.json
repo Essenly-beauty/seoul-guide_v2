@@ -1176,6 +1176,51 @@
       "ados_editorial_angles": ["송리단길의 아침을 월간 플레이리스트와 함께 시작하는 카페", "커피보다 먼저 오늘 들을 음악을 고르는 동네 정거장"],
       "cautions": ["메뉴·좌석·음향 경험은 충분한 독립 근거가 없어 추가 확인 필요", "브랜드 표기가 Cafe Lights·카페라이츠·Kafe Wrights로 혼용되므로 서비스 표준명 결정 필요"],
       "evidence": [{ "url": "https://linktr.ee/kafewrights", "publisher": "Kafe Wrights", "source_kind": "official-link-hub", "supports": ["songridan-branch", "official-social-account", "spotify", "monthly-pairing-music", "store-guide"] }, { "url": "https://cafesinseoul.com/cafes/cafe-22767673", "publisher": "Cafes in Seoul", "source_kind": "place-directory", "supports": ["address", "opening-hours", "phone"] }]
+    },
+    {
+      "canonical_place_id": "seoul:songpa:cafe-2-7-seokchon",
+      "member_external_ids": ["coffeelog-cf1b352dc7d090c3"],
+      "research_status": "reviewed", "confidence": "high",
+      "verified_attributes": ["designer-interior", "barista-operated", "multiple-bean-choice", "decaf-option", "work-friendly", "large-space", "coffee-and-cocktails", "late-hours"],
+      "ados_editorial_angles": ["석촌고분 앞 디자이너의 라운지에서 커피와 칵테일 사이를 고르는 곳", "원두 세 가지와 넓은 테이블을 두고 오래 할 일을 하는 날"],
+      "cautions": ["화요일 휴무와 늦은 마감시간은 방문 전 확인", "카페와 바 성격이 섞여 시간대별 분위기가 달라질 수 있음"],
+      "evidence": [{ "url": "https://www.daangn.com/kr/local-profile/%EC%B9%B4%ED%8E%982-7-mxntqz6t5wn7/", "publisher": "당근 동네업체", "source_kind": "business-profile", "supports": ["address", "designer-interior", "barista-operated", "multiple-bean-choice", "decaf-option"] }, { "url": "https://kr.trip.com/moments/poi-city-137460446/", "publisher": "Trip.com", "source_kind": "recent-travel-content", "supports": ["current-operation-2026", "opening-hours", "work-friendly", "large-space", "parking-signal"] }, { "url": "https://www.tabling.co.kr/place/677cd1f166de5f069888d0f2", "publisher": "테이블링", "source_kind": "place-platform", "supports": ["coffee-and-cocktails", "baked-goods", "lounge-atmosphere"] }]
+    },
+    {
+      "canonical_place_id": "seoul:seongdong:layer10-cafe-ttukseom",
+      "member_external_ids": ["coffeelog-47a034b4e9d43bec"],
+      "research_status": "reviewed", "confidence": "high",
+      "verified_attributes": ["studio-cafe", "skylight", "large-space", "group-friendly", "pet-friendly", "baumkuchen", "aged-milk-latte", "daytime"],
+      "ados_editorial_angles": ["뚝섬의 높은 천장과 천창 아래에서 빛을 따라 자리를 고르는 카페", "모든 크기의 반려견과 바움쿠헨을 함께 즐기는 넓은 스튜디오"],
+      "cautions": ["반려견은 리드줄 필수이며 애견카페가 아닌 일반 카페", "월요일 휴무·이른 저녁 마감·주차 불가 확인", "2층 계단 접근성 참고"],
+      "evidence": [{ "url": "https://ban-life.com/store/view?id=19214&type=s", "publisher": "반려생활", "source_kind": "pet-friendly-directory", "supports": ["address", "opening-hours", "all-dog-sizes", "leash-policy", "large-space", "group-seating", "parking-caution"] }, { "url": "https://www.diningcode.com/profile.php?rid=nwBYYZi6p8Wm", "publisher": "DiningCode", "source_kind": "place-platform", "supports": ["current-operation-2026", "skylight", "high-ceiling", "studio-space", "baumkuchen", "aged-milk-latte", "access-caution"] }]
+    },
+    {
+      "canonical_place_id": "seoul:seongdong:cafe-cite-seongsu",
+      "member_external_ids": ["coffeelog-30615038aee2932d"],
+      "research_status": "reviewed", "confidence": "high",
+      "verified_attributes": ["large-space", "glasshouse", "terrace", "natural-light", "multi-building", "citrus-dessert", "roman-affogato", "late-hours"],
+      "ados_editorial_angles": ["성수의 유리 온실에서 햇빛과 레몬 디저트를 함께 즐기는 곳", "로마식 아포가토를 성수식 대형 공간에서 경험하는 오후"],
+      "cautions": ["주말에는 혼잡하고 높은 천장 때문에 소리가 울릴 수 있음", "낮은 테이블과 단단한 좌석은 장시간 체류에 불편할 수 있음", "주차 불가"],
+      "evidence": [{ "url": "https://www.dongnecoffeenote.com/c/9373", "publisher": "동네 커피 노트", "source_kind": "review-analysis", "supports": ["current-reviews-2026", "address", "large-space", "natural-light", "glass-window", "terrace", "parking-caution"] }, { "url": "https://www.diningcode.com/profile.php?rid=FYqIvnu3UYl6", "publisher": "DiningCode", "source_kind": "place-platform", "supports": ["opening-hours", "roman-affogato", "citrus-dessert", "multi-floor", "terrace", "seating-caution"] }, { "url": "https://polle.com/place/38M2PP/%EC%B9%B4%ED%8E%98%EC%94%A8%EB%96%BC", "publisher": "뽈레", "source_kind": "review-platform", "supports": ["multi-building", "glasshouse", "acoustic-caution", "seating-caution"] }]
+    },
+    {
+      "canonical_place_id": "seoul:seongdong:wanita-listening-room-seongsu",
+      "member_external_ids": ["coffeelog-e86f6d2953afa819"],
+      "research_status": "reviewed", "confidence": "high",
+      "verified_attributes": ["lp-listening-room", "individual-turntables", "headphones", "private-listening-booth", "request-songs", "live-sessions", "coffee-and-alcohol", "reservation"],
+      "ados_editorial_angles": ["성수에서 각자의 턴테이블로 한 장의 LP에 온전히 잠기는 시간", "신청곡과 라이브 세션으로 카페보다 음악을 먼저 고르는 데이트"],
+      "cautions": ["일반 카페가 아니라 기본 음료가 포함된 1인 문화비 방식", "3.5층 계단 접근성과 주차 불가 참고", "공연·대관 일정은 사전 확인"],
+      "evidence": [{ "url": "https://www.diningcode.com/profile.php?rid=FohSAPfJx5y6", "publisher": "DiningCode", "source_kind": "place-platform", "supports": ["address", "opening-hours", "cultural-entry-fee", "individual-turntables", "headphones", "private-booth", "request-songs", "live-sessions", "coffee-and-alcohol", "access-caution"] }, { "url": "https://www.albamon.com/jobs/detail-company/PIFifhXOhm6KanOZ_GOsew%3D%3D", "publisher": "알바몬", "source_kind": "verified-employer-listing", "supports": ["current-operation-signal", "address", "business-identity"] }]
+    },
+    {
+      "canonical_place_id": "seoul:seongdong:classic-harye-coffee",
+      "member_external_ids": ["coffeelog-6fb7b04783fa0be2"],
+      "research_status": "needs_source_review", "confidence": "low",
+      "verified_attributes": ["coffee-focused-signal", "classic-concept-signal"],
+      "ados_editorial_angles": ["성수에서 클래식과 커피의 관계를 따라가 볼 잠재 후보"],
+      "cautions": ["검색 가능한 독립 출처가 부족해 주소·운영 여부·공간 성격 재확인 필요", "ADoS 콘텐츠나 장소 카드로 승격하지 말고 후속 현장 확인 큐로 유지"],
+      "evidence": []
     }
   ]
 }
