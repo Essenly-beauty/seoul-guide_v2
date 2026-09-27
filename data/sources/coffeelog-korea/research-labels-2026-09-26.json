@@ -1572,6 +1572,51 @@
       "ados_editorial_angles": ["수유에서 직원이 퇴근한 뒤에도 무인으로 이어지는 24시간 카페", "반려견과 테라스를 쓰고 단독룸에서 오래 머무는 동네 아지트"],
       "cautions": ["직원 상주 시간 이후에는 무인으로 운영", "반려동물은 목줄 착용 등 현장 규칙 준수", "단독룸·주차 이용 조건과 디저트 재고는 방문 전 확인"],
       "evidence": [{ "url": "https://www.daangn.com/kr/local-profile/%EA%B2%BD%EC%8A%A4%EC%BB%A4%ED%94%BC-xsomxg7w8736/", "publisher": "당근 동네업체", "source_kind": "business-profile", "supports": ["relocation-near-suyu-station", "private-room", "parking-signal", "cozy-neighborhood-concept"] }, { "url": "https://www.diningcode.com/profile.php?rid=vSMIl5CynUm1", "publisher": "DiningCode", "source_kind": "place-platform", "supports": ["current-operation-2026", "twenty-four-hours", "hybrid-staffed-unmanned", "terrace", "dessert", "address"] }, { "url": "https://pettriplife.com/place/105", "publisher": "펫트립라이프", "source_kind": "pet-place-guide", "supports": ["pet-friendly", "leash-rule"] }, { "url": "https://council.gangbuk.seoul.kr/kr/bbs/download.do?bbs_id=cost&uid=D912014A6F07906A1B995217D63353BD", "publisher": "강북구의회", "source_kind": "public-spending-record", "supports": ["operation-signal-2025", "address", "business-identity"] }]
+    },
+    {
+      "canonical_place_id": "seoul:mapo:ilgi-yeonnam",
+      "member_external_ids": ["coffeelog-20109512ce0efd2e"],
+      "research_status": "reviewed", "confidence": "medium",
+      "verified_attributes": ["vintage-interior", "brunch", "fresh-bread", "potato-bread", "french-toast", "pepper-french-toast", "early-opening-signal", "short-hours", "quiet-neighborhood"],
+      "ados_editorial_angles": ["연남의 끝자락에서 갓 구운 감자식빵으로 늦은 아침을 시작하는 곳", "빈티지한 지하 공간에서 후추 프렌치토스트를 천천히 먹는 브런치 카페"],
+      "cautions": ["출처별 개점 시간이 10시와 11시로 달라 최신 공지 확인", "오후 6시 전후로 일찍 닫는 편", "지층 매장으로 접근성 확인 필요"],
+      "evidence": [{ "url": "https://cafe.ambitstock.com/yeonnam/cafe/%EC%9D%BC%EA%B8%B0/", "publisher": "오늘의 카페", "source_kind": "place-review-analysis", "supports": ["current-listing-2026", "address", "opening-hours-signal", "vintage-interior", "pepper-french-toast"] }, { "url": "https://kr.trip.com/moments/detail/mapo-gu-2016462-124218229/", "publisher": "Trip.com", "source_kind": "visit-guide", "supports": ["potato-bread", "fresh-bread", "brunch", "early-opening-signal", "sunday-closure-signal"] }]
+    },
+    {
+      "canonical_place_id": "seoul:mapo:kop-yeonnam",
+      "member_external_ids": ["coffeelog-b71578a97fc31fa5"],
+      "research_status": "identity_verified", "confidence": "medium",
+      "verified_attributes": ["new-opening-2026", "third-floor", "outlet-signal", "yeonnam-neighborhood"],
+      "ados_editorial_angles": ["연남동 3층에 새로 문을 연 카페 후보—공간과 메뉴를 더 확인한 뒤 소개할 곳"],
+      "cautions": ["2026년 신규 인허가 외에 메뉴·공간을 뒷받침할 독립 자료가 부족함", "영업시간과 현재 운영 상태는 공식 채널에서 재확인", "ADoS 발행 전 현장 또는 최근 방문 검증 필요"],
+      "evidence": [{ "url": "https://moggo.co.kr/yeonnam/place/3130000-101-2026-00218/", "publisher": "모꼬", "source_kind": "public-licensing-derived-data", "supports": ["business-identity", "opening-license-2026", "address", "third-floor"] }, { "url": "https://www.jjimhaedum.com/%EB%A7%88%ED%8F%AC%EA%B5%AC/%EC%B9%B4%ED%8E%98", "publisher": "찜해둠", "source_kind": "place-directory", "supports": ["current-listing-2026", "address", "outlet-signal"] }]
+    },
+    {
+      "canonical_place_id": "seoul:mapo:cafe-parentheses-mangwon",
+      "member_external_ids": ["coffeelog-bd40f3e8da47dd91"],
+      "research_status": "needs_source_review", "confidence": "low",
+      "verified_attributes": ["second-floor", "sunlight", "quiet-stay-signal", "mangwon-neighborhood"],
+      "ados_editorial_angles": ["망원동 2층 창으로 오후 햇살을 길게 받던 카페—현재 운영 확인이 필요한 아카이브 후보"],
+      "cautions": ["확인된 방문 기록이 2021년 중심이며 2026년 현재 운영 근거를 찾지 못함", "영업시간과 휴무일은 과거 정보이므로 사용 금지", "발행 전 폐업·이전 여부 확인 필수"],
+      "evidence": [{ "url": "https://yunaverse.tistory.com/entry/%EB%A7%9D%EC%9B%90-%EC%8B%A0%EC%83%81%EC%B9%B4%ED%8E%98-%EC%B6%94%EC%B2%9C-%ED%96%87%EC%82%B4-%EC%A2%8B%EC%9D%80-%EB%82%A0-%EC%B9%B4%ED%8E%98%EA%B4%84%ED%98%B8%EC%97%90-%EB%8B%A4%EB%85%80%EC%98%A4%EB%8B%A4?category=1011966", "publisher": "yunaverse", "source_kind": "historical-visit", "supports": ["historical-address", "second-floor", "sunlight", "former-hours"] }, { "url": "https://brunch.co.kr/%40%401bFb/284", "publisher": "브런치", "source_kind": "historical-editorial", "supports": ["historical-operation-2021", "second-floor", "sunlight", "quiet-stay-signal"] }]
+    },
+    {
+      "canonical_place_id": "seoul:mapo:sop-coffee-yeonnam",
+      "member_external_ids": ["coffeelog-f46f307da6c1012b"],
+      "research_status": "reviewed", "confidence": "medium",
+      "verified_attributes": ["specialty-coffee", "seasonal-dessert", "gift-inspired-concept", "minimal-interior", "bar-seating", "quiet-reset", "yeonnam-cafe-street"],
+      "ados_editorial_angles": ["연남 카페거리 입구에서 작은 선물처럼 스페셜티 커피를 건네는 곳", "간결한 공간과 계절 디저트로 지친 하루를 잠시 재정비하는 카페"],
+      "cautions": ["공공 인허가는 영업 상태이나 실제 운영시간은 공식 채널에서 재확인", "시즌 디저트와 원두 구성은 방문 시점에 따라 달라짐", "주차 가능 여부는 독립적으로 확인되지 않음"],
+      "evidence": [{ "url": "https://moggo.co.kr/yeonnam/place/3130000-121-2019-00013/", "publisher": "모꼬", "source_kind": "public-licensing-derived-data", "supports": ["current-license-status-2026", "address", "business-identity"] }, { "url": "https://www.siksinhot.com/P/1615360", "publisher": "식신", "source_kind": "place-guide", "supports": ["gift-inspired-concept", "specialty-coffee", "seasonal-dessert", "minimal-and-restful-space", "bar-seating"] }, { "url": "https://app.daytrip.io/ko/space/6240186dd3286d2ddb2cb2c4/daylog/6404a5c1c8121901f9b25c33", "publisher": "DayTrip", "source_kind": "space-guide", "supports": ["yeonnam-cafe-street", "address", "space-identity"] }]
+    },
+    {
+      "canonical_place_id": "seoul:mapo:haus-kiru-donggyo",
+      "member_external_ids": ["coffeelog-a6c1cbde3df55803"],
+      "research_status": "reviewed", "confidence": "high",
+      "verified_attributes": ["specialty-filter-coffee", "multiple-bean-choice", "french-toast", "sandwich", "wood-interior", "large-window", "terrace", "work-friendly", "bar-seating", "pet-friendly", "resident-dog", "early-opening"],
+      "ados_editorial_angles": ["경의선숲길 옆 원목 공간에서 원두를 고르고 프렌치토스트를 나누는 아침", "보더콜리 키루의 환대를 받으며 창가에서 조용히 일하는 카페"],
+      "cautions": ["동명의 연남 2호점과 혼동하지 않도록 와우산로 170 지점 기준", "요일별 마감시간이 출처마다 달라 최신 공지 확인", "주말에는 웨이팅이 생길 수 있고 콘센트가 많지 않음", "주차 정보가 출처별로 엇갈려 대중교통 권장"],
+      "evidence": [{ "url": "https://www.diningcode.com/profile.php?rid=dCDMqKGsPgvy", "publisher": "DiningCode", "source_kind": "place-platform", "supports": ["current-operation-2026", "address", "opening-hours", "multiple-bean-choice", "french-toast", "sandwich", "wood-interior", "large-window", "terrace", "work-friendly", "bar-seating", "weekend-waiting"] }, { "url": "https://www.tabling.co.kr/place/677cd63366de5f0698908fd5", "publisher": "테이블링", "source_kind": "place-platform", "supports": ["address", "opening-hours-signal", "filter-coffee", "pet-friendly", "french-toast", "sandwich", "parking-conflict"] }, { "url": "https://www.elle.co.kr/article/1880802", "publisher": "엘르 코리아", "source_kind": "magazine-editorial", "supports": ["resident-dog-kiru", "second-branch-context", "furniture-showroom-interior"] }]
     }
   ]
 }
