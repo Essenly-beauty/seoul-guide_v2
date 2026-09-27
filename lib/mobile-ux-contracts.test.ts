@@ -40,7 +40,10 @@ describe("mobile interaction contracts", () => {
 
   it("keeps shared touch targets large enough to use reliably", () => {
     expect(ruleBody(cssSource, ".iconbtn")).toMatch(/width:\s*44px;[^]*height:\s*44px;/);
-    expect(ruleBody(cssSource, ".chip")).toMatch(/min-height:\s*44px;/);
+    // Chips sit at 40px, not 44: the owner found the 44px floor made every
+    // chip row read as too tall (2026-09-27) and asked for 40. Buttons,
+    // inputs and the nav keep 44/48; this is a chip-only decision.
+    expect(ruleBody(cssSource, ".chip")).toMatch(/min-height:\s*40px;/);
     expect(ruleBody(cssSource, ".input")).toMatch(/min-height:\s*48px;[^]*font-size:\s*16px;/);
     expect(ruleBody(cssSource, ".bottomnav .nav")).toMatch(/min-height:\s*48px;/);
     expect(cssSource).toMatch(/button\s*\{[^}]*min-width:\s*44px;[^}]*min-height:\s*44px;/);
@@ -122,5 +125,18 @@ describe("quiet status lines stay quiet", () => {
   it("but Retry keeps a full 44px tap target", () => {
     const rule = css.slice(css.indexOf(".station-location-note button {"));
     expect(rule.slice(0, 240)).toContain("min-height: 44px");
+  });
+});
+
+describe("chips read as pills on a dark card", () => {
+  it("gives the outlined chip a faint text-tinted fill instead of none", () => {
+    // Owner, real iPhone in the dark theme (2026-09-27): the country chips on
+    // the profile card were invisible until touched — a 1px #272b33 border on
+    // a #16181d card was all they had. A 6% tint of the text colour lifts the
+    // pill one step off whatever it sits on, in both themes, without reading
+    // as a filled button. Selected chips keep their accent fill.
+    const rule = ruleBody(cssSource, ".chip");
+    expect(rule).not.toMatch(/background:\s*transparent/);
+    expect(rule).toMatch(/background:\s*color-mix\(in srgb, var\(--text\) 6%, transparent\);/);
   });
 });

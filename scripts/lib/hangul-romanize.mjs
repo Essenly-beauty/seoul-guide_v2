@@ -207,12 +207,17 @@ export function sharedLatinToken(english, korean) {
     The app is English-first for visitors, so a title that is half Korean is
     unreadable to its audience; the Korean stays in nameKr where it belongs
     (owner decision 2026-08-23). */
+// Order matters — the first matching pattern wins. "거리점" used to catch the
+// tail of "사거리점" and invent a street, and there was no "본점" entry at all,
+// so an Olive Young main branch rendered with a dangling "bon".
 const TITLE_SUFFIXES = [
   [/역점$/, " Stn."],
   [/역$/, " Stn."],
   [/구청점$/, "-gu Office"],
   [/타운$/, " Town"],
+  [/[사오삼네]거리점$/, " Intersection"],
   [/거리점$/, " St."],
+  [/본점$/, " Main"],
   [/점$/, ""],
 ];
 export function englishizeName(name) {

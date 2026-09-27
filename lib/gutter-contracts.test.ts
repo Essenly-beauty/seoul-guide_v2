@@ -35,9 +35,9 @@ describe("horizontal gutter contracts", () => {
 
   it("aligns the floating map chrome as one family, not one member at a time", () => {
     // 14px was the shared corner of .map-top, .map-banner, .map-fab,
-    // .map-rotation-reset and .metro-zoombtn: moving one alone re-creates the
+    // .map-compass and .metro-zoombtn: moving one alone re-creates the
     // reported defect on the overlay layer.
-    for (const selector of ["\\.map-banner", "\\.map-fab", "\\.map-rotation-reset"]) {
+    for (const selector of ["\\.map-banner", "\\.map-fab", "\\.map-compass"]) {
       const m = new RegExp(`${selector}\\s*\\{[^}]*\\}`).exec(css);
       expect(m, selector).toBeTruthy();
       expect(m![0], selector).not.toMatch(/(?:left|right):\s*14px/);

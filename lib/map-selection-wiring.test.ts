@@ -209,7 +209,7 @@ describe("map place selection wiring", () => {
     expect(sheetSource).toContain('alt=""');
     // Known retailers get their own mark (public/brands), never a generic pin.
     expect(sheetSource).toContain(' : BRAND_MARK_SRC[place.type]');
-    expect(sheetSource).toContain('className={place.type === "daiso" ? "maprow-brand-mark maprow-brand-mark--daiso" : "maprow-brand-mark"}');
+    expect(sheetSource).toContain('className={place.type === "daiso" ? "maprow-brand-mark maprow-brand-mark--daiso"');
     // Everything else mirrors the map pin: TYPE_ICON glyph in TYPE_COLOR.
     expect(sheetSource).toContain('className="maprow-photo-fallback" style={{ color: TYPE_COLOR[place.type] }}');
     expect(sheetSource).toContain("<Icon name={TYPE_ICON[place.type]}");
@@ -222,6 +222,20 @@ describe("map place selection wiring", () => {
     expect(sheetSource.indexOf("{placePhoto ? (")).toBeLessThan(sheetSource.indexOf(") : brandMark ? ("));
     expect(cssSource).toMatch(/\.maprow-brand-mark--daiso\s*\{[^}]*width:\s*100%;[^}]*height:\s*100%;/s);
     expect(existsSync(new URL("../public/brands/daiso-logo.jpeg", import.meta.url))).toBe(true);
+  });
+
+  it("uses Olive Young brand imagery only when a real store photo is missing", () => {
+    expect(sheetSource).toContain(' : BRAND_MARK_SRC[place.type]');
+    expect(sheetSource.indexOf("{placePhoto ? (")).toBeLessThan(sheetSource.indexOf(") : brandMark ? ("));
+    expect(sheetSource).toContain('place.type === "olive_young" ? "maprow-brand-mark maprow-brand-mark--olive-young"');
+    expect(cssSource).toMatch(/\.maprow-brand-mark--olive-young\s*\{[^}]*width:\s*100%;[^}]*height:\s*100%;/s);
+    expect(summarySource).toContain('place.type === "olive_young"');
+    expect(summarySource).toContain("photos.length === 0");
+    expect(summarySource).toContain("<OliveYoungBrandHero");
+    expect(detailSource).toContain('place.type === "olive_young"');
+    expect(detailSource).toContain("<OliveYoungBrandHero");
+    expect(detailSource).toContain('place.photos ?? (place.photoUrl ? [place.photoUrl] : [])');
+    expect(detailSource).toContain("<PhotosSection place={place}");
   });
 
   it("keeps Daiso map rows free of duplicate category and price while showing confirmed services", () => {
@@ -362,12 +376,13 @@ describe("map place selection wiring", () => {
     expect(screenSource).toContain("userHeading={heading}");
   });
 
-  it("keeps experimental two-finger rotation behind an explicit release flag", () => {
-    expect(viewSource).toContain("event.touches.length !== 2");
-    expect(viewSource).toContain("style.rotate");
-    expect(viewSource).toContain('aria-label="Reset map rotation"');
-    expect(viewSource).toContain('process.env.NEXT_PUBLIC_ENABLE_EXPERIMENTAL_MAP_ROTATION === "1"');
-    expect(viewSource).toContain("{rotationEnabled && (");
+  it("ships real two-finger rotation, not the CSS proof of concept", () => {
+    // 2026-08-20 rotated the rendered pane behind an env flag; it never
+    // rotated Leaflet's coordinate system. 2026-09-27 wired a rotation-aware
+    // engine instead — lib/map-rotate-wiring.test.ts holds that contract.
+    expect(viewSource).not.toContain("style.rotate");
+    expect(viewSource).not.toContain("NEXT_PUBLIC_ENABLE_EXPERIMENTAL_MAP_ROTATION");
+    expect(viewSource).toContain("TouchZoomRotate");
   });
 
   it("renders larger grouped transfer-station discs", () => {
@@ -480,7 +495,7 @@ describe("place photo ingestion", () => {
     const detail = readFileSync(new URL("../components/place/place-detail-body.tsx", import.meta.url), "utf8");
     expect(detail).toContain("function PlacePhotoCollage");
     expect(detail).toContain("photos.slice(0, 3)");
-    expect(detail).toContain("<PlacePhotoCollage photos={place.photos ?? []}");
+    expect(detail).toContain("<PlacePhotoCollage photos={place.photos ?? (place.photoUrl ? [place.photoUrl] : [])}");
     expect(detail).toContain("<PhotosSection place={place}");
   });
 });

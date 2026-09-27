@@ -39,13 +39,24 @@ describe("ranking retailer server/client boundary", () => {
 });
 
 describe("retailer-specific ranking presentation", () => {
+  it("calls editorial Olive Young picks What's trending without claiming today's official sales", () => {
+    expect(clientSource).toContain('title={tab === "sales" ? "What\'s trending" : "Highest-rated by reviews"}');
+    expect(clientSource).toContain('description={tab === "sales" ? "Curated beauty picks — not a live sales chart." : undefined}');
+    expect(clientSource).not.toContain("Today's sales ranking");
+    expect(clientSource).toContain('className="caption muted"');
+  });
+
   it("preserves the complete Olive Young ranking and brand flows", () => {
     expect(clientSource).toContain("const config = OLIVE_YOUNG_RANKING_CONFIG");
     expect(clientSource).toContain("config.tabs.map");
     expect(clientSource).toContain("config.categoriesForTab(tab).map");
     expect(clientSource).toContain("config.products");
     expect(clientSource).toContain("config.emptyMessage");
-    expect(clientSource).toContain('<SectionHeader title="Trending now"');
+    // Renamed 2026-09-23. The lists are refreshed by hand every week or two,
+    // so the copy may not borrow a live feed's vocabulary — see
+    // lib/ranking-freshness-copy.test.ts, which bans those words outright. The
+    // rail itself must stay, which is what this line pins.
+    expect(clientSource).toContain('<SectionHeader title="Also popular"');
     expect(clientSource).toContain('placeholder="Search brands"');
     expect(clientSource).toContain("href={routes.shopItem(p.id)}");
     expect(clientSource).not.toMatch(/import\s*\{[^}]*\bPRODUCTS\b[^}]*\}\s*from\s*["']@\/lib\/data["']/s);
@@ -100,7 +111,9 @@ describe("retailer-specific ranking presentation", () => {
     expect(clientSource).toContain('className="daiso-category-chip-visual"');
     expect(clientSource).toContain('<div className="chiprow" role="tablist" aria-label="Daiso ranking type">');
     expect(clientSource).not.toMatch(/className="daiso-category-chip"\s+soft/);
-    expect(cssSource).toMatch(/\.chip\.daiso-category-chip\s*\{[\s\S]*?min-height:\s*44px;[\s\S]*?padding:\s*4px\s+0;/);
+    // 40px chip floor (owner, 2026-09-27): the 36px visual plus 2px of
+    // padding each side lands on 40 exactly.
+    expect(cssSource).toMatch(/\.chip\.daiso-category-chip\s*\{[\s\S]*?min-height:\s*40px;[\s\S]*?padding:\s*2px\s+0;/);
     expect(cssSource).toMatch(/\.daiso-category-chip-visual\s*\{[\s\S]*?min-height:\s*36px;[\s\S]*?padding:\s*0\s+12px;[\s\S]*?font-size:\s*12px;/);
     expect(cssSource).toContain(".chip.daiso-category-chip.selected .daiso-category-chip-visual");
     expect(cssSource).toContain("--daiso-category-text: #b83d00");

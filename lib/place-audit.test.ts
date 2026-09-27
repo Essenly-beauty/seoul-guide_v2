@@ -86,14 +86,21 @@ describe("place launch audit", () => {
     expect(summary.bySource).toEqual(expectedSourceCounts);
     expect(summary.bySource.daiso).toBe(251 + 33); // approved snapshot + 2026-09-18 shop-in-shop supplement
     expect(summary.findings.provisional_english_name).toBe(347 + 33); // + supplement Daiso names
-    expect(summary.findings.approximate_pin).toBe(138 + 9); // + road-level supplement pins
+    // 137 + 9 road-level supplement pins. One fewer than before the Olive
+    // Young rebuild: the old import left 3 branches on a district centroid,
+    // the new one leaves 2, because the store finder's addresses parse better
+    // once the building after the comma is stripped.
+    expect(summary.findings.approximate_pin).toBe(137 + 9);
     expect(summary.findings.outside_service_area).toBe(16);
     expect(summary.findings.no_licensed_photo).toBe(
       CATALOGUE_PLACES.filter((place) => !(place.photos?.length || place.photoUrl)).length,
     );
     expect(summary.findings.duplicate_coordinate).toBe(expectedDuplicateCoordinates);
     expect(summary.findings.missing_korean_listing_name).toBe(119);
-    expect(summary.findings.generated_english_romanization).toBe(239);
+    // Every Olive Young row, 366 of them. The finding marks a name built by
+    // romanising the Korean, which is still how these are built; moving to the
+    // retailer's own roster fixed which stores exist, not how they are spelled.
+    expect(summary.findings.generated_english_romanization).toBe(366);
     expect(summary.findings.cached_kakao_match).toBeGreaterThanOrEqual(350);
     expect(summary.byIdentity.matched).toBeUndefined();
     expect(summary.byIdentity.unchecked).toBe(CATALOGUE_PLACES.length);
@@ -174,8 +181,8 @@ describe("place launch audit", () => {
     expect(checklist).toContain("reports/place-audit.md");
     expect(checklist).toContain("unchecked does not mean invalid");
     expect(checklist).toContain("no automatic deletion");
-    expect(checklist).toContain("내부 카탈로그는 995곳");
-    expect(checklist).toContain("공개 카탈로그는 878곳");
+    expect(checklist).toContain("내부 카탈로그는 1122곳");
+    expect(checklist).toContain("공개 카탈로그는 1008곳");
     expect(checklist).toContain("nameVerification: provisional");
   });
 });

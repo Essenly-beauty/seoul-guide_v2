@@ -86,10 +86,12 @@ function RankRow({ p, rank }: { p: Product; rank: number }) {
 
 function RankSection({
   title,
+  description,
   products,
   emptyMessage,
 }: {
   title: string;
+  description?: string;
   products: readonly Product[];
   emptyMessage: string;
 }) {
@@ -98,6 +100,7 @@ function RankSection({
   return (
     <section className="stack sm">
       <SectionHeader title={title} count={products.length} />
+      {description && <p className="caption muted">{description}</p>}
       {products.length === 0 ? (
         <EmptyState>{emptyMessage}</EmptyState>
       ) : (
@@ -123,7 +126,7 @@ function TrendingSection({ products }: { products: readonly Product[] }) {
   if (trending.length === 0) return null;
   return (
     <section className="stack sm">
-      <SectionHeader title="Trending now" count={trending.length} />
+      <SectionHeader title="Also popular" count={trending.length} />
       <HScroll ariaLabel="Trending products">
         {trending.map((p) => (
           <Link key={p.id} href={routes.shopItem(p.id)} style={{ width: 128 }}>
@@ -255,7 +258,11 @@ function OliveYoungRanking() {
             {/* key resets the "More ›" expansion when the ranking scope changes */}
             <RankSection
               key={`${tab}:${category}`}
-              title={tab === "sales" ? "Today's sales ranking" : "Highest-rated by reviews"}
+              // Owner decision 2026-09-27: use editorial trend framing, but
+              // explicitly disclose that these are curated picks, not a live
+              // or same-day retailer sales chart.
+              title={tab === "sales" ? "What's trending" : "Highest-rated by reviews"}
+              description={tab === "sales" ? "Curated beauty picks — not a live sales chart." : undefined}
               products={ranked}
               emptyMessage={config.emptyMessage}
             />

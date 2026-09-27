@@ -2,13 +2,22 @@ const INITIALS = ["g", "kk", "n", "d", "tt", "r", "m", "b", "pp", "s", "ss", "",
 const MEDIALS = ["a", "ae", "ya", "yae", "eo", "e", "yeo", "ye", "o", "wa", "wae", "oe", "yo", "u", "wo", "we", "wi", "yu", "eu", "ui", "i"];
 const FINALS = ["", "k", "k", "k", "n", "n", "n", "t", "l", "k", "m", "l", "l", "l", "p", "l", "m", "p", "p", "t", "t", "ng", "t", "t", "k", "t", "p", "t"];
 
+// First match wins, so the longer patterns come first. Two entries here were
+// wrong (docs/research/retail-branch-names-2026-09.md §2): "거리점" matched the
+// last three characters of "사거리점" and turned all 25 intersections into
+// streets that do not exist, and "본점" mapped to the empty string, deleting
+// the only thing that tells 노원본점 from 노원점.
 const DAISO_SUFFIXES = [
   ["역점", " Stn."],
   ["역", " Stn."],
   ["구청점", "-gu Office"],
   ["타운", " Town"],
+  ["사거리점", " Intersection"],
+  ["오거리점", " Intersection"],
+  ["삼거리점", " Intersection"],
+  ["네거리점", " Intersection"],
   ["거리점", " St."],
-  ["본점", ""],
+  ["본점", " Main"],
   ["점", ""],
 ] as const;
 

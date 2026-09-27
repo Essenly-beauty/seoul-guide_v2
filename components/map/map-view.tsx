@@ -2,10 +2,11 @@
 
 import { withTileKey } from "@/lib/map-tiles";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { preconnect } from "react-dom";
+import { createPortal, preconnect } from "react-dom";
 import { Circle, MapContainer, Polyline, TileLayer, Marker, useMap, useMapEvents } from "react-leaflet";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
+import { TouchZoomRotate, bearingOf, resetNorth, settleNorth, visibleBounds } from "@/lib/map-touch-rotate";
 import { Icon } from "@/components/icon";
 import { TYPE_ICON, TYPE_LABEL, zoneShort, type Place } from "@/lib/data";
 import { haversineKm, type LatLng } from "@/lib/geo";
@@ -269,83 +270,80 @@ function mapBottomInset(map: L.Map, fallback: number) {
   return Math.max(0, Math.min(mapRect.height, mapRect.bottom - overlayTop));
 }
 
-function touchAngle(touches: TouchList) {
-  const a = touches[0];
-  const b = touches[1];
-  return Math.atan2(b.clientY - a.clientY, b.clientX - a.clientX) * (180 / Math.PI);
-}
-
-function shortestAngleDelta(next: number, start: number) {
-  return ((next - start + 540) % 360) - 180;
-}
-
-function MapRotationWiring({ bearing, onBearingChange }: { bearing: number; onBearingChange: (bearing: number) => void }) {
+/** Installs the two-finger zoom + rotate handler and puts the fresh map on
+ *  true north (the fork boots on a 0.1° stand-in that softens every tile). */
+function MapRotationWiring() {
   const map = useMap();
-  const bearingRef = useRef(bearing);
-  useEffect(() => { bearingRef.current = bearing; }, [bearing]);
-
   useEffect(() => {
-    const container = map.getContainer();
-    const pane = map.getPane("mapPane");
-    if (!pane) return;
-    const gesture = { startAngle: 0, startBearing: 0, active: false };
-    const apply = (next: number) => {
-      const normalized = ((next % 360) + 360) % 360;
-      bearingRef.current = normalized;
-      pane.style.rotate = normalized === 0 ? "" : `${normalized}deg`;
-    };
-    const onTouchStart = (event: TouchEvent) => {
-      if (event.touches.length !== 2) return;
-      gesture.startAngle = touchAngle(event.touches);
-      gesture.startBearing = bearingRef.current;
-      gesture.active = true;
-    };
-    const onTouchMove = (event: TouchEvent) => {
-      if (!gesture.active || event.touches.length !== 2) return;
-      event.preventDefault();
-      apply(gesture.startBearing + shortestAngleDelta(touchAngle(event.touches), gesture.startAngle));
-    };
-    const onTouchEnd = (event: TouchEvent) => {
-      if (!gesture.active || event.touches.length >= 2) return;
-      gesture.active = false;
-      onBearingChange(bearingRef.current);
-    };
-    container.addEventListener("touchstart", onTouchStart, { passive: false });
-    container.addEventListener("touchmove", onTouchMove, { passive: false });
-    container.addEventListener("touchend", onTouchEnd, { passive: true });
-    container.addEventListener("touchcancel", onTouchEnd, { passive: true });
-    return () => {
-      container.removeEventListener("touchstart", onTouchStart);
-      container.removeEventListener("touchmove", onTouchMove);
-      container.removeEventListener("touchend", onTouchEnd);
-      container.removeEventListener("touchcancel", onTouchEnd);
-      pane.style.rotate = "";
-    };
-  }, [map, onBearingChange]);
-
-  useEffect(() => {
-    const pane = map.getPane("mapPane");
-    if (pane) pane.style.rotate = bearing === 0 ? "" : `${bearing}deg`;
-  }, [bearing, map]);
+    settleNorth(map);
+    const handler = new TouchZoomRotate(map);
+    handler.enable();
+    return () => { handler.disable(); };
+  }, [map]);
   return null;
 }
 
-function MapRotationReset({ bearing, onReset }: { bearing: number; onReset: () => void }) {
-  if (Math.abs(bearing) < 0.5) return null;
-  return (
+/** The map's bearing as React state, to a tenth of a degree. Only the two
+ *  small components that draw it subscribe, so a rotate frame never
+ *  re-renders the marker tree. */
+function useMapBearing() {
+  const map = useMap();
+  const [bearing, setBearing] = useState(() => bearingOf(map));
+  useEffect(() => {
+    const report = () => setBearing(Math.round(bearingOf(map) * 10) / 10);
+    map.on("rotate", report);
+    return () => { map.off("rotate", report); };
+  }, [map]);
+  return bearing;
+}
+
+/** Compass: appears only while the map is turned, points at north, and a tap
+ *  eases the map back north (Google/Apple Maps convention). It portals out
+ *  to the screen wrapper beside the other floating controls: inside the
+ *  canvas (z-index 0) it would paint under the top bar and the banners. */
+function CompassButton() {
+  const map = useMap();
+  const bearing = useMapBearing();
+  const host = map.getContainer().parentElement;
+  if (!host) return null;
+  const on = Math.abs(bearing) >= 0.5;
+  return createPortal(
     <button
       type="button"
-      className="map-rotation-reset"
-      aria-label="Reset map rotation"
-      title="Reset map rotation"
-      style={{ transform: `rotate(${-bearing}deg)` }}
-      onClick={(event) => {
-        event.stopPropagation();
-        onReset();
-      }}
+      className={on ? "map-compass on" : "map-compass"}
+      aria-label="Point map north"
+      title="Point map north"
+      aria-hidden={!on}
+      tabIndex={on ? 0 : -1}
+      onClick={() => resetNorth(map)}
     >
-      <span aria-hidden="true">N</span>
-    </button>
+      {/* The needle points at north: the fork turns content clockwise by the
+          bearing, so north is at +bearing from straight up. */}
+      <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" style={{ transform: `rotate(${bearing}deg)` }}>
+        <path d="M12 2.5 15.4 12H8.6Z" fill="var(--accent)" />
+        <path d="M12 21.5 8.6 12h6.8Z" fill="currentColor" opacity="0.5" />
+      </svg>
+    </button>,
+    host,
+  );
+}
+
+/** Red current-location marker. Marker icons stay screen-upright on a rotated
+ *  map and the fork turns content clockwise by the bearing, so north sits at
+ *  +bearing on screen and the device heading (clockwise from true north) adds
+ *  it to point true. */
+function MeMarker({ userLoc, userHeading }: { userLoc: LatLng; userHeading?: number | null }) {
+  const bearing = useMapBearing();
+  const meIcon = useMemo(() => meIconForHeading(userHeading == null ? userHeading : userHeading + bearing), [userHeading, bearing]);
+  return (
+    <Marker
+      position={[userLoc.lat, userLoc.lng]}
+      icon={meIcon}
+      interactive={false}
+      keyboard={false}
+      alt="Your current location"
+      title="Your current location"
+    />
   );
 }
 
@@ -374,7 +372,7 @@ function MapWiring({ flyTarget, bottomInsetRatio = 0, bottomInsetPx, focusZoom, 
   }, [map, onMap, onView]);
   useEffect(() => {
     getBounds?.(() => {
-      const b = map.getBounds();
+      const b = visibleBounds(map);
       return { south: b.getSouth(), west: b.getWest(), north: b.getNorth(), east: b.getEast() };
     });
   }, [map, getBounds]);
@@ -406,8 +404,10 @@ function MapWiring({ flyTarget, bottomInsetRatio = 0, bottomInsetPx, focusZoom, 
     // must never zoom the map out from under them).
     const targetZoom = focusZoom ?? map.getZoom();
     const projectedTarget = map.project([flyTarget.lat, flyTarget.lng], targetZoom);
+    // The anchor offset is in screen pixels; on a rotated map it has to turn
+    // with the map before it is added to the projected (unrotated) target.
     const center = map.unproject(
-      projectedTarget.add(L.point(size.x / 2 - anchor.x, size.y / 2 - anchor.y)),
+      projectedTarget.add(L.point(size.x / 2 - anchor.x, size.y / 2 - anchor.y).rotate(-(map._bearing ?? 0))),
       targetZoom,
     );
     if (animate && !reducedMotion()) map.flyTo(center, targetZoom, { duration: 0.8 });
@@ -478,14 +478,8 @@ export default function MapView({ center, places, selectedId, onSelect, onSelect
   // tile — the tiles are the page's LCP element (React 19 dedupes these).
   for (const s of ["a", "b", "c", "d"]) preconnect(`https://${s}.basemaps.cartocdn.com`);
   const [zoom, setZoom] = useState(INITIAL_ZOOM);
-  const [bearing, setBearing] = useState(0);
-  // The current CSS proof-of-concept rotates Leaflet's rendered pane but not
-  // Leaflet's interaction coordinate system. Keep it opt-in until a
-  // rotation-aware map engine is wired and touch-regression tested.
-  const rotationEnabled = process.env.NEXT_PUBLIC_ENABLE_EXPERIMENTAL_MAP_ROTATION === "1";
   const { theme } = useTheme();
   const mapRef = useRef<L.Map | null>(null);
-  const meIcon = useMemo(() => meIconForHeading(userHeading), [userHeading]);
 
   // Exact fixed-six matches are not spatial-density clusters: they are distinct
   // official branches sharing one real pin. Keep them out of the zoom cluster
@@ -550,7 +544,7 @@ export default function MapView({ center, places, selectedId, onSelect, onSelect
       return singles.filter((p) => haversineKm(center, p) < 4);
     }
     try {
-      const b = map.getBounds().pad(0.3);
+      const b = visibleBounds(map).pad(0.3);
       return singles.filter((p) => b.contains([p.lat, p.lng]));
     } catch {
       return singles;
@@ -563,7 +557,7 @@ export default function MapView({ center, places, selectedId, onSelect, onSelect
       return coordinateGroups.filter((group) => haversineKm(center, group) < 4);
     }
     try {
-      const bounds = map.getBounds().pad(0.3);
+      const bounds = visibleBounds(map).pad(0.3);
       return coordinateGroups.filter((group) => bounds.contains([group.lat, group.lng]));
     } catch {
       return coordinateGroups;
@@ -615,7 +609,7 @@ export default function MapView({ center, places, selectedId, onSelect, onSelect
     if (!map || zoom < STATION_ZOOM || viewVersion < 0) {
       return { stations: [] as string[], exits: [] as { id: string; no: number; lat: number; lng: number }[] };
     }
-    const bounds = map.getBounds().pad(0.15);
+    const bounds = visibleBounds(map).pad(0.15);
     const stations = Object.keys(STATIONS).filter((id) => {
       const st = STATIONS[id];
       return bounds.contains([st.lat, st.lng]);
@@ -662,9 +656,16 @@ export default function MapView({ center, places, selectedId, onSelect, onSelect
       zoom={INITIAL_ZOOM}
       className="map-canvas"
       zoomControl={false}
+      rotate
+      touchZoom={false}
       attributionControl={true}
     >
-      <TileLayer key={theme} url={withTileKey(TILE_URLS[theme], process.env.NEXT_PUBLIC_CARTO_API_KEY)} attribution={ATTRIB} eventHandlers={{ load: handleTilesLoaded }} />
+      {/* updateWhenIdle is Leaflet's desktop default; on phones it flips to
+          true and tiles load only on moveend, which left the corners a
+          rotation swings into view blank until the fingers lifted. Loading
+          while moving (throttled to Leaflet's 200ms) fills them mid-gesture
+          and makes long pans continuous too. */}
+      <TileLayer key={theme} url={withTileKey(TILE_URLS[theme], process.env.NEXT_PUBLIC_CARTO_API_KEY)} attribution={ATTRIB} updateWhenIdle={false} eventHandlers={{ load: handleTilesLoaded }} />
       {!tilesLoaded && (
         // eslint-disable-next-line @next/next/no-img-element
         <img className={`map-ph map-ph-${theme} map-ph-fade`} src={`/map-placeholder-${theme}.jpg`} alt="" />
@@ -682,12 +683,8 @@ export default function MapView({ center, places, selectedId, onSelect, onSelect
         onView={handleView}
         onBlankTap={() => onSelect(null)}
       />
-      {rotationEnabled && (
-        <>
-          <MapRotationWiring bearing={bearing} onBearingChange={setBearing} />
-          <MapRotationReset bearing={bearing} onReset={() => setBearing(0)} />
-        </>
-      )}
+      <MapRotationWiring />
+      <CompassButton />
       {/* Wayfinding path — the route's stations joined in the brand orange. */}
       {routePath && routePath.length >= 2 && (
         <Polyline
@@ -712,16 +709,7 @@ export default function MapView({ center, places, selectedId, onSelect, onSelect
           }}
         />
       )}
-      {userLoc && (
-        <Marker
-          position={[userLoc.lat, userLoc.lng]}
-          icon={meIcon}
-          interactive={false}
-          keyboard={false}
-          alt="Your current location"
-          title="Your current location"
-        />
-      )}
+      {userLoc && <MeMarker userLoc={userLoc} userHeading={userHeading} />}
       {/* Kakao-style transit layer — beneath place pins (negative z offsets).
           Stations are tappable (opens nearby browse) when a handler is wired. */}
       {transit.stations.map((id) => (

@@ -1,0 +1,4681 @@
+{
+ "schemaVersion": 1,
+ "source": "oliveyoung-store-finder",
+ "sourceUrl": "https://www.oliveyoung.co.kr/store/store/getStoreInfoMain.do",
+ "retrievedAt": "2026-09-23T00:00:00.000Z",
+ "region": "서울특별시",
+ "method": "The page renders #storeList server-side. Driven through its own search box (#searchKeyword) with each of the 25 자치구, then again with 중구 landmark keywords because '서울 중구' alone returned nothing. Deduplicated on the store code in getStockStoreDetail('CODE', ...).",
+ "note": "'time' is the hours for the day of capture only, not a weekly schedule. 'tags' are the badges the finder shows (e.g. 스마트 반품). Stores whose addr is outside 서울 were dropped.",
+ "totalCnt": 366,
+ "stores": [
+  {
+   "code": "B007",
+   "name": "씨제이ENM커머스부문점",
+   "addr": "서울특별시 서초구 과천대로 870-13 지하1층",
+   "status": "영업 중",
+   "time": "수 08:00~20:00",
+   "tags": [],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/B007_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "서초구"
+  },
+  {
+   "code": "B037",
+   "name": "건대입구점",
+   "addr": "서울특별시 광진구 동일로22길 115 1,2층",
+   "status": "영업 중",
+   "time": "수 10:00~23:30",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/B037_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "광진구"
+  },
+  {
+   "code": "B054",
+   "name": "중앙대점",
+   "addr": "서울특별시 동작구 흑석로 81",
+   "status": "영업 중",
+   "time": "수 09:00~22:30",
+   "tags": [
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/B054_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "동작구"
+  },
+  {
+   "code": "B060",
+   "name": "강남구청역점",
+   "addr": "서울특별시 강남구 선릉로 703 1층",
+   "status": "영업 중",
+   "time": "수 08:00~22:30",
+   "tags": [],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/B060_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "강남구"
+  },
+  {
+   "code": "B086",
+   "name": "중랑점",
+   "addr": "서울특별시 중랑구 망우로32길 6",
+   "status": "영업 중",
+   "time": "수 10:00~22:30",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/B086_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "중랑구"
+  },
+  {
+   "code": "B091",
+   "name": "동덕여대점",
+   "addr": "서울특별시 성북구 화랑로11길 31",
+   "status": "영업 중",
+   "time": "수 10:30~23:00",
+   "tags": [],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/B091_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "성북구"
+  },
+  {
+   "code": "B092",
+   "name": "화곡역점",
+   "addr": "서울특별시 강서구 화곡로 149 심당빌딩 1층",
+   "status": "영업 중",
+   "time": "수 10:30~23:00",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/B092_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "강서구"
+  },
+  {
+   "code": "B096",
+   "name": "길동사거리점",
+   "addr": "서울특별시 강동구 천호대로 1120 1층",
+   "status": "영업 중",
+   "time": "수 10:30~23:00",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/B096_202501212358531.png?rs=800x0&SF=webp&autoorient=y",
+   "gu": "강동구"
+  },
+  {
+   "code": "B107",
+   "name": "노원점",
+   "addr": "서울특별시 노원구 상계로 65 105호,106호",
+   "status": "영업 중",
+   "time": "수 09:30~23:00",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/B107_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "노원구"
+  },
+  {
+   "code": "B191",
+   "name": "쌍문역점",
+   "addr": "서울특별시 도봉구 도봉로 480 1층",
+   "status": "영업 중",
+   "time": "수 10:00~22:30",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/B191_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "도봉구"
+  },
+  {
+   "code": "B197",
+   "name": "청담역점",
+   "addr": "서울특별시 강남구 삼성로 716",
+   "status": "영업 중",
+   "time": "수 09:00~22:30",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/B197_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "강남구"
+  },
+  {
+   "code": "B205",
+   "name": "외대정문점",
+   "addr": "서울특별시 동대문구 이문로 107",
+   "status": "영업 중",
+   "time": "수 09:30~22:30",
+   "tags": [],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/B205_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "동대문구"
+  },
+  {
+   "code": "B206",
+   "name": "사당역점",
+   "addr": "서울특별시 관악구 과천대로 941 지산빌딩",
+   "status": "영업 중",
+   "time": "수 09:00~23:00",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/B206_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "관악구"
+  },
+  {
+   "code": "B208",
+   "name": "봉천역점",
+   "addr": "서울특별시 관악구 남부순환로 1735",
+   "status": "영업 중",
+   "time": "수 10:00~23:00",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/B208_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "관악구"
+  },
+  {
+   "code": "B212",
+   "name": "등촌점",
+   "addr": "서울특별시 양천구 목동중앙북로7길 20, 1층",
+   "status": "영업 중",
+   "time": "수 10:00~23:00",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/B212_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "양천구"
+  },
+  {
+   "code": "B214",
+   "name": "까치산역점",
+   "addr": "서울특별시 강서구 강서로13길 3, 지하 1층",
+   "status": "영업 중",
+   "time": "수 10:00~23:00",
+   "tags": [],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/B214_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "강서구"
+  },
+  {
+   "code": "BA3E",
+   "name": "잠실역8호선점",
+   "addr": "서울특별시 송파구 올림픽로 305 잠실역8호선 지하상가 H7~10호",
+   "status": "영업 중",
+   "time": "수 10:00~22:30",
+   "tags": [],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/BA3E_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "송파구"
+  },
+  {
+   "code": "BA46",
+   "name": "마포역점",
+   "addr": "서울특별시 마포구 마포대로 53 마포트라팰리스상가 115호",
+   "status": "영업 중",
+   "time": "수 09:00~23:30",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/BA46_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "마포구"
+  },
+  {
+   "code": "BA57",
+   "name": "강서구청점",
+   "addr": "서울특별시 강서구 화곡로 316 1층 (화곡동)",
+   "status": "영업 중",
+   "time": "수 10:00~23:00",
+   "tags": [],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/BA57_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "강서구"
+  },
+  {
+   "code": "BA7C",
+   "name": "길동역점",
+   "addr": "서울특별시 강동구 양재대로 1481 1층",
+   "status": "영업 중",
+   "time": "수 10:00~22:00",
+   "tags": [],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/BA7C_202604980910461.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "강동구"
+  },
+  {
+   "code": "BA9B",
+   "name": "당산역점",
+   "addr": "서울특별시 영등포구 당산로 223",
+   "status": "영업 중",
+   "time": "수 09:30~23:00",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/BA9B_202501091001221.png?rs=800x0&SF=webp&autoorient=y",
+   "gu": "영등포구"
+  },
+  {
+   "code": "BA9C",
+   "name": "양재하나로클럽점",
+   "addr": "서울특별시 서초구 청계산로 10 1층",
+   "status": "영업 중",
+   "time": "수 09:30~22:00",
+   "tags": [],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/BA9C_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "서초구"
+  },
+  {
+   "code": "BAB2",
+   "name": "낙성대인헌점",
+   "addr": "서울특별시 관악구 남부순환로248길 3 1층",
+   "status": "영업 중",
+   "time": "수 10:00~23:00",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/BAB2_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "관악구"
+  },
+  {
+   "code": "BAC6",
+   "name": "구의역점",
+   "addr": "서울특별시 광진구 아차산로 378",
+   "status": "영업 중",
+   "time": "수 10:00~22:30",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/BAC6_2025113082311441.png?rs=800x0&SF=webp&autoorient=y",
+   "gu": "광진구"
+  },
+  {
+   "code": "D001",
+   "name": "신사점",
+   "addr": "서울특별시 강남구 도산대로 116 논현빌딩 1층",
+   "status": "영업 중",
+   "time": "수 09:00~22:30",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/D001_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "강남구"
+  },
+  {
+   "code": "D004",
+   "name": "압구정점",
+   "addr": "서울특별시 강남구 논현로175길 6 1층",
+   "status": "영업 중",
+   "time": "수 10:00~22:30",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/D004_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "강남구"
+  },
+  {
+   "code": "D008",
+   "name": "경희대점",
+   "addr": "서울특별시 동대문구 경희대로 2",
+   "status": "영업 중",
+   "time": "수 10:00~22:30",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/D008_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "동대문구"
+  },
+  {
+   "code": "D018",
+   "name": "돈암점",
+   "addr": "서울특별시 성북구 동소문로22길 39",
+   "status": "영업 중",
+   "time": "수 10:00~23:00",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/D018_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "성북구"
+  },
+  {
+   "code": "D030",
+   "name": "여의도역점",
+   "addr": "서울특별시 영등포구 여의나루로 61 한영회계법인빌딩 1층",
+   "status": "영업 중",
+   "time": "수 08:00~22:30",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/D030_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "영등포구"
+  },
+  {
+   "code": "D031",
+   "name": "충무로역점",
+   "addr": "서울특별시 중구 퇴계로 222 구인빌딩 1층",
+   "time": "수 08:30~22:00",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/D031_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "서울특별시 중구"
+  },
+  {
+   "code": "D032",
+   "name": "선릉로점",
+   "addr": "서울특별시 강남구 테헤란로64길 20 원동방빌딩 1층",
+   "status": "영업 중",
+   "time": "수 10:00~23:00",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/D032_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "강남구"
+  },
+  {
+   "code": "D033",
+   "name": "시청역점",
+   "addr": "서울특별시 중구 세종대로16길 1 1층",
+   "time": "수 09:00~22:30",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/D033_2025051271024011.png?rs=800x0&SF=webp&autoorient=y",
+   "gu": "서울특별시 중구"
+  },
+  {
+   "code": "D036",
+   "name": "연신내점",
+   "addr": "서울특별시 은평구 통일로 857 1층",
+   "status": "영업 중",
+   "time": "수 10:00~23:00",
+   "tags": [
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/D036_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "은평구"
+  },
+  {
+   "code": "D041",
+   "name": "스타시티점",
+   "addr": "서울특별시 광진구 아차산로 272 스타시티가 1층",
+   "status": "영업 중",
+   "time": "수 10:30~22:30",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/D041_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "광진구"
+  },
+  {
+   "code": "D046",
+   "name": "남부터미널점",
+   "addr": "서울특별시 서초구 효령로 283 서경빌딩 1층",
+   "status": "영업 중",
+   "time": "수 09:00~23:00",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/D046_2026082270033071.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "서초구"
+  },
+  {
+   "code": "D050",
+   "name": "압구정역점",
+   "addr": "서울특별시 강남구 논현로 878 중산빌딩 1층",
+   "status": "영업 중",
+   "time": "수 09:00~22:30",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/D050_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "강남구"
+  },
+  {
+   "code": "D052",
+   "name": "신촌대로점",
+   "addr": "서울특별시 서대문구 신촌로 121 1층",
+   "status": "영업 중",
+   "time": "수 10:00~22:30",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/D052_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "서대문구"
+  },
+  {
+   "code": "D064",
+   "name": "신림타임스트림점",
+   "addr": "서울특별시 관악구 신림로 330 타임스트림점 지하1층",
+   "status": "영업 중",
+   "time": "수 10:30~22:00",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/D064_202502381628311.png?rs=800x0&SF=webp&autoorient=y",
+   "gu": "관악구"
+  },
+  {
+   "code": "D072",
+   "name": "타임스퀘어아트리움점",
+   "addr": "서울특별시 영등포구 영중로 15 타임스퀘어 3층 315호",
+   "status": "영업 중",
+   "time": "수 10:30~22:00",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/D072_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "영등포구"
+  },
+  {
+   "code": "D092",
+   "name": "종각점",
+   "addr": "서울특별시 종로구 종로 61 1층",
+   "status": "영업 중",
+   "time": "수 09:00~22:30",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/D092_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "종로구"
+  },
+  {
+   "code": "D094",
+   "name": "세종로점",
+   "addr": "서울특별시 종로구 세종대로 161 1층",
+   "status": "영업 중",
+   "time": "수 08:00~22:30",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/D094_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "종로구"
+  },
+  {
+   "code": "D102",
+   "name": "둔촌점",
+   "addr": "서울특별시 강동구 양재대로 1317 경일빌딩 1층",
+   "status": "영업 중",
+   "time": "수 10:00~22:30",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/D102_202504990933241.png?rs=800x0&SF=webp&autoorient=y",
+   "gu": "강동구"
+  },
+  {
+   "code": "D107",
+   "name": "제일제당센터점",
+   "addr": "서울특별시 중구 동호로 330 지하1층",
+   "time": "수 08:00~21:00",
+   "tags": [
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/D107_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "서울특별시 중구"
+  },
+  {
+   "code": "D109",
+   "name": "문래점",
+   "addr": "서울특별시 영등포구 선유로 63 1층",
+   "status": "영업 중",
+   "time": "수 10:00~22:00",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/D109_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "영등포구"
+  },
+  {
+   "code": "D122",
+   "name": "역삼역점",
+   "addr": "서울특별시 강남구 테헤란로 138 성홍타워 1층",
+   "status": "영업 중",
+   "time": "수 08:00~22:00",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/D122_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "강남구"
+  },
+  {
+   "code": "D127",
+   "name": "올리브영 목동 타운",
+   "addr": "서울특별시 양천구 목동서로 159-1 CBS방송국 내 1층",
+   "status": "영업 중",
+   "time": "수 09:30~23:00",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/D127_2026092500754221.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "양천구"
+  },
+  {
+   "code": "D130",
+   "name": "광운대역점",
+   "addr": "서울특별시 노원구 석계로 102 1층 2호",
+   "status": "영업 중",
+   "time": "수 10:00~22:00",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/D130_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "노원구"
+  },
+  {
+   "code": "D138",
+   "name": "종로YBM점",
+   "addr": "서울특별시 종로구 종로 104",
+   "status": "영업 중",
+   "time": "수 08:00~22:30",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/D138_2024113091329311.png?rs=800x0&SF=webp&autoorient=y",
+   "gu": "종로구"
+  },
+  {
+   "code": "D141",
+   "name": "방배이수점",
+   "addr": "서울특별시 서초구 동작대로 118 예다인프라자빌딩 1층",
+   "status": "영업 중",
+   "time": "수 09:00~23:00",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/D141_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "서초구"
+  },
+  {
+   "code": "D146",
+   "name": "천호중앙점",
+   "addr": "서울특별시 강동구 천호대로 1027 일동빌딩 1층",
+   "status": "영업 중",
+   "time": "수 10:00~23:00",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/D146_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "강동구"
+  },
+  {
+   "code": "D147",
+   "name": "신촌연세점",
+   "addr": "서울특별시 서대문구 연세로 37 1층",
+   "status": "영업 중",
+   "time": "수 10:00~23:00",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/D147_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "서대문구"
+  },
+  {
+   "code": "D151",
+   "name": "가락시장역점",
+   "addr": "서울특별시 송파구 중대로 105 가락 ID타워 1층",
+   "status": "영업 중",
+   "time": "수 09:30~22:30",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/D151_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "송파구"
+  },
+  {
+   "code": "D154",
+   "name": "서래마을점",
+   "addr": "서울특별시 서초구 서래로 39 1층",
+   "status": "영업 중",
+   "time": "수 10:00~22:30",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/D154_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "서초구"
+  },
+  {
+   "code": "D160",
+   "name": "명일역점",
+   "addr": "서울특별시 강동구 양재대로 1637 1층 2호~4호",
+   "status": "영업 중",
+   "time": "수 10:00~22:30",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/D160_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "강동구"
+  },
+  {
+   "code": "D164",
+   "name": "돈암중앙점",
+   "addr": "서울특별시 성북구 동소문로 118 1층",
+   "status": "영업 중",
+   "time": "수 09:00~23:00",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/D164_202502410920151.png?rs=800x0&SF=webp&autoorient=y",
+   "gu": "성북구"
+  },
+  {
+   "code": "D171",
+   "name": "종로1가점",
+   "addr": "서울특별시 종로구 종로 19 르미에르종로타운 1층",
+   "status": "영업 중",
+   "time": "수 08:00~22:30",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/D171_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "종로구"
+  },
+  {
+   "code": "D173",
+   "name": "홍대정문점",
+   "addr": "서울특별시 마포구 홍익로 4 1층",
+   "status": "영업 중",
+   "time": "수 09:00~22:30",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/D173_202502510921111.png?rs=800x0&SF=webp&autoorient=y",
+   "gu": "마포구"
+  },
+  {
+   "code": "D176",
+   "name": "올리브영 명동 타운",
+   "addr": "서울특별시 중구 명동길 53 1~2층",
+   "time": "수 10:00~22:30",
+   "tags": [
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/D176_2026092500755091.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "서울특별시 중구"
+  },
+  {
+   "code": "D181",
+   "name": "혜화역점",
+   "addr": "서울특별시 종로구 대학로 122 흥사단회관 1층",
+   "status": "영업 중",
+   "time": "수 10:00~22:30",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/D181_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "종로구"
+  },
+  {
+   "code": "D192",
+   "name": "양재스타클래스점",
+   "addr": "서울특별시 강남구 남부순환로 2615",
+   "status": "영업 중",
+   "time": "수 09:00~22:30",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/D192_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "강남구"
+  },
+  {
+   "code": "D193",
+   "name": "홍대대학로점",
+   "addr": "서울특별시 종로구 대학로 57 홍익대대학로캠퍼스 내 1층",
+   "status": "영업 중",
+   "time": "수 10:00~22:00",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/D193_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "종로구"
+  },
+  {
+   "code": "D202",
+   "name": "은행사거리점",
+   "addr": "서울특별시 노원구 한글비석로 264 중계그랜드프라자 1층",
+   "status": "영업 중",
+   "time": "수 10:00~23:00",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/D202_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "노원구"
+  },
+  {
+   "code": "D203",
+   "name": "홍대입구역점",
+   "addr": "서울특별시 마포구 양화로 156 엘지팰리스 1층",
+   "status": "영업 중",
+   "time": "수 10:00~23:00",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/D203_2025041131601211.png?rs=800x0&SF=webp&autoorient=y",
+   "gu": "마포구"
+  },
+  {
+   "code": "D214",
+   "name": "시흥사거리점",
+   "addr": "서울특별시 금천구 시흥대로 228 1층",
+   "status": "영업 중",
+   "time": "수 10:00~22:30",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/D214_2025113181458401.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "금천구"
+  },
+  {
+   "code": "D215",
+   "name": "증미역점",
+   "addr": "서울특별시 강서구 양천로 583 우림블루나인 1층",
+   "status": "영업 중",
+   "time": "수 10:00~22:00",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/D215_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "강서구"
+  },
+  {
+   "code": "D222",
+   "name": "공덕역점",
+   "addr": "서울특별시 마포구 백범로 199 메트로디오빌 1층",
+   "status": "영업 중",
+   "time": "수 10:00~22:30",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/D222_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "마포구"
+  },
+  {
+   "code": "D259",
+   "name": "신촌명물거리점",
+   "addr": "서울특별시 서대문구 명물길 54",
+   "status": "영업 중",
+   "time": "수 10:00~23:00",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/D259_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "서대문구"
+  },
+  {
+   "code": "D264",
+   "name": "압구정중앙점",
+   "addr": "서울특별시 강남구 논현로 842 압구정빌딩 1층",
+   "status": "영업 중",
+   "time": "수 09:00~22:30",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/D264_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "강남구"
+  },
+  {
+   "code": "D278",
+   "name": "상암MBC점",
+   "addr": "서울특별시 마포구 성암로 267 MBC 신사옥상업시설 1층",
+   "status": "영업 중",
+   "time": "수 08:00~22:30",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/D278_202502480933521.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "마포구"
+  },
+  {
+   "code": "D295",
+   "name": "동대문역사문화공원역점",
+   "addr": "서울특별시 중구 장충단로 251 1층",
+   "time": "수 10:00~23:30",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/D295_2025041131051421.jpeg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "서울특별시 중구"
+  },
+  {
+   "code": "D297",
+   "name": "송정역점",
+   "addr": "서울특별시 강서구 공항대로 28 1층",
+   "status": "영업 중",
+   "time": "수 10:00~23:00",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/D297_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "강서구"
+  },
+  {
+   "code": "D316",
+   "name": "명동대로점",
+   "addr": "서울특별시 중구 퇴계로 120 1층",
+   "time": "수 10:00~22:30",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/D316_202502520942011.png?rs=800x0&SF=webp&autoorient=y",
+   "gu": "서울특별시 중구"
+  },
+  {
+   "code": "D321",
+   "name": "코엑스몰점",
+   "addr": "서울특별시 강남구 테헤란로87길 22",
+   "status": "영업 중",
+   "time": "수 10:00~22:00",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/D321_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "강남구"
+  },
+  {
+   "code": "D322",
+   "name": "상수역점",
+   "addr": "서울특별시 마포구 와우산로 49 상수아뜨리에 1층",
+   "status": "영업 중",
+   "time": "수 09:00~22:30",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/D322_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "마포구"
+  },
+  {
+   "code": "D324",
+   "name": "사가정역점",
+   "addr": "서울특별시 중랑구 면목로 310 극장빌딩 1층",
+   "status": "영업 중",
+   "time": "수 10:00~22:30",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/D324_2024113251706521.png?rs=800x0&SF=webp&autoorient=y",
+   "gu": "중랑구"
+  },
+  {
+   "code": "D335",
+   "name": "염창역점",
+   "addr": "서울특별시 강서구 공항대로 637 1층",
+   "status": "영업 중",
+   "time": "수 10:00~23:00",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/D335_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "강서구"
+  },
+  {
+   "code": "D345",
+   "name": "가산디지털단지역점",
+   "addr": "서울특별시 금천구 벚꽃로 286",
+   "status": "영업 중",
+   "time": "수 08:00~22:30",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/D345_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "금천구"
+  },
+  {
+   "code": "D359",
+   "name": "신도림점",
+   "addr": "서울특별시 구로구 경인로 661",
+   "status": "영업 중",
+   "time": "수 09:30~22:30",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/D359_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "구로구"
+  },
+  {
+   "code": "D372",
+   "name": "보라매병원역점",
+   "addr": "서울특별시 동작구 보라매로 5가길 16",
+   "status": "영업 중",
+   "time": "수 09:00~22:30",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/D372_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "동작구"
+  },
+  {
+   "code": "D378",
+   "name": "목동역점",
+   "addr": "서울특별시 양천구 목동로 203",
+   "status": "영업 중",
+   "time": "수 10:00~22:30",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/D378_2025041151307231.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "양천구"
+  },
+  {
+   "code": "D382",
+   "name": "수서역점",
+   "addr": "서울특별시 강남구 밤고개로1길 10",
+   "status": "영업 중",
+   "time": "수 08:00~22:30",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/D382_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "강남구"
+  },
+  {
+   "code": "D383",
+   "name": "대학로중앙점",
+   "addr": "서울특별시 종로구 대학로 144 1층",
+   "status": "영업 중",
+   "time": "수 10:00~23:00",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/D383_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "종로구"
+  },
+  {
+   "code": "D390",
+   "name": "신내점",
+   "addr": "서울특별시 중랑구 신내로72",
+   "status": "영업 중",
+   "time": "수 10:00~22:30",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/D390_2025071951544491.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "중랑구"
+  },
+  {
+   "code": "D400",
+   "name": "고덕점",
+   "addr": "서울특별시 강동구 동남로75길 13-15 성은빌딩 1층",
+   "status": "영업 중",
+   "time": "수 10:00~22:30",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/D400_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "강동구"
+  },
+  {
+   "code": "D403",
+   "name": "이태원입구점",
+   "addr": "서울특별시 용산구 이태원로 145",
+   "status": "영업 중",
+   "time": "수 11:00~22:00",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/D403_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "용산구"
+  },
+  {
+   "code": "D404",
+   "name": "아차산역점",
+   "addr": "서울특별시 광진구 천호대로 671",
+   "status": "영업 중",
+   "time": "수 10:00~22:30",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/D404_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "광진구"
+  },
+  {
+   "code": "D405",
+   "name": "성수역점",
+   "addr": "서울특별시 성동구 아차산로 91",
+   "status": "영업 중",
+   "time": "수 08:30~22:30",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/D405_2024102921458201.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "성동구"
+  },
+  {
+   "code": "D424",
+   "name": "녹두거리점",
+   "addr": "서울특별시 관악구 신림로 127 1층",
+   "status": "영업 중",
+   "time": "수 10:00~22:30",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/D424_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "관악구"
+  },
+  {
+   "code": "D433",
+   "name": "합정카페거리점",
+   "addr": "서울특별시 마포구 독막로 13",
+   "status": "영업 중",
+   "time": "수 10:00~22:30",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/D433_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "마포구"
+  },
+  {
+   "code": "D435",
+   "name": "방학역점",
+   "addr": "서울특별시 도봉구 도봉로150길 28",
+   "status": "영업 중",
+   "time": "수 10:00~22:30",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/D435_2024102851634171.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "도봉구"
+  },
+  {
+   "code": "D448",
+   "name": "금호점",
+   "addr": "서울특별시 성동구 독서당로 302 1층",
+   "status": "영업 중",
+   "time": "수 10:00~22:30",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/D448_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "성동구"
+  },
+  {
+   "code": "D454",
+   "name": "창동역점",
+   "addr": "서울특별시 도봉구 노해로63길 84-16",
+   "status": "영업 중",
+   "time": "수 10:00~22:30",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/D454_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "도봉구"
+  },
+  {
+   "code": "D480",
+   "name": "서울시립대점",
+   "addr": "서울특별시 동대문구 전농로 222 씨티프라자 104~105호",
+   "status": "영업 중",
+   "time": "수 10:00~22:00",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/D480_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "동대문구"
+  },
+  {
+   "code": "D483",
+   "name": "서초역점",
+   "addr": "서울특별시 서초구 반포대로 110",
+   "status": "영업 중",
+   "time": "수 09:00~22:30",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/D483_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "서초구"
+  },
+  {
+   "code": "D499",
+   "name": "방이역점",
+   "addr": "서울특별시 송파구 마천로 41",
+   "status": "영업 중",
+   "time": "수 10:00~22:30",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/D499_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "송파구"
+  },
+  {
+   "code": "D513",
+   "name": "오목교역점",
+   "addr": "서울특별시 양천구 오목로 344 청학빌딩",
+   "status": "영업 중",
+   "time": "수 10:00~22:30",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/D513_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "양천구"
+  },
+  {
+   "code": "D514",
+   "name": "강변역점",
+   "addr": "서울특별시 광진구 강변역로4길 10",
+   "status": "영업 중",
+   "time": "수 09:30~22:30",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/D514_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "광진구"
+  },
+  {
+   "code": "D519",
+   "name": "보라매역점",
+   "addr": "서울특별시 동작구 여의대방로 142",
+   "status": "영업 중",
+   "time": "수 10:00~22:30",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/D519_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "동작구"
+  },
+  {
+   "code": "D523",
+   "name": "남성역점",
+   "addr": "서울특별시 동작구 사당로 228",
+   "status": "영업 중",
+   "time": "수 10:00~22:30",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/D523_2025113181500311.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "동작구"
+  },
+  {
+   "code": "D528",
+   "name": "위례아이파크점",
+   "addr": "서울특별시 송파구 위례광장로 136",
+   "status": "영업 중",
+   "time": "수 10:00~22:30",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/D528_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "송파구"
+  },
+  {
+   "code": "D529",
+   "name": "강동구청점",
+   "addr": "서울특별시 강동구 성내로 19",
+   "status": "영업 중",
+   "time": "수 10:00~22:30",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/D529_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "강동구"
+  },
+  {
+   "code": "D530",
+   "name": "신림점",
+   "addr": "서울특별시 관악구 신림로 353",
+   "status": "영업 중",
+   "time": "수 10:00~23:00",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/D530_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "관악구"
+  },
+  {
+   "code": "D534",
+   "name": "마포도화점",
+   "addr": "서울특별시 마포구 삼개로 20",
+   "status": "영업 중",
+   "time": "수 10:00~22:00",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/D534_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "마포구"
+  },
+  {
+   "code": "D544",
+   "name": "신당역점",
+   "addr": "서울특별시 중구 다산로 258",
+   "time": "수 09:00~22:30",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/D544_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "서울특별시 중구"
+  },
+  {
+   "code": "D547",
+   "name": "석촌역점",
+   "addr": "서울특별시 송파구 백제고분로 387",
+   "status": "영업 중",
+   "time": "수 10:00~23:00",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/D547_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "송파구"
+  },
+  {
+   "code": "D548",
+   "name": "숭실대입구역점",
+   "addr": "서울특별시 동작구 상도로 358",
+   "status": "영업 중",
+   "time": "수 10:00~22:30",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/D548_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "동작구"
+  },
+  {
+   "code": "D555",
+   "name": "휘경동점",
+   "addr": "서울특별시 동대문구 망우로 78, 휘경빌딩 1층",
+   "status": "영업 중",
+   "time": "수 09:00~22:30",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/D555_2024113251756021.png?rs=800x0&SF=webp&autoorient=y",
+   "gu": "동대문구"
+  },
+  {
+   "code": "D562",
+   "name": "신대방역점",
+   "addr": "서울특별시 관악구 난곡로 357 1층",
+   "status": "영업 중",
+   "time": "수 10:00~22:30",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/D562_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "관악구"
+  },
+  {
+   "code": "D578",
+   "name": "타워팰리스점",
+   "addr": "서울특별시 강남구 언주로30길 39 Lynn Square(린스퀘어) 1층",
+   "status": "영업 중",
+   "time": "수 09:30~22:30",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/D578_2026051400922471.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "강남구"
+  },
+  {
+   "code": "DA0D",
+   "name": "수유중앙점",
+   "addr": "서울특별시 강북구 도봉로 336 (번동)",
+   "status": "영업 중",
+   "time": "수 09:00~23:00",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DA0D_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "강북구"
+  },
+  {
+   "code": "DA21",
+   "name": "서초대로점",
+   "addr": "서울특별시 서초구 서초대로 314 정보통신공제조합회관",
+   "status": "영업 중",
+   "time": "수 08:00~22:30",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DA21_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "서초구"
+  },
+  {
+   "code": "DA22",
+   "name": "장승배기역점",
+   "addr": "서울특별시 동작구 장승배기로11가길 11 (상도동, 상도파크자이)",
+   "status": "영업 중",
+   "time": "수 10:00~22:30",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DA22_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "동작구"
+  },
+  {
+   "code": "DA2D",
+   "name": "신정네거리역점",
+   "addr": "서울특별시 양천구 중앙로 252",
+   "status": "영업 중",
+   "time": "수 10:30~22:30",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DA2D_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "양천구"
+  },
+  {
+   "code": "DA34",
+   "name": "양천구청점",
+   "addr": "서울특별시 양천구 목동동로 73 1층",
+   "status": "영업 중",
+   "time": "수 10:00~22:30",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DA34_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "양천구"
+  },
+  {
+   "code": "DA48",
+   "name": "동교동점",
+   "addr": "서울특별시 마포구 동교로 207",
+   "status": "영업 중",
+   "time": "수 10:00~22:30",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DA48_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "마포구"
+  },
+  {
+   "code": "DA49",
+   "name": "순천향입구점",
+   "addr": "서울특별시 용산구 대사관로 71",
+   "status": "영업 중",
+   "time": "수 09:00~22:30",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DA49_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "용산구"
+  },
+  {
+   "code": "DA54",
+   "name": "봉은사역점",
+   "addr": "서울특별시 강남구 영동대로 602",
+   "status": "영업 중",
+   "time": "수 09:00~22:30",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DA54_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "강남구"
+  },
+  {
+   "code": "DA57",
+   "name": "창천점",
+   "addr": "서울특별시 서대문구 신촌로 17",
+   "status": "영업 중",
+   "time": "수 10:00~23:00",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DA57_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "서대문구"
+  },
+  {
+   "code": "DA5F",
+   "name": "동부이촌점",
+   "addr": "서울특별시 용산구 이촌로75길 16",
+   "status": "영업 중",
+   "time": "수 09:30~22:30",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DA5F_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "용산구"
+  },
+  {
+   "code": "DA61",
+   "name": "발산점",
+   "addr": "서울특별시 강서구 강서로 360",
+   "status": "영업 중",
+   "time": "수 10:00~22:30",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DA61_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "강서구"
+  },
+  {
+   "code": "DA62",
+   "name": "신설동역점",
+   "addr": "서울특별시 동대문구 왕산로 4 1층",
+   "status": "영업 중",
+   "time": "수 09:00~22:30",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DA62_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "동대문구"
+  },
+  {
+   "code": "DA69",
+   "name": "상봉듀오트리스점",
+   "addr": "서울특별시 중랑구 상봉로 131 (상봉동, 상봉 듀오트리스)",
+   "status": "영업 중",
+   "time": "수 10:00~22:00",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DA69_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "중랑구"
+  },
+  {
+   "code": "DA6F",
+   "name": "상도역점",
+   "addr": "서울특별시 동작구 양녕로 257",
+   "status": "영업 중",
+   "time": "수 10:00~22:30",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DA6F_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "동작구"
+  },
+  {
+   "code": "DA74",
+   "name": "양천향교역점",
+   "addr": "서울특별시 강서구 양천로 344",
+   "status": "영업 중",
+   "time": "수 10:00~22:30",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DA74_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "강서구"
+  },
+  {
+   "code": "DA78",
+   "name": "대흥역점",
+   "addr": "서울특별시 마포구 백범로 91",
+   "status": "영업 중",
+   "time": "수 10:00~22:00",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DA78_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "마포구"
+  },
+  {
+   "code": "DA7A",
+   "name": "독립문점",
+   "addr": "서울특별시 종로구 송월길 99 경희궁 자이 2132, 2133, 2134호",
+   "status": "영업 중",
+   "time": "수 10:00~22:30",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DA7A_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "종로구"
+  },
+  {
+   "code": "DA7B",
+   "name": "정동점",
+   "addr": "서울특별시 중구 새문안로 26",
+   "time": "수 08:00~22:00",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DA7B_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "서울특별시 중구"
+  },
+  {
+   "code": "DA89",
+   "name": "장한평역점",
+   "addr": "서울특별시 동대문구 장한로 3",
+   "status": "영업 중",
+   "time": "수 09:30~22:30",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DA89_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "동대문구"
+  },
+  {
+   "code": "DA90",
+   "name": "중화역점",
+   "addr": "서울특별시 중랑구 동일로 802 1층",
+   "status": "영업 중",
+   "time": "수 10:00~22:30",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DA90_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "중랑구"
+  },
+  {
+   "code": "DA99",
+   "name": "석계역점",
+   "addr": "서울특별시 노원구 석계로1길 14",
+   "status": "영업 중",
+   "time": "수 10:00~22:30",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DA99_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "노원구"
+  },
+  {
+   "code": "DA9B",
+   "name": "언주역점",
+   "addr": "서울특별시 강남구 봉은사로 209",
+   "status": "영업 중",
+   "time": "수 09:00~22:30",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DA9B_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "강남구"
+  },
+  {
+   "code": "DA9E",
+   "name": "미아역점",
+   "addr": "서울특별시 강북구 도봉로 188",
+   "status": "영업 중",
+   "time": "수 10:00~22:30",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DA9E_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "강북구"
+  },
+  {
+   "code": "DAA3",
+   "name": "숙대점",
+   "addr": "서울특별시 용산구 청파로45길 19 복조빌딩 1층(올리브영 숙대점)",
+   "status": "영업 중",
+   "time": "수 09:30~22:30",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DAA3_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "용산구"
+  },
+  {
+   "code": "DAAA",
+   "name": "문정역점",
+   "addr": "서울특별시 송파구 송파대로 167 B동 지하1층 G127,128호",
+   "status": "영업 중",
+   "time": "수 09:00~22:00",
+   "tags": [
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DAAA_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "송파구"
+  },
+  {
+   "code": "DAAB",
+   "name": "상왕십리역점",
+   "addr": "서울특별시 성동구 왕십리로 382",
+   "status": "영업 중",
+   "time": "수 10:00~22:30",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DAAB_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "성동구"
+  },
+  {
+   "code": "DAAC",
+   "name": "신대방삼거리역점",
+   "addr": "서울특별시 동작구 보라매로 113",
+   "status": "영업 중",
+   "time": "수 10:00~22:30",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DAAC_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "동작구"
+  },
+  {
+   "code": "DAB3",
+   "name": "은행나무사거리점",
+   "addr": "서울특별시 금천구 금하로 705",
+   "status": "영업 중",
+   "time": "수 10:00~22:00",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DAB3_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "금천구"
+  },
+  {
+   "code": "DABB",
+   "name": "영등포역사점",
+   "addr": "서울특별시 영등포구 경인로 846 3층 맞이방 올리브영 영등포역사점",
+   "status": "영업 중",
+   "time": "수 08:30~22:30",
+   "tags": [
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DABB_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "영등포구"
+  },
+  {
+   "code": "DAC0",
+   "name": "천왕역점",
+   "addr": "서울특별시 구로구 오류로 20 (오류동 173-47 )",
+   "status": "영업 중",
+   "time": "수 10:00~22:30",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DAC0_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "구로구"
+  },
+  {
+   "code": "DACB",
+   "name": "발산역점",
+   "addr": "서울특별시 강서구 강서로 385 우성에스비타워 107호,108호,109호",
+   "status": "영업 중",
+   "time": "수 09:00~22:30",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DACB_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "강서구"
+  },
+  {
+   "code": "DAD2",
+   "name": "신촌로터리점",
+   "addr": "서울특별시 마포구 서강로 133 1층",
+   "status": "영업 중",
+   "time": "수 10:00~22:30",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DAD2_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "마포구"
+  },
+  {
+   "code": "DAD8",
+   "name": "학동중앙점",
+   "addr": "서울특별시 강남구 도산대로 326",
+   "status": "영업 중",
+   "time": "수 09:00~22:30",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DAD8_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "강남구"
+  },
+  {
+   "code": "DAD9",
+   "name": "합정교보점",
+   "addr": "서울특별시 마포구 월드컵로1길 14 올리브영 합정교보점",
+   "status": "영업 중",
+   "time": "수 10:30~22:00",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DAD9_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "마포구"
+  },
+  {
+   "code": "DADA",
+   "name": "자양역점",
+   "addr": "서울특별시 광진구 능동로 7",
+   "status": "영업 중",
+   "time": "수 10:00~22:30",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DADA_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "광진구"
+  },
+  {
+   "code": "DAE2",
+   "name": "마포구청역점",
+   "addr": "서울특별시 마포구 월드컵로 196 대명비첸시티 1층 제102,103,105,106호",
+   "status": "영업 중",
+   "time": "수 09:00~22:00",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DAE2_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "마포구"
+  },
+  {
+   "code": "DAE8",
+   "name": "가양역점",
+   "addr": "서울특별시 강서구 양천로 476 금부빌딩 지상1층",
+   "status": "영업 중",
+   "time": "수 10:00~22:30",
+   "tags": [
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DAE8_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "강서구"
+  },
+  {
+   "code": "DAEA",
+   "name": "올리브영 강남 타운",
+   "addr": "서울특별시 서초구 강남대로 429 동일빌딩 1~3층",
+   "status": "영업 중",
+   "time": "수 10:00~22:30",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DAEA_2026092500758551.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "서초구"
+  },
+  {
+   "code": "DAED",
+   "name": "방화역점",
+   "addr": "서울특별시 강서구 금낭화로 292",
+   "status": "영업 중",
+   "time": "수 10:00~22:30",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DAED_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "강서구"
+  },
+  {
+   "code": "DAF8",
+   "name": "신방화역점",
+   "addr": "서울특별시 강서구 방화대로 294 마곡더블유타워 121호,122호",
+   "status": "영업 중",
+   "time": "수 10:00~22:30",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DAF8_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "강서구"
+  },
+  {
+   "code": "DB16",
+   "name": "한남오거리점",
+   "addr": "서울특별시 용산구 독서당로 65-1",
+   "status": "영업 중",
+   "time": "수 09:00~22:30",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DB16_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "용산구"
+  },
+  {
+   "code": "DB25",
+   "name": "중계역점",
+   "addr": "서울특별시 노원구 동일로 1335 (상계동)",
+   "status": "영업 중",
+   "time": "수 10:00~22:30",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DB25_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "노원구"
+  },
+  {
+   "code": "DB28",
+   "name": "만리동점",
+   "addr": "서울특별시 중구 만리재로 175 서울역센트럴자이 상가 1층",
+   "time": "수 10:00~22:30",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DB28_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "서울특별시 중구"
+  },
+  {
+   "code": "DB33",
+   "name": "애오개역점",
+   "addr": "서울특별시 마포구 마포대로 201 마포트라펠리스 2차 1층",
+   "status": "영업 중",
+   "time": "수 09:00~22:30",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DB33_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "마포구"
+  },
+  {
+   "code": "DB35",
+   "name": "상계보람점",
+   "addr": "서울특별시 노원구 한글비석로 471",
+   "status": "영업 중",
+   "time": "수 10:00~22:30",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DB35_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "노원구"
+  },
+  {
+   "code": "DB39",
+   "name": "구산역점",
+   "addr": "서울특별시 은평구 서오릉로 137 (역촌동)",
+   "status": "영업 중",
+   "time": "수 10:00~22:30",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DB39_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "은평구"
+  },
+  {
+   "code": "DB3D",
+   "name": "올리브영 가로수길 타운",
+   "addr": "서울특별시 강남구 도산대로 133",
+   "status": "영업 중",
+   "time": "수 09:00~23:00",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DB3D_2026092500759471.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "강남구"
+  },
+  {
+   "code": "DB41",
+   "name": "황학사거리점",
+   "addr": "서울특별시 성동구 왕십리로 410 센트라스 1층 158호",
+   "status": "영업 중",
+   "time": "수 10:00~23:00",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DB41_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "성동구"
+  },
+  {
+   "code": "DB48",
+   "name": "잠실학원사거리점",
+   "addr": "서울특별시 송파구 석촌호수로 130",
+   "status": "영업 중",
+   "time": "수 10:00~22:30",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DB48_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "송파구"
+  },
+  {
+   "code": "DB67",
+   "name": "트윈시티점",
+   "addr": "서울특별시 용산구 한강대로 366 B1 109,110호",
+   "status": "영업 중",
+   "time": "수 10:00~22:00",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DB67_2024102852220331.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "용산구"
+  },
+  {
+   "code": "DB68",
+   "name": "성신여대입구역점",
+   "addr": "서울특별시 성북구 아리랑로 9",
+   "status": "영업 중",
+   "time": "수 10:00~22:00",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DB68_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "성북구"
+  },
+  {
+   "code": "DB6D",
+   "name": "아현역점",
+   "addr": "서울특별시 서대문구 신촌로35길 10 103호",
+   "status": "영업 중",
+   "time": "수 10:00~22:30",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DB6D_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "서대문구"
+  },
+  {
+   "code": "DB7B",
+   "name": "배명사거리점",
+   "addr": "서울특별시 송파구 백제고분로 276 공익빌딩 1층",
+   "status": "영업 중",
+   "time": "수 10:00~22:30",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DB7B_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "송파구"
+  },
+  {
+   "code": "DB7E",
+   "name": "구일역점",
+   "addr": "서울특별시 구로구 구일로10길 49 (구로동, 다원그린빌) 1층 제101-2호, 제102-1호",
+   "status": "영업 중",
+   "time": "수 10:00~22:30",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DB7E_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "구로구"
+  },
+  {
+   "code": "DB89",
+   "name": "공릉역점",
+   "addr": "서울특별시 노원구 동일로192길 74 (공릉동 441-92, 93)",
+   "status": "영업 중",
+   "time": "수 10:00~22:30",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DB89_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "노원구"
+  },
+  {
+   "code": "DB92",
+   "name": "북가좌동점",
+   "addr": "서울특별시 서대문구 거북골로 191",
+   "status": "영업 중",
+   "time": "수 10:00~22:30",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DB92_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "서대문구"
+  },
+  {
+   "code": "DB93",
+   "name": "응암역점",
+   "addr": "서울특별시 은평구 증산로 475 (신사동)",
+   "status": "영업 중",
+   "time": "수 10:00~22:30",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DB93_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "은평구"
+  },
+  {
+   "code": "DB96",
+   "name": "신용산역점",
+   "addr": "서울특별시 용산구 한강대로 95 (한강로2가, 래미안용산) 101호,102호",
+   "status": "영업 중",
+   "time": "수 09:00~22:30",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DB96_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "용산구"
+  },
+  {
+   "code": "DBA3",
+   "name": "강남엔터식스점",
+   "addr": "서울특별시 서초구 신반포로 지하 188 엔터식스 강남점 26, 27호",
+   "status": "영업 중",
+   "time": "수 10:30~21:30",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DBA3_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "서초구"
+  },
+  {
+   "code": "DBA7",
+   "name": "종암점",
+   "addr": "서울특별시 성북구 종암로 123 우영타워 102호",
+   "status": "영업 중",
+   "time": "수 10:00~22:00",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DBA7_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "성북구"
+  },
+  {
+   "code": "DBA8",
+   "name": "용산리첸시아점",
+   "addr": "서울특별시 용산구 백범로 341 외 1필지(원효로1가, 리첸시아 용산) 리첸시아 에이동 103호, 104호, 105호, 112호",
+   "status": "영업 중",
+   "time": "수 10:00~22:30",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DBA8_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "용산구"
+  },
+  {
+   "code": "DBBC",
+   "name": "공덕파크팰리스점",
+   "addr": "서울특별시 마포구 마포대로 143 마포공덕파크팰리스 108호",
+   "status": "영업 중",
+   "time": "수 09:00~22:30",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DBBC_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "마포구"
+  },
+  {
+   "code": "DBCF",
+   "name": "포이사거리점",
+   "addr": "서울특별시 강남구 논현로 82",
+   "status": "영업 중",
+   "time": "수 09:00~22:30",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DBCF_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "강남구"
+  },
+  {
+   "code": "DBE3",
+   "name": "홍제역점",
+   "addr": "서울특별시 서대문구 통일로 446",
+   "status": "영업 중",
+   "time": "수 10:00~22:30",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DBE3_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "서대문구"
+  },
+  {
+   "code": "DBE5",
+   "name": "송파구청점",
+   "addr": "서울특별시 송파구 오금로 87 잠실리시온 1층",
+   "status": "영업 중",
+   "time": "수 10:00~23:00",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DBE5_2025113321022061.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "송파구"
+  },
+  {
+   "code": "DBE8",
+   "name": "회기중앙점",
+   "addr": "서울특별시 동대문구 이문로 30 올리브영",
+   "status": "영업 중",
+   "time": "수 10:00~23:00",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DBE8_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "동대문구"
+  },
+  {
+   "code": "DBEF",
+   "name": "일원역점",
+   "addr": "서울특별시 강남구 일원로 115 삼성생명 일원역빌딩 B동 1층",
+   "status": "영업 중",
+   "time": "수 10:00~22:00",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DBEF_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "강남구"
+  },
+  {
+   "code": "DBF1",
+   "name": "길음역점",
+   "addr": "서울특별시 성북구 정릉로 376 BR빌딩 지하  2층",
+   "status": "영업 중",
+   "time": "수 10:00~22:30",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DBF1_2024102881325201.png?rs=800x0&SF=webp&autoorient=y",
+   "gu": "성북구"
+  },
+  {
+   "code": "DBF5",
+   "name": "올림픽대교북단점",
+   "addr": "서울특별시 광진구 아차산로 484",
+   "status": "영업 중",
+   "time": "수 10:00~22:30",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DBF5_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "광진구"
+  },
+  {
+   "code": "DBF7",
+   "name": "신길점",
+   "addr": "서울특별시 영등포구 영등포로 358 대윤메디컬센터 1층",
+   "status": "영업 중",
+   "time": "수 11:00~22:30",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DBF7_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "영등포구"
+  },
+  {
+   "code": "DC07",
+   "name": "씨제이남산더센터점",
+   "addr": "서울특별시 중구 소월로2길 12 CJ빌딩",
+   "time": "수 08:00~18:00",
+   "tags": [
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DC07_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "서울특별시 중구"
+  },
+  {
+   "code": "DC1F",
+   "name": "숙대입구역점",
+   "addr": "서울특별시 용산구 한강대로 285 (갈월동)",
+   "status": "영업 중",
+   "time": "수 10:00~22:30",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DC1F_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "용산구"
+  },
+  {
+   "code": "DC27",
+   "name": "선릉타운점",
+   "addr": "서울특별시 강남구 테헤란로 411 성담빌딩 1층",
+   "status": "영업 중",
+   "time": "수 08:00~22:30",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DC27_2025071950933591.png?rs=800x0&SF=webp&autoorient=y",
+   "gu": "강남구"
+  },
+  {
+   "code": "DC2F",
+   "name": "신도림테크노마트점",
+   "addr": "서울특별시 구로구 새말로 97 신도림테크노마트 B1층 45호, 일부 46호",
+   "status": "영업 중",
+   "time": "수 10:30~21:00",
+   "tags": [
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DC2F_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "구로구"
+  },
+  {
+   "code": "DC36",
+   "name": "대치점",
+   "addr": "서울특별시 강남구 도곡로 448 동서빌딩",
+   "status": "영업 중",
+   "time": "수 10:00~22:30",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DC36_2024113191322051.png?rs=800x0&SF=webp&autoorient=y",
+   "gu": "강남구"
+  },
+  {
+   "code": "DC37",
+   "name": "노원공릉점",
+   "addr": "서울특별시 노원구 동일로 1083",
+   "status": "영업 중",
+   "time": "수 10:00~22:00",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DC37_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "노원구"
+  },
+  {
+   "code": "DC55",
+   "name": "개봉역북부점",
+   "addr": "서울특별시 구로구 경인로40길 41 181-5번지 외 2필지",
+   "status": "영업 중",
+   "time": "수 10:00~22:30",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DC55_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "구로구"
+  },
+  {
+   "code": "DC57",
+   "name": "홍대공항철도역점",
+   "addr": "서울특별시 마포구 양화로 183",
+   "status": "영업 중",
+   "time": "수 10:00~23:00",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DC57_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "마포구"
+  },
+  {
+   "code": "DC5D",
+   "name": "구로호텔점",
+   "addr": "서울특별시 구로구 디지털로32길 72 1층",
+   "status": "영업 중",
+   "time": "수 08:00~22:30",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DC5D_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "구로구"
+  },
+  {
+   "code": "DC65",
+   "name": "세곡동점",
+   "addr": "서울특별시 강남구 헌릉로569길 21-36",
+   "status": "영업 중",
+   "time": "수 10:00~22:30",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DC65_202501241554221.png?rs=800x0&SF=webp&autoorient=y",
+   "gu": "강남구"
+  },
+  {
+   "code": "DC69",
+   "name": "서울숲역점",
+   "addr": "서울특별시 성동구 왕십리로 50 (성수동1가 656-335 1층)",
+   "status": "영업 중",
+   "time": "수 10:00~22:30",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DC69_202501061022481.png?rs=800x0&SF=webp&autoorient=y",
+   "gu": "성동구"
+  },
+  {
+   "code": "DC6B",
+   "name": "망원동점",
+   "addr": "서울특별시 마포구 망원로 71 (망원동 423-4번지 1층)",
+   "status": "영업 중",
+   "time": "수 10:00~22:00",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DC6B_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "마포구"
+  },
+  {
+   "code": "DC74",
+   "name": "방배점",
+   "addr": "서울특별시 서초구 방배로 83 (방배동 909-6)",
+   "status": "영업 중",
+   "time": "수 10:00~22:30",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DC74_2025092441451331.png?rs=800x0&SF=webp&autoorient=y",
+   "gu": "서초구"
+  },
+  {
+   "code": "DC7D",
+   "name": "강남우성점",
+   "addr": "서울특별시 강남구 강남대로 320 황화빌딩 1층 일부",
+   "status": "영업 중",
+   "time": "수 08:00~22:30",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DC7D_2024113181028301.png?rs=800x0&SF=webp&autoorient=y",
+   "gu": "강남구"
+  },
+  {
+   "code": "DC98",
+   "name": "상일동역점",
+   "addr": "서울특별시 강동구 고덕로 399 고덕동 210-1 고덕센트럴푸르지오 메가스퀘어 102,103, 104호",
+   "status": "영업 중",
+   "time": "수 10:00~22:30",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DC98_202501311419051.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "강동구"
+  },
+  {
+   "code": "DCAA",
+   "name": "청량리역사점",
+   "addr": "서울특별시 동대문구 왕산로 214 청량리역 3층 맞이방 올리브영",
+   "status": "영업 중",
+   "time": "수 09:00~22:00",
+   "tags": [
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DCAA_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "동대문구"
+  },
+  {
+   "code": "DCBE",
+   "name": "녹번역점",
+   "addr": "서울특별시 은평구 은평로 240 힐스테이트녹번역 상가 B3층 308 ~ 311호",
+   "status": "영업 중",
+   "time": "수 10:00~22:30",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DCBE_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "은평구"
+  },
+  {
+   "code": "DCC6",
+   "name": "답십리역점",
+   "addr": "서울특별시 동대문구 고미술로 81 1층 103호",
+   "status": "영업 중",
+   "time": "수 10:00~22:30",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DCC6_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "동대문구"
+  },
+  {
+   "code": "DCC9",
+   "name": "두타점",
+   "addr": "서울특별시 중구 장충단로 275 두산타워빌딩 지하 2층",
+   "time": "수 10:30~00:00",
+   "tags": [
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DCC9_202602592348091.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "서울특별시 중구"
+  },
+  {
+   "code": "DCCA",
+   "name": "동여의도점",
+   "addr": "서울특별시 영등포구 의사당대로1길 25",
+   "status": "영업 중",
+   "time": "수 08:00~22:00",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DCCA_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "영등포구"
+  },
+  {
+   "code": "DCDE",
+   "name": "파르나스몰점",
+   "addr": "서울특별시 강남구 테헤란로 521 지하1층 파르나스몰 R-37",
+   "status": "영업 중",
+   "time": "수 10:00~22:00",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DCDE_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "강남구"
+  },
+  {
+   "code": "DCDF",
+   "name": "신강남점",
+   "addr": "서울특별시 강남구 봉은사로2길 31",
+   "status": "영업 중",
+   "time": "수 10:00~23:00",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DCDF_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "강남구"
+  },
+  {
+   "code": "DCE5",
+   "name": "응암점",
+   "addr": "서울특별시 은평구 은평로 102 연합빌딩 1 ~ 2층",
+   "status": "영업 중",
+   "time": "수 10:00~22:30",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DCE5_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "은평구"
+  },
+  {
+   "code": "DCEC",
+   "name": "쌍문점",
+   "addr": "서울특별시 도봉구 도당로 2 2층",
+   "status": "영업 중",
+   "time": "수 10:00~22:00",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DCEC_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "도봉구"
+  },
+  {
+   "code": "DCF5",
+   "name": "방이시장점",
+   "addr": "서울특별시 송파구 백제고분로 460 (방이동, 쿠피아타워)",
+   "status": "영업 중",
+   "time": "수 11:00~22:00",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DCF5_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "송파구"
+  },
+  {
+   "code": "DD09",
+   "name": "목동사거리점",
+   "addr": "서울특별시 강서구 등촌로 25 (화곡동)",
+   "status": "영업 중",
+   "time": "수 10:00~22:30",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DD09_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "강서구"
+  },
+  {
+   "code": "DD0D",
+   "name": "서울대입구역점",
+   "addr": "서울특별시 관악구 남부순환로 1840",
+   "status": "영업 중",
+   "time": "수 09:30~23:00",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DD0D_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "관악구"
+  },
+  {
+   "code": "DD0F",
+   "name": "명지대점",
+   "addr": "서울특별시 서대문구 거북골로 34 명지대학교 인문캠퍼스 교육문화복합시설 1층MCC관",
+   "status": "영업 중",
+   "time": "수 10:00~22:30",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DD0F_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "서대문구"
+  },
+  {
+   "code": "DD13",
+   "name": "디지털미디어시티역점",
+   "addr": "서울특별시 마포구 성암로 지하 184 디지털미디어시티역점 지하1층",
+   "status": "영업 중",
+   "time": "수 09:00~22:00",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DD13_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "마포구"
+  },
+  {
+   "code": "DD14",
+   "name": "광흥창역점",
+   "addr": "서울특별시 마포구 서강로 75-16 PEER 1층",
+   "status": "영업 중",
+   "time": "수 10:00~22:30",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DD14_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "마포구"
+  },
+  {
+   "code": "DD15",
+   "name": "양재역점",
+   "addr": "서울특별시 서초구 남부순환로 지하 2585 신분당선 양재역",
+   "status": "영업 중",
+   "time": "수 09:00~22:00",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DD15_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "서초구"
+  },
+  {
+   "code": "DD1D",
+   "name": "서울역점",
+   "addr": "서울특별시 중구 한강대로 405",
+   "time": "수 08:00~22:00",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DD1D_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "서울특별시 중구"
+  },
+  {
+   "code": "DD1E",
+   "name": "신림중앙점",
+   "addr": "서울특별시 관악구 신림로 321",
+   "status": "영업 중",
+   "time": "수 09:00~23:00",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DD1E_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "관악구"
+  },
+  {
+   "code": "DD1F",
+   "name": "롯데백화점잠실점",
+   "addr": "서울특별시 송파구 올림픽로 240 롯데백화점잠실점 지하1층",
+   "status": "영업 중",
+   "time": "수 10:00~22:00",
+   "tags": [
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DD1F_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "송파구"
+  },
+  {
+   "code": "DD20",
+   "name": "오류동역점",
+   "addr": "서울특별시 구로구 경인로 204",
+   "status": "영업 중",
+   "time": "수 10:00~22:30",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DD20_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "구로구"
+  },
+  {
+   "code": "DD27",
+   "name": "중곡역점",
+   "addr": "서울특별시 광진구 능동로 400",
+   "status": "영업 중",
+   "time": "수 09:00~22:00",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DD27_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "광진구"
+  },
+  {
+   "code": "DD29",
+   "name": "수색점",
+   "addr": "서울특별시 은평구 수색로 216",
+   "status": "영업 중",
+   "time": "수 10:00~22:30",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DD29_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "은평구"
+  },
+  {
+   "code": "DD2C",
+   "name": "서서울호수공원점",
+   "addr": "서울특별시 양천구 남부순환로 424 올리브영 서서울호수공원점",
+   "status": "영업 중",
+   "time": "수 10:00~22:30",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DD2C_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "양천구"
+  },
+  {
+   "code": "DD2D",
+   "name": "왕십리역사점",
+   "addr": "서울특별시 성동구 왕십리광장로 17 2층",
+   "status": "영업 중",
+   "time": "수 10:00~23:00",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DD2D_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "성동구"
+  },
+  {
+   "code": "DD30",
+   "name": "군자역점",
+   "addr": "서울특별시 광진구 천호대로 548 1층, 2층",
+   "status": "영업 중",
+   "time": "수 10:00~23:00",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DD30_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "광진구"
+  },
+  {
+   "code": "DD31",
+   "name": "목동파리공원점",
+   "addr": "서울특별시 양천구 목동서로 65 목동가든스위트 113호",
+   "status": "영업 중",
+   "time": "수 10:00~22:30",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DD31_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "양천구"
+  },
+  {
+   "code": "DD3C",
+   "name": "구파발점",
+   "addr": "서울특별시 은평구 진관2로 15-40 3호",
+   "status": "영업 중",
+   "time": "수 10:00~22:30",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DD3C_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "은평구"
+  },
+  {
+   "code": "DD43",
+   "name": "구로구청점",
+   "addr": "서울특별시 구로구 구로중앙로 68 신안타워 1층 102-3호",
+   "status": "영업 중",
+   "time": "수 10:00~22:30",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DD43_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "구로구"
+  },
+  {
+   "code": "DD46",
+   "name": "마곡나루역점",
+   "addr": "서울특별시 강서구 마곡중앙5로 18 1층",
+   "status": "영업 중",
+   "time": "수 09:00~22:30",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DD46_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "강서구"
+  },
+  {
+   "code": "DD47",
+   "name": "낙성대점",
+   "addr": "서울특별시 관악구 남부순환로 1908 대원빌딩 올리브영",
+   "status": "영업 중",
+   "time": "수 10:00~23:00",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DD47_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "관악구"
+  },
+  {
+   "code": "DD48",
+   "name": "대학로점",
+   "addr": "서울특별시 종로구 창경궁로 237 1~3층",
+   "status": "영업 중",
+   "time": "수 10:00~22:30",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DD48_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "종로구"
+  },
+  {
+   "code": "DD49",
+   "name": "롯데월드몰점",
+   "addr": "서울특별시 송파구 올림픽로 300 롯데월드몰 5층",
+   "status": "영업 중",
+   "time": "수 10:30~22:00",
+   "tags": [
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DD49_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "송파구"
+  },
+  {
+   "code": "DD4C",
+   "name": "미아뉴타운점",
+   "addr": "서울특별시 강북구 삼양로27길 19 204동 115~117호",
+   "status": "영업 중",
+   "time": "수 10:00~22:30",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DD4C_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "강북구"
+  },
+  {
+   "code": "DD4D",
+   "name": "노원역사거리점",
+   "addr": "서울특별시 노원구 노해로 480 조광빌딩 1층,2층",
+   "status": "영업 중",
+   "time": "수 10:00~23:00",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DD4D_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "노원구"
+  },
+  {
+   "code": "DD4F",
+   "name": "우장산역점",
+   "addr": "서울특별시 강서구 강서로 242 강서힐스테이트 118~122호",
+   "status": "영업 중",
+   "time": "수 10:00~23:00",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DD4F_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "강서구"
+  },
+  {
+   "code": "DD51",
+   "name": "테헤란로점",
+   "addr": "서울특별시 강남구 테헤란로 514 1층",
+   "status": "영업 중",
+   "time": "수 08:00~22:30",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DD51_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "강남구"
+  },
+  {
+   "code": "DD52",
+   "name": "염창역9호선점",
+   "addr": "서울특별시 강서구 공항대로 지하 631 염창역 지하1층",
+   "status": "영업 중",
+   "time": "수 09:00~22:30",
+   "tags": [
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DD52_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "강서구"
+  },
+  {
+   "code": "DD5B",
+   "name": "롯데몰은평점",
+   "addr": "서울특별시 은평구 통일로 1050 롯데쇼핑 롯데몰은평점 지하1층",
+   "status": "영업 중",
+   "time": "수 10:30~22:00",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DD5B_202501231540361.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "은평구"
+  },
+  {
+   "code": "DD5E",
+   "name": "이태원중앙점",
+   "addr": "서울특별시 용산구 이태원로 179 해밀톤쇼핑센터 1층",
+   "status": "영업 중",
+   "time": "수 11:00~22:30",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DD5E_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "용산구"
+  },
+  {
+   "code": "DD61",
+   "name": "역삼점",
+   "addr": "서울특별시 강남구 테헤란로 111 대건빌딩 1층",
+   "status": "영업 중",
+   "time": "수 08:30~23:00",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DD61_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "강남구"
+  },
+  {
+   "code": "DD6F",
+   "name": "명동타임워크점",
+   "addr": "서울특별시 중구 남대문로 78 타임워크명동 108호, 109호",
+   "time": "수 09:30~22:30",
+   "tags": [
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DD6F_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "서울특별시 중구"
+  },
+  {
+   "code": "DD72",
+   "name": "개포동점",
+   "addr": "서울특별시 강남구 선릉로 26 지하1층",
+   "status": "영업 중",
+   "time": "수 10:00~22:00",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DD72_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "강남구"
+  },
+  {
+   "code": "DD74",
+   "name": "김포공항국내선청사점",
+   "addr": "서울특별시 강서구 하늘길 112 김포공항국내선청사 동편 2층",
+   "status": "영업 중",
+   "time": "수 06:00~20:30",
+   "tags": [
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DD74_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "강서구"
+  },
+  {
+   "code": "DD75",
+   "name": "신사서초점",
+   "addr": "서울특별시 서초구 강남대로 589 1층 106~108호",
+   "status": "영업 중",
+   "time": "수 09:00~22:30",
+   "tags": [
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DD75_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "서초구"
+  },
+  {
+   "code": "DD7A",
+   "name": "고척아이파크몰점",
+   "addr": "서울특별시 구로구 경인로43길 49",
+   "status": "영업 중",
+   "time": "수 10:00~22:00",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DD7A_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "구로구"
+  },
+  {
+   "code": "DD80",
+   "name": "양원역점",
+   "addr": "서울특별시 중랑구 양원역로10길 17 제이메디컬 101호",
+   "status": "영업 중",
+   "time": "수 10:00~22:00",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DD80_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "중랑구"
+  },
+  {
+   "code": "DD82",
+   "name": "장위뉴타운점",
+   "addr": "서울특별시 성북구 돌곶이로40길 46 꿈의숲아이파크 717동",
+   "status": "영업 중",
+   "time": "수 10:00~22:00",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DD82_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "성북구"
+  },
+  {
+   "code": "DD97",
+   "name": "헬리오시티점",
+   "addr": "서울특별시 송파구 송파대로 345 1041~1043",
+   "status": "영업 중",
+   "time": "수 10:00~22:30",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DD97_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "송파구"
+  },
+  {
+   "code": "DD9A",
+   "name": "천호엔터식스점",
+   "addr": "서울특별시 강동구 천호대로 지하 997 지하1층",
+   "status": "영업 중",
+   "time": "수 10:00~21:30",
+   "tags": [
+    "픽업 서비스"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DD9A_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "강동구"
+  },
+  {
+   "code": "DD9E",
+   "name": "남구로점",
+   "addr": "서울특별시 구로구 도림로 81",
+   "status": "영업 중",
+   "time": "수 10:00~22:30",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DD9E_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "구로구"
+  },
+  {
+   "code": "DDA9",
+   "name": "국회의사당역점",
+   "addr": "서울특별시 영등포구 국회대로 지하 758 9호선 지하2층",
+   "status": "영업 중",
+   "time": "수 09:00~22:00",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DDA9_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "영등포구"
+  },
+  {
+   "code": "DDAA",
+   "name": "플러스점",
+   "addr": "서울특별시 용산구 한강대로 372 KDB생명타워 B114~B115",
+   "status": "영업 중",
+   "time": "수 08:00~20:00",
+   "tags": [
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DDAA_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "용산구"
+  },
+  {
+   "code": "DDAC",
+   "name": "화곡역사거리점",
+   "addr": "서울특별시 강서구 강서로 163",
+   "status": "영업 중",
+   "time": "수 10:00~23:00",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DDAC_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "강서구"
+  },
+  {
+   "code": "DDAE",
+   "name": "삼성중앙역점",
+   "addr": "서울특별시 강남구 봉은사로 465 올리브영",
+   "status": "영업 중",
+   "time": "수 10:00~22:30",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DDAE_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "강남구"
+  },
+  {
+   "code": "DDB1",
+   "name": "미아사거리역점",
+   "addr": "서울특별시 강북구 도봉로 53 1층",
+   "status": "영업 중",
+   "time": "수 10:00~22:30",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DDB1_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "강북구"
+  },
+  {
+   "code": "DDC0",
+   "name": "무교동점",
+   "addr": "서울특별시 중구 무교로 24 1층",
+   "time": "수 08:00~22:30",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DDC0_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "서울특별시 중구"
+  },
+  {
+   "code": "DDC2",
+   "name": "신림역점",
+   "addr": "서울특별시 관악구 신림로 350",
+   "status": "영업 중",
+   "time": "수 10:00~23:00",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DDC2_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "관악구"
+  },
+  {
+   "code": "DDC9",
+   "name": "어린이대공원역점",
+   "addr": "서울특별시 광진구 광나루로 388 1,2층",
+   "status": "영업 중",
+   "time": "수 10:00~22:30",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DDC9_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "광진구"
+  },
+  {
+   "code": "DDCA",
+   "name": "신금호역점",
+   "addr": "서울특별시 성동구 무수막길 95",
+   "status": "영업 중",
+   "time": "수 10:00~22:30",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DDCA_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "성동구"
+  },
+  {
+   "code": "DDD9",
+   "name": "올리브영 관악 타운",
+   "addr": "서울특별시 관악구 관악로 173",
+   "status": "영업 중",
+   "time": "수 09:00~23:00",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DDD9_2026092500801061.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "관악구"
+  },
+  {
+   "code": "DDE1",
+   "name": "대림성모점",
+   "addr": "서울특별시 동작구 시흥대로 654",
+   "status": "영업 중",
+   "time": "수 09:00~22:30",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DDE1_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "동작구"
+  },
+  {
+   "code": "DDEC",
+   "name": "명동점",
+   "addr": "서울특별시 중구 명동8길 14",
+   "time": "수 10:00~22:30",
+   "tags": [
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DDEC_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "서울특별시 중구"
+  },
+  {
+   "code": "DDF4",
+   "name": "올리브영 건대 타운",
+   "addr": "서울특별시 광진구 아차산로 244 1,2층",
+   "status": "영업 중",
+   "time": "수 10:00~23:00",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DDF4_2026092500801311.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "광진구"
+  },
+  {
+   "code": "DDF5",
+   "name": "건대커먼그라운드점",
+   "addr": "서울특별시 광진구 아차산로 200 커먼그라운드",
+   "status": "영업 중",
+   "time": "수 11:00~22:00",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DDF5_2025113211613131.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "광진구"
+  },
+  {
+   "code": "DDF7",
+   "name": "구로디지털대로점",
+   "addr": "서울특별시 구로구 시흥대로 561 동해빌딩 1층",
+   "status": "영업 중",
+   "time": "수 10:00~23:00",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DDF7_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "구로구"
+  },
+  {
+   "code": "DDFF",
+   "name": "가산점",
+   "addr": "서울특별시 금천구 가산디지털1로 168 우림라온스밸리 A동 124~126호",
+   "status": "영업 중",
+   "time": "수 08:00~22:00",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DDFF_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "금천구"
+  },
+  {
+   "code": "DE02",
+   "name": "경복궁역점",
+   "addr": "서울특별시 종로구 자하문로 9 1,2층",
+   "status": "영업 중",
+   "time": "수 09:00~22:30",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DE02_2024102851909081.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "종로구"
+  },
+  {
+   "code": "DE03",
+   "name": "종로점",
+   "addr": "서울특별시 종로구 종로 78 미려빌딩 1층 일부",
+   "status": "영업 중",
+   "time": "수 09:00~22:30",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DE03_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "종로구"
+  },
+  {
+   "code": "DE04",
+   "name": "미아사거리점",
+   "addr": "서울특별시 강북구 도봉로10길 6 올리브영",
+   "status": "영업 중",
+   "time": "수 10:00~23:00",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DE04_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "강북구"
+  },
+  {
+   "code": "DE06",
+   "name": "거여역점",
+   "addr": "서울특별시 송파구 오금로 509 1층",
+   "status": "영업 중",
+   "time": "수 10:00~22:30",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DE06_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "송파구"
+  },
+  {
+   "code": "DE07",
+   "name": "창동점",
+   "addr": "서울특별시 도봉구 마들로13길 61 시드큐브 창동 1층 106-4, 5호",
+   "status": "영업 중",
+   "time": "수 10:00~22:00",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DE07_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "도봉구"
+  },
+  {
+   "code": "DE08",
+   "name": "대치역점",
+   "addr": "서울특별시 강남구 남부순환로 2936 1,2층",
+   "status": "영업 중",
+   "time": "수 10:00~22:30",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DE08_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "강남구"
+  },
+  {
+   "code": "DE0A",
+   "name": "신천중앙점",
+   "addr": "서울특별시 송파구 올림픽로 114 1층, 2층",
+   "status": "영업 중",
+   "time": "수 10:00~23:00",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DE0A_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "송파구"
+  },
+  {
+   "code": "DE14",
+   "name": "수유역점",
+   "addr": "서울특별시 강북구 도봉로 329 동오빌딩 1층",
+   "status": "영업 중",
+   "time": "수 10:00~23:00",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DE14_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "강북구"
+  },
+  {
+   "code": "DE17",
+   "name": "압구정로데오역점",
+   "addr": "서울특별시 강남구 선릉로 817 캠포츠빌딩",
+   "status": "영업 중",
+   "time": "수 10:00~23:00",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DE17_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "강남구"
+  },
+  {
+   "code": "DE18",
+   "name": "홍대사거리점",
+   "addr": "서울특별시 마포구 양화로 140",
+   "status": "영업 중",
+   "time": "수 10:00~23:00",
+   "tags": [
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DE18_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "마포구"
+  },
+  {
+   "code": "DE1C",
+   "name": "이수역점",
+   "addr": "서울특별시 동작구 사당로 307",
+   "status": "영업 중",
+   "time": "수 09:00~23:00",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DE1C_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "동작구"
+  },
+  {
+   "code": "DE25",
+   "name": "올리브영N 성수",
+   "addr": "서울특별시 성동구 연무장7길 13 팩토리얼 성수",
+   "status": "영업 중",
+   "time": "수 10:00~22:00",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DE25_2026092501052291.png?rs=800x0&SF=webp&autoorient=y",
+   "gu": "성동구"
+  },
+  {
+   "code": "DE26",
+   "name": "신촌중앙점",
+   "addr": "서울특별시 서대문구 신촌로 93 광신빌딩 1층",
+   "status": "영업 중",
+   "time": "수 10:00~23:00",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DE26_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "서대문구"
+  },
+  {
+   "code": "DE29",
+   "name": "천호역점",
+   "addr": "서울특별시 강동구 올림픽로 659 1층",
+   "status": "영업 중",
+   "time": "수 10:00~22:30",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DE29_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "강동구"
+  },
+  {
+   "code": "DE39",
+   "name": "정릉점",
+   "addr": "서울특별시 성북구 보국문로 33",
+   "status": "영업 중",
+   "time": "수 10:00~22:00",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DE39_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "성북구"
+  },
+  {
+   "code": "DE3C",
+   "name": "올리브영 홍대 타운",
+   "addr": "서울특별시 마포구 홍익로6길 57 올리브영 홍대 타운",
+   "status": "영업 중",
+   "time": "수 10:00~22:30",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DE3C_2026092500803421.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "마포구"
+  },
+  {
+   "code": "DE44",
+   "name": "삼전역점",
+   "addr": "서울특별시 송파구 백제고분로 196 1층",
+   "status": "영업 중",
+   "time": "수 10:00~22:30",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DE44_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "송파구"
+  },
+  {
+   "code": "DE45",
+   "name": "암사역점",
+   "addr": "서울특별시 강동구 올림픽로 774 1층",
+   "status": "영업 중",
+   "time": "수 10:00~22:30",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DE45_2024113091321331.png?rs=800x0&SF=webp&autoorient=y",
+   "gu": "강동구"
+  },
+  {
+   "code": "DE49",
+   "name": "노량진역점",
+   "addr": "서울특별시 동작구 노량진로 159",
+   "status": "영업 중",
+   "time": "수 09:00~23:00",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DE49_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "동작구"
+  },
+  {
+   "code": "DE4B",
+   "name": "마들역점",
+   "addr": "서울특별시 노원구 동일로 1532 거북빌딩 1층",
+   "status": "영업 중",
+   "time": "수 10:00~22:00",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DE4B_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "노원구"
+  },
+  {
+   "code": "DE4C",
+   "name": "망원역점",
+   "addr": "서울특별시 마포구 월드컵로 75",
+   "status": "영업 중",
+   "time": "수 09:00~23:00",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DE4C_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "마포구"
+  },
+  {
+   "code": "DE50",
+   "name": "학동역점",
+   "addr": "서울특별시 강남구 논현로 667",
+   "status": "영업 중",
+   "time": "수 09:00~22:30",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DE50_2024123551501541.png?rs=800x0&SF=webp&autoorient=y",
+   "gu": "강남구"
+  },
+  {
+   "code": "DE52",
+   "name": "선유도역점",
+   "addr": "서울특별시 영등포구 양평로 115",
+   "status": "영업 중",
+   "time": "수 10:00~22:30",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DE52_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "영등포구"
+  },
+  {
+   "code": "DE54",
+   "name": "영등포역점",
+   "addr": "서울특별시 영등포구 영중로 6",
+   "status": "영업 중",
+   "time": "수 10:00~23:00",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DE54_2024102942051551.png?rs=800x0&SF=webp&autoorient=y",
+   "gu": "영등포구"
+  },
+  {
+   "code": "DE55",
+   "name": "뚝섬역점",
+   "addr": "서울특별시 성동구 아차산로 6",
+   "status": "영업 중",
+   "time": "수 09:00~22:30",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DE55_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "성동구"
+  },
+  {
+   "code": "DE5A",
+   "name": "길음점",
+   "addr": "서울특별시 성북구 길음로 11 롯데캐슬 상가 160~162호",
+   "status": "영업 중",
+   "time": "수 10:00~22:00",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DE5A_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "성북구"
+  },
+  {
+   "code": "DE5B",
+   "name": "상봉역점",
+   "addr": "서울특별시 중랑구 망우로 307 리베로빌딩 1층",
+   "status": "영업 중",
+   "time": "수 10:00~22:30",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DE5B_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "중랑구"
+  },
+  {
+   "code": "DE5E",
+   "name": "서여의도점",
+   "addr": "서울특별시 영등포구 국회대로74길 19 동우국제빌딩 1층",
+   "status": "영업 중",
+   "time": "수 09:00~22:00",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DE5E_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "영등포구"
+  },
+  {
+   "code": "DE65",
+   "name": "상암ENM점",
+   "addr": "서울특별시 마포구 상암산로 66 CJ E&M 센터 1층",
+   "status": "영업 중",
+   "time": "수 08:00~22:00",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DE65_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "마포구"
+  },
+  {
+   "code": "DE71",
+   "name": "강남논현점",
+   "addr": "서울특별시 강남구 강남대로118길 11",
+   "status": "영업 중",
+   "time": "수 10:00~23:00",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DE71_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "강남구"
+  },
+  {
+   "code": "DE72",
+   "name": "선릉중앙점",
+   "addr": "서울특별시 강남구 테헤란로 316",
+   "status": "영업 중",
+   "time": "수 08:00~22:30",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DE72_2024102901024501.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "강남구"
+  },
+  {
+   "code": "DE79",
+   "name": "이케아강동점",
+   "addr": "서울특별시 강동구 고덕비즈밸리로 51 1층",
+   "status": "영업 중",
+   "time": "수 10:00~22:00",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DE79_2025051341702561.png?rs=800x0&SF=webp&autoorient=y",
+   "gu": "강동구"
+  },
+  {
+   "code": "DE80",
+   "name": "성수연방점",
+   "addr": "서울특별시 성동구 성수이로14길 14",
+   "status": "영업 중",
+   "time": "수 10:00~21:30",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DE80_2024102921450261.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "성동구"
+  },
+  {
+   "code": "DE87",
+   "name": "송파하비오점",
+   "addr": "서울특별시 송파구 송파대로 111 올리브영 송파하비오점",
+   "status": "영업 중",
+   "time": "수 10:00~22:30",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DE87_2024102881528391.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "송파구"
+  },
+  {
+   "code": "DE88",
+   "name": "동묘앞역점",
+   "addr": "서울특별시 종로구 종로 346",
+   "status": "영업 중",
+   "time": "수 09:00~22:30",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DE88_2024123511046021.png?rs=800x0&SF=webp&autoorient=y",
+   "gu": "종로구"
+  },
+  {
+   "code": "DE89",
+   "name": "송리단길점",
+   "addr": "서울특별시 송파구 백제고분로 425 1층",
+   "status": "영업 중",
+   "time": "수 10:00~22:30",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DE89_2024102851627201.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "송파구"
+  },
+  {
+   "code": "DE8F",
+   "name": "연희점",
+   "addr": "서울특별시 서대문구 연희로 97 올리브영",
+   "status": "영업 중",
+   "time": "수 10:00~22:30",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DE8F_202504981038371.png?rs=800x0&SF=webp&autoorient=y",
+   "gu": "서대문구"
+  },
+  {
+   "code": "DE93",
+   "name": "명동역점",
+   "addr": "서울특별시 중구 퇴계로 115 밀리오레 1층",
+   "time": "수 10:00~22:30",
+   "tags": [
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DE93_2024102971353051.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "서울특별시 중구"
+  },
+  {
+   "code": "DE9D",
+   "name": "장안동사거리점",
+   "addr": "서울특별시 동대문구 답십리로 268 해림빌딩 1층",
+   "status": "영업 중",
+   "time": "수 10:00~22:30",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DE9D_2024102851142561.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "동대문구"
+  },
+  {
+   "code": "DE9F",
+   "name": "올리브영 파르나스삼성 타운",
+   "addr": "서울특별시 강남구 테헤란로 521 파르나스몰 지하1층 R6, 7호",
+   "status": "영업 중",
+   "time": "수 10:00~22:00",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DE9F_2026092500806531.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "강남구"
+  },
+  {
+   "code": "DEA9",
+   "name": "현대시티몰가든파이브점",
+   "addr": "서울특별시 송파구 충민로 66 현대시티몰가든파이브점 몰관 1층",
+   "status": "영업 중",
+   "time": "수 10:30~20:30",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DEA9_2024102881431481.jpeg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "송파구"
+  },
+  {
+   "code": "DEAD",
+   "name": "현대아울렛가산점",
+   "addr": "서울특별시 금천구 디지털로10길 9 지하 1층",
+   "status": "영업 중",
+   "time": "수 10:30~21:00",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DEAD_202501240928491.png?rs=800x0&SF=webp&autoorient=y",
+   "gu": "금천구"
+  },
+  {
+   "code": "DEAE",
+   "name": "한티역점",
+   "addr": "서울특별시 강남구 선릉로 312 1층 한티역점",
+   "status": "영업 중",
+   "time": "수 10:00~23:00",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DEAE_202501240926071.png?rs=800x0&SF=webp&autoorient=y",
+   "gu": "강남구"
+  },
+  {
+   "code": "DEB2",
+   "name": "먹골역점",
+   "addr": "서울특별시 중랑구 공릉로2길 7 1~2층",
+   "status": "영업 중",
+   "time": "수 10:00~22:30",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DEB2_2024102921206381.jpeg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "중랑구"
+  },
+  {
+   "code": "DEB9",
+   "name": "구로지밸리몰점",
+   "addr": "서울특별시 구로구 디지털로 300 지밸리플라자 1층",
+   "status": "영업 중",
+   "time": "수 08:00~22:00",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DEB9_202501240916091.jpeg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "구로구"
+  },
+  {
+   "code": "DEBD",
+   "name": "청량리중앙점",
+   "addr": "서울특별시 동대문구 왕산로 194 1~2층",
+   "status": "영업 중",
+   "time": "수 10:00~22:30",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DEBD_2024123511107033.png?rs=800x0&SF=webp&autoorient=y",
+   "gu": "동대문구"
+  },
+  {
+   "code": "DED3",
+   "name": "구의이스트폴점",
+   "addr": "서울특별시 광진구 아차산로 402 판매시설 L1층",
+   "status": "영업 중",
+   "time": "수 10:00~22:00",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DED3_2025051430945131.png?rs=800x0&SF=webp&autoorient=y",
+   "gu": "광진구"
+  },
+  {
+   "code": "DED6",
+   "name": "던던동대문점",
+   "addr": "서울특별시 중구 을지로 264 지하2층",
+   "time": "수 10:30~21:00",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DED6_202502341747031.png?rs=800x0&SF=webp&autoorient=y",
+   "gu": "서울특별시 중구"
+  },
+  {
+   "code": "DEDB",
+   "name": "당산대로점",
+   "addr": "서울특별시 영등포구 양평로 58 1층, 올리브영",
+   "status": "영업 중",
+   "time": "수 10:00~23:00",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DEDB_2025061641713281.png?rs=800x0&SF=webp&autoorient=y",
+   "gu": "영등포구"
+  },
+  {
+   "code": "DEDC",
+   "name": "영등포타임스퀘어점",
+   "addr": "서울특별시 영등포구 영중로 15 타임스퀘어 지하 1층",
+   "status": "영업 중",
+   "time": "수 10:30~22:00",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DEDC_2024113321123581.png?rs=800x0&SF=webp&autoorient=y",
+   "gu": "영등포구"
+  },
+  {
+   "code": "DEDE",
+   "name": "대치사거리점",
+   "addr": "서울특별시 강남구 삼성로 342",
+   "status": "영업 중",
+   "time": "수 10:00~22:30",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DEDE_202501240917361.png?rs=800x0&SF=webp&autoorient=y",
+   "gu": "강남구"
+  },
+  {
+   "code": "DEDF",
+   "name": "약수역점",
+   "addr": "서울특별시 중구 동호로 192",
+   "time": "수 09:30~22:30",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DEDF_202503631019021.png?rs=800x0&SF=webp&autoorient=y",
+   "gu": "서울특별시 중구"
+  },
+  {
+   "code": "DEE7",
+   "name": "내방역점",
+   "addr": "서울특별시 서초구 방배로 178 1층",
+   "status": "영업 중",
+   "time": "수 10:00~22:30",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DEE7_202504971859531.jpeg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "서초구"
+  },
+  {
+   "code": "DEEA",
+   "name": "용산아이파크몰더센터점",
+   "addr": "서울특별시 용산구 한강대로23길 55 용산아이파크몰 지하1층",
+   "status": "영업 중",
+   "time": "수 10:00~22:00",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DEEA_202501240938421.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "용산구"
+  },
+  {
+   "code": "DEEB",
+   "name": "난곡사거리점",
+   "addr": "서울특별시 관악구 남부순환로 1474 1층",
+   "status": "영업 중",
+   "time": "수 10:00~22:30",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DEEB_2024113111331221.png?rs=800x0&SF=webp&autoorient=y",
+   "gu": "관악구"
+  },
+  {
+   "code": "DEF3",
+   "name": "롯데월드몰플러스점",
+   "addr": "서울특별시 송파구 올림픽로 300 롯데월드몰 2층",
+   "status": "영업 중",
+   "time": "수 10:30~22:00",
+   "tags": [
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DEF3_2024113341048495.png?rs=800x0&SF=webp&autoorient=y",
+   "gu": "송파구"
+  },
+  {
+   "code": "DF08",
+   "name": "한성대입구역점",
+   "addr": "서울특별시 성북구 삼선교로 12 1층",
+   "status": "영업 중",
+   "time": "수 10:00~22:00",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DF08_202501240923211.png?rs=800x0&SF=webp&autoorient=y",
+   "gu": "성북구"
+  },
+  {
+   "code": "DF09",
+   "name": "역삼중앙점",
+   "addr": "서울특별시 강남구 테헤란로 151",
+   "status": "영업 중",
+   "time": "수 08:00~22:00",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DF09_202502441739311.png?rs=800x0&SF=webp&autoorient=y",
+   "gu": "강남구"
+  },
+  {
+   "code": "DF12",
+   "name": "원그로브점",
+   "addr": "서울특별시 강서구 공항대로 165 지하1층 EB129호",
+   "status": "영업 중",
+   "time": "수 10:00~22:00",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DF12_2025102950930561.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "강서구"
+  },
+  {
+   "code": "DF15",
+   "name": "서초우성점",
+   "addr": "서울특별시 서초구 강남대로 331 광일빌딩 1층",
+   "status": "영업 중",
+   "time": "수 08:00~22:30",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DF15_2025051220934451.png?rs=800x0&SF=webp&autoorient=y",
+   "gu": "서초구"
+  },
+  {
+   "code": "DF1B",
+   "name": "압구정로데오점",
+   "addr": "서울특별시 강남구 압구정로 342",
+   "status": "영업 중",
+   "time": "수 09:30~22:30",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DF1B_2025102740918001.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "강남구"
+  },
+  {
+   "code": "DF1E",
+   "name": "안암점",
+   "addr": "서울특별시 성북구 고려대로24길 44 1층",
+   "status": "영업 중",
+   "time": "수 10:00~23:00",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DF1E_2025071831620161.png?rs=800x0&SF=webp&autoorient=y",
+   "gu": "성북구"
+  },
+  {
+   "code": "DF23",
+   "name": "명동2가점",
+   "addr": "서울특별시 중구 남대문로 68-1",
+   "time": "수 10:00~22:30",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DF23_2025071831621131.png?rs=800x0&SF=webp&autoorient=y",
+   "gu": "서울특별시 중구"
+  },
+  {
+   "code": "DF26",
+   "name": "올리브영 센트럴 강남 타운",
+   "addr": "서울특별시 서초구 강남대로 403 지하1층~지상4층",
+   "status": "영업 중",
+   "time": "수 10:00~22:30",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DF26_2026092500808271.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "서초구"
+  },
+  {
+   "code": "DF28",
+   "name": "용산아이파크몰점",
+   "addr": "서울특별시 용산구 한강대로23길 55 HDC 아이파크몰 패션파크 4F",
+   "status": "영업 중",
+   "time": "수 10:30~22:00",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DF28_202502501518081.png?rs=800x0&SF=webp&autoorient=y",
+   "gu": "용산구"
+  },
+  {
+   "code": "DF29",
+   "name": "불광역점",
+   "addr": "서울특별시 은평구 통일로 741",
+   "status": "영업 중",
+   "time": "수 10:00~22:30",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DF29_202503721825091.png?rs=800x0&SF=webp&autoorient=y",
+   "gu": "은평구"
+  },
+  {
+   "code": "DF2A",
+   "name": "현대시티아울렛동대문점",
+   "addr": "서울특별시 중구 장충단로13길 20 2층",
+   "time": "수 10:30~21:00",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DF2A_202503631007131.png?rs=800x0&SF=webp&autoorient=y",
+   "gu": "서울특별시 중구"
+  },
+  {
+   "code": "DF2B",
+   "name": "합정메세나폴리스점",
+   "addr": "서울특별시 마포구 양화로 45 메세나폴리스몰 B1186~1187",
+   "status": "영업 중",
+   "time": "수 09:30~22:30",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DF2B_2025041061631021.png?rs=800x0&SF=webp&autoorient=y",
+   "gu": "마포구"
+  },
+  {
+   "code": "DF2E",
+   "name": "NC신구로점",
+   "addr": "서울특별시 구로구 구로중앙로 152",
+   "status": "영업 중",
+   "time": "수 10:30~21:00",
+   "tags": [
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DF2E_202501211016061.jpeg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "구로구"
+  },
+  {
+   "code": "DF31",
+   "name": "홍대놀이터점",
+   "addr": "서울특별시 마포구 와우산로21길 29 석전빌딩 1층~3층",
+   "status": "영업 중",
+   "time": "수 10:00~23:00",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DF31_2025061621351463.png?rs=800x0&SF=webp&autoorient=y",
+   "gu": "마포구"
+  },
+  {
+   "code": "DF34",
+   "name": "수락산역점",
+   "addr": "서울특별시 노원구 동일로 1660",
+   "status": "영업 중",
+   "time": "수 10:00~22:30",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DF34_2025041131039471.png?rs=800x0&SF=webp&autoorient=y",
+   "gu": "노원구"
+  },
+  {
+   "code": "DF3B",
+   "name": "덕수궁점",
+   "addr": "서울특별시 중구 세종대로 91",
+   "time": "수 08:00~22:30",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DF3B_2025113171426341.jpeg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "서울특별시 중구"
+  },
+  {
+   "code": "DF3C",
+   "name": "명동거리점",
+   "addr": "서울특별시 중구 명동8나길 9",
+   "time": "수 10:00~22:30",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DF3C_2025051470910071.png?rs=800x0&SF=webp&autoorient=y",
+   "gu": "서울특별시 중구"
+  },
+  {
+   "code": "DF3F",
+   "name": "롯데월드점",
+   "addr": "서울특별시 송파구 올림픽로 240 (롯데월드 어드벤쳐 지하1층 매표소 인근)",
+   "status": "영업 중",
+   "time": "수 10:00~21:30",
+   "tags": [],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DF3F_2025041121010221.png?rs=800x0&SF=webp&autoorient=y",
+   "gu": "송파구"
+  },
+  {
+   "code": "DF40",
+   "name": "선릉점",
+   "addr": "서울특별시 강남구 테헤란로 424 1층 일부",
+   "status": "영업 중",
+   "time": "수 08:00~22:30",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DF40_202503691114501.png?rs=800x0&SF=webp&autoorient=y",
+   "gu": "강남구"
+  },
+  {
+   "code": "DF42",
+   "name": "신논현역점",
+   "addr": "서울특별시 강남구 강남대로 470",
+   "status": "영업 중",
+   "time": "수 09:00~22:30",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DF42_2025082331318481.png?rs=800x0&SF=webp&autoorient=y",
+   "gu": "강남구"
+  },
+  {
+   "code": "DF47",
+   "name": "신풍역점",
+   "addr": "서울특별시 영등포구 신풍로 28 비스타동원 110~113호",
+   "status": "영업 중",
+   "time": "수 10:00~22:30",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DF47_2025041051842131.png?rs=800x0&SF=webp&autoorient=y",
+   "gu": "영등포구"
+  },
+  {
+   "code": "DF4E",
+   "name": "동대문역사문화공원사거리점",
+   "addr": "서울특별시 중구 을지로 255",
+   "time": "수 10:00~23:30",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DF4E_2025082161741551.png?rs=800x0&SF=webp&autoorient=y",
+   "gu": "서울특별시 중구"
+  },
+  {
+   "code": "DF64",
+   "name": "서초타운점",
+   "addr": "서울특별시 서초구 서초대로78길 32",
+   "status": "영업 중",
+   "time": "수 08:00~22:30",
+   "tags": [],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DF64_2026051321301571.jpeg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "서초구"
+  },
+  {
+   "code": "DF65",
+   "name": "세로수길점",
+   "addr": "서울특별시 강남구 강남대로160길 45",
+   "status": "영업 중",
+   "time": "수 11:00~22:00",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DF65_2026051500923521.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "강남구"
+  },
+  {
+   "code": "DF69",
+   "name": "이대중앙점",
+   "addr": "서울특별시 서대문구 이화여대길 12",
+   "status": "영업 중",
+   "time": "수 10:00~22:30",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DF69_2025082401746381.png?rs=800x0&SF=webp&autoorient=y",
+   "gu": "서대문구"
+  },
+  {
+   "code": "DF6D",
+   "name": "이마트목동점",
+   "addr": "서울특별시 양천구 오목로 299",
+   "status": "영업 중",
+   "time": "수 10:00~22:00",
+   "tags": [
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DF6D_2025071831527003.png?rs=800x0&SF=webp&autoorient=y",
+   "gu": "양천구"
+  },
+  {
+   "code": "DF70",
+   "name": "여의도IFC점",
+   "addr": "서울특별시 영등포구 국제금융로 10",
+   "status": "영업 중",
+   "time": "수 10:00~22:00",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DF70_2025082311604351.png?rs=800x0&SF=webp&autoorient=y",
+   "gu": "영등포구"
+  },
+  {
+   "code": "DF71",
+   "name": "상봉엔터식스점",
+   "addr": "서울특별시 중랑구 망우로 353",
+   "status": "영업 중",
+   "time": "수 10:30~21:30",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DF71_2025092581544421.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "중랑구"
+  },
+  {
+   "code": "DF77",
+   "name": "현대백화점목동점",
+   "addr": "서울특별시 양천구 목동동로 257 현대백화점 지하 2층",
+   "status": "영업 중",
+   "time": "수 10:30~21:00",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DF77_2025103000946441.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "양천구"
+  },
+  {
+   "code": "DF81",
+   "name": "올리브영 뷰티 맨션 성수",
+   "addr": "서울특별시 성동구 성수이로 108 B1F~4F",
+   "status": "영업 중",
+   "time": "수 10:00~22:00",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DF81_2026061811058011.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "성동구"
+  },
+  {
+   "code": "DF87",
+   "name": "신논현점",
+   "addr": "서울특별시 서초구 강남대로 483",
+   "status": "영업 중",
+   "time": "수 09:00~22:30",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DF87_2025092591447151.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "서초구"
+  },
+  {
+   "code": "DF89",
+   "name": "안국역점",
+   "addr": "서울특별시 종로구 북촌로 1",
+   "status": "영업 중",
+   "time": "수 10:00~22:00",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DF89_2026092500812261.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "종로구"
+  },
+  {
+   "code": "DF92",
+   "name": "잠실점",
+   "addr": "서울특별시 송파구 올림픽로 269 롯데캐슬플라자 1층",
+   "status": "영업 중",
+   "time": "수 09:00~22:00",
+   "tags": [],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DF92_2025123371931221.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "송파구"
+  },
+  {
+   "code": "DF93",
+   "name": "마포공덕점",
+   "addr": "서울특별시 마포구 마포대로 78 자람빌딩 1층",
+   "status": "영업 중",
+   "time": "수 10:00~23:00",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DF93_2025102900938341.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "마포구"
+  },
+  {
+   "code": "DF94",
+   "name": "개롱역점",
+   "addr": "서울특별시 송파구 오금로 404",
+   "status": "영업 중",
+   "time": "수 10:00~22:30",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DF94_2025102740919291.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "송파구"
+  },
+  {
+   "code": "DF9A",
+   "name": "스타필드애비뉴그랑서울점",
+   "addr": "서울특별시 종로구 종로 33 스타필드애비뉴그랑서울 올리브영 타워1 상업시설 B1층 B135호",
+   "status": "영업 중",
+   "time": "수 08:00~21:00",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DF9A_2025103011628381.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "종로구"
+  },
+  {
+   "code": "DF9C",
+   "name": "올리브영 센트럴 명동 타운",
+   "addr": "서울특별시 중구 명동8길 27 엠플라자 B1층~3층",
+   "time": "수 10:00~22:30",
+   "tags": [],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DF9C_2026092500809161.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "서울특별시 중구"
+  },
+  {
+   "code": "DF9F",
+   "name": "광장마켓점",
+   "addr": "서울특별시 종로구 창경궁로 88 2층 올리브영",
+   "status": "영업 중",
+   "time": "수 10:00~22:00",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DF9F_2026041201015351.png?rs=800x0&SF=webp&autoorient=y",
+   "gu": "종로구"
+  },
+  {
+   "code": "DFA6",
+   "name": "둔촌파크포레온점",
+   "addr": "서울특별시 강동구 양재대로 1360 포레온스테이션5 B2F 212호",
+   "status": "영업 중",
+   "time": "수 10:00~22:30",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DFA6_2025113251350481.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "강동구"
+  },
+  {
+   "code": "DFAB",
+   "name": "롯데몰김포공항점",
+   "addr": "서울특별시 강서구 하늘길 38 롯데몰 김포공항점 MF층",
+   "status": "영업 중",
+   "time": "수 10:30~22:00",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DFAB_2025113321012411.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "강서구"
+  },
+  {
+   "code": "DFAD",
+   "name": "연신내연서점",
+   "addr": "서울특별시 은평구 연서로 212",
+   "status": "영업 중",
+   "time": "수 10:00~22:30",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DFAD_202604930933073.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "은평구"
+  },
+  {
+   "code": "DFCE",
+   "name": "NC강남점",
+   "addr": "서울특별시 서초구 잠원로 37-6 뉴코아아울렛강남점 1층",
+   "status": "영업 중",
+   "time": "수 10:00~22:00",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DFCE_202603751409411.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "서초구"
+  },
+  {
+   "code": "DFCF",
+   "name": "올리브베러 광화문점",
+   "addr": "서울특별시 종로구 종로3길 17 D타워",
+   "status": "영업 중",
+   "time": "수 09:00~22:00",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DFCF_202601291134001.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "종로구"
+  },
+  {
+   "code": "DFD0",
+   "name": "사당점",
+   "addr": "서울특별시 동작구 동작대로 29",
+   "status": "영업 중",
+   "time": "수 10:00~23:00",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DFD0_202603751752341.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "동작구"
+  },
+  {
+   "code": "DFDD",
+   "name": "등촌역점",
+   "addr": "서울특별시 강서구 공항대로 543",
+   "status": "영업 중",
+   "time": "수 10:00~22:30",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DFDD_2026051270904281.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "강서구"
+  },
+  {
+   "code": "DFE1",
+   "name": "올리브베러 강남역점",
+   "addr": "서울특별시 강남구 강남대로 374",
+   "status": "영업 중",
+   "time": "수 09:00~22:30",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DFE1_2026041051741271.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "강남구"
+  },
+  {
+   "code": "DFFB",
+   "name": "연신내로데오점",
+   "addr": "서울특별시 은평구 연서로 221",
+   "status": "영업 중",
+   "time": "수 09:30~23:00",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/B116_1.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "은평구"
+  },
+  {
+   "code": "DG01",
+   "name": "인사동점",
+   "addr": "서울특별시 종로구 인사동길 49 안녕인사동 올리브영 지상1층 12번, 지상M층 3번, 4번",
+   "status": "영업 중",
+   "time": "수 10:30~21:30",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DG01_2026072091432311.png?rs=800x0&SF=webp&autoorient=y",
+   "gu": "종로구"
+  },
+  {
+   "code": "DG10",
+   "name": "스타필드마켓월계점",
+   "addr": "서울특별시 노원구 마들로3길 15 1층",
+   "status": "영업 중",
+   "time": "수 10:00~22:00",
+   "tags": [
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DG10_2026082390905241.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "노원구"
+  },
+  {
+   "code": "DG27",
+   "name": "롯데아울렛서울역점",
+   "addr": "서울특별시 용산구 한강대로 405 롯데아울렛 서울역점 2층 일부",
+   "status": "영업 중",
+   "time": "수 10:30~22:00",
+   "tags": [
+    "픽업 서비스",
+    "스마트 반품"
+   ],
+   "photo": "https://image.oliveyoung.co.kr/cfimages/oystore/DG27_2026092541024471.jpg?rs=800x0&SF=webp&autoorient=y",
+   "gu": "용산구"
+  }
+ ]
+}

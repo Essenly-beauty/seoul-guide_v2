@@ -64,6 +64,32 @@ describe("route deep links (spec v2 §6)", () => {
     expect(googleDirectionsUrl(dest, origin, "walking")).toContain("travelmode=walking");
   });
 
+  it("names the destination for Google when the place has a name", () => {
+    // Owner report 2026-09-27, from the Google Maps app: both ends read
+    // "핀 고정 위치" (dropped pin). Google's URL scheme has no label for a
+    // coordinate; a text destination is shown as typed, and Google geocodes
+    // it. So a named place goes over as "<English name>, <address>", with
+    // the floor stripped off the address so the geocoder is not confused.
+    // Compare the whole parameter, not a prefix: a toContain on the encoded
+    // text passed while "1~2층" was still hanging off the end of it.
+    const destinationOf = (url: string) => new URL(url).searchParams.get("destination");
+    expect(destinationOf(googleDirectionsUrl({ lat: 37.5006, lng: 127.0266, name: "Olive Young Gangnam Town", address: "서울 강남구 강남대로 429 1~2층" })))
+      .toBe("Olive Young Gangnam Town, 서울 강남구 강남대로 429");
+    // the single-floor form the store finder writes most often
+    expect(destinationOf(googleDirectionsUrl({ lat: 37.5, lng: 127, name: "Olive Young Gangnam-gu Office Stn.", address: "서울특별시 강남구 선릉로 703 1층" })))
+      .toBe("Olive Young Gangnam-gu Office Stn., 서울특별시 강남구 선릉로 703");
+    expect(destinationOf(googleDirectionsUrl({ lat: 37.5, lng: 127, name: "Daiso Sillim", address: "서울특별시 관악구 호암로 605 (신림동)B1~2층" })))
+      .toBe("Daiso Sillim, 서울특별시 관악구 호암로 605 (신림동)");
+    expect(googleDirectionsUrl({ lat: 37.5006, lng: 127.0266, name: "Olive Young Gangnam Town", address: "서울 강남구 강남대로 429" })).not.toContain("37.5006");
+  });
+
+  it("leaves the origin to Google so it reads as the visitor's own location", () => {
+    // Passing the device fix as coordinates made the START a dropped pin too.
+    // Omitted, Google fills in "내 위치" / "Your location" itself.
+    const url = googleDirectionsUrl({ lat: 37.5006, lng: 127.0266, name: "Olive Young Gangnam Town", address: "서울 강남구 강남대로 429" }, { lat: 37.5, lng: 127 });
+    expect(url).not.toContain("origin=");
+  });
+
   it("kakao: from/to route with origin, to-link without", () => {
     expect(kakaoRouteUrl("드래곤힐", dest, origin)).toContain("/link/from/");
     expect(kakaoRouteUrl("드래곤힐", dest)).toContain("/link/to/");

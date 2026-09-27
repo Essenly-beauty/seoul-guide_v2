@@ -191,6 +191,10 @@ export function ProductDetailScrollHeader({
 
       <div className="product-detail-hero">
         {children}
+        {/* One Back over the photo, nothing else. Share is already in the
+            CTA bar below and in the compact bar that takes over on scroll;
+            the overlay Share that used to sit here landed on top of Back at
+            the same corner and hid it (owner, real iPhone, 2026-09-27). */}
         <div
           ref={actionRef}
           className="product-detail-hero-actions"
@@ -198,7 +202,6 @@ export function ProductDetailScrollHeader({
           inert={compactVisible ? true : undefined}
         >
           <BackButtonBordered fallback={fallback} />
-          <ProductShareButton variant="overlay" aria-label="Share product" product={product} />
         </div>
       </div>
     </>

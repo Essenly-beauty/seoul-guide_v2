@@ -5,7 +5,8 @@ import { BottomSheet } from "@/components/ui/bottom-sheet";
 import { Button } from "@/components/ui/button";
 import { CategoryBadge } from "@/components/category/category-badge";
 import { Chip } from "@/components/ui/chip";
-import { PRICE_OPTIONS, SERVICE_FILTERS, TYPE_LABEL, type PlaceType, type PriceRange } from "@/lib/data";
+import { PLACES, PRICE_OPTIONS, SERVICE_FILTERS, TYPE_LABEL, type PlaceType, type PriceRange } from "@/lib/data";
+import { liveServiceFilters } from "@/lib/service-filters";
 import { EMPTY_FILTERS, type MapFilters } from "@/lib/places";
 
 const toggle = <T,>(list: T[], v: T): T[] =>
@@ -22,8 +23,12 @@ export function FilterSheet({ cats, filters, onApply, onClose }: {
   // With category chips selected, show those categories' tag groups; with
   // none, show every group — the filter badge counts tags even when no
   // category is picked, so the sheet must expose them all (2026-08-02).
+  // Only tags at least one published place can answer. The sheet used to read
+  // SERVICE_FILTERS straight and offered 20 filters of which 18 matched
+  // nothing, six of them for a category with no places at all. An empty result
+  // reads as "Seoul has no such store", not "we have no such data".
   const serviceGroups = (cats.length > 0 ? cats : (Object.keys(SERVICE_FILTERS) as PlaceType[]))
-    .map((c) => ({ type: c, tags: SERVICE_FILTERS[c] ?? [] }))
+    .map((c) => ({ type: c, tags: liveServiceFilters(PLACES, c) }))
     .filter((g) => g.tags.length > 0);
 
   const DISTANCES: { km: number; label: string }[] = [

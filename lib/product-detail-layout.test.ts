@@ -56,6 +56,17 @@ describe("product detail information-page layout", () => {
     expect(routeSource).not.toContain("heroOverlay=");
   });
 
+  it("keeps the hero chrome to a lone Back; Share lives in the CTA bar and the compact bar", () => {
+    // Owner, real iPhone (2026-09-27): the hero showed a Share circle at the
+    // top left with the Back circle hidden underneath it, and Share was
+    // already in the bottom bar. Scrolling swapped that spot for Back, so
+    // the resting state now matches: one Back over the photo, nothing else.
+    const hero = scrollHeaderSource.slice(scrollHeaderSource.indexOf('className="product-detail-hero-actions"'));
+    expect(hero).toContain("<BackButtonBordered");
+    expect(hero).not.toContain("<ProductShareButton");
+    expect(scrollHeaderSource.slice(0, scrollHeaderSource.indexOf('className="product-detail-hero"'))).toContain("<ProductShareButton");
+  });
+
   it("uses the information-page title and anchored section hierarchy", () => {
     expect(bodySource).toContain('fontFamily: "var(--sans)"');
     expect(bodySource).toContain("<AnchorTabs sections={SECTIONS}");

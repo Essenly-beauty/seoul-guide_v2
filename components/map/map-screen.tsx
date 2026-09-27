@@ -35,6 +35,9 @@ import { fetchSharedList, type SharedList } from "@/lib/shared-lists";
 import { resolveSharedListView, type SharedListView } from "@/lib/shared-list-view";
 import { SharedListAccessBanner } from "./shared-list-access-banner";
 import { SharedListReadyBanner } from "./shared-list-ready-banner";
+import { InstallNudgeBanner } from "@/components/pwa/install-nudge-banner";
+import { FilterEmptyModal } from "./filter-empty-modal";
+import { shouldOfferFilterReset } from "@/lib/filter-empty-policy";
 import { useSigninNudge } from "@/components/auth/signin-nudge";
 import { useAuthUser } from "@/lib/auth/use-auth";
 import { useTheme } from "@/components/theme/theme-provider";
@@ -95,6 +98,10 @@ export function MapScreen() {
   const [mode, setMode] = useState<"map" | "subway">("map");
   const [filters, setFilters] = useState<MapFilters>(EMPTY_FILTERS);
   const [filterOpen, setFilterOpen] = useState(false);
+  // Set on Apply and consumed by the effect below, so the empty-result
+  // prompt can only follow an Apply — never a pan, a zoom or a data change.
+  const justAppliedFiltersRef = useRef(false);
+  const [emptyPrompt, setEmptyPrompt] = useState(false);
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [selectedGroupIds, setSelectedGroupIds] = useState<string[]>([]);
   const { loc, status, heading, retry, requestHeading } = useLocation();
@@ -371,6 +378,18 @@ export function MapScreen() {
         : 14
     : undefined;
   const activeFilterCount = countActiveFilters(filters);
+  // `places` recomputes in the same render as `filters`, so this effect
+  // sees the fresh count. `filters` is a dep in its own right: swapping one
+  // tag for another keeps the count and the length the same, and the
+  // flag must still be consumed.
+  useEffect(() => {
+    if (!justAppliedFiltersRef.current) return;
+    justAppliedFiltersRef.current = false;
+    if (mode !== "map") return;
+    if (shouldOfferFilterReset({ resultCount: places.length, activeFilters: activeFilterCount, justApplied: true })) {
+      setEmptyPrompt(true);
+    }
+  }, [filters, places.length, activeFilterCount, mode]);
   const filterLabel = activeFilterCount === 0
     ? "Detail filters, none active"
     : `Detail filters, ${activeFilterCount} active filter${activeFilterCount === 1 ? "" : "s"}`;
@@ -706,6 +725,19 @@ export function MapScreen() {
         />
       )}
 
+      {/* Last of the banners on purpose: a shared list or a save confirmation
+          is answering something the visitor just did, and the Home Screen
+          offer is not. It only appears once they have saved something, and
+          never when the app is already running from the Home Screen. */}
+      {emptyPrompt && (
+        <FilterEmptyModal
+          onAdjust={() => { setEmptyPrompt(false); setFilterOpen(true); }}
+          onReset={() => { setEmptyPrompt(false); setFilters(EMPTY_FILTERS); }}
+          onClose={() => setEmptyPrompt(false)}
+        />
+      )}
+      {mode === "map" && !sharedList && <InstallNudgeBanner />}
+
       {mode === "map" && !sharedList && savedParam === "1" && (
         <div className="map-banner" role="status">
           <Icon name="heart" size="xs" style={{ color: "var(--accent)", flex: "none" }} aria-hidden="true" />
@@ -732,7 +764,11 @@ export function MapScreen() {
           cats={cats}
           filters={filters}
           onApply={(nextFilters) => {
-            setFilters(nextFilters);
+            justAppliedFiltersRef.current = true;
+            // Always a fresh object: reopening the sheet and tapping Apply with
+            // nothing changed hands back the same reference, React skips the
+            // render, the effect never runs, and the flag would stay armed.
+            setFilters({ ...nextFilters });
             handleMapSelect(null);
           }}
           onClose={() => { setFilterOpen(false); filterBtnRef.current?.focus(); }}

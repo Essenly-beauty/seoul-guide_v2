@@ -5,6 +5,7 @@ import { IconButton } from "@/components/ui/icon-button";
 import { useToast } from "@/components/ui/toast";
 import { useSigninNudge } from "@/components/auth/signin-nudge";
 import { toggleFavorite, useFavorites, type FavKind } from "@/lib/favorites";
+import { recordValueMoment } from "@/lib/install-nudge";
 import { getPlace } from "@/lib/data";
 
 type FavoriteButtonProps = {
@@ -40,6 +41,10 @@ export function FavoriteButton({ kind, id, initial = false, variant = "plain", s
           const next = kind && id ? toggleFavorite(kind, id) : !on;
           if (!(kind && id)) setLocalOn(next);
           toast(next ? "Saved to favorites" : "Removed");
+          // Saving is the moment the app has proved useful, so it is also when
+          // the Home Screen offer becomes fair to make. Counted, not shown:
+          // lib/install-nudge-policy.ts decides whether it appears.
+          if (next) recordValueMoment();
           // guests get a one-time account nudge after their first save
           const place = kind === "place" && id ? getPlace(id) : null;
           if (next) nudge("favorite", place ? { savedPlace: { id: place.id, name: place.name } } : undefined);

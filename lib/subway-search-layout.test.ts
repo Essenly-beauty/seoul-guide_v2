@@ -251,6 +251,62 @@ describe("subway flow: search → station → place (owner walkthrough 2026-08-2
   });
 });
 
+describe("station search: while results are open, everything else gives up its room", () => {
+  // Owner report 2026-09-27, from a real iPhone with the keyboard up: the
+  // results list under the arrival field showed one row. The numbers: the
+  // panel is capped at the viewport minus the keyboard (~544px on an iPhone),
+  // and the header (110) + the two-field card (370) + the footer (130) leave
+  // it nothing. The picker is the whole task while it is open, so the other
+  // field, the decorative route rail, the swap button and the footer step
+  // aside until a station is picked.
+  const css = readFileSync(new URL("../app/globals.css", import.meta.url), "utf8");
+
+  it("hides the field that is not being searched", () => {
+    expect(css).toMatch(/\.subway-search-field-stack:has\(\.station-search-results\) \.station-combobox:not\(:has\(\.station-search-results\)\)\s*\{[^}]*display: none/);
+  });
+
+  it("hides the route rail and the swap button", () => {
+    expect(css).toMatch(/\.subway-search-fields:has\(\.station-search-results\) \.subway-search-route-rail[^{]*\{[^}]*display: none/);
+    expect(css).toMatch(/\.subway-search-fields:has\(\.station-search-results\) \[aria-label="Swap departure and arrival"\][^{]*\{[^}]*display: none/);
+  });
+
+  it("hides the Show route / Update route footer", () => {
+    // Picking a row is the action; the footer only takes 130px from the list.
+    expect(css).toMatch(/\.subway-controller:has\(\.station-search-results\) \.subway-search-footer\s*\{[^}]*display: none/);
+  });
+});
+
+describe("station sheet: the header stays put, only the list scrolls", () => {
+  // Owner report 2026-09-27, from a real iPhone: scrolling the station's
+  // place list dragged the station name, its line badges and the "18 places
+  // · within 500 m" line off the top with it. Those are the frame; the rows
+  // are the content. .subway-controller-scroll scrolls everything, so in
+  // station-browse mode it must stop scrolling and hand that job to
+  // .station-sheet-list alone.
+  const css = readFileSync(new URL("../app/globals.css", import.meta.url), "utf8");
+  const browse = (sel: string) => `.subway-controller.station-browse ${sel}`;
+
+  it("stops the outer scroller from scrolling in station-browse mode", () => {
+    expect(css).toMatch(new RegExp(`${browse(".subway-controller-scroll").replace(/[.]/g, "\\.")} \\{[^}]*overflow: hidden`));
+  });
+
+  it("makes the list the one scroll container", () => {
+    const rule = css.slice(css.indexOf(browse(".station-sheet-list")));
+    const body = rule.slice(0, rule.indexOf("}"));
+    expect(body).toContain("overflow-y: auto");
+    expect(body).toContain("min-height: 0");
+    expect(body).toContain("flex: 1");
+    // the last row must still clear the home indicator once the list scrolls
+    expect(body).toContain("env(safe-area-inset-bottom)");
+  });
+
+  it("pins the grip, the title row and the count line", () => {
+    for (const part of [".station-sheet-grip", ".station-sheet-head", ".station-sheet-sub"]) {
+      expect(css, part).toMatch(new RegExp(`${browse(part).replace(/[.]/g, "\\.")}[^{]*\\{[^}]*flex: none`));
+    }
+  });
+});
+
 describe("subway panel layout defects (owner reports 2026-08-22)", () => {
   const controller = readFileSync(new URL("../components/subway/subway-route-controller.tsx", import.meta.url), "utf8");
   const css = readFileSync(new URL("../app/globals.css", import.meta.url), "utf8");
@@ -333,5 +389,17 @@ describe("timing is Google's job, the stepper is the bottom control", () => {
     // the place list for good (WCAG 2.4.11 Focus Not Obscured).
     expect(body).not.toMatch(/position:\s*absolute/);
     expect(body).toMatch(/flex:\s*none/);
+  });
+});
+
+describe("station search: the divider between the fields leaves with the hidden field", () => {
+  const css = readFileSync(new URL("../app/globals.css", import.meta.url), "utf8");
+
+  it("drops the border-top of the field being searched", () => {
+    // `.station-combobox + .station-combobox` draws a hairline between
+    // Departure and Arrival. display:none does not take a node out of the `+`
+    // combinator, so with Departure hidden the Arrival field kept a stray line
+    // over it (runtime screenshot, 2026-09-27).
+    expect(css).toMatch(/\.subway-search-field-stack:has\(\.station-search-results\) \.station-combobox:has\(\.station-search-results\)\s*\{[^}]*border-top:\s*0;/);
   });
 });

@@ -229,8 +229,13 @@ describe("Daiso official-source import", () => {
     expect(result.withheld).toEqual([]);
     expect(result.published.map(({ name, nameVerification }) => ({ name, nameVerification }))).toEqual([
       { name: "Daiso Gangnam Station", nameVerification: "verified" },
-      { name: "Daiso Myeongdong", nameVerification: "provisional" },
+      // 본점 is a discriminator, not decoration: a 명동본점 that reads "Daiso
+      // Myeongdong" is indistinguishable from a plain 명동점 next door.
+      { name: "Daiso Myeongdong Main", nameVerification: "provisional" },
     ]);
+    // The subject of this test: the supplied nameEn is refused outright, not
+    // merely reformatted, when Naver did not confirm it.
+    expect(result.published.map((place) => place.name)).not.toContain("Unverified Official Name");
     expect(result.published.every((place) => !("englishOk" in place))).toBe(true);
   });
 

@@ -142,6 +142,7 @@
   :root:not([data-theme="dark"]) .map-avatar,
   :root:not([data-theme="dark"]) .map-modebtn:not(.on),
   :root:not([data-theme="dark"]) .map-fab:not(.on),
+  :root:not([data-theme="dark"]) .map-compass,
   :root:not([data-theme="dark"]) .map-top .chip:not(.selected) {
     background: rgba(255, 255, 255, 0.82);
   }
@@ -612,6 +613,30 @@
   }
   .subway-controller.search-ready:has(.station-search-results) {
     height: min(88%, 720px);
+  }
+  /* Station search with results open (owner report 2026-09-27, real iPhone,
+     keyboard up): the panel is capped at the viewport minus the keyboard,
+     about 544px, and the header (110) + the two-field card (370) + the footer
+     (130) left the results list one row. The picker is the whole task while
+     it is open, so everything that is not the picker steps aside until a
+     station is chosen: the other field, the decorative route rail, the swap
+     button, and the Show/Update route footer. They all come back the moment
+     the results close. */
+  .subway-search-field-stack:has(.station-search-results) .station-combobox:not(:has(.station-search-results)) {
+    display: none;
+  }
+  .subway-search-fields:has(.station-search-results) .subway-search-route-rail,
+  .subway-search-fields:has(.station-search-results) [aria-label="Swap departure and arrival"] {
+    display: none;
+  }
+  .subway-controller:has(.station-search-results) .subway-search-footer {
+    display: none;
+  }
+  /* display:none does not take a node out of the `+` combinator, so the
+     hairline `.station-combobox + .station-combobox` draws between the two
+     fields stayed above the lone Arrival field. */
+  .subway-search-field-stack:has(.station-search-results) .station-combobox:has(.station-search-results) {
+    border-top: 0;
   }
   .station-results-label {
     padding: 8px 11px 5px;
@@ -1748,15 +1773,21 @@
 
   /* chips / badges */
   .chip {
-    min-height: 44px;
+    /* 40px, not the 44px floor the other controls keep: the owner found
+       every chip row read as too tall at 44 and asked for 40 (2026-09-27). */
+    min-height: 40px;
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    padding: 8px 14px;
+    padding: 6px 14px;
     border-radius: var(--r-full);
-    /* outlined, not filled — reads graphic against the dark field; chips that
-       float over the map re-add a surface fill (.map-top .chip). */
-    background: transparent;
+    /* A faint tint of the text colour, not a flat surface: the owner's dark
+       theme test (2026-09-27) showed the outlined chip vanishing into the
+       card it sits on — a #272b33 hairline on #16181d was all it had. Six
+       percent lifts the pill one step off any ground in either theme
+       (#16181d → #232529, white → #f1f2f4) and still reads as a choice, not
+       a button. Chips over the map add their own surface fill (.map-top .chip). */
+    background: color-mix(in srgb, var(--text) 6%, transparent);
     border: 1px solid var(--border);
     font-size: 13px;
     font-weight: 500;
@@ -1799,8 +1830,8 @@
   .chip.daiso-category-chip {
     --daiso-category-text: #b83d00;
     --daiso-category-focus-ring: #1c2431;
-    min-height: 44px;
-    padding: 4px 0;
+    min-height: 40px;
+    padding: 2px 0;
     background: transparent;
     border-color: transparent;
     color: var(--text);
@@ -2362,7 +2393,7 @@
   }
   .filtersheet .chipwrap { gap: 6px; margin-top: 5px !important; }
   .filtersheet .chip {
-    min-height: 44px;
+    min-height: 40px;
     padding: 6px 13px;
     font-size: 12.5px;
   }
@@ -3197,6 +3228,9 @@
     width: 100%;
     box-shadow: var(--shadow-float);
   }
+  /* The empty-result prompt lives on the map screen, where .mapsheet (950)
+     and the subway stepper (960) would otherwise sit on top of a 90. */
+  .modal.filter-empty-modal { z-index: 970; }
 
   /* home hub cards */
   .hubcard {
@@ -3809,7 +3843,7 @@
   .station-sheet-cats::-webkit-scrollbar { display: none; }
   .sfchip {
     display: inline-flex; align-items: center; gap: 5px;
-    min-height: 44px; padding: 0 18px; border-radius: 999px;
+    min-height: 40px; padding: 0 18px; border-radius: 999px;
     border: 1px solid var(--border); background: var(--surface); color: var(--muted);
     font-size: 14px; font-weight: 650; white-space: nowrap; flex: none;
   }
@@ -3828,6 +3862,34 @@
   .station-sheet-pop button[aria-checked="true"] { color: var(--accent); background: var(--accent-soft); }
 
   .station-sheet-list { display: flex; flex-direction: column; }
+
+  /* Station browse (owner report 2026-09-27): the station name, its line
+     badges and the "N places · within 500 m" line are the frame, and they
+     scrolled away with the rows. .subway-controller-scroll owns scrolling
+     for every other panel state, so only in station-browse mode does it
+     stand still and hand the job to the list. The bottom padding that kept
+     the last row clear of the home indicator moves with it. */
+  .subway-controller.station-browse .subway-controller-scroll {
+    overflow: hidden;
+    display: flex; flex-direction: column;
+    padding-bottom: 0;
+  }
+  .subway-controller.station-browse .subway-search-panel {
+    display: flex; flex-direction: column;
+    flex: 1; min-height: 0;
+    padding-bottom: 0;
+  }
+  .subway-controller.station-browse .station-sheet { flex: 1; min-height: 0; }
+  .subway-controller.station-browse .station-sheet-grip,
+  .subway-controller.station-browse .station-sheet-head,
+  .subway-controller.station-browse .station-sheet-sub { flex: none; }
+  .subway-controller.station-browse .station-sheet-list {
+    flex: 1; min-height: 0;
+    overflow-y: auto; overflow-x: hidden;
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: max(18px, env(safe-area-inset-bottom));
+  }
   .station-row {
     display: flex; align-items: center; gap: 14px; width: 100%;
     padding: 10px 16px; text-align: left; font: inherit; color: inherit;
@@ -3984,7 +4046,7 @@
   }
   .map-top .chip {
     box-shadow: var(--shadow-card);
-    min-height: 44px;
+    min-height: 40px;
   }
   /* :not(.selected) — .chip.selected (earlier in the cascade) sets the same
      specificity; without this guard this rule's background would win and
@@ -4070,13 +4132,21 @@
     opacity: 0;
     pointer-events: none;
   }
-  .map-rotation-reset {
+  /* Compass: only while the map is turned (owner request 2026-09-27, two-
+     finger rotation). Top right, where Google and Apple Maps keep theirs,
+     below the band the banners (.map-banner, top + 96px) occupy so neither
+     covers the other; the needle points at north and a tap eases the map
+     back north. It is portaled beside the other floating controls (the
+     canvas is a z-index:0 context that would paint it under the top bar).
+     Hidden state keeps the box out of the tap order and off the
+     accessibility tree (aria-hidden in the markup). */
+  .map-compass {
     position: absolute;
     right: 16px;
-    top: calc(max(12px, env(safe-area-inset-top)) + 104px);
-    z-index: 700;
-    width: 36px;
-    height: 36px;
+    top: calc(max(12px, env(safe-area-inset-top)) + 160px);
+    z-index: 900;
+    width: 40px;
+    height: 40px;
     display: grid;
     place-items: center;
     border-radius: var(--r-full);
@@ -4085,10 +4155,18 @@
     box-shadow: var(--shadow-float);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
-    color: var(--accent);
-    font-size: 12px;
-    font-weight: 800;
-    transition: transform 0.12s ease;
+    color: var(--text);
+    transition: opacity 0.18s ease, visibility 0.18s, transform 0.18s ease;
+  }
+  .map-compass svg { display: block; }
+  .map-compass:not(.on) {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transform: scale(0.85);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .map-compass { transition: none; }
   }
   .map-banner {
     position: absolute;
@@ -4288,6 +4366,35 @@
   /* the empty state is one honest block, not two decoy tiles */
   .selected-place-summary-media-grid.is-empty .selected-place-summary-media {
     min-height: clamp(104px, 13vh, 124px);
+  }
+
+  .olive-young-brand-hero {
+    position: relative;
+    overflow: hidden;
+    border-radius: var(--r-md);
+    background: var(--surface-hover);
+  }
+  .olive-young-brand-hero img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .olive-young-brand-hero .olive-young-brand-hero-caption {
+    position: absolute;
+    left: 8px;
+    bottom: 8px;
+    padding: 4px 8px;
+    border-radius: var(--r-sm);
+    background: var(--surface);
+    color: var(--text);
+    font-size: 11px;
+    font-weight: 650;
+    line-height: 1.2;
+  }
+  .olive-young-detail-brand-hero {
+    height: 170px;
   }
 
   .selected-place-actions {
@@ -4505,6 +4612,11 @@
     height: 46%;
   }
   .maprow-brand-mark--daiso {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .maprow-brand-mark--olive-young {
     width: 100%;
     height: 100%;
     object-fit: cover;

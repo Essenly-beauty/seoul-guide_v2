@@ -1,4 +1,4 @@
-# MYSEOULDROP — 작업 핸드오프 (2026-09-20 기준, PR #2 배포 완료)
+# MYSEOULDROP — 작업 핸드오프 (2026-09-27 기준, main 직배포)
 
 > 다음 세션에서 이 문서 하나로 바로 이어서 작업할 수 있게 정리한 문서.
 > 프로젝트 전반 문서는 `docs/README.md`, 인증 설정은 `docs/auth-setup.md` 참고.
@@ -36,7 +36,7 @@ vercel env pull --yes  # .env.local 재생성
 - 하단 탭바 먹통 원인 수정: `MapWiring` 인라인 콜백 무한 리렌더 → useCallback 안정화
 - 실데이터 파이프라인 3종 (지오코딩 캐시 커밋됨 → 재실행 수 초):
   - **미용실 205곳**: Creatrip CSV → `scripts/build-creatrip-places.mjs` (Nominatim, 94% 주소 정확)
-  - **올리브영 239곳**: 카카오맵 구별 캡처(`scripts/capture-kakao-oy.sh`) → `build-oliveyoung-kakao.mjs` (99% 정확, OSM 폴백 스크립트 별도)
+  - **올리브영 366곳**: 올리브영 자체 매장찾기 스냅샷(`data/sources/oliveyoung-seoul-2026-09-23.json`) → `build-oliveyoung-official.mjs`. 9/23 이전에는 카카오맵 검색 캡처였고 서울 매장의 38%를 놓치고 있었다
   - **관광지·시장 112곳**: a_drop_of_seoul CSV 2종 → `build-ados-places.mjs` (about/aboutKr 설명 포함, 상세페이지 노출)
 - 존 5개 추가(jamsil/yeongdeungpo/seoul_etc/busan/gyeonggi), 데이터 무결성 테스트 (`lib/creatrip-places.test.ts`)
 
@@ -154,6 +154,34 @@ vercel env pull --yes  # .env.local 재생성
 - 상세페이지 별점 위젯 공유 스토어 전환, My reviews 페이지 실데이터(목업 제거), 메뉴 카운트 라이브
 - Supabase Site URL 설정 완료됨(사용자 확인) — localhost 메일 문제 해결
 
+### F. 리테일 지점 영문명 마감 (9/21~9/23)
+> 문서: `docs/research/retail-branch-names-2026-09.md` (§0에 마감 표 있음)
+
+오너 리포트("다이소/올리브영 영문명은 같은데 실제 지점명이 다름")의 후속. 오버라이드 268 → **301건**, 읽을 수 없는 이름 33 → **0건**.
+
+- **파이프라인 접미사 버그 2건**(`e439228`) — 재빌드 때 이름을 다시 망가뜨릴 시한폭탄이었다. ① `본점`이 `점` 규칙에 걸려 삭제됨(노원본점 → "Daiso Nowon" = **다른 가게 이름**) ② `거리점` 규칙이 `사거리점`의 끝 세 글자를 먹어 **없는 거리 25개**를 만듦(미아사거리점 → "Daiso Miasa St."). `scripts/lib/hangul-romanize.mjs`는 올리브영 임포트를 먹이면서 **테스트가 0개**였다 → `lib/hangul-romanize-suffix.test.ts` 신설
+- **검증된 이름에 붙은 거짓 안내문 163건**(`ef52521`) — 오버라이드가 `name`만 바꾸고 `nameVerification`을 두어, 사람이 검증한 이름에 "아직 검증되지 않았다"가 떴다. `"verified"`는 네이버 확인을 뜻하므로 과장 → `PlaceNameVerification`에 **`"derived"`** 추가하고 출처를 그대로 말하게 함
+- **마지막 33건**(`1fcab15`) — 새로 조사하지 않고 리포지토리 안의 검증된 어휘만 썼다: `lib/subway-data.json`의 서울교통공사 영문 역명표 + 오버라이드 파일이 이미 검증해 둔 체인·건물명. 역명표가 로마자 2건도 교정 — **왕십리=Wangsimni**, **정릉=Jeongneung**(둘 다 음운 동화)
+- **얻은 규칙: 판별자는 앞에 둔다.** 당연한 이름부터 넣었더니 24자 충돌이 27 → 34로 **올랐다.** 지점을 가르는 단어가 긴 호스트 이름 뒤에 있으면 잘림이 판별부를 지운다. 앞으로 빼니 27로 복귀
+- **`audit:data:check`는 개명 후에도 통과한다**(문서의 예측이 틀렸음, `c255053`). `scripts/audit-places.ts:29`가 오버라이드 **전**의 `CATALOGUE_PLACES`를 읽기 때문. 다만 이것은 별개 문제를 드러낸다 — 감사 리포트의 이름이 앱이 보여주는 이름과 다르다
+- 865 테스트 통과, `verify:predeploy` 전 항목 통과. 실기기 폭(390×844) 확인: 878행 **읽을 수 없는 이름 0건**, 콘솔 에러 0건, 가로 스크롤 없음
+
+### G. 홈 화면 설치 안내 · 랭킹 문구 · 상품 검수 (9/23~9/27)
+> 문서: `docs/product-recommendation-policy.md`(오너 확정 기준), `reports/parallel-*-single-verification-2026-09-23.md`
+
+- **홈 화면 설치 넛지**(`aad69ec`, `d45dd38`) — 앱은 처음부터 설치 가능했다(manifest `standalone`, 아이콘, SW, 애플 메타 전부 프로드 200). 없던 건 안내였고 입구가 햄버거 메뉴뿐이었다. 지도에 **장소를 한 번 저장한 뒤** 한 줄 배너가 뜬다. 이미 설치됨·한 번 닫음·카카오톡 등 인앱 브라우저에서는 안 뜬다(`lib/install-nudge-policy.ts`, 전부 거절 규칙). 프로드에서 7단계 흐름 전부 확인, 콘솔 에러 0
+- **랭킹 신선도 문구**(`7fe3f3a`) — 오너 결정: 목록은 1~2주마다 손 갱신 + 세일·명절. `Today's sales ranking`·`Trending now`와 장소 상세의 **존재하지 않는** "Olive Young chain-wide chart" 인용을 걷어냈다. `lib/ranking-freshness-copy.test.ts`가 살아 있는 피드 어휘를 금지. **미해결**: 갱신 주기를 쓴다면 화면에 기준 시점이 있어야 하는데 이를 금지하는 계약 테스트가 둘(`ranking-retailer-contract.test.ts`, `product-detail-layout.test.ts`)이고 사유는 스쿼시돼 없음 → 오너 결정
+- **단품 상세 검증**(`5efcd2b`) — 정책 필터 통과 42건을 공식 상세로 판정: **단품 확정 32**(다이소 24, 올리브영 8), 단품 아님 7, 보류 3. 다이소는 `pdOptRevwCnt` API가 옵션 수를 그대로 주어 **curl로 끝남**; 올리브영은 "옵션을 선택해 주세요" 문구가 판정 신호(요소 존재는 아님). 이름에 "(단품)"이 적힌 옵션형(`A000000180532`)이 실제로 있어 정책의 "이름으로 판정 금지"를 증명. **메이크업은 후보 5건 전부 옵션형 = 단품 0** — 색조는 호수를 한 페이지에 묶는 구조라 단품 규칙 아래서 카테고리가 통째로 빈다
+- **외래어 상호 17건 교정**(`ebe70e4`) — 프로드 검증에서 코엑스몰 플래그십이 "Koekseumol"로 잡혔다. 토큰 길이 예산이 놓치는 부류라 `lib/place-name-loanwords.test.ts`가 **의미**로 검사(한글에 코엑스·타워·아이파크·롯데·이마트… 가 있으면 영문에 그 철자가 있어야 함). 프로드 17/17 반영 확인
+- **병렬 검증 보고서 4종**(9/23) — `reports/parallel-{daiso,olive-young}-verification`, `parallel-product-curation`(142행 CSV), `parallel-ranking-refresh-readiness`. 다이소 급상승 차트만 재현 불가(관찰 시각 차이로 판정, 리뷰 수 단조성 18/18이 근거)
+
+- **홈 화면 설치 페이지 버튼 우선 재설계**(`fee1623`, 9/27) — 실기기 테스트 3회 실패(공유 아이콘을 못 찾음·크롬 시크릿 탭·"버튼을 눌렀는데 안 됨") 후 `/download`를 **버튼 하나**로: Android/데스크톱은 진짜 설치 프롬프트, iPhone은 바텀시트가 공유 아이콘을 **그림으로** 보여주고 브라우저별 위치를 말한다(Safari: 하단 `···`, Chrome: 주소창 우상단 + 시크릿 탭 불가 경고). 설명 문단은 페이지에서 제거. `lib/pwa-install.test.ts`
+- **역 시트 헤더 고정 + 앱 아이콘 축소**(`72c1788`) — 역 목록을 스크롤해도 그립·제목·건수 줄은 고정, 목록만 스크롤(`.station-browse` flex 체인, `lib/subway-search-layout.test.ts`). 아이콘 S는 타일의 58%(104/180), 평면 `#FF5018` + 아주 옅은 그림자(0.14), 그라데이션 없음. `public/icon-192/512.png`도 같은 구성으로 재생성
+- **필터 0건 모달 + 칩 40px**(`36e38a5`) — 필터를 적용해 결과가 0이면 가운데 모달("No places match these filters" / Clear filters·Change filters). `lib/filter-empty-policy.ts`가 **방금 적용한 경우에만** 허용. 칩 `min-height` 44→40(오너 지정), `lib/touch-feedback-contracts.test.ts` `CHIP_FLOOR = 40`. 프로드 확인: 필터 7개 → 모달
+- **구글 길찾기 목적지 이름**(`1ea2a41`) — 좌표만 넘기면 구글이 양끝을 "핀 고정 위치"로 보여준다. 이제 `destination=<영문 이름>, <층 제거한 주소>`(`lib/geo.ts stripFloor`), origin 생략 → "내 위치". 프로드 확인: "Daiso Garak Market Stn., 서울특별시 송파구 중대로 109 (가락동)"
+- **역 검색 입력 중 패널 정리**(`64add44`) — 키보드가 올라오면 패널이 544px인데 헤더+두 필드 카드+레일+푸터가 다 차지해 결과가 1줄이었다. 결과가 열려 있는 동안 다른 필드·레일·스왑·푸터·필드 사이 구분선을 숨김(`:has(.station-search-results)`), 역을 고르면 전부 복귀. 프로드 실측 8건 중 5건 완전 노출
+- **칩 6% 틴트**(`261bb2f`) — 다크 테마 프로필 카드에서 국가 칩이 안 보였다(#272b33 테두리뿐). `.chip`에 `color-mix(in srgb, var(--text) 6%, transparent)` — 다크 ≈ #2c2f35, 라이트 ≈ #f1f2f4. 선택 칩·지도 위 칩은 자기 배경 유지
+- **두 손가락 지도 회전**(`28bb78a`·`a7fa3b6`, 9/27 저녁) — Leaflet은 회전을 못 하므로 `leaflet-rotate-map`(Leaflet 1.9.4 + rotate 브랜치, BSD-2)을 `next.config.mjs`에서 bare `leaflet`에 별칭(react-leaflet과 같은 인스턴스). 포크에는 제스처가 없고 자체 핀치는 회전 비대응이라 `lib/map-touch-rotate.ts`가 두 손가락을 전담: MapLibre 규칙(손가락 원둘레 25px 이동 시 회전 시작, 최소 벌림이 기준, 시작 전 각도는 버림), 줌·회전 같은 프레임, 손가락 아래 지점 고정, 종료는 Leaflet 핀치와 동일, 7° 이내면 북쪽으로 복귀. 나침반(`.map-compass`, `.map-screen`에 포털)은 회전 중에만 보이고 탭하면 북쪽. **포크 사실**: `setBearing(deg)`은 `_bearing` 라디안 저장, `(theta||0.1)`로 0이 0.1°가 됨(→ `NORTH_EPS` 1e-9로 대체), 매 호출에 `rotate/move/moveend` 발화(→ 제스처 중엔 moveend 억제), 컨테이너 중심 기준 회전, 콘텐츠는 **시계방향 +bearing**(나침반 바늘·헤딩 화살표 모두 `+bearing`), 마커 아이콘은 화면 정렬 유지, `getBounds()`는 회전 무시 → `getCircumscribedBounds()`. 순수 회전은 Leaflet 줌 프록시가 `_animateZoom` 안에서 **동기적으로** moveend를 내므로 스냅 리스너는 호출 전에 건다. 모바일 `updateWhenIdle`을 꺼서 회전 중에도 타일이 채워짐. `lib/map-rotate.test.ts`(순수 수학 16), `lib/map-rotate-wiring.test.ts`(배선 계약 16). 헤드리스 합성 터치로 회전/핀치/드래그/스냅/나침반/감속 모션 실측(메모리 `mobile-design-map-rotation`)
 ---
 
 ## 3. ⚠️ 사용자(계정 소유자) 액션 대기 — 최우선
@@ -180,6 +208,31 @@ vercel env pull --yes  # .env.local 재생성
 ---
 
 ## 4. 다음 작업 백로그 (우선순위순)
+
+### 해결됨(9/27) — 다이소 상세 251곳 프로덕션 404
+다른 세션이 `c510421 Resolve encoded Daiso store IDs in detail routes`로 수정·푸시했고 `2f39f37` 병합으로 배포됐다. 프로드 확인(9/27 18:00, 헤드리스 iPhone UA):
+`/place/daiso-official:%EA…가락시장역점` 200, 제목 "Daiso Garak Market Stn.", **"In store" 행 노출**, 구글 목적지에 이름+주소(층 제거). 이 항목은 닫는다.
+
+### P0 — 오너 결정: 검증된 단품 32건을 어디에 올릴 것인가 (9/27)
+근거 없는 14개 샘플이 채우던 자리가 이미 넷이다 — 랭킹 "Popular at Olive Young"(수기 `salesRank`), "Highest-rated by reviews"(`reviewRank`,
+**공식 리뷰 랭킹 자체가 없음**), "Also popular"(`isTrending` 5개 수기), 장소 상세의 올리브영 픽 4개. 새 자리를 만들 게 아니라 이 넷 중 32건으로 뒷받침되는
+곳은 교체하고 안 되는 곳은 주장을 멈추는 결정. 보류 3건(다이소 2제형 키트·네일 램프, 올리브영 증정 스티커 기획)도 함께.
+
+### P0 — 오너 결정 1건: 목록 행에서 체인 이름 빼기 (9/23 실측 완료, 판단만 남음)
+행 하나에 체인 이름이 **두 번** 나온다. `.label`이 `"Daiso · Gangnam"`을 이미 표시하는데 제목이 또 `"Daiso Gangnam Stn. 2"`다. 390×844에서
+목록 행은 이름에 **262px 한 줄 상자**를 주고 들어가는 글자는 **중앙값 24자**인데, 그 중 12자를 이 중복이 먹는다(878행 중 123행이 잘림).
+
+| | 지금 | 체인 이름 제거 |
+|---|---|---|
+| 구분 안 되는 지점 | 27곳 / 12그룹 | **13곳 / 6그룹** |
+| 24자를 넘겨 잘리는 행 | 405행 | **216행** |
+
+`name` 필드가 아니라 **목록 행 표시**만 바꾸는 결정이다(전체 `name`에서 빼면 미용실 등이 나빠진다). 화면에 보이는 변화라 오너 승인 후 진행.
+남은 12그룹은 **전부 이름 문제가 아니다** — 12그룹 모두 판별자가 이름 끝에 있고 전부 갈라내려면 36자가 필요하다. 로마자화를 더 고쳐도 안 내려간다.
+
+### P2 — 감사 리포트와 표시 이름의 분리 (9/23 발견)
+`reports/place-audit.md`를 열어 지점을 검증하는 사람은 기계 로마자 이름을 보는데 앱은 검증된 이름을 보여준다. 검증 산출물과 표시물이
+갈라져 있으면 틀린 이름이 리뷰를 통과할 수 있다. 원본을 감사한다는 목적상 원본 이름을 쓰는 건 맞으므로, 리포트에 **두 이름을 나란히** 싣는다.
 
 ### P1 — 리서치 후속 (9/20, `docs/research/web-app-best-practices-2026-09.md` §5)
 - [ ] 장소 데이터 번들 분리 — `public/data/places-index.<hash>.json` + `headers()` immutable, 클라이언트는 hydration 후 fetch (리서치 D1). 보류 사유: 검색·즐겨찾기·지하철 근처 목록이 동기 `PLACES` 배열 의존
@@ -232,12 +285,13 @@ vercel env pull --yes  # .env.local 재생성
 - **DB 마이그레이션**: `supabase/migrations/*.sql` 순번 파일 + node pg로 적용 (예시는 git log의 favorites 커밋 참고). `POSTGRES_URL_NON_POOLING` 사용, URL의 `sslmode` 파라미터 제거 후 `ssl:{rejectUnauthorized:false}`.
 - **관리자 테스트 유저**: service role로 `admin.createUser({email_confirm:true})` → 테스트 → `deleteUser` 정리. `@myseouldrop.app` 도메인 사용 (가짜 TLD는 Supabase가 거부).
 - **협업 규칙**: main 직푸시 대신 브랜치+PR 권장, 강제 푸시 금지. 디자인 실험은 `design/*` 브랜치.
+- **공유 작업 트리 (9/27)**: 이 디렉터리를 여러 Claude 세션이 **동시에** 쓴다(`git status` 117건이 남의 미커밋). 로컬 `main`이 origin보다 뒤일 수 있고, 남의 WIP가 origin/main과 같은 영역을 건드려 메인 트리에서 `git merge`가 충돌한다(9/27 7개 파일). **메인 트리에서 merge·reset·stash·`git add <남의 파일>` 금지.** 임시 `git worktree`에 `integrate` 브랜치(= origin/main 병합본)를 두고 내 hunk만 이식해 커밋 → `tsc`·`vitest`·`lint`·`build` → `git push origin integrate:main`. 자세한 절차는 그 브랜치의 병합 커밋 로그(`2f39f37`, `d0f6a9f`) 참고.
 
 ## 6. 데이터 파이프라인 재실행
 
 ```bash
 node scripts/build-creatrip-places.mjs      # 미용실 (CSV 경로 인자 가능)
-./scripts/capture-kakao-oy.sh && node scripts/build-oliveyoung-kakao.mjs  # 올리브영
+node scripts/build-oliveyoung-official.mjs  # 올리브영 (스냅샷 갱신은 docs/research/store-data-accuracy-2026-09-23.md §4 참조)
 node scripts/build-ados-places.mjs          # 관광지·시장
 npm run build:daiso-data                    # 다이소 251곳 (승인 스냅샷 data/sources/daiso-seoul-2026-09-03.json)
 npm run build:daiso-supplement              # 다이소 마트 입점 33곳 (오너 목록 + 다이소몰 API 스냅샷, 지오코딩 캐시 커밋됨)

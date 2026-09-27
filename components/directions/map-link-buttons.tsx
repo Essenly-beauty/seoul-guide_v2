@@ -30,7 +30,9 @@ function mobilePlatform(): MobilePlatform {
  * URL; users who set NAVER Map to English stay in the English map experience.
  */
 export function MapLinkButtons({ place, origin }: {
-  place: Pick<Place, "nameKr" | "lat" | "lng">;
+  // name + address feed the Google hand-off so its route sheet shows the
+  // shop, not "핀 고정 위치"; nameKr feeds Kakao (owner report 2026-09-27).
+  place: Pick<Place, "nameKr" | "lat" | "lng" | "name" | "address">;
   origin?: LatLng | null;
 }) {
   const dest = { lat: place.lat, lng: place.lng };
@@ -72,7 +74,11 @@ export function MapLinkButtons({ place, origin }: {
   };
 
   const links = [
-    { label: "Google", href: googleDirectionsUrl(dest, origin), bg: "#4285f4", fg: "#fff" },
+    // Google gets the shop by name + address so its route sheet reads
+    // "Olive Young Gangnam Town", not "핀 고정 위치"; the origin is left to
+    // Google so it reads "내 위치" (owner report 2026-09-27). Kakao keeps
+    // the coordinates: its link scheme carries a name alongside them.
+    { label: "Google", href: googleDirectionsUrl({ ...dest, name: place.name, address: place.address }), bg: "#4285f4", fg: "#fff" },
     { label: "Kakao", href: kakaoRouteUrl(place.nameKr, dest, origin), bg: "#fae100", fg: "#3c1e1e" },
   ];
   return (

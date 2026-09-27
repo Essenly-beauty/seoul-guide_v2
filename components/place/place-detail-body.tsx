@@ -25,6 +25,7 @@ import { Icon } from "@/components/icon";
 import { useLocation } from "@/components/map/use-location";
 import { useSigninNudge } from "@/components/auth/signin-nudge";
 import { PlaceCorrectionLauncher } from "@/components/place/place-correction-launcher";
+import { OliveYoungBrandHero } from "@/components/place/olive-young-brand-hero";
 import { toggleFavorite, useFavorites } from "@/lib/favorites";
 import { REVIEW_MAX_LEN, setRating, setReview, useMyRatings, useMyRatingsReady } from "@/lib/ratings";
 import { fetchPlaceReviews, REPORT_REASONS, reportReview, timeAgo, type PublicReview } from "@/lib/reviews";
@@ -315,7 +316,10 @@ function TaxiCard({ place }: { place: Place }) {
 
 // ── Olive Young stores: bestsellers instead of a service menu ──
 // (user request 2026-08-16: the store page should route to the products
-// sold there — the chart is chain-wide, so it's labeled honestly.)
+// sold there. It used to be labelled "Olive Young bestsellers — chain-wide
+// chart"; the 2026-09-23 verification found no such chart on Olive Young's
+// site, and these 14 rows are hand-written samples, so the label now says what
+// the list actually is.)
 function OliveYoungPicks() {
   const picks = PRODUCTS
     .filter((p) => p.channel === "olive_young" && p.salesRank !== undefined)
@@ -323,7 +327,7 @@ function OliveYoungPicks() {
     .slice(0, 4);
   return (
     <>
-      <div className="caption muted">Olive Young bestsellers — chain-wide chart, stock varies by branch.</div>
+      <div className="caption muted">A short list we refresh every week or two. Stock varies by branch.</div>
       <div>
         {picks.map((p, i) => (
           <Link key={p.id} className="listrow" href={routes.shopItem(p.id)}>
@@ -452,18 +456,19 @@ function ServicesSection({ place }: { place: Place }) {
   );
 }
 
-function PlacePhotoCollage({ photos, placeName }: { photos: readonly string[]; placeName: string }) {
+function PlacePhotoCollage({ photos, placeName, brandFallback = false }: { photos: readonly string[]; placeName: string; brandFallback?: boolean }) {
   const visiblePhotos = photos.slice(0, 3);
   const hasThreePhotos = visiblePhotos.length >= 3;
 
   if (visiblePhotos.length === 0) {
-    return (
+    const emptyMedia = (
       <div style={{ display: "grid", gridTemplateColumns: "2fr 1fr", gridTemplateRows: "73px 73px", gap: 6 }}>
         <ImgPh style={{ gridRow: "1 / 3" }} />
         <ImgPh />
         <ImgPh />
       </div>
     );
+    return brandFallback ? <OliveYoungBrandHero className="olive-young-detail-brand-hero" fallback={emptyMedia} /> : emptyMedia;
   }
 
   return (
@@ -707,6 +712,54 @@ function ReviewsSection({ place }: { place: Place }) {
   );
 }
 
+/** What the retailer's own store finder says this branch can do.
+ *
+ *  These decide a visit for a foreign visitor — whether the branch does a tax
+ *  refund, sells a SIM, or refuses cash — and until 2026-09-23 the app held
+ *  every one of them and showed none. "Card only" leads because it is the one
+ *  that turns someone away at the till. */
+const STORE_FACT_LABELS: Record<string, string> = {
+  "cashless-store": "Card only, no cash",
+  "tax-refund": "Tax refund",
+  "sim-card": "SIM cards",
+  "store-pickup": "Store pickup",
+  "photo-sticker": "Photo booth",
+  "name-sticker": "Name stickers",
+  parking: "Parking",
+  elevator: "Elevator",
+  "entrance-ramp": "Step-free entrance",
+};
+const STORE_FACT_ORDER = Object.keys(STORE_FACT_LABELS);
+
+function StoreFactsRow({ place }: { place: Place }) {
+  const facts = [...new Set([...(place.serviceTags ?? []), ...(place.facilities ?? [])])]
+    .filter((key) => key in STORE_FACT_LABELS)
+    .sort((a, b) => STORE_FACT_ORDER.indexOf(a) - STORE_FACT_ORDER.indexOf(b));
+  if (facts.length === 0) return null;
+  return (
+    <div className="inforow" style={{ alignItems: "flex-start" }}>
+      <Icon name="mark" size="xs" />
+      <span>In store</span>
+      <span className="chev" style={{ display: "flex", flexWrap: "wrap", gap: 6, justifyContent: "flex-end" }}>
+        {facts.map((key) => (
+          <span
+            key={key}
+            className="caption"
+            style={{
+              padding: "2px 8px", borderRadius: 999, whiteSpace: "nowrap",
+              border: "1px solid var(--line)",
+              color: key === "cashless-store" ? "var(--warning, var(--text))" : "var(--muted)",
+              fontWeight: key === "cashless-store" ? 600 : 400,
+            }}
+          >
+            {STORE_FACT_LABELS[key]}
+          </span>
+        ))}
+      </span>
+    </div>
+  );
+}
+
 // ── Info (d-info): full details — Naver home/info split ───
 function InfoSection({ place }: { place: Place }) {
   const { toast } = useToast();
@@ -744,8 +797,11 @@ function InfoSection({ place }: { place: Place }) {
         <span>English</span>
         <span className="caption muted chev">{place.englishOk ? "Staff can assist in English" : "Translation app recommended"}</span>
       </div>
-      {/* facility chips (Card OK / Locker / Towel rental) were invented
-          shared samples — removed until per-place verified data exists */}
+      {/* The facility chips pulled in the launch audit were one invented
+          sample repeated on every place. These are per-place and come from the
+          retailer's own store finder, which is the condition that removal was
+          waiting on. Nothing renders when a place has no such data. */}
+      <StoreFactsRow place={place} />
       {place.priceRange && (
         <div className="inforow">
           <span className="muted" style={{ width: 20, textAlign: "center", flex: "none" }} aria-hidden="true">₩</span>
@@ -758,10 +814,14 @@ function InfoSection({ place }: { place: Place }) {
         {place.source === "daiso"
           ? place.nameVerification === "provisional"
             ? "Official Daiso store listing — the English display name is provisional and has not yet been verified on Naver Map or Google. Confirm important details before visiting."
-            : "Official Daiso store listing — details can change. Confirm important ones before visiting."
+            : place.nameVerification === "derived"
+              ? "Official Daiso store listing — the English display name comes from the official station name or the chain's own English branding, not from the store's own sign. Confirm important details before visiting."
+              : "Official Daiso store listing — details can change. Confirm important ones before visiting."
           : place.source === "curated"
             ? "Curated pick — details compiled by our team and not yet venue-verified. Confirm before visiting."
-            : "Listed from public sources — details can change. Confirm important ones before visiting."}
+            : place.source === "olive_young"
+              ? "Listed on Olive Young's own store finder — the English display name is ours, not the store's sign. Details can change; confirm important ones before visiting."
+              : "Listed from public sources — details can change. Confirm important ones before visiting."}
         {place.locationVerification === "provisional"
           ? " Provisional location — the map pin is neighborhood-level; use the map-service button to confirm the storefront before visiting."
           : place.geoSource === "area"
@@ -914,7 +974,7 @@ export function PlaceDetailBody({ place, heroOverlay, onCollapse }: {
 
       {/* §4.6 photo header collage */}
       <div ref={heroRef} style={{ position: "relative", padding: 8 }}>
-        <PlacePhotoCollage photos={place.photos ?? []} placeName={place.name} />
+        <PlacePhotoCollage photos={place.photos ?? (place.photoUrl ? [place.photoUrl] : [])} placeName={place.name} brandFallback={place.type === "olive_young"} />
         {onCollapse && (
           <IconButton
             name="down"

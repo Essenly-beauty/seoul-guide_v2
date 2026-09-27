@@ -26,8 +26,18 @@ export type StepCategory =
   | "cleanser" | "toner" | "essence" | "serum" | "moisturizer" | "sunscreen" | "mask_pack"
   | "shampoo" | "conditioner" | "hair_treatment";
 export type ProductChannel = "olive_young" | "korea_exclusive";
-export type PlaceSource = "curated" | "creatrip" | "kakao" | "ados" | "daiso";
-export type PlaceNameVerification = "verified" | "provisional";
+/** "kakao" means a Kakao Map capture, which is a map's index rather than the
+    retailer's own list. The Olive Young rows carried it until 2026-09-23,
+    when they moved to "olive_young" — the retailer's own store finder — and
+    138 missing branches came with the move. */
+export type PlaceSource = "curated" | "creatrip" | "kakao" | "ados" | "daiso" | "olive_young";
+/** "verified" means an outside listing (Naver) confirmed the English name.
+    "derived" means it was read off an authoritative table rather than a
+    listing — the Seoul Metro station names in lib/subway-data.json, or a
+    chain's own English brand name — and recorded with its basis in
+    scripts/lib/en-name-overrides.json. "provisional" is the machine
+    transliteration, which nobody has checked. */
+export type PlaceNameVerification = "verified" | "derived" | "provisional";
 export type PlaceLocationVerification = "verified" | "provisional";
 
 export type ZoneKey =
@@ -88,7 +98,7 @@ export const OY_BRAND_GREEN = "#9bce26";
  *  show the retailer's mark instead of a generic pin; categories without a
  *  mark fall back to their TYPE_ICON glyph in TYPE_COLOR. */
 export const BRAND_MARK_SRC: Partial<Record<PlaceType, string>> = {
-  olive_young: "/brands/olive-young-mark.svg",
+  olive_young: "/brands/olive-young-logo.jpeg",
   daiso: "/brands/daiso-mark.svg",
 };
 
@@ -116,6 +126,17 @@ export const CATEGORY_DEFINITIONS = [
 
 /** Per-category detail-filter service tags (spec §4.2). Keys match Place.serviceTags. */
 export const SERVICE_FILTERS: Partial<Record<PlaceType, { key: string; label: string }[]>> = {
+  // Daiso's own store finder reports these per store (scripts/build-daiso-
+  // supplement-places.ts). A visitor could not reach any of them until
+  // 2026-09-23: the category had no entry here at all, so the 65 tax-free and
+  // 116 SIM-selling stores were unreachable. "cashless-store" is deliberately
+  // not a filter — nobody searches for a shop that refuses cash; it is a
+  // warning, and the place sheet shows it as one.
+  daiso: [
+    { key: "tax-refund", label: "Tax refund" }, { key: "sim-card", label: "SIM cards" },
+    { key: "store-pickup", label: "Store pickup" }, { key: "photo-sticker", label: "Photo booth" },
+    { key: "name-sticker", label: "Name stickers" },
+  ],
   olive_young: [
     { key: "global", label: "Global (Tax-free)" }, { key: "late", label: "Open late" },
   ],
@@ -195,6 +216,11 @@ export type Place = {
   stationWalk?: { station: string; exit?: string; minutes: number };
   services?: ServiceItem[];
   serviceTags?: string[];
+  /** Step-free access and parking, as the retailer's own store finder reports
+      them. The launch audit pulled the old facility rows because they were
+      one invented sample repeated on every place; these are per-place and
+      sourced. */
+  facilities?: string[];
   bookingChannels?: BookingChannel[];
   priceConfirmedDaysAgo?: number;
   // Creatrip import extras — kept so the CSV round-trips losslessly.
@@ -214,6 +240,10 @@ export type Place = {
   nameVerification?: PlaceNameVerification;
   /** Explicitly provisional pins may be published only with an on-screen warning. */
   locationVerification?: PlaceLocationVerification;
+  /** The retailer's own identifier for this branch (Olive Young's store code,
+      e.g. "D176"). Stable across a rename, unlike the Korean branch name the
+      place id is derived from, so a future rebuild can match on it. */
+  storeCode?: string;
   /** Provenance (data-ledger slice, 2026-08-12): where this row came from.
       "curated" rows are team-compiled and may carry unverified details —
       the detail page discloses this and hides their synthetic ratings. */
@@ -310,7 +340,7 @@ export const CATALOGUE_PLACES: Place[] = [
   // Creatrip hair-salon import (205 rows → scripts/build-creatrip-places.mjs).
   ...withSource(CREATRIP_PLACES, "creatrip"),
   // Seoul Olive Young stores, Kakao Map capture (scripts/build-oliveyoung-kakao.mjs).
-  ...withSource(OLIVEYOUNG_PLACES, "kakao"),
+  ...withSource(OLIVEYOUNG_PLACES, "olive_young"),
   // "A drop of Seoul" attractions + towers & markets (scripts/build-ados-places.mjs).
   ...withSource(ADOS_PLACES, "ados"),
   // Owner-photo venues with independently reviewed, address-level pins.
@@ -581,9 +611,9 @@ export const ARTICLES: Article[] = [
 ];
 
 // ── Lookups ───────────────────────────────────────────────
-// Next.js can escape the colons in a route param while some source IDs
-// (notably official Daiso IDs) already contain percent-encoded Hangul. Match
-// the decoded forms without changing stable saved-place and review IDs.
+// Route params may arrive decoded, while official Daiso IDs retain encoded
+// Hangul in the stored ID. Compare both forms, including escaped colons,
+// without changing IDs already used by saved places and reviews.
 function decodedFind<T>(list: T[], key: (x: T) => string, id: string): T | undefined {
   const direct = list.find((x) => key(x) === id);
   if (direct) return direct;
