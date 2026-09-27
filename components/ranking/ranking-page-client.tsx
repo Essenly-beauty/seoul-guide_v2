@@ -86,10 +86,12 @@ function RankRow({ p, rank }: { p: Product; rank: number }) {
 
 function RankSection({
   title,
+  description,
   products,
   emptyMessage,
 }: {
   title: string;
+  description?: string;
   products: readonly Product[];
   emptyMessage: string;
 }) {
@@ -98,6 +100,7 @@ function RankSection({
   return (
     <section className="stack sm">
       <SectionHeader title={title} count={products.length} />
+      {description && <p className="caption muted">{description}</p>}
       {products.length === 0 ? (
         <EmptyState>{emptyMessage}</EmptyState>
       ) : (
@@ -255,11 +258,11 @@ function OliveYoungRanking() {
             {/* key resets the "More ›" expansion when the ranking scope changes */}
             <RankSection
               key={`${tab}:${category}`}
-              // Owner decision 2026-09-23: this list is refreshed by hand every
-              // week or two, and again around a sale or a holiday. It must not
-              // borrow a live feed's vocabulary. The previous title dated a
-              // hand-made snapshot to the hour the visitor happened to open it.
-              title={tab === "sales" ? "Popular at Olive Young" : "Highest-rated by reviews"}
+              // Owner decision 2026-09-27: use editorial trend framing, but
+              // explicitly disclose that these are curated picks, not a live
+              // or same-day retailer sales chart.
+              title={tab === "sales" ? "What's trending" : "Highest-rated by reviews"}
+              description={tab === "sales" ? "Curated beauty picks — not a live sales chart." : undefined}
               products={ranked}
               emptyMessage={config.emptyMessage}
             />

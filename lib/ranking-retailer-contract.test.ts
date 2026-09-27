@@ -39,6 +39,13 @@ describe("ranking retailer server/client boundary", () => {
 });
 
 describe("retailer-specific ranking presentation", () => {
+  it("calls editorial Olive Young picks What's trending without claiming today's official sales", () => {
+    expect(clientSource).toContain('title={tab === "sales" ? "What\'s trending" : "Highest-rated by reviews"}');
+    expect(clientSource).toContain('description={tab === "sales" ? "Curated beauty picks — not a live sales chart." : undefined}');
+    expect(clientSource).not.toContain("Today's sales ranking");
+    expect(clientSource).toContain('className="caption muted"');
+  });
+
   it("preserves the complete Olive Young ranking and brand flows", () => {
     expect(clientSource).toContain("const config = OLIVE_YOUNG_RANKING_CONFIG");
     expect(clientSource).toContain("config.tabs.map");
