@@ -15,7 +15,7 @@
     "geography": "Seoul only",
     "record_count": 454,
     "enriched_record_count": 30,
-    "researched_record_count": 191
+    "researched_record_count": 196
   },
   "import_policy": {
     "default_action": "stage_only",
@@ -19734,8 +19734,59 @@
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
       "editorial_context_provenance": null,
-      "canonical_place_id": null,
-      "research_status": "not_researched"
+      "canonical_place_id": "seoul:gwangjin:sayou-jungwon-jayang",
+      "research_status": "reviewed",
+      "research_confidence": "high",
+      "verified_attributes": [
+        "reservation-only",
+        "unmanned-book-cafe",
+        "city-view",
+        "sunset-view",
+        "quiet-stay",
+        "work-friendly",
+        "all-seat-outlets",
+        "tea-ceremony",
+        "self-service-drip",
+        "late-hours"
+      ],
+      "ados_editorial_angles": [
+        "구의역 6층 창가를 예약해 노을과 한 권의 책을 독점하는 시간",
+        "사람 대신 비밀번호가 맞아주는 무인 서재에서 차를 우리고 생각을 정리하는 곳"
+      ],
+      "research_cautions": [
+        "카페보다는 시간제 공유서재에 가까우며 사전 예약·결제 필수",
+        "기본 이용 시간이 길어 짧은 커피 방문에는 부적합",
+        "주차는 1대 수준으로 제한적"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://www.diningcode.com/profile.php?rid=1ZoHJWVpUCVX",
+          "publisher": "DiningCode",
+          "source_kind": "place-platform",
+          "supports": [
+            "address",
+            "opening-hours",
+            "reservation-only",
+            "unmanned-operation",
+            "city-view",
+            "sunset-view",
+            "all-seat-outlets",
+            "tea-ceremony",
+            "self-service-drip",
+            "parking-caution"
+          ]
+        },
+        {
+          "url": "https://www.cosmopolitan.co.kr/article/1889202",
+          "publisher": "코스모폴리탄 코리아",
+          "source_kind": "magazine-editorial",
+          "supports": [
+            "reservation-book-cafe",
+            "panoramic-window-view",
+            "quiet-rest"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-0c9671a76fac5120",
@@ -19767,8 +19818,61 @@
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
       "editorial_context_provenance": null,
-      "canonical_place_id": null,
-      "research_status": "not_researched"
+      "canonical_place_id": "seoul:gwangjin:ones-coffee-guui",
+      "research_status": "reviewed",
+      "research_confidence": "high",
+      "verified_attributes": [
+        "specialty-coffee",
+        "multiple-bean-choice",
+        "siphon-coffee",
+        "cold-brew",
+        "signature-vanilla-coldbrew-cream-latte",
+        "early-opening",
+        "late-hours",
+        "neighborhood-roastery",
+        "wheelchair-accessible"
+      ],
+      "ados_editorial_angles": [
+        "어린이대공원 산책 전 사이폰과 스페셜티 원두를 고르는 구의동 로스터리",
+        "젊은 창업자의 실험실 같은 한 잔을 이른 아침부터 늦은 저녁까지 만나는 곳"
+      ],
+      "research_cautions": [
+        "휴무일은 소셜 채널에 별도 공지",
+        "출처별 마감시간이 달라 방문 전 최신 공지 확인",
+        "주차 가능 대수와 리필 조건은 매장 확인"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://www.daangn.com/kr/local-profile/%EC%9B%90%EC%A6%88%EC%BB%A4%ED%94%BC-86s2fyyq11wp/",
+          "publisher": "당근 동네업체",
+          "source_kind": "business-profile",
+          "supports": [
+            "current-operation-2026",
+            "address",
+            "opening-hours",
+            "specialty-coffee",
+            "siphon-coffee",
+            "cold-brew",
+            "signature-menu",
+            "owner-communication"
+          ]
+        },
+        {
+          "url": "https://gajaseoul.com/ko/store/ones_coffee",
+          "publisher": "GAJA SEOUL",
+          "source_kind": "place-guide",
+          "supports": [
+            "founder-story",
+            "three-store-growth",
+            "roastery",
+            "hand-drip",
+            "multiple-beans",
+            "wheelchair-access",
+            "parking",
+            "children-grand-park-proximity"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-811fb4ba0f544f55",
@@ -19800,8 +19904,68 @@
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
       "editorial_context_provenance": null,
-      "canonical_place_id": null,
-      "research_status": "not_researched"
+      "canonical_place_id": "seoul:gwangjin:adp-coffee-roasters-jayang",
+      "research_status": "reviewed",
+      "research_confidence": "high",
+      "verified_attributes": [
+        "specialty-coffee",
+        "on-site-roasting",
+        "filter-coffee",
+        "multiple-blends",
+        "signature-berry-brown",
+        "signature-jayang-cream-latte",
+        "basement-space",
+        "house-dessert",
+        "neighborhood-discount"
+      ],
+      "ados_editorial_angles": [
+        "뚝섬한강공원으로 가는 길에 두 가지 블렌드와 필터 커피를 고르는 로스터리",
+        "자양동 주민의 일상을 베리브라운과 동네 할인으로 연결하는 카페"
+      ],
+      "research_cautions": [
+        "매장 앞 주차는 1~2대 수준이라 대중교통 권장",
+        "지하 좌석의 접근성 확인",
+        "원두와 디저트 재고는 방문 시점에 따라 달라짐"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://ramyselect.com/restaurants/adp-coffee-jayang",
+          "publisher": "라미셀렉트",
+          "source_kind": "recent-place-guide",
+          "supports": [
+            "current-operation-2026",
+            "address",
+            "opening-hours",
+            "filter-coffee",
+            "multiple-blends",
+            "signature-menus",
+            "house-dessert",
+            "parking-caution"
+          ]
+        },
+        {
+          "url": "https://gajaseoul.com/en/store/adef_coffee_roasters",
+          "publisher": "GAJA SEOUL",
+          "source_kind": "place-guide",
+          "supports": [
+            "brand-meaning",
+            "on-site-roasting",
+            "specialty-coffee",
+            "basement-space",
+            "neighborhood-discount",
+            "quiet-atmosphere"
+          ]
+        },
+        {
+          "url": "https://50plus.or.kr/upload/im/2025/10/8f801dd1-e967-4eae-91e6-34e97be1d9a2.pdf",
+          "publisher": "서울시50플러스재단",
+          "source_kind": "public-spending-record",
+          "supports": [
+            "operation-signal-2025",
+            "business-identity"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-050607c581529e10",
@@ -20002,8 +20166,71 @@
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
       "editorial_context_provenance": null,
-      "canonical_place_id": null,
-      "research_status": "not_researched"
+      "canonical_place_id": "seoul:gwangjin:bookstore-gozneok-gunja",
+      "research_status": "reviewed",
+      "research_confidence": "high",
+      "verified_attributes": [
+        "book-cafe",
+        "independent-bookstore",
+        "house-conversion",
+        "two-floor",
+        "book-curation",
+        "author-notes",
+        "book-talks",
+        "independent-publishing-fair",
+        "house-made-basque-cheesecake",
+        "late-hours"
+      ],
+      "ados_editorial_angles": [
+        "군자동 이층집에서 작가의 메모를 따라 다음 책을 고르는 카페",
+        "북토크와 독립출판 북페어가 동네의 취향을 모으는 작은 책방"
+      ],
+      "research_cautions": [
+        "스스로는 ‘북카페’보다 ‘책이 많은 카페’로 소개한다는 맥락 유지",
+        "주차 불가",
+        "주말에는 혼잡하고 일부 좌석이 독서에 불편할 수 있음"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://www.goesneok.com/",
+          "publisher": "책방고즈넉",
+          "source_kind": "official",
+          "supports": [
+            "current-operation-2026",
+            "opening-hours",
+            "house-made-cakes",
+            "reading-and-conversation-space"
+          ]
+        },
+        {
+          "url": "https://v.daum.net/v/tc1GTCnQTi",
+          "publisher": "여성동아",
+          "source_kind": "local-editorial",
+          "supports": [
+            "gunja-neighborhood",
+            "house-conversion",
+            "book-filled-cafe",
+            "book-talks",
+            "independent-publishing-fair",
+            "separate-bookshop",
+            "brand-meaning"
+          ]
+        },
+        {
+          "url": "https://www.diningcode.com/profile.php?rid=iNlaIuEjyCxR",
+          "publisher": "DiningCode",
+          "source_kind": "place-platform",
+          "supports": [
+            "address",
+            "opening-hours",
+            "two-floor",
+            "book-purchase",
+            "house-made-basque-cheesecake",
+            "parking-caution",
+            "weekend-crowding"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-1c88f88e402e7210",
@@ -20068,8 +20295,70 @@
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
       "editorial_context_provenance": null,
-      "canonical_place_id": null,
-      "research_status": "not_researched"
+      "canonical_place_id": "seoul:gwangjin:badd-cafe-and-bar-hwayang",
+      "research_status": "reviewed",
+      "research_confidence": "high",
+      "verified_attributes": [
+        "cafe-and-bar",
+        "late-night",
+        "wine-and-cocktails",
+        "seasonal-fruit-dessert",
+        "house-made-cakes",
+        "multi-floor",
+        "work-friendly-signal",
+        "pet-friendly",
+        "date-friendly"
+      ],
+      "ados_editorial_angles": [
+        "건대에서 제철 과일 케이크와 와인으로 오후를 자정까지 늘이는 곳",
+        "낮의 카페와 밤의 바 사이를 반려견과 함께 건너는 화양동 공간"
+      ],
+      "research_cautions": [
+        "카페 메뉴와 바 메뉴의 주문 마감시간이 다를 수 있음",
+        "주말·공휴일 웨이팅 가능",
+        "주차 불가로 인근 공영주차장 이용",
+        "시즌 과일 메뉴는 판매 시기 확인"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://www.dongnecoffeenote.com/c/21785",
+          "publisher": "동네 커피 노트",
+          "source_kind": "review-analysis",
+          "supports": [
+            "current-reviews-2026",
+            "address",
+            "wine-and-alcohol",
+            "pet-friendly",
+            "late-night",
+            "work-friendly-signal",
+            "parking-caution"
+          ]
+        },
+        {
+          "url": "https://www.diningcode.com/profile.php?rid=miLB5Yo972Ti",
+          "publisher": "DiningCode",
+          "source_kind": "place-platform",
+          "supports": [
+            "opening-hours",
+            "seasonal-fruit-dessert",
+            "house-made-cakes",
+            "cocktails",
+            "pet-friendly",
+            "weekend-waiting"
+          ]
+        },
+        {
+          "url": "https://place.udanax.org/place.php?id=878389&placeName=%EB%B9%84%EC%95%A0%EB%93%9C+%EC%B9%B4%ED%8E%98%EC%95%A4%EB%B0%94",
+          "publisher": "업체창고",
+          "source_kind": "business-directory",
+          "supports": [
+            "address",
+            "business-identity",
+            "multi-floor",
+            "late-last-order"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-77d9f2b75b430578",
