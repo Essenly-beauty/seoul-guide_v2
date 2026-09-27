@@ -23,7 +23,7 @@ import { supabaseBrowser } from "@/lib/supabase/client";
 import { routes } from "@/lib/routes";
 import { setPendingFavoriteReturn } from "@/lib/signup-return";
 
-export type NudgeContext = "favorite" | "rating" | "savedLayer" | "menu" | "shareList";
+export type NudgeContext = "favorite" | "rating" | "reviewPublish" | "savedLayer" | "menu" | "shareList";
 type SavedPlace = { id: string; name: string };
 type NudgeOptions = { savedPlace?: SavedPlace };
 type ActiveNudge = { context: NudgeContext; savedPlace?: SavedPlace };
@@ -36,6 +36,10 @@ const COPY: Record<NudgeContext, { title: string; body: string }> = {
   rating: {
     title: "Keep your ratings",
     body: "Join and your ratings and review notes stay on your account across devices.",
+  },
+  reviewPublish: {
+    title: "Sign in to publish",
+    body: "Your review is saved privately on this device. Sign in, then choose Post publicly again.",
   },
   savedLayer: {
     title: "Your saved-places layer",

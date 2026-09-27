@@ -581,15 +581,27 @@ export const ARTICLES: Article[] = [
 ];
 
 // ── Lookups ───────────────────────────────────────────────
-// Route params arrive percent-encoded (App Router does not decode them), and
-// ~240 Olive Young ids contain Hangul — decode before matching or every
-// Korean-id detail URL misses.
+// Next.js can escape the colons in a route param while some source IDs
+// (notably official Daiso IDs) already contain percent-encoded Hangul. Match
+// the decoded forms without changing stable saved-place and review IDs.
 function decodedFind<T>(list: T[], key: (x: T) => string, id: string): T | undefined {
   const direct = list.find((x) => key(x) === id);
   if (direct) return direct;
   try {
     const decoded = decodeURIComponent(id);
-    return decoded === id ? undefined : list.find((x) => key(x) === decoded);
+    if (decoded !== id) {
+      const match = list.find((x) => key(x) === decoded);
+      if (match) return match;
+    }
+    return list.find((x) => {
+      const stored = key(x);
+      if (!stored.includes("%")) return false;
+      try {
+        return decodeURIComponent(stored) === decoded;
+      } catch {
+        return false;
+      }
+    });
   } catch {
     return undefined; // malformed % sequence
   }

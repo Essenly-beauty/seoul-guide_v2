@@ -32,6 +32,9 @@ const SubwayRouteController = dynamic(
 );
 import { toggleFavorite, useFavorites } from "@/lib/favorites";
 import { fetchSharedList, type SharedList } from "@/lib/shared-lists";
+import { resolveSharedListView, type SharedListView } from "@/lib/shared-list-view";
+import { SharedListAccessBanner } from "./shared-list-access-banner";
+import { SharedListReadyBanner } from "./shared-list-ready-banner";
 import { useSigninNudge } from "@/components/auth/signin-nudge";
 import { useAuthUser } from "@/lib/auth/use-auth";
 import { useTheme } from "@/components/theme/theme-provider";
@@ -114,7 +117,7 @@ export function MapScreen() {
   const [stationRadius, setStationRadius] = useState(0.5);
   const [stationCategory, setStationCategory] = useState<SubwayPlaceCategory>("all");
   const [subwayEditing, setSubwayEditing] = useState(false);
-  const { user: authUser } = useAuthUser();
+  const { user: authUser, loading: authLoading } = useAuthUser();
   const { nudge, sheet: nudgeSheet } = useSigninNudge();
   const { theme } = useTheme();
   preloadInitialTiles(theme, centerRef.current);
@@ -139,26 +142,34 @@ export function MapScreen() {
   const savedParam = searchParams.get("saved");
   const savedOnly = favOnly || savedParam === "1";
 
-  // Shared favorite list `/map?list={uuid}` (user request 2026-08-16):
-  // narrow the map to the shared pins with a banner naming the list.
-  const [sharedList, setSharedList] = useState<SharedList | null>(null);
+  // A stale response must never reveal an earlier viewer's list after sign-out
+  // or a different `?list=` navigation, even for one render.
+  const [shareResult, setShareResult] = useState<{
+    id: string | null;
+    viewerId: string | null;
+    view: SharedListView;
+  }>({ id: null, viewerId: null, view: { status: "none" } });
+  const [shareRetry, setShareRetry] = useState(0);
+  const viewerId = authUser?.id ?? null;
+  const shareView: SharedListView = !listParam
+    ? { status: "none" }
+    : authLoading || shareResult.id !== listParam || shareResult.viewerId !== viewerId
+      ? { status: "loading" }
+      : shareResult.view;
+  const sharedList: SharedList | null = shareView.status === "ok" ? shareView.list : null;
   useEffect(() => {
     if (!listParam) {
-      setSharedList(null);
+      setShareResult({ id: null, viewerId: null, view: { status: "none" } });
       return;
     }
     let alive = true;
-    void fetchSharedList(listParam).then((list) => {
+    setShareResult({ id: listParam, viewerId, view: { status: "loading" } });
+    void resolveSharedListView(listParam, viewerId, authLoading, fetchSharedList).then((view) => {
       if (!alive) return;
-      if (list) {
-        setSharedList(list);
-        return;
-      }
-      toast("That shared list link isn't available");
-      router.replace(routes.map);
+      setShareResult({ id: listParam, viewerId, view });
     });
     return () => { alive = false; };
-  }, [listParam, router, toast]);
+  }, [listParam, viewerId, authLoading, shareRetry]);
 
   // Camera: center on the shared pins, and don't let GPS auto-fly steal it.
   useEffect(() => {
@@ -680,14 +691,19 @@ export function MapScreen() {
       )}
 
       {mode === "map" && sharedList && (
-        <div className="map-banner" role="status">
-          <Icon name="heart" size="xs" style={{ color: "var(--accent)", flex: "none" }} aria-hidden="true" />
-          <span className="small" style={{ flex: 1, minWidth: 0, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
-            <b>{sharedList.title}</b> · {sharedList.placeIds.length} places
-          </span>
-          <Button size="sm" style={{ flex: "none" }} onClick={saveAllShared}>Save all</Button>
-          <IconButton name="x" label="Close shared list" size={32} iconSize="xs" onClick={() => router.replace(routes.map)} />
-        </div>
+        <SharedListReadyBanner
+          list={sharedList}
+          onSaveAll={saveAllShared}
+          onClose={() => router.replace(routes.map)}
+        />
+      )}
+
+      {mode === "map" && listParam && (
+        <SharedListAccessBanner
+          id={listParam}
+          view={shareView}
+          onRetry={() => setShareRetry((current) => current + 1)}
+        />
       )}
 
       {mode === "map" && !sharedList && savedParam === "1" && (

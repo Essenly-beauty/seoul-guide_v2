@@ -6,6 +6,7 @@ import { BrandMark, BrandWordmark } from "@/components/brand/brand-logo";
 import { GoogleGlyph } from "@/components/brand/auth-glyphs";
 import { supabaseBrowser } from "@/lib/supabase/client";
 import { routes } from "@/lib/routes";
+import { oauthCallbackUrl } from "@/lib/auth-return";
 
 // Kakao and Apple are outside the current launch scope — Google is live.
 type SocialProvider = "google";
@@ -14,13 +15,14 @@ type SocialProvider = "google";
     back + lockup, title, support line, the caller's form, then real social
     OAuth via Supabase. Providers not yet configured in the Supabase
     dashboard surface the provider error inline instead of failing silently. */
-export function AuthShell({ title, support, children, cta, foot }: {
+export function AuthShell({ title, support, children, cta, foot, oauthNext }: {
   title: string;
   support?: ReactNode;
   children: ReactNode;
   /** Prominent block under the socials (e.g. the login page's register button). */
   cta?: ReactNode;
   foot?: ReactNode;
+  oauthNext?: string;
 }) {
   const [socialError, setSocialError] = useState<string | null>(null);
   const [socialBusy, setSocialBusy] = useState<SocialProvider | null>(null);
@@ -32,7 +34,7 @@ export function AuthShell({ title, support, children, cta, foot }: {
     const supabase = supabaseBrowser();
     const { error } = await supabase.auth.signInWithOAuth({
       provider,
-      options: { redirectTo: `${window.location.origin}/auth/callback?next=/map` },
+      options: { redirectTo: oauthCallbackUrl(window.location.origin, oauthNext) },
     });
     if (error) {
       setSocialBusy(null);

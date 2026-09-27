@@ -27,7 +27,7 @@ describe("password policy", () => {
   });
 
   it("is what the sign-up and reset forms enforce (no stale minLength={6})", () => {
-    for (const path of ["components/auth/register-client.tsx", "app/reset-password/page.tsx"]) {
+    for (const path of ["components/auth/register-client.tsx", "components/auth/reset-password-client.tsx"]) {
       const src = readFileSync(join(process.cwd(), path), "utf8");
       expect(src, path).not.toMatch(/minLength=\{6\}/);
       expect(src, path).toMatch(/PASSWORD_MIN_LENGTH/);

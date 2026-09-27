@@ -26,7 +26,7 @@ import { useLocation } from "@/components/map/use-location";
 import { useSigninNudge } from "@/components/auth/signin-nudge";
 import { PlaceCorrectionLauncher } from "@/components/place/place-correction-launcher";
 import { toggleFavorite, useFavorites } from "@/lib/favorites";
-import { REVIEW_MAX_LEN, setRating, setReview, useMyRatings } from "@/lib/ratings";
+import { REVIEW_MAX_LEN, setRating, setReview, useMyRatings, useMyRatingsReady } from "@/lib/ratings";
 import { fetchPlaceReviews, REPORT_REASONS, reportReview, timeAgo, type PublicReview } from "@/lib/reviews";
 import { routes } from "@/lib/routes";
 import { PLACES, PRODUCTS, TYPE_LABEL, zoneShort, type Place } from "@/lib/data";
@@ -582,6 +582,7 @@ function ReviewsSection({ place }: { place: Place }) {
   const { toast } = useToast();
   // Shared store — persists per place, syncs to the account when signed in.
   const myRatings = useMyRatings();
+  const ratingsReady = useMyRatingsReady();
   const myRating = myRatings[place.id]?.rating ?? null;
   const myReview = myRatings[place.id]?.body ?? "";
   const { nudge: nudgeRating, sheet: ratingNudgeSheet } = useSigninNudge();
@@ -601,18 +602,21 @@ function ReviewsSection({ place }: { place: Place }) {
   };
 
   const saveReview = async () => {
-    if (myRating === null || savingReview) return;
+    if (myRating === null || savingReview || !ratingsReady) return;
     setSavingReview(true);
     const saved = await setReview(place.id, myRating, draft, postPublic);
     setSavingReview(false);
-    if (!saved) {
+    if (saved === "failed") {
       toast("Couldn’t save your review. Your draft is still here — please try again.");
       return;
     }
     setComposing(false);
-    toast(draft.trim()
-      ? postPublic ? "Review posted — travelers can now see it" : "Review saved as a private note"
-      : "Review removed");
+    if (saved === "private" && postPublic) {
+      toast("Saved privately on this device — sign in to publish");
+      nudgeRating("reviewPublish");
+    } else {
+      toast(saved === "published" ? "Public review saved" : saved === "removed" ? "Review removed" : "Review saved as a private note");
+    }
     setReviewBump((b) => b + 1);
   };
 
@@ -644,8 +648,7 @@ function ReviewsSection({ place }: { place: Place }) {
           </span>
         )}
 
-        {/* Review text — private-first: synced to the account, shown only to
-            the author until public reviews (with moderation) ship. */}
+        {/* Review text is private until a signed-in author publishes it. */}
         {myRating !== null && !composing && (
           myReview ? (
             <div className="stack sm" style={{ width: "100%", textAlign: "left", background: "var(--surface)", border: "1px solid var(--border)", borderRadius: 12, padding: "10px 12px" }}>
@@ -681,7 +684,7 @@ function ReviewsSection({ place }: { place: Place }) {
             </label>
             <div className="row" style={{ gap: 8 }}>
               <Button variant="secondary" size="sm" style={{ flex: 1 }} onClick={() => setComposing(false)}>Cancel</Button>
-              <Button size="sm" style={{ flex: 1 }} disabled={savingReview} onClick={saveReview}>
+              <Button size="sm" style={{ flex: 1 }} disabled={savingReview || !ratingsReady} onClick={saveReview}>
                 {savingReview ? "Saving…" : "Save review"}
               </Button>
             </div>

@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState, type FormEvent } from "react";
 import { useParams, useRouter } from "next/navigation";
 import { CategoryBadge } from "@/components/category/category-badge";
+import { useSigninNudge } from "@/components/auth/signin-nudge";
 import { BackButton } from "@/components/ui/back-button";
 import { Button } from "@/components/ui/button";
 import { EmptyState } from "@/components/ui/empty-state";
@@ -20,6 +21,7 @@ import { routes } from "@/lib/routes";
 export default function ReviewEditorPage() {
   const { id } = useParams<{ id: string }>();
   const router = useRouter();
+  const { nudge, sheet } = useSigninNudge();
   const reviews = useMyRatings();
   const ready = useMyRatingsReady();
   const review = reviews[id];
@@ -29,6 +31,7 @@ export default function ReviewEditorPage() {
   const [postPublic, setPostPublic] = useState(true);
   const [saving, setSaving] = useState(false);
   const [saveError, setSaveError] = useState("");
+  const [saveInfo, setSaveInfo] = useState("");
   const initializedReviewId = useRef<string | null>(null);
 
   useEffect(() => {
@@ -44,10 +47,16 @@ export default function ReviewEditorPage() {
     if (saving || !canEditMyReview(review) || rating < 1 || !draft.trim()) return;
     setSaving(true);
     setSaveError("");
+    setSaveInfo("");
     const saved = await setReview(id, rating, draft, postPublic);
     setSaving(false);
-    if (!saved) {
+    if (saved === "failed") {
       setSaveError("Couldn’t save your review. Your draft is still here — please try again.");
+      return;
+    }
+    if (saved === "private" && postPublic) {
+      setSaveInfo("Saved privately on this device. Sign in, then choose Post publicly again.");
+      nudge("reviewPublish");
       return;
     }
     router.replace(routes.review(id));
@@ -57,6 +66,7 @@ export default function ReviewEditorPage() {
 
   return (
     <>
+      {sheet}
       <TopBar
         center
         left={<BackButton fallback={routes.review(id)} />}
@@ -147,6 +157,7 @@ export default function ReviewEditorPage() {
               </Button>
             </div>
             {saveError && <p role="alert" className="auth-error">{saveError}</p>}
+            {saveInfo && <p role="status" className="t-caption">{saveInfo}</p>}
           </form>
         )}
       </div>

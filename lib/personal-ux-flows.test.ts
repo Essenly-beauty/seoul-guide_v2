@@ -11,10 +11,13 @@ const profileEditor = source("components/mypage/beauty-profile-editor.tsx");
 const reviewsPage = source("app/mypage/reviews/page.tsx");
 const reviewDetail = source("app/mypage/reviews/[id]/page.tsx");
 const reviewEditor = source("app/mypage/reviews/[id]/edit/page.tsx");
+const placeDetail = source("components/place/place-detail-body.tsx");
+const signinNudge = source("components/auth/signin-nudge.tsx");
 const ratings = source("lib/ratings.ts");
 const routes = source("lib/routes.ts");
 const favorites = source("app/favorites/page.tsx");
 const mapScreen = source("components/map/map-screen.tsx");
+const sharedListReadyBanner = source("components/map/shared-list-ready-banner.tsx");
 const mapSheet = source("components/map/map-sheet.tsx");
 const menu = source("app/menu/page.tsx");
 const blog = source("app/blog/page.tsx");
@@ -58,13 +61,21 @@ describe("my review inspection", () => {
   it("opens a dedicated, real review composer and returns to the review after saving", () => {
     expect(routes).toContain("reviewEdit: (id: string)");
     expect(reviewEditor).toContain("await setReview(id, rating, draft, postPublic)");
-    expect(reviewEditor).toContain("if (!saved)");
+    expect(reviewEditor).toContain('if (saved === "failed")');
     expect(reviewEditor).toContain('role="alert"');
     expect(reviewEditor).toContain("REVIEW_MAX_LEN");
     expect(reviewEditor).toContain('aria-label="Your rating"');
     expect(reviewEditor).toContain('aria-label="Your review"');
     expect(reviewEditor).toContain("Post publicly");
     expect(reviewEditor).toContain("router.replace(routes.review(id))");
+  });
+
+  it("keeps a guest public request private and offers sign-in in both composers", () => {
+    expect(signinNudge).toContain("reviewPublish: {");
+    expect(placeDetail).toContain('saved === "published"');
+    expect(placeDetail).toContain('nudgeRating("reviewPublish")');
+    expect(reviewEditor).toContain('nudge("reviewPublish")');
+    expect(reviewEditor).toContain('if (saved === "failed")');
   });
 
   it("initializes the review form once so a failed optimistic save cannot erase the draft", () => {
@@ -106,7 +117,8 @@ describe("saved and shared place journeys", () => {
 
   it("explains that shared lists open on the web and remain savable", () => {
     expect(favorites).toContain("No app install needed");
-    expect(mapScreen).toContain("Save all");
+    expect(mapScreen).toContain("<SharedListReadyBanner");
+    expect(sharedListReadyBanner).toContain("Save all");
     expect(mapScreen).toContain('nudge("favorite")');
   });
 

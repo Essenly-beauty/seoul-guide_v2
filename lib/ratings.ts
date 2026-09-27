@@ -16,6 +16,7 @@ import { supabaseBrowser } from "./supabase/client";
 
 export type MyRating = { rating: number; body?: string; isPublic?: boolean; at?: string };
 export type RatingMap = Record<string, MyRating>;
+export type ReviewSaveResult = "published" | "private" | "removed" | "failed";
 
 /** ratings.body DB check is 2000 chars — mirror it client-side. */
 export const REVIEW_MAX_LEN = 2000;
@@ -80,7 +81,17 @@ export function parseRatings(raw: unknown): RatingMap {
 function loadLocal(): RatingMap {
   try {
     const raw = localStorage.getItem(KEY);
-    if (raw) return parseRatings(JSON.parse(raw));
+    if (raw) {
+      const parsed = parseRatings(JSON.parse(raw));
+      if (localStorage.getItem(MERGED_KEY)) return parsed;
+      // Old guest builds could store isPublic=true without posting anything.
+      // Never present or later merge that local-only flag as consent.
+      const privateGuest: RatingMap = {};
+      for (const [id, { isPublic: _ignored, ...rating }] of Object.entries(parsed)) {
+        privateGuest[id] = rating;
+      }
+      return privateGuest;
+    }
   } catch {
     // fall through to empty
   }
@@ -130,6 +141,15 @@ async function fetchServer(): Promise<RatingMap | null> {
 
 /** One-time per account: bring the guest's ratings into the server.
     ignoreDuplicates — an existing account rating beats an old guest one. */
+export function guestMergeRows(uid: string, local: RatingMap) {
+  return Object.entries(local).map(([place_id, v]) => ({
+    user_id: uid,
+    place_id,
+    rating: v.rating,
+    ...(validBody(v.body) ? { body: v.body, is_public: false } : {}),
+  }));
+}
+
 async function mergeLocalIntoServer(uid: string): Promise<boolean> {
   try {
     const owner = localStorage.getItem(MERGED_KEY);
@@ -145,12 +165,7 @@ async function mergeLocalIntoServer(uid: string): Promise<boolean> {
     }
   } catch { /* proceed — worst case the upsert is a no-op */ }
   const local = loadLocal();
-  const rows = Object.entries(local).map(([place_id, v]) => ({
-    user_id: uid,
-    place_id,
-    rating: v.rating,
-    ...(validBody(v.body) ? { body: v.body, is_public: v.isPublic === true } : {}),
-  }));
+  const rows = guestMergeRows(uid, local);
   if (rows.length > 0) {
     const supabase = supabaseBrowser();
     const { error } = await supabase
@@ -300,18 +315,18 @@ export function setRating(placeId: string, rating: number): void {
 /** Save (or clear, with an empty string) my review text for a rated place.
     isPublic is the composer's explicit consent — public reviews show the
     author's first name to other travelers. */
-export async function setReview(placeId: string, rating: number, body: string, isPublic = false): Promise<boolean> {
+export async function setReview(placeId: string, rating: number, body: string, isPublic = false): Promise<ReviewSaveResult> {
   const cur = load();
   const prev = cur[placeId];
   const trimmed = body.trim().slice(0, REVIEW_MAX_LEN);
-  const share = Boolean(trimmed) && isPublic;
+  const share = Boolean(trimmed) && isPublic && userId !== null;
   const at = new Date().toISOString();
   write({ ...cur, [placeId]: { rating, ...(trimmed ? { body: trimmed } : {}), ...(share ? { isPublic: true } : {}), at } });
 
   const op: PendingOp = { placeId, rating, body: trimmed || null, isPublic: share, at, seq: ++opSeq };
   pending.set(placeId, op);
-  if (userId) return sendOp(userId, op, prev);
-  return true;
+  if (userId && !(await sendOp(userId, op, prev))) return "failed";
+  return !trimmed ? "removed" : share ? "published" : "private";
 }
 
 function subscribe(cb: () => void) {

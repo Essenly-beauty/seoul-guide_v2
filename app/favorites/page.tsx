@@ -24,6 +24,7 @@ import { useToast } from "@/components/ui/toast";
 import { createSharedList, LIST_TITLE_MAX, sanitizeListTitle, sharedListUrl } from "@/lib/shared-lists";
 import { Button } from "@/components/ui/button";
 import { Notice } from "@/components/ui/notice";
+import { OwnedSharedLists } from "@/components/favorites/owned-shared-lists";
 
 // Pulsing placeholder rows while the account's saved list is fetched —
 // flashing "nothing saved yet" on a fresh device reads as data loss.
@@ -54,7 +55,7 @@ function LoadingRows() {
 // (user request 2026-08-16 — Kakao/Naver shared-folder pattern.)
 // Members name the snapshot before it becomes a link (v1.1: the auto
 // title was the only option); guests get the join sheet.
-function ShareListButton({ placeIds }: { placeIds: string[] }) {
+function ShareListButton({ placeIds, onCreated }: { placeIds: string[]; onCreated: () => void }) {
   const { user } = useAuthUser();
   const { nudge, sheet } = useSigninNudge();
   const { toast, share } = useToast();
@@ -68,7 +69,8 @@ function ShareListButton({ placeIds }: { placeIds: string[] }) {
       const finalTitle = sanitizeListTitle(title);
       const id = await createSharedList(finalTitle, placeIds);
       setNaming(false);
-      share({ title: finalTitle, text: "My saved places on MYSEOULDROP. No app install needed — open on the web and save the places to your own list:", url: sharedListUrl(window.location.origin, id) });
+      onCreated();
+      share({ title: finalTitle, text: "My saved places on MYSEOULDROP. No app install needed; sign in or create an account to open this web link:", url: sharedListUrl(window.location.origin, id) });
     } catch (e) {
       toast(e instanceof Error && e.message === "Nothing to share yet" ? e.message : "Couldn't create the share link — try again");
     } finally {
@@ -93,7 +95,7 @@ function ShareListButton({ placeIds }: { placeIds: string[] }) {
           <Button variant="secondary" size="sm" style={{ flex: 1 }} disabled={busy} onClick={() => setNaming(false)}>Cancel</Button>
           <Button size="sm" style={{ flex: 1 }} disabled={busy} onClick={() => void shareNow()}>Share link</Button>
         </div>
-        <p className="t-caption">No app install needed. Friends can open the web link and save every place to their own list.</p>
+        <p className="t-caption">No app install needed. Friends sign in or create an account to open the web link and save places to their own list.</p>
       </div>
     );
   }
@@ -121,7 +123,7 @@ function ShareListButton({ placeIds }: { placeIds: string[] }) {
 }
 
 // ── Places — category filter + detail-page list rows ──────
-function PlacesSection({ favPlaces }: { favPlaces: Place[] }) {
+function PlacesSection({ favPlaces, onShareCreated }: { favPlaces: Place[]; onShareCreated: () => void }) {
   const [cats, setCats] = useState<Place["type"][]>([]);
   const shown = cats.length === 0 ? favPlaces : favPlaces.filter((p) => cats.includes(p.type));
   return (
@@ -156,7 +158,7 @@ function PlacesSection({ favPlaces }: { favPlaces: Place[] }) {
           ))}
         </div>
       )}
-      {favPlaces.length > 0 && <ShareListButton placeIds={favPlaces.map((p) => p.id)} />}
+      {favPlaces.length > 0 && <ShareListButton placeIds={favPlaces.map((p) => p.id)} onCreated={onShareCreated} />}
     </section>
   );
 }
@@ -217,6 +219,7 @@ export default function FavoritesPage() {
   const favs = useFavorites();
   const ready = useFavoritesReady();
   const { user, loading: authLoading } = useAuthUser();
+  const [shareRefresh, setShareRefresh] = useState(0);
   const favPlaces = PLACES.filter((p) => favs.place.includes(p.id));
   const favProducts = PRODUCTS.filter((p) => favs.product.includes(p.id));
   const favArticles = ARTICLES.filter((a) => favs.article.includes(a.slug));
@@ -239,7 +242,13 @@ export default function FavoritesPage() {
         )}
         {ready ? (
           <>
-            <PlacesSection favPlaces={favPlaces} />
+            <PlacesSection favPlaces={favPlaces} onShareCreated={() => setShareRefresh((current) => current + 1)} />
+            {user && (
+              <>
+                <SectionDivider />
+                <OwnedSharedLists key={user.id} refreshKey={shareRefresh} />
+              </>
+            )}
             <SectionDivider />
             <ProductsSection favProducts={favProducts} />
             <SectionDivider />

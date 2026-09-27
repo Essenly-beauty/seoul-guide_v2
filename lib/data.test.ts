@@ -227,3 +227,15 @@ describe("no source placeholders reach a visitor", () => {
     expect(PLACES.length).toBeGreaterThan(450);
   });
 });
+
+describe("place detail route lookups", () => {
+  it("resolves official Daiso links across route parameter encodings", async () => {
+    const { DAISO_PLACES } = await import("@/lib/generated/daiso-places");
+    const { getPlace } = await import("@/lib/data");
+
+    for (const place of DAISO_PLACES) {
+      expect(getPlace(decodeURIComponent(place.id))?.id, place.id).toBe(place.id);
+      expect(getPlace(place.id.replaceAll(":", "%3A"))?.id, place.id).toBe(place.id);
+    }
+  });
+});
