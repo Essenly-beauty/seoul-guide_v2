@@ -1,4 +1,4 @@
-# MYSEOULDROP — 작업 핸드오프 (2026-09-20 기준, PR #2 배포 완료)
+# MYSEOULDROP — 작업 핸드오프 (2026-09-27 기준, main 직배포)
 
 > 다음 세션에서 이 문서 하나로 바로 이어서 작업할 수 있게 정리한 문서.
 > 프로젝트 전반 문서는 `docs/README.md`, 인증 설정은 `docs/auth-setup.md` 참고.
@@ -175,6 +175,12 @@ vercel env pull --yes  # .env.local 재생성
 - **외래어 상호 17건 교정**(`ebe70e4`) — 프로드 검증에서 코엑스몰 플래그십이 "Koekseumol"로 잡혔다. 토큰 길이 예산이 놓치는 부류라 `lib/place-name-loanwords.test.ts`가 **의미**로 검사(한글에 코엑스·타워·아이파크·롯데·이마트… 가 있으면 영문에 그 철자가 있어야 함). 프로드 17/17 반영 확인
 - **병렬 검증 보고서 4종**(9/23) — `reports/parallel-{daiso,olive-young}-verification`, `parallel-product-curation`(142행 CSV), `parallel-ranking-refresh-readiness`. 다이소 급상승 차트만 재현 불가(관찰 시각 차이로 판정, 리뷰 수 단조성 18/18이 근거)
 
+- **홈 화면 설치 페이지 버튼 우선 재설계**(`fee1623`, 9/27) — 실기기 테스트 3회 실패(공유 아이콘을 못 찾음·크롬 시크릿 탭·"버튼을 눌렀는데 안 됨") 후 `/download`를 **버튼 하나**로: Android/데스크톱은 진짜 설치 프롬프트, iPhone은 바텀시트가 공유 아이콘을 **그림으로** 보여주고 브라우저별 위치를 말한다(Safari: 하단 `···`, Chrome: 주소창 우상단 + 시크릿 탭 불가 경고). 설명 문단은 페이지에서 제거. `lib/pwa-install.test.ts`
+- **역 시트 헤더 고정 + 앱 아이콘 축소**(`72c1788`) — 역 목록을 스크롤해도 그립·제목·건수 줄은 고정, 목록만 스크롤(`.station-browse` flex 체인, `lib/subway-search-layout.test.ts`). 아이콘 S는 타일의 58%(104/180), 평면 `#FF5018` + 아주 옅은 그림자(0.14), 그라데이션 없음. `public/icon-192/512.png`도 같은 구성으로 재생성
+- **필터 0건 모달 + 칩 40px**(`36e38a5`) — 필터를 적용해 결과가 0이면 가운데 모달("No places match these filters" / Clear filters·Change filters). `lib/filter-empty-policy.ts`가 **방금 적용한 경우에만** 허용. 칩 `min-height` 44→40(오너 지정), `lib/touch-feedback-contracts.test.ts` `CHIP_FLOOR = 40`. 프로드 확인: 필터 7개 → 모달
+- **구글 길찾기 목적지 이름**(`1ea2a41`) — 좌표만 넘기면 구글이 양끝을 "핀 고정 위치"로 보여준다. 이제 `destination=<영문 이름>, <층 제거한 주소>`(`lib/geo.ts stripFloor`), origin 생략 → "내 위치". 프로드 확인: "Daiso Garak Market Stn., 서울특별시 송파구 중대로 109 (가락동)"
+- **역 검색 입력 중 패널 정리**(`64add44`) — 키보드가 올라오면 패널이 544px인데 헤더+두 필드 카드+레일+푸터가 다 차지해 결과가 1줄이었다. 결과가 열려 있는 동안 다른 필드·레일·스왑·푸터·필드 사이 구분선을 숨김(`:has(.station-search-results)`), 역을 고르면 전부 복귀. 프로드 실측 8건 중 5건 완전 노출
+- **칩 6% 틴트**(`261bb2f`) — 다크 테마 프로필 카드에서 국가 칩이 안 보였다(#272b33 테두리뿐). `.chip`에 `color-mix(in srgb, var(--text) 6%, transparent)` — 다크 ≈ #2c2f35, 라이트 ≈ #f1f2f4. 선택 칩·지도 위 칩은 자기 배경 유지
 ---
 
 ## 3. ⚠️ 사용자(계정 소유자) 액션 대기 — 최우선
@@ -202,12 +208,9 @@ vercel env pull --yes  # .env.local 재생성
 
 ## 4. 다음 작업 백로그 (우선순위순)
 
-### P0 — 다이소 상세 251곳이 프로덕션에서 404 (9/27 확인, 수정은 있으나 미커밋)
-`myseouldrop.app/place/daiso-official:%EA…` 형태 **251곳 전부**가 "This page wandered off"(표본 4/4). ascii id인 보충 매장 33곳은 정상. 원인: `lib/data.ts`
-`decodedFind`가 라우터는 디코딩하지 않는다고 가정하는데 프로드 Next 15.5는 이미 디코딩한 한글을 넘겨 `%EA…` 리터럴 id와 어느 형태로도 안 맞는다.
-**수정은 다른 세션의 작업 트리 `lib/data.ts`에 이미 있다**(stored에 `%`가 있으면 양쪽 디코딩해 비교, 읽어 보니 맞음). 그러나 미커밋이고 같은 파일에 그 세션의
-Product 타입 변경도 섞여 있어 통째로 못 가져온다. 테스트도 없다. → 그 세션 커밋 또는 hunk 분리 랜딩 + 테스트. **영향**: 면세·유심 등 시설 정보를 가진
-다이소 218곳이 전부 이 251곳 안이라 9/23의 "In store" 행이 **프로드에서 아직 안 보인다**(코드는 맞음, 개발 서버에서 확인됨).
+### 해결됨(9/27) — 다이소 상세 251곳 프로덕션 404
+다른 세션이 `c510421 Resolve encoded Daiso store IDs in detail routes`로 수정·푸시했고 `2f39f37` 병합으로 배포됐다. 프로드 확인(9/27 18:00, 헤드리스 iPhone UA):
+`/place/daiso-official:%EA…가락시장역점` 200, 제목 "Daiso Garak Market Stn.", **"In store" 행 노출**, 구글 목적지에 이름+주소(층 제거). 이 항목은 닫는다.
 
 ### P0 — 오너 결정: 검증된 단품 32건을 어디에 올릴 것인가 (9/27)
 근거 없는 14개 샘플이 채우던 자리가 이미 넷이다 — 랭킹 "Popular at Olive Young"(수기 `salesRank`), "Highest-rated by reviews"(`reviewRank`,
@@ -281,6 +284,7 @@ Product 타입 변경도 섞여 있어 통째로 못 가져온다. 테스트도 
 - **DB 마이그레이션**: `supabase/migrations/*.sql` 순번 파일 + node pg로 적용 (예시는 git log의 favorites 커밋 참고). `POSTGRES_URL_NON_POOLING` 사용, URL의 `sslmode` 파라미터 제거 후 `ssl:{rejectUnauthorized:false}`.
 - **관리자 테스트 유저**: service role로 `admin.createUser({email_confirm:true})` → 테스트 → `deleteUser` 정리. `@myseouldrop.app` 도메인 사용 (가짜 TLD는 Supabase가 거부).
 - **협업 규칙**: main 직푸시 대신 브랜치+PR 권장, 강제 푸시 금지. 디자인 실험은 `design/*` 브랜치.
+- **공유 작업 트리 (9/27)**: 이 디렉터리를 여러 Claude 세션이 **동시에** 쓴다(`git status` 117건이 남의 미커밋). 로컬 `main`이 origin보다 뒤일 수 있고, 남의 WIP가 origin/main과 같은 영역을 건드려 메인 트리에서 `git merge`가 충돌한다(9/27 7개 파일). **메인 트리에서 merge·reset·stash·`git add <남의 파일>` 금지.** 임시 `git worktree`에 `integrate` 브랜치(= origin/main 병합본)를 두고 내 hunk만 이식해 커밋 → `tsc`·`vitest`·`lint`·`build` → `git push origin integrate:main`. 자세한 절차는 그 브랜치의 병합 커밋 로그(`2f39f37`, `d0f6a9f`) 참고.
 
 ## 6. 데이터 파이프라인 재실행
 
