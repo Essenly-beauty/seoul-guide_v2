@@ -31,6 +31,16 @@ describe("place launch audit", () => {
     expect(JSON.stringify(CATALOGUE_PLACES)).toBe(before);
   });
 
+  it("sorts Korean and ASCII place ids consistently across host locales", () => {
+    const place = CATALOGUE_PLACES[0];
+    const entries = buildAuditEntries([
+      { ...place, id: "oy-gangnam" },
+      { ...place, id: "oy-가락" },
+    ], EMPTY_VERDICTS, {});
+
+    expect(entries.map((entry) => entry.id)).toEqual(["oy-가락", "oy-gangnam"]);
+  });
+
   it("builds encoded review links without fetching or copying provider content", () => {
     const links = providerSearchLinks({
       name: "Olive Young Myeongdong Town",

@@ -192,7 +192,7 @@ export function buildAuditEntries(
       evidenceLinks: [...new Set(manual.evidenceLinks ?? [])].sort(),
       ...(manual.naverPlaceId ? { naverPlaceId: manual.naverPlaceId } : {}),
     };
-  }).sort((a, b) => a.id.localeCompare(b.id));
+  }).sort((a, b) => a.id.localeCompare(b.id, "ko"));
 }
 
 function increment(target: Record<string, number>, key: string): void {
@@ -200,7 +200,7 @@ function increment(target: Record<string, number>, key: string): void {
 }
 
 function sortedCounts(input: Record<string, number>): Record<string, number> {
-  return Object.fromEntries(Object.entries(input).sort(([a], [b]) => a.localeCompare(b)));
+  return Object.fromEntries(Object.entries(input).sort(([a], [b]) => a.localeCompare(b, "ko")));
 }
 
 export function summarizePlaceAudit(entries: readonly PlaceAuditEntry[]): PlaceAuditSummary {
@@ -253,7 +253,7 @@ export function renderAuditMarkdown(
   ]);
   const priority = entries
     .filter((entry) => entry.findings.some((finding) => priorityFindings.has(finding)))
-    .sort((a, b) => a.source.localeCompare(b.source) || a.id.localeCompare(b.id));
+    .sort((a, b) => a.source.localeCompare(b.source, "ko") || a.id.localeCompare(b.id, "ko"));
 
   const lines = [
     "# MYSEOULDROP place data audit",
