@@ -3,7 +3,14 @@ import { ImageResponse } from "next/og";
 export const size = { width: 180, height: 180 };
 export const contentType = "image/png";
 
-/** The mark at 58% of the canvas, not 87%.
+/** Why this file is apple-icon1 and not apple-icon: iOS caches a site's
+ *  touch icon by URL path and the query hash Next appends did not make a
+ *  phone refetch it — the owner re-added the shortcut on 2026-09-27 and
+ *  still got the old mark. Next's metadata convention allows one digit
+ *  after the name, which moves the route to /apple-icon1 and forces a
+ *  fresh fetch. Bump the digit again if the mark ever changes.
+ *
+ *  The mark at 58% of the canvas, not 87%.
  *
  *  The owner installed the app on a real iPhone (2026-09-27) and the S filled
  *  the icon edge to edge, which read as too large next to every other icon.

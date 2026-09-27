@@ -16,6 +16,11 @@
 - 화면 E2E 3건은 Chrome 프로세스가 실행 직후 `SIGABRT`로 종료되어 **실행되지 않았다**. 앱 기능 실패로 분류하지 않는다. 다른 실행 환경에서 재실행해야 한다.
 - SQL 정책 테스트 `supabase/tests/shared_lists_rls.test.sql`은 코드에 있으나 운영 DB에서 실행하지 않았다.
 
+## 최신 `main` 재통합 — 2026-09-27
+
+- 계정 데이터 다운로드의 비회원 `401` 후속 수정과 최신 브랜드·지도 변경을 다시 통합했다. 지도 제목은 `MYSEOULDROP`으로 유지하고, 공유 링크의 메타데이터는 계속 일반 안내만 표시해 목록 이름·장소 수를 공개하지 않는다.
+- 통합 후 `npm test` 110개 파일·1,032건, 타입 검사, 린트, 공개 환경값의 프로덕션 빌드가 통과했다. 공유 목록의 실제 회원 동선·운영 RLS 검증은 여전히 미완료다.
+
 ## 적용 전 게이트
 
 1. Supabase Dashboard의 Database Settings → SSL Configuration에서 해당 프로젝트의 서버 루트 인증서를 받아 검증 가능한 DB 접속을 준비한다. 현재 연결 문자열의 pooler 인증서 체인이 이 실행 환경에서 검증되지 않아, 인증서 검증을 끄고 SQL을 실행하지 않았다. [Supabase 연결·SSL 안내](https://supabase.com/docs/guides/database/connecting-to-postgres).

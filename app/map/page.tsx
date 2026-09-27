@@ -4,15 +4,15 @@ import { MapScreen } from "@/components/map/map-screen";
 import { BottomNav } from "@/components/ui/bottom-nav";
 
 const BASE_META: Metadata = {
-  title: "Map — MYSEOULDROP",
+  title: "MYSEOULDROP",
   description: "Find Seoul beauty spots on the map. Sign in to open a shared list.",
   openGraph: {
-    title: "Map — MYSEOULDROP",
+    title: "MYSEOULDROP",
     description: "Find Seoul beauty spots on the map. Sign in to open a shared list.",
   },
   twitter: {
     card: "summary",
-    title: "Map — MYSEOULDROP",
+    title: "MYSEOULDROP",
     description: "Find Seoul beauty spots on the map. Sign in to open a shared list.",
   },
 };

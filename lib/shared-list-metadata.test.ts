@@ -19,7 +19,7 @@ describe("public map preview", () => {
     }]));
     vi.stubGlobal("fetch", fetch);
     const metadata = await generateMetadata({ searchParams: Promise.resolve({ list: "2f9c1a34-9c1d-4e7a-b1f2-3d4e5f607182" }) });
-    expect(metadata.title).toBe("Map — MYSEOULDROP");
+    expect(metadata.title).toBe("MYSEOULDROP");
     expect(JSON.stringify(metadata)).not.toContain("Private Seoul weekend");
     expect(JSON.stringify(metadata)).not.toContain("saved place");
     expect(fetch).not.toHaveBeenCalled();
