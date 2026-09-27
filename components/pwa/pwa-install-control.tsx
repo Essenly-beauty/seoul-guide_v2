@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, type ReactNode } from "react";
+import { BottomSheet } from "@/components/ui/bottom-sheet";
 import { Button } from "@/components/ui/button";
 
 type BeforeInstallPromptEvent = Event & {
@@ -32,20 +33,137 @@ const IOS_BROWSER_NAMES: [RegExp, string][] = [
 const iosBrowserName = () =>
   IOS_BROWSER_NAMES.find(([re]) => re.test(navigator.userAgent))?.[1] ?? null;
 
+// ── Pictures, not prose ──────────────────────────────────────
+// The owner's test on a real iPhone (2026-09-27): told to "tap the Share
+// button", they could not find it, because the page never showed what it
+// looks like or where it sits. So the sheet draws it. These are the iOS
+// system glyphs a visitor is actually looking for, drawn large enough to
+// recognise at a glance.
+
+/** The iOS Share button: a box with an arrow leaving through the top. */
+function ShareGlyph() {
+  return (
+    <svg width="56" height="56" viewBox="0 0 56 56" aria-hidden="true" style={{ flex: "none" }}>
+      <rect x="5" y="5" width="46" height="46" rx="12" fill="var(--accent-soft)" />
+      <path d="M28 33V13m0 0-7 7m7-7 7 7" fill="none" stroke="var(--accent)" strokeWidth="3.2" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M18 24h-2a3 3 0 0 0-3 3v13a3 3 0 0 0 3 3h24a3 3 0 0 0 3-3V27a3 3 0 0 0-3-3h-2" fill="none" stroke="var(--accent)" strokeWidth="3.2" strokeLinecap="round" />
+    </svg>
+  );
+}
+
+/** The "Add to Home Screen" row icon: a box with a plus. */
+function PlusGlyph() {
+  return (
+    <svg width="56" height="56" viewBox="0 0 56 56" aria-hidden="true" style={{ flex: "none" }}>
+      <rect x="5" y="5" width="46" height="46" rx="12" fill="var(--accent-soft)" />
+      <rect x="15" y="15" width="26" height="26" rx="6" fill="none" stroke="var(--accent)" strokeWidth="3" />
+      <path d="M28 21v14M21 28h14" fill="none" stroke="var(--accent)" strokeWidth="3.2" strokeLinecap="round" />
+    </svg>
+  );
+}
+
+/** The browser's own menu button on Android and desktop: three dots. */
+function MenuGlyph() {
+  return (
+    <svg width="56" height="56" viewBox="0 0 56 56" aria-hidden="true" style={{ flex: "none" }}>
+      <rect x="5" y="5" width="46" height="46" rx="12" fill="var(--accent-soft)" />
+      <circle cx="28" cy="17" r="3.4" fill="var(--accent)" />
+      <circle cx="28" cy="28" r="3.4" fill="var(--accent)" />
+      <circle cx="28" cy="39" r="3.4" fill="var(--accent)" />
+    </svg>
+  );
+}
+
+/** The "tap Add" step has no icon; it is a word on a button. */
+function WordGlyph({ word }: { word: string }) {
+  return (
+    <span
+      aria-hidden="true"
+      style={{ width: 56, height: 56, borderRadius: 12, flex: "none", display: "grid", placeItems: "center",
+        background: "var(--accent-soft)", color: "var(--accent)", fontWeight: 800, fontSize: 15, letterSpacing: 0.2 }}
+    >
+      {word}
+    </span>
+  );
+}
+
+function StepRow({ n, glyph, title, where }: { n: number; glyph: ReactNode; title: ReactNode; where?: ReactNode }) {
+  return (
+    <li style={{ display: "flex", gap: 14, alignItems: "center" }}>
+      {glyph}
+      <div style={{ flex: 1, minWidth: 0 }}>
+        <b style={{ display: "block", fontSize: 16, lineHeight: 1.3 }}>
+          <span className="mono" style={{ color: "var(--accent)", marginRight: 8 }}>{n}</span>{title}
+        </b>
+        {where && <span className="t-caption muted" style={{ display: "block", marginTop: 3, lineHeight: 1.45 }}>{where}</span>}
+      </div>
+    </li>
+  );
+}
+
+/** Where the Share button lives differs by browser, and that one fact was
+    what the owner could not find. Each variant answers it in its first step. */
+type Guide = "safari" | "chrome-ios" | "android" | "in-app";
+
+const GUIDE_KICKER: Record<Guide, string> = {
+  safari: "No download · three taps in Safari",
+  "chrome-ios": "Add MYSEOULDROP from Chrome",
+  android: "No download · from your browser's menu",
+  "in-app": "Open in Safari or Chrome to install",
+};
+
+function GuideSteps({ guide, copyLink, copied }: { guide: Guide; copyLink: () => void; copied: boolean }) {
+  if (guide === "in-app") {
+    return (
+      <ol className="stack sm" style={{ listStyle: "none", margin: 0, padding: 0 }}>
+        <StepRow n={1} glyph={<MenuGlyph />} title="Open this page in Safari or Chrome"
+          where="KakaoTalk and other in-app browsers cannot add apps to the Home Screen. Use the ⋮ or ··· menu to open in your browser, or copy the link." />
+        <StepRow n={2} glyph={<ShareGlyph />} title="Tap the Share button there" />
+        <StepRow n={3} glyph={<PlusGlyph />} title="Choose Add to Home Screen" />
+        <li style={{ listStyle: "none" }}>
+          <Button variant="secondary" size="sm" onClick={copyLink}>{copied ? "Link copied" : "Copy link"}</Button>
+        </li>
+      </ol>
+    );
+  }
+  if (guide === "android") {
+    return (
+      <ol className="stack sm" style={{ listStyle: "none", margin: 0, padding: 0 }}>
+        <StepRow n={1} glyph={<MenuGlyph />} title="Open the browser menu" where="The ⋮ at the top right of the address bar." />
+        <StepRow n={2} glyph={<PlusGlyph />} title="Choose Install app" where="Some browsers call it Add to Home screen." />
+        <StepRow n={3} glyph={<WordGlyph word="Install" />} title="Tap Install" where="The app lands on your Home Screen and opens without the browser bars." />
+      </ol>
+    );
+  }
+  return (
+    <ol className="stack sm" style={{ listStyle: "none", margin: 0, padding: 0 }}>
+      <StepRow
+        n={1}
+        glyph={<ShareGlyph />}
+        title="Tap the Share button"
+        where={guide === "safari"
+          ? "At the bottom of the screen. If your address bar is at the bottom and you see no Share button, tap ··· at the bottom right first."
+          : "At the top right of the address bar. It does not appear in an Incognito tab — use a normal tab."}
+      />
+      <StepRow n={2} glyph={<PlusGlyph />} title="Choose Add to Home Screen" where="Scroll down the list a little to find it." />
+      <StepRow n={3} glyph={<WordGlyph word="Add" />} title="Tap Add" where="Top right. The app lands on your Home Screen and opens without the browser bars." />
+    </ol>
+  );
+}
+
 /**
- * Uses the native browser install prompt where it exists and explains the
- * Safari-only Home Screen path where it does not. It never fakes installation.
+ * One button. Where a browser can install from the page, the button is the
+ * real install prompt. Where it cannot — every browser on iPhone — the button
+ * opens a sheet that shows the Share icon as a picture and says where it is.
+ * It never fakes an installation.
  */
 export function PwaInstallControl() {
   const [platform, setPlatform] = useState<Platform>("checking");
   const [installed, setInstalled] = useState(false);
   const [promptEvent, setPromptEvent] = useState<BeforeInstallPromptEvent | null>(null);
-  // iOS has exactly one install path, so the steps are open by default —
-  // collapsing the only instruction behind a toggle read as "there is a
-  // download somewhere else" (owner report 2026-08-22).
-  const [showIosSteps, setShowIosSteps] = useState(true);
   const [browserName, setBrowserName] = useState<string | null>(null);
   const [copied, setCopied] = useState(false);
+  const [sheet, setSheet] = useState(false);
 
   useEffect(() => {
     setInstalled(isStandalone());
@@ -86,9 +204,6 @@ export function PwaInstallControl() {
     setPromptEvent(null);
   };
 
-  if (platform === "checking") return null;
-  if (installed) return <p className="t-caption" style={{ color: "var(--accent)", fontWeight: 700 }}>Installed on this device</p>;
-
   const copyLink = async () => {
     try {
       await navigator.clipboard.writeText(window.location.href);
@@ -99,25 +214,19 @@ export function PwaInstallControl() {
     }
   };
 
-  // iPhone browsers have different install menus. Chrome can add a shortcut
-  // from its own Share menu; other browsers get a copy-link Safari handoff.
-  if (platform === "ios-other-browser") {
-    if (browserName === "Chrome") {
-      return (
-        <div className="stack xs" style={{ alignItems: "flex-start", textAlign: "left", maxWidth: 340 }}>
-          <b className="t-label-md">Add MYSEOULDROP from Chrome</b>
-          <p className="t-caption muted" style={{ margin: 0 }}>
-            Tap Chrome&apos;s Share icon, choose Add to Home Screen, then tap Add. The shortcut opens MYSEOULDROP like an app.
-          </p>
-        </div>
-      );
-    }
+  if (platform === "checking") return null;
+  if (installed) return <p className="t-caption" style={{ color: "var(--accent)", fontWeight: 700 }}>Installed on this device</p>;
+
+  // The one browser family with no Home Screen path at all gets a handoff,
+  // not a guide: Firefox, Edge and Opera on iPhone do not offer Add to Home
+  // Screen (iOS has allowed it since 16.4; they have not implemented it).
+  if (platform === "ios-other-browser" && browserName !== "Chrome") {
     return (
       <div className="stack xs" style={{ alignItems: "flex-start", textAlign: "left", maxWidth: 340 }}>
         <b className="t-label-md">You’re in {browserName} — open Safari to install</b>
         <p className="t-caption muted" style={{ margin: 0 }}>
-          Apple lets only Safari add an app to the Home Screen. Copy this link,
-          open Safari, paste it, then tap Share → Add to Home Screen.
+          {browserName} on iPhone does not offer Add to Home Screen. Copy this link,
+          open Safari or Chrome, paste it, then tap Share → Add to Home Screen.
         </p>
         <Button variant="secondary" size="sm" onClick={() => void copyLink()}>
           {copied ? "Link copied" : "Copy link"}
@@ -126,48 +235,43 @@ export function PwaInstallControl() {
     );
   }
 
-  if (platform === "in-app") {
-    return (
-      <div className="stack xs" style={{ alignItems: "flex-start", textAlign: "left", maxWidth: 340 }}>
-        <b className="t-label-md">Open in Safari or Chrome to install</b>
-        <p className="t-caption muted" style={{ margin: 0 }}>
-          KakaoTalk and other in-app browsers cannot install web apps directly. Use the browser menu to open this link externally, then choose Add to Home Screen or Install app.
-        </p>
-        <Button variant="secondary" size="sm" onClick={() => void copyLink()}>
-          {copied ? "Link copied" : "Copy link"}
-        </Button>
-      </div>
-    );
-  }
-
+  // A browser that can install from the page: the button is the install.
   if (promptEvent) {
     return (
-      <Button variant="primary" size="sm" onClick={() => void install()}>
+      <Button variant="primary" style={{ width: "100%", maxWidth: 340 }} onClick={() => void install()}>
         Install MYSEOULDROP
       </Button>
     );
   }
 
-  if (platform === "ios") {
-    return (
-      <div className="stack xs" style={{ alignItems: "flex-start" }}>
-        <Button variant="secondary" size="sm" onClick={() => setShowIosSteps((open) => !open)} aria-expanded={showIosSteps}>
-          {showIosSteps ? "Hide iPhone install steps" : "Show iPhone install steps"}
-        </Button>
-        {showIosSteps && (
-          <ol className="t-caption muted" style={{ margin: 0, paddingLeft: 18, lineHeight: 1.55 }}>
-            <li>Tap the Share button in Safari’s toolbar.</li>
-            <li>Scroll down and choose <b>Add to Home Screen</b>.</li>
-            <li>Tap Add. There is nothing to download — the app lands on your Home Screen.</li>
-          </ol>
-        )}
-      </div>
-    );
+  if (platform === "unsupported") {
+    return <p className="t-caption muted">Open this page in Chrome or Safari to install.</p>;
   }
 
-  if (platform === "browser") {
-    return <p className="t-caption muted">Use your browser’s Install app menu if the install prompt does not appear.</p>;
-  }
+  const guide: Guide =
+    platform === "in-app" ? "in-app"
+      : platform === "ios-other-browser" ? "chrome-ios"
+        : platform === "ios" ? "safari"
+          : "android";
 
-  return <p className="t-caption muted">Open this page in Chrome or Safari to install.</p>;
+  return (
+    <>
+      <Button variant="primary" style={{ width: "100%", maxWidth: 340 }} onClick={() => setSheet(true)}>Add to Home Screen</Button>
+      {sheet && (
+        <BottomSheet
+          title="Add to Home Screen"
+          kicker={GUIDE_KICKER[guide]}
+          onClose={() => setSheet(false)}
+          footer={
+            <p className="t-caption muted" style={{ margin: 0, lineHeight: 1.5 }}>
+              If you’re signed in, your saved places and account follow you into the app.
+              Hearts saved without an account stay in the browser you tapped them in.
+            </p>
+          }
+        >
+          <GuideSteps guide={guide} copyLink={() => void copyLink()} copied={copied} />
+        </BottomSheet>
+      )}
+    </>
+  );
 }

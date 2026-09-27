@@ -18,21 +18,16 @@ export default function DownloadPage() {
           <BrandWordmark size={15} />
           <h1 className="h1" style={{ marginTop: 18 }}>Install MYSEOULDROP</h1>
           <p className="t-caption muted" style={{ maxWidth: 340 }}>
-            There is no file to download. This adds MYSEOULDROP to your Home Screen straight from the browser, and your map, saved places, and account stay exactly where they are.
+            There is no file to download. The app goes straight onto your Home Screen and opens without the browser bars.
           </p>
+          {/* One button. What it does depends on the browser, and the control
+              decides: the real install prompt where one exists, a guided
+              sheet that points at the Share icon where it does not. The
+              paragraphs that used to sit under here repeated that sheet in
+              prose, and the owner's test on a real phone showed nobody reads
+              them (2026-09-27). */}
           <PwaInstallControl />
         </div>
-
-        <section className="stack sm" style={{ marginTop: 30, textAlign: "left" }}>
-          <div>
-            <b className="t-label-md">iPhone &amp; iPad</b>
-            <p className="t-caption muted">Open this page in Safari or Chrome, tap Share, then choose Add to Home Screen. iPhone does not show an in-page download prompt.</p>
-          </div>
-          <div>
-            <b className="t-label-md">Android &amp; desktop</b>
-            <p className="t-caption muted">Use the Install MYSEOULDROP button or your browser’s Install app menu.</p>
-          </div>
-        </section>
 
         <section className="stack xs" style={{ marginTop: 12 }} aria-label="Native store availability">
           <span className="t-caption muted">App Store · coming soon</span>
