@@ -57,8 +57,29 @@ export function googleMapsUrl(lat: number, lng: number): string {
 //    origin is optional — without location permission each service falls back
 //    to a destination-only link and resolves the start point itself.
 
+/** A destination Google can name. With `name` set, the hand-off sends
+ *  "<name>, <address>" as text instead of coordinates.
+ *
+ *  Owner report 2026-09-27, from the Google Maps app: both ends of the route
+ *  read "핀 고정 위치" (dropped pin). Google's URL scheme has no label for a
+ *  coordinate destination — a "(label)" after lat,lng is ignored, checked in
+ *  a browser — so the only way to show the shop's name is to send text and
+ *  let Google geocode it. The trade is exactness: the pin lands where Google
+ *  puts the address, not on our coordinate. For a shop with a road address
+ *  that is the same building. The floor is stripped off first ("1~2층", "B1")
+ *  because it is noise to a geocoder. */
+export type NamedDestination = LatLng & { name?: string; address?: string };
+
+// No \b after the floor token: Hangul is not a "word" character to the
+// regex engine, so a boundary between 층 and the end of the string never
+// matches, and "703 1층" was going through untouched. The floor may also
+// follow the parenthesised dong directly, as the store finder writes it:
+// "(신림동)B1~2층".
+const stripFloor = (address: string) =>
+  address.replace(/\s*(?:B?\d+F|지하\s*\d*층?|B?[\d,~\-]+층|\d+호)(?:\s|$).*$/iu, "").replace(/\s*(?:B?\d+F|지하\s*\d*층?|B?[\d,~\-]+층|\d+호)$/iu, "").trim();
+
 export function googleDirectionsUrl(
-  dest: LatLng,
+  dest: NamedDestination,
   origin?: LatLng | null,
   travelMode: "transit" | "walking" = "transit",
   /** Intermediate stops, in order. Google plans through them, so a hand-off
@@ -66,8 +87,17 @@ export function googleDirectionsUrl(
       (owner decision 2026-08-22: Google owns timing and routing accuracy). */
   waypoints?: LatLng[],
 ): string {
-  const base = `https://www.google.com/maps/dir/?api=1&destination=${dest.lat},${dest.lng}&travelmode=${travelMode}`;
-  const withOrigin = origin ? `${base}&origin=${origin.lat},${origin.lng}` : base;
+  const named = Boolean(dest.name);
+  const destination = named
+    ? encodeURIComponent(dest.address ? `${dest.name}, ${stripFloor(dest.address)}` : dest.name!)
+    : `${dest.lat},${dest.lng}`;
+  const base = `https://www.google.com/maps/dir/?api=1&destination=${destination}&travelmode=${travelMode}`;
+  // A named hand-off is "take me there from where I am". Passing the device
+  // fix as coordinates made the START a dropped pin as well; left out,
+  // Google fills in "내 위치" / "Your location" itself. Station-to-station
+  // routes still pass their origin, because there it is a place, not the
+  // visitor.
+  const withOrigin = origin && !named ? `${base}&origin=${origin.lat},${origin.lng}` : base;
   if (!waypoints || waypoints.length === 0) return withOrigin;
   const via = waypoints.map((p) => `${p.lat},${p.lng}`).join("|");
   return `${withOrigin}&waypoints=${encodeURIComponent(via)}`;
