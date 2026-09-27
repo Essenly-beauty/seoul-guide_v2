@@ -3,9 +3,9 @@
   "generated_on": "2026-09-26",
   "caution": "이 파일은 전수 조사 큐다. 추정 필드는 공개용 태그가 아니며 사람 또는 출처 검토가 필요하다.",
   "summary": {
-    "done_or_pending_specific_check": 165,
+    "done_or_pending_specific_check": 170,
     "p3_general_review": 243,
-    "p2_editorial_potential": 46
+    "p2_editorial_potential": 41
   },
   "records": [
     {
@@ -2882,8 +2882,8 @@
       "normalized_name": "카페2.7",
       "possible_duplicate_external_ids": [],
       "content_kind_guess": "cafe_candidate",
-      "research_priority": "p2_editorial_potential",
-      "current_research_status": "not_researched"
+      "research_priority": "done_or_pending_specific_check",
+      "current_research_status": "reviewed"
     },
     {
       "external_id": "coffeelog-1a6e885a1bb6a661",
@@ -2914,8 +2914,8 @@
       "normalized_name": "레이어10 카페",
       "possible_duplicate_external_ids": [],
       "content_kind_guess": "cafe_candidate",
-      "research_priority": "p2_editorial_potential",
-      "current_research_status": "not_researched"
+      "research_priority": "done_or_pending_specific_check",
+      "current_research_status": "reviewed"
     },
     {
       "external_id": "coffeelog-0d3d79e325f49570",
@@ -2996,8 +2996,8 @@
       "normalized_name": "카페씨떼",
       "possible_duplicate_external_ids": [],
       "content_kind_guess": "cafe_candidate",
-      "research_priority": "p2_editorial_potential",
-      "current_research_status": "not_researched"
+      "research_priority": "done_or_pending_specific_check",
+      "current_research_status": "reviewed"
     },
     {
       "external_id": "coffeelog-7133730089d72b2c",
@@ -3018,8 +3018,8 @@
       "normalized_name": "와니타 음악감상실 성수",
       "possible_duplicate_external_ids": [],
       "content_kind_guess": "cafe_candidate",
-      "research_priority": "p2_editorial_potential",
-      "current_research_status": "not_researched"
+      "research_priority": "done_or_pending_specific_check",
+      "current_research_status": "reviewed"
     },
     {
       "external_id": "coffeelog-5c116508f45ed18f",
@@ -3164,8 +3164,8 @@
       "normalized_name": "클래식 해례커피",
       "possible_duplicate_external_ids": [],
       "content_kind_guess": "cafe_candidate",
-      "research_priority": "p2_editorial_potential",
-      "current_research_status": "not_researched"
+      "research_priority": "done_or_pending_specific_check",
+      "current_research_status": "needs_source_review"
     },
     {
       "external_id": "coffeelog-7777e518105d49f2",
