@@ -1,11 +1,11 @@
 # Retailer UI and Daiso detail-route release — 2026-09-27
 
-**Status:** Route regression fixed and locally verified; combined preview and production checks pending.
+**Status:** Combined preview verified; production deployment pending.
 
 **Branch:** `release/ui-brand-route-20260927` (rebased on `origin/main` at `9168756`).
 
 **Earlier UI-only preview:** [map](https://seoul-guide-v2-115ee0ihd-admin-28156576s-projects.vercel.app/map) · [Olive Young ranking](https://seoul-guide-v2-115ee0ihd-admin-28156576s-projects.vercel.app/ranking?retailer=olive_young). This deployment does not include the route fix.
-**Combined preview:** To be recorded after the new branch deploys.
+**Combined preview:** [map](https://seoul-guide-v2-n7ktce1hb-admin-28156576s-projects.vercel.app/map) · [Olive Young ranking](https://seoul-guide-v2-n7ktce1hb-admin-28156576s-projects.vercel.app/ranking?retailer=olive_young). Vercel deployment `HzfLzGwwVyniSxpKk4Y5VAcsJ1Ui` was Ready for commit `2cdcbf6`.
 
 ## UI scope and evidence
 
@@ -20,6 +20,12 @@
 - Production `https://myseouldrop.app/place/<official Daiso ID>` showed `This page wandered off` for a percent-encoded Korean official ID (Garaksijang Stn.). All 251 official Daiso IDs in `lib/generated/daiso-places.ts` contain `%` escapes. Production `getPlace()` compares only the literal ID and the once-decoded incoming route parameter; it cannot match the stored percent-encoded ID after Next.js has decoded the parameter. This branch now fixes only that lookup and adds two tests covering all 251 IDs. The tests failed on the old code and passed after the fix. Stored IDs are unchanged.
 - Count correction: 65 official Daiso branches have `tax-refund`, 116 have `sim-card`, and **137 distinct branches have either**. The report's 218 is not supported by the generated official dataset.
 - The Olive Young COEX Mall name fix is on `main` (`ebe70e4`). Production detail rendered `Olive Young COEX Mall`; `lib/place-name-loanwords.test.ts` passed in the clean UI branch. This confirms that example, not a fresh live audit of all 17 corrections.
+
+## Combined preview check
+
+- The `All` map list displayed Daiso Gangnam Stn. 2 with `Tax refund` and `SIM card`, without the old `DAISO · GANGNAM` eyebrow. Both Daiso and Olive Young logo images in the list loaded with nonzero natural widths.
+- The map's nearby-place link opened an official Daiso detail route at a percent-encoded Korean ID. It rendered `Daiso Gangnam Stn.` and an `In store` row with `Tax refund`, rather than the production 404. The all-251 test covers the other official IDs at the lookup layer.
+- The Olive Young ranking showed `What's trending`, the curated-not-live qualifier, and `Sales`, `Review Best`, and `Brands` tabs. Console error lists for the map, Daiso detail, and ranking tabs were empty.
 
 ## Production gate
 
