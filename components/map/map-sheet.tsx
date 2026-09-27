@@ -9,6 +9,7 @@ import { SelectedPlaceActionBar } from "./selected-place-action-bar";
 import { LiveBadge } from "@/components/ui/live-badge";
 import { BRAND_MARK_SRC, getPlace, TYPE_COLOR, TYPE_ICON, TYPE_LABEL, zoneShort, type Place } from "@/lib/data";
 import { formatCompactDistance, haversineKm, type LatLng } from "@/lib/geo";
+import { daisoRowServices } from "@/lib/daiso-row-services";
 import {
   getMapSheetHalfOffsetRatio,
   nextMapSheetSnap,
@@ -522,7 +523,7 @@ export function MapSheet({ places, origin, selectedId, groupPlaceIds = [], onSel
             >
               <MapRowThumb place={place} />
               <div className="maprow-copy">
-                <span className="label">{TYPE_LABEL[place.type]} · {zoneShort(place.zone)}</span>
+                {place.type !== "daiso" && <span className="label">{TYPE_LABEL[place.type]} · {zoneShort(place.zone)}</span>}
                 <div className="place-name-primary">{place.name}</div>
                 {place.nameKr !== place.name && (
                   <div className="place-name-secondary" lang="ko">{place.nameKr}</div>
@@ -532,6 +533,7 @@ export function MapSheet({ places, origin, selectedId, groupPlaceIds = [], onSel
                   <span className="map-meta-token mono">{formatCompactDistance(km)}</span>
                   <span>{place.address}</span>
                 </div>
+                <DaisoRowServices place={place} />
               </div>
             </button>
           );
@@ -552,7 +554,7 @@ export function MapSheet({ places, origin, selectedId, groupPlaceIds = [], onSel
             >
               <MapRowThumb place={p} />
               <div className="maprow-copy">
-                <span className="label">{TYPE_LABEL[p.type]} · {zoneShort(p.zone)}</span>
+                {p.type !== "daiso" && <span className="label">{TYPE_LABEL[p.type]} · {zoneShort(p.zone)}</span>}
                 <div className="place-name-primary">{p.name}</div>
                 {p.nameKr !== p.name && (
                   <div className="place-name-secondary" lang="ko">{p.nameKr}</div>
@@ -562,9 +564,10 @@ export function MapSheet({ places, origin, selectedId, groupPlaceIds = [], onSel
                   <span className="map-meta-token mono">{formatCompactDistance(km)}</span>
                   {p.rating && <span className="map-meta-token stars">★{p.rating}</span>}
                   {/* price folded into the meta line — the right-edge chip read too heavy */}
-                  <span className="map-meta-token mono">{p.priceRange}</span>
+                  {p.type !== "daiso" && <span className="map-meta-token mono">{p.priceRange}</span>}
                   {p.englishOk && <span>English OK</span>}
                 </div>
+                <DaisoRowServices place={p} />
               </div>
             </button>
           )) : null}
@@ -622,6 +625,16 @@ function MapRowThumb({ place }: { place: Place }) {
           <Icon name={TYPE_ICON[place.type]} className="maprow-fallback-glyph" />
         </span>
       )}
+    </div>
+  );
+}
+
+function DaisoRowServices({ place }: { place: Place }) {
+  const services = daisoRowServices(place);
+  if (services.length === 0) return null;
+  return (
+    <div className="caption muted maprow-daiso-services">
+      {services.map((label) => <span className="maprow-daiso-service" key={label}>{label}</span>)}
     </div>
   );
 }
