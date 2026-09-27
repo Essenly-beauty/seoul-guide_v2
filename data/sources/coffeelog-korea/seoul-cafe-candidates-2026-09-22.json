@@ -15,7 +15,7 @@
     "geography": "Seoul only",
     "record_count": 454,
     "enriched_record_count": 30,
-    "researched_record_count": 231
+    "researched_record_count": 237
   },
   "import_policy": {
     "default_action": "stage_only",
@@ -4089,8 +4089,76 @@
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
       "editorial_context_provenance": null,
-      "canonical_place_id": null,
-      "research_status": "not_researched"
+      "canonical_place_id": "seoul:mapo:deep-blue-lake-mangwon",
+      "research_status": "reviewed",
+      "research_confidence": "high",
+      "verified_attributes": [
+        "specialty-roastery",
+        "light-roast",
+        "tea-like-coffee",
+        "single-origin",
+        "multiple-bean-choice",
+        "brewing-coffee",
+        "bean-retail",
+        "drip-bags",
+        "multi-floor",
+        "large-space",
+        "work-friendly-signal",
+        "no-parking"
+      ],
+      "ados_editorial_angles": [
+        "망원시장 산책 뒤 과일처럼 맑은 라이트 로스트로 입안을 환기하는 곳",
+        "파란 3층 건물에서 원두를 고르고 커피를 천천히 비교하는 로스터리"
+      ],
+      "research_cautions": [
+        "산미가 선명한 라이트 로스트 중심이라 다크 로스트 취향에는 다를 수 있음",
+        "전용 주차가 없어 망원 공영주차장 이용",
+        "주말과 시장 피크 시간 혼잡 가능"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://www.diningcode.com/profile.php?rid=4YtMbCbgV2WC",
+          "publisher": "DiningCode",
+          "source_kind": "place-platform",
+          "supports": [
+            "current-operation-2026",
+            "address",
+            "opening-hours",
+            "specialty-roastery",
+            "light-roast",
+            "tea-like-coffee",
+            "single-origin",
+            "multiple-bean-choice",
+            "brewing-coffee",
+            "bean-retail",
+            "drip-bags",
+            "multi-floor",
+            "large-space",
+            "work-friendly-signal",
+            "no-parking"
+          ]
+        },
+        {
+          "url": "https://www.hdec.kr/HdecToday/330/0607p_focus.pdf",
+          "publisher": "현대건설 사보",
+          "source_kind": "historical-editorial",
+          "supports": [
+            "long-running-neighborhood-cafe",
+            "multi-floor",
+            "flat-white",
+            "mangwon-market-location"
+          ]
+        },
+        {
+          "url": "https://scakorea.squarespace.com/s/2024-KCRC.pdf",
+          "publisher": "SCA Korea",
+          "source_kind": "industry-competition-record",
+          "supports": [
+            "roaster-competition-participation",
+            "roastery-identity"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-a29cbf4ba768dc3b",
@@ -4530,8 +4598,79 @@
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
       "editorial_context_provenance": null,
-      "canonical_place_id": null,
-      "research_status": "not_researched"
+      "canonical_place_id": "seoul:mapo:small-low-seongsan",
+      "research_status": "reviewed",
+      "research_confidence": "high",
+      "verified_attributes": [
+        "specialty-roastery",
+        "on-site-roasting",
+        "filter-coffee",
+        "origami-dripper",
+        "competition-recognized",
+        "bean-retail",
+        "small-space",
+        "bar-seating",
+        "quiet-stay",
+        "short-hours"
+      ],
+      "ados_editorial_angles": [
+        "성산동의 작은 바에서 옻칠 트레이에 담긴 한 잔을 천천히 식혀 마시는 곳",
+        "직접 볶은 원두와 정교한 브루잉 도구를 가까이서 보는 로스터리"
+      ],
+      "research_cautions": [
+        "일·월요일 휴무이며 오후 6시 전후로 일찍 닫음",
+        "좌석이 작아 단체·장시간 작업에는 부적합",
+        "원두 라인업과 디저트는 방문 시점에 따라 변경"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://www.diningcode.com/profile.php?rid=godWDOsBOSWM",
+          "publisher": "DiningCode",
+          "source_kind": "place-platform",
+          "supports": [
+            "current-operation-2026",
+            "address",
+            "opening-hours",
+            "filter-coffee",
+            "small-space",
+            "bar-seating",
+            "quiet-stay",
+            "takeout"
+          ]
+        },
+        {
+          "url": "https://dongnecoffeenote.com/c/5861",
+          "publisher": "동네 커피 노트",
+          "source_kind": "review-analysis",
+          "supports": [
+            "on-site-roasting",
+            "specialty-coffee",
+            "bean-retail",
+            "quiet-stay",
+            "not-work-focused"
+          ]
+        },
+        {
+          "url": "https://polle.com/place/1gks3Q/%EC%8A%A4%EB%AA%B0%EB%A1%9C%EC%9A%B0",
+          "publisher": "뽈레",
+          "source_kind": "specialty-visit-review",
+          "supports": [
+            "origami-dripper",
+            "brewing-equipment",
+            "coffee-presentation",
+            "bean-variety"
+          ]
+        },
+        {
+          "url": "https://static1.squarespace.com/static/5c748146d86cc967369b1f7e/t/67400bc9b65c914ac5d44f47/1732250570207/2025%2BKCTC%2B%E1%84%8B%E1%85%A8%E1%84%89%E1%85%A5%E1%86%AB%2B%E1%84%8B%E1%85%B5%E1%86%AF%E1%84%8C%E1%85%A5%E1%86%BC%281122%29.pdf",
+          "publisher": "SCA Korea",
+          "source_kind": "industry-competition-record",
+          "supports": [
+            "competition-recognized",
+            "barista-identity"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-cf6a690c210789ee",
@@ -4636,8 +4775,76 @@
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
       "editorial_context_provenance": null,
-      "canonical_place_id": null,
-      "research_status": "not_researched"
+      "canonical_place_id": "seoul:mapo:berry-bliss-seogyo",
+      "research_status": "reviewed",
+      "research_confidence": "high",
+      "verified_attributes": [
+        "fruit-specialist",
+        "certified-fruit-sommelier",
+        "souffle-pancake",
+        "seasonal-fruit",
+        "fruit-parfait",
+        "fruit-bingsu",
+        "brunch",
+        "multi-floor",
+        "large-space",
+        "terrace",
+        "reservation",
+        "late-hours"
+      ],
+      "ados_editorial_angles": [
+        "과일 소믈리에가 고른 제철 과일을 수플레 위에 가장 풍성하게 올리는 곳",
+        "복숭아·무화과·딸기의 계절을 파르페와 빙수로 기록하는 홍대 카페"
+      ],
+      "research_cautions": [
+        "제철 과일에 따라 대표 메뉴와 가격이 크게 달라짐",
+        "수플레는 주문 후 조리 시간이 길 수 있음",
+        "디저트 가격대가 높은 편",
+        "주차 불가"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://www.diningcode.com/profile.php?rid=K6U2W8NLy3rH",
+          "publisher": "DiningCode",
+          "source_kind": "place-platform",
+          "supports": [
+            "current-operation-2026",
+            "certified-fruit-sommelier",
+            "souffle-pancake",
+            "seasonal-fruit",
+            "fruit-parfait",
+            "fruit-bingsu",
+            "brunch",
+            "multi-floor",
+            "large-space",
+            "terrace",
+            "reservation",
+            "long-preparation"
+          ]
+        },
+        {
+          "url": "https://www.tabling.co.kr/place/677cd66a66de5f069890ee03",
+          "publisher": "테이블링",
+          "source_kind": "place-platform",
+          "supports": [
+            "address",
+            "opening-hours",
+            "souffle-pancake",
+            "fruit-dessert",
+            "multi-floor",
+            "no-parking"
+          ]
+        },
+        {
+          "url": "https://bizno.net/article/5658502424",
+          "publisher": "비즈노",
+          "source_kind": "business-status-directory",
+          "supports": [
+            "business-identity",
+            "address"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-0891b62911c36b6d",
@@ -4743,8 +4950,71 @@
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
       "editorial_context_provenance": null,
-      "canonical_place_id": null,
-      "research_status": "not_researched"
+      "canonical_place_id": "seoul:mapo:koike-yeonnam",
+      "research_status": "reviewed",
+      "research_confidence": "high",
+      "verified_attributes": [
+        "cake-specialist",
+        "custom-cake",
+        "seasonal-fruit-cake",
+        "whole-cake-reservation",
+        "cat-themed",
+        "multi-floor",
+        "wood-interior",
+        "large-space",
+        "late-hours-weekend",
+        "gyeongui-line-neighborhood"
+      ],
+      "ados_editorial_angles": [
+        "연남의 고양이 모티프 공간에서 제철 쇼트케이크 한 조각을 고르는 곳",
+        "경의선숲길 약속을 주문 제작 홀케이크로 기념하는 2층 카페"
+      ],
+      "research_cautions": [
+        "주말 오후에는 혼잡할 수 있음",
+        "홀케이크와 디자인 케이크는 공식 채널 사전 주문 필요",
+        "평일과 주말 마감시간이 다름",
+        "주차 조건 확인"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://pf.kakao.com/_Axfxbxcj",
+          "publisher": "코이크 카카오채널",
+          "source_kind": "official-channel",
+          "supports": [
+            "current-operation-2026",
+            "address",
+            "opening-hours",
+            "custom-cake",
+            "whole-cake-reservation",
+            "seasonal-fruit-cake",
+            "cat-themed",
+            "multi-floor",
+            "wood-interior",
+            "crowding"
+          ]
+        },
+        {
+          "url": "https://moggo.co.kr/yeonnam/place/3130000-101-2019-00100/",
+          "publisher": "모꼬",
+          "source_kind": "public-licensing-derived-data",
+          "supports": [
+            "current-license-status-2026",
+            "address",
+            "long-running-operation-signal"
+          ]
+        },
+        {
+          "url": "https://www.diningcode.com/profile.php?rid=TZpz1Hcd0l7h",
+          "publisher": "DiningCode",
+          "source_kind": "place-platform",
+          "supports": [
+            "cake-specialist",
+            "custom-cake",
+            "dessert",
+            "yeonnam-location"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-bd702cbcfebaedcc",
@@ -4776,8 +5046,72 @@
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
       "editorial_context_provenance": null,
-      "canonical_place_id": null,
-      "research_status": "not_researched"
+      "canonical_place_id": "seoul:mapo:benny-cake-sangsu",
+      "research_status": "reviewed",
+      "research_confidence": "high",
+      "verified_attributes": [
+        "cake-specialist",
+        "slice-cake",
+        "custom-cake",
+        "same-day-made",
+        "seasonal-fruit-cake",
+        "bottle-cake",
+        "party-goods",
+        "whole-building",
+        "late-hours",
+        "reservation-pickup"
+      ],
+      "ados_editorial_angles": [
+        "상수에서 조각 케이크를 고르거나 오늘만의 생일 케이크를 주문하는 집",
+        "알록달록한 초와 파티 소품까지 한 건물에서 준비하는 기념일 정거장"
+      ],
+      "research_cautions": [
+        "주문 제작 케이크는 디자인·날짜·픽업시간 사전 상담과 예약 필요",
+        "수요일 휴무",
+        "주차 정보 없음",
+        "제철 과일 메뉴와 조각 케이크 구성은 수시 변경"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://www.hicake.co.kr/benny.cake",
+          "publisher": "하이케이크",
+          "source_kind": "official-ordering-profile",
+          "supports": [
+            "current-operation-2026",
+            "address",
+            "opening-hours",
+            "same-day-made",
+            "custom-cake",
+            "bottle-cake",
+            "reservation-pickup",
+            "parking-unknown"
+          ]
+        },
+        {
+          "url": "https://www.tabling.co.kr/place/677ccc5566de5f06987ee50f",
+          "publisher": "테이블링",
+          "source_kind": "place-platform",
+          "supports": [
+            "address",
+            "opening-hours",
+            "wednesday-closure",
+            "slice-cake",
+            "seasonal-fruit-cake"
+          ]
+        },
+        {
+          "url": "https://www.diningcode.com/profile.php?rid=U8FR4vWWo4c9",
+          "publisher": "DiningCode",
+          "source_kind": "place-platform",
+          "supports": [
+            "current-review-2026",
+            "whole-building",
+            "custom-cake",
+            "party-goods",
+            "wifi"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-d0e773a85115246c",
@@ -4877,8 +5211,54 @@
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
       "editorial_context_provenance": null,
-      "canonical_place_id": null,
-      "research_status": "not_researched"
+      "canonical_place_id": "seoul:mapo:imu-bakeshop-seogyo",
+      "research_status": "reviewed",
+      "research_confidence": "medium",
+      "verified_attributes": [
+        "vegan-bakeshop",
+        "gluten-free",
+        "whole-grain",
+        "cake-specialist",
+        "cookies",
+        "international-pastry-background-signal",
+        "baking-class-signal",
+        "second-floor",
+        "takeout-friendly"
+      ],
+      "ados_editorial_angles": [
+        "합정에서 비건과 글루텐프리 케이크를 타협 없이 고르는 베이크숍",
+        "우리 통밀로 만든 디저트를 배우고 포장해 가는 2층 작업실"
+      ],
+      "research_cautions": [
+        "카페 체류보다 디저트 구매 중심일 수 있어 좌석 운영 확인",
+        "영업시간과 휴무일을 공식 채널에서 재확인",
+        "해외 제과 경력과 클래스 운영은 최신 정보 추가 검증 권장"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://dongnecoffeenote.com/c/3445",
+          "publisher": "동네 커피 노트",
+          "source_kind": "review-analysis",
+          "supports": [
+            "current-review-2026",
+            "address",
+            "vegan",
+            "gluten-free",
+            "cake-specialist",
+            "international-pastry-background-signal"
+          ]
+        },
+        {
+          "url": "https://m.ehyundai.com/mobile/culture/ct_01_01_01_01.do?crsCd=503010&crsSqNo=234&proCustNo=P03187297&sqCd=005&stCd=400",
+          "publisher": "현대백화점 문화센터",
+          "source_kind": "institutional-class-listing",
+          "supports": [
+            "business-identity",
+            "whole-grain-vegan-baking",
+            "baking-class-signal"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-ef5cd56805aa1548",
