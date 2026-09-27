@@ -15,7 +15,7 @@
     "geography": "Seoul only",
     "record_count": 454,
     "enriched_record_count": 30,
-    "researched_record_count": 206
+    "researched_record_count": 211
   },
   "import_policy": {
     "default_action": "stage_only",
@@ -23150,8 +23150,73 @@
       ],
       "editorial_context_status": "source_derived",
       "editorial_context_provenance": "threads_collection_title",
-      "canonical_place_id": null,
-      "research_status": "not_researched"
+      "canonical_place_id": "seoul:eunpyeong:freerole-cafe-bulgwang",
+      "research_status": "reviewed",
+      "research_confidence": "high",
+      "verified_attributes": [
+        "multi-floor",
+        "work-friendly",
+        "reading-friendly",
+        "book-club-friendly",
+        "early-opening-weekday",
+        "late-hours",
+        "wide-tables",
+        "wifi",
+        "outlets",
+        "egg-tart",
+        "in-house-bakes",
+        "parking-limited"
+      ],
+      "ados_editorial_angles": [
+        "불광역에서 1층의 대화와 2층의 집중을 골라 쓰는 넓은 카페",
+        "평일 이른 아침 에그타르트와 노트북으로 하루를 여는 곳"
+      ],
+      "research_cautions": [
+        "두 원본 레코드는 동일 매장으로 병합",
+        "주말에는 평일보다 늦게 문을 엶",
+        "2층은 계단 접근이며 주차는 2~3대 수준으로 제한적"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://www.tabling.co.kr/place/677cd25166de5f0698898005",
+          "publisher": "테이블링",
+          "source_kind": "place-platform",
+          "supports": [
+            "address",
+            "opening-hours",
+            "parking-limited",
+            "egg-tart",
+            "in-house-bakes",
+            "multi-floor"
+          ]
+        },
+        {
+          "url": "https://www.diningcode.com/profile.php?rid=OPzLFpexpiUZ",
+          "publisher": "DiningCode",
+          "source_kind": "place-platform",
+          "supports": [
+            "floor-by-use",
+            "work-friendly",
+            "reading-friendly",
+            "wifi",
+            "outlets",
+            "wide-tables",
+            "parking-limited",
+            "early-opening-weekday"
+          ]
+        },
+        {
+          "url": "https://morningcalm.koreanair.com/media/pages/archive/jan-feb-2026/feafec6cd6-1768377316/morningcalm-2026-1-ol-low-3.pdf",
+          "publisher": "대한항공 모닝캄",
+          "source_kind": "travel-magazine",
+          "supports": [
+            "current-operation-2026",
+            "spacious-interior",
+            "book-club-friendly",
+            "work-and-study"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-6c3b47b3d43ab89c",
@@ -23216,8 +23281,73 @@
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
       "editorial_context_provenance": null,
-      "canonical_place_id": null,
-      "research_status": "not_researched"
+      "canonical_place_id": "seoul:eunpyeong:freerole-cafe-bulgwang",
+      "research_status": "reviewed",
+      "research_confidence": "high",
+      "verified_attributes": [
+        "multi-floor",
+        "work-friendly",
+        "reading-friendly",
+        "book-club-friendly",
+        "early-opening-weekday",
+        "late-hours",
+        "wide-tables",
+        "wifi",
+        "outlets",
+        "egg-tart",
+        "in-house-bakes",
+        "parking-limited"
+      ],
+      "ados_editorial_angles": [
+        "불광역에서 1층의 대화와 2층의 집중을 골라 쓰는 넓은 카페",
+        "평일 이른 아침 에그타르트와 노트북으로 하루를 여는 곳"
+      ],
+      "research_cautions": [
+        "두 원본 레코드는 동일 매장으로 병합",
+        "주말에는 평일보다 늦게 문을 엶",
+        "2층은 계단 접근이며 주차는 2~3대 수준으로 제한적"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://www.tabling.co.kr/place/677cd25166de5f0698898005",
+          "publisher": "테이블링",
+          "source_kind": "place-platform",
+          "supports": [
+            "address",
+            "opening-hours",
+            "parking-limited",
+            "egg-tart",
+            "in-house-bakes",
+            "multi-floor"
+          ]
+        },
+        {
+          "url": "https://www.diningcode.com/profile.php?rid=OPzLFpexpiUZ",
+          "publisher": "DiningCode",
+          "source_kind": "place-platform",
+          "supports": [
+            "floor-by-use",
+            "work-friendly",
+            "reading-friendly",
+            "wifi",
+            "outlets",
+            "wide-tables",
+            "parking-limited",
+            "early-opening-weekday"
+          ]
+        },
+        {
+          "url": "https://morningcalm.koreanair.com/media/pages/archive/jan-feb-2026/feafec6cd6-1768377316/morningcalm-2026-1-ol-low-3.pdf",
+          "publisher": "대한항공 모닝캄",
+          "source_kind": "travel-magazine",
+          "supports": [
+            "current-operation-2026",
+            "spacious-interior",
+            "book-club-friendly",
+            "work-and-study"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-ae3e942e51f4c3c6",
@@ -23249,8 +23379,55 @@
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
       "editorial_context_provenance": null,
-      "canonical_place_id": null,
-      "research_status": "not_researched"
+      "canonical_place_id": "seoul:yangcheon:book-and-brew-omokgyo",
+      "research_status": "reviewed",
+      "research_confidence": "medium",
+      "verified_attributes": [
+        "book-cafe",
+        "work-friendly",
+        "reading-friendly",
+        "diverse-seating",
+        "single-seating",
+        "group-seating",
+        "early-opening-tue-sat",
+        "late-hours",
+        "parking-limited"
+      ],
+      "ados_editorial_angles": [
+        "오목교에서 책과 노트북 사이를 오가며 밤 열 시까지 머무는 카페",
+        "1인석부터 모임석까지 오늘 필요한 집중의 크기를 고르는 곳"
+      ],
+      "research_cautions": [
+        "일·월요일은 화~토요일보다 늦게 문을 엶",
+        "무료 주차는 특정 요일 1대 수준이라는 안내가 있어 대중교통 또는 인근 공영주차장 권장",
+        "최신 도서 구성과 좌석 운영은 방문 전 확인"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://www.diningcode.com/profile.php?rid=XwEZmHz4CYw4",
+          "publisher": "DiningCode",
+          "source_kind": "place-platform",
+          "supports": [
+            "address",
+            "opening-hours",
+            "book-cafe",
+            "work-friendly",
+            "reading-friendly",
+            "single-seating",
+            "group-seating",
+            "parking-limited"
+          ]
+        },
+        {
+          "url": "https://www.bizbank.co.kr/article/5600403282-92",
+          "publisher": "비즈뱅크",
+          "source_kind": "business-directory",
+          "supports": [
+            "business-identity",
+            "address"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-c59ff1b11f43574d",
@@ -23414,8 +23591,34 @@
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
       "editorial_context_provenance": null,
-      "canonical_place_id": null,
-      "research_status": "not_researched"
+      "canonical_place_id": "seoul:seongbuk:etz-coffee-hansungdae",
+      "research_status": "needs_source_review",
+      "research_confidence": "low",
+      "verified_attributes": [
+        "dessert-cafe-signal",
+        "butter-rice-cake-signal",
+        "hansungdae-neighborhood-signal"
+      ],
+      "ados_editorial_angles": [
+        "한성대입구 골목에서 버터떡을 곁들이는 작은 감성 카페 후보"
+      ],
+      "research_cautions": [
+        "공개 검색으로 공식 주소·영업시간·운영 주체를 교차 검증하지 못함",
+        "상호 영문 표기와 현재 운영 여부를 공식 채널에서 재확인해야 함",
+        "편집 발행 전 현장 또는 지도 검증 필수"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://www.ndex.kr/data/hkjin22",
+          "publisher": "엔덱스",
+          "source_kind": "recent-blog-index",
+          "supports": [
+            "recent-visit-signal-2026",
+            "hansungdae-neighborhood-signal",
+            "butter-rice-cake-signal"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-1eb9c57b8e031416",
@@ -23513,8 +23716,74 @@
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
       "editorial_context_provenance": null,
-      "canonical_place_id": null,
-      "research_status": "not_researched"
+      "canonical_place_id": "seoul:gangbuk:kyungs-coffee-suyu",
+      "research_status": "reviewed",
+      "research_confidence": "high",
+      "verified_attributes": [
+        "twenty-four-hours",
+        "hybrid-staffed-unmanned",
+        "private-room",
+        "parking-signal",
+        "pet-friendly",
+        "terrace",
+        "dessert",
+        "neighborhood-cafe",
+        "late-night"
+      ],
+      "ados_editorial_angles": [
+        "수유에서 직원이 퇴근한 뒤에도 무인으로 이어지는 24시간 카페",
+        "반려견과 테라스를 쓰고 단독룸에서 오래 머무는 동네 아지트"
+      ],
+      "research_cautions": [
+        "직원 상주 시간 이후에는 무인으로 운영",
+        "반려동물은 목줄 착용 등 현장 규칙 준수",
+        "단독룸·주차 이용 조건과 디저트 재고는 방문 전 확인"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://www.daangn.com/kr/local-profile/%EA%B2%BD%EC%8A%A4%EC%BB%A4%ED%94%BC-xsomxg7w8736/",
+          "publisher": "당근 동네업체",
+          "source_kind": "business-profile",
+          "supports": [
+            "relocation-near-suyu-station",
+            "private-room",
+            "parking-signal",
+            "cozy-neighborhood-concept"
+          ]
+        },
+        {
+          "url": "https://www.diningcode.com/profile.php?rid=vSMIl5CynUm1",
+          "publisher": "DiningCode",
+          "source_kind": "place-platform",
+          "supports": [
+            "current-operation-2026",
+            "twenty-four-hours",
+            "hybrid-staffed-unmanned",
+            "terrace",
+            "dessert",
+            "address"
+          ]
+        },
+        {
+          "url": "https://pettriplife.com/place/105",
+          "publisher": "펫트립라이프",
+          "source_kind": "pet-place-guide",
+          "supports": [
+            "pet-friendly",
+            "leash-rule"
+          ]
+        },
+        {
+          "url": "https://council.gangbuk.seoul.kr/kr/bbs/download.do?bbs_id=cost&uid=D912014A6F07906A1B995217D63353BD",
+          "publisher": "강북구의회",
+          "source_kind": "public-spending-record",
+          "supports": [
+            "operation-signal-2025",
+            "address",
+            "business-identity"
+          ]
+        }
+      ]
     }
   ],
   "editorial_context_policy": {

@@ -1536,6 +1536,42 @@
       "ados_editorial_angles": ["샤로수길에서 ‘돌·땅·하늘’ 세 잔으로 로스팅의 차이를 읽는 곳", "원두 납품 작업실이 주말이면 커피 애호가의 교실이 되는 로스터리"],
       "cautions": ["정오부터 오후 6시까지의 짧은 운영이며 휴무 공지 확인 필수", "작업실 겸 카페라 좌석과 운영일이 변동될 수 있음", "주소의 층 표기가 출처별로 달라 현장 길 안내 확인"],
       "evidence": [{ "url": "https://gfac.or.kr/uploadfile/ecms/media/media/2025/02/6e98978260f52befae9be088d688ee94.pdf", "publisher": "관악문화재단", "source_kind": "local-culture-interview", "supports": ["owner-identity", "wholesale-workshop", "weekend-cafe", "roasting-education", "brand-story"] }, { "url": "https://www.diningcode.com/profile.php?rid=EOBLL3sh2vcn", "publisher": "DiningCode", "source_kind": "place-platform", "supports": ["address", "opening-hours", "competition-awarded", "didrich-roaster", "filter-coffee", "signature-tasting-set", "house-dessert"] }, { "url": "https://dongnecoffeenote.com/c/3132", "publisher": "동네 커피 노트", "source_kind": "review-analysis", "supports": ["current-review-signal", "specialty-roastery", "work-friendly", "bean-retail"] }, { "url": "https://blog.naver.com/PostView.naver?blogId=unseokcoffee&logNo=222979279220", "publisher": "운석커피로스터스", "source_kind": "official-blog", "supports": ["specialty-coffee", "roast-profile", "brewing-guide", "wholesale"] }]
+    },
+    {
+      "canonical_place_id": "seoul:eunpyeong:freerole-cafe-bulgwang",
+      "member_external_ids": ["coffeelog-16271d17b078a205", "coffeelog-047c1763ebe81b5a"],
+      "research_status": "reviewed", "confidence": "high",
+      "verified_attributes": ["multi-floor", "work-friendly", "reading-friendly", "book-club-friendly", "early-opening-weekday", "late-hours", "wide-tables", "wifi", "outlets", "egg-tart", "in-house-bakes", "parking-limited"],
+      "ados_editorial_angles": ["불광역에서 1층의 대화와 2층의 집중을 골라 쓰는 넓은 카페", "평일 이른 아침 에그타르트와 노트북으로 하루를 여는 곳"],
+      "cautions": ["두 원본 레코드는 동일 매장으로 병합", "주말에는 평일보다 늦게 문을 엶", "2층은 계단 접근이며 주차는 2~3대 수준으로 제한적"],
+      "evidence": [{ "url": "https://www.tabling.co.kr/place/677cd25166de5f0698898005", "publisher": "테이블링", "source_kind": "place-platform", "supports": ["address", "opening-hours", "parking-limited", "egg-tart", "in-house-bakes", "multi-floor"] }, { "url": "https://www.diningcode.com/profile.php?rid=OPzLFpexpiUZ", "publisher": "DiningCode", "source_kind": "place-platform", "supports": ["floor-by-use", "work-friendly", "reading-friendly", "wifi", "outlets", "wide-tables", "parking-limited", "early-opening-weekday"] }, { "url": "https://morningcalm.koreanair.com/media/pages/archive/jan-feb-2026/feafec6cd6-1768377316/morningcalm-2026-1-ol-low-3.pdf", "publisher": "대한항공 모닝캄", "source_kind": "travel-magazine", "supports": ["current-operation-2026", "spacious-interior", "book-club-friendly", "work-and-study"] }]
+    },
+    {
+      "canonical_place_id": "seoul:yangcheon:book-and-brew-omokgyo",
+      "member_external_ids": ["coffeelog-ae3e942e51f4c3c6"],
+      "research_status": "reviewed", "confidence": "medium",
+      "verified_attributes": ["book-cafe", "work-friendly", "reading-friendly", "diverse-seating", "single-seating", "group-seating", "early-opening-tue-sat", "late-hours", "parking-limited"],
+      "ados_editorial_angles": ["오목교에서 책과 노트북 사이를 오가며 밤 열 시까지 머무는 카페", "1인석부터 모임석까지 오늘 필요한 집중의 크기를 고르는 곳"],
+      "cautions": ["일·월요일은 화~토요일보다 늦게 문을 엶", "무료 주차는 특정 요일 1대 수준이라는 안내가 있어 대중교통 또는 인근 공영주차장 권장", "최신 도서 구성과 좌석 운영은 방문 전 확인"],
+      "evidence": [{ "url": "https://www.diningcode.com/profile.php?rid=XwEZmHz4CYw4", "publisher": "DiningCode", "source_kind": "place-platform", "supports": ["address", "opening-hours", "book-cafe", "work-friendly", "reading-friendly", "single-seating", "group-seating", "parking-limited"] }, { "url": "https://www.bizbank.co.kr/article/5600403282-92", "publisher": "비즈뱅크", "source_kind": "business-directory", "supports": ["business-identity", "address"] }]
+    },
+    {
+      "canonical_place_id": "seoul:seongbuk:etz-coffee-hansungdae",
+      "member_external_ids": ["coffeelog-f703147da3c0a2cd"],
+      "research_status": "needs_source_review", "confidence": "low",
+      "verified_attributes": ["dessert-cafe-signal", "butter-rice-cake-signal", "hansungdae-neighborhood-signal"],
+      "ados_editorial_angles": ["한성대입구 골목에서 버터떡을 곁들이는 작은 감성 카페 후보"],
+      "cautions": ["공개 검색으로 공식 주소·영업시간·운영 주체를 교차 검증하지 못함", "상호 영문 표기와 현재 운영 여부를 공식 채널에서 재확인해야 함", "편집 발행 전 현장 또는 지도 검증 필수"],
+      "evidence": [{ "url": "https://www.ndex.kr/data/hkjin22", "publisher": "엔덱스", "source_kind": "recent-blog-index", "supports": ["recent-visit-signal-2026", "hansungdae-neighborhood-signal", "butter-rice-cake-signal"] }]
+    },
+    {
+      "canonical_place_id": "seoul:gangbuk:kyungs-coffee-suyu",
+      "member_external_ids": ["coffeelog-6b0fcb1afda5f6e4"],
+      "research_status": "reviewed", "confidence": "high",
+      "verified_attributes": ["twenty-four-hours", "hybrid-staffed-unmanned", "private-room", "parking-signal", "pet-friendly", "terrace", "dessert", "neighborhood-cafe", "late-night"],
+      "ados_editorial_angles": ["수유에서 직원이 퇴근한 뒤에도 무인으로 이어지는 24시간 카페", "반려견과 테라스를 쓰고 단독룸에서 오래 머무는 동네 아지트"],
+      "cautions": ["직원 상주 시간 이후에는 무인으로 운영", "반려동물은 목줄 착용 등 현장 규칙 준수", "단독룸·주차 이용 조건과 디저트 재고는 방문 전 확인"],
+      "evidence": [{ "url": "https://www.daangn.com/kr/local-profile/%EA%B2%BD%EC%8A%A4%EC%BB%A4%ED%94%BC-xsomxg7w8736/", "publisher": "당근 동네업체", "source_kind": "business-profile", "supports": ["relocation-near-suyu-station", "private-room", "parking-signal", "cozy-neighborhood-concept"] }, { "url": "https://www.diningcode.com/profile.php?rid=vSMIl5CynUm1", "publisher": "DiningCode", "source_kind": "place-platform", "supports": ["current-operation-2026", "twenty-four-hours", "hybrid-staffed-unmanned", "terrace", "dessert", "address"] }, { "url": "https://pettriplife.com/place/105", "publisher": "펫트립라이프", "source_kind": "pet-place-guide", "supports": ["pet-friendly", "leash-rule"] }, { "url": "https://council.gangbuk.seoul.kr/kr/bbs/download.do?bbs_id=cost&uid=D912014A6F07906A1B995217D63353BD", "publisher": "강북구의회", "source_kind": "public-spending-record", "supports": ["operation-signal-2025", "address", "business-identity"] }]
     }
   ]
 }
