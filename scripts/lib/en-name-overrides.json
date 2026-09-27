@@ -455,6 +455,12 @@
     "basis": "chain 세이브존 = Save Zone + station 노원 = Nowon",
     "note": "confidence medium. The chain's own site (esavezone.co.kr) styles it SAVEZONE, one word all caps; the spaced form is deliberate, like IPARK Mall."
   },
+  "daiso-official:%EC%86%A1%ED%8C%8C%ED%8C%8C%ED%81%AC%ED%95%98%EB%B9%84%EC%98%A4%EC%A0%90:%EC%84%9C%EC%9A%B8%ED%8A%B9%EB%B3%84%EC%8B%9C%20%EC%86%A1%ED%8C%8C%EA%B5%AC%20%EC%86%A1%ED%8C%8C%EB%8C%80%EB%A1%9C%20111%20(%EB%AC%B8%EC%A0%95%EB%8F%99%2C%20%ED%8C%8C%ED%81%AC%ED%95%98%EB%B9%84%EC%98%A4)1~2%EC%B8%B5:37.481244:127.122332": {
+    "nameEn": "Daiso Songpa Park Habio",
+    "nameKrAtVerification": "송파파크하비오점",
+    "basis": "[rr] 송파 = Songpa + [loan] 파크하비오 = Park Habio, the complex's own English",
+    "note": ""
+  },
   "daiso-official:%EC%88%98%EC%9C%A0%EB%B3%B8%EC%A0%90:%EC%84%9C%EC%9A%B8%ED%8A%B9%EB%B3%84%EC%8B%9C%20%EA%B0%95%EB%B6%81%EA%B5%AC%20%EB%8F%84%EB%B4%89%EB%A1%9C%20342%20(%EB%B2%88%EB%8F%99)b1%EC%B8%B5:37.638035:127.026129": {
     "nameEn": "Daiso Suyu Main",
     "nameKrAtVerification": "수유본점",
@@ -472,6 +478,12 @@
     "nameKrAtVerification": "수유시장2호점",
     "basis": "station 수유 = Suyu + 시장 -> Market + branch numeral",
     "note": "confidence medium on the market name."
+  },
+  "daiso-official:%EC%8A%A4%ED%83%80%EC%8B%9C%ED%8B%B0%EA%B1%B4%EB%8C%80%EC%A0%90:%EC%84%9C%EC%9A%B8%ED%8A%B9%EB%B3%84%EC%8B%9C%20%EA%B4%91%EC%A7%84%EA%B5%AC%20%EB%8A%A5%EB%8F%99%EB%A1%9C%2092%20(%EC%9E%90%EC%96%91%EB%8F%99)b2%EC%B8%B5:37.539037:127.071432": {
+    "nameEn": "Daiso Star City Konkuk Univ.",
+    "nameKrAtVerification": "스타시티건대점",
+    "basis": "[venue] 스타시티 = Star City + [station] 건대입구 = Konkuk Univ.",
+    "note": ""
   },
   "daiso-official:%EC%8B%9C%ED%9D%A5%EC%82%AC%EA%B1%B0%EB%A6%AC%EC%A0%90:%EC%84%9C%EC%9A%B8%ED%8A%B9%EB%B3%84%EC%8B%9C%20%EA%B8%88%EC%B2%9C%EA%B5%AC%20%EC%8B%9C%ED%9D%A5%EB%8C%80%EB%A1%9C%20230%20(%EC%8B%9C%ED%9D%A5%EB%8F%99)b1~1%EC%B8%B5:37.454428:126.901248": {
     "nameEn": "Daiso Siheung Intersection",
@@ -965,6 +977,12 @@
     "basis": "chain 롯데슈퍼 = Lotte Super + station 마포 = Mapo + station 대흥 = Daeheung",
     "note": "Both halves of the head come from the station table."
   },
+  "daisomall-official:70947": {
+    "nameEn": "Daiso Highway Mart Guui",
+    "nameKrAtVerification": "하이웨이마트구의점",
+    "basis": "[loan] 하이웨이마트 = Highway Mart + [station] 구의 = Guui",
+    "note": ""
+  },
   "daisomall-official:71045": {
     "nameEn": "Daiso Lotte Super Jangwi",
     "nameKrAtVerification": "롯데슈퍼장위점",
@@ -1157,6 +1175,12 @@
     "basis": "[station] 건대입구 = Konkuk Univ. + [loan] 커먼그라운드 = Common Ground",
     "note": ""
   },
+  "oy-고척아이파크몰점": {
+    "nameEn": "Olive Young Gocheok IPARK Mall",
+    "nameKrAtVerification": "올리브영 고척아이파크몰점",
+    "basis": "[venue] 아이파크몰 = IPARK Mall (already verified here) + [rr] 고척 = Gocheok",
+    "note": ""
+  },
   "oy-공덕파크팰리스점": {
     "nameEn": "Olive Young Gongdeok Park Palace",
     "nameKrAtVerification": "올리브영 공덕파크팰리스점",
@@ -1180,6 +1204,12 @@
     "nameKrAtVerification": "올리브영 광장마켓점",
     "basis": "마켓 -> Market + romanized 광장",
     "note": "confidence medium: the address 종로구 창경궁로 88 광장시장 2층 settles the venue as Gwangjang Market, but the market's own English is not sourced."
+  },
+  "oy-구로지밸리몰점": {
+    "nameEn": "Olive Young Guro G-Valley Mall",
+    "nameKrAtVerification": "올리브영 구로지밸리몰점",
+    "basis": "[loan] 지밸리몰 = G-Valley Mall, the mall's own English + [station] 구로 = Guro",
+    "note": ""
   },
   "oy-길동사거리점": {
     "nameEn": "Olive Young Gildong Intersection",
@@ -1283,6 +1313,12 @@
     "basis": "venue 두타 = Doota",
     "note": "confidence medium: inferred. Doota is the mall's own styling; Duta was a raw romanization."
   },
+  "oy-둔촌파크포레온점": {
+    "nameEn": "Olive Young Dunchon Park Foreon",
+    "nameKrAtVerification": "올리브영 둔촌파크포레온점",
+    "basis": "[station] 둔촌동 = Dunchondong + [loan] 올림픽파크포레온 = Park Foreon (already used here for Daiso)",
+    "note": ""
+  },
   "oy-디지털미디어시티역점": {
     "nameEn": "Olive Young Digital Media City Stn.",
     "nameKrAtVerification": "올리브영 디지털미디어시티역점",
@@ -1295,11 +1331,23 @@
     "basis": "[chain] 롯데몰 = Lotte Mall + [station] 김포공항 = Gimpo Int'l Airport",
     "note": ""
   },
+  "oy-롯데몰은평점": {
+    "nameEn": "Olive Young Lotte Mall Eunpyeong",
+    "nameKrAtVerification": "올리브영 롯데몰은평점",
+    "basis": "[chain] 롯데몰 = Lotte Mall (already verified here for Daiso) + [rr] 은평 = Eunpyeong",
+    "note": ""
+  },
   "oy-롯데백화점잠실점": {
     "nameEn": "Olive Young Lotte Jamsil",
     "nameKrAtVerification": "올리브영 롯데백화점잠실점",
     "basis": "chain 롯데백화점 = Lotte Department Store, shortened to Lotte in a shop name + station 잠실 = Jamsil",
     "note": "24 chars against 42 for the full form."
+  },
+  "oy-롯데아울렛서울역점": {
+    "nameEn": "Olive Young Lotte Outlet Seoul Stn.",
+    "nameKrAtVerification": "올리브영 롯데아울렛서울역점",
+    "basis": "[chain] 롯데아울렛 = Lotte Outlet + [station] 서울역 = Seoul Stn.",
+    "note": ""
   },
   "oy-롯데월드몰점": {
     "nameEn": "Olive Young Lotte World Mall",
@@ -1439,6 +1487,12 @@
     "basis": "station 서울숲 = Seoul Forest + 역 -> Stn.",
     "note": "The station file stores Seoul-forest; the hyphen is normalized at read time. A landmark noun is translated, not romanized."
   },
+  "oy-서초타운점": {
+    "nameEn": "Olive Young Seocho Town",
+    "nameKrAtVerification": "올리브영 서초타운점",
+    "basis": "[station] 서초 = Seocho + 타운 = Town (Olive Young's flagship format word)",
+    "note": ""
+  },
   "oy-선릉로점": {
     "nameEn": "Olive Young Seolleung-ro",
     "nameKrAtVerification": "올리브영 선릉로점",
@@ -1486,6 +1540,12 @@
     "nameKrAtVerification": "올리브영 숭실대입구역점",
     "basis": "station 숭실대입구 = Soongsil Univ. + 역 -> Stn.",
     "note": "31 chars, so Stn. is kept for the station sense."
+  },
+  "oy-스타시티점": {
+    "nameEn": "Olive Young Star City",
+    "nameKrAtVerification": "올리브영 스타시티점",
+    "basis": "[venue] 스타시티 = Star City (already verified here for The Dears at Konkuk)",
+    "note": ""
   },
   "oy-스타필드마켓월계점": {
     "nameEn": "Olive Young Wolgye Starfield Market",
@@ -1643,11 +1703,23 @@
     "basis": "station 용산 = Yongsan + venue 아이파크몰 = IPARK Mall",
     "note": "One of the five spellings the owner named. The mall's own site renders IPARKMALL unspaced; the spaced form is deliberate."
   },
+  "oy-위례아이파크점": {
+    "nameEn": "Olive Young Wirye IPARK",
+    "nameKrAtVerification": "올리브영 위례아이파크점",
+    "basis": "[venue] 아이파크 = IPARK (already verified here) + [rr] 위례 = Wirye",
+    "note": ""
+  },
   "oy-은행사거리점": {
     "nameEn": "Olive Young Eunhaeng Intersection",
     "nameKrAtVerification": "올리브영 은행사거리점",
     "basis": "사거리 -> Intersection + romanized 은행",
     "note": "33 chars. 은행 stays romanized: it is the ginkgo-tree place name in Junggye, not bank."
+  },
+  "oy-이마트목동점": {
+    "nameEn": "Olive Young Emart Mokdong",
+    "nameKrAtVerification": "올리브영 이마트목동점",
+    "basis": "[chain] 이마트 = Emart + [station] 목동 = Mokdong (both already verified here)",
+    "note": ""
   },
   "oy-이태원입구점": {
     "nameEn": "Olive Young Itaewon Entrance",
@@ -1696,6 +1768,12 @@
     "nameKrAtVerification": "올리브영 정릉점",
     "basis": "station 정릉 = Jeongneung",
     "note": "Fixes Jeongreung."
+  },
+  "oy-제일제당센터점": {
+    "nameEn": "Olive Young CJ Cheiljedang Center",
+    "nameKrAtVerification": "올리브영 제일제당센터점",
+    "basis": "[loan] CJ제일제당센터 = CJ Cheiljedang Center, the company's own English",
+    "note": ""
   },
   "oy-종로1가점": {
     "nameEn": "Olive Young Jongno 1-ga",
@@ -1751,6 +1829,18 @@
     "basis": "Olive Young's own English list: 청량리중앙 = Cheongnyangni Central",
     "note": "Owner report #1. 33 chars, one over and irreducible. Confirms Cheongnyangni from the brand's own mouth, independently of the station file."
   },
+  "oy-코엑스몰점": {
+    "nameEn": "Olive Young COEX Mall",
+    "nameKrAtVerification": "올리브영 코엑스몰점",
+    "basis": "[venue] 코엑스몰 = COEX Mall (already verified here for Daiso)",
+    "note": ""
+  },
+  "oy-타워팰리스점": {
+    "nameEn": "Olive Young Tower Palace",
+    "nameKrAtVerification": "올리브영 타워팰리스점",
+    "basis": "[loan] 타워팰리스 = Tower Palace, the complex's own English",
+    "note": ""
+  },
   "oy-타임스퀘어아트리움점": {
     "nameEn": "Olive Young Times Square Atrium",
     "nameKrAtVerification": "올리브영 타임스퀘어아트리움점",
@@ -1762,6 +1852,12 @@
     "nameKrAtVerification": "올리브영 테헤란로점",
     "basis": "romanized 테헤란 + 로 -> -ro",
     "note": "The hyphenated form lands on the street's official English name."
+  },
+  "oy-트윈시티점": {
+    "nameEn": "Olive Young Twin City",
+    "nameKrAtVerification": "올리브영 트윈시티점",
+    "basis": "[loan] 트윈시티 = Twin City, the building's own English",
+    "note": ""
   },
   "oy-파르나스몰점": {
     "nameEn": "Olive Young Parnas Mall",
@@ -1803,6 +1899,12 @@
     "nameEn": "Olive Young Hapjeong Cafe St.",
     "nameKrAtVerification": "올리브영 합정카페거리점",
     "basis": "[station] 합정 = Hapjeong + 카페거리 = Cafe Street",
+    "note": ""
+  },
+  "oy-헬리오시티점": {
+    "nameEn": "Olive Young Helio City",
+    "nameKrAtVerification": "올리브영 헬리오시티점",
+    "basis": "[loan] 헬리오시티 = Helio City, the complex's own English",
     "note": ""
   },
   "oy-현대백화점목동점": {
