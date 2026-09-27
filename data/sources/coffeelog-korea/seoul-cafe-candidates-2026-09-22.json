@@ -15,7 +15,7 @@
     "geography": "Seoul only",
     "record_count": 454,
     "enriched_record_count": 30,
-    "researched_record_count": 133
+    "researched_record_count": 140
   },
   "import_policy": {
     "default_action": "stage_only",
@@ -980,8 +980,59 @@
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
       "editorial_context_provenance": null,
-      "canonical_place_id": null,
-      "research_status": "not_researched"
+      "canonical_place_id": "seoul:mapo:maverick-house-sangsu",
+      "research_status": "reviewed",
+      "research_confidence": "high",
+      "verified_attributes": [
+        "cultural-platform",
+        "work-friendly",
+        "conversation-friendly",
+        "coffee-dessert-and-meals",
+        "event-space",
+        "late-hours"
+      ],
+      "ados_editorial_angles": [
+        "상수에서 커피와 작업, 대화가 느슨하게 교차하는 문화 플랫폼",
+        "낮의 몰입에서 저녁의 모임과 이벤트로 이어지는 공간"
+      ],
+      "research_cautions": [
+        "행사·대관 일정에 따라 일반 이용 범위가 달라질 수 있어 방문 전 확인",
+        "커피 전문성 단독보다 문화·커뮤니티 맥락을 중심으로 소개"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://www.glowupmag.com/posts/%EB%A7%88%ED%8F%AC%EA%B5%AC-%EC%83%81%EC%88%98%EB%8F%99%EC%97%90-%EC%83%88%EB%A1%9C%EC%9A%B4-%EA%B4%91%EC%9E%A5%EC%9D%B4-%EC%83%9D%EA%B2%BC%EB%8B%A4",
+          "publisher": "Glowup Magazine",
+          "source_kind": "founder-interview",
+          "supports": [
+            "cultural-platform",
+            "work-and-conversation",
+            "coffee-dessert-and-meals",
+            "mapo-context"
+          ]
+        },
+        {
+          "url": "https://shareit.kr/store/10060",
+          "publisher": "Shareit",
+          "source_kind": "space-rental-platform",
+          "supports": [
+            "sangsu-location",
+            "modern-cafe-space",
+            "event-space"
+          ]
+        },
+        {
+          "url": "https://event-us.kr/thequestionsociety/event/130678",
+          "publisher": "이벤터스",
+          "source_kind": "event-platform",
+          "supports": [
+            "address",
+            "third-floor",
+            "community-event",
+            "duplicate-identity"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-d80508595f91ac3a",
@@ -2129,8 +2180,59 @@
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
       "editorial_context_provenance": null,
-      "canonical_place_id": null,
-      "research_status": "not_researched"
+      "canonical_place_id": "seoul:mapo:maverick-house-sangsu",
+      "research_status": "reviewed",
+      "research_confidence": "high",
+      "verified_attributes": [
+        "cultural-platform",
+        "work-friendly",
+        "conversation-friendly",
+        "coffee-dessert-and-meals",
+        "event-space",
+        "late-hours"
+      ],
+      "ados_editorial_angles": [
+        "상수에서 커피와 작업, 대화가 느슨하게 교차하는 문화 플랫폼",
+        "낮의 몰입에서 저녁의 모임과 이벤트로 이어지는 공간"
+      ],
+      "research_cautions": [
+        "행사·대관 일정에 따라 일반 이용 범위가 달라질 수 있어 방문 전 확인",
+        "커피 전문성 단독보다 문화·커뮤니티 맥락을 중심으로 소개"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://www.glowupmag.com/posts/%EB%A7%88%ED%8F%AC%EA%B5%AC-%EC%83%81%EC%88%98%EB%8F%99%EC%97%90-%EC%83%88%EB%A1%9C%EC%9A%B4-%EA%B4%91%EC%9E%A5%EC%9D%B4-%EC%83%9D%EA%B2%BC%EB%8B%A4",
+          "publisher": "Glowup Magazine",
+          "source_kind": "founder-interview",
+          "supports": [
+            "cultural-platform",
+            "work-and-conversation",
+            "coffee-dessert-and-meals",
+            "mapo-context"
+          ]
+        },
+        {
+          "url": "https://shareit.kr/store/10060",
+          "publisher": "Shareit",
+          "source_kind": "space-rental-platform",
+          "supports": [
+            "sangsu-location",
+            "modern-cafe-space",
+            "event-space"
+          ]
+        },
+        {
+          "url": "https://event-us.kr/thequestionsociety/event/130678",
+          "publisher": "이벤터스",
+          "source_kind": "event-platform",
+          "supports": [
+            "address",
+            "third-floor",
+            "community-event",
+            "duplicate-identity"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-7fbb0a1bade35cd2",
@@ -2886,8 +2988,48 @@
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
       "editorial_context_provenance": null,
-      "canonical_place_id": null,
-      "research_status": "not_researched"
+      "canonical_place_id": "seoul:mapo:sandstone-coffee-lab-yeonnam",
+      "research_status": "reviewed",
+      "research_confidence": "high",
+      "verified_attributes": [
+        "roastery",
+        "hand-drip",
+        "early-opening",
+        "terrace",
+        "signature-cream-latte",
+        "brunch"
+      ],
+      "ados_editorial_angles": [
+        "연남의 붐비는 길을 벗어나 아침 핸드드립을 마시는 곳",
+        "햇살 드는 테라스에서 커피와 가벼운 브런치를 고르는 시간"
+      ],
+      "research_cautions": [
+        "주차 불가",
+        "평일과 주말 마감시간 차이는 방문 전 확인"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://www.daangn.com/kr/local-profile/%EC%83%8C%EB%93%9C%EC%8A%A4%ED%86%A4%EC%BB%A4%ED%94%BC%EB%9E%A9-twt5jw9nz79b/",
+          "publisher": "당근 동네업체",
+          "source_kind": "business-profile",
+          "supports": [
+            "address",
+            "opening-hours",
+            "hand-drip",
+            "signature-cream-latte",
+            "brunch"
+          ]
+        },
+        {
+          "url": "https://kor.cafeshow.com/kor/cafeshow/exhibitor_view.asp?idx=4673",
+          "publisher": "서울카페쇼",
+          "source_kind": "official-industry-event",
+          "supports": [
+            "brand-identity",
+            "address"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-be104cac75f15c7e",
@@ -3012,8 +3154,48 @@
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
       "editorial_context_provenance": null,
-      "canonical_place_id": null,
-      "research_status": "not_researched"
+      "canonical_place_id": "seoul:mapo:sandstone-coffee-lab-yeonnam",
+      "research_status": "reviewed",
+      "research_confidence": "high",
+      "verified_attributes": [
+        "roastery",
+        "hand-drip",
+        "early-opening",
+        "terrace",
+        "signature-cream-latte",
+        "brunch"
+      ],
+      "ados_editorial_angles": [
+        "연남의 붐비는 길을 벗어나 아침 핸드드립을 마시는 곳",
+        "햇살 드는 테라스에서 커피와 가벼운 브런치를 고르는 시간"
+      ],
+      "research_cautions": [
+        "주차 불가",
+        "평일과 주말 마감시간 차이는 방문 전 확인"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://www.daangn.com/kr/local-profile/%EC%83%8C%EB%93%9C%EC%8A%A4%ED%86%A4%EC%BB%A4%ED%94%BC%EB%9E%A9-twt5jw9nz79b/",
+          "publisher": "당근 동네업체",
+          "source_kind": "business-profile",
+          "supports": [
+            "address",
+            "opening-hours",
+            "hand-drip",
+            "signature-cream-latte",
+            "brunch"
+          ]
+        },
+        {
+          "url": "https://kor.cafeshow.com/kor/cafeshow/exhibitor_view.asp?idx=4673",
+          "publisher": "서울카페쇼",
+          "source_kind": "official-industry-event",
+          "supports": [
+            "brand-identity",
+            "address"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-7098c0bca5e9a48c",
@@ -7898,8 +8080,41 @@
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
       "editorial_context_provenance": null,
-      "canonical_place_id": null,
-      "research_status": "not_researched"
+      "canonical_place_id": "seoul:jung:horangii-euljiro",
+      "research_status": "reviewed",
+      "research_confidence": "medium",
+      "verified_attributes": [
+        "signature-latte",
+        "retro-space",
+        "euljiro-alley"
+      ],
+      "ados_editorial_angles": [
+        "을지로 골목의 짧고 진한 라테 한 잔",
+        "오래된 도심의 결을 함께 보는 카페"
+      ],
+      "research_cautions": [
+        "체류형 목적보다 골목 동선의 한 정거장으로 편집"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://english.visitkorea.or.kr/svc/contents/contentsView.do?vcontsId=186520",
+          "publisher": "VisitKorea",
+          "source_kind": "public-tourism",
+          "supports": [
+            "place-identity",
+            "euljiro-address"
+          ]
+        },
+        {
+          "url": "https://world.nol.com/en/pois/d724fa0b-6528-4c42-887c-c913b83f0298",
+          "publisher": "NOL",
+          "source_kind": "travel-platform",
+          "supports": [
+            "retro-space",
+            "signature-latte"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-3bcbfed808f1090a",
@@ -8815,8 +9030,41 @@
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
       "editorial_context_provenance": null,
-      "canonical_place_id": null,
-      "research_status": "not_researched"
+      "canonical_place_id": "seoul:jung:horangii-euljiro",
+      "research_status": "reviewed",
+      "research_confidence": "medium",
+      "verified_attributes": [
+        "signature-latte",
+        "retro-space",
+        "euljiro-alley"
+      ],
+      "ados_editorial_angles": [
+        "을지로 골목의 짧고 진한 라테 한 잔",
+        "오래된 도심의 결을 함께 보는 카페"
+      ],
+      "research_cautions": [
+        "체류형 목적보다 골목 동선의 한 정거장으로 편집"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://english.visitkorea.or.kr/svc/contents/contentsView.do?vcontsId=186520",
+          "publisher": "VisitKorea",
+          "source_kind": "public-tourism",
+          "supports": [
+            "place-identity",
+            "euljiro-address"
+          ]
+        },
+        {
+          "url": "https://world.nol.com/en/pois/d724fa0b-6528-4c42-887c-c913b83f0298",
+          "publisher": "NOL",
+          "source_kind": "travel-platform",
+          "supports": [
+            "retro-space",
+            "signature-latte"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-5832e807e23a24af",
@@ -16991,13 +17239,18 @@
       "editorial_context_provenance": null,
       "canonical_place_id": "seoul:gwangjin:adef-coffee-roasters",
       "research_status": "identity_verified",
-      "research_confidence": "medium",
+      "research_confidence": "high",
       "verified_attributes": [
-        "recent-operation-signal"
+        "recent-operation-signal",
+        "roastery",
+        "signature-flavored-latte"
       ],
-      "ados_editorial_angles": [],
+      "ados_editorial_angles": [
+        "자양동에서 로스터리의 베리 향 라테를 골라 마시는 한 잔"
+      ],
       "research_cautions": [
-        "공간·메뉴 성격은 추가 출처 확인 전 태그하지 않음"
+        "베리브라운의 상시 판매 여부와 정확한 레시피는 방문 전 확인",
+        "공간 성격은 추가 출처 확인 전 태그하지 않음"
       ],
       "research_evidence": [
         {
@@ -17007,6 +17260,17 @@
           "supports": [
             "operation-signal-in-2025",
             "gwangjin-address"
+          ]
+        },
+        {
+          "url": "https://www.50plus.or.kr/upload/im/2026/03/dc1515b3-72f7-4e9e-93e9-9c110fa056f0.pdf",
+          "publisher": "서울시50플러스재단",
+          "source_kind": "public-record",
+          "supports": [
+            "operation-signal-in-2026",
+            "official-business-name",
+            "address",
+            "duplicate-identity"
           ]
         }
       ]
@@ -17074,8 +17338,43 @@
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
       "editorial_context_provenance": null,
-      "canonical_place_id": null,
-      "research_status": "not_researched"
+      "canonical_place_id": "seoul:gwangjin:adef-coffee-roasters",
+      "research_status": "identity_verified",
+      "research_confidence": "high",
+      "verified_attributes": [
+        "recent-operation-signal",
+        "roastery",
+        "signature-flavored-latte"
+      ],
+      "ados_editorial_angles": [
+        "자양동에서 로스터리의 베리 향 라테를 골라 마시는 한 잔"
+      ],
+      "research_cautions": [
+        "베리브라운의 상시 판매 여부와 정확한 레시피는 방문 전 확인",
+        "공간 성격은 추가 출처 확인 전 태그하지 않음"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://50plus.or.kr/upload/im/2025/11/256e2a18-ec92-4a85-9cd4-6d440748cb1f.pdf",
+          "publisher": "서울시50플러스재단",
+          "source_kind": "public-record",
+          "supports": [
+            "operation-signal-in-2025",
+            "gwangjin-address"
+          ]
+        },
+        {
+          "url": "https://www.50plus.or.kr/upload/im/2026/03/dc1515b3-72f7-4e9e-93e9-9c110fa056f0.pdf",
+          "publisher": "서울시50플러스재단",
+          "source_kind": "public-record",
+          "supports": [
+            "operation-signal-in-2026",
+            "official-business-name",
+            "address",
+            "duplicate-identity"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-f4bcb5fce9575f60",

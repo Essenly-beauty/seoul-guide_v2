@@ -27,7 +27,7 @@
     },
     {
       "canonical_place_id": "seoul:jung:horangii-euljiro",
-      "member_external_ids": ["coffeelog-64f3cbaecfc86861"],
+      "member_external_ids": ["coffeelog-64f3cbaecfc86861", "coffeelog-d62e07e39ae99327", "coffeelog-e8ee02a91a8a8ef8"],
       "research_status": "reviewed", "confidence": "medium",
       "verified_attributes": ["signature-latte", "retro-space", "euljiro-alley"],
       "ados_editorial_angles": ["을지로 골목의 짧고 진한 라테 한 잔", "오래된 도심의 결을 함께 보는 카페"],
@@ -48,11 +48,12 @@
     },
     {
       "canonical_place_id": "seoul:gwangjin:adef-coffee-roasters",
-      "member_external_ids": ["coffeelog-050607c581529e10"],
-      "research_status": "identity_verified", "confidence": "medium",
-      "verified_attributes": ["recent-operation-signal"], "ados_editorial_angles": [],
-      "cautions": ["공간·메뉴 성격은 추가 출처 확인 전 태그하지 않음"],
-      "evidence": [{ "url": "https://50plus.or.kr/upload/im/2025/11/256e2a18-ec92-4a85-9cd4-6d440748cb1f.pdf", "publisher": "서울시50플러스재단", "source_kind": "public-record", "supports": ["operation-signal-in-2025", "gwangjin-address"] }]
+      "member_external_ids": ["coffeelog-050607c581529e10", "coffeelog-c40b7bcfda4c45dc"],
+      "research_status": "identity_verified", "confidence": "high",
+      "verified_attributes": ["recent-operation-signal", "roastery", "signature-flavored-latte"],
+      "ados_editorial_angles": ["자양동에서 로스터리의 베리 향 라테를 골라 마시는 한 잔"],
+      "cautions": ["베리브라운의 상시 판매 여부와 정확한 레시피는 방문 전 확인", "공간 성격은 추가 출처 확인 전 태그하지 않음"],
+      "evidence": [{ "url": "https://50plus.or.kr/upload/im/2025/11/256e2a18-ec92-4a85-9cd4-6d440748cb1f.pdf", "publisher": "서울시50플러스재단", "source_kind": "public-record", "supports": ["operation-signal-in-2025", "gwangjin-address"] }, { "url": "https://www.50plus.or.kr/upload/im/2026/03/dc1515b3-72f7-4e9e-93e9-9c110fa056f0.pdf", "publisher": "서울시50플러스재단", "source_kind": "public-record", "supports": ["operation-signal-in-2026", "official-business-name", "address", "duplicate-identity"] }]
     },
     {
       "canonical_place_id": "seoul:seodaemun:manufact-coffee-yeonhui",
@@ -773,7 +774,7 @@
     },
     {
       "canonical_place_id": "seoul:mapo:sandstone-coffee-lab-yeonnam",
-      "member_external_ids": ["coffeelog-3e232e7ea1cf2e86"],
+      "member_external_ids": ["coffeelog-3e232e7ea1cf2e86", "coffeelog-7a643b012b4708da", "coffeelog-7a26f6390a81ebd6"],
       "research_status": "reviewed", "confidence": "high",
       "verified_attributes": ["roastery", "hand-drip", "early-opening", "terrace", "signature-cream-latte", "brunch"],
       "ados_editorial_angles": ["연남의 붐비는 길을 벗어나 아침 핸드드립을 마시는 곳", "햇살 드는 테라스에서 커피와 가벼운 브런치를 고르는 시간"],
@@ -941,6 +942,15 @@
       "ados_editorial_angles": ["석촌에서 달지 않고 묵직한 라테를 마시는 아침", "크림 없이 커피와 우유의 균형으로 기억되는 동네 한 잔"],
       "cautions": ["‘백호라떼’는 상호이자 시그니처 메뉴명이므로 두 원문을 한 장소로 통합", "작업·디저트보다 라테 취향 중심으로 소개"],
       "evidence": [{ "url": "https://www.diningcode.com/profile.php?rid=rxh4qG0IsLSH", "publisher": "DiningCode", "source_kind": "place-platform", "supports": ["address", "duplicate-identity", "opening-hours", "signature-latte", "wifi-outlet-signal"] }, { "url": "https://polle.com/place/12QnJs/%EB%B0%B1%ED%98%B8%EB%9D%BC%EB%96%BC", "publisher": "뽈레", "source_kind": "review-platform", "supports": ["dark-roast", "low-acidity", "unsweetened-latte", "lactose-free-and-decaf-signal"] }]
+    },
+    {
+      "canonical_place_id": "seoul:mapo:maverick-house-sangsu",
+      "member_external_ids": ["coffeelog-6f47c1a3f797e16e", "coffeelog-92a4303edf8d8ef5"],
+      "research_status": "reviewed", "confidence": "high",
+      "verified_attributes": ["cultural-platform", "work-friendly", "conversation-friendly", "coffee-dessert-and-meals", "event-space", "late-hours"],
+      "ados_editorial_angles": ["상수에서 커피와 작업, 대화가 느슨하게 교차하는 문화 플랫폼", "낮의 몰입에서 저녁의 모임과 이벤트로 이어지는 공간"],
+      "cautions": ["행사·대관 일정에 따라 일반 이용 범위가 달라질 수 있어 방문 전 확인", "커피 전문성 단독보다 문화·커뮤니티 맥락을 중심으로 소개"],
+      "evidence": [{ "url": "https://www.glowupmag.com/posts/%EB%A7%88%ED%8F%AC%EA%B5%AC-%EC%83%81%EC%88%98%EB%8F%99%EC%97%90-%EC%83%88%EB%A1%9C%EC%9A%B4-%EA%B4%91%EC%9E%A5%EC%9D%B4-%EC%83%9D%EA%B2%BC%EB%8B%A4", "publisher": "Glowup Magazine", "source_kind": "founder-interview", "supports": ["cultural-platform", "work-and-conversation", "coffee-dessert-and-meals", "mapo-context"] }, { "url": "https://shareit.kr/store/10060", "publisher": "Shareit", "source_kind": "space-rental-platform", "supports": ["sangsu-location", "modern-cafe-space", "event-space"] }, { "url": "https://event-us.kr/thequestionsociety/event/130678", "publisher": "이벤터스", "source_kind": "event-platform", "supports": ["address", "third-floor", "community-event", "duplicate-identity"] }]
     }
   ]
 }
