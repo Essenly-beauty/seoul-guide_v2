@@ -15,9 +15,12 @@ describe("progressive product detail header", () => {
     expect(headerProgress({ top: 20, height: 44, safeTop: 0 })).toBe(0);
   });
 
-  it("renders initial back/share and compact back/title/share/overflow controls", () => {
-    expect(source).toContain("BackButtonBordered");
-    expect(source).toContain('variant="overlay"');
+  it("renders a lone Back over the hero and compact back/title/share/overflow controls", () => {
+    // The hero used to carry an overlay Share too; it sat on top of Back in
+    // the same corner and Share was already in the CTA bar (owner, 2026-09-27).
+    const hero = source.slice(source.indexOf('className="product-detail-hero-actions"'));
+    expect(hero).toContain("<BackButtonBordered");
+    expect(hero).not.toContain("<ProductShareButton");
     expect(source).toContain("ProductShareButton");
     expect(source).toContain('name="more"');
     expect(source).toContain('className="product-detail-compact-title"');
