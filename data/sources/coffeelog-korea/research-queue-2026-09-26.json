@@ -3,9 +3,9 @@
   "generated_on": "2026-09-26",
   "caution": "이 파일은 전수 조사 큐다. 추정 필드는 공개용 태그가 아니며 사람 또는 출처 검토가 필요하다.",
   "summary": {
-    "done_or_pending_specific_check": 175,
+    "done_or_pending_specific_check": 180,
     "p3_general_review": 243,
-    "p2_editorial_potential": 36
+    "p2_editorial_potential": 31
   },
   "records": [
     {
@@ -595,8 +595,8 @@
       "normalized_name": "갈라스커피",
       "possible_duplicate_external_ids": [],
       "content_kind_guess": "cafe_candidate",
-      "research_priority": "p2_editorial_potential",
-      "current_research_status": "not_researched"
+      "research_priority": "done_or_pending_specific_check",
+      "current_research_status": "reviewed"
     },
     {
       "external_id": "coffeelog-7a26f6390a81ebd6",
@@ -1053,8 +1053,8 @@
       "normalized_name": "렉터스라운지",
       "possible_duplicate_external_ids": [],
       "content_kind_guess": "cafe_candidate",
-      "research_priority": "p2_editorial_potential",
-      "current_research_status": "not_researched"
+      "research_priority": "done_or_pending_specific_check",
+      "current_research_status": "reviewed"
     },
     {
       "external_id": "coffeelog-51a54b2f9d99808d",
@@ -2464,8 +2464,8 @@
       "normalized_name": "커피볶는아침컴퍼니",
       "possible_duplicate_external_ids": [],
       "content_kind_guess": "cafe_candidate",
-      "research_priority": "p2_editorial_potential",
-      "current_research_status": "not_researched"
+      "research_priority": "done_or_pending_specific_check",
+      "current_research_status": "reviewed"
     },
     {
       "external_id": "coffeelog-2477c247eebc57e8",
@@ -3424,8 +3424,8 @@
       "normalized_name": "스태키커피하우스 가로수길",
       "possible_duplicate_external_ids": [],
       "content_kind_guess": "cafe_candidate",
-      "research_priority": "p2_editorial_potential",
-      "current_research_status": "not_researched"
+      "research_priority": "done_or_pending_specific_check",
+      "current_research_status": "needs_status_check"
     },
     {
       "external_id": "coffeelog-12426b657963c9ca",
@@ -3504,8 +3504,8 @@
       "normalized_name": "북앤레스트",
       "possible_duplicate_external_ids": [],
       "content_kind_guess": "cafe_candidate",
-      "research_priority": "p2_editorial_potential",
-      "current_research_status": "not_researched"
+      "research_priority": "done_or_pending_specific_check",
+      "current_research_status": "reviewed"
     },
     {
       "external_id": "coffeelog-6fed0eaf0c832d27",
