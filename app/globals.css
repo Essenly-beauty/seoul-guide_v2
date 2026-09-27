@@ -4323,6 +4323,35 @@
     min-height: clamp(104px, 13vh, 124px);
   }
 
+  .olive-young-brand-hero {
+    position: relative;
+    overflow: hidden;
+    border-radius: var(--r-md);
+    background: var(--surface-hover);
+  }
+  .olive-young-brand-hero img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .olive-young-brand-hero .olive-young-brand-hero-caption {
+    position: absolute;
+    left: 8px;
+    bottom: 8px;
+    padding: 4px 8px;
+    border-radius: var(--r-sm);
+    background: var(--surface);
+    color: var(--text);
+    font-size: 11px;
+    font-weight: 650;
+    line-height: 1.2;
+  }
+  .olive-young-detail-brand-hero {
+    height: 170px;
+  }
+
   .selected-place-actions {
     position: absolute;
     left: 0;
@@ -4537,6 +4566,16 @@
     width: 46%;
     height: 46%;
   }
+  .maprow-brand-mark--daiso {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .maprow-brand-mark--olive-young {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
   .maprow-photo-fallback .maprow-fallback-glyph {
     width: 34px;
     height: 34px;
@@ -4553,6 +4592,17 @@
     display: inline-flex;
     align-items: baseline;
     white-space: nowrap;
+  }
+  .maprow-daiso-services {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    margin-top: 4px;
+  }
+  .maprow-daiso-service {
+    padding: 2px 6px;
+    border-radius: var(--r-sm);
+    background: var(--surface-hover);
   }
   .mapsheet.full.has-selection .mapsheet-handle {
     min-height: 20px;

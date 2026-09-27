@@ -35,4 +35,22 @@ describe("brand asset contract", () => {
     expect(brandIcon).toContain("BRAND_MONOGRAMS");
     expect(brandIcon).toContain("aria-label={`${brand} brand`}");
   });
+
+  it("uses the owner's Olive Young logo for photo-less thumbnails and keeps a distinct brand hero", () => {
+    const data = source("lib/data.ts");
+    const heroSourcePath = new URL("../components/place/olive-young-brand-hero.tsx", import.meta.url);
+    const hero = existsSync(heroSourcePath) ? source("components/place/olive-young-brand-hero.tsx") : "";
+    const logoPath = new URL("../public/brands/olive-young-logo.jpeg", import.meta.url);
+    const heroPath = new URL("../public/brands/olive-young-hero.avif", import.meta.url);
+
+    expect(data).toContain('olive_young: "/brands/olive-young-logo.jpeg"');
+    expect(existsSync(logoPath)).toBe(true);
+    expect(readFileSync(logoPath).subarray(0, 3)).toEqual(Buffer.from([0xff, 0xd8, 0xff]));
+    expect(existsSync(heroPath)).toBe(true);
+    expect(readFileSync(heroPath).subarray(4, 12).toString()).toBe("ftypavif");
+    expect(hero).toContain('src="/brands/olive-young-hero.avif"');
+    expect(hero).toContain('alt="Olive Young brand image, not a photo of this store"');
+    expect(hero).toContain("Brand image");
+    expect(hero).toContain("onError");
+  });
 });

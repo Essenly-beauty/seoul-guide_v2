@@ -208,13 +208,43 @@ describe("map place selection wiring", () => {
     expect(sheetSource).toContain('className="maprow-photo"');
     expect(sheetSource).toContain('alt=""');
     // Known retailers get their own mark (public/brands), never a generic pin.
-    expect(sheetSource).toContain("const brandMark = BRAND_MARK_SRC[place.type]");
-    expect(sheetSource).toContain('<img className="maprow-brand-mark" src={brandMark} alt="" />');
+    expect(sheetSource).toContain(' : BRAND_MARK_SRC[place.type]');
+    expect(sheetSource).toContain('className={place.type === "daiso" ? "maprow-brand-mark maprow-brand-mark--daiso"');
     // Everything else mirrors the map pin: TYPE_ICON glyph in TYPE_COLOR.
     expect(sheetSource).toContain('className="maprow-photo-fallback" style={{ color: TYPE_COLOR[place.type] }}');
     expect(sheetSource).toContain("<Icon name={TYPE_ICON[place.type]}");
     // Both row kinds share the one component.
     expect(sheetSource.match(/<MapRowThumb place=/g)).toHaveLength(2);
+  });
+
+  it("uses the supplied full-square Daiso logo for photo-less nearby rows only", () => {
+    expect(sheetSource).toContain('const brandMark = place.type === "daiso" ? "/brands/daiso-logo.jpeg" : BRAND_MARK_SRC[place.type]');
+    expect(sheetSource.indexOf("{placePhoto ? (")).toBeLessThan(sheetSource.indexOf(") : brandMark ? ("));
+    expect(cssSource).toMatch(/\.maprow-brand-mark--daiso\s*\{[^}]*width:\s*100%;[^}]*height:\s*100%;/s);
+    expect(existsSync(new URL("../public/brands/daiso-logo.jpeg", import.meta.url))).toBe(true);
+  });
+
+  it("uses Olive Young brand imagery only when a real store photo is missing", () => {
+    expect(sheetSource).toContain(' : BRAND_MARK_SRC[place.type]');
+    expect(sheetSource.indexOf("{placePhoto ? (")).toBeLessThan(sheetSource.indexOf(") : brandMark ? ("));
+    expect(sheetSource).toContain('place.type === "olive_young" ? "maprow-brand-mark maprow-brand-mark--olive-young"');
+    expect(cssSource).toMatch(/\.maprow-brand-mark--olive-young\s*\{[^}]*width:\s*100%;[^}]*height:\s*100%;/s);
+    expect(summarySource).toContain('place.type === "olive_young"');
+    expect(summarySource).toContain("photos.length === 0");
+    expect(summarySource).toContain("<OliveYoungBrandHero");
+    expect(detailSource).toContain('place.type === "olive_young"');
+    expect(detailSource).toContain("<OliveYoungBrandHero");
+    expect(detailSource).toContain('place.photos ?? (place.photoUrl ? [place.photoUrl] : [])');
+    expect(detailSource).toContain("<PhotosSection place={place}");
+  });
+
+  it("keeps Daiso map rows free of duplicate category and price while showing confirmed services", () => {
+    expect(sheetSource).toContain('{place.type !== "daiso" && <span className="label">{TYPE_LABEL[place.type]} · {zoneShort(place.zone)}</span>}');
+    expect(sheetSource).toContain('{p.type !== "daiso" && <span className="label">{TYPE_LABEL[p.type]} · {zoneShort(p.zone)}</span>}');
+    expect(sheetSource).toContain('{p.type !== "daiso" && <span className="map-meta-token mono">{p.priceRange}</span>}');
+    expect(sheetSource.match(/<DaisoRowServices place=/g)).toHaveLength(2);
+    expect(sheetSource).toContain('const services = daisoRowServices(place)');
+    expect(cssSource).toContain(".maprow-daiso-service {");
   });
 
   it("reuses the direct place-detail body and CTA at the full snap", () => {
@@ -464,7 +494,7 @@ describe("place photo ingestion", () => {
     const detail = readFileSync(new URL("../components/place/place-detail-body.tsx", import.meta.url), "utf8");
     expect(detail).toContain("function PlacePhotoCollage");
     expect(detail).toContain("photos.slice(0, 3)");
-    expect(detail).toContain("<PlacePhotoCollage photos={place.photos ?? []}");
+    expect(detail).toContain("<PlacePhotoCollage photos={place.photos ?? (place.photoUrl ? [place.photoUrl] : [])}");
     expect(detail).toContain("<PhotosSection place={place}");
   });
 });

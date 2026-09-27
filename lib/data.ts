@@ -98,7 +98,7 @@ export const OY_BRAND_GREEN = "#9bce26";
  *  show the retailer's mark instead of a generic pin; categories without a
  *  mark fall back to their TYPE_ICON glyph in TYPE_COLOR. */
 export const BRAND_MARK_SRC: Partial<Record<PlaceType, string>> = {
-  olive_young: "/brands/olive-young-mark.svg",
+  olive_young: "/brands/olive-young-logo.jpeg",
   daiso: "/brands/daiso-mark.svg",
 };
 
@@ -611,15 +611,27 @@ export const ARTICLES: Article[] = [
 ];
 
 // ── Lookups ───────────────────────────────────────────────
-// Route params arrive percent-encoded (App Router does not decode them), and
-// ~240 Olive Young ids contain Hangul — decode before matching or every
-// Korean-id detail URL misses.
+// Route params may arrive decoded, while official Daiso IDs retain encoded
+// Hangul in the stored ID. Compare both representations without changing IDs
+// already used by saved places and reviews.
 function decodedFind<T>(list: T[], key: (x: T) => string, id: string): T | undefined {
   const direct = list.find((x) => key(x) === id);
   if (direct) return direct;
   try {
     const decoded = decodeURIComponent(id);
-    return decoded === id ? undefined : list.find((x) => key(x) === decoded);
+    if (decoded !== id) {
+      const match = list.find((x) => key(x) === decoded);
+      if (match) return match;
+    }
+    return list.find((x) => {
+      const stored = key(x);
+      if (!stored.includes("%")) return false;
+      try {
+        return decodeURIComponent(stored) === decoded;
+      } catch {
+        return false;
+      }
+    });
   } catch {
     return undefined; // malformed % sequence
   }

@@ -1,6 +1,7 @@
 "use client";
 
 import { Icon } from "@/components/icon";
+import { OliveYoungBrandHero } from "@/components/place/olive-young-brand-hero";
 import { LiveBadge } from "@/components/ui/live-badge";
 import { TYPE_LABEL, type Place } from "@/lib/data";
 import { formatCompactDistance } from "@/lib/geo";
@@ -25,6 +26,14 @@ export function SelectedPlaceSummary({
 
   // `photos` is the future shape; `photoUrl` is what the type carries today.
   const photos: string[] = (place.photos ?? (place.photoUrl ? [place.photoUrl] : [])).filter(Boolean);
+  const emptyMedia = (
+    <div className="selected-place-summary-media-grid is-empty">
+      <div className="selected-place-summary-media" role="img" aria-label={`${place.name} photos coming soon`}>
+        <Icon name="pin" size="sm" aria-hidden="true" />
+        <span>Photos coming soon</span>
+      </div>
+    </div>
+  );
 
   if (variant === "compact") {
     return (
@@ -123,10 +132,7 @@ export function SelectedPlaceSummary({
           <Icon name="x" size="xs" aria-hidden="true" />
         </button>
       </div>
-      {/* Two-up swipeable rail (owner request 2026-08-22). It renders only
-          the photos a place actually has — no place in the dataset carries
-          one yet, so today every card falls to the single honest empty
-          state rather than padding the rail with decoy tiles. */}
+      {/* Verified store photos always take precedence over a chain image. */}
       {photos.length > 0 ? (
         <div
           className="selected-place-summary-media-rail"
@@ -145,14 +151,11 @@ export function SelectedPlaceSummary({
             </div>
           ))}
         </div>
-      ) : (
-        <div className="selected-place-summary-media-grid is-empty">
-          <div className="selected-place-summary-media" role="img" aria-label={`${place.name} photos coming soon`}>
-            <Icon name="pin" size="sm" aria-hidden="true" />
-            <span>Photos coming soon</span>
-          </div>
+      ) : place.type === "olive_young" && photos.length === 0 ? (
+        <div className="selected-place-summary-media-grid">
+          <OliveYoungBrandHero className="selected-place-summary-media" fallback={emptyMedia} />
         </div>
-      )}
+      ) : emptyMedia}
     </article>
   );
 }
