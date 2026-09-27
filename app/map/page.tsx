@@ -3,7 +3,7 @@ import { Suspense } from "react";
 import { MapScreen } from "@/components/map/map-screen";
 import { BottomNav } from "@/components/ui/bottom-nav";
 
-const BASE_META: Metadata = { title: "Map — MYSEOULDROP" };
+const BASE_META: Metadata = { title: "MYSEOULDROP" };
 
 // Shared-list links (/map?list={uuid}) get a real preview card in
 // KakaoTalk/iMessage — title + place count from the snapshot row.

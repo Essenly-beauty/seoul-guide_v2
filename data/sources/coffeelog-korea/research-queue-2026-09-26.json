@@ -3,8 +3,8 @@
   "generated_on": "2026-09-26",
   "caution": "이 파일은 전수 조사 큐다. 추정 필드는 공개용 태그가 아니며 사람 또는 출처 검토가 필요하다.",
   "summary": {
-    "done_or_pending_specific_check": 226,
-    "p3_general_review": 228
+    "done_or_pending_specific_check": 237,
+    "p3_general_review": 217
   },
   "records": [
     {
@@ -448,8 +448,8 @@
       "normalized_name": "조블라 홍대점",
       "possible_duplicate_external_ids": [],
       "content_kind_guess": "cafe_candidate",
-      "research_priority": "p3_general_review",
-      "current_research_status": "not_researched"
+      "research_priority": "done_or_pending_specific_check",
+      "current_research_status": "reviewed"
     },
     {
       "external_id": "coffeelog-73d872c043b5fd31",
@@ -502,8 +502,8 @@
       "normalized_name": "만유인력",
       "possible_duplicate_external_ids": [],
       "content_kind_guess": "cafe_candidate",
-      "research_priority": "p3_general_review",
-      "current_research_status": "not_researched"
+      "research_priority": "done_or_pending_specific_check",
+      "current_research_status": "reviewed"
     },
     {
       "external_id": "coffeelog-0c78dbf39f96b02d",
@@ -512,8 +512,8 @@
       "normalized_name": "해머플레이스 크렘 브륄레",
       "possible_duplicate_external_ids": [],
       "content_kind_guess": "cafe_candidate",
-      "research_priority": "p3_general_review",
-      "current_research_status": "not_researched"
+      "research_priority": "done_or_pending_specific_check",
+      "current_research_status": "reviewed"
     },
     {
       "external_id": "coffeelog-5f54d253a206cb3a",
@@ -522,8 +522,8 @@
       "normalized_name": "플러피 베이크샵 마들렌, 까눌레",
       "possible_duplicate_external_ids": [],
       "content_kind_guess": "mixed_or_non_cafe_needs_review",
-      "research_priority": "p3_general_review",
-      "current_research_status": "not_researched"
+      "research_priority": "done_or_pending_specific_check",
+      "current_research_status": "reviewed"
     },
     {
       "external_id": "coffeelog-3e5831d9057f738c",
@@ -532,8 +532,8 @@
       "normalized_name": "베니케이크 케이크",
       "possible_duplicate_external_ids": [],
       "content_kind_guess": "cafe_candidate",
-      "research_priority": "p3_general_review",
-      "current_research_status": "not_researched"
+      "research_priority": "done_or_pending_specific_check",
+      "current_research_status": "reviewed"
     },
     {
       "external_id": "coffeelog-f73caa8c6affaafd",
@@ -542,8 +542,8 @@
       "normalized_name": "딥블루레이크 망원동",
       "possible_duplicate_external_ids": [],
       "content_kind_guess": "cafe_candidate",
-      "research_priority": "p3_general_review",
-      "current_research_status": "not_researched"
+      "research_priority": "done_or_pending_specific_check",
+      "current_research_status": "reviewed"
     },
     {
       "external_id": "coffeelog-a29cbf4ba768dc3b",
@@ -616,8 +616,8 @@
       "normalized_name": "스몰로우",
       "possible_duplicate_external_ids": [],
       "content_kind_guess": "cafe_candidate",
-      "research_priority": "p3_general_review",
-      "current_research_status": "not_researched"
+      "research_priority": "done_or_pending_specific_check",
+      "current_research_status": "reviewed"
     },
     {
       "external_id": "coffeelog-cf6a690c210789ee",
@@ -638,8 +638,8 @@
       "normalized_name": "베리블리스 서교동",
       "possible_duplicate_external_ids": [],
       "content_kind_guess": "cafe_candidate",
-      "research_priority": "p3_general_review",
-      "current_research_status": "not_researched"
+      "research_priority": "done_or_pending_specific_check",
+      "current_research_status": "reviewed"
     },
     {
       "external_id": "coffeelog-0891b62911c36b6d",
@@ -658,8 +658,8 @@
       "normalized_name": "코이크 연남동",
       "possible_duplicate_external_ids": [],
       "content_kind_guess": "cafe_candidate",
-      "research_priority": "p3_general_review",
-      "current_research_status": "not_researched"
+      "research_priority": "done_or_pending_specific_check",
+      "current_research_status": "reviewed"
     },
     {
       "external_id": "coffeelog-bd702cbcfebaedcc",
@@ -668,8 +668,8 @@
       "normalized_name": "베니케이크 상수동",
       "possible_duplicate_external_ids": [],
       "content_kind_guess": "cafe_candidate",
-      "research_priority": "p3_general_review",
-      "current_research_status": "not_researched"
+      "research_priority": "done_or_pending_specific_check",
+      "current_research_status": "reviewed"
     },
     {
       "external_id": "coffeelog-d0e773a85115246c",
@@ -688,8 +688,8 @@
       "normalized_name": "이뮤 베이크샵 서교동",
       "possible_duplicate_external_ids": [],
       "content_kind_guess": "mixed_or_non_cafe_needs_review",
-      "research_priority": "p3_general_review",
-      "current_research_status": "not_researched"
+      "research_priority": "done_or_pending_specific_check",
+      "current_research_status": "reviewed"
     },
     {
       "external_id": "coffeelog-ef5cd56805aa1548",
