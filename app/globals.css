@@ -3828,6 +3828,34 @@
   .station-sheet-pop button[aria-checked="true"] { color: var(--accent); background: var(--accent-soft); }
 
   .station-sheet-list { display: flex; flex-direction: column; }
+
+  /* Station browse (owner report 2026-09-27): the station name, its line
+     badges and the "N places · within 500 m" line are the frame, and they
+     scrolled away with the rows. .subway-controller-scroll owns scrolling
+     for every other panel state, so only in station-browse mode does it
+     stand still and hand the job to the list. The bottom padding that kept
+     the last row clear of the home indicator moves with it. */
+  .subway-controller.station-browse .subway-controller-scroll {
+    overflow: hidden;
+    display: flex; flex-direction: column;
+    padding-bottom: 0;
+  }
+  .subway-controller.station-browse .subway-search-panel {
+    display: flex; flex-direction: column;
+    flex: 1; min-height: 0;
+    padding-bottom: 0;
+  }
+  .subway-controller.station-browse .station-sheet { flex: 1; min-height: 0; }
+  .subway-controller.station-browse .station-sheet-grip,
+  .subway-controller.station-browse .station-sheet-head,
+  .subway-controller.station-browse .station-sheet-sub { flex: none; }
+  .subway-controller.station-browse .station-sheet-list {
+    flex: 1; min-height: 0;
+    overflow-y: auto; overflow-x: hidden;
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: max(18px, env(safe-area-inset-bottom));
+  }
   .station-row {
     display: flex; align-items: center; gap: 14px; width: 100%;
     padding: 10px 16px; text-align: left; font: inherit; color: inherit;

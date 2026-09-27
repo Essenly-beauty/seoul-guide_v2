@@ -251,6 +251,37 @@ describe("subway flow: search → station → place (owner walkthrough 2026-08-2
   });
 });
 
+describe("station sheet: the header stays put, only the list scrolls", () => {
+  // Owner report 2026-09-27, from a real iPhone: scrolling the station's
+  // place list dragged the station name, its line badges and the "18 places
+  // · within 500 m" line off the top with it. Those are the frame; the rows
+  // are the content. .subway-controller-scroll scrolls everything, so in
+  // station-browse mode it must stop scrolling and hand that job to
+  // .station-sheet-list alone.
+  const css = readFileSync(new URL("../app/globals.css", import.meta.url), "utf8");
+  const browse = (sel: string) => `.subway-controller.station-browse ${sel}`;
+
+  it("stops the outer scroller from scrolling in station-browse mode", () => {
+    expect(css).toMatch(new RegExp(`${browse(".subway-controller-scroll").replace(/[.]/g, "\\.")} \\{[^}]*overflow: hidden`));
+  });
+
+  it("makes the list the one scroll container", () => {
+    const rule = css.slice(css.indexOf(browse(".station-sheet-list")));
+    const body = rule.slice(0, rule.indexOf("}"));
+    expect(body).toContain("overflow-y: auto");
+    expect(body).toContain("min-height: 0");
+    expect(body).toContain("flex: 1");
+    // the last row must still clear the home indicator once the list scrolls
+    expect(body).toContain("env(safe-area-inset-bottom)");
+  });
+
+  it("pins the grip, the title row and the count line", () => {
+    for (const part of [".station-sheet-grip", ".station-sheet-head", ".station-sheet-sub"]) {
+      expect(css, part).toMatch(new RegExp(`${browse(part).replace(/[.]/g, "\\.")}[^{]*\\{[^}]*flex: none`));
+    }
+  });
+});
+
 describe("subway panel layout defects (owner reports 2026-08-22)", () => {
   const controller = readFileSync(new URL("../components/subway/subway-route-controller.tsx", import.meta.url), "utf8");
   const css = readFileSync(new URL("../app/globals.css", import.meta.url), "utf8");
