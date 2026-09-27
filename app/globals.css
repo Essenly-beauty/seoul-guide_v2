@@ -613,6 +613,30 @@
   .subway-controller.search-ready:has(.station-search-results) {
     height: min(88%, 720px);
   }
+  /* Station search with results open (owner report 2026-09-27, real iPhone,
+     keyboard up): the panel is capped at the viewport minus the keyboard,
+     about 544px, and the header (110) + the two-field card (370) + the footer
+     (130) left the results list one row. The picker is the whole task while
+     it is open, so everything that is not the picker steps aside until a
+     station is chosen: the other field, the decorative route rail, the swap
+     button, and the Show/Update route footer. They all come back the moment
+     the results close. */
+  .subway-search-field-stack:has(.station-search-results) .station-combobox:not(:has(.station-search-results)) {
+    display: none;
+  }
+  .subway-search-fields:has(.station-search-results) .subway-search-route-rail,
+  .subway-search-fields:has(.station-search-results) [aria-label="Swap departure and arrival"] {
+    display: none;
+  }
+  .subway-controller:has(.station-search-results) .subway-search-footer {
+    display: none;
+  }
+  /* display:none does not take a node out of the `+` combinator, so the
+     hairline `.station-combobox + .station-combobox` draws between the two
+     fields stayed above the lone Arrival field. */
+  .subway-search-field-stack:has(.station-search-results) .station-combobox:has(.station-search-results) {
+    border-top: 0;
+  }
   .station-results-label {
     padding: 8px 11px 5px;
     color: var(--muted);
