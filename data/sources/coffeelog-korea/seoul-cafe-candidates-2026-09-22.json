@@ -15,7 +15,7 @@
     "geography": "Seoul only",
     "record_count": 454,
     "enriched_record_count": 30,
-    "researched_record_count": 150
+    "researched_record_count": 155
   },
   "import_policy": {
     "default_action": "stage_only",
@@ -6763,8 +6763,53 @@
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
       "editorial_context_provenance": null,
-      "canonical_place_id": null,
-      "research_status": "not_researched"
+      "canonical_place_id": "seoul:yongsan:cafe-foyer-itaewon",
+      "research_status": "reviewed",
+      "research_confidence": "high",
+      "verified_attributes": [
+        "boutique-hotel-lounge",
+        "multi-floor",
+        "terrace",
+        "conversation-friendly",
+        "late-hours",
+        "evening-alcohol"
+      ],
+      "ados_editorial_angles": [
+        "이태원 한복판에서 부티크 호텔 로비처럼 쉬어 가는 곳",
+        "넓은 소파에 앉아 커피에서 맥주까지 대화를 이어가는 저녁"
+      ],
+      "research_cautions": [
+        "콘센트 사용 불가 안내가 있어 작업 카페로 분류하지 않음",
+        "전용 주차장이 없고 인근 민영주차 비용이 높은 편"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://www.diningcode.com/profile.php?rid=4qGtsyL8C7a2",
+          "publisher": "DiningCode",
+          "source_kind": "place-platform",
+          "supports": [
+            "address",
+            "opening-hours",
+            "multi-floor",
+            "hotel-lounge-atmosphere",
+            "terrace",
+            "coffee-dessert-and-beer",
+            "outlet-caution"
+          ]
+        },
+        {
+          "url": "https://www.keyzard.cc/hiverlinge/nb/224257843670",
+          "publisher": "Keyzard",
+          "source_kind": "recent-visit-index",
+          "supports": [
+            "current-operation-2026",
+            "itaewon-station-access",
+            "terrace",
+            "pet-friendly-signal",
+            "parking-caution"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-f9f438f33e53d844",
@@ -7533,8 +7578,63 @@
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
       "editorial_context_provenance": null,
-      "canonical_place_id": null,
-      "research_status": "not_researched"
+      "canonical_place_id": "seoul:yongsan:villa-coffee-bar-haebangchon",
+      "research_status": "reviewed",
+      "research_confidence": "high",
+      "verified_attributes": [
+        "rooftop",
+        "n-seoul-tower-view",
+        "sunset-view",
+        "residential-neighborhood",
+        "basque-cheesecake",
+        "evening-alcohol",
+        "pet-friendly-signal"
+      ],
+      "ados_editorial_angles": [
+        "해방촌 주택가의 작은 옥상에서 남산과 노을을 마주하는 곳",
+        "낮의 바스크 치즈케이크가 저녁의 와인과 칵테일로 이어지는 카페바"
+      ],
+      "research_cautions": [
+        "옥상으로 이어지는 좁은 계단과 제한된 창가 좌석 참고",
+        "주차 공간이 없고 영업시간이 출처별로 달라 공식 SNS 확인"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://chinese.visitseoul.net/editorspicks/2026-Noksapyeong/CNN8ioolc",
+          "publisher": "서울관광재단",
+          "source_kind": "official-tourism",
+          "supports": [
+            "current-operation-2026",
+            "residential-neighborhood",
+            "rooftop",
+            "n-seoul-tower-view",
+            "basque-cheesecake",
+            "access-caution"
+          ]
+        },
+        {
+          "url": "https://dongnecoffeenote.com/c/10284",
+          "publisher": "동네 커피 노트",
+          "source_kind": "review-analysis",
+          "supports": [
+            "address",
+            "current-reviews-2026",
+            "rooftop",
+            "sunset-view",
+            "parking-caution"
+          ]
+        },
+        {
+          "url": "https://xn--ok0b236bp0a.com/place/26173",
+          "publisher": "여기유",
+          "source_kind": "tourism-directory",
+          "supports": [
+            "evening-alcohol",
+            "pet-friendly-signal",
+            "parking-caution"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-1080ed10fbaa09f7",
@@ -7695,8 +7795,63 @@
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
       "editorial_context_provenance": null,
-      "canonical_place_id": null,
-      "research_status": "not_researched"
+      "canonical_place_id": "seoul:yongsan:samjeong-cafe-cheongpa",
+      "research_status": "reviewed",
+      "research_confidence": "high",
+      "verified_attributes": [
+        "early-opening",
+        "brunch",
+        "family-friendly",
+        "large-space",
+        "terrace",
+        "art-exhibition",
+        "neighborhood-history"
+      ],
+      "ados_editorial_angles": [
+        "효창공원의 세 우물 이야기를 품은 청파동 브런치 카페",
+        "아이와 함께 넓은 테라스에서 프렌치토스트를 먹는 아침"
+      ],
+      "research_cautions": [
+        "유모차·아이 동반에는 유리하지만 아동 편의시설 세부 조건은 확인",
+        "전시 일정과 테라스 운영은 방문 전 확인"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://mom-mom.net/travel/places/68afbf324402da52f01aa4ad",
+          "publisher": "맘맘",
+          "source_kind": "family-place-guide",
+          "supports": [
+            "address",
+            "current-operation-2026",
+            "opening-hours",
+            "brunch",
+            "family-friendly",
+            "large-space",
+            "terrace",
+            "reservation"
+          ]
+        },
+        {
+          "url": "https://xn--2s2b33eb3kgvpta.com/store/S000000_1696495514843",
+          "publisher": "완벽한 하루",
+          "source_kind": "place-guide",
+          "supports": [
+            "three-wells-story",
+            "art-exhibition",
+            "cultural-space"
+          ]
+        },
+        {
+          "url": "https://naratbab.kr/place/7922429876/",
+          "publisher": "나랏밥상",
+          "source_kind": "public-spending-derived-place-data",
+          "supports": [
+            "operation-signal-2025-2026",
+            "address",
+            "light-meal"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-9fc3347637191331",
@@ -8129,8 +8284,54 @@
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
       "editorial_context_provenance": null,
-      "canonical_place_id": null,
-      "research_status": "not_researched"
+      "canonical_place_id": "seoul:jung:cafe-wildduck-yaksu",
+      "research_status": "reviewed",
+      "research_confidence": "medium",
+      "verified_attributes": [
+        "brunch",
+        "courtyard-terrace",
+        "family-friendly",
+        "fresh-juice",
+        "hidden-basement",
+        "daytime-only"
+      ],
+      "ados_editorial_angles": [
+        "약수동 지하에 숨은 마당에서 아이와 브런치를 먹는 낮",
+        "생과일주스와 넓은 테라스를 찾아가는 가족의 주말"
+      ],
+      "research_cautions": [
+        "아기의자·수유실·기저귀교환대는 확인되지 않음",
+        "지하 진입과 유모차 동선, 주차 가능 여부가 출처 내에서도 엇갈려 방문 전 확인",
+        "영업시간이 짧은 낮 중심 공간"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://mom-mom.net/travel/places/661c9e32a475261696ad1374",
+          "publisher": "맘맘",
+          "source_kind": "family-place-guide",
+          "supports": [
+            "address",
+            "brunch",
+            "courtyard-terrace",
+            "family-friendly",
+            "fresh-juice",
+            "hidden-basement",
+            "access-and-facility-cautions"
+          ]
+        },
+        {
+          "url": "https://www.leebommat.com/restaurant/content/188/d0bfe843-f176-4eb4-baff-cf23bae51bc7",
+          "publisher": "이봄맛",
+          "source_kind": "place-guide",
+          "supports": [
+            "address",
+            "opening-hours-signal",
+            "brunch",
+            "terrace",
+            "almond-cake"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-7ebe6811cadd8555",
@@ -9028,8 +9229,59 @@
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
       "editorial_context_provenance": null,
-      "canonical_place_id": null,
-      "research_status": "not_researched"
+      "canonical_place_id": "seoul:jung:lione-coffee-euljiro",
+      "research_status": "reviewed",
+      "research_confidence": "high",
+      "verified_attributes": [
+        "espresso-bar",
+        "italian-inspired",
+        "sewoon-daelim-sangga",
+        "signature-cream-espresso",
+        "small-space",
+        "pet-friendly-signal"
+      ],
+      "ados_editorial_angles": [
+        "세운대림상가의 오래된 결 사이에서 이탈리아식 에스프레소를 마시는 곳",
+        "을지로 산책의 템포를 짧고 진한 크림 커피로 바꾸는 정거장"
+      ],
+      "research_cautions": [
+        "좌석이 적어 장시간 체류보다 짧은 에스프레소 스톱에 적합",
+        "상가 내부에서 가열·나열 표기가 엇갈리므로 3층 373호를 기준으로 길 안내 확인"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://raa.purpleo.kr/article/111290",
+          "publisher": "전국 휴게음식점 지도",
+          "source_kind": "public-licensing-data",
+          "supports": [
+            "business-status",
+            "address",
+            "opening-registration"
+          ]
+        },
+        {
+          "url": "https://polle.com/place/3WYluY/%EB%A6%AC%EC%98%A4%EB%84%A4%20%EC%BB%A4%ED%94%BC",
+          "publisher": "뽈레",
+          "source_kind": "review-platform",
+          "supports": [
+            "espresso-bar",
+            "signature-menu",
+            "small-space",
+            "pet-friendly-signal",
+            "address"
+          ]
+        },
+        {
+          "url": "https://v.daum.net/v/BXx5lXuScM",
+          "publisher": "월간커피",
+          "source_kind": "coffee-editorial",
+          "supports": [
+            "sewoon-daelim-location",
+            "signature-house-coffee",
+            "espresso-composition"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-8dfa315495cfbe20",
