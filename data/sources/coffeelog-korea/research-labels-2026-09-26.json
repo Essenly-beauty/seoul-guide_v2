@@ -996,6 +996,51 @@
       "ados_editorial_angles": ["상수의 통유리 창가에서 조용히 머무는 늦은 오후", "사진보다 커피와 단맛의 균형으로 기억하는 동네 카페"],
       "cautions": ["후기 분석상 디저트 전문점보다는 커피와 공간의 균형으로 분류", "피크 시간 좌석 상황과 최신 마감시간 확인"],
       "evidence": [{ "url": "https://www.dongnecoffeenote.com/c/8785", "publisher": "동네 커피 노트", "source_kind": "review-analysis", "supports": ["address", "current-review-signal", "quiet-stay", "glass-window", "coffee", "dessert"] }, { "url": "https://www.albamon.com/jobs/detail/118011777", "publisher": "알바몬", "source_kind": "verified-employer-listing", "supports": ["current-operation-2026", "address", "late-hours-signal"] }]
+    },
+    {
+      "canonical_place_id": "seoul:mapo:malic-coffee-seogyo",
+      "member_external_ids": ["coffeelog-ec04cd8f5fea4499"],
+      "research_status": "reviewed", "confidence": "high",
+      "verified_attributes": ["specialty-coffee", "competition-roaster", "bean-guidance", "quiet-stay", "semi-basement", "dessert"],
+      "ados_editorial_angles": ["홍대의 소음에서 반 층 내려가 취향에 맞는 원두를 묻는 곳", "대회 로스터의 설명과 함께 커피 자체에 집중하는 서교동 한 잔"],
+      "cautions": ["좌석·채광 등 반지하 공간 조건은 방문 전 확인", "대회 수상 이력은 2023년 기준이며 현재 근무자 구성과 동일하다고 단정하지 않음"],
+      "evidence": [{ "url": "https://scakorea.squarespace.com/s/2023-Korea-Coffee-Roasting-Championship-Results-Final-1.pdf", "publisher": "SCA Korea", "source_kind": "official-competition-result", "supports": ["malic-coffee-affiliation", "roasting-competition-second-place"] }, { "url": "https://likemonohandmade.tistory.com/116", "publisher": "개인 방문기", "source_kind": "recent-visit", "supports": ["address", "semi-basement", "specialty-coffee", "bean-guidance", "quiet-space", "dessert"] }, { "url": "https://worldcafemap.com/en/south-korea/seoul/malic-coffee", "publisher": "WorldCafeMap", "source_kind": "place-directory", "supports": ["place-identity", "address"] }]
+    },
+    {
+      "canonical_place_id": "seoul:yongsan:cafe-tajagi-haebangchon",
+      "member_external_ids": ["coffeelog-18acc6fc8398e71f"],
+      "research_status": "reviewed", "confidence": "high",
+      "verified_attributes": ["city-view", "sunset-view", "vintage-interior", "typewriter-experience", "rooftop", "evening-alcohol"],
+      "ados_editorial_angles": ["해방촌의 노을을 보며 타자기로 문장을 남기는 곳", "신흥시장 위에서 낮의 서울과 밤의 불빛을 이어 보는 빈티지 카페"],
+      "cautions": ["계단·루프탑 접근성과 우천 시 이용 가능 여부 확인", "전망과 체험 중심이며 작업 카페로 분류하지 않음"],
+      "evidence": [{ "url": "https://korean.visitseoul.net/editorspicks/%ED%95%B4%EB%B0%A9%EC%B4%8C%EC%97%90%EC%84%9C-%EC%84%9C%EC%9A%B8%EC%82%AC%EB%9E%8C%EC%B2%98%EB%9F%BC-%EB%A8%B9%EA%B3%A0-%EB%A7%88%EC%8B%9C%EA%B3%A0-%ED%9C%B4%EC%8B%9D%ED%95%98%EA%B8%B0_/31759", "publisher": "서울관광재단", "source_kind": "official-tourism", "supports": ["haebangchon-location", "rooftop", "city-view", "vintage-interior", "typewriter-experience", "tea-dessert-beer"] }, { "url": "https://alleymag.com/spot/spot-kop6wc63b/", "publisher": "Alley Magazine", "source_kind": "place-feature", "supports": ["current-place-signal", "sunset-view", "retro-atmosphere"] }]
+    },
+    {
+      "canonical_place_id": "seoul:yongsan:cafe-shush-yongsan",
+      "member_external_ids": ["coffeelog-3fedb4f79185a1e9"],
+      "research_status": "reviewed", "confidence": "high",
+      "verified_attributes": ["large-space", "terrace", "private-room", "group-friendly", "event-space", "seasonal-fruit-cake", "citrus-espresso"],
+      "ados_editorial_angles": ["작은 용리단길 카페들 사이에서 여럿이 넉넉하게 모이는 곳", "제철 과일 케이크와 시트러스 에스프레소를 고르는 용산의 큰 공간"],
+      "cautions": ["행사·대관 시 일반 좌석과 운영시간이 달라질 수 있음", "주소가 플랫폼별로 17-8과 23-7로 엇갈려 서비스 공개 전 공식 채널 확인"],
+      "evidence": [{ "url": "https://bizw.kr/brand/200776", "publisher": "로컬플레이스", "source_kind": "business-profile", "supports": ["address", "large-space", "terrace", "private-room", "events", "citrus-espresso", "evening-alcohol"] }, { "url": "https://www.diningcode.com/profile.php?rid=nB1kYGZtA0F4", "publisher": "DiningCode", "source_kind": "place-platform", "supports": ["opening-hours", "seasonal-fruit-cake", "group-friendly", "terrace", "address-conflict"] }, { "url": "https://pak.re.kr/?bo_idx=3&hCode=BOARD&idx=249&page=view&pg=1&sfl=&stx=", "publisher": "한국인구학회", "source_kind": "institutional-event-notice", "supports": ["current-operation-2026", "event-venue", "address"] }]
+    },
+    {
+      "canonical_place_id": "seoul:yongsan:cafe-lese-bop-yongsan",
+      "member_external_ids": ["coffeelog-a5a6b67412ac61ca"],
+      "research_status": "reviewed", "confidence": "high",
+      "verified_attributes": ["brunch", "large-space", "group-friendly", "quiet-signal", "specialty-coffee-option", "decaf-option", "late-hours"],
+      "ados_editorial_angles": ["삼각지에서 커피와 샌드위치·수프를 한 자리에서 해결하는 브런치", "넓은 테이블에 여럿이 모여 늦게까지 이야기하기 좋은 2층"],
+      "cautions": ["작업·공부보다 브런치와 모임 목적으로 분류", "1층 BOP와 2층 카페르세의 주문·좌석 운영 관계는 방문 전 확인"],
+      "evidence": [{ "url": "https://dongnecoffeenote.com/c/17419", "publisher": "동네 커피 노트", "source_kind": "review-analysis", "supports": ["address", "brunch", "group-seating", "work-use-caution"] }, { "url": "https://www.diningcode.com/profile.php?rid=44QbYqBKelsZ", "publisher": "DiningCode", "source_kind": "place-platform", "supports": ["opening-hours", "large-space", "quiet-signal", "sandwich-and-soup", "specialty-and-decaf-options", "floor-configuration"] }]
+    },
+    {
+      "canonical_place_id": "seoul:yongsan:beansmith-coffee-roasters",
+      "member_external_ids": ["coffeelog-0f5ffd57466b8bb8"],
+      "research_status": "reviewed", "confidence": "high",
+      "verified_attributes": ["in-house-roastery", "multiple-bean-choice", "decaf-option", "early-opening", "pastry-chef-dessert", "pet-friendly-signal", "old-house"],
+      "ados_editorial_angles": ["원효로의 오래된 집에서 네 가지 원두 중 오늘의 맛을 고르는 아침", "창작의 동네 열정도에서 로스팅 커피와 치즈케이크를 함께 먹는 곳"],
+      "cautions": ["평일과 주말 운영시간 차이가 큼", "반려동물 동반 조건과 재개발 영향에 따른 운영 변동은 방문 전 확인"],
+      "evidence": [{ "url": "https://www.daangn.com/kr/local-profile/%EB%B9%88%EC%8A%A4%EB%AF%B8%EC%8A%A4-%EC%BB%A4%ED%94%BC-%EB%A1%9C%EC%8A%A4%ED%84%B0%EC%8A%A4-41qobevc94bb/", "publisher": "당근 동네업체", "source_kind": "business-profile", "supports": ["address", "current-operation-2026", "opening-hours", "in-house-roastery", "four-bean-choice", "decaf", "pastry-chef-dessert", "brand-concept"] }, { "url": "https://www.tabling.co.kr/place/677cd76266de5f069892a73c", "publisher": "테이블링", "source_kind": "place-platform", "supports": ["weekday-weekend-hours", "pet-friendly-signal", "dessert-menu", "parking-caution"] }]
     }
   ]
 }
