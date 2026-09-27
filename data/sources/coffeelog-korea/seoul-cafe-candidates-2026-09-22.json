@@ -15,7 +15,7 @@
     "geography": "Seoul only",
     "record_count": 454,
     "enriched_record_count": 30,
-    "researched_record_count": 221
+    "researched_record_count": 226
   },
   "import_policy": {
     "default_action": "stage_only",
@@ -2143,8 +2143,70 @@
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
       "editorial_context_provenance": null,
-      "canonical_place_id": null,
-      "research_status": "not_researched"
+      "canonical_place_id": "seoul:mapo:odt-hapjeong",
+      "research_status": "reviewed",
+      "research_confidence": "high",
+      "verified_attributes": [
+        "brulee-dessert",
+        "signature-brulee-latte",
+        "house-made-brioche",
+        "brunch",
+        "large-window",
+        "second-floor",
+        "cherry-blossom-view",
+        "late-hours",
+        "decaf-option",
+        "design-studio-interior"
+      ],
+      "ados_editorial_angles": [
+        "합정 2층 통창에서 벚꽃을 보며 크림브륄레 라테를 깨뜨리는 봄",
+        "직접 구운 브리오슈 프렌치토스트로 늦은 브런치를 시작해 밤까지 머무는 곳"
+      ],
+      "research_cautions": [
+        "주말과 벚꽃철에는 웨이팅 가능성이 높고 만석 시 90분 이용 제한",
+        "남향 통창 좌석은 낮에 덥게 느껴질 수 있음",
+        "시그니처 메뉴는 단맛이 강한 편"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://www.diningcode.com/profile.php?rid=7PyQnb2TkMvR",
+          "publisher": "DiningCode",
+          "source_kind": "place-platform",
+          "supports": [
+            "current-operation-2026",
+            "opening-hours",
+            "signature-brulee-latte",
+            "house-made-brioche",
+            "brunch",
+            "large-window",
+            "decaf-option",
+            "design-studio-interior",
+            "waiting",
+            "time-limit"
+          ]
+        },
+        {
+          "url": "https://mahanpu.tistory.com/62",
+          "publisher": "몸과 마음, 건강하게",
+          "source_kind": "seasonal-visit",
+          "supports": [
+            "address",
+            "second-floor",
+            "cherry-blossom-view",
+            "spring-seasonality"
+          ]
+        },
+        {
+          "url": "https://v.daum.net/v/yEW2ysVsDn",
+          "publisher": "에스콰이어 코리아",
+          "source_kind": "magazine-editorial",
+          "supports": [
+            "hapjeong-location",
+            "signature-drinks",
+            "brioche-dessert"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-5467c4b5012772c5",
@@ -2176,8 +2238,76 @@
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
       "editorial_context_provenance": null,
-      "canonical_place_id": null,
-      "research_status": "not_researched"
+      "canonical_place_id": "seoul:mapo:yeonnam-cherry-blossom-house",
+      "research_status": "reviewed",
+      "research_confidence": "high",
+      "verified_attributes": [
+        "house-conversion",
+        "courtyard",
+        "large-cherry-tree",
+        "terrace",
+        "seasonal-view",
+        "pet-friendly",
+        "souvenir-shop",
+        "late-hours",
+        "photo-focused"
+      ],
+      "ados_editorial_angles": [
+        "연남동의 큰 벚나무 아래에서 서울의 봄을 가장 먼저 기다리는 집",
+        "계절이 바뀌어도 주택 마당과 소품을 천천히 구경하는 카페"
+      ],
+      "research_cautions": [
+        "3~4월 벚꽃철에는 오픈런과 웨이팅을 고려",
+        "커피 전문성보다 계절 풍경과 공간 경험이 중심",
+        "실내·실외 반려동물 동반 세부 조건은 방문 전 확인"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://yeohaengsallang.tistory.com/34",
+          "publisher": "여행살랑",
+          "source_kind": "recent-comparison-2026",
+          "supports": [
+            "current-operation-2026",
+            "opening-hours",
+            "signature-cherry-latte",
+            "large-cherry-tree",
+            "terrace",
+            "spring-crowding"
+          ]
+        },
+        {
+          "url": "https://www.keyzard.cc/gyals0314/nb/223828834864",
+          "publisher": "키자드",
+          "source_kind": "recent-seasonal-visit",
+          "supports": [
+            "address",
+            "opening-hours-signal",
+            "pet-friendly",
+            "indoor-and-outdoor-seating",
+            "opening-run"
+          ]
+        },
+        {
+          "url": "https://www.esquirekorea.co.kr/article/53642",
+          "publisher": "에스콰이어 코리아",
+          "source_kind": "magazine-editorial",
+          "supports": [
+            "large-cherry-tree",
+            "march-april-seasonality",
+            "gyeongui-line-forest-route"
+          ]
+        },
+        {
+          "url": "https://savelog.tistory.com/95",
+          "publisher": "savelog",
+          "source_kind": "historical-visit",
+          "supports": [
+            "house-conversion",
+            "souvenir-shop",
+            "courtyard-atmosphere"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-3e232e7ea1cf2e86",
@@ -2282,8 +2412,86 @@
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
       "editorial_context_provenance": null,
-      "canonical_place_id": null,
-      "research_status": "not_researched"
+      "canonical_place_id": "seoul:mapo:grey-lab-hapjeong",
+      "research_status": "reviewed",
+      "research_confidence": "high",
+      "verified_attributes": [
+        "garden-terrace",
+        "three-cherry-trees",
+        "seasonal-view",
+        "signature-apple-tea",
+        "apple-dessert",
+        "minimal-interior",
+        "quiet-stay",
+        "gallery-adjacent",
+        "pet-friendly-signal"
+      ],
+      "ados_editorial_angles": [
+        "합정 골목의 세 그루 벚나무 아래에서 사과꽃 같은 애플티를 마시는 곳",
+        "카페 뒤 전시 공간까지 이어 걸으며 조용한 오후를 보내는 작은 정원"
+      ],
+      "research_cautions": [
+        "벚꽃 개화기에는 테라스 좌석 경쟁과 혼잡이 큼",
+        "반려동물 동반 범위는 최신 공지 확인",
+        "야외 좌석은 날씨 영향을 크게 받음"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://www.esquirekorea.co.kr/article/53642",
+          "publisher": "에스콰이어 코리아",
+          "source_kind": "magazine-editorial",
+          "supports": [
+            "address",
+            "three-cherry-trees",
+            "garden-terrace",
+            "spring-crowding"
+          ]
+        },
+        {
+          "url": "https://v.daum.net/v/4XBmW3nbsl",
+          "publisher": "엘르 코리아",
+          "source_kind": "magazine-editorial",
+          "supports": [
+            "signature-apple-tea",
+            "apple-dessert",
+            "cherry-blossom-view",
+            "outdoor-seating"
+          ]
+        },
+        {
+          "url": "https://alwayy.tistory.com/44",
+          "publisher": "미식 탐험",
+          "source_kind": "visit-record",
+          "supports": [
+            "address",
+            "quiet-backstreet",
+            "garden-terrace",
+            "minimal-interior",
+            "quiet-stay"
+          ]
+        },
+        {
+          "url": "https://www.space-ac.com/space_ac",
+          "publisher": "스페이스 아크",
+          "source_kind": "official-neighbor",
+          "supports": [
+            "current-location-2026",
+            "gallery-adjacent",
+            "address",
+            "building-identity"
+          ]
+        },
+        {
+          "url": "https://www.albamon.com/jobs/detail-company/BjpjX6Aqo7Sb9Quo1VsxTQ%3D%3D",
+          "publisher": "알바몬",
+          "source_kind": "verified-employer-listing",
+          "supports": [
+            "business-identity",
+            "address",
+            "recent-hiring-signal"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-69122f4a96bd360d",
@@ -2315,8 +2523,65 @@
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
       "editorial_context_provenance": null,
-      "canonical_place_id": null,
-      "research_status": "not_researched"
+      "canonical_place_id": "seoul:mapo:logout-chaeggro-mapo",
+      "research_status": "reviewed",
+      "research_confidence": "medium",
+      "verified_attributes": [
+        "book-cafe",
+        "bookstore-connected",
+        "hangang-view",
+        "night-view",
+        "rooftop",
+        "multi-floor",
+        "work-friendly",
+        "reading-friendly",
+        "group-friendly",
+        "late-hours",
+        "parking-signal"
+      ],
+      "ados_editorial_angles": [
+        "마포의 높은 서가에서 한강과 여의도의 불빛을 함께 읽는 북카페",
+        "책·업무·대화를 층별로 골라 쓰고 루프탑까지 오르는 곳"
+      ],
+      "research_cautions": [
+        "채그로 건물 안의 카페 브랜드로 층별 주문·이용 방식이 다름",
+        "주말 오후에는 좌석 대기가 생길 수 있음",
+        "음료 가격대가 높은 편이며 최신 층별 운영 정보 확인"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://www.diningcode.com/profile.php?rid=wy4cmk4DG2S6",
+          "publisher": "DiningCode",
+          "source_kind": "place-platform",
+          "supports": [
+            "current-review-2026",
+            "address",
+            "opening-hours",
+            "bookstore-connected",
+            "hangang-view",
+            "night-view",
+            "rooftop",
+            "multi-floor",
+            "work-friendly",
+            "reading-friendly",
+            "group-friendly",
+            "parking-signal",
+            "weekend-crowding"
+          ]
+        },
+        {
+          "url": "https://dongnecoffeenote.com/c/3414",
+          "publisher": "동네 커피 노트",
+          "source_kind": "review-analysis",
+          "supports": [
+            "address",
+            "hangang-view",
+            "book-cafe",
+            "large-space",
+            "work-friendly-signal"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-aec239b68bad4aec",
@@ -2924,8 +3189,92 @@
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
       "editorial_context_provenance": null,
-      "canonical_place_id": null,
-      "research_status": "not_researched"
+      "canonical_place_id": "seoul:mapo:nice-work-today-sinsu",
+      "research_status": "reviewed",
+      "research_confidence": "high",
+      "verified_attributes": [
+        "work-friendly",
+        "reading-friendly",
+        "large-tables",
+        "outlets",
+        "wifi",
+        "single-seating",
+        "bar-seating",
+        "forest-trail-view",
+        "large-window",
+        "terrace",
+        "filter-coffee",
+        "global-roaster-selection",
+        "late-hours",
+        "elevator"
+      ],
+      "ados_editorial_angles": [
+        "경의선숲길 통창 앞에서 오늘의 일을 끝내는 워킹 스페이스 카페",
+        "세계 로스터의 필터 커피를 고르고 긴 테이블에 노트북을 펴는 곳"
+      ],
+      "research_cautions": [
+        "시험기간과 주말 오후에는 만석·웨이팅 가능성이 큼",
+        "대화보다 작업과 공부 분위기가 강해 모임에는 부적합",
+        "주차 불가로 인근 공영주차장 이용",
+        "영업시간 표기가 출처별로 달라 최신 공지 확인"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://www.diningcode.com/profile.php?rid=GTOvuRrzcJiQ",
+          "publisher": "DiningCode",
+          "source_kind": "place-platform",
+          "supports": [
+            "current-operation-2026",
+            "address",
+            "opening-hours-signal",
+            "work-friendly",
+            "large-tables",
+            "outlets",
+            "single-seating",
+            "bar-seating",
+            "forest-trail-view",
+            "large-window",
+            "filter-coffee",
+            "global-roaster-selection",
+            "crowding",
+            "no-parking"
+          ]
+        },
+        {
+          "url": "https://polle.com/place/5889ZQ/%EB%82%98%EC%9D%B4%EC%8A%A4%20%EC%9B%8C%ED%81%AC%20%ED%88%AC%EB%8D%B0%EC%9D%B4",
+          "publisher": "뽈레",
+          "source_kind": "place-platform",
+          "supports": [
+            "recent-review-2026",
+            "work-friendly",
+            "exam-season-crowding",
+            "menu",
+            "no-parking"
+          ]
+        },
+        {
+          "url": "https://gangseotongsin.com/archives/20502",
+          "publisher": "강서통신",
+          "source_kind": "opening-editorial",
+          "supports": [
+            "brand-concept",
+            "address",
+            "terrace",
+            "large-tables",
+            "forest-trail-view",
+            "long-stay"
+          ]
+        },
+        {
+          "url": "https://www.jesperhedemann.com/pages/seoul-coffee-guide",
+          "publisher": "Seoul Coffee Guide",
+          "source_kind": "specialty-coffee-guide",
+          "supports": [
+            "work-and-coffee-positioning",
+            "mapo-location"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-9fd5902134afe414",
