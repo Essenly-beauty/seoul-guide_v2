@@ -15,7 +15,7 @@
     "geography": "Seoul only",
     "record_count": 454,
     "enriched_record_count": 30,
-    "researched_record_count": 180
+    "researched_record_count": 186
   },
   "import_policy": {
     "default_action": "stage_only",
@@ -17655,8 +17655,71 @@
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
       "editorial_context_provenance": null,
-      "canonical_place_id": null,
-      "research_status": "not_researched"
+      "canonical_place_id": "seoul:gangnam:wyns-coffee-samseong",
+      "research_status": "reviewed",
+      "research_confidence": "medium",
+      "verified_attributes": [
+        "roastery-signal",
+        "multiple-bean-choice",
+        "house-bakes",
+        "dessert",
+        "large-space",
+        "quiet-stay",
+        "group-friendly",
+        "acai-bowl"
+      ],
+      "ados_editorial_angles": [
+        "삼성동 오피스 골목에서 원두를 고르고 직접 구운 디저트를 곁들이는 곳",
+        "코엑스의 밀도에서 벗어나 아사이볼과 커피로 잠시 숨을 고르는 넓은 카페"
+      ],
+      "research_cautions": [
+        "최신 출처마다 영업시간이 달라 방문 전 공식 지도 확인 필요",
+        "오래된 정보의 이른 출근 시간 운영을 현재 정보로 단정하지 않음"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://www.albamon.com/jobs/detail/117916161",
+          "publisher": "알바몬",
+          "source_kind": "verified-employer-listing",
+          "supports": [
+            "current-operation-2026",
+            "address",
+            "business-identity"
+          ]
+        },
+        {
+          "url": "https://dongnecoffeenote.com/c/14712",
+          "publisher": "동네 커피 노트",
+          "source_kind": "review-analysis",
+          "supports": [
+            "address",
+            "current-review-volume"
+          ]
+        },
+        {
+          "url": "https://cafe.ambitstock.com/samseong/cafe/%EC%9C%88%EC%8A%A4%EC%BB%A4%ED%94%BC/",
+          "publisher": "오늘의 카페",
+          "source_kind": "place-aggregator",
+          "supports": [
+            "address",
+            "opening-hours-signal",
+            "roastery-signal",
+            "dessert",
+            "large-space"
+          ]
+        },
+        {
+          "url": "https://kr.trip.com/moments/detail/gangnam-gu-2016458-136684480/",
+          "publisher": "Trip.com",
+          "source_kind": "recent-visit",
+          "supports": [
+            "large-space",
+            "quiet-stay",
+            "acai-bowl",
+            "opening-hours-conflict"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-4c3a2b7a69acc604",
@@ -17787,8 +17850,71 @@
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
       "editorial_context_provenance": null,
-      "canonical_place_id": null,
-      "research_status": "not_researched"
+      "canonical_place_id": "seoul:gangnam:sumokgeumto-cafe-nonhyeon",
+      "research_status": "reviewed",
+      "research_confidence": "high",
+      "verified_attributes": [
+        "specialty-coffee",
+        "signature-aged-milk-latte",
+        "multiple-bean-choice",
+        "large-space",
+        "greenhouse-terrace",
+        "wood-workshop-interior",
+        "brunch",
+        "jambon-beurre",
+        "pet-friendly-terrace"
+      ],
+      "ados_editorial_angles": [
+        "논현동 언덕의 초록 온실에서 숙성 우유 라테를 마시는 아침",
+        "목공방의 나무 결 사이에서 잠봉뵈르와 네 가지 원두를 고르는 곳"
+      ],
+      "research_cautions": [
+        "테라스 반려견 동반 조건은 방문 전 확인",
+        "평일과 금·토·일 마감시간이 다름",
+        "전용 주차 가능 여부가 출처마다 엇갈려 인근 유료 주차장 이용 권장"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://www.gangnamfinds.com/ko/place/sumokgeumto-kape",
+          "publisher": "Gangnam Finds",
+          "source_kind": "local-place-guide",
+          "supports": [
+            "address",
+            "opening-hours",
+            "specialty-coffee",
+            "signature-latte",
+            "jambon-beurre",
+            "wifi"
+          ]
+        },
+        {
+          "url": "https://www.diningcode.com/profile.php?rid=fVBY92bV1hjQ",
+          "publisher": "DiningCode",
+          "source_kind": "place-platform",
+          "supports": [
+            "current-operation-2026",
+            "large-space",
+            "greenhouse-terrace",
+            "wood-workshop",
+            "multiple-beans",
+            "aged-milk-latte",
+            "pet-friendly-terrace",
+            "parking-conflict"
+          ]
+        },
+        {
+          "url": "https://www.harpersbazaar.co.kr/article/71248",
+          "publisher": "하퍼스 바자 코리아",
+          "source_kind": "magazine-editorial",
+          "supports": [
+            "residential-neighborhood",
+            "greenhouse-terrace",
+            "latte",
+            "jambon-beurre",
+            "complex-lifestyle-space"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-a34e25951cb21925",
@@ -18084,8 +18210,60 @@
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
       "editorial_context_provenance": null,
-      "canonical_place_id": null,
-      "research_status": "not_researched"
+      "canonical_place_id": "seoul:seocho:reflect-coffee-roasting-lab",
+      "research_status": "reviewed",
+      "research_confidence": "medium",
+      "verified_attributes": [
+        "roasting-lab",
+        "specialty-coffee-signal",
+        "filter-coffee",
+        "small-space",
+        "flower-detail",
+        "brownie-signal",
+        "parking-signal"
+      ],
+      "ados_editorial_angles": [
+        "양재역 뒤편에서 생화와 로스팅 향 사이에 커피 한 잔을 고르는 작은 랩",
+        "뱅뱅사거리의 속도를 필터 커피와 브라우니로 낮추는 곳"
+      ],
+      "research_cautions": [
+        "두 원본 레코드는 동일 매장으로 병합",
+        "최신 공식 영업시간과 메뉴는 독립 출처가 부족해 방문 전 확인",
+        "무료 주차 가능 시간과 대수는 현장 확인 필요"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://www.tabling.co.kr/place/677cd0f566de5f0698870832",
+          "publisher": "테이블링",
+          "source_kind": "place-platform",
+          "supports": [
+            "business-identity",
+            "current-listing"
+          ]
+        },
+        {
+          "url": "https://myprivatecafe.tistory.com/entry/%EB%A6%AC%ED%94%8C%EB%A0%89%ED%8A%B8-%EC%BB%A4%ED%94%BC-%EB%A1%9C%EC%8A%A4%ED%8C%85%EB%9E%A9-%EC%84%9C%EC%B4%88%EB%8F%99-Reflect-Coffee-Roasting-Lab?category=1041303",
+          "publisher": "투명 취향",
+          "source_kind": "visit-record",
+          "supports": [
+            "address",
+            "roasting-lab",
+            "coffee-quality-signal",
+            "flower-detail"
+          ]
+        },
+        {
+          "url": "https://mudungglobal.com/nb/latest",
+          "publisher": "Mudung Global",
+          "source_kind": "recent-cafe-editorial-index",
+          "supports": [
+            "current-editorial-signal-2025",
+            "specialty-coffee",
+            "brownie",
+            "parking-signal"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-054087cc2fcb064a",
@@ -18150,8 +18328,54 @@
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
       "editorial_context_provenance": null,
-      "canonical_place_id": null,
-      "research_status": "not_researched"
+      "canonical_place_id": "seoul:seocho:minimale-kaffeeroster-gyodae-court",
+      "research_status": "reviewed",
+      "research_confidence": "high",
+      "verified_attributes": [
+        "specialty-coffee",
+        "signature-helsinki-latte",
+        "nordic-inspired",
+        "early-opening",
+        "late-hours-weekday",
+        "decaf-option",
+        "cookies",
+        "takeout-friendly"
+      ],
+      "ados_editorial_angles": [
+        "교대 법원 골목에서 북유럽의 기억을 재해석한 헬싱키 라테를 마시는 곳",
+        "이른 출근과 늦은 퇴근 사이를 스페셜티 에스프레소와 꾸덕한 쿠키로 잇는 카페"
+      ],
+      "research_cautions": [
+        "평일과 주말 영업시간이 크게 다름",
+        "주차 불가",
+        "헬싱키 라테는 단맛이 있는 시그니처라 취향에 따라 기본 커피 권장"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://www.diningcode.com/profile.php?rid=kOGhRdFHsQqO",
+          "publisher": "DiningCode",
+          "source_kind": "place-platform",
+          "supports": [
+            "address",
+            "opening-hours",
+            "specialty-coffee",
+            "signature-helsinki-latte",
+            "nordic-inspiration",
+            "decaf",
+            "cookies",
+            "parking-caution"
+          ]
+        },
+        {
+          "url": "https://www.youtube.com/watch?v=QhiL8826BsA",
+          "publisher": "joonimism",
+          "source_kind": "visit-video",
+          "supports": [
+            "branch-identity",
+            "helsinki-latte"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-c6d2895a06ad6bf3",
@@ -18183,8 +18407,63 @@
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
       "editorial_context_provenance": null,
-      "canonical_place_id": null,
-      "research_status": "not_researched"
+      "canonical_place_id": "seoul:seocho:lull-coffee-arts-center",
+      "research_status": "reviewed",
+      "research_confidence": "high",
+      "verified_attributes": [
+        "brewing-specialist",
+        "barista-operated",
+        "competition-recognized",
+        "in-house-roasting",
+        "coffee-guidance",
+        "arts-center-neighborhood",
+        "instrument-street",
+        "limited-parking"
+      ],
+      "ados_editorial_angles": [
+        "예술의전당 공연 전 정인성 바리스타의 설명과 함께 브루잉 커피를 고르는 곳",
+        "서초 악기거리에서 연주와 연주 사이를 직접 볶은 한 잔으로 잇는 카페"
+      ],
+      "research_cautions": [
+        "주차는 1~2대·최대 1시간 수준으로 제한적",
+        "공연일에는 주변 혼잡이 예상돼 대중교통 이용 권장",
+        "최신 영업시간은 공식 채널 확인"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://lounge.eoseye.com/COLLABO/lull-coffee.html",
+          "publisher": "EOS Membership Lounge",
+          "source_kind": "brand-collaboration",
+          "supports": [
+            "barista-identity",
+            "competition-record",
+            "in-house-roasting",
+            "brewing-specialist",
+            "coffee-guidance",
+            "arts-center-location"
+          ]
+        },
+        {
+          "url": "https://bizw.kr/brand/202071",
+          "publisher": "로컬플레이스",
+          "source_kind": "business-profile",
+          "supports": [
+            "arts-center-neighborhood",
+            "instrument-street",
+            "directions",
+            "limited-parking"
+          ]
+        },
+        {
+          "url": "https://www.114.co.kr/search/detail?comp_id=3665849&comp_tp_cd=GOV&godata_tp_cd=LOCALDATA&upjong_cd=",
+          "publisher": "114On",
+          "source_kind": "public-licensing-derived-data",
+          "supports": [
+            "business-status-signal",
+            "seocho-address"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-575be59a137ecdc1",
@@ -18216,8 +18495,60 @@
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
       "editorial_context_provenance": null,
-      "canonical_place_id": null,
-      "research_status": "not_researched"
+      "canonical_place_id": "seoul:seocho:reflect-coffee-roasting-lab",
+      "research_status": "reviewed",
+      "research_confidence": "medium",
+      "verified_attributes": [
+        "roasting-lab",
+        "specialty-coffee-signal",
+        "filter-coffee",
+        "small-space",
+        "flower-detail",
+        "brownie-signal",
+        "parking-signal"
+      ],
+      "ados_editorial_angles": [
+        "양재역 뒤편에서 생화와 로스팅 향 사이에 커피 한 잔을 고르는 작은 랩",
+        "뱅뱅사거리의 속도를 필터 커피와 브라우니로 낮추는 곳"
+      ],
+      "research_cautions": [
+        "두 원본 레코드는 동일 매장으로 병합",
+        "최신 공식 영업시간과 메뉴는 독립 출처가 부족해 방문 전 확인",
+        "무료 주차 가능 시간과 대수는 현장 확인 필요"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://www.tabling.co.kr/place/677cd0f566de5f0698870832",
+          "publisher": "테이블링",
+          "source_kind": "place-platform",
+          "supports": [
+            "business-identity",
+            "current-listing"
+          ]
+        },
+        {
+          "url": "https://myprivatecafe.tistory.com/entry/%EB%A6%AC%ED%94%8C%EB%A0%89%ED%8A%B8-%EC%BB%A4%ED%94%BC-%EB%A1%9C%EC%8A%A4%ED%8C%85%EB%9E%A9-%EC%84%9C%EC%B4%88%EB%8F%99-Reflect-Coffee-Roasting-Lab?category=1041303",
+          "publisher": "투명 취향",
+          "source_kind": "visit-record",
+          "supports": [
+            "address",
+            "roasting-lab",
+            "coffee-quality-signal",
+            "flower-detail"
+          ]
+        },
+        {
+          "url": "https://mudungglobal.com/nb/latest",
+          "publisher": "Mudung Global",
+          "source_kind": "recent-cafe-editorial-index",
+          "supports": [
+            "current-editorial-signal-2025",
+            "specialty-coffee",
+            "brownie",
+            "parking-signal"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-203e52df758221ee",
