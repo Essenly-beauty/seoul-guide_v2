@@ -3,9 +3,9 @@
   "generated_on": "2026-09-26",
   "caution": "이 파일은 전수 조사 큐다. 추정 필드는 공개용 태그가 아니며 사람 또는 출처 검토가 필요하다.",
   "summary": {
-    "done_or_pending_specific_check": 160,
+    "done_or_pending_specific_check": 165,
     "p3_general_review": 243,
-    "p2_editorial_potential": 51
+    "p2_editorial_potential": 46
   },
   "records": [
     {
@@ -2608,8 +2608,8 @@
       "normalized_name": "에이바우트커피 송파점",
       "possible_duplicate_external_ids": [],
       "content_kind_guess": "cafe_candidate",
-      "research_priority": "p2_editorial_potential",
-      "current_research_status": "not_researched"
+      "research_priority": "done_or_pending_specific_check",
+      "current_research_status": "reviewed"
     },
     {
       "external_id": "coffeelog-5e67e6e8fdb5898d",
@@ -2658,8 +2658,8 @@
       "normalized_name": "가타커피",
       "possible_duplicate_external_ids": [],
       "content_kind_guess": "cafe_candidate",
-      "research_priority": "p2_editorial_potential",
-      "current_research_status": "not_researched"
+      "research_priority": "done_or_pending_specific_check",
+      "current_research_status": "reviewed"
     },
     {
       "external_id": "coffeelog-d7730e8ba8e330c4",
@@ -2668,8 +2668,8 @@
       "normalized_name": "리프커피바",
       "possible_duplicate_external_ids": [],
       "content_kind_guess": "cafe_candidate",
-      "research_priority": "p2_editorial_potential",
-      "current_research_status": "not_researched"
+      "research_priority": "done_or_pending_specific_check",
+      "current_research_status": "reviewed"
     },
     {
       "external_id": "coffeelog-ee30bf5bdf23ca69",
@@ -2792,8 +2792,8 @@
       "normalized_name": "뷰클런즈",
       "possible_duplicate_external_ids": [],
       "content_kind_guess": "cafe_candidate",
-      "research_priority": "p2_editorial_potential",
-      "current_research_status": "not_researched"
+      "research_priority": "done_or_pending_specific_check",
+      "current_research_status": "reviewed"
     },
     {
       "external_id": "coffeelog-90c64cd46ce79452",
@@ -2812,8 +2812,8 @@
       "normalized_name": "카페라이츠 송리단길",
       "possible_duplicate_external_ids": [],
       "content_kind_guess": "cafe_candidate",
-      "research_priority": "p2_editorial_potential",
-      "current_research_status": "not_researched"
+      "research_priority": "done_or_pending_specific_check",
+      "current_research_status": "identity_verified"
     },
     {
       "external_id": "coffeelog-3058406f837a906c",
