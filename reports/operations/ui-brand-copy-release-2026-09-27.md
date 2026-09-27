@@ -22,3 +22,5 @@
 ## Production gate
 
 Do not promote the separate member/shared-list preview. Decide whether this UI-only branch should ship before or together with the independently prepared Daiso lookup fix. If the lookup fix is to join this release, cherry-pick only that hunk plus its regression test into the isolated branch and re-run the full release checks. If it ships separately, record the known detail 404 as still open at the time of UI promotion.
+
+`origin/main` advanced to `6665375` (Seoul cafe editorial) after this preview build. Rebase and recheck the release branch against the then-current `main` before any production merge.
