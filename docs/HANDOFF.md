@@ -166,6 +166,15 @@ vercel env pull --yes  # .env.local 재생성
 - **`audit:data:check`는 개명 후에도 통과한다**(문서의 예측이 틀렸음, `c255053`). `scripts/audit-places.ts:29`가 오버라이드 **전**의 `CATALOGUE_PLACES`를 읽기 때문. 다만 이것은 별개 문제를 드러낸다 — 감사 리포트의 이름이 앱이 보여주는 이름과 다르다
 - 865 테스트 통과, `verify:predeploy` 전 항목 통과. 실기기 폭(390×844) 확인: 878행 **읽을 수 없는 이름 0건**, 콘솔 에러 0건, 가로 스크롤 없음
 
+### G. 홈 화면 설치 안내 · 랭킹 문구 · 상품 검수 (9/23~9/27)
+> 문서: `docs/product-recommendation-policy.md`(오너 확정 기준), `reports/parallel-*-single-verification-2026-09-23.md`
+
+- **홈 화면 설치 넛지**(`aad69ec`, `d45dd38`) — 앱은 처음부터 설치 가능했다(manifest `standalone`, 아이콘, SW, 애플 메타 전부 프로드 200). 없던 건 안내였고 입구가 햄버거 메뉴뿐이었다. 지도에 **장소를 한 번 저장한 뒤** 한 줄 배너가 뜬다. 이미 설치됨·한 번 닫음·카카오톡 등 인앱 브라우저에서는 안 뜬다(`lib/install-nudge-policy.ts`, 전부 거절 규칙). 프로드에서 7단계 흐름 전부 확인, 콘솔 에러 0
+- **랭킹 신선도 문구**(`7fe3f3a`) — 오너 결정: 목록은 1~2주마다 손 갱신 + 세일·명절. `Today's sales ranking`·`Trending now`와 장소 상세의 **존재하지 않는** "Olive Young chain-wide chart" 인용을 걷어냈다. `lib/ranking-freshness-copy.test.ts`가 살아 있는 피드 어휘를 금지. **미해결**: 갱신 주기를 쓴다면 화면에 기준 시점이 있어야 하는데 이를 금지하는 계약 테스트가 둘(`ranking-retailer-contract.test.ts`, `product-detail-layout.test.ts`)이고 사유는 스쿼시돼 없음 → 오너 결정
+- **단품 상세 검증**(`5efcd2b`) — 정책 필터 통과 42건을 공식 상세로 판정: **단품 확정 32**(다이소 24, 올리브영 8), 단품 아님 7, 보류 3. 다이소는 `pdOptRevwCnt` API가 옵션 수를 그대로 주어 **curl로 끝남**; 올리브영은 "옵션을 선택해 주세요" 문구가 판정 신호(요소 존재는 아님). 이름에 "(단품)"이 적힌 옵션형(`A000000180532`)이 실제로 있어 정책의 "이름으로 판정 금지"를 증명. **메이크업은 후보 5건 전부 옵션형 = 단품 0** — 색조는 호수를 한 페이지에 묶는 구조라 단품 규칙 아래서 카테고리가 통째로 빈다
+- **외래어 상호 17건 교정**(`ebe70e4`) — 프로드 검증에서 코엑스몰 플래그십이 "Koekseumol"로 잡혔다. 토큰 길이 예산이 놓치는 부류라 `lib/place-name-loanwords.test.ts`가 **의미**로 검사(한글에 코엑스·타워·아이파크·롯데·이마트… 가 있으면 영문에 그 철자가 있어야 함). 프로드 17/17 반영 확인
+- **병렬 검증 보고서 4종**(9/23) — `reports/parallel-{daiso,olive-young}-verification`, `parallel-product-curation`(142행 CSV), `parallel-ranking-refresh-readiness`. 다이소 급상승 차트만 재현 불가(관찰 시각 차이로 판정, 리뷰 수 단조성 18/18이 근거)
+
 ---
 
 ## 3. ⚠️ 사용자(계정 소유자) 액션 대기 — 최우선
@@ -192,6 +201,18 @@ vercel env pull --yes  # .env.local 재생성
 ---
 
 ## 4. 다음 작업 백로그 (우선순위순)
+
+### P0 — 다이소 상세 251곳이 프로덕션에서 404 (9/27 확인, 수정은 있으나 미커밋)
+`myseouldrop.app/place/daiso-official:%EA…` 형태 **251곳 전부**가 "This page wandered off"(표본 4/4). ascii id인 보충 매장 33곳은 정상. 원인: `lib/data.ts`
+`decodedFind`가 라우터는 디코딩하지 않는다고 가정하는데 프로드 Next 15.5는 이미 디코딩한 한글을 넘겨 `%EA…` 리터럴 id와 어느 형태로도 안 맞는다.
+**수정은 다른 세션의 작업 트리 `lib/data.ts`에 이미 있다**(stored에 `%`가 있으면 양쪽 디코딩해 비교, 읽어 보니 맞음). 그러나 미커밋이고 같은 파일에 그 세션의
+Product 타입 변경도 섞여 있어 통째로 못 가져온다. 테스트도 없다. → 그 세션 커밋 또는 hunk 분리 랜딩 + 테스트. **영향**: 면세·유심 등 시설 정보를 가진
+다이소 218곳이 전부 이 251곳 안이라 9/23의 "In store" 행이 **프로드에서 아직 안 보인다**(코드는 맞음, 개발 서버에서 확인됨).
+
+### P0 — 오너 결정: 검증된 단품 32건을 어디에 올릴 것인가 (9/27)
+근거 없는 14개 샘플이 채우던 자리가 이미 넷이다 — 랭킹 "Popular at Olive Young"(수기 `salesRank`), "Highest-rated by reviews"(`reviewRank`,
+**공식 리뷰 랭킹 자체가 없음**), "Also popular"(`isTrending` 5개 수기), 장소 상세의 올리브영 픽 4개. 새 자리를 만들 게 아니라 이 넷 중 32건으로 뒷받침되는
+곳은 교체하고 안 되는 곳은 주장을 멈추는 결정. 보류 3건(다이소 2제형 키트·네일 램프, 올리브영 증정 스티커 기획)도 함께.
 
 ### P0 — 오너 결정 1건: 목록 행에서 체인 이름 빼기 (9/23 실측 완료, 판단만 남음)
 행 하나에 체인 이름이 **두 번** 나온다. `.label`이 `"Daiso · Gangnam"`을 이미 표시하는데 제목이 또 `"Daiso Gangnam Stn. 2"`다. 390×844에서
