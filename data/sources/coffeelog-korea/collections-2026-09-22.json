@@ -1,0 +1,132 @@
+{
+  "schema_version": "1.0.0",
+  "dataset_id": "coffeelog-korea-editorial-collections-2026-09-22",
+  "source_profile_url": "https://www.threads.com/@coffeelog_korea",
+  "interpretation_note": "Collection membership and tags preserve the source account's framing. They are not ADoS or My Seoul Drop endorsements.",
+  "collections": [
+    {
+      "id": "coffeelog-korea:sky-view-cafes",
+      "slug": "sky-view-cafes",
+      "title_ko": "하늘이 예쁜 날 같이 가고 싶은 통창 카페",
+      "title_en": "Cafés with windows and a view",
+      "source_post_url": "https://www.threads.com/@coffeelog_korea/post/DdisKAzEWYc",
+      "source_address_post_url": "https://www.threads.com/@coffeelog_korea/post/DdisL3akfGp",
+      "context_tags": {
+        "occasions": [
+          "slow-afternoon",
+          "date",
+          "good-weather"
+        ],
+        "spaces": [
+          "large-window",
+          "view"
+        ],
+        "seasons": [],
+        "food_drink": []
+      },
+      "source_type": "threads_collection",
+      "verification_status": "source_derived_unverified",
+      "member_external_ids": [
+        "coffeelog-d584f888b03d79e2",
+        "coffeelog-0f716868e46b6878",
+        "coffeelog-cae1cbd79992c767",
+        "coffeelog-18acc6fc8398e71f",
+        "coffeelog-c042a50d215ba065",
+        "coffeelog-4b94c0111867b9e7"
+      ]
+    },
+    {
+      "id": "coffeelog-korea:weekend-work-cafes",
+      "slug": "weekend-work-cafes",
+      "title_ko": "주말에 작업하고 싶을 때 저장해두는 카페",
+      "title_en": "Cafés for working on the weekend",
+      "source_post_url": "https://www.threads.com/@coffeelog_korea/post/DddjoYiEc26",
+      "source_address_post_url": "https://www.threads.com/@coffeelog_korea/post/DddjqnckYra",
+      "context_tags": {
+        "occasions": [
+          "work",
+          "study",
+          "solo-time"
+        ],
+        "spaces": [
+          "long-stay"
+        ],
+        "seasons": [],
+        "food_drink": []
+      },
+      "source_type": "threads_collection",
+      "verification_status": "source_derived_unverified",
+      "member_external_ids": [
+        "coffeelog-84904313f64760cb",
+        "coffeelog-9414ba3ffda99ba7",
+        "coffeelog-21ad2aeb5fef86d0",
+        "coffeelog-aea4a9653b00ffb3",
+        "coffeelog-f6e3f9ff7c801753",
+        "coffeelog-16271d17b078a205"
+      ]
+    },
+    {
+      "id": "coffeelog-korea:seongsu-coffee-walk",
+      "slug": "seongsu-coffee-walk",
+      "title_ko": "성수 카페 목록",
+      "title_en": "A Seongsu coffee walk",
+      "source_post_url": "https://www.threads.com/@coffeelog_korea/post/DRzHY7okQdI",
+      "source_address_post_url": "https://www.threads.com/@coffeelog_korea/post/DRzHY7okQdI",
+      "context_tags": {
+        "occasions": [
+          "neighborhood-walk"
+        ],
+        "spaces": [],
+        "seasons": [],
+        "food_drink": [
+          "coffee"
+        ]
+      },
+      "source_type": "threads_collection",
+      "verification_status": "source_derived_unverified",
+      "member_external_ids": [
+        "coffeelog-7edf7852e6cf9708",
+        "coffeelog-6fb7b04783fa0be2",
+        "coffeelog-7777e518105d49f2",
+        "coffeelog-057067f4aa62dcc6",
+        "coffeelog-e2f8e7cdb7d8d3f9",
+        "coffeelog-aa5bffc87789e4a1",
+        "coffeelog-f63d7f4937338261",
+        "coffeelog-f36ddda1110190d9"
+      ]
+    },
+    {
+      "id": "coffeelog-korea:hannam-afternoon-cafes",
+      "slug": "hannam-afternoon-cafes",
+      "title_ko": "한남 카페 목록",
+      "title_en": "An afternoon in Hannam",
+      "source_post_url": "https://www.threads.com/@coffeelog_korea/post/DRt6YN2kbNq",
+      "source_address_post_url": "https://www.threads.com/@coffeelog_korea/post/DRt6YN2kbNq",
+      "context_tags": {
+        "occasions": [
+          "afternoon",
+          "neighborhood-walk"
+        ],
+        "spaces": [],
+        "seasons": [],
+        "food_drink": [
+          "coffee"
+        ]
+      },
+      "source_type": "threads_collection",
+      "verification_status": "source_derived_unverified",
+      "member_external_ids": [
+        "coffeelog-6d2755880e1abd36",
+        "coffeelog-75ff291de9fdeff0",
+        "coffeelog-90cbe5a9828d36f1",
+        "coffeelog-f51852163f1dc45c",
+        "coffeelog-0df93023d0d554c1",
+        "coffeelog-73bac24820345154",
+        "coffeelog-708d0b365f9909ab",
+        "coffeelog-83dbcff6b2ad5f49",
+        "coffeelog-d93e003e7e7e0211",
+        "coffeelog-3b8686ea5d6e885d"
+      ]
+    }
+  ]
+}
