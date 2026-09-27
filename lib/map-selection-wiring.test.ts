@@ -208,13 +208,20 @@ describe("map place selection wiring", () => {
     expect(sheetSource).toContain('className="maprow-photo"');
     expect(sheetSource).toContain('alt=""');
     // Known retailers get their own mark (public/brands), never a generic pin.
-    expect(sheetSource).toContain("const brandMark = BRAND_MARK_SRC[place.type]");
-    expect(sheetSource).toContain('<img className="maprow-brand-mark" src={brandMark} alt="" />');
+    expect(sheetSource).toContain(' : BRAND_MARK_SRC[place.type]');
+    expect(sheetSource).toContain('className={place.type === "daiso" ? "maprow-brand-mark maprow-brand-mark--daiso" : "maprow-brand-mark"}');
     // Everything else mirrors the map pin: TYPE_ICON glyph in TYPE_COLOR.
     expect(sheetSource).toContain('className="maprow-photo-fallback" style={{ color: TYPE_COLOR[place.type] }}');
     expect(sheetSource).toContain("<Icon name={TYPE_ICON[place.type]}");
     // Both row kinds share the one component.
     expect(sheetSource.match(/<MapRowThumb place=/g)).toHaveLength(2);
+  });
+
+  it("uses the supplied full-square Daiso logo for photo-less nearby rows only", () => {
+    expect(sheetSource).toContain('const brandMark = place.type === "daiso" ? "/brands/daiso-logo.jpeg" : BRAND_MARK_SRC[place.type]');
+    expect(sheetSource.indexOf("{placePhoto ? (")).toBeLessThan(sheetSource.indexOf(") : brandMark ? ("));
+    expect(cssSource).toMatch(/\.maprow-brand-mark--daiso\s*\{[^}]*width:\s*100%;[^}]*height:\s*100%;/s);
+    expect(existsSync(new URL("../public/brands/daiso-logo.jpeg", import.meta.url))).toBe(true);
   });
 
   it("reuses the direct place-detail body and CTA at the full snap", () => {

@@ -4504,6 +4504,11 @@
     width: 46%;
     height: 46%;
   }
+  .maprow-brand-mark--daiso {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
   .maprow-photo-fallback .maprow-fallback-glyph {
     width: 34px;
     height: 34px;

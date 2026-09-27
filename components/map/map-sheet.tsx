@@ -592,7 +592,7 @@ export function MapSheet({ places, origin, selectedId, groupPlaceIds = [], onSel
     request 2026-09-12). */
 function MapRowThumb({ place }: { place: Place }) {
   const placePhoto = place.photoThumbnail ?? place.photos?.[0] ?? place.photoUrl;
-  const brandMark = BRAND_MARK_SRC[place.type];
+  const brandMark = place.type === "daiso" ? "/brands/daiso-logo.jpeg" : BRAND_MARK_SRC[place.type];
   return (
     <div className="thumb hero-img maprow-thumb">
       {placePhoto ? (
@@ -611,7 +611,11 @@ function MapRowThumb({ place }: { place: Place }) {
       ) : brandMark ? (
         <span className="maprow-photo-fallback maprow-brand-fallback">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img className="maprow-brand-mark" src={brandMark} alt="" />
+          <img
+            className={place.type === "daiso" ? "maprow-brand-mark maprow-brand-mark--daiso" : "maprow-brand-mark"}
+            src={brandMark}
+            alt=""
+          />
         </span>
       ) : (
         <span className="maprow-photo-fallback" style={{ color: TYPE_COLOR[place.type] }}>
