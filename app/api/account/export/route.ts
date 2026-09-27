@@ -10,15 +10,20 @@ function unavailable() {
   });
 }
 
+function signInRequired() {
+  return NextResponse.json({ error: "Sign in to export your data." }, {
+    status: 401,
+    headers: { "cache-control": "private, no-store" },
+  });
+}
+
 export async function GET() {
   try {
     const supabase = supabaseServer();
     const { data: { user }, error: authError } = await supabase.auth.getUser();
+    if (authError?.name === "AuthSessionMissingError") return signInRequired();
     if (authError) return unavailable();
-    if (!user) return NextResponse.json({ error: "Sign in to export your data." }, {
-      status: 401,
-      headers: { "cache-control": "private, no-store" },
-    });
+    if (!user) return signInRequired();
 
     const [favorites, ratings, profile] = await Promise.all([
       supabase.from("favorites").select("kind, item_id, created_at").order("created_at"),

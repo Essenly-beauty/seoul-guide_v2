@@ -96,4 +96,15 @@ describe("GET /api/account/export", () => {
     expect(response.status).toBe(401);
     expect(mocks.from).not.toHaveBeenCalled();
   });
+
+  it("treats Supabase's missing-session error as a signed-out guest", async () => {
+    mocks.getUser.mockResolvedValue({
+      data: { user: null },
+      error: { name: "AuthSessionMissingError", message: "Auth session missing!" },
+    });
+    const response = await GET();
+    expect(response.status).toBe(401);
+    expect(response.headers.get("cache-control")).toContain("no-store");
+    expect(mocks.from).not.toHaveBeenCalled();
+  });
 });
