@@ -15,7 +15,7 @@
     "geography": "Seoul only",
     "record_count": 454,
     "enriched_record_count": 30,
-    "researched_record_count": 155
+    "researched_record_count": 160
   },
   "import_policy": {
     "default_action": "stage_only",
@@ -10129,8 +10129,54 @@
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
       "editorial_context_provenance": null,
-      "canonical_place_id": null,
-      "research_status": "not_researched"
+      "canonical_place_id": "seoul:jung:upnd-coffee-roasters-myeongdong",
+      "research_status": "reviewed",
+      "research_confidence": "high",
+      "verified_attributes": [
+        "roastery",
+        "multiple-bean-choice",
+        "quiet-stay",
+        "large-space",
+        "early-opening",
+        "late-hours",
+        "house-made-bakes"
+      ],
+      "ados_editorial_angles": [
+        "명동의 관광 동선 한가운데서 원두를 고르고 조용히 쉬는 2층",
+        "이른 아침부터 늦은 저녁까지 커피와 수제 스콘을 만나는 도심 로스터리"
+      ],
+      "research_cautions": [
+        "점심시간에는 인근 직장인으로 혼잡할 수 있음",
+        "주차 불가이며 작은 건물 입구와 2층 위치를 길 안내에 명시"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://www.diningcode.com/profile.php?rid=aGQKFVkHhNbm",
+          "publisher": "DiningCode",
+          "source_kind": "place-platform",
+          "supports": [
+            "address",
+            "opening-hours",
+            "roastery",
+            "multiple-beans",
+            "large-space",
+            "quiet-stay",
+            "house-made-bakes",
+            "signature-cream-latte"
+          ]
+        },
+        {
+          "url": "https://www.tabling.co.kr/place/677cd13266de5f0698877854",
+          "publisher": "테이블링",
+          "source_kind": "place-platform",
+          "supports": [
+            "current-hours",
+            "address",
+            "quiet-signal",
+            "parking-caution"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-f436b4acda8fe74e",
@@ -10261,8 +10307,57 @@
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
       "editorial_context_provenance": null,
-      "canonical_place_id": null,
-      "research_status": "not_researched"
+      "canonical_place_id": "seoul:jongno:respire-bakery-cafe-seochon",
+      "research_status": "reviewed",
+      "research_confidence": "high",
+      "verified_attributes": [
+        "bakery-cafe",
+        "early-opening",
+        "salt-bread",
+        "brunch",
+        "stone-wall-view",
+        "terrace",
+        "pet-friendly-limited",
+        "lactose-free-option"
+      ],
+      "ados_editorial_angles": [
+        "경복궁과 청와대 사이 돌담을 보며 소금빵을 먹는 아침",
+        "서촌 산책 중 오믈렛 토스트와 락토프리 라테로 쉬어 가는 곳"
+      ],
+      "research_cautions": [
+        "인기 빵은 주말 오후 전에 품절될 수 있음",
+        "반려동물은 1층·야외만 가능하다는 방문 정보 확인",
+        "2층 계단이 좁고 주차 불가"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://www.diningcode.com/profile.php?rid=7c3Rq6KJNKDm",
+          "publisher": "DiningCode",
+          "source_kind": "place-platform",
+          "supports": [
+            "address",
+            "current-hours-2026",
+            "salt-bread",
+            "brunch",
+            "stone-wall-view",
+            "terrace",
+            "pet-friendly-limited",
+            "lactose-free-option",
+            "access-caution"
+          ]
+        },
+        {
+          "url": "https://superchart.com/ko/%40everyday-saucer/seochon-bakery-salt-bread-caramel-creme/",
+          "publisher": "Superchart",
+          "source_kind": "recent-visit",
+          "supports": [
+            "current-operation-2026",
+            "two-floor-space",
+            "seochon-walk",
+            "salt-bread"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-36d31e3afdfcf2e7",
@@ -11819,8 +11914,58 @@
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
       "editorial_context_provenance": null,
-      "canonical_place_id": null,
-      "research_status": "not_researched"
+      "canonical_place_id": "seoul:jongno:oscar-space-coffeehouse-daehangno",
+      "research_status": "reviewed",
+      "research_confidence": "high",
+      "verified_attributes": [
+        "specialty-coffee",
+        "social-impact",
+        "donation-menu",
+        "community-space",
+        "youth-founded",
+        "cozy-space"
+      ],
+      "ados_editorial_angles": [
+        "대학로 골목에서 한 잔의 선택을 금융위기가정 지원으로 연결하는 카페",
+        "커피 경력을 가진 청년 창업가가 만든 감정과 대화의 아지트"
+      ],
+      "research_cautions": [
+        "정확한 최신 주소·영업시간은 공식 채널에서 추가 확인 후 노출",
+        "사회적 가치 서사를 과장하지 않고 실제 기부 메뉴 근거와 함께 소개"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://www.bss.or.kr/archive/story/social-solidarity-bank-oscar-space-donation-menu-launch/",
+          "publisher": "사회연대은행",
+          "source_kind": "partner-organization",
+          "supports": [
+            "daehangno-location",
+            "specialty-coffee",
+            "donation-menu",
+            "financial-crisis-family-support",
+            "cozy-space"
+          ]
+        },
+        {
+          "url": "https://www.bss.or.kr/archive/story/social-solidarity-bank-the-terrace-5th-oscar-space-interview/",
+          "publisher": "사회연대은행",
+          "source_kind": "founder-interview",
+          "supports": [
+            "youth-founders",
+            "coffee-industry-experience",
+            "community-hideout-concept",
+            "social-enterprise-incubation"
+          ]
+        },
+        {
+          "url": "https://www.bss.or.kr/wp-content/uploads/2026/05/2025-%EC%97%B0%EC%B0%A8%EB%B3%B4%EA%B3%A0%EC%84%9C_web_edit.pdf",
+          "publisher": "사회연대은행",
+          "source_kind": "annual-report",
+          "supports": [
+            "donation-program-operation-signal"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-63335b347c2d562a",
@@ -12162,8 +12307,64 @@
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
       "editorial_context_provenance": null,
-      "canonical_place_id": null,
-      "research_status": "not_researched"
+      "canonical_place_id": "seoul:songpa:cafe-eclipse-seokchon",
+      "research_status": "reviewed",
+      "research_confidence": "high",
+      "verified_attributes": [
+        "seokchon-lake-view",
+        "rooftop-terrace",
+        "coffee-and-wine",
+        "late-hours",
+        "sommelier-operated",
+        "house-made-dessert",
+        "pet-friendly-signal",
+        "parking"
+      ],
+      "ados_editorial_angles": [
+        "석촌호수의 낮을 커피로 시작해 밤의 와인까지 이어가는 곳",
+        "바리스타와 소믈리에가 함께 만든 달과 태양의 카페"
+      ],
+      "research_cautions": [
+        "월요일 휴무와 금·토 자정 마감 등 요일별 운영시간 확인",
+        "반려동물·루프탑 이용 조건은 방문 전 확인"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://xn--2s2b33eb3kgvpta.com/store/S153426_1643878660391",
+          "publisher": "완벽한 하루",
+          "source_kind": "place-guide",
+          "supports": [
+            "coffee-and-wine-concept",
+            "barista-and-sommelier",
+            "house-made-dessert",
+            "opening-hours",
+            "address"
+          ]
+        },
+        {
+          "url": "https://www.dongnecoffeenote.com/c/25075",
+          "publisher": "동네 커피 노트",
+          "source_kind": "review-analysis",
+          "supports": [
+            "rooftop-terrace",
+            "view",
+            "brunch-signal",
+            "work-use-caution"
+          ]
+        },
+        {
+          "url": "https://www.tabling.co.kr/place/677ccbbe66de5f06987dcc54",
+          "publisher": "테이블링",
+          "source_kind": "place-platform",
+          "supports": [
+            "current-hours",
+            "wine",
+            "terrace",
+            "parking",
+            "pet-friendly-signal"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-ce11af7ff29326d4",
@@ -12577,8 +12778,69 @@
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
       "editorial_context_provenance": null,
-      "canonical_place_id": null,
-      "research_status": "not_researched"
+      "canonical_place_id": "seoul:songpa:cafe-manarant-seokchon",
+      "research_status": "reviewed",
+      "research_confidence": "high",
+      "verified_attributes": [
+        "book-cafe",
+        "lp-listening",
+        "dedicated-listening-room",
+        "work-friendly",
+        "large-space",
+        "group-seating",
+        "quiet-stay",
+        "late-hours"
+      ],
+      "ados_editorial_angles": [
+        "석촌호수 근처에서 책과 LP 사이에 하루를 맡기는 큰 카페",
+        "턴테이블 좌석과 조용한 2층에서 오래 집중하는 날"
+      ],
+      "research_cautions": [
+        "다이닝코드의 임시 휴무 표기와 다른 플랫폼의 정상 운영 정보가 충돌하므로 방문 전 확인",
+        "주차 불가, 인기 빵은 오후에 품절될 수 있음"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://www.ktriptips.com/kor/food/3082222",
+          "publisher": "K-Trip Tips",
+          "source_kind": "tourism-data",
+          "supports": [
+            "current-update-2026",
+            "address",
+            "opening-hours",
+            "hundred-plus-seats",
+            "books",
+            "lp-listening",
+            "ten-turntables",
+            "soundproof-listening-room",
+            "work-space",
+            "group-seating"
+          ]
+        },
+        {
+          "url": "https://www.tabling.co.kr/place/677cd73f66de5f0698926ae5",
+          "publisher": "테이블링",
+          "source_kind": "place-platform",
+          "supports": [
+            "current-hours",
+            "book-cafe",
+            "lp",
+            "salt-bread",
+            "parking-caution"
+          ]
+        },
+        {
+          "url": "https://www.diningcode.com/profile.php?rid=ev6i3KmVp4kw",
+          "publisher": "DiningCode",
+          "source_kind": "place-platform",
+          "supports": [
+            "work-friendly",
+            "quiet-second-floor",
+            "outlets",
+            "temporary-closure-conflict"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-90dcf2e61afa4c07",
