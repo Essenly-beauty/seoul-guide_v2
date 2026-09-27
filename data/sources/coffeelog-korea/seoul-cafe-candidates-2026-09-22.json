@@ -15,7 +15,7 @@
     "geography": "Seoul only",
     "record_count": 454,
     "enriched_record_count": 30,
-    "researched_record_count": 170
+    "researched_record_count": 175
   },
   "import_policy": {
     "default_action": "stage_only",
@@ -16076,8 +16076,64 @@
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
       "editorial_context_provenance": null,
-      "canonical_place_id": null,
-      "research_status": "not_researched"
+      "canonical_place_id": "seoul:seongdong:farmers-cafe-seoul-forest",
+      "research_status": "reviewed",
+      "research_confidence": "high",
+      "verified_attributes": [
+        "chocolate-specialist",
+        "belgian-chocolate",
+        "work-friendly",
+        "outlets",
+        "late-hours",
+        "terrace-garden",
+        "pet-friendly",
+        "neighborhood-long-running"
+      ],
+      "ados_editorial_angles": [
+        "서울숲에서 카카오 함량을 고른 벨지안 초콜릿으로 당을 채우는 곳",
+        "자정까지 노트북을 펴고 초콜릿 우유를 마시는 성수의 오래된 카페"
+      ],
+      "research_cautions": [
+        "주차 불가",
+        "반려동물 동반 범위와 테라스 운영은 방문 전 확인",
+        "공휴일 영업시간은 달라질 수 있음"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://www.tabling.co.kr/place/677ccb7266de5f06987d445a",
+          "publisher": "테이블링",
+          "source_kind": "place-platform",
+          "supports": [
+            "address",
+            "opening-hours",
+            "belgian-chocolate",
+            "work-friendly",
+            "pet-friendly",
+            "parking-caution"
+          ]
+        },
+        {
+          "url": "https://www.diningcode.com/profile.php?rid=wntlXKRTCPjQ",
+          "publisher": "DiningCode",
+          "source_kind": "place-platform",
+          "supports": [
+            "belgian-chocolate",
+            "terrace",
+            "outlets",
+            "work-friendly",
+            "late-hours"
+          ]
+        },
+        {
+          "url": "https://m.albamon.com/jobs/detail/119153293",
+          "publisher": "알바몬",
+          "source_kind": "verified-employer-listing",
+          "supports": [
+            "current-operation-2026",
+            "long-running-business-signal"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-4ac6e3266dfac960",
@@ -16268,8 +16324,46 @@
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
       "editorial_context_provenance": null,
-      "canonical_place_id": null,
-      "research_status": "not_researched"
+      "canonical_place_id": "seoul:gangnam:popular-coffee-roasters-nonhyeon",
+      "research_status": "reviewed",
+      "research_confidence": "high",
+      "verified_attributes": [
+        "specialty-coffee",
+        "roastery",
+        "multiple-origins",
+        "bean-retail",
+        "early-opening",
+        "work-friendly",
+        "meeting-friendly",
+        "terrace",
+        "pet-friendly"
+      ],
+      "ados_editorial_angles": [
+        "논현 출근길에 여러 산지의 스페셜티 커피를 고르는 이른 아침",
+        "반려견과 테라스와 실내를 오가며 원두 이야기를 나누는 로스터리"
+      ],
+      "research_cautions": [
+        "반려견은 리드줄 필수이며 맹견은 입장 제한",
+        "주말에는 평일보다 늦게 문을 여므로 방문 전 시간 확인"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://ban-life.com/store/view?id=21930&type=s",
+          "publisher": "반려생활",
+          "source_kind": "pet-friendly-directory",
+          "supports": [
+            "address",
+            "opening-hours",
+            "specialty-coffee",
+            "roastery",
+            "multiple-origins",
+            "work-friendly",
+            "meeting-friendly",
+            "terrace",
+            "pet-policy"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-70dd002196d01050",
@@ -16433,8 +16527,67 @@
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
       "editorial_context_provenance": null,
-      "canonical_place_id": null,
-      "research_status": "not_researched"
+      "canonical_place_id": "seoul:gangnam:artspace-y-cafe-yeoksam",
+      "research_status": "reviewed",
+      "research_confidence": "high",
+      "verified_attributes": [
+        "gallery-cafe",
+        "rotating-exhibitions",
+        "specialty-coffee",
+        "quiet-stay",
+        "rooftop-view",
+        "tea-selection",
+        "pet-friendly",
+        "parking",
+        "group-friendly"
+      ],
+      "ados_editorial_angles": [
+        "강남역의 소음에서 벗어나 전시와 차를 함께 보는 갤러리 카페",
+        "개인전을 본 뒤 루프탑에서 강남의 전경을 이어 보는 곳"
+      ],
+      "research_cautions": [
+        "전시 일정과 루프탑 개방 여부는 방문 전 확인",
+        "영업시간 표기가 출처마다 달라 공식 채널 재확인 필요",
+        "주차는 사전 문의 권장"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://www.gangnamfinds.com/ko/place/ateuseupeiseuwai-kape",
+          "publisher": "Gangnam Finds",
+          "source_kind": "local-place-guide",
+          "supports": [
+            "address",
+            "opening-hours-signal",
+            "specialty-coffee",
+            "rooftop-view",
+            "group-friendly",
+            "pet-friendly",
+            "parking"
+          ]
+        },
+        {
+          "url": "https://www.diningcode.com/profile.php?rid=GoqkmCcymc3y",
+          "publisher": "DiningCode",
+          "source_kind": "place-platform",
+          "supports": [
+            "gallery-cafe",
+            "rotating-exhibitions",
+            "quiet-stay",
+            "tea-selection",
+            "opening-hours-conflict"
+          ]
+        },
+        {
+          "url": "https://www.a4b4.co.kr/78694",
+          "publisher": "a4b4",
+          "source_kind": "recent-exhibition-visit",
+          "supports": [
+            "current-operation-2026",
+            "basement-and-second-floor-gallery",
+            "rotating-exhibition"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-1e85e8fb4fcf7b1d",
@@ -16466,8 +16619,71 @@
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
       "editorial_context_provenance": null,
-      "canonical_place_id": null,
-      "research_status": "not_researched"
+      "canonical_place_id": "seoul:gangnam:gongwon-script-garosugil",
+      "research_status": "reviewed",
+      "research_confidence": "high",
+      "verified_attributes": [
+        "multi-floor",
+        "listening-room",
+        "music-bar",
+        "cafe-and-bar",
+        "late-night",
+        "furniture-showroom-signal",
+        "music-sessions",
+        "tiramisu"
+      ],
+      "ados_editorial_angles": [
+        "가로수길 지하 청음실에서 음악을 듣고 층마다 다른 자리를 고르는 곳",
+        "낮의 카페가 새벽 한 시 음악 바로 이어지는 다층 공간"
+      ],
+      "research_cautions": [
+        "지하 음악 바의 이용 조건·공연 일정·예약 여부는 방문 전 확인",
+        "향이 강하다는 방문 후기가 있어 민감한 이용자는 참고",
+        "주차 불가"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://marketbz.com/companyDetail/1408528434",
+          "publisher": "마켓비즈",
+          "source_kind": "business-registration-directory",
+          "supports": [
+            "business-identity",
+            "address",
+            "opening-registration-2025"
+          ]
+        },
+        {
+          "url": "https://www.diningcode.com/profile.php?rid=nWSuxESa1FCF",
+          "publisher": "DiningCode",
+          "source_kind": "place-platform",
+          "supports": [
+            "multi-floor",
+            "listening-room",
+            "music-bar",
+            "late-night",
+            "furniture",
+            "tiramisu",
+            "parking-caution"
+          ]
+        },
+        {
+          "url": "https://sqnc.global/event/0qfkbncjd0wps",
+          "publisher": "SQNC",
+          "source_kind": "event-listing",
+          "supports": [
+            "music-session",
+            "listening-culture"
+          ]
+        },
+        {
+          "url": "https://imginn.com/p/DcNvC8oILiB/",
+          "publisher": "Instagram mirror",
+          "source_kind": "official-social-mirror",
+          "supports": [
+            "current-operation-2026"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-7748db2add0f9510",
@@ -16756,8 +16972,51 @@
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
       "editorial_context_provenance": null,
-      "canonical_place_id": null,
-      "research_status": "not_researched"
+      "canonical_place_id": "seoul:gangnam:new-steel-paper-coffee-sinsa",
+      "research_status": "reviewed",
+      "research_confidence": "medium",
+      "verified_attributes": [
+        "hand-drip",
+        "semi-basement",
+        "open-window",
+        "weekend-late-hours",
+        "quiet-stay",
+        "dessert"
+      ],
+      "ados_editorial_angles": [
+        "가로수길 반지하의 열린 창가에서 핸드드립을 천천히 마시는 곳",
+        "술 대신 커피로 저녁 2차를 이어가는 금요일과 토요일의 늦은 카페"
+      ],
+      "research_cautions": [
+        "일요일부터 목요일까지는 비교적 이른 저녁에 마감",
+        "주차 불가",
+        "최신 영업시간과 브랜드 영문 표기는 공식 채널에서 추가 확인"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://pgpg.co.kr/company/16508",
+          "publisher": "페이지페이지",
+          "source_kind": "business-directory",
+          "supports": [
+            "business-identity",
+            "address"
+          ]
+        },
+        {
+          "url": "https://www.diningcode.com/profile.php?rid=Bsb0OrKW3AMU",
+          "publisher": "DiningCode",
+          "source_kind": "place-platform",
+          "supports": [
+            "hand-drip",
+            "semi-basement",
+            "open-window",
+            "opening-hours",
+            "quiet-stay",
+            "dessert",
+            "parking-caution"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-b590f83860e1f835",

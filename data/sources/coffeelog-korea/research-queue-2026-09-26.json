@@ -3,9 +3,9 @@
   "generated_on": "2026-09-26",
   "caution": "이 파일은 전수 조사 큐다. 추정 필드는 공개용 태그가 아니며 사람 또는 출처 검토가 필요하다.",
   "summary": {
-    "done_or_pending_specific_check": 170,
+    "done_or_pending_specific_check": 175,
     "p3_general_review": 243,
-    "p2_editorial_potential": 41
+    "p2_editorial_potential": 36
   },
   "records": [
     {
@@ -3244,8 +3244,8 @@
       "normalized_name": "파머스카페",
       "possible_duplicate_external_ids": [],
       "content_kind_guess": "cafe_candidate",
-      "research_priority": "p2_editorial_potential",
-      "current_research_status": "not_researched"
+      "research_priority": "done_or_pending_specific_check",
+      "current_research_status": "reviewed"
     },
     {
       "external_id": "coffeelog-4ac6e3266dfac960",
@@ -3294,8 +3294,8 @@
       "normalized_name": "파퓰러커피",
       "possible_duplicate_external_ids": [],
       "content_kind_guess": "cafe_candidate",
-      "research_priority": "p2_editorial_potential",
-      "current_research_status": "not_researched"
+      "research_priority": "done_or_pending_specific_check",
+      "current_research_status": "reviewed"
     },
     {
       "external_id": "coffeelog-70dd002196d01050",
@@ -3344,8 +3344,8 @@
       "normalized_name": "아트스페이스와이 카페",
       "possible_duplicate_external_ids": [],
       "content_kind_guess": "cafe_candidate",
-      "research_priority": "p2_editorial_potential",
-      "current_research_status": "not_researched"
+      "research_priority": "done_or_pending_specific_check",
+      "current_research_status": "reviewed"
     },
     {
       "external_id": "coffeelog-1e85e8fb4fcf7b1d",
@@ -3354,8 +3354,8 @@
       "normalized_name": "공원스크립트 가로수길점",
       "possible_duplicate_external_ids": [],
       "content_kind_guess": "cafe_candidate",
-      "research_priority": "p2_editorial_potential",
-      "current_research_status": "not_researched"
+      "research_priority": "done_or_pending_specific_check",
+      "current_research_status": "reviewed"
     },
     {
       "external_id": "coffeelog-7748db2add0f9510",
@@ -3414,8 +3414,8 @@
       "normalized_name": "뉴스틸페이퍼커피",
       "possible_duplicate_external_ids": [],
       "content_kind_guess": "cafe_candidate",
-      "research_priority": "p2_editorial_potential",
-      "current_research_status": "not_researched"
+      "research_priority": "done_or_pending_specific_check",
+      "current_research_status": "reviewed"
     },
     {
       "external_id": "coffeelog-b590f83860e1f835",
