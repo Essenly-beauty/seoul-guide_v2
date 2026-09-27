@@ -1446,6 +1446,51 @@
       "ados_editorial_angles": ["건대에서 제철 과일 케이크와 와인으로 오후를 자정까지 늘이는 곳", "낮의 카페와 밤의 바 사이를 반려견과 함께 건너는 화양동 공간"],
       "cautions": ["카페 메뉴와 바 메뉴의 주문 마감시간이 다를 수 있음", "주말·공휴일 웨이팅 가능", "주차 불가로 인근 공영주차장 이용", "시즌 과일 메뉴는 판매 시기 확인"],
       "evidence": [{ "url": "https://www.dongnecoffeenote.com/c/21785", "publisher": "동네 커피 노트", "source_kind": "review-analysis", "supports": ["current-reviews-2026", "address", "wine-and-alcohol", "pet-friendly", "late-night", "work-friendly-signal", "parking-caution"] }, { "url": "https://www.diningcode.com/profile.php?rid=miLB5Yo972Ti", "publisher": "DiningCode", "source_kind": "place-platform", "supports": ["opening-hours", "seasonal-fruit-dessert", "house-made-cakes", "cocktails", "pet-friendly", "weekend-waiting"] }, { "url": "https://place.udanax.org/place.php?id=878389&placeName=%EB%B9%84%EC%95%A0%EB%93%9C+%EC%B9%B4%ED%8E%98%EC%95%A4%EB%B0%94", "publisher": "업체창고", "source_kind": "business-directory", "supports": ["address", "business-identity", "multi-floor", "late-last-order"] }]
+    },
+    {
+      "canonical_place_id": "seoul:gwangjin:n5rm-roastery-konkuk",
+      "member_external_ids": ["coffeelog-cc031d6f1c095d62"],
+      "research_status": "reviewed", "confidence": "high",
+      "verified_attributes": ["specialty-roastery", "filter-coffee", "bean-aroma-library", "multiple-bean-choice", "bar-seating", "matcha-and-hojicha", "ube-basque-cheesecake", "pet-friendly", "weekend-early-opening"],
+      "ados_editorial_angles": ["건대 양꼬치거리에서 원두 향을 먼저 맡고 오늘의 필터를 고르는 커피 바", "ㄷ자 바에 앉아 추출 과정을 보고 호지차와 우베 디저트까지 이어가는 곳"],
+      "cautions": ["평일과 주말 개점시간이 다름", "바 좌석 중심이라 단체·장시간 체류에는 부적합", "주차 정보가 출처마다 엇갈려 대중교통 권장"],
+      "evidence": [{ "url": "https://www.tabling.co.kr/place/677cd8be66de5f0698950b33", "publisher": "테이블링", "source_kind": "place-platform", "supports": ["address", "opening-hours", "filter-coffee", "pet-friendly", "parking-caution"] }, { "url": "https://www.diningcode.com/profile.php?rid=J7vVvXgZijXi", "publisher": "DiningCode", "source_kind": "place-platform", "supports": ["bar-seating", "bean-aroma-library", "multiple-bean-choice", "matcha", "hojicha", "ube-basque-cheesecake", "parking-conflict"] }, { "url": "https://cdn.ems.coex.co.kr/event/1188/%4020261188/cms/2026%20%EC%84%9C%EC%9A%B8%EC%BB%A4%ED%94%BC%EC%97%91%EC%8A%A4%ED%8F%AC%20%26%20%ED%95%9C%EA%B5%AD%EA%B5%AD%EC%A0%9C%EB%B2%A0%EC%9D%B4%EC%BB%A0%EB%A6%AC%ED%8E%98%EC%96%B4%20%EB%A6%AC%ED%94%8C%EB%A0%9B%20%28%EC%B5%9C%EC%A2%85%29.pdf", "publisher": "서울커피엑스포", "source_kind": "industry-event-directory", "supports": ["current-operation-2026", "roastery-brand-identity"] }]
+    },
+    {
+      "canonical_place_id": "seoul:gwangjin:kaleo-coffee-roasters-jayang",
+      "member_external_ids": ["coffeelog-1673ddb9e973d4c1"],
+      "research_status": "reviewed", "confidence": "high",
+      "verified_attributes": ["neighborhood-long-running", "on-site-roasting", "flat-white", "latte-focused", "single-origin", "cold-brew", "small-space", "takeout-focused", "blue-ribbon-recognized"],
+      "ados_editorial_angles": ["건대에서 10년 넘게 같은 자리의 로스팅 향과 플랫화이트를 지켜온 곳", "화려한 좌석 대신 기본에 충실한 라테 한 잔을 들고 나오는 작은 로스터리"],
+      "cautions": ["네다섯 좌석 규모로 테이크아웃에 더 적합", "일요일 휴무와 요일별 영업시간 확인", "과거 기사와 현재 운영시간이 달라 최신 지도 기준 사용"],
+      "evidence": [{ "url": "https://www.bigissue.kr/magazine/new/365/3241", "publisher": "빅이슈 코리아", "source_kind": "magazine-editorial", "supports": ["long-running-neighborhood-cafe", "on-site-roasting", "blue-ribbon-recognition", "small-space", "takeout-focused"] }, { "url": "https://www.diningcode.com/profile.php?rid=WcSkWuIzMVA8", "publisher": "DiningCode", "source_kind": "place-platform", "supports": ["current-operation-2026", "address", "opening-hours", "roastery", "latte", "cold-brew", "small-space"] }, { "url": "https://xn--2s2b33eb3kgvpta.com/store/S190412_1558789289242", "publisher": "완벽한 하루", "source_kind": "place-guide", "supports": ["opening-hours", "flat-white", "single-origin", "takeout-focused"] }]
+    },
+    {
+      "canonical_place_id": "seoul:gangdong:pioneer-coffee-gangdonggu-office",
+      "member_external_ids": ["coffeelog-232c31015cd2e6ff"],
+      "research_status": "reviewed", "confidence": "high",
+      "verified_attributes": ["specialty-roastery", "green-bean-selection", "single-origin", "coffee-education", "coffee-content", "tasting-flight", "brewing-coffee", "bean-retail", "early-opening-weekday"],
+      "ados_editorial_angles": ["강동구청 앞에서 아메리카노·라테·브루잉을 한 번에 비교하는 테트라 셀렉션", "한 잔에서 끝내지 않고 원두 교육과 월간 소식지로 커피를 더 깊게 배우는 로스터리"],
+      "cautions": ["공식 홈페이지의 일요일 마감 표기는 오타로 보이며 공식 카카오 채널의 18시 정보를 우선 참고", "주말에는 평일보다 늦게 문을 엶", "테이스팅 구성과 원두는 수시 변경"],
+      "evidence": [{ "url": "https://pioneercoffee.co.kr/", "publisher": "파이오니어커피", "source_kind": "official", "supports": ["address", "green-bean-selection", "in-house-roasting", "coffee-education", "content-library", "bean-retail", "opening-hours-signal"] }, { "url": "https://pf.kakao.com/_xmwxaRG", "publisher": "파이오니어커피 카카오채널", "source_kind": "official-channel", "supports": ["current-operation-2026", "address", "opening-hours", "single-origin", "paid-parking-signal"] }, { "url": "https://www.diningcode.com/profile.php?rid=O38OJuPNOQiD", "publisher": "DiningCode", "source_kind": "place-platform", "supports": ["tasting-flight", "brewing-coffee", "latte", "drip-bag", "small-seating"] }]
+    },
+    {
+      "canonical_place_id": "seoul:gangdong:cafe-j-godeok",
+      "member_external_ids": ["coffeelog-e23214a4ab055774"],
+      "research_status": "reviewed", "confidence": "high",
+      "verified_attributes": ["japanese-tea-specialist", "kyoto-matcha", "hojicha", "matcha-tiramisu", "japanese-dessert", "quiet-stay", "family-friendly", "high-chair", "pregnancy-benefit-signal"],
+      "ados_editorial_angles": ["고덕동에서 교토 말차와 호지차의 농도를 차분히 맛보는 곳", "아이와 함께 말차 티라미수를 나누고 임산부를 환대하는 동네 찻집"],
+      "cautions": ["일요일 휴무이며 토요일은 오전 11시에 개점", "전용 주차장이 없어 인근 유료 주차장 이용", "임산부 음료 혜택과 유아 편의는 방문 전 최신 조건 확인"],
+      "evidence": [{ "url": "https://www.diningcode.com/profile.php?rid=vK72i5mUcws2", "publisher": "DiningCode", "source_kind": "place-platform", "supports": ["address", "opening-hours", "kyoto-matcha", "hojicha", "matcha-tiramisu", "quiet-stay", "high-chair", "family-friendly", "parking-caution", "pregnancy-benefit-signal"] }, { "url": "https://koreabizmap.com/dashboard/store/MA010120220805836336", "publisher": "코리아비즈맵", "source_kind": "business-status-directory", "supports": ["current-business-status", "godeok-location"] }, { "url": "https://egangdong.kr/vol593/media/vol593.pdf", "publisher": "강동구청", "source_kind": "local-government-publication", "supports": ["neighborhood-business-operation-signal-2025"] }]
+    },
+    {
+      "canonical_place_id": "seoul:gangdong:cafe-autumn-seongnae",
+      "member_external_ids": ["coffeelog-0e3417186a355bca"],
+      "research_status": "reviewed", "confidence": "high",
+      "verified_attributes": ["dessert-cafe", "house-made-cakes", "basque-cheesecake", "new-york-cheese-brulee", "baked-goods", "antique-interior", "terrace", "pet-friendly-signal", "late-hours"],
+      "ados_editorial_angles": ["올림픽공원 산책 뒤 뉴욕 치즈 브륄레를 고르는 성내동 디저트 카페", "앤티크한 방에서 바스크치즈케이크와 늦은 저녁을 보내는 곳"],
+      "cautions": ["월요일 휴무", "주차 불가로 올림픽공원 북2문 등 인근 주차장 이용", "인기 디저트는 저녁 전에 품절될 수 있음", "주말 피크에는 만석 가능"],
+      "evidence": [{ "url": "https://www.tabling.co.kr/place/68103bb060fa39d16f0c6f92", "publisher": "테이블링", "source_kind": "place-platform", "supports": ["address", "opening-hours", "signature-dessert", "cakes", "baked-goods", "parking-caution"] }, { "url": "https://www.dongnecoffeenote.com/c/26041", "publisher": "동네 커피 노트", "source_kind": "review-analysis", "supports": ["current-reviews-2026", "dessert-focus", "atmosphere", "terrace", "parking-caution"] }, { "url": "https://www.diningcode.com/profile.php?rid=Hjk3qTdWidN1", "publisher": "DiningCode", "source_kind": "place-platform", "supports": ["antique-interior", "basque-cheesecake", "baked-goods", "terrace", "pet-friendly-signal", "weekend-crowding"] }]
     }
   ]
 }
