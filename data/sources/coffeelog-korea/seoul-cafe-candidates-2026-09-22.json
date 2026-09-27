@@ -15,7 +15,7 @@
     "geography": "Seoul only",
     "record_count": 454,
     "enriched_record_count": 30,
-    "researched_record_count": 140
+    "researched_record_count": 145
   },
   "import_policy": {
     "default_action": "stage_only",
@@ -3366,8 +3366,49 @@
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
       "editorial_context_provenance": null,
-      "canonical_place_id": null,
-      "research_status": "not_researched"
+      "canonical_place_id": "seoul:mapo:rowing-coffee-hapjeong",
+      "research_status": "reviewed",
+      "research_confidence": "high",
+      "verified_attributes": [
+        "work-friendly",
+        "private-second-floor",
+        "fruit-sandwich",
+        "cultural-programming",
+        "late-hours"
+      ],
+      "ados_editorial_angles": [
+        "합정에서 오래 앉아 일하기 위해 설계된 2층 카페",
+        "제철 과일 산도와 플리마켓·공연을 함께 만나는 동네 워크플레이스"
+      ],
+      "research_cautions": [
+        "행사 일정에는 작업 환경과 좌석 이용이 달라질 수 있음",
+        "전화번호 등 일부 플랫폼 정보는 비정상 표기 가능성이 있어 공식 SNS 우선 확인"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://cafeinsightlab.com/shop_view/?idx=87",
+          "publisher": "카페인사이트랩",
+          "source_kind": "industry-visit-program",
+          "supports": [
+            "workplace-concept",
+            "private-second-floor",
+            "owner-made-furniture",
+            "flea-markets",
+            "performances"
+          ]
+        },
+        {
+          "url": "https://triple.guide/restaurants/354b9a02-a87f-4521-812f-d7bdc3a0a655",
+          "publisher": "Triple",
+          "source_kind": "travel-platform",
+          "supports": [
+            "address",
+            "opening-hours",
+            "fruit-sandwich",
+            "work-friendly"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-40a3b50d5360c12c",
@@ -3465,8 +3506,43 @@
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
       "editorial_context_provenance": null,
-      "canonical_place_id": null,
-      "research_status": "not_researched"
+      "canonical_place_id": "seoul:mapo:vertical-coffee-seogyo",
+      "research_status": "identity_verified",
+      "research_confidence": "medium",
+      "verified_attributes": [
+        "third-floor",
+        "hongdae-station-access",
+        "large-space-signal",
+        "late-hours-signal"
+      ],
+      "ados_editorial_angles": [
+        "홍대입구역 가까이에서 번잡한 거리보다 한 층 위로 올라가는 카페"
+      ],
+      "research_cautions": [
+        "공간·메뉴의 편집 특징은 근거가 부족해 보수적으로 태그",
+        "최신 영업시간과 좌석·콘센트 조건은 방문 전 확인"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://pf.kakao.com/_CxjAwxj",
+          "publisher": "버티컬커피 카카오채널",
+          "source_kind": "business-channel",
+          "supports": [
+            "place-identity",
+            "third-floor",
+            "hongdae-station-access"
+          ]
+        },
+        {
+          "url": "https://www.114.co.kr/search/detail?comp_id=8870177&comp_tp_cd=GOV&godata_tp_cd=LOCALDATA&upjong_cd=",
+          "publisher": "114On",
+          "source_kind": "public-business-data",
+          "supports": [
+            "seogyo-location",
+            "business-registration-signal"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-10481027b04a8048",
@@ -4092,8 +4168,60 @@
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
       "editorial_context_provenance": null,
-      "canonical_place_id": null,
-      "research_status": "not_researched"
+      "canonical_place_id": "seoul:mapo:mercer-bis-cafe-yeonnam",
+      "research_status": "reviewed",
+      "research_confidence": "high",
+      "verified_attributes": [
+        "chiffon-cake-specialist",
+        "japanese-dessert",
+        "fireplace",
+        "large-seating",
+        "terrace",
+        "late-hours"
+      ],
+      "ados_editorial_angles": [
+        "연남의 화덕 앞에서 일본식 쉬폰케이크를 나눠 먹는 저녁",
+        "경의선숲길 산책 뒤 계절 과일 케이크를 고르는 디저트 목적지"
+      ],
+      "research_cautions": [
+        "조각·홀케이크 가격대가 높은 편이라는 후기 다수",
+        "계절 메뉴와 화덕 운영 시간은 방문 전 확인"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://mercerbis-yeonnam.com/ja/",
+          "publisher": "마사비스 연남점",
+          "source_kind": "official",
+          "supports": [
+            "address",
+            "opening-hours",
+            "dessert-cafe-identity"
+          ]
+        },
+        {
+          "url": "https://www.diningcode.com/profile.php?rid=YDdyYSrSV3kM",
+          "publisher": "DiningCode",
+          "source_kind": "place-platform",
+          "supports": [
+            "chiffon-cake",
+            "large-seating",
+            "fireplace",
+            "terrace",
+            "price-caution"
+          ]
+        },
+        {
+          "url": "https://pandarank.net/contents/6932897d21dae8c3e2c016cd",
+          "publisher": "판다랭크",
+          "source_kind": "recent-visit",
+          "supports": [
+            "current-operation-2025",
+            "fireplace",
+            "yeonnam-walk",
+            "seasonal-cake"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-6ebdadd34c0952eb",
@@ -4816,8 +4944,61 @@
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
       "editorial_context_provenance": null,
-      "canonical_place_id": null,
-      "research_status": "not_researched"
+      "canonical_place_id": "seoul:mapo:cafe-gongmyeong-yeonnam",
+      "research_status": "reviewed",
+      "research_confidence": "high",
+      "verified_attributes": [
+        "book-cafe",
+        "publisher-operated",
+        "large-space",
+        "bakery",
+        "reading-friendly",
+        "late-hours"
+      ],
+      "ados_editorial_angles": [
+        "연남에서 책을 고르고 오래 읽기 좋은 출판사 카페",
+        "비 오는 날 베이커리와 문장을 함께 고르는 큰 공간"
+      ],
+      "research_cautions": [
+        "원본의 지점 표기가 없어 연남점으로 식별했으나 서비스 노출 전 주소 재확인",
+        "주말 혼잡 시 조용한 독서 환경이 달라질 수 있음"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://cafegm.kr/",
+          "publisher": "카페 공명",
+          "source_kind": "official",
+          "supports": [
+            "brand-identity",
+            "coffee",
+            "bakery",
+            "space"
+          ]
+        },
+        {
+          "url": "https://www.diningcode.com/profile.php?rid=vbZXUq6LJBDi",
+          "publisher": "DiningCode",
+          "source_kind": "place-platform",
+          "supports": [
+            "yeonnam-address",
+            "opening-hours",
+            "large-space",
+            "books",
+            "bakery",
+            "reading-friendly"
+          ]
+        },
+        {
+          "url": "https://www.jobkorea.co.kr/Recruit/GI_Read/49842872",
+          "publisher": "잡코리아",
+          "source_kind": "verified-employer-listing",
+          "supports": [
+            "current-operation-2026",
+            "yeonnam-address",
+            "bakery-operation"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-d60871784a64e4a0",
@@ -4849,8 +5030,50 @@
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
       "editorial_context_provenance": null,
-      "canonical_place_id": null,
-      "research_status": "not_researched"
+      "canonical_place_id": "seoul:mapo:stance-coffee-sangsu",
+      "research_status": "reviewed",
+      "research_confidence": "high",
+      "verified_attributes": [
+        "quiet-stay",
+        "glass-window",
+        "dessert",
+        "coffee-focused",
+        "late-hours",
+        "neighborhood-cafe"
+      ],
+      "ados_editorial_angles": [
+        "상수의 통유리 창가에서 조용히 머무는 늦은 오후",
+        "사진보다 커피와 단맛의 균형으로 기억하는 동네 카페"
+      ],
+      "research_cautions": [
+        "후기 분석상 디저트 전문점보다는 커피와 공간의 균형으로 분류",
+        "피크 시간 좌석 상황과 최신 마감시간 확인"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://www.dongnecoffeenote.com/c/8785",
+          "publisher": "동네 커피 노트",
+          "source_kind": "review-analysis",
+          "supports": [
+            "address",
+            "current-review-signal",
+            "quiet-stay",
+            "glass-window",
+            "coffee",
+            "dessert"
+          ]
+        },
+        {
+          "url": "https://www.albamon.com/jobs/detail/118011777",
+          "publisher": "알바몬",
+          "source_kind": "verified-employer-listing",
+          "supports": [
+            "current-operation-2026",
+            "address",
+            "late-hours-signal"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-a2ee2366a072f696",

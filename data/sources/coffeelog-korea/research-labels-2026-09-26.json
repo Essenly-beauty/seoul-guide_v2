@@ -951,6 +951,51 @@
       "ados_editorial_angles": ["상수에서 커피와 작업, 대화가 느슨하게 교차하는 문화 플랫폼", "낮의 몰입에서 저녁의 모임과 이벤트로 이어지는 공간"],
       "cautions": ["행사·대관 일정에 따라 일반 이용 범위가 달라질 수 있어 방문 전 확인", "커피 전문성 단독보다 문화·커뮤니티 맥락을 중심으로 소개"],
       "evidence": [{ "url": "https://www.glowupmag.com/posts/%EB%A7%88%ED%8F%AC%EA%B5%AC-%EC%83%81%EC%88%98%EB%8F%99%EC%97%90-%EC%83%88%EB%A1%9C%EC%9A%B4-%EA%B4%91%EC%9E%A5%EC%9D%B4-%EC%83%9D%EA%B2%BC%EB%8B%A4", "publisher": "Glowup Magazine", "source_kind": "founder-interview", "supports": ["cultural-platform", "work-and-conversation", "coffee-dessert-and-meals", "mapo-context"] }, { "url": "https://shareit.kr/store/10060", "publisher": "Shareit", "source_kind": "space-rental-platform", "supports": ["sangsu-location", "modern-cafe-space", "event-space"] }, { "url": "https://event-us.kr/thequestionsociety/event/130678", "publisher": "이벤터스", "source_kind": "event-platform", "supports": ["address", "third-floor", "community-event", "duplicate-identity"] }]
+    },
+    {
+      "canonical_place_id": "seoul:mapo:rowing-coffee-hapjeong",
+      "member_external_ids": ["coffeelog-0891b62911c36b6d"],
+      "research_status": "reviewed", "confidence": "high",
+      "verified_attributes": ["work-friendly", "private-second-floor", "fruit-sandwich", "cultural-programming", "late-hours"],
+      "ados_editorial_angles": ["합정에서 오래 앉아 일하기 위해 설계된 2층 카페", "제철 과일 산도와 플리마켓·공연을 함께 만나는 동네 워크플레이스"],
+      "cautions": ["행사 일정에는 작업 환경과 좌석 이용이 달라질 수 있음", "전화번호 등 일부 플랫폼 정보는 비정상 표기 가능성이 있어 공식 SNS 우선 확인"],
+      "evidence": [{ "url": "https://cafeinsightlab.com/shop_view/?idx=87", "publisher": "카페인사이트랩", "source_kind": "industry-visit-program", "supports": ["workplace-concept", "private-second-floor", "owner-made-furniture", "flea-markets", "performances"] }, { "url": "https://triple.guide/restaurants/354b9a02-a87f-4521-812f-d7bdc3a0a655", "publisher": "Triple", "source_kind": "travel-platform", "supports": ["address", "opening-hours", "fruit-sandwich", "work-friendly"] }]
+    },
+    {
+      "canonical_place_id": "seoul:mapo:vertical-coffee-seogyo",
+      "member_external_ids": ["coffeelog-d0e773a85115246c"],
+      "research_status": "identity_verified", "confidence": "medium",
+      "verified_attributes": ["third-floor", "hongdae-station-access", "large-space-signal", "late-hours-signal"],
+      "ados_editorial_angles": ["홍대입구역 가까이에서 번잡한 거리보다 한 층 위로 올라가는 카페"],
+      "cautions": ["공간·메뉴의 편집 특징은 근거가 부족해 보수적으로 태그", "최신 영업시간과 좌석·콘센트 조건은 방문 전 확인"],
+      "evidence": [{ "url": "https://pf.kakao.com/_CxjAwxj", "publisher": "버티컬커피 카카오채널", "source_kind": "business-channel", "supports": ["place-identity", "third-floor", "hongdae-station-access"] }, { "url": "https://www.114.co.kr/search/detail?comp_id=8870177&comp_tp_cd=GOV&godata_tp_cd=LOCALDATA&upjong_cd=", "publisher": "114On", "source_kind": "public-business-data", "supports": ["seogyo-location", "business-registration-signal"] }]
+    },
+    {
+      "canonical_place_id": "seoul:mapo:mercer-bis-cafe-yeonnam",
+      "member_external_ids": ["coffeelog-94fa740514d14471"],
+      "research_status": "reviewed", "confidence": "high",
+      "verified_attributes": ["chiffon-cake-specialist", "japanese-dessert", "fireplace", "large-seating", "terrace", "late-hours"],
+      "ados_editorial_angles": ["연남의 화덕 앞에서 일본식 쉬폰케이크를 나눠 먹는 저녁", "경의선숲길 산책 뒤 계절 과일 케이크를 고르는 디저트 목적지"],
+      "cautions": ["조각·홀케이크 가격대가 높은 편이라는 후기 다수", "계절 메뉴와 화덕 운영 시간은 방문 전 확인"],
+      "evidence": [{ "url": "https://mercerbis-yeonnam.com/ja/", "publisher": "마사비스 연남점", "source_kind": "official", "supports": ["address", "opening-hours", "dessert-cafe-identity"] }, { "url": "https://www.diningcode.com/profile.php?rid=YDdyYSrSV3kM", "publisher": "DiningCode", "source_kind": "place-platform", "supports": ["chiffon-cake", "large-seating", "fireplace", "terrace", "price-caution"] }, { "url": "https://pandarank.net/contents/6932897d21dae8c3e2c016cd", "publisher": "판다랭크", "source_kind": "recent-visit", "supports": ["current-operation-2025", "fireplace", "yeonnam-walk", "seasonal-cake"] }]
+    },
+    {
+      "canonical_place_id": "seoul:mapo:cafe-gongmyeong-yeonnam",
+      "member_external_ids": ["coffeelog-b753f31d4771a237"],
+      "research_status": "reviewed", "confidence": "high",
+      "verified_attributes": ["book-cafe", "publisher-operated", "large-space", "bakery", "reading-friendly", "late-hours"],
+      "ados_editorial_angles": ["연남에서 책을 고르고 오래 읽기 좋은 출판사 카페", "비 오는 날 베이커리와 문장을 함께 고르는 큰 공간"],
+      "cautions": ["원본의 지점 표기가 없어 연남점으로 식별했으나 서비스 노출 전 주소 재확인", "주말 혼잡 시 조용한 독서 환경이 달라질 수 있음"],
+      "evidence": [{ "url": "https://cafegm.kr/", "publisher": "카페 공명", "source_kind": "official", "supports": ["brand-identity", "coffee", "bakery", "space"] }, { "url": "https://www.diningcode.com/profile.php?rid=vbZXUq6LJBDi", "publisher": "DiningCode", "source_kind": "place-platform", "supports": ["yeonnam-address", "opening-hours", "large-space", "books", "bakery", "reading-friendly"] }, { "url": "https://www.jobkorea.co.kr/Recruit/GI_Read/49842872", "publisher": "잡코리아", "source_kind": "verified-employer-listing", "supports": ["current-operation-2026", "yeonnam-address", "bakery-operation"] }]
+    },
+    {
+      "canonical_place_id": "seoul:mapo:stance-coffee-sangsu",
+      "member_external_ids": ["coffeelog-d60871784a64e4a0"],
+      "research_status": "reviewed", "confidence": "high",
+      "verified_attributes": ["quiet-stay", "glass-window", "dessert", "coffee-focused", "late-hours", "neighborhood-cafe"],
+      "ados_editorial_angles": ["상수의 통유리 창가에서 조용히 머무는 늦은 오후", "사진보다 커피와 단맛의 균형으로 기억하는 동네 카페"],
+      "cautions": ["후기 분석상 디저트 전문점보다는 커피와 공간의 균형으로 분류", "피크 시간 좌석 상황과 최신 마감시간 확인"],
+      "evidence": [{ "url": "https://www.dongnecoffeenote.com/c/8785", "publisher": "동네 커피 노트", "source_kind": "review-analysis", "supports": ["address", "current-review-signal", "quiet-stay", "glass-window", "coffee", "dessert"] }, { "url": "https://www.albamon.com/jobs/detail/118011777", "publisher": "알바몬", "source_kind": "verified-employer-listing", "supports": ["current-operation-2026", "address", "late-hours-signal"] }]
     }
   ]
 }
