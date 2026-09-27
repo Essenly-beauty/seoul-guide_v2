@@ -59,13 +59,13 @@ describe("install nudge wiring", () => {
     expect(button).toMatch(/if \(next\) recordValueMoment\(\)/);
   });
 
-  // NOT asserted here yet: that components/map/map-screen.tsx renders
-  // <InstallNudgeBanner />. The render line is in the working tree and
-  // verified in the browser, but map-screen.tsx currently also carries
-  // another session's unfinished shared-list work, and that work imports
-  // lib/shared-list-view.ts, which is not in the repository yet. Committing
-  // map-screen.tsx now would break the build for anyone checking this out.
-  // Add the assertion in the commit that lands the map screen.
+  it("renders the offer on the map", () => {
+    const screen = read("components/map/map-screen.tsx");
+    expect(screen).toMatch(/<InstallNudgeBanner \/>/);
+    // Behind the shared-list banner: an offer must never sit on top of a
+    // list the visitor just opened from a friend's link.
+    expect(screen).toMatch(/!sharedList && <InstallNudgeBanner \/>/);
+  });
 
   it("sends the visitor to the install guide that already handles each platform", () => {
     const banner = read("components/pwa/install-nudge-banner.tsx");

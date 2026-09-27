@@ -32,6 +32,7 @@ const SubwayRouteController = dynamic(
 );
 import { toggleFavorite, useFavorites } from "@/lib/favorites";
 import { fetchSharedList, type SharedList } from "@/lib/shared-lists";
+import { InstallNudgeBanner } from "@/components/pwa/install-nudge-banner";
 import { useSigninNudge } from "@/components/auth/signin-nudge";
 import { useAuthUser } from "@/lib/auth/use-auth";
 import { useTheme } from "@/components/theme/theme-provider";
@@ -689,6 +690,12 @@ export function MapScreen() {
           <IconButton name="x" label="Close shared list" size={32} iconSize="xs" onClick={() => router.replace(routes.map)} />
         </div>
       )}
+
+      {/* Last of the banners on purpose: a shared list or a save confirmation
+          is answering something the visitor just did, and the Home Screen
+          offer is not. It only appears once they have saved something, and
+          never when the app is already running from the Home Screen. */}
+      {mode === "map" && !sharedList && <InstallNudgeBanner />}
 
       {mode === "map" && !sharedList && savedParam === "1" && (
         <div className="map-banner" role="status">
