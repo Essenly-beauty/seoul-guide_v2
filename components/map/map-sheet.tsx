@@ -615,7 +615,7 @@ function MapRowThumb({ place }: { place: Place }) {
         <span className="maprow-photo-fallback maprow-brand-fallback">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            className={place.type === "daiso" ? "maprow-brand-mark maprow-brand-mark--daiso" : "maprow-brand-mark"}
+            className={place.type === "daiso" ? "maprow-brand-mark maprow-brand-mark--daiso" : place.type === "olive_young" ? "maprow-brand-mark maprow-brand-mark--olive-young" : "maprow-brand-mark"}
             src={brandMark}
             alt=""
           />

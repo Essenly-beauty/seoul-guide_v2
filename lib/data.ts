@@ -98,7 +98,7 @@ export const OY_BRAND_GREEN = "#9bce26";
  *  show the retailer's mark instead of a generic pin; categories without a
  *  mark fall back to their TYPE_ICON glyph in TYPE_COLOR. */
 export const BRAND_MARK_SRC: Partial<Record<PlaceType, string>> = {
-  olive_young: "/brands/olive-young-mark.svg",
+  olive_young: "/brands/olive-young-logo.jpeg",
   daiso: "/brands/daiso-mark.svg",
 };
 

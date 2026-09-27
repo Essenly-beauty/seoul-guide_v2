@@ -25,6 +25,7 @@ import { Icon } from "@/components/icon";
 import { useLocation } from "@/components/map/use-location";
 import { useSigninNudge } from "@/components/auth/signin-nudge";
 import { PlaceCorrectionLauncher } from "@/components/place/place-correction-launcher";
+import { OliveYoungBrandHero } from "@/components/place/olive-young-brand-hero";
 import { toggleFavorite, useFavorites } from "@/lib/favorites";
 import { REVIEW_MAX_LEN, setRating, setReview, useMyRatings } from "@/lib/ratings";
 import { fetchPlaceReviews, REPORT_REASONS, reportReview, timeAgo, type PublicReview } from "@/lib/reviews";
@@ -455,18 +456,19 @@ function ServicesSection({ place }: { place: Place }) {
   );
 }
 
-function PlacePhotoCollage({ photos, placeName }: { photos: readonly string[]; placeName: string }) {
+function PlacePhotoCollage({ photos, placeName, brandFallback = false }: { photos: readonly string[]; placeName: string; brandFallback?: boolean }) {
   const visiblePhotos = photos.slice(0, 3);
   const hasThreePhotos = visiblePhotos.length >= 3;
 
   if (visiblePhotos.length === 0) {
-    return (
+    const emptyMedia = (
       <div style={{ display: "grid", gridTemplateColumns: "2fr 1fr", gridTemplateRows: "73px 73px", gap: 6 }}>
         <ImgPh style={{ gridRow: "1 / 3" }} />
         <ImgPh />
         <ImgPh />
       </div>
     );
+    return brandFallback ? <OliveYoungBrandHero className="olive-young-detail-brand-hero" fallback={emptyMedia} /> : emptyMedia;
   }
 
   return (
@@ -969,7 +971,7 @@ export function PlaceDetailBody({ place, heroOverlay, onCollapse }: {
 
       {/* §4.6 photo header collage */}
       <div ref={heroRef} style={{ position: "relative", padding: 8 }}>
-        <PlacePhotoCollage photos={place.photos ?? []} placeName={place.name} />
+        <PlacePhotoCollage photos={place.photos ?? (place.photoUrl ? [place.photoUrl] : [])} placeName={place.name} brandFallback={place.type === "olive_young"} />
         {onCollapse && (
           <IconButton
             name="down"
