@@ -1748,11 +1748,13 @@
 
   /* chips / badges */
   .chip {
-    min-height: 44px;
+    /* 40px, not the 44px floor the other controls keep: the owner found
+       every chip row read as too tall at 44 and asked for 40 (2026-09-27). */
+    min-height: 40px;
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    padding: 8px 14px;
+    padding: 6px 14px;
     border-radius: var(--r-full);
     /* outlined, not filled — reads graphic against the dark field; chips that
        float over the map re-add a surface fill (.map-top .chip). */
@@ -1799,8 +1801,8 @@
   .chip.daiso-category-chip {
     --daiso-category-text: #b83d00;
     --daiso-category-focus-ring: #1c2431;
-    min-height: 44px;
-    padding: 4px 0;
+    min-height: 40px;
+    padding: 2px 0;
     background: transparent;
     border-color: transparent;
     color: var(--text);
@@ -2362,7 +2364,7 @@
   }
   .filtersheet .chipwrap { gap: 6px; margin-top: 5px !important; }
   .filtersheet .chip {
-    min-height: 44px;
+    min-height: 40px;
     padding: 6px 13px;
     font-size: 12.5px;
   }
@@ -3197,6 +3199,9 @@
     width: 100%;
     box-shadow: var(--shadow-float);
   }
+  /* The empty-result prompt lives on the map screen, where .mapsheet (950)
+     and the subway stepper (960) would otherwise sit on top of a 90. */
+  .modal.filter-empty-modal { z-index: 970; }
 
   /* home hub cards */
   .hubcard {
@@ -3809,7 +3814,7 @@
   .station-sheet-cats::-webkit-scrollbar { display: none; }
   .sfchip {
     display: inline-flex; align-items: center; gap: 5px;
-    min-height: 44px; padding: 0 18px; border-radius: 999px;
+    min-height: 40px; padding: 0 18px; border-radius: 999px;
     border: 1px solid var(--border); background: var(--surface); color: var(--muted);
     font-size: 14px; font-weight: 650; white-space: nowrap; flex: none;
   }
@@ -4012,7 +4017,7 @@
   }
   .map-top .chip {
     box-shadow: var(--shadow-card);
-    min-height: 44px;
+    min-height: 40px;
   }
   /* :not(.selected) — .chip.selected (earlier in the cascade) sets the same
      specificity; without this guard this rule's background would win and

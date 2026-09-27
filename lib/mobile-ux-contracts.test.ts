@@ -40,7 +40,10 @@ describe("mobile interaction contracts", () => {
 
   it("keeps shared touch targets large enough to use reliably", () => {
     expect(ruleBody(cssSource, ".iconbtn")).toMatch(/width:\s*44px;[^]*height:\s*44px;/);
-    expect(ruleBody(cssSource, ".chip")).toMatch(/min-height:\s*44px;/);
+    // Chips sit at 40px, not 44: the owner found the 44px floor made every
+    // chip row read as too tall (2026-09-27) and asked for 40. Buttons,
+    // inputs and the nav keep 44/48; this is a chip-only decision.
+    expect(ruleBody(cssSource, ".chip")).toMatch(/min-height:\s*40px;/);
     expect(ruleBody(cssSource, ".input")).toMatch(/min-height:\s*48px;[^]*font-size:\s*16px;/);
     expect(ruleBody(cssSource, ".bottomnav .nav")).toMatch(/min-height:\s*48px;/);
     expect(cssSource).toMatch(/button\s*\{[^}]*min-width:\s*44px;[^}]*min-height:\s*44px;/);

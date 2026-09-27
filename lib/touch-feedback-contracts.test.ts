@@ -68,6 +68,11 @@ describe("touch target floor", () => {
   }
 
   const FLOOR = 44;
+  // Chips are the one control the owner asked to bring down to 40px
+  // (2026-09-27): at 44 every chip row read as too tall. Everything else
+  // keeps the 44px floor.
+  const CHIP_FLOOR = 40;
+  const floorFor = (selector: string) => (/chip/.test(selector) ? CHIP_FLOOR : FLOOR);
   for (const selector of [
     ".subway-station-focus > button",
     ".map-top .chip",
@@ -75,15 +80,15 @@ describe("touch target floor", () => {
     ".subway-route-steps > span",
     ".daiso-category-chip-visual",
   ]) {
-    it(`keeps every ${selector} at ${FLOOR}px or more`, () => {
+    it(`keeps every ${selector} at ${floorFor(selector)}px or more`, () => {
       const found = minHeights(selector);
       expect(found.length, `${selector} declares no min-height`).toBeGreaterThan(0);
-      for (const value of found) expect(value, `${selector} declares ${value}px`).toBeGreaterThanOrEqual(FLOOR);
+      for (const value of found) expect(value, `${selector} declares ${value}px`).toBeGreaterThanOrEqual(floorFor(selector));
     });
   }
 
-  it("lets the station filter chip inherit the 44px base instead of shrinking it", () => {
-    for (const value of minHeights(".station-filter-rail .sfchip")) expect(value).toBeGreaterThanOrEqual(FLOOR);
+  it("lets the station filter chip inherit the chip floor instead of shrinking below it", () => {
+    for (const value of minHeights(".station-filter-rail .sfchip")) expect(value).toBeGreaterThanOrEqual(CHIP_FLOOR);
   });
 
   it("gives the snap handle a 44px hit area without growing the chrome budget", () => {

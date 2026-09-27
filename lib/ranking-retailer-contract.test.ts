@@ -104,7 +104,9 @@ describe("retailer-specific ranking presentation", () => {
     expect(clientSource).toContain('className="daiso-category-chip-visual"');
     expect(clientSource).toContain('<div className="chiprow" role="tablist" aria-label="Daiso ranking type">');
     expect(clientSource).not.toMatch(/className="daiso-category-chip"\s+soft/);
-    expect(cssSource).toMatch(/\.chip\.daiso-category-chip\s*\{[\s\S]*?min-height:\s*44px;[\s\S]*?padding:\s*4px\s+0;/);
+    // 40px chip floor (owner, 2026-09-27): the 36px visual plus 2px of
+    // padding each side lands on 40 exactly.
+    expect(cssSource).toMatch(/\.chip\.daiso-category-chip\s*\{[\s\S]*?min-height:\s*40px;[\s\S]*?padding:\s*2px\s+0;/);
     expect(cssSource).toMatch(/\.daiso-category-chip-visual\s*\{[\s\S]*?min-height:\s*36px;[\s\S]*?padding:\s*0\s+12px;[\s\S]*?font-size:\s*12px;/);
     expect(cssSource).toContain(".chip.daiso-category-chip.selected .daiso-category-chip-visual");
     expect(cssSource).toContain("--daiso-category-text: #b83d00");
