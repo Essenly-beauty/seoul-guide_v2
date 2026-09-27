@@ -44,6 +44,17 @@ const nextConfig = {
   async headers() {
     return [{ source: "/(.*)", headers: SECURITY_HEADERS }];
   },
+  // The map runs leaflet-rotate-map — Leaflet 1.9.4 with the rotate branch
+  // merged, BSD — because Leaflet itself cannot rotate (owner request
+  // 2026-09-27). react-leaflet imports the bare "leaflet", so the alias is
+  // what makes MapContainer build the rotating Map; deep imports such as
+  // leaflet/dist/leaflet.css keep resolving to the original package (the
+  // fork's stylesheet is byte-identical). Both bundlers get the rule.
+  webpack: (config) => {
+    config.resolve.alias = { ...config.resolve.alias, leaflet$: "leaflet-rotate-map" };
+    return config;
+  },
+  turbopack: { resolveAlias: { leaflet: "leaflet-rotate-map" } },
   // Launch scope: prototype routes closed until their features are real.
   // Config-level redirects work for both direct loads and client-side
   // navigation without throwing NEXT_REDIRECT into window.onerror (which

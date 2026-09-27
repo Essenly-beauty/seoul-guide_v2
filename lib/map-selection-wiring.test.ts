@@ -376,12 +376,13 @@ describe("map place selection wiring", () => {
     expect(screenSource).toContain("userHeading={heading}");
   });
 
-  it("keeps experimental two-finger rotation behind an explicit release flag", () => {
-    expect(viewSource).toContain("event.touches.length !== 2");
-    expect(viewSource).toContain("style.rotate");
-    expect(viewSource).toContain('aria-label="Reset map rotation"');
-    expect(viewSource).toContain('process.env.NEXT_PUBLIC_ENABLE_EXPERIMENTAL_MAP_ROTATION === "1"');
-    expect(viewSource).toContain("{rotationEnabled && (");
+  it("ships real two-finger rotation, not the CSS proof of concept", () => {
+    // 2026-08-20 rotated the rendered pane behind an env flag; it never
+    // rotated Leaflet's coordinate system. 2026-09-27 wired a rotation-aware
+    // engine instead — lib/map-rotate-wiring.test.ts holds that contract.
+    expect(viewSource).not.toContain("style.rotate");
+    expect(viewSource).not.toContain("NEXT_PUBLIC_ENABLE_EXPERIMENTAL_MAP_ROTATION");
+    expect(viewSource).toContain("TouchZoomRotate");
   });
 
   it("renders larger grouped transfer-station discs", () => {

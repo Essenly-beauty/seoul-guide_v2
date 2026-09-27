@@ -142,6 +142,7 @@
   :root:not([data-theme="dark"]) .map-avatar,
   :root:not([data-theme="dark"]) .map-modebtn:not(.on),
   :root:not([data-theme="dark"]) .map-fab:not(.on),
+  :root:not([data-theme="dark"]) .map-compass,
   :root:not([data-theme="dark"]) .map-top .chip:not(.selected) {
     background: rgba(255, 255, 255, 0.82);
   }
@@ -4131,13 +4132,21 @@
     opacity: 0;
     pointer-events: none;
   }
-  .map-rotation-reset {
+  /* Compass: only while the map is turned (owner request 2026-09-27, two-
+     finger rotation). Top right, where Google and Apple Maps keep theirs,
+     below the band the banners (.map-banner, top + 96px) occupy so neither
+     covers the other; the needle points at north and a tap eases the map
+     back north. It is portaled beside the other floating controls (the
+     canvas is a z-index:0 context that would paint it under the top bar).
+     Hidden state keeps the box out of the tap order and off the
+     accessibility tree (aria-hidden in the markup). */
+  .map-compass {
     position: absolute;
     right: 16px;
-    top: calc(max(12px, env(safe-area-inset-top)) + 104px);
-    z-index: 700;
-    width: 36px;
-    height: 36px;
+    top: calc(max(12px, env(safe-area-inset-top)) + 160px);
+    z-index: 900;
+    width: 40px;
+    height: 40px;
     display: grid;
     place-items: center;
     border-radius: var(--r-full);
@@ -4146,10 +4155,18 @@
     box-shadow: var(--shadow-float);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
-    color: var(--accent);
-    font-size: 12px;
-    font-weight: 800;
-    transition: transform 0.12s ease;
+    color: var(--text);
+    transition: opacity 0.18s ease, visibility 0.18s, transform 0.18s ease;
+  }
+  .map-compass svg { display: block; }
+  .map-compass:not(.on) {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transform: scale(0.85);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .map-compass { transition: none; }
   }
   .map-banner {
     position: absolute;
