@@ -15,7 +15,7 @@
     "geography": "Seoul only",
     "record_count": 454,
     "enriched_record_count": 30,
-    "researched_record_count": 216
+    "researched_record_count": 221
   },
   "import_policy": {
     "default_action": "stage_only",
@@ -1086,8 +1086,73 @@
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
       "editorial_context_provenance": null,
-      "canonical_place_id": null,
-      "research_status": "not_researched"
+      "canonical_place_id": "seoul:mapo:house-of-woomul-hapjeong",
+      "research_status": "reviewed",
+      "research_confidence": "high",
+      "verified_attributes": [
+        "cafe-and-bar",
+        "large-terrace",
+        "large-space",
+        "pet-friendly",
+        "late-hours",
+        "cocktails-and-beer",
+        "hot-food",
+        "large-window",
+        "colorful-interior",
+        "parking-limited"
+      ],
+      "ados_editorial_angles": [
+        "합정의 넓은 마당에서 반려견과 커피를 마시다 맥주까지 이어가는 곳",
+        "낮의 통창 카페와 밤의 야외 바 사이를 한 자리에서 건너는 공간"
+      ],
+      "research_cautions": [
+        "디저트보다 야외 공간과 음료 선택 폭이 강점인 곳",
+        "인접 고깃집 냄새가 야외 좌석에 느껴질 수 있음",
+        "주차는 3대 안팎으로 제한적이며 만차 시 인근 공영주차장 이용"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://bokmanhee.tistory.com/v/471",
+          "publisher": "복복이씨",
+          "source_kind": "recent-visit-2026",
+          "supports": [
+            "address",
+            "opening-hours",
+            "large-terrace",
+            "pet-friendly",
+            "cafe-and-bar",
+            "cocktails-and-beer",
+            "hot-food",
+            "large-window",
+            "colorful-interior",
+            "parking-limited"
+          ]
+        },
+        {
+          "url": "https://polle.com/place/3Rub2E/%ED%95%98%EC%9A%B0%EC%8A%A4%20%EC%98%A4%EB%B8%8C%20%EC%9A%B0%EB%AC%BC",
+          "publisher": "뽈레",
+          "source_kind": "place-platform",
+          "supports": [
+            "current-review-2026",
+            "address",
+            "coffee-and-alcohol",
+            "pet-friendly",
+            "menu",
+            "parking-caution"
+          ]
+        },
+        {
+          "url": "https://www.jobkorea.co.kr/Recruit/GI_Read/49010676?Oem_Code=C1&listno=3681&logpath=1&sc=552&stext=%EC%97%B0%EA%B5%AC+%EA%B0%9C%EB%B0%9C",
+          "publisher": "잡코리아",
+          "source_kind": "verified-employer-listing",
+          "supports": [
+            "current-operation-2026",
+            "address",
+            "barista-and-bartender-operation",
+            "late-hours"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-41a693d693f7d5c9",
@@ -1194,8 +1259,73 @@
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
       "editorial_context_provenance": null,
-      "canonical_place_id": null,
-      "research_status": "not_researched"
+      "canonical_place_id": "seoul:mapo:lowe-house-sangsu",
+      "research_status": "reviewed",
+      "research_confidence": "high",
+      "verified_attributes": [
+        "house-conversion",
+        "house-made-cakes",
+        "seasonal-fruit-cake",
+        "same-day-whole-cake",
+        "brownie",
+        "terrace",
+        "pet-friendly",
+        "late-hours",
+        "resident-dog",
+        "near-station"
+      ],
+      "ados_editorial_angles": [
+        "상수역 앞 개조 주택에서 제철 과일 케이크를 고르는 오후",
+        "급하게 케이크가 필요한 날 당일 홀케이크와 테라스를 함께 찾는 곳"
+      ],
+      "research_cautions": [
+        "케이크 가격대가 높은 편",
+        "주말에는 실내 좌석이 만석일 수 있음",
+        "주차 불가로 인근 공영주차장 이용",
+        "반려동물 동반 범위는 방문 전 확인"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://www.diningcode.com/profile.php?rid=i16kKTEaZ9Cv",
+          "publisher": "DiningCode",
+          "source_kind": "place-platform",
+          "supports": [
+            "current-operation-2026",
+            "address",
+            "opening-hours",
+            "house-conversion",
+            "seasonal-fruit-cake",
+            "same-day-whole-cake",
+            "brownie",
+            "terrace",
+            "pet-friendly",
+            "resident-dog",
+            "weekend-crowding"
+          ]
+        },
+        {
+          "url": "https://place.clariosync.com/p/6428526/%EB%A1%9C%EC%9C%84%ED%95%98%EC%9A%B0%EC%8A%A4",
+          "publisher": "ClarioSync Place",
+          "source_kind": "public-licensing-derived-data",
+          "supports": [
+            "current-business-status-2026",
+            "address",
+            "opening-license-2024"
+          ]
+        },
+        {
+          "url": "https://mapz.dododo.co.kr/view.php?id=14912",
+          "publisher": "도도도맵",
+          "source_kind": "place-review-index",
+          "supports": [
+            "house-made-cakes",
+            "menu",
+            "house-conversion",
+            "terrace",
+            "pet-friendly"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-6f47c1a3f797e16e",
@@ -1311,8 +1441,70 @@
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
       "editorial_context_provenance": null,
-      "canonical_place_id": null,
-      "research_status": "not_researched"
+      "canonical_place_id": "seoul:mapo:morals-and-norms-sangsu",
+      "research_status": "reviewed",
+      "research_confidence": "high",
+      "verified_attributes": [
+        "specialty-roastery",
+        "on-site-roasting",
+        "filter-coffee",
+        "multiple-bean-choice",
+        "batch-brew",
+        "bean-retail",
+        "small-space",
+        "bar-seating",
+        "early-opening",
+        "takeout-friendly"
+      ],
+      "ados_editorial_angles": [
+        "상수의 작은 바에서 세 가지 원두 중 오늘의 브루잉을 고르는 로스터리",
+        "오래 앉기보다 내일의 커피 한 잔과 원두를 들고 나오는 곳"
+      ],
+      "research_cautions": [
+        "좌석이 좁고 적어 장시간 체류나 단체 방문에는 부적합",
+        "테이블링에는 매장식사 불가로도 표기되어 현장 좌석 운영 확인",
+        "이전 신수동 매장 정보와 혼동 주의"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://www.tabling.co.kr/place/677cd0de66de5f069886de68",
+          "publisher": "테이블링",
+          "source_kind": "place-platform",
+          "supports": [
+            "address",
+            "opening-hours",
+            "roastery",
+            "batch-brew",
+            "filter-coffee",
+            "bean-retail",
+            "small-space",
+            "takeout-friendly"
+          ]
+        },
+        {
+          "url": "https://pbp.co.kr/magazine/11/19/01",
+          "publisher": "피치바이피치",
+          "source_kind": "founder-interview",
+          "supports": [
+            "owner-identity",
+            "relocation-to-sangsu",
+            "on-site-roasting",
+            "brand-story"
+          ]
+        },
+        {
+          "url": "https://www.diningcode.com/profile.php?rid=wt0fKvNt5OM3",
+          "publisher": "DiningCode",
+          "source_kind": "place-platform",
+          "supports": [
+            "multiple-bean-choice",
+            "espresso-variations",
+            "filter-coffee",
+            "bar-seating",
+            "small-space"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-1d53667105fae0f0",
@@ -1344,8 +1536,73 @@
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
       "editorial_context_provenance": null,
-      "canonical_place_id": null,
-      "research_status": "not_researched"
+      "canonical_place_id": "seoul:mapo:b-hind-seogyo",
+      "research_status": "reviewed",
+      "research_confidence": "high",
+      "verified_attributes": [
+        "long-running-neighborhood-cafe",
+        "french-toast",
+        "brunch",
+        "work-friendly",
+        "quiet-stay",
+        "cozy-interior",
+        "late-hours",
+        "weekday-weekend-hours",
+        "no-parking"
+      ],
+      "ados_editorial_angles": [
+        "홍대 카페 문화의 시간을 간직한 골목에서 프렌치토스트를 먹는 곳",
+        "상수와 합정 사이, 늦은 저녁까지 조용히 이야기하거나 노트북을 펴는 카페"
+      ],
+      "research_cautions": [
+        "주말은 평일보다 늦게 문을 여는 편",
+        "피크 시간에는 좌석 확보가 어려울 수 있음",
+        "주차 불가",
+        "프렌치토스트 조리와 식감이 과거와 달라졌다는 최근 의견 존재"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://www.diningcode.com/profile.php?rid=TgysRJwnkSkQ",
+          "publisher": "DiningCode",
+          "source_kind": "place-platform",
+          "supports": [
+            "current-operation-2026",
+            "address",
+            "opening-hours",
+            "french-toast",
+            "work-friendly",
+            "quiet-stay",
+            "late-hours",
+            "no-parking"
+          ]
+        },
+        {
+          "url": "https://polle.com/place/1lzP5e/%EB%B9%84%ED%95%98%EC%9D%B8%EB%93%9C",
+          "publisher": "뽈레",
+          "source_kind": "place-platform",
+          "supports": [
+            "recent-review-2026",
+            "long-running-cafe",
+            "french-toast",
+            "brunch",
+            "work-friendly",
+            "quiet-stay",
+            "crowding",
+            "recipe-change-signal"
+          ]
+        },
+        {
+          "url": "https://m.tripinfo.co.kr/info.html?content_id=134702&content_type_id=39&rd=%2Frd%2Fm%2Finfo%2Ffood",
+          "publisher": "대한민국 구석구석 연계 여행정보",
+          "source_kind": "travel-guide",
+          "supports": [
+            "address",
+            "brand-name-meaning",
+            "quiet-backstreet-location",
+            "menu"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-b7abd35afa84e386",
@@ -1516,8 +1773,83 @@
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
       "editorial_context_provenance": null,
-      "canonical_place_id": null,
-      "research_status": "not_researched"
+      "canonical_place_id": "seoul:mapo:rocktte-spirit-mangwon",
+      "research_status": "reviewed",
+      "research_confidence": "high",
+      "verified_attributes": [
+        "latte-focused",
+        "signature-viennanilla",
+        "filter-coffee",
+        "single-origin",
+        "american-vintage-interior",
+        "blues-music",
+        "resident-dog-signal",
+        "house-dessert",
+        "short-hours",
+        "no-parking"
+      ],
+      "ados_editorial_angles": [
+        "망원에서 블루스 음악과 묵직한 라테를 함께 마시는 작은 공간",
+        "미국 서부의 빈티지 무드 속에서 비엔나닐라와 파이를 고르는 곳"
+      ],
+      "research_cautions": [
+        "화·수요일 휴무이며 평일 운영시간이 짧음",
+        "좌석이 편하지 않아 오래 머무르기보다 커피와 분위기에 집중하는 방문에 적합",
+        "주차 불가",
+        "매장 강아지 상주 여부는 방문 전 확인"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://www.diningcode.com/profile.php?rid=nuRcoCq4m5xD",
+          "publisher": "DiningCode",
+          "source_kind": "place-platform",
+          "supports": [
+            "current-operation-2026",
+            "address",
+            "opening-hours",
+            "latte-focused",
+            "signature-viennanilla",
+            "filter-coffee",
+            "single-origin",
+            "house-dessert",
+            "no-parking"
+          ]
+        },
+        {
+          "url": "https://dongnecoffeenote.com/c/22719",
+          "publisher": "동네 커피 노트",
+          "source_kind": "review-analysis",
+          "supports": [
+            "current-review-volume",
+            "latte-body",
+            "atmosphere",
+            "resident-dog-signal",
+            "not-work-friendly"
+          ]
+        },
+        {
+          "url": "https://img.designhouse.co.kr/luxury/2021/M11.pdf",
+          "publisher": "럭셔리",
+          "source_kind": "magazine-editorial",
+          "supports": [
+            "blues-music",
+            "distinctive-interior",
+            "latte-focus",
+            "brand-story"
+          ]
+        },
+        {
+          "url": "https://polle.com/place/1NyUMc/%EB%9D%BD%EB%96%BC%EC%8A%A4%ED%94%BC%EB%A6%BF",
+          "publisher": "뽈레",
+          "source_kind": "place-platform",
+          "supports": [
+            "american-vintage-interior",
+            "menu",
+            "seating-caution",
+            "no-parking"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-3040db6a00197b55",
