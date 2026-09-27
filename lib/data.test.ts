@@ -237,3 +237,24 @@ describe("no source placeholders reach a visitor", () => {
     expect(PLACES.length).toBeGreaterThan(450);
   });
 });
+
+describe("place detail route lookups", () => {
+  it("resolves every official Daiso store after the route decodes its ID", async () => {
+    const { DAISO_PLACES } = await import("@/lib/generated/daiso-places");
+    const { getPlace } = await import("@/lib/data");
+
+    expect(DAISO_PLACES).toHaveLength(251);
+    for (const place of DAISO_PLACES) {
+      expect(getPlace(decodeURIComponent(place.id))?.id, place.id).toBe(place.id);
+    }
+  });
+
+  it("preserves links whose colon separators are escaped by the browser", async () => {
+    const { DAISO_PLACES } = await import("@/lib/generated/daiso-places");
+    const { getPlace } = await import("@/lib/data");
+
+    for (const place of DAISO_PLACES) {
+      expect(getPlace(place.id.replaceAll(":", "%3A"))?.id, place.id).toBe(place.id);
+    }
+  });
+});
