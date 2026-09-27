@@ -224,6 +224,15 @@ describe("map place selection wiring", () => {
     expect(existsSync(new URL("../public/brands/daiso-logo.jpeg", import.meta.url))).toBe(true);
   });
 
+  it("keeps Daiso map rows free of duplicate category and price while showing confirmed services", () => {
+    expect(sheetSource).toContain('{place.type !== "daiso" && <span className="label">{TYPE_LABEL[place.type]} · {zoneShort(place.zone)}</span>}');
+    expect(sheetSource).toContain('{p.type !== "daiso" && <span className="label">{TYPE_LABEL[p.type]} · {zoneShort(p.zone)}</span>}');
+    expect(sheetSource).toContain('{p.type !== "daiso" && <span className="map-meta-token mono">{p.priceRange}</span>}');
+    expect(sheetSource.match(/<DaisoRowServices place=/g)).toHaveLength(2);
+    expect(sheetSource).toContain('const services = daisoRowServices(place)');
+    expect(cssSource).toContain(".maprow-daiso-service {");
+  });
+
   it("reuses the direct place-detail body and CTA at the full snap", () => {
     expect(sheetSource).toContain("<PlaceDetailBody");
     expect(sheetSource).toContain("<PlaceCtaBar");
