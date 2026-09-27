@@ -660,7 +660,12 @@ export default function MapView({ center, places, selectedId, onSelect, onSelect
       touchZoom={false}
       attributionControl={true}
     >
-      <TileLayer key={theme} url={withTileKey(TILE_URLS[theme], process.env.NEXT_PUBLIC_CARTO_API_KEY)} attribution={ATTRIB} eventHandlers={{ load: handleTilesLoaded }} />
+      {/* updateWhenIdle is Leaflet's desktop default; on phones it flips to
+          true and tiles load only on moveend, which left the corners a
+          rotation swings into view blank until the fingers lifted. Loading
+          while moving (throttled to Leaflet's 200ms) fills them mid-gesture
+          and makes long pans continuous too. */}
+      <TileLayer key={theme} url={withTileKey(TILE_URLS[theme], process.env.NEXT_PUBLIC_CARTO_API_KEY)} attribution={ATTRIB} updateWhenIdle={false} eventHandlers={{ load: handleTilesLoaded }} />
       {!tilesLoaded && (
         // eslint-disable-next-line @next/next/no-img-element
         <img className={`map-ph map-ph-${theme} map-ph-fade`} src={`/map-placeholder-${theme}.jpg`} alt="" />

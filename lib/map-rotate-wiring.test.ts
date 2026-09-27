@@ -125,6 +125,12 @@ describe("map rotation runs on a rotation-aware engine", () => {
     expect(css).toMatch(/\.map-compass\s*\{[^}]*z-index:\s*900/);
   });
 
+  it("keeps loading tiles while the map turns, so the corners that swing into view are not blank until the fingers lift", () => {
+    // Leaflet defaults updateWhenIdle to true on mobile: tiles load only on
+    // moveend. A rotation exposes the screen corners for the whole gesture.
+    expect(view).toMatch(/<TileLayer[^>]*updateWhenIdle=\{false\}/);
+  });
+
   it("respects reduced motion for the compass reset and the north snap", () => {
     expect(handler).toContain("reducedMotion");
   });
