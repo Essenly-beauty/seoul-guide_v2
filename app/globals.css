@@ -1780,9 +1780,13 @@
     gap: 6px;
     padding: 6px 14px;
     border-radius: var(--r-full);
-    /* outlined, not filled — reads graphic against the dark field; chips that
-       float over the map re-add a surface fill (.map-top .chip). */
-    background: transparent;
+    /* A faint tint of the text colour, not a flat surface: the owner's dark
+       theme test (2026-09-27) showed the outlined chip vanishing into the
+       card it sits on — a #272b33 hairline on #16181d was all it had. Six
+       percent lifts the pill one step off any ground in either theme
+       (#16181d → #232529, white → #f1f2f4) and still reads as a choice, not
+       a button. Chips over the map add their own surface fill (.map-top .chip). */
+    background: color-mix(in srgb, var(--text) 6%, transparent);
     border: 1px solid var(--border);
     font-size: 13px;
     font-weight: 500;

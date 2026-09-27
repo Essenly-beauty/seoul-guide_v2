@@ -127,3 +127,16 @@ describe("quiet status lines stay quiet", () => {
     expect(rule.slice(0, 240)).toContain("min-height: 44px");
   });
 });
+
+describe("chips read as pills on a dark card", () => {
+  it("gives the outlined chip a faint text-tinted fill instead of none", () => {
+    // Owner, real iPhone in the dark theme (2026-09-27): the country chips on
+    // the profile card were invisible until touched — a 1px #272b33 border on
+    // a #16181d card was all they had. A 6% tint of the text colour lifts the
+    // pill one step off whatever it sits on, in both themes, without reading
+    // as a filled button. Selected chips keep their accent fill.
+    const rule = ruleBody(cssSource, ".chip");
+    expect(rule).not.toMatch(/background:\s*transparent/);
+    expect(rule).toMatch(/background:\s*color-mix\(in srgb, var\(--text\) 6%, transparent\);/);
+  });
+});
