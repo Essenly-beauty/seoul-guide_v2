@@ -1491,6 +1491,51 @@
       "ados_editorial_angles": ["올림픽공원 산책 뒤 뉴욕 치즈 브륄레를 고르는 성내동 디저트 카페", "앤티크한 방에서 바스크치즈케이크와 늦은 저녁을 보내는 곳"],
       "cautions": ["월요일 휴무", "주차 불가로 올림픽공원 북2문 등 인근 주차장 이용", "인기 디저트는 저녁 전에 품절될 수 있음", "주말 피크에는 만석 가능"],
       "evidence": [{ "url": "https://www.tabling.co.kr/place/68103bb060fa39d16f0c6f92", "publisher": "테이블링", "source_kind": "place-platform", "supports": ["address", "opening-hours", "signature-dessert", "cakes", "baked-goods", "parking-caution"] }, { "url": "https://www.dongnecoffeenote.com/c/26041", "publisher": "동네 커피 노트", "source_kind": "review-analysis", "supports": ["current-reviews-2026", "dessert-focus", "atmosphere", "terrace", "parking-caution"] }, { "url": "https://www.diningcode.com/profile.php?rid=Hjk3qTdWidN1", "publisher": "DiningCode", "source_kind": "place-platform", "supports": ["antique-interior", "basque-cheesecake", "baked-goods", "terrace", "pet-friendly-signal", "weekend-crowding"] }]
+    },
+    {
+      "canonical_place_id": "seoul:gangdong:cafe-hee-wa-seongnae",
+      "member_external_ids": ["coffeelog-84eee188893ebac7"],
+      "research_status": "reviewed", "confidence": "medium",
+      "verified_attributes": ["dessert-cafe", "tiramisu", "quiet-stay", "cozy-interior", "early-opening", "neighborhood-newcomer", "reservation-signal"],
+      "ados_editorial_angles": ["성내동 골목에서 조용한 아침과 티라미수를 함께 시작하는 신생 카페", "따뜻한 작은 방처럼 머물며 디저트에 집중하는 곳"],
+      "cautions": ["월요일 휴무와 주차 불가 확인", "반려동물 가능 여부가 후기 안에서도 충돌해 방문 전 직접 확인", "2025년 개업한 신생 매장이라 운영 정보 변동 가능"],
+      "evidence": [{ "url": "https://dongnecoffeenote.com/c/18825", "publisher": "동네 커피 노트", "source_kind": "review-analysis", "supports": ["current-reviews-2026", "address", "opening-hours", "tiramisu", "dessert-focus", "quiet-stay", "cozy-interior", "parking-caution", "pet-policy-conflict"] }, { "url": "https://findby.co.kr/details/05403-117404172426-st-652b08f68c641f9e3888dd36", "publisher": "도로명주소 찾기", "source_kind": "public-licensing-derived-data", "supports": ["address", "opening-date-2025", "current-business-status-2026"] }, { "url": "https://bigvalue.ai/dashboard/biz/2254401204", "publisher": "BigValue", "source_kind": "business-status-directory", "supports": ["current-business-status-2026", "business-identity"] }]
+    },
+    {
+      "canonical_place_id": "seoul:gangdong:supplement-coffee-seongnae",
+      "member_external_ids": ["coffeelog-c858d6d43551fc04"],
+      "research_status": "reviewed", "confidence": "high",
+      "verified_attributes": ["neighborhood-cafe", "dark-wood-interior", "quiet-stay", "signature-supplement-latte", "uji-matcha", "hojicha", "baked-goods", "pet-friendly", "parking-signal"],
+      "ados_editorial_angles": ["성내동 일상의 ‘부록’처럼 짙은 나무와 낮은 조도에 머무는 카페", "올림픽공원 산책에 우지 말차와 호지차 크림라테를 덧붙이는 곳"],
+      "cautions": ["월요일 휴무이며 주말은 평일보다 한 시간 일찍 마감", "주차 가능 대수와 반려동물 동반 조건은 방문 전 확인", "시그니처 라테는 단맛이 강하다는 방문 의견 참고"],
+      "evidence": [{ "url": "https://www.tabling.co.kr/place/677cd84566de5f0698943643", "publisher": "테이블링", "source_kind": "place-platform", "supports": ["address", "opening-hours", "signature-latte", "uji-matcha", "hojicha", "baked-goods", "pet-friendly", "parking-signal"] }, { "url": "https://holidaylab.co/supplement-coffee-interior", "publisher": "홀리데이랩 디자인스튜디오", "source_kind": "design-project", "supports": ["brand-name-meaning", "neighborhood-culture-intent", "dark-wood-interior", "low-saturation-lighting", "quiet-stay"] }, { "url": "https://www.albamon.com/jobs/detail-company/a3BzgWXju-ZBnLyxKNTK_A%3D%3D", "publisher": "알바몬", "source_kind": "verified-employer-listing", "supports": ["business-identity", "address"] }]
+    },
+    {
+      "canonical_place_id": "seoul:seodaemun:flick-on-coffee-sinchon",
+      "member_external_ids": ["coffeelog-8da126c3fccd1ad5"],
+      "research_status": "reviewed", "confidence": "high",
+      "verified_attributes": ["specialty-coffee", "coffee-omakase", "global-roaster-selection", "multiple-bean-choice", "barista-guidance", "light-roast", "signature-creme-citron", "signature-grand-noir", "small-space", "time-limit"],
+      "ados_editorial_angles": ["신촌 골목에서 향을 맡고 취향을 말해 커피 오마카세를 시작하는 곳", "레몬 오일 크림커피와 세계 로스터의 라이트 로스트 사이에서 새로운 맛을 배우는 바"],
+      "cautions": ["좌석이 작고 매장 이용이 최대 1시간 30분으로 제한될 수 있음", "핸드드립은 시간이 걸리며 테이스팅 코스 가격이 높은 편", "영업시간과 일요일 휴무 주기가 출처별로 달라 공식 소셜 확인"],
+      "evidence": [{ "url": "https://www.timeout.com/seoul/restaurants/flick-on-coffee", "publisher": "Time Out Seoul", "source_kind": "city-editorial", "supports": ["address", "owner-guidance", "signature-creme-citron", "banana-cream-pie", "small-space"] }, { "url": "https://www.diningcode.com/profile.php?rid=ou52t7H7g7wk", "publisher": "DiningCode", "source_kind": "place-platform", "supports": ["current-hours-2026", "hand-drip", "multiple-beans", "signature-grand-noir", "tiramisu", "time-limit", "small-space"] }, { "url": "https://www.corner.inc/place/pG6AfCiZVJK1", "publisher": "Corner", "source_kind": "recent-place-editorial", "supports": ["current-operation-2026", "coffee-omakase", "global-roaster-selection", "bean-aroma-selection", "barista-guidance"] }, { "url": "https://www.jesperhedemann.com/pages/seoul-coffee-guide", "publisher": "Seoul Coffee Guide", "source_kind": "specialty-coffee-guide", "supports": ["owner-identity", "light-roast", "international-roasters"] }]
+    },
+    {
+      "canonical_place_id": "seoul:seodaemun:cafe-moraenae-first-gajwa",
+      "member_external_ids": ["coffeelog-90cf8b1481f222e2"],
+      "research_status": "reviewed", "confidence": "high",
+      "verified_attributes": ["work-friendly", "reading-friendly", "multi-floor", "outlets", "wifi", "large-tables", "single-seating", "wheelchair-accessible", "free-parking-signal", "multiple-bean-choice", "fritz-beans", "house-made-scones"],
+      "ados_editorial_angles": ["가좌역 1분 거리에서 프릳츠 원두를 고르고 노트북을 펴는 동네 작업실", "주민이 잠시 앉는 바깥 의자부터 조용한 2층까지 모래내의 쉼을 나누는 카페"],
+      "cautions": ["월요일 휴무 표기와 연중 운영 안내가 충돌해 최신 공지 확인", "무료 주차는 사전 문의 권장", "층별 접근성과 외부 화장실 위치 확인"],
+      "evidence": [{ "url": "https://www.daangn.com/kr/local-profile/%EC%B9%B4%ED%8E%98-%EB%AA%A8%EB%9E%98%EB%82%B4-1%EB%B2%88%EC%A7%80-t9pthvgdp4r1/", "publisher": "당근 동네업체", "source_kind": "business-profile", "supports": ["current-operation-2026", "address", "opening-hours-signal", "multi-floor", "seat-count", "work-friendly", "outlets", "wifi", "wheelchair-access", "parking", "fritz-beans"] }, { "url": "https://www.diningcode.com/profile.php?rid=EqNJTEOM0a0p", "publisher": "DiningCode", "source_kind": "place-platform", "supports": ["monday-closure-conflict", "multiple-bean-choice", "house-made-scones", "large-tables", "quiet-stay", "takeout-discount"] }]
+    },
+    {
+      "canonical_place_id": "seoul:gwanak:unseok-coffee-roasters-bongcheon",
+      "member_external_ids": ["coffeelog-7179a2c5e379c22d"],
+      "research_status": "reviewed", "confidence": "high",
+      "verified_attributes": ["specialty-roastery", "wholesale-workshop", "roasting-education", "competition-awarded", "didrich-roaster", "multiple-roast-styles", "filter-coffee", "signature-tasting-set", "bean-retail", "short-hours"],
+      "ados_editorial_angles": ["샤로수길에서 ‘돌·땅·하늘’ 세 잔으로 로스팅의 차이를 읽는 곳", "원두 납품 작업실이 주말이면 커피 애호가의 교실이 되는 로스터리"],
+      "cautions": ["정오부터 오후 6시까지의 짧은 운영이며 휴무 공지 확인 필수", "작업실 겸 카페라 좌석과 운영일이 변동될 수 있음", "주소의 층 표기가 출처별로 달라 현장 길 안내 확인"],
+      "evidence": [{ "url": "https://gfac.or.kr/uploadfile/ecms/media/media/2025/02/6e98978260f52befae9be088d688ee94.pdf", "publisher": "관악문화재단", "source_kind": "local-culture-interview", "supports": ["owner-identity", "wholesale-workshop", "weekend-cafe", "roasting-education", "brand-story"] }, { "url": "https://www.diningcode.com/profile.php?rid=EOBLL3sh2vcn", "publisher": "DiningCode", "source_kind": "place-platform", "supports": ["address", "opening-hours", "competition-awarded", "didrich-roaster", "filter-coffee", "signature-tasting-set", "house-dessert"] }, { "url": "https://dongnecoffeenote.com/c/3132", "publisher": "동네 커피 노트", "source_kind": "review-analysis", "supports": ["current-review-signal", "specialty-roastery", "work-friendly", "bean-retail"] }, { "url": "https://blog.naver.com/PostView.naver?blogId=unseokcoffee&logNo=222979279220", "publisher": "운석커피로스터스", "source_kind": "official-blog", "supports": ["specialty-coffee", "roast-profile", "brewing-guide", "wholesale"] }]
     }
   ]
 }

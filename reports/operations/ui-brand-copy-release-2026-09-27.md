@@ -1,6 +1,6 @@
 # Retailer UI and Daiso detail-route release — 2026-09-27
 
-**Status:** Combined preview verified; production deployment pending.
+**Status:** Production verified on `myseouldrop.app`.
 
 **Branch:** `release/ui-brand-route-20260927` (rebased on `origin/main` at `9168756`).
 
@@ -29,4 +29,12 @@
 
 ## Production gate
 
-The owner chose to include the Daiso lookup fix before the UI release. Do not promote the separate member/shared-list preview or uncommitted ranking-data files. Verify the combined unique preview, then merge only this branch to the then-current `main` and confirm the production Daiso detail route plus the UI changes. Rebase or merge any newly advanced `main` and rerun checks before pushing production.
+The owner chose to include the Daiso lookup fix before the UI release. Only this branch was fast-forwarded to `main` at `9e8684c`; the separate member/shared-list preview and uncommitted ranking-data files were not promoted. Vercel production deployment `CYZ9w6hzi8JDLx47zZAHm6dC7EgQ` reached Ready and listed `myseouldrop.app` as a domain.
+
+## Production check
+
+- Two Korean-ID Daiso detail routes opened with their real titles, including Gangnam Stn. 2 with `In store · Tax refund · SIM cards`. The old `This page wandered off` error did not appear. The automated lookup tests cover all 251 official IDs; the live check sampled two.
+- The production `All` map list rendered the supplied Daiso and Olive Young logo files with nonzero image widths. Daiso Gangnam Stn. 2 showed `Tax refund` and `SIM card` without the redundant eyebrow.
+- The production Olive Young ranking displayed `What's trending` and `Curated beauty picks — not a live sales chart.`, with `Sales`, `Review Best`, and `Brands` retained.
+- The three checked production tabs had no browser console errors. Vercel runtime logs filtered to this deployment over the last 30 minutes showed 0 `Error` and 0 `Fatal` events at the time of inspection.
+- The supplied large Olive Young AVIF is wired and has an error fallback, but its visual appearance was not independently inspected because direct local-file browser inspection was blocked. The owner can review that image in the live app.
