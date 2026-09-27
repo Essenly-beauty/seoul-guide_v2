@@ -1,12 +1,14 @@
 # Retailer UI brand and copy design
 
-**Date:** 2026-09-27  
-**Owner approval:** Use a UI-only release for the Daiso card and ranking copy, plus the supplied Olive Young image assets.  
+**Date:** 2026-09-27
+
+**Owner approval:** Use a UI-only release for the Daiso card and ranking copy, plus the supplied Olive Young image assets.
+
 **Base:** The latest remote `main`, excluding the separate member/shared-list and ranking-data worktrees.
 
 ## Purpose and scope
 
-MYSEOULDROP is a mobile-first Seoul beauty and place-finding guide for visitors. The map list must identify familiar retailers at a glance without inventing store-specific facts. This release changes presentation only; it does not publish new ranking data, alter account or database behavior, or change place IDs.
+MYSEOULDROP is a mobile-first Seoul beauty and place-finding guide for visitors. The map list must identify familiar retailers at a glance without inventing store-specific facts. This UI slice changes presentation only; it does not publish new ranking data, alter account or database behavior, or change place IDs. The combined release separately includes the owner-approved Daiso detail-route lookup fix.
 
 ## Ranking copy
 
@@ -31,4 +33,4 @@ MYSEOULDROP is a mobile-first Seoul beauty and place-finding guide for visitors.
 - Tests cover: shared map-row fallback in `All` and filtered modes; Daiso labels/services; Olive Young small and large fallback precedence; ranking text and its non-live qualifier; no change to other place types.
 - Verify tests, typecheck, lint, production build, and a mobile viewport in an isolated preview before production promotion.
 - The supplied AVIF could not be visually inspected with the available local viewer, and the browser disallowed direct local-file navigation. Verify the file type, static asset path, render branches, and image-error fallback through code/tests without using a preview as an indirect way to inspect that file. Hand off final visual approval of the large image to the owner.
-- An independently reported P0 exists: all 251 official Daiso detail links with percent-encoded Korean IDs may 404. The production incident is tracked separately. Do not silently fold a data lookup change into this UI design; confirm its release order with the owner before production deployment.
+- The owner subsequently approved including the independently reported Daiso detail-route lookup fix before the UI release. Its test and deployment evidence are in the [release record](../../../reports/operations/ui-brand-copy-release-2026-09-27.md).
