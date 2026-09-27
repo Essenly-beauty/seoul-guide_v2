@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "contractId": "seoul-place-fill-only-v1",
+  "identityKey": "common_id",
+  "serviceIdsAreImmutable": true,
+  "fields": {
+    "preserveNonEmptyExistingValues": true,
+    "fillEmptyValuesOnly": true,
+    "replacementRequiresExplicitPlaceApproval": true
+  },
+  "photos": {
+    "preserveExistingFiles": true,
+    "preserveExistingOrder": true,
+    "appendAfterExisting": true,
+    "deduplicateBeforeAppend": true,
+    "targetMinimum": 3,
+    "targetMaximum": 5,
+    "replacementRequiresExplicitPlaceApproval": true,
+    "uiFallbacksAreNotPlacePhotos": true
+  },
+  "removal": {
+    "deleteMissingSourceRecords": false,
+    "preserveAsTombstone": true,
+    "reuseCommonIds": false
+  },
+  "canonicalRegistry": {
+    "driveFolderId": "1s5QAEJVrh7IDvcLfeFX1JqoYUXZRS36M",
+    "registryFile": "registry.json",
+    "photoManifestFile": "photo-manifest.json"
+  }
+}
