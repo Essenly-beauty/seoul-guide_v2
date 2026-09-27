@@ -30,5 +30,5 @@ MYSEOULDROP is a mobile-first Seoul beauty and place-finding guide for visitors.
 
 - Tests cover: shared map-row fallback in `All` and filtered modes; Daiso labels/services; Olive Young small and large fallback precedence; ranking text and its non-live qualifier; no change to other place types.
 - Verify tests, typecheck, lint, production build, and a mobile viewport in an isolated preview before production promotion.
-- The supplied AVIF could not be visually inspected with the available local viewer, and the browser disallowed direct local-file navigation. Verify file type and app behavior without bypassing that restriction; disclose any remaining visual uncertainty.
+- The supplied AVIF could not be visually inspected with the available local viewer, and the browser disallowed direct local-file navigation. Verify the file type, static asset path, render branches, and image-error fallback through code/tests without using a preview as an indirect way to inspect that file. Hand off final visual approval of the large image to the owner.
 - An independently reported P0 exists: all 251 official Daiso detail links with percent-encoded Korean IDs may 404. The production incident is tracked separately. Do not silently fold a data lookup change into this UI design; confirm its release order with the owner before production deployment.
