@@ -4554,6 +4554,17 @@
     align-items: baseline;
     white-space: nowrap;
   }
+  .maprow-daiso-services {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    margin-top: 4px;
+  }
+  .maprow-daiso-service {
+    padding: 2px 6px;
+    border-radius: var(--r-sm);
+    background: var(--surface-hover);
+  }
   .mapsheet.full.has-selection .mapsheet-handle {
     min-height: 20px;
     gap: 0;
