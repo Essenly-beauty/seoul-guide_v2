@@ -11,6 +11,7 @@ import { ADOS_PHOTO_PROVISIONAL_PLACES } from "./generated/ados-photo-provisiona
 import { DAISO_PLACES } from "./generated/daiso-places";
 import { DAISO_SUPPLEMENT_PLACES } from "./generated/daiso-supplement-places";
 import { applyEnglishNameOverrides } from "./place-name-en";
+import { mergeFillOnlyPhotos } from "./place-fill-only";
 
 if (DAISO_PLACES.length !== 251) {
   throw new Error(`Expected exactly 251 generated Daiso stores, received ${DAISO_PLACES.length}`);
@@ -309,7 +310,11 @@ const CURATED_PLACES: Place[] = [
 ];
 
 const withSource = (list: Place[], source: PlaceSource): Place[] =>
-  list.map((p) => ({
+  list.map((p) => {
+    // Both arrays are already-deployed service assets at this boundary. Keep
+    // all of them; the 3–5 cap applies only when selecting future additions.
+    const photos = mergeFillOnlyPhotos(p.photos, PLACE_PHOTOS[p.id], Number.POSITIVE_INFINITY);
+    return ({
     ...p,
     source,
     // Some scraped rows carry the source's own placeholder instead of an
@@ -321,14 +326,17 @@ const withSource = (list: Place[], source: PlaceSource): Place[] =>
     // so dropping files into public/places/<id>/ and rebuilding is the whole
     // job (scripts/build-place-photos.mjs). A place with none keeps `photos`
     // undefined and renders the honest empty state.
-    ...(PLACE_PHOTOS[p.id]?.length ? { photos: PLACE_PHOTOS[p.id] } : {}),
-    ...(PLACE_PHOTO_THUMBNAILS[p.id] ? { photoThumbnail: PLACE_PHOTO_THUMBNAILS[p.id] } : {}),
+    ...(photos.length ? { photos } : {}),
+    ...((p.photoThumbnail || PLACE_PHOTO_THUMBNAILS[p.id])
+      ? { photoThumbnail: p.photoThumbnail || PLACE_PHOTO_THUMBNAILS[p.id] }
+      : {}),
     // Curated rows carry editorial seed values for layout and local ranking
     // demos, not venue-verified ratings. Strip them at the public data-layer
     // boundary so map/search/list surfaces cannot accidentally present them
     // as real customer signals.
     ...(source === "curated" ? { rating: undefined, ratingCount: undefined } : {}),
-  }));
+    });
+  });
 
 /**
  * Complete source catalogue used by the internal audit. Records stay here even
