@@ -1896,6 +1896,60 @@
       "ados_editorial_angles": ["연남 2층 화덕에서 구운 프렌치토스트를 목적지로 삼는 카페", "제철 과일과 크렘 앙글레이즈로 익숙한 빵의 인상을 바꾸는 곳"],
       "cautions": ["핵심 상세 근거가 2023년 취재라 2026년 현재 운영 여부·시간·메뉴를 공식 채널에서 재확인", "화덕 조리 메뉴는 대기시간과 품절 가능성 고려", "시즌에 따라 과일과 토핑 구성 변경"],
       "evidence": [{ "url": "https://www.saeki.co.kr/magazine/info?mgznId=2941", "publisher": "세기몰", "source_kind": "editorial-feature", "supports": ["address", "opening-hours-historical", "second-floor", "french-toast-specialist", "wood-fired-oven", "seasonal-fruit", "creme-anglaise", "jambon-dessert", "chocolate-dessert", "tea-selection"] }]
+    },
+    {
+      "canonical_place_id": "seoul:mapo:bekand-mangwon",
+      "member_external_ids": ["coffeelog-21d4665b19338b71"],
+      "research_status": "reviewed", "confidence": "high",
+      "verified_attributes": ["brunch-cafe", "breakfast-friendly", "french-toast-specialist", "brioche", "seasonal-fruit", "cream-brulee-topping", "morning-set", "reservation", "takeout", "weekend-late-hours", "no-parking", "waiting"],
+      "ados_editorial_angles": ["망원에서 아침 프렌치토스트 세트로 주말을 시작하는 브런치 카페", "브리오슈와 제철 딸기, 크림브륄레 토핑 중 오늘의 단맛을 고르는 곳"],
+      "cautions": ["평일과 금~일 영업시간이 다르므로 방문 전 확인", "웨이팅 가능", "주차 불가", "추가 소스와 토핑은 당도와 양이 높은 편이라는 후기 참고"],
+      "evidence": [{ "url": "https://www.tabling.co.kr/place/677cd56f66de5f06988f33e1", "publisher": "테이블링", "source_kind": "place-platform", "supports": ["current-operation-2026", "address", "opening-hours", "brunch-cafe", "breakfast-friendly", "french-toast-specialist", "brioche", "seasonal-fruit", "cream-brulee-topping", "morning-set", "reservation", "takeout", "no-parking", "waiting"] }]
+    },
+    {
+      "canonical_place_id": "seoul:mapo:jo-and-dawson-yeonnam",
+      "member_external_ids": ["coffeelog-5c3d7256079b4281"],
+      "research_status": "reviewed", "confidence": "high",
+      "verified_attributes": ["basement-space", "french-toast-specialist", "pan-oven-torch-method", "maple-syrup", "maldon-salt", "milk-tea", "cheesecake", "date-friendly", "pet-friendly", "small-space", "waiting", "no-parking"],
+      "ados_editorial_angles": ["연남의 작은 지하방에서 겉은 바삭하고 속은 수플레처럼 익힌 프렌치토스트를 기다리는 곳", "메이플 시럽과 말돈 소금, 밀크티로 단짠의 균형을 완성하는 디저트 목적지"],
+      "cautions": ["평일에도 웨이팅이 잦고 좌석이 적음", "본점과 인근 티룸의 주소·메뉴·분위기를 혼동하지 않도록 구분", "주차 불가", "반려동물 동반 세부 규칙과 최신 영업시간 확인"],
+      "evidence": [{ "url": "https://www.daangn.com/kr/local-profile/%EC%A1%B0%EC%95%A4%EB%8F%84%EC%8A%A8-ihbiknva5r22/", "publisher": "당근 동네업체", "source_kind": "business-profile", "supports": ["updated-2026", "address", "basement-space", "french-toast-specialist", "pan-oven-torch-method", "maple-syrup", "maldon-salt", "milk-tea", "cheesecake", "date-friendly", "small-space", "waiting"] }, { "url": "https://polle.com/place/498CUn/%EC%A1%B0%EC%95%A4%EB%8F%84%EC%8A%A8", "publisher": "뽈레", "source_kind": "place-platform", "supports": ["current-review-2026", "address", "french-toast-specialist", "cheesecake", "waiting", "pet-friendly", "reservation-signal"] }, { "url": "https://moggo.co.kr/yeonnam/place/3130000-104-2021-00255/", "publisher": "모꼬", "source_kind": "public-licensing-derived-data", "supports": ["current-license-record-2026", "address", "business-identity"] }]
+    },
+    {
+      "canonical_place_id": "seoul:mapo:yeontral-dabang-yeonnam",
+      "member_external_ids": ["coffeelog-ba21389c3af5a312"],
+      "research_status": "reviewed", "confidence": "high",
+      "verified_attributes": ["basement-space", "bakery-cafe", "french-toast", "croffle", "baked-goods", "hand-drip", "coconut-kaya-latte", "terrace", "pet-friendly", "reservation", "takeout", "delivery", "limited-parking", "daily-operation"],
+      "ados_editorial_angles": ["연남 산책 중 반려견과 야외 자리에 앉아 코코넛 카야 라떼를 마시는 카페", "프렌치토스트부터 스콘과 마들렌까지 선택지가 넓은 동네형 베이커리 카페"],
+      "cautions": ["혼잡 시 대형견 입장이 제한될 수 있어 전화 확인", "주차 1대 표기가 있으나 단속 가능성이 언급돼 공영주차장 권장", "1인 1음료 정책과 주말 체류 제한 가능성 확인", "프렌치토스트의 식감과 가격 평가는 후기에 편차가 큼"],
+      "evidence": [{ "url": "https://polle.com/place/520N1u/%EC%97%B0%ED%8A%B8%EB%9F%B4%EB%8B%A4%EB%B0%A9", "publisher": "뽈레", "source_kind": "place-platform", "supports": ["address", "bakery-cafe", "french-toast", "croffle", "baked-goods", "hand-drip", "coconut-kaya-latte", "pet-friendly", "reservation", "takeout", "delivery", "limited-parking"] }, { "url": "https://www.diningcode.com/profile.php?rid=6kR1SyN34d1O", "publisher": "DiningCode", "source_kind": "place-platform", "supports": ["current-operation-2026", "address", "opening-hours", "basement-space", "terrace", "pet-friendly", "limited-parking", "one-drink-policy"] }, { "url": "https://ban-life.com/store/view?id=15947&type=s", "publisher": "반려생활", "source_kind": "pet-place-platform", "supports": ["address", "daily-operation", "pet-friendly", "pet-rules", "terrace"] }]
+    },
+    {
+      "canonical_place_id": "seoul:mapo:kiosk-mangwon",
+      "member_external_ids": ["coffeelog-514de2061e2807f4"],
+      "research_status": "reviewed", "confidence": "high",
+      "verified_attributes": ["second-floor", "hidden-entrance", "tiny-space", "french-toast-specialist", "custom-toppings", "ice-cream-topping", "soy-latte", "affordable-dessert", "quick-visit", "sunday-closed", "no-parking"],
+      "ados_editorial_angles": ["망원 골목의 간판 없는 2층에서 토핑을 골라 프렌치토스트 한 접시만 빠르게 먹는 곳", "머무는 공간보다 작고 선명한 디저트 경험을 목적지로 삼는 카페"],
+      "cautions": ["좌석이 매우 적어 장시간 체류나 단체 방문에 부적합", "입구와 간판을 찾기 어렵다는 후기 다수", "일요일 휴무 표기 확인", "주차 불가", "식사를 마친 뒤 빠른 정리가 이뤄질 수 있어 회전 중심 공간으로 안내"],
+      "evidence": [{ "url": "https://www.diningcode.com/profile.php?rid=wSWKRFfkXVKb", "publisher": "DiningCode", "source_kind": "place-platform", "supports": ["current-review-2026", "address", "opening-hours", "second-floor", "hidden-entrance", "tiny-space", "french-toast-specialist", "custom-toppings", "ice-cream-topping", "soy-latte", "quick-visit", "sunday-closed", "no-parking"] }, { "url": "https://www.diningcode.com/dingco/wSWKRFfkXVKb", "publisher": "DiningCode", "source_kind": "editorial-summary", "supports": ["tiny-space", "french-toast-specialist", "custom-toppings"] }, { "url": "https://bbombba.tistory.com/m/24", "publisher": "bbombba", "source_kind": "visit-record", "supports": ["french-toast-specialist", "broadcast-feature-signal", "ice-cream-topping"] }]
+    },
+    {
+      "canonical_place_id": "seoul:mapo:long-vacation-yeonnam",
+      "member_external_ids": ["coffeelog-c996620709e25b80"],
+      "research_status": "reviewed", "confidence": "high",
+      "verified_attributes": ["second-floor", "kyoto-inspired", "matcha-specialist", "uji-matcha", "matcha-pudding", "matcha-latte", "matcha-yuzu-soda", "gluten-free-terrine", "yuzu-tiramisu", "date-friendly", "pet-friendly", "no-kids", "group-limit-four", "waiting", "no-parking"],
+      "ados_editorial_angles": ["연남 2층에서 우지 말차 푸딩과 유자 소다로 교토의 한낮을 떠올리는 카페", "꾸덕한 말차 테린느와 앙버터 토스트를 천천히 나누는 데이트 코스"],
+      "cautions": ["노키즈존이며 한 팀 최대 4명", "주말 웨이팅 가능", "전용 주차장 없음", "반려동물 동반 조건과 휴무일 확인", "말차 테린느의 글루텐프리 표기가 알레르기·교차오염 안전을 보장하지 않음"],
+      "evidence": [{ "url": "https://www.diningcode.com/profile.php?rid=S7npz8rEgJQH", "publisher": "DiningCode", "source_kind": "place-platform", "supports": ["current-operation-2026", "address", "opening-hours", "second-floor", "kyoto-inspired", "matcha-specialist", "uji-matcha", "matcha-pudding", "matcha-latte", "matcha-yuzu-soda", "gluten-free-terrine", "yuzu-tiramisu", "date-friendly", "pet-friendly", "no-kids", "group-limit-four", "waiting", "no-parking"] }]
+    },
+    {
+      "canonical_place_id": "seoul:mapo:tea-nomad-mangwon",
+      "member_external_ids": ["coffeelog-5b6ad33a9bae1b1b"],
+      "research_status": "reviewed", "confidence": "high",
+      "verified_attributes": ["second-floor", "tea-house", "reservation-required", "tea-set", "matcha-bingsu", "hojicha-bingsu", "wagashi", "castella", "uji-matcha", "quiet-stay", "oriental-interior", "date-friendly", "no-kids", "short-week", "waiting"],
+      "ados_editorial_angles": ["망원 2층에서 차 한 상과 화과자를 예약해 고요한 오후를 보내는 티하우스", "우지 말차와 호지차 빙수로 한여름의 속도를 늦추는 곳"],
+      "cautions": ["예약제 운영 및 예약 필수 표기가 있어 사전 확인", "화·목요일 휴무", "노키즈존", "웨이팅 가능", "차빙 세트와 빙수는 계절·회차별 구성이 달라질 수 있음"],
+      "evidence": [{ "url": "https://www.diningcode.com/profile.php?rid=JVEV6zl4GfAA", "publisher": "DiningCode", "source_kind": "place-platform", "supports": ["current-operation-2026", "address", "opening-hours", "second-floor", "tea-house", "reservation-required", "tea-set", "matcha-bingsu", "castella", "quiet-stay", "date-friendly", "no-kids", "short-week", "waiting"] }, { "url": "https://dbidh.kr/80", "publisher": "DBiDH", "source_kind": "visit-record", "supports": ["brand-origin", "oriental-interior", "tea-house", "uji-matcha", "hojicha-bingsu", "tea-set"] }]
     }
   ]
 }
