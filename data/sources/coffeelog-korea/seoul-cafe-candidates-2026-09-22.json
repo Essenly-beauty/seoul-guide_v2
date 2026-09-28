@@ -15,7 +15,7 @@
     "geography": "Seoul only",
     "record_count": 454,
     "enriched_record_count": 30,
-    "researched_record_count": 243
+    "researched_record_count": 249
   },
   "import_policy": {
     "default_action": "stage_only",
@@ -5964,8 +5964,61 @@
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
       "editorial_context_provenance": null,
-      "canonical_place_id": null,
-      "research_status": "not_researched"
+      "canonical_place_id": "seoul:mapo:saegeomjeong-hapjeong",
+      "research_status": "reviewed",
+      "research_confidence": "high",
+      "verified_attributes": [
+        "work-friendly",
+        "laptop-friendly",
+        "outlets",
+        "large-space",
+        "quiet-stay",
+        "dark-interior",
+        "signature-latte",
+        "anthracite-beans",
+        "no-parking"
+      ],
+      "ados_editorial_angles": [
+        "합정의 어두운 실내에서 화면에 집중해 오래 작업하는 카페",
+        "콘센트와 넓은 자리를 먼저 고르고 새검정 라떼로 숨을 고르는 곳"
+      ],
+      "research_cautions": [
+        "실내가 어두워 종이책 독서나 필기 작업에는 호불호가 있을 수 있음",
+        "주차 불가",
+        "최신 영업시간은 공식 채널에서 방문 전 확인",
+        "디저트보다 작업 환경과 커피에 초점을 둔 추천이 적합"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://dongnecoffeenote.com/c/8808",
+          "publisher": "동네 커피 노트",
+          "source_kind": "review-analysis",
+          "supports": [
+            "current-review-2026",
+            "address",
+            "work-friendly",
+            "large-space",
+            "quiet-stay",
+            "outlets",
+            "laptop-friendly"
+          ]
+        },
+        {
+          "url": "https://polle.com/place/2i8JO6/%EC%83%88%EA%B2%80%EC%A0%95",
+          "publisher": "뽈레",
+          "source_kind": "place-platform",
+          "supports": [
+            "recent-review-2026",
+            "address",
+            "dark-interior",
+            "work-friendly",
+            "laptop-friendly",
+            "signature-latte",
+            "anthracite-beans",
+            "no-parking"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-8f1b4d89d7afccd5",
@@ -6119,8 +6172,73 @@
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
       "editorial_context_provenance": null,
-      "canonical_place_id": null,
-      "research_status": "not_researched"
+      "canonical_place_id": "seoul:mapo:origami-club-hapjeong",
+      "research_status": "reviewed",
+      "research_confidence": "high",
+      "verified_attributes": [
+        "second-floor",
+        "large-space",
+        "large-window",
+        "quiet-stay",
+        "group-friendly",
+        "wifi",
+        "late-hours",
+        "cafe-bar",
+        "specialty-coffee",
+        "signature-latte",
+        "basque-cheesecake",
+        "alcohol"
+      ],
+      "ados_editorial_angles": [
+        "합정 2층 큰 창 아래서 라떼부터 자정의 한 잔까지 이어가는 카페 바",
+        "종이 오브제와 낮은 채도의 공간에서 여럿이 늦게 만나는 곳"
+      ],
+      "research_cautions": [
+        "좌석 편안함은 개인차가 있다는 방문 후기 참고",
+        "자정 마감과 주류 판매 여부는 방문 전 재확인",
+        "낮의 카페와 밤의 바 분위기가 달라 시간대별 추천 문맥을 구분"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://www.daangn.com/kr/local-profile/%EC%98%A4%EB%A6%AC%EA%B0%80%EB%AF%B8%ED%81%B4%EB%9F%BD-%ED%95%A9%EC%A0%95-3yfcfzqghzvx/",
+          "publisher": "당근 동네업체",
+          "source_kind": "business-profile",
+          "supports": [
+            "current-operation-2026",
+            "address",
+            "opening-hours",
+            "group-seating",
+            "wifi",
+            "signature-latte",
+            "basque-cheesecake",
+            "alcohol"
+          ]
+        },
+        {
+          "url": "https://www.alba.co.kr/job/Detail?adid=146999048",
+          "publisher": "알바천국",
+          "source_kind": "verified-employer-listing",
+          "supports": [
+            "current-operation-2026",
+            "address",
+            "late-hours"
+          ]
+        },
+        {
+          "url": "https://www.diningcode.com/profile.php?rid=rnoqeLwUMcan",
+          "publisher": "DiningCode",
+          "source_kind": "place-platform",
+          "supports": [
+            "second-floor",
+            "large-space",
+            "large-window",
+            "quiet-stay",
+            "group-friendly",
+            "specialty-coffee",
+            "cafe-bar"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-0a2116c49bde5eaf",
@@ -6152,8 +6270,79 @@
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
       "editorial_context_provenance": null,
-      "canonical_place_id": null,
-      "research_status": "not_researched"
+      "canonical_place_id": "seoul:mapo:pildam-mangwon",
+      "research_status": "reviewed",
+      "research_confidence": "high",
+      "verified_attributes": [
+        "second-floor",
+        "hand-drip",
+        "work-friendly",
+        "reading-friendly",
+        "solo-friendly",
+        "outlets",
+        "wifi",
+        "window-view",
+        "retro-interior",
+        "music-collection",
+        "whisky",
+        "cocktails",
+        "two-hour-limit"
+      ],
+      "ados_editorial_angles": [
+        "망원 2층 창가에서 핸드드립 향과 오래된 음반 곁에 혼자 머무는 곳",
+        "낮에는 노트북과 책, 저녁에는 위스키 한 잔으로 결이 바뀌는 카페"
+      ],
+      "research_cautions": [
+        "이용시간 2시간 제한이 언급돼 장시간 작업 전 확인",
+        "휴무일은 인스타그램 공지 확인",
+        "만석이 잦다는 후기 참고",
+        "조용한 분위기를 해치지 않는 소규모 방문에 적합"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://korean.visitseoul.net/restaurants/2024-pildam/KOP90lngm",
+          "publisher": "서울관광재단",
+          "source_kind": "official-tourism-guide",
+          "supports": [
+            "updated-2026",
+            "address",
+            "opening-hours",
+            "second-floor",
+            "hand-drip",
+            "work-friendly",
+            "solo-friendly",
+            "window-view",
+            "retro-interior",
+            "music-collection",
+            "whisky",
+            "cocktails"
+          ]
+        },
+        {
+          "url": "https://alleymag.com/spot/spot-kop90lngm/",
+          "publisher": "alleymag",
+          "source_kind": "place-guide",
+          "supports": [
+            "solo-friendly",
+            "retro-interior",
+            "outlets",
+            "wifi",
+            "work-friendly"
+          ]
+        },
+        {
+          "url": "https://www.diningcode.com/profile.php?rid=7Aa6djzKSzkz",
+          "publisher": "DiningCode",
+          "source_kind": "place-platform",
+          "supports": [
+            "current-operation-2026",
+            "quiet-stay",
+            "reading-friendly",
+            "two-hour-limit",
+            "waiting-signal"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-73792df72e578b16",
@@ -6185,8 +6374,77 @@
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
       "editorial_context_provenance": null,
-      "canonical_place_id": null,
-      "research_status": "not_researched"
+      "canonical_place_id": "seoul:mapo:capet-mangwon",
+      "research_status": "reviewed",
+      "research_confidence": "high",
+      "verified_attributes": [
+        "two-floor-space",
+        "furniture-showroom",
+        "pet-friendly",
+        "late-hours",
+        "signature-mocha",
+        "house-made-marshmallow",
+        "capet-bread",
+        "butter-dessert",
+        "photo-friendly",
+        "date-friendly"
+      ],
+      "ados_editorial_angles": [
+        "망원 골목의 2층 가구 쇼룸에서 소파와 오브제를 구경하는 카페",
+        "직접 만든 마시멜로 모카와 버터 디저트로 달콤함을 채우는 곳"
+      ],
+      "research_cautions": [
+        "반려동물 동반 세부 규칙은 방문 전 확인",
+        "포토 스폿과 좌석이 겹칠 수 있어 혼잡 시간대 유의",
+        "대표 메뉴와 마감시간은 최신 공지 재확인"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://www.diningcode.com/profile.php?rid=6g6WXJ32DtAX",
+          "publisher": "DiningCode",
+          "source_kind": "place-platform",
+          "supports": [
+            "current-operation-2026",
+            "address",
+            "two-floor-space",
+            "late-hours",
+            "chocolate-menu"
+          ]
+        },
+        {
+          "url": "https://ban-life.com/store/view?id=14842&type=s",
+          "publisher": "반려생활",
+          "source_kind": "pet-place-platform",
+          "supports": [
+            "address",
+            "long-running-operation",
+            "furniture-showroom",
+            "pet-friendly"
+          ]
+        },
+        {
+          "url": "https://autoreserve.com/ko/restaurants/doxhUYMbYx1KXjDaZBbh",
+          "publisher": "AutoReserve",
+          "source_kind": "place-platform",
+          "supports": [
+            "signature-mocha",
+            "house-made-marshmallow",
+            "capet-bread",
+            "butter-dessert"
+          ]
+        },
+        {
+          "url": "https://kr.trip.com/moments/poi-capet-148072818/",
+          "publisher": "Trip.com",
+          "source_kind": "travel-platform",
+          "supports": [
+            "current-review-2026",
+            "photo-friendly",
+            "interior-design",
+            "dessert-variety"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-e11f8a4a8e57ff5a",
@@ -6218,8 +6476,62 @@
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
       "editorial_context_provenance": null,
-      "canonical_place_id": null,
-      "research_status": "not_researched"
+      "canonical_place_id": "seoul:mapo:are-and-am-yeonnam",
+      "research_status": "reviewed",
+      "research_confidence": "medium",
+      "verified_attributes": [
+        "dessert-cafe",
+        "chocolate-dessert",
+        "pound-cake",
+        "brownie",
+        "pavlova",
+        "seasonal-latte",
+        "wifi",
+        "pet-friendly",
+        "takeout",
+        "limited-weekday-parking"
+      ],
+      "ados_editorial_angles": [
+        "연남에서 브라우니와 더티초코 파운드로 진한 단맛을 고르는 디저트 카페",
+        "계절 라떼와 파블로바를 반려동물과 함께 즐기는 골목의 한때"
+      ],
+      "research_cautions": [
+        "평일 매장 앞 주차는 1대·2시간 제한이며 주말과 공휴일은 불가",
+        "반려동물 동반 조건과 시즌 메뉴는 방문 전 확인",
+        "초콜릿 중심의 높은 당도는 취향을 고려",
+        "공식 채널 외 플랫폼 근거 비중이 높아 세부 운영 재확인"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://pgpg.co.kr/company/17522",
+          "publisher": "포근포근",
+          "source_kind": "place-platform",
+          "supports": [
+            "current-operation-2026",
+            "address",
+            "opening-hours",
+            "chocolate-dessert",
+            "pound-cake",
+            "brownie",
+            "pavlova",
+            "seasonal-latte",
+            "wifi",
+            "pet-friendly",
+            "takeout",
+            "limited-weekday-parking"
+          ]
+        },
+        {
+          "url": "https://areandam.tistory.com/45",
+          "publisher": "Are&am",
+          "source_kind": "brand-owned-blog",
+          "supports": [
+            "yeonnam-location",
+            "chocolate-dessert",
+            "brand-identity"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-94fa740514d14471",
@@ -6412,8 +6724,48 @@
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
       "editorial_context_provenance": null,
-      "canonical_place_id": null,
-      "research_status": "not_researched"
+      "canonical_place_id": "seoul:mapo:pain-perdu-yeonnam",
+      "research_status": "reviewed",
+      "research_confidence": "medium",
+      "verified_attributes": [
+        "second-floor",
+        "french-toast-specialist",
+        "wood-fired-oven",
+        "seasonal-fruit",
+        "creme-anglaise",
+        "jambon-dessert",
+        "chocolate-dessert",
+        "tea-selection",
+        "date-friendly"
+      ],
+      "ados_editorial_angles": [
+        "연남 2층 화덕에서 구운 프렌치토스트를 목적지로 삼는 카페",
+        "제철 과일과 크렘 앙글레이즈로 익숙한 빵의 인상을 바꾸는 곳"
+      ],
+      "research_cautions": [
+        "핵심 상세 근거가 2023년 취재라 2026년 현재 운영 여부·시간·메뉴를 공식 채널에서 재확인",
+        "화덕 조리 메뉴는 대기시간과 품절 가능성 고려",
+        "시즌에 따라 과일과 토핑 구성 변경"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://www.saeki.co.kr/magazine/info?mgznId=2941",
+          "publisher": "세기몰",
+          "source_kind": "editorial-feature",
+          "supports": [
+            "address",
+            "opening-hours-historical",
+            "second-floor",
+            "french-toast-specialist",
+            "wood-fired-oven",
+            "seasonal-fruit",
+            "creme-anglaise",
+            "jambon-dessert",
+            "chocolate-dessert",
+            "tea-selection"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-21d4665b19338b71",
