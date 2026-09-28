@@ -15,7 +15,7 @@
     "geography": "Seoul only",
     "record_count": 454,
     "enriched_record_count": 30,
-    "researched_record_count": 237
+    "researched_record_count": 243
   },
   "import_policy": {
     "default_action": "stage_only",
@@ -5290,8 +5290,60 @@
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
       "editorial_context_provenance": null,
-      "canonical_place_id": null,
-      "research_status": "not_researched"
+      "canonical_place_id": "seoul:mapo:before-blooming-donggyo",
+      "research_status": "reviewed",
+      "research_confidence": "medium",
+      "verified_attributes": [
+        "cake-specialist",
+        "fresh-fruit-cake",
+        "seasonal-fruit",
+        "third-floor",
+        "large-space",
+        "date-friendly",
+        "celebration-friendly",
+        "late-hours",
+        "no-parking"
+      ],
+      "ados_editorial_angles": [
+        "동교동 3층에서 제철 과일 케이크로 작은 기념일을 보내는 곳",
+        "무화과와 딸기의 계절을 한 조각씩 기다리는 연남 카페"
+      ],
+      "research_cautions": [
+        "공식 영업시간과 휴무일은 방문 전 재확인",
+        "계절에 따라 케이크 라인업과 품절 시간이 달라짐",
+        "주차 불가",
+        "작업보다 디저트와 대화 중심의 방문에 적합"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://dongnecoffeenote.com/c/22709",
+          "publisher": "동네 커피 노트",
+          "source_kind": "review-analysis",
+          "supports": [
+            "current-review-2026",
+            "address",
+            "fresh-fruit-cake",
+            "seasonal-fruit",
+            "third-floor",
+            "large-space",
+            "date-friendly",
+            "celebration-friendly",
+            "late-hours-signal",
+            "no-parking"
+          ]
+        },
+        {
+          "url": "https://gajaseoul.com/ko/store/before_blooming",
+          "publisher": "GAJA SEOUL",
+          "source_kind": "place-guide",
+          "supports": [
+            "yeonnam-location",
+            "cake-specialist",
+            "cozy-interior",
+            "date-and-small-gathering"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-97aaf7139dc0f8a3",
@@ -5323,8 +5375,62 @@
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
       "editorial_context_provenance": null,
-      "canonical_place_id": null,
-      "research_status": "not_researched"
+      "canonical_place_id": "seoul:mapo:honest-pancakes-yeonnam",
+      "research_status": "reviewed",
+      "research_confidence": "high",
+      "verified_attributes": [
+        "pancake-specialist",
+        "seasonal-fruit-pancake",
+        "buttermilk-pancake",
+        "house-made-compote",
+        "late-hours",
+        "cozy-interior",
+        "date-friendly",
+        "solo-friendly",
+        "delivery",
+        "no-parking"
+      ],
+      "ados_editorial_angles": [
+        "연남 골목에서 계절 과일과 직접 만든 콩포트를 팬케이크 위에 쌓는 곳",
+        "늦은 오후 버터밀크 팬케이크와 밀크티로 천천히 쉬어가는 카페"
+      ],
+      "research_cautions": [
+        "화요일 휴무 표기 확인",
+        "주차 불가",
+        "시즌 메뉴와 과일 수급에 따라 대표 팬케이크가 달라짐",
+        "팬케이크 조리 시간을 고려"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://www.diningcode.com/profile.php?rid=AUVIWY2CZHhT",
+          "publisher": "DiningCode",
+          "source_kind": "place-platform",
+          "supports": [
+            "current-operation-2026",
+            "address",
+            "opening-hours",
+            "pancake-specialist",
+            "seasonal-fruit-pancake",
+            "buttermilk-pancake",
+            "house-made-compote",
+            "cozy-interior",
+            "date-friendly",
+            "solo-friendly",
+            "delivery",
+            "no-parking"
+          ]
+        },
+        {
+          "url": "https://moggo.co.kr/yeonnam/place/3130000-101-2019-00727/",
+          "publisher": "모꼬",
+          "source_kind": "public-licensing-derived-data",
+          "supports": [
+            "current-license-status-2026",
+            "long-running-operation-signal",
+            "business-identity"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-3298b72dd7e19dfa",
@@ -5356,8 +5462,80 @@
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
       "editorial_context_provenance": null,
-      "canonical_place_id": null,
-      "research_status": "not_researched"
+      "canonical_place_id": "seoul:mapo:live-in-ohou-mangwon",
+      "research_status": "reviewed",
+      "research_confidence": "high",
+      "verified_attributes": [
+        "cheesecake-specialist",
+        "experimental-seasonal-dessert",
+        "pea-cheesecake",
+        "pistachio-dessert",
+        "bottle-cake",
+        "reservation-pickup",
+        "basement-space",
+        "quiet-stay",
+        "shared-table",
+        "short-week",
+        "no-kids",
+        "no-parking"
+      ],
+      "ados_editorial_angles": [
+        "망원 지하의 작은 방에서 완두와 피스타치오를 치즈케이크로 만나는 곳",
+        "매일 달라지는 실험적인 케이크를 미리 예약해 조용히 픽업하는 카페"
+      ],
+      "research_cautions": [
+        "월~수요일 휴무 표기가 있어 운영일 확인 필수",
+        "좌석 예약은 불가하며 평일에도 웨이팅·품절 가능",
+        "노키즈존",
+        "주차 불가",
+        "인기 메뉴는 사전 픽업 예약 권장"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://www.diningcode.com/profile.php?rid=5v0iS9zQ4mky",
+          "publisher": "DiningCode",
+          "source_kind": "place-platform",
+          "supports": [
+            "current-operation-2026",
+            "address",
+            "opening-hours-signal",
+            "cheesecake-specialist",
+            "pea-cheesecake",
+            "pistachio-dessert",
+            "bottle-cake",
+            "reservation-pickup",
+            "basement-space",
+            "quiet-stay",
+            "shared-table",
+            "waiting",
+            "no-kids",
+            "no-parking"
+          ]
+        },
+        {
+          "url": "https://www.tabling.co.kr/place/677cd0c566de5f069886b0f4",
+          "publisher": "테이블링",
+          "source_kind": "place-platform",
+          "supports": [
+            "address",
+            "opening-days",
+            "seasonal-cheesecake",
+            "takeout",
+            "no-kids",
+            "no-parking"
+          ]
+        },
+        {
+          "url": "https://polle.com/place/4O9smk/%EB%A6%AC%EB%B8%8C%20%EC%9D%B8%20%EC%98%A4%ED%9B%84",
+          "publisher": "뽈레",
+          "source_kind": "place-platform",
+          "supports": [
+            "experimental-seasonal-dessert",
+            "pistachio-specialty",
+            "recent-review-2026"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-87035c13412b25ec",
@@ -5389,8 +5567,70 @@
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
       "editorial_context_provenance": null,
-      "canonical_place_id": null,
-      "research_status": "not_researched"
+      "canonical_place_id": "seoul:mapo:madeljen-yeonnam",
+      "research_status": "reviewed",
+      "research_confidence": "medium",
+      "verified_attributes": [
+        "gluten-free-bakery",
+        "rice-flour",
+        "organic-raw-sugar",
+        "no-white-sugar",
+        "no-synthetic-preservatives",
+        "cake-specialist",
+        "egg-tart",
+        "butter-sand",
+        "takeout-friendly",
+        "department-store-popups"
+      ],
+      "ados_editorial_angles": [
+        "연남에서 국산 쌀가루와 유기농 원당으로 만든 케이크를 고르는 글루텐프리 숍",
+        "밀가루 디저트가 부담스러운 날 에그타르트와 버터샌드를 포장하는 곳"
+      ],
+      "research_cautions": [
+        "검색 결과에 양재점 정보가 혼재하므로 연남 지점의 현 주소·운영 여부 재확인",
+        "글루텐프리와 알레르기 안전은 동일하지 않으므로 교차오염·성분 직접 문의",
+        "좌석보다 포장 판매 중심일 수 있음"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://coloso.co.kr/creator/pastry-madeljen/profile",
+          "publisher": "Coloso",
+          "source_kind": "founder-profile",
+          "supports": [
+            "owner-identity",
+            "yeonnam-operation",
+            "gluten-free",
+            "rice-flour",
+            "organic-raw-sugar",
+            "butter-sand",
+            "department-store-popups"
+          ]
+        },
+        {
+          "url": "https://toucrew.tistory.com/311",
+          "publisher": "투크루",
+          "source_kind": "visit-record",
+          "supports": [
+            "yeonnam-bakery-cafe",
+            "gluten-free",
+            "egg-tart",
+            "bread"
+          ]
+        },
+        {
+          "url": "https://www.luckymeal.io/stores/1083",
+          "publisher": "럭키밀",
+          "source_kind": "surplus-food-platform",
+          "supports": [
+            "rice-flour",
+            "organic-raw-sugar",
+            "no-white-sugar",
+            "no-synthetic-preservatives",
+            "takeout-friendly",
+            "location-conflict"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-cdaf2a5700233e53",
@@ -5422,8 +5662,84 @@
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
       "editorial_context_provenance": null,
-      "canonical_place_id": null,
-      "research_status": "not_researched"
+      "canonical_place_id": "seoul:mapo:volver-hapjeong",
+      "research_status": "reviewed",
+      "research_confidence": "high",
+      "verified_attributes": [
+        "second-floor",
+        "large-window",
+        "quiet-stay",
+        "work-friendly",
+        "reading-friendly",
+        "signature-coffee",
+        "banana-bread",
+        "house-cookies",
+        "pet-friendly",
+        "late-hours",
+        "paid-parking"
+      ],
+      "ados_editorial_angles": [
+        "합정과 망원 사이 2층 통창에서 책과 노트북을 펴는 조용한 카페",
+        "‘돌아오다’라는 이름처럼 바나나브레드와 커피 곁에 오래 머무는 곳"
+      ],
+      "research_cautions": [
+        "토요일과 평일 마감시간이 다름",
+        "유료 주차 조건은 방문 전 확인",
+        "반려동물 동반 세부 규칙 확인",
+        "화장실이 남녀공용이라는 방문 기록 참고"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://www.tabling.co.kr/place/677cd04366de5f069885c07d",
+          "publisher": "테이블링",
+          "source_kind": "place-platform",
+          "supports": [
+            "current-operation-2026",
+            "address",
+            "opening-hours",
+            "signature-coffee",
+            "banana-bread",
+            "house-cookies",
+            "pet-friendly",
+            "paid-parking",
+            "quiet-stay"
+          ]
+        },
+        {
+          "url": "https://dongnecoffeenote.com/c/5829",
+          "publisher": "동네 커피 노트",
+          "source_kind": "review-analysis",
+          "supports": [
+            "address",
+            "second-floor",
+            "large-window",
+            "quiet-stay",
+            "work-friendly",
+            "view"
+          ]
+        },
+        {
+          "url": "https://www.albamon.com/jobs/detail-company/r9LUUrQuYDI8QUkK8I7KkA%3D%3D",
+          "publisher": "알바몬",
+          "source_kind": "verified-employer-listing",
+          "supports": [
+            "current-operation-2026",
+            "business-identity",
+            "address"
+          ]
+        },
+        {
+          "url": "https://guide-j.tistory.com/entry/%EB%A7%9D%EC%9B%90-%ED%95%A9%EC%A0%95-%EC%B9%B4%ED%8E%98-%EB%B3%BC%EB%B2%A0%EB%A5%B4-%EC%8B%9C%EA%B7%B8%EB%8B%88%EC%B2%98-%EB%94%94%EC%A0%80%ED%8A%B8-%EB%B0%94%EB%82%98%EB%82%98-%ED%91%B8%EB%94%A9",
+          "publisher": "guide-J",
+          "source_kind": "visit-record",
+          "supports": [
+            "brand-name-meaning",
+            "large-window",
+            "banana-dessert",
+            "shared-restroom-signal"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-5bc6ee727219d7aa",
@@ -5531,8 +5847,92 @@
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
       "editorial_context_provenance": null,
-      "canonical_place_id": null,
-      "research_status": "not_researched"
+      "canonical_place_id": "seoul:mapo:nice-work-today-sinsu",
+      "research_status": "reviewed",
+      "research_confidence": "high",
+      "verified_attributes": [
+        "work-friendly",
+        "reading-friendly",
+        "large-tables",
+        "outlets",
+        "wifi",
+        "single-seating",
+        "bar-seating",
+        "forest-trail-view",
+        "large-window",
+        "terrace",
+        "filter-coffee",
+        "global-roaster-selection",
+        "late-hours",
+        "elevator"
+      ],
+      "ados_editorial_angles": [
+        "경의선숲길 통창 앞에서 오늘의 일을 끝내는 워킹 스페이스 카페",
+        "세계 로스터의 필터 커피를 고르고 긴 테이블에 노트북을 펴는 곳"
+      ],
+      "research_cautions": [
+        "시험기간과 주말 오후에는 만석·웨이팅 가능성이 큼",
+        "대화보다 작업과 공부 분위기가 강해 모임에는 부적합",
+        "주차 불가로 인근 공영주차장 이용",
+        "영업시간 표기가 출처별로 달라 최신 공지 확인"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://www.diningcode.com/profile.php?rid=GTOvuRrzcJiQ",
+          "publisher": "DiningCode",
+          "source_kind": "place-platform",
+          "supports": [
+            "current-operation-2026",
+            "address",
+            "opening-hours-signal",
+            "work-friendly",
+            "large-tables",
+            "outlets",
+            "single-seating",
+            "bar-seating",
+            "forest-trail-view",
+            "large-window",
+            "filter-coffee",
+            "global-roaster-selection",
+            "crowding",
+            "no-parking"
+          ]
+        },
+        {
+          "url": "https://polle.com/place/5889ZQ/%EB%82%98%EC%9D%B4%EC%8A%A4%20%EC%9B%8C%ED%81%AC%20%ED%88%AC%EB%8D%B0%EC%9D%B4",
+          "publisher": "뽈레",
+          "source_kind": "place-platform",
+          "supports": [
+            "recent-review-2026",
+            "work-friendly",
+            "exam-season-crowding",
+            "menu",
+            "no-parking"
+          ]
+        },
+        {
+          "url": "https://gangseotongsin.com/archives/20502",
+          "publisher": "강서통신",
+          "source_kind": "opening-editorial",
+          "supports": [
+            "brand-concept",
+            "address",
+            "terrace",
+            "large-tables",
+            "forest-trail-view",
+            "long-stay"
+          ]
+        },
+        {
+          "url": "https://www.jesperhedemann.com/pages/seoul-coffee-guide",
+          "publisher": "Seoul Coffee Guide",
+          "source_kind": "specialty-coffee-guide",
+          "supports": [
+            "work-and-coffee-positioning",
+            "mapo-location"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-ce710fb216d6549e",

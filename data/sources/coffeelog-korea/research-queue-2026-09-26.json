@@ -3,8 +3,8 @@
   "generated_on": "2026-09-26",
   "caution": "이 파일은 전수 조사 큐다. 추정 필드는 공개용 태그가 아니며 사람 또는 출처 검토가 필요하다.",
   "summary": {
-    "done_or_pending_specific_check": 237,
-    "p3_general_review": 217
+    "done_or_pending_specific_check": 243,
+    "p3_general_review": 211
   },
   "records": [
     {
@@ -698,8 +698,8 @@
       "normalized_name": "비포블루밍 동교동",
       "possible_duplicate_external_ids": [],
       "content_kind_guess": "cafe_candidate",
-      "research_priority": "p3_general_review",
-      "current_research_status": "not_researched"
+      "research_priority": "done_or_pending_specific_check",
+      "current_research_status": "reviewed"
     },
     {
       "external_id": "coffeelog-97aaf7139dc0f8a3",
@@ -708,8 +708,8 @@
       "normalized_name": "어니스트팬케이크 연남동",
       "possible_duplicate_external_ids": [],
       "content_kind_guess": "cafe_candidate",
-      "research_priority": "p3_general_review",
-      "current_research_status": "not_researched"
+      "research_priority": "done_or_pending_specific_check",
+      "current_research_status": "reviewed"
     },
     {
       "external_id": "coffeelog-3298b72dd7e19dfa",
@@ -718,8 +718,8 @@
       "normalized_name": "리브인오후 망원동",
       "possible_duplicate_external_ids": [],
       "content_kind_guess": "cafe_candidate",
-      "research_priority": "p3_general_review",
-      "current_research_status": "not_researched"
+      "research_priority": "done_or_pending_specific_check",
+      "current_research_status": "reviewed"
     },
     {
       "external_id": "coffeelog-87035c13412b25ec",
@@ -728,8 +728,8 @@
       "normalized_name": "마들젠 글루텐프리 케이크샵 연남동",
       "possible_duplicate_external_ids": [],
       "content_kind_guess": "mixed_or_non_cafe_needs_review",
-      "research_priority": "p3_general_review",
-      "current_research_status": "not_researched"
+      "research_priority": "done_or_pending_specific_check",
+      "current_research_status": "reviewed"
     },
     {
       "external_id": "coffeelog-cdaf2a5700233e53",
@@ -738,8 +738,8 @@
       "normalized_name": "볼베르",
       "possible_duplicate_external_ids": [],
       "content_kind_guess": "cafe_candidate",
-      "research_priority": "p3_general_review",
-      "current_research_status": "not_researched"
+      "research_priority": "done_or_pending_specific_check",
+      "current_research_status": "reviewed"
     },
     {
       "external_id": "coffeelog-5bc6ee727219d7aa",
@@ -760,8 +760,8 @@
       "normalized_name": "나이스워크투데이",
       "possible_duplicate_external_ids": [],
       "content_kind_guess": "cafe_candidate",
-      "research_priority": "p3_general_review",
-      "current_research_status": "not_researched"
+      "research_priority": "done_or_pending_specific_check",
+      "current_research_status": "reviewed"
     },
     {
       "external_id": "coffeelog-ce710fb216d6549e",
