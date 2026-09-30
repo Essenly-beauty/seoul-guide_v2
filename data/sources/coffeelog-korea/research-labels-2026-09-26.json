@@ -1950,6 +1950,60 @@
       "ados_editorial_angles": ["망원 2층에서 차 한 상과 화과자를 예약해 고요한 오후를 보내는 티하우스", "우지 말차와 호지차 빙수로 한여름의 속도를 늦추는 곳"],
       "cautions": ["예약제 운영 및 예약 필수 표기가 있어 사전 확인", "화·목요일 휴무", "노키즈존", "웨이팅 가능", "차빙 세트와 빙수는 계절·회차별 구성이 달라질 수 있음"],
       "evidence": [{ "url": "https://www.diningcode.com/profile.php?rid=JVEV6zl4GfAA", "publisher": "DiningCode", "source_kind": "place-platform", "supports": ["current-operation-2026", "address", "opening-hours", "second-floor", "tea-house", "reservation-required", "tea-set", "matcha-bingsu", "castella", "quiet-stay", "date-friendly", "no-kids", "short-week", "waiting"] }, { "url": "https://dbidh.kr/80", "publisher": "DBiDH", "source_kind": "visit-record", "supports": ["brand-origin", "oriental-interior", "tea-house", "uji-matcha", "hojicha-bingsu", "tea-set"] }]
+    },
+    {
+      "canonical_place_id": "seoul:mapo:turn-down-service-yeonnam",
+      "member_external_ids": ["coffeelog-756918425d7c503c"],
+      "research_status": "reviewed", "confidence": "high",
+      "verified_attributes": ["semi-basement", "vinyl-music", "leather-shop", "wood-interior", "late-hours", "house-made-tarts", "seasonal-tarts", "nut-cream-latte", "house-made-granola", "pet-friendly", "takeout", "delivery", "two-hour-limit"],
+      "ados_editorial_angles": ["연남의 반지하 우드룸에서 LP를 들으며 늦은 밤까지 머무는 카페", "견과 크림 커널라떼와 계절 타르트를 함께 고르는 디저트 목적지"],
+      "cautions": ["2시간 이용 제한", "LP 감상 환경의 음량과 선곡은 시간대에 따라 기대와 다를 수 있음", "주차 표기가 플랫폼마다 엇갈려 대중교통 권장", "반려동물 동반 조건과 타르트 품절 여부 확인"],
+      "evidence": [{ "url": "https://polle.com/place/2m5Cvi/%ED%84%B4%20%EB%8B%A4%EC%9A%B4%20%EC%84%9C%EB%B9%84%EC%8A%A4", "publisher": "뽈레", "source_kind": "place-platform", "supports": ["current-review-2026", "address", "semi-basement", "vinyl-music", "wood-interior", "late-hours", "house-made-tarts", "seasonal-tarts", "nut-cream-latte", "house-made-granola", "pet-friendly", "takeout", "delivery", "two-hour-limit"] }, { "url": "https://world.nol.com/en/pois/0ee245cb-4186-42fa-93a7-37c2b7db6593", "publisher": "NOL World", "source_kind": "travel-platform", "supports": ["current-operation-2026", "address", "opening-hours", "vinyl-music", "vintage-interior"] }, { "url": "https://www.diningcode.com/profile.php?rid=0Fy7ztHqTOZ2", "publisher": "DiningCode", "source_kind": "place-platform", "supports": ["current-operation-2026", "address", "opening-hours", "date-friendly", "takeout", "delivery"] }, { "url": "https://arexkorea.blogspot.com/2021/06/visit-arex-station-yeontral-park-hongik-univ-station-exit-3.html", "publisher": "AREX", "source_kind": "official-travel-content", "supports": ["leather-shop", "wood-interior", "nut-cream-latte", "dessert-pairing"] }]
+    },
+    {
+      "canonical_place_id": "seoul:mapo:new-phase-yeonnam",
+      "member_external_ids": ["coffeelog-bcd0cb7ef76bfb20"],
+      "research_status": "reviewed", "confidence": "medium",
+      "verified_attributes": ["second-floor", "creative-community-space", "reading-friendly", "work-friendly", "solo-friendly", "books", "writing-prompts", "check-in-card", "individual-seating", "sofa-seating", "quiet-stay", "plant-filled", "pet-friendly", "thursday-closed", "no-parking"],
+      "ados_editorial_angles": ["연남 2층에서 체크인 카드에 오늘의 목표를 적고 책 한 권을 읽는 사색의 카페", "낯선 사람들의 문장과 질문 노트를 넘기며 혼자 작업하는 창작 커뮤니티 공간"],
+      "cautions": ["목요일 정기휴무 표기 확인", "주차장 없음", "반려동물 동반 세부 규칙 확인", "플랫폼과 에디토리얼 기사 중심 근거라 최신 공식 운영시간 재확인"],
+      "evidence": [{ "url": "https://www.diningcode.com/profile.php?rid=PY26GX1sDerK", "publisher": "DiningCode", "source_kind": "place-platform", "supports": ["operation-signal-2025", "second-floor", "reading-friendly", "work-friendly", "solo-friendly", "books", "writing-prompts", "check-in-card", "individual-seating", "sofa-seating", "quiet-stay", "plant-filled", "pet-friendly", "thursday-closed", "no-parking"] }, { "url": "https://www.soft-journal.com/news/325203", "publisher": "소프트 저널", "source_kind": "editorial-feature", "supports": ["brand-identity", "creative-community-space", "small-brand-curation", "jeju-inspired-interior"] }]
+    },
+    {
+      "canonical_place_id": "seoul:mapo:dasijeom-mangwon",
+      "member_external_ids": ["coffeelog-63bb32ef28e4ef89"],
+      "research_status": "reviewed", "confidence": "high",
+      "verified_attributes": ["third-floor", "book-cafe", "digital-detox", "reading-friendly", "solo-friendly", "quiet-stay", "one-person-desks", "sofa-seating", "vinyl-music", "vintage-speakers", "projector", "writing-programs", "weaving-programs", "space-rental", "birthday-cafe-rental"],
+      "ados_editorial_angles": ["망원 3층에서 휴대폰을 맡기고 책과 음악에만 머무는 일요일 오후", "혼자 읽는 소파부터 필사·위빙 모임까지 느린 시간을 설계한 북카페"],
+      "cautions": ["디지털 디톡스 프로그램은 특정 요일·시간에만 운영될 수 있어 예약 확인", "대관이나 생일카페 일정에는 일반 이용 환경이 달라질 수 있음", "3층 계단 접근성과 최신 카페 영업시간 확인"],
+      "evidence": [{ "url": "https://www.daangn.com/kr/local-profile/%EB%8B%A4%EC%8B%9C%EC%A0%90-vxrmt9f4kcw8/", "publisher": "당근 동네업체", "source_kind": "business-profile", "supports": ["active-2026", "creative-programs", "books", "vinyl-music", "quiet-stay", "writing-programs", "weaving-programs", "space-rental"] }, { "url": "https://time-off-club.com/spots/mangwon", "publisher": "타임오프클럽", "source_kind": "editorial-guide", "supports": ["current-operation-2026", "address", "third-floor", "book-cafe", "digital-detox", "reading-friendly", "solo-friendly", "one-person-desks", "sofa-seating"] }, { "url": "https://dukplace.com/ko/place/cafe/detail/15142", "publisher": "덕플레이스", "source_kind": "rental-platform", "supports": ["birthday-cafe-rental", "vintage-speakers", "projector", "display-space", "custom-drinks-and-desserts"] }]
+    },
+    {
+      "canonical_place_id": "seoul:mapo:ruar-coffee-bar-mangwon",
+      "member_external_ids": ["coffeelog-351d86fd8377b2ce"],
+      "research_status": "reviewed", "confidence": "high",
+      "verified_attributes": ["two-floor-space", "brick-building", "large-space", "group-friendly", "solo-friendly", "brewing-coffee", "vanilla-bean-latte", "rare-cheesecake", "seasonal-fruit-cake", "pet-friendly", "wifi", "parking", "separate-restrooms", "late-hours"],
+      "ados_editorial_angles": ["망원 붉은 벽돌집 2층에서 혼자 앉거나 여럿이 모이는 넉넉한 커피바", "브루잉 커피와 제철 과일 레어치즈케이크를 늦은 저녁까지 즐기는 곳"],
+      "cautions": ["플랫폼별 마감시간이 20시와 22시로 달라 공식 채널 확인", "주말 2층은 혼잡하고 소음이 커질 수 있음", "반려동물은 이동가방 이용 조건 확인", "무료 주차 가능 대수와 위치 확인"],
+      "evidence": [{ "url": "https://www.diningcode.com/profile.php?rid=KEBgyMDQQY4i", "publisher": "DiningCode", "source_kind": "place-platform", "supports": ["current-review-2026", "address", "two-floor-space", "brick-building", "large-space", "group-friendly", "solo-friendly", "brewing-coffee", "vanilla-bean-latte", "rare-cheesecake", "seasonal-fruit-cake", "pet-friendly", "parking", "separate-restrooms"] }, { "url": "https://peton.me/bbs/board.php?bo_table=addPlace&wr_id=231400", "publisher": "펫온", "source_kind": "pet-place-platform", "supports": ["updated-2026", "address", "opening-hours-signal", "group-friendly", "pet-friendly", "wifi", "parking", "separate-restrooms"] }]
+    },
+    {
+      "canonical_place_id": "seoul:mapo:nocturne-hapjeong",
+      "member_external_ids": ["coffeelog-c251fe3d4886f200"],
+      "research_status": "reviewed", "confidence": "high",
+      "verified_attributes": ["cafe-bar", "day-to-night", "cocktails", "bar-seating", "window-seating", "solo-seating", "sofa-seating", "terrace", "french-toast", "made-to-order", "maple-and-salt", "cream-latte", "date-friendly", "late-hours", "no-parking"],
+      "ados_editorial_angles": ["합정에서 낮의 프렌치토스트가 밤의 칵테일로 이어지는 카페 바", "테라스와 바 좌석 사이에서 메이플·소금을 곁들인 두툼한 토스트를 기다리는 곳"],
+      "cautions": ["카페와 바 운영 시간이 구분됨", "프렌치토스트는 주문 후 약 15분 조리 시간 고려", "주말 만석 가능", "주차 불가", "낮과 밤의 메뉴·분위기를 별도 문맥으로 소개"],
+      "evidence": [{ "url": "https://www.diningcode.com/profile.php?rid=nRWkBpb5kj8G", "publisher": "DiningCode", "source_kind": "place-platform", "supports": ["current-operation-2026", "address", "opening-hours", "cafe-bar", "day-to-night", "cocktails", "sofa-seating", "terrace", "french-toast", "made-to-order", "maple-and-salt", "cream-latte", "date-friendly", "late-hours", "no-parking", "waiting"] }, { "url": "https://www.tabling.co.kr/place/68c7eca6919474fb3e53384f", "publisher": "테이블링", "source_kind": "place-platform", "supports": ["cafe-bar", "cocktails", "bar-seating", "window-seating", "solo-seating", "cream-latte"] }]
+    },
+    {
+      "canonical_place_id": "seoul:mapo:doduk-and-kyubum-sangsu",
+      "member_external_ids": ["coffeelog-a2ee2366a072f696"],
+      "research_status": "reviewed", "confidence": "medium",
+      "verified_attributes": ["micro-roastery", "house-roasted-beans", "filter-coffee", "coffee-focused", "small-space", "quiet-stay", "vintage-interior", "vinyl-music", "relocated-from-daeheung", "early-close"],
+      "ados_editorial_angles": ["상수의 작은 LP 카페에서 직접 볶은 원두의 필터 커피에 집중하는 곳", "화려한 디저트보다 조용한 빈티지 공간과 한 잔의 추출을 고르는 오후"],
+      "cautions": ["19시 전후 이른 마감 표기 확인", "좌석이 적어 단체 방문에 부적합", "대흥동 이전 전 정보와 현 상수동 주소가 섞일 수 있음", "공식 채널에서 휴무일과 최신 운영 여부 재확인"],
+      "evidence": [{ "url": "https://triple.guide/restaurants/88bb8e95-14bb-40e7-be0d-87af0abfec09", "publisher": "트리플", "source_kind": "travel-platform", "supports": ["address", "opening-hours", "micro-roastery", "house-roasted-beans", "filter-coffee", "coffee-focused", "small-space", "quiet-stay", "vintage-interior", "vinyl-music", "relocated-from-daeheung"] }]
     }
   ]
 }
