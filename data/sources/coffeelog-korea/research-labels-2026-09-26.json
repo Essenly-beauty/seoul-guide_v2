@@ -6,7 +6,7 @@
   "records": [
     {
       "canonical_place_id": "seoul:mapo:bean-brothers-coffeehouse-seoul",
-      "member_external_ids": ["coffeelog-cae1cbd79992c767", "coffeelog-e450675948af7ed5"],
+      "member_external_ids": ["coffeelog-cae1cbd79992c767", "coffeelog-e450675948af7ed5", "coffeelog-51a54b2f9d99808d"],
       "research_status": "reviewed", "confidence": "high",
       "verified_attributes": ["coffee-focused", "slow-coffee-experience", "tasting-program", "conversation-friendly"],
       "ados_editorial_angles": ["커피를 천천히 경험하는 오후", "상수에서 커피 취향을 넓히는 곳"],
@@ -1755,7 +1755,7 @@
     },
     {
       "canonical_place_id": "seoul:mapo:deep-blue-lake-mangwon",
-      "member_external_ids": ["coffeelog-f73caa8c6affaafd"],
+      "member_external_ids": ["coffeelog-f73caa8c6affaafd", "coffeelog-fe43f1b9efd39d8c"],
       "research_status": "reviewed", "confidence": "high",
       "verified_attributes": ["specialty-roastery", "light-roast", "tea-like-coffee", "single-origin", "multiple-bean-choice", "brewing-coffee", "bean-retail", "drip-bags", "multi-floor", "large-space", "work-friendly-signal", "no-parking"],
       "ados_editorial_angles": ["망원시장 산책 뒤 과일처럼 맑은 라이트 로스트로 입안을 환기하는 곳", "파란 3층 건물에서 원두를 고르고 커피를 천천히 비교하는 로스터리"],
@@ -2004,6 +2004,42 @@
       "ados_editorial_angles": ["상수의 작은 LP 카페에서 직접 볶은 원두의 필터 커피에 집중하는 곳", "화려한 디저트보다 조용한 빈티지 공간과 한 잔의 추출을 고르는 오후"],
       "cautions": ["19시 전후 이른 마감 표기 확인", "좌석이 적어 단체 방문에 부적합", "대흥동 이전 전 정보와 현 상수동 주소가 섞일 수 있음", "공식 채널에서 휴무일과 최신 운영 여부 재확인"],
       "evidence": [{ "url": "https://triple.guide/restaurants/88bb8e95-14bb-40e7-be0d-87af0abfec09", "publisher": "트리플", "source_kind": "travel-platform", "supports": ["address", "opening-hours", "micro-roastery", "house-roasted-beans", "filter-coffee", "coffee-focused", "small-space", "quiet-stay", "vintage-interior", "vinyl-music", "relocated-from-daeheung"] }]
+    },
+    {
+      "canonical_place_id": "seoul:mapo:cielo-mangwon",
+      "member_external_ids": ["coffeelog-bfc151bee50c30af"],
+      "research_status": "reviewed", "confidence": "high",
+      "verified_attributes": ["roastery", "specialty-coffee", "multiple-bean-choice", "aroma-sampling", "work-friendly", "laptop-friendly", "morning-open", "drip-bags", "bean-retail", "gift-packs", "terrace", "pet-friendly", "takeout", "thursday-closed", "no-parking"],
+      "ados_editorial_angles": ["망원에서 원두 향을 먼저 비교하고 오늘 마실 커피를 고르는 로스터리", "오전 9시에 문을 열어 노트북과 드립커피로 하루를 시작하는 동네 카페"],
+      "cautions": ["플랫폼별 마감시간이 20시와 21시로 달라 방문 전 확인", "목요일 휴무", "주차 불가", "반려동물 동반 좌석과 세부 규칙 확인"],
+      "evidence": [{ "url": "https://www.tabling.co.kr/place/677cd6f866de5f069891f026", "publisher": "테이블링", "source_kind": "place-platform", "supports": ["current-operation-2026", "address", "opening-hours", "work-friendly", "laptop-friendly", "multiple-bean-choice", "bean-retail", "drip-bags", "gift-packs", "pet-friendly", "takeout", "thursday-closed", "no-parking"] }, { "url": "https://www.diningcode.com/profile.php?rid=0ll7X9jVsZVk", "publisher": "DiningCode", "source_kind": "place-platform", "supports": ["current-review-2026", "address", "roastery", "specialty-coffee", "aroma-sampling", "multiple-bean-choice", "drip-bags", "terrace", "quiet-stay"] }]
+    },
+    {
+      "canonical_place_id": "seoul:yongsan:umoae-namyeong",
+      "member_external_ids": ["coffeelog-21ad2aeb5fef86d0"],
+      "research_status": "reviewed", "confidence": "high",
+      "verified_attributes": ["cafe-bar", "late-hours", "work-friendly", "outlets", "book-lending", "vintage-speakers", "music-focused", "solo-friendly", "wine", "whisky", "beer", "kaymak-bread", "seasonal-parfait", "collaboration-dessert", "pet-friendly", "no-kids", "no-parking", "one-drink-policy"],
+      "ados_editorial_angles": ["숙대입구에서 책을 빌리고 노트북을 펴 밤 11시까지 머무는 카페 바", "큰 빈티지 스피커 앞에서 카이막 브레드와 와인 사이를 고르는 저녁"],
+      "cautions": ["음악 음량이 커 작업·대화 집중도는 시간대에 따라 달라짐", "주말 만석 및 장시간 점유 가능", "노키즈존", "1인 1음료", "주차 불가", "반려동물 동반 조건 확인"],
+      "evidence": [{ "url": "https://www.diningcode.com/profile.php?rid=taqt5Tbz65nj", "publisher": "DiningCode", "source_kind": "place-platform", "supports": ["current-operation-2026", "address", "opening-hours", "cafe-bar", "late-hours", "work-friendly", "outlets", "book-lending", "vintage-speakers", "solo-friendly", "kaymak-bread", "seasonal-parfait", "collaboration-dessert", "one-drink-policy", "no-parking"] }, { "url": "https://polle.com/place/3Vec8d/%EC%9A%B0%EB%AA%A8%EC%97%90", "publisher": "뽈레", "source_kind": "place-platform", "supports": ["current-review-2026", "music-focused", "wine", "whisky", "beer", "pet-friendly", "no-kids", "no-parking", "crowding-signal"] }, { "url": "https://junggutongsin.com/archives/25981", "publisher": "중구통신", "source_kind": "opening-record", "supports": ["business-identity", "cafe-bar", "address"] }]
+    },
+    {
+      "canonical_place_id": "seoul:yongsan:shelter-haebangchon",
+      "member_external_ids": ["coffeelog-667486baa59d27c3"],
+      "research_status": "reviewed", "confidence": "high",
+      "verified_attributes": ["third-floor", "multi-level-rooftop", "namsan-view", "city-view", "large-window", "sunset-friendly", "date-friendly", "salt-coffee", "scones", "beer", "indoor-restroom", "weekend-late-hours"],
+      "ados_editorial_angles": ["해방촌 3·4층 루프탑에서 남산과 노을을 함께 보는 카페", "바람 부는 날에는 통창 안쪽에서 소금 커피를 마시며 도시를 내려다보는 곳"],
+      "cautions": ["루프탑 이용은 날씨와 계절 영향을 크게 받음", "평일과 주말 마감시간이 다름", "해방촌 경사와 계단 접근 고려", "인기 시간대 뷰 좌석 혼잡 가능", "커피보다 전망 중심의 추천 문맥이 적합"],
+      "evidence": [{ "url": "https://www.diningcode.com/profile.php?rid=1yK2gun3x0WP", "publisher": "DiningCode", "source_kind": "place-platform", "supports": ["current-operation-2026", "address", "opening-hours", "third-floor", "multi-level-rooftop", "namsan-view", "city-view", "large-window", "sunset-friendly", "date-friendly", "salt-coffee", "beer", "indoor-restroom"] }, { "url": "https://datepop.co.kr/item/24833", "publisher": "데이트팝", "source_kind": "date-guide", "supports": ["date-friendly", "salt-coffee", "scones", "quiet-stay"] }, { "url": "https://www.marieclairekorea.com/newnew/2025/07/rooftop-cafe/", "publisher": "Marie Claire Korea", "source_kind": "editorial-feature", "supports": ["rooftop", "city-view", "summer-evening"] }]
+    },
+    {
+      "canonical_place_id": "seoul:yongsan:seoul-ludens-itaewon",
+      "member_external_ids": ["coffeelog-20966068d705a135"],
+      "research_status": "reviewed", "confidence": "high",
+      "verified_attributes": ["second-floor", "rooftop", "terrace", "n-seoul-tower-view", "panoramic-city-view", "cafe-bar", "wine", "beer", "cocktails", "late-night", "date-friendly", "group-friendly", "reservation", "separate-restrooms", "no-parking"],
+      "ados_editorial_angles": ["경리단길 2층 테라스에서 남산타워와 서울의 경사를 함께 보는 밤", "커피보다 전망과 와인 한 잔을 목적으로 자정 이후까지 머무는 카페 바"],
+      "cautions": ["커피·음식보다 전망의 만족도가 높다는 평가가 우세", "서비스에 대한 최근 부정적 평가가 있어 추천 전 편집 재검토 필요", "주차 불가", "접근 경사가 크고 이동약자 접근성 확인 필요", "가격대가 일반 카페보다 높음"],
+      "evidence": [{ "url": "https://www.dongnecoffeenote.com/c/1780", "publisher": "동네 커피 노트", "source_kind": "review-analysis", "supports": ["verified-2026", "address", "second-floor", "rooftop", "terrace", "n-seoul-tower-view", "panoramic-city-view", "large-space", "wine", "no-parking", "not-work-focused"] }, { "url": "https://polle.com/place/4hBn9X/%EC%84%9C%EC%9A%B8%EB%A3%A8%EB%8D%B4%EC%8A%A4", "publisher": "뽈레", "source_kind": "place-platform", "supports": ["current-operation-2026", "cafe-bar", "wine", "rooftop", "city-view", "daily-operation"] }, { "url": "https://restaurantguru.com/amp/%EC%84%9C%EC%9A%B8%EB%A3%A8%EB%8D%B4%EC%8A%A4-Seoul", "publisher": "Restaurant Guru", "source_kind": "restaurant-platform", "supports": ["updated-2026", "opening-hours", "late-night", "view", "service-caution"] }, { "url": "https://www.menupan.com/restaurant/onepage.asp?acode=D103559", "publisher": "메뉴판닷컴", "source_kind": "place-platform", "supports": ["reservation", "group-friendly", "separate-restrooms", "no-parking", "wine", "beer", "food-menu"] }]
     }
   ]
 }
