@@ -2256,6 +2256,60 @@
       "ados_editorial_angles": ["60년 넘은 근대건축의 큰 창으로 명동 중국대사관 풍경을 바라보는 카페", "명동 저녁 동선 뒤 늦게까지 무화과 케이크와 차를 고를 수 있는 넓은 공간"],
       "cautions": ["주차 불가", "관광·쇼핑 피크에는 혼잡 가능", "콘센트가 제한적이어서 작업 카페로는 부적합", "층간 이동과 오래된 건물의 접근성 확인", "디저트 라인업은 계절별 변동"],
       "evidence": [{ "url": "https://www.diningcode.com/profile.php?rid=xP8j67fJIBCa", "publisher": "DiningCode", "source_kind": "place-platform", "supports": ["current-operation-2026", "address", "opening-hours", "historic-building", "multi-floor", "large-cafe", "chinese-embassy-view", "large-windows", "photo-friendly", "dessert-cafe", "fig-cake", "tiramisu", "late-hours", "daily-operation", "no-parking"] }, { "url": "https://dongnecoffeenote.com/c/423", "publisher": "동네 커피 노트", "source_kind": "review-analysis", "supports": ["current-reviews-2026", "address", "dessert-cafe", "photo-friendly"] }, { "url": "https://sjworld.tistory.com/1094", "publisher": "K.SJ", "source_kind": "historical-visit-record", "supports": ["chinese-embassy-view", "roll-cake", "earl-grey-cake", "limited-power-outlets"] }]
+    },
+    {
+      "canonical_place_id": "seoul:jung:obrett-euljiro",
+      "member_external_ids": ["coffeelog-f1078294febdf26e"],
+      "research_status": "reviewed", "confidence": "high",
+      "verified_attributes": ["fourth-floor-cafe", "large-windows", "sunlight", "namsan-tower-view", "vintage-interior", "store-cafe", "gallery-adjacent", "banana-pudding", "vanilla-latte", "brownie", "pet-friendly", "wifi", "takeout", "no-parking", "steep-stairs", "crowded"],
+      "ados_editorial_angles": ["을지로3가역 앞 가파른 계단 끝에서 햇살과 남산타워를 만나는 4층 카페", "빈티지 가구 사이 바나나푸딩과 바닐라라떼로 쉬어가는 오후"],
+      "cautions": ["엘리베이터 없이 가파른 계단으로 4층까지 올라가야 해 접근성 낮음", "주말과 오후에는 만석·웨이팅 및 소음 가능", "주차 불가", "반려동물 동반 조건 확인", "평일과 주말 마감 시간이 다름"],
+      "evidence": [{ "url": "https://www.diningcode.com/profile.php?rid=mmdYWl1XmElG", "publisher": "DiningCode", "source_kind": "place-platform", "supports": ["current-operation-2026", "opening-hours", "fourth-floor-cafe", "large-windows", "sunlight", "namsan-tower-view", "vintage-interior", "banana-pudding", "vanilla-latte", "brownie", "pet-friendly", "wifi", "crowded"] }, { "url": "https://polle.com/place/1AS9vC/%EC%98%A4%EB%B8%8C%EB%A0%9B", "publisher": "Polle", "source_kind": "place-platform", "supports": ["address", "store-cafe", "gallery-adjacent", "steep-stairs", "takeout", "pet-friendly", "no-parking", "waiting"] }]
+    },
+    {
+      "canonical_place_id": "seoul:jung:continuity-euljiro",
+      "member_external_ids": ["coffeelog-02d6e580f93b5d6d"],
+      "research_status": "reviewed", "confidence": "high",
+      "verified_attributes": ["specialty-coffee", "hand-drip", "dessert-cafe", "tarts", "urban-garden", "photo-friendly", "late-hours", "daily-operation", "wifi", "charging", "group-seating", "rental-available", "vegan-options", "takeout", "delivery", "no-parking"],
+      "ados_editorial_angles": ["을지로의 복잡한 골목 위 도심 정원에서 핸드드립과 타르트를 고르는 카페", "충전·와이파이·단체석을 갖춰 늦은 저녁까지 대화나 짧은 작업을 이어가는 곳"],
+      "cautions": ["저녁과 주말에는 대기 가능", "전용 주차장 없음", "시즌 디저트와 비건 메뉴는 당일 구성 확인", "대관 일정에는 좌석 이용이 달라질 수 있음"],
+      "evidence": [{ "url": "https://www.diningcode.com/profile.php?rid=g7y7xR0wy3kL", "publisher": "DiningCode", "source_kind": "place-platform", "supports": ["current-operation-2026", "address", "opening-hours", "hand-drip", "dessert-cafe", "tarts", "urban-garden", "photo-friendly", "late-hours", "daily-operation", "wifi", "group-seating", "takeout", "delivery", "no-parking"] }, { "url": "https://www.daangn.com/kr/local-profile/%EC%BD%98%ED%8B%B0%EB%89%B4%EC%9D%B4%ED%8B%B0-y8pnfodh6375/", "publisher": "당근 동네 업체", "source_kind": "local-business-profile", "supports": ["current-update-2026", "address", "opening-hours", "vegan-options", "wifi", "charging", "group-seating", "rental-available", "reservation", "takeout"] }, { "url": "https://dongnecoffeenote.com/c/415", "publisher": "동네 커피 노트", "source_kind": "review-analysis", "supports": ["current-reviews-2026", "specialty-coffee", "urban-garden", "photo-friendly", "coffee-quality-signal"] }]
+    },
+    {
+      "canonical_place_id": "seoul:jung:cassette-chungmuro",
+      "member_external_ids": ["coffeelog-182d2ed369862133"],
+      "research_status": "reviewed", "confidence": "high",
+      "verified_attributes": ["music-cafe", "jazz", "cassette-tapes", "reel-to-reel", "large-speakers", "vintage-interior", "old-building", "third-floor", "small-space", "quiet-solo-stay", "banana-coffee", "babka", "wine", "hidden-alley", "stairs"],
+      "ados_editorial_angles": ["충무로 오래된 건물 3층에서 릴테이프와 재즈를 들으며 혼자 머무는 카페", "바나나 커피와 바브카를 곁들여 낮의 작은 재즈바처럼 즐기는 곳"],
+      "cautions": ["계단으로 3층에 접근하며 건물 입구가 눈에 잘 띄지 않음", "공간이 작아 만석 가능", "영업시간이 짧아 마감 전 확인", "작업·단체 목적보다 음악 감상과 짧은 체류에 적합", "디저트 라인업은 변동 가능"],
+      "evidence": [{ "url": "https://www.diningcode.com/profile.php?rid=yr1usXt7YR6z", "publisher": "DiningCode", "source_kind": "place-platform", "supports": ["current-operation-2026", "address", "opening-hours", "music-cafe", "jazz", "cassette-tapes", "reel-to-reel", "large-speakers", "vintage-interior", "old-building", "third-floor", "banana-coffee", "babka", "hidden-alley", "stairs"] }, { "url": "https://dongnecoffeenote.com/c/38872", "publisher": "동네 커피 노트", "source_kind": "review-analysis", "supports": ["current-reviews-2026", "address", "quiet-solo-stay", "vintage-interior", "small-space", "wine"] }]
+    },
+    {
+      "canonical_place_id": "seoul:jung:verona-euljiro",
+      "member_external_ids": ["coffeelog-f04140d7272e0eef"],
+      "research_status": "reviewed", "confidence": "high",
+      "verified_attributes": ["year-round-christmas", "romeo-and-juliet-theme", "verona-theme", "stained-glass", "photo-friendly", "third-floor", "seasonal-bingsu", "croffle", "verona-latte", "alcohol-available", "late-hours-weekend", "waiting", "no-parking", "hidden-entrance"],
+      "ados_editorial_angles": ["한여름에도 트리와 스테인드글라스가 켜진 365일 크리스마스 카페", "을지로 골목 3층에서 제철 과일 빙수와 로미오와 줄리엣의 무드를 즐기는 곳"],
+      "cautions": ["주말과 포토 스폿 중심 시간에는 웨이팅·혼잡 가능", "주차 불가", "간판이 작고 3층 계단 접근", "1인 1주문 정책 확인", "빙수·과일 메뉴는 계절과 수급에 따라 변경", "음료보다 테마와 사진 경험 비중이 큰 추천"],
+      "evidence": [{ "url": "https://www.diningcode.com/profile.php?rid=kwPmMtXaMtBM", "publisher": "DiningCode", "source_kind": "place-platform", "supports": ["current-operation-2026", "address", "opening-hours", "year-round-christmas", "romeo-and-juliet-theme", "verona-theme", "stained-glass", "photo-friendly", "third-floor", "seasonal-bingsu", "croffle", "verona-latte", "alcohol-available", "late-hours-weekend", "waiting", "no-parking", "hidden-entrance"] }, { "url": "https://ayamy.tistory.com/61", "publisher": "ayamy", "source_kind": "historical-visit-record", "supports": ["christmas-theme", "hidden-alley", "croffle"] }]
+    },
+    {
+      "canonical_place_id": "seoul:jung:gelike-euljiro",
+      "member_external_ids": ["coffeelog-0e937da31efcdb2f"],
+      "research_status": "reviewed", "confidence": "medium",
+      "verified_attributes": ["gelato-cafe", "sorbet", "seasonal-gelato", "basil-lemon-sorbet", "coffee", "retro-interior", "crt-television", "industrial-furniture", "printing-alley", "ground-floor", "current-business-signal"],
+      "ados_editorial_angles": ["을지로 인쇄 골목의 브라운관 TV와 철제 가구 사이에서 젤라또를 고르는 카페", "여름 한정 바질 레몬 소르베와 아이스커피로 골목의 열기를 식히는 곳"],
+      "cautions": ["상세 운영 정보가 제한적이므로 영업시간·휴무일을 당일 확인", "젤라또와 소르베 맛은 계절별 변경", "공간·편의시설 정보는 추가 현장 확인 필요", "편집 추천 전 공식 채널과 접근성 확인", "eligible_for_ados false 유지"],
+      "evidence": [{ "url": "https://dongnecoffeenote.com/c/10608", "publisher": "동네 커피 노트", "source_kind": "review-analysis", "supports": ["current-reviews-2026", "address", "gelato-cafe", "coffee-quality-signal", "dessert-signal"] }, { "url": "https://kr.trip.com/moments/detail/jung-gu-2016454-135535192/", "publisher": "트립닷컴", "source_kind": "visit-guide", "supports": ["address", "opening-hours-signal", "gelato", "sorbet", "seasonal-gelato", "basil-lemon-sorbet", "coffee", "retro-interior", "crt-television", "industrial-furniture", "printing-alley"] }, { "url": "https://marketbz.com/companyDetail/5332002689", "publisher": "마켓비즈", "source_kind": "current-business-signal", "supports": ["current-operation-2026", "cafe-registration"] }]
+    },
+    {
+      "canonical_place_id": "seoul:jung:hotel-susyeonhwa-euljiro",
+      "member_external_ids": ["coffeelog-3b775fcea8c4caf7"],
+      "research_status": "reviewed", "confidence": "high",
+      "verified_attributes": ["cafe-bar", "day-to-night", "cocktails", "natural-wine", "craft-beer", "coffee", "cakes", "basque-cheesecake", "vintage-interior", "old-building", "fourth-floor", "no-elevator", "dark-lighting", "photo-friendly", "designer-studio-origin", "exhibition-rental", "late-night", "no-signage", "weekend-time-limit", "no-parking"],
+      "ados_editorial_angles": ["을지로 오래된 건물 4층에서 낮 커피가 밤 칵테일로 이어지는 가짜 호텔 라운지", "브라운관 TV와 낡은 여행가방 사이에서 바스크 치즈케이크를 먹는 뉴트로 공간"],
+      "cautions": ["엘리베이터 없이 4층 계단 접근", "간판이 없어 입구를 찾기 어려움", "주말 2시간 이용 제한 가능", "조명이 어둡고 음악이 커 독서·작업에는 부적합", "요일별 마감 시간이 출처마다 달라 당일 확인", "주차 불가"],
+      "evidence": [{ "url": "https://www.diningcode.com/profile.php?rid=ul9shXxmZJHs", "publisher": "DiningCode", "source_kind": "place-platform", "supports": ["current-operation-2026", "cafe-bar", "day-to-night", "cocktails", "natural-wine", "craft-beer", "coffee", "cakes", "basque-cheesecake", "vintage-interior", "old-building", "fourth-floor", "no-elevator", "dark-lighting", "photo-friendly", "late-night", "no-signage", "weekend-time-limit", "no-parking"] }, { "url": "https://xn--2s2b33eb3kgvpta.com/store/S190530_1564369681044", "publisher": "완벽한 하루", "source_kind": "place-guide", "supports": ["current-listing-2026", "hidden-cafe", "dessert-signal"] }, { "url": "https://leemoc.tistory.com/48", "publisher": "Leemoc", "source_kind": "historical-visit-record", "supports": ["designer-studio-origin", "exhibition-rental", "cafe-bar", "no-signage"] }]
     }
   ]
 }
