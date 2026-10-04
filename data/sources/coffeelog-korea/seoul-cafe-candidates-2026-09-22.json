@@ -15,7 +15,7 @@
     "geography": "Seoul only",
     "record_count": 454,
     "enriched_record_count": 30,
-    "researched_record_count": 303
+    "researched_record_count": 309
   },
   "import_policy": {
     "default_action": "stage_only",
@@ -15718,8 +15718,81 @@
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
       "editorial_context_provenance": null,
-      "canonical_place_id": null,
-      "research_status": "not_researched"
+      "canonical_place_id": "seoul:jung:cream-chic-myeongdong",
+      "research_status": "reviewed",
+      "research_confidence": "high",
+      "verified_attributes": [
+        "cream-coffee-specialty",
+        "einspanner",
+        "nutella-spanner",
+        "matcha-cream-latte",
+        "ice-cream-latte",
+        "roastery-signal",
+        "baked-goods",
+        "madeleine",
+        "cookies",
+        "scones",
+        "egg-tart",
+        "early-open-weekend",
+        "late-hours",
+        "takeout",
+        "delivery",
+        "small-tables",
+        "crowded",
+        "no-parking"
+      ],
+      "ados_editorial_angles": [
+        "명동 쇼핑 사이 진하고 고소한 아인슈페너와 구움과자를 빠르게 고르는 카페",
+        "늦은 밤까지 말차 크림라떼나 아이스크림라떼로 관광 동선을 쉬어가는 곳"
+      ],
+      "research_cautions": [
+        "식사 직후와 주말에는 만석·웨이팅 및 높은 소음 가능",
+        "좌석 간격과 테이블이 작아 장시간 체류·작업에는 부적합",
+        "주차 불가",
+        "크림 음료와 디저트 중심이라 단맛 선호도 고려",
+        "명동 관광객 혼잡 시간 안내"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://www.diningcode.com/profile.php?rid=fg90f2N1aGQY",
+          "publisher": "DiningCode",
+          "source_kind": "place-platform",
+          "supports": [
+            "current-operation-2026",
+            "address",
+            "opening-hours",
+            "cream-coffee-specialty",
+            "einspanner",
+            "nutella-spanner",
+            "matcha-cream-latte",
+            "ice-cream-latte",
+            "roastery-signal",
+            "baked-goods",
+            "madeleine",
+            "cookies",
+            "scones",
+            "egg-tart",
+            "early-open-weekend",
+            "late-hours",
+            "takeout",
+            "delivery",
+            "small-tables",
+            "crowded",
+            "no-parking"
+          ]
+        },
+        {
+          "url": "https://cafe.ambitstock.com/euljiro/cafe/%ED%81%AC%EB%A6%BC%EC%8B%9C%ED%81%AC/",
+          "publisher": "오늘의 카페",
+          "source_kind": "aggregated-place-guide",
+          "supports": [
+            "current-listing-2026",
+            "address",
+            "dessert-cafe",
+            "myeongdong-location"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-51f309f75c876297",
@@ -15751,8 +15824,68 @@
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
       "editorial_context_provenance": null,
-      "canonical_place_id": null,
-      "research_status": "not_researched"
+      "canonical_place_id": "seoul:jung:tippy-chungmuro",
+      "research_status": "reviewed",
+      "research_confidence": "medium",
+      "verified_attributes": [
+        "coffee-focused",
+        "fig-espresso",
+        "fig-leaf-tea",
+        "seasonal-ingredient-drinks",
+        "quiet-space",
+        "solo-cafe",
+        "ground-floor",
+        "takeout-discount-signal",
+        "chungmuro-location"
+      ],
+      "ados_editorial_angles": [
+        "충무로에서 무화과 에스프레소와 직접 찌고 말린 무화과잎 차를 고르는 작은 카페",
+        "명동과 충무로 사이 조용한 1층 공간에서 혼자 커피를 마시는 곳"
+      ],
+      "research_cautions": [
+        "현재 상세 영업시간과 공식 운영 정보가 제한돼 방문 전 확인",
+        "후기에서 메뉴 품질과 응대 평가가 엇갈림",
+        "무화과 기반 메뉴는 계절·재고에 따라 변경 가능",
+        "좌석·주차·접근성 추가 확인 필요",
+        "eligible_for_ados false 유지"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://www.diningcode.com/profile.php?rid=5CNDYsljCPjl",
+          "publisher": "DiningCode",
+          "source_kind": "place-platform",
+          "supports": [
+            "current-listing-2026",
+            "address-signal",
+            "coffee-focused",
+            "fig-leaf-tea",
+            "quiet-space"
+          ]
+        },
+        {
+          "url": "https://polle.com/place/3n3a4l/%ED%8B%B0%ED%94%BC",
+          "publisher": "Polle",
+          "source_kind": "place-platform",
+          "supports": [
+            "address",
+            "fig-espresso",
+            "seasonal-ingredient-drinks",
+            "ground-floor",
+            "takeout-discount-signal",
+            "mixed-reviews"
+          ]
+        },
+        {
+          "url": "https://place.udanax.org/place.php?id=1239244&placeName=%ED%8B%B0%ED%94%BC",
+          "publisher": "업체창고",
+          "source_kind": "business-directory",
+          "supports": [
+            "address",
+            "cafe-identity",
+            "chungmuro-location"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-b440f7cdcdccbe93",
@@ -15784,8 +15917,81 @@
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
       "editorial_context_provenance": null,
-      "canonical_place_id": null,
-      "research_status": "not_researched"
+      "canonical_place_id": "seoul:jung:avant-bakery-euljiro-dgb",
+      "research_status": "reviewed",
+      "research_confidence": "high",
+      "verified_attributes": [
+        "bakery-cafe",
+        "large-space",
+        "office-building",
+        "early-open-weekday",
+        "breakfast-friendly",
+        "croissant",
+        "scones",
+        "rice-salt-bread",
+        "baguette",
+        "ang-butter",
+        "cakes",
+        "financier",
+        "bar-seating",
+        "solo-cafe",
+        "parking-support",
+        "long-hours",
+        "lunch-crowds",
+        "cheonggyecheon-nearby"
+      ],
+      "ados_editorial_angles": [
+        "청계천 출근길 오전 7시에 큰 크루아상과 쌀 소금빵을 집어 드는 베이커리 카페",
+        "종각과 을지로입구 사이 금융센터 1층에서 바 좌석에 앉아 빠르게 아침을 먹는 곳"
+      ],
+      "research_cautions": [
+        "평일 점심에는 직장인 수요로 만석 가능",
+        "주말은 늦게 열어 출근형 추천과 시간이 다름",
+        "주차 1시간 지원 이후 조건 확인",
+        "일부 제품 가격대와 서비스 평가가 엇갈림",
+        "진열 빵의 덮개 등 위생 민감도 고려"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://www.diningcode.com/profile.php?rid=yG8EyUzVv6Wi",
+          "publisher": "DiningCode",
+          "source_kind": "place-platform",
+          "supports": [
+            "current-operation-2026",
+            "address",
+            "opening-hours",
+            "bakery-cafe",
+            "large-space",
+            "office-building",
+            "early-open-weekday",
+            "breakfast-friendly",
+            "croissant",
+            "scones",
+            "rice-salt-bread",
+            "baguette",
+            "ang-butter",
+            "cakes",
+            "financier",
+            "bar-seating",
+            "solo-cafe",
+            "parking-support",
+            "long-hours",
+            "lunch-crowds",
+            "cheonggyecheon-nearby"
+          ]
+        },
+        {
+          "url": "https://dongnecoffeenote.com/c/10652",
+          "publisher": "동네 커피 노트",
+          "source_kind": "review-analysis",
+          "supports": [
+            "current-reviews-2026",
+            "croissant",
+            "office-district",
+            "cheonggyecheon-nearby"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-e8ee02a91a8a8ef8",
@@ -15957,8 +16163,75 @@
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
       "editorial_context_provenance": null,
-      "canonical_place_id": null,
-      "research_status": "not_researched"
+      "canonical_place_id": "seoul:jung:obrett-euljiro",
+      "research_status": "reviewed",
+      "research_confidence": "high",
+      "verified_attributes": [
+        "fourth-floor-cafe",
+        "large-windows",
+        "sunlight",
+        "namsan-tower-view",
+        "vintage-interior",
+        "store-cafe",
+        "gallery-adjacent",
+        "banana-pudding",
+        "vanilla-latte",
+        "brownie",
+        "pet-friendly",
+        "wifi",
+        "takeout",
+        "no-parking",
+        "steep-stairs",
+        "crowded"
+      ],
+      "ados_editorial_angles": [
+        "을지로3가역 앞 가파른 계단 끝에서 햇살과 남산타워를 만나는 4층 카페",
+        "빈티지 가구 사이 바나나푸딩과 바닐라라떼로 쉬어가는 오후"
+      ],
+      "research_cautions": [
+        "엘리베이터 없이 가파른 계단으로 4층까지 올라가야 해 접근성 낮음",
+        "주말과 오후에는 만석·웨이팅 및 소음 가능",
+        "주차 불가",
+        "반려동물 동반 조건 확인",
+        "평일과 주말 마감 시간이 다름"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://www.diningcode.com/profile.php?rid=mmdYWl1XmElG",
+          "publisher": "DiningCode",
+          "source_kind": "place-platform",
+          "supports": [
+            "current-operation-2026",
+            "opening-hours",
+            "fourth-floor-cafe",
+            "large-windows",
+            "sunlight",
+            "namsan-tower-view",
+            "vintage-interior",
+            "banana-pudding",
+            "vanilla-latte",
+            "brownie",
+            "pet-friendly",
+            "wifi",
+            "crowded"
+          ]
+        },
+        {
+          "url": "https://polle.com/place/1AS9vC/%EC%98%A4%EB%B8%8C%EB%A0%9B",
+          "publisher": "Polle",
+          "source_kind": "place-platform",
+          "supports": [
+            "address",
+            "store-cafe",
+            "gallery-adjacent",
+            "steep-stairs",
+            "takeout",
+            "pet-friendly",
+            "no-parking",
+            "waiting"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-31e5ed73c46bb52f",
@@ -15990,8 +16263,92 @@
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
       "editorial_context_provenance": null,
-      "canonical_place_id": null,
-      "research_status": "not_researched"
+      "canonical_place_id": "seoul:jung:yaksuteo-yaksu",
+      "research_status": "reviewed",
+      "research_confidence": "high",
+      "verified_attributes": [
+        "cafe-bar",
+        "day-to-night",
+        "late-night",
+        "coffee",
+        "einspanner",
+        "whisky",
+        "cocktails",
+        "two-bean-options",
+        "large-windows",
+        "sunlight",
+        "lp-music",
+        "vintage-interior",
+        "work-friendly-signal",
+        "reading-friendly",
+        "mixed-seating",
+        "second-floor",
+        "crowded-weekend",
+        "no-parking"
+      ],
+      "ados_editorial_angles": [
+        "약수역 바로 앞 통창 카페에서 낮에는 노트북을 펴고 밤에는 위스키로 넘어가는 곳",
+        "두 가지 원두 중 하나를 골라 버터리한 아인슈페너를 마시며 LP를 듣는 카페바"
+      ],
+      "research_cautions": [
+        "주말 밤에는 만석과 높은 소음 가능",
+        "공식 프로필과 플랫폼 간 마감 시간이 자정~새벽 2시로 달라 당일 확인",
+        "주차 불가",
+        "2층 계단 접근성 확인",
+        "낮 작업과 밤 카페바 분위기가 크게 다름"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://www.daangn.com/kr/local-profile/%EC%95%BD%EC%88%98%ED%84%B0-qk2q321jf9nt/",
+          "publisher": "당근 동네 업체",
+          "source_kind": "official-local-profile",
+          "supports": [
+            "current-update-2026",
+            "address",
+            "late-night",
+            "day-to-night",
+            "work-friendly-signal",
+            "mixed-seating",
+            "large-windows",
+            "crowded"
+          ]
+        },
+        {
+          "url": "https://www.diningcode.com/profile.php?rid=YAVhXmeqWSuG",
+          "publisher": "DiningCode",
+          "source_kind": "place-platform",
+          "supports": [
+            "current-operation-2026",
+            "address",
+            "opening-hours-conflict",
+            "cafe-bar",
+            "coffee",
+            "einspanner",
+            "whisky",
+            "cocktails",
+            "large-windows",
+            "sunlight",
+            "lp-music",
+            "vintage-interior",
+            "work-friendly-signal",
+            "reading-friendly",
+            "second-floor",
+            "no-parking"
+          ]
+        },
+        {
+          "url": "https://www.tabling.co.kr/place/677cd47066de5f06988d6704",
+          "publisher": "테이블링",
+          "source_kind": "place-platform",
+          "supports": [
+            "address",
+            "two-bean-options",
+            "einspanner",
+            "crowded-weekend",
+            "cafe-bar"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-050d1b748c60bfb8",
@@ -16095,8 +16452,78 @@
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
       "editorial_context_provenance": null,
-      "canonical_place_id": null,
-      "research_status": "not_researched"
+      "canonical_place_id": "seoul:jung:metcha-myeongdong",
+      "research_status": "reviewed",
+      "research_confidence": "high",
+      "verified_attributes": [
+        "matcha-specialty",
+        "tea-room",
+        "whole-building",
+        "four-floors",
+        "large-space",
+        "group-seating",
+        "matcha-cream",
+        "matcha-milk-tea",
+        "matcha-dessert",
+        "non-coffee-focus",
+        "takeout",
+        "myeongdong-location",
+        "no-parking"
+      ],
+      "ados_editorial_angles": [
+        "명동 한복판 네 층을 채운 말차 전문점에서 농도와 디저트를 함께 고르는 티룸",
+        "커피를 마시지 않는 일행과 단체 좌석에서 말차 밀크티로 쉬어가기 좋은 곳"
+      ],
+      "research_cautions": [
+        "명동 관광 피크에는 층별 좌석도 혼잡 가능",
+        "주차 불가",
+        "말차의 쌉싸름함과 크림 단맛 선호도 고려",
+        "층간 이동과 접근성 세부 확인",
+        "대표 메뉴와 영업시간은 공식 사이트에서 방문 전 재확인"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://metcha.kr/",
+          "publisher": "METCHA",
+          "source_kind": "official-website",
+          "supports": [
+            "current-operation-2026",
+            "official-brand",
+            "address",
+            "matcha-specialty",
+            "tea-room",
+            "whole-building",
+            "four-floors",
+            "large-space",
+            "group-seating",
+            "takeout",
+            "myeongdong-location"
+          ]
+        },
+        {
+          "url": "https://polle.com/place/25BxFI/%EB%A7%B7%EC%B0%A8",
+          "publisher": "Polle",
+          "source_kind": "place-platform",
+          "supports": [
+            "address",
+            "matcha-cream",
+            "matcha-dessert",
+            "no-parking",
+            "mixed-menu-reviews"
+          ]
+        },
+        {
+          "url": "https://dongnecoffeenote.com/c/1887",
+          "publisher": "동네 커피 노트",
+          "source_kind": "review-analysis",
+          "supports": [
+            "current-reviews-2026",
+            "matcha-specialty",
+            "matcha-milk-tea",
+            "non-coffee-focus"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-40db223049ef4ec2",
