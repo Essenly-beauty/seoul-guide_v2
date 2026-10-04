@@ -2310,6 +2310,60 @@
       "ados_editorial_angles": ["을지로 오래된 건물 4층에서 낮 커피가 밤 칵테일로 이어지는 가짜 호텔 라운지", "브라운관 TV와 낡은 여행가방 사이에서 바스크 치즈케이크를 먹는 뉴트로 공간"],
       "cautions": ["엘리베이터 없이 4층 계단 접근", "간판이 없어 입구를 찾기 어려움", "주말 2시간 이용 제한 가능", "조명이 어둡고 음악이 커 독서·작업에는 부적합", "요일별 마감 시간이 출처마다 달라 당일 확인", "주차 불가"],
       "evidence": [{ "url": "https://www.diningcode.com/profile.php?rid=ul9shXxmZJHs", "publisher": "DiningCode", "source_kind": "place-platform", "supports": ["current-operation-2026", "cafe-bar", "day-to-night", "cocktails", "natural-wine", "craft-beer", "coffee", "cakes", "basque-cheesecake", "vintage-interior", "old-building", "fourth-floor", "no-elevator", "dark-lighting", "photo-friendly", "late-night", "no-signage", "weekend-time-limit", "no-parking"] }, { "url": "https://xn--2s2b33eb3kgvpta.com/store/S190530_1564369681044", "publisher": "완벽한 하루", "source_kind": "place-guide", "supports": ["current-listing-2026", "hidden-cafe", "dessert-signal"] }, { "url": "https://leemoc.tistory.com/48", "publisher": "Leemoc", "source_kind": "historical-visit-record", "supports": ["designer-studio-origin", "exhibition-rental", "cafe-bar", "no-signage"] }]
+    },
+    {
+      "canonical_place_id": "seoul:jung:commute-euljiro",
+      "member_external_ids": ["coffeelog-8dfa315495cfbe20"],
+      "research_status": "reviewed", "confidence": "high",
+      "verified_attributes": ["early-open-weekday", "commuter-coffee", "signature-euljiro-spanner", "commute-latte", "flat-white", "brewed-coffee", "decaf", "oat-milk", "quiet-space", "reading-friendly", "work-friendly-signal", "wifi", "basement", "takeout", "parking-available", "closed-saturday"],
+      "ados_editorial_angles": ["을지로입구 출근길 지하 1층에서 오전 7시 30분 을지로슈페너를 마시는 카페", "차분한 좌석에서 디카페인이나 오트밀크 커피와 함께 잠깐 읽고 일하는 곳"],
+      "cautions": ["토요일 휴무와 일요일 단축 운영 확인", "지하층 위치로 자연광·접근 동선 고려", "브레이크타임 여부는 당일 확인", "주차는 건물 유료 조건 확인", "피크 출근·점심 시간 혼잡 가능"],
+      "evidence": [{ "url": "https://www.tabling.co.kr/place/677cd6ab66de5f06989164cc", "publisher": "테이블링", "source_kind": "place-platform", "supports": ["current-operation-2026", "address", "opening-hours", "early-open-weekday", "signature-euljiro-spanner", "brewed-coffee", "flat-white", "quiet-space", "reading-friendly", "work-friendly-signal", "parking-available", "takeout", "closed-saturday"] }, { "url": "https://www.daangn.com/kr/local-profile/%EC%BB%A4%EB%AE%A4%ED%8A%B8-iodbj5fz8myy/", "publisher": "당근 동네 업체", "source_kind": "official-local-profile", "supports": ["current-update-2026", "brand-story", "address", "signature-euljiro-spanner", "commute-latte", "flat-white", "brewed-coffee"] }, { "url": "https://www.diningcode.com/profile.php?rid=EoD1okpXACOZ", "publisher": "DiningCode", "source_kind": "place-platform", "supports": ["basement", "decaf", "oat-milk-signal", "quiet-space", "wifi", "parking-paid"] }]
+    },
+    {
+      "canonical_place_id": "seoul:jung:pildong-page-turner",
+      "member_external_ids": ["coffeelog-eff6e39bc5e0de71"],
+      "research_status": "reviewed", "confidence": "low",
+      "verified_attributes": ["non-cafe-likely", "bookstore-signal", "retail-business-signal", "third-floor", "pildong-location", "identity-needs-verification"],
+      "ados_editorial_angles": ["이름은 북카페를 연상시키지만 현재는 서점·판매 공간 여부부터 다시 확인해야 할 필동 후보"],
+      "cautions": ["카페 운영 근거가 확인되지 않아 Coffee & Cafes에서 제외", "현재 영업 여부·방문 가능 시간·판매 품목을 공식 채널 또는 현장 확인", "동명 업체와 혼동 가능", "주소 표기가 301호와 지번 수준으로만 확인됨", "eligible_for_ados false 유지"],
+      "evidence": [{ "url": "https://azr.purpleo.kr/article/4481", "publisher": "전국 서점 지도", "source_kind": "public-data-derived-directory", "supports": ["bookstore-signal", "pildong-location", "place-identity-signal"] }, { "url": "https://www.jobplanet.co.kr/companies/495873/landing/%ED%95%84%EB%8F%99%ED%8E%98%EC%9D%B4%EC%A7%80%ED%84%B0%EB%84%88", "publisher": "잡플래닛", "source_kind": "business-profile", "supports": ["retail-business-signal", "address", "third-floor", "business-identity"] }]
+    },
+    {
+      "canonical_place_id": "seoul:jung:les-mains-dores-gwanghwamun",
+      "member_external_ids": ["coffeelog-b718bcd124207736"],
+      "research_status": "reviewed", "confidence": "high",
+      "verified_attributes": ["bakery-cafe", "three-floors", "large-space", "morning-open", "daily-operation", "breakfast-friendly", "work-friendly", "meeting-friendly", "power-outlets", "fritz-hansen-furniture", "croissant", "pistachio-cream-croissant", "madeleine", "financier", "egg-tart", "sandwich", "takeout", "no-parking"],
+      "ados_editorial_angles": ["광화문 출근 전에 3층 규모의 베이커리에서 크루아상으로 아침을 시작하는 곳", "프리츠한센 가구와 콘센트가 있는 층을 골라 미팅이나 노트북 작업을 이어가는 카페"],
+      "cautions": ["주차 불가", "출근·점심 시간 직장인 혼잡 가능", "층별 분위기와 콘센트 좌석이 다름", "인기 크루아상과 시즌 한정 제품은 조기 품절 가능", "가격대가 일반 베이커리보다 높은 편"],
+      "evidence": [{ "url": "https://www.tabling.co.kr/place/68ecb32b36ac0da802902500", "publisher": "테이블링", "source_kind": "place-platform", "supports": ["current-operation-2026", "address", "opening-hours", "bakery-cafe", "three-floors", "large-space", "morning-open", "daily-operation", "breakfast-friendly", "work-friendly", "meeting-friendly", "power-outlets", "croissant", "pistachio-cream-croissant", "madeleine", "sandwich", "takeout", "no-parking"] }, { "url": "https://www.diningcode.com/profile.php?rid=qTI0gsaOXgM7", "publisher": "DiningCode", "source_kind": "place-platform", "supports": ["current-reviews-2026", "address", "three-floors", "fritz-hansen-furniture", "financier", "egg-tart", "quiet-upper-floor"] }, { "url": "https://mapz.dododo.co.kr/view.php?id=17958", "publisher": "도도도맵", "source_kind": "menu-guide", "supports": ["current-menu-2026", "croissant", "madeleine", "financier", "baguette", "sandwich", "seasonal-menu"] }]
+    },
+    {
+      "canonical_place_id": "seoul:jung:pigments-euljiro-entrance",
+      "member_external_ids": ["coffeelog-e525beabf2d61803"],
+      "research_status": "reviewed", "confidence": "high",
+      "verified_attributes": ["bakery-cafe", "early-open", "breakfast-friendly", "croissant", "pain-au-chocolat", "jambon-beurre", "sandwich", "sourdough", "salt-bread", "vienna-coffee", "bread-production-onsite", "reservation", "takeout", "parking-available", "weekday-long-hours", "quiet-space"],
+      "ados_editorial_angles": ["을지로입구역 바로 앞에서 오전 7시 30분 사워도우와 크루아상으로 출근 전 아침을 챙기는 카페", "잠봉뵈르 하나를 포장하거나 조용한 좌석에서 비엔나커피와 든든하게 쉬는 곳"],
+      "cautions": ["일요일은 단축 운영", "건물 내 주차 조건 확인", "일부 좌석이 불편하다는 후기 신호", "시즌·인기 베이커리 품절 가능", "커피와 빵 가격대 및 포장 여부를 함께 안내"],
+      "evidence": [{ "url": "https://www.tabling.co.kr/place/677cd7e266de5f069893885c", "publisher": "테이블링", "source_kind": "place-platform", "supports": ["current-operation-2026", "address", "opening-hours", "bakery-cafe", "early-open", "breakfast-friendly", "croissant", "pain-au-chocolat", "jambon-beurre", "sandwich", "sourdough", "salt-bread", "vienna-coffee", "reservation", "takeout", "parking-available", "quiet-space"] }, { "url": "https://www.jobkorea.co.kr/Recruit/GI_Read/49358484", "publisher": "잡코리아", "source_kind": "current-business-signal", "supports": ["current-operation-2026", "address", "bread-production-onsite", "business-identity"] }, { "url": "https://dongnecoffeenote.com/c/7283", "publisher": "동네 커피 노트", "source_kind": "review-analysis", "supports": ["current-reviews-2026", "early-open", "bakery-variety"] }]
+    },
+    {
+      "canonical_place_id": "seoul:jung:collectivo-euljiro-pine-avenue",
+      "member_external_ids": ["coffeelog-0f26356d12020c35"],
+      "research_status": "reviewed", "confidence": "high",
+      "verified_attributes": ["bakery-cafe", "large-space", "office-district", "early-open-weekday", "long-hours-weekday", "group-friendly", "meeting-friendly", "solo-cafe", "cakes", "whole-cake", "mango-cake", "bread-variety", "non-coffee-options", "parking-available", "wheelchair-accessible", "restroom", "weekend-variable-hours"],
+      "ados_editorial_angles": ["을지로3가 오피스 빌딩 1층에서 넓은 좌석과 베이커리로 미팅을 잡기 쉬운 카페", "퇴근 전 망고 케이크 한 조각과 음료를 고르거나 홀케이크를 픽업하는 곳"],
+      "cautions": ["요일·공휴일별 영업시간 변동이 커 당일 확인", "주차 무료 조건과 시간 확인", "점심 직후 직장인 혼잡 가능", "케이크 가격대가 높은 편", "브랜드형 대형 카페로 독립적인 동네성보다 편의성이 핵심"],
+      "evidence": [{ "url": "https://www.diningcode.com/profile.php?rid=FZRraqEf8WSb", "publisher": "DiningCode", "source_kind": "place-platform", "supports": ["current-operation-2026", "address", "opening-hours", "bakery-cafe", "large-space", "office-district", "early-open-weekday", "long-hours-weekday", "group-friendly", "meeting-friendly", "solo-cafe", "parking-available", "weekend-variable-hours"] }, { "url": "https://www.daangn.com/kr/local-profile/%EC%BD%9C%EB%A0%89%ED%8B%B0%EB%B3%B4-%EC%9D%84%EC%A7%80%EB%A1%9C%ED%8C%8C%EC%9D%B8%EC%97%90%EB%B9%84%EB%89%B4%EC%A0%90-e7rdqiejrwdt/", "publisher": "당근 동네 업체", "source_kind": "local-business-profile", "supports": ["current-listing-2026", "address", "cakes", "whole-cake", "mango-cake", "bread-variety", "non-coffee-options", "group-seating", "parking-available", "wheelchair-accessible", "restroom"] }]
+    },
+    {
+      "canonical_place_id": "seoul:jung:jeokdang-euljiro",
+      "member_external_ids": ["coffeelog-277fb48f31a4126f"],
+      "research_status": "reviewed", "confidence": "high",
+      "verified_attributes": ["korean-dessert-cafe", "modern-korean-design", "red-bean-specialty", "patbingsu", "makgeolli-bingsu", "yanggaeng", "monaka", "baekseolgi-angbutter", "red-bean-latte", "traditional-drinks", "garden-view", "quiet-space", "photo-friendly", "daily-operation", "laptop-seats", "wheelchair-accessible", "accessible-parking", "delivery", "parking-available"],
+      "ados_editorial_angles": ["을지로 오피스 빌딩 뒤편의 고요한 정원에서 팥빙수와 양갱을 현대적으로 먹는 카페", "백설기 앙버터와 수정과 에이드처럼 익숙한 한국 간식을 새 조합으로 고르는 곳"],
+      "cautions": ["인기 시간에는 팥빙수 대기 가능", "건물 후문 쪽 입구 동선 확인", "주차 조건과 장애인 주차 이용 기준 확인", "노트북 좌석이 있어도 후기상 작업 목적은 핵심이 아님", "맛에 대한 평가는 엇갈려 공간·한국 디저트 경험 중심으로 소개"],
+      "evidence": [{ "url": "https://www.daangn.com/kr/local-profile/%EC%A0%81%EB%8B%B9-jdnz37kjuqd6/", "publisher": "당근 동네 업체", "source_kind": "official-local-profile", "supports": ["current-update-2026", "address", "opening-hours", "korean-dessert-cafe", "patbingsu", "makgeolli-bingsu", "baekseolgi-angbutter", "red-bean-latte", "monaka", "laptop-seats", "wheelchair-accessible", "accessible-parking", "delivery", "parking-available"] }, { "url": "https://polle.com/place/4p30o0/%EC%A0%81%EB%8B%B9", "publisher": "Polle", "source_kind": "place-platform", "supports": ["yanggaeng", "monaka", "traditional-drinks", "daily-operation", "takeout", "delivery", "mixed-taste-reviews", "modern-korean-design"] }, { "url": "https://www.dongnecoffeenote.com/c/3847", "publisher": "동네 커피 노트", "source_kind": "review-analysis", "supports": ["current-reviews-2026", "garden-view", "quiet-space", "photo-friendly"] }]
     }
   ]
 }
