@@ -15,7 +15,7 @@
     "geography": "Seoul only",
     "record_count": 454,
     "enriched_record_count": 30,
-    "researched_record_count": 285
+    "researched_record_count": 291
   },
   "import_policy": {
     "default_action": "stage_only",
@@ -12566,8 +12566,67 @@
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
       "editorial_context_provenance": null,
-      "canonical_place_id": null,
-      "research_status": "not_researched"
+      "canonical_place_id": "seoul:yongsan:la-vie-en-coco-itaewon",
+      "research_status": "reviewed",
+      "research_confidence": "high",
+      "verified_attributes": [
+        "chocolate-specialty",
+        "single-origin-chocolate",
+        "hot-chocolate",
+        "chocolate-shake",
+        "whisky-chocolate",
+        "handmade-chocolate",
+        "specialty-coffee",
+        "quiet-space",
+        "takeout",
+        "delivery",
+        "reservation",
+        "limited-opening-days",
+        "no-parking"
+      ],
+      "ados_editorial_angles": [
+        "녹사평 골목에서 산지별 싱글 오리진 핫초콜릿을 비교해 마시는 작은 카페",
+        "커피 대신 진한 초콜릿 한 잔이 필요한 비 오는 오후를 위한 곳"
+      ],
+      "research_cautions": [
+        "주 3~4일 중심의 제한 영업이므로 방문 전 운영일 확인",
+        "초콜릿 메뉴의 산지와 재고는 변동 가능",
+        "주차 불가",
+        "조용한 소규모 공간이라 단체·장시간 체류에는 좌석 확인"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://www.tabling.co.kr/place/677ccea566de5f069883356a",
+          "publisher": "테이블링",
+          "source_kind": "place-platform",
+          "supports": [
+            "current-operation-2026",
+            "address",
+            "opening-days",
+            "chocolate-specialty",
+            "single-origin-chocolate",
+            "hot-chocolate",
+            "chocolate-shake",
+            "whisky-chocolate",
+            "takeout",
+            "delivery",
+            "reservation",
+            "no-parking"
+          ]
+        },
+        {
+          "url": "https://www.diningcode.com/profile.php?rid=G1ObNBJ4RD1G",
+          "publisher": "DiningCode",
+          "source_kind": "place-platform",
+          "supports": [
+            "address",
+            "handmade-chocolate",
+            "specialty-coffee",
+            "quiet-space",
+            "takeout"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-48590d65356785e9",
@@ -12687,8 +12746,62 @@
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
       "editorial_context_provenance": null,
-      "canonical_place_id": null,
-      "research_status": "not_researched"
+      "canonical_place_id": "seoul:yongsan:cream-connection-itaewon",
+      "research_status": "reviewed",
+      "research_confidence": "high",
+      "verified_attributes": [
+        "cream-coffee-specialty",
+        "einspanner",
+        "connection-latte",
+        "ube-latte",
+        "croffle",
+        "small-space",
+        "terrace",
+        "takeout-friendly",
+        "quiet-weekday",
+        "closed-monday-tuesday"
+      ],
+      "ados_editorial_angles": [
+        "경리단길 골목에서 밀도 높은 크림을 얹은 아인슈페너 한 잔에 집중하는 카페",
+        "평일 한산한 시간 우베 라떼와 크로플로 짧게 쉬어가는 곳"
+      ],
+      "research_cautions": [
+        "매장이 작아 주말·피크 시간 좌석 부족 가능",
+        "월·화 휴무와 요일별 마감 시간 확인",
+        "크림 음료 중심이라 단맛 선호도 고려",
+        "테라스 이용은 날씨에 따라 달라짐"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://www.diningcode.com/profile.php?rid=QOnJpfSWD9bJ",
+          "publisher": "DiningCode",
+          "source_kind": "place-platform",
+          "supports": [
+            "current-operation-2026",
+            "address",
+            "opening-hours",
+            "cream-coffee-specialty",
+            "einspanner",
+            "connection-latte",
+            "ube-latte",
+            "croffle",
+            "small-space",
+            "terrace",
+            "takeout-friendly",
+            "quiet-weekday",
+            "closed-monday-tuesday"
+          ]
+        },
+        {
+          "url": "https://bizw.kr/brand/196963",
+          "publisher": "비즈워크",
+          "source_kind": "business-profile",
+          "supports": [
+            "business-identity",
+            "itaewon-branch"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-e5c59d2fd12a3576",
@@ -12720,8 +12833,77 @@
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
       "editorial_context_provenance": null,
-      "canonical_place_id": null,
-      "research_status": "not_researched"
+      "canonical_place_id": "seoul:yongsan:korz-samgakji",
+      "research_status": "reviewed",
+      "research_confidence": "high",
+      "verified_attributes": [
+        "specialty-coffee",
+        "light-roast",
+        "single-origin",
+        "kyoto-style-coffee-partner",
+        "style-coffee-beans",
+        "uji-matcha",
+        "matcha-latte",
+        "small-space",
+        "shared-table",
+        "terrace",
+        "drip-bags",
+        "coffee-goods",
+        "parking-support"
+      ],
+      "ados_editorial_angles": [
+        "삼각지에서 교토 Style Coffee의 라이트 로스트 싱글 오리진을 고르는 카페",
+        "우지 말차 한 잔과 우드톤의 작은 공간으로 용리단길의 속도를 낮추는 곳"
+      ],
+      "research_cautions": [
+        "검색 출처별 영업 시작 시간이 달라 당일 공식 채널 확인",
+        "좌석이 적어 만석·대기 가능",
+        "반려동물은 테라스 조건 확인",
+        "주차 지원 시간 이후 요금 발생 가능",
+        "싱글 오리진 라인업은 수시 변경"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://www.diningcode.com/profile.php?rid=eMagC4uKoS1k",
+          "publisher": "DiningCode",
+          "source_kind": "place-platform",
+          "supports": [
+            "current-operation-2026",
+            "address",
+            "specialty-coffee",
+            "kyoto-style-coffee-partner",
+            "uji-matcha",
+            "matcha-latte",
+            "small-space",
+            "shared-table",
+            "parking-support"
+          ]
+        },
+        {
+          "url": "https://the-edit.co.kr/76440",
+          "publisher": "디에디트",
+          "source_kind": "editorial-feature",
+          "supports": [
+            "style-coffee-official-partner",
+            "light-roast",
+            "single-origin",
+            "style-coffee-beans",
+            "coffee-focused"
+          ]
+        },
+        {
+          "url": "https://witholddog.tistory.com/entry/%EC%82%BC%EA%B0%81%EC%A7%80%EC%B9%B4%ED%8E%98-%EA%B5%90%ED%86%A0-%EA%B0%90%EC%84%B1-%EA%B0%80%EB%93%9D%ED%95%9C-%EC%BD%94%EB%A5%B4%EC%B8%A0korz-%E2%80%94-%EC%9A%B0%EC%A7%80-%EB%A7%90%EC%B0%A8%EB%9D%BC%EB%96%BC-%ED%95%9C-%EC%9E%94%EC%9D%98-%EC%97%AC%EC%9C%A0%EC%9A%A9%EC%82%B0%EC%B9%B4%ED%8E%98",
+          "publisher": "olddog'smom",
+          "source_kind": "visit-guide",
+          "supports": [
+            "address",
+            "terrace",
+            "pet-policy-signal",
+            "parking-support",
+            "opening-hours-conflict"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-ca44664a9709ded1",
@@ -12817,8 +12999,81 @@
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
       "editorial_context_provenance": null,
-      "canonical_place_id": null,
-      "research_status": "not_researched"
+      "canonical_place_id": "seoul:jung:pines-myeongdong",
+      "research_status": "reviewed",
+      "research_confidence": "high",
+      "verified_attributes": [
+        "view-cafe",
+        "myeongdong-cathedral-view",
+        "namsan-tower-view",
+        "terrace",
+        "rooftop-feel",
+        "photo-friendly",
+        "pines-einspanner",
+        "ice-cream-latte",
+        "dessert",
+        "daily-operation",
+        "elevator-access",
+        "weekend-crowds",
+        "no-parking"
+      ],
+      "ados_editorial_angles": [
+        "명동성당의 고딕 파사드와 남산타워를 한 프레임에 담는 테라스 카페",
+        "오픈 시간에 맞춰 전망 좋은 자리를 고르고 파인즈 아인슈페너를 마시는 곳"
+      ],
+      "research_cautions": [
+        "주말에는 전망석 경쟁과 대기 가능",
+        "테라스는 날씨에 따라 이용 제한",
+        "주차 불가",
+        "건물 입구와 3층 매장 동선이 처음 방문 시 헷갈릴 수 있음",
+        "커피보다 전망·사진 경험 비중이 큰 추천"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://www.diningcode.com/profile.php?rid=RUH02gDorqot",
+          "publisher": "DiningCode",
+          "source_kind": "place-platform",
+          "supports": [
+            "current-operation-2026",
+            "address",
+            "opening-hours",
+            "myeongdong-cathedral-view",
+            "terrace",
+            "photo-friendly",
+            "pines-einspanner",
+            "ice-cream-latte",
+            "dessert",
+            "daily-operation",
+            "weekend-crowds",
+            "no-parking"
+          ]
+        },
+        {
+          "url": "https://dongnecoffeenote.com/c/28456",
+          "publisher": "동네 커피 노트",
+          "source_kind": "review-analysis",
+          "supports": [
+            "current-reviews-2026",
+            "address",
+            "myeongdong-cathedral-view",
+            "namsan-tower-view",
+            "terrace",
+            "photo-friendly",
+            "pet-friendly-signal"
+          ]
+        },
+        {
+          "url": "https://cafe.ambitstock.com/euljiro/cafe/%ED%8C%8C%EC%9D%B8%EC%A6%88/",
+          "publisher": "오늘의 카페",
+          "source_kind": "aggregated-place-guide",
+          "supports": [
+            "current-listing-2026",
+            "address",
+            "opening-hours",
+            "view-cafe"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-2a2aebaa324c2960",
@@ -12850,8 +13105,80 @@
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
       "editorial_context_provenance": null,
-      "canonical_place_id": null,
-      "research_status": "not_researched"
+      "canonical_place_id": "seoul:jung:ugly-bakers-bagel-sindang",
+      "research_status": "reviewed",
+      "research_confidence": "high",
+      "verified_attributes": [
+        "bagel-cafe",
+        "converted-house",
+        "large-space",
+        "courtyard",
+        "terrace",
+        "group-friendly",
+        "pet-friendly-outdoor",
+        "morning-open",
+        "daily-operation",
+        "savory-bagels",
+        "sweet-bagels",
+        "takeout-friendly",
+        "photo-friendly",
+        "no-parking",
+        "family-friendly"
+      ],
+      "ados_editorial_angles": [
+        "신당의 오래된 큰집과 마당을 베이글 카페로 바꾼 넓은 동네 휴식처",
+        "명란감태처럼 식사형 베이글을 골라 야외 테이블에서 아침을 먹는 곳"
+      ],
+      "research_cautions": [
+        "반려동물 동반은 야외석 조건 확인",
+        "주차 불가",
+        "주말과 좋은 날씨에는 가족·단체 방문으로 혼잡 가능",
+        "야외 좌석은 날씨와 비둘기 등 환경 변수 고려",
+        "베이글별 품절 가능"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://www.diningcode.com/profile.php?rid=ecCzekvat02s",
+          "publisher": "DiningCode",
+          "source_kind": "place-platform",
+          "supports": [
+            "current-operation-2026",
+            "bagel-cafe",
+            "terrace",
+            "pet-friendly",
+            "family-friendly",
+            "photo-friendly",
+            "mixed-quality-reviews"
+          ]
+        },
+        {
+          "url": "https://benebeanjoy.com/%EB%82%B4%EB%8F%88%EB%82%B4%EC%82%B0-%EC%8B%A0%EB%8B%B9-%EB%B2%A0%EC%9D%B4%EA%B8%80-%EC%B2%9C%EA%B5%AD-%EC%96%B4%EA%B8%80%EB%A6%AC-%EB%B2%A0%EC%9D%B4%EC%BB%A4%EC%8A%A4-%EB%B2%A0%EC%9D%B4%EA%B8%80/",
+          "publisher": "Bean의 친절노트",
+          "source_kind": "current-visit-guide-2026",
+          "supports": [
+            "address",
+            "opening-hours",
+            "converted-house",
+            "large-space",
+            "courtyard",
+            "terrace",
+            "group-friendly",
+            "pet-friendly",
+            "daily-operation"
+          ]
+        },
+        {
+          "url": "https://dongnecoffeenote.com/c/3849",
+          "publisher": "동네 커피 노트",
+          "source_kind": "review-analysis",
+          "supports": [
+            "current-reviews-2026",
+            "address",
+            "no-parking",
+            "pet-friendly-terrace"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-f70ac9f42766c790",
@@ -13167,8 +13494,83 @@
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
       "editorial_context_provenance": null,
-      "canonical_place_id": null,
-      "research_status": "not_researched"
+      "canonical_place_id": "seoul:jung:the-spot-fabulous-myeongdong",
+      "research_status": "reviewed",
+      "research_confidence": "high",
+      "verified_attributes": [
+        "historic-building",
+        "multi-floor",
+        "large-cafe",
+        "chinese-embassy-view",
+        "large-windows",
+        "photo-friendly",
+        "dessert-cafe",
+        "fig-cake",
+        "roll-cake",
+        "earl-grey-cake",
+        "tiramisu",
+        "late-hours",
+        "daily-operation",
+        "no-parking",
+        "limited-power-outlets"
+      ],
+      "ados_editorial_angles": [
+        "60년 넘은 근대건축의 큰 창으로 명동 중국대사관 풍경을 바라보는 카페",
+        "명동 저녁 동선 뒤 늦게까지 무화과 케이크와 차를 고를 수 있는 넓은 공간"
+      ],
+      "research_cautions": [
+        "주차 불가",
+        "관광·쇼핑 피크에는 혼잡 가능",
+        "콘센트가 제한적이어서 작업 카페로는 부적합",
+        "층간 이동과 오래된 건물의 접근성 확인",
+        "디저트 라인업은 계절별 변동"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://www.diningcode.com/profile.php?rid=xP8j67fJIBCa",
+          "publisher": "DiningCode",
+          "source_kind": "place-platform",
+          "supports": [
+            "current-operation-2026",
+            "address",
+            "opening-hours",
+            "historic-building",
+            "multi-floor",
+            "large-cafe",
+            "chinese-embassy-view",
+            "large-windows",
+            "photo-friendly",
+            "dessert-cafe",
+            "fig-cake",
+            "tiramisu",
+            "late-hours",
+            "daily-operation",
+            "no-parking"
+          ]
+        },
+        {
+          "url": "https://dongnecoffeenote.com/c/423",
+          "publisher": "동네 커피 노트",
+          "source_kind": "review-analysis",
+          "supports": [
+            "current-reviews-2026",
+            "address",
+            "dessert-cafe",
+            "photo-friendly"
+          ]
+        },
+        {
+          "url": "https://sjworld.tistory.com/1094",
+          "publisher": "K.SJ",
+          "source_kind": "historical-visit-record",
+          "supports": [
+            "chinese-embassy-view",
+            "roll-cake",
+            "earl-grey-cake",
+            "limited-power-outlets"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-b27a06371ee7e5fd",
