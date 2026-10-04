@@ -14,16 +14,16 @@
 
 - 인증된 GitHub SSH 계정 `mg1018-whatap`으로 최신 `main`을 분리 복제하고 `feat/place-catalog-shadow-20261004` 브랜치를 만들었다. 원래 작업 트리의 미커밋 변경은 덮어쓰지 않았다.
 - Task 1·2의 manifest 계약, 생성/검사 명령을 구현했다. 분리 브랜치의 기존 테스트 965개가 시작 시 통과했고, 신규 테스트와 `lib/data.test.ts`를 합친 29개가 통과했다. 현재 소스 1,122건과 공개 장소 1,008건을 manifest로 내보내며 `--check`가 일치했다.
-- Task 3은 **미실행/차단**이다. Supabase CLI 2.115.0은 확인했지만 Docker 데몬이 없고, 이 실행 환경에서 Docker Desktop을 열거나 로그 파일을 만들 수 없었다. pgTAP·SQL 마이그레이션·실제 DB 적재/패리티는 아직 실행하지 않았다.
-- 분리 브랜치에서 타입 검사·린트·전체 103개 파일/971개 테스트가 통과했다. `npm run audit:data:check`는 최신 `main`에서 이미 보고서가 현재 장소 데이터보다 오래되어 실패한다. 이번 변경은 장소 원본을 수정하지 않았으므로 감사 보고서 재생성은 별도 데이터 검토로 남긴다. 이 실패를 사전배포 통과로 표시하지 않는다.
+- 후속 실행에서 Docker 데몬이 동작해 Task 3~5의 로컬 DB 부분을 `feat/place-catalog-shadow-db-20261004` 작업 트리에서 진행했다. CLI가 만든 `20261004115304_place_catalog_shadow.sql`을 **로컬에만** 적용했고 pgTAP 9/9, 원본 1,122건·게시 1,008건 적재 및 ID·전체 payload 해시 전수 비교가 통과했다. 로컬 DB 통합 테스트는 별도 실행했다. 운영 DB에는 적용하지 않았다.
+- 첫 분리 브랜치에서는 타입 검사·린트·전체 103개 파일/971개 테스트가 통과했다. 후속 DB 작업 트리에서는 타입 검사·린트·106개 파일 976개 테스트가 통과했고 로컬 DB 전용 테스트 2개는 개별 실행해 통과했다. `npm run audit:data:check`는 원본 분리 브랜치와 후속 작업 트리에서 동일하게 오래된 보고서 때문에 실패한다. 감사 보고서 재생성은 별도 데이터 검토로 남기며 사전배포 통과로 표시하지 않는다.
 - 검증된 부분 작업은 GitHub의 `feat/place-catalog-shadow-20261004` 브랜치로 푸시했다. `main` 병합·프로덕션 배포·DB 적용은 하지 않았다.
-- 운영 Supabase, 앱 조회, 이미지, 상품 랭킹, 블로그는 변경하지 않았다. 현재 상태는 병행 카탈로그의 로컬 코드 준비 단계다.
+- 운영 Supabase, 앱 조회, 이미지, 상품 랭킹, 블로그는 변경하지 않았다. 현재 상태는 병행 카탈로그의 **로컬 DB 검증 완료, 운영 반영 미승인** 단계다. 로컬 Advisor는 새 장소 테이블 경고 0건, 기존 `public_reviews` 보안 등급 오류 2건을 표시했다. 실제 운영 상태와 백업 확인 전에는 DB·앱을 전환하지 않는다.
 
 ## 범위와 선행 조건
 
 이 문서는 [전체 데이터 구조 설계](service-data-architecture-design-2026-10-04.md)의 **B1: 병행 카탈로그**만 실행한다. 결과물은 실제 로컬 DB에 적재·권한 테스트·전수 패리티 검사를 할 수 있는 소프트웨어다. B2에서 `place_hours`, `place_features`, `place_services`, 필드별 근거·승인 이력·미디어 메타데이터와 앱 조회 전환을 진행한다. B1의 `payload`는 기존 `Place` 형식을 손실 없이 보존하는 임시 읽기 모델이다. 이후 정규화 테이블의 값과 독립적으로 수정하는 이중 원본으로 쓰지 않는다. 스토리·상품 랭킹·회원·리뷰 스키마는 변경하지 않는다.
 
-원래 작업 트리는 다수의 사용자 변경이 있고 원격 `main`보다 뒤에 있다. `.git` 쓰기 권한도 없으므로 **그 작업 트리에서 커밋·체리픽·리베이스하지 않는다.** 실행은 인증된 SSH로 복제한 분리 브랜치에서 진행한다. 현재 환경에서는 Docker 데몬이 없어 pgTAP을 실행할 수 없다. Supabase CLI 텔레메트리 파일 오류는 `SUPABASE_TELEMETRY_DISABLED=1`로 우회해 CLI 2.115.0을 확인했지만, 로컬 DB 검증의 대안은 아니다. DB가 실행되기 전에는 SQL 통과나 운영 적용을 주장하지 않는다.
+원래 작업 트리는 다수의 사용자 변경이 있고 원격 `main`보다 뒤에 있다. `.git` 쓰기 권한도 없으므로 **그 작업 트리에서 커밋·체리픽·리베이스하지 않는다.** 실행은 인증된 SSH로 복제한 분리 브랜치와 그로부터 파생한 작업 트리에서 진행한다. 첫 실행 때 없던 Docker 데몬이 후속 실행에서 동작해 로컬 검증을 마쳤다. Supabase CLI 텔레메트리 파일 오류는 `SUPABASE_TELEMETRY_DISABLED=1`로 우회했다. 이 로컬 결과를 운영 적용으로 주장하지 않는다.
 
 실행 직전 Supabase CLI `--help`·버전과 [변경 이력](https://supabase.com/changelog), [Data API 권한 지침](https://supabase.com/docs/guides/api/securing-your-api)을 다시 확인한다. 현재 환경의 `.md` 변경 이력 URL은 브라우저 도구가 `text/markdown`을 처리하지 못해 읽지 못했다. 운영 DB의 실제 스키마·마이그레이션 이력·백업·Data API 노출 설정은 읽기 전용으로 대조한다. B1 명령에는 운영 DB 쓰기 경로를 넣지 않는다.
 
@@ -34,6 +34,7 @@
 | `lib/place-catalog-manifest.ts` | 원본은 손실 없이 보존하고 게시 배열만 주소·좌표·필수값 검증 후 결정적 manifest로 변환 |
 | `lib/place-catalog-manifest.test.ts` | 중복 ID, 게시 ID의 원본 존재, 필수값·해시·원본 불변성 검증 |
 | `lib/place-catalog-stage.test.ts` | 로컬 DB 전용 적재기 연결 제한 검증 |
+| `scripts/lib/local-catalog-database-url.mjs`, `lib/place-catalog-local-url.test.ts` | 적재·검증기와 DB 통합 테스트에 공통 적용하는 로컬 연결 제한 |
 | `scripts/lib/place-catalog-parity.mjs`, `lib/place-catalog-parity.test.ts` | 적재 검증기가 재사용하는 ID·해시 비교와 테스트 |
 | `scripts/export-place-catalog.ts` | 무비밀 로컬 manifest 생성 및 `--check` 드리프트 검사 |
 | `scripts/.cache/place-catalog-manifest.json` | Git 제외된 임시 출력; 앱·운영 DB의 원본 아님 |
