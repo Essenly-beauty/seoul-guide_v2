@@ -20,7 +20,11 @@
     "verify:predeploy": "npm run typecheck && npm run lint && npm test && npm run audit:data:check && npm run build",
     "build:subway-data": "node scripts/fetch-subway-sources.mjs && node scripts/build-subway-data.mjs",
     "build:subway-svg": "node scripts/fetch-subway-sources.mjs && node scripts/build-subway-svg.mjs",
-    "e2e": "playwright test"
+    "e2e": "playwright test",
+    "catalog:export": "vite-node --script scripts/export-place-catalog.ts",
+    "catalog:check": "vite-node --script scripts/export-place-catalog.ts --check",
+    "catalog:stage": "node scripts/stage-place-catalog.mjs",
+    "catalog:verify": "node scripts/verify-place-catalog.mjs"
   },
   "dependencies": {
     "@supabase/ssr": "^0.12.4",

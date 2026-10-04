@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { buildPlaceCatalogManifest } from "./place-catalog-manifest";
-import type { Place } from "./data";
+import { CATALOGUE_PLACES, PLACES, type Place } from "./data";
 
 const base: Place = {
   id: "oy-test", name: "Olive Young Test", nameKr: "올리브영 테스트점",
@@ -37,5 +37,13 @@ describe("place catalog manifest", () => {
     expect(buildPlaceCatalogManifest([{ ...base, address: " " }], []).sourceRows).toHaveLength(1);
     expect(() => buildPlaceCatalogManifest([base], [{ ...base, address: " " }])).toThrow(/address/);
     expect(() => buildPlaceCatalogManifest([base], [{ ...base, lat: Number.NaN }])).toThrow(/coordinates/);
+  });
+
+  it("exports every current public place from the source catalogue", () => {
+    const result = buildPlaceCatalogManifest(CATALOGUE_PLACES, PLACES);
+    expect(result.sourceRows).toHaveLength(CATALOGUE_PLACES.length);
+    expect(result.publishedRows).toHaveLength(PLACES.length);
+    expect(result.publishedRows.map((item) => item.id))
+      .toEqual([...PLACES.map((item) => item.id)].sort((a, b) => a < b ? -1 : a > b ? 1 : 0));
   });
 });
