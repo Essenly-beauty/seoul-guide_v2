@@ -192,10 +192,10 @@ test.describe("direct auth + account sync", () => {
     await login(page);
     await page.goto("/place/ct-soonsoo-celebrity-hair-makeup-salon-in-cheongdam");
     await page.getByRole("button", { name: "Rate 4 stars" }).click();
-    await page.getByRole("button", { name: "Write a review" }).click();
     await page.getByLabel("Your review").fill("Great aqua peel, English-friendly staff.");
-    // consent checkbox defaults ON for a new review
-    await expect(page.getByRole("checkbox")).toBeChecked();
+    // Public posting requires an explicit choice.
+    await expect(page.getByRole("checkbox")).not.toBeChecked();
+    await page.getByRole("checkbox").check();
     await page.getByRole("button", { name: "Save review" }).click();
     await expect(page.getByText("Your review · public")).toBeVisible();
 

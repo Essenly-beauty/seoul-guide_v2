@@ -67,7 +67,7 @@ export default function MenuPage() {
   useEffect(() => {
     if (!authLoading && !user) nudge("menu");
   }, [authLoading, user, nudge]);
-  const ratedCount = Object.keys(ratings).filter((id) => getPlace(id)).length;
+  const ratedCount = user ? Object.keys(ratings).filter((id) => getPlace(id)).length : 0;
   const ratedLabel = ratingsReady ? String(ratedCount) : "–";
   return (
     <>

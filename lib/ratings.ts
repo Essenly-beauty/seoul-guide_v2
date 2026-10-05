@@ -3,8 +3,8 @@
 // My-ratings store — the "Been here? Rate your visit" stars on place detail,
 // listed on the My reviews page and counted in the menu stats.
 //
-// Guests: localStorage under "essenly.myrating" (the key the prototype used;
-//   legacy entries were bare numbers and are upgraded on read).
+// Guests cannot create ratings or reviews. Legacy device entries are retained
+// for a private, one-time account import after sign-in.
 // Signed in: Supabase `ratings` table (RLS-scoped) is the source of truth.
 //   Same hardened sync shape as lib/favorites.ts: one-time guest merge whose
 //   flag is only consumed on success, pending-intent overlay so a stale fetch
@@ -16,6 +16,7 @@ import { supabaseBrowser } from "./supabase/client";
 
 export type MyRating = { rating: number; body?: string; isPublic?: boolean; at?: string };
 export type RatingMap = Record<string, MyRating>;
+export type ReviewSaveResult = boolean | "auth-required";
 
 /** ratings.body DB check is 2000 chars — mirror it client-side. */
 export const REVIEW_MAX_LEN = 2000;
@@ -23,7 +24,8 @@ export const REVIEW_MAX_LEN = 2000;
 /**
  * Single policy seam for the My-review edit affordance. The current product
  * rule is owner-only: a review can be edited only when it exists in the
- * current account/device My-ratings store. Future time or moderation windows
+ * current account My-ratings store. Screens separately enforce sign-in.
+ * Future time or moderation windows
  * belong here instead of being duplicated across screens.
  */
 export function canEditMyReview(review: MyRating | null | undefined): boolean {
@@ -149,7 +151,7 @@ async function mergeLocalIntoServer(uid: string): Promise<boolean> {
     user_id: uid,
     place_id,
     rating: v.rating,
-    ...(validBody(v.body) ? { body: v.body, is_public: v.isPublic === true } : {}),
+    ...(validBody(v.body) ? { body: v.body, is_public: false } : {}),
   }));
   if (rows.length > 0) {
     const supabase = supabaseBrowser();
@@ -286,7 +288,9 @@ function wireAuth() {
 
 /** Set (or change) my rating for a place — optimistic, server-backed.
     Stars only; an existing review text is left untouched. */
-export function setRating(placeId: string, rating: number): void {
+export async function setRating(placeId: string, rating: number): Promise<ReviewSaveResult> {
+  if (!userId) return "auth-required";
+  if (!Number.isInteger(rating) || !validRating(rating)) return false;
   const cur = load();
   const prev = cur[placeId];
   const at = new Date().toISOString();
@@ -294,13 +298,14 @@ export function setRating(placeId: string, rating: number): void {
 
   const op: PendingOp = { placeId, rating, at, seq: ++opSeq };
   pending.set(placeId, op);
-  if (userId) void sendOp(userId, op, prev);
+  return sendOp(userId, op, prev);
 }
 
 /** Save (or clear, with an empty string) my review text for a rated place.
-    isPublic is the composer's explicit consent — public reviews show the
-    author's first name to other travelers. */
-export async function setReview(placeId: string, rating: number, body: string, isPublic = false): Promise<boolean> {
+    isPublic is the composer's explicit consent to show text to travelers. */
+export async function setReview(placeId: string, rating: number, body: string, isPublic = false): Promise<ReviewSaveResult> {
+  if (!userId) return "auth-required";
+  if (!Number.isInteger(rating) || !validRating(rating)) return false;
   const cur = load();
   const prev = cur[placeId];
   const trimmed = body.trim().slice(0, REVIEW_MAX_LEN);
@@ -310,8 +315,7 @@ export async function setReview(placeId: string, rating: number, body: string, i
 
   const op: PendingOp = { placeId, rating, body: trimmed || null, isPublic: share, at, seq: ++opSeq };
   pending.set(placeId, op);
-  if (userId) return sendOp(userId, op, prev);
-  return true;
+  return sendOp(userId, op, prev);
 }
 
 function subscribe(cb: () => void) {

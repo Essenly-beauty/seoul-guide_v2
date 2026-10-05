@@ -13,6 +13,8 @@ import { Icon } from "@/components/icon";
 import { routes } from "@/lib/routes";
 import { getPlace } from "@/lib/data";
 import { useMyRatings, useMyRatingsReady } from "@/lib/ratings";
+import { useAuthUser } from "@/lib/auth/use-auth";
+import { ReviewSigninRequired } from "@/components/auth/review-signin-required";
 
 const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
@@ -29,8 +31,9 @@ export default function MyReviewsPage() {
   // Live store — the same ratings set on each place page, synced to the
   // account when signed in.
   const ratings = useMyRatings();
+  const { user, loading } = useAuthUser();
   const ready = useMyRatingsReady();
-  const rated = Object.entries(ratings)
+  const rated = Object.entries(user ? ratings : {})
     .map(([id, r]) => ({ place: getPlace(id), ...r }))
     .filter((r) => r.place)
     .sort((a, b) => (b.at ?? "").localeCompare(a.at ?? ""));
@@ -45,7 +48,7 @@ export default function MyReviewsPage() {
         </section>
 
         <SectionDivider />
-        {!ready ? (
+        {loading || !ready ? (
           <div role="status" aria-busy="true" aria-label="Loading your ratings" className="stack sm" style={{ animation: "pulse 1.6s ease-in-out infinite" }}>
             {[0, 1].map((i) => (
               <div key={i} className="row" style={{ gap: 12, padding: "10px 0" }}>
@@ -54,7 +57,7 @@ export default function MyReviewsPage() {
               </div>
             ))}
           </div>
-        ) : rated.length === 0 ? (
+        ) : !user ? <ReviewSigninRequired /> : rated.length === 0 ? (
           <section className="stack sm">
             <EmptyState>No ratings yet — open a place you&apos;ve visited and tap the stars.</EmptyState>
             <Button variant="secondary" href={routes.map} style={{ alignSelf: "center" }}>Browse the map</Button>

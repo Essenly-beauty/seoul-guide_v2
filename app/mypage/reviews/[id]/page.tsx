@@ -10,6 +10,8 @@ import { CategoryBadge } from "@/components/category/category-badge";
 import { getPlace } from "@/lib/data";
 import { canEditMyReview, useMyRatings, useMyRatingsReady } from "@/lib/ratings";
 import { routes } from "@/lib/routes";
+import { useAuthUser } from "@/lib/auth/use-auth";
+import { ReviewSigninRequired } from "@/components/auth/review-signin-required";
 
 function formatReviewDate(at?: string): string {
   if (!at) return "Date unavailable";
@@ -21,6 +23,7 @@ function formatReviewDate(at?: string): string {
 export default function MyReviewDetailPage() {
   const { id } = useParams<{ id: string }>();
   const ratings = useMyRatings();
+  const { user, loading } = useAuthUser();
   const ready = useMyRatingsReady();
   const review = ratings[id];
   const place = getPlace(id);
@@ -29,9 +32,9 @@ export default function MyReviewDetailPage() {
     <>
       <TopBar center left={<BackButton fallback={routes.reviews} />} title="My review" />
       <div className="app-scroll pad stack pagev2 review-detail-page">
-        {!ready ? (
+        {loading || !ready ? (
           <div role="status" aria-busy="true" className="review-detail-loading">Loading your review…</div>
-        ) : !place || !review ? (
+        ) : !user ? <ReviewSigninRequired /> : !place || !review ? (
           <section className="stack sm">
             <EmptyState>This review is no longer available in your account.</EmptyState>
             <Button variant="secondary" href={routes.reviews}>Back to My reviews</Button>

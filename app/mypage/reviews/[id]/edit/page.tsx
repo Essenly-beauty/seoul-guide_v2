@@ -16,36 +16,51 @@ import {
   useMyRatingsReady,
 } from "@/lib/ratings";
 import { routes } from "@/lib/routes";
+import { useAuthUser } from "@/lib/auth/use-auth";
+import { ReviewSigninRequired } from "@/components/auth/review-signin-required";
 
 export default function ReviewEditorPage() {
   const { id } = useParams<{ id: string }>();
   const router = useRouter();
+  const { user, loading } = useAuthUser();
   const reviews = useMyRatings();
   const ready = useMyRatingsReady();
   const review = reviews[id];
   const place = getPlace(id);
   const [rating, setRating] = useState(0);
   const [draft, setDraft] = useState("");
-  const [postPublic, setPostPublic] = useState(true);
+  const [postPublic, setPostPublic] = useState(false);
   const [saving, setSaving] = useState(false);
   const [saveError, setSaveError] = useState("");
   const initializedReviewId = useRef<string | null>(null);
+
+  useEffect(() => {
+    initializedReviewId.current = null;
+    setRating(0);
+    setDraft("");
+    setPostPublic(false);
+    setSaveError("");
+  }, [user?.id, id]);
 
   useEffect(() => {
     if (!ready || !review || initializedReviewId.current === id) return;
     initializedReviewId.current = id;
     setRating(review.rating);
     setDraft(review.body ?? "");
-    setPostPublic(review.body ? review.isPublic === true : true);
+    setPostPublic(review.isPublic === true);
   }, [id, ready, review]);
 
   const save = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    if (saving || !canEditMyReview(review) || rating < 1 || !draft.trim()) return;
+    if (!user || saving || !canEditMyReview(review) || rating < 1) return;
     setSaving(true);
     setSaveError("");
     const saved = await setReview(id, rating, draft, postPublic);
     setSaving(false);
+    if (saved === "auth-required") {
+      setSaveError("Please sign in again to save your rating and review.");
+      return;
+    }
     if (!saved) {
       setSaveError("Couldn’t save your review. Your draft is still here — please try again.");
       return;
@@ -63,11 +78,11 @@ export default function ReviewEditorPage() {
         title={editing ? "Edit review" : "Add review"}
       />
       <div className="app-scroll pad pagev2 review-composer-page">
-        {!ready ? (
+        {loading || !ready ? (
           <div role="status" aria-busy="true" className="review-detail-loading">
             Loading your review…
           </div>
-        ) : !place || !canEditMyReview(review) ? (
+        ) : !user ? <ReviewSigninRequired /> : !place || !canEditMyReview(review) ? (
           <section className="stack sm">
             <EmptyState>Rate this place before adding a review.</EmptyState>
             <Button variant="secondary" href={place ? routes.place(id) : routes.reviews}>
@@ -105,7 +120,7 @@ export default function ReviewEditorPage() {
             <label className="review-composer-copy">
               <span>
                 <b>{editing ? "Update your review" : "What should other travelers know?"}</b>
-                <span className="t-caption">Useful details make your rating more meaningful.</span>
+                <span className="t-caption">Optional — add useful details to your star rating.</span>
               </span>
               <textarea
                 className="input"
@@ -121,7 +136,7 @@ export default function ReviewEditorPage() {
               </span>
             </label>
 
-            <label className="review-composer-consent">
+            {draft.trim() && <label className="review-composer-consent">
               <input
                 type="checkbox"
                 checked={postPublic}
@@ -130,10 +145,10 @@ export default function ReviewEditorPage() {
               <span>
                 <b>Post publicly</b>
                 <span className="t-caption">
-                  Travelers see this review with your first name. Uncheck to keep it private.
+                  Share this review with other travelers. Leave unchecked to keep it private.
                 </span>
               </span>
-            </label>
+            </label>}
 
             <div className="review-composer-actions">
               <Button
@@ -142,8 +157,8 @@ export default function ReviewEditorPage() {
               >
                 Cancel
               </Button>
-              <Button type="submit" disabled={saving || rating < 1 || !draft.trim()}>
-                {saving ? "Saving…" : "Save review"}
+              <Button type="submit" disabled={saving || rating < 1}>
+                {saving ? "Saving…" : draft.trim() ? "Save review" : "Save rating"}
               </Button>
             </div>
             {saveError && <p role="alert" className="auth-error">{saveError}</p>}

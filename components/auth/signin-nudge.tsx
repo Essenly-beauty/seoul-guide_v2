@@ -5,7 +5,8 @@
 // the account is sold contextually). Visitors meet it on the My tab, on
 // place-detail views, and on account-value actions (heart, rating, saved
 // layer). Always dismissible: the visitor action itself has already
-// completed locally, so "Keep exploring" never loses anything.
+// completed locally for saves. Ratings require sign-in before writing;
+// "Keep exploring" dismisses that request without creating a rating.
 //
 // Frequency by context:
 //  - menu, favorite, rating, savedLayer: every time (deliberate,
@@ -34,8 +35,8 @@ const COPY: Record<NudgeContext, { title: string; body: string }> = {
     body: "This heart lives only on this device. Join and your saved places follow you — any phone, safely backed up.",
   },
   rating: {
-    title: "Keep your ratings",
-    body: "Join and your ratings and review notes stay on your account across devices.",
+    title: "Sign in to rate and review",
+    body: "Sign in to leave a star rating and add a review. You can keep exploring places without an account.",
   },
   savedLayer: {
     title: "Your saved-places layer",

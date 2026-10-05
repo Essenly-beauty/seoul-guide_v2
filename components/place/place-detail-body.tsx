@@ -27,7 +27,8 @@ import { useSigninNudge } from "@/components/auth/signin-nudge";
 import { PlaceCorrectionLauncher } from "@/components/place/place-correction-launcher";
 import { OliveYoungBrandHero } from "@/components/place/olive-young-brand-hero";
 import { toggleFavorite, useFavorites } from "@/lib/favorites";
-import { REVIEW_MAX_LEN, setRating, setReview, useMyRatings } from "@/lib/ratings";
+import { REVIEW_MAX_LEN, setReview, useMyRatings, useMyRatingsReady } from "@/lib/ratings";
+import { useAuthUser } from "@/lib/auth/use-auth";
 import { fetchPlaceReviews, REPORT_REASONS, reportReview, timeAgo, type PublicReview } from "@/lib/reviews";
 import { routes } from "@/lib/routes";
 import { PLACES, PRODUCTS, TYPE_LABEL, zoneShort, type Place } from "@/lib/data";
@@ -587,29 +588,45 @@ function ReviewsSection({ place }: { place: Place }) {
   const { toast } = useToast();
   // Shared store — persists per place, syncs to the account when signed in.
   const myRatings = useMyRatings();
-  const myRating = myRatings[place.id]?.rating ?? null;
-  const myReview = myRatings[place.id]?.body ?? "";
+  const ready = useMyRatingsReady();
+  const { user, loading } = useAuthUser();
+  const myRating = user ? myRatings[place.id]?.rating ?? null : null;
+  const myReview = user ? myRatings[place.id]?.body ?? "" : "";
   const { nudge: nudgeRating, sheet: ratingNudgeSheet } = useSigninNudge();
-  const [editing, setEditing] = useState(false);
+  const [draftRating, setDraftRating] = useState(0);
   const [composing, setComposing] = useState(false);
   const [draft, setDraft] = useState("");
-  // consent default: new reviews public, an existing note keeps its choice
-  const [postPublic, setPostPublic] = useState(true);
+  const [postPublic, setPostPublic] = useState(false);
   const [reviewBump, setReviewBump] = useState(0);
   const [savingReview, setSavingReview] = useState(false);
 
-  const rate = (n: number) => {
-    setRating(place.id, n);
-    setEditing(false);
-    toast(`Thanks — you rated ${n} star${n === 1 ? "" : "s"}`);
-    nudgeRating("rating"); // guest-only, once per device
+  useEffect(() => {
+    setComposing(false);
+    setDraft("");
+    setDraftRating(0);
+    setPostPublic(false);
+  }, [user?.id, place.id]);
+
+  const beginReview = (n = myRating ?? 0) => {
+    if (loading || !ready) return;
+    if (!user) { nudgeRating("rating"); return; }
+    setDraftRating(n);
+    setDraft(myReview);
+    setPostPublic(myRatings[place.id]?.isPublic === true);
+    setComposing(true);
   };
 
   const saveReview = async () => {
-    if (myRating === null || savingReview) return;
+    if (!user) { nudgeRating("rating"); return; }
+    if (draftRating < 1 || savingReview) return;
     setSavingReview(true);
-    const saved = await setReview(place.id, myRating, draft, postPublic);
+    const saved = await setReview(place.id, draftRating, draft, postPublic);
     setSavingReview(false);
+    if (saved === "auth-required") {
+      toast("Please sign in again to save your rating and review.");
+      nudgeRating("rating");
+      return;
+    }
     if (!saved) {
       toast("Couldn’t save your review. Your draft is still here — please try again.");
       return;
@@ -617,11 +634,11 @@ function ReviewsSection({ place }: { place: Place }) {
     setComposing(false);
     toast(draft.trim()
       ? postPublic ? "Review posted — travelers can now see it" : "Review saved as a private note"
-      : "Review removed");
+      : "Rating saved");
     setReviewBump((b) => b + 1);
   };
 
-  const canRate = myRating === null || editing;
+  const selectedRating = composing && user ? draftRating : myRating ?? 0;
 
   return (
     <section id="d-reviews" className="d-sec stack">
@@ -629,45 +646,46 @@ function ReviewsSection({ place }: { place: Place }) {
       {/* Rate prompt — tappable stars, persisted per place */}
       <div className="stack sm" style={{ alignItems: "center", textAlign: "center" }}>
         <b style={{ fontSize: 14.5 }}>Been here? Rate your visit</b>
-        <div className="row" style={{ gap: 6, justifyContent: "center" }} role="group" aria-label={`Rate ${myRating ?? 0} of 5 stars`}>
+        <div className="row" style={{ gap: 6, justifyContent: "center" }} role="group" aria-label={`Rate ${selectedRating} of 5 stars`}>
           {[1, 2, 3, 4, 5].map((n) => (
             <button
               key={n}
               aria-label={`Rate ${n} stars`}
-              disabled={!canRate}
-              onClick={() => rate(n)}
-              style={{ fontSize: 24, lineHeight: 1, padding: "0 2px", color: n <= (myRating ?? 0) ? "var(--warning)" : "var(--dim)" }}
+              disabled={loading || !ready || savingReview}
+              aria-pressed={selectedRating === n}
+              onClick={() => composing && user ? setDraftRating(n) : beginReview(n)}
+              style={{ fontSize: 24, lineHeight: 1, padding: "0 2px", color: n <= selectedRating ? "var(--warning)" : "var(--dim)" }}
             >
-              {n <= (myRating ?? 0) ? "★" : "☆"}
+              {n <= selectedRating ? "★" : "☆"}
             </button>
           ))}
         </div>
-        {myRating !== null && !editing && (
+        {myRating !== null && !composing && (
           <span className="caption muted">
             You rated {myRating} star{myRating === 1 ? "" : "s"} ·{" "}
-            <button className="caption" style={{ color: "var(--accent)", fontWeight: 600 }} onClick={() => setEditing(true)}>Edit</button>
+            <button className="caption" style={{ color: "var(--accent)", fontWeight: 600 }} onClick={() => beginReview()}>Edit</button>
           </span>
         )}
 
-        {/* Review text — private-first: synced to the account, shown only to
-            the author until public reviews (with moderation) ship. */}
-        {myRating !== null && !composing && (
+        {/* Stars and optional review text are saved together after sign-in. */}
+        {!(composing && user) && (
           myReview ? (
             <div className="stack sm" style={{ width: "100%", textAlign: "left", background: "var(--surface)", border: "1px solid var(--border)", borderRadius: 12, padding: "10px 12px" }}>
               <span className="t-caption">Your review · {myRatings[place.id]?.isPublic ? "public" : "private note"}</span>
               <p className="small" style={{ whiteSpace: "pre-wrap" }}>{myReview}</p>
-              <button className="caption" style={{ color: "var(--accent)", fontWeight: 600, alignSelf: "flex-start" }} onClick={() => { setDraft(myReview); setPostPublic(myRatings[place.id]?.isPublic === true); setComposing(true); }}>
+              <button className="caption" style={{ color: "var(--accent)", fontWeight: 600, alignSelf: "flex-start" }} onClick={() => beginReview()}>
                 Edit review
               </button>
             </div>
           ) : (
-            <button className="caption" style={{ color: "var(--accent)", fontWeight: 600 }} onClick={() => { setDraft(""); setPostPublic(true); setComposing(true); }}>
+            <button className="caption" disabled={loading || !ready} style={{ color: "var(--accent)", fontWeight: 600 }} onClick={() => beginReview()}>
               Write a review
             </button>
           )
         )}
-        {composing && (
+        {composing && user && !loading && ready && (
           <div className="stack sm" style={{ width: "100%", textAlign: "left" }}>
+            <span className="caption muted">Choose your stars above. Add a review if you like.</span>
             <textarea
               className="input"
               aria-label="Your review"
@@ -680,14 +698,14 @@ function ReviewsSection({ place }: { place: Place }) {
               autoFocus
             />
             {/* terms promise consent-first publishing — this checkbox IS the consent */}
-            <label className="row caption" style={{ gap: 8, alignItems: "flex-start", cursor: "pointer" }}>
+            {draft.trim() && <label className="row caption" style={{ gap: 8, alignItems: "flex-start", cursor: "pointer" }}>
               <input type="checkbox" checked={postPublic} onChange={(e) => setPostPublic(e.target.checked)} style={{ marginTop: 1 }} />
-              <span className="muted">Post publicly — travelers see it with your first name. Uncheck to keep it as a private note.</span>
-            </label>
+              <span className="muted">Post publicly — share this review with other travelers. Leave unchecked to keep it private.</span>
+            </label>}
             <div className="row" style={{ gap: 8 }}>
               <Button variant="secondary" size="sm" style={{ flex: 1 }} onClick={() => setComposing(false)}>Cancel</Button>
-              <Button size="sm" style={{ flex: 1 }} disabled={savingReview} onClick={saveReview}>
-                {savingReview ? "Saving…" : "Save review"}
+              <Button size="sm" style={{ flex: 1 }} disabled={savingReview || draftRating < 1} onClick={saveReview}>
+                {savingReview ? "Saving…" : draft.trim() ? "Save review" : "Save rating"}
               </Button>
             </div>
           </div>
