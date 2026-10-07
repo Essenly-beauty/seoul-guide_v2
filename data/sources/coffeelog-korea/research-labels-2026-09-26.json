@@ -2463,6 +2463,51 @@
       "ados_editorial_angles": ["서촌 토박이가 만든 미숫가루 에스프레소 라떼와 군고구마 브륄레를 맛보는 작은 카페", "겨울 통인시장 산책 뒤 아이스크림을 더한 고구마 디저트로 몸을 녹이는 곳"],
       "cautions": ["서울 공식 관광정보에 확장 공사 휴무와 재오픈 일정 확인 안내가 있어 현재 영업 상태 공식 확인 필수", "최근 2026년 후기는 있으나 플랫폼 정보와 충돌", "매장이 작아 만석 시 90분 제한", "주차 불가", "2~3인 중심 좌석으로 단체·작업 부적합", "eligible_for_ados false 유지"],
       "evidence": [{ "url": "https://stage-kr.visitseoul.net/restaurants/Ongoing/KOPwdb2fm", "publisher": "서울 공식 관광정보", "source_kind": "official-tourism-guide", "supports": ["updated-2026", "address", "owner-local-story", "ongoing-latte", "misutgaru-espresso", "roasted-sweet-potato-brulee", "basque-cheesecake", "operation-status-conflict", "temporary-closure-signal", "ninety-minute-limit-when-full"] }, { "url": "https://polle.com/place/1ydjp1/%EC%98%A8%EA%B3%A0%EC%9E%89", "publisher": "Polle", "source_kind": "place-platform", "supports": ["current-review-signal-2026", "address", "small-cafe", "dessert-cafe", "ongoing-latte", "banana-pudding", "roasted-sweet-potato-brulee", "basque-cheesecake", "egg-tart", "decaf", "oat-milk", "pet-friendly", "takeout", "delivery", "no-parking", "ninety-minute-limit-when-full"] }, { "url": "https://www.dongnecoffeenote.com/c/26014", "publisher": "동네 커피 노트", "source_kind": "review-analysis", "supports": ["current-reviews-2026", "dessert-focused", "quiet-space", "small-space", "parking-difficult"] }]
+    },
+    {
+      "canonical_place_id": "seoul:jongno:creamson-father-hyehwa",
+      "member_external_ids": ["coffeelog-f0537eeb410c37b3", "coffeelog-c3d357fe9887f0ba"],
+      "research_status": "reviewed", "confidence": "high",
+      "verified_attributes": ["duplicate-name-variant", "converted-house-cafe", "two-floor-cafe", "large-space", "bakery-cafe", "twist-pastry", "cakes", "hand-drip", "einspanner", "signature-drinks", "terrace", "outdoor-seating", "solo-seating", "group-friendly", "no-parking"],
+      "ados_editorial_angles": ["혜화 주택가의 개조 주택에서 층과 테라스를 오가며 크림 커피와 트위스트 페이스트리를 고르는 카페", "마로니에공원 산책 뒤 혼자 바 좌석에 앉거나 여럿이 큰 테이블을 잡기 좋은 베이커리 카페"],
+      "cautions": ["원본의 ‘크림스파더 혜화’는 ‘크림슨파더 혜화’의 표기 오류로 통합", "주말에는 대형 매장도 혼잡 가능", "주차 불가·인근 공영주차장 확인", "테라스는 날씨와 계절 영향", "인기 페이스트리 품절 가능"],
+      "evidence": [{ "url": "https://www.diningcode.com/profile.php?rid=6nMrwB9VqAbx", "publisher": "DiningCode", "source_kind": "place-platform", "supports": ["current-operation-2026", "address", "opening-hours", "converted-house-cafe", "two-floor-cafe", "large-space", "bakery-cafe", "hand-drip", "terrace", "solo-seating", "group-friendly", "twist-pastry", "cakes", "signature-drinks", "no-parking"] }, { "url": "https://bakery.happynowinfo.com/b/bakery-3000000-121-2024-00004/keurimseunpadeo-hyehwa-seoul-jongno-gu/", "publisher": "해피나우 베이커리", "source_kind": "public-license-derived-directory", "supports": ["current-bakery-registration-signal", "address", "business-identity"] }, { "url": "https://bizw.kr/brand/196801", "publisher": "비즈더블유", "source_kind": "brand-directory", "supports": ["address", "large-space", "converted-house-cafe", "outdoor-seating", "pastry-signal"] }]
+    },
+    {
+      "canonical_place_id": "seoul:jongno:donut-jeongsu-changsin",
+      "member_external_ids": ["coffeelog-7d899c13d4beca4d"],
+      "research_status": "reviewed", "confidence": "high",
+      "verified_attributes": ["donut-specialty", "korean-ingredient-dessert", "tarak-donut", "matcha-donut", "maple-donut", "lemon-yogurt-donut", "converted-house-cafe", "two-floor-cafe", "courtyard", "city-view", "namsan-view", "photo-friendly", "takeout", "delivery", "closed-tuesday-wednesday", "sellout-risk", "steep-hill", "parking-information-conflict"],
+      "ados_editorial_angles": ["창신동 언덕 위 개조 주택에서 타락과 말차처럼 한국적인 맛의 도넛을 고르는 카페", "마당과 창가에서 남산 방향의 도심 풍경을 보고 도넛 한 상자를 포장해 내려오는 곳"],
+      "cautions": ["화·수요일 휴무", "인기 도넛 조기 품절 가능", "창신동 경사와 도보 접근 난이도 고려", "주차 정보가 출처마다 달라 대중교통 권장·방문 전 확인", "주말에는 사진 촬영과 좌석 대기 가능"],
+      "evidence": [{ "url": "https://www.tabling.co.kr/place/677cd02866de5f0698858d3f", "publisher": "테이블링", "source_kind": "place-platform", "supports": ["current-operation-2026", "address", "opening-hours", "closed-tuesday-wednesday", "donut-specialty", "tarak-donut", "matcha-donut", "maple-donut", "lemon-yogurt-donut"] }, { "url": "https://www.diningcode.com/profile.php?rid=llqJAGlAfCvx", "publisher": "DiningCode", "source_kind": "place-platform", "supports": ["converted-house-cafe", "two-floor-cafe", "city-view", "korean-ingredient-dessert", "takeout", "delivery", "no-parking-signal"] }, { "url": "https://dongnecoffeenote.com/c/403", "publisher": "동네 커피 노트", "source_kind": "review-analysis", "supports": ["current-reviews-2026", "courtyard", "photo-friendly", "view-signal"] }, { "url": "https://youchuca.popit.kr/place/6a9b7338c95db978d57538b3", "publisher": "유추차", "source_kind": "place-guide", "supports": ["namsan-view", "tarak-donut", "matcha-donut", "sellout-risk"] }]
+    },
+    {
+      "canonical_place_id": "seoul:jongno:fikee-seosulla",
+      "member_external_ids": ["coffeelog-ecedb15dbb6f9ea1"],
+      "research_status": "reviewed", "confidence": "high",
+      "verified_attributes": ["book-cafe", "reading-friendly", "books", "large-windows", "stone-wall-view", "seosulla-gil", "quiet-space", "morning-open", "daily-operation", "late-hours-weekend", "cakes", "snacks", "coffee", "solo-cafe"],
+      "ados_editorial_angles": ["서순라길 돌담이 보이는 큰 창 앞에서 아침 8시부터 책과 커피를 펼치는 북카페", "주말 저녁 돌담 산책 전후 조용한 음악과 케이크로 독서 시간을 늘리는 곳"],
+      "cautions": ["평일과 금~일 마감 시간이 다름", "조용한 북카페 성격에 맞는 대화·촬영 예절 필요", "서순라길 피크 산책 시간에는 좌석 혼잡 가능", "주차·휠체어 접근성 세부 확인"],
+      "evidence": [{ "url": "https://korean.visitseoul.net/restaurants/2024-FIKEE/KOP17930t", "publisher": "서울 공식 관광정보", "source_kind": "official-tourism-guide", "supports": ["updated-2026", "address", "opening-hours", "book-cafe", "reading-friendly", "books", "large-windows", "stone-wall-view", "seosulla-gil", "morning-open", "daily-operation", "late-hours-weekend", "cakes", "snacks"] }, { "url": "https://pandarank.net/contents/69a6e5de830a5bcb7cbf6aaf", "publisher": "판다랭크", "source_kind": "editorial-guide", "supports": ["current-guide-2026", "stone-wall-view", "quiet-space", "music", "reading-friendly", "evening-visit"] }, { "url": "https://dining.ayo.pe.kr/restaurant/e647475669d0ba41c7adfa9952b232e5", "publisher": "다이닝 아요", "source_kind": "public-license-derived-directory", "supports": ["address", "business-identity", "cafe-registration-signal"] }]
+    },
+    {
+      "canonical_place_id": "seoul:jongno:yeongusil-seochon",
+      "member_external_ids": ["coffeelog-3ac4303f25406fe5"],
+      "research_status": "reviewed", "confidence": "high",
+      "verified_attributes": ["not-conventional-cafe", "private-listening-room", "reservation-only", "one-group-at-a-time", "maximum-three-people", "two-hour-session", "lp-listening", "bluetooth-audio", "classical-radio", "welcome-drink", "outside-food-allowed", "rooftop-space", "third-floor", "late-hours", "seochon-location"],
+      "ados_editorial_angles": ["서촌 옥탑에서 단 한 팀만 두 시간 동안 신청곡과 LP를 듣는 예약제 청음실", "커피를 사 마시는 카페보다 웰컴 드링크와 외부 음식을 곁들여 음악에 집중하는 비밀 아지트"],
+      "cautions": ["일반 카페가 아니라 예약제 유료 청음 공간으로 분류", "동시간대 한 팀·최대 3인, 당일 예약 불가 가능", "음료 판매 없이 웰컴 드링크와 외부 반입 중심", "3층과 옥탑 계단 접근", "정확한 예약 타임·가격·외부 음식 규칙을 예약 전 확인", "eligible_for_ados false 유지 후 Places 카페 카드보다 상황형 에디토리얼 후보로 검토"],
+      "evidence": [{ "url": "https://www.diningcode.com/profile.php?rid=Im8FJ92k0te7", "publisher": "DiningCode", "source_kind": "place-platform", "supports": ["current-operation-2026", "address", "opening-hours", "not-conventional-cafe", "private-listening-room", "reservation-only", "one-group-at-a-time", "maximum-three-people", "two-hour-session", "lp-listening", "bluetooth-audio", "classical-radio", "welcome-drink", "outside-food-allowed", "rooftop-space", "third-floor"] }, { "url": "https://kr.trip.com/moments/detail/jongno-gu-2016460-132997412/", "publisher": "트립닷컴", "source_kind": "travel-guide", "supports": ["address", "private-listening-room", "lp-listening", "welcome-drink", "seochon-location"] }]
+    },
+    {
+      "canonical_place_id": "seoul:jongno:lefranc-rooftop-insadong",
+      "member_external_ids": ["coffeelog-aa3b1386750624df"],
+      "research_status": "reviewed", "confidence": "high",
+      "verified_attributes": ["cafe-restaurant", "gallery-building", "fifth-and-sixth-floor", "rooftop", "terrace", "city-view", "hanok-rooftop-view", "night-view", "large-space", "group-friendly", "coffee", "cakes", "wine", "cocktails", "meal-menu", "daily-operation", "no-parking"],
+      "ados_editorial_angles": ["인사동 전시 관람 뒤 5·6층 루프탑에 올라 한옥 지붕과 도심을 함께 내려다보는 카페 레스토랑", "해 질 무렵 케이크와 커피에서 와인과 저녁 식사로 이어가기 좋은 전망형 공간"],
+      "cautions": ["카페 전용점보다 레스토랑·와인 바 성격이 함께 있는 공간", "루프탑은 폭염·한파·우천 등 날씨 영향", "주차 불가로 안내된 최신 정보 우선·건물 주변 주차 조건 확인", "식사와 주류 메뉴는 가격대가 높은 편", "전망 좌석은 주말·해질녘 혼잡 가능", "플랫폼별 마감 시간이 21~22시로 달라 당일 확인"],
+      "evidence": [{ "url": "https://www.diningcode.com/profile.php?rid=qkVSMPZoofZi", "publisher": "DiningCode", "source_kind": "place-platform", "supports": ["current-operation-2026", "address", "opening-hours", "cafe-restaurant", "gallery-building", "fifth-and-sixth-floor", "rooftop", "terrace", "city-view", "night-view", "large-space", "group-friendly", "coffee", "cakes", "wine", "meal-menu", "daily-operation", "no-parking"] }, { "url": "https://world.nol.com/zh-CN/pois/e838c2e9-ee1e-4a66-80e9-205a9c7a4e4d", "publisher": "NOL World", "source_kind": "travel-place-guide", "supports": ["current-listing-2026", "address", "opening-hours", "hanok-rooftop-view", "date-friendly", "official-instagram-link"] }, { "url": "https://www.qplace.kr/portfolio/1792", "publisher": "큐플레이스", "source_kind": "design-portfolio", "supports": ["large-space", "cafe-restaurant", "interior-design", "business-identity"] }]
     }
   ]
 }
