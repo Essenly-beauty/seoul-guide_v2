@@ -2562,6 +2562,60 @@
       "ados_editorial_angles": ["혜화역 골목 안 1·2층과 루프탑을 오르며 공연 전 케이크와 밤라떼를 즐기는 카페", "해 질 무렵 유럽풍 계단과 옥상에서 사진을 남기고 맥주나 와인까지 이어가는 대학로 공간"],
       "cautions": ["좁은 골목 안쪽이라 지도 확인 필요", "주차 불가", "루프탑은 폭염·한파·우천 영향", "사진 목적 방문객이 몰리는 시간에는 조용한 분위기가 달라질 수 있음", "디저트와 음료 품질 평가는 일부 엇갈림", "층간·루프탑 계단 접근성 확인"],
       "evidence": [{ "url": "https://www.diningcode.com/profile.php?rid=09hyHEdG8QBg", "publisher": "DiningCode", "source_kind": "place-platform", "supports": ["current-operation-2026", "address", "opening-hours", "two-floor-cafe", "rooftop", "terrace", "european-style-interior", "large-windows", "photo-friendly", "quiet-space", "theater-district", "pre-show-stop", "signature-latte", "chestnut-latte", "cakes", "wine", "beer", "daily-operation", "no-parking", "hidden-alley"] }, { "url": "https://www.tabling.co.kr/place/677cd61766de5f0698905d8a", "publisher": "테이블링", "source_kind": "place-platform", "supports": ["current-operation-2026", "address", "opening-hours", "large-space", "baked-goods", "wine", "beer", "takeout", "no-parking", "mixed-reviews"] }, { "url": "https://www.dongnecoffeenote.com/area/%EC%A2%85%EB%A1%9C%EA%B5%AC/mood", "publisher": "동네 커피 노트", "source_kind": "review-analysis", "supports": ["current-reviews-2026", "rooftop", "photo-friendly", "large-space"] }]
+    },
+    {
+      "canonical_place_id": "seoul:jongno:nazit-hyehwa",
+      "member_external_ids": ["coffeelog-ce4c33eb4f6c0ade"],
+      "research_status": "reviewed", "confidence": "high",
+      "verified_attributes": ["book-cafe", "actor-operated", "curated-books", "reading-friendly", "conversation-friendly", "quiet-space", "hand-drip-only-coffee", "decaf", "wine", "daily-dessert", "brownie-ice-cream", "small-space", "bar-seating", "pet-friendly", "terrace-reading", "book-clubs", "time-limit-signal", "seat-move-policy"],
+      "ados_editorial_angles": ["배우가 운영하는 혜화의 작은 북카페에서 핸드드립을 마시며 운영자가 고른 책을 읽는 곳", "공연 전후 혼자 조용히 머물거나 독서모임을 통해 이야기를 나누는 동네 아지트"],
+      "cautions": ["소규모 공간이라 혼잡 시 이용시간 제한·좌석 이동 요청 가능", "가격대가 높다는 후기 신호", "공휴일 휴무 여부 확인", "반려동물 동반 조건과 테라스 이용 가능 여부 확인", "모임 일정이 있는 날의 일반 이용 가능 여부 확인"],
+      "evidence": [{ "url": "https://www.diningcode.com/profile.php?rid=vWvJVU4JyVsV", "publisher": "DiningCode", "source_kind": "place-platform", "supports": ["current-operation-2026", "address", "opening-hours", "book-cafe", "reading-friendly", "conversation-friendly", "quiet-space", "decaf", "daily-dessert", "small-space", "bar-seating", "pet-friendly", "time-limit-signal", "seat-move-policy"] }, { "url": "https://linktr.ee/yournazit", "publisher": "나지트", "source_kind": "official-link-hub", "supports": ["actor-operated", "book-cafe", "book-clubs", "official-social-links"] }, { "url": "https://www.tabling.co.kr/place/677cd90366de5f0698958a6e", "publisher": "테이블링", "source_kind": "place-platform", "supports": ["hand-drip-only-coffee", "wine", "brownie-ice-cream", "curated-books", "solo-cafe"] }, { "url": "https://www.esquirekorea.co.kr/article/1901410", "publisher": "에스콰이어 코리아", "source_kind": "editorial-feature", "supports": ["current-feature-2026", "terrace-reading", "creative-walk-context"] }]
+    },
+    {
+      "canonical_place_id": "seoul:jongno:chillin-daehangno",
+      "member_external_ids": ["coffeelog-f0873b877a91cdec"],
+      "research_status": "reviewed", "confidence": "high",
+      "verified_attributes": ["cafe-bar", "day-to-night", "late-night", "daily-operation", "churros", "banana-pudding", "tiramisu", "signature-latte", "coffee-cocktails", "cocktails", "alcohol", "dark-lighting", "wood-interior", "terrace", "pet-mascot-signal", "delivery", "takeout", "group-seating", "rental", "wheelchair-signal", "no-parking"],
+      "ados_editorial_angles": ["대학로 공연이 끝난 뒤 자정까지 츄러스와 커피 칵테일을 이어갈 수 있는 카페바", "낮에는 바나나푸딩과 라떼, 밤에는 어두운 우드톤 공간에서 칵테일을 고르는 곳"],
+      "cautions": ["낮 카페와 밤 펍 분위기가 크게 다름", "반려동물 마스코트 상주 여부와 접촉 조건 확인", "주차 불가", "늦은 시간에는 음악·대화 소음 가능", "휠체어 이용 가능 표기는 실제 출입구 턱과 화장실 동선 재확인"],
+      "evidence": [{ "url": "https://www.diningcode.com/profile.php?rid=PnrziXVSqY5c", "publisher": "DiningCode", "source_kind": "place-platform", "supports": ["current-operation-2026", "address", "opening-hours", "cafe-bar", "day-to-night", "late-night", "daily-operation", "churros", "banana-pudding", "tiramisu", "signature-latte", "cocktails", "dark-lighting", "wood-interior", "terrace", "pet-mascot-signal", "delivery", "no-parking"] }, { "url": "https://www.daangn.com/kr/local-profile/%EC%B9%A0%EB%A6%B0-f92jq4u3udy3/", "publisher": "당근 동네 업체", "source_kind": "official-local-profile", "supports": ["current-update-2026", "address", "opening-hours", "coffee-cocktails", "churros", "takeout", "group-seating", "rental", "wheelchair-signal"] }, { "url": "https://youchuca.popit.kr/place/6a4ee246377a7673b3f8ed98", "publisher": "유추카", "source_kind": "video-review-index", "supports": ["current-video-coverage-2026", "cafe-bar", "warm-interior", "evening-visit"] }]
+    },
+    {
+      "canonical_place_id": "seoul:jongno:ething-room-hyehwa",
+      "member_external_ids": ["coffeelog-a1d247c6ba4ae0dc"],
+      "research_status": "reviewed", "confidence": "high",
+      "verified_attributes": ["dessert-cafe", "roll-cake-specialty", "seasonal-fruit-cakes", "fig-fraisier", "pistachio-berry-roll", "chocolate-cake", "corn-latte", "seasonal-drinks", "bright-space", "large-windows", "white-wood-interior", "plants", "vintage-objects", "work-friendly-signal", "date-friendly", "third-floor", "internal-restroom", "closed-monday", "no-parking"],
+      "ados_editorial_angles": ["혜화역 3층의 큰 창 아래에서 제철 과일 롤케이크와 산미 있는 커피를 고르는 디저트 카페", "공연 사이 밝은 화이트·우드 공간에 노트북을 펴거나 메모가 가득한 벽을 구경하는 곳"],
+      "cautions": ["월요일 휴무", "평일과 주말 오픈 시간이 다름", "주차 불가", "3층 계단·엘리베이터 접근 여부 확인", "제철 과일 케이크와 음료는 시즌·재고에 따라 변경", "인기 디저트 시간대에는 혼잡·품절 가능"],
+      "evidence": [{ "url": "https://www.diningcode.com/profile.php?rid=JJgpUpkWUaiW", "publisher": "DiningCode", "source_kind": "place-platform", "supports": ["current-operation-2026", "address", "opening-hours", "dessert-cafe", "roll-cake-specialty", "pistachio-berry-roll", "corn-latte", "seasonal-drinks", "bright-space", "large-windows", "white-wood-interior", "plants", "vintage-objects", "work-friendly-signal", "date-friendly", "third-floor", "internal-restroom", "closed-monday", "no-parking"] }, { "url": "https://www.dongnecoffeenote.com/c/7169", "publisher": "동네 커피 노트", "source_kind": "review-analysis", "supports": ["current-reviews-2026", "seasonal-fruit-cakes", "fig-fraisier", "coffee-acidity", "dessert-focused", "photo-friendly"] }, { "url": "https://dining.ayo.pe.kr/restaurant/b5e00de8fb495190c8ed36b3eec9a117", "publisher": "다이닝 아요", "source_kind": "public-license-derived-directory", "supports": ["address", "third-floor", "business-identity"] }]
+    },
+    {
+      "canonical_place_id": "seoul:jongno:matiere-daehangno",
+      "member_external_ids": ["coffeelog-77738d48ed81afe9", "coffeelog-64b091aa61577a9d"],
+      "research_status": "reviewed", "confidence": "high",
+      "verified_attributes": ["duplicate-name-variant", "bakery-roastery", "specialty-coffee", "onsite-roasting", "filter-coffee", "panama-geisha", "award-signal", "mousse-cakes", "seasonal-fruit-dessert", "mango-mousse", "tart", "takeout", "delivery", "quiet-space", "solo-cafe", "closed-friday"],
+      "ados_editorial_angles": ["대학로 골목에서 직접 볶은 스페셜티 커피와 정교한 무스 케이크를 함께 고르는 베이커리 로스터리", "공연 전 파나마 게이샤 한 잔이나 제철 과일 디저트에 집중해 잠시 조용히 머무는 곳"],
+      "cautions": ["원본의 두 표기 ‘마띠에르’와 ‘마띠에르 bakery & roastery’를 동일 매장으로 통합", "금요일 휴무 여부를 방문 전 확인", "주말은 평일보다 일찍 열림", "스페셜티 원두와 제철 무스는 구성·가격 변동 가능", "인기 디저트 조기 품절 가능", "좌석·주차·접근성 세부 확인"],
+      "evidence": [{ "url": "https://www.diningcode.com/profile.php?rid=Zi4P2l6WitAE", "publisher": "DiningCode", "source_kind": "place-platform", "supports": ["current-operation-2026", "address", "opening-hours", "bakery-roastery", "specialty-coffee", "filter-coffee", "panama-geisha", "mousse-cakes", "seasonal-fruit-dessert", "mango-mousse", "takeout", "delivery", "quiet-space", "solo-cafe", "closed-friday"] }, { "url": "https://westpointway.tistory.com/entry/%ED%98%9C%ED%99%94%EC%97%AD-%EC%B9%B4%ED%8E%98-%EC%BB%A4%ED%94%BC-%EB%A7%88%EB%9D%A0%EC%97%90%EB%A5%B4-bakery-roastery-%E2%80%93-%EB%8C%80%ED%95%99%EB%A1%9C-%EA%B0%90%EC%84%B1-%EB%94%94%EC%A0%80%ED%8A%B8%EC%99%80-%EC%8A%A4%ED%8E%98%EC%85%9C%ED%8B%B0-%EC%BB%A4%ED%94%BC%EC%9D%98-%EC%99%84%EB%B2%BD%ED%95%9C-%EC%A1%B0%ED%99%94?category=1256564", "publisher": "West Point Way", "source_kind": "visit-guide", "supports": ["bakery-roastery", "opening-year-2018", "award-signal", "specialty-coffee", "dessert-focused"] }, { "url": "https://www.bandinlunis.com/front/product/detailProduct.do?prodId=4781991", "publisher": "반디앤루니스", "source_kind": "coffee-guide-index", "supports": ["matiere-bakery-roastery-name", "daehangno-location"] }]
+    },
+    {
+      "canonical_place_id": "seoul:jongno:brightside-sungin",
+      "member_external_ids": ["coffeelog-9b63987c6f0267d3"],
+      "research_status": "reviewed", "confidence": "high",
+      "verified_attributes": ["converted-1960s-inn", "two-floor-cafe", "vintage-interior", "plant-filled", "large-windows", "quiet-space", "reading-friendly", "late-hours", "brightside-latte", "einspanner", "flat-white", "kaymak", "terrine", "homemade-dessert", "highball", "cafe-bar-signal", "pet-friendly", "takeout", "delivery", "no-parking", "hidden-entrance"],
+      "ados_editorial_angles": ["신설동과 숭인동 사이 1960년대 여관을 개조한 공간에서 달고 밀도 높은 라떼를 마시는 카페", "식물과 빈티지 가구가 놓인 두 층을 둘러보고 늦은 저녁 테린느나 하이볼로 쉬어가는 곳"],
+      "cautions": ["주차 불가", "대로변 건물 안쪽의 숨은 출입구라 지도 확인", "낮은 테이블·좌석 편의성이 떨어진다는 후기 신호", "환기·공기질에 대한 엇갈린 후기", "단맛이 강한 시그니처 라떼는 취향 고려", "반려동물 동반 조건 확인"],
+      "evidence": [{ "url": "https://www.diningcode.com/profile.php?rid=uJxEcc4BnWLE", "publisher": "DiningCode", "source_kind": "place-platform", "supports": ["current-operation-2026", "address", "opening-hours", "converted-1960s-inn", "two-floor-cafe", "vintage-interior", "plant-filled", "large-windows", "quiet-space", "reading-friendly", "late-hours", "brightside-latte", "einspanner", "flat-white", "kaymak", "terrine", "homemade-dessert", "highball", "no-parking", "hidden-entrance"] }, { "url": "https://polle.com/place/1yIPhD/%EB%B8%8C%EB%9D%BC%EC%9D%B4%ED%8A%B8%20%EC%82%AC%EC%9D%B4%EB%93%9C", "publisher": "Polle", "source_kind": "place-platform", "supports": ["current-reviews-2026", "address", "pet-friendly", "takeout", "delivery", "cafe-bar-signal", "seat-comfort-conflict", "air-quality-conflict"] }]
+    },
+    {
+      "canonical_place_id": "seoul:jongno:britresso-daehangno",
+      "member_external_ids": ["coffeelog-6546e5507de85327"],
+      "research_status": "reviewed", "confidence": "high",
+      "verified_attributes": ["british-theme", "sixteenth-century-concept", "antique-interior", "quiet-space", "residential-alley", "signature-cafe-royal", "flamed-liqueur", "cream-mocha", "british-hot-chocolate-inspired", "lemon-posset", "afternoon-tea-set", "scones", "tigres", "hand-drip", "custom-coffee-beans", "daily-operation", "rental", "takeout", "group-orders"],
+      "ados_editorial_angles": ["혜화 주택가 골목에서 16세기 영국을 재해석한 실내와 불붙인 리큐어 커피를 만나는 카페", "애프터눈 티 트레이에 스콘과 티그레를 올려 공연 전 조용한 티타임을 만드는 곳"],
+      "cautions": ["리큐어가 들어가는 시그니처 음료는 알코올 섭취 여부 확인", "주택가 골목 위치라 접근 경로 확인", "애프터눈 티와 디저트는 재고·예약 필요 여부 확인", "앤티크 콘셉트와 낮은 조도가 작업 목적에는 맞지 않을 수 있음", "주차·휠체어 접근성 세부 확인"],
+      "evidence": [{ "url": "https://www.daangn.com/kr/local-profile/britresso-dzh5kcbw3usr/", "publisher": "당근 동네 업체", "source_kind": "official-local-profile", "supports": ["current-update-2026", "address", "opening-hours", "british-theme", "sixteenth-century-concept", "signature-cafe-royal", "flamed-liqueur", "cream-mocha", "british-hot-chocolate-inspired", "lemon-posset", "scones", "tigres", "custom-coffee-beans", "daily-operation", "rental", "takeout", "group-orders"] }, { "url": "https://polle.com/place/3givCV/%EB%B8%8C%EB%A6%AC%ED%8A%B8%EB%A0%88%EC%86%8C", "publisher": "Polle", "source_kind": "place-platform", "supports": ["address", "antique-interior", "quiet-space", "residential-alley", "afternoon-tea-set", "scones", "tigres", "hand-drip"] }]
     }
   ]
 }
