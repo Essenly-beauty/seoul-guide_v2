@@ -15,7 +15,7 @@
     "geography": "Seoul only",
     "record_count": 454,
     "enriched_record_count": 30,
-    "researched_record_count": 334
+    "researched_record_count": 340
   },
   "import_policy": {
     "default_action": "stage_only",
@@ -20488,8 +20488,98 @@
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
       "editorial_context_provenance": null,
-      "canonical_place_id": null,
-      "research_status": "not_researched"
+      "canonical_place_id": "seoul:jongno:sans-ikseon",
+      "research_status": "reviewed",
+      "research_confidence": "high",
+      "verified_attributes": [
+        "alternative-coffee-specialty",
+        "caffeine-free-option",
+        "natural-caffeine-option",
+        "rest-formula-option",
+        "oat-latte",
+        "oat-cream-latte",
+        "unsweetened-tomato-tiramisu",
+        "apple-crumble-pudding",
+        "vegan-cookie",
+        "granola",
+        "converted-hanok",
+        "futuristic-design",
+        "flagship-store",
+        "daily-operation",
+        "morning-open",
+        "takeout",
+        "no-parking"
+      ],
+      "ados_editorial_angles": [
+        "익선동의 오래된 한옥과 은색 외관 사이에서 카페인 제로 대체 커피를 시험해 보는 플래그십",
+        "커피를 줄이고 싶은 날 에너지·휴식 포뮬러를 고르고 무가당 토마토 티라미수를 곁들이는 곳"
+      ],
+      "research_cautions": [
+        "일반 원두 커피가 아닌 대체 커피 경험이 핵심이라 맛 기대치를 안내",
+        "포뮬러와 카페인 유형을 주문 전에 확인",
+        "주차 불가",
+        "익선동 관광 피크에는 혼잡 가능",
+        "비건·무가당 표기는 개별 메뉴 성분을 당일 재확인",
+        "오후 7시 전 이른 마감"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://sansfoundry.co.kr/OFFLINE",
+          "publisher": "SANS Foundry",
+          "source_kind": "official-website",
+          "supports": [
+            "current-operation-2026",
+            "official-brand",
+            "address",
+            "opening-hours",
+            "alternative-coffee-specialty",
+            "flagship-store"
+          ]
+        },
+        {
+          "url": "https://www.tabling.co.kr/place/677cd86066de5f069894655c",
+          "publisher": "테이블링",
+          "source_kind": "place-platform",
+          "supports": [
+            "opening-hours",
+            "daily-operation",
+            "caffeine-free-option",
+            "natural-caffeine-option",
+            "rest-formula-option",
+            "oat-cream-latte",
+            "unsweetened-tomato-tiramisu",
+            "apple-crumble-pudding",
+            "vegan-cookie",
+            "granola",
+            "takeout",
+            "no-parking"
+          ]
+        },
+        {
+          "url": "https://www.diningcode.com/profile.php?rid=nXtCNi0XR9Yn",
+          "publisher": "DiningCode",
+          "source_kind": "place-platform",
+          "supports": [
+            "current-operation-2026",
+            "converted-hanok",
+            "futuristic-design",
+            "alternative-coffee",
+            "oat-latte",
+            "morning-open"
+          ]
+        },
+        {
+          "url": "https://kass.mafra.go.kr/newkass/cmm/fms/FileDown.do?atchFileId=FILE_000000000020867&fileSn=0",
+          "publisher": "농림축산식품부",
+          "source_kind": "market-report",
+          "supports": [
+            "alternative-coffee-company",
+            "launch-year-2022",
+            "converted-hanok",
+            "specialty-category-signal"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-d9b16892fe55c2c0",
@@ -20521,8 +20611,72 @@
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
       "editorial_context_provenance": null,
-      "canonical_place_id": null,
-      "research_status": "not_researched"
+      "canonical_place_id": "seoul:jongno:cafe-vvv-ikseon",
+      "research_status": "reviewed",
+      "research_confidence": "medium",
+      "verified_attributes": [
+        "hotel-ground-floor-cafe",
+        "breakfast-friendly",
+        "brunch",
+        "early-open",
+        "daytime-only",
+        "coffee",
+        "accommodation-partnership",
+        "guest-discount",
+        "ikseon-dong",
+        "ground-floor",
+        "closed-tuesday-wednesday-signal"
+      ],
+      "ados_editorial_angles": [
+        "익선동 숙소 1층에서 오전 8시 커피와 브런치로 골목 산책을 시작하는 카페",
+        "어반스테이 투숙객이라면 할인 혜택과 조식을 함께 챙기기 좋은 아침 정류장"
+      ],
+      "research_cautions": [
+        "독립 목적지형 카페보다 숙박시설 연계 아침·브런치 성격이 강함",
+        "공식 숙소 안내상 목~월 운영으로 화·수 휴무 신호",
+        "오후 5시 이른 마감",
+        "투숙객 할인은 체크인 알림톡과 적용 기간 확인",
+        "메뉴·좌석·주차·접근성 정보가 제한돼 편집 추천 전 추가 확인",
+        "eligible_for_ados false 유지"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://en.urbanstay.co.kr/boutique-ikseon",
+          "publisher": "Urbanstay",
+          "source_kind": "official-accommodation-guide",
+          "supports": [
+            "current-operation-2026",
+            "hotel-ground-floor-cafe",
+            "opening-hours",
+            "breakfast-friendly",
+            "brunch",
+            "early-open",
+            "daytime-only",
+            "accommodation-partnership",
+            "guest-discount",
+            "closed-tuesday-wednesday-signal"
+          ]
+        },
+        {
+          "url": "https://triple.guide/hotels/feb581ba-ba26-4f34-848f-2336a362b2b0",
+          "publisher": "트리플",
+          "source_kind": "accommodation-platform",
+          "supports": [
+            "cafe-vvv-breakfast-package",
+            "ikseon-dong",
+            "hotel-integration"
+          ]
+        },
+        {
+          "url": "https://tabelog.com/southkorea/A5301/A530104/53003684/",
+          "publisher": "Tabelog",
+          "source_kind": "place-platform",
+          "supports": [
+            "cafe-identity",
+            "insadong-ikseon-area-signal"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-7bf40cff3ddf72c2",
@@ -20780,8 +20934,111 @@
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
       "editorial_context_provenance": null,
-      "canonical_place_id": null,
-      "research_status": "not_researched"
+      "canonical_place_id": "seoul:songpa:thinking-cabinet-songpa",
+      "research_status": "reviewed",
+      "research_confidence": "high",
+      "verified_attributes": [
+        "not-conventional-cafe",
+        "reservation-only",
+        "unmanned-book-space",
+        "shared-workspace",
+        "three-hour-session",
+        "paid-seat",
+        "reading-friendly",
+        "work-friendly",
+        "quiet-space",
+        "books",
+        "window-desk",
+        "power-outlets",
+        "personal-lighting",
+        "one-person-sofa",
+        "two-person-sofa",
+        "terrace-for-calls",
+        "self-service-drip-bag",
+        "daily-operation",
+        "fourth-floor",
+        "rental",
+        "no-parking"
+      ],
+      "ados_editorial_angles": [
+        "송리단길 4층에서 휴대폰을 내려놓고 세 시간 동안 책과 작업에 잠기는 예약제 무인 북스페이스",
+        "창가 책상이나 1인 소파를 골라 콘센트와 조명까지 확보하고 혼자 사색하는 곳"
+      ],
+      "research_cautions": [
+        "일반 카페가 아니라 좌석 시간을 결제하는 예약제 무인 책방·공유 작업 공간",
+        "방문 전 예약 필수",
+        "기본 3시간·1인 15,000원 등 요금 변동 확인",
+        "대화와 전화는 테라스 이용 규칙 확인",
+        "주차 불가",
+        "4층 출입구가 헷갈릴 수 있고 엘리베이터 접근성 확인",
+        "음료는 셀프 드립백 등 제한적"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://thinkingcabinet.com/",
+          "publisher": "사색서랍",
+          "source_kind": "official-website",
+          "supports": [
+            "current-operation-2026",
+            "official-brand",
+            "book-space",
+            "reservation",
+            "book-search",
+            "rental"
+          ]
+        },
+        {
+          "url": "https://www.diningcode.com/profile.php?rid=Pey7WhTlVGTl",
+          "publisher": "DiningCode",
+          "source_kind": "place-platform",
+          "supports": [
+            "current-operation-2026",
+            "address",
+            "opening-hours",
+            "not-conventional-cafe",
+            "reservation-only",
+            "unmanned-book-space",
+            "shared-workspace",
+            "three-hour-session",
+            "paid-seat",
+            "reading-friendly",
+            "work-friendly",
+            "quiet-space",
+            "window-desk",
+            "power-outlets",
+            "personal-lighting",
+            "one-person-sofa",
+            "two-person-sofa",
+            "terrace-for-calls",
+            "self-service-drip-bag",
+            "fourth-floor",
+            "no-parking"
+          ]
+        },
+        {
+          "url": "https://www.tabling.co.kr/place/67c6c40b4306a889d2c23bc2",
+          "publisher": "테이블링",
+          "source_kind": "place-platform",
+          "supports": [
+            "daily-operation",
+            "opening-hours",
+            "address",
+            "paid-seat",
+            "reservation",
+            "no-parking"
+          ]
+        },
+        {
+          "url": "https://xn--2s2b33eb3kgvpta.com/store/S250616_1750054586897",
+          "publisher": "완벽한 하루",
+          "source_kind": "place-guide",
+          "supports": [
+            "reservation-only",
+            "book-cafe",
+            "songridan-gil-location"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-ec554b021b91a504",
@@ -20813,8 +21070,91 @@
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
       "editorial_context_provenance": null,
-      "canonical_place_id": null,
-      "research_status": "not_researched"
+      "canonical_place_id": "seoul:songpa:thirsty-ant-songpa",
+      "research_status": "reviewed",
+      "research_confidence": "high",
+      "verified_attributes": [
+        "rooftop-cafe",
+        "ninth-floor",
+        "lotte-world-tower-view",
+        "night-view",
+        "photo-friendly",
+        "late-hours",
+        "closed-monday",
+        "signature-salty-coffee",
+        "signature-sweet-coffee",
+        "ice-cream-monaka",
+        "dried-persimmon-cream-cheese",
+        "milk-tea",
+        "pet-friendly",
+        "reservation",
+        "takeout",
+        "wheelchair-facility-signal",
+        "not-quiet-focused"
+      ],
+      "ados_editorial_angles": [
+        "석촌역 9층 루프탑에서 롯데월드타워가 켜지는 시간을 기다리는 전망 카페",
+        "해 질 무렵 솔티·스위트 시그니처 커피와 아이스크림 모나카를 들고 야경을 보는 곳"
+      ],
+      "research_cautions": [
+        "월요일 정기휴무",
+        "루프탑은 폭염·한파·우천·강풍 영향",
+        "해질녘과 주말에는 전망 좌석 혼잡 가능",
+        "조용한 독서·작업 목적에는 부적합",
+        "반려동물 동반 범위와 실내 규칙 확인",
+        "장애인 시설 표기는 엘리베이터·루프탑 턱 동선까지 재확인",
+        "가격대가 높은 편"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://www.diningcode.com/profile.php?rid=3thhn7IXqgMm",
+          "publisher": "DiningCode",
+          "source_kind": "place-platform",
+          "supports": [
+            "current-operation-2026",
+            "address",
+            "opening-hours",
+            "rooftop-cafe",
+            "ninth-floor",
+            "lotte-world-tower-view",
+            "night-view",
+            "late-hours",
+            "closed-monday",
+            "photo-friendly"
+          ]
+        },
+        {
+          "url": "https://cafe.ambitstock.com/jamsil/cafe/%EB%96%A8%EC%8A%A4%ED%8B%B0%EC%95%A4%ED%8A%B8/",
+          "publisher": "오늘의 카페",
+          "source_kind": "aggregated-place-guide",
+          "supports": [
+            "current-listing-2026",
+            "address",
+            "late-hours",
+            "signature-salty-coffee",
+            "signature-sweet-coffee",
+            "ice-cream-monaka",
+            "dried-persimmon-cream-cheese",
+            "milk-tea",
+            "pet-friendly",
+            "reservation",
+            "takeout",
+            "wheelchair-facility-signal"
+          ]
+        },
+        {
+          "url": "https://www.dongnecoffeenote.com/c/1709",
+          "publisher": "동네 커피 노트",
+          "source_kind": "review-analysis",
+          "supports": [
+            "current-reviews-2026",
+            "rooftop",
+            "photo-friendly",
+            "not-quiet-focused",
+            "not-dessert-focused"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-f385282196d47c61",
@@ -20935,8 +21275,88 @@
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
       "editorial_context_provenance": null,
-      "canonical_place_id": null,
-      "research_status": "not_researched"
+      "canonical_place_id": "seoul:songpa:meek-songpa",
+      "research_status": "reviewed",
+      "research_confidence": "high",
+      "verified_attributes": [
+        "specialty-coffee",
+        "homemade-desserts",
+        "french-toast",
+        "banana-pudding",
+        "large-windows",
+        "sunlight",
+        "exposed-concrete",
+        "wood-furniture",
+        "plants",
+        "warm-lighting",
+        "bar-seating",
+        "table-seating",
+        "daily-operation",
+        "late-hours",
+        "parking-available",
+        "seokchon-station",
+        "large-space-signal"
+      ],
+      "ados_editorial_angles": [
+        "석촌역 통창 아래에서 스페셜티 커피와 주문한 프렌치토스트로 햇살 좋은 오후를 보내는 카페",
+        "노출 콘크리트와 원목이 섞인 차분한 공간에서 바나나푸딩을 먹고 석촌호수로 걷는 동선"
+      ],
+      "research_cautions": [
+        "동명의 연희동 미크 커피와 혼동 주의",
+        "후면 전용 주차는 3~5대 수준으로 만차 가능·조건 확인",
+        "주말과 석촌호수 행사일 혼잡 가능",
+        "프렌치토스트 등 조리 메뉴 대기시간 확인",
+        "통창 좌석은 한낮 일사와 눈부심 고려"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://www.diningcode.com/profile.php?rid=K0ivE1Q3rkLj",
+          "publisher": "DiningCode",
+          "source_kind": "place-platform",
+          "supports": [
+            "current-operation-2026",
+            "address",
+            "opening-hours",
+            "specialty-coffee",
+            "homemade-desserts",
+            "french-toast",
+            "banana-pudding",
+            "large-windows",
+            "sunlight",
+            "exposed-concrete",
+            "wood-furniture",
+            "plants",
+            "warm-lighting",
+            "bar-seating",
+            "table-seating",
+            "daily-operation",
+            "late-hours",
+            "parking-available",
+            "seokchon-station"
+          ]
+        },
+        {
+          "url": "https://www.indpmusic.co.kr/magazine/visit-jamsil-meek",
+          "publisher": "인디피 뮤직 매거진",
+          "source_kind": "editorial-visit",
+          "supports": [
+            "current-visit-2026",
+            "address",
+            "parking-available",
+            "large-space-signal",
+            "music-space-context"
+          ]
+        },
+        {
+          "url": "https://www.saramin.co.kr/zf_user/company-info/view/csn/b3NBY1U3NjdmeU9wdFlhRWhEbGNYZz09/company_nm/%EB%AF%B8%ED%81%AC",
+          "publisher": "사람인",
+          "source_kind": "business-profile",
+          "supports": [
+            "songpa-address",
+            "business-identity"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-fbcbc4cc4e932847",
@@ -20968,8 +21388,89 @@
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
       "editorial_context_provenance": null,
-      "canonical_place_id": null,
-      "research_status": "not_researched"
+      "canonical_place_id": "seoul:songpa:jbout-coffee-seokchon-lake",
+      "research_status": "reviewed",
+      "research_confidence": "high",
+      "verified_attributes": [
+        "lake-view",
+        "seokchon-lake",
+        "lotte-world-tower-view",
+        "second-floor",
+        "terrace",
+        "large-space",
+        "pet-friendly",
+        "coffee-focused",
+        "americano",
+        "daily-operation",
+        "late-hours",
+        "takeout",
+        "external-restroom",
+        "weekend-crowds",
+        "not-dessert-focused",
+        "not-work-focused"
+      ],
+      "ados_editorial_angles": [
+        "석촌호수 산책 전후 2층 창가에서 호수와 롯데월드타워를 함께 보는 커피 카페",
+        "늦은 저녁까지 테라스 자리를 노리고 아메리카노 한 잔으로 풍경에 집중하는 곳"
+      ],
+      "research_cautions": [
+        "주말 오후에는 창가·전망 좌석 만석 가능",
+        "외부 화장실",
+        "디저트나 작업보다 전망과 커피 중심으로 소개",
+        "반려동물 동반 좌석·조건 확인",
+        "플랫폼에 과거 잠실로 180 지점 정보가 혼재하므로 현재 송파나루길 206 주소 기준",
+        "주차 조건 확인"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://www.diningcode.com/profile.php?rid=BhFbDYJ1F0DZ",
+          "publisher": "DiningCode",
+          "source_kind": "place-platform",
+          "supports": [
+            "current-operation-2026",
+            "address",
+            "opening-hours",
+            "lake-view",
+            "seokchon-lake",
+            "lotte-world-tower-view",
+            "second-floor",
+            "terrace",
+            "large-space",
+            "coffee-focused",
+            "daily-operation",
+            "late-hours",
+            "takeout"
+          ]
+        },
+        {
+          "url": "https://dongnecoffeenote.com/c/9773",
+          "publisher": "동네 커피 노트",
+          "source_kind": "review-analysis",
+          "supports": [
+            "current-reviews-2026",
+            "lake-view",
+            "terrace",
+            "large-space",
+            "pet-friendly",
+            "photo-friendly",
+            "not-dessert-focused",
+            "not-work-focused"
+          ]
+        },
+        {
+          "url": "https://kimcoppercircle.tistory.com/v/entry/%EC%84%9C%EC%9A%B8-%EC%86%A1%ED%8C%8C-%EC%95%84%EB%A9%94%EB%A6%AC%EC%B9%B4%EB%85%B8-%EB%A7%9B%EC%A7%91-%EC%A0%9C%EC%9D%B4%EB%B9%84%EC%95%84%EC%9B%83-%EC%BB%A4%ED%94%BCJBOUT-Coffee-%EC%84%9D%EC%B4%8C-%ED%98%B8%EC%88%98-%EB%B7%B0",
+          "publisher": "김동동",
+          "source_kind": "visit-record",
+          "supports": [
+            "address",
+            "opening-hours",
+            "americano",
+            "lake-view",
+            "external-restroom",
+            "weekend-crowds"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-d0c818cf521b3f01",
