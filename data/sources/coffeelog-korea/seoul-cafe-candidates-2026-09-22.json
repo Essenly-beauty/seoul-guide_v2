@@ -15,7 +15,7 @@
     "geography": "Seoul only",
     "record_count": 454,
     "enriched_record_count": 30,
-    "researched_record_count": 321
+    "researched_record_count": 327
   },
   "import_policy": {
     "default_action": "stage_only",
@@ -18542,8 +18542,93 @@
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
       "editorial_context_provenance": null,
-      "canonical_place_id": null,
-      "research_status": "not_researched"
+      "canonical_place_id": "seoul:jongno:otium-jonggak",
+      "research_status": "reviewed",
+      "research_confidence": "high",
+      "verified_attributes": [
+        "book-cafe",
+        "music-listening",
+        "high-end-audio",
+        "curated-books",
+        "owner-book-comments",
+        "journalist-founder-story",
+        "reading-friendly",
+        "solo-cafe",
+        "quiet-space",
+        "large-space",
+        "wood-interior",
+        "coffee-libre-beans-signal",
+        "tea",
+        "wine",
+        "salon-talks",
+        "third-floor",
+        "weekend-crowds"
+      ],
+      "ados_editorial_angles": [
+        "종각의 번잡한 골목 3층에서 기자 출신 운영자의 책 코멘트를 읽고 재즈와 클래식을 듣는 북살롱",
+        "커피리브레 원두 한 잔을 두고 독서에서 음악 감상, 저자 토크까지 이어지는 도심의 사색 공간"
+      ],
+      "research_cautions": [
+        "주말에는 좌석 만석 가능",
+        "3층 접근 동선과 엘리베이터 여부 확인",
+        "행사·북토크가 있는 날에는 평소의 조용한 분위기와 다를 수 있음",
+        "상세 영업시간과 행사 대관 여부를 공식 채널에서 당일 확인",
+        "주차는 인근 유료주차장 이용 조건 확인"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://polle.com/place/5fFv1F/%EC%98%A4%ED%8B%B0%EC%9B%80",
+          "publisher": "Polle",
+          "source_kind": "place-platform",
+          "supports": [
+            "current-listing-2026",
+            "address",
+            "book-cafe",
+            "music-listening",
+            "high-end-audio",
+            "curated-books",
+            "owner-book-comments",
+            "journalist-founder-story",
+            "reading-friendly",
+            "wood-interior",
+            "coffee-libre-beans-signal",
+            "weekend-crowds"
+          ]
+        },
+        {
+          "url": "https://dining.ayo.pe.kr/restaurant/6703e3e89b834a8ae3369b95acc71acf",
+          "publisher": "다이닝 아요",
+          "source_kind": "public-license-derived-directory",
+          "supports": [
+            "current-license-2026",
+            "address",
+            "third-floor",
+            "large-space",
+            "opening-date-2024"
+          ]
+        },
+        {
+          "url": "https://bizno.net/article/4862002137",
+          "publisher": "비즈노",
+          "source_kind": "business-directory",
+          "supports": [
+            "current-business-signal",
+            "address",
+            "business-identity",
+            "phone"
+          ]
+        },
+        {
+          "url": "https://m.yes24.com/goods/detail/143492193",
+          "publisher": "YES24",
+          "source_kind": "event-listing",
+          "supports": [
+            "book-salon",
+            "author-talks",
+            "address"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-9c1060f7715e824f",
@@ -18575,8 +18660,86 @@
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
       "editorial_context_provenance": null,
-      "canonical_place_id": null,
-      "research_status": "not_researched"
+      "canonical_place_id": "seoul:jongno:pungnyu-seochon",
+      "research_status": "reviewed",
+      "research_confidence": "high",
+      "verified_attributes": [
+        "hanok-cafe",
+        "korean-modern-design",
+        "antique-interior",
+        "bamboo-alley",
+        "terrace",
+        "pet-friendly-terrace",
+        "seasonal-signature-drinks",
+        "filter-coffee",
+        "dessert-cafe",
+        "pistachio-tiramisu",
+        "fig-dessert",
+        "photo-friendly",
+        "quiet-space",
+        "limited-parking",
+        "weekend-waiting",
+        "mixed-taste-reviews"
+      ],
+      "ados_editorial_angles": [
+        "서촌 대나무 골목 끝 한옥에서 계절 이름을 붙인 음료와 디저트를 고르는 카페",
+        "비 오는 날 처마와 앤티크 가구가 만드는 고즈넉한 장면을 즐기기 좋은 공간"
+      ],
+      "research_cautions": [
+        "주말 웨이팅 가능",
+        "디저트 당도와 커피 밸런스 평가는 엇갈림",
+        "가격대가 높은 편",
+        "매장 옆 주차는 1대 수준이라 사전 문의·공영주차장 권장",
+        "반려동물은 테라스 동반 조건 확인",
+        "계절 메뉴는 수급에 따라 변경"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://www.diningcode.com/profile.php?rid=sEG43AKKdzSq",
+          "publisher": "DiningCode",
+          "source_kind": "place-platform",
+          "supports": [
+            "current-operation-2026",
+            "address",
+            "opening-hours",
+            "hanok-cafe",
+            "antique-interior",
+            "bamboo-alley",
+            "terrace",
+            "pet-friendly-terrace",
+            "seasonal-signature-drinks",
+            "filter-coffee",
+            "dessert-cafe",
+            "photo-friendly",
+            "quiet-space",
+            "limited-parking"
+          ]
+        },
+        {
+          "url": "https://polle.com/place/3wzkBN/%ED%92%8D%EB%A5%98",
+          "publisher": "Polle",
+          "source_kind": "place-platform",
+          "supports": [
+            "address",
+            "korean-modern-design",
+            "pistachio-tiramisu",
+            "fig-dessert",
+            "mixed-taste-reviews",
+            "premium-price-signal"
+          ]
+        },
+        {
+          "url": "https://mejusa81.tistory.com/entry/%EC%A2%85%EB%A1%9C-%ED%95%9C%EC%98%A5-%EA%B0%90%EC%84%B1%EC%B9%B4%ED%8E%98-%ED%92%8D%EB%A5%98-%EA%B0%80%EB%B3%BC%EB%A7%8C%ED%95%9C-%EA%B3%B3-%EB%B6%84%EC%9C%84%EA%B8%B0%C2%B7%EC%82%AC%EC%A7%84-%EC%8A%A4%ED%8F%BF",
+          "publisher": "메주사",
+          "source_kind": "visit-guide",
+          "supports": [
+            "current-visit-2026",
+            "hanok-cafe",
+            "photo-friendly",
+            "weekend-waiting"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-00e4f36283386c08",
@@ -18608,8 +18771,100 @@
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
       "editorial_context_provenance": null,
-      "canonical_place_id": null,
-      "research_status": "not_researched"
+      "canonical_place_id": "seoul:jongno:haksa-dabang-jonggak",
+      "research_status": "reviewed",
+      "research_confidence": "high",
+      "verified_attributes": [
+        "book-cafe",
+        "reading-friendly",
+        "work-friendly",
+        "quiet-space",
+        "direct-roasting",
+        "hand-drip",
+        "geisha-coffee-seasonal",
+        "cakes",
+        "pudding",
+        "egg-tart",
+        "matcha-latte",
+        "large-space",
+        "varied-seating",
+        "group-reservations",
+        "takeout",
+        "weekday-morning-open",
+        "second-floor",
+        "no-parking"
+      ],
+      "ados_editorial_angles": [
+        "종각 직장가 2층에서 직접 볶은 커피와 책을 두고 조용히 노트북을 펴는 다방",
+        "퇴근 전 케이크와 말차라떼를 고르거나 소규모 모임을 예약하기 좋은 넓은 북카페"
+      ],
+      "research_cautions": [
+        "평일과 주말 영업시간이 다름",
+        "주차 불가",
+        "2층 접근성 확인",
+        "점심·퇴근 시간 직장인 혼잡 가능",
+        "시즌 원두와 유행 디저트는 판매 기간·재고 확인"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://www.tabling.co.kr/place/68a3d95c11c8e44915eb21cb",
+          "publisher": "테이블링",
+          "source_kind": "place-platform",
+          "supports": [
+            "current-operation-2026",
+            "address",
+            "opening-hours",
+            "book-cafe",
+            "cakes",
+            "pudding",
+            "matcha-latte",
+            "varied-seating",
+            "group-reservations",
+            "takeout",
+            "weekday-morning-open",
+            "no-parking"
+          ]
+        },
+        {
+          "url": "https://www.dongnecoffeenote.com/c/10540",
+          "publisher": "동네 커피 노트",
+          "source_kind": "review-analysis",
+          "supports": [
+            "current-reviews-2026",
+            "direct-roasting",
+            "reading-friendly",
+            "work-friendly",
+            "quiet-space",
+            "large-space",
+            "second-floor",
+            "dessert-cafe"
+          ]
+        },
+        {
+          "url": "https://www.diningcode.com/profile.php?rid=z6mUJrJdHmdN",
+          "publisher": "DiningCode",
+          "source_kind": "place-platform",
+          "supports": [
+            "opening-hours",
+            "hand-drip",
+            "geisha-coffee-seasonal",
+            "egg-tart",
+            "solo-cafe",
+            "internal-restroom"
+          ]
+        },
+        {
+          "url": "https://c-straw.com/lounge/1142",
+          "publisher": "STRAW",
+          "source_kind": "editorial-feature",
+          "supports": [
+            "current-feature-2026",
+            "book-selection",
+            "reading-friendly",
+            "jonggak-access"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-48d76f0f1c594e01",
@@ -18762,8 +19017,83 @@
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
       "editorial_context_provenance": null,
-      "canonical_place_id": null,
-      "research_status": "not_researched"
+      "canonical_place_id": "seoul:jongno:chonggakne-bungeoppang-gwangjang-market",
+      "research_status": "reviewed",
+      "research_confidence": "high",
+      "verified_attributes": [
+        "non-cafe",
+        "street-food-stall",
+        "gwangjang-market",
+        "bungeoppang-specialty",
+        "red-bean-walnut",
+        "custard",
+        "red-bean-cream-cheese",
+        "sweet-potato-cream-cheese",
+        "pizza-bungeoppang",
+        "handmade-fillings",
+        "limited-hours",
+        "queue",
+        "purchase-limit-signal",
+        "seasonal-street-snack",
+        "takeout-only"
+      ],
+      "ados_editorial_angles": [
+        "광장시장 남1문에서 팥호두부터 피자까지 수제 속을 고르는 겨울 붕어빵 노점",
+        "시장 산책 중 긴 줄과 1인 구매 제한을 감수하고 갓 구운 한 봉지를 받는 서울 간식"
+      ],
+      "research_cautions": [
+        "카페가 아닌 포장 중심 길거리 간식점으로 Coffee & Cafes에서 제외",
+        "영업시간이 짧고 재료 소진 시 조기 마감 가능",
+        "겨울·계절 운영 여부를 당일 확인",
+        "대기 줄과 1인 구매 수량 제한 가능",
+        "시장 내 혼잡·입식 동선 고려",
+        "eligible_for_ados false 유지하되 시장 간식 에디토리얼 후보"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://www.diningcode.com/profile.php?rid=fTj6VtJl9eOL",
+          "publisher": "DiningCode",
+          "source_kind": "place-platform",
+          "supports": [
+            "current-operation-2026",
+            "address",
+            "opening-hours",
+            "non-cafe",
+            "street-food-stall",
+            "gwangjang-market",
+            "bungeoppang-specialty",
+            "red-bean-walnut",
+            "custard",
+            "red-bean-cream-cheese",
+            "sweet-potato-cream-cheese",
+            "pizza-bungeoppang",
+            "queue",
+            "takeout-only"
+          ]
+        },
+        {
+          "url": "https://view.nate.com/travel/view/330721/",
+          "publisher": "핫식신·네이트",
+          "source_kind": "editorial-feature",
+          "supports": [
+            "queue",
+            "handmade-fillings",
+            "ingredient-quality",
+            "gwangjang-market"
+          ]
+        },
+        {
+          "url": "https://www.esquirekorea.co.kr/article/61485",
+          "publisher": "에스콰이어 코리아",
+          "source_kind": "editorial-feature",
+          "supports": [
+            "seasonal-street-snack",
+            "queue",
+            "flavor-variety",
+            "purchase-limit-signal"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-574bfce284c31f78",
@@ -18795,8 +19125,76 @@
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
       "editorial_context_provenance": null,
-      "canonical_place_id": null,
-      "research_status": "not_researched"
+      "canonical_place_id": "seoul:jongno:mobssie-seochon",
+      "research_status": "reviewed",
+      "research_confidence": "high",
+      "verified_attributes": [
+        "closed-signal-2026",
+        "former-dessert-cafe",
+        "chocolate-specialty",
+        "baked-to-order-chocolate-cake",
+        "chocolate-mousse",
+        "ganache",
+        "hot-chocolate",
+        "cold-chocolate",
+        "lime-cheesecake",
+        "small-shop",
+        "takeout",
+        "no-parking",
+        "seochon-location"
+      ],
+      "ados_editorial_angles": [
+        "서촌에서 주문 뒤 바로 구워 흐르는 초콜릿 케이크로 기억되던 초콜릿 전문 카페의 아카이브"
+      ],
+      "research_cautions": [
+        "2026년 플랫폼에서 폐점으로 표시되고 전 요일 휴무 상태라 현재 추천에서 제외",
+        "과거 메뉴와 후기는 기록용이며 방문 가능 정보로 사용하지 말 것",
+        "공공 인허가 데이터의 기준일보다 폐점 신호가 최신이므로 영업 재개 시 재검증",
+        "eligible_for_ados false 유지"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://polle.com/place/5fRh94/%EB%AA%B9%EC%8B%9C",
+          "publisher": "Polle",
+          "source_kind": "place-platform",
+          "supports": [
+            "closed-signal-2026",
+            "address",
+            "former-dessert-cafe",
+            "chocolate-specialty",
+            "baked-to-order-chocolate-cake",
+            "chocolate-mousse",
+            "ganache",
+            "hot-chocolate",
+            "cold-chocolate",
+            "lime-cheesecake",
+            "takeout",
+            "no-parking"
+          ]
+        },
+        {
+          "url": "https://www.diningcode.com/profile.php?rid=AOlXg5rLd1zN",
+          "publisher": "DiningCode",
+          "source_kind": "place-platform",
+          "supports": [
+            "all-days-closed-signal-2026",
+            "address",
+            "former-menu",
+            "chocolate-specialty",
+            "small-shop"
+          ]
+        },
+        {
+          "url": "https://dining.ayo.pe.kr/restaurant/319c1f619849e83bf29ff488fd2ef7af",
+          "publisher": "다이닝 아요",
+          "source_kind": "public-license-derived-directory",
+          "supports": [
+            "license-record-2026-01",
+            "address",
+            "business-identity"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-a4c6e69a8e6dc934",
@@ -18828,8 +19226,99 @@
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
       "editorial_context_provenance": null,
-      "canonical_place_id": null,
-      "research_status": "not_researched"
+      "canonical_place_id": "seoul:jongno:haehwa-daehangno",
+      "research_status": "reviewed",
+      "research_confidence": "high",
+      "verified_attributes": [
+        "two-floor-cafe",
+        "rooftop",
+        "terrace",
+        "european-style-interior",
+        "large-windows",
+        "photo-friendly",
+        "quiet-space",
+        "theater-district",
+        "pre-show-stop",
+        "signature-latte",
+        "chestnut-latte",
+        "cakes",
+        "baked-goods",
+        "wine",
+        "beer",
+        "daily-operation",
+        "takeout",
+        "no-parking",
+        "hidden-alley"
+      ],
+      "ados_editorial_angles": [
+        "혜화역 골목 안 1·2층과 루프탑을 오르며 공연 전 케이크와 밤라떼를 즐기는 카페",
+        "해 질 무렵 유럽풍 계단과 옥상에서 사진을 남기고 맥주나 와인까지 이어가는 대학로 공간"
+      ],
+      "research_cautions": [
+        "좁은 골목 안쪽이라 지도 확인 필요",
+        "주차 불가",
+        "루프탑은 폭염·한파·우천 영향",
+        "사진 목적 방문객이 몰리는 시간에는 조용한 분위기가 달라질 수 있음",
+        "디저트와 음료 품질 평가는 일부 엇갈림",
+        "층간·루프탑 계단 접근성 확인"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://www.diningcode.com/profile.php?rid=09hyHEdG8QBg",
+          "publisher": "DiningCode",
+          "source_kind": "place-platform",
+          "supports": [
+            "current-operation-2026",
+            "address",
+            "opening-hours",
+            "two-floor-cafe",
+            "rooftop",
+            "terrace",
+            "european-style-interior",
+            "large-windows",
+            "photo-friendly",
+            "quiet-space",
+            "theater-district",
+            "pre-show-stop",
+            "signature-latte",
+            "chestnut-latte",
+            "cakes",
+            "wine",
+            "beer",
+            "daily-operation",
+            "no-parking",
+            "hidden-alley"
+          ]
+        },
+        {
+          "url": "https://www.tabling.co.kr/place/677cd61766de5f0698905d8a",
+          "publisher": "테이블링",
+          "source_kind": "place-platform",
+          "supports": [
+            "current-operation-2026",
+            "address",
+            "opening-hours",
+            "large-space",
+            "baked-goods",
+            "wine",
+            "beer",
+            "takeout",
+            "no-parking",
+            "mixed-reviews"
+          ]
+        },
+        {
+          "url": "https://www.dongnecoffeenote.com/area/%EC%A2%85%EB%A1%9C%EA%B5%AC/mood",
+          "publisher": "동네 커피 노트",
+          "source_kind": "review-analysis",
+          "supports": [
+            "current-reviews-2026",
+            "rooftop",
+            "photo-friendly",
+            "large-space"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-6301c351a94e7989",
