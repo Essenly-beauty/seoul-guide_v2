@@ -15,7 +15,7 @@
     "geography": "Seoul only",
     "record_count": 454,
     "enriched_record_count": 30,
-    "researched_record_count": 352
+    "researched_record_count": 358
   },
   "import_policy": {
     "default_action": "stage_only",
@@ -23876,8 +23876,84 @@
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
       "editorial_context_provenance": null,
-      "canonical_place_id": null,
-      "research_status": "not_researched"
+      "canonical_place_id": "seoul:songpa:frank-coffin-bar-jamsil",
+      "research_status": "reviewed",
+      "research_confidence": "high",
+      "verified_attributes": [
+        "cafe-bar",
+        "european-vintage-interior",
+        "dark-lighting",
+        "signature-cream-coffee",
+        "espresso",
+        "croffle",
+        "tiramisu",
+        "matcha-latte",
+        "non-coffee-drinks",
+        "second-floor",
+        "open-kitchen",
+        "window-seating",
+        "bar-seating",
+        "date-friendly",
+        "pet-friendly-signal",
+        "late-hours",
+        "no-parking"
+      ],
+      "ados_editorial_angles": [
+        "송리단길 2층의 어두운 빈티지 바 분위기에서 달콤한 크림커피와 에스프레소를 마시는 곳",
+        "오픈 키친이 보이는 창가에 앉아 무화과 크로플이나 피스타치오 티라미수를 곁들이는 저녁 데이트 카페"
+      ],
+      "research_cautions": [
+        "2층 계단 접근성 확인",
+        "주차 불가·인근 유료주차장 이용",
+        "주말에는 좌석 혼잡과 대화 소음 가능",
+        "시그니처 크림커피는 단맛과 크림 비중이 높은 편",
+        "반려동물 동반 좌석·규칙 확인",
+        "체인 지점이므로 잠실점 주소 확인"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://www.diningcode.com/profile.php?rid=EQBma2kIFxMn",
+          "publisher": "DiningCode",
+          "source_kind": "place-platform",
+          "supports": [
+            "current-operation-2026",
+            "address",
+            "opening-hours",
+            "european-vintage-interior",
+            "dark-lighting",
+            "signature-cream-coffee",
+            "espresso",
+            "croffle",
+            "tiramisu",
+            "matcha-latte",
+            "non-coffee-drinks",
+            "second-floor",
+            "open-kitchen",
+            "window-seating",
+            "bar-seating",
+            "pet-friendly-signal",
+            "no-parking"
+          ]
+        },
+        {
+          "url": "https://frankcoffinbar.com/",
+          "publisher": "Frank Coffin Bar",
+          "source_kind": "official-brand",
+          "supports": [
+            "brand-identity",
+            "jamsil-branch"
+          ]
+        },
+        {
+          "url": "https://bizw.kr/brand/197827",
+          "publisher": "비즈더블유",
+          "source_kind": "brand-directory",
+          "supports": [
+            "espresso-bar-concept",
+            "croffle-specialty"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-dd567e9f152c38e2",
@@ -24001,8 +24077,77 @@
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
       "editorial_context_provenance": null,
-      "canonical_place_id": null,
-      "research_status": "not_researched"
+      "canonical_place_id": "seoul:songpa:seryun-songridan",
+      "research_status": "reviewed",
+      "research_confidence": "medium",
+      "verified_attributes": [
+        "dessert-cafe",
+        "tiramisu",
+        "fruit-cakes",
+        "pound-cake",
+        "basque-cheesecake-signal",
+        "decaf",
+        "einspanner",
+        "quiet-conversation-signal",
+        "meeting-friendly-signal",
+        "two-floor-space",
+        "indoor-restroom",
+        "premium-price-signal",
+        "mixed-reviews"
+      ],
+      "ados_editorial_angles": [
+        "송리단길에서 촉촉한 티라미수와 계절 과일 케이크를 골라 조용히 대화하는 디저트 카페",
+        "청첩장 모임처럼 이야기에 집중할 자리를 찾을 때 커피와 조각 케이크를 함께 주문하는 곳"
+      ],
+      "research_cautions": [
+        "최신 공식 채널과 영업시간 정보가 부족해 방문 전 운영 여부 재확인",
+        "디저트와 커피에 대한 평가는 엇갈림",
+        "메뉴 가격대가 높은 편이라는 후기 신호",
+        "주말에는 조용한 분위기가 보장되지 않을 수 있음",
+        "주차·반려동물·층간 접근성 정보 추가 확인",
+        "eligible_for_ados false 유지"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://www.diningcode.com/profile.php?rid=OlPcRcRS0Rr3",
+          "publisher": "DiningCode",
+          "source_kind": "place-platform",
+          "supports": [
+            "current-listing-2026",
+            "dessert-cafe",
+            "tiramisu",
+            "fruit-cakes",
+            "pound-cake",
+            "basque-cheesecake-signal",
+            "decaf",
+            "einspanner",
+            "quiet-conversation-signal",
+            "meeting-friendly-signal",
+            "indoor-restroom",
+            "premium-price-signal",
+            "mixed-reviews"
+          ]
+        },
+        {
+          "url": "https://raa.purpleo.kr/article/99679",
+          "publisher": "전국 휴게음식점 지도",
+          "source_kind": "public-license-derived-directory",
+          "supports": [
+            "address",
+            "two-floor-space",
+            "business-identity"
+          ]
+        },
+        {
+          "url": "https://www.siksinhot.com/P/1255820",
+          "publisher": "식신",
+          "source_kind": "legacy-place-directory",
+          "supports": [
+            "address",
+            "seryun-name"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-759b087a519e1ae0",
@@ -24107,8 +24252,92 @@
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
       "editorial_context_provenance": null,
-      "canonical_place_id": null,
-      "research_status": "not_researched"
+      "canonical_place_id": "seoul:songpa:milbit-songpa",
+      "research_status": "reviewed",
+      "research_confidence": "high",
+      "verified_attributes": [
+        "bakery-cafe",
+        "mammoth-bread-specialty",
+        "matcha-rice-cake-mammoth",
+        "cheese-mammoth",
+        "chewy-bread",
+        "cube-bread",
+        "salt-bread",
+        "same-day-baking-signal",
+        "multiple-beans",
+        "decaf",
+        "hojicha-drink",
+        "converted-house",
+        "wood-interior",
+        "large-space-signal",
+        "terrace",
+        "daily-operation",
+        "no-parking",
+        "high-price-signal"
+      ],
+      "ados_editorial_angles": [
+        "송리단길 주택 개조 공간에서 단면이 풍성한 말차 찹쌀떡 맘모스와 진한 커피를 나눠 먹는 베이커리 카페",
+        "한적한 골목의 우드톤 테라스에서 소금버터빵과 호지차 아이스크림 음료로 쉬어가는 곳"
+      ],
+      "research_cautions": [
+        "맘모스빵은 양과 단맛이 강해 여럿이 나누기 적합",
+        "인기 빵은 늦은 시간 품절 가능",
+        "가격대가 높은 편이라는 후기 신호",
+        "주차 불가·인근 주차장 확인",
+        "주말에는 대기와 혼잡 가능",
+        "테라스는 날씨 영향"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://www.diningcode.com/profile.php?rid=sKV6pCjJHZsh",
+          "publisher": "DiningCode",
+          "source_kind": "place-platform",
+          "supports": [
+            "current-operation-2026",
+            "address",
+            "opening-hours",
+            "bakery-cafe",
+            "mammoth-bread-specialty",
+            "matcha-rice-cake-mammoth",
+            "cheese-mammoth",
+            "chewy-bread",
+            "cube-bread",
+            "salt-bread",
+            "multiple-beans",
+            "decaf",
+            "hojicha-drink",
+            "converted-house",
+            "wood-interior",
+            "large-space-signal",
+            "terrace",
+            "daily-operation",
+            "no-parking",
+            "high-price-signal"
+          ]
+        },
+        {
+          "url": "https://movementlab.kr/product/%EB%B0%80%EB%B9%9B/19582/category/858/display/1/",
+          "publisher": "Movement Lab",
+          "source_kind": "brand-profile",
+          "supports": [
+            "address",
+            "bakery-brand-concept",
+            "matcha-rice-cake-mammoth",
+            "cheese-mammoth",
+            "hojicha-drink"
+          ]
+        },
+        {
+          "url": "https://www.jobkorea.co.kr/Recruit/GI_Read/49912094",
+          "publisher": "잡코리아",
+          "source_kind": "current-business-signal",
+          "supports": [
+            "current-operation-2026",
+            "songridan-location",
+            "bakery-cafe"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-19643de2d4ec55fe",
@@ -24140,8 +24369,105 @@
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
       "editorial_context_provenance": null,
-      "canonical_place_id": null,
-      "research_status": "not_researched"
+      "canonical_place_id": "seoul:songpa:woomood-songridan",
+      "research_status": "reviewed",
+      "research_confidence": "high",
+      "verified_attributes": [
+        "cafe-wine-bar",
+        "signature-latte",
+        "black-sesame-cream-latte",
+        "dirty-matcha",
+        "croffle",
+        "basque-cheesecake",
+        "macaron",
+        "wood-interior",
+        "plants",
+        "large-windows",
+        "quiet-conversation",
+        "spacious-interior",
+        "parking-available",
+        "wheelchair-entrance-signal",
+        "reservation",
+        "takeout-discount",
+        "separate-restrooms",
+        "no-kids-zone",
+        "closed-monday"
+      ],
+      "ados_editorial_angles": [
+        "석촌호수 산책 뒤 원목과 식물이 놓인 통창 공간에서 우무드 라떼와 크로플로 조용히 대화하는 카페",
+        "낮의 크림라떼에서 저녁 와인으로 자연스럽게 이어지는 송리단길의 카페 겸 와인바"
+      ],
+      "research_cautions": [
+        "월요일 휴무",
+        "노키즈존 운영",
+        "플랫폼별 당일 오픈 시간이 달라 공식 채널에서 확인",
+        "주차는 인접 건물 지하 등 이용 조건 확인",
+        "작업보다 대화와 휴식 중심으로 소개",
+        "예약·반려동물·휠체어 접근 세부 조건 확인"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://www.daangn.com/kr/local-profile/%EC%9A%B0%EB%AC%B4%EB%93%9C-6dgdqi8ej6gv/",
+          "publisher": "당근 동네 업체",
+          "source_kind": "official-local-profile",
+          "supports": [
+            "current-update-2026",
+            "address",
+            "opening-hours",
+            "cafe-wine-bar",
+            "signature-latte",
+            "black-sesame-cream-latte",
+            "dirty-matcha"
+          ]
+        },
+        {
+          "url": "https://www.diningcode.com/profile.php?rid=tlLX71xMIGiI",
+          "publisher": "DiningCode",
+          "source_kind": "place-platform",
+          "supports": [
+            "current-operation-2026",
+            "address",
+            "closed-monday",
+            "croffle",
+            "wood-interior",
+            "plants",
+            "large-windows",
+            "quiet-conversation",
+            "spacious-interior",
+            "parking-available"
+          ]
+        },
+        {
+          "url": "https://gajaseoul.com/ko/store/woomood",
+          "publisher": "GAJA SEOUL",
+          "source_kind": "place-guide",
+          "supports": [
+            "wine",
+            "croffle",
+            "cakes",
+            "parking-available",
+            "wheelchair-entrance-signal",
+            "reservation",
+            "takeout-discount",
+            "separate-restrooms",
+            "no-kids-zone"
+          ]
+        },
+        {
+          "url": "https://www.tabling.co.kr/place/677cd63366de5f069890916b",
+          "publisher": "테이블링",
+          "source_kind": "place-platform",
+          "supports": [
+            "closed-monday",
+            "parking-available",
+            "no-kids-zone",
+            "wine",
+            "macaron",
+            "croffle",
+            "basque-cheesecake"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-a57ac983a298c695",
@@ -24173,8 +24499,97 @@
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
       "editorial_context_provenance": null,
-      "canonical_place_id": null,
-      "research_status": "not_researched"
+      "canonical_place_id": "seoul:songpa:zenzen-jamsil",
+      "research_status": "reviewed",
+      "research_confidence": "high",
+      "verified_attributes": [
+        "souffle-pancake-specialty",
+        "brunch",
+        "all-day-brunch",
+        "tiramisu",
+        "salad",
+        "coffee",
+        "wine",
+        "beer",
+        "dark-interior",
+        "european-vintage-interior",
+        "sofa-seating",
+        "group-friendly",
+        "date-friendly",
+        "second-floor",
+        "elevator",
+        "late-hours",
+        "daily-operation",
+        "takeout",
+        "delivery",
+        "waiting-signal",
+        "no-parking"
+      ],
+      "ados_editorial_angles": [
+        "석촌호수 산책 전후 어두운 유럽풍 소파에 앉아 수플레 팬케이크를 천천히 기다리는 오래된 잠실 디저트 카페",
+        "오전 브런치부터 밤의 와인까지 한 공간에서 이어가며 여럿이 편하게 머무는 송리단길 2층 카페"
+      ],
+      "research_cautions": [
+        "수플레 조리시간과 주말 웨이팅 고려",
+        "주차 불가",
+        "2층이지만 엘리베이터 이용 가능 여부를 현장에서 확인",
+        "어두운 조도로 작업·독서에는 부적합할 수 있음",
+        "혼잡 시 자리 이동·이용 규칙 확인",
+        "메뉴와 가격은 플랫폼별 갱신 시점이 달라 당일 확인"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://www.diningcode.com/profile.php?rid=RIN8qyBvUISf",
+          "publisher": "DiningCode",
+          "source_kind": "place-platform",
+          "supports": [
+            "current-operation-2026",
+            "address",
+            "opening-hours",
+            "souffle-pancake-specialty",
+            "brunch",
+            "all-day-brunch",
+            "tiramisu",
+            "salad",
+            "coffee",
+            "wine",
+            "beer",
+            "dark-interior",
+            "european-vintage-interior",
+            "sofa-seating",
+            "group-friendly",
+            "date-friendly",
+            "second-floor",
+            "elevator",
+            "waiting-signal",
+            "no-parking"
+          ]
+        },
+        {
+          "url": "https://www.tabling.co.kr/place/677ccc3d66de5f06987eb555",
+          "publisher": "테이블링",
+          "source_kind": "place-platform",
+          "supports": [
+            "current-listing-2026",
+            "opening-hours",
+            "souffle-pancake-specialty",
+            "brunch",
+            "takeout",
+            "delivery",
+            "no-parking"
+          ]
+        },
+        {
+          "url": "https://dongnecoffeenote.com/c/1703",
+          "publisher": "동네 커피 노트",
+          "source_kind": "review-analysis",
+          "supports": [
+            "current-reviews-2026",
+            "long-running-place-signal",
+            "dessert-focused"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-f401b04b96e99412",
@@ -24267,8 +24682,84 @@
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
       "editorial_context_provenance": null,
-      "canonical_place_id": null,
-      "research_status": "not_researched"
+      "canonical_place_id": "seoul:songpa:wellhaus-songridan",
+      "research_status": "reviewed",
+      "research_confidence": "high",
+      "verified_attributes": [
+        "dessert-cafe",
+        "fruit-cakes",
+        "butter-bars",
+        "cheese-butter-bar",
+        "signature-blend",
+        "cream-coffee",
+        "cozy-interior",
+        "photo-friendly",
+        "second-floor",
+        "daily-operation",
+        "late-hours",
+        "parking-available-signal",
+        "pet-friendly",
+        "rental",
+        "cake-reservation",
+        "premium-price-signal"
+      ],
+      "ados_editorial_angles": [
+        "송리단길 2층의 아늑한 공간에서 제철 과일 케이크와 크리미한 시그니처 커피를 고르는 디저트 카페",
+        "황치즈 버터바처럼 진한 단짠 디저트를 포장하거나 반려동물과 사진을 남기기 좋은 곳"
+      ],
+      "research_cautions": [
+        "과일 케이크와 버터바는 재고·시즌에 따라 변동",
+        "전반적인 가격대가 높은 편이라는 후기 신호",
+        "2층 접근성과 엘리베이터 여부 확인",
+        "주차 가능 대수와 조건 확인",
+        "반려동물 동반 좌석·규칙 확인",
+        "대관·케이크 예약은 공식 채널로 사전 문의"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://www.diningcode.com/profile.php?rid=5dOHlUrTbbml",
+          "publisher": "DiningCode",
+          "source_kind": "place-platform",
+          "supports": [
+            "current-operation-2026",
+            "dessert-cafe",
+            "fruit-cakes",
+            "butter-bars",
+            "cheese-butter-bar",
+            "signature-blend",
+            "cream-coffee",
+            "cozy-interior",
+            "photo-friendly",
+            "second-floor",
+            "premium-price-signal"
+          ]
+        },
+        {
+          "url": "https://www.hicake.co.kr/products/UHJvZHVjdDo5MDIxNzJkNC0wYjc2LTQ2Y2ItOTE5OC0zZTllNmYwOGFlNWQ%3D",
+          "publisher": "하이케이크",
+          "source_kind": "official-booking-profile",
+          "supports": [
+            "address",
+            "opening-hours",
+            "daily-operation",
+            "late-hours",
+            "parking-available-signal",
+            "pet-friendly",
+            "rental",
+            "cake-reservation"
+          ]
+        },
+        {
+          "url": "https://www.dongnecoffeenote.com/c/1704",
+          "publisher": "동네 커피 노트",
+          "source_kind": "review-analysis",
+          "supports": [
+            "current-reviews-2026",
+            "dessert-focused",
+            "atmosphere-signal"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-f5c28441211bc81a",
