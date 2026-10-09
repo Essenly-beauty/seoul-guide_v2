@@ -3,8 +3,8 @@
   "generated_on": "2026-09-26",
   "caution": "이 파일은 전수 조사 큐다. 추정 필드는 공개용 태그가 아니며 사람 또는 출처 검토가 필요하다.",
   "summary": {
-    "done_or_pending_specific_check": 315,
-    "p3_general_review": 139
+    "done_or_pending_specific_check": 352,
+    "p3_general_review": 102
   },
   "records": [
     {
@@ -2119,8 +2119,8 @@
       "normalized_name": "크림슨파더 혜화",
       "possible_duplicate_external_ids": [],
       "content_kind_guess": "cafe_candidate",
-      "research_priority": "p3_general_review",
-      "current_research_status": "not_researched"
+      "research_priority": "done_or_pending_specific_check",
+      "current_research_status": "reviewed"
     },
     {
       "external_id": "coffeelog-7d899c13d4beca4d",
@@ -2129,8 +2129,8 @@
       "normalized_name": "도넛정수 창신",
       "possible_duplicate_external_ids": [],
       "content_kind_guess": "mixed_or_non_cafe_needs_review",
-      "research_priority": "p3_general_review",
-      "current_research_status": "not_researched"
+      "research_priority": "done_or_pending_specific_check",
+      "current_research_status": "reviewed"
     },
     {
       "external_id": "coffeelog-ecedb15dbb6f9ea1",
@@ -2139,8 +2139,8 @@
       "normalized_name": "파이키",
       "possible_duplicate_external_ids": [],
       "content_kind_guess": "cafe_candidate",
-      "research_priority": "p3_general_review",
-      "current_research_status": "not_researched"
+      "research_priority": "done_or_pending_specific_check",
+      "current_research_status": "reviewed"
     },
     {
       "external_id": "coffeelog-3d5e96379c46b433",
@@ -2181,8 +2181,8 @@
       "normalized_name": "연구실",
       "possible_duplicate_external_ids": [],
       "content_kind_guess": "cafe_candidate",
-      "research_priority": "p3_general_review",
-      "current_research_status": "not_researched"
+      "research_priority": "done_or_pending_specific_check",
+      "current_research_status": "reviewed"
     },
     {
       "external_id": "coffeelog-7fe71f00c29c950c",
@@ -2203,8 +2203,8 @@
       "normalized_name": "크림스파더 혜화",
       "possible_duplicate_external_ids": [],
       "content_kind_guess": "cafe_candidate",
-      "research_priority": "p3_general_review",
-      "current_research_status": "not_researched"
+      "research_priority": "done_or_pending_specific_check",
+      "current_research_status": "reviewed"
     },
     {
       "external_id": "coffeelog-aa3b1386750624df",
@@ -2213,8 +2213,8 @@
       "normalized_name": "르프랑루프탑",
       "possible_duplicate_external_ids": [],
       "content_kind_guess": "cafe_candidate",
-      "research_priority": "p3_general_review",
-      "current_research_status": "not_researched"
+      "research_priority": "done_or_pending_specific_check",
+      "current_research_status": "reviewed"
     },
     {
       "external_id": "coffeelog-9f219c8b04846046",
@@ -2223,8 +2223,8 @@
       "normalized_name": "오티움",
       "possible_duplicate_external_ids": [],
       "content_kind_guess": "cafe_candidate",
-      "research_priority": "p3_general_review",
-      "current_research_status": "not_researched"
+      "research_priority": "done_or_pending_specific_check",
+      "current_research_status": "reviewed"
     },
     {
       "external_id": "coffeelog-9c1060f7715e824f",
@@ -2233,8 +2233,8 @@
       "normalized_name": "풍류",
       "possible_duplicate_external_ids": [],
       "content_kind_guess": "cafe_candidate",
-      "research_priority": "p3_general_review",
-      "current_research_status": "not_researched"
+      "research_priority": "done_or_pending_specific_check",
+      "current_research_status": "reviewed"
     },
     {
       "external_id": "coffeelog-00e4f36283386c08",
@@ -2243,8 +2243,8 @@
       "normalized_name": "학사다방",
       "possible_duplicate_external_ids": [],
       "content_kind_guess": "cafe_candidate",
-      "research_priority": "p3_general_review",
-      "current_research_status": "not_researched"
+      "research_priority": "done_or_pending_specific_check",
+      "current_research_status": "reviewed"
     },
     {
       "external_id": "coffeelog-48d76f0f1c594e01",
@@ -2273,8 +2273,8 @@
       "normalized_name": "총각네붕어빵",
       "possible_duplicate_external_ids": [],
       "content_kind_guess": "mixed_or_non_cafe_needs_review",
-      "research_priority": "p3_general_review",
-      "current_research_status": "not_researched"
+      "research_priority": "done_or_pending_specific_check",
+      "current_research_status": "reviewed"
     },
     {
       "external_id": "coffeelog-574bfce284c31f78",
@@ -2283,8 +2283,8 @@
       "normalized_name": "몹시",
       "possible_duplicate_external_ids": [],
       "content_kind_guess": "cafe_candidate",
-      "research_priority": "p3_general_review",
-      "current_research_status": "not_researched"
+      "research_priority": "done_or_pending_specific_check",
+      "current_research_status": "reviewed"
     },
     {
       "external_id": "coffeelog-a4c6e69a8e6dc934",
@@ -2293,8 +2293,8 @@
       "normalized_name": "해화",
       "possible_duplicate_external_ids": [],
       "content_kind_guess": "cafe_candidate",
-      "research_priority": "p3_general_review",
-      "current_research_status": "not_researched"
+      "research_priority": "done_or_pending_specific_check",
+      "current_research_status": "reviewed"
     },
     {
       "external_id": "coffeelog-6301c351a94e7989",
@@ -2313,8 +2313,8 @@
       "normalized_name": "나지트",
       "possible_duplicate_external_ids": [],
       "content_kind_guess": "cafe_candidate",
-      "research_priority": "p3_general_review",
-      "current_research_status": "not_researched"
+      "research_priority": "done_or_pending_specific_check",
+      "current_research_status": "reviewed"
     },
     {
       "external_id": "coffeelog-dbccb3db0a94b32b",
@@ -2333,8 +2333,8 @@
       "normalized_name": "칠린",
       "possible_duplicate_external_ids": [],
       "content_kind_guess": "cafe_candidate",
-      "research_priority": "p3_general_review",
-      "current_research_status": "not_researched"
+      "research_priority": "done_or_pending_specific_check",
+      "current_research_status": "reviewed"
     },
     {
       "external_id": "coffeelog-a1d247c6ba4ae0dc",
@@ -2343,8 +2343,8 @@
       "normalized_name": "이띵룸",
       "possible_duplicate_external_ids": [],
       "content_kind_guess": "cafe_candidate",
-      "research_priority": "p3_general_review",
-      "current_research_status": "not_researched"
+      "research_priority": "done_or_pending_specific_check",
+      "current_research_status": "reviewed"
     },
     {
       "external_id": "coffeelog-77738d48ed81afe9",
@@ -2353,8 +2353,8 @@
       "normalized_name": "마띠에르",
       "possible_duplicate_external_ids": [],
       "content_kind_guess": "cafe_candidate",
-      "research_priority": "p3_general_review",
-      "current_research_status": "not_researched"
+      "research_priority": "done_or_pending_specific_check",
+      "current_research_status": "reviewed"
     },
     {
       "external_id": "coffeelog-9b63987c6f0267d3",
@@ -2363,8 +2363,8 @@
       "normalized_name": "브라이트사이드",
       "possible_duplicate_external_ids": [],
       "content_kind_guess": "cafe_candidate",
-      "research_priority": "p3_general_review",
-      "current_research_status": "not_researched"
+      "research_priority": "done_or_pending_specific_check",
+      "current_research_status": "reviewed"
     },
     {
       "external_id": "coffeelog-3244a62c096701ef",
@@ -2393,8 +2393,8 @@
       "normalized_name": "브리트레소",
       "possible_duplicate_external_ids": [],
       "content_kind_guess": "cafe_candidate",
-      "research_priority": "p3_general_review",
-      "current_research_status": "not_researched"
+      "research_priority": "done_or_pending_specific_check",
+      "current_research_status": "reviewed"
     },
     {
       "external_id": "coffeelog-64b091aa61577a9d",
@@ -2403,8 +2403,8 @@
       "normalized_name": "마띠에르 bakery & roastery",
       "possible_duplicate_external_ids": [],
       "content_kind_guess": "cafe_candidate",
-      "research_priority": "p3_general_review",
-      "current_research_status": "not_researched"
+      "research_priority": "done_or_pending_specific_check",
+      "current_research_status": "reviewed"
     },
     {
       "external_id": "coffeelog-eb792fbba7d5f3f0",
@@ -2423,8 +2423,8 @@
       "normalized_name": "산스",
       "possible_duplicate_external_ids": [],
       "content_kind_guess": "cafe_candidate",
-      "research_priority": "p3_general_review",
-      "current_research_status": "not_researched"
+      "research_priority": "done_or_pending_specific_check",
+      "current_research_status": "reviewed"
     },
     {
       "external_id": "coffeelog-d9b16892fe55c2c0",
@@ -2433,8 +2433,8 @@
       "normalized_name": "븨븨븨",
       "possible_duplicate_external_ids": [],
       "content_kind_guess": "cafe_candidate",
-      "research_priority": "p3_general_review",
-      "current_research_status": "not_researched"
+      "research_priority": "done_or_pending_specific_check",
+      "current_research_status": "reviewed"
     },
     {
       "external_id": "coffeelog-7bf40cff3ddf72c2",
@@ -2473,8 +2473,8 @@
       "normalized_name": "사색서랍",
       "possible_duplicate_external_ids": [],
       "content_kind_guess": "cafe_candidate",
-      "research_priority": "p3_general_review",
-      "current_research_status": "not_researched"
+      "research_priority": "done_or_pending_specific_check",
+      "current_research_status": "reviewed"
     },
     {
       "external_id": "coffeelog-ec554b021b91a504",
@@ -2483,8 +2483,8 @@
       "normalized_name": "떨스티앤트",
       "possible_duplicate_external_ids": [],
       "content_kind_guess": "cafe_candidate",
-      "research_priority": "p3_general_review",
-      "current_research_status": "not_researched"
+      "research_priority": "done_or_pending_specific_check",
+      "current_research_status": "reviewed"
     },
     {
       "external_id": "coffeelog-f385282196d47c61",
@@ -2503,8 +2503,8 @@
       "normalized_name": "미크",
       "possible_duplicate_external_ids": [],
       "content_kind_guess": "cafe_candidate",
-      "research_priority": "p3_general_review",
-      "current_research_status": "not_researched"
+      "research_priority": "done_or_pending_specific_check",
+      "current_research_status": "reviewed"
     },
     {
       "external_id": "coffeelog-fbcbc4cc4e932847",
@@ -2513,8 +2513,8 @@
       "normalized_name": "jbout coffee",
       "possible_duplicate_external_ids": [],
       "content_kind_guess": "cafe_candidate",
-      "research_priority": "p3_general_review",
-      "current_research_status": "not_researched"
+      "research_priority": "done_or_pending_specific_check",
+      "current_research_status": "reviewed"
     },
     {
       "external_id": "coffeelog-d0c818cf521b3f01",
@@ -2523,8 +2523,8 @@
       "normalized_name": "봉땅 본점",
       "possible_duplicate_external_ids": [],
       "content_kind_guess": "cafe_candidate",
-      "research_priority": "p3_general_review",
-      "current_research_status": "not_researched"
+      "research_priority": "done_or_pending_specific_check",
+      "current_research_status": "reviewed"
     },
     {
       "external_id": "coffeelog-638c58adaa14b0d7",
@@ -2533,8 +2533,8 @@
       "normalized_name": "비터솔트",
       "possible_duplicate_external_ids": [],
       "content_kind_guess": "cafe_candidate",
-      "research_priority": "p3_general_review",
-      "current_research_status": "not_researched"
+      "research_priority": "done_or_pending_specific_check",
+      "current_research_status": "reviewed"
     },
     {
       "external_id": "coffeelog-e6eefb0f842c40c8",
@@ -2555,8 +2555,8 @@
       "normalized_name": "나루터",
       "possible_duplicate_external_ids": [],
       "content_kind_guess": "cafe_candidate",
-      "research_priority": "p3_general_review",
-      "current_research_status": "not_researched"
+      "research_priority": "done_or_pending_specific_check",
+      "current_research_status": "reviewed"
     },
     {
       "external_id": "coffeelog-2ca86087bcbd7fba",
@@ -2577,8 +2577,8 @@
       "normalized_name": "땡스투홀리데이",
       "possible_duplicate_external_ids": [],
       "content_kind_guess": "cafe_candidate",
-      "research_priority": "p3_general_review",
-      "current_research_status": "not_researched"
+      "research_priority": "done_or_pending_specific_check",
+      "current_research_status": "reviewed"
     },
     {
       "external_id": "coffeelog-f49a98fbd557d90a",
@@ -2587,8 +2587,8 @@
       "normalized_name": "맨들러",
       "possible_duplicate_external_ids": [],
       "content_kind_guess": "cafe_candidate",
-      "research_priority": "p3_general_review",
-      "current_research_status": "not_researched"
+      "research_priority": "done_or_pending_specific_check",
+      "current_research_status": "reviewed"
     },
     {
       "external_id": "coffeelog-99746f058d75aaea",
@@ -2627,8 +2627,8 @@
       "normalized_name": "댓츄라이트",
       "possible_duplicate_external_ids": [],
       "content_kind_guess": "cafe_candidate",
-      "research_priority": "p3_general_review",
-      "current_research_status": "not_researched"
+      "research_priority": "done_or_pending_specific_check",
+      "current_research_status": "reviewed"
     },
     {
       "external_id": "coffeelog-38c0d6aefbea1d37",
@@ -2647,8 +2647,8 @@
       "normalized_name": "어피셔나도",
       "possible_duplicate_external_ids": [],
       "content_kind_guess": "cafe_candidate",
-      "research_priority": "p3_general_review",
-      "current_research_status": "not_researched"
+      "research_priority": "done_or_pending_specific_check",
+      "current_research_status": "reviewed"
     },
     {
       "external_id": "coffeelog-ac38503b3c86027a",
@@ -2677,8 +2677,8 @@
       "normalized_name": "이즈 ease",
       "possible_duplicate_external_ids": [],
       "content_kind_guess": "cafe_candidate",
-      "research_priority": "p3_general_review",
-      "current_research_status": "not_researched"
+      "research_priority": "done_or_pending_specific_check",
+      "current_research_status": "reviewed"
     },
     {
       "external_id": "coffeelog-77f1469516e8c217",
@@ -2687,8 +2687,8 @@
       "normalized_name": "카프하우스",
       "possible_duplicate_external_ids": [],
       "content_kind_guess": "cafe_candidate",
-      "research_priority": "p3_general_review",
-      "current_research_status": "not_researched"
+      "research_priority": "done_or_pending_specific_check",
+      "current_research_status": "reviewed"
     },
     {
       "external_id": "coffeelog-dc6a565c4bafcab4",
@@ -2697,8 +2697,8 @@
       "normalized_name": "봉땅 본점 (송리단길)",
       "possible_duplicate_external_ids": [],
       "content_kind_guess": "cafe_candidate",
-      "research_priority": "p3_general_review",
-      "current_research_status": "not_researched"
+      "research_priority": "done_or_pending_specific_check",
+      "current_research_status": "reviewed"
     },
     {
       "external_id": "coffeelog-3fbbc14cf161d9c2",
@@ -2717,8 +2717,8 @@
       "normalized_name": "그림제작소 잠실점",
       "possible_duplicate_external_ids": [],
       "content_kind_guess": "cafe_candidate",
-      "research_priority": "p3_general_review",
-      "current_research_status": "not_researched"
+      "research_priority": "done_or_pending_specific_check",
+      "current_research_status": "reviewed"
     },
     {
       "external_id": "coffeelog-b24d3f8b08aa4463",
@@ -2727,8 +2727,8 @@
       "normalized_name": "브루브루",
       "possible_duplicate_external_ids": [],
       "content_kind_guess": "cafe_candidate",
-      "research_priority": "p3_general_review",
-      "current_research_status": "not_researched"
+      "research_priority": "done_or_pending_specific_check",
+      "current_research_status": "reviewed"
     },
     {
       "external_id": "coffeelog-c215ec7c7246a294",
