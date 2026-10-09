@@ -15,7 +15,7 @@
     "geography": "Seoul only",
     "record_count": 454,
     "enriched_record_count": 30,
-    "researched_record_count": 346
+    "researched_record_count": 352
   },
   "import_policy": {
     "default_action": "stage_only",
@@ -22692,8 +22692,69 @@
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
       "editorial_context_provenance": null,
-      "canonical_place_id": null,
-      "research_status": "not_researched"
+      "canonical_place_id": "seoul:songpa:aficionado-coffee-songpa",
+      "research_status": "reviewed",
+      "research_confidence": "medium",
+      "verified_attributes": [
+        "coffee-focused",
+        "espresso",
+        "lungo",
+        "flat-white",
+        "signature-latte",
+        "early-open",
+        "closed-wednesday",
+        "pet-friendly",
+        "takeout",
+        "ground-floor",
+        "no-parking",
+        "mixed-coffee-reviews"
+      ],
+      "ados_editorial_angles": [
+        "송파나루역 주택가에서 오전 8시 30분 에스프레소나 플랫화이트로 하루를 시작하는 커피 바",
+        "화려한 디저트보다 룽고와 우유 커피에 집중해 빠르게 들르기 좋은 동네 카페"
+      ],
+      "research_cautions": [
+        "수요일 휴무",
+        "주차 불가",
+        "원두 로스팅과 맛에 대한 후기가 엇갈림",
+        "반려동물 동반 조건과 좌석 범위 확인",
+        "공간·접근성·디저트 정보가 제한돼 편집 추천 전 추가 확인",
+        "eligible_for_ados false 유지"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://www.tabling.co.kr/place/677cd15b66de5f069887c24a",
+          "publisher": "테이블링",
+          "source_kind": "place-platform",
+          "supports": [
+            "current-operation-2026",
+            "address",
+            "opening-hours",
+            "coffee-focused",
+            "espresso",
+            "lungo",
+            "flat-white",
+            "signature-latte",
+            "early-open",
+            "closed-wednesday",
+            "pet-friendly",
+            "takeout",
+            "ground-floor",
+            "no-parking",
+            "mixed-coffee-reviews"
+          ]
+        },
+        {
+          "url": "https://polle.com/place/3eRlIu/%EC%96%B4%ED%94%BC%EC%85%94%EB%82%98%EB%8F%84",
+          "publisher": "Polle",
+          "source_kind": "place-platform",
+          "supports": [
+            "current-listing-2026",
+            "aficionado-coffee-name",
+            "seokchon-lake-area"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-ac38503b3c86027a",
@@ -22882,8 +22943,102 @@
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
       "editorial_context_provenance": null,
-      "canonical_place_id": null,
-      "research_status": "not_researched"
+      "canonical_place_id": "seoul:songpa:ease-seokchon",
+      "research_status": "reviewed",
+      "research_confidence": "high",
+      "verified_attributes": [
+        "filter-coffee",
+        "hand-drip",
+        "single-origin",
+        "decaf",
+        "quiet-space",
+        "reading-friendly",
+        "solo-cafe",
+        "bar-seating",
+        "large-windows",
+        "sunlight",
+        "minimal-interior",
+        "banana-tiramisu",
+        "chocolate-mousse",
+        "seasonal-fruit-tart",
+        "prosciutto-sandwich",
+        "jasmine-milk-tea",
+        "takeout-discount",
+        "pet-friendly",
+        "ground-floor",
+        "no-parking",
+        "small-space"
+      ],
+      "ados_editorial_angles": [
+        "석촌역의 작은 통창 카페에서 바리스타가 천천히 내리는 싱글 오리진 필터커피를 지켜보는 곳",
+        "바나나 티라미수나 프로슈토 샌드위치를 곁들여 혼자 책을 읽고 조용히 쉬기 좋은 공간"
+      ],
+      "research_cautions": [
+        "주차 불가",
+        "소규모·2인 좌석 중심이라 단체 방문과 피크 시간 대기 가능",
+        "창가 좌석은 한낮 직사광선과 열기 고려",
+        "필터커피 농도·로스팅 취향에 대한 평가는 엇갈림",
+        "임시 휴무는 공식 SNS 확인",
+        "반려동물 동반 조건 확인"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://www.diningcode.com/profile.php?rid=LbVz6I4UFyTT",
+          "publisher": "DiningCode",
+          "source_kind": "place-platform",
+          "supports": [
+            "current-operation-2026",
+            "address",
+            "opening-hours",
+            "filter-coffee",
+            "hand-drip",
+            "single-origin",
+            "decaf",
+            "quiet-space",
+            "reading-friendly",
+            "solo-cafe",
+            "bar-seating",
+            "large-windows",
+            "sunlight",
+            "minimal-interior",
+            "banana-tiramisu",
+            "chocolate-mousse",
+            "seasonal-fruit-tart",
+            "prosciutto-sandwich",
+            "jasmine-milk-tea",
+            "takeout-discount",
+            "ground-floor",
+            "no-parking",
+            "small-space"
+          ]
+        },
+        {
+          "url": "https://polle.com/place/41lkzO/%EC%9D%B4%EC%A6%88",
+          "publisher": "Polle",
+          "source_kind": "place-platform",
+          "supports": [
+            "current-listing-2026",
+            "address",
+            "filter-coffee",
+            "pet-friendly",
+            "takeout",
+            "no-parking",
+            "mixed-coffee-reviews"
+          ]
+        },
+        {
+          "url": "https://conyplace.com/%EC%9D%B4%EC%A6%88-ease-%EC%84%9C%EC%9A%B8-%EC%86%A1%ED%8C%8C%EA%B5%AC%EC%9D%98-%EC%95%84%EB%8A%91%ED%95%9C-%EA%B0%9C%EC%9D%B8-%EC%B9%B4%ED%8E%98/",
+          "publisher": "코니플레이스",
+          "source_kind": "place-guide",
+          "supports": [
+            "large-windows",
+            "natural-light",
+            "minimal-interior",
+            "filter-coffee",
+            "non-coffee-menu"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-77f1469516e8c217",
@@ -22915,8 +23070,107 @@
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
       "editorial_context_provenance": null,
-      "canonical_place_id": null,
-      "research_status": "not_researched"
+      "canonical_place_id": "seoul:songpa:kaf-haus-songridan",
+      "research_status": "reviewed",
+      "research_confidence": "high",
+      "verified_attributes": [
+        "converted-house",
+        "three-level-space",
+        "basement",
+        "two-floors",
+        "work-friendly",
+        "filter-coffee",
+        "multiple-beans",
+        "cardamom-bun-weekend",
+        "roll-bun-weekend",
+        "banana-bread",
+        "raspberry-milk-tea",
+        "matilda-cake",
+        "cakes",
+        "tarts",
+        "tiramisu",
+        "warm-wood-interior",
+        "quiet-space",
+        "pet-friendly",
+        "takeout",
+        "daily-operation",
+        "no-parking"
+      ],
+      "ados_editorial_angles": [
+        "송리단길 개조 주택의 지하부터 2층까지 자리를 고르며 필터커피와 북유럽식 카다멈 번을 맛보는 카페",
+        "우드톤 공간에서 노트북을 펴거나 라즈베리 밀크티와 바나나 브레드로 조용히 데이트하는 곳"
+      ],
+      "research_cautions": [
+        "주차 불가·인근 유료 공영주차장 이용",
+        "주말 한정 번은 재고와 판매일 확인",
+        "층간 이동과 지하 접근성 확인",
+        "반려동물 동반 가능 층·좌석 확인",
+        "커피와 디저트 맛 평가는 일부 엇갈림",
+        "임시 휴무는 공식 SNS 확인"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://www.diningcode.com/profile.php?rid=Enkl0J1MmOla",
+          "publisher": "DiningCode",
+          "source_kind": "place-platform",
+          "supports": [
+            "current-operation-2026",
+            "address",
+            "opening-hours",
+            "converted-house",
+            "three-level-space",
+            "basement",
+            "two-floors",
+            "work-friendly",
+            "filter-coffee",
+            "multiple-beans",
+            "cardamom-bun-weekend",
+            "quiet-space",
+            "daily-operation",
+            "no-parking"
+          ]
+        },
+        {
+          "url": "https://www.tabling.co.kr/place/68103baa60fa39d16f0c49f2",
+          "publisher": "테이블링",
+          "source_kind": "place-platform",
+          "supports": [
+            "opening-hours",
+            "warm-wood-interior",
+            "raspberry-milk-tea",
+            "banana-bread",
+            "matilda-cake",
+            "cakes",
+            "tarts",
+            "tiramisu",
+            "pet-friendly",
+            "takeout",
+            "no-parking"
+          ]
+        },
+        {
+          "url": "https://www.dongnecoffeenote.com/c/25043",
+          "publisher": "동네 커피 노트",
+          "source_kind": "review-analysis",
+          "supports": [
+            "current-reviews-2026",
+            "quiet-space",
+            "coffee-quality-signal",
+            "converted-house"
+          ]
+        },
+        {
+          "url": "https://dining.ayo.pe.kr/restaurant/b5a1c4c27ab0f4f69fe307012b233f3b",
+          "publisher": "다이닝 아요",
+          "source_kind": "public-license-derived-directory",
+          "supports": [
+            "current-license-2026",
+            "address",
+            "two-floors",
+            "business-identity"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-dc6a565c4bafcab4",
@@ -22948,8 +23202,94 @@
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
       "editorial_context_provenance": null,
-      "canonical_place_id": null,
-      "research_status": "not_researched"
+      "canonical_place_id": "seoul:songpa:bontemps-main-songpa",
+      "research_status": "reviewed",
+      "research_confidence": "high",
+      "verified_attributes": [
+        "twisted-donut-specialty",
+        "natural-starter",
+        "premium-donuts",
+        "salted-caramel-donut",
+        "milk-castella-donut",
+        "injeolmi-donut",
+        "seasonal-donuts",
+        "signature-cream-coffee",
+        "misutgaru",
+        "terrace",
+        "pet-friendly",
+        "family-friendly",
+        "takeout",
+        "delivery",
+        "vegan-menu-signal",
+        "waiting-area",
+        "parking-information-conflict",
+        "crowded",
+        "not-quiet-focused"
+      ],
+      "ados_editorial_angles": [
+        "석촌호수 산책 중 천연 발효종으로 만든 꽈배기형 도넛을 하나씩 고르는 봉땅의 본점",
+        "솔티드 캐러멜이나 인절미 도넛을 포장하거나 반려동물과 테라스에 앉기 좋은 디저트 정류장"
+      ],
+      "research_cautions": [
+        "주말과 석촌호수 행사일에는 대기·혼잡 가능",
+        "조용한 카페보다 디저트와 활기찬 분위기 중심",
+        "주차 가능 여부가 출처·후기마다 달라 방문 전 확인",
+        "반려동물 동반 가능 좌석과 규칙 확인",
+        "시즌 도넛은 품절·구성 변경 가능",
+        "단맛과 크림이 강한 메뉴 비중 고려"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://www.diningcode.com/profile.php?rid=3s4OsGqFUPwb",
+          "publisher": "DiningCode",
+          "source_kind": "place-platform",
+          "supports": [
+            "current-operation-2026",
+            "twisted-donut-specialty",
+            "salted-caramel-donut",
+            "milk-castella-donut",
+            "injeolmi-donut",
+            "seasonal-donuts",
+            "signature-cream-coffee",
+            "misutgaru",
+            "terrace",
+            "pet-friendly",
+            "family-friendly",
+            "delivery",
+            "crowded",
+            "parking-information-conflict"
+          ]
+        },
+        {
+          "url": "https://gajaseoul.com/ko/store/bontemps_bonjum",
+          "publisher": "GAJA SEOUL",
+          "source_kind": "place-guide",
+          "supports": [
+            "current-listing-2026",
+            "address",
+            "natural-starter",
+            "premium-donuts",
+            "terrace",
+            "takeout",
+            "delivery",
+            "vegan-menu-signal",
+            "waiting-area",
+            "parking-signal"
+          ]
+        },
+        {
+          "url": "https://dongnecoffeenote.com/c/3613",
+          "publisher": "동네 커피 노트",
+          "source_kind": "review-analysis",
+          "supports": [
+            "current-reviews-2026",
+            "dessert-focused",
+            "terrace",
+            "pet-friendly",
+            "not-quiet-focused"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-3fbbc14cf161d9c2",
@@ -23040,8 +23380,73 @@
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
       "editorial_context_provenance": null,
-      "canonical_place_id": null,
-      "research_status": "not_researched"
+      "canonical_place_id": "seoul:songpa:grim-factory-jamsil",
+      "research_status": "reviewed",
+      "research_confidence": "medium",
+      "verified_attributes": [
+        "non-cafe",
+        "drawing-studio",
+        "art-experience",
+        "two-hour-session",
+        "canvas-painting",
+        "date-activity",
+        "family-friendly",
+        "friends-activity",
+        "third-floor",
+        "reservation-signal",
+        "materials-provided-signal"
+      ],
+      "ados_editorial_angles": [
+        "석촌호수 근처에서 두 시간 동안 캔버스 한 장을 완성하는 잠실의 셀프 드로잉 체험",
+        "커피를 마시는 대신 연인·친구·가족과 각자의 그림을 남기는 비 오는 날 데이트 코스"
+      ],
+      "research_cautions": [
+        "카페가 아닌 유료 미술 체험 공간으로 Coffee & Cafes에서 제외",
+        "기본 이용시간 약 2시간과 추가 시간·재료 요금을 예약 전 확인",
+        "예약 필요 여부와 당일 좌석 확인",
+        "3층 접근성과 엘리베이터 여부 확인",
+        "음료 제공 여부를 카페 서비스로 오인하지 말 것",
+        "eligible_for_ados false 유지하되 체험형 Places 후보"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://www.albamon.com/jobs/detail-company/VIhg5gxAVByg9WkiE3HYTw%3D%3D",
+          "publisher": "알바몬",
+          "source_kind": "verified-business-profile",
+          "supports": [
+            "current-business-signal-2026",
+            "address",
+            "third-floor",
+            "business-identity"
+          ]
+        },
+        {
+          "url": "https://yamzzu.tistory.com/33",
+          "publisher": "봄밤봄 이야기",
+          "source_kind": "visit-record",
+          "supports": [
+            "non-cafe",
+            "drawing-studio",
+            "art-experience",
+            "two-hour-session",
+            "canvas-painting",
+            "date-activity",
+            "family-friendly",
+            "friends-activity",
+            "materials-provided-signal"
+          ]
+        },
+        {
+          "url": "https://xn--2s2b33eb3kgvpta.com/store/S168286_1643878660517",
+          "publisher": "완벽한 하루",
+          "source_kind": "place-guide",
+          "supports": [
+            "current-listing-2026",
+            "place-identity",
+            "jamsil-branch"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-b24d3f8b08aa4463",
@@ -23073,8 +23478,108 @@
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
       "editorial_context_provenance": null,
-      "canonical_place_id": null,
-      "research_status": "not_researched"
+      "canonical_place_id": "seoul:songpa:broobroo-songpa",
+      "research_status": "reviewed",
+      "research_confidence": "high",
+      "verified_attributes": [
+        "twenty-four-hours",
+        "daily-operation",
+        "large-cafe",
+        "three-level-space",
+        "basement-work-zone",
+        "work-friendly",
+        "study-friendly",
+        "wifi",
+        "comfortable-sofas",
+        "group-friendly",
+        "elevator",
+        "parking-available-limited",
+        "reorder-discount",
+        "coffee",
+        "cakes",
+        "pizza",
+        "waffles",
+        "beer",
+        "all-day-lounge",
+        "high-price"
+      ],
+      "ados_editorial_angles": [
+        "송파나루역에서 막차 이후에도 지하 작업석과 소파를 골라 밤새 머물 수 있는 24시간 대형 카페",
+        "낮에는 스터디와 모임, 새벽에는 피자·커피·맥주까지 이어지는 세 층짜리 올데이 라운지"
+      ],
+      "research_cautions": [
+        "음료 가격대가 높은 편",
+        "주차장이 있으나 만차 시 인근 유료주차장 이용",
+        "24시간 공간 특성상 시간대별 소음·청결·분위기 편차 가능",
+        "장시간 이용 및 혼잡 시 시간 제한 정책 확인",
+        "지하 작업석은 자연광이 없고 늦은 시간 안전한 귀가 동선 고려",
+        "재주문 할인 조건은 컵 반납 등 당일 확인"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://www.diningcode.com/profile.php?rid=fKp7yVHpaMgB",
+          "publisher": "DiningCode",
+          "source_kind": "place-platform",
+          "supports": [
+            "current-operation-2026",
+            "address",
+            "twenty-four-hours",
+            "daily-operation",
+            "large-cafe",
+            "three-level-space",
+            "work-friendly",
+            "study-friendly",
+            "comfortable-sofas",
+            "group-friendly",
+            "elevator",
+            "parking-available-limited",
+            "coffee",
+            "cakes",
+            "high-price"
+          ]
+        },
+        {
+          "url": "https://polle.com/place/38ONb8/%EB%B8%8C%EB%A3%A8%EB%B8%8C%EB%A3%A8",
+          "publisher": "Polle",
+          "source_kind": "place-platform",
+          "supports": [
+            "address",
+            "twenty-four-hours",
+            "basement-work-zone",
+            "comfortable-sofas",
+            "reorder-discount",
+            "pizza",
+            "waffles",
+            "beer",
+            "parking-available-limited"
+          ]
+        },
+        {
+          "url": "https://www.dongnecoffeenote.com/c/3627",
+          "publisher": "동네 커피 노트",
+          "source_kind": "review-analysis",
+          "supports": [
+            "current-reviews-2026",
+            "late-night",
+            "large-space",
+            "work-friendly",
+            "study-friendly",
+            "wifi"
+          ]
+        },
+        {
+          "url": "https://pandarank.net/contents/69c649c5acc4eb0c1780506f",
+          "publisher": "판다랭크",
+          "source_kind": "editorial-guide",
+          "supports": [
+            "current-guide-2026",
+            "all-day-lounge",
+            "pizza",
+            "beer",
+            "high-price"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-c215ec7c7246a294",
