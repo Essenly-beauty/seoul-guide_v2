@@ -16,6 +16,7 @@
 - 운영 DB에 트랜잭션 내부 적용 → 복구 SQL 실행 → 원본 비교 → 전체 ROLLBACK 리허설 성공.
 - 운영 migration `20261009052244_secure_public_review_projection` 적용 완료. 원본 리뷰 3건/신고 0건의 모든 값 유지 확인.
 - 적용 후 실제 익명 REST 요청: 공개 뷰/공개 projection HTTP 200, 원본 id 조회 0건, 원본 본문 조회 HTTP 401(42501).
+- 운영 DB에서 authenticated/anon 역할로 upsert·소유권 표시·비공개 전환 검증 통과. 이 검사는 트랜잭션 전체를 되돌려 가상 리뷰가 저장되거나 다른 연결에 공개되지 않도록 수행. 실제 브라우저 로그인 검증을 대체하지 않음.
 - Supabase Security Advisors 재실행: 공개 뷰의 Auth Users 노출 및 Security Definer View 오류 모두 사라짐. 오류 0개, 기존 경고 2개(`touch_updated_at` search_path, `web_vitals` 익명 INSERT 정책)는 별도 운영 보완 과제로 남음. 이번 변경을 전체 DB 보안 감사 완료로 간주하지 않음.
 
 ## DB 구조
