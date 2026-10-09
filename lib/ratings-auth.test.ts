@@ -1,17 +1,17 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
-const mocks = vi.hoisted(() => ({ upsert: vi.fn(), uid: null as string | null, authChange: null as null | ((event: string, session: null) => void) }));
+const mocks = vi.hoisted(() => ({ upsert: vi.fn(), uid: null as string | null, userRequest: null as null | Promise<{ data: { user: { id: string } | null } }>, authChange: null as null | ((event: string, session: null) => void) }));
 vi.mock("react", () => ({ useSyncExternalStore: (subscribe: (cb: () => void) => unknown, get: () => unknown) => { subscribe(() => {}); return get(); } }));
 vi.mock("./supabase/client", () => ({ supabaseBrowser: () => ({
   auth: {
-    getUser: async () => ({ data: { user: mocks.uid ? { id: mocks.uid } : null } }),
+    getUser: async () => mocks.userRequest ?? ({ data: { user: mocks.uid ? { id: mocks.uid } : null } }),
     onAuthStateChange: (callback: typeof mocks.authChange) => { mocks.authChange = callback; return { data: { subscription: { unsubscribe() {} } } }; },
   },
   from: () => ({ upsert: mocks.upsert, select: async () => ({ data: [], error: null }) }),
 }) }));
 
 beforeEach(() => {
-  vi.resetModules(); mocks.uid = null; mocks.upsert.mockReset().mockResolvedValue({ error: null });
+  vi.resetModules(); mocks.uid = null; mocks.userRequest = null; mocks.authChange = null; mocks.upsert.mockReset().mockResolvedValue({ error: null });
   const data = new Map<string, string>();
   vi.stubGlobal("localStorage", { getItem: (k: string) => data.get(k) ?? null, setItem: (k: string, v: string) => data.set(k, v), removeItem: (k: string) => data.delete(k) });
   vi.stubGlobal("window", { addEventListener() {}, removeEventListener() {} });
@@ -19,6 +19,17 @@ beforeEach(() => {
 afterEach(() => vi.unstubAllGlobals());
 
 describe("account-only ratings and reviews", () => {
+  it("ignores an old account lookup that finishes after sign-out", async () => {
+    let finish!: (value: { data: { user: { id: string } } }) => void;
+    mocks.userRequest = new Promise((resolve) => { finish = resolve; });
+    const { useMyRatings, setReview } = await import("./ratings");
+    useMyRatings();
+    mocks.authChange?.("SIGNED_OUT", null);
+    finish({ data: { user: { id: "old-account" } } });
+    await new Promise((resolve) => setTimeout(resolve, 0));
+    expect(await setReview("place", 4, "stale draft", true)).toBe("auth-required");
+    expect(mocks.upsert).not.toHaveBeenCalled();
+  });
   it("rejects guest stars without changing device data or writing to the server", async () => {
     const { setRating } = await import("./ratings");
     expect(await setRating("place", 4)).toBe("auth-required");

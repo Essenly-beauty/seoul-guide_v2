@@ -259,7 +259,11 @@ function wireAuth() {
   if (authWired || typeof window === "undefined") return;
   authWired = true;
   const supabase = supabaseBrowser();
+  // A server lookup started on mount must not restore an account after a
+  // newer sign-out/account-switch event. INITIAL_SESSION is only a replay.
+  let sawAuthEvent = false;
   supabase.auth.getUser().then(({ data }) => {
+    if (sawAuthEvent) return;
     if (data.user && userId !== data.user.id) {
       userId = data.user.id;
       void adoptServerState(data.user.id);
@@ -274,6 +278,11 @@ function wireAuth() {
     }
   });
   supabase.auth.onAuthStateChange((event, session) => {
+    if (event === "INITIAL_SESSION") {
+      if (sawAuthEvent) return;
+    } else {
+      sawAuthEvent = true;
+    }
     const nextId = session?.user?.id ?? null;
     if (event === "SIGNED_OUT" || nextId === null) {
       settleAsGuest(event === "SIGNED_OUT" && userId !== null);
