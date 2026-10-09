@@ -1,0 +1,65 @@
+const fs = require('node:fs');
+const assert = require('node:assert/strict');
+const {PGlite} = require(process.env.PGLITE_MODULE || '@electric-sql/pglite');
+const migration = 'supabase/migrations/20261009052244_secure_public_review_projection.sql';
+(async()=>{
+  const db = new PGlite();
+  let checks = 0;
+  const eq = (a,b) => { assert.deepEqual(a,b); checks++; };
+  const rows = async q => (await db.query(q)).rows;
+  const role = async (name,uid='') => db.exec(`reset role; set role ${name}; select set_config('request.jwt.claim.sub','${uid}',false);`);
+  const denied = async q => { await assert.rejects(()=>db.exec(q),e=>e.code==='42501'); checks++; };
+  try {
+    await db.exec(`create role anon; create role authenticated; create role service_role bypassrls;
+      create schema auth; create table auth.users(id uuid primary key,raw_user_meta_data jsonb default '{}');
+      create function auth.uid() returns uuid language sql stable as $$select nullif(current_setting('request.jwt.claim.sub',true),'')::uuid$$;
+      grant usage on schema public,auth to anon,authenticated,service_role;
+      create function public.touch_updated_at() returns trigger language plpgsql as $$begin new.updated_at=now(); return new; end$$;
+      insert into auth.users(id) values ('00000000-0000-0000-0000-000000000001'),('00000000-0000-0000-0000-000000000002'),('00000000-0000-0000-0000-000000000003'),('00000000-0000-0000-0000-000000000004');`);
+    await db.exec(fs.readFileSync('supabase/migrations/0003_ratings.sql','utf8'));
+    await db.exec(fs.readFileSync('supabase/migrations/0007_public_reviews.sql','utf8'));
+    await db.exec('grant all on all tables in schema public to anon,authenticated,service_role');
+    await db.exec(fs.readFileSync(migration,'utf8'));
+    eq((await rows("select has_column_privilege('authenticated','public.ratings','hidden','UPDATE') as allowed"))[0].allowed,false);
+    const owner='00000000-0000-0000-0000-000000000001';
+    await role('authenticated',owner);
+    await db.exec(`insert into public.ratings(user_id,place_id,rating,body,is_public) values ('${owner}','test-public',5,'Public text',true),('${owner}','test-private',4,'Private text',false);`);
+    const id=(await rows("select id from public.ratings where place_id='test-public'"))[0].id;
+    await db.exec(`insert into public.ratings(user_id,place_id,rating,body,is_public) values ('${owner}','test-public',5,'Public text',true) on conflict(user_id,place_id) do update set user_id=excluded.user_id,place_id=excluded.place_id,rating=excluded.rating,body=excluded.body,is_public=excluded.is_public`);
+    eq((await rows("select id from public.ratings where place_id='test-public'"))[0].id,id);
+    await denied("update public.ratings set user_id='00000000-0000-0000-0000-000000000002' where place_id='test-public'");
+    eq((await rows('select display_name,mine from public.public_reviews')),[{display_name:'User',mine:true}]);
+    await denied("update public.ratings set hidden=false where place_id='test-public'");
+    await denied('truncate public.ratings');
+    await denied("delete from public.published_reviews");
+    await role('anon');
+    eq((await rows('select body,mine from public.public_reviews')),[{body:'Public text',mine:false}]);
+    eq((await rows('select id,user_id from public.ratings')).length,0);
+    await denied(`insert into public.ratings(user_id,place_id,rating) values ('${owner}','guest',4)`);
+    for (const n of [2,3,4]) {
+      await role('authenticated',`00000000-0000-0000-0000-00000000000${n}`);
+      eq((await rows('select * from public.ratings')).length,0);
+      eq((await rows(`update public.ratings set body='Other author' where id='${id}' returning id`)).length,0);
+      await db.exec(`insert into public.review_reports(rating_id,reporter,reason) values ('${id}','00000000-0000-0000-0000-00000000000${n}','spam')`);
+    }
+    await role('anon');
+    eq((await rows('select * from public.public_reviews')).length,0);
+    await role('authenticated',owner);
+    eq((await rows("select hidden from public.ratings where place_id='test-public'"))[0].hidden,true);
+    await db.exec("update public.ratings set body='Edited hidden text' where place_id='test-public'");
+    eq((await rows('select * from public.public_reviews')).length,0);
+    await role('postgres');
+    await db.exec("update public.ratings set hidden=false where place_id='test-public'");
+    await role('authenticated',owner);
+    await db.exec("update public.ratings set is_public=false where place_id='test-public'");
+    eq((await rows('select * from public.public_reviews')).length,0);
+    await db.exec("update public.ratings set is_public=true where place_id='test-public'");
+    eq((await rows('select * from public.public_reviews')).length,1);
+    await db.exec("delete from public.ratings where place_id='test-public'");
+    eq((await rows('select * from public.public_reviews')).length,0);
+    await role('postgres');
+    eq((await rows("select reloptions from pg_class where oid='public.public_reviews'::regclass"))[0].reloptions,['security_invoker=true']);
+    eq((await rows("select has_function_privilege('anon','public.auto_hide_reported_review()','EXECUTE') as allowed"))[0].allowed,false);
+    console.log(JSON.stringify({status:'passed',checks}));
+  } finally {await db.close();}
+})().catch(e=>{console.error(e);process.exitCode=1;});
