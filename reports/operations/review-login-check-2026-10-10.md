@@ -53,6 +53,18 @@
 
 ## 남은 범위
 
+- 추가 `audit:data:check`는 저장된 보고서의 정렬 순서 차이로 실패했다. 공식 생성기를 실행해 ID별 비교한 결과 1,122개 레코드의 값 및 summary는 전부 동일하고 순서만 달랐다. 재생성 직후 검사는 통과했지만 불필요한 9천 행 diff를 배포에 포함하지 않고 이번에 생성한 두 보고서만 원복했다. 따라서 원본 상태의 데이터 감사까지 모두 통과했다고 주장하지 않는다. 정렬은 `lib/place-audit.ts`의 localeCompare를 사용하며 환경 간 결정성 개선은 후속 과제다.
+
 - 사용자 직접 리뷰 삭제 UI는 현재 없다. 이번 작업은 로그인·저장·수정·공개 분리 검증이며 삭제 UX 추가는 후속 작업이다.
 - 운영 도메인에서 새 로그인 후 쓰기는 별도 사용자 세션 검증이 필요하다. 실제 쓰기 검증은 동일 Supabase를 사용하는 프리뷰에서 수행했다.
 - Vercel CLI 60.1.3은 구버전이다. 관리 기기에서 `npm i -g vercel@latest` 업그레이드를 권장하며 이번 배포는 Git 연동을 사용한다.
+
+## Production 배포 완료
+
+- 검증 커밋: `a60501fd032418b02a8f4b2813df696b410b7d97`. 최신 main을 포함하는지 재확인한 뒤 강제 푸시 없이 main에 반영했다.
+- Preview `8ZTdqjJKEhtXmaAhERpDxJ99KCeY`: Ready, 53초.
+- Production `4KwjBfospudJAMRpFeJ4qiXTE7V2`: Ready, 1분 18초. 대시보드에서 main/a60501f 및 myseouldrop.app 도메인 연결 확인.
+- 운영 `https://myseouldrop.app/place/ct-soonsoo-celebrity-hair-makeup-salon-in-cheongdam` 비회원 상세 열람 성공. 별점 클릭 시 로그인 안내가 나타나며 별점 선택/저장은 발생하지 않았다. 프리뷰에서 로그아웃 후 리뷰 버튼 및 내 리뷰 접근 차단도 확인했다.
+- 실제 로그인 쓰기 검증은 프리뷰에서, 배포 후 비회원 차단은 운영 도메인에서 수행했다. 운영 도메인에서 로그인 쓰기까지 검증했다고 확대 해석하지 않는다.
+- 후속 결과 문서 커밋은 리뷰 브랜치에 공유하며, 배포 앱 커밋은 위 a60501f로 구분한다.
+- 배포 ID로 필터한 Vercel Logs의 Last 30 minutes 조회: Warning 0 / Error 0 / Fatal 0. 배포 직후의 짧은 관찰이며 장기 안정성 보장이 아니다. Web Analytics와 Speed Insights는 대시보드상 Not Enabled, 외부 log drain 구성은 이번에 확인하지 않았다.
