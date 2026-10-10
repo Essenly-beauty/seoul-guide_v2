@@ -15,7 +15,7 @@
     "geography": "Seoul only",
     "record_count": 454,
     "enriched_record_count": 30,
-    "researched_record_count": 370
+    "researched_record_count": 376
   },
   "import_policy": {
     "default_action": "stage_only",
@@ -27416,8 +27416,108 @@
       ],
       "editorial_context_status": "source_derived",
       "editorial_context_provenance": "threads_collection_title",
-      "canonical_place_id": null,
-      "research_status": "not_researched"
+      "canonical_place_id": "seoul:seongdong:move-mov-seongsu",
+      "research_status": "reviewed",
+      "research_confidence": "high",
+      "verified_attributes": [
+        "cafe-studio",
+        "media-art",
+        "large-projector",
+        "dark-interior",
+        "photo-friendly",
+        "spacious-seating",
+        "comfortable-sofas",
+        "terrace",
+        "pet-friendly",
+        "solo-cafe",
+        "conversation-friendly",
+        "weekday-early-open",
+        "weekend-late-open",
+        "late-hours",
+        "reservation",
+        "takeout",
+        "delivery",
+        "multiple-beans",
+        "decaf",
+        "tiramisu",
+        "matcha-tiramisu",
+        "single-serving-bingsu",
+        "croffle",
+        "premium-price-signal",
+        "construction-noise-signal"
+      ],
+      "ados_editorial_angles": [
+        "성수의 어두운 카페 스튜디오에서 대형 프로젝터 미디어아트를 보며 티라미수와 커피를 즐기는 곳",
+        "평일 아침에는 혼자 머물고 저녁에는 소파나 테라스에서 대화하기 좋은 복합문화형 카페"
+      ],
+      "research_cautions": [
+        "평일과 주말 오픈 시간이 크게 다름",
+        "전시 콘텐츠와 운영 여부는 시기별 변경 가능",
+        "시즌 빙수와 디저트는 판매 기간·재고 확인",
+        "디저트 양 대비 가격이 높다는 후기 신호",
+        "외부 공사 시 테라스 소음 가능",
+        "주차가 어렵다는 후기와 건물 주차 정보가 혼재해 사전 확인",
+        "반려동물 동반 규칙 확인"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://www.diningcode.com/profile.php?rid=34oFAXa3a8UE",
+          "publisher": "DiningCode",
+          "source_kind": "place-platform",
+          "supports": [
+            "current-operation-2026",
+            "address",
+            "opening-hours",
+            "cafe-studio",
+            "media-art",
+            "large-projector",
+            "dark-interior",
+            "photo-friendly",
+            "spacious-seating",
+            "terrace",
+            "pet-friendly",
+            "solo-cafe",
+            "conversation-friendly",
+            "weekday-early-open",
+            "weekend-late-open",
+            "late-hours",
+            "multiple-beans",
+            "decaf",
+            "tiramisu",
+            "matcha-tiramisu",
+            "single-serving-bingsu",
+            "croffle",
+            "premium-price-signal",
+            "construction-noise-signal"
+          ]
+        },
+        {
+          "url": "https://polle.com/place/2f5KPK/%EB%AC%B4%EB%B8%8C%EB%AA%A8%EB%B8%8C",
+          "publisher": "Polle",
+          "source_kind": "place-platform",
+          "supports": [
+            "current-listing-2026",
+            "pet-friendly",
+            "reservation",
+            "takeout",
+            "delivery",
+            "dessert-menu"
+          ]
+        },
+        {
+          "url": "https://dongnecoffeenote.com/c/3533",
+          "publisher": "동네 커피 노트",
+          "source_kind": "review-analysis",
+          "supports": [
+            "current-reviews-2026",
+            "comfortable-sofas",
+            "spacious-seating",
+            "pet-friendly",
+            "terrace",
+            "parking-difficulty-signal"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-057067f4aa62dcc6",
@@ -27457,8 +27557,79 @@
       ],
       "editorial_context_status": "source_derived",
       "editorial_context_provenance": "threads_collection_title",
-      "canonical_place_id": null,
-      "research_status": "not_researched"
+      "canonical_place_id": "seoul:seongdong:krow-seongsu",
+      "research_status": "reviewed",
+      "research_confidence": "medium",
+      "verified_attributes": [
+        "coffee-bar",
+        "siphon-coffee",
+        "signature-affogato",
+        "caviar-affogato-signal",
+        "semi-basement",
+        "bar-seating",
+        "dark-interior",
+        "quiet-space",
+        "conversation-friendly",
+        "unusual-menu",
+        "late-hours",
+        "closed-weekday-signal",
+        "no-parking",
+        "residential-alley"
+      ],
+      "ados_editorial_angles": [
+        "뚝섬역 주택가 반지하의 바 같은 공간에서 사이폰으로 내린 커피를 천천히 보는 카페",
+        "어둡고 조용한 바 좌석에서 독특한 아포가토를 주문해 성수의 밝고 붐비는 카페와 다른 시간을 보내는 곳"
+      ],
+      "research_cautions": [
+        "최근 출처의 정기휴무가 목요일, 과거 출처는 월요일로 달라 공식 채널 확인",
+        "반지하 계단 접근성 고려",
+        "주차 불가·주택가 불법주차 금지",
+        "사이폰과 시그니처 메뉴의 당일 판매 여부 확인",
+        "공간과 최신 메뉴에 대한 공식 정보가 제한돼 발행 전 재확인",
+        "eligible_for_ados false 유지"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://polle.com/place/3i7pK2/%ED%81%AC%EB%A1%9C%EC%9A%B0",
+          "publisher": "Polle",
+          "source_kind": "place-platform",
+          "supports": [
+            "current-listing-2026",
+            "place-identity",
+            "cafe-bar",
+            "coffee-focused"
+          ]
+        },
+        {
+          "url": "https://lyayan-0.tistory.com/v/35",
+          "publisher": "설집사",
+          "source_kind": "recent-visit-record",
+          "supports": [
+            "current-operation-signal-2025",
+            "address",
+            "opening-hours",
+            "closed-thursday-signal",
+            "semi-basement",
+            "dark-interior",
+            "quiet-space",
+            "conversation-friendly"
+          ]
+        },
+        {
+          "url": "https://acroforest1503.com/entry/dkssu",
+          "publisher": "행복교과서",
+          "source_kind": "visit-record",
+          "supports": [
+            "siphon-coffee",
+            "signature-affogato",
+            "caviar-affogato-signal",
+            "bar-seating",
+            "unusual-menu",
+            "no-parking",
+            "residential-alley"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-e2f8e7cdb7d8d3f9",
@@ -27498,8 +27669,94 @@
       ],
       "editorial_context_status": "source_derived",
       "editorial_context_provenance": "threads_collection_title",
-      "canonical_place_id": null,
-      "research_status": "not_researched"
+      "canonical_place_id": "seoul:seongdong:oatt-seongsu",
+      "research_status": "reviewed",
+      "research_confidence": "high",
+      "verified_attributes": [
+        "brunch-cafe",
+        "early-open",
+        "breakfast",
+        "egg-benedict",
+        "open-toast",
+        "french-toast",
+        "pasta",
+        "potato-soup-signal",
+        "house-baked-bread-signal",
+        "coffee",
+        "warm-interior",
+        "cozy-space",
+        "foreign-visitor-signal",
+        "family-friendly",
+        "high-chair",
+        "paid-parking",
+        "weekend-crowds",
+        "premium-price"
+      ],
+      "ados_editorial_angles": [
+        "성수에서 오전 9시부터 잠봉뵈르 에그베네딕트와 커피로 하루를 시작하는 브런치 카페",
+        "따뜻한 실내에서 감자수프와 직접 구운 빵, 무화과 프렌치토스트를 나눠 먹는 느긋한 아침"
+      ],
+      "research_cautions": [
+        "주말 오전에도 빠르게 만석이 될 수 있음",
+        "메뉴 가격대가 높은 편",
+        "주차는 유료이며 지원 조건 확인",
+        "유아의자는 있으나 유모차 동선·좌석 여유 확인",
+        "평일과 주말 마감 시간이 다를 수 있음",
+        "브런치 중심으로 커피 전문 카페와 구분해 소개"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://www.tabling.co.kr/place/677cd63566de5f06989093fc",
+          "publisher": "테이블링",
+          "source_kind": "place-platform",
+          "supports": [
+            "current-operation-2026",
+            "address",
+            "opening-hours",
+            "brunch-cafe",
+            "early-open",
+            "breakfast",
+            "egg-benedict",
+            "open-toast",
+            "pasta",
+            "coffee",
+            "warm-interior",
+            "cozy-space",
+            "foreign-visitor-signal",
+            "family-friendly",
+            "high-chair",
+            "paid-parking",
+            "weekend-crowds",
+            "premium-price",
+            "potato-soup-signal",
+            "house-baked-bread-signal"
+          ]
+        },
+        {
+          "url": "https://www.tel-co.net/cafe/spot/11384",
+          "publisher": "여행의기술",
+          "source_kind": "place-directory",
+          "supports": [
+            "current-listing-2026",
+            "address",
+            "brunch-cafe",
+            "egg-benedict",
+            "open-toast",
+            "french-toast",
+            "pasta"
+          ]
+        },
+        {
+          "url": "https://dining.ayo.pe.kr/restaurant/036898906d15015b44e9fb04af626568",
+          "publisher": "다이닝 아요",
+          "source_kind": "public-license-derived-directory",
+          "supports": [
+            "current-license-2026",
+            "address",
+            "business-identity"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-aa5bffc87789e4a1",
@@ -27539,8 +27796,79 @@
       ],
       "editorial_context_status": "source_derived",
       "editorial_context_provenance": "threads_collection_title",
-      "canonical_place_id": null,
-      "research_status": "not_researched"
+      "canonical_place_id": "seoul:seongdong:brewc-seongsu",
+      "research_status": "reviewed",
+      "research_confidence": "high",
+      "verified_attributes": [
+        "european-cafe",
+        "vintage-interior",
+        "dark-interior",
+        "ceiling-mural",
+        "jazz-music",
+        "signature-einspanner",
+        "italian-tiramisu",
+        "coffee",
+        "dessert-cafe",
+        "date-friendly",
+        "ground-floor",
+        "weekday-early-open",
+        "weekend-early-open",
+        "daily-operation",
+        "late-hours",
+        "no-parking"
+      ],
+      "ados_editorial_angles": [
+        "성수의 작은 유럽을 표방한 어두운 빈티지 공간에서 재즈를 들으며 아인슈페너와 이탈리아식 티라미수를 먹는 카페",
+        "평일 오전 8시부터 문을 여는 1층 카페에서 조용한 커피로 북성수 산책을 시작하는 곳"
+      ],
+      "research_cautions": [
+        "주차 불가",
+        "성수역에서 도보 이동 거리가 있는 편",
+        "평일과 주말 오픈 시간이 다름",
+        "어두운 조도로 작업·사진 목적에는 취향이 갈릴 수 있음",
+        "티라미수는 재고 소진 가능",
+        "유럽 콘셉트보다 실제 커피·디저트 경험 중심으로 편집"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://www.diningcode.com/profile.php?rid=EP5163KKaXvW",
+          "publisher": "DiningCode",
+          "source_kind": "place-platform",
+          "supports": [
+            "current-operation-2026",
+            "address",
+            "opening-hours",
+            "european-cafe",
+            "vintage-interior",
+            "dark-interior",
+            "ceiling-mural",
+            "jazz-music",
+            "signature-einspanner",
+            "italian-tiramisu",
+            "coffee",
+            "dessert-cafe",
+            "date-friendly",
+            "ground-floor",
+            "weekday-early-open",
+            "weekend-early-open",
+            "daily-operation",
+            "late-hours",
+            "no-parking"
+          ]
+        },
+        {
+          "url": "https://bizw.kr/brand/197073",
+          "publisher": "비즈더블유",
+          "source_kind": "brand-directory",
+          "supports": [
+            "address",
+            "brand-concept",
+            "european-cafe",
+            "signature-einspanner",
+            "italian-tiramisu"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-f63d7f4937338261",
@@ -27580,8 +27908,117 @@
       ],
       "editorial_context_status": "source_derived",
       "editorial_context_provenance": "threads_collection_title",
-      "canonical_place_id": null,
-      "research_status": "not_researched"
+      "canonical_place_id": "seoul:seongdong:aayaan-seongsu",
+      "research_status": "reviewed",
+      "research_confidence": "high",
+      "verified_attributes": [
+        "dessert-cafe",
+        "fruit-tarts",
+        "fruit-sando",
+        "soft-serve",
+        "fig-desserts",
+        "lucky-latte",
+        "matcha-cream-latte",
+        "milk-tea",
+        "cocktails",
+        "european-interior",
+        "third-floor",
+        "terrace",
+        "date-friendly",
+        "late-hours",
+        "takeout",
+        "decaf",
+        "premium-price",
+        "incense-at-entrance-signal",
+        "no-parking"
+      ],
+      "ados_editorial_angles": [
+        "뚝섬과 서울숲 사이 3층의 유럽풍 테라스에서 제철 과일 타르트와 소프트아이스크림을 즐기는 디저트 카페",
+        "오후 늦게 문을 열어 밤까지 행운 라떼나 칵테일로 이어가기 좋은 성수 데이트 장소"
+      ],
+      "research_cautions": [
+        "3층 계단과 엘리베이터 여부 확인",
+        "출처별 오픈·마감 및 휴무일 표기가 달라 공식 SNS 확인",
+        "디저트와 음료 가격대가 높은 편",
+        "제철 과일 메뉴는 구성·가격 변동 가능",
+        "입구 향 사용에 민감한 방문자는 주의",
+        "주차 불가",
+        "테라스는 날씨 영향"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://www.hotple.com/place/%EC%95%84%EC%9D%B4%EC%95%88-%EC%84%B1%EC%88%98%EB%8F%991%EA%B0%80-%EB%94%94%EC%A0%80%ED%8A%B8-1386881475",
+          "publisher": "핫플",
+          "source_kind": "place-profile",
+          "supports": [
+            "current-operation-2026",
+            "address",
+            "opening-hours",
+            "dessert-cafe",
+            "fruit-tarts",
+            "fruit-sando",
+            "soft-serve",
+            "fig-desserts",
+            "lucky-latte",
+            "coffee",
+            "decaf",
+            "cocktails",
+            "european-interior",
+            "third-floor",
+            "terrace",
+            "late-hours"
+          ]
+        },
+        {
+          "url": "https://www.diningcode.com/profile.php?rid=ejynOvQIbrVa",
+          "publisher": "DiningCode",
+          "source_kind": "place-platform",
+          "supports": [
+            "current-operation-2026",
+            "address",
+            "opening-hours",
+            "date-friendly",
+            "terrace",
+            "takeout"
+          ]
+        },
+        {
+          "url": "https://polle.com/place/33NerU/%EC%95%84%EC%9D%B4%EC%95%88",
+          "publisher": "Polle",
+          "source_kind": "place-platform",
+          "supports": [
+            "current-listing-2026",
+            "fruit-tarts",
+            "soft-serve",
+            "fig-desserts",
+            "matcha-cream-latte",
+            "milk-tea",
+            "premium-price",
+            "incense-at-entrance-signal",
+            "no-parking"
+          ]
+        },
+        {
+          "url": "https://www.gqkorea.co.kr/2025/06/05/%EC%8A%88%ED%8D%BC-%ED%91%B8%EB%93%9C-%ED%86%A0%EB%A7%88%ED%86%A0%EB%A5%BC-%EB%94%94%EC%A0%80%ED%8A%B8%EB%A1%9C-%EC%A6%90%EA%B8%B8-%EC%88%98-%EC%9E%88%EB%8A%94-%EB%A7%9B%EC%A7%91-5/",
+          "publisher": "GQ Korea",
+          "source_kind": "editorial-magazine",
+          "supports": [
+            "lucky-latte",
+            "tomato-basil-dessert-drink",
+            "dessert-cafe"
+          ]
+        },
+        {
+          "url": "https://www.albamon.com/jobs/detail-company/8Q9mFuRdHFUDlLMMh3f0-w%3D%3D",
+          "publisher": "알바몬",
+          "source_kind": "verified-business-profile",
+          "supports": [
+            "current-business-2026",
+            "address",
+            "business-identity"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-f36ddda1110190d9",
@@ -27621,8 +28058,104 @@
       ],
       "editorial_context_status": "source_derived",
       "editorial_context_provenance": "threads_collection_title",
-      "canonical_place_id": null,
-      "research_status": "not_researched"
+      "canonical_place_id": "seoul:seongdong:rufruf-seongsu",
+      "research_status": "reviewed",
+      "research_confidence": "high",
+      "verified_attributes": [
+        "cheesecake-specialty",
+        "basque-cheesecake",
+        "crumble-cheesecake",
+        "strawberry-crumble",
+        "apple-cinnamon-crumble",
+        "corn-crumble",
+        "matcha-pistachio",
+        "black-sesame",
+        "sweet-potato",
+        "signature-latte",
+        "non-acidic-coffee-signal",
+        "traditional-korean-teas",
+        "fourth-floor",
+        "modern-interior",
+        "rotating-display",
+        "magazines",
+        "work-friendly-signal",
+        "conversation-friendly",
+        "quiet-space-signal",
+        "weekend-waiting",
+        "whole-cake-reservation-signal"
+      ],
+      "ados_editorial_angles": [
+        "성수 4층의 회전 레일 앞에서 여러 맛의 크럼블 치즈케이크를 비교해 고르는 디저트 카페",
+        "매거진을 펼치거나 친구와 조용히 대화하며 연잎차와 사과 시나몬 치즈케이크를 곁들이는 곳"
+      ],
+      "research_cautions": [
+        "주말 웨이팅이 길 수 있어 평일 방문 권장",
+        "4층 접근성과 엘리베이터 여부 확인",
+        "인기 치즈케이크는 늦은 시간 품절 가능",
+        "케이크와 우유 음료를 함께 주문하면 단맛이 강할 수 있음",
+        "홀케이크 예약·당일 구매 조건 확인",
+        "망원점·안국 아뜰리에와 혼동하지 말 것",
+        "주차 정보 확인"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://www.diningcode.com/profile.php?rid=a3p5II0KMDSf",
+          "publisher": "DiningCode",
+          "source_kind": "place-platform",
+          "supports": [
+            "current-operation-2026",
+            "cheesecake-specialty",
+            "basque-cheesecake",
+            "crumble-cheesecake",
+            "strawberry-crumble",
+            "apple-cinnamon-crumble",
+            "corn-crumble",
+            "matcha-pistachio",
+            "black-sesame",
+            "sweet-potato",
+            "signature-latte",
+            "non-acidic-coffee-signal",
+            "traditional-korean-teas",
+            "conversation-friendly",
+            "quiet-space-signal",
+            "weekend-waiting"
+          ]
+        },
+        {
+          "url": "https://www.tabling.co.kr/place/677cd07566de5f0698861d53",
+          "publisher": "테이블링",
+          "source_kind": "place-platform",
+          "supports": [
+            "current-listing-2026",
+            "address",
+            "work-friendly-signal",
+            "whole-cake-reservation-signal",
+            "cheesecake-selection"
+          ]
+        },
+        {
+          "url": "https://dongnecoffeenote.com/c/27924",
+          "publisher": "동네 커피 노트",
+          "source_kind": "review-analysis",
+          "supports": [
+            "current-reviews-2026",
+            "address",
+            "fourth-floor",
+            "dessert-focused"
+          ]
+        },
+        {
+          "url": "https://app.daytrip.io/ko/space/6384887620649148735d0bfb/daylog/63848876277cf9e830dccab8",
+          "publisher": "DayTrip",
+          "source_kind": "space-guide",
+          "supports": [
+            "rotating-display",
+            "modern-interior",
+            "magazines",
+            "seongsu-location"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-03430bfa74d2564d",
