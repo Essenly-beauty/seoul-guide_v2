@@ -15,7 +15,7 @@
     "geography": "Seoul only",
     "record_count": 454,
     "enriched_record_count": 30,
-    "researched_record_count": 364
+    "researched_record_count": 370
   },
   "import_policy": {
     "default_action": "stage_only",
@@ -25922,8 +25922,75 @@
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
       "editorial_context_provenance": null,
-      "canonical_place_id": null,
-      "research_status": "not_researched"
+      "canonical_place_id": "seoul:seongdong:onggeundal-seongsu",
+      "research_status": "reviewed",
+      "research_confidence": "high",
+      "verified_attributes": [
+        "bakery-cafe",
+        "large-space",
+        "three-floor-space",
+        "high-ceiling",
+        "large-windows",
+        "natural-light",
+        "terrace",
+        "rooftop",
+        "room-seating",
+        "floor-seating",
+        "solo-seating",
+        "pastry-focused",
+        "cakes",
+        "milk-tea",
+        "daily-operation",
+        "late-hours",
+        "crowded",
+        "echo-noise-signal",
+        "cleanliness-concern-signal",
+        "mixed-service-reviews"
+      ],
+      "ados_editorial_angles": [
+        "성수 골목의 높은 층고와 통창 아래에서 여러 층의 좌석을 고르고 페이스트리와 밀크티를 나누는 대형 베이커리 카페",
+        "테라스와 루프탑까지 이어지는 공간 자체를 구경하며 늦은 밤까지 쉬어가는 성수의 넓은 정류장"
+      ],
+      "research_cautions": [
+        "주말과 오후에는 혼잡·웨이팅 및 공간 울림으로 소음 가능",
+        "최근 청결과 응대에 대한 부정적 후기 신호가 있어 발행 전 현장 재확인",
+        "루프탑·테라스는 날씨 영향",
+        "층간 이동과 엘리베이터 여부 확인",
+        "빵과 케이크는 늦은 시간 품절 가능",
+        "커피 전문성보다 공간과 베이커리 중심으로 소개"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://www.diningcode.com/profile.php?rid=PqcxisHIQDQV",
+          "publisher": "DiningCode",
+          "source_kind": "place-platform",
+          "supports": [
+            "current-operation-2026",
+            "address",
+            "opening-hours",
+            "bakery-cafe",
+            "large-space",
+            "three-floor-space",
+            "high-ceiling",
+            "large-windows",
+            "natural-light",
+            "terrace",
+            "rooftop",
+            "room-seating",
+            "floor-seating",
+            "solo-seating",
+            "pastry-focused",
+            "cakes",
+            "milk-tea",
+            "daily-operation",
+            "late-hours",
+            "crowded",
+            "echo-noise-signal",
+            "cleanliness-concern-signal",
+            "mixed-service-reviews"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-30615038aee2932d",
@@ -26274,8 +26341,96 @@
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
       "editorial_context_provenance": null,
-      "canonical_place_id": null,
-      "research_status": "not_researched"
+      "canonical_place_id": "seoul:seongdong:ttiat-wangsimni",
+      "research_status": "reviewed",
+      "research_confidence": "high",
+      "verified_attributes": [
+        "roastery",
+        "multiple-blends",
+        "light-roast-option",
+        "dark-roast-option",
+        "decaf",
+        "hand-drip",
+        "beans-for-sale",
+        "signature-coconut-latte",
+        "sugarcane-latte",
+        "black-sesame-cream-coffee",
+        "cold-brew",
+        "bottled-coffee",
+        "milk-tea",
+        "matcha-latte",
+        "desserts",
+        "small-space",
+        "second-floor-signal",
+        "takeout",
+        "delivery",
+        "reservation",
+        "no-parking",
+        "neighborhood-cafe"
+      ],
+      "ados_editorial_angles": [
+        "한양대 앞에서 고소한 형아·산미 있는 아우·디카페인 꿀잠 중 원두 취향을 골라 마시는 동네 로스터리",
+        "작은 공간에서 코코넛 하늘라떼나 사탕수수라떼를 마시고 원두·드립백을 포장하는 왕십리 커피 정류장"
+      ],
+      "research_cautions": [
+        "좌석이 적어 피크 시간 체류가 어려울 수 있음",
+        "주차 불가",
+        "핸드드립은 혼잡 시간 주문 가능 여부 확인",
+        "2층 좌석 접근성과 운영 여부 확인",
+        "패스오더 메뉴는 비입점 추정 정보가 포함돼 가격·재고 재확인",
+        "지점이 여러 곳이므로 왕십리본점 주소 확인"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://polle.com/place/3Sh5q9/%EB%9D%A0%EC%95%8B",
+          "publisher": "Polle",
+          "source_kind": "place-platform",
+          "supports": [
+            "current-reviews-2026",
+            "address",
+            "roastery",
+            "multiple-blends",
+            "hand-drip",
+            "signature-coconut-latte",
+            "sugarcane-latte",
+            "black-sesame-cream-coffee",
+            "small-space",
+            "second-floor-signal",
+            "takeout",
+            "delivery",
+            "reservation",
+            "no-parking"
+          ]
+        },
+        {
+          "url": "https://app.passorder.co.kr/advance/f91cb194-1509-490d-b504-dbbe0b8c8088",
+          "publisher": "패스오더",
+          "source_kind": "menu-platform",
+          "supports": [
+            "address",
+            "light-roast-option",
+            "dark-roast-option",
+            "decaf",
+            "beans-for-sale",
+            "cold-brew",
+            "bottled-coffee",
+            "milk-tea",
+            "matcha-latte",
+            "desserts"
+          ]
+        },
+        {
+          "url": "https://biz.koke.kr/products/5781",
+          "publisher": "코케비즈",
+          "source_kind": "roaster-profile",
+          "supports": [
+            "roastery",
+            "brand-history-2019",
+            "multiple-direct-stores",
+            "decaf-beans"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-7b00d651830481a6",
@@ -26367,8 +26522,102 @@
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
       "editorial_context_provenance": null,
-      "canonical_place_id": null,
-      "research_status": "not_researched"
+      "canonical_place_id": "seoul:seongdong:gimisa-seongsu",
+      "research_status": "reviewed",
+      "research_confidence": "high",
+      "verified_attributes": [
+        "specialty-coffee",
+        "roastery",
+        "single-origin",
+        "hand-drip-signal",
+        "competition-judge-founder-signal",
+        "apple-cinnamon-affogato",
+        "oriental-interior",
+        "calm-space",
+        "solo-cafe",
+        "date-friendly",
+        "multiple-seating-types",
+        "basement-and-ground-floor",
+        "terrace",
+        "takeout",
+        "early-close-weekdays",
+        "closed-sunday-signal",
+        "mixed-reviews"
+      ],
+      "ados_editorial_angles": [
+        "성수의 동양적이고 차분한 공간에서 싱글 오리진 커피를 고르고 천천히 맛보는 로스터리",
+        "사과조림과 시나몬을 얹은 아포가토를 주문해 1층과 지하의 서로 다른 좌석을 경험하는 곳"
+      ],
+      "research_cautions": [
+        "일요일 휴무 신호와 플랫폼의 연중무휴 표기가 충돌하므로 공식 채널 확인",
+        "평일은 저녁 전에 일찍 마감하는 편",
+        "커피와 응대에 대한 평가는 일부 엇갈림",
+        "지하 좌석 접근성과 환기 확인",
+        "테라스는 날씨 영향",
+        "기미사 시청점과 혼동하지 말 것"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://www.diningcode.com/profile.php?rid=c8P9RQFaAxwd",
+          "publisher": "DiningCode",
+          "source_kind": "place-platform",
+          "supports": [
+            "current-operation-2026",
+            "address",
+            "opening-hours",
+            "specialty-coffee",
+            "solo-cafe",
+            "date-friendly",
+            "basement-and-ground-floor",
+            "terrace",
+            "takeout",
+            "early-close-weekdays",
+            "mixed-reviews"
+          ]
+        },
+        {
+          "url": "https://www.tabling.co.kr/place/677cd00a66de5f0698855968",
+          "publisher": "테이블링",
+          "source_kind": "place-platform",
+          "supports": [
+            "current-listing-2026",
+            "place-identity",
+            "coffee-focused"
+          ]
+        },
+        {
+          "url": "https://www.gimisa.com/Menu",
+          "publisher": "기미사",
+          "source_kind": "official",
+          "supports": [
+            "single-origin",
+            "coffee-program",
+            "brand-identity"
+          ]
+        },
+        {
+          "url": "https://www.ktriptips.com/kor/food/2901550",
+          "publisher": "K-Trip Tips",
+          "source_kind": "tourism-guide",
+          "supports": [
+            "oriental-interior",
+            "multiple-seating-types",
+            "apple-cinnamon-affogato"
+          ]
+        },
+        {
+          "url": "https://cafe.ambitstock.com/seongsu/cafe/%EA%B8%B0%EB%AF%B8%EC%82%AC/",
+          "publisher": "오늘의 카페",
+          "source_kind": "aggregated-place-guide",
+          "supports": [
+            "current-listing-2026",
+            "roastery",
+            "specialty-coffee",
+            "calm-space",
+            "closed-sunday-signal"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-e548e5e1b00143d9",
@@ -26400,8 +26649,97 @@
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
       "editorial_context_provenance": null,
-      "canonical_place_id": null,
-      "research_status": "not_researched"
+      "canonical_place_id": "seoul:seongdong:viat-seongsu",
+      "research_status": "reviewed",
+      "research_confidence": "high",
+      "verified_attributes": [
+        "large-cafe",
+        "second-floor",
+        "gallery-like-interior",
+        "spacious-seating",
+        "sofa-seating",
+        "quiet-space-signal",
+        "group-friendly",
+        "family-friendly-signal",
+        "croffle",
+        "fig-greek-yogurt-croffle",
+        "ice-cream-croffle",
+        "tiramisu-affogato",
+        "malenka-cake",
+        "coffee",
+        "fruit-ade",
+        "table-order",
+        "daily-operation",
+        "late-hours",
+        "no-parking",
+        "external-ground-floor-restroom",
+        "mixed-croffle-texture-reviews"
+      ],
+      "ados_editorial_angles": [
+        "북성수 2층의 갤러리 같은 넓은 공간에서 소파 자리를 골라 크로플과 커피를 나누는 카페",
+        "성수 중심가의 혼잡을 벗어나 가족이나 친구와 무화과 그릭 크로플을 여유롭게 먹는 곳"
+      ],
+      "research_cautions": [
+        "2층 계단 접근성과 엘리베이터 여부 확인",
+        "주차 불가",
+        "화장실은 매장 밖 1층에 있고 비밀번호 확인 필요",
+        "크로플 식감이 지나치게 바삭하다는 엇갈린 후기",
+        "빵푸딩은 현재 상시 메뉴 근거가 부족해 대표 속성에서 제외",
+        "조명에 따라 사진 색감이 노랗게 보일 수 있음"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://www.diningcode.com/profile.php?rid=PLq8Vmno3fFT",
+          "publisher": "DiningCode",
+          "source_kind": "place-platform",
+          "supports": [
+            "current-operation-2026",
+            "address",
+            "opening-hours",
+            "large-cafe",
+            "second-floor",
+            "spacious-seating",
+            "sofa-seating",
+            "quiet-space-signal",
+            "croffle",
+            "fig-greek-yogurt-croffle",
+            "ice-cream-croffle",
+            "tiramisu-affogato",
+            "malenka-cake",
+            "coffee",
+            "fruit-ade",
+            "table-order",
+            "daily-operation",
+            "late-hours",
+            "no-parking",
+            "external-ground-floor-restroom",
+            "mixed-croffle-texture-reviews"
+          ]
+        },
+        {
+          "url": "https://superchart.com/ko/%40seoul-paper-coaster/viat-seongsu-baby-stroller-croffle-cafe/",
+          "publisher": "Superchart",
+          "source_kind": "current-visit-summary",
+          "supports": [
+            "current-visit-2026",
+            "gallery-like-interior",
+            "family-friendly-signal",
+            "croffle",
+            "spacious-seating"
+          ]
+        },
+        {
+          "url": "https://superchart.com/ko/%40block-dish-seoul/beart-seongsu-spacious-cafe-fig-croffle/",
+          "publisher": "Superchart",
+          "source_kind": "current-visit-summary",
+          "supports": [
+            "current-visit-2026",
+            "large-cafe",
+            "fig-greek-yogurt-croffle",
+            "fruit-ade"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-39f8c903029f913c",
@@ -26605,8 +26943,95 @@
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
       "editorial_context_provenance": null,
-      "canonical_place_id": null,
-      "research_status": "not_researched"
+      "canonical_place_id": "seoul:seongdong:frolla-seongsu",
+      "research_status": "reviewed",
+      "research_confidence": "high",
+      "verified_attributes": [
+        "italian-cafe",
+        "espresso-focused",
+        "italian-owner",
+        "espresso-with-liqueur",
+        "amaretto",
+        "aperol-spritz",
+        "tiramisu",
+        "espresso-tiramisu",
+        "crostata",
+        "panini",
+        "seasonal-fruit-dessert",
+        "bright-pink-exterior",
+        "kitschy-interior",
+        "music-focused-signal",
+        "date-friendly",
+        "brunch-signal",
+        "ground-floor",
+        "busy-hotspot"
+      ],
+      "ados_editorial_angles": [
+        "성수의 강렬한 분홍 간판 아래에서 이탈리아식 에스프레소와 아마레토 조합을 경험하는 카페",
+        "파니니로 가볍게 식사하고 에스프레소 티라미수나 계절 크로스타타까지 이어가는 작은 이탈리아 동선"
+      ],
+      "research_cautions": [
+        "주말과 피크 시간에는 혼잡·대기 가능",
+        "에스프레소 리큐르 메뉴는 주류 포함 여부 확인",
+        "계절 과일 디저트와 크로스타타 구성은 수시 변동",
+        "작은 공간이라 장시간 작업보다 짧은 식사·커피에 적합",
+        "더현대 지점과 혼동하지 말고 성수 본점 주소 확인",
+        "주차·반려동물 조건 추가 확인"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://www.daangn.com/kr/local-profile/%ED%94%84%EB%A1%A4%EB%9D%BC-k56hxcm8wu5x/",
+          "publisher": "당근 동네 업체",
+          "source_kind": "official-local-profile",
+          "supports": [
+            "current-operation-2026",
+            "address",
+            "italian-cafe",
+            "italian-owner",
+            "espresso-focused",
+            "panini",
+            "kitschy-interior"
+          ]
+        },
+        {
+          "url": "https://polle.com/place/5xeEyA/%ED%94%84%EB%A1%A4%EB%9D%BC",
+          "publisher": "Polle",
+          "source_kind": "place-platform",
+          "supports": [
+            "current-listing-2026",
+            "address",
+            "espresso-with-liqueur",
+            "amaretto",
+            "aperol-spritz",
+            "tiramisu",
+            "espresso-tiramisu",
+            "crostata"
+          ]
+        },
+        {
+          "url": "https://cafe.ambitstock.com/seongsu/cafe/%ED%94%84%EB%A1%A4%EB%9D%BC/",
+          "publisher": "오늘의 카페",
+          "source_kind": "aggregated-place-guide",
+          "supports": [
+            "current-listing-2026",
+            "date-friendly",
+            "brunch-signal",
+            "dessert-focused"
+          ]
+        },
+        {
+          "url": "https://ktxmagazine.kr/wp-content/uploads/2024/12/2304.pdf",
+          "publisher": "KTX매거진",
+          "source_kind": "editorial-magazine",
+          "supports": [
+            "italian-owner",
+            "espresso-experience",
+            "bright-pink-exterior",
+            "music-focused-signal",
+            "crostata"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-d0524a61d7b4aa90",
@@ -26824,8 +27249,80 @@
       ],
       "editorial_context_status": "source_derived",
       "editorial_context_provenance": "threads_collection_title",
-      "canonical_place_id": null,
-      "research_status": "not_researched"
+      "canonical_place_id": "seoul:seongdong:thousand-seongsu",
+      "research_status": "reviewed",
+      "research_confidence": "high",
+      "verified_attributes": [
+        "american-pie-specialty",
+        "banana-cream-pie",
+        "blueberry-cheese-pie",
+        "apple-pie",
+        "pumpkin-pie",
+        "mud-pie",
+        "peanut-butter-pie",
+        "seasonal-pies",
+        "vintage-american-interior",
+        "red-white-brown-palette",
+        "photo-friendly",
+        "small-space",
+        "date-friendly",
+        "foreign-visitor-signal",
+        "pet-friendly",
+        "takeout",
+        "wifi",
+        "daily-operation",
+        "late-hours",
+        "waiting-evenings",
+        "no-parking",
+        "premium-price-signal"
+      ],
+      "ados_editorial_angles": [
+        "성수 골목의 빈티지 미국식 공간에서 바나나 크림·블루베리 치즈·애플파이 중 한 조각을 고르는 디저트 카페",
+        "레드와 브라운이 짙은 작은 홀에서 사진을 남기고 진한 라떼와 파이를 즐기는 저녁 데이트 장소"
+      ],
+      "research_cautions": [
+        "공간이 작아 저녁과 주말에는 웨이팅 가능",
+        "주차 불가",
+        "파이 한 조각 가격대가 높은 편",
+        "계절 파이는 재고와 판매 기간 확인",
+        "반려동물 동반 규칙·좌석 확인",
+        "사진상 대형 공간으로 오인하기 쉬움",
+        "조용한 카페보다 활기찬 디저트 목적지로 소개"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://www.diningcode.com/profile.php?rid=D5C5na3iX9dU",
+          "publisher": "DiningCode",
+          "source_kind": "place-platform",
+          "supports": [
+            "current-operation-2026",
+            "address",
+            "opening-hours",
+            "american-pie-specialty",
+            "banana-cream-pie",
+            "blueberry-cheese-pie",
+            "apple-pie",
+            "pumpkin-pie",
+            "mud-pie",
+            "peanut-butter-pie",
+            "seasonal-pies",
+            "vintage-american-interior",
+            "red-white-brown-palette",
+            "photo-friendly",
+            "small-space",
+            "date-friendly",
+            "foreign-visitor-signal",
+            "pet-friendly",
+            "takeout",
+            "wifi",
+            "daily-operation",
+            "late-hours",
+            "waiting-evenings",
+            "no-parking",
+            "premium-price-signal"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-6fb7b04783fa0be2",
