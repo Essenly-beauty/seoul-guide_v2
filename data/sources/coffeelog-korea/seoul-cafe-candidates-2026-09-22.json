@@ -15,7 +15,7 @@
     "geography": "Seoul only",
     "record_count": 454,
     "enriched_record_count": 30,
-    "researched_record_count": 382
+    "researched_record_count": 388
   },
   "import_policy": {
     "default_action": "stage_only",
@@ -29166,8 +29166,112 @@
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
       "editorial_context_provenance": null,
-      "canonical_place_id": null,
-      "research_status": "not_researched"
+      "canonical_place_id": "seoul:gangnam:view376-apgujeong",
+      "research_status": "reviewed",
+      "research_confidence": "high",
+      "verified_attributes": [
+        "han-river-view",
+        "sunset-view",
+        "night-view",
+        "rooftop",
+        "terrace",
+        "large-windows",
+        "large-space",
+        "group-friendly",
+        "pet-friendly",
+        "brunch-cafe",
+        "pancakes",
+        "sandwiches",
+        "french-toast",
+        "bingsu",
+        "cakes",
+        "salt-bread",
+        "takeout",
+        "daily-operation",
+        "late-night",
+        "open-until-2am",
+        "kiosk-order",
+        "no-parking",
+        "premium-price",
+        "seasonal-crowds"
+      ],
+      "ados_editorial_angles": [
+        "압구정나들목을 지나 한강 바로 앞 통창과 루프탑에서 노을부터 야경까지 보는 전망 카페",
+        "새벽 2시까지 브런치와 디저트를 주문하며 반려견이나 여럿이 한강 산책 뒤 머무는 곳"
+      ],
+      "research_cautions": [
+        "주차 불가·인근 공영주차장 이용",
+        "노을 시간과 주말에는 전망 좌석·루프탑 혼잡 가능",
+        "음료와 브런치 가격대가 높은 편",
+        "루프탑·테라스는 날씨 영향",
+        "반려동물 동반 좌석·규칙 확인",
+        "브런치 운영 시간이 별도이며 메뉴 소진 가능",
+        "카페 이용객만 루프탑 이용 가능"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://www.diningcode.com/profile.php?rid=hO0OFH7DVNyG",
+          "publisher": "DiningCode",
+          "source_kind": "place-platform",
+          "supports": [
+            "current-operation-2026",
+            "address",
+            "opening-hours",
+            "han-river-view",
+            "sunset-view",
+            "night-view",
+            "rooftop",
+            "terrace",
+            "large-windows",
+            "large-space",
+            "group-friendly",
+            "brunch-cafe",
+            "cakes",
+            "salt-bread",
+            "daily-operation",
+            "late-night",
+            "open-until-2am",
+            "kiosk-order",
+            "premium-price",
+            "seasonal-crowds"
+          ]
+        },
+        {
+          "url": "https://www.tabling.co.kr/place/677cd81066de5f069893daf3",
+          "publisher": "테이블링",
+          "source_kind": "place-platform",
+          "supports": [
+            "opening-hours",
+            "pet-friendly",
+            "pancakes",
+            "sandwiches",
+            "french-toast",
+            "bingsu",
+            "takeout",
+            "no-parking"
+          ]
+        },
+        {
+          "url": "https://letseoul.com/ko/places/view376",
+          "publisher": "렛츠서울",
+          "source_kind": "local-guide",
+          "supports": [
+            "opened-2024",
+            "han-river-view",
+            "address"
+          ]
+        },
+        {
+          "url": "https://www.gangnamfinds.com/ko/place/view376",
+          "publisher": "Gangnam Finds",
+          "source_kind": "local-public-guide",
+          "supports": [
+            "current-listing-2026",
+            "specialty-coffee-signal",
+            "address"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-0f1f7acda4457ad4",
@@ -29199,8 +29303,65 @@
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
       "editorial_context_provenance": null,
-      "canonical_place_id": null,
-      "research_status": "not_researched"
+      "canonical_place_id": "seoul:gangnam:cinnabon-bite-and-rest-apgujeong",
+      "research_status": "reviewed",
+      "research_confidence": "high",
+      "verified_attributes": [
+        "cinnamon-roll-specialty",
+        "global-chain",
+        "classic-cinnabon",
+        "caramel-pecan-cinnabon",
+        "minibon",
+        "cinnabon-bites",
+        "bakery-cafe",
+        "han-river-pier-location",
+        "third-floor-signal",
+        "takeout-signal",
+        "sweet-dessert",
+        "brand-founded-1985"
+      ],
+      "ados_editorial_angles": [
+        "압구정 한강 선착장 동선에서 진한 시나몬 향의 클래식 롤이나 한입 크기 바이츠를 고르는 베이커리 카페",
+        "한강 산책 중 카라멜 피칸 시나본을 포장해 달콤한 간식으로 나누는 글로벌 브랜드 지점"
+      ],
+      "research_cautions": [
+        "매우 달고 크림치즈 프로스팅이 무거운 디저트",
+        "한강버스 압구정선착장 내 정확한 층·출입 동선과 운항일 접근 조건 확인",
+        "공식 페이지의 3층 표기와 선착장 표기가 함께 있어 현장 확인",
+        "운영시간 정보 추가 확인",
+        "인기 메뉴 품절·재가열 여부 확인",
+        "독립 카페가 아닌 글로벌 체인 지점임을 명시",
+        "eligible_for_ados false 유지"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://www.cinnabon.kr/",
+          "publisher": "시나본 코리아",
+          "source_kind": "official",
+          "supports": [
+            "current-store-2026",
+            "address",
+            "third-floor-signal",
+            "cinnamon-roll-specialty",
+            "global-chain",
+            "classic-cinnabon",
+            "caramel-pecan-cinnabon",
+            "minibon",
+            "cinnabon-bites",
+            "brand-founded-1985"
+          ]
+        },
+        {
+          "url": "https://www.cinnabon.kr/STORE",
+          "publisher": "시나본 코리아",
+          "source_kind": "official-store-list",
+          "supports": [
+            "current-store-2026",
+            "han-river-pier-location",
+            "address"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-939e186024b0689f",
@@ -29420,8 +29581,99 @@
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
       "editorial_context_provenance": null,
-      "canonical_place_id": null,
-      "research_status": "not_researched"
+      "canonical_place_id": "seoul:gangnam:alver-gangnam",
+      "research_status": "reviewed",
+      "research_confidence": "high",
+      "verified_attributes": [
+        "large-cafe",
+        "multi-floor-building",
+        "high-ceiling",
+        "large-windows",
+        "terrace",
+        "garden-like-space",
+        "large-tables",
+        "group-friendly",
+        "meeting-friendly",
+        "solo-cafe",
+        "pet-friendly",
+        "daily-operation",
+        "late-hours",
+        "tiramisu",
+        "signature-ice-cream-latte",
+        "coffee",
+        "cookies",
+        "art-displays",
+        "crowded",
+        "noisy",
+        "mixed-food-drink-reviews"
+      ],
+      "ados_editorial_angles": [
+        "강남역과 신논현 사이에서 높은 층고·통창·테라스를 갖춘 큰 공간에 여럿이 모이기 좋은 카페",
+        "도심 골목을 걷다 정원 같은 1층과 여러 층의 좌석 중 자리를 골라 티라미수와 커피로 쉬는 곳"
+      ],
+      "research_cautions": [
+        "주말과 피크 시간에는 혼잡하고 소음이 큰 편",
+        "커피와 베이커리 맛에 대한 후기가 엇갈려 공간 중심으로 소개",
+        "반려동물 동반 가능 층·좌석 확인",
+        "건물 규모가 커도 인기 좌석은 만석 가능",
+        "주차 조건 확인",
+        "조용한 작업보다 모임·대화에 적합"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://www.diningcode.com/profile.php?rid=tQjzQKd3R2jR",
+          "publisher": "DiningCode",
+          "source_kind": "place-platform",
+          "supports": [
+            "current-operation-2026",
+            "address",
+            "opening-hours",
+            "large-cafe",
+            "multi-floor-building",
+            "high-ceiling",
+            "large-windows",
+            "terrace",
+            "garden-like-space",
+            "large-tables",
+            "group-friendly",
+            "meeting-friendly",
+            "solo-cafe",
+            "pet-friendly",
+            "daily-operation",
+            "late-hours",
+            "tiramisu",
+            "signature-ice-cream-latte",
+            "coffee",
+            "cookies",
+            "crowded",
+            "noisy"
+          ]
+        },
+        {
+          "url": "https://polle.com/place/3zXm9N/%EC%95%8C%EB%B2%A0%EB%A5%B4",
+          "publisher": "Polle",
+          "source_kind": "place-platform",
+          "supports": [
+            "current-listing-2026",
+            "large-space",
+            "large-windows",
+            "high-ceiling",
+            "art-displays",
+            "mixed-food-drink-reviews"
+          ]
+        },
+        {
+          "url": "https://autoreserve.com/ko/restaurants/n57CFAJUrzn2xqDRXMmn",
+          "publisher": "AutoReserve",
+          "source_kind": "place-directory",
+          "supports": [
+            "current-listing-2026",
+            "large-space",
+            "tiramisu",
+            "gangnam-location"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-83702ee05ea3d201",
@@ -29522,8 +29774,106 @@
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
       "editorial_context_provenance": null,
-      "canonical_place_id": null,
-      "research_status": "not_researched"
+      "canonical_place_id": "seoul:gangnam:bunker-company-apgujeong",
+      "research_status": "reviewed",
+      "research_confidence": "high",
+      "verified_attributes": [
+        "specialty-coffee",
+        "barista-champion",
+        "roastery-brand",
+        "coffee-information-card",
+        "espresso",
+        "brewing-coffee",
+        "multiple-long-black-options",
+        "decaf",
+        "coffee-focused",
+        "converted-house",
+        "two-floor-space",
+        "terrace",
+        "quiet-residential-alley",
+        "music-focused",
+        "early-open",
+        "takeout",
+        "delivery",
+        "wifi",
+        "separate-restrooms",
+        "no-parking",
+        "holiday-closure-signal"
+      ],
+      "ados_editorial_angles": [
+        "압구정 주택가의 개조 주택에서 생산자·품종·바리스타의 고민이 적힌 카드와 함께 커피를 맛보는 곳",
+        "베이스가 울리는 음악 아래 에스프레소와 브루잉 커피, 서로 다른 롱블랙을 비교하는 커피 중심 카페"
+      ],
+      "research_cautions": [
+        "주차 불가·인근 공영주차장 이용",
+        "연휴 당일 휴무 가능",
+        "에스프레소와 브루드 커피의 라스트오더 시간이 다를 수 있음",
+        "테라스는 날씨 영향",
+        "라떼의 쓴맛 등 커피 취향에 따라 평가가 갈릴 수 있음",
+        "하남 로스터리와 압구정점을 혼동하지 말 것"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://www.diningcode.com/profile.php?rid=0rrFDx2TiZ90",
+          "publisher": "DiningCode",
+          "source_kind": "place-platform",
+          "supports": [
+            "current-operation-2026",
+            "address",
+            "opening-hours",
+            "specialty-coffee",
+            "coffee-focused",
+            "converted-house",
+            "two-floor-space",
+            "terrace",
+            "quiet-residential-alley",
+            "music-focused",
+            "early-open",
+            "takeout",
+            "no-parking",
+            "holiday-closure-signal"
+          ]
+        },
+        {
+          "url": "https://visitgangnam.net/en/places/bunker-company-at-apgujeong",
+          "publisher": "Visit Gangnam",
+          "source_kind": "public-tourism",
+          "supports": [
+            "address",
+            "opening-hours",
+            "barista-champion-signal",
+            "roastery-brand",
+            "coffee-information-card",
+            "coffee-focused"
+          ]
+        },
+        {
+          "url": "https://gajaseoul.com/en/store/bunkercompany_apgujeong",
+          "publisher": "GAJA SEOUL",
+          "source_kind": "place-guide",
+          "supports": [
+            "current-operation-2026",
+            "barista-champion",
+            "two-floor-space",
+            "takeout",
+            "wifi",
+            "separate-restrooms"
+          ]
+        },
+        {
+          "url": "https://polle.com/place/5cNRgM/%EB%B2%99%EC%BB%A4%20%EC%BB%B4%ED%8D%BC%EB%8B%88",
+          "publisher": "Polle",
+          "source_kind": "place-platform",
+          "supports": [
+            "current-reviews-2026",
+            "espresso",
+            "brewing-coffee",
+            "multiple-long-black-options",
+            "decaf",
+            "delivery"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-f36192a52032da09",
@@ -29894,8 +30244,89 @@
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
       "editorial_context_provenance": null,
-      "canonical_place_id": null,
-      "research_status": "not_researched"
+      "canonical_place_id": "seoul:gangnam:house-m-yangjaecheon",
+      "research_status": "reviewed",
+      "research_confidence": "high",
+      "verified_attributes": [
+        "cafe-restaurant",
+        "yangjaecheon",
+        "brunch-signal",
+        "mango-bingsu",
+        "seasonal-dessert",
+        "group-friendly",
+        "reservation",
+        "pet-friendly",
+        "waiting-area",
+        "takeout",
+        "wifi",
+        "parking-available-signal",
+        "ground-floor",
+        "closed-monday",
+        "weekend-longer-hours",
+        "sunday-early-open",
+        "accessible-facility-signal"
+      ],
+      "ados_editorial_angles": [
+        "양재천 산책 뒤 1층 카페 레스토랑에서 생망고가 넉넉한 빙수로 더위를 식히는 곳",
+        "주말 아침부터 반려견이나 가족·친구와 브런치와 디저트를 이어가기 좋은 양재천 카페"
+      ],
+      "research_cautions": [
+        "월요일 휴무",
+        "평일·토요일·일요일 운영시간이 서로 다름",
+        "망고빙수는 계절·원물 수급과 가격 확인",
+        "반려동물 동반 좌석·규칙 확인",
+        "주차 가능 대수와 지원 조건 확인",
+        "카페 겸 레스토랑으로 식사 시간 혼잡 가능",
+        "장애인 편의시설 세부 범위 확인"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://www.diningcode.com/profile.php?rid=IYzzqNe5PVxZ",
+          "publisher": "DiningCode",
+          "source_kind": "place-platform",
+          "supports": [
+            "current-operation-2026",
+            "address",
+            "opening-hours",
+            "cafe-restaurant",
+            "yangjaecheon",
+            "brunch-signal",
+            "mango-bingsu",
+            "seasonal-dessert",
+            "group-friendly",
+            "reservation",
+            "pet-friendly",
+            "waiting-area",
+            "takeout",
+            "wifi",
+            "parking-available-signal",
+            "ground-floor",
+            "closed-monday",
+            "weekend-longer-hours",
+            "sunday-early-open"
+          ]
+        },
+        {
+          "url": "https://pgpg.co.kr/company/18478",
+          "publisher": "포근포근",
+          "source_kind": "accessibility-directory",
+          "supports": [
+            "address",
+            "cafe-restaurant",
+            "accessible-facility-signal"
+          ]
+        },
+        {
+          "url": "https://xn--2s2b33eb3kgvpta.com/store/S251031_1761892301285",
+          "publisher": "완벽한 하루",
+          "source_kind": "place-guide",
+          "supports": [
+            "current-listing-2026",
+            "yangjaecheon",
+            "cafe-identity"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-5d0105ed07521ba4",
@@ -29927,8 +30358,108 @@
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
       "editorial_context_provenance": null,
-      "canonical_place_id": null,
-      "research_status": "not_researched"
+      "canonical_place_id": "seoul:gangnam:les-amis-honnetes-nonhyeon",
+      "research_status": "reviewed",
+      "research_confidence": "high",
+      "verified_attributes": [
+        "bakery",
+        "takeout-focused",
+        "croissant-style-fish-bread",
+        "cream-filled-fish-bread",
+        "dubai-chocolate-fish-bread",
+        "matcha-cream-fish-bread",
+        "lemon-cream-fish-bread",
+        "chocolate-cream-fish-bread",
+        "salt-bread",
+        "bagels",
+        "white-roll",
+        "rice-spinach-ciabatta",
+        "cold-brew",
+        "misugaru",
+        "early-open",
+        "daily-operation",
+        "small-space",
+        "garden-signal",
+        "delivery",
+        "no-parking",
+        "popular-sellout-signal"
+      ],
+      "ados_editorial_angles": [
+        "논현 가구거리 산책 중 크루아상처럼 결이 살아 있는 크림 붕어빵을 골라 포장하는 베이커리",
+        "말차·레몬·두바이 초콜릿처럼 계절과 유행을 반영한 붕어빵을 선물용으로 고르는 간식 정류장"
+      ],
+      "research_cautions": [
+        "좌석보다 포장 중심 매장이라는 최신 후기 신호",
+        "주차 불가·인근 공영주차장 이용",
+        "인기 맛은 늦은 시간 품절 가능",
+        "크림과 버터 비중이 높은 달고 묵직한 디저트",
+        "지점이 여러 곳이므로 논현 본점 주소 확인",
+        "유행·시즌 메뉴는 상시 판매가 아닐 수 있음",
+        "카페보다는 베이커리·간식 장소로 분류"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://www.diningcode.com/profile.php?rid=9f6n6RfHgxEp",
+          "publisher": "DiningCode",
+          "source_kind": "place-platform",
+          "supports": [
+            "current-operation-2026",
+            "address",
+            "opening-hours",
+            "bakery",
+            "croissant-style-fish-bread",
+            "cream-filled-fish-bread",
+            "dubai-chocolate-fish-bread",
+            "matcha-cream-fish-bread",
+            "lemon-cream-fish-bread",
+            "chocolate-cream-fish-bread",
+            "salt-bread",
+            "bagels",
+            "white-roll",
+            "rice-spinach-ciabatta",
+            "cold-brew",
+            "misugaru",
+            "early-open",
+            "daily-operation",
+            "small-space",
+            "garden-signal",
+            "delivery",
+            "no-parking"
+          ]
+        },
+        {
+          "url": "https://www.tabling.co.kr/place/677cd28266de5f069889da4f",
+          "publisher": "테이블링",
+          "source_kind": "place-platform",
+          "supports": [
+            "current-listing-2026",
+            "address",
+            "bakery",
+            "egg-tart",
+            "pain-au-chocolat-signal"
+          ]
+        },
+        {
+          "url": "https://dongnecoffeenote.com/c/3008",
+          "publisher": "동네 커피 노트",
+          "source_kind": "review-analysis",
+          "supports": [
+            "current-reviews-2026",
+            "takeout-focused",
+            "popular-sellout-signal"
+          ]
+        },
+        {
+          "url": "https://gangnamfinds.com/ko/place/rejamionetteu",
+          "publisher": "Gangnam Finds",
+          "source_kind": "local-public-guide",
+          "supports": [
+            "current-listing-2026",
+            "address",
+            "place-identity"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-6f6d68803cd9e174",
