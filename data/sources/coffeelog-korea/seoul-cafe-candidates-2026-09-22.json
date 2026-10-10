@@ -15,7 +15,7 @@
     "geography": "Seoul only",
     "record_count": 454,
     "enriched_record_count": 30,
-    "researched_record_count": 376
+    "researched_record_count": 382
   },
   "import_policy": {
     "default_action": "stage_only",
@@ -28187,8 +28187,97 @@
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
       "editorial_context_provenance": null,
-      "canonical_place_id": null,
-      "research_status": "not_researched"
+      "canonical_place_id": "seoul:seongdong:childish-seongsu",
+      "research_status": "reviewed",
+      "research_confidence": "high",
+      "verified_attributes": [
+        "dessert-cafe",
+        "salt-bread-specialty",
+        "fish-shaped-salt-bread",
+        "rice-flour",
+        "low-gluten-signal",
+        "butter",
+        "pizza-salt-bread",
+        "mammoth-salt-bread",
+        "jambon-beurre-sandwich",
+        "egg-mayo-sandwich",
+        "taiwanese-mango-bingsu",
+        "ube-bingsu",
+        "signature-cream-coffee",
+        "in-house-baking",
+        "second-floor",
+        "window-seating",
+        "family-friendly",
+        "date-friendly",
+        "takeout-discount",
+        "delivery",
+        "reservation",
+        "closed-monday",
+        "no-parking",
+        "waiting-signal"
+      ],
+      "ados_editorial_angles": [
+        "성수에서 소금빵 반죽을 붕어빵 모양으로 구운 단짠 디저트를 골라 먹는 장난기 있는 카페",
+        "대만식 망고빙수나 필리핀 우베빙수와 소금붕어빵을 나눠 먹기 좋은 가족·친구 디저트 코스"
+      ],
+      "research_cautions": [
+        "월요일 휴무",
+        "2층 계단 접근성과 엘리베이터 여부 확인",
+        "주차 불가",
+        "주말에는 웨이팅 가능",
+        "망고·우베빙수와 일부 메뉴는 시즌·재고 확인",
+        "저글루텐 표기는 글루텐프리를 의미하지 않으므로 알레르기 확인",
+        "인기 메뉴는 주문 후 조리 대기 가능"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://www.diningcode.com/profile.php?rid=SWokzqlH8UgL",
+          "publisher": "DiningCode",
+          "source_kind": "place-platform",
+          "supports": [
+            "current-operation-2026",
+            "address",
+            "opening-hours",
+            "dessert-cafe",
+            "salt-bread-specialty",
+            "fish-shaped-salt-bread",
+            "rice-flour",
+            "low-gluten-signal",
+            "butter",
+            "pizza-salt-bread",
+            "mammoth-salt-bread",
+            "jambon-beurre-sandwich",
+            "egg-mayo-sandwich",
+            "taiwanese-mango-bingsu",
+            "ube-bingsu",
+            "signature-cream-coffee",
+            "second-floor",
+            "window-seating",
+            "family-friendly",
+            "date-friendly",
+            "takeout-discount",
+            "delivery",
+            "reservation",
+            "closed-monday",
+            "no-parking",
+            "waiting-signal"
+          ]
+        },
+        {
+          "url": "https://superchart.com/ko/stores/childish/",
+          "publisher": "Superchart",
+          "source_kind": "current-place-summary",
+          "supports": [
+            "current-listing-2026",
+            "in-house-baking",
+            "rice-flour",
+            "low-gluten-signal",
+            "butter",
+            "fish-shaped-salt-bread",
+            "bingsu-selection"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-f87e500a44e4588b",
@@ -28309,8 +28398,100 @@
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
       "editorial_context_provenance": null,
-      "canonical_place_id": null,
-      "research_status": "not_researched"
+      "canonical_place_id": "seoul:seongdong:bonjirrr-seongsu",
+      "research_status": "reviewed",
+      "research_confidence": "high",
+      "verified_attributes": [
+        "large-cafe",
+        "work-friendly",
+        "large-tables",
+        "sofa-seating",
+        "outdoor-seating",
+        "pet-friendly",
+        "reservation",
+        "takeout",
+        "late-night",
+        "weekend-midnight",
+        "chocolate-terrine",
+        "matcha-terrine",
+        "basque-cheesecake",
+        "lemon-cake",
+        "muffin",
+        "carrot-cake",
+        "quiet-space-signal",
+        "weekend-crowds",
+        "two-hour-limit-weekend",
+        "no-parking"
+      ],
+      "ados_editorial_angles": [
+        "성수에서 넓은 테이블에 노트북을 펴고 늦은 밤까지 머물 수 있는 대형 작업 카페",
+        "소파나 야외 좌석에 반려견과 앉아 말차 테린느와 큰 당근 케이크를 나누는 공간"
+      ],
+      "research_cautions": [
+        "주말 혼잡 시 2시간 이용 제한 가능",
+        "금·토는 자정, 그 외 요일은 오후 11시 마감으로 차이",
+        "주차 불가",
+        "반려동물 동반 좌석·규칙 확인",
+        "작업 좌석은 주말에 빠르게 찰 수 있음",
+        "당근 케이크 크림과 질감은 취향이 갈릴 수 있음"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://www.tabling.co.kr/place/677cd53b66de5f06988ed935",
+          "publisher": "테이블링",
+          "source_kind": "place-platform",
+          "supports": [
+            "current-operation-2026",
+            "address",
+            "opening-hours",
+            "large-cafe",
+            "work-friendly",
+            "large-tables",
+            "sofa-seating",
+            "outdoor-seating",
+            "pet-friendly",
+            "reservation",
+            "takeout",
+            "late-night",
+            "weekend-midnight",
+            "chocolate-terrine",
+            "matcha-terrine",
+            "basque-cheesecake",
+            "carrot-cake",
+            "weekend-crowds",
+            "two-hour-limit-weekend",
+            "no-parking"
+          ]
+        },
+        {
+          "url": "https://www.diningcode.com/profile.php?rid=m3Gtn7OAvamo",
+          "publisher": "DiningCode",
+          "source_kind": "place-platform",
+          "supports": [
+            "current-operation-2026",
+            "large-cafe",
+            "outdoor-seating",
+            "chocolate-terrine",
+            "matcha-terrine",
+            "basque-cheesecake",
+            "lemon-cake",
+            "muffin",
+            "carrot-cake",
+            "quiet-space-signal",
+            "no-parking"
+          ]
+        },
+        {
+          "url": "https://ilovefood.tistory.com/215",
+          "publisher": "일러푸드",
+          "source_kind": "visit-record",
+          "supports": [
+            "work-friendly",
+            "large-space",
+            "popular-place-signal"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-d4e43ba1a7f762ad",
@@ -28342,8 +28523,110 @@
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
       "editorial_context_provenance": null,
-      "canonical_place_id": null,
-      "research_status": "not_researched"
+      "canonical_place_id": "seoul:seongdong:new-at-dawn-seongsu",
+      "research_status": "reviewed",
+      "research_confidence": "high",
+      "verified_attributes": [
+        "rooftop",
+        "namsan-view",
+        "sky-view",
+        "photo-friendly",
+        "blue-interior",
+        "fourth-floor",
+        "fifth-floor-rooftop",
+        "pet-friendly",
+        "late-hours",
+        "daily-operation-signal",
+        "signature-cream-coffee",
+        "oat-cold-brew",
+        "cakes",
+        "tiramisu",
+        "tarts",
+        "reservation",
+        "takeout",
+        "paid-parking-signal",
+        "not-work-focused",
+        "premium-price-signal",
+        "stairs-only-signal"
+      ],
+      "ados_editorial_angles": [
+        "서울숲 산책 뒤 5층 루프탑에서 남산과 서울 하늘을 바라보며 사진을 남기는 카페",
+        "파란색 실내와 따뜻한 조명 아래 시그니처 슈페너와 디저트를 즐기고 늦은 저녁까지 머무는 데이트 장소"
+      ],
+      "research_cautions": [
+        "4층 매장과 5층 루프탑까지 엘리베이터 없이 계단 이용 신호",
+        "루프탑은 날씨·벌레 영향",
+        "공식 채널의 임시휴무 공지를 방문 전 확인",
+        "반려동물 동반 규칙 확인",
+        "주차는 유료·지원 조건 확인",
+        "가격대가 높은 편",
+        "작업보다 전망·사진·대화 중심으로 소개"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://pf.kakao.com/_xhdvBn",
+          "publisher": "뉴앳던 성수",
+          "source_kind": "official-channel",
+          "supports": [
+            "current-operation-2026",
+            "opening-hours",
+            "rooftop",
+            "namsan-view",
+            "sky-view",
+            "photo-friendly",
+            "pet-friendly"
+          ]
+        },
+        {
+          "url": "https://www.diningcode.com/profile.php?rid=XAMS91Gt3f6K",
+          "publisher": "DiningCode",
+          "source_kind": "place-platform",
+          "supports": [
+            "current-operation-2026",
+            "address",
+            "opening-hours",
+            "rooftop",
+            "namsan-view",
+            "blue-interior",
+            "fourth-floor",
+            "fifth-floor-rooftop",
+            "late-hours",
+            "daily-operation-signal",
+            "signature-cream-coffee",
+            "cakes",
+            "tiramisu",
+            "tarts",
+            "premium-price-signal",
+            "stairs-only-signal"
+          ]
+        },
+        {
+          "url": "https://www.tabling.co.kr/place/677cd2e266de5f06988a8a81",
+          "publisher": "테이블링",
+          "source_kind": "place-platform",
+          "supports": [
+            "opening-hours",
+            "rooftop",
+            "pet-friendly",
+            "reservation",
+            "takeout",
+            "paid-parking-signal",
+            "oat-cold-brew"
+          ]
+        },
+        {
+          "url": "https://dongnecoffeenote.com/c/27928",
+          "publisher": "동네 커피 노트",
+          "source_kind": "review-analysis",
+          "supports": [
+            "current-reviews-2026",
+            "photo-friendly",
+            "rooftop",
+            "pet-friendly",
+            "not-work-focused"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-c7f442985b9cac4c",
@@ -28435,8 +28718,112 @@
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
       "editorial_context_provenance": null,
-      "canonical_place_id": null,
-      "research_status": "not_researched"
+      "canonical_place_id": "seoul:seongdong:period-seoul-forest",
+      "research_status": "reviewed",
+      "research_confidence": "high",
+      "verified_attributes": [
+        "egg-tart-specialty",
+        "apple-tart",
+        "portuguese-style-pastry",
+        "fresh-baked-to-order-signal",
+        "pistachio-cream",
+        "coffee",
+        "large-windows",
+        "green-view",
+        "converted-house",
+        "black-interior",
+        "quiet-space",
+        "solo-cafe",
+        "bar-seating",
+        "indoor-restroom",
+        "takeout",
+        "daily-operation-signal",
+        "early-close",
+        "weekend-crowds",
+        "afternoon-sellout",
+        "no-parking",
+        "mixed-coffee-reviews"
+      ],
+      "ados_editorial_angles": [
+        "서울숲 골목의 큰 창 너머 초록을 보며 포르투갈식 에그타르트와 애플타르트를 먹는 조용한 카페",
+        "블랙톤의 개조 주택에서 혼자 쉬거나 피스타치오 크림 음료와 갓 데운 타르트를 곁들이는 오후"
+      ],
+      "research_cautions": [
+        "저녁 8시 전후로 일찍 마감",
+        "플랫폼별 특정 휴무일 표기가 달라 공식 채널 확인",
+        "주말 오후에는 타르트 품절 가능",
+        "주차 불가",
+        "등받이 없는 좌석이 있어 장시간 체류에는 불편할 수 있음",
+        "커피 평가는 엇갈려 타르트 중심으로 소개"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://www.diningcode.com/profile.php?rid=ysDAsEQ867M8",
+          "publisher": "DiningCode",
+          "source_kind": "place-platform",
+          "supports": [
+            "current-operation-2026",
+            "address",
+            "opening-hours",
+            "egg-tart-specialty",
+            "apple-tart",
+            "portuguese-style-pastry",
+            "pistachio-cream",
+            "coffee",
+            "large-windows",
+            "green-view",
+            "quiet-space",
+            "solo-cafe",
+            "bar-seating",
+            "takeout",
+            "daily-operation-signal",
+            "early-close",
+            "mixed-coffee-reviews"
+          ]
+        },
+        {
+          "url": "https://www.tabling.co.kr/place/677cd26866de5f069889a8ec",
+          "publisher": "테이블링",
+          "source_kind": "place-platform",
+          "supports": [
+            "opening-hours",
+            "egg-tart-specialty",
+            "apple-tart",
+            "fresh-baked-to-order-signal",
+            "converted-house",
+            "black-interior",
+            "quiet-space",
+            "indoor-restroom",
+            "weekend-crowds",
+            "afternoon-sellout",
+            "no-parking"
+          ]
+        },
+        {
+          "url": "https://polle.com/place/4OWHp3/%ED%94%BC%EB%A6%AC%EC%96%B4%EB%93%9C",
+          "publisher": "Polle",
+          "source_kind": "place-platform",
+          "supports": [
+            "current-listing-2026",
+            "egg-tart-specialty",
+            "apple-tart",
+            "portuguese-style-pastry",
+            "quiet-space",
+            "solo-cafe",
+            "no-parking"
+          ]
+        },
+        {
+          "url": "https://dongnecoffeenote.com/c/9377",
+          "publisher": "동네 커피 노트",
+          "source_kind": "review-analysis",
+          "supports": [
+            "current-reviews-2026",
+            "address",
+            "place-identity"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-8824341623c505a9",
@@ -28539,8 +28926,85 @@
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
       "editorial_context_provenance": null,
-      "canonical_place_id": null,
-      "research_status": "not_researched"
+      "canonical_place_id": "seoul:gangnam:quiet-and-quiet-dogok",
+      "research_status": "reviewed",
+      "research_confidence": "high",
+      "verified_attributes": [
+        "designer-owned",
+        "design-studio-cafe",
+        "quiet-space",
+        "work-friendly",
+        "reading-friendly",
+        "conversation-friendly",
+        "large-space",
+        "large-windows",
+        "tree-view",
+        "natural-light",
+        "sofa-seating",
+        "bar-seating",
+        "proper-height-tables",
+        "vintage-tableware",
+        "coffee",
+        "vanilla-bean-latte",
+        "tiramisu",
+        "basque-cheesecake",
+        "brownie",
+        "levain-cookie",
+        "open-sandwich",
+        "second-floor",
+        "closed-sunday",
+        "weekday-hours",
+        "limited-parking"
+      ],
+      "ados_editorial_angles": [
+        "매봉역 주택가 2층에서 큰 창의 나무를 보며 조용히 노트북이나 책을 펼치는 디자이너의 카페",
+        "빈티지 찻잔과 디자인 소재 사이에서 바닐라빈 라떼와 티라미수를 즐기는 차분한 대화 공간"
+      ],
+      "research_cautions": [
+        "일요일 휴무",
+        "평일과 토요일 오픈 시간이 다르고 저녁 7시경 일찍 마감",
+        "2층 계단 접근성 확인",
+        "건물 옆 주차는 1대 수준으로 이용이 어려워 공영주차장 권장",
+        "영업시간이 작업 일정에 따라 연장·변경될 수 있음",
+        "이름과 달리 시간대에 따라 대화 소음 가능"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://www.diningcode.com/profile.php?rid=SbFDW6eLYQ0L",
+          "publisher": "DiningCode",
+          "source_kind": "place-platform",
+          "supports": [
+            "current-operation-2026",
+            "address",
+            "opening-hours",
+            "designer-owned",
+            "design-studio-cafe",
+            "quiet-space",
+            "work-friendly",
+            "reading-friendly",
+            "conversation-friendly",
+            "large-space",
+            "large-windows",
+            "tree-view",
+            "natural-light",
+            "sofa-seating",
+            "bar-seating",
+            "proper-height-tables",
+            "vintage-tableware",
+            "coffee",
+            "vanilla-bean-latte",
+            "tiramisu",
+            "basque-cheesecake",
+            "brownie",
+            "levain-cookie",
+            "open-sandwich",
+            "second-floor",
+            "closed-sunday",
+            "weekday-hours",
+            "limited-parking"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-1ee6d6f5e1d6fd34",
@@ -28572,8 +29036,105 @@
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
       "editorial_context_provenance": null,
-      "canonical_place_id": null,
-      "research_status": "not_researched"
+      "canonical_place_id": "seoul:gangnam:slab-commons-dogok",
+      "research_status": "reviewed",
+      "research_confidence": "high",
+      "verified_attributes": [
+        "open-work-studio",
+        "interior-design-studio",
+        "work-friendly",
+        "study-friendly",
+        "quiet-space",
+        "forest-view",
+        "large-windows",
+        "natural-light",
+        "large-shared-table",
+        "window-seating",
+        "comfortable-chairs",
+        "power-outlets",
+        "wifi",
+        "day-pass",
+        "three-hour-limit-with-drink",
+        "two-drinks-with-day-pass",
+        "second-floor",
+        "weekday-hours",
+        "closed-sunday",
+        "no-kids-zone-signal",
+        "no-parking",
+        "limited-seating-weekends",
+        "premium-drink-price"
+      ],
+      "ados_editorial_angles": [
+        "양재와 강남 사이에서 인테리어 디자이너들이 일하는 공개 작업실을 공유하며 노트북에 집중하는 카페",
+        "큰 창의 숲뷰와 넓은 공용 테이블, 편한 의자를 보고 데이패스로 하루 작업을 계획하는 곳"
+      ],
+      "research_cautions": [
+        "일요일 휴무",
+        "평일 오후 5시 30분경 마감으로 늦은 작업에는 부적합",
+        "음료 주문 시 약 3시간 이용 제한, 데이패스 조건 확인",
+        "토요일에는 좌석이 빠르게 만석 가능",
+        "주차 불가·인근 공영주차장 이용",
+        "노키즈존 운영 여부 확인",
+        "2층 접근성과 엘리베이터 여부 확인",
+        "일반 카페보다 작업실 공유 공간 성격이 강함"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://www.diningcode.com/profile.php?rid=mGPMTEHKYjf7",
+          "publisher": "DiningCode",
+          "source_kind": "place-platform",
+          "supports": [
+            "current-operation-2026",
+            "address",
+            "opening-hours",
+            "open-work-studio",
+            "interior-design-studio",
+            "work-friendly",
+            "study-friendly",
+            "quiet-space",
+            "forest-view",
+            "large-windows",
+            "natural-light",
+            "large-shared-table",
+            "window-seating",
+            "comfortable-chairs",
+            "power-outlets",
+            "wifi",
+            "day-pass",
+            "three-hour-limit-with-drink",
+            "two-drinks-with-day-pass",
+            "second-floor",
+            "weekday-hours",
+            "closed-sunday",
+            "no-kids-zone-signal",
+            "no-parking",
+            "limited-seating-weekends",
+            "premium-drink-price"
+          ]
+        },
+        {
+          "url": "https://gangnamfinds.com/ko/place/seulraepkeomeonjeu",
+          "publisher": "Gangnam Finds",
+          "source_kind": "local-guide",
+          "supports": [
+            "current-listing-2026",
+            "specialty-coffee-signal",
+            "work-friendly",
+            "gangnam-location"
+          ]
+        },
+        {
+          "url": "https://conyplace.com/%EC%8A%AC%EB%9E%A9%EC%BB%A4%EB%A8%BC%EC%A6%88-%EC%A1%B0%EC%9A%A9%ED%95%9C-%EC%9E%91%EC%97%85-%EA%B3%B5%EA%B0%84%EA%B3%BC-%EC%88%B2-%EB%B7%B0%EC%9D%98-%EC%A1%B0%ED%99%94/",
+          "publisher": "코니플레이스",
+          "source_kind": "place-guide",
+          "supports": [
+            "quiet-space",
+            "work-friendly",
+            "forest-view",
+            "interior-design-studio"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-4ebad3bb2730ef43",
