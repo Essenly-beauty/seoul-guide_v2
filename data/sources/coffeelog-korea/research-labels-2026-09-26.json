@@ -3093,6 +3093,60 @@
       "ados_editorial_angles": ["논현 가구거리 산책 중 크루아상처럼 결이 살아 있는 크림 붕어빵을 골라 포장하는 베이커리", "말차·레몬·두바이 초콜릿처럼 계절과 유행을 반영한 붕어빵을 선물용으로 고르는 간식 정류장"],
       "cautions": ["좌석보다 포장 중심 매장이라는 최신 후기 신호", "주차 불가·인근 공영주차장 이용", "인기 맛은 늦은 시간 품절 가능", "크림과 버터 비중이 높은 달고 묵직한 디저트", "지점이 여러 곳이므로 논현 본점 주소 확인", "유행·시즌 메뉴는 상시 판매가 아닐 수 있음", "카페보다는 베이커리·간식 장소로 분류"],
       "evidence": [{ "url": "https://www.diningcode.com/profile.php?rid=9f6n6RfHgxEp", "publisher": "DiningCode", "source_kind": "place-platform", "supports": ["current-operation-2026", "address", "opening-hours", "bakery", "croissant-style-fish-bread", "cream-filled-fish-bread", "dubai-chocolate-fish-bread", "matcha-cream-fish-bread", "lemon-cream-fish-bread", "chocolate-cream-fish-bread", "salt-bread", "bagels", "white-roll", "rice-spinach-ciabatta", "cold-brew", "misugaru", "early-open", "daily-operation", "small-space", "garden-signal", "delivery", "no-parking"] }, { "url": "https://www.tabling.co.kr/place/677cd28266de5f069889da4f", "publisher": "테이블링", "source_kind": "place-platform", "supports": ["current-listing-2026", "address", "bakery", "egg-tart", "pain-au-chocolat-signal"] }, { "url": "https://dongnecoffeenote.com/c/3008", "publisher": "동네 커피 노트", "source_kind": "review-analysis", "supports": ["current-reviews-2026", "takeout-focused", "popular-sellout-signal"] }, { "url": "https://gangnamfinds.com/ko/place/rejamionetteu", "publisher": "Gangnam Finds", "source_kind": "local-public-guide", "supports": ["current-listing-2026", "address", "place-identity"] }]
+    },
+    {
+      "canonical_place_id": "seoul:gangnam:ground-b-samseong",
+      "member_external_ids": ["coffeelog-6f6d68803cd9e174"],
+      "research_status": "reviewed", "confidence": "high",
+      "verified_attributes": ["large-cafe", "high-ceiling", "floor-to-ceiling-windows", "terrace", "near-samseong-station", "early-open-weekday", "weekday-focused", "group-friendly", "venue-rental", "seminar-friendly", "pop-up-friendly", "projector", "screen", "microphone", "limited-parking"],
+      "ados_editorial_angles": ["삼성역에서 팀 미팅이나 작은 세미나를 카페 분위기로 풀고 싶을 때 고르는 80평 규모의 높은 층고 공간", "통창과 테라스, 대형 스크린을 갖춰 팝업·브랜드 행사처럼 목적이 분명한 모임에 맞는 카페"],
+      "cautions": ["평일 중심 운영이며 주말은 휴무 신호", "일반 방문 중에도 대관 일정이 있는지 확인", "주차 지원 대수는 평일·주말 및 행사 조건에 따라 달라질 수 있음", "대관 장비와 비용은 사전 문의", "커피 목적보다 모임·대관 목적이 더 선명한 장소"],
+      "evidence": [{ "url": "https://www.diningcode.com/profile.php?rid=wVvOXlwjp5HO", "publisher": "DiningCode", "source_kind": "place-platform", "supports": ["current-operation-2026", "address", "opening-hours", "large-cafe", "terrace", "group-friendly", "venue-rental", "weekday-focused"] }, { "url": "https://www.filmkorea.or.kr/location/location_view.jsp?id=286388&page=234", "publisher": "한국영상위원회", "source_kind": "location-directory", "supports": ["address", "large-cafe", "high-ceiling", "floor-to-ceiling-windows", "terrace", "near-samseong-station", "limited-parking", "venue-rental"] }, { "url": "https://www.spacecloud.kr/space/58414", "publisher": "스페이스클라우드", "source_kind": "venue-platform", "supports": ["current-listing-2026", "venue-rental", "projector", "screen", "microphone", "seminar-friendly", "pop-up-friendly"] }]
+    },
+    {
+      "canonical_place_id": "seoul:gangnam:tete-a-tete-seolleung",
+      "member_external_ids": ["coffeelog-5a07f880aef963eb"],
+      "research_status": "reviewed", "confidence": "high",
+      "verified_attributes": ["dessert-cafe", "near-seolleung-station", "warm-wood-interior", "floor-to-ceiling-windows", "spacious", "egg-tart", "chestnut-tiramisu", "brownie", "scones", "cream-latte", "weekday-late-night", "work-friendly-signal", "quiet-signal", "group-friendly", "takeout", "delivery", "wifi", "no-parking"],
+      "ados_editorial_angles": ["선릉에서 퇴근 뒤 늦은 시간까지 밤 티라미수나 에그타르트를 곁들여 대화를 이어가는 디저트 카페", "통창과 따뜻한 우드톤, 넓은 좌석을 갖춰 평일 낮에는 혼자 작업하거나 잠시 머물기 좋은 도심 카페"],
+      "cautions": ["평일과 주말 운영시간 차이가 큼", "주차 불가·인근 유료주차장 이용", "작업 적합성은 좌석과 혼잡도에 따라 달라짐", "음악 볼륨과 의자 편안함에 대한 평이 갈릴 수 있음", "디저트 재고와 시즌 메뉴 확인"],
+      "evidence": [{ "url": "https://www.tabling.co.kr/place/677cd79566de5f0698930212", "publisher": "테이블링", "source_kind": "place-platform", "supports": ["current-operation-2026", "address", "opening-hours", "dessert-cafe", "egg-tart", "chestnut-tiramisu", "brownie", "scones", "takeout", "no-parking"] }, { "url": "https://www.diningcode.com/profile.php?rid=Bru97qN0EaJU", "publisher": "DiningCode", "source_kind": "place-platform", "supports": ["address", "opening-hours", "warm-wood-interior", "floor-to-ceiling-windows", "group-friendly", "delivery", "wifi", "weekday-late-night"] }, { "url": "https://dongnecoffeenote.com/c/13908", "publisher": "동네 커피 노트", "source_kind": "review-analysis", "supports": ["current-reviews-2026", "spacious", "work-friendly-signal", "quiet-signal", "dessert-focus"] }]
+    },
+    {
+      "canonical_place_id": "seoul:gangnam:gluu-gluu-samseong",
+      "member_external_ids": ["coffeelog-34693471043026ba"],
+      "research_status": "reviewed", "confidence": "high",
+      "verified_attributes": ["churreria", "espresso-bar", "spanish-dessert", "porras", "churros", "fried-to-order", "dark-chocolate-dip", "multiple-dipping-sauces", "cortado", "espresso", "small-space", "two-person-seating", "takeout", "daily-operation-signal", "no-parking", "near-samseong-station"],
+      "ados_editorial_angles": ["삼성역 골목에서 갓 튀긴 스페인 남부식 뽀라스를 코르타도와 함께 먹는 짧고 강한 디저트 정류장", "초콜릿·레몬·얼그레이 등 여러 소스를 골라 클래식 츄러스와 통통한 뽀라스의 식감을 비교하는 곳"],
+      "cautions": ["좌석이 작고 2인 중심이라 4인 이상 방문에는 불편할 수 있음", "피크 시간 웨이팅 가능", "주차 불가·인근 공영주차장 이용", "튀김 디저트라 따뜻할 때 먹는 편이 좋음", "영업 요일·휴무 정보가 플랫폼별로 달라 방문 전 확인", "디핑 소스는 별도 주문"],
+      "evidence": [{ "url": "https://www.diningcode.com/profile.php?rid=t2RGRZ20S54I", "publisher": "DiningCode", "source_kind": "place-platform", "supports": ["current-operation-2026", "address", "opening-hours", "porras", "churros", "fried-to-order", "dark-chocolate-dip", "multiple-dipping-sauces", "cortado", "takeout", "no-parking"] }, { "url": "https://www.tabling.co.kr/place/677cd32d66de5f06988b176e", "publisher": "테이블링", "source_kind": "place-platform", "supports": ["current-listing-2026", "address", "churreria", "espresso-bar", "spanish-dessert", "small-space", "two-person-seating", "daily-operation-signal"] }, { "url": "https://polle.com/place/120w7I/%EA%B8%80%EB%A3%A8%EA%B8%80%EB%A3%A8", "publisher": "Polle", "source_kind": "place-platform", "supports": ["current-reviews-2026", "porras", "churros", "espresso-bar", "takeout"] }]
+    },
+    {
+      "canonical_place_id": "seoul:gangnam:momo-bagel-samseong",
+      "member_external_ids": ["coffeelog-4c3a2b7a69acc604"],
+      "research_status": "reviewed", "confidence": "high",
+      "verified_attributes": ["bagel-shop", "bakery-cafe", "bagel-sandwiches", "fruit-sando", "salmon-sandwich", "bulgogi-sandwich", "chicken-sandwich", "jambon-beurre", "carrot-rapee", "salt-bagel", "lunch-friendly", "takeout-focused", "delivery", "small-seating-area", "pet-friendly-signal", "limited-free-parking", "weekday-early-open", "closed-sunday-signal"],
+      "ados_editorial_angles": ["삼성중앙역 직장인이 생연어·불고기·당근라페 베이글 샌드위치로 빠르게 점심을 해결하는 실용적인 한 끼 장소", "과일 산도와 소금 베이글을 골라 포장하고, 자리가 나면 작은 매장에서 커피까지 곁들이는 동네 베이글 숍"],
+      "cautions": ["테이블 수가 적어 포장 중심으로 계획하는 편이 안전", "인기 과일 산도는 점심 이후 품절 가능", "요일별 영업시간과 정기휴무가 변동된 신호가 있어 방문 전 확인", "반려동물 동반 범위와 좌석 규칙 확인", "주차는 매장 앞 소수 차량·시간 제한 신호", "카페보다 베이글·샌드위치 식사 목적이 중심"],
+      "evidence": [{ "url": "https://www.diningcode.com/profile.php?rid=IPS8nmP4y1TH", "publisher": "DiningCode", "source_kind": "place-platform", "supports": ["current-operation-2026", "address", "opening-hours", "bagel-shop", "bagel-sandwiches", "fruit-sando", "salmon-sandwich", "bulgogi-sandwich", "chicken-sandwich", "jambon-beurre", "carrot-rapee", "salt-bagel", "takeout-focused", "delivery", "small-seating-area", "pet-friendly-signal", "limited-free-parking"] }, { "url": "https://dept.galleria.co.kr/store-info/luxuryhall/gourmet/journey-of-taste/EXPAND002/store/3781", "publisher": "갤러리아", "source_kind": "brand-directory", "supports": ["bagel-brand", "ingredient-focus", "handmade-bagel"] }, { "url": "https://bakery.happynowinfo.com/b/bakery-3220000-121-2026-00004/momobeigeul-seoul-gangnam-gu/", "publisher": "빵집정보", "source_kind": "business-directory", "supports": ["current-listing-2026", "address", "bakery-identity"] }]
+    },
+    {
+      "canonical_place_id": "seoul:gangnam:pain-de-m-et-mooni-apgujeong",
+      "member_external_ids": ["coffeelog-bccb98a2fa65a73f"],
+      "research_status": "reviewed", "confidence": "high",
+      "verified_attributes": ["large-bakery-cafe", "near-apgujeong-rodeo-station", "ornate-interior", "antique-style", "photo-friendly", "seasonal-decoration", "terrace", "rooftop", "garden-signal", "multiple-photo-zones", "croissants", "ribbon-croissant", "cakes", "mango-drink", "pet-friendly", "date-friendly", "premium-pricing"],
+      "ados_editorial_angles": ["압구정로데오에서 앤티크한 실내와 테라스·루프탑을 오가며 서로 다른 배경의 사진을 남기는 베이커리 카페", "크리스마스처럼 계절 장식이 강한 시기에 리본 크루아상과 케이크를 골라 데이트 코스로 넣기 좋은 곳"],
+      "cautions": ["음료와 베이커리 가격대가 높은 편", "맛보다 공간·사진 경험에 대한 평가가 더 선명함", "계절 장식과 시즌 베이커리는 시기별 변동", "오픈 진열 베이커리에 대한 위생 체감은 개인차", "반려동물 동반 가능 구역과 규칙 확인", "주말과 포토존 혼잡 가능"],
+      "evidence": [{ "url": "https://www.diningcode.com/profile.php?rid=PbXAhkAKSodX", "publisher": "DiningCode", "source_kind": "place-platform", "supports": ["current-operation-2026", "address", "large-bakery-cafe", "ornate-interior", "antique-style", "photo-friendly", "multiple-photo-zones", "croissants", "ribbon-croissant", "cakes", "mango-drink", "pet-friendly", "date-friendly", "premium-pricing"] }, { "url": "https://dongnecoffeenote.com/c/1190", "publisher": "동네 커피 노트", "source_kind": "review-analysis", "supports": ["current-reviews-2026", "near-apgujeong-rodeo-station", "terrace", "rooftop", "photo-friendly"] }]
+    },
+    {
+      "canonical_place_id": "seoul:gangnam:fratelli-gangnam",
+      "member_external_ids": ["coffeelog-7197a8e41dd60704"],
+      "research_status": "reviewed", "confidence": "high",
+      "verified_attributes": ["large-cafe", "multi-floor", "rooftop", "terrace", "late-night", "daily-operation", "near-sinnonhyeon-station", "french-toast", "brulee-style-toast", "truffle-bechamel-toast", "fig-toast", "cream-coffee", "two-bean-options", "decaf", "cakes", "date-friendly", "group-friendly", "no-parking", "premium-pricing"],
+      "ados_editorial_angles": ["신논현에서 밤 11시까지 프렌치토스트와 크림 커피를 두고 약속을 길게 이어갈 수 있는 여러 층 규모의 카페", "초코·프루티 원두를 고른 커피와 푸딩처럼 부드러운 브륄레식 토스트를 루프탑 동선과 함께 즐기는 곳"],
+      "cautions": ["주차 불가", "음료·케이크 가격대가 높은 편", "층별 좌석을 전부 운영하지 않는 시간대가 있을 수 있음", "루프탑·테라스는 날씨와 계절 영향", "주말·저녁 혼잡 가능", "건물 내 층간 이동과 화장실 위치 확인"],
+      "evidence": [{ "url": "https://www.diningcode.com/profile.php?rid=jI75dTxFe9bm", "publisher": "DiningCode", "source_kind": "place-platform", "supports": ["current-operation-2026", "address", "opening-hours", "large-cafe", "multi-floor", "rooftop", "terrace", "late-night", "daily-operation", "near-sinnonhyeon-station", "french-toast", "brulee-style-toast", "truffle-bechamel-toast", "fig-toast", "cream-coffee", "two-bean-options", "decaf", "cakes", "date-friendly", "group-friendly", "no-parking", "premium-pricing"] }, { "url": "https://www.tabling.co.kr/place/677cd30966de5f06988ad3b3", "publisher": "테이블링", "source_kind": "place-platform", "supports": ["current-listing-2026", "address", "opening-hours", "french-toast", "coffee", "takeout", "no-parking"] }, { "url": "https://cafe.ambitstock.com/nonhyeon/cafe/%ED%94%84%EB%9D%BC%ED%85%94%EB%A6%AC/", "publisher": "오늘의 카페", "source_kind": "review-aggregator", "supports": ["current-listing-2026", "near-sinnonhyeon-station", "view-signal", "dessert-cafe"] }]
     }
   ]
 }
