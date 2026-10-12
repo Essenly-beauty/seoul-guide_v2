@@ -15,7 +15,7 @@
     "geography": "Seoul only",
     "record_count": 454,
     "enriched_record_count": 30,
-    "researched_record_count": 400
+    "researched_record_count": 406
   },
   "import_policy": {
     "default_action": "stage_only",
@@ -32144,8 +32144,70 @@
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
       "editorial_context_provenance": null,
-      "canonical_place_id": null,
-      "research_status": "not_researched"
+      "canonical_place_id": "seoul:seocho:cafe-the-black-yangjae",
+      "research_status": "reviewed",
+      "research_confidence": "high",
+      "verified_attributes": [
+        "late-night",
+        "daily-operation-signal",
+        "two-floor",
+        "dark-interior",
+        "cozy",
+        "sofa-seating",
+        "single-person-seating",
+        "work-friendly-signal",
+        "wifi",
+        "salt-cream-latte",
+        "cold-brew",
+        "pain-suisse",
+        "tiramisu",
+        "chocolate-cake",
+        "cheesecake",
+        "date-friendly",
+        "limited-parking",
+        "near-yangjaecheon"
+      ],
+      "ados_editorial_angles": [
+        "양재에서 자정 이후까지 대화를 이어가거나 혼자 노트북을 펼칠 수 있는 드문 심야 카페",
+        "어두운 실내와 2층 소파석에 기대 솔트크림라떼와 초콜릿 계열 디저트를 즐기는 늦은 밤 정류장"
+      ],
+      "research_cautions": [
+        "공식 운영시간은 방문 전 재확인",
+        "간판의 24시간 표기와 실제 새벽 마감 시간이 다를 수 있음",
+        "낮에도 어두운 인테리어라 밝은 작업 환경을 원하는 경우 부적합",
+        "주차는 소수 차량만 가능한 신호",
+        "양재시민의숲역에서 도보 이동 필요",
+        "음료·디저트 가격대가 높은 편"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://www.diningcode.com/profile.php?rid=6i9SZuUtjNtb",
+          "publisher": "DiningCode",
+          "source_kind": "place-platform",
+          "supports": [
+            "current-operation-2026",
+            "address",
+            "opening-hours",
+            "late-night",
+            "daily-operation-signal",
+            "two-floor",
+            "dark-interior",
+            "cozy",
+            "sofa-seating",
+            "single-person-seating",
+            "work-friendly-signal",
+            "wifi",
+            "salt-cream-latte",
+            "cold-brew",
+            "pain-suisse",
+            "tiramisu",
+            "chocolate-cake",
+            "cheesecake",
+            "date-friendly",
+            "limited-parking"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-c6326bf2e7cebadd",
@@ -32177,8 +32239,95 @@
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
       "editorial_context_provenance": null,
-      "canonical_place_id": null,
-      "research_status": "not_researched"
+      "canonical_place_id": "seoul:seocho:five-brewing-bangbae",
+      "research_status": "reviewed",
+      "research_confidence": "high",
+      "verified_attributes": [
+        "specialty-coffee",
+        "brewing-focused",
+        "single-origin",
+        "hand-drip",
+        "bean-guidance",
+        "barista-champion",
+        "coffee-author",
+        "roastery-signal",
+        "piccolo-latte",
+        "decaf-brewing",
+        "premium-coffee",
+        "two-floor",
+        "spacious-seating",
+        "late-evening",
+        "group-seating",
+        "delivery",
+        "parking-available-signal",
+        "near-naebang-station"
+      ],
+      "ados_editorial_angles": [
+        "내방역 주택가에서 바리스타 대회 우승자가 고른 싱글오리진을 설명과 함께 천천히 마시는 브루잉 카페",
+        "저녁 10시까지 넉넉한 2층 좌석에 머물며 피콜로라떼나 디카페인 브루잉까지 취향별로 고르는 곳"
+      ],
+      "research_cautions": [
+        "싱글오리진·트렌디 메뉴 가격대가 높은 편",
+        "원두 라인업과 브루잉 가격은 수시 변동",
+        "주차 가능 대수와 지원 조건 확인",
+        "저녁과 주말 2층 혼잡 가능",
+        "디저트 종류와 재고 확인"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://www.daangn.com/kr/local-profile/%ED%8C%8C%EC%9D%B4%EB%B8%8C%EB%B8%8C%EB%A3%A8%EC%9E%89-zo72ipstb6ka/",
+          "publisher": "당근 동네업체",
+          "source_kind": "business-profile",
+          "supports": [
+            "current-operation-2026",
+            "address",
+            "opening-hours",
+            "specialty-coffee",
+            "brewing-focused",
+            "hand-drip",
+            "piccolo-latte",
+            "decaf-brewing",
+            "premium-coffee",
+            "two-floor",
+            "spacious-seating",
+            "late-evening",
+            "group-seating",
+            "delivery",
+            "parking-available-signal"
+          ]
+        },
+        {
+          "url": "https://www.tel-co.net/cafe/spot/9857",
+          "publisher": "여행의기술",
+          "source_kind": "place-guide",
+          "supports": [
+            "current-listing-2026",
+            "single-origin",
+            "bean-guidance",
+            "decaf-brewing"
+          ]
+        },
+        {
+          "url": "https://seocho.newstool.co.kr/pdf/seocho_202502.pdf",
+          "publisher": "서초구 소식지",
+          "source_kind": "local-publication",
+          "supports": [
+            "barista-champion",
+            "coffee-author",
+            "place-identity"
+          ]
+        },
+        {
+          "url": "https://www.banyantreeclub.com/upload_file/board/newsletter/202012.pdf",
+          "publisher": "반얀트리 클럽 서울",
+          "source_kind": "interview",
+          "supports": [
+            "barista-champion",
+            "coffee-professional",
+            "roastery-signal"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-ddc93edf1430e41d",
@@ -32295,8 +32444,102 @@
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
       "editorial_context_provenance": null,
-      "canonical_place_id": null,
-      "research_status": "not_researched"
+      "canonical_place_id": "seoul:seocho:moscent-yangjae",
+      "research_status": "reviewed",
+      "research_confidence": "high",
+      "verified_attributes": [
+        "specialty-coffee",
+        "hand-drip",
+        "multiple-single-origins",
+        "australian-cappuccino",
+        "flat-white",
+        "french-toast",
+        "near-yangjaecheon",
+        "spacious",
+        "floor-to-ceiling-windows",
+        "window-bar",
+        "quiet-signal",
+        "work-friendly-signal",
+        "reading-friendly",
+        "pet-friendly",
+        "group-seating",
+        "parking-available",
+        "daily-operation",
+        "late-evening"
+      ],
+      "ados_editorial_angles": [
+        "양재천 산책 전후 여러 싱글오리진 핸드드립과 호주식 카푸치노를 골라 마시는 스페셜티 카페",
+        "노을이 드는 통창 바 자리에서 책이나 노트북을 펼치고 프렌치토스트까지 천천히 즐기는 넓은 공간"
+      ],
+      "research_cautions": [
+        "동일 장소로 수집된 두 원문 레코드를 병합",
+        "바리스타에 따라 플랫화이트 맛 편차가 있다는 후기",
+        "프렌치토스트 평가는 취향 차이",
+        "주차 가능 대수와 지원 조건 확인",
+        "반려동물 동반 구역과 규칙 확인",
+        "핸드드립 원두와 가격은 수시 변동"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://www.tabling.co.kr/place/677cd56a66de5f06988f2b73",
+          "publisher": "테이블링",
+          "source_kind": "place-platform",
+          "supports": [
+            "current-operation-2026",
+            "address",
+            "opening-hours",
+            "specialty-coffee",
+            "hand-drip",
+            "multiple-single-origins",
+            "australian-cappuccino",
+            "flat-white",
+            "french-toast",
+            "spacious",
+            "work-friendly-signal",
+            "pet-friendly",
+            "parking-available",
+            "daily-operation",
+            "late-evening"
+          ]
+        },
+        {
+          "url": "https://www.daangn.com/kr/local-profile/%EB%AA%A8%EC%84%BC%ED%8A%B8-%EC%96%91%EC%9E%AC%EC%A0%90-w3wyw76osved/",
+          "publisher": "당근 동네업체",
+          "source_kind": "business-profile",
+          "supports": [
+            "current-listing-2026",
+            "address",
+            "opening-hours",
+            "near-yangjaecheon",
+            "reading-friendly",
+            "group-seating",
+            "parking-available"
+          ]
+        },
+        {
+          "url": "https://www.diningcode.com/profile.php?rid=zQJJdAxlam5y",
+          "publisher": "DiningCode",
+          "source_kind": "place-platform",
+          "supports": [
+            "current-reviews-2026",
+            "floor-to-ceiling-windows",
+            "window-bar",
+            "quiet-signal",
+            "work-friendly-signal",
+            "spacious"
+          ]
+        },
+        {
+          "url": "https://www.albamon.com/jobs/detail/119291477",
+          "publisher": "알바몬",
+          "source_kind": "business-listing",
+          "supports": [
+            "current-business-2026",
+            "address",
+            "specialty-coffee-business"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-989bc812df518894",
@@ -32580,8 +32823,87 @@
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
       "editorial_context_provenance": null,
-      "canonical_place_id": null,
-      "research_status": "not_researched"
+      "canonical_place_id": "seoul:seocho:truffle-hog-yangjae",
+      "research_status": "reviewed",
+      "research_confidence": "medium",
+      "verified_attributes": [
+        "specialty-coffee",
+        "coffee-stand",
+        "in-house-roasting",
+        "fresh-baked-pastries",
+        "early-open-signal",
+        "wild-hog-cream-coffee",
+        "black-sesame-cream-coffee",
+        "single-origin-signal",
+        "decaf-signal",
+        "scones-signal",
+        "basque-cheesecake-signal",
+        "small-space",
+        "cozy",
+        "near-yangjaecheon",
+        "current-business-license-2026"
+      ],
+      "ados_editorial_angles": [
+        "양재 출근길에 직접 로스팅한 커피와 아침에 구운 베이커리를 빠르게 챙기는 작은 커피 스탠드",
+        "구수한 와일드호그 크림커피와 흑임자 크림커피처럼 고소한 향미를 선호할 때 찾는 곳"
+      ],
+      "research_cautions": [
+        "상세 메뉴·영업시간을 확인할 수 있는 공식 채널이 제한적",
+        "약 16평 규모로 좌석이 넉넉하지 않을 수 있음",
+        "크림커피·디저트 정보 일부는 편집형 가이드 기반이라 현장 재확인",
+        "주차 지원 여부 확인",
+        "원두·베이커리 라인업은 당일 변동 가능",
+        "장시간 체류보다 테이크아웃·짧은 방문에 적합"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://cafe.ayo.pe.kr/cafe/6a82a5182d6479c4c6b080f756c6fcd3",
+          "publisher": "카페·빵집 찾기",
+          "source_kind": "public-license-directory",
+          "supports": [
+            "current-business-license-2026",
+            "address",
+            "coffee-shop-license",
+            "small-space",
+            "opening-date"
+          ]
+        },
+        {
+          "url": "https://jobs.daangn.com/job-posts/%EC%96%91%EC%9E%AC%EB%8F%99-%EC%BB%A4%ED%94%BC%EC%8A%A4%ED%83%A0%EB%93%9C-%ED%8A%B8%EB%9F%AC%ED%94%8C%ED%98%B8%EA%B7%B8-%ED%8F%89%EC%9D%BC-%EC%A3%BC%EB%A7%90-%ED%8C%8C%ED%8A%B8%ED%83%80%EC%9E%84-yn6z2ihxqkh9",
+          "publisher": "당근알바",
+          "source_kind": "business-listing",
+          "supports": [
+            "current-operation-2026",
+            "address",
+            "specialty-coffee",
+            "coffee-stand",
+            "in-house-roasting",
+            "fresh-baked-pastries",
+            "early-open-signal"
+          ]
+        },
+        {
+          "url": "https://cafeflex.tistory.com/entry/%EC%84%9C%EC%9A%B8-%EC%96%91%EC%9E%AC%EC%97%AD-%EC%96%91%EC%9E%AC%EC%B2%9C-%EC%B9%B4%ED%8E%98-%EC%B6%94%EC%B2%9C-5%EA%B3%B3",
+          "publisher": "카페플렉스",
+          "source_kind": "editorial-guide",
+          "supports": [
+            "wild-hog-cream-coffee",
+            "black-sesame-cream-coffee",
+            "cozy",
+            "near-yangjaecheon"
+          ]
+        },
+        {
+          "url": "https://seochorowa.co.kr/zone/yangjae-cheon-gil",
+          "publisher": "서초로와",
+          "source_kind": "local-public-directory",
+          "supports": [
+            "current-listing-2026",
+            "address",
+            "cafe-identity"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-a69b2d9d72ff36b1",
@@ -32613,8 +32935,102 @@
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
       "editorial_context_provenance": null,
-      "canonical_place_id": null,
-      "research_status": "not_researched"
+      "canonical_place_id": "seoul:seocho:moscent-yangjae",
+      "research_status": "reviewed",
+      "research_confidence": "high",
+      "verified_attributes": [
+        "specialty-coffee",
+        "hand-drip",
+        "multiple-single-origins",
+        "australian-cappuccino",
+        "flat-white",
+        "french-toast",
+        "near-yangjaecheon",
+        "spacious",
+        "floor-to-ceiling-windows",
+        "window-bar",
+        "quiet-signal",
+        "work-friendly-signal",
+        "reading-friendly",
+        "pet-friendly",
+        "group-seating",
+        "parking-available",
+        "daily-operation",
+        "late-evening"
+      ],
+      "ados_editorial_angles": [
+        "양재천 산책 전후 여러 싱글오리진 핸드드립과 호주식 카푸치노를 골라 마시는 스페셜티 카페",
+        "노을이 드는 통창 바 자리에서 책이나 노트북을 펼치고 프렌치토스트까지 천천히 즐기는 넓은 공간"
+      ],
+      "research_cautions": [
+        "동일 장소로 수집된 두 원문 레코드를 병합",
+        "바리스타에 따라 플랫화이트 맛 편차가 있다는 후기",
+        "프렌치토스트 평가는 취향 차이",
+        "주차 가능 대수와 지원 조건 확인",
+        "반려동물 동반 구역과 규칙 확인",
+        "핸드드립 원두와 가격은 수시 변동"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://www.tabling.co.kr/place/677cd56a66de5f06988f2b73",
+          "publisher": "테이블링",
+          "source_kind": "place-platform",
+          "supports": [
+            "current-operation-2026",
+            "address",
+            "opening-hours",
+            "specialty-coffee",
+            "hand-drip",
+            "multiple-single-origins",
+            "australian-cappuccino",
+            "flat-white",
+            "french-toast",
+            "spacious",
+            "work-friendly-signal",
+            "pet-friendly",
+            "parking-available",
+            "daily-operation",
+            "late-evening"
+          ]
+        },
+        {
+          "url": "https://www.daangn.com/kr/local-profile/%EB%AA%A8%EC%84%BC%ED%8A%B8-%EC%96%91%EC%9E%AC%EC%A0%90-w3wyw76osved/",
+          "publisher": "당근 동네업체",
+          "source_kind": "business-profile",
+          "supports": [
+            "current-listing-2026",
+            "address",
+            "opening-hours",
+            "near-yangjaecheon",
+            "reading-friendly",
+            "group-seating",
+            "parking-available"
+          ]
+        },
+        {
+          "url": "https://www.diningcode.com/profile.php?rid=zQJJdAxlam5y",
+          "publisher": "DiningCode",
+          "source_kind": "place-platform",
+          "supports": [
+            "current-reviews-2026",
+            "floor-to-ceiling-windows",
+            "window-bar",
+            "quiet-signal",
+            "work-friendly-signal",
+            "spacious"
+          ]
+        },
+        {
+          "url": "https://www.albamon.com/jobs/detail/119291477",
+          "publisher": "알바몬",
+          "source_kind": "business-listing",
+          "supports": [
+            "current-business-2026",
+            "address",
+            "specialty-coffee-business"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-03e261b126a0e08f",
@@ -32740,8 +33156,91 @@
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
       "editorial_context_provenance": null,
-      "canonical_place_id": null,
-      "research_status": "not_researched"
+      "canonical_place_id": "seoul:seocho:jansang-roastery-yangjae",
+      "research_status": "reviewed",
+      "research_confidence": "high",
+      "verified_attributes": [
+        "roastery",
+        "specialty-coffee",
+        "hand-drip",
+        "geisha-signal",
+        "two-americano-profiles",
+        "seasonal-brewing",
+        "signature-nut-coffee",
+        "matcha-cream-cold-brew",
+        "valrhona-chocolate",
+        "milk-tea",
+        "earl-grey-orange-cake",
+        "bean-sales",
+        "roasting-consulting",
+        "near-yangjaecheon",
+        "solo-friendly"
+      ],
+      "ados_editorial_angles": [
+        "양재동 골목에서 묵직한 타입과 화사한 타입의 아메리카노를 비교하고 시즌 핸드드립을 고르는 로스터리",
+        "견과류 베이스의 잔상커피나 말차 크림 콜드브루처럼 로스터의 개성이 드러나는 시그니처를 경험하는 곳"
+      ],
+      "research_cautions": [
+        "시즌 브루잉 원두와 가격은 수시 변동",
+        "게이샤 판매 여부와 가격은 방문 전 확인",
+        "시그니처 음료는 견과류·우유·크림 알레르기 확인",
+        "유리잔이 무겁다는 이용 후기",
+        "좌석·주차 조건과 운영시간 재확인",
+        "한성대·행궁동 등 동명 카페와 혼동 주의"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://www.diningcode.com/profile.php?rid=9anmIz9zG65G",
+          "publisher": "DiningCode",
+          "source_kind": "place-platform",
+          "supports": [
+            "current-operation-2026",
+            "address",
+            "roastery",
+            "specialty-coffee",
+            "hand-drip",
+            "two-americano-profiles",
+            "seasonal-brewing",
+            "signature-nut-coffee",
+            "matcha-cream-cold-brew",
+            "valrhona-chocolate",
+            "milk-tea",
+            "earl-grey-orange-cake",
+            "solo-friendly"
+          ]
+        },
+        {
+          "url": "https://pf.kakao.com/_ixohYG",
+          "publisher": "잔상 공식 카카오채널",
+          "source_kind": "official-channel",
+          "supports": [
+            "address",
+            "geisha-signal",
+            "roastery",
+            "specialty-coffee"
+          ]
+        },
+        {
+          "url": "https://www.jansang.co.kr/",
+          "publisher": "로스터리 잔상",
+          "source_kind": "official-site",
+          "supports": [
+            "bean-sales",
+            "in-house-roasting",
+            "roasting-consulting"
+          ]
+        },
+        {
+          "url": "https://dongnecoffeenote.com/c/6133",
+          "publisher": "동네 커피 노트",
+          "source_kind": "review-analysis",
+          "supports": [
+            "current-reviews-2026",
+            "address",
+            "place-identity"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-9c643b37e44b9158",
