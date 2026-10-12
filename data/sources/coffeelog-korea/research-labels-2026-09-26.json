@@ -3147,6 +3147,51 @@
       "ados_editorial_angles": ["신논현에서 밤 11시까지 프렌치토스트와 크림 커피를 두고 약속을 길게 이어갈 수 있는 여러 층 규모의 카페", "초코·프루티 원두를 고른 커피와 푸딩처럼 부드러운 브륄레식 토스트를 루프탑 동선과 함께 즐기는 곳"],
       "cautions": ["주차 불가", "음료·케이크 가격대가 높은 편", "층별 좌석을 전부 운영하지 않는 시간대가 있을 수 있음", "루프탑·테라스는 날씨와 계절 영향", "주말·저녁 혼잡 가능", "건물 내 층간 이동과 화장실 위치 확인"],
       "evidence": [{ "url": "https://www.diningcode.com/profile.php?rid=jI75dTxFe9bm", "publisher": "DiningCode", "source_kind": "place-platform", "supports": ["current-operation-2026", "address", "opening-hours", "large-cafe", "multi-floor", "rooftop", "terrace", "late-night", "daily-operation", "near-sinnonhyeon-station", "french-toast", "brulee-style-toast", "truffle-bechamel-toast", "fig-toast", "cream-coffee", "two-bean-options", "decaf", "cakes", "date-friendly", "group-friendly", "no-parking", "premium-pricing"] }, { "url": "https://www.tabling.co.kr/place/677cd30966de5f06988ad3b3", "publisher": "테이블링", "source_kind": "place-platform", "supports": ["current-listing-2026", "address", "opening-hours", "french-toast", "coffee", "takeout", "no-parking"] }, { "url": "https://cafe.ambitstock.com/nonhyeon/cafe/%ED%94%84%EB%9D%BC%ED%85%94%EB%A6%AC/", "publisher": "오늘의 카페", "source_kind": "review-aggregator", "supports": ["current-listing-2026", "near-sinnonhyeon-station", "view-signal", "dessert-cafe"] }]
+    },
+    {
+      "canonical_place_id": "seoul:gangnam:glyn-gaepo",
+      "member_external_ids": ["coffeelog-a34e25951cb21925"],
+      "research_status": "reviewed", "confidence": "high",
+      "verified_attributes": ["specialty-coffee", "quiet-neighborhood", "near-yangjaecheon", "near-neighborhood-park", "floor-to-ceiling-windows", "monochrome-interior", "plants", "high-end-audio", "bang-and-olufsen", "flat-white", "latte", "espresso", "work-friendly-signal", "pet-friendly-indoor", "group-seating", "wifi", "parking-available", "early-close", "closed-sunday"],
+      "ados_editorial_angles": ["양재천과 개포동 근린공원 사이에서 스페셜티 플랫화이트와 뱅앤올룹슨 음악을 조용히 즐기는 동네 쉼터", "통창과 식물이 있는 차분한 공간에서 반려견과 머물거나 노트북을 펼치기 좋은 평일 낮 카페"],
+      "cautions": ["일요일 정기휴무", "저녁 전에 문을 닫는 이른 마감", "주거지 안쪽이라 대중교통 접근 시간이 필요", "반려동물 실내 동반 규칙 확인", "주차 가능 대수와 조건 확인", "조용한 공간이라 큰 모임에는 분위기 확인"],
+      "evidence": [{ "url": "https://www.tabling.co.kr/restaurant/7696", "publisher": "테이블링", "source_kind": "place-platform", "supports": ["current-operation-2026", "address", "opening-hours", "specialty-coffee", "near-yangjaecheon", "near-neighborhood-park", "high-end-audio", "bang-and-olufsen", "espresso", "flat-white", "pet-friendly-indoor", "group-seating", "wifi", "parking-available", "closed-sunday"] }, { "url": "https://cafehoppers.com/en/seoul/cafe/glyn", "publisher": "Cafe Hoppers", "source_kind": "editorial-guide", "supports": ["current-listing-2026", "quiet-neighborhood", "floor-to-ceiling-windows", "monochrome-interior", "plants", "work-friendly-signal", "pet-friendly-indoor", "flat-white", "latte", "specialty-coffee"] }]
+    },
+    {
+      "canonical_place_id": "seoul:seocho:bonjireureu-sinsa",
+      "member_external_ids": ["coffeelog-99a5925f67417bde", "coffeelog-6952e724fd626f9e"],
+      "research_status": "reviewed", "confidence": "high",
+      "verified_attributes": ["cafe", "near-nonhyeon-station", "bright-daylight", "spacious", "calm-interior", "terrace", "large-table", "work-friendly-signal", "late-night", "bean-choice", "basque-cheesecake", "muffin", "lemon-cake", "takeout", "date-friendly", "solo-friendly"],
+      "ados_editorial_angles": ["논현역 가까이에서 채광 좋은 넓은 좌석과 큰 테이블을 골라 노트북을 펼치는 늦은 오후 카페", "고소한 원두와 산미 있는 원두 중 취향을 고르고 바스크치즈케이크나 레몬케이크를 곁들이며 밤까지 머무는 곳"],
+      "cautions": ["평일과 주말 오픈 시간이 다름", "공휴일 휴무 신호가 있어 방문 전 확인", "주차는 매장 앞·골목 이용 후기가 있으나 공식 지원 조건 확인", "레몬 디저트의 산미와 커피 평가는 취향 차이", "노트북 이용객이 많은 시간대에는 큰 테이블 혼잡 가능", "동일 장소로 수집된 두 원문 레코드를 병합"],
+      "evidence": [{ "url": "https://www.diningcode.com/profile.php?rid=gkvW9XVr4E3e", "publisher": "DiningCode", "source_kind": "place-platform", "supports": ["current-operation-2026", "address", "opening-hours", "bright-daylight", "spacious", "calm-interior", "terrace", "large-table", "work-friendly-signal", "late-night", "bean-choice", "basque-cheesecake", "muffin", "lemon-cake", "takeout", "date-friendly", "solo-friendly"] }, { "url": "https://autoreserve.com/ko/restaurants/TDzwULJ1gW1AethcgBuT", "publisher": "AutoReserve", "source_kind": "reservation-platform", "supports": ["current-listing-2026", "address", "opening-hours", "near-nonhyeon-station", "holiday-closure-signal"] }]
+    },
+    {
+      "canonical_place_id": "seoul:seocho:second-breath-yangjaecheon",
+      "member_external_ids": ["coffeelog-a9a31aee4f38d7d7"],
+      "research_status": "reviewed", "confidence": "high",
+      "verified_attributes": ["yangjaecheon-view", "walk-stop", "quiet", "floor-to-ceiling-window", "window-bar", "outlets", "work-friendly", "pet-friendly-indoor", "parking-available", "specialty-coffee-signal", "einspanner", "condensed-milk-latte", "peanut-latte", "kaya-toast", "tiramisu", "financier", "madeleine", "croffle", "cup-bingsu", "terrace-signal"],
+      "ados_editorial_angles": ["양재천 산책로의 나무를 통창으로 바라보며 창가 콘센트 자리에서 조용히 작업하는 카페", "반려견과 산책한 뒤 카야토스트·아인슈페너·작은 컵빙수 중 하나를 골라 쉬어 가는 양재천 정류장"],
+      "cautions": ["양재역과 양재시민의숲역에서 각각 도보 이동 필요", "반려동물은 목줄·가방 등 매장 규칙 준수", "주차 가능 대수와 지원 시간 확인", "창가 작업석은 한정적", "테라스 이용은 날씨 영향", "시즌 디저트와 빙수 판매 여부 확인"],
+      "evidence": [{ "url": "https://www.diningcode.com/profile.php?rid=YnvRGOkZnM8L", "publisher": "DiningCode", "source_kind": "place-platform", "supports": ["current-operation-2026", "address", "yangjaecheon-view", "walk-stop", "quiet", "floor-to-ceiling-window", "window-bar", "outlets", "work-friendly", "pet-friendly-indoor", "parking-available", "einspanner", "condensed-milk-latte", "peanut-latte", "kaya-toast", "tiramisu", "financier", "madeleine", "croffle", "cup-bingsu", "terrace-signal"] }, { "url": "https://www.gangnamfinds.com/ko/place/sekeonbeureseu", "publisher": "Gangnam Finds", "source_kind": "local-public-guide", "supports": ["current-listing-2026", "specialty-coffee-signal", "kaya-toast", "cafe-identity"] }, { "url": "https://www.foodsafetykorea.go.kr/portal/petKoreaList1.pdf", "publisher": "식품안전나라", "source_kind": "public-directory", "supports": ["address", "pet-friendly-business-listing"] }]
+    },
+    {
+      "canonical_place_id": "seoul:seocho:drunken-bean-nonhyeon",
+      "member_external_ids": ["coffeelog-0954926e0b863a6e"],
+      "research_status": "reviewed", "confidence": "high",
+      "verified_attributes": ["specialty-coffee", "whiskey-aged-coffee", "bourbon-aged-beans", "signature-cold-brew", "cold-brew-bottle", "gift-set", "filter-coffee", "bean-choice", "basque-cheesecake", "new-york-subway-concept", "photo-friendly", "large-complex-space", "terrace", "cafe-and-bar-signal", "live-jazz-signal", "near-nonhyeon-station", "closed-monday-signal"],
+      "ados_editorial_angles": ["버번위스키에 숙성한 스페셜티 생두의 콜드브루로 커피와 위스키 향의 경계를 경험하는 논현 카페", "뉴욕 지하철 개찰구를 닮은 입구부터 사진을 남기고, 낮 카페와 저녁 문화공간의 다른 분위기를 이어 보는 곳"],
+      "cautions": ["시그니처 콜드브루 가격대가 높은 편", "위스키 향미가 있으므로 취향과 알코올 관련 안내 확인", "월요일 휴무 및 운영시간 변동 가능", "카페·바·공연 운영 범위와 층별 이용시간 확인", "라이브 재즈는 특정 요일·시간에만 열릴 수 있음", "발렛·주차 조건 확인"],
+      "evidence": [{ "url": "https://www.diningcode.com/profile.php?rid=ToMeWEFCupe4", "publisher": "DiningCode", "source_kind": "place-platform", "supports": ["current-operation-2026", "address", "specialty-coffee", "whiskey-aged-coffee", "bourbon-aged-beans", "signature-cold-brew", "cold-brew-bottle", "gift-set", "filter-coffee", "bean-choice", "basque-cheesecake", "new-york-subway-concept", "photo-friendly", "terrace", "closed-monday-signal"] }, { "url": "https://nadrilab.com/places/4585b6aa-4ec2-48c7-b33f-6af21d2812a7", "publisher": "나들이랩", "source_kind": "place-guide", "supports": ["current-listing-2026", "large-complex-space", "signature-cold-brew", "family-daytime-signal"] }, { "url": "https://seocho.newstool.co.kr/pdf/seocho_202511.pdf", "publisher": "서초구 소식지", "source_kind": "local-publication", "supports": ["whiskey-aged-coffee", "bourbon-aged-beans", "cafe-and-bar-signal", "live-jazz-signal"] }]
+    },
+    {
+      "canonical_place_id": "seoul:seocho:term-study-room-seocho",
+      "member_external_ids": ["coffeelog-769fc58c2ac225ae"],
+      "research_status": "reviewed_non_cafe", "confidence": "high",
+      "verified_attributes": ["study-room", "private-room", "reservation-required", "meeting-room", "interview-friendly", "tutoring-friendly", "book-club-friendly", "smart-monitor", "unmanned", "daily-operation", "late-night", "free-parking", "complimentary-coffee", "complimentary-tea", "snacks", "near-gyodae-station"],
+      "ados_editorial_angles": ["일반 카페가 아니라 독서모임·과외·온라인 면접을 예약제로 진행하는 서초동 프라이빗 스터디룸", "빈브라더스 커피와 차·간식이 포함된 조용한 방을 시간제로 빌리는 목적형 공간"],
+      "cautions": ["일반 카페 추천 목록에서 제외", "룸 단위 사전 예약과 시간제 결제 필요", "가격과 무료 제공 품목은 예약 시 재확인", "무인 운영이므로 입장 안내 사전 확인", "무료주차 적용 시간과 등록 방식 확인", "커피 품질보다 프라이빗 모임 공간이 핵심"],
+      "evidence": [{ "url": "https://daangn.com/kr/local-profile/%ED%85%80-ncouowjbeah5/", "publisher": "당근 동네업체", "source_kind": "business-profile", "supports": ["current-operation-2026", "address", "opening-hours", "study-room", "private-room", "reservation-required", "meeting-room", "interview-friendly", "tutoring-friendly", "book-club-friendly", "smart-monitor", "unmanned", "daily-operation", "late-night", "free-parking", "complimentary-coffee", "complimentary-tea", "snacks", "near-gyodae-station"] }, { "url": "https://www.placeview.co.kr/id/MTY5NTY1ODczNSAg", "publisher": "플레이스뷰", "source_kind": "business-directory", "supports": ["current-listing-2026", "address", "study-room"] }]
     }
   ]
 }
