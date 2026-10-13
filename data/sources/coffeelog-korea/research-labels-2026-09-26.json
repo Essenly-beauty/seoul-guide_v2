@@ -3345,6 +3345,60 @@
       "ados_editorial_angles": ["당산의 클래식하고 아늑한 실내에서 라떼아트와 부드러운 폼이 살아 있는 커피를 조용히 마시는 곳", "안쪽 좌석에 자리 잡고 맨홀 핸드드립이나 블랙·화이트 크림커피를 취향대로 고르는 동네 카페"],
       "cautions": ["디저트 종류가 적다는 후기 신호", "맨홀 핸드드립과 크림커피 가격대가 높은 편", "반려동물 동반 구역과 규칙 확인", "대관 일정과 단체석 사용 여부 확인", "최신 영업시간·휴무일 확인", "맨홀커피 브랜드 또는 공간과의 관계는 현장 확인"],
       "evidence": [{ "url": "https://www.daangn.com/kr/local-profile/%EB%A7%88%EC%BD%98-frbihet4koxv/", "publisher": "당근 동네업체", "source_kind": "business-profile", "supports": ["current-operation-2026", "address", "classic-interior", "cozy", "quiet-inner-seating", "hand-drip", "manhole-coffee-series", "cream-coffee", "latte-art", "limited-dessert-selection-signal", "pet-friendly", "group-seating", "group-order", "venue-rental", "delivery", "wifi"] }, { "url": "https://www.tabling.co.kr/place/677cd38f66de5f06988bc5f6", "publisher": "테이블링", "source_kind": "place-platform", "supports": ["current-listing-2026", "address", "cafe-identity", "maconcino-signal"] }, { "url": "https://www.siksinhot.com/P/1581089", "publisher": "식신", "source_kind": "place-platform", "supports": ["cream-coffee", "basque-cheesecake-signal", "address"] }]
+    },
+    {
+      "canonical_place_id": "seoul:yeongdeungpo:dusk-blue-dangsan",
+      "member_external_ids": ["coffeelog-44ef162172e023f0"],
+      "research_status": "reviewed", "confidence": "medium",
+      "verified_attributes": ["neighborhood-cafe", "second-floor", "signature-drinks", "dusk-grey", "dusk-latte", "peanut-latte", "osk-signature", "wifi", "pet-friendly", "delivery", "takeout", "takeout-discount", "limited-parking", "near-yeongdeungpo-gu-office-station"],
+      "ados_editorial_angles": ["영등포구청과 당산 사이 2층에서 더스크그레이·더스크라떼처럼 이름부터 분위기가 이어지는 시그니처를 고르는 동네 카페", "반려견과 조용히 머물거나 피넛라떼를 포장해 당산 골목을 걷기 좋은 작은 정류장"],
+      "cautions": ["공개 플랫폼에서 최신 영업시간 확인이 어려워 방문 전 공식 SNS 확인", "건물 앞 주차는 2~3대 수준이며 사전 연락 권장", "2층 진입 동선과 엘리베이터 여부 확인", "반려동물 동반 규칙 확인", "메뉴·가격은 변동 가능", "리뷰 데이터가 상대적으로 적어 현장 재확인 필요"],
+      "evidence": [{ "url": "https://pgpg.co.kr/company/17876", "publisher": "포근포근", "source_kind": "place-directory", "supports": ["current-listing-2026", "address", "second-floor", "signature-drinks", "dusk-grey", "dusk-latte", "peanut-latte", "osk-signature", "wifi", "pet-friendly", "delivery", "takeout", "takeout-discount", "limited-parking"] }, { "url": "https://www.dongnecoffeenote.com/c/22393", "publisher": "동네 커피 노트", "source_kind": "review-analysis", "supports": ["current-reviews-2026", "address", "neighborhood-cafe", "place-identity"] }, { "url": "https://culture.seoul.go.kr/culture/cmmn/file/fileDown.do?atchFileId=6b9f3fdce32048e4b1c0009f2adbf026&bbsId=&fileSn=1&menuNo=200050", "publisher": "서울문화포털", "source_kind": "local-publication", "supports": ["local-workplace-cafe-listing", "yeongdeungpo-identity"] }]
+    },
+    {
+      "canonical_place_id": "seoul:yeongdeungpo:lowther-mullae",
+      "member_external_ids": ["coffeelog-863dbeae7f7e416c"],
+      "research_status": "reviewed", "confidence": "high",
+      "verified_attributes": ["large-cafe", "high-ceiling", "former-climbing-gym", "design-house-interior", "spacious", "quiet-acoustics-signal", "work-friendly", "introduction-friendly", "latte", "gateau", "cheesecake", "mugwort-injeolmi-gateau", "pet-friendly", "wifi", "takeout", "daily-operation", "late-evening", "no-parking"],
+      "ados_editorial_angles": ["옛 클라이밍 센터의 높은 층고를 살린 디자인 하우스 같은 공간에서 좌석마다 다른 분위기를 고르는 문래 대형 카페", "말차·쑥인절미 갸또와 깔끔한 커피를 두고 작업하거나 소개팅 대화를 이어가기 좋은 곳"],
+      "cautions": ["주차 불가", "소개팅·주말 방문객이 몰릴 수 있음", "강한 냉방에 대한 후기 신호", "반려동물 동반 규칙 확인", "디저트 재고와 시즌 라인업 변동", "높은 층고지만 특정 시간대 대화 소음 가능"],
+      "evidence": [{ "url": "https://www.tabling.co.kr/place/68c7eca3919474fb3e532839", "publisher": "테이블링", "source_kind": "place-platform", "supports": ["current-operation-2026", "address", "opening-hours", "large-cafe", "high-ceiling", "former-climbing-gym", "latte", "gateau", "cheesecake", "pet-friendly", "takeout", "daily-operation", "late-evening", "no-parking"] }, { "url": "https://www.daangn.com/kr/local-profile/%EB%A1%9C%EC%9A%B0%EB%8D%94-%EB%AC%B8%EB%9E%98-3maqmsmiinjp/", "publisher": "당근 동네업체", "source_kind": "business-profile", "supports": ["current-listing-2026", "address", "design-house-interior", "spacious", "high-ceiling", "pet-friendly"] }, { "url": "https://www.diningcode.com/profile.php?rid=txXTs0sqW4Ie", "publisher": "DiningCode", "source_kind": "place-platform", "supports": ["current-reviews-2026", "quiet-acoustics-signal", "work-friendly", "introduction-friendly", "mugwort-injeolmi-gateau", "wifi", "cooling-caution"] }]
+    },
+    {
+      "canonical_place_id": "seoul:yeongdeungpo:no-burden-dangsan",
+      "member_external_ids": ["coffeelog-92de13261d9a2548"],
+      "research_status": "reviewed", "confidence": "high",
+      "verified_attributes": ["dessert-cafe", "cozy", "warm-interior", "matcha-latte", "pet-friendly", "large-dog-friendly-signal", "weekday-early-open", "weekend-late-open", "late-evening", "second-floor", "near-yeongdeungpo-gu-office-station", "no-parking"],
+      "ados_editorial_angles": ["영등포구청역 근처 따뜻하고 코지한 2층 공간에서 말차라떼와 디저트를 즐기는 동네 카페", "대형견도 크기 제한 없이 동반할 수 있다는 신호가 있어 반려견 산책 뒤 쉬어가기 좋은 곳"],
+      "cautions": ["주차 불가·영등포구청 별관 유료주차장 이용 신호", "평일과 주말 오픈 시간이 다름", "대형견 포함 반려동물은 목줄 등 매장 규칙 확인", "2층 진입 동선과 엘리베이터 여부 확인", "최신 디저트 라인업과 영업시간 재확인"],
+      "evidence": [{ "url": "https://www.diningcode.com/profile.php?rid=x2ujJCAHwU2E", "publisher": "DiningCode", "source_kind": "place-platform", "supports": ["current-operation-2026", "address", "opening-hours", "dessert-cafe", "cozy", "warm-interior", "matcha-latte", "pet-friendly", "weekday-early-open", "weekend-late-open", "late-evening", "second-floor", "near-yeongdeungpo-gu-office-station", "no-parking"] }, { "url": "https://pettriplife.com/place/828", "publisher": "펫트립라이프", "source_kind": "pet-friendly-directory", "supports": ["current-listing-2026", "address", "pet-friendly", "large-dog-friendly-signal", "leash-rule-signal"] }]
+    },
+    {
+      "canonical_place_id": "seoul:yeongdeungpo:heavy-rotate-dorim",
+      "member_external_ids": ["coffeelog-968a976f027e8533"],
+      "research_status": "reviewed", "confidence": "high",
+      "verified_attributes": ["roastery", "in-house-roasting", "single-origin", "filter-coffee", "fig-leaf-latte", "coconut-note", "leche-cremosa", "pink-affogato", "heavy-latte", "flat-white", "cappuccino", "decaf", "white-chocolate-latte", "distinctive-lighting", "date-friendly", "daily-operation-signal", "evening-close"],
+      "ados_editorial_angles": ["도림동에서 직접 로스팅한 싱글오리진과 무화과잎 에센스의 피그라떼를 경험하는 개성 강한 커피 바", "묽은 크림과 라떼의 균형을 살린 레체크레모사나 핑크 아포가토를 조명 아래 천천히 즐기는 데이트 카페"],
+      "cautions": ["낮 12시 30분부터 여는 늦은 오픈", "필터커피 원두 라인업과 가격은 수시 변동", "무화과잎·코코넛·우유 등 알레르기와 향미 취향 확인", "주차 정보 확인", "좌석 규모와 반려동물 동반 여부 확인", "영업시간과 휴무는 최신 공지 재확인"],
+      "evidence": [{ "url": "https://www.diningcode.com/profile.php?rid=t2xJoE1F1vBy", "publisher": "DiningCode", "source_kind": "place-platform", "supports": ["current-operation-2026", "address", "opening-hours", "roastery", "in-house-roasting", "single-origin", "filter-coffee", "fig-leaf-latte", "coconut-note", "leche-cremosa", "pink-affogato", "heavy-latte", "flat-white", "cappuccino", "decaf", "white-chocolate-latte", "date-friendly", "daily-operation-signal", "evening-close"] }, { "url": "https://pearlk.kr/product/pearl-napkin-lamp-matte/12/", "publisher": "PEARL", "source_kind": "design-supplier", "supports": ["address", "distinctive-lighting", "interior-object"] }, { "url": "https://www.foodsafetykorea.go.kr/portal/20260314_pet.pdf", "publisher": "식품안전나라", "source_kind": "public-directory", "supports": ["current-business-listing-2026", "address", "cafe-license-signal"] }]
+    },
+    {
+      "canonical_place_id": "seoul:gwangjin:index-shop-common-ground",
+      "member_external_ids": ["coffeelog-97ea43afc54796ce"],
+      "research_status": "reviewed_mixed_retail", "confidence": "high",
+      "verified_attributes": ["curated-bookstore", "book-cafe", "photo-books", "independent-publishing", "coffee", "tea", "common-ground", "third-floor", "near-konkuk-university-station", "reading-friendly", "cultural-space", "seoul-photo-festival-participant-2026"],
+      "ados_editorial_angles": ["커먼그라운드 3층에서 독립출판물과 사진책을 고른 뒤 커피를 곁들여 읽는 큐레이션 서점형 북카페", "건대 쇼핑 동선 사이에 책가도를 둘러보고 서울사진축제 연계 공간으로 방문하기 좋은 문화 정류장"],
+      "cautions": ["일반 카페보다 서점·문화공간 정체성이 강함", "커먼그라운드 건물 운영시간과 휴무 확인", "도서 열람·촬영 규칙 확인", "카페 메뉴와 좌석 규모는 현장 재확인", "행사 기간에는 공간 구성과 이용 가능 좌석 변동", "쇼핑몰 주차 요금과 지원 조건 확인"],
+      "evidence": [{ "url": "https://www.placeview.co.kr/id/NTAxNzQxNzUw", "publisher": "플레이스뷰", "source_kind": "business-directory", "supports": ["current-listing-2026", "address", "book-cafe", "coffee", "tea", "common-ground"] }, { "url": "https://cafe.ambitstock.com/kondae/cafe/%EC%9D%B8%EB%8D%B1%EC%8A%A4%EC%88%8D/", "publisher": "오늘의 카페", "source_kind": "review-aggregator", "supports": ["current-listing-2026", "third-floor", "near-konkuk-university-station", "reading-friendly", "coffee-specialty-signal"] }, { "url": "https://english.seoul.go.kr/wp-content/uploads/2026/04/SeoulPhotoFestival_Leafleat.pdf", "publisher": "서울특별시", "source_kind": "official-event-guide", "supports": ["seoul-photo-festival-participant-2026", "photo-books", "cultural-space", "gwangjin"] }, { "url": "https://two-chairs.com/resources/images/common/2021-9%C2%B710.pdf", "publisher": "TWO CHAIRS", "source_kind": "editorial-publication", "supports": ["curated-bookstore", "independent-publishing", "book-cafe", "common-ground", "reading-friendly"] }]
+    },
+    {
+      "canonical_place_id": "seoul:gwangjin:yeonpil-gunja",
+      "member_external_ids": ["coffeelog-1c88f88e402e7210"],
+      "research_status": "reviewed", "confidence": "high",
+      "verified_attributes": ["specialty-coffee", "filter-coffee", "hand-drip", "bean-aroma-sampling", "bean-guidance", "geisha-signal", "quiet-rule", "small-space", "bar-seating", "music-focused", "bonui-chestnut", "chestnut-tiramisu", "scones-signal", "weekday-reading-friendly", "weekend-laptop-ban", "pet-friendly-signal", "takeout", "parking-conflict-signal", "near-gunja-station"],
+      "ados_editorial_angles": ["군자에서 원두 향을 먼저 맡고 설명을 들은 뒤 뉘앙스가 선명한 필터커피를 조용히 음미하는 목적형 카페", "소근소근한 대화와 음악에 집중하는 공간에서 보늬밤이나 밤 티라미수를 커피와 페어링하는 곳"],
+      "cautions": ["조용한 대화 규칙 준수", "주말·공휴일 노트북과 태블릿 사용 불가", "작은 공간이라 오후 만석 가능", "서비스 속도가 느릴 수 있다는 후기", "보늬밤 등 인기 디저트 주문 조건·재고 확인", "주차 가능 표기와 매장 앞 주차 불가 안내가 엇갈려 대중교통 권장", "휴무일은 인스타그램 최신 공지 확인"],
+      "evidence": [{ "url": "https://polle.com/place/4PVoTQ/%EC%97%B0%ED%95%84", "publisher": "Polle", "source_kind": "place-platform", "supports": ["current-reviews-2026", "address", "specialty-coffee", "filter-coffee", "hand-drip", "bean-aroma-sampling", "bean-guidance", "geisha-signal", "quiet-rule", "small-space", "bar-seating", "bonui-chestnut", "chestnut-tiramisu", "weekend-laptop-ban", "pet-friendly-signal", "takeout", "parking-available-signal"] }, { "url": "https://dongnecoffeenote.com/c/5608", "publisher": "동네 커피 노트", "source_kind": "review-analysis", "supports": ["current-reviews-2026", "coffee-quality-signal", "photo-friendly", "quiet-signal", "scones-signal"] }, { "url": "https://app.daytrip.io/ko/space/63101813325def3f53ff803f/daylog/63974b54b58f4eefaff2d288", "publisher": "DayTrip", "source_kind": "place-guide", "supports": ["address", "opening-hours-signal", "music-focused", "weekday-reading-friendly", "weekend-laptop-ban", "parking-unavailable-signal", "official-instagram"] }]
     }
   ]
 }
