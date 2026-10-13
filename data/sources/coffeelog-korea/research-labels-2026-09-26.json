@@ -3237,6 +3237,60 @@
       "ados_editorial_angles": ["양재동 골목에서 묵직한 타입과 화사한 타입의 아메리카노를 비교하고 시즌 핸드드립을 고르는 로스터리", "견과류 베이스의 잔상커피나 말차 크림 콜드브루처럼 로스터의 개성이 드러나는 시그니처를 경험하는 곳"],
       "cautions": ["시즌 브루잉 원두와 가격은 수시 변동", "게이샤 판매 여부와 가격은 방문 전 확인", "시그니처 음료는 견과류·우유·크림 알레르기 확인", "유리잔이 무겁다는 이용 후기", "좌석·주차 조건과 운영시간 재확인", "한성대·행궁동 등 동명 카페와 혼동 주의"],
       "evidence": [{ "url": "https://www.diningcode.com/profile.php?rid=9anmIz9zG65G", "publisher": "DiningCode", "source_kind": "place-platform", "supports": ["current-operation-2026", "address", "roastery", "specialty-coffee", "hand-drip", "two-americano-profiles", "seasonal-brewing", "signature-nut-coffee", "matcha-cream-cold-brew", "valrhona-chocolate", "milk-tea", "earl-grey-orange-cake", "solo-friendly"] }, { "url": "https://pf.kakao.com/_ixohYG", "publisher": "잔상 공식 카카오채널", "source_kind": "official-channel", "supports": ["address", "geisha-signal", "roastery", "specialty-coffee"] }, { "url": "https://www.jansang.co.kr/", "publisher": "로스터리 잔상", "source_kind": "official-site", "supports": ["bean-sales", "in-house-roasting", "roasting-consulting"] }, { "url": "https://dongnecoffeenote.com/c/6133", "publisher": "동네 커피 노트", "source_kind": "review-analysis", "supports": ["current-reviews-2026", "address", "place-identity"] }]
+    },
+    {
+      "canonical_place_id": "seoul:seocho:contio-jamwon",
+      "member_external_ids": ["coffeelog-f1596991b849ba39"],
+      "research_status": "reviewed", "confidence": "medium",
+      "verified_attributes": ["spanish-style-coffee", "con-leche", "manchada", "signature-latte", "strawberry-einspanner-signal", "matcha-latte", "cinnamon-latte", "book-cafe-signal", "warm-atmosphere", "owner-philosophy-signal", "near-nonhyeon-station", "relocation-signal", "monthly-closure-signal"],
+      "ados_editorial_angles": ["논현역과 신사역 사이에서 콘레체·만차다처럼 프랜차이즈에서 보기 드문 스페인식 커피를 고르는 카페", "따뜻한 분위기와 책이 있는 공간에서 운영자의 커피 철학을 느끼며 천천히 머무는 동네 카페"],
+      "cautions": ["양재동 언남길과 잠원동 신반포로 주소가 함께 노출되어 이전 여부와 현재 주소 확인 필수", "정기휴무가 매달 1일이라는 신호와 플랫폼 휴무 표시가 달라 방문 전 확인", "시즌 생딸기 메뉴는 상시 판매가 아닐 수 있음", "주차 정보 확인", "이전 전후 공간 사진과 후기가 섞였을 수 있음"],
+      "evidence": [{ "url": "https://www.diningcode.com/profile.php?rid=z7mZ6Cf15rhQ", "publisher": "DiningCode", "source_kind": "place-platform", "supports": ["current-operation-2026", "current-address-signal", "near-nonhyeon-station", "book-cafe-signal", "spanish-style-coffee", "monthly-closure-signal"] }, { "url": "https://www.daangn.com/kr/local-profile/%EC%BD%98%EB%9D%A0%EC%98%A4-contio-hpn6pkdzn3a9/", "publisher": "당근 동네업체", "source_kind": "business-profile", "supports": ["current-activity-2026", "former-address-signal", "relocation-signal", "con-leche", "manchada", "strawberry-einspanner-signal", "matcha-latte", "cinnamon-latte", "warm-atmosphere", "owner-philosophy-signal"] }]
+    },
+    {
+      "canonical_place_id": "seoul:seocho:simon-yangjaecheon",
+      "member_external_ids": ["coffeelog-7d77d125e9f6011a"],
+      "research_status": "reviewed", "confidence": "high",
+      "verified_attributes": ["dessert-cafe", "near-yangjaecheon", "terrine", "cakes", "cookies", "cube-latte", "drip-coffee", "signature-drink-sanho", "pet-friendly", "parking-available-signal", "takeout", "closed-monday", "late-evening"],
+      "ados_editorial_angles": ["양재천 산책 뒤 테린느와 드립커피를 차분하게 곁들이는 디저트 카페", "반려견과 함께 큐브라떼나 시그니처 음료를 마시며 밤 10시까지 쉬어 가는 동네 정류장"],
+      "cautions": ["월요일 정기휴무", "메뉴 가격이 플랫폼에 0원으로 표시되어 현장 가격 확인", "반려동물 동반 구역과 규칙 확인", "주차 가능 대수와 지원 조건 확인", "테린느·케이크 재고는 늦은 시간 품절 가능"],
+      "evidence": [{ "url": "https://www.tabling.co.kr/place/677cd1f566de5f069888d98a", "publisher": "테이블링", "source_kind": "place-platform", "supports": ["current-operation-2026", "address", "opening-hours", "dessert-cafe", "terrine", "cakes", "cookies", "cube-latte", "drip-coffee", "signature-drink-sanho", "pet-friendly", "parking-available-signal", "takeout", "closed-monday", "late-evening"] }]
+    },
+    {
+      "canonical_place_id": "seoul:yeongdeungpo:lostone-daerim",
+      "member_external_ids": ["coffeelog-e2c66d4c35f7e47f"],
+      "research_status": "reviewed", "confidence": "high",
+      "verified_attributes": ["large-cafe", "multi-floor", "approximately-150-pyeong", "architect-designed", "sloped-floor", "stone-installation", "specialty-coffee", "in-house-roasting", "loring-roaster", "multiple-beans", "hand-drip", "geisha-signal", "bakery", "animal-cream-cake", "seasonal-bingsu", "elevator", "family-friendly", "late-night", "limited-parking", "near-daerim-station"],
+      "ados_editorial_angles": ["대림역 골목에서 기울어진 바닥과 거대한 돌 조형을 층마다 경험하는 건축 목적형 대형 로스터리 카페", "직접 로스팅한 스페셜티 커피와 동물성 생크림 케이크·계절 빙수를 밤늦게까지 함께 즐기는 곳"],
+      "cautions": ["경사진 바닥·벌어진 계단·미끄러운 층계참에 대한 안전 후기 있어 어린이·노약자 주의", "건물 주차 가능 대수가 적어 인근 공영주차장 고려", "금·토 및 공휴일 전날 운영시간이 다를 수 있음", "대형 공간이지만 주말 혼잡 가능", "게이샤·계절 과일 디저트 가격대가 높은 편", "엘리베이터 운행 범위 확인"],
+      "evidence": [{ "url": "https://www.daangn.com/kr/local-profile/%EB%A1%9C%EC%8A%A4%ED%86%A4-we4irk6anmwc/", "publisher": "당근 동네업체", "source_kind": "business-profile", "supports": ["current-operation-2026", "address", "opening-hours", "large-cafe", "approximately-150-pyeong", "architect-designed", "specialty-coffee", "in-house-roasting", "loring-roaster", "bakery", "animal-cream-cake", "seasonal-bingsu", "wifi"] }, { "url": "https://www.diningcode.com/profile.php?rid=K8uzIey1mfhz", "publisher": "DiningCode", "source_kind": "place-platform", "supports": ["current-reviews-2026", "multi-floor", "sloped-floor", "stone-installation", "multiple-beans", "hand-drip", "geisha-signal", "elevator", "family-friendly", "late-night", "limited-parking", "near-daerim-station"] }]
+    },
+    {
+      "canonical_place_id": "seoul:yeongdeungpo:loft-house-ground-mullae",
+      "member_external_ids": ["coffeelog-1187fae00be512f1"],
+      "research_status": "reviewed", "confidence": "high",
+      "verified_attributes": ["dessert-cafe", "mullae", "meringue-roulade", "fresh-fruit-dessert", "pavlova-signal", "caramelized-brioche", "ice-cream-dessert", "chocolate-crunch-brioche", "einspanner", "cold-brew-crunch", "group-seating", "late-evening", "weekend-waiting-signal", "new-cafe-2026"],
+      "ados_editorial_angles": ["문래 골목에서 생과일 머랭 롤라드와 파블로바처럼 가볍고 선명한 식감의 디저트를 커피와 맞추는 곳", "카라멜라이즈드 브리오슈와 아이스크림을 두고 저녁까지 대화를 이어가는 신상 디저트 카페"],
+      "cautions": ["주말 웨이팅 가능", "머랭·생과일 디저트는 당일 재고와 계절에 따라 변동", "주차 정보 확인", "2026년 신상 매장으로 운영시간과 메뉴가 안정화 중일 수 있음", "단체석 이용 가능 여부는 혼잡도에 따라 확인"],
+      "evidence": [{ "url": "https://www.daangn.com/kr/local-profile/%EB%A1%9C%ED%94%84%ED%8A%B8%ED%95%98%EC%9A%B0%EC%8A%A4-%EA%B7%B8%EB%9D%BC%EC%9A%B4%EB%93%9C-5ys8spofu9p4/", "publisher": "당근 동네업체", "source_kind": "business-profile", "supports": ["current-operation-2026", "address", "opening-hours", "dessert-cafe", "mullae", "meringue-roulade", "fresh-fruit-dessert", "pavlova-signal", "caramelized-brioche", "ice-cream-dessert", "chocolate-crunch-brioche", "einspanner", "cold-brew-crunch", "group-seating", "late-evening", "weekend-waiting-signal"] }, { "url": "https://www.ndex.kr/data/dananayee", "publisher": "엔덱스", "source_kind": "blog-index", "supports": ["current-review-2026", "new-cafe-2026", "mullae", "dessert-focus"] }]
+    },
+    {
+      "canonical_place_id": "seoul:yeongdeungpo:woodstone-yeouido",
+      "member_external_ids": ["coffeelog-ea3d5babbb0bcc74"],
+      "research_status": "reviewed", "confidence": "high",
+      "verified_attributes": ["specialty-coffee-roaster", "office-lobby-cafe", "near-national-assembly-station", "near-kbs", "early-open-weekday", "weekday-lunch", "weekend-operation", "stone-latte", "affordable-coffee", "egg-tart", "salt-bread-signal", "soft-serve-signal", "single-person-seating", "window-seating", "group-seating", "wheelchair-accessible-signal", "takeout", "workday-focused"],
+      "ados_editorial_angles": ["서여의도 출근길 KBS 맞은편 로비에서 합리적인 가격의 스페셜티 커피를 빠르게 챙기는 직장인 카페", "점심시간에는 달고 부드러운 스톤라떼를, 한산한 주말에는 책과 함께 조용히 쉬어 가는 국회의사당역 정류장"],
+      "cautions": ["평일과 주말 영업시간 차이가 큼", "평일 점심시간 혼잡 가능", "건물 로비형 개방 공간이라 독립된 카페 분위기와 다름", "주차 가능 표기와 주차 불가 후기가 엇갈려 건물 주차 조건 확인", "주말 운영 여부와 라스트오더 재확인", "휠체어 접근성의 세부 동선 확인"],
+      "evidence": [{ "url": "https://www.daangn.com/kr/local-profile/%EC%9A%B0%EB%93%9C%EC%8A%A4%ED%86%A4-%EC%97%AC%EC%9D%98%EB%8F%84-8rbzvk1bosub/", "publisher": "당근 동네업체", "source_kind": "business-profile", "supports": ["current-operation-2026", "address", "opening-hours", "office-lobby-cafe", "near-kbs", "early-open-weekday", "single-person-seating", "window-seating", "group-seating", "wheelchair-accessible-signal", "takeout", "parking-available-signal"] }, { "url": "https://www.diningcode.com/profile.php?rid=cyMOQtBWALSS", "publisher": "DiningCode", "source_kind": "place-platform", "supports": ["current-reviews-2026", "near-national-assembly-station", "weekday-lunch", "weekend-operation", "stone-latte", "affordable-coffee", "egg-tart", "salt-bread-signal", "soft-serve-signal", "parking-unavailable-signal"] }, { "url": "https://linktr.ee/woodstone.coffee", "publisher": "우드스톤", "source_kind": "official-link-hub", "supports": ["specialty-coffee-roaster", "official-branch", "wholesale-coffee"] }]
+    },
+    {
+      "canonical_place_id": "seoul:yeongdeungpo:pyeonghwa-mullae",
+      "member_external_ids": ["coffeelog-bbb2c3c7a7ba35e6"],
+      "research_status": "reviewed", "confidence": "high",
+      "verified_attributes": ["cafe-and-wine-bar", "mullae-creative-village", "hidden-alley", "retro-interior", "espresso-bar-daytime", "wine-bar-evening", "house-wine", "sangria", "beer", "late-night", "date-friendly", "dark-interior", "small-space", "no-parking-signal"],
+      "ados_editorial_angles": ["문래창작촌 골목에서 낮의 에스프레소 바가 저녁 7시 이후 와인 바로 바뀌는 흐름을 따라 오래 머무는 데이트 장소", "레트로하고 어두운 공간에서 커피로 시작해 하우스 와인이나 상그리아로 자연스럽게 넘어가는 곳"],
+      "cautions": ["저녁에는 카페보다 와인 바 성격이 강함", "주소가 도림로131길 13과 영등포구 관광자료의 도림로133길 10으로 엇갈려 최신 위치 확인", "어둡고 좁다는 후기가 있어 시야가 불편한 방문객 주의", "메뉴판 글씨가 작다는 후기", "화장실 상태에 대한 부정적 후기 신호", "주차 불가 신호", "요일별 심야 마감 시간이 다를 수 있음"],
+      "evidence": [{ "url": "https://harugot.com/rank/yeongdeungpo/cafe/", "publisher": "하루곳", "source_kind": "editorial-guide", "supports": ["current-operation-2026", "mullae-creative-village", "hidden-alley", "espresso-bar-daytime", "wine-bar-evening", "house-wine", "sangria", "date-friendly"] }, { "url": "https://polle.com/place/4MBfCo/%ED%8F%89%ED%99%94", "publisher": "Polle", "source_kind": "place-platform", "supports": ["current-reviews-2026", "address-signal", "cafe-and-wine-bar", "beer", "dark-interior", "small-space", "no-parking-signal", "facility-caution"] }, { "url": "https://www.ydp.go.kr/DATA/download/tour/cts4018_file13.pdf", "publisher": "영등포구", "source_kind": "local-tourism-guide", "supports": ["official-local-listing", "mullae", "address-conflict-signal", "cafe-identity"] }, { "url": "https://kr.trip.com/moments/detail/seoul-234-13875498/", "publisher": "트립닷컴", "source_kind": "travel-platform", "supports": ["opening-hours-historic", "late-night", "mullae", "cafe-identity"] }]
     }
   ]
 }
