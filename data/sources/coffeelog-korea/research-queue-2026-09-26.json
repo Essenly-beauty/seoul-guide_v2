@@ -3,8 +3,8 @@
   "generated_on": "2026-09-26",
   "caution": "이 파일은 전수 조사 큐다. 추정 필드는 공개용 태그가 아니며 사람 또는 출처 검토가 필요하다.",
   "summary": {
-    "done_or_pending_specific_check": 412,
-    "p3_general_review": 42
+    "done_or_pending_specific_check": 418,
+    "p3_general_review": 36
   },
   "records": [
     {
@@ -3823,8 +3823,8 @@
       "normalized_name": "로프트하우스 (문래)",
       "possible_duplicate_external_ids": [],
       "content_kind_guess": "cafe_candidate",
-      "research_priority": "p3_general_review",
-      "current_research_status": "not_researched"
+      "research_priority": "done_or_pending_specific_check",
+      "current_research_status": "reviewed"
     },
     {
       "external_id": "coffeelog-8507632d437ee6e9",
@@ -3843,8 +3843,8 @@
       "normalized_name": "킵댓 여의도점",
       "possible_duplicate_external_ids": [],
       "content_kind_guess": "cafe_candidate",
-      "research_priority": "p3_general_review",
-      "current_research_status": "not_researched"
+      "research_priority": "done_or_pending_specific_check",
+      "current_research_status": "reviewed"
     },
     {
       "external_id": "coffeelog-94841577efc2a348",
@@ -3853,8 +3853,8 @@
       "normalized_name": "폰트",
       "possible_duplicate_external_ids": [],
       "content_kind_guess": "cafe_candidate",
-      "research_priority": "p3_general_review",
-      "current_research_status": "not_researched"
+      "research_priority": "done_or_pending_specific_check",
+      "current_research_status": "reviewed"
     },
     {
       "external_id": "coffeelog-65101c1e3b00702e",
@@ -3863,8 +3863,8 @@
       "normalized_name": "스틸바이트 문래",
       "possible_duplicate_external_ids": [],
       "content_kind_guess": "cafe_candidate",
-      "research_priority": "p3_general_review",
-      "current_research_status": "not_researched"
+      "research_priority": "done_or_pending_specific_check",
+      "current_research_status": "reviewed"
     },
     {
       "external_id": "coffeelog-000380d2534eff5c",
@@ -3873,8 +3873,8 @@
       "normalized_name": "리브레리",
       "possible_duplicate_external_ids": [],
       "content_kind_guess": "cafe_candidate",
-      "research_priority": "p3_general_review",
-      "current_research_status": "not_researched"
+      "research_priority": "done_or_pending_specific_check",
+      "current_research_status": "reviewed"
     },
     {
       "external_id": "coffeelog-7465799e6656ad00",
@@ -3883,8 +3883,8 @@
       "normalized_name": "마콘",
       "possible_duplicate_external_ids": [],
       "content_kind_guess": "cafe_candidate",
-      "research_priority": "p3_general_review",
-      "current_research_status": "not_researched"
+      "research_priority": "done_or_pending_specific_check",
+      "current_research_status": "reviewed"
     },
     {
       "external_id": "coffeelog-44ef162172e023f0",

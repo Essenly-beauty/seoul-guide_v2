@@ -15,7 +15,7 @@
     "geography": "Seoul only",
     "record_count": 454,
     "enriched_record_count": 30,
-    "researched_record_count": 412
+    "researched_record_count": 418
   },
   "import_policy": {
     "default_action": "stage_only",
@@ -34164,8 +34164,69 @@
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
       "editorial_context_provenance": null,
-      "canonical_place_id": null,
-      "research_status": "not_researched"
+      "canonical_place_id": "seoul:yeongdeungpo:loft-house-mullae",
+      "research_status": "reviewed",
+      "research_confidence": "high",
+      "verified_attributes": [
+        "large-cafe",
+        "multi-floor",
+        "rooftop",
+        "panoramic-windows",
+        "exposed-concrete",
+        "wood-interior",
+        "plants",
+        "mullae-creative-village",
+        "photo-friendly",
+        "outlets",
+        "work-friendly-signal",
+        "decaf-cold-brew",
+        "desserts",
+        "late-evening",
+        "group-friendly",
+        "no-parking",
+        "popular-crowding-signal"
+      ],
+      "ados_editorial_angles": [
+        "문래창작촌 초입에서 노출 콘크리트와 우드톤, 넓은 창의 파노라마 풍경을 층별로 즐기는 공간형 카페",
+        "선선한 날 루프탑에 올라가고 실내 콘센트 자리에서는 잠깐 충전하거나 작업을 이어가는 저녁 카페"
+      ],
+      "research_cautions": [
+        "주차 불가",
+        "주말·저녁 만석과 웨이팅 가능",
+        "루프탑은 날씨와 계절 영향",
+        "노출 콘크리트 분위기는 취향 차이",
+        "셀프 주문 동선과 응대에 대한 엇갈린 후기",
+        "인접한 로프트하우스 그라운드와 별도 매장"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://www.diningcode.com/profile.php?rid=6DoNnUhp4wTr",
+          "publisher": "DiningCode",
+          "source_kind": "place-platform",
+          "supports": [
+            "current-operation-2026",
+            "address",
+            "opening-hours",
+            "large-cafe",
+            "multi-floor",
+            "rooftop",
+            "panoramic-windows",
+            "exposed-concrete",
+            "wood-interior",
+            "plants",
+            "mullae-creative-village",
+            "photo-friendly",
+            "outlets",
+            "work-friendly-signal",
+            "decaf-cold-brew",
+            "desserts",
+            "late-evening",
+            "group-friendly",
+            "no-parking",
+            "popular-crowding-signal"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-8507632d437ee6e9",
@@ -34259,8 +34320,86 @@
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
       "editorial_context_provenance": null,
-      "canonical_place_id": null,
-      "research_status": "not_researched"
+      "canonical_place_id": "seoul:yeongdeungpo:keep-that-yeouido",
+      "research_status": "reviewed",
+      "research_confidence": "high",
+      "verified_attributes": [
+        "specialty-coffee-signal",
+        "office-building-cafe",
+        "early-open",
+        "late-evening",
+        "weekday-lunch-crowd",
+        "filter-coffee",
+        "flat-white",
+        "einspanner",
+        "cold-brew",
+        "signature-latte",
+        "vanilla-ice-cream-latte-signal",
+        "apple-crumble",
+        "spacious",
+        "work-friendly-off-peak",
+        "group-seating",
+        "delivery",
+        "parking-available-signal",
+        "near-yeouido-station"
+      ],
+      "ados_editorial_angles": [
+        "여의도 출근 전 필터커피를 고르거나 퇴근 후까지 플랫화이트를 마실 수 있는 오피스 빌딩 카페",
+        "점심 피크를 비켜 쾌적한 좌석에서 아이스크림이 녹아드는 바닐라라떼와 애플크럼블을 즐기는 곳"
+      ],
+      "research_cautions": [
+        "평일 점심시간 직장인 혼잡으로 작업 집중이 어려울 수 있음",
+        "주차 가능 여부와 지원 조건 확인",
+        "바닐라라떼는 충분히 저어 먹는 메뉴 신호",
+        "가격대가 일반 오피스 카페보다 높은 편",
+        "영업시간과 주말 운영 여부 확인",
+        "건물 내 정확한 출입 동선 확인"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://www.daangn.com/kr/local-profile/%ED%82%B5%EB%8C%93-%EC%97%AC%EC%9D%98%EB%8F%84%EC%A0%90-teqta2a9d4bn/",
+          "publisher": "당근 동네업체",
+          "source_kind": "business-profile",
+          "supports": [
+            "current-operation-2026",
+            "address",
+            "opening-hours",
+            "early-open",
+            "late-evening",
+            "filter-coffee",
+            "flat-white",
+            "einspanner",
+            "signature-latte",
+            "group-seating",
+            "delivery",
+            "parking-available-signal"
+          ]
+        },
+        {
+          "url": "https://polle.com/place/3F5Jyp/%ED%82%B5%EB%8C%93",
+          "publisher": "Polle",
+          "source_kind": "place-platform",
+          "supports": [
+            "current-reviews-2026",
+            "office-building-cafe",
+            "weekday-lunch-crowd",
+            "cold-brew",
+            "apple-crumble",
+            "spacious",
+            "work-friendly-off-peak"
+          ]
+        },
+        {
+          "url": "https://naknak.app/spots/kr-seoul-keep-that-yeouido",
+          "publisher": "낙낙",
+          "source_kind": "place-guide",
+          "supports": [
+            "vanilla-ice-cream-latte-signal",
+            "address",
+            "place-identity"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-94841577efc2a348",
@@ -34292,8 +34431,86 @@
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
       "editorial_context_provenance": null,
-      "canonical_place_id": null,
-      "research_status": "not_researched"
+      "canonical_place_id": "seoul:yeongdeungpo:pont-mullae",
+      "research_status": "reviewed",
+      "research_confidence": "high",
+      "verified_attributes": [
+        "specialty-coffee-signal",
+        "single-origin",
+        "drip-coffee",
+        "oat-latte",
+        "vanilla-latte",
+        "bakery",
+        "clean-interior",
+        "vintage-ceiling",
+        "photo-friendly",
+        "quiet-signal",
+        "seating-available",
+        "work-unfriendly-table-signal",
+        "parking-available-signal",
+        "near-sindorim-station",
+        "mullae"
+      ],
+      "ados_editorial_angles": [
+        "문래의 거친 골목 분위기와 대비되는 깔끔한 실내에서 과일 향 싱글오리진 드립과 오트라떼를 고르는 카페",
+        "빈티지한 천장과 절제된 소품을 배경으로 사진을 남기고 베이커리를 곁들이는 신도림 쪽 문래 산책 코스"
+      ],
+      "research_cautions": [
+        "테이블이 작업에 편하지 않다는 후기 신호",
+        "주차 가능 여부와 실제 공간·지원 조건 확인",
+        "용산점 등 다른 지점과 혼동 주의",
+        "좌석 수와 주말 혼잡도 확인",
+        "최신 영업시간을 공식 채널에서 재확인"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://polle.com/place/1jNbBK/%ED%8F%B0%ED%8A%B8",
+          "publisher": "Polle",
+          "source_kind": "place-platform",
+          "supports": [
+            "current-listing-2026",
+            "address",
+            "bakery",
+            "clean-interior",
+            "seating-available",
+            "work-unfriendly-table-signal",
+            "mullae"
+          ]
+        },
+        {
+          "url": "https://wombat30.tistory.com/m/57",
+          "publisher": "개인 방문기",
+          "source_kind": "visit-review",
+          "supports": [
+            "single-origin",
+            "drip-coffee",
+            "oat-latte",
+            "specialty-coffee-signal"
+          ]
+        },
+        {
+          "url": "https://leicagopro.tistory.com/888",
+          "publisher": "개인 방문기",
+          "source_kind": "visit-review",
+          "supports": [
+            "address",
+            "vanilla-latte",
+            "bakery",
+            "vintage-ceiling",
+            "clean-interior",
+            "parking-available-signal"
+          ]
+        },
+        {
+          "url": "https://ccydp.kr/ydp_brand_new.pdf",
+          "publisher": "문화도시 영등포",
+          "source_kind": "local-publication",
+          "supports": [
+            "local-place-listing",
+            "pont-mullae-identity"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-65101c1e3b00702e",
@@ -34325,8 +34542,107 @@
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
       "editorial_context_provenance": null,
-      "canonical_place_id": null,
-      "research_status": "not_researched"
+      "canonical_place_id": "seoul:yeongdeungpo:steel-byte-mullae",
+      "research_status": "reviewed",
+      "research_confidence": "high",
+      "verified_attributes": [
+        "roastery",
+        "specialty-coffee",
+        "in-house-roasting",
+        "single-origin",
+        "filter-coffee",
+        "two-blend-options",
+        "bean-aroma-sampling",
+        "bite-latte",
+        "bite-cream-latte",
+        "flat-white",
+        "einspanner",
+        "bean-sales",
+        "wholesale",
+        "early-open",
+        "work-friendly-signal",
+        "wifi",
+        "pet-friendly",
+        "group-order",
+        "venue-rental",
+        "parking-available-signal",
+        "metal-interior"
+      ],
+      "ados_editorial_angles": [
+        "문래 철공소 골목의 메탈 인테리어 안에서 원두 향을 먼저 맡고 싱글오리진 필터커피를 고르는 로스터리",
+        "직접 로스팅한 원두와 블렌딩 우유가 만나는 바이트 크림 라떼로 아침이나 작업 중간을 채우는 곳"
+      ],
+      "research_cautions": [
+        "저녁보다 아침·낮 중심의 운영시간",
+        "반려동물 동반 구역과 규칙 확인",
+        "주차 가능 대수와 지원 조건 확인",
+        "대관 일정이 있을 수 있어 단체 방문 전 문의",
+        "원두와 필터커피 라인업은 수시 변동",
+        "공간 리뉴얼 후 좌석 배치가 후기 사진과 다를 수 있음"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://www.daangn.com/kr/local-profile/%EC%8A%A4%ED%8B%B8%EB%B0%94%EC%9D%B4%ED%8A%B8-3u63gdpo6fg6/",
+          "publisher": "당근 동네업체",
+          "source_kind": "business-profile",
+          "supports": [
+            "current-operation-2026",
+            "address",
+            "opening-hours",
+            "roastery",
+            "specialty-coffee",
+            "in-house-roasting",
+            "single-origin",
+            "filter-coffee",
+            "two-blend-options",
+            "bean-aroma-sampling",
+            "bite-latte",
+            "bite-cream-latte",
+            "flat-white",
+            "einspanner",
+            "bean-sales",
+            "early-open",
+            "wifi",
+            "pet-friendly",
+            "group-order",
+            "venue-rental",
+            "parking-available-signal"
+          ]
+        },
+        {
+          "url": "https://sdy1717.tistory.com/213?category=1303901",
+          "publisher": "한입 반 노트",
+          "source_kind": "visit-review",
+          "supports": [
+            "current-review-2026",
+            "metal-interior",
+            "roastery",
+            "single-origin",
+            "bite-cream-latte",
+            "parking-available-signal"
+          ]
+        },
+        {
+          "url": "https://biz.koke.kr/sellers/steelbyte",
+          "publisher": "코케비즈",
+          "source_kind": "wholesale-platform",
+          "supports": [
+            "address",
+            "bean-sales",
+            "wholesale",
+            "custom-blend"
+          ]
+        },
+        {
+          "url": "https://cafemap.online/magazine/mullae-kagong",
+          "publisher": "CafeMap",
+          "source_kind": "review-analysis",
+          "supports": [
+            "work-friendly-signal",
+            "mullae"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-000380d2534eff5c",
@@ -34358,8 +34674,79 @@
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
       "editorial_context_provenance": null,
-      "canonical_place_id": null,
-      "research_status": "not_researched"
+      "canonical_place_id": "seoul:yeongdeungpo:librairie-yeongdeungpo-gu-office",
+      "research_status": "reviewed",
+      "research_confidence": "high",
+      "verified_attributes": [
+        "book-cafe",
+        "late-night",
+        "midnight-close",
+        "work-friendly",
+        "laptop-friendly",
+        "quiet-signal",
+        "comfortable-seating",
+        "honey-cake",
+        "scones",
+        "vanilla-latte",
+        "orange-punch",
+        "pet-friendly",
+        "reservation",
+        "takeout",
+        "no-parking",
+        "solo-friendly",
+        "date-friendly",
+        "near-yeongdeungpo-gu-office-station"
+      ],
+      "ados_editorial_angles": [
+        "영등포구청역에서 자정까지 책을 읽거나 노트북 작업을 이어갈 수 있는 늦은 밤 북카페",
+        "편안한 의자에 앉아 꿀케이크나 스콘을 곁들이며 혼자 오래 머물기 좋은 당산의 카페"
+      ],
+      "research_cautions": [
+        "주차 불가",
+        "반려동물 동반 구역과 규칙 확인",
+        "노트북 이용객이 몰리는 시간에는 좌석 부족 가능",
+        "주말은 평일보다 일찍 여는 대신 혼잡할 수 있음",
+        "예약 적용 범위와 이용 시간 확인",
+        "자정 마감 및 라스트오더 변동 가능"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://www.tabling.co.kr/place/677cd1bc66de5f069888750f",
+          "publisher": "테이블링",
+          "source_kind": "place-platform",
+          "supports": [
+            "current-operation-2026",
+            "address",
+            "opening-hours",
+            "book-cafe",
+            "late-night",
+            "midnight-close",
+            "laptop-friendly",
+            "honey-cake",
+            "scones",
+            "vanilla-latte",
+            "orange-punch",
+            "pet-friendly",
+            "reservation",
+            "takeout",
+            "no-parking"
+          ]
+        },
+        {
+          "url": "https://www.diningcode.com/profile.php?rid=AKmOl3ceILZC",
+          "publisher": "DiningCode",
+          "source_kind": "place-platform",
+          "supports": [
+            "current-reviews-2026",
+            "work-friendly",
+            "quiet-signal",
+            "comfortable-seating",
+            "solo-friendly",
+            "date-friendly",
+            "near-yeongdeungpo-gu-office-station"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-7465799e6656ad00",
@@ -34391,8 +34778,85 @@
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
       "editorial_context_provenance": null,
-      "canonical_place_id": null,
-      "research_status": "not_researched"
+      "canonical_place_id": "seoul:yeongdeungpo:macon-dangsan",
+      "research_status": "reviewed",
+      "research_confidence": "high",
+      "verified_attributes": [
+        "classic-interior",
+        "cozy",
+        "quiet-inner-seating",
+        "hand-drip",
+        "manhole-coffee-series",
+        "cream-coffee",
+        "latte-art",
+        "basque-cheesecake-signal",
+        "limited-dessert-selection-signal",
+        "pet-friendly",
+        "group-seating",
+        "group-order",
+        "venue-rental",
+        "delivery",
+        "wifi",
+        "near-dangsan-station"
+      ],
+      "ados_editorial_angles": [
+        "당산의 클래식하고 아늑한 실내에서 라떼아트와 부드러운 폼이 살아 있는 커피를 조용히 마시는 곳",
+        "안쪽 좌석에 자리 잡고 맨홀 핸드드립이나 블랙·화이트 크림커피를 취향대로 고르는 동네 카페"
+      ],
+      "research_cautions": [
+        "디저트 종류가 적다는 후기 신호",
+        "맨홀 핸드드립과 크림커피 가격대가 높은 편",
+        "반려동물 동반 구역과 규칙 확인",
+        "대관 일정과 단체석 사용 여부 확인",
+        "최신 영업시간·휴무일 확인",
+        "맨홀커피 브랜드 또는 공간과의 관계는 현장 확인"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://www.daangn.com/kr/local-profile/%EB%A7%88%EC%BD%98-frbihet4koxv/",
+          "publisher": "당근 동네업체",
+          "source_kind": "business-profile",
+          "supports": [
+            "current-operation-2026",
+            "address",
+            "classic-interior",
+            "cozy",
+            "quiet-inner-seating",
+            "hand-drip",
+            "manhole-coffee-series",
+            "cream-coffee",
+            "latte-art",
+            "limited-dessert-selection-signal",
+            "pet-friendly",
+            "group-seating",
+            "group-order",
+            "venue-rental",
+            "delivery",
+            "wifi"
+          ]
+        },
+        {
+          "url": "https://www.tabling.co.kr/place/677cd38f66de5f06988bc5f6",
+          "publisher": "테이블링",
+          "source_kind": "place-platform",
+          "supports": [
+            "current-listing-2026",
+            "address",
+            "cafe-identity",
+            "maconcino-signal"
+          ]
+        },
+        {
+          "url": "https://www.siksinhot.com/P/1581089",
+          "publisher": "식신",
+          "source_kind": "place-platform",
+          "supports": [
+            "cream-coffee",
+            "basque-cheesecake-signal",
+            "address"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-44ef162172e023f0",
