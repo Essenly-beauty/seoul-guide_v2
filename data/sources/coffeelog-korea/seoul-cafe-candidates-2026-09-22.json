@@ -15,7 +15,7 @@
     "geography": "Seoul only",
     "record_count": 454,
     "enriched_record_count": 30,
-    "researched_record_count": 424
+    "researched_record_count": 430
   },
   "import_policy": {
     "default_action": "stage_only",
@@ -36228,8 +36228,72 @@
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
       "editorial_context_provenance": null,
-      "canonical_place_id": null,
-      "research_status": "not_researched"
+      "canonical_place_id": "seoul:gwangjin:iwlt-seoul-neungdong",
+      "research_status": "reviewed",
+      "research_confidence": "high",
+      "verified_attributes": [
+        "coffee",
+        "almond-au-lait",
+        "matcha-au-lait",
+        "scones",
+        "lp-music",
+        "large-windows",
+        "quiet-signal",
+        "work-friendly-signal",
+        "terrace",
+        "takeout",
+        "near-achasan-station",
+        "parking-unavailable"
+      ],
+      "ados_editorial_angles": [
+        "아차산 산책 뒤 통창과 LP 음악이 있는 골목 카페에서 아몬드오레와 스콘으로 쉬어가는 코스",
+        "군자·능동에서 비교적 조용한 분위기 속 혼자 작업하거나 차를 마시기 좋은 곳"
+      ],
+      "research_cautions": [
+        "주말에는 웨이팅과 테이블 공유 가능성",
+        "낮은 테이블 좌석이 있어 장시간 작업 좌석은 제한적",
+        "매장 주변 주차가 어려워 대중교통 권장",
+        "가격과 휴무일은 최신 공지 확인"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://www.diningcode.com/profile.php?rid=1n2MKWGq0hWk",
+          "publisher": "다이닝코드",
+          "source_kind": "place-platform",
+          "supports": [
+            "current-reviews-2026",
+            "address",
+            "hours",
+            "almond-au-lait",
+            "matcha-au-lait",
+            "quiet-signal",
+            "terrace",
+            "takeout"
+          ]
+        },
+        {
+          "url": "https://polle.com/place/1qDx6j/%EC%95%84%EC%9D%B4%EB%8D%94%EB%B8%94%EB%A3%A8%EC%97%98%ED%8B%B0%20%EC%84%9C%EC%9A%B8",
+          "publisher": "Polle",
+          "source_kind": "place-platform",
+          "supports": [
+            "address",
+            "scones",
+            "work-friendly-signal",
+            "quiet-signal",
+            "parking-unavailable"
+          ]
+        },
+        {
+          "url": "https://kucafe.co.kr/",
+          "publisher": "건대카페",
+          "source_kind": "local-guide",
+          "supports": [
+            "lp-music",
+            "large-windows",
+            "concept-cafe"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-93d74f8991871847",
@@ -36261,8 +36325,74 @@
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
       "editorial_context_provenance": null,
-      "canonical_place_id": null,
-      "research_status": "not_researched"
+      "canonical_place_id": "seoul:gwangjin:ansineon-kondae",
+      "research_status": "reviewed",
+      "research_confidence": "high",
+      "verified_attributes": [
+        "specialty-coffee",
+        "filter-coffee",
+        "seasonal-beans",
+        "international-roasters-signal",
+        "seasonal-desserts",
+        "french-toast",
+        "custard-pudding",
+        "pavlova",
+        "tiramisu",
+        "takeout",
+        "delivery",
+        "near-konkuk-university-station",
+        "parking-unavailable"
+      ],
+      "ados_editorial_angles": [
+        "건대에서 계절마다 바뀌는 필터커피와 해외 로스터 원두를 디저트에 맞춰 고르는 커피 목적지",
+        "프렌치토스트·파블로바·밤푸딩처럼 계절감 있는 디저트로 약속을 구체화하기 좋은 곳"
+      ],
+      "research_cautions": [
+        "계절 메뉴와 원두 라인업은 수시 변경",
+        "인기 디저트 재고 확인",
+        "주차 불가로 인근 공영주차장 이용",
+        "평일과 주말 영업 시작 시간이 다를 수 있어 확인 필요"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://www.diningcode.com/profile.php?rid=GD2GecrYUZIG",
+          "publisher": "다이닝코드",
+          "source_kind": "place-platform",
+          "supports": [
+            "current-listing-2026",
+            "address",
+            "hours",
+            "filter-coffee",
+            "seasonal-beans",
+            "international-roasters-signal",
+            "french-toast",
+            "custard-pudding",
+            "pavlova",
+            "tiramisu",
+            "takeout",
+            "delivery",
+            "parking-unavailable"
+          ]
+        },
+        {
+          "url": "https://www.dongnecoffeenote.com/c/5601",
+          "publisher": "동네 커피 노트",
+          "source_kind": "review-analysis",
+          "supports": [
+            "current-reviews-2026",
+            "coffee-quality-signal"
+          ]
+        },
+        {
+          "url": "https://kucafe.co.kr/",
+          "publisher": "건대카페",
+          "source_kind": "local-guide",
+          "supports": [
+            "international-coffee-signal",
+            "meringue-cake-signal"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-40b81db9cbd4a634",
@@ -36294,8 +36424,60 @@
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
       "editorial_context_provenance": null,
-      "canonical_place_id": null,
-      "research_status": "not_researched"
+      "canonical_place_id": "seoul:gwangjin:blacksmith-jayang",
+      "research_status": "reviewed",
+      "research_confidence": "medium",
+      "verified_attributes": [
+        "cafe",
+        "dessert",
+        "tiramisu",
+        "geisha-coffee-signal",
+        "near-konkuk-university-station",
+        "jayang-neighborhood"
+      ],
+      "ados_editorial_angles": [
+        "자양동 골목에서 게이샤 커피를 활용한 치즈 티라미수를 찾아가는 디저트 중심 카페",
+        "건대의 번화한 메인 동선에서 한 블록 벗어나 커피와 티라미수로 쉬어가는 곳"
+      ],
+      "research_cautions": [
+        "메뉴·영업시간·좌석 정보가 제한적이므로 방문 전 확인",
+        "동명 프랜차이즈 및 타 업종과 혼동 주의",
+        "게이샤 원두 사용 방식과 티라미수 재고 현장 확인"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://www.placeview.co.kr/id/MTUzOTI4Mzk2NSAg",
+          "publisher": "플레이스뷰",
+          "source_kind": "business-directory",
+          "supports": [
+            "current-listing-2026",
+            "address",
+            "cafe",
+            "phone"
+          ]
+        },
+        {
+          "url": "https://ramyselect.com/restaurants/blacksmith-jayang",
+          "publisher": "라미셀렉트",
+          "source_kind": "menu-directory",
+          "supports": [
+            "current-listing-2026",
+            "address",
+            "dessert",
+            "tiramisu",
+            "geisha-coffee-signal"
+          ]
+        },
+        {
+          "url": "https://www.50plus.or.kr/upload/im/2025/10/8f801dd1-e967-4eae-91e6-34e97be1d9a2.pdf",
+          "publisher": "서울시50플러스재단",
+          "source_kind": "public-expense-record",
+          "supports": [
+            "operating-signal-2025",
+            "address"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-cc031d6f1c095d62",
@@ -36816,8 +36998,76 @@
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
       "editorial_context_provenance": null,
-      "canonical_place_id": null,
-      "research_status": "not_researched"
+      "canonical_place_id": "seoul:gangdong:aiao-seongnae",
+      "research_status": "reviewed",
+      "research_confidence": "high",
+      "verified_attributes": [
+        "coffee",
+        "cream-latte",
+        "milk-tea",
+        "tea-selection",
+        "baked-desserts",
+        "mid-century-modern",
+        "colorful-interior",
+        "terrace",
+        "pet-friendly",
+        "group-friendly",
+        "near-gangdong-station",
+        "parking-limited"
+      ],
+      "ados_editorial_angles": [
+        "강풀만화거리 산책 뒤 1960년대 미드센추리 색감과 테라스를 즐기며 크림라떼를 마시는 카페",
+        "반려견과 함께 차·스콘·테린느까지 고를 수 있어 취향이 다른 일행과 만나기 좋은 성내동 공간"
+      ],
+      "research_cautions": [
+        "휴무일 정보가 출처별로 엇갈려 최신 공지 확인",
+        "전용 주차 공간이 적어 만차 시 공영주차장 이용",
+        "반려동물 동반 규칙과 좌석 범위 확인",
+        "디저트는 늦은 시간 품절 가능"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://www.tabling.co.kr/place/677ccff366de5f0698852cf1",
+          "publisher": "테이블링",
+          "source_kind": "reservation-platform",
+          "supports": [
+            "current-listing-2026",
+            "address",
+            "hours-signal",
+            "pet-friendly",
+            "parking-signal",
+            "tea-selection",
+            "baked-desserts"
+          ]
+        },
+        {
+          "url": "https://www.diningcode.com/profile.php?rid=izxN0G7gu4vI",
+          "publisher": "다이닝코드",
+          "source_kind": "place-platform",
+          "supports": [
+            "current-reviews-2026",
+            "address",
+            "cream-latte",
+            "mid-century-modern",
+            "terrace",
+            "group-friendly",
+            "pet-friendly",
+            "parking-limited"
+          ]
+        },
+        {
+          "url": "https://woori1025.tistory.com/138",
+          "publisher": "냠냠일기",
+          "source_kind": "recent-visit-review",
+          "supports": [
+            "visited-2026",
+            "mid-century-modern",
+            "colorful-interior",
+            "pet-friendly",
+            "parking-limited"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-0e3417186a355bca",
@@ -36944,8 +37194,55 @@
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
       "editorial_context_provenance": null,
-      "canonical_place_id": null,
-      "research_status": "not_researched"
+      "canonical_place_id": "seoul:gangdong:untold-seongnae",
+      "research_status": "needs_source_review",
+      "research_confidence": "low",
+      "verified_attributes": [
+        "cafe-listing",
+        "small-space",
+        "pet-friendly-listing",
+        "near-cheonho-station",
+        "seongnae-neighborhood"
+      ],
+      "ados_editorial_angles": [
+        "성내동의 작은 골목 카페 후보로, 반려동물 동반 가능 여부와 실제 커피·베이커리 구성을 확인한 뒤 소개할 곳"
+      ],
+      "research_cautions": [
+        "현재 운영 여부와 공식 채널 확인 필요",
+        "메뉴·영업시간·공간 특징에 대한 신뢰도 높은 자료 부족",
+        "반려동물 동반 조건은 방문 전 문의",
+        "ADoS 공개 추천 전 현장 또는 공식 정보 재검증 필요"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://dining.ayo.pe.kr/restaurant/0c830c9cdc74f7136b54543d41b228e4",
+          "publisher": "전국 음식점 정보",
+          "source_kind": "public-data-aggregator",
+          "supports": [
+            "public-record-2026",
+            "address",
+            "small-space"
+          ]
+        },
+        {
+          "url": "https://www.siksinhot.com/P/1831953",
+          "publisher": "식신",
+          "source_kind": "place-directory",
+          "supports": [
+            "cafe-listing",
+            "address"
+          ]
+        },
+        {
+          "url": "https://www.anipass.co.kr/www/32",
+          "publisher": "애니패스",
+          "source_kind": "pet-friendly-directory",
+          "supports": [
+            "pet-friendly-listing",
+            "address"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-646f48998a1e0da4",
@@ -37339,8 +37636,80 @@
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
       "editorial_context_provenance": null,
-      "canonical_place_id": null,
-      "research_status": "not_researched"
+      "canonical_place_id": "seoul:gangdong:damgeum-seongnae",
+      "research_status": "reviewed",
+      "research_confidence": "high",
+      "verified_attributes": [
+        "italian-bar",
+        "specialty-coffee",
+        "espresso",
+        "espresso-con-panna",
+        "handmade-gelato",
+        "low-sugar-gelato",
+        "seasonal-fruit",
+        "italian-brunch",
+        "sandwiches",
+        "pasta",
+        "natural-light",
+        "terrace",
+        "pet-friendly",
+        "large-dog-friendly-by-reservation",
+        "near-olympic-park",
+        "parking"
+      ],
+      "ados_editorial_angles": [
+        "올림픽공원 산책 전후 에스프레소 콘파냐와 저당 수제 젤라또를 이탈리안 바처럼 즐기는 곳",
+        "브런치부터 아페리티보까지 이어져 반려견 동반 주말 약속을 한 장소에서 해결하기 좋은 성내동 카페"
+      ],
+      "research_cautions": [
+        "평일·주말 영업시간과 휴무일 확인",
+        "대형견 동반은 예약 및 요청사항 기재 권장",
+        "테이블 간격이 좁다는 후기",
+        "이탈리아 정부 인증 표현의 구체적 인증 범위는 추가 확인",
+        "계절 젤라또와 브런치 메뉴는 변동 가능"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://english.visitkorea.or.kr/svc/contents/contentsView.do?vcontsId=194216",
+          "publisher": "한국관광공사",
+          "source_kind": "official-tourism-guide",
+          "supports": [
+            "address",
+            "hours",
+            "italian-bar",
+            "espresso",
+            "espresso-con-panna",
+            "handmade-gelato",
+            "italian-brunch"
+          ]
+        },
+        {
+          "url": "https://damgeum.com/",
+          "publisher": "담금",
+          "source_kind": "official-website",
+          "supports": [
+            "current-brand-site-2026",
+            "low-sugar-gelato",
+            "seasonal-fruit",
+            "italian-bar",
+            "near-olympic-park"
+          ]
+        },
+        {
+          "url": "https://ban-life.com/store/view?id=20188&type=s",
+          "publisher": "반려생활",
+          "source_kind": "pet-friendly-platform",
+          "supports": [
+            "current-listing-2026",
+            "address",
+            "pet-friendly",
+            "large-dog-friendly-by-reservation",
+            "parking",
+            "group-seating",
+            "hours-signal"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-2311fc924c13e338",
