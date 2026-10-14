@@ -3453,6 +3453,60 @@
       "ados_editorial_angles": ["올림픽공원 산책 전후 에스프레소 콘파냐와 저당 수제 젤라또를 이탈리안 바처럼 즐기는 곳", "브런치부터 아페리티보까지 이어져 반려견 동반 주말 약속을 한 장소에서 해결하기 좋은 성내동 카페"],
       "cautions": ["평일·주말 영업시간과 휴무일 확인", "대형견 동반은 예약 및 요청사항 기재 권장", "테이블 간격이 좁다는 후기", "이탈리아 정부 인증 표현의 구체적 인증 범위는 추가 확인", "계절 젤라또와 브런치 메뉴는 변동 가능"],
       "evidence": [{ "url": "https://english.visitkorea.or.kr/svc/contents/contentsView.do?vcontsId=194216", "publisher": "한국관광공사", "source_kind": "official-tourism-guide", "supports": ["address", "hours", "italian-bar", "espresso", "espresso-con-panna", "handmade-gelato", "italian-brunch"] }, { "url": "https://damgeum.com/", "publisher": "담금", "source_kind": "official-website", "supports": ["current-brand-site-2026", "low-sugar-gelato", "seasonal-fruit", "italian-bar", "near-olympic-park"] }, { "url": "https://ban-life.com/store/view?id=20188&type=s", "publisher": "반려생활", "source_kind": "pet-friendly-platform", "supports": ["current-listing-2026", "address", "pet-friendly", "large-dog-friendly-by-reservation", "parking", "group-seating", "hours-signal"] }]
+    },
+    {
+      "canonical_place_id": "seoul:seodaemun:wood-cottage-yeonhui",
+      "member_external_ids": ["coffeelog-cc3b41df11e862fc"],
+      "research_status": "reviewed", "confidence": "medium",
+      "verified_attributes": ["cafe-bar", "converted-house", "cozy-interior", "toast", "jeonnamchin-toast", "yeonhui-neighborhood", "second-floor-signal"],
+      "ados_editorial_angles": ["연희동의 주택 개조 공간에서 재치 있는 ‘전남친 토스트’를 목적 삼아 들르는 카페 겸 바", "낮은 담장과 오래된 집을 따라 걷는 연희 산책에 아늑한 실내와 간단한 음식을 더하는 정류장"],
+      "cautions": ["주소가 공식 관광 페이지 내 구간별로 다르게 노출되어 방문 전 지도 재확인", "영업시간·바 운영 시간·주류 메뉴 확인", "좌석과 주차 정보 추가 확인 필요"],
+      "evidence": [{ "url": "https://korean.visitseoul.net/editorspicks/2026-Yeonhuilife/KONzsug0p", "publisher": "서울관광재단", "source_kind": "official-tourism-editorial", "supports": ["featured-2026", "yeonhui-neighborhood", "converted-house", "cafe-bar", "jeonnamchin-toast"] }, { "url": "https://stage-kr.visitseoul.net/editorspicks/2026-Yeonhuilife/KONzsug0p", "publisher": "서울관광재단", "source_kind": "official-tourism-editorial-staging", "supports": ["featured-2026", "address-signal", "jeonnamchin-toast"] }, { "url": "https://place.udanax.org/p/875305/%EC%9A%B0%EB%93%9C%EC%BD%94%ED%8B%B0%EC%A7%80", "publisher": "업체창고", "source_kind": "business-directory", "supports": ["cafe-listing", "cozy-interior", "yeonhui-neighborhood"] }]
+    },
+    {
+      "canonical_place_id": "seoul:seodaemun:tumus-yeonhui",
+      "member_external_ids": ["coffeelog-a0468adcc0b373cf"],
+      "research_status": "reviewed", "confidence": "high",
+      "verified_attributes": ["hand-drip", "seasonal-desserts", "butter-apple-pie", "matcha-basque-cheesecake", "tarts", "roll-cake", "large-space", "work-friendly", "power-outlets", "sofa-seating", "group-friendly", "second-floor", "takeout", "parking-unavailable"],
+      "ados_editorial_angles": ["연희동에서 넓은 테이블과 콘센트, 창가 소파를 골라 오래 집중하기 좋은 2층 작업 카페", "핸드드립과 버터 애플파이·말차 바스크치즈케이크 등 계절 디저트를 함께 고르는 곳"],
+      "cautions": ["시험 기간과 오후에는 작업 손님으로 혼잡 가능", "음료 단맛에 대한 취향 차이 후기", "주차 불가", "계절 디저트와 가격은 변동 가능"],
+      "evidence": [{ "url": "https://polle.com/place/202kC9/%ED%85%80%EC%96%B4%EC%8A%A4", "publisher": "Polle", "source_kind": "place-platform", "supports": ["current-reviews-2026", "address", "hand-drip", "seasonal-desserts", "large-space", "work-friendly", "power-outlets", "sofa-seating", "group-friendly", "second-floor", "takeout", "parking-unavailable"] }]
+    },
+    {
+      "canonical_place_id": "seoul:seodaemun:chocolatique-yeonhui",
+      "member_external_ids": ["coffeelog-b7456fa5bdf8e70d"],
+      "research_status": "reviewed_mixed_retail", "confidence": "high",
+      "verified_attributes": ["artisan-chocolate-shop", "one-person-workshop", "handmade-chocolate", "bonbons", "fondant-au-chocolat", "orangettes", "chocolate-sandwich", "salted-caramel", "spiced-chocolate", "gift-friendly", "takeout-focused", "small-space", "no-seating-signal", "parking-unavailable", "yeonhui-neighborhood"],
+      "ados_editorial_angles": ["연희동 골목의 간판 없는 1인 초콜릿 공방에서 향신료 봉봉과 오랑제뜨를 골라 선물하는 곳", "커피 약속보다 산책 중 작은 수제 초콜릿 상자를 포장해 가는 목적에 맞는 디저트 숍"],
+      "cautions": ["일반 카페보다 테이크아웃 초콜릿 전문점 정체성이 강함", "매장이 작고 앉아서 먹는 좌석이 없다는 최신 후기", "쓴맛이 강한 제품이 있어 취향을 설명하고 추천받기", "월요일 휴무·품절 마감 확인", "주차 불가"],
+      "evidence": [{ "url": "https://love.seoul.go.kr/articles/10532", "publisher": "서울사랑", "source_kind": "official-city-editorial", "supports": ["featured-2026", "artisan-chocolate-shop", "hidden-storefront", "spiced-chocolate", "yeonhui-neighborhood"] }, { "url": "https://www.esquirekorea.co.kr/eee/1557", "publisher": "에스콰이어 코리아", "source_kind": "editorial-directory", "supports": ["address", "hours", "monday-closed", "parking-unavailable", "dessert"] }, { "url": "https://www.diningcode.com/profile.php?rid=fSCkEDakSajP", "publisher": "다이닝코드", "source_kind": "place-platform", "supports": ["current-reviews-2026", "one-person-workshop", "handmade-chocolate", "bonbons", "fondant-au-chocolat", "orangettes", "gift-friendly", "small-space", "no-seating-signal"] }]
+    },
+    {
+      "canonical_place_id": "seoul:seodaemun:hailwood-hongje",
+      "member_external_ids": ["coffeelog-47e1e442b9af4436"],
+      "research_status": "reviewed", "confidence": "high",
+      "verified_attributes": ["listening-cafe", "lp-collection", "vintage-speakers", "wood-interior", "guest-filter-coffee", "anaerobic-coffee-signal", "cream-brulee-latte", "apple-crumble", "granola-yogurt", "wine", "highball", "late-hours", "solo-friendly", "group-friendly", "pet-friendly", "dog-drink", "laptop-seating", "parking-signal", "hongje-neighborhood"],
+      "ados_editorial_angles": ["홍제 주택가에서 LP와 빈티지 스피커, 매주 바뀌는 게스트 드립커피에 집중하는 동네 리스닝 카페", "낮의 애플크럼블과 커피에서 밤의 와인·하이볼까지 이어져 혼자 또는 반려견과 오래 머물기 좋은 곳"],
+      "cautions": ["평일과 주말 시작 시간이 다를 수 있어 최신 공지 확인", "게스트 원두와 디저트는 주기적으로 변경", "주차 가능 대수와 조건 확인", "카페와 바의 시간대별 분위기 차이 고려"],
+      "evidence": [{ "url": "https://www.daangn.com/kr/local-profile/%ED%97%A4%EC%9D%BC%EC%9A%B0%EB%93%9C-zhcfvb2mbydy/", "publisher": "당근", "source_kind": "owner-managed-local-profile", "supports": ["active-2026", "address", "hours-signal", "guest-filter-coffee", "anaerobic-coffee-signal", "apple-crumble", "highball", "pet-friendly", "dog-drink", "laptop-seating", "parking-signal"] }, { "url": "https://www.diningcode.com/profile.php?rid=JQpxcRrEGIIa", "publisher": "다이닝코드", "source_kind": "place-platform", "supports": ["current-listing-2026", "address", "cream-brulee-latte", "granola-yogurt", "wine", "highball", "late-hours", "solo-friendly", "group-friendly", "pet-friendly"] }, { "url": "https://pimu.tistory.com/1462", "publisher": "피사체에 담은 Museum", "source_kind": "recent-visit-review", "supports": ["visited-2026", "listening-cafe", "lp-collection", "vintage-speakers", "wood-interior"] }]
+    },
+    {
+      "canonical_place_id": "seoul:gwanak:301h-sillim",
+      "member_external_ids": ["coffeelog-4b94c0111867b9e7"],
+      "research_status": "reviewed", "confidence": "medium",
+      "verified_attributes": ["coffee", "third-floor", "green-view", "quiet-signal", "work-friendly-signal", "cozy-signal", "near-sindaebang-station", "sillim-neighborhood"],
+      "ados_editorial_angles": ["신대방역 생활권의 3층에서 초록 풍경을 바라보며 조용히 작업하거나 쉬어가는 동네 카페", "번화한 카페 거리 대신 고즈넉한 분위기와 창밖 녹음을 우선할 때 고르는 곳"],
+      "cautions": ["최신 영업시간과 휴무일 확인", "메뉴·좌석·노트북 정책에 대한 자료가 제한적", "3층 접근성과 엘리베이터 여부 확인", "ADoS 공개 전 운영 상태 재확인 권장"],
+      "evidence": [{ "url": "https://www.daangn.com/kr/local-profile/301h-he2cdc5xuc8k/", "publisher": "당근", "source_kind": "local-business-profile", "supports": ["listing-2025", "address", "coffee", "menu-price-signal"] }, { "url": "https://www.keyzard.cc/byun_s/nb/223960886643", "publisher": "키자드", "source_kind": "review-index", "supports": ["visited-2025", "third-floor", "green-view", "quiet-signal", "work-friendly-signal", "near-sindaebang-station"] }, { "url": "https://manupic.com/korea/seoul/ko/menu/cappuccino/", "publisher": "MANUPIC", "source_kind": "menu-directory", "supports": ["current-menu-listing-2026", "address-signal", "cappuccino"] }]
+    },
+    {
+      "canonical_place_id": "seoul:gwanak:2f-samusil-bongcheon",
+      "member_external_ids": ["coffeelog-67e91cc315ea7ea0"],
+      "research_status": "reviewed", "confidence": "high",
+      "verified_attributes": ["work-cafe", "office-concept", "quiet-rule", "reservation-system", "weekday-reservation", "weekend-walk-in-signal", "half-day-pass", "full-day-pass", "time-limit-signal", "filter-coffee", "second-floor", "retro-interior", "near-bongcheon-station", "parking-unavailable", "steep-stairs"],
+      "ados_editorial_angles": ["봉천에서 반나절·종일권을 예약하고 말 그대로 사무실처럼 조용히 몰입하는 목적형 작업 카페", "주말에는 워크인으로 드립커피를 마시며 레트로한 책상에 앉아 개인 작업을 정리하기 좋은 곳"],
+      "cautions": ["평일 예약제와 주말·공휴일 워크인 정책이 바뀔 수 있어 최신 공지 필수", "예약 시 별도 좌석 이용료와 동행 규칙 확인", "워크인 이용 시간 제한 가능", "입구 계단이 가파르고 2층 접근성 제한", "주차 불가", "조용한 작업 분위기 준수"],
+      "evidence": [{ "url": "https://www.diningcode.com/profile.php?rid=ywNkGoxx12F9", "publisher": "다이닝코드", "source_kind": "place-platform", "supports": ["current-reviews-2026", "address", "work-cafe", "quiet-rule", "reservation-system", "weekday-reservation", "weekend-walk-in-signal", "half-day-pass", "full-day-pass", "time-limit-signal", "filter-coffee", "second-floor", "near-bongcheon-station", "parking-unavailable", "steep-stairs"] }, { "url": "https://maily.so/nomadletter/posts/1do19570zx6", "publisher": "노마드레터", "source_kind": "local-editorial", "supports": ["office-concept", "work-friendly", "desk-layout", "quiet-signal"] }, { "url": "https://gfac.or.kr/uploadfile/ecms/media/media/2025/02/6e98978260f52befae9be088d688ee94.pdf", "publisher": "관악문화재단", "source_kind": "public-cultural-publication", "supports": ["featured-cultural-space", "gwanak-local-context"] }]
     }
   ]
 }
