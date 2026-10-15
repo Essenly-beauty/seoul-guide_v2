@@ -4,7 +4,10 @@ import path from "node:path";
 const sourceDir = path.join(process.cwd(), "data", "sources", "coffeelog-korea");
 const labels = JSON.parse(await readFile(path.join(sourceDir, "research-labels-2026-09-26.json"), "utf8"));
 const manifest = JSON.parse(await readFile(path.join(sourceDir, "editorial-series-2026-10-15.json"), "utf8"));
-const checklist = JSON.parse(await readFile(path.join(sourceDir, "publication-checklist-priority-1-3.json"), "utf8"));
+const checklists = await Promise.all([
+  "publication-checklist-priority-1-3.json",
+  "publication-checklist-priority-4-6.json",
+].map(async (filename) => JSON.parse(await readFile(path.join(sourceDir, filename), "utf8"))));
 const byCanonicalId = new Map(labels.records.map((record) => [record.canonical_place_id, record]));
 const errors = [];
 const seriesIds = new Set();
@@ -26,7 +29,7 @@ for (const series of manifest.series) {
   }
 }
 
-for (const item of checklist.series) {
+for (const item of checklists.flatMap((checklist) => checklist.series)) {
   const series = manifest.series.find((candidate) => candidate.id === item.series_id);
   if (!series) {
     errors.push(`Checklist references unknown series: ${item.series_id}`);
@@ -51,5 +54,6 @@ if (errors.length) {
   process.exitCode = 1;
 } else {
   const placements = manifest.series.reduce((sum, series) => sum + series.places.length, 0);
-  console.log(`Validated ${manifest.series.length} editorial series, ${placements} place placements, and ${checklist.series.length} publication drafts.`);
+  const publicationDrafts = checklists.reduce((sum, checklist) => sum + checklist.series.length, 0);
+  console.log(`Validated ${manifest.series.length} editorial series, ${placements} place placements, and ${publicationDrafts} publication drafts.`);
 }

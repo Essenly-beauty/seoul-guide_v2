@@ -1,0 +1,25 @@
+{
+  "schema_version": "1.0.0",
+  "dataset_id": "coffeelog-korea-publication-checklist-priority-4-6",
+  "created_on": "2026-10-15",
+  "scope": "ADoS Coffee & Cafés editorial series priorities 4-6",
+  "default_status": "pending_prepublication_check",
+  "checks": ["current_operation", "official_store_name", "address_and_branch", "opening_hours", "featured_attribute", "access_and_house_rules", "image_rights", "editorial_approval"],
+  "series": [
+    {
+      "series_id": "ados-coffee:books-and-a-long-afternoon",
+      "draft_path": "./editorial-drafts/04-books-and-a-long-afternoon.md",
+      "places": ["seoul:mapo:check-and-grow", "seoul:seongdong:senvers-book-cafe", "seoul:jung:cafe-hubble-namsan-books", "seoul:songpa:cafe-manarant-seokchon", "seoul:gangnam:book-and-rest-samseong", "seoul:gwangjin:bookstore-gozneok-gunja"]
+    },
+    {
+      "series_id": "ados-coffee:seoul-after-sunset",
+      "draft_path": "./editorial-drafts/05-seoul-after-sunset.md",
+      "places": ["seoul:mapo:viva-bossa-mangwon", "seoul:mapo:maverick-house-sangsu", "seoul:mapo:origami-club-hapjeong", "seoul:songpa:cafe-eclipse-seokchon", "seoul:songpa:about-coffee-songpa", "seoul:jung:hotel-susyeonhwa-euljiro"]
+    },
+    {
+      "series_id": "ados-coffee:rooftops-and-seoul-sunset",
+      "draft_path": "./editorial-drafts/06-rooftops-and-seoul-sunset.md",
+      "places": ["seoul:yongsan:cafe-tajagi-haebangchon", "seoul:yongsan:villa-coffee-bar-haebangchon", "seoul:yongsan:shelter-haebangchon", "seoul:yongsan:s-caf-haebangchon", "seoul:jung:loiter-coffee-shelter", "seoul:mapo:check-and-grow"]
+    }
+  ]
+}
