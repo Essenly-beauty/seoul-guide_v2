@@ -8,6 +8,8 @@ export const COFFEE_EDITORIAL_SERIES = [
     "titleKo": "창가에 앉아 일을 끝내는 오후",
     "titleEn": "An afternoon of work by the window",
     "dekKo": "노트북을 펴기 좋은 좌석과 창가의 빛을 함께 고른 여섯 곳.",
+    "introduction": "집중이 필요한 날에도 서울을 포기할 필요는 없다. 책상만 넓은 카페보다 창밖의 나무와 골목, 시간에 따라 달라지는 빛까지 일의 리듬을 바꿔주는 곳을 골랐다. 노트북을 펼치기 좋은 좌석이 확인된 여섯 곳이지만, 콘센트와 이용 시간은 방문하는 날 다시 확인하는 편이 좋다.",
+    "publicationNote": "이 글은 2026년 10월 리서치 초안이다. 영업시간, 노트북 정책, 좌석 이용 시간과 대관 일정은 발행일과 방문일에 다시 확인한다.",
     "occasionTags": [
       "work",
       "solo-time",
@@ -20,6 +22,7 @@ export const COFFEE_EDITORIAL_SERIES = [
         "name": "HHSS HOUSE",
         "district": "마포구",
         "editorialNote": "나무가 보이는 창 앞에서 혼자 집중하는 망원의 오후",
+        "body": "디자인 스튜디오와 카페의 경계에 있는 3층 공간이다. 창 앞에 앉으면 나무가 시야에 들어오고, 혼자 조용히 필터커피를 마시며 일하기 좋다. 신발을 벗고 입장하며 출입구가 눈에 잘 띄지 않는다는 점은 미리 알아두자. 매장 고양이와 향 사용에도 민감한 사람이라면 다른 선택지가 편할 수 있다.",
         "attributes": [
           "design-studio-cafe",
           "work-friendly",
@@ -38,6 +41,7 @@ export const COFFEE_EDITORIAL_SERIES = [
         "name": "나이스워크투데이 (대흥)",
         "district": "마포구",
         "editorialNote": "경의선숲길 통창과 일하기 위한 공간 정체성이 만나는 곳",
+        "body": "경의선숲길을 바라보는 큰 창, 넓은 테이블, 1인석과 콘센트까지 이름 그대로 ‘일하기 위한 카페’에 가깝다. 원두를 골라 마시는 필터커피도 이곳을 단순한 공유 오피스와 다르게 만든다. 시험 기간과 주말 오후에는 자리를 기다릴 수 있고, 대화 중심 모임보다는 각자의 일에 집중하는 방문에 맞는다.",
         "attributes": [
           "work-friendly",
           "reading-friendly",
@@ -56,6 +60,7 @@ export const COFFEE_EDITORIAL_SERIES = [
         "name": "볼베르",
         "district": "마포구",
         "editorialNote": "책과 노트북을 펴기 좋은 합정의 조용한 2층",
+        "body": "합정과 망원 사이 2층에 있는 조용한 카페다. 큰 창 아래 책이나 노트북을 펼치고, 바나나 브레드나 쿠키를 곁들이며 오래 머무는 흐름이 자연스럽다. 요일별 마감 시간이 다를 수 있고 유료 주차와 반려동물 동반 규칙은 방문 전에 확인해야 한다.",
         "attributes": [
           "second-floor",
           "large-window",
@@ -74,6 +79,7 @@ export const COFFEE_EDITORIAL_SERIES = [
         "name": "로잉커피",
         "district": "마포구",
         "editorialNote": "망원 골목을 내려다보며 과일 산도의 커피와 일하는 자리",
+        "body": "창가에서 망원 골목을 내려다보며 커피와 계절 디저트를 함께 고를 수 있다. 과일 산도와 작업하기 좋은 좌석이 이곳의 분명한 이유지만, 혼잡을 조절하기 위한 이용 시간 제한이 있을 수 있다. 이름이 비슷한 별도 2호점 ‘로잉커피바’와 혼동하지 않도록 지점을 확인하자.",
         "attributes": [
           "fruit-sando",
           "seasonal-dessert",
@@ -92,6 +98,7 @@ export const COFFEE_EDITORIAL_SERIES = [
         "name": "약수터",
         "district": "중구",
         "editorialNote": "낮의 작업에서 밤의 위스키까지 이어지는 약수역 통창",
+        "body": "낮에는 햇빛이 드는 통창 앞에서 책과 노트북을 펴고, 밤에는 위스키와 칵테일로 분위기가 바뀌는 카페 바다. 한 장소 안에서 오후의 일과 저녁 약속을 이어가고 싶을 때 특히 유용하다. 주말 밤은 붐비고 소리가 커질 수 있으며, 2층까지 계단으로 올라가야 한다.",
         "attributes": [
           "cafe-bar",
           "day-to-night",
@@ -110,6 +117,7 @@ export const COFFEE_EDITORIAL_SERIES = [
         "name": "작업실01",
         "district": "마포구",
         "editorialNote": "홍대 한복판에서 집중을 우선하는 작은 작업실",
+        "body": "홍대 한복판에서 좌석의 목적을 집중에 맞춘 작은 작업 공간이다. 1인석과 노트북 좌석, 창가 자리가 있고 비교적 늦은 시간까지 머무는 선택지가 된다. 대관 일정에 따라 좌석 이용이 달라질 수 있으므로 공지를 확인하고, 동명의 오래된 북카페가 아니라 ‘작업실01’인지 이름을 끝까지 확인하자.",
         "attributes": [
           "work-friendly",
           "laptop-seating",
@@ -131,6 +139,8 @@ export const COFFEE_EDITORIAL_SERIES = [
     "titleKo": "아홉 시 전, 서울의 첫 커피",
     "titleEn": "Seoul's first coffee before nine",
     "dekKo": "출근과 산책이 시작되기 전에 문을 여는 로스터리와 작은 카페.",
+    "introduction": "아직 약속도 상점도 시작되지 않은 시간, 먼저 문을 연 카페는 동네를 다르게 보이게 한다. 진한 플랫화이트부터 주문 즉시 내리는 V60까지, 아침 일찍 찾아갈 커피의 이유가 분명한 여섯 곳을 골랐다. 이른 영업은 변동 가능성이 큰 정보이므로 방문 전날 공식 공지를 확인하자.",
+    "publicationNote": "제목의 ‘아홉 시 전’은 편집 콘셉트다. 각 장소의 실제 오픈 시간과 요일별 차이는 발행 당일 공식 채널로 확인한 뒤 본문에 표기한다.",
     "occasionTags": [
       "morning",
       "commute",
@@ -143,6 +153,7 @@ export const COFFEE_EDITORIAL_SERIES = [
         "name": "매뉴팩트커피 연희 본점 (연희동)",
         "district": "서대문구",
         "editorialNote": "연희동에서 플랫화이트를 짧고 진하게 마시는 아침",
+        "body": "가파른 계단을 올라 2층의 작은 매장에 닿으면 플랫화이트와 에스프레소, 핸드드립 중 오늘의 첫 잔을 고를 수 있다. 좌석이 많지 않아 오래 머무는 아침보다는 커피를 짧고 진하게 마시거나 원두와 드립백을 사서 나오는 방문에 어울린다. 주차는 인근 공영주차장을 생각하는 편이 낫다.",
         "attributes": [
           "coffee-roaster",
           "flat-white",
@@ -161,6 +172,7 @@ export const COFFEE_EDITORIAL_SERIES = [
         "name": "샌드스톤커피랩 (연남)",
         "district": "마포구",
         "editorialNote": "연남의 붐비는 시간 전에 만나는 핸드드립",
+        "body": "연남이 붐비기 전에 핸드드립을 마실 수 있는 로스터리다. 테라스와 브런치, 시그니처 크림 라테까지 있어 산책의 시작점으로 삼기 좋다. 평일과 주말의 마감 시간이 다를 수 있고 전용 주차는 기대하지 않는 편이 좋다.",
         "attributes": [
           "roastery",
           "hand-drip",
@@ -179,6 +191,7 @@ export const COFFEE_EDITORIAL_SERIES = [
         "name": "아르코커피로스터스",
         "district": "서초구",
         "editorialNote": "양재에서 주문 즉시 내린 V60으로 시작하는 하루",
+        "body": "아침 여덟 시부터 주문 즉시 V60을 내리는 커피가 이 시리즈의 취지와 가장 또렷하게 맞는 곳 중 하나다. 싱글 오리진과 디카페인 선택지를 살펴보고 하루의 속도를 정해보자. 원두 구성은 바뀌며 주차 공간이 매우 제한적이어서 대중교통 방문이 안전하다.",
         "attributes": [
           "roastery",
           "filter-coffee",
@@ -197,6 +210,7 @@ export const COFFEE_EDITORIAL_SERIES = [
         "name": "빈스미스 커피 로스터리",
         "district": "용산구",
         "editorialNote": "원효로 오래된 집에서 네 가지 원두 중 고르는 첫 잔",
+        "body": "오래된 집을 고친 공간에서 여러 원두 중 하나를 고르고, 파티시에가 만든 디저트를 곁들일 수 있다. 로스터리의 선택지와 주택의 편안함이 함께 있어 서두르지 않는 아침에 잘 맞는다. 평일과 주말 운영 시간이 크게 다를 수 있고, 주변 재개발에 따른 운영 변동도 방문 전에 살펴야 한다.",
         "attributes": [
           "in-house-roastery",
           "multiple-bean-choice",
@@ -215,6 +229,7 @@ export const COFFEE_EDITORIAL_SERIES = [
         "name": "파퓰러커피",
         "district": "강남구",
         "editorialNote": "논현 출근길에 산지별 스페셜티 커피를 고르는 곳",
+        "body": "출근길에 여러 산지의 스페셜티 커피와 판매용 원두를 비교하기 좋은 로스터리다. 테라스와 일하기 좋은 좌석도 있어 첫 미팅 전 잠시 머무는 선택지가 된다. 주말에는 평일보다 늦게 열 수 있으며, 반려견 동반 시 리드줄 등 매장 규칙을 확인해야 한다.",
         "attributes": [
           "specialty-coffee",
           "roastery",
@@ -233,6 +248,7 @@ export const COFFEE_EDITORIAL_SERIES = [
         "name": "어펜드커피로스터스",
         "district": "중구",
         "editorialNote": "명동 일정이 시작되기 전 조용한 2층에 머무는 커피",
+        "body": "명동의 관광 동선 한가운데 있지만 2층에 올라가면 비교적 조용하고 넓은 공간이 나온다. 원두를 고른 커피와 매장에서 만든 베이크를 함께 주문해 도심 일정 전 숨을 고르기 좋다. 점심시간에는 직장인으로 붐빌 수 있고 주차는 불가능하다.",
         "attributes": [
           "roastery",
           "multiple-bean-choice",
@@ -254,6 +270,8 @@ export const COFFEE_EDITORIAL_SERIES = [
     "titleKo": "커피를 위해 서울을 건너는 날",
     "titleEn": "Coffee worth crossing Seoul for",
     "dekKo": "공간보다 원두와 추출이 먼저 기억되는 서울의 로스터리 여섯 곳.",
+    "introduction": "예쁜 공간보다 한 잔의 이유를 먼저 묻는 날이 있다. 직접 볶은 원두, 산지별 선택, 필터 추출과 커피를 설명하는 태도까지 확인된 서울의 로스터리 여섯 곳이다. ‘최고’라는 순위 대신 서로 다른 동네에서 커피를 경험하는 방식을 보여준다.",
+    "publicationNote": "이 글은 순위가 아니라 서로 다른 커피 경험을 제안한다. 원두 라인업, 추출 메뉴, 지점 주소와 운영 여부는 발행일에 공식 채널로 다시 확인한다.",
     "occasionTags": [
       "coffee-destination",
       "solo-time"
@@ -265,6 +283,7 @@ export const COFFEE_EDITORIAL_SERIES = [
         "name": "프로토콜 상수점",
         "district": "마포구",
         "editorialNote": "상수에서 기록하며 커피 감각에 집중하는 시간",
+        "body": "기록하고 집중하는 시간을 공간의 언어로 만든 로스터리다. 커피가 장식이 아니라 방문의 중심에 있고, 한 잔을 앞에 두고 읽거나 쓰는 시간이 자연스럽다. 혼잡할 때 이용 시간 제한이 생기는지는 방문 전에 확인하자.",
         "attributes": [
           "specialty-coffee",
           "roastery",
@@ -281,6 +300,7 @@ export const COFFEE_EDITORIAL_SERIES = [
         "name": "로우키",
         "district": "성동구",
         "editorialNote": "성수에서 커피 자체를 목적지로 만드는 로스터리",
+        "body": "성수에서 커피 자체를 목적지로 삼고 싶을 때 떠올릴 수 있는 스페셜티 로스터리다. 로스팅뿐 아니라 커피 교육까지 이어온 브랜드의 맥락이 있어 한 잔 뒤의 과정을 함께 보기 좋다. 본사·로스팅 주소와 실제 성수 매장 주소를 혼동하지 않도록 지점을 확인해야 한다.",
         "attributes": [
           "specialty-coffee",
           "roastery",
@@ -297,6 +317,7 @@ export const COFFEE_EDITORIAL_SERIES = [
         "name": "커피몽타주 / 성내동",
         "district": "강동구",
         "editorialNote": "서울 동쪽에서 로스팅의 과정을 가까이 보는 곳",
+        "body": "서울 동쪽에서 로스팅과 산지의 연결을 가까이 보는 쇼룸형 공간이다. 직접 거래와 로스터리의 과정에 관심 있는 사람에게 특히 설득력이 있다. 하남의 로스팅 공장과 서울 성내 플래그십은 서로 다른 장소이므로 지도에서 지점을 구분하자.",
         "attributes": [
           "specialty-coffee",
           "roastery",
@@ -313,6 +334,7 @@ export const COFFEE_EDITORIAL_SERIES = [
         "name": "엘카페 커피로스터스",
         "district": "용산구",
         "editorialNote": "서울역 출발 전 원두와 추출을 제대로 고르는 법",
+        "body": "서울역에서 출발하기 전 필터커피와 원두를 제대로 고르고 싶을 때 들를 만하다. 커피 전문성과 작업하기 좋은 성격이 함께 있어 이동 전 잠깐의 집중에도 맞는다. 평일과 주말 운영 시간이 다르며, 무단차 진입로와 엘리베이터가 없다는 접근성 정보도 함께 안내해야 한다.",
         "attributes": [
           "specialty-coffee",
           "roastery",
@@ -331,6 +353,7 @@ export const COFFEE_EDITORIAL_SERIES = [
         "name": "커넥츠커피 망원",
         "district": "마포구",
         "editorialNote": "동네의 아침과 핸드드립을 잇는 망원 로스터리",
+        "body": "동네의 아침과 핸드드립을 연결하는 로스터리다. 스페셜티 커피와 직접 볶은 원두, 유제품을 피하는 선택지까지 있어 취향에 따라 한 잔을 조정하기 좋다. 평일과 주말의 문 여는 시간이 다르므로 이른 방문이라면 특히 확인이 필요하다.",
         "attributes": [
           "roastery",
           "specialty-coffee",
@@ -348,6 +371,7 @@ export const COFFEE_EDITORIAL_SERIES = [
         "name": "마일스톤 커피",
         "district": "강남구",
         "editorialNote": "신사 골목에서 시작된 서울의 호주식 커피",
+        "body": "신사 골목에서 시작해 서울에 호주식 커피 문화를 풀어낸 로스터리다. 에스프레소와 우유가 만나는 방식, 동네 카페로 시작한 브랜드의 시간을 함께 읽을 수 있다. 공식 법인 주소는 한남으로 표시될 수 있으므로 장소 카드에는 신사 매장의 정확한 주소를 사용한다.",
         "attributes": [
           "specialty-coffee",
           "roastery",
@@ -367,6 +391,8 @@ export const COFFEE_EDITORIAL_SERIES = [
     "titleKo": "책 한 권과 오래 보내는 오후",
     "titleEn": "A long afternoon with a book",
     "dekKo": "서가와 음악, 창밖 풍경까지 읽는 속도를 늦춰주는 북카페.",
+    "introduction": "책이 많은 카페와 책을 읽기 좋은 카페는 조금 다르다. 서가의 큐레이션뿐 아니라 소파와 창밖 풍경, 음악의 크기까지 읽는 속도를 바꾸는 여섯 곳을 골랐다. 일반 카페와 다른 이용료나 좌석 규칙이 있는 곳도 있으니, 방문 전에 각 공간의 방식을 살펴보자.",
+    "publicationNote": "이용권, 좌석 규칙, 행사 일정과 당일 운영 여부를 발행 시점에 다시 확인한다.",
     "occasionTags": [
       "reading",
       "solo-time",
@@ -379,6 +405,7 @@ export const COFFEE_EDITORIAL_SERIES = [
         "name": "채그로",
         "district": "마포구",
         "editorialNote": "한강과 책 사이에서 보내는 긴 오후",
+        "body": "높은 자리에서 한강을 바라보며 책을 펼치는 경험이 이곳의 중심이다. 오래 머무는 북카페이자 공간 대여 장소의 성격을 함께 지녀 음료 가격에도 자리 이용의 의미가 담겨 있다. 층과 좌석에 따라 대화하거나 혼자 읽는 규칙이 다를 수 있다.",
         "attributes": [
           "book-cafe",
           "hangang-view",
@@ -397,6 +424,7 @@ export const COFFEE_EDITORIAL_SERIES = [
         "name": "서울북카페 센버스",
         "district": "성동구",
         "editorialNote": "책을 음악과 향, 음료로 함께 읽는 성수",
+        "body": "책을 글자로만 읽지 않고 음악과 향, 음료를 함께 연결하는 감각적인 독서 공간이다. 넓은 장소에서 한 권에 오래 머물고 싶은 날에 잘 맞는다. 일반 카페처럼 음료만 주문하는 방식이 아니라 유료 이용권을 기반으로 하므로 요금과 이용 시간을 먼저 확인해야 한다.",
         "attributes": [
           "book-cafe",
           "multi-sensory-reading",
@@ -415,6 +443,7 @@ export const COFFEE_EDITORIAL_SERIES = [
         "name": "카페허블&남산책방",
         "district": "중구",
         "editorialNote": "남산 산책 뒤 과학과 문학을 펼치는 책방 카페",
+        "body": "남산골한옥마을을 산책한 뒤 과학과 문학의 서가를 함께 볼 수 있는 출판사 운영 책방 카페다. 창밖의 한옥 풍경과 문화 프로그램이 독서의 맥락을 넓힌다. 전시와 행사는 기간마다 달라지므로 상설 프로그램처럼 기대하기보다 방문 시점의 일정을 확인하자.",
         "attributes": [
           "publisher-operated",
           "book-cafe",
@@ -433,6 +462,7 @@ export const COFFEE_EDITORIAL_SERIES = [
         "name": "카페 마나랑",
         "district": "송파구",
         "editorialNote": "석촌호수 근처에서 책과 LP 사이에 하루를 맡기는 곳",
+        "body": "책과 LP, 별도의 음악감상실과 작업 좌석이 한 공간에 놓인 큰 북카페다. 석촌호수 일정 뒤 조용히 머물거나 여럿이 각자의 시간을 보내기 좋다. 플랫폼별 운영 상태가 엇갈리는 시점이 있어 방문 전 당일 영업을 확인하고, 인기 빵은 늦은 오후 전에 고르는 편이 낫다.",
         "attributes": [
           "book-cafe",
           "lp-listening",
@@ -451,6 +481,7 @@ export const COFFEE_EDITORIAL_SERIES = [
         "name": "북앤레스트",
         "district": "강남구",
         "editorialNote": "코엑스 뒤편, 삼천 권의 책과 소파 사이에서 속도를 낮추는 곳",
+        "body": "코엑스 뒤편에서 약 삼천 권의 책과 소파, 개인실 사이를 고를 수 있다. 혼자 책을 읽는 시간부터 작은 모임까지 좌석의 선택 폭이 넓다. 평일과 주말의 운영 시간이 크게 다를 수 있고 주차 정보도 출처마다 달라 대중교통 방문이 안전하다.",
         "attributes": [
           "book-cafe",
           "three-thousand-books",
@@ -469,6 +500,7 @@ export const COFFEE_EDITORIAL_SERIES = [
         "name": "책방고즈넉",
         "district": "광진구",
         "editorialNote": "군자동 이층집에서 작가의 메모를 따라 다음 책을 고르는 곳",
+        "body": "이층집을 고친 공간에서 작가의 메모와 큐레이션을 따라 다음 책을 발견하는 곳이다. 책 모임과 독립출판 행사가 열리고 직접 만든 바스크 치즈케이크도 곁들일 수 있다. 운영자는 이곳을 ‘북카페’보다 ‘책이 많은 카페’에 가깝게 설명하며, 주말에는 붐빌 수 있다.",
         "attributes": [
           "book-cafe",
           "independent-bookstore",
@@ -490,6 +522,8 @@ export const COFFEE_EDITORIAL_SERIES = [
     "titleKo": "해가 진 뒤에도 커피를 마시고 싶어서",
     "titleEn": "Coffee after sunset",
     "dekKo": "늦은 작업, 긴 대화, 커피에서 술로 넘어가는 밤을 위한 여섯 곳.",
+    "introduction": "저녁의 카페는 낮보다 목적이 다양하다. 마감 전 일을 끝내거나 대화를 길게 이어가고, 커피에서 와인과 칵테일로 자연스럽게 넘어가기도 한다. 늦게까지 문을 여는 신호가 확인된 곳 가운데 밤의 쓰임이 서로 다른 여섯 곳을 골랐다.",
+    "publicationNote": "늦은 영업시간과 주류 판매, 대관 일정은 변동 가능성이 높다. 발행일과 방문일에 각각 확인한다.",
     "occasionTags": [
       "late-night",
       "work",
@@ -502,6 +536,7 @@ export const COFFEE_EDITORIAL_SERIES = [
         "name": "비바보사 망원",
         "district": "마포구",
         "editorialNote": "망원에서 늦게까지 노트북을 펼칠 수 있는 넓은 3층",
+        "body": "넓은 3층 공간에 콘센트와 와이파이가 있어 늦은 작업을 이어가기 좋다. 커피 전문점의 한 잔보다는 차와 브라우니를 곁들여 노트북을 펴는 환경이 선택의 이유다. 혼잡한 시간의 좌석 및 이용 시간 정책은 확인할 필요가 있다.",
         "attributes": [
           "work-friendly",
           "many-outlets",
@@ -520,6 +555,7 @@ export const COFFEE_EDITORIAL_SERIES = [
         "name": "메버릭하우스",
         "district": "마포구",
         "editorialNote": "커피와 작업, 대화가 느슨하게 교차하는 상수의 밤",
+        "body": "커피와 식사, 작업과 대화, 작은 행사가 느슨하게 교차하는 문화 플랫폼이다. 혼자 일하다 누군가를 만나거나 저녁 프로그램으로 넘어가는 하루에 잘 맞는다. 행사와 대관 일정에 따라 일반 이용 범위가 달라질 수 있다.",
         "attributes": [
           "cultural-platform",
           "work-friendly",
@@ -538,6 +574,7 @@ export const COFFEE_EDITORIAL_SERIES = [
         "name": "오리가미클럽 합정",
         "district": "마포구",
         "editorialNote": "큰 창 아래 라테에서 자정의 한 잔까지 이어지는 카페 바",
+        "body": "2층 큰 창 아래에서 라테와 바스크 치즈케이크를 먹다가 늦은 시간의 술로 이어갈 수 있는 카페 바다. 낮에는 조용히 머물고 밤에는 대화를 나누는 식으로 시간대에 따라 공간을 다르게 사용할 수 있다. 자정 마감과 주류 판매 여부는 방문 전에 재확인하자.",
         "attributes": [
           "second-floor",
           "large-space",
@@ -556,6 +593,7 @@ export const COFFEE_EDITORIAL_SERIES = [
         "name": "카페이클립스",
         "district": "송파구",
         "editorialNote": "석촌호수의 낮 커피가 밤의 와인으로 바뀌는 곳",
+        "body": "석촌호수를 바라보는 커피가 밤에는 와인으로 바뀌는 곳이다. 소믈리에가 운영하고 직접 만든 디저트와 루프톱 테라스가 있어 저녁 데이트의 흐름을 만들기 좋다. 요일별 마감 시간, 휴무일과 루프톱 이용 조건을 확인해야 한다.",
         "attributes": [
           "seokchon-lake-view",
           "rooftop-terrace",
@@ -574,6 +612,7 @@ export const COFFEE_EDITORIAL_SERIES = [
         "name": "에이바우트커피 송파점",
         "district": "송파구",
         "editorialNote": "송파에서 새벽까지 노트북을 펼칠 수 있는 여러 층",
+        "body": "여러 층과 작업석, 미팅룸을 갖춰 밤늦게까지 노트북을 펴야 하는 날의 실용적인 선택이다. 이른 아침부터 늦은 밤까지 이어지는 긴 운영 시간이 장점이지만, 지하 작업석과 미팅룸의 이용 조건은 달라질 수 있다. 주차와 피크 시간 좌석도 미리 살펴보자.",
         "attributes": [
           "work-friendly",
           "multi-floor",
@@ -592,6 +631,7 @@ export const COFFEE_EDITORIAL_SERIES = [
         "name": "호텔수선화",
         "district": "중구",
         "editorialNote": "을지로의 낮 커피가 밤 칵테일로 이어지는 가짜 호텔",
+        "body": "오래된 건물 4층, 간판 없는 입구를 찾아 올라가면 낮의 커피가 밤의 칵테일과 내추럴 와인으로 이어지는 ‘가짜 호텔’이 나온다. 어두운 조명과 큰 음악은 작업보다 늦은 대화에 어울린다. 엘리베이터와 주차가 없고 주말에는 이용 시간이 제한될 수 있다.",
         "attributes": [
           "cafe-bar",
           "day-to-night",
@@ -613,6 +653,8 @@ export const COFFEE_EDITORIAL_SERIES = [
     "titleKo": "서울의 지붕 위에서 노을을 기다리는 법",
     "titleEn": "Waiting for sunset above Seoul",
     "dekKo": "남산과 골목, 한강의 빛이 달라지는 시간을 보는 테라스와 루프톱.",
+    "introduction": "서울에서 전망은 높이만으로 결정되지 않는다. 남산이 가까워지는 해방촌의 경사, 필동 골목 끝의 옥상, 마포에서 멀리 보는 한강처럼 동네마다 저녁의 방향이 다르다. 맑은 날 해가 지기 한 시간쯤 전에 도착하고, 루프톱 운영 여부는 당일 날씨와 함께 확인하자.",
+    "publicationNote": "루프톱·테라스는 계절, 강풍, 우천과 행사에 따라 닫힐 수 있다. 일몰 시각과 당일 이용 가능 여부를 확인한다.",
     "occasionTags": [
       "sunset",
       "date",
@@ -625,6 +667,7 @@ export const COFFEE_EDITORIAL_SERIES = [
         "name": "카페타자기",
         "district": "용산구",
         "editorialNote": "해방촌 노을 앞에서 타자기로 문장을 남기는 곳",
+        "body": "도시와 노을을 바라보며 실제 타자기로 짧은 문장을 남길 수 있는 빈티지 카페다. 전망을 사진으로만 소비하기보다 그날의 서울을 기록하는 경험이 분명하다. 계단과 루프톱 접근성, 비 오는 날의 이용 가능 여부를 확인해야 한다.",
         "attributes": [
           "city-view",
           "sunset-view",
@@ -643,6 +686,7 @@ export const COFFEE_EDITORIAL_SERIES = [
         "name": "빌라커피바",
         "district": "용산구",
         "editorialNote": "주택가의 작은 옥상에서 남산을 마주하는 커피바",
+        "body": "주택가의 작은 옥상에서 남산서울타워와 저녁빛을 마주한다. 바스크 치즈케이크와 커피를 먹다가 술 한 잔으로 이어가기도 좋다. 옥상으로 가는 계단이 좁고 좋은 자리는 많지 않으며, 영업시간은 공식 SNS로 확인하는 편이 안전하다.",
         "attributes": [
           "rooftop",
           "n-seoul-tower-view",
@@ -661,6 +705,7 @@ export const COFFEE_EDITORIAL_SERIES = [
         "name": "쉘터 해방촌",
         "district": "용산구",
         "editorialNote": "3·4층 루프톱에서 남산과 노을을 넓게 보는 곳",
+        "body": "3층 실내와 여러 층의 루프톱에서 남산과 도시를 넓게 볼 수 있다. 소금커피와 스콘, 맥주까지 있어 노을 전후의 시간을 한곳에서 보내기 좋다. 해방촌의 경사와 계단, 평일·주말의 다른 마감 시간과 인기 뷰 좌석의 혼잡을 고려하자.",
         "attributes": [
           "third-floor",
           "multi-level-rooftop",
@@ -679,6 +724,7 @@ export const COFFEE_EDITORIAL_SERIES = [
         "name": "S.caf",
         "district": "용산구",
         "editorialNote": "해방촌의 북적임을 벗어나 골목의 저녁을 보는 곳",
+        "body": "북적이는 중심 골목에서 조금 벗어나 큰 창과 테라스, 루프톱에서 남산의 낮과 밤을 이어 본다. 담요가 준비된 신호도 있지만 야외 공간은 날씨의 영향을 크게 받는다. 주차는 어렵고 언덕과 계단을 지나야 한다.",
         "attributes": [
           "rooftop",
           "terrace",
@@ -697,6 +743,7 @@ export const COFFEE_EDITORIAL_SERIES = [
         "name": "로이터 커피 셸터 (충무로)",
         "district": "중구",
         "editorialNote": "남산 둘레길 뒤 필동 루프톱에서 쉬어 가는 자리",
+        "body": "남산 둘레길을 걷고 내려온 뒤 필동 루프톱에서 쉬어 가기 좋은 큰 카페다. 여럿이 앉을 좌석이 있고 산책 코스와 자연스럽게 연결된다. 관광정보와 장소 플랫폼의 휴무일 표기가 다를 수 있어 방문 전 확인이 필요하다.",
         "attributes": [
           "namsan-view",
           "rooftop",
@@ -715,6 +762,7 @@ export const COFFEE_EDITORIAL_SERIES = [
         "name": "채그로",
         "district": "마포구",
         "editorialNote": "마포의 높은 자리에서 한강과 책을 함께 보는 오후",
+        "body": "해방촌과 다른 방향에서 서울의 저녁을 보는 선택이다. 높은 자리에서 한강과 책을 함께 바라보며 노을 뒤까지 오래 머물 수 있다. 음료 가격에는 공간 이용의 성격이 포함되며 층별 좌석 규칙을 확인해야 한다.",
         "attributes": [
           "book-cafe",
           "hangang-view",
@@ -736,6 +784,8 @@ export const COFFEE_EDITORIAL_SERIES = [
     "titleKo": "디저트 하나를 이유로 찾아가는 카페",
     "titleEn": "Cafés worth visiting for one dessert",
     "dekKo": "프렌치토스트부터 티라미수까지, 주문할 이유가 분명한 접시들.",
+    "introduction": "카페를 고를 때 커피보다 먼저 떠오르는 한 접시가 있다. 프렌치토스트와 치즈 브륄레, 한국적인 츄로넛처럼 그 동네까지 갈 이유가 되는 디저트를 골랐다. 계절과 재고에 따라 바뀌고 늦은 오후에는 품절될 수 있으니, 꼭 먹고 싶은 메뉴라면 방문 전에 확인하자.",
+    "publicationNote": "대표 디저트의 당일 판매 여부, 가격, 품절 시간과 기간 한정 메뉴 여부를 발행 전에 확인한다.",
     "occasionTags": [
       "dessert",
       "date",
@@ -748,6 +798,7 @@ export const COFFEE_EDITORIAL_SERIES = [
         "name": "하우스키루",
         "district": "마포구",
         "editorialNote": "경의선숲길 옆 원목 공간에서 나누는 프렌치토스트",
+        "body": "경의선숲길 옆 원목 공간에서 원두를 고른 필터커피와 프렌치토스트를 함께 주문한다. 큰 창과 테라스, 바 좌석이 있어 아침부터 천천히 먹기 좋다. 연남의 동명 2호점과 혼동하지 않도록 와우산로 지점을 확인하고, 주말 웨이팅을 고려하자.",
         "attributes": [
           "specialty-filter-coffee",
           "multiple-bean-choice",
@@ -766,6 +817,7 @@ export const COFFEE_EDITORIAL_SERIES = [
         "name": "비하인드",
         "district": "마포구",
         "editorialNote": "홍대 카페 문화의 시간을 간직한 프렌치토스트",
+        "body": "홍대 카페 문화의 시간을 오래 지켜온 골목 카페다. 프렌치토스트와 브런치를 먹으며 조용히 머무는 경험이 이곳의 이유다. 주말에는 평일보다 늦게 열 수 있고, 최근에는 프렌치토스트의 조리와 식감이 예전과 다르다는 의견도 있어 ‘변하지 않은 맛’으로 단정하지 않는다.",
         "attributes": [
           "long-running-neighborhood-cafe",
           "french-toast",
@@ -784,6 +836,7 @@ export const COFFEE_EDITORIAL_SERIES = [
         "name": "클래식 해례커피",
         "district": "성동구",
         "editorialNote": "한국적 라테와 츄로넛을 함께 경험하는 성수",
+        "body": "흑임자 크림을 올린 해례라테와 츄러스·도넛을 결합한 츄로넛처럼 한국적인 재료와 익숙한 형식을 다시 엮는다. 높은 층고의 큰 공간이라 여럿이 디저트를 나누기 좋지만 주말에는 소리가 크고 좌석이 가깝게 느껴질 수 있다. 인기 메뉴는 오후에 품절될 수 있다.",
         "attributes": [
           "specialty-coffee",
           "award-winning-barista-brand",
@@ -802,6 +855,7 @@ export const COFFEE_EDITORIAL_SERIES = [
         "name": "카페 오텀",
         "district": "강동구",
         "editorialNote": "올림픽공원 산책 뒤 고르는 뉴욕 치즈 브륄레",
+        "body": "올림픽공원 산책 뒤 뉴욕 치즈 브륄레나 직접 만든 케이크를 고르는 디저트 카페다. 앤티크한 실내와 테라스가 있어 산책의 끝을 길게 이어가기 좋다. 월요일은 쉬는 날로 알려져 있고 주말 피크에는 만석이거나 인기 디저트가 먼저 끝날 수 있다.",
         "attributes": [
           "dessert-cafe",
           "house-made-cakes",
@@ -820,6 +874,7 @@ export const COFFEE_EDITORIAL_SERIES = [
         "name": "네로우 패스",
         "district": "용산구",
         "editorialNote": "좁은 골목 끝 세 층의 디저트 진열을 따라가는 곳",
+        "body": "좁은 골목 끝 주택을 고친 여러 층의 공간에서 바스크 치즈케이크, 까눌레, 에그타르트와 피낭시에를 차례로 살핀다. 한 가지 메뉴보다 진열 전체를 탐색하는 재미가 큰 곳이다. 주말 웨이팅과 계단 접근을 고려하고, 팝업이나 대관 일정에는 일반 영업 범위가 달라질 수 있다.",
         "attributes": [
           "converted-house",
           "multi-floor",
@@ -838,6 +893,7 @@ export const COFFEE_EDITORIAL_SERIES = [
         "name": "더 스팟 패뷸러스 (명동)",
         "district": "중구",
         "editorialNote": "근대건축의 큰 창 앞에서 티라미수를 먹는 명동",
+        "body": "오래된 근대건축의 큰 창으로 중국대사관 일대를 바라보며 티라미수와 계절 케이크를 먹는다. 디저트뿐 아니라 건물과 풍경이 함께 방문의 이유가 된다. 관광·쇼핑 시간에는 붐비고 콘센트가 적어 작업 목적에는 맞지 않으며, 계절에 따라 디저트 구성이 달라진다.",
         "attributes": [
           "historic-building",
           "multi-floor",
@@ -859,6 +915,8 @@ export const COFFEE_EDITORIAL_SERIES = [
     "titleKo": "혼자 앉을 자리와 한 잔의 커피",
     "titleEn": "One seat and one cup",
     "dekKo": "바 좌석, 음악, 핸드드립처럼 혼자일 때 더 잘 보이는 것들.",
+    "introduction": "혼자 가기 좋은 카페는 빈 좌석이 많은 곳과 다르다. 바리스타의 손을 볼 수 있는 바, 한 사람에게 맞는 책상, 말없이 골라 듣는 음악처럼 혼자일 때 더 잘 보이는 것이 있어야 한다. 커피에 집중하는 작은 바부터 휴대폰을 잠시 내려놓는 공간까지 여섯 곳을 골랐다.",
+    "publicationNote": "티피는 운영·메뉴·좌석을 추가 확인하기 전 공개 보류한다. 모든 장소의 바 좌석 운영과 체류 제한도 발행일에 다시 확인한다.",
     "occasionTags": [
       "solo-time",
       "coffee",
@@ -871,6 +929,7 @@ export const COFFEE_EDITORIAL_SERIES = [
         "name": "로스터리 엔오알엠",
         "district": "광진구",
         "editorialNote": "원두 향을 먼저 맡고 오늘의 필터를 고르는 건대의 커피 바",
+        "body": "원두 향을 먼저 맡아보고 오늘 마실 필터커피를 고르는 바 좌석 중심의 로스터리다. 커피가 낯설어도 향에서 시작할 수 있고 말차와 호지차 선택지도 있다. 단체나 장시간 체류보다는 혼자 한 잔에 집중하는 방문에 맞으며 평일과 주말 개점 시간이 다르다.",
         "attributes": [
           "specialty-roastery",
           "filter-coffee",
@@ -889,6 +948,7 @@ export const COFFEE_EDITORIAL_SERIES = [
         "name": "도덕과규범",
         "district": "마포구",
         "editorialNote": "세 가지 원두 중 오늘의 브루잉을 고르는 상수의 작은 바",
+        "body": "작은 바에서 세 가지 원두 중 하나를 고르고 브루잉 또는 배치브루로 마신다. 직접 로스팅한 원두를 사거나 짧게 테이크아웃하기도 좋다. 좌석이 매우 적고 플랫폼에는 매장 취식이 제한된 것으로 표시되기도 하므로 현장 운영을 확인해야 한다.",
         "attributes": [
           "specialty-roastery",
           "on-site-roasting",
@@ -907,6 +967,7 @@ export const COFFEE_EDITORIAL_SERIES = [
         "name": "스몰로우 /",
         "district": "마포구",
         "editorialNote": "옻칠 트레이의 한 잔을 천천히 식혀 마시는 성산동",
+        "body": "오리가미 드리퍼로 내린 커피를 옻칠 트레이에 받아 천천히 식혀 마시는 작은 로스터리다. 조용한 바 좌석에서 추출과 온도의 변화를 바라보는 시간이 핵심이다. 일·월요일에 쉬고 비교적 일찍 닫으며, 단체나 노트북 장시간 작업에는 맞지 않는다.",
         "attributes": [
           "specialty-roastery",
           "on-site-roasting",
@@ -925,6 +986,7 @@ export const COFFEE_EDITORIAL_SERIES = [
         "name": "필담",
         "district": "마포구",
         "editorialNote": "창가와 오래된 음반 곁에 혼자 머무는 망원 2층",
+        "body": "2층 창가와 오래된 음반 곁에서 핸드드립을 마시고 책이나 노트북을 펼칠 수 있다. 밤에는 위스키와 칵테일까지 이어져 혼자 보내는 시간의 폭이 넓다. 두 시간 이용 제한과 휴무 공지를 확인하고, 조용한 분위기를 존중하는 소규모 방문이 어울린다.",
         "attributes": [
           "second-floor",
           "hand-drip",
@@ -943,6 +1005,7 @@ export const COFFEE_EDITORIAL_SERIES = [
         "name": "다시점",
         "district": "마포구",
         "editorialNote": "휴대폰을 맡기고 책과 음악에만 머무는 일요일",
+        "body": "한 사람용 책상과 소파, 바이닐 음악이 있는 3층 북카페다. 특정 시간에는 휴대폰을 맡기고 책과 글쓰기에 집중하는 디지털 디톡스 프로그램도 운영한다. 프로그램은 요일과 예약에 따라 달라지고 대관 일정에는 일반 이용 환경이 바뀔 수 있다.",
         "attributes": [
           "third-floor",
           "book-cafe",
@@ -961,6 +1024,7 @@ export const COFFEE_EDITORIAL_SERIES = [
         "name": "티피",
         "district": "중구",
         "editorialNote": "무화과 에스프레소와 무화과잎 차를 고르는 충무로의 작은 카페",
+        "body": "무화과 에스프레소와 직접 찌고 말린 무화과잎 차처럼 계절 재료를 한 잔에 담는 작은 카페다. 1층의 조용한 공간이라 혼자 새로운 메뉴를 고르기 좋다는 신호가 있지만, 공개된 최신 운영 정보와 좌석 정보가 충분하지 않다. 이 장소는 발행 전 공식 채널 또는 현장 확인을 통과한 경우에만 포함한다.",
         "attributes": [
           "coffee-focused",
           "fig-espresso",

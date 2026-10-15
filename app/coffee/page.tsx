@@ -1,11 +1,18 @@
 import Link from "next/link";
 import type { CSSProperties } from "react";
+import type { Metadata } from "next";
 import { BottomNav } from "@/components/ui/bottom-nav";
 import { TopBar } from "@/components/ui/top-bar";
 import { COFFEE_EDITORIAL_SERIES } from "@/lib/generated/coffee-editorial";
 import { routes } from "@/lib/routes";
 
 const COFFEE_TONES = ["#69745e", "#987153", "#495c61", "#75646f"];
+
+export const metadata: Metadata = {
+  title: "Coffee & Cafés — A Drop of Seoul Editorial Preview",
+  description: "상황과 시간, 동네로 고르는 서울 카페 편집 시리즈 8편.",
+  robots: { index: false, follow: false },
+};
 
 export default function CoffeeEditorialPage() {
   return (

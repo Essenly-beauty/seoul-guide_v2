@@ -15,4 +15,12 @@ describe("coffee editorial preview data", () => {
       for (const place of series.places) expect(place.canonicalPlaceId).toMatch(/^seoul:/);
     }
   });
+
+  it("includes the full article copy generated from every draft", () => {
+    for (const series of COFFEE_EDITORIAL_SERIES) {
+      expect(series.introduction.length).toBeGreaterThan(50);
+      expect(series.publicationNote.length).toBeGreaterThan(20);
+      for (const place of series.places) expect(place.body.length).toBeGreaterThan(40);
+    }
+  });
 });
