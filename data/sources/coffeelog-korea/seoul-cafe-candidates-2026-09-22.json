@@ -15,7 +15,7 @@
     "geography": "Seoul only",
     "record_count": 454,
     "enriched_record_count": 30,
-    "researched_record_count": 442
+    "researched_record_count": 448
   },
   "import_policy": {
     "default_action": "stage_only",
@@ -39819,8 +39819,103 @@
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
       "editorial_context_provenance": null,
-      "canonical_place_id": null,
-      "research_status": "not_researched"
+      "canonical_place_id": "seoul:gangseo:another-side-balsan",
+      "research_status": "reviewed",
+      "research_confidence": "high",
+      "verified_attributes": [
+        "specialty-coffee",
+        "filter-coffee",
+        "large-cafe",
+        "high-ceiling",
+        "seasonal-installation",
+        "indoor-forest",
+        "plants",
+        "aquarium",
+        "artificial-stream",
+        "large-windows",
+        "garden-view",
+        "terrace",
+        "family-friendly",
+        "accessible",
+        "accessible-restroom",
+        "accessible-parking",
+        "parking-two-hours-signal",
+        "late-hours",
+        "near-balsan-station",
+        "pet-unfriendly"
+      ],
+      "ados_editorial_angles": [
+        "멀리 떠나지 않고 발산의 대형 실내 숲과 물길 사이에서 스페셜티 커피를 마시는 도심 휴양 카페",
+        "봄 라일락·여름 휴양지·겨울 크리스마스 숲처럼 계절 연출이 바뀌어 아이와 다시 찾기 좋은 곳"
+      ],
+      "research_cautions": [
+        "주말·연휴 혼잡과 좌석 부족 가능",
+        "반려동물 동반 불가",
+        "계절 장식은 방문 시점에 따라 변경",
+        "카페 이용 시 무료 주차 시간과 이후 요금 확인",
+        "서비스·청결에 대한 상반된 후기 고려"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://korean.visitseoul.net/restaurants/anotherside/KOP6j3tuj",
+          "publisher": "서울관광재단",
+          "source_kind": "official-tourism-guide",
+          "supports": [
+            "updated-2026",
+            "address",
+            "hours",
+            "specialty-coffee",
+            "filter-coffee",
+            "large-cafe",
+            "seasonal-installation",
+            "indoor-forest",
+            "accessible",
+            "accessible-restroom",
+            "accessible-parking",
+            "pet-unfriendly"
+          ]
+        },
+        {
+          "url": "https://www.diningcode.com/profile.php?rid=eygbk2rhoR6m",
+          "publisher": "다이닝코드",
+          "source_kind": "place-platform",
+          "supports": [
+            "current-reviews-2026",
+            "large-cafe",
+            "plants",
+            "aquarium",
+            "large-windows",
+            "garden-view",
+            "terrace",
+            "family-friendly",
+            "parking-signal"
+          ]
+        },
+        {
+          "url": "https://youchuca.popit.kr/place/6a519113ad6cb950e0ac093b",
+          "publisher": "유추카",
+          "source_kind": "video-review-index",
+          "supports": [
+            "current-listing-2026",
+            "high-ceiling",
+            "aquarium",
+            "artificial-stream",
+            "terrace",
+            "parking-two-hours-signal",
+            "pet-unfriendly"
+          ]
+        },
+        {
+          "url": "https://file.raceplan.co.kr/files/gangseo/images/ebook2025.pdf",
+          "publisher": "강서구 관광안내",
+          "source_kind": "public-tourism-publication",
+          "supports": [
+            "address",
+            "apple-crumble-cake",
+            "black-soybean-sesame-latte"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-641279a1113d1ad1",
@@ -39852,8 +39947,103 @@
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
       "editorial_context_provenance": null,
-      "canonical_place_id": null,
-      "research_status": "not_researched"
+      "canonical_place_id": "seoul:gangseo:another-side-balsan",
+      "research_status": "reviewed",
+      "research_confidence": "high",
+      "verified_attributes": [
+        "specialty-coffee",
+        "filter-coffee",
+        "large-cafe",
+        "high-ceiling",
+        "seasonal-installation",
+        "indoor-forest",
+        "plants",
+        "aquarium",
+        "artificial-stream",
+        "large-windows",
+        "garden-view",
+        "terrace",
+        "family-friendly",
+        "accessible",
+        "accessible-restroom",
+        "accessible-parking",
+        "parking-two-hours-signal",
+        "late-hours",
+        "near-balsan-station",
+        "pet-unfriendly"
+      ],
+      "ados_editorial_angles": [
+        "멀리 떠나지 않고 발산의 대형 실내 숲과 물길 사이에서 스페셜티 커피를 마시는 도심 휴양 카페",
+        "봄 라일락·여름 휴양지·겨울 크리스마스 숲처럼 계절 연출이 바뀌어 아이와 다시 찾기 좋은 곳"
+      ],
+      "research_cautions": [
+        "주말·연휴 혼잡과 좌석 부족 가능",
+        "반려동물 동반 불가",
+        "계절 장식은 방문 시점에 따라 변경",
+        "카페 이용 시 무료 주차 시간과 이후 요금 확인",
+        "서비스·청결에 대한 상반된 후기 고려"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://korean.visitseoul.net/restaurants/anotherside/KOP6j3tuj",
+          "publisher": "서울관광재단",
+          "source_kind": "official-tourism-guide",
+          "supports": [
+            "updated-2026",
+            "address",
+            "hours",
+            "specialty-coffee",
+            "filter-coffee",
+            "large-cafe",
+            "seasonal-installation",
+            "indoor-forest",
+            "accessible",
+            "accessible-restroom",
+            "accessible-parking",
+            "pet-unfriendly"
+          ]
+        },
+        {
+          "url": "https://www.diningcode.com/profile.php?rid=eygbk2rhoR6m",
+          "publisher": "다이닝코드",
+          "source_kind": "place-platform",
+          "supports": [
+            "current-reviews-2026",
+            "large-cafe",
+            "plants",
+            "aquarium",
+            "large-windows",
+            "garden-view",
+            "terrace",
+            "family-friendly",
+            "parking-signal"
+          ]
+        },
+        {
+          "url": "https://youchuca.popit.kr/place/6a519113ad6cb950e0ac093b",
+          "publisher": "유추카",
+          "source_kind": "video-review-index",
+          "supports": [
+            "current-listing-2026",
+            "high-ceiling",
+            "aquarium",
+            "artificial-stream",
+            "terrace",
+            "parking-two-hours-signal",
+            "pet-unfriendly"
+          ]
+        },
+        {
+          "url": "https://file.raceplan.co.kr/files/gangseo/images/ebook2025.pdf",
+          "publisher": "강서구 관광안내",
+          "source_kind": "public-tourism-publication",
+          "supports": [
+            "address",
+            "apple-crumble-cake",
+            "black-soybean-sesame-latte"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-1020844c2082ac58",
@@ -39961,8 +40151,87 @@
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
       "editorial_context_provenance": null,
-      "canonical_place_id": null,
-      "research_status": "not_researched"
+      "canonical_place_id": "seoul:dongdaemun:domang-hwigyeong",
+      "research_status": "reviewed",
+      "research_confidence": "high",
+      "verified_attributes": [
+        "work-friendly",
+        "reading-friendly",
+        "quiet-signal",
+        "small-space",
+        "zoned-seating",
+        "large-desk-surface",
+        "millie-library-partnership-signal",
+        "cheesecake",
+        "einspanner",
+        "pet-friendly-signal",
+        "resident-dog-signal",
+        "near-hoegi-station",
+        "near-university-of-seoul"
+      ],
+      "ados_editorial_angles": [
+        "회기역과 서울시립대 사이 조용한 골목에서 구획된 좌석에 노트북과 책을 펼쳐 생각을 정리하는 카페",
+        "아인슈페너나 치즈케이크를 곁들이고 상주견을 마주치며 잠시 도시에서 ‘도망’하는 동네 아지트"
+      ],
+      "research_cautions": [
+        "작은 공간이라 만석 가능",
+        "밀리의서재 제휴 내용과 혜택은 최신 확인",
+        "반려동물 동반 규칙 및 상주견 접촉 주의",
+        "영업시간과 노트북 이용 정책 확인"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://www.dongnecoffeenote.com/c/5762",
+          "publisher": "동네 커피 노트",
+          "source_kind": "review-analysis",
+          "supports": [
+            "current-reviews-2026",
+            "address",
+            "work-friendly",
+            "pet-friendly-signal",
+            "photo-friendly",
+            "dessert-signal"
+          ]
+        },
+        {
+          "url": "https://polle.com/place/2VN9ul/%EB%8F%84%EB%A7%9D",
+          "publisher": "Polle",
+          "source_kind": "place-platform",
+          "supports": [
+            "current-listing-2026",
+            "address",
+            "millie-library-partnership-signal",
+            "quiet-signal",
+            "work-friendly",
+            "einspanner",
+            "resident-dog-signal"
+          ]
+        },
+        {
+          "url": "https://pandarank.net/contents/697ca0892eb7ba4de2cf3b9b",
+          "publisher": "판다랭크",
+          "source_kind": "recent-visit-review",
+          "supports": [
+            "visited-2026",
+            "address",
+            "reading-friendly",
+            "quiet-signal",
+            "cheesecake"
+          ]
+        },
+        {
+          "url": "https://pandarank.net/contents/6917f5c7c435ba21e3e18ee4",
+          "publisher": "판다랭크",
+          "source_kind": "recent-visit-review",
+          "supports": [
+            "visited-2025",
+            "small-space",
+            "zoned-seating",
+            "large-desk-surface",
+            "work-friendly"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-2414eb920fb8e32c",
@@ -39994,8 +40263,96 @@
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
       "editorial_context_provenance": null,
-      "canonical_place_id": null,
-      "research_status": "not_researched"
+      "canonical_place_id": "seoul:dongdaemun:ruhe-agit-hoegi",
+      "research_status": "reviewed",
+      "research_confidence": "high",
+      "verified_attributes": [
+        "cafe-bar",
+        "second-floor",
+        "jazz",
+        "rnb",
+        "soul-music",
+        "curated-interior",
+        "ambient-lighting",
+        "maple-toast",
+        "brownie",
+        "pavlova",
+        "plum-tomato-soda",
+        "milk-tea",
+        "alcohol",
+        "laptop-friendly",
+        "solo-friendly",
+        "conversation-friendly",
+        "pet-friendly",
+        "reservation",
+        "takeout",
+        "parking-unavailable",
+        "near-kyunghee-university"
+      ],
+      "ados_editorial_angles": [
+        "경희대 앞 2층에서 재즈·R&B·소울 플레이리스트와 감도 높은 오브제를 즐기는 카페 바",
+        "꾸덕한 브라우니나 파블로바에서 술 한 잔까지 이어져 혼자 쉬거나 친구와 늦게 대화하기 좋은 곳"
+      ],
+      "research_cautions": [
+        "일요일 시작 시간이 다름",
+        "임시 휴무는 인스타그램 확인",
+        "전용 주차장 없음",
+        "논커피 음료에 대한 취향 차이 후기",
+        "반려동물 동반 규칙 확인"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://www.tabling.co.kr/place/677cd0de66de5f069886ded4",
+          "publisher": "테이블링",
+          "source_kind": "reservation-platform",
+          "supports": [
+            "current-listing-2026",
+            "address",
+            "hours",
+            "jazz",
+            "rnb",
+            "soul-music",
+            "curated-interior",
+            "maple-toast",
+            "brownie",
+            "pavlova",
+            "plum-tomato-soda",
+            "laptop-friendly",
+            "pet-friendly",
+            "reservation",
+            "takeout",
+            "parking-unavailable"
+          ]
+        },
+        {
+          "url": "https://www.diningcode.com/profile.php?rid=nsSvkQX9oXxJ",
+          "publisher": "다이닝코드",
+          "source_kind": "place-platform",
+          "supports": [
+            "current-reviews-2026",
+            "address",
+            "second-floor",
+            "ambient-lighting",
+            "brownie",
+            "pavlova",
+            "milk-tea",
+            "alcohol",
+            "solo-friendly",
+            "conversation-friendly"
+          ]
+        },
+        {
+          "url": "https://yeongrim04.tistory.com/59",
+          "publisher": "영림의 일상",
+          "source_kind": "visit-review",
+          "supports": [
+            "cafe-bar",
+            "address",
+            "second-floor",
+            "coffee-quality-signal"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-d9a6d7b5abb0e2fe",
@@ -40103,8 +40460,95 @@
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
       "editorial_context_provenance": null,
-      "canonical_place_id": null,
-      "research_status": "not_researched"
+      "canonical_place_id": "seoul:dongdaemun:nerdy-blue-jeonnong",
+      "research_status": "reviewed",
+      "research_confidence": "medium",
+      "verified_attributes": [
+        "converted-house",
+        "two-floors",
+        "annex-seating",
+        "outdoor-seating",
+        "vintage-interior",
+        "work-friendly",
+        "power-outlets",
+        "board-games",
+        "mini-pool-table",
+        "cold-brew",
+        "nerdy-milk",
+        "cheongnyangni-ade",
+        "financier",
+        "cakes",
+        "late-hours-signal",
+        "pet-friendly-signal",
+        "near-university-of-seoul"
+      ],
+      "ados_editorial_angles": [
+        "서울시립대 가까운 옛 주택의 1·2층과 별관을 오가며 콘센트 자리를 골라 작업하는 빈티지 카페",
+        "콜드브루와 너디밀크, 보드게임·미니 당구대까지 있어 공부와 가벼운 놀이를 함께 해결하는 동네 공간"
+      ],
+      "research_cautions": [
+        "좌석이 편하지 않다는 최신 후기",
+        "영업시간과 메뉴 정보 일부가 오래되어 공식 채널 재확인",
+        "동명의 왕십리 ‘너디블루 버로우’와 혼동 주의",
+        "반려동물·주차 규칙 확인",
+        "ADoS 공개 전 운영 정보 한 차례 추가 확인 권장"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://polle.com/v__qo_op__v",
+          "publisher": "Polle",
+          "source_kind": "user-review-profile",
+          "supports": [
+            "visited-2026",
+            "address",
+            "converted-house",
+            "young-crowd",
+            "seating-comfort-caution"
+          ]
+        },
+        {
+          "url": "https://subin0318.tistory.com/",
+          "publisher": "취준생 일기",
+          "source_kind": "visit-review-index",
+          "supports": [
+            "address",
+            "two-floors",
+            "annex-seating",
+            "outdoor-seating",
+            "work-friendly",
+            "power-outlets",
+            "cold-brew",
+            "financier",
+            "late-hours-signal"
+          ]
+        },
+        {
+          "url": "https://ns2.joodns.com/matzip/matzip.do?code=M210710164929234980T&f=1&s=0&t=0",
+          "publisher": "맛집정보",
+          "source_kind": "menu-directory",
+          "supports": [
+            "current-listing-signal",
+            "address",
+            "phone",
+            "cold-brew",
+            "nerdy-milk",
+            "cheongnyangni-ade",
+            "cakes"
+          ]
+        },
+        {
+          "url": "https://today-yj.tistory.com/11",
+          "publisher": "융찡이",
+          "source_kind": "legacy-visit-review",
+          "supports": [
+            "converted-house",
+            "two-floors",
+            "work-friendly",
+            "board-games",
+            "mini-pool-table"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-16271d17b078a205",
@@ -40244,8 +40688,88 @@
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
       "editorial_context_provenance": null,
-      "canonical_place_id": null,
-      "research_status": "not_researched"
+      "canonical_place_id": "seoul:eunpyeong:bee-yool-yeokchon",
+      "research_status": "reviewed",
+      "research_confidence": "high",
+      "verified_attributes": [
+        "specialty-coffee",
+        "filter-coffee",
+        "multiple-beans",
+        "personalized-bean-guidance",
+        "coffee-mbti",
+        "long-black",
+        "ethiopia-blend",
+        "flat-white",
+        "oat-milk",
+        "housemade-vanilla-syrup",
+        "financiers",
+        "pudding",
+        "small-space",
+        "bar-seating",
+        "quiet-signal",
+        "work-friendly",
+        "reading-friendly",
+        "guestbook",
+        "takeout",
+        "early-weekday-opening",
+        "near-eungam-station",
+        "parking-signal"
+      ],
+      "ados_editorial_angles": [
+        "응암역 주택가에서 여러 원두의 향미를 설명 듣고 ‘커피 MBTI’처럼 내 취향의 필터커피를 찾는 작은 바",
+        "평일 아침 일찍 바 좌석에 앉아 다이어리나 책을 펼치고 휘낭시에와 천천히 커피를 마시는 동네 아지트"
+      ],
+      "research_cautions": [
+        "평일과 주말 영업시간이 크게 다름",
+        "월요일 휴무",
+        "작은 공간이라 단체 방문 전 확인",
+        "드립 주문은 시간이 걸릴 수 있음",
+        "주차 가능 대수와 조건 확인"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://www.diningcode.com/profile.php?rid=HI4Kt4eEIVg0",
+          "publisher": "다이닝코드",
+          "source_kind": "place-platform",
+          "supports": [
+            "current-reviews-2026",
+            "address",
+            "hours",
+            "specialty-coffee",
+            "filter-coffee",
+            "multiple-beans",
+            "personalized-bean-guidance",
+            "coffee-mbti",
+            "long-black",
+            "ethiopia-blend",
+            "flat-white",
+            "oat-milk",
+            "housemade-vanilla-syrup",
+            "financiers",
+            "pudding",
+            "small-space",
+            "bar-seating",
+            "quiet-signal",
+            "work-friendly",
+            "reading-friendly",
+            "guestbook",
+            "takeout",
+            "parking-signal"
+          ]
+        },
+        {
+          "url": "https://www.daangn.com/kr/local-profile/%EB%B9%84%EC%9C%A8-zkg35pku7bv7/",
+          "publisher": "당근",
+          "source_kind": "local-business-profile",
+          "supports": [
+            "active-2026",
+            "address",
+            "coffee-quality-signal",
+            "quiet-signal",
+            "comfortable-space"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-047c1763ebe81b5a",
