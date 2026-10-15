@@ -7,6 +7,7 @@ const manifest = JSON.parse(await readFile(path.join(sourceDir, "editorial-serie
 const checklists = await Promise.all([
   "publication-checklist-priority-1-3.json",
   "publication-checklist-priority-4-6.json",
+  "publication-checklist-priority-7-8.json",
 ].map(async (filename) => JSON.parse(await readFile(path.join(sourceDir, filename), "utf8"))));
 const byCanonicalId = new Map(labels.records.map((record) => [record.canonical_place_id, record]));
 const errors = [];
@@ -28,6 +29,9 @@ for (const series of manifest.series) {
     else if (research.research_status !== "reviewed") errors.push(`${series.id}: ${place.canonical_place_id} is ${research.research_status}`);
   }
 }
+
+const publicationDrafts = checklists.reduce((sum, checklist) => sum + checklist.series.length, 0);
+if (publicationDrafts !== manifest.series.length) errors.push(`Expected a draft for all ${manifest.series.length} series, found ${publicationDrafts}`);
 
 for (const item of checklists.flatMap((checklist) => checklist.series)) {
   const series = manifest.series.find((candidate) => candidate.id === item.series_id);
@@ -54,6 +58,5 @@ if (errors.length) {
   process.exitCode = 1;
 } else {
   const placements = manifest.series.reduce((sum, series) => sum + series.places.length, 0);
-  const publicationDrafts = checklists.reduce((sum, checklist) => sum + checklist.series.length, 0);
   console.log(`Validated ${manifest.series.length} editorial series, ${placements} place placements, and ${publicationDrafts} publication drafts.`);
 }
