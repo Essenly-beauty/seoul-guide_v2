@@ -19,6 +19,7 @@ export const routes = {
   rankingRetailer: (retailer: "olive_young" | "daiso") =>
     `/ranking?retailer=${encodeURIComponent(retailer)}`,
   blog: "/blog",
+  coffee: "/coffee",
   favorites: "/favorites",
   savedPlacesMap: "/map?saved=1",
   /** Open the map in subway mode focused on one station (station-first search). */
@@ -43,6 +44,7 @@ export const routes = {
   search: "/search",
   download: "/download",
   blogArticle: (slug: string) => `/blog/${slug}`,
+  coffeeSeries: (slug: string) => `/coffee/${slug}`,
   journalArticle: (slug: string) => `/blog/${slug}`, // legacy alias
 
   // Menu-only screens

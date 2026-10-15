@@ -42,6 +42,20 @@ export default function BlogListPage() {
 
         <SectionDivider />
 
+        <section className="stack sm">
+          <SectionHeader title="Coffee & Cafés" />
+          <Link href={routes.coffee} className="coffee-blog-feature">
+            <div>
+              <div className="label">8 EDITORIAL STORIES</div>
+              <b>오늘의 서울을 카페로 고르는 법</b>
+              <p className="small muted">작업할 창가, 아침의 첫 잔, 책과 노을을 위한 서울 카페 큐레이션.</p>
+            </div>
+            <span aria-hidden="true">→</span>
+          </Link>
+        </section>
+
+        <SectionDivider />
+
         {/* Latest stories — thumb rows */}
         <section className="stack sm">
           <SectionHeader title="Latest stories" count={stories.length} />
