@@ -11,6 +11,8 @@
 - `EDITORIAL_CONTEXT_TAXONOMY.md`: 컬렉션 ID와 상황·공간·계절·메뉴·동네 태그 규칙.
 - `research-labels-2026-09-26.json`: 외부 출처로 검증한 장소 속성, ADoS 편집 각도, 근거 URL.
 - `research-queue-2026-09-26.json`: 454개 전체 후보의 정규화 이름, 중복 가능성, 업종 검토 및 조사 우선순위.
+- `editorial-series-2026-10-15.json`: 검증된 정규 장소를 상황 중심의 ADoS 글 8편으로 묶은 개발용 초안 매니페스트.
+- `EDITORIAL_SERIES_ROADMAP.md`: 시리즈 발행 순서, 화면 적용 방식, 공개 전 안전장치.
 - `seoul-names-raw.md`: 서울 21개 자치구별 원문 이름 목록.
 - `outside-seoul-raw.md`: 경기·부산·제주 등 서울 이외 장소의 원문 기반 백업. 현재 import 대상은 아니다.
 
@@ -24,6 +26,7 @@
 6. Threads 계정은 발견 출처다. My Seoul Drop 자체 리뷰나 추천 근거로 표시하지 않는다.
 7. `source_collection_ids`와 다축 태그는 원문 게시물의 편집 맥락이다. 현장 검증된 장소 속성으로 간주하지 않는다.
 8. `research_status`와 `verified_attributes`는 외부 조사 결과이며, `eligible_for_ados`와 별개다.
+9. `editorial-series-2026-10-15.json`은 글 기획 초안이다. 포함 여부만으로 장소 추천 승인이나 공개 권한을 부여하지 않는다.
 
 권장 검토 상태:
 
