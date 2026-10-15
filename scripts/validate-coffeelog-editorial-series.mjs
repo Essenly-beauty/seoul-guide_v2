@@ -51,6 +51,16 @@ for (const item of checklists.flatMap((checklist) => checklist.series)) {
   } catch {
     errors.push(`${item.series_id}: missing draft ${item.draft_path}`);
   }
+
+  if (item.draft_path_en) {
+    try {
+      const englishDraft = await readFile(path.join(sourceDir, item.draft_path_en), "utf8");
+      if (!englishDraft.includes(`series_id: ${item.series_id}`)) errors.push(`${item.series_id}: English draft frontmatter id mismatch`);
+      if ((englishDraft.match(/^## /gm) ?? []).length !== series.places.length) errors.push(`${item.series_id}: English draft place count mismatch`);
+    } catch {
+      errors.push(`${item.series_id}: missing English draft ${item.draft_path_en}`);
+    }
+  }
 }
 
 if (errors.length) {

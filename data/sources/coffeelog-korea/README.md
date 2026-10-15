@@ -14,6 +14,7 @@
 - `editorial-series-2026-10-15.json`: 검증된 정규 장소를 상황 중심의 ADoS 글 8편으로 묶은 개발용 초안 매니페스트.
 - `EDITORIAL_SERIES_ROADMAP.md`: 시리즈 발행 순서, 화면 적용 방식, 공개 전 안전장치.
 - `editorial-drafts/`: 우선순위 1~8 전체 시리즈의 한국어 아티클 초안.
+- `editorial-drafts-en/`: ADoS 해외 독자를 위해 다시 편집한 영문 아티클 초안. 우선순위 순서대로 확장한다.
 - `EDITORIAL_IMAGE_BRIEFS.md`: 우선순위 1~8 전체 시리즈의 대표 이미지 방향과 금지 요소.
 - `publication-checklist-priority-1-3.json`: 18개 장소의 발행 직전 재확인 범위와 원고 연결 정보.
 - `publication-checklist-priority-4-6.json`: 다음 18개 장소의 발행 직전 재확인 범위와 원고 연결 정보.

@@ -23,4 +23,13 @@ describe("coffee editorial preview data", () => {
       for (const place of series.places) expect(place.body.length).toBeGreaterThan(40);
     }
   });
+
+  it("keeps available English drafts aligned with the Korean place order", () => {
+    const translated = COFFEE_EDITORIAL_SERIES.filter((series) => series.english);
+    expect(translated).toHaveLength(3);
+    for (const series of translated) {
+      expect(series.english?.introduction.length).toBeGreaterThan(80);
+      expect(series.english?.placeBodies).toHaveLength(series.places.length);
+    }
+  });
 });

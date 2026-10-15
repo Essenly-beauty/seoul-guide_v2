@@ -18,6 +18,7 @@
     {
       "series_id": "ados-coffee:work-with-a-window",
       "draft_path": "./editorial-drafts/01-work-with-a-window.md",
+      "draft_path_en": "./editorial-drafts-en/01-work-with-a-window.md",
       "places": [
         "seoul:mapo:hhss-house-mangwon",
         "seoul:mapo:nice-work-today-sinsu",
@@ -30,6 +31,7 @@
     {
       "series_id": "ados-coffee:seoul-before-nine",
       "draft_path": "./editorial-drafts/02-seoul-before-nine.md",
+      "draft_path_en": "./editorial-drafts-en/02-seoul-before-nine.md",
       "places": [
         "seoul:seodaemun:manufact-coffee-yeonhui",
         "seoul:mapo:sandstone-coffee-lab-yeonnam",
@@ -42,6 +44,7 @@
     {
       "series_id": "ados-coffee:coffee-worth-crossing-seoul-for",
       "draft_path": "./editorial-drafts/03-coffee-worth-crossing-seoul-for.md",
+      "draft_path_en": "./editorial-drafts-en/03-coffee-worth-crossing-seoul-for.md",
       "places": [
         "seoul:mapo:protokoll-sangsu",
         "seoul:seongdong:lowkey-seongsu",

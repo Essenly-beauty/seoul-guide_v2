@@ -14,31 +14,40 @@ const checklists = await Promise.all([
 
 const researchById = new Map(labels.records.map((record) => [record.canonical_place_id, record]));
 const candidateByExternalId = new Map(candidates.records.map((record) => [record.external_id, record]));
-const draftPathBySeriesId = new Map(checklists.flatMap((checklist) => checklist.series).map((item) => [item.series_id, item.draft_path]));
+const checklistBySeriesId = new Map(checklists.flatMap((checklist) => checklist.series).map((item) => [item.series_id, item]));
 
 function cleanParagraph(value) {
   return value.replace(/\n+/g, " ").replace(/\s+/g, " ").trim();
 }
 
-async function readDraft(seriesId, expectedPlaces) {
-  const relativePath = draftPathBySeriesId.get(seriesId);
+async function readDraft(seriesId, expectedPlaces, language = "ko") {
+  const checklist = checklistBySeriesId.get(seriesId);
+  const relativePath = language === "en" ? checklist?.draft_path_en : checklist?.draft_path;
   if (!relativePath) throw new Error(`Missing draft path: ${seriesId}`);
   const markdown = await readFile(path.join(sourceDir, relativePath), "utf8");
+  const frontmatter = Object.fromEntries((markdown.match(/^---\n([\s\S]*?)\n---/)?.[1] ?? "").split("\n").map((line) => {
+    const splitAt = line.indexOf(":");
+    return splitAt < 0 ? [line, ""] : [line.slice(0, splitAt).trim(), line.slice(splitAt + 1).trim()];
+  }));
   const withoutFrontmatter = markdown.replace(/^---\n[\s\S]*?\n---\n/, "");
-  const publicationMatch = withoutFrontmatter.match(/^> 발행 메모:\s*(.+)$/m);
+  const noteLabel = language === "en" ? "Publication note" : "발행 메모";
+  const publicationMatch = withoutFrontmatter.match(new RegExp(`^> ${noteLabel}:\\s*(.+)$`, "m"));
   const publicationNote = publicationMatch ? cleanParagraph(publicationMatch[1]) : "";
-  const mainCopy = withoutFrontmatter.replace(/^> 발행 메모:[\s\S]*$/m, "").trim();
+  const mainCopy = withoutFrontmatter.replace(new RegExp(`^> ${noteLabel}:[\\s\\S]*$`, "m"), "").trim();
   const sections = mainCopy.split(/^## /m);
   const introduction = cleanParagraph(sections.shift().replace(/^# .+\n+/, ""));
+  const placeHeadings = sections.map((section) => section.split("\n", 1)[0].trim());
   const placeBodies = sections.map((section) => cleanParagraph(section.replace(/^.+\n+/, "")));
   if (placeBodies.length !== expectedPlaces) {
     throw new Error(`${seriesId}: expected ${expectedPlaces} draft sections, found ${placeBodies.length}`);
   }
-  return { introduction, placeBodies, publicationNote };
+  return { introduction, placeBodies, placeHeadings, publicationNote, frontmatter };
 }
 
 const series = await Promise.all(manifest.series.map(async (item) => {
   const draft = await readDraft(item.id, item.places.length);
+  const checklist = checklistBySeriesId.get(item.id);
+  const englishDraft = checklist?.draft_path_en ? await readDraft(item.id, item.places.length, "en") : null;
   return {
     id: item.id,
     slug: item.slug,
@@ -48,6 +57,13 @@ const series = await Promise.all(manifest.series.map(async (item) => {
     dekKo: item.dek_ko,
     introduction: draft.introduction,
     publicationNote: draft.publicationNote,
+    english: englishDraft ? {
+      dek: englishDraft.frontmatter.dek_en,
+      introduction: englishDraft.introduction,
+      publicationNote: englishDraft.publicationNote,
+      placeBodies: englishDraft.placeBodies,
+      placeHeadings: englishDraft.placeHeadings,
+    } : null,
     occasionTags: item.occasion_tags,
     places: item.places.map((place, index) => {
     const research = researchById.get(place.canonical_place_id);

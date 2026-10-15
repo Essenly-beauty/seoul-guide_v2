@@ -10,6 +10,27 @@ export const COFFEE_EDITORIAL_SERIES = [
     "dekKo": "노트북을 펴기 좋은 좌석과 창가의 빛을 함께 고른 여섯 곳.",
     "introduction": "집중이 필요한 날에도 서울을 포기할 필요는 없다. 책상만 넓은 카페보다 창밖의 나무와 골목, 시간에 따라 달라지는 빛까지 일의 리듬을 바꿔주는 곳을 골랐다. 노트북을 펼치기 좋은 좌석이 확인된 여섯 곳이지만, 콘센트와 이용 시간은 방문하는 날 다시 확인하는 편이 좋다.",
     "publicationNote": "이 글은 2026년 10월 리서치 초안이다. 영업시간, 노트북 정책, 좌석 이용 시간과 대관 일정은 발행일과 방문일에 다시 확인한다.",
+    "english": {
+      "dek": "Six Seoul cafés where a laptop-friendly seat comes with daylight, trees, or a view of the neighborhood.",
+      "introduction": "Needing to focus does not mean giving up on Seoul for the day. These six cafés offer more than a large table: trees outside the glass, a view over the neighborhood, and light that changes the rhythm of an afternoon. Laptop-friendly seating has been reported at each place, but outlet access and time limits can change, so check the latest house rules before settling in.",
+      "publicationNote": "This is an October 2026 research draft. Recheck opening hours, laptop policies, seat limits, and rental schedules both before publication and before visiting.",
+      "placeBodies": [
+        "Part design studio and part café, HHSS HOUSE occupies a tucked-away third floor. A window seat looks into the trees, making it a calm place to work alone over filter coffee. You remove your shoes before entering, and the entrance can be easy to miss. There is also a resident cat and fragrance in the space, worth noting if you are sensitive to either.",
+        "With a large window facing the Gyeongui Line Forest Park, shared tables, individual seats, Wi-Fi, and outlets, this comes close to a café designed around getting things done. A rotating filter-coffee selection keeps it from feeling like a generic coworking room. Seats can fill during exam periods and on weekend afternoons, and the quiet working mood is better for individual focus than a lively group meeting.",
+        "This quiet second-floor café sits between Hapjeong and Mangwon. The natural routine is simple: open a book or laptop beneath the large window and add banana bread or a house cookie. Closing hours can vary by day. Confirm paid-parking terms and current pet rules before visiting.",
+        "Window seats look down over the Mangwon streets, while coffee and seasonal fruit desserts give you a reason to stay beyond a single task. The café may use different time limits to manage busy periods. Check that you are heading to this location rather than the separately operated Rowing Coffee Bar.",
+        "In daylight, the large second-floor windows work well for reading or a laptop. At night, the room shifts toward whisky and cocktails. It is useful when an afternoon of work needs to become an evening plan without changing addresses. Weekend nights can be crowded and louder, and access is by stairs.",
+        "In the middle of Hongdae, this compact workspace café prioritizes focus with individual, laptop, and window seating. It can also be an option later in the day. Rentals and private events may affect available seats, and the full name “Jakupsil 01” matters: it should not be confused with an older café with a similar name."
+      ],
+      "placeHeadings": [
+        "HHSS HOUSE · Mangwon",
+        "Nice Work Today · Sinsu",
+        "Volver · Hapjeong",
+        "Rowing Coffee · Mangwon",
+        "Yaksuteo · Yaksu",
+        "Jakupsil 01 · Hongdae"
+      ]
+    },
     "occasionTags": [
       "work",
       "solo-time",
@@ -141,6 +162,27 @@ export const COFFEE_EDITORIAL_SERIES = [
     "dekKo": "출근과 산책이 시작되기 전에 문을 여는 로스터리와 작은 카페.",
     "introduction": "아직 약속도 상점도 시작되지 않은 시간, 먼저 문을 연 카페는 동네를 다르게 보이게 한다. 진한 플랫화이트부터 주문 즉시 내리는 V60까지, 아침 일찍 찾아갈 커피의 이유가 분명한 여섯 곳을 골랐다. 이른 영업은 변동 가능성이 큰 정보이므로 방문 전날 공식 공지를 확인하자.",
     "publicationNote": "제목의 ‘아홉 시 전’은 편집 콘셉트다. 각 장소의 실제 오픈 시간과 요일별 차이는 발행 당일 공식 채널로 확인한 뒤 본문에 표기한다.",
+    "english": {
+      "dek": "Six early-opening cafés for a flat white, a fresh V60, or a quiet start before the city gets busy.",
+      "introduction": "Before appointments begin and shop shutters rise, an open café can make a familiar neighborhood feel entirely different. These six places offer a clear reason to arrive early, from a compact flat white to a V60 brewed to order. Early opening hours are especially prone to change, so check the café’s latest notice the day before you go.",
+      "publicationNote": "“Before nine” is an editorial theme, not a guarantee for every day. Confirm each café’s exact opening time and weekday or weekend schedule through its official channel before publication.",
+      "placeBodies": [
+        "Climb the steep stairs to a small second-floor room and choose the first cup of the day from flat white, espresso, or hand drip. There are only a few seats, so this is better for a short, concentrated coffee—or for leaving with beans and drip bags—than for occupying a table all morning. Use nearby public parking rather than expecting a dedicated space.",
+        "This roastery serves hand drip before Yeonnam reaches its busiest hours. A terrace, brunch, and a signature cream latte make it an easy starting point for a neighborhood walk. Weekday and weekend hours may differ, and dedicated parking should not be assumed.",
+        "A V60 brewed to order from around eight in the morning captures the spirit of this list. Look through the single-origin and decaf choices, then let the first cup set the pace of the day. The bean selection changes, and parking is extremely limited, so public transport is the safer plan.",
+        "An old house has been converted into a roastery where you can choose among several beans and add a pastry-chef-made dessert. The combination of coffee choice and residential calm suits an unhurried morning. Weekday and weekend schedules can differ considerably, and redevelopment in the surrounding area makes a current-operation check worthwhile.",
+        "This roastery is useful on the way to work for comparing specialty coffees from several origins or picking up beans. A terrace and work-friendly seating also make it a possible stop before a first meeting. It may open later on weekends, and visitors with dogs should confirm leash and entry rules.",
+        "Although it sits in the middle of Myeongdong’s visitor routes, the second floor is relatively spacious and calm. Choose a bean, add one of the in-house bakes, and pause before a day in central Seoul. The café can fill with local office workers at lunch, and there is no parking."
+      ],
+      "placeHeadings": [
+        "Manufact Coffee Yeonhui · Yeonhui",
+        "Sandstone Coffee Lab · Yeonnam",
+        "Arco Coffee Roasters · Yangjae",
+        "Beansmith Coffee Roastery · Wonhyoro",
+        "Popular Coffee · Nonhyeon",
+        "Upnd Coffee Roasters · Myeongdong"
+      ]
+    },
     "occasionTags": [
       "morning",
       "commute",
@@ -272,6 +314,27 @@ export const COFFEE_EDITORIAL_SERIES = [
     "dekKo": "공간보다 원두와 추출이 먼저 기억되는 서울의 로스터리 여섯 곳.",
     "introduction": "예쁜 공간보다 한 잔의 이유를 먼저 묻는 날이 있다. 직접 볶은 원두, 산지별 선택, 필터 추출과 커피를 설명하는 태도까지 확인된 서울의 로스터리 여섯 곳이다. ‘최고’라는 순위 대신 서로 다른 동네에서 커피를 경험하는 방식을 보여준다.",
     "publicationNote": "이 글은 순위가 아니라 서로 다른 커피 경험을 제안한다. 원두 라인업, 추출 메뉴, 지점 주소와 운영 여부는 발행일에 공식 채널로 다시 확인한다.",
+    "english": {
+      "dek": "Six roasteries where the beans, the brewing, and the way coffee is explained matter more than a photogenic room.",
+      "introduction": "Some days, the question is not whether a café is beautiful but whether the cup gives you a reason to travel. These six Seoul roasteries have a clear relationship to roasting, origin choice, filter brewing, or coffee education. This is not a ranking of the city’s “best.” It is a map of different ways to experience coffee across Seoul.",
+      "publicationNote": "This article proposes different coffee experiences rather than a ranking. Reconfirm bean lineups, brewing menus, branch addresses, and current operation through official channels before publication.",
+      "placeBodies": [
+        "Protokoll translates time spent recording and concentrating into the language of a roastery. Coffee is the point rather than a decorative extra, and reading or writing beside a cup feels natural here. Check whether the café is applying a time limit during busy periods.",
+        "Lowkey is a specialty roastery for days when coffee itself needs to be the destination in Seongsu. Its work extends from roasting into coffee education, giving the cup a visible process and context. Be careful not to confuse the company or roasting address with the customer-facing Seongsu shop.",
+        "On Seoul’s eastern side, this showroom-style space brings the relationship between roasting and origin closer to the visitor. Its direct-trade and roastery context makes it especially relevant to people interested in what happens before brewing. The Hanam roasting facility and the Seoul Seongnae flagship are separate locations, so verify the branch on your map.",
+        "This is a worthwhile stop before departing from Seoul Station when you want to choose filter coffee or beans with care. Coffee expertise and a work-friendly setting also suit a short period of focus before traveling. Weekday and weekend hours differ, and the lack of step-free access or an elevator should be included in any visit plan.",
+        "Connects links a neighborhood morning with hand-dripped specialty coffee and its own roasted beans. A dairy-free option can make the cup easier to adjust to personal needs. Opening times differ between weekdays and weekends, which matters especially for an early visit.",
+        "Beginning in a Sinsa alley, Milestone helped translate Australian coffee culture into a Seoul neighborhood café. The relationship between espresso and milk—and the brand’s growth from a local starting point—gives the visit its context. Corporate information may show a Hannam address, so the place card must use the exact address of the Sinsa café."
+      ],
+      "placeHeadings": [
+        "Protokoll Sangsu · Sangsu",
+        "Lowkey · Seongsu",
+        "Coffee Montage · Seongnae",
+        "El Café Coffee Roasters · Huam",
+        "Connects Coffee Mangwon · Mangwon",
+        "Milestone Coffee Sinsa · Sinsa"
+      ]
+    },
     "occasionTags": [
       "coffee-destination",
       "solo-time"
@@ -393,6 +456,7 @@ export const COFFEE_EDITORIAL_SERIES = [
     "dekKo": "서가와 음악, 창밖 풍경까지 읽는 속도를 늦춰주는 북카페.",
     "introduction": "책이 많은 카페와 책을 읽기 좋은 카페는 조금 다르다. 서가의 큐레이션뿐 아니라 소파와 창밖 풍경, 음악의 크기까지 읽는 속도를 바꾸는 여섯 곳을 골랐다. 일반 카페와 다른 이용료나 좌석 규칙이 있는 곳도 있으니, 방문 전에 각 공간의 방식을 살펴보자.",
     "publicationNote": "이용권, 좌석 규칙, 행사 일정과 당일 운영 여부를 발행 시점에 다시 확인한다.",
+    "english": null,
     "occasionTags": [
       "reading",
       "solo-time",
@@ -524,6 +588,7 @@ export const COFFEE_EDITORIAL_SERIES = [
     "dekKo": "늦은 작업, 긴 대화, 커피에서 술로 넘어가는 밤을 위한 여섯 곳.",
     "introduction": "저녁의 카페는 낮보다 목적이 다양하다. 마감 전 일을 끝내거나 대화를 길게 이어가고, 커피에서 와인과 칵테일로 자연스럽게 넘어가기도 한다. 늦게까지 문을 여는 신호가 확인된 곳 가운데 밤의 쓰임이 서로 다른 여섯 곳을 골랐다.",
     "publicationNote": "늦은 영업시간과 주류 판매, 대관 일정은 변동 가능성이 높다. 발행일과 방문일에 각각 확인한다.",
+    "english": null,
     "occasionTags": [
       "late-night",
       "work",
@@ -655,6 +720,7 @@ export const COFFEE_EDITORIAL_SERIES = [
     "dekKo": "남산과 골목, 한강의 빛이 달라지는 시간을 보는 테라스와 루프톱.",
     "introduction": "서울에서 전망은 높이만으로 결정되지 않는다. 남산이 가까워지는 해방촌의 경사, 필동 골목 끝의 옥상, 마포에서 멀리 보는 한강처럼 동네마다 저녁의 방향이 다르다. 맑은 날 해가 지기 한 시간쯤 전에 도착하고, 루프톱 운영 여부는 당일 날씨와 함께 확인하자.",
     "publicationNote": "루프톱·테라스는 계절, 강풍, 우천과 행사에 따라 닫힐 수 있다. 일몰 시각과 당일 이용 가능 여부를 확인한다.",
+    "english": null,
     "occasionTags": [
       "sunset",
       "date",
@@ -786,6 +852,7 @@ export const COFFEE_EDITORIAL_SERIES = [
     "dekKo": "프렌치토스트부터 티라미수까지, 주문할 이유가 분명한 접시들.",
     "introduction": "카페를 고를 때 커피보다 먼저 떠오르는 한 접시가 있다. 프렌치토스트와 치즈 브륄레, 한국적인 츄로넛처럼 그 동네까지 갈 이유가 되는 디저트를 골랐다. 계절과 재고에 따라 바뀌고 늦은 오후에는 품절될 수 있으니, 꼭 먹고 싶은 메뉴라면 방문 전에 확인하자.",
     "publicationNote": "대표 디저트의 당일 판매 여부, 가격, 품절 시간과 기간 한정 메뉴 여부를 발행 전에 확인한다.",
+    "english": null,
     "occasionTags": [
       "dessert",
       "date",
@@ -917,6 +984,7 @@ export const COFFEE_EDITORIAL_SERIES = [
     "dekKo": "바 좌석, 음악, 핸드드립처럼 혼자일 때 더 잘 보이는 것들.",
     "introduction": "혼자 가기 좋은 카페는 빈 좌석이 많은 곳과 다르다. 바리스타의 손을 볼 수 있는 바, 한 사람에게 맞는 책상, 말없이 골라 듣는 음악처럼 혼자일 때 더 잘 보이는 것이 있어야 한다. 커피에 집중하는 작은 바부터 휴대폰을 잠시 내려놓는 공간까지 여섯 곳을 골랐다.",
     "publicationNote": "티피는 운영·메뉴·좌석을 추가 확인하기 전 공개 보류한다. 모든 장소의 바 좌석 운영과 체류 제한도 발행일에 다시 확인한다.",
+    "english": null,
     "occasionTags": [
       "solo-time",
       "coffee",

@@ -6540,6 +6540,9 @@
   .coffee-editorial-note > p:last-child { margin-top: 6px; color: var(--muted); font-size: 12px; line-height: 1.6; }
   .coffee-detail-hero { position: relative; min-height: 390px; padding: 88px 24px 30px; overflow: hidden; background: var(--coffee-tone); color: white; }
   .coffee-detail-back { position: absolute; top: 14px; left: 14px; z-index: 2; }
+  .coffee-language-switch { position: absolute; top: 20px; right: 18px; z-index: 2; display: flex; gap: 4px; padding: 3px; border: 1px solid rgba(255,255,255,.35); border-radius: 999px; }
+  .coffee-language-switch a { padding: 5px 8px; border-radius: 999px; color: rgba(255,255,255,.72); font-size: 10px; font-weight: 700; }
+  .coffee-language-switch a[aria-current="page"] { background: rgba(255,255,255,.92); color: #333a31; }
   .coffee-detail-hero h1 { position: relative; z-index: 1; max-width: 330px; margin: 18px 0 16px; font-family: var(--font-serif); font-size: 43px; line-height: 1.02; letter-spacing: -.035em; }
   .coffee-detail-hero > p:not(.label) { position: relative; z-index: 1; max-width: 310px; font-size: 14px; line-height: 1.65; color: rgba(255,255,255,.82); }
   .coffee-detail-orbit { position: absolute; right: -100px; bottom: -130px; width: 310px; height: 310px; border: 1px solid rgba(255,255,255,.4); border-radius: 50%; }
