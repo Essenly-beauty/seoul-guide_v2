@@ -26,7 +26,7 @@ describe("coffee editorial preview data", () => {
 
   it("keeps available English drafts aligned with the Korean place order", () => {
     const translated = COFFEE_EDITORIAL_SERIES.filter((series) => series.english);
-    expect(translated).toHaveLength(3);
+    expect(translated).toHaveLength(6);
     for (const series of translated) {
       expect(series.english?.introduction.length).toBeGreaterThan(80);
       expect(series.english?.placeBodies).toHaveLength(series.places.length);

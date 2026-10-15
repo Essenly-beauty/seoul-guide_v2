@@ -456,7 +456,27 @@ export const COFFEE_EDITORIAL_SERIES = [
     "dekKo": "서가와 음악, 창밖 풍경까지 읽는 속도를 늦춰주는 북카페.",
     "introduction": "책이 많은 카페와 책을 읽기 좋은 카페는 조금 다르다. 서가의 큐레이션뿐 아니라 소파와 창밖 풍경, 음악의 크기까지 읽는 속도를 바꾸는 여섯 곳을 골랐다. 일반 카페와 다른 이용료나 좌석 규칙이 있는 곳도 있으니, 방문 전에 각 공간의 방식을 살펴보자.",
     "publicationNote": "이용권, 좌석 규칙, 행사 일정과 당일 운영 여부를 발행 시점에 다시 확인한다.",
-    "english": null,
+    "english": {
+      "dek": "Six Seoul book cafés where shelves, music, seating, and the view all help you slow down and keep reading.",
+      "introduction": "A café with many books is not always a café made for reading. These six places consider more than the shelf: the sofa, the view beyond the window, and even the volume of the music can change your pace. Some operate with admission fees or seating rules that differ from an ordinary café, so learn how each space works before you arrive.",
+      "publicationNote": "Reconfirm admission fees, seating rules, event schedules, and same-day operation before publication.",
+      "placeBodies": [
+        "The essential experience is opening a book high above the Han River. Check and Grow functions both as a long-stay book café and a rentable space, so the price of a drink also reflects time spent there. Conversation and solo-reading rules can vary by floor and seat.",
+        "Senvers connects reading with music, scent, and drinks rather than treating a book as text alone. The large space suits a day when you want to remain with one book for several hours. It uses a paid-access model instead of a simple drink order, so confirm the current fee and session length first.",
+        "Run by a publisher, this bookshop café brings science and humanities shelves together after a walk through Namsangol Hanok Village. The view of traditional roofs and its cultural programming widen the context around a book. Exhibitions and events change, so check the schedule rather than expecting every program to be permanent.",
+        "Books, vinyl, a dedicated listening room, and work-friendly seats share this large café near Seokchon Lake. It works for a quiet afternoon alone or for a group in which everyone wants to do something different. Platforms have shown conflicting operation information at times, so confirm same-day opening; popular baked goods may also sell out later in the afternoon.",
+        "Behind COEX, roughly three thousand books sit among sofas and private rooms. The range of seating supports both solo reading and a small gathering. Weekday and weekend hours can differ significantly, while parking information varies between sources, making public transport the safer choice.",
+        "Inside a converted two-story house, notes from authors and the shop’s curation lead you toward the next book. Book talks and independent-publishing events share space with house-made Basque cheesecake. The owner describes it less as a “book café” than a “café with many books,” and weekends can be busy."
+      ],
+      "placeHeadings": [
+        "Check and Grow · Mapo",
+        "Senvers Seoul Book Café · Seongsu",
+        "Café Hubble & Namsan Bookshop · Pil-dong",
+        "Café Manarant · Seokchon",
+        "Book & Rest · Samseong",
+        "Gozneok Bookshop · Gunja"
+      ]
+    },
     "occasionTags": [
       "reading",
       "solo-time",
@@ -588,7 +608,27 @@ export const COFFEE_EDITORIAL_SERIES = [
     "dekKo": "늦은 작업, 긴 대화, 커피에서 술로 넘어가는 밤을 위한 여섯 곳.",
     "introduction": "저녁의 카페는 낮보다 목적이 다양하다. 마감 전 일을 끝내거나 대화를 길게 이어가고, 커피에서 와인과 칵테일로 자연스럽게 넘어가기도 한다. 늦게까지 문을 여는 신호가 확인된 곳 가운데 밤의 쓰임이 서로 다른 여섯 곳을 골랐다.",
     "publicationNote": "늦은 영업시간과 주류 판매, 대관 일정은 변동 가능성이 높다. 발행일과 방문일에 각각 확인한다.",
-    "english": null,
+    "english": {
+      "dek": "Six Seoul cafés for late work, a long conversation, or the moment when coffee gives way to wine and cocktails.",
+      "introduction": "A café has more possible roles after dark. It can be where you finish the last task of the day, let a conversation run long, or move naturally from coffee to wine and cocktails. These six places have shown late-opening signals, but each offers a different kind of Seoul night.",
+      "publicationNote": "Late hours, alcohol service, and private-event schedules are highly changeable. Confirm them both on publication day and on the day of a visit.",
+      "placeBodies": [
+        "Outlets, Wi-Fi, and a spacious third floor make Viva Bossa practical for work that runs into the evening. The reason to choose it is the laptop-friendly environment with tea and brownies, rather than a singular specialty-coffee experience. Check the latest seat and time-limit policy during busy hours.",
+        "Coffee, meals, work, conversation, and small events overlap inside this cultural platform. It suits a day that begins with solo work and ends with meeting someone or joining an evening program. Private rentals and events can change how much of the space is open for general use.",
+        "Under a large second-floor window, a latte and Basque cheesecake can lead into a drink later at night. The room works differently across the day: quiet lingering in the afternoon, conversation in the evening. Reconfirm midnight closing and current alcohol service before visiting.",
+        "Coffee overlooking Seokchon Lake transitions into wine after dark. Sommelier operation, house-made desserts, and a rooftop terrace create an easy evening-date sequence. Closing times vary by day, and both the weekly holiday and rooftop access need confirmation.",
+        "Multiple floors, work seats, outlets, and a meeting room make this a practical option when a laptop needs to stay open late. Its long schedule can stretch from early morning into the night, but conditions for basement work seats and meeting rooms may change. Check parking and peak-time seat availability as well.",
+        "Find the unsigned entrance and climb to the fourth floor of an old building to reach a fictional “hotel” where daytime coffee becomes cocktails and natural wine. Dark lighting and louder music suit late conversation more than reading or work. There is no elevator or parking, and weekend visits may be subject to a time limit."
+      ],
+      "placeHeadings": [
+        "Viva Bossa · Mangwon",
+        "Maverick House · Sangsu",
+        "Origami Club · Hapjeong",
+        "Café Eclipse · Seokchon",
+        "About Coffee Songpa · Songpa",
+        "Hotel Susunhwa · Euljiro"
+      ]
+    },
     "occasionTags": [
       "late-night",
       "work",
@@ -720,7 +760,27 @@ export const COFFEE_EDITORIAL_SERIES = [
     "dekKo": "남산과 골목, 한강의 빛이 달라지는 시간을 보는 테라스와 루프톱.",
     "introduction": "서울에서 전망은 높이만으로 결정되지 않는다. 남산이 가까워지는 해방촌의 경사, 필동 골목 끝의 옥상, 마포에서 멀리 보는 한강처럼 동네마다 저녁의 방향이 다르다. 맑은 날 해가 지기 한 시간쯤 전에 도착하고, 루프톱 운영 여부는 당일 날씨와 함께 확인하자.",
     "publicationNote": "루프톱·테라스는 계절, 강풍, 우천과 행사에 따라 닫힐 수 있다. 일몰 시각과 당일 이용 가능 여부를 확인한다.",
-    "english": null,
+    "english": {
+      "dek": "Six terraces and rooftops where Namsan, neighborhood roofs, or the Han River change with the evening light.",
+      "introduction": "In Seoul, a view is not only about height. The slopes of Haebangchon pull Namsan closer, a rooftop appears at the end of a Pil-dong alley, and Mapo opens toward the distant Han River. Arrive roughly an hour before sunset on a clear day, and always check same-day rooftop access against the weather.",
+      "publicationNote": "Rooftops and terraces may close because of season, strong wind, rain, or private events. Confirm sunset time and same-day outdoor access.",
+      "placeBodies": [
+        "This vintage café pairs a city-and-sunset view with real typewriters, inviting you to leave a short sentence about the day. The experience is less about collecting another skyline photo and more about recording a moment in Seoul. Confirm stair access, rooftop availability, and what happens in wet weather.",
+        "A small residential rooftop faces N Seoul Tower and the evening light. Basque cheesecake and coffee can move into a drink as the sky gets darker. The stairs are narrow, the best seats are limited, and official social media is the safest source for current hours.",
+        "From the third-floor interior and several rooftop levels, Shelter opens a broad view toward Namsan and the city. Salt coffee, scones, and beer can carry a visit across sunset. Account for Haebangchon’s steep streets and stairs, different weekday and weekend closing times, and competition for view seats.",
+        "Set slightly away from the busiest central lanes, S.caf connects a large window, terrace, and rooftop to views of Namsan from day into night. Blankets have been offered, but every outdoor seat remains weather-dependent. There is no parking, and reaching the café involves hills and stairs.",
+        "After walking the Namsan trails, this large Pil-dong café offers a rooftop pause and seats that can accommodate a group. It fits naturally into a walking route rather than requiring a separate destination trip. Official tourism information and place platforms have differed on closing days, so check before setting out.",
+        "This is the alternative to a Haebangchon sunset: a high seat in Mapo looking toward the Han River with a book open beside you. You can remain after the light changes, but drink prices reflect the space-use model and seating rules vary by floor."
+      ],
+      "placeHeadings": [
+        "Café Tajagi · Haebangchon",
+        "Villa Coffee Bar · Haebangchon",
+        "Shelter · Haebangchon",
+        "S.caf · Haebangchon",
+        "Loiter Coffee Shelter · Pil-dong",
+        "Check and Grow · Mapo"
+      ]
+    },
     "occasionTags": [
       "sunset",
       "date",
