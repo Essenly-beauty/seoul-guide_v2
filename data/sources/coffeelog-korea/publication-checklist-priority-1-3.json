@@ -1,0 +1,55 @@
+{
+  "schema_version": "1.0.0",
+  "dataset_id": "coffeelog-korea-publication-checklist-priority-1-3",
+  "created_on": "2026-10-15",
+  "scope": "ADoS Coffee & Cafés editorial series priorities 1-3",
+  "default_status": "pending_prepublication_check",
+  "checks": [
+    "current_operation",
+    "official_store_name",
+    "address_and_branch",
+    "opening_hours",
+    "featured_attribute",
+    "access_and_house_rules",
+    "image_rights",
+    "editorial_approval"
+  ],
+  "series": [
+    {
+      "series_id": "ados-coffee:work-with-a-window",
+      "draft_path": "./editorial-drafts/01-work-with-a-window.md",
+      "places": [
+        "seoul:mapo:hhss-house-mangwon",
+        "seoul:mapo:nice-work-today-sinsu",
+        "seoul:mapo:volver-hapjeong",
+        "seoul:mapo:rowing-coffee-mangwon",
+        "seoul:jung:yaksuteo-yaksu",
+        "seoul:mapo:jakupsil-01"
+      ]
+    },
+    {
+      "series_id": "ados-coffee:seoul-before-nine",
+      "draft_path": "./editorial-drafts/02-seoul-before-nine.md",
+      "places": [
+        "seoul:seodaemun:manufact-coffee-yeonhui",
+        "seoul:mapo:sandstone-coffee-lab-yeonnam",
+        "seoul:seocho:arco-coffee-roasters-yangjae",
+        "seoul:yongsan:beansmith-coffee-roasters",
+        "seoul:gangnam:popular-coffee-roasters-nonhyeon",
+        "seoul:jung:upnd-coffee-roasters-myeongdong"
+      ]
+    },
+    {
+      "series_id": "ados-coffee:coffee-worth-crossing-seoul-for",
+      "draft_path": "./editorial-drafts/03-coffee-worth-crossing-seoul-for.md",
+      "places": [
+        "seoul:mapo:protokoll-sangsu",
+        "seoul:seongdong:lowkey-seongsu",
+        "seoul:gangdong:coffee-montage-seongnae",
+        "seoul:yongsan:el-cafe-coffee-roasters-huam",
+        "seoul:mapo:connects-coffee-mangwon",
+        "seoul:gangnam:milestone-coffee-sinsa"
+      ]
+    }
+  ]
+}

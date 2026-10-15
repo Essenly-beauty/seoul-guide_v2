@@ -4,6 +4,7 @@ import path from "node:path";
 const sourceDir = path.join(process.cwd(), "data", "sources", "coffeelog-korea");
 const labels = JSON.parse(await readFile(path.join(sourceDir, "research-labels-2026-09-26.json"), "utf8"));
 const manifest = JSON.parse(await readFile(path.join(sourceDir, "editorial-series-2026-10-15.json"), "utf8"));
+const checklist = JSON.parse(await readFile(path.join(sourceDir, "publication-checklist-priority-1-3.json"), "utf8"));
 const byCanonicalId = new Map(labels.records.map((record) => [record.canonical_place_id, record]));
 const errors = [];
 const seriesIds = new Set();
@@ -25,10 +26,30 @@ for (const series of manifest.series) {
   }
 }
 
+for (const item of checklist.series) {
+  const series = manifest.series.find((candidate) => candidate.id === item.series_id);
+  if (!series) {
+    errors.push(`Checklist references unknown series: ${item.series_id}`);
+    continue;
+  }
+
+  const expectedIds = series.places.map((place) => place.canonical_place_id);
+  if (JSON.stringify(item.places) !== JSON.stringify(expectedIds)) {
+    errors.push(`${item.series_id}: checklist places or order do not match the series manifest`);
+  }
+
+  try {
+    const draft = await readFile(path.join(sourceDir, item.draft_path), "utf8");
+    if (!draft.includes(`series_id: ${item.series_id}`)) errors.push(`${item.series_id}: draft frontmatter id mismatch`);
+  } catch {
+    errors.push(`${item.series_id}: missing draft ${item.draft_path}`);
+  }
+}
+
 if (errors.length) {
   console.error(errors.join("\n"));
   process.exitCode = 1;
 } else {
   const placements = manifest.series.reduce((sum, series) => sum + series.places.length, 0);
-  console.log(`Validated ${manifest.series.length} editorial series and ${placements} place placements.`);
+  console.log(`Validated ${manifest.series.length} editorial series, ${placements} place placements, and ${checklist.series.length} publication drafts.`);
 }
