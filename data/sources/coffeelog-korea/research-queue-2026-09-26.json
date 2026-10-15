@@ -3,8 +3,7 @@
   "generated_on": "2026-09-26",
   "caution": "이 파일은 전수 조사 큐다. 추정 필드는 공개용 태그가 아니며 사람 또는 출처 검토가 필요하다.",
   "summary": {
-    "done_or_pending_specific_check": 448,
-    "p3_general_review": 6
+    "done_or_pending_specific_check": 454
   },
   "records": [
     {
@@ -4579,8 +4578,8 @@
       "normalized_name": "포러리",
       "possible_duplicate_external_ids": [],
       "content_kind_guess": "cafe_candidate",
-      "research_priority": "p3_general_review",
-      "current_research_status": "not_researched"
+      "research_priority": "done_or_pending_specific_check",
+      "current_research_status": "reviewed"
     },
     {
       "external_id": "coffeelog-abf2aa80399ce075",
@@ -4589,8 +4588,8 @@
       "normalized_name": "내작",
       "possible_duplicate_external_ids": [],
       "content_kind_guess": "cafe_candidate",
-      "research_priority": "p3_general_review",
-      "current_research_status": "not_researched"
+      "research_priority": "done_or_pending_specific_check",
+      "current_research_status": "reviewed"
     },
     {
       "external_id": "coffeelog-5cc4bae0f0505156",
@@ -4599,8 +4598,8 @@
       "normalized_name": "웨이스테이션",
       "possible_duplicate_external_ids": [],
       "content_kind_guess": "cafe_candidate",
-      "research_priority": "p3_general_review",
-      "current_research_status": "not_researched"
+      "research_priority": "done_or_pending_specific_check",
+      "current_research_status": "reviewed"
     },
     {
       "external_id": "coffeelog-3800cec11b5a43b5",
@@ -4609,8 +4608,8 @@
       "normalized_name": "마스트리스보트",
       "possible_duplicate_external_ids": [],
       "content_kind_guess": "cafe_candidate",
-      "research_priority": "p3_general_review",
-      "current_research_status": "not_researched"
+      "research_priority": "done_or_pending_specific_check",
+      "current_research_status": "reviewed"
     },
     {
       "external_id": "coffeelog-f703147da3c0a2cd",
@@ -4629,8 +4628,8 @@
       "normalized_name": "뿡어당",
       "possible_duplicate_external_ids": [],
       "content_kind_guess": "cafe_candidate",
-      "research_priority": "p3_general_review",
-      "current_research_status": "not_researched"
+      "research_priority": "done_or_pending_specific_check",
+      "current_research_status": "reviewed_mixed_retail"
     },
     {
       "external_id": "coffeelog-1599d325ddd9e001",
@@ -4639,8 +4638,8 @@
       "normalized_name": "시즌모먼트",
       "possible_duplicate_external_ids": [],
       "content_kind_guess": "cafe_candidate",
-      "research_priority": "p3_general_review",
-      "current_research_status": "not_researched"
+      "research_priority": "done_or_pending_specific_check",
+      "current_research_status": "reviewed"
     },
     {
       "external_id": "coffeelog-6b0fcb1afda5f6e4",

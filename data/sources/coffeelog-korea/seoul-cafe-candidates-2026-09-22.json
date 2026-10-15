@@ -15,7 +15,7 @@
     "geography": "Seoul only",
     "record_count": 454,
     "enriched_record_count": 30,
-    "researched_record_count": 448
+    "researched_record_count": 454
   },
   "import_policy": {
     "default_action": "stage_only",
@@ -40979,8 +40979,94 @@
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
       "editorial_context_provenance": null,
-      "canonical_place_id": null,
-      "research_status": "not_researched"
+      "canonical_place_id": "seoul:yangcheon:porary-sinwol",
+      "research_status": "reviewed",
+      "research_confidence": "high",
+      "verified_attributes": [
+        "book-cafe",
+        "music-focused",
+        "large-space",
+        "vintage-interior",
+        "quiet-signal",
+        "reading-friendly",
+        "work-friendly",
+        "laptop-friendly",
+        "sandwiches",
+        "brunch",
+        "granita-float",
+        "pecan-cinnamon-roll",
+        "matcha-forest-soda",
+        "question-notes",
+        "solo-friendly",
+        "family-friendly",
+        "pet-friendly-signal",
+        "second-floor",
+        "elevator-signal",
+        "parking-two-hours-signal",
+        "sinwol-neighborhood"
+      ],
+      "ados_editorial_angles": [
+        "신월동 농협 건물 2층의 넓은 북카페에서 음악을 들으며 책이나 노트북을 오래 펼쳐두는 동네 작업실",
+        "포러리 질문 쪽지에 생각을 남기고 샌드위치·말차숲소다까지 곁들이는 혼자만의 오후"
+      ],
+      "research_cautions": [
+        "건물 정면이 아닌 왼쪽 골목에서 입구를 찾아야 함",
+        "주말 웨이팅과 입장 제한 가능",
+        "화요일 휴무",
+        "반려동물 동반 범위와 규칙 확인",
+        "농협 건물 지하 무료 주차 시간 및 조건 확인"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://www.diningcode.com/profile.php?rid=22SGjc7V4Dkw",
+          "publisher": "다이닝코드",
+          "source_kind": "place-platform",
+          "supports": [
+            "current-reviews-2026",
+            "address",
+            "second-floor",
+            "book-cafe",
+            "reading-friendly",
+            "work-friendly",
+            "sandwiches",
+            "granita-float",
+            "pecan-cinnamon-roll",
+            "matcha-forest-soda",
+            "solo-friendly",
+            "family-friendly",
+            "pet-friendly-signal",
+            "parking-signal"
+          ]
+        },
+        {
+          "url": "https://youchuca.popit.kr/place/6a519066ad6cb950e0ac08a1",
+          "publisher": "유추카",
+          "source_kind": "video-review-index",
+          "supports": [
+            "current-listing-2026",
+            "large-space",
+            "vintage-interior",
+            "music-focused",
+            "quiet-signal",
+            "reading-friendly",
+            "work-friendly",
+            "sandwiches",
+            "parking-two-hours-signal",
+            "weekend-wait-signal"
+          ]
+        },
+        {
+          "url": "https://twojjini1089.tistory.com/17",
+          "publisher": "twojjini",
+          "source_kind": "visit-review",
+          "supports": [
+            "book-cafe",
+            "pet-friendly-signal",
+            "question-notes",
+            "quiet-signal"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-abf2aa80399ce075",
@@ -41012,8 +41098,123 @@
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
       "editorial_context_provenance": null,
-      "canonical_place_id": null,
-      "research_status": "not_researched"
+      "canonical_place_id": "seoul:yangcheon:naejak-sinjeong",
+      "research_status": "reviewed",
+      "research_confidence": "high",
+      "verified_attributes": [
+        "lp-cafe",
+        "cafe-bar",
+        "vinyl-music",
+        "manga",
+        "large-tables",
+        "inner-quiet-room",
+        "work-friendly",
+        "reading-friendly",
+        "solo-friendly",
+        "group-friendly",
+        "cheesecake",
+        "tiramisu",
+        "financiers",
+        "mugwort-cream-latte",
+        "cocktails",
+        "highball",
+        "whisky",
+        "wine",
+        "pet-friendly",
+        "takeout",
+        "parking-limited",
+        "near-sinjeong-station"
+      ],
+      "ados_editorial_angles": [
+        "신정역 앞에서 LP와 만화책 사이 넓은 테이블에 앉아 작업하거나 비 오는 날 책을 읽는 카페",
+        "낮의 쑥 크림라떼와 치즈케이크에서 저녁의 하이볼·칵테일까지 자연스럽게 이어지는 동네 카페 바"
+      ],
+      "research_cautions": [
+        "24시간 운영이라는 일부 자동 생성 정보는 신뢰하지 말고 최신 영업시간 확인",
+        "월요일 휴무",
+        "주차 공간이 협소하고 18시 이후 이용 제한 가능",
+        "반려동물 동반 매너와 좌석 규칙 확인",
+        "작업 목적이면 더 조용한 안쪽 좌석 권장"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://www.tabling.co.kr/place/677cd7ec66de5f06989398c2",
+          "publisher": "테이블링",
+          "source_kind": "reservation-platform",
+          "supports": [
+            "current-listing-2026",
+            "address",
+            "hours",
+            "lp-cafe",
+            "large-tables",
+            "cheesecake",
+            "tiramisu",
+            "financiers",
+            "mugwort-cream-latte",
+            "pet-friendly",
+            "parking-signal",
+            "takeout"
+          ]
+        },
+        {
+          "url": "https://polle.com/place/3BBTqk/%EB%82%B4%EC%9E%91",
+          "publisher": "Polle",
+          "source_kind": "place-platform",
+          "supports": [
+            "address",
+            "cafe-bar",
+            "vinyl-music",
+            "work-friendly",
+            "reading-friendly",
+            "cocktails",
+            "cheesecake",
+            "tiramisu",
+            "pet-friendly",
+            "parking-signal"
+          ]
+        },
+        {
+          "url": "https://www.diningcode.com/profile.php?rid=17dZ5ikIQ6kQ",
+          "publisher": "다이닝코드",
+          "source_kind": "place-platform",
+          "supports": [
+            "current-reviews-2026",
+            "address",
+            "hours",
+            "quiet-signal",
+            "work-friendly",
+            "large-space",
+            "pet-friendly",
+            "parking-caution"
+          ]
+        },
+        {
+          "url": "https://ban-life.com/store/view?id=27048&type=s",
+          "publisher": "반려생활",
+          "source_kind": "pet-friendly-platform",
+          "supports": [
+            "current-listing-2026",
+            "address",
+            "pet-friendly",
+            "parking-limited",
+            "wifi",
+            "group-friendly"
+          ]
+        },
+        {
+          "url": "https://www.welfarehello.com/community/hometownNews/%EB%94%B0%EB%9C%BB%ED%95%9C-%EB%B6%84%EC%9C%84%EA%B8%B0-LP-%EC%B9%B4%ED%8E%98-%EB%82%B4%EC%9E%91NAEJAK--8ef762c4-25e3-44d7-a08b-480e16c48f12",
+          "publisher": "양천구 SNS 서포터스 via 웰로",
+          "source_kind": "local-public-editorial",
+          "supports": [
+            "vinyl-music",
+            "manga",
+            "solo-friendly",
+            "group-friendly",
+            "cocktails",
+            "near-sinjeong-station"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-5cc4bae0f0505156",
@@ -41045,8 +41246,90 @@
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
       "editorial_context_provenance": null,
-      "canonical_place_id": null,
-      "research_status": "not_researched"
+      "canonical_place_id": "seoul:nowon:waystation-gongneung",
+      "research_status": "reviewed",
+      "research_confidence": "high",
+      "verified_attributes": [
+        "coffee",
+        "filter-coffee",
+        "decaf-filter",
+        "large-space",
+        "work-friendly",
+        "laptop-seating",
+        "bar-seating",
+        "large-tables",
+        "wifi",
+        "stationery-shop",
+        "notebooks",
+        "pens",
+        "gyeongchun-latte",
+        "hwarang-latte",
+        "lemonicano",
+        "honey-cake",
+        "basque-cheesecake",
+        "takeout-discount",
+        "delivery",
+        "group-order",
+        "rental",
+        "second-floor",
+        "near-taereung-entrance-station",
+        "parking-unavailable"
+      ],
+      "ados_editorial_angles": [
+        "태릉입구에서 40평대 우드톤 공간의 넓은 테이블을 골라 하루 작업을 정리하는 카페 겸 문구 소품숍",
+        "경춘라떼와 필터커피를 마시며 노트와 펜을 구경하고 서울생활사박물관 동선에 붙이기 좋은 정류장"
+      ],
+      "research_cautions": [
+        "일요일 정기 휴무",
+        "전용 주차 불가로 서울생활사박물관 주차장 등 대안 확인",
+        "임시 휴무는 공식 인스타그램 확인",
+        "시간대에 따라 작업 손님과 대화 손님이 겹쳐 소음 차이 가능"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://www.diningcode.com/profile.php?rid=okzMjFJLY4m5",
+          "publisher": "다이닝코드",
+          "source_kind": "place-platform",
+          "supports": [
+            "current-reviews-2026",
+            "address",
+            "hours",
+            "work-friendly",
+            "bar-seating",
+            "large-tables",
+            "stationery-shop",
+            "gyeongchun-latte",
+            "lemonicano",
+            "honey-cake",
+            "basque-cheesecake",
+            "takeout",
+            "delivery",
+            "parking-unavailable"
+          ]
+        },
+        {
+          "url": "https://www.daangn.com/kr/local-profile/%EC%9B%A8%EC%9D%B4%EC%8A%A4%ED%85%8C%EC%9D%B4%EC%85%98-xw9fsvhgpcds/?in=%ED%9C%98%EA%B2%BD%EC%A0%9C2%EB%8F%99-99",
+          "publisher": "당근",
+          "source_kind": "owner-managed-local-profile",
+          "supports": [
+            "address",
+            "hours",
+            "large-space",
+            "work-friendly",
+            "laptop-seating",
+            "wifi",
+            "stationery-shop",
+            "notebooks",
+            "pens",
+            "filter-coffee",
+            "decaf-filter",
+            "gyeongchun-latte",
+            "hwarang-latte",
+            "group-order",
+            "rental"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-3800cec11b5a43b5",
@@ -41078,8 +41361,91 @@
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
       "editorial_context_provenance": null,
-      "canonical_place_id": null,
-      "research_status": "not_researched"
+      "canonical_place_id": "seoul:nowon:mast-lisboat-gongneung",
+      "research_status": "reviewed",
+      "research_confidence": "high",
+      "verified_attributes": [
+        "filter-coffee",
+        "balanced-coffee",
+        "small-space",
+        "six-tables-signal",
+        "work-friendly",
+        "reading-friendly",
+        "quiet-signal",
+        "resident-cat",
+        "tiramisu-specialty",
+        "seasonal-tiramisu",
+        "basque-cheesecake",
+        "scones",
+        "sandwiches",
+        "tomato-burrata-sandwich",
+        "jambon-beurre",
+        "highball",
+        "late-hours-signal",
+        "second-floor",
+        "near-taereung-entrance-station",
+        "parking-signal"
+      ],
+      "ados_editorial_angles": [
+        "태릉입구의 작은 2층 카페에서 상주 고양이와 함께 필터커피와 계절 티라미수를 천천히 즐기는 곳",
+        "작업하다 토마토 부라타 샌드위치나 잠봉뵈르로 한 끼를 해결하고 늦게까지 머물기 좋은 공릉 아지트"
+      ],
+      "research_cautions": [
+        "테이블 약 6개의 작은 공간이라 만석 가능",
+        "상주 고양이가 있어 알레르기·동물 민감 방문객 주의",
+        "계절 티라미수와 디저트 재고 변동",
+        "주차 가능 대수와 조건 확인",
+        "차이 라떼 등 음료에 대한 취향 차이 후기"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://www.diningcode.com/profile.php?rid=kgVmaHJZKmXR",
+          "publisher": "다이닝코드",
+          "source_kind": "place-platform",
+          "supports": [
+            "current-listing-2026",
+            "filter-coffee",
+            "balanced-coffee",
+            "quiet-signal",
+            "resident-cat",
+            "tiramisu-specialty",
+            "seasonal-tiramisu",
+            "basque-cheesecake",
+            "scones",
+            "tomato-burrata-sandwich",
+            "jambon-beurre",
+            "highball",
+            "parking-signal"
+          ]
+        },
+        {
+          "url": "https://polle.com/place/1sdvDW/%EB%A7%88%EC%8A%A4%ED%8A%B8%20%EB%A6%AC%EC%8A%A4%EB%B3%B4%ED%8A%B8",
+          "publisher": "Polle",
+          "source_kind": "place-platform",
+          "supports": [
+            "current-reviews-2026",
+            "address",
+            "second-floor",
+            "small-space",
+            "six-tables-signal",
+            "work-friendly",
+            "reading-friendly",
+            "resident-cat",
+            "late-hours-signal"
+          ]
+        },
+        {
+          "url": "https://www.daangn.com/story_articles/599298813",
+          "publisher": "당근 동네생활",
+          "source_kind": "local-recommendation",
+          "supports": [
+            "address",
+            "work-friendly",
+            "quiet-signal",
+            "near-taereung-entrance-station"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-f703147da3c0a2cd",
@@ -41170,8 +41536,67 @@
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
       "editorial_context_provenance": null,
-      "canonical_place_id": null,
-      "research_status": "not_researched"
+      "canonical_place_id": "seoul:seongbuk:bbungeodang-seongsin",
+      "research_status": "reviewed_mixed_retail",
+      "research_confidence": "high",
+      "verified_attributes": [
+        "fish-shaped-pastry-specialty",
+        "twelve-grain-batter",
+        "gourmet-butter",
+        "red-bean",
+        "custard",
+        "matcha-cream",
+        "pizza-filling",
+        "ang-butter",
+        "cream-cheese-red-bean",
+        "ice-cream",
+        "takeout-focused",
+        "seasonal-menu",
+        "local-landmark",
+        "near-sungshin-womens-university"
+      ],
+      "ados_editorial_angles": [
+        "성신여대에서 열두 가지 가루와 고메버터 반죽으로 만든 말차·피자·앙버터 붕어빵을 골라 먹는 간식 목적지",
+        "전통 팥붕어빵보다 풍성한 크림과 짭짤한 메뉴를 비교해보는 ‘서울 붕어빵의 진화’ 코스"
+      ],
+      "research_cautions": [
+        "일반 카페보다 붕어빵 전문 디저트 숍 정체성이 강함",
+        "앙버터 등 일부 메뉴는 단종·계절 운영 가능",
+        "인기 메뉴 품절과 대기 가능",
+        "좌석·영업시간·주차 정보는 최신 공식 채널 확인"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://m.tripinfo.co.kr/info.html?content_id=2935186&content_type_id=39&navi=food_rank-seoul",
+          "publisher": "트립인포",
+          "source_kind": "tourism-directory",
+          "supports": [
+            "current-reviews-2025",
+            "address",
+            "twelve-grain-batter",
+            "gourmet-butter",
+            "custard",
+            "matcha-cream",
+            "pizza-filling",
+            "ang-butter",
+            "ice-cream",
+            "local-landmark"
+          ]
+        },
+        {
+          "url": "https://www.elle.co.kr/article/74690",
+          "publisher": "엘르 코리아",
+          "source_kind": "editorial-guide",
+          "supports": [
+            "fish-shaped-pastry-specialty",
+            "address",
+            "gourmet-butter",
+            "ang-butter",
+            "cream-cheese-red-bean",
+            "takeout-focused"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-1599d325ddd9e001",
@@ -41203,8 +41628,103 @@
       "neighborhood_tags": [],
       "editorial_context_status": "unclassified",
       "editorial_context_provenance": null,
-      "canonical_place_id": null,
-      "research_status": "not_researched"
+      "canonical_place_id": "seoul:jungnang:season-moment-sangbong",
+      "research_status": "reviewed",
+      "research_confidence": "high",
+      "verified_attributes": [
+        "bakery-cafe",
+        "converted-house",
+        "two-floor-signal",
+        "large-space",
+        "large-windows",
+        "natural-light",
+        "warm-lighting",
+        "wood-interior",
+        "terrace",
+        "outdoor-seating",
+        "croissants",
+        "cakes",
+        "sweet-potato-pastry",
+        "daily-baked-goods",
+        "work-friendly",
+        "reading-friendly",
+        "solo-friendly",
+        "conversation-friendly",
+        "near-sangbong-station",
+        "parking-ten-cars-signal"
+      ],
+      "ados_editorial_angles": [
+        "상봉역 뒤 주택가의 개조 건물과 야외 테이블에서 햇살을 받으며 갓 구운 페이스트리를 고르는 베이커리 카페",
+        "좌석 간격이 넉넉한 2층까지 올라가 고구마 페이스트리와 커피로 책·노트북 시간을 보내는 곳"
+      ],
+      "research_cautions": [
+        "주말에는 인기 빵이 일찍 품절될 수 있어 이른 방문 권장",
+        "공개 콘텐츠에 다른 주소가 혼재하므로 면목로95길 26 기준으로 방문",
+        "매장 앞 주차 가능 대수와 실제 지원 조건 확인",
+        "혼잡 시간에는 작업보다 대화 손님 비중이 높을 수 있음"
+      ],
+      "research_evidence": [
+        {
+          "url": "https://www.diningcode.com/profile.php?rid=ou8vS5oR6Lfs",
+          "publisher": "다이닝코드",
+          "source_kind": "place-platform",
+          "supports": [
+            "current-listing-2026",
+            "address",
+            "hours",
+            "bakery-cafe",
+            "terrace",
+            "converted-house",
+            "cakes",
+            "parking-ten-cars-signal",
+            "near-sangbong-station"
+          ]
+        },
+        {
+          "url": "https://dining.ayo.pe.kr/restaurant/0367ad283f3c72bee3152e5bdc44512e",
+          "publisher": "전국 음식점 정보",
+          "source_kind": "public-data-aggregator",
+          "supports": [
+            "public-record-2026",
+            "address",
+            "floor-area"
+          ]
+        },
+        {
+          "url": "https://pinkspam.tistory.com/63",
+          "publisher": "폴라의 맛집일지",
+          "source_kind": "visit-review",
+          "supports": [
+            "visited-2025",
+            "address",
+            "converted-house",
+            "two-floor-signal",
+            "outdoor-seating",
+            "warm-lighting",
+            "wood-interior",
+            "sweet-potato-pastry",
+            "work-attempt-signal"
+          ]
+        },
+        {
+          "url": "https://kr.trip.com/moments/theme/destination-jungnang-gu-2016449-restaurant-993134/",
+          "publisher": "Trip.com",
+          "source_kind": "travel-review-index",
+          "supports": [
+            "current-listing-2026",
+            "address",
+            "bakery-cafe",
+            "large-windows",
+            "natural-light",
+            "daily-baked-goods",
+            "work-friendly",
+            "reading-friendly",
+            "solo-friendly",
+            "conversation-friendly",
+            "early-sellout-signal"
+          ]
+        }
+      ]
     },
     {
       "external_id": "coffeelog-6b0fcb1afda5f6e4",
