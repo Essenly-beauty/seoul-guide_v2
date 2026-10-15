@@ -3423,7 +3423,7 @@
       "possible_duplicate_external_ids": [],
       "content_kind_guess": "cafe_candidate",
       "research_priority": "done_or_pending_specific_check",
-      "current_research_status": "needs_status_check"
+      "current_research_status": "identity_verified"
     },
     {
       "external_id": "coffeelog-12426b657963c9ca",
@@ -4149,7 +4149,7 @@
       "possible_duplicate_external_ids": [],
       "content_kind_guess": "cafe_candidate",
       "research_priority": "done_or_pending_specific_check",
-      "current_research_status": "needs_source_review"
+      "current_research_status": "identity_verified"
     },
     {
       "external_id": "coffeelog-646f48998a1e0da4",
@@ -4273,7 +4273,7 @@
       ],
       "content_kind_guess": "cafe_candidate",
       "research_priority": "done_or_pending_specific_check",
-      "current_research_status": "identity_linked_needs_review"
+      "current_research_status": "reviewed"
     },
     {
       "external_id": "coffeelog-5f7aa96ec5c47897",
@@ -4315,7 +4315,7 @@
       ],
       "content_kind_guess": "cafe_candidate",
       "research_priority": "done_or_pending_specific_check",
-      "current_research_status": "identity_linked_needs_review"
+      "current_research_status": "reviewed"
     },
     {
       "external_id": "coffeelog-b7456fa5bdf8e70d",
@@ -4619,7 +4619,7 @@
       "possible_duplicate_external_ids": [],
       "content_kind_guess": "cafe_candidate",
       "research_priority": "done_or_pending_specific_check",
-      "current_research_status": "needs_source_review"
+      "current_research_status": "identity_verified"
     },
     {
       "external_id": "coffeelog-1eb9c57b8e031416",

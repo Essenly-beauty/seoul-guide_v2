@@ -58,11 +58,11 @@
     {
       "canonical_place_id": "seoul:seodaemun:manufact-coffee-yeonhui",
       "member_external_ids": ["coffeelog-1bc90c347eb89453", "coffeelog-ffc19dd463842996"],
-      "research_status": "identity_linked_needs_review", "confidence": "medium",
-      "verified_attributes": ["coffee-roaster"],
-      "ados_editorial_angles": ["연희동 산책에 커피 한 잔을 더하는 곳"],
-      "cautions": ["두 원본 행이 동일 지점인지 주소로 최종 확인", "플랫화이트는 장소의 상시 속성으로 승격하지 않음"],
-      "evidence": [{ "url": "https://manufactcoffee.cafe24.com/shopinfo/company.html", "publisher": "Manufact Coffee", "source_kind": "official", "supports": ["brand-identity"] }]
+      "research_status": "reviewed", "confidence": "high",
+      "verified_attributes": ["coffee-roaster", "flat-white", "espresso", "hand-drip", "beans-and-drip-bags", "small-space", "takeout-friendly", "early-opening"],
+      "ados_editorial_angles": ["연희동에서 직접 볶은 원두의 플랫화이트를 짧고 진하게 마시는 본점", "자리가 적어 오래 머물기보다 원두와 드립백까지 골라 나오는 커피 목적지"],
+      "cautions": ["두 원본 행은 같은 연희 본점을 가리키는 중복으로 통합", "매장이 작고 좌석이 적어 혼잡 시 테이크아웃 권장", "영업시간과 휴무는 출처별 차이가 있어 방문 직전 공식 채널 확인", "2층까지 계단으로 이동하며 주차는 인근 공영주차장 이용 권장"],
+      "evidence": [{ "url": "https://manufactcoffee.cafe24.com/shopinfo/company.html", "publisher": "Manufact Coffee", "source_kind": "official", "supports": ["brand-identity"] }, { "url": "https://www.diningcode.com/profile.php?rid=JQNdSPPNwLZR", "publisher": "다이닝코드", "source_kind": "place-platform", "supports": ["current-listing-2026", "yeonhui-head-store", "address", "phone", "flat-white", "small-space", "takeout", "beans-and-drip-bags"] }, { "url": "https://www.daangn.com/kr/local-profile/%EB%A7%A4%EB%89%B4%ED%8C%A9%ED%8A%B8%EC%BB%A4%ED%94%BC-%EC%97%B0%ED%9D%AC-%EB%B3%B8%EC%A0%90-6a3t19aguenu/", "publisher": "당근 동네업체", "source_kind": "local-business-directory", "supports": ["yeonhui-head-store", "address", "phone", "flat-white", "espresso", "hand-drip", "small-space"] }, { "url": "https://www.tel-co.net/cafe/spot/9876", "publisher": "여행의기술", "source_kind": "place-guide", "supports": ["current-listing-2026", "address", "coffee-roaster", "flat-white", "seasonal-blends", "beans-and-drip-bags", "small-space"] }]
     },
     {
       "canonical_place_id": "seoul:seongdong:center-coffee-seoul-forest",
@@ -1306,11 +1306,11 @@
     {
       "canonical_place_id": "seoul:gangnam:stacky-coffee-house-garosugil",
       "member_external_ids": ["coffeelog-b590f83860e1f835"],
-      "research_status": "needs_status_check", "confidence": "medium",
+      "research_status": "identity_verified", "confidence": "medium",
       "verified_attributes": ["multi-floor", "standalone-building", "high-ceiling", "large-space", "meeting-friendly", "gallery-like-interior", "signature-cream-coffee", "house-dessert", "outdoor-seating"],
       "ados_editorial_angles": ["가로수길에서 지하부터 2층까지 서로 다른 분위기를 골라 앉는 카페", "높은 층고와 가구 갤러리 같은 공간에서 크림 커피와 디저트를 나누는 약속"],
-      "cautions": ["2026년 봄 장기 임시휴무 이력이 있고 현재 영업시간 표기가 비정상적이어서 운영 재개 여부를 반드시 확인", "운영 상태가 확인될 때까지 ADoS 장소 카드로 승격하지 않음"],
-      "evidence": [{ "url": "https://www.diningcode.com/profile.php?rid=eey7EWBbod1N", "publisher": "DiningCode", "source_kind": "place-platform", "supports": ["address", "multi-floor", "high-ceiling", "large-space", "meeting-friendly", "gallery-like-interior", "menu", "temporary-closure-signal", "status-conflict"] }, { "url": "https://brunch.co.kr/@3v6n/9", "publisher": "브런치스토리", "source_kind": "visit-essay", "supports": ["address", "garosugil-location", "dessert-stop"] }]
+      "cautions": ["2026년 3월 26일~5월 31일 장기 임시휴무 안내 이후 플랫폼 영업시간이 계속 비정상적으로 표시되어 운영 재개를 확정하지 못함", "상호·주소·공간 정체성만 검증했으며 ADoS 장소 카드 발행 전 전화 또는 공식 채널로 당일 영업 확인", "운영 상태가 확인될 때까지 추천 목록에서는 보류"],
+      "evidence": [{ "url": "https://www.diningcode.com/profile.php?rid=eey7EWBbod1N", "publisher": "DiningCode", "source_kind": "place-platform", "supports": ["current-listing-2026", "address", "phone", "multi-floor", "high-ceiling", "large-space", "meeting-friendly", "gallery-like-interior", "menu", "temporary-closure-signal", "status-conflict"] }, { "url": "https://comm.konest.com/forumd/51611", "publisher": "코네스트 커뮤니티", "source_kind": "place-directory", "supports": ["business-identity", "address", "phone", "historical-hours"] }, { "url": "https://brunch.co.kr/@3v6n/9", "publisher": "브런치스토리", "source_kind": "visit-essay", "supports": ["address", "garosugil-location", "dessert-stop"] }]
     },
     {
       "canonical_place_id": "seoul:gangnam:book-and-rest-samseong",
@@ -1567,10 +1567,10 @@
     {
       "canonical_place_id": "seoul:seongbuk:etz-coffee-hansungdae",
       "member_external_ids": ["coffeelog-f703147da3c0a2cd"],
-      "research_status": "needs_source_review", "confidence": "low",
+      "research_status": "identity_verified", "confidence": "low",
       "verified_attributes": ["dessert-cafe-signal", "butter-rice-cake-signal", "hansungdae-neighborhood-signal"],
       "ados_editorial_angles": ["한성대입구 골목에서 버터떡을 곁들이는 작은 감성 카페 후보"],
-      "cautions": ["공개 검색으로 공식 주소·영업시간·운영 주체를 교차 검증하지 못함", "상호 영문 표기와 현재 운영 여부를 공식 채널에서 재확인해야 함", "편집 발행 전 현장 또는 지도 검증 필수"],
+      "cautions": ["2026년 4월 방문 기록으로 상호와 한성대입구권 운영 신호만 확인", "공식 주소·영업시간·운영 주체와 상호 영문 표기는 공개 검색에서 교차 검증하지 못함", "버터떡은 단일 최근 방문 기록 기반 신호이므로 상시 메뉴로 단정하지 않음", "ADoS 공개 추천과 장소 카드 발행 전 현장·지도 또는 공식 채널 재검증 필수"],
       "evidence": [{ "url": "https://www.ndex.kr/data/hkjin22", "publisher": "엔덱스", "source_kind": "recent-blog-index", "supports": ["recent-visit-signal-2026", "hansungdae-neighborhood-signal", "butter-rice-cake-signal"] }]
     },
     {
@@ -3448,11 +3448,11 @@
     {
       "canonical_place_id": "seoul:gangdong:untold-seongnae",
       "member_external_ids": ["coffeelog-53832a413552b8fa"],
-      "research_status": "needs_source_review", "confidence": "low",
-      "verified_attributes": ["cafe-listing", "small-space", "pet-friendly-listing", "near-cheonho-station", "seongnae-neighborhood"],
-      "ados_editorial_angles": ["성내동의 작은 골목 카페 후보로, 반려동물 동반 가능 여부와 실제 커피·베이커리 구성을 확인한 뒤 소개할 곳"],
-      "cautions": ["현재 운영 여부와 공식 채널 확인 필요", "메뉴·영업시간·공간 특징에 대한 신뢰도 높은 자료 부족", "반려동물 동반 조건은 방문 전 문의", "ADoS 공개 추천 전 현장 또는 공식 정보 재검증 필요"],
-      "evidence": [{ "url": "https://dining.ayo.pe.kr/restaurant/0c830c9cdc74f7136b54543d41b228e4", "publisher": "전국 음식점 정보", "source_kind": "public-data-aggregator", "supports": ["public-record-2026", "address", "small-space"] }, { "url": "https://www.siksinhot.com/P/1831953", "publisher": "식신", "source_kind": "place-directory", "supports": ["cafe-listing", "address"] }, { "url": "https://www.anipass.co.kr/www/32", "publisher": "애니패스", "source_kind": "pet-friendly-directory", "supports": ["pet-friendly-listing", "address"] }]
+      "research_status": "identity_verified", "confidence": "medium",
+      "verified_attributes": ["cafe-listing", "small-space", "registered-pet-friendly", "near-cheonho-station", "seongnae-neighborhood", "bakery-cafe-signal"],
+      "ados_editorial_angles": ["성내동 골목에서 반려동물과 함께 들를 수 있는 작은 베이커리 카페 후보"],
+      "cautions": ["2026년 공공 인허가와 식약처 반려동물 동반출입 등록으로 주소·업소 정체성은 확인", "공식 채널과 상세 메뉴·영업시간 자료가 부족해 ADoS 추천 발행 전 당일 영업 및 베이커리 구성을 재확인", "반려동물 크기·목줄·이용 좌석 등 세부 동반 조건은 업소에 문의"],
+      "evidence": [{ "url": "https://dining.ayo.pe.kr/restaurant/0c830c9cdc74f7136b54543d41b228e4", "publisher": "전국 음식점 정보", "source_kind": "public-data-aggregator", "supports": ["public-record-2026", "business-identity", "address", "small-space"] }, { "url": "https://pettriphub.kr/place/mj5zys9.html", "publisher": "PetTripHub", "source_kind": "public-data-directory", "supports": ["current-listing-2026", "mfds-registered-pet-friendly", "address"] }, { "url": "https://www.ganpoom.com/style_detail?id=12050", "publisher": "간판의품격", "source_kind": "project-portfolio", "supports": ["business-identity", "address", "bakery-cafe-signal", "storefront"] }, { "url": "https://www.siksinhot.com/P/1831953", "publisher": "식신", "source_kind": "place-directory", "supports": ["cafe-listing", "address"] }]
     },
     {
       "canonical_place_id": "seoul:gangdong:damgeum-seongnae",
