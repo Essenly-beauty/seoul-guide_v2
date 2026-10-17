@@ -9,6 +9,7 @@ import { createServerClient } from "@supabase/ssr";
 import { cookies } from "next/headers";
 import type { EmailOtpType } from "@supabase/supabase-js";
 import { routes } from "@/lib/routes";
+import { recoveryCallbackTarget } from "@/lib/auth-return";
 
 /** Same-origin relative paths only — reject anything a browser could coerce
     into an absolute/protocol-relative hop (backslashes, //, control chars). */
@@ -59,7 +60,7 @@ export async function GET(request: Request) {
   if (tokenHash && otpType) {
     const { error } = await supabase.auth.verifyOtp({ token_hash: tokenHash, type: otpType });
     if (!error) {
-      const target = otpType === "recovery" ? routes.resetPassword : next;
+      const target = otpType === "recovery" ? recoveryCallbackTarget(next) : next;
       return NextResponse.redirect(new URL(target, url.origin));
     }
     const reason = error.code === "otp_expired" ? "expired" : "auth";

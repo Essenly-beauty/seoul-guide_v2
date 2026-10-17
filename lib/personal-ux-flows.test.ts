@@ -106,7 +106,8 @@ describe("saved and shared place journeys", () => {
 
   it("explains that shared lists open on the web and remain savable", () => {
     expect(favorites).toContain("No app install needed");
-    expect(mapScreen).toContain("Save all");
+    expect(mapScreen).toContain("<SharedListReadyBanner");
+    expect(mapScreen).toContain("onSaveAll={saveAllShared}");
     expect(mapScreen).toContain('nudge("favorite")');
   });
 

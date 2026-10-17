@@ -6,8 +6,8 @@ const optionalSource = (path: string) => {
   const url = new URL(`../${path}`, import.meta.url);
   return existsSync(url) ? readFileSync(url, "utf8") : "";
 };
-const forgotPassword = source("app/forgot-password/page.tsx");
-const resetPassword = source("app/reset-password/page.tsx");
+const forgotPassword = source("components/auth/forgot-password-client.tsx");
+const resetPassword = source("components/auth/reset-password-client.tsx");
 const authCallback = source("app/auth/callback/route.ts");
 const menuProfile = source("components/mypage/menu-profile.tsx");
 const menuPage = source("app/menu/page.tsx");
@@ -17,9 +17,10 @@ const signoutModal = source("components/ui/signout-modal.tsx");
 
 describe("account recovery", () => {
   it("sends recovery links back to the password-reset screen after a PKCE exchange", () => {
-    expect(forgotPassword).toContain("/auth/callback?next=${encodeURIComponent(routes.resetPassword)}");
-    expect(authCallback).toContain("const target = otpType === \"recovery\" ? routes.resetPassword : next;");
+    expect(forgotPassword).toContain("oauthCallbackUrl(window.location.origin, passwordResetDestination(next))");
+    expect(authCallback).toContain("const target = otpType === \"recovery\" ? recoveryCallbackTarget(next) : next;");
     expect(authCallback).toContain("return NextResponse.redirect(new URL(next, url.origin));");
+    expect(resetPassword).toContain("router.push(safeAuthNext(next) ?? routes.map)");
   });
 
   it("requires a matching confirmation before updating the password", () => {

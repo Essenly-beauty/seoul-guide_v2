@@ -7,6 +7,7 @@ import { AuthShell } from "@/components/auth/auth-shell";
 import { EyeGlyph } from "@/components/brand/auth-glyphs";
 import { supabaseBrowser } from "@/lib/supabase/client";
 import { routes } from "@/lib/routes";
+import { authLinkWithNext, safeAuthNext } from "@/lib/auth-return";
 
 /** Reasons /auth/callback can forward here with (review: one generic message
     hid expired links and cross-browser PKCE failures behind the same copy). */
@@ -16,16 +17,10 @@ const CALLBACK_ERRORS: Record<string, string> = {
   browser: "That link was opened in a different browser, so it couldn't finish — your email may already be confirmed. Try signing in with your password.",
 };
 
-/** Same-origin relative paths only (mirrors the server-side guard). */
-function safeNext(raw: string | null): string | null {
-  if (!raw || !raw.startsWith("/") || raw.startsWith("//") || raw.includes("\\")) return null;
-  return raw;
-}
-
 function SignInForm() {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const nextTarget = safeNext(searchParams.get("next")) ?? routes.map;
+  const nextTarget = safeAuthNext(searchParams.get("next")) ?? routes.map;
   const [reveal, setReveal] = useState(false);
   const [id, setId] = useState("");
   const [pw, setPw] = useState("");
@@ -158,7 +153,7 @@ function SignInForm() {
         </div>
       )}
 
-      <Link className="auth-aside" href={routes.forgotPassword}>Forgot password?</Link>
+      <Link className="auth-aside" href={authLinkWithNext(routes.forgotPassword, nextTarget)}>Forgot password?</Link>
       <button className="auth-cta" type="submit" disabled={busy}>
         {busy ? "Signing in…" : "Sign In"}
       </button>
@@ -171,7 +166,7 @@ function SignInForm() {
 // funnel round-trips even when the browser is already signed in.
 function RegisterCta() {
   const searchParams = useSearchParams();
-  const next = safeNext(searchParams.get("next"));
+  const next = safeAuthNext(searchParams.get("next"));
   const params = new URLSearchParams();
   if (next) params.set("next", next);
   if (searchParams.get("switch") === "1") params.set("switch", "1");
@@ -185,10 +180,11 @@ function RegisterCta() {
   );
 }
 
-export function LoginClient() {
+export function LoginClient({ next }: { next?: string }) {
   return (
     <AuthShell
       title="Sign in"
+      oauthNext={next}
       support={<>If you need any support <Link className="auth-link" href={routes.support}>click here</Link></>}
       cta={
         <Suspense fallback={null}>

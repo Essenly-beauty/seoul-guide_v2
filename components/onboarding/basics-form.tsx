@@ -8,17 +8,13 @@ import { Button } from "@/components/ui/button";
 import { Chip } from "@/components/ui/chip";
 import { routes } from "@/lib/routes";
 import { INTEREST_OPTIONS, answerQuestion, questionFor, useProfile } from "@/lib/profile";
-
-function safeNext(raw: string | undefined): string {
-  if (!raw || !raw.startsWith("/") || raw.startsWith("//") || raw.includes("\\")) return routes.map;
-  return raw;
-}
+import { safeAuthNext } from "@/lib/auth-return";
 
 export function BasicsForm({ next }: { next?: string }) {
   const router = useRouter();
   const profile = useProfile();
   const stay = questionFor("stayType");
-  const nextTarget = safeNext(next);
+  const nextTarget = safeAuthNext(next) ?? routes.map;
 
   const finish = () => {
     router.push(nextTarget);

@@ -9,6 +9,7 @@ import { supabaseBrowser } from "@/lib/supabase/client";
 import { PASSWORD_MIN_LENGTH, passwordProblem } from "@/lib/auth-policy";
 import { updateProfile } from "@/lib/profile";
 import { routes } from "@/lib/routes";
+import { authLinkWithNext, registrationDestination, registrationReturnPath, signInFromRegistration } from "@/lib/auth-return";
 
 // Mirrors the onboarding question so the answer pre-fills the profile.
 const COUNTRIES = [
@@ -18,14 +19,11 @@ const COUNTRIES = [
 
 const RESEND_COOLDOWN_S = 60;
 
-function safeNext(raw: string | undefined): string | null {
-  if (!raw || !raw.startsWith("/") || raw.startsWith("//") || raw.includes("\\")) return null;
-  return raw;
-}
-
 export function RegisterClient({ next }: { next?: string }) {
   const router = useRouter();
-  const onboardingTarget = safeNext(next) ?? routes.onboardingBasics;
+  const onboardingTarget = registrationDestination(next);
+  const signInHref = signInFromRegistration(next);
+  const resetHref = authLinkWithNext(routes.forgotPassword, registrationReturnPath(next));
   const [reveal, setReveal] = useState(false);
   const [form, setForm] = useState({ name: "", email: "", password: "", confirm: "", country: "" });
   const [consent, setConsent] = useState(false);
@@ -134,6 +132,7 @@ export function RegisterClient({ next }: { next?: string }) {
     return (
       <AuthShell
         title="Check your email"
+        oauthNext={onboardingTarget}
         support={<>We sent a confirmation link to <b style={{ color: "var(--text)" }}>{sentTo}</b></>}
         foot={<>Wrong address? <button className="auth-link" onClick={() => { setSentTo(null); setResendNote(null); }}>Try again</button></>}
       >
@@ -153,7 +152,7 @@ export function RegisterClient({ next }: { next?: string }) {
         {resendNote && <p className="auth-support" role="status" style={{ marginTop: 14 }}>{resendNote}</p>}
         <p className="auth-support" style={{ marginTop: 18 }}>
           Confirmed it already (maybe on another device)?{" "}
-          <Link className="auth-link" href={routes.signIn}>Sign in</Link>
+          <Link className="auth-link" href={signInHref}>Sign in</Link>
         </p>
       </AuthShell>
     );
@@ -162,8 +161,9 @@ export function RegisterClient({ next }: { next?: string }) {
   return (
     <AuthShell
       title="Register"
+      oauthNext={onboardingTarget}
       support={<>Create your free account and start saving places right away. Need help? <Link className="auth-link" href={routes.support}>Contact us</Link></>}
-      foot={<>Do you have an account? <Link className="auth-link" href={routes.signIn}>Sign in</Link></>}
+      foot={<>Do you have an account? <Link className="auth-link" href={signInHref}>Sign in</Link></>}
     >
       <form onSubmit={submit} style={{ display: "contents" }}>
         <div className="auth-fields">
@@ -268,7 +268,7 @@ export function RegisterClient({ next }: { next?: string }) {
         {error && (
           <p id="register-error" className="auth-error" role="alert">
             {error}{error.includes("already has an account") && (
-              <> <Link className="auth-link" href={routes.signIn}>Sign in</Link> · <Link className="auth-link" href={routes.forgotPassword}>Reset password</Link></>
+              <> <Link className="auth-link" href={signInHref}>Sign in</Link> · <Link className="auth-link" href={resetHref}>Reset password</Link></>
             )}
           </p>
         )}
