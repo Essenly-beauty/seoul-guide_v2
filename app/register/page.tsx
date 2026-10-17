@@ -2,6 +2,7 @@ import { redirect } from "next/navigation";
 import { RegisterClient } from "@/components/auth/register-client";
 import { supabaseServer } from "@/lib/supabase/server";
 import { routes } from "@/lib/routes";
+import { safeAuthNext } from "@/lib/auth-return";
 
 // A signed-in visitor normally belongs in the app, but `?switch=1` keeps
 // registration available when they deliberately choose to create another
@@ -10,7 +11,7 @@ export default async function RegisterPage({ searchParams }: { searchParams: Pro
   const params = await searchParams;
   if (params.switch !== "1") {
     const { data: { user } } = await supabaseServer().auth.getUser();
-    if (user) redirect(routes.map);
+    if (user) redirect(safeAuthNext(params.next) ?? routes.map);
   }
   const next = typeof params.next === "string" ? params.next : undefined;
   return <RegisterClient next={next} />;

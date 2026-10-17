@@ -7,13 +7,22 @@
 
 import { getPlace } from "@/lib/data";
 import { supabaseBrowser } from "@/lib/supabase/client";
+import { looksLikeListId } from "@/lib/shared-list-id";
+
+export { looksLikeListId } from "@/lib/shared-list-id";
 
 export type SharedList = {
   id: string;
   title: string;
   placeIds: string[];
   createdAt: string;
+  /** Saved IDs that are no longer in the public place catalogue. */
+  unavailablePlaceCount?: number;
 };
+
+export type SharedListFetch =
+  | { status: "ok"; list: SharedList }
+  | { status: "sign-in" | "unavailable" | "retry" };
 
 export const LIST_TITLE_MAX = 80;
 export const LIST_PLACES_MAX = 300;
@@ -34,11 +43,6 @@ export function sharedListUrl(origin: string, id: string): string {
   return `${origin}/map?list=${encodeURIComponent(id)}`;
 }
 
-/** Uuid-shaped check — skips a doomed network round-trip on junk params. */
-export function looksLikeListId(id: string): boolean {
-  return /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(id);
-}
-
 /** Insert a snapshot; resolves to the new list id. Caller must be signed in (RLS). */
 export async function createSharedList(title: string, placeIds: readonly string[]): Promise<string> {
   const ids = sanitizeListPlaceIds(placeIds);
@@ -56,21 +60,76 @@ export async function createSharedList(title: string, placeIds: readonly string[
   return (data as { id: string }).id;
 }
 
-/** Fetch a shared list by id; null when missing/invalid (never throws for a bad link). */
-export async function fetchSharedList(id: string): Promise<SharedList | null> {
-  if (!looksLikeListId(id)) return null;
+/** List the signed-in creator's snapshots; browser RLS is owner-only. */
+export async function listOwnSharedLists(): Promise<SharedList[]> {
+  const supabase = supabaseBrowser();
+  const { data: userData } = await supabase.auth.getUser();
+  const owner = userData.user?.id;
+  if (!owner) throw new Error("Sign in to manage shared links");
+  const { data, error } = await supabase
+    .from("shared_lists")
+    .select("id, title, place_ids, created_at")
+    .eq("owner", owner)
+    .order("created_at", { ascending: false });
+  if (error) throw error;
+  return (data ?? []).map((row) => {
+    const rawPlaceIds: string[] = Array.isArray(row.place_ids) ? row.place_ids : [];
+    const placeIds = sanitizeListPlaceIds(rawPlaceIds);
+    return {
+      id: row.id,
+      title: row.title,
+      placeIds,
+      createdAt: row.created_at,
+      unavailablePlaceCount: Math.max(0, new Set(rawPlaceIds).size - placeIds.length),
+    };
+  });
+}
+
+/** Revoke only a row owned by this member; zero affected rows is not success. */
+export async function revokeSharedList(id: string): Promise<void> {
+  if (!looksLikeListId(id)) throw new Error("Invalid shared list link");
+  const supabase = supabaseBrowser();
+  const { data: userData } = await supabase.auth.getUser();
+  const owner = userData.user?.id;
+  if (!owner) throw new Error("Sign in to manage shared links");
+  const { data, error } = await supabase
+    .from("shared_lists")
+    .delete()
+    .eq("id", id)
+    .eq("owner", owner)
+    .select("id")
+    .maybeSingle();
+  if (error) throw error;
+  if (!data) throw new Error("This shared link is no longer available");
+}
+
+/** Read one list through the session-checked server route, never direct table SELECT. */
+export async function fetchSharedList(id: string): Promise<SharedListFetch> {
+  if (!looksLikeListId(id)) return { status: "unavailable" };
   try {
-    const { data, error } = await supabaseBrowser()
-      .from("shared_lists")
-      .select("id, title, place_ids, created_at")
-      .eq("id", id)
-      .maybeSingle();
-    if (error || !data) return null;
-    const row = data as { id: string; title: string; place_ids: string[]; created_at: string };
-    const placeIds = sanitizeListPlaceIds(row.place_ids ?? []);
-    if (placeIds.length === 0) return null;
-    return { id: row.id, title: row.title, placeIds, createdAt: row.created_at };
+    const response = await fetch(`/api/shared-lists/${encodeURIComponent(id)}`, {
+      credentials: "same-origin",
+      cache: "no-store",
+    });
+    if (response.status === 401) return { status: "sign-in" };
+    if (response.status === 400 || response.status === 404) return { status: "unavailable" };
+    if (!response.ok) return { status: "retry" };
+    const row = await response.json() as { id: string; title: string; place_ids: string[]; created_at: string };
+    const rawPlaceIds = Array.isArray(row.place_ids)
+      ? row.place_ids.filter((placeId): placeId is string => typeof placeId === "string")
+      : [];
+    const placeIds = sanitizeListPlaceIds(rawPlaceIds);
+    return {
+      status: "ok",
+      list: {
+        id: row.id,
+        title: row.title,
+        placeIds,
+        createdAt: row.created_at,
+        unavailablePlaceCount: Math.max(0, new Set(rawPlaceIds).size - placeIds.length),
+      },
+    };
   } catch {
-    return null; // offline / table missing — the map just renders normally
+    return { status: "retry" };
   }
 }
