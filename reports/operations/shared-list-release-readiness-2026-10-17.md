@@ -9,10 +9,10 @@ This release moves shared-list reads behind an authenticated, exact-UUID server 
 - Adapted the shared-list and auth-return changes from `release/member-guest-shared-main-integration-20260927`; retained current main's ratings, catalogue, and editorial changes.
 - Initial release commit `979966f` was pushed as `mg1018-whatap`, with author `mg1018@Local <mg1018@whatap.io>`. That existing commit has not been rewritten.
 - Future commits use `gksaudrhks12-sys <gksaudrhks12@gmail.com>`. Both the original checkout and this release copy select the account-specific SSH key locally; global Git identity is unchanged.
-- The new key authenticates as `gksaudrhks12-sys` and can fetch the repository. However, `git push --dry-run origin HEAD:refs/heads/release/shared-list-security-20261017` was rejected with `Permission to Essenly-beauty/seoul-guide_v2.git denied to gksaudrhks12-sys`. Repository write access must be granted before any further push; do not fall back to another account.
+- The new key authenticates as `gksaudrhks12-sys`. The initial push-permission failure was traced to a pending repository invitation; after the user accepted it, `git push --dry-run origin HEAD:refs/heads/release/shared-list-security-20261017` succeeded. Do not fall back to another account.
 - Git remote: `git@github.com:Essenly-beauty/seoul-guide_v2.git`.
 - Local Vercel link identifies `seoul-guide-v2`, project `prj_5eidC5l66Xu01vsVyJhpmv5H3qXf`, team `team_F8hIyOkJ9p0Bdyn44Phngi1a`.
-- Vercel CLI reports `loggedIn: false`. The current browser account `mg1018-6521` cannot open the historically recorded `admin-28156576s-projects/seoul-guide-v2` project (404). The intended project and current owner must be confirmed after authentication before production deployment.
+- Vercel CLI now authenticates as `admin-28156576` (`admin@essenly.beauty`), and `vercel project inspect --non-interactive` confirms the existing project and team above. No new project was created or linked.
 
 ## Verification
 
@@ -44,5 +44,7 @@ This release moves shared-list reads behind an authenticated, exact-UUID server 
 - The latest **Production** entry in GitHub's deployment history is `f767920`, created 2026-10-15 17:26 KST. This does not prove that every deployment made outside the Git integration is represented in that history.
 - Current production `https://seoul-guide-v2.vercel.app`: `/` and `/map` return 200; unauthenticated `/api/account/export` returns JSON 401 with `private, no-store`; the new shared-list API still returns HTML 404 and is not live there.
 - Read-only live Supabase checks returned: profiles 5, favorites 10, ratings 3, shared_lists 1, feedback 0, published_reviews 0. Anonymous direct `shared_lists` access still returns 200 with count 1. No data or policies were changed during this revalidation.
-- Vercel CLI still reports `loggedIn: false`; GitHub CLI credentials are unavailable/invalid in this execution environment. The browser session was `1018one`, and was not used to perform writes under the wrong account.
-- Remaining gates: repository Write access for `gksaudrhks12-sys`; Vercel authentication and exact project/team confirmation; PR/CI review; signed-in owner/recipient preview checks; approved production rollout; then database lockdown and role-based verification.
+- GitHub CLI credentials remain unavailable/invalid in this execution environment. The earlier browser session was `1018one`, and was not used to perform writes under the wrong account. SSH push permission does not authenticate the GitHub PR API.
+- After Vercel login, protected Preview HTTP checks succeeded via `vercel curl`: guest API 401 with `private, no-store`; map and login documents 200; generic map metadata and the original shared-link `next` retained in signup and recovery links. These are HTTP checks, not authenticated browser E2E.
+- The existing Preview is `Ready`. Required public Supabase variables and the server-only service-role variable are registered for Preview and Production; the values were not changed. No `error`/`fatal` runtime log records were returned for the checked 20-minute window.
+- Remaining gates: PR/CI review under the intended GitHub account; signed-in owner/recipient preview checks; approved production rollout; then database lockdown and role-based verification.
