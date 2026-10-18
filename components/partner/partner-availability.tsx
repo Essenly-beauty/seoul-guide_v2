@@ -48,20 +48,22 @@ export function ReservationRulesFields({ value, onChange, disabled }: { value: R
 export function DateOverridesFields({ value, onChange, disabled, subject = 'shop' }: { value: DateOverrideDraft[]; onChange: (value: DateOverrideDraft[]) => void; disabled: boolean; subject?: 'shop' | 'staff' }) {
   const updateDay = (index: number, change: Partial<DateOverrideDraft>) => onChange(value.map((day, position) => position === index ? { ...day, ...change } : day));
   const updatePeriod = (dayIndex: number, kind: 'hours' | 'breaks', periodIndex: number, change: Partial<SpecialPeriodDraft>) => updateDay(dayIndex, { [kind]: value[dayIndex][kind].map((period, position) => position === periodIndex ? { ...period, ...change } : period) });
-  return <fieldset className={styles.fields} disabled={disabled}><legend>특별 영업일과 휴무</legend>
+  const dayLabel = subject === 'staff' ? '특별 근무일' : '특별 영업일';
+  const hoursLabel = subject === 'staff' ? '근무시간' : '영업시간';
+  return <fieldset className={styles.fields} disabled={disabled}><legend>{dayLabel}과 휴무</legend>
     <p className={styles.hint}>특별 날짜의 {subject === 'staff' ? '근무시간' : '영업시간'}·휴게시간은 그 요일의 주간 {subject === 'staff' ? '근무시간' : '영업시간'}과 휴게시간을 대체합니다. 주간 일정의 날짜별 차단 시간은 특별 날짜에도 그대로 적용됩니다. 시간대 Asia/Seoul.</p>
-    {!value.length && <p className={styles.empty}>특별 영업일이 아직 없습니다. 평소와 다른 영업시간이나 종일 휴무가 있을 때 날짜를 추가해 주세요.</p>}
-    {value.map((day, index) => <section key={index} className={styles.specialDay} aria-label={`특별 영업일 ${index + 1}`}>
-      <div className={styles.sectionHeading}><h3>특별 날짜 {index + 1} <span className={styles.muted}>/ {value.length}</span></h3><Button variant="secondary" disabled={disabled} aria-label={`특별 영업일 ${index + 1} 삭제`} onClick={() => onChange(value.filter((_, position) => position !== index))}>날짜 삭제</Button></div>
-      <Field label="날짜"><input type="date" aria-label={`특별 영업일 ${index + 1} 날짜`} value={day.date} onChange={(event) => updateDay(index, { date: event.target.value })} /></Field>
-      <label className={styles.specialClosure}><input type="checkbox" aria-label={`특별 영업일 ${index + 1} 종일 휴무`} checked={day.closed} onChange={(event) => updateDay(index, { closed: event.target.checked })} />종일 휴무</label>
-      {!day.closed && (['hours', 'breaks'] as const).map((kind) => <section key={kind} className={styles.scheduleSection}><h3>{kind === 'hours' ? '특별 영업시간' : '특별 휴게시간'} <span className={styles.muted}>{day[kind].length} / 128</span></h3>
+    {!value.length && <p className={styles.empty}>{dayLabel}이 아직 없습니다. 평소와 다른 {hoursLabel}이나 종일 휴무가 있을 때 날짜를 추가해 주세요.</p>}
+    {value.map((day, index) => <section key={index} className={styles.specialDay} aria-label={`${dayLabel} ${index + 1}`}>
+      <div className={styles.sectionHeading}><h3>특별 날짜 {index + 1} <span className={styles.muted}>/ {value.length}</span></h3><Button variant="secondary" disabled={disabled} aria-label={`${dayLabel} ${index + 1} 삭제`} onClick={() => onChange(value.filter((_, position) => position !== index))}>날짜 삭제</Button></div>
+      <Field label="날짜"><input type="date" aria-label={`${dayLabel} ${index + 1} 날짜`} value={day.date} onChange={(event) => updateDay(index, { date: event.target.value })} /></Field>
+      <label className={styles.specialClosure}><input type="checkbox" aria-label={`${dayLabel} ${index + 1} 종일 휴무`} checked={day.closed} onChange={(event) => updateDay(index, { closed: event.target.checked })} />종일 휴무</label>
+      {!day.closed && (['hours', 'breaks'] as const).map((kind) => <section key={kind} className={styles.scheduleSection}><h3>{kind === 'hours' ? `특별 ${hoursLabel}` : '특별 휴게시간'} <span className={styles.muted}>{day[kind].length} / 128</span></h3>
         {day[kind].map((period, periodIndex) => <div key={periodIndex} className={styles.specialRow}>
-          <label>시작 시간<input aria-label={`특별 영업일 ${index + 1} ${kind === 'hours' ? '시작' : '휴게 시작'} 시간 ${periodIndex + 1}`} placeholder="09:00" value={period.start} onChange={(event) => updatePeriod(index, kind, periodIndex, { start: event.target.value })} /></label>
-          <label>종료 시간<input aria-label={`특별 영업일 ${index + 1} ${kind === 'hours' ? '종료' : '휴게 종료'} 시간 ${periodIndex + 1}`} placeholder="18:00" value={period.end} onChange={(event) => updatePeriod(index, kind, periodIndex, { end: event.target.value })} /></label>
-          <Button variant="secondary" disabled={disabled} aria-label={`특별 영업일 ${index + 1} ${kind === 'hours' ? '영업시간' : '휴게시간'} ${periodIndex + 1} 삭제`} onClick={() => updateDay(index, { [kind]: day[kind].filter((_, position) => position !== periodIndex) })}>시간 삭제</Button>
+          <label>시작 시간<input aria-label={`${dayLabel} ${index + 1} ${kind === 'hours' ? subject === 'staff' ? '근무 시작' : '시작' : '휴게 시작'} 시간 ${periodIndex + 1}`} placeholder="09:00" value={period.start} onChange={(event) => updatePeriod(index, kind, periodIndex, { start: event.target.value })} /></label>
+          <label>종료 시간<input aria-label={`${dayLabel} ${index + 1} ${kind === 'hours' ? subject === 'staff' ? '근무 종료' : '종료' : '휴게 종료'} 시간 ${periodIndex + 1}`} placeholder="18:00" value={period.end} onChange={(event) => updatePeriod(index, kind, periodIndex, { end: event.target.value })} /></label>
+          <Button variant="secondary" disabled={disabled} aria-label={`${dayLabel} ${index + 1} ${kind === 'hours' ? hoursLabel : '휴게시간'} ${periodIndex + 1} 삭제`} onClick={() => updateDay(index, { [kind]: day[kind].filter((_, position) => position !== periodIndex) })}>시간 삭제</Button>
         </div>)}
-        <Button variant="secondary" disabled={disabled || day[kind].length >= 128} onClick={() => updateDay(index, { [kind]: [...day[kind], { start: '', end: '' }] })}>{kind === 'hours' ? '영업시간' : '휴게시간'} 추가</Button>
+        <Button variant="secondary" disabled={disabled || day[kind].length >= 128} onClick={() => updateDay(index, { [kind]: [...day[kind], { start: '', end: '' }] })}>{kind === 'hours' ? hoursLabel : '휴게시간'} 추가</Button>
       </section>)}
     </section>)}
     <Button variant="secondary" disabled={disabled || value.length >= 366} onClick={() => onChange([...value, { date: '', closed: true, hours: [], breaks: [] }])}>특별 날짜 추가</Button>

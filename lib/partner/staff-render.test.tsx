@@ -46,4 +46,16 @@ describe('staff editor visible states', () => {
     expect(calendar.text()).toContain('특별 날짜');
     expect(calendar('fieldset[disabled]').length).toBe(2);
   });
+
+  it('calls staff special dates and accessible time controls 근무 rather than 영업', () => {
+    const draft = staffCalendarDraft(null);
+    draft.overrides.push({ date: '2026-11-05', closed: false, hours: [{ start: '09:00', end: '18:00' }], breaks: [] });
+    const $ = render(<StaffCalendarFields value={draft} onChange={() => {}} disabled={false} />);
+    expect($('fieldset legend').text()).toContain('특별 근무일과 휴무');
+    expect($('section[aria-label="특별 근무일 1"]').length).toBe(1);
+    expect($('input[aria-label="특별 근무일 1 날짜"]').length).toBe(1);
+    expect($('input[aria-label="특별 근무일 1 근무 시작 시간 1"]').length).toBe(1);
+    expect($('button[aria-label="특별 근무일 1 근무시간 1 삭제"]').length).toBe(1);
+    expect($.text()).not.toContain('특별 영업');
+  });
 });

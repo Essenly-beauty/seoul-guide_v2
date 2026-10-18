@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Notice } from '@/components/ui/notice';
 import type { Menu, PartnerSnapshot } from '@/lib/partner/contracts';
 import type { StaffCommand } from '@/lib/partner/staff-contracts';
+import { matchingStaffDetail, postStaffCommand, restoreStaffListFocus } from '@/lib/partner/staff-client';
 import type { StaffCalendar, StaffDetail, StaffDetailSnapshot, StaffListSnapshot, StaffSummary } from '@/lib/partner/staff-server';
 import { staffCalendarDraft, staffCalendarFormValues, staffProfileDraft, staffProfileFormValues, type StaffCalendarDraft, type StaffProfileDraft } from '@/lib/partner/staff-form-values';
 import { PartnerRequestScope, uncertainSaveOutcomeMessage, usePartner, type PartnerDraftRecord } from './partner-provider';
@@ -28,14 +29,14 @@ export function StaffModeNotice({ snapshot, eligibleCount }: { snapshot: Partner
   </Notice>;
 }
 
-export function StaffListView({ staff, selectedId, loading, stale, onSelect }: { staff: StaffSummary[] | null; selectedId: string | null; loading: boolean; stale: boolean; onSelect: (id: string) => void }) {
+export function StaffListView({ staff, selectedId, loading, stale, onSelect, onButtonRef }: { staff: StaffSummary[] | null; selectedId: string | null; loading: boolean; stale: boolean; onSelect: (id: string) => void; onButtonRef?: (id: string, element: HTMLButtonElement | null) => void }) {
   if (staff === null) return <p className={styles.empty} role="status">{loading ? '담당자 목록을 불러오는 중입니다…' : '담당자 목록을 불러오지 못했습니다. 다시 시도해 주세요.'}</p>;
   const ordered = [...staff].sort((a, b) => a.sortOrder - b.sortOrder || a.id.localeCompare(b.id));
   return <>
     {stale && <p className={styles.hint} role="status">마지막으로 조회한 담당자 목록입니다. 최신 정보 확인에 실패했습니다.</p>}
     {ordered.length === 0 ? <p className={styles.empty}>아직 등록된 담당자가 없습니다. 필요할 때 예약용 담당자를 추가해 주세요.</p> :
       <ul className={styles.staffList}>{ordered.map((person) => <li key={person.id}>
-        <button type="button" className={styles.staffListButton} aria-current={selectedId === person.id ? 'true' : undefined} onClick={() => onSelect(person.id)}>
+        <button type="button" ref={(element) => onButtonRef?.(person.id, element)} className={styles.staffListButton} aria-current={selectedId === person.id ? 'true' : undefined} onClick={() => onSelect(person.id)}>
           <span className={styles.staffListName}>{person.name || '이름 미입력'}</span>
           <span className={styles.staffListMeta}>{person.title || '직함 미입력'} · {visibilityLabels[person.visibility]}</span>
         </button>
@@ -214,6 +215,9 @@ function StaffWorkspace({ snapshot }: { snapshot: PartnerSnapshot }) {
   const detailRef = useRef<StaffDetailSnapshot | null>(null);
   detailRef.current = detail;
   const detailHeading = useRef<HTMLHeadingElement>(null);
+  const listHeading = useRef<HTMLHeadingElement>(null);
+  const listButtons = useRef(new Map<string, HTMLButtonElement>());
+  const returnFocus = useRef<{ id: string | null } | null>(null);
   const merchantId = snapshot.merchant.id;
 
   const read = useCallback(async <T,>(url: string, signal: AbortSignal, isCurrent: () => boolean): Promise<T> => {
@@ -243,7 +247,7 @@ function StaffWorkspace({ snapshot }: { snapshot: PartnerSnapshot }) {
     }
   }, null), [listRequests, read]);
 
-  const loadDetail = useCallback(async (id: string): Promise<StaffDetailSnapshot | null> => detailRequests.runRead(async (request) => {
+  const loadDetail = useCallback(async (id: string): Promise<StaffDetailSnapshot | null> => matchingStaffDetail(id, detailRequests.runRead(async (request) => {
     setDetailState('loading');
     try {
       const fresh = await read<StaffDetailSnapshot>(`/api/partner/staff?id=${encodeURIComponent(id)}`, request.controller.signal, request.isCurrent);
@@ -255,7 +259,7 @@ function StaffWorkspace({ snapshot }: { snapshot: PartnerSnapshot }) {
       if (request.isCurrent()) { setDetailState('error'); setDetailStale(true); }
       return null;
     }
-  }, null), [detailRequests, read]);
+  }, null)), [detailRequests, read]);
 
   useEffect(() => {
     listRequests.activate(); detailRequests.activate(); writes.activate();
@@ -276,23 +280,29 @@ function StaffWorkspace({ snapshot }: { snapshot: PartnerSnapshot }) {
     window.addEventListener('focus', focus); document.addEventListener('visibilitychange', focus);
     return () => { window.removeEventListener('focus', focus); document.removeEventListener('visibilitychange', focus); };
   }, [loadList, loadDetail]);
-  useEffect(() => { if (selection) detailHeading.current?.focus(); }, [selection]);
+  useEffect(() => {
+    if (selection) detailHeading.current?.focus();
+    else if (returnFocus.current) {
+      restoreStaffListFocus(returnFocus.current.id, listButtons.current, listHeading.current);
+      returnFocus.current = null;
+    }
+  }, [selection]);
 
-  const select = (next: Selection | null) => {
+  const select = (next: Selection | null, focusList = false) => {
     if (selection?.id === next?.id || !confirmLeave()) return;
+    if (focusList) returnFocus.current = { id: selection?.isNew ? null : selection?.id ?? null };
     setDetail(null); setDetailStale(false); setMenuMessage(null); setMenuAmbiguous(false); setSelection(next);
   };
   const save = async (command: StaffCommand): Promise<{ kind: 'saved'; detail: StaffDetailSnapshot } | { kind: 'conflict' | 'error' | 'committed-stale' | 'cancelled'; message: string }> => {
     const request = writes.startWrite();
     if (!request) return { kind: 'error', message: '다른 저장이 진행 중입니다.' };
     try {
-      const response = await fetch('/api/partner/staff', { method: 'POST', credentials: 'same-origin', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(command), signal: request.controller.signal });
-      const body = await response.json();
+      const result = await postStaffCommand(command, request.controller.signal);
       if (!request.isCurrent()) return { kind: 'cancelled', message: '' };
-      if (response.status === 401 || response.status === 403) { setList(null); setDetail(null); void refresh(); return { kind: 'error', message: '현재 매장을 수정할 권한이 없습니다.' }; }
-      if (!response.ok || body?.ok !== true) return response.status === 409
-        ? { kind: 'conflict', message: '다른 곳에서 정보가 변경되었습니다. 현재 입력은 유지됩니다. 최신 정보를 확인해 주세요.' }
-        : { kind: 'error', message: '저장하지 못했습니다. 입력 내용은 유지됩니다. 잠시 후 다시 시도해 주세요.' };
+      if (result === 'forbidden') { setList(null); setDetail(null); void refresh(); return { kind: 'error', message: '현재 매장을 수정할 권한이 없습니다.' }; }
+      if (result === 'conflict') return { kind: 'conflict', message: '다른 곳에서 정보가 변경되었습니다. 현재 입력은 유지됩니다. 최신 정보를 확인해 주세요.' };
+      if (result === 'error') return { kind: 'error', message: '저장하지 못했습니다. 입력 내용은 유지됩니다. 잠시 후 다시 시도해 주세요.' };
+      if (result === 'ambiguous') return { kind: 'committed-stale', message: uncertainSaveOutcomeMessage };
       const id = command.kind === 'staff' ? command.id : command.staffId;
       if (selectedRef.current?.id !== id) return { kind: 'cancelled', message: '' };
       const fresh = await loadDetail(id);
@@ -319,12 +329,12 @@ function StaffWorkspace({ snapshot }: { snapshot: PartnerSnapshot }) {
     <header className={styles.pageHeader}><p className={styles.eyebrow}>STAFF OPERATIONS</p><h1>담당자</h1><p className={styles.muted}>예약용 담당자와 제공 메뉴, 근무 일정을 관리합니다.</p></header>
     <StaffModeNotice snapshot={snapshot} eligibleCount={list && listState === 'ready' && !listStale && !list.staff.some((item) => item.visibility === 'visible') ? 0 : null} />
     <div className={styles.staffWorkspace} data-detail-open={selection ? 'true' : 'false'}>
-      <section className={styles.staffListPane} aria-labelledby="staff-list-title"><div className={styles.sectionHeading}><h2 id="staff-list-title">담당자 목록 <span className={styles.muted}>{list ? `${list.staff.length}명` : ''}</span></h2><Button variant="secondary" disabled={readOnly || snapshot.merchant.bookingEnabled || !list || listState === 'error'} onClick={() => select({ id: crypto.randomUUID(), isNew: true })}>담당자 추가</Button></div>
+      <section className={styles.staffListPane} aria-labelledby="staff-list-title"><div className={styles.sectionHeading}><h2 id="staff-list-title" ref={listHeading} tabIndex={-1}>담당자 목록 <span className={styles.muted}>{list ? `${list.staff.length}명` : ''}</span></h2><Button variant="secondary" disabled={readOnly || snapshot.merchant.bookingEnabled || !list || listState === 'error'} onClick={() => select({ id: crypto.randomUUID(), isNew: true })}>담당자 추가</Button></div>
         {listState === 'error' && <Notice tone="warning" role="alert">{list ? '최신 목록을 불러오지 못했습니다. 마지막 조회 정보를 표시합니다.' : '담당자 목록을 불러오지 못했습니다.'} <Button variant="secondary" onClick={() => void loadList()}>다시 시도</Button></Notice>}
-        <StaffListView staff={list?.staff ?? null} selectedId={selection?.id ?? null} loading={listState === 'loading'} stale={listStale} onSelect={(id) => select({ id, isNew: false })} />
+        <StaffListView staff={list?.staff ?? null} selectedId={selection?.id ?? null} loading={listState === 'loading'} stale={listStale} onSelect={(id) => select({ id, isNew: false })} onButtonRef={(id, element) => { if (element) listButtons.current.set(id, element); else listButtons.current.delete(id); }} />
       </section>
       <section className={styles.staffDetailPane} aria-labelledby="staff-detail-title">
-        {selection && <Button variant="secondary" className={styles.staffBack} onClick={() => select(null)}>담당자 목록으로</Button>}
+        {selection && <Button variant="secondary" className={styles.staffBack} onClick={() => select(null, true)}>담당자 목록으로</Button>}
         <h2 id="staff-detail-title" ref={detailHeading} tabIndex={-1} className={styles.staffDetailTitle}>{selection ? '담당자 상세' : '담당자 선택'}</h2>
         {!selection ? <p className={styles.empty}>목록에서 담당자를 선택하거나 새 담당자를 추가하세요.</p> : <>
           {detailState === 'loading' && !selection.isNew && !currentDetail && <p role="status">담당자 정보를 불러오는 중입니다…</p>}
