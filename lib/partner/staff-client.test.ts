@@ -1,6 +1,6 @@
 import { describe, expect, it, vi } from 'vitest';
 import { PartnerDraftStore, PartnerRequestScope, type PartnerDraftRecord } from '@/components/partner/partner-provider';
-import { completeStaffDraft, completeStaffMenuAction, completeStaffReload, discardStaffSelectionDrafts, lockPendingStaffMenuOnLeave, matchingStaffDetail, postStaffCommand, readBackStaffSave, recoverStaffMenuLock, restoreStaffListFocus, staffCreateAbsentFromList, staffMenuLockAfterRead } from './staff-client';
+import { completeStaffDraft, completeStaffMenuAction, completeStaffReload, discardStaffSelectionDrafts, lockPendingStaffMenuOnLeave, matchingStaffDetail, persistedStaffSelection, postStaffCommand, readBackStaffSave, recoverStaffMenuLock, restoreStaffListFocus, staffCreateAbsentFromList, staffMenuLockAfterRead } from './staff-client';
 import type { StaffCommand } from './staff-contracts';
 import type { StaffDetailSnapshot } from './staff-server';
 
@@ -74,6 +74,15 @@ describe('staff command response before readback', () => {
 });
 
 describe('mounted staff form completion after selection changes', () => {
+  it('promotes a recovered new staff to persisted selection so focus reads resume without selecting another staff', () => {
+    const newA = { id: staffA, isNew: true };
+    const persisted = persistedStaffSelection(newA, detail(staffA).staff.id);
+    expect(persisted).toEqual({ id: staffA, isNew: false });
+    expect(persisted && !persisted.isNew).toBe(true);
+    const selectedB = { id: staffB, isNew: false };
+    expect(persistedStaffSelection(selectedB, detail(staffA).staff.id)).toBe(selectedB);
+    expect(persistedStaffSelection(persisted, staffA)).toBe(persisted); // Save readback does not transition twice.
+  });
   it('reserves committed-stale for an acknowledged POST whose detail readback fails', async () => {
     expect(await readBackStaffSave(staffA, async () => null, () => true)).toEqual({ kind: 'committed-stale' });
   });

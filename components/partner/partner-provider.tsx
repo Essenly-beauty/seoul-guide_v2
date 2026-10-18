@@ -95,6 +95,25 @@ export class PartnerDraftStore {
   clear() { this.records.clear(); this.editor = null; this.activeKeys.clear(); this.listeners.forEach((listener) => listener()); }
 }
 
+type PartnerHistoryLocation = { href: string; state: unknown };
+/** Runs before App Router's popstate listener; a rejected traversal restores its prior route/tree. */
+export function guardPartnerPopstate(
+  event: Pick<PopStateEvent, 'stopImmediatePropagation'>, previous: PartnerHistoryLocation, destinationHref: string,
+  drafts: PartnerDraftStore, confirmLeave: () => boolean, confirmExit: () => boolean,
+  restore: (location: PartnerHistoryLocation) => void,
+): boolean {
+  if (destinationHref === previous.href) return true;
+  const destination = new URL(destinationHref);
+  const leavesWorkspace = destination.origin !== new URL(previous.href).origin || (destination.pathname !== '/partner' && !destination.pathname.startsWith('/partner/'));
+  let allowed = true;
+  if (leavesWorkspace && drafts.hasUnsavedChanges()) {
+    allowed = confirmExit();
+    if (allowed) drafts.clear();
+  } else allowed = confirmLeave();
+  if (!allowed) { event.stopImmediatePropagation(); restore(previous); }
+  return allowed;
+}
+
 type Access = 'loading' | 'ready' | 'signed-out' | 'unassigned' | 'unavailable';
 export const uncertainSaveOutcomeMessage = '서버의 저장 결과를 확인하지 못했습니다. 다시 불러와 저장 여부를 확인한 뒤 필요하면 다시 저장해 주세요.';
 type PartnerContextValue = {
@@ -122,6 +141,7 @@ function PartnerSession({ children, authenticated, checking }: { children: React
   const [requests] = useState(() => new PartnerRequestScope());
   const [drafts] = useState(() => new PartnerDraftStore());
   const merchantId = useRef<string | null>(null);
+  const historyLocation = useRef<PartnerHistoryLocation | null>(null);
   const confirmLeave = useCallback((discard = true) => {
     if (!drafts.hasActiveUnsavedChanges()) return true;
     if (!window.confirm('저장하지 않은 변경사항이 있습니다. 변경사항을 버릴까요?')) return false;
@@ -173,6 +193,7 @@ function PartnerSession({ children, authenticated, checking }: { children: React
     return () => { requests.dispose(); drafts.clear(); };
   }, [requests, drafts]);
   useEffect(() => { void refresh(); }, [pathname, refresh]);
+  useEffect(() => { historyLocation.current = { href: window.location.href, state: window.history.state }; });
   useEffect(() => {
     const focus = () => { if (document.visibilityState === 'visible') void refresh(); };
     window.addEventListener('focus', focus);
@@ -194,9 +215,18 @@ function PartnerSession({ children, authenticated, checking }: { children: React
       } else allowed = confirmLeave();
       if (!allowed) { event.preventDefault(); event.stopPropagation(); }
     };
+    const popstate = (event: PopStateEvent) => {
+      const previous = historyLocation.current;
+      if (!previous) return;
+      const allowed = guardPartnerPopstate(event, previous, window.location.href, drafts, confirmLeave,
+        () => window.confirm('가맹점 관리를 나가면 저장하지 않은 초안이 모두 지워집니다. 나갈까요?'),
+        (location) => window.history.pushState(location.state, '', location.href));
+      if (allowed) historyLocation.current = { href: window.location.href, state: event.state };
+    };
     window.addEventListener('beforeunload', unload);
     document.addEventListener('click', click, true);
-    return () => { window.removeEventListener('beforeunload', unload); document.removeEventListener('click', click, true); };
+    window.addEventListener('popstate', popstate, true);
+    return () => { window.removeEventListener('beforeunload', unload); document.removeEventListener('click', click, true); window.removeEventListener('popstate', popstate, true); };
   }, [confirmLeave, drafts]);
   const save = useCallback(async (command: PartnerCommand | ReservationCommand): Promise<SaveResult> => {
     if (!authenticated) return { kind: 'cancelled' };

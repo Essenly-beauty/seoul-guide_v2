@@ -1,7 +1,7 @@
 import { describe, expect, it, vi } from 'vitest';
 import { createElement } from 'react';
 import { renderToStaticMarkup } from 'react-dom/server';
-import { PartnerDraftStore, uncertainSaveOutcomeMessage, type PartnerDraftRecord } from '@/components/partner/partner-provider';
+import { guardPartnerPopstate, PartnerDraftStore, uncertainSaveOutcomeMessage, type PartnerDraftRecord } from '@/components/partner/partner-provider';
 import { failedReloadState, rebaseUnchangedSharedSchedule, SaveStatus } from '@/components/partner/partner-form';
 
 const entry = (): PartnerDraftRecord<{ name: string; updatedAt: string }> => ({ token: Symbol(), draft: { name: '편집 중', updatedAt: '2026-10-18T01:02:03.123456+00:00' }, baseline: { name: '저장된 이름', updatedAt: '2026-10-18T01:02:03.123456+00:00' }, state: { kind: 'idle' } });
@@ -30,6 +30,51 @@ describe('session-scoped partner draft recovery', () => {
     const html = renderToStaticMarkup(createElement(SaveStatus, { state: unconfirmed.state, onReload: () => {} }));
     expect(html).toContain('저장 여부');
     expect(html).not.toContain('저장은 완료');
+  });
+  it('blocks a history traversal out of partner when an inactive unconfirmed draft is not discarded', () => {
+    const store = new PartnerDraftStore();
+    const record = { ...entry(), draft: entry().baseline, state: { kind: 'unconfirmed' as const } };
+    store.write('staff:profile:existing', record);
+    const previous = { href: 'http://localhost/partner/staff', state: { __NA: true, tree: 'partner' } };
+    const stop = vi.fn();
+    const restore = vi.fn();
+    const confirm = vi.fn(() => false);
+    expect(guardPartnerPopstate({ stopImmediatePropagation: stop }, previous, 'http://localhost/support', store, () => true, confirm, restore)).toBe(false);
+    expect(stop).toHaveBeenCalledOnce();
+    expect(restore).toHaveBeenCalledWith(previous);
+    expect(store.read('staff:profile:existing')).toBe(record);
+    expect(confirm).toHaveBeenCalledOnce();
+  });
+  it('lets confirmed external traversal clear drafts and internal traversal use active-form confirmation', () => {
+    const store = new PartnerDraftStore();
+    const record = entry();
+    store.write('settings', record); store.setActive('settings');
+    const previous = { href: 'http://localhost/partner/settings', state: { __NA: true } };
+    const stop = vi.fn();
+    const restore = vi.fn();
+    const confirmLeave = vi.fn(() => { store.discardActive(); return true; });
+    expect(guardPartnerPopstate({ stopImmediatePropagation: stop }, previous, 'http://localhost/partner/staff', store, confirmLeave, () => false, restore)).toBe(true);
+    expect(confirmLeave).toHaveBeenCalledOnce();
+    expect(store.read('settings')).toBeUndefined();
+    store.write('settings', record);
+    expect(guardPartnerPopstate({ stopImmediatePropagation: stop }, previous, 'http://localhost/support', store, confirmLeave, () => true, restore)).toBe(true);
+    expect(store.read('settings')).toBeUndefined();
+    expect(stop).not.toHaveBeenCalled();
+    expect(restore).not.toHaveBeenCalled();
+  });
+  it('restores the current route for a declined internal Back and ignores same-URL history entries', () => {
+    const store = new PartnerDraftStore();
+    const record = entry();
+    store.write('staff', record); store.setActive('staff');
+    const previous = { href: 'http://localhost/partner/staff', state: { __NA: true } };
+    const stop = vi.fn();
+    const restore = vi.fn();
+    const confirmLeave = vi.fn(() => false);
+    expect(guardPartnerPopstate({ stopImmediatePropagation: stop }, previous, 'http://localhost/partner/services', store, confirmLeave, () => true, restore)).toBe(false);
+    expect(restore).toHaveBeenCalledWith(previous);
+    expect(store.read('staff')).toBe(record);
+    expect(guardPartnerPopstate({ stopImmediatePropagation: stop }, previous, previous.href, store, confirmLeave, () => true, restore)).toBe(true);
+    expect(confirmLeave).toHaveBeenCalledOnce();
   });
   it('does not unlock an unconfirmed form when its explicit recovery read fails', () => {
     expect(failedReloadState({ kind: 'unconfirmed' }, 'read failed')).toEqual({ kind: 'unconfirmed' });

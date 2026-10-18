@@ -69,6 +69,10 @@ export function staffCreateAbsentFromList(id: string, list: StaffListSnapshot | 
   return !!list && !list.staff.some((person) => person.id === id);
 }
 
+export function persistedStaffSelection<T extends { id: string; isNew: boolean }>(selection: T | null, id: string): T | null {
+  return selection?.id === id && selection.isNew ? { ...selection, isNew: false } : selection;
+}
+
 export async function readBackStaffSave(
   id: string, loadDetail: (id: string) => Promise<StaffDetailSnapshot | null>, isCurrent: () => boolean,
 ): Promise<{ kind: 'saved'; detail: StaffDetailSnapshot } | { kind: 'committed-stale' } | { kind: 'cancelled' }> {

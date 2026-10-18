@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Notice } from '@/components/ui/notice';
 import type { Menu, PartnerSnapshot } from '@/lib/partner/contracts';
 import type { StaffCommand } from '@/lib/partner/staff-contracts';
-import { completeStaffDraft, completeStaffMenuAction, completeStaffReload, discardStaffSelectionDrafts, lockPendingStaffMenuOnLeave, matchingStaffDetail, postStaffCommand, readBackStaffSave, recoverStaffMenuLock, restoreStaffListFocus, staffCreateAbsentFromList, staffMenuLockAfterRead } from '@/lib/partner/staff-client';
+import { completeStaffDraft, completeStaffMenuAction, completeStaffReload, discardStaffSelectionDrafts, lockPendingStaffMenuOnLeave, matchingStaffDetail, persistedStaffSelection, postStaffCommand, readBackStaffSave, recoverStaffMenuLock, restoreStaffListFocus, staffCreateAbsentFromList, staffMenuLockAfterRead } from '@/lib/partner/staff-client';
 import type { StaffCalendar, StaffDetail, StaffDetailSnapshot, StaffListSnapshot, StaffSummary } from '@/lib/partner/staff-server';
 import { staffCalendarDraft, staffCalendarFormValues, staffProfileDraft, staffProfileFormValues, type StaffCalendarDraft, type StaffProfileDraft } from '@/lib/partner/staff-form-values';
 import { PartnerRequestScope, uncertainSaveOutcomeMessage, usePartner, type PartnerDraftRecord } from './partner-provider';
@@ -275,6 +275,8 @@ function StaffWorkspace({ snapshot }: { snapshot: PartnerSnapshot }) {
       if (fresh.staff?.id !== id || !Array.isArray(fresh.staff.menuIds)) throw new Error('invalid');
       const menuLock = staffMenuLockAfterRead(menuLocks.current, id, explicitMenuRecovery);
       setDetail(fresh); setDetailState('ready'); setDetailStale(false); setMenuAmbiguous(!!menuLock); setMenuMessage(menuLock);
+      const persisted = persistedStaffSelection(selectedRef.current, id);
+      if (persisted !== selectedRef.current) { selectedRef.current = persisted; setSelection(persisted); }
       return fresh;
     } catch {
       if (request.isCurrent()) { setDetailState('error'); setDetailStale(true); }
@@ -288,7 +290,9 @@ function StaffWorkspace({ snapshot }: { snapshot: PartnerSnapshot }) {
     return () => { listRequests.dispose(); detailRequests.dispose(); writes.dispose(); };
   }, [listRequests, detailRequests, writes, loadList]);
   useEffect(() => {
-    if (selection && !selection.isNew) void loadDetail(selection.id);
+    if (selection && !selection.isNew) {
+      if (detailRef.current?.staff.id !== selection.id) void loadDetail(selection.id);
+    }
     else { detailRequests.invalidate(); setDetail(null); setDetailState('ready'); }
   }, [selection, loadDetail, detailRequests]);
   useEffect(() => {
@@ -338,7 +342,6 @@ function StaffWorkspace({ snapshot }: { snapshot: PartnerSnapshot }) {
       const readback = await readBackStaffSave(id, loadDetail, stillCurrent);
       if (readback.kind === 'cancelled') return { kind: 'cancelled', message: '' };
       if (readback.kind === 'committed-stale') return { kind: 'committed-stale', message: uncertainSaveOutcomeMessage };
-      if (selectedRef.current?.isNew) setSelection({ id, isNew: false });
       return { kind: 'saved', detail: readback.detail };
     } catch {
       if (!stillCurrent()) return { kind: 'cancelled', message: '' };
