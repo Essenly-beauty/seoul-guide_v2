@@ -79,6 +79,8 @@ describe('merchant admin actual markup', () => {
     expect($.text()).toContain('날짜별 차단 시간');
     expect($('input[aria-label="특별 영업일 1 날짜"]').val()).toBe('2026-11-05');
     expect($('input[aria-label="특별 영업일 1 시작 시간 1"]').length).toBe(1);
+    expect($('input[type="checkbox"][aria-label="특별 영업일 1 종일 휴무"]').length).toBe(1);
+    expect($('input[type="checkbox"][aria-label="특별 영업일 2 종일 휴무"]').length).toBe(1);
     expect($('button:not([disabled])').length).toBe(0);
     expect($('fieldset[disabled]').length).toBe(1);
     const empty = render(<DateOverridesFields value={[]} onChange={() => {}} disabled={false} />);

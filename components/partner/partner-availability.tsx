@@ -54,7 +54,7 @@ export function DateOverridesFields({ value, onChange, disabled }: { value: Date
     {value.map((day, index) => <section key={index} className={styles.specialDay} aria-label={`특별 영업일 ${index + 1}`}>
       <div className={styles.sectionHeading}><h3>특별 날짜 {index + 1} <span className={styles.muted}>/ {value.length}</span></h3><Button variant="secondary" disabled={disabled} aria-label={`특별 영업일 ${index + 1} 삭제`} onClick={() => onChange(value.filter((_, position) => position !== index))}>날짜 삭제</Button></div>
       <Field label="날짜"><input type="date" aria-label={`특별 영업일 ${index + 1} 날짜`} value={day.date} onChange={(event) => updateDay(index, { date: event.target.value })} /></Field>
-      <label className={styles.specialClosure}><input type="checkbox" checked={day.closed} onChange={(event) => updateDay(index, { closed: event.target.checked })} />종일 휴무</label>
+      <label className={styles.specialClosure}><input type="checkbox" aria-label={`특별 영업일 ${index + 1} 종일 휴무`} checked={day.closed} onChange={(event) => updateDay(index, { closed: event.target.checked })} />종일 휴무</label>
       {!day.closed && (['hours', 'breaks'] as const).map((kind) => <section key={kind} className={styles.scheduleSection}><h3>{kind === 'hours' ? '특별 영업시간' : '특별 휴게시간'} <span className={styles.muted}>{day[kind].length} / 128</span></h3>
         {day[kind].map((period, periodIndex) => <div key={periodIndex} className={styles.specialRow}>
           <label>시작 시간<input aria-label={`특별 영업일 ${index + 1} ${kind === 'hours' ? '시작' : '휴게 시작'} 시간 ${periodIndex + 1}`} placeholder="09:00" value={period.start} onChange={(event) => updatePeriod(index, kind, periodIndex, { start: event.target.value })} /></label>
@@ -96,7 +96,7 @@ function RulesEditor({ snapshot }: { snapshot: PartnerSnapshot }) {
 }
 function WeeklyEditor({ snapshot }: { snapshot: PartnerSnapshot }) {
   const from = (current: PartnerSnapshot) => ({ values: scheduleDraft(current.schedule), updatedAt: current.schedule?.updatedAt ?? null });
-  const form = usePartnerDraft('schedule', from(snapshot));
+  const form = usePartnerDraft('schedule', from(snapshot), true);
   return <section className={styles.availabilitySection} aria-labelledby="weekly-hours-title"><div className={styles.sectionHeading}><div><p className={styles.eyebrow}>02 / WEEKLY HOURS</p><h2 id="weekly-hours-title">주간 영업 일정</h2></div></div>
     <p className={styles.muted}>모든 메뉴와 담당자에게 공통으로 적용할 영업시간·휴게시간·날짜별 차단 시간을 입력합니다.</p>
     <form className={styles.editor} onSubmit={(event) => { event.preventDefault(); const parsed = scheduleFormValues(form.draft.values, snapshot.dateOverrides); if (!parsed.ok) { form.invalid(parsed.error); return; } const version = form.draft.updatedAt ? { mode: 'update' as const, expectedUpdatedAt: form.draft.updatedAt } : { mode: 'create' as const }; void form.submit({ kind: 'schedule', ...version, values: parsed.values }, from); }}>
@@ -108,7 +108,7 @@ function WeeklyEditor({ snapshot }: { snapshot: PartnerSnapshot }) {
 }
 function DateEditor({ snapshot }: { snapshot: PartnerSnapshot }) {
   const from = (current: PartnerSnapshot) => ({ values: dateOverridesDraft(current.dateOverrides), updatedAt: current.schedule?.updatedAt ?? null });
-  const form = usePartnerDraft('dateOverrides', from(snapshot));
+  const form = usePartnerDraft('dateOverrides', from(snapshot), true);
   const disabled = snapshot.readOnly || form.locked;
   return <section className={styles.availabilitySection} aria-labelledby="special-dates-title"><div className={styles.sectionHeading}><div><p className={styles.eyebrow}>03 / SPECIAL DATES</p><h2 id="special-dates-title">특별 영업일·휴무</h2></div></div>
     <p className={styles.muted}>평소와 다른 날짜만 추가하세요. 종일 휴무나 평소 쉬는 날의 특별 영업도 설정할 수 있습니다.</p>

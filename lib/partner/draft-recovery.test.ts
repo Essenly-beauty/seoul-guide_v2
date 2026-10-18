@@ -1,5 +1,6 @@
 import { describe, expect, it, vi } from 'vitest';
 import { PartnerDraftStore, uncertainSaveOutcomeMessage, type PartnerDraftRecord } from '@/components/partner/partner-provider';
+import { rebaseUnchangedSharedSchedule } from '@/components/partner/partner-form';
 
 const entry = (): PartnerDraftRecord<{ name: string; updatedAt: string }> => ({ token: Symbol(), draft: { name: '편집 중', updatedAt: '2026-10-18T01:02:03.123456+00:00' }, baseline: { name: '저장된 이름', updatedAt: '2026-10-18T01:02:03.123456+00:00' }, state: { kind: 'idle' } });
 
@@ -101,6 +102,41 @@ describe('session-scoped partner draft recovery', () => {
   it('does not promise a stable client identifier when a save outcome is unknown', () => {
     expect(uncertainSaveOutcomeMessage).toContain('저장 여부를 확인');
     expect(uncertainSaveOutcomeMessage).not.toMatch(/같은 식별자|중복 없이 재시도/);
+  });
+  it('keeps dirty weekly hours and rebases only their version after a special-date save', () => {
+    const baseline = { values: { hours: [], breaks: [], blocks: [] }, updatedAt: null as string | null };
+    const record = { token: Symbol(), baseline, draft: { values: { ...baseline.values, hours: [{ weekday: 1, startMinute: 540, endMinute: 1080 }] }, updatedAt: baseline.updatedAt }, state: { kind: 'idle' as const } };
+    const next = { values: baseline.values, updatedAt: '2026-10-18T02:00:00Z' };
+    const rebased = rebaseUnchangedSharedSchedule(record, next);
+    expect(rebased?.draft.values).toEqual(record.draft.values);
+    expect(rebased?.draft.updatedAt).toBe(next.updatedAt);
+    expect(rebased?.baseline.values).toEqual(baseline.values);
+    expect(rebased?.baseline.updatedAt).toBe(next.updatedAt);
+    expect(rebased?.token).toBe(record.token);
+  });
+  it('keeps dirty special dates and rebases only their version after a weekly-hours save', () => {
+    const baseline = { values: [], updatedAt: null };
+    const record = { token: Symbol(), baseline, draft: { values: [{ date: '2026-11-05', closed: true, hours: [], breaks: [] }], updatedAt: null }, state: { kind: 'idle' as const } };
+    const next = { values: [], updatedAt: '2026-10-18T02:00:00Z' };
+    const rebased = rebaseUnchangedSharedSchedule(record, next);
+    expect(rebased?.draft.values).toEqual(record.draft.values);
+    expect(rebased?.draft.updatedAt).toBe(next.updatedAt);
+    expect(rebased?.baseline.updatedAt).toBe(next.updatedAt);
+  });
+  it('retains the stale stamp when the same persisted field changed externally', () => {
+    const baseline = { values: [], updatedAt: '2026-10-18T01:00:00Z' };
+    const record = { token: Symbol(), baseline, draft: { values: [{ date: '2026-11-05' }], updatedAt: baseline.updatedAt }, state: { kind: 'conflict' as const, message: '충돌' } };
+    expect(rebaseUnchangedSharedSchedule(record, { values: [{ date: '2026-11-06' }], updatedAt: '2026-10-18T02:00:00Z' })).toBeNull();
+    expect(record.draft.updatedAt).toBe(baseline.updatedAt);
+    expect(rebaseUnchangedSharedSchedule(record, { values: baseline.values, updatedAt: '2026-10-18T02:00:00Z' })?.state).toEqual({ kind: 'idle' });
+  });
+  it('does not rebase pending, reloading or committed-stale drafts', () => {
+    const baseline = { values: [], updatedAt: '2026-10-18T01:00:00Z' };
+    const next = { values: [], updatedAt: '2026-10-18T02:00:00Z' };
+    for (const kind of ['pending', 'reloading', 'committed-stale'] as const) {
+      const record = { token: Symbol(), baseline, draft: { values: [{ date: '2026-11-05' }], updatedAt: baseline.updatedAt }, state: { kind } };
+      expect(rebaseUnchangedSharedSchedule(record, next)).toBeNull();
+    }
   });
   it('clears all private draft/editor state on access loss or session teardown', () => {
     const store = new PartnerDraftStore();

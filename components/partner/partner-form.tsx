@@ -19,8 +19,22 @@ export function SaveStatus({ state, onReload }: { state: SaveState; onReload: ()
   </div>;
 }
 
+type VersionedValues = { values: unknown; updatedAt: string | null };
+
+/** Preserve this form's edits when only a sibling field changed on the shared schedule row. */
+export function rebaseUnchangedSharedSchedule<T extends VersionedValues>(record: PartnerDraftRecord<T>, incoming: VersionedValues): PartnerDraftRecord<T> | null {
+  if (!incoming.updatedAt || incoming.updatedAt === record.baseline.updatedAt ||
+    record.state.kind === 'pending' || record.state.kind === 'reloading' || record.state.kind === 'committed-stale' ||
+    JSON.stringify(record.draft) === JSON.stringify(record.baseline) ||
+    JSON.stringify(incoming.values) !== JSON.stringify(record.baseline.values)) return null;
+  return { ...record,
+    draft: { ...record.draft, updatedAt: incoming.updatedAt },
+    baseline: { ...record.baseline, updatedAt: incoming.updatedAt },
+    state: record.state.kind === 'conflict' ? { kind: 'idle' } : record.state };
+}
+
 /** The baseline (including the exact DB version) travels with the draft. */
-export function usePartnerDraft<T>(key: string, initial: T) {
+export function usePartnerDraft<T extends VersionedValues>(key: string, initial: T, rebaseSharedScheduleVersion = false) {
   const partner = usePartner();
   const { drafts } = partner;
   const [fallback] = useState<PartnerDraftRecord<T>>(() => ({ token: Symbol(key), draft: initial, baseline: initial, state: { kind: 'idle' } }));
@@ -42,11 +56,15 @@ export function usePartnerDraft<T>(key: string, initial: T) {
   }, [drafts, key, fallback]);
   useEffect(() => {
     const current = drafts.read<T>(key);
-    if (current && !dirty && !locked) {
-      const next = JSON.parse(serializedInitial) as T;
-      drafts.write(key, { ...current, draft: next, baseline: next });
+    if (!current || current.state.kind === 'pending' || current.state.kind === 'reloading' || current.state.kind === 'committed-stale') return;
+    const next = JSON.parse(serializedInitial) as T;
+    if (JSON.stringify(current.draft) === JSON.stringify(current.baseline)) {
+      if (JSON.stringify(current.baseline) !== serializedInitial) drafts.write(key, { ...current, draft: next, baseline: next });
+    } else if (rebaseSharedScheduleVersion) {
+      const rebased = rebaseUnchangedSharedSchedule(current, next);
+      if (rebased) drafts.write(key, rebased);
     }
-  }, [serializedInitial, dirty, locked, drafts, key]);
+  }, [serializedInitial, dirty, locked, drafts, key, rebaseSharedScheduleVersion]);
   const setDraft = (value: T) => drafts.write(key, { ...record, draft: value });
   const setState = (value: SaveState) => drafts.write(key, { ...record, state: value });
   const submit = async (command: PartnerCommand | ReservationCommand, next: (snapshot: PartnerSnapshot) => T) => {
