@@ -4,9 +4,10 @@ import { supabaseServer } from "@/lib/supabase/server";
 
 // Permanent account deletion — the privacy policy promises it, so it must be
 // real. The caller proves ownership via their session cookie; the service
-// role performs the delete. DB rows cascade (favorites/profiles/ratings
+// role performs the delete. Ordinary account rows cascade (favorites/profiles/ratings
 // reference auth.users ON DELETE CASCADE; feedback keeps the note but drops
-// the author via ON DELETE SET NULL).
+// the author via ON DELETE SET NULL). Merchant ownership instead restricts
+// deletion, including revoked memberships, until support closes or transfers it.
 export async function POST(request: Request) {
   // same-origin guard — session cookies are SameSite=Lax, but be explicit
   const origin = request.headers.get("origin");
@@ -18,6 +19,32 @@ export async function POST(request: Request) {
   const supabase = supabaseServer();
   const { data: { user } } = await supabase.auth.getUser();
   if (!user) return NextResponse.json({ error: "Sign in first." }, { status: 401 });
+
+  try {
+    const { data, error } = await supabase
+      .from("merchant_memberships")
+      .select("merchant_id")
+      .eq("user_id", user.id)
+      .limit(1);
+    if (error || !Array.isArray(data)) {
+      return NextResponse.json({
+        code: "MERCHANT_OWNERSHIP_CHECK_FAILED",
+        error: "Deletion is temporarily unavailable.",
+      }, { status: 503 });
+    }
+    if (data.length > 0) {
+      return NextResponse.json({
+        code: "MERCHANT_ACCOUNT_REQUIRES_SUPPORT",
+        error: "Please contact support to close or transfer your merchant before deleting your account.",
+        supportPath: "/support",
+      }, { status: 409 });
+    }
+  } catch {
+    return NextResponse.json({
+      code: "MERCHANT_OWNERSHIP_CHECK_FAILED",
+      error: "Deletion is temporarily unavailable.",
+    }, { status: 503 });
+  }
 
   const serviceKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
   const url = process.env.SUPABASE_URL ?? process.env.NEXT_PUBLIC_SUPABASE_URL;
