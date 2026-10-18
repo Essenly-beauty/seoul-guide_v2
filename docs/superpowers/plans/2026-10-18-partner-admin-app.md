@@ -42,7 +42,9 @@
 
 ## Task 1: Strict authenticated configuration API
 
-- [ ] Write failing boundary tests with valid category/menu/settings/schedule commands, then reject null/array primitives, unknown keys, caller tenant IDs, deposits even null, status/booking edits, invalid UUIDs, nonfinite/unsafe/fractional numbers, overlength Unicode strings, invalid dates/times, overlapping periods, uncovered breaks and storage size bounds.
+**Completed:** `b9ed315`, `dbe4ca1`, `dd8ab2c`. Independent spec and quality reviews approved, no open findings. Parent verified 185 focused tests, typecheck, a local-env production build, and real isolated Auth/PostgREST persistence/tenant-isolation checks. GET's concrete envelope is `{ok:true,snapshot}`. The Next 15 loopback-normalization issue discovered by real integration testing is covered by actual `NextRequest` regression tests and a narrow Origin/Host check.
+
+- [x] Write failing boundary tests with valid category/menu/settings/schedule commands, then reject null/array primitives, unknown keys, caller tenant IDs, deposits even null, status/booking edits, invalid UUIDs, nonfinite/unsafe/fractional numbers, overlength Unicode strings, invalid dates/times, overlapping periods, uncovered breaks and storage size bounds.
 
 ```ts
 expect(parsePartnerCommand({ kind: 'category', mode: 'create', id: categoryId,
@@ -56,9 +58,9 @@ expect(parsePartnerCommand({ kind: 'settings', expectedUpdatedAt: stamp,
 
 Commands: category/menu `{kind,mode:'create'|'update',id,expectedUpdatedAt? ,values}` (stamp required only for update); schedule `{kind:'schedule',mode,expectedUpdatedAt?,values:{hours,breaks,blocks}}`; settings `{kind:'settings',expectedUpdatedAt,values:{displayName,contactEmail,contactPhone,address,businessTypes}}`. Menu values contain all A1 fields except id, merchantId and depositKrw. Category values contain names, visibility and sortOrder. UUIDs use standard canonical hex format. Timestamps must be nonempty ISO-formatted strings and remain byte-for-byte unchanged for DB equality.
 
-- [ ] Run `npx vitest run lib/partner/contracts.test.ts`; observe the missing validator/failed assertions before implementation.
-- [ ] Implement discriminated DTOs and `parsePartnerCommand(input: unknown)` returning `{ok:true,command}` or `{ok:false,errors:string[]}`. Reuse `validateMenu`/`validateSchedule` only after runtime type checks. Do not coerce JSON numbers/strings/nulls. Use Unicode codepoint length and A2 caps (128 hours, 128 breaks, 512 blocks, schedule JSON 256 KiB). Draft strings/null fields remain allowed under A1 rules.
-- [ ] Write failing server/HTTP tests for logged-out 401; missing/revoked membership 403; auth/query faults 503; suspended/closed read-only; own snapshot; full pagination; generic failures; no client-supplied ownership; cross-tenant category/update rejection; stale timestamps; duplicate create conflict; no mutation on failed authorization; private no-store headers; malformed/oversized/cross-origin writes.
+- [x] Run `npx vitest run lib/partner/contracts.test.ts`; observe the missing validator/failed assertions before implementation.
+- [x] Implement discriminated DTOs and `parsePartnerCommand(input: unknown)` returning `{ok:true,command}` or `{ok:false,errors:string[]}`. Reuse `validateMenu`/`validateSchedule` only after runtime type checks. Do not coerce JSON numbers/strings/nulls. Use Unicode codepoint length and A2 caps (128 hours, 128 breaks, 512 blocks, schedule JSON 256 KiB). Draft strings/null fields remain allowed under A1 rules.
+- [x] Write failing server/HTTP tests for logged-out 401; missing/revoked membership 403; auth/query faults 503; suspended/closed read-only; own snapshot; full pagination; generic failures; no client-supplied ownership; cross-tenant category/update rejection; stale timestamps; duplicate create conflict; no mutation on failed authorization; private no-store headers; malformed/oversized/cross-origin writes.
 
 ```ts
 const response = await POST(new Request('https://app.test/api/partner', {
@@ -69,10 +71,10 @@ expect(response.status).toBe(403);
 expect(await response.json()).not.toHaveProperty('details');
 ```
 
-- [ ] Run `npx vitest run lib/partner/server.test.ts lib/partner/api.test.ts` and record RED before implementation.
-- [ ] Implement `getPartnerContext(client)` with `auth.getUser()`, membership by verified user and `revoked_at IS NULL`, merchant by membership. Return actual status/readOnly. No metadata roles. Select explicit columns only. Query errors/malformed results fail closed, not empty success. GET returns `{merchant,categories,menus,schedule,readOnly,loadedAt}`; merchant and each stored row include `updatedAt`; schedule may be null. No membership/actor/contact data for other tenants.
-- [ ] Read category/menu lists using stable ID ordering and 200-row pages, detecting the documented bound. Sort projected lists by sortOrder then ID for display. Translate A2 snake_case fields to DTOs explicitly.
-- [ ] Implement `savePartnerCommand(client,context,command)` with narrow SQL column allowlists. Include server-owned merchant_id on inserts only. Menu validation resolves category through the same tenant and uses existing stored deposit on updates. DB constraints still protect concurrent operator deposit changes. Updates filter entity ID, merchant ID and exact timestamp, select result and return 409 on no row; duplicate IDs return 409. No DELETE/upsert. Schedule uses separate insert/update; no client deposit column even on insertion.
+- [x] Run `npx vitest run lib/partner/server.test.ts lib/partner/api.test.ts` and record RED before implementation.
+- [x] Implement `getPartnerContext(client)` with `auth.getUser()`, membership by verified user and `revoked_at IS NULL`, merchant by membership. Return actual status/readOnly. No metadata roles. Select explicit columns only. Query errors/malformed results fail closed, not empty success. GET returns `{merchant,categories,menus,schedule,readOnly,loadedAt}`; merchant and each stored row include `updatedAt`; schedule may be null. No membership/actor/contact data for other tenants.
+- [x] Read category/menu lists using stable ID ordering and 200-row pages, detecting the documented bound. Sort projected lists by sortOrder then ID for display. Translate A2 snake_case fields to DTOs explicitly.
+- [x] Implement `savePartnerCommand(client,context,command)` with narrow SQL column allowlists. Include server-owned merchant_id on inserts only. Menu validation resolves category through the same tenant and uses existing stored deposit on updates. DB constraints still protect concurrent operator deposit changes. Updates filter entity ID, merchant ID and exact timestamp, select result and return 409 on no row; duplicate IDs return 409. No DELETE/upsert. Schedule uses separate insert/update; no client deposit column even on insertion.
 
 ```ts
 const result = await client.from('merchant_categories')
@@ -82,8 +84,8 @@ const result = await client.from('merchant_categories')
   .eq('updated_at', command.expectedUpdatedAt).select('id').maybeSingle();
 ```
 
-- [ ] Implement GET/POST with existing `supabaseServer()`. Every response private/no-store and `Vary: Cookie`. POST requires exact same-origin Origin, application/json, and an actually bounded 300 KiB stream (not just content-length), catches malformed JSON/stream faults, then verifies auth and validates input. Responses are safe Korean messages and stable codes; no raw SQL/provider errors. Success `{ok:true}` means DB accepted the change, not that a subsequent reload succeeded.
-- [ ] Run focused tests, `npm run typecheck`, `npm run lint`; fix regressions, self-review, commit exact task files with configured author. Independent spec review then quality review must pass before Task 2.
+- [x] Implement GET/POST with existing `supabaseServer()`. Every response private/no-store and `Vary: Cookie`. POST requires exact same-origin Origin, application/json, and an actually bounded 300 KiB stream (not just content-length), catches malformed JSON/stream faults, then verifies auth and validates input. Responses are safe Korean messages and stable codes; no raw SQL/provider errors. Success `{ok:true}` means DB accepted the change, not that a subsequent reload succeeded.
+- [x] Run focused tests, `npm run typecheck`, `npm run lint`; fix regressions, self-review, commit exact task files with configured author. Independent spec review then quality review must pass before Task 2.
 
 ## Task 2: Responsive merchant admin and safe forms
 
@@ -108,6 +110,8 @@ expect(parseOptionalInteger('1.5')).toBeUndefined();
 - [ ] Run focused tests, full `npm test -- --run`, typecheck/lint; self-review and commit exact files. Independent spec then quality review before Task 3.
 
 ## Task 3: Real local Auth/API/browser verification
+
+**Environment evidence:** Fresh project `/private/tmp/partner-app-20261018-Io8Zlv` is running on the specified ports, with only Auth/PostgREST/Kong/Postgres. Existing three DB containers were not changed. All 170 SQL assertions passed in the new project. Next dev runs on loopback port 3018 with local env overrides and `WATCHPACK_POLLING=1000` (native file watching exceeded the environment's file limit). Chrome CLI launch is blocked in this environment; use the product's authorized Chrome browser controls for interactive responsive checks, and keep HTTP/Auth integration checks independently runnable without a browser. Do not bypass the launch restriction or claim unexecuted Playwright browser tests passed.
 
 - [ ] Create a new disposable local Supabase CLI project under an explicit `/private/tmp/partner-app-20261018-*` directory; unique API 54381 / DB 54382 / shadow 54380, seed disabled. Reuse repository migrations. Do not reset/stop the original DB or either A2 test DB.
 - [ ] Write guarded test runner/config: refuse non-loopback or unexpected ports/project prefix; read CLI status keys in-process without printing; launch Next with local Supabase env overrides and no remote keys. Use only existing CLI/packages. Real local test users/merchants are clearly QA fixtures, not production examples.
