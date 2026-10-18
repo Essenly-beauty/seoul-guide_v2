@@ -79,6 +79,15 @@ select is_empty($$select id from public.merchant_audit_events where merchant_id=
 select is((select count(*) from public.merchant_audit_events where entity_table='merchant_services' and action='UPDATE'),1::bigint,'failed writes produce no audit');
 update public.merchant_services set price_krw=price_krw;
 select is((select count(*) from public.merchant_audit_events where entity_table='merchant_services' and action='UPDATE'),1::bigint,'no op update produces no audit');
+select results_eq($$update public.merchant_services set name_ko=repeat('😀',120) returning length(name_ko)$$,array[120],'owner saves 120 code point Korean name');
+select results_eq($$update public.merchant_services set name_en=repeat('😀',120) returning length(name_en)$$,array[120],'owner saves 120 code point English name');
+select results_eq($$update public.merchant_services set description_ko=repeat('😀',4000) returning length(description_ko)$$,array[4000],'owner saves 4000 code point Korean description');
+select results_eq($$update public.merchant_services set description_en=repeat('😀',4000) returning length(description_en)$$,array[4000],'owner saves 4000 code point English description');
+select throws_ok($$update public.merchant_services set name_ko=repeat('😀',121)$$,'23514',null,'Korean name rejects 121 code points');
+select throws_ok($$update public.merchant_services set name_en=repeat('😀',121)$$,'23514',null,'English name rejects 121 code points');
+select throws_ok($$update public.merchant_services set description_ko=repeat('😀',4001)$$,'23514',null,'Korean description rejects 4001 code points');
+select throws_ok($$update public.merchant_services set description_en=repeat('😀',4001)$$,'23514',null,'English description rejects 4001 code points');
+select ok(not exists(select 1 from public.merchant_audit_events e where row_to_json(e)::text like '%😀%'),'Unicode text values remain absent from audit');
 
 set local request.jwt.claim.sub='c0000000-0000-0000-0000-000000000001';
 set local request.jwt.claims='{"user_metadata":{"merchant_id":"a0000000-0000-0000-0000-000000000002","role":"owner"}}';

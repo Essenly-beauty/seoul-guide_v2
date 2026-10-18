@@ -62,6 +62,12 @@ describe('partner catalog', () => {
     expect(validateMenu({ ...menu, [field]: 0 }, [category])).toEqual([]);
   });
 
+  it.each(['nameKo', 'nameEn', 'descriptionKo', 'descriptionEn'] as const)('counts Unicode code points for %s bounds', (field) => {
+    const limit = field.startsWith('name') ? 120 : 4000;
+    expect(validateMenu({ ...menu, [field]: '😀'.repeat(limit) }, [category])).toEqual([]);
+    expect(validateMenu({ ...menu, [field]: '😀'.repeat(limit + 1) }, [category])).toContain(`${field}.invalid`);
+  });
+
   it('rejects invalid visibility', () => {
     expect(validateMenu({ ...menu, visibility: 'invalid' as Visibility }, [category])).toContain('visibility.invalid');
   });

@@ -16,7 +16,8 @@ export function validateMenu(menu: PartnerMenu, categories: readonly PartnerCate
     if (typeof menu[field] !== 'string' || !menu[field].trim()) errors.push(`${field}.invalid`);
   }
   for (const field of ['nameKo', 'nameEn', 'descriptionKo', 'descriptionEn'] as const) {
-    if (typeof menu[field] !== 'string' || menu[field].length > (field.startsWith('name') ? 120 : 4000)) errors.push(`${field}.invalid`);
+    // Match PostgreSQL length(text) by counting Unicode code points.
+    if (typeof menu[field] !== 'string' || Array.from(menu[field]).length > (field.startsWith('name') ? 120 : 4000)) errors.push(`${field}.invalid`);
   }
   for (const field of ['priceKrw', 'depositKrw', 'durationMinutes'] as const) {
     const value = menu[field];
