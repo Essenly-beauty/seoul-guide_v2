@@ -3757,13 +3757,13 @@
   }
   .subway-route-open .icn { color: var(--accent); flex: none; }
   .subway-route-preview-label {
-    margin-bottom: 6px;
+    margin: 0;
     color: var(--accent);
     font-size: 11px;
     font-weight: 700;
   }
   .subway-route-preview-note {
-    margin-top: 6px;
+    margin: 0;
     color: var(--muted);
     font-size: 11px;
     line-height: 1.4;
@@ -5703,7 +5703,14 @@
   .subway-controller.route-ready {
     transition: height 0.28s cubic-bezier(0.16, 1, 0.3, 1);
   }
-  .subway-controller.route-ready.snap-compact { height: max(22%, 158px); }
+  .subway-controller.route-ready.snap-compact {
+    /* The preview copy and active station must fit at every text size. The
+       inherited viewport cap still applies; short screens can scroll. */
+    height: auto;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+  }
+  .subway-controller.route-ready.snap-compact .subway-controller-scroll { display: none; }
   .subway-controller.route-ready.snap-half { height: min(62%, 580px); }
   .subway-controller.route-ready.snap-full { height: min(85%, 720px); }
   @media (prefers-reduced-motion: reduce) {
@@ -5762,7 +5769,7 @@
     align-items: center;
     gap: 6px;
     min-width: 0;
-    padding: 10px 16px 4px;
+    padding: 10px 16px max(10px, env(safe-area-inset-bottom));
     color: var(--muted);
     font-size: 11px;
   }

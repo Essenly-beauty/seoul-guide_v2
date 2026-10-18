@@ -109,6 +109,19 @@ describe("subway endpoint search layout", () => {
     expect(clear).toContain("preserveQueryRef.current = Boolean(selectedId)");
   });
 
+  it.each(["station-search-clear", "station-search-dismiss"])(
+    "%s prevents pointer focus transfer before its click can run",
+    (className) => {
+      const start = controllerSource.indexOf(`className="${className}"`);
+      const button = controllerSource.slice(start, controllerSource.indexOf("</button>", start));
+      // Mobile browsers may blur with relatedTarget=null when a button is
+      // pressed, which would close/unmount it before click. Cancelling the
+      // pointer default keeps input focus without a flag left on cancellation.
+      expect(button).toContain("onPointerDown={(event) => event.preventDefault()}");
+      expect(button).toContain("onClick=");
+    },
+  );
+
   it("allows an intentionally emptied endpoint to remain empty after leaving the field", () => {
     const start = controllerSource.indexOf("const finishEditing =");
     const finish = controllerSource.slice(start, controllerSource.indexOf("const exact =", start));
@@ -262,6 +275,23 @@ describe("route-ready panel shares the station-sheet language", () => {
     // header title + ticket card + stepper all repeated the same endpoints
     expect(controller).toContain("{!readyRoute && (");
     expect(css).toContain(".subway-controller.route-ready.snap-half { height: min(62%, 580px); }");
+  });
+
+  it("sizes the compact panel from its preview and station content, with a short-viewport scroll fallback", () => {
+    const start = css.indexOf(".subway-controller.route-ready.snap-compact {");
+    const compact = css.slice(start, css.indexOf("}", start));
+    expect(compact).toContain("height: auto");
+    expect(compact).toContain("overflow-y: auto");
+    expect(css).toMatch(/\.subway-controller\.route-ready\.snap-compact \.subway-controller-scroll\s*\{[^}]*display:\s*none/);
+    expect(css).toMatch(/\.subway-compact-station\s*\{[^}]*padding:[^;]*env\(safe-area-inset-bottom\)/);
+  });
+
+  it("uses the summary grid gap without adding another paragraph margin", () => {
+    for (const className of ["subway-route-preview-label", "subway-route-preview-note"]) {
+      const start = css.indexOf(`.${className} {`);
+      const rule = css.slice(start, css.indexOf("}", start));
+      expect(rule).toContain("margin: 0");
+    }
   });
 });
 

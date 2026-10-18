@@ -3,7 +3,7 @@ import { renderToStaticMarkup } from "react-dom/server";
 import { load } from "cheerio";
 import { describe, expect, it } from "vitest";
 import { SubwayRouteController } from "@/components/subway/subway-route-controller";
-import { findRoute, findRouteVia } from "./subway";
+import { findRoute, findRouteVia, STATIONS } from "./subway";
 
 const noop = () => {};
 const defaults: ComponentProps<typeof SubwayRouteController> = {
@@ -47,6 +47,20 @@ describe("subway route controller", () => {
     expect($(".station-combobox label").map((_, label) => $(label).text()).get()).toEqual(["Departure", "Arrival"]);
     expect($("input[role='combobox']").map((_, input) => $(input).attr("value")).get()).toEqual(["Gangnam", "Hongik Univ."]);
     expect($("button[aria-label='Swap departure and arrival']").attr("disabled")).toBeUndefined();
+  });
+
+  it("hands off the exact chosen Yangpyeong station despite its duplicate name", () => {
+    const stations = Object.values(STATIONS).filter(({ name }) => name === "Yangpyeong");
+    expect(stations).toHaveLength(2);
+    const destinations = stations.map((station) => {
+      const route = findRoute("gangnam", station.id);
+      expect(route).not.toBeNull();
+      const $ = render({ route, arrivalId: station.id });
+      const params = new URL($("a.subway-route-open").attr("href")!).searchParams;
+      expect(params.get("destination")).toBe(`${station.lat},${station.lng}`);
+      return params.get("destination");
+    });
+    expect(destinations[0]).not.toBe(destinations[1]);
   });
 
   it("still rejects identical endpoints before applying a route", () => {

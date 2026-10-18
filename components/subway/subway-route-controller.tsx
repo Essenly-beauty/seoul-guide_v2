@@ -251,6 +251,7 @@ function StationCombobox({
             type="button"
             className="station-search-clear"
             aria-label={`Clear ${label.toLowerCase()}`}
+            onPointerDown={(event) => event.preventDefault()}
             onClick={() => {
               setQuery("");
               setSelectionError(false);
@@ -281,6 +282,7 @@ function StationCombobox({
               type="button"
               className="station-search-dismiss"
               aria-label={`Close ${label.toLowerCase()} station search`}
+              onPointerDown={(event) => event.preventDefault()}
               onClick={dismissSearch}
             >
               Close search
