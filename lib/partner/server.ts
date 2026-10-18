@@ -3,6 +3,7 @@ import { boundedString, categoryValues, integer, menuValues, record, scheduleVal
 import { validateMenu } from './catalog';
 import { reservationSchedule, type DateOverride } from './reservation-calendar';
 import { reservationRules, type ReservationRules } from './reservation-config';
+import { reservationJsonbBytes } from './reservation-jsonb';
 
 export class PartnerError extends Error {
   constructor(public readonly status: number, public readonly code: string) { super(code); }
@@ -50,8 +51,13 @@ function decodeSchedule(row: unknown, merchantId: string): { schedule: Schedule 
   if (row === null) return { schedule: null, dateOverrides: [] };
   if (!record(row) || row.merchant_id !== merchantId || !timestamp(row.updated_at)) return unavailable();
   const values = { hours: row.hours, breaks: row.breaks, blocks: row.blocks };
-  const combined: unknown = { merchantId, ...values, overrides: row.overrides };
-  if (!scheduleValues(values) || !reservationSchedule(combined)) return unavailable();
+  if (!scheduleValues(values)) return unavailable();
+  // Historical admin closure blocks can use year 0000, which the newer
+  // customer-booking contract intentionally forbids. Keep those blocks in the
+  // admin DTO, but never pass them to the booking validator.
+  const bookableBlocks = values.blocks.filter((block) => !block.date.startsWith('0000-'));
+  const combined: unknown = { merchantId, hours: values.hours, breaks: values.breaks, blocks: bookableBlocks, overrides: row.overrides };
+  if (!reservationSchedule(combined) || reservationJsonbBytes({ ...values, overrides: combined.overrides }) > 256 * 1024) return unavailable();
   return { schedule: { merchantId, ...values, updatedAt: row.updated_at }, dateOverrides: combined.overrides };
 }
 function decodeReservationRules(row: unknown, merchantId: string): (ReservationRules & { updatedAt: string }) | null {

@@ -1,6 +1,7 @@
 import { exactKeys, record, timestamp } from './contracts';
 import { reservationRules, type ReservationRules } from './reservation-config';
 import { reservationSchedule, type DateOverride } from './reservation-calendar';
+import { reservationJsonbBytes } from './reservation-jsonb';
 
 type Version = { mode: 'create'; expectedUpdatedAt?: never } | { mode: 'update'; expectedUpdatedAt: string };
 export type ReservationCommand =
@@ -22,9 +23,11 @@ export function parseReservationCommand(input: unknown): { ok: true; command: Re
     if (input.kind === 'reservationRules') {
       if (!exactRecord(input.values, ['mode', 'capacity', 'startDate', 'endDate', 'minimumLeadMinutes', 'slotIntervalMinutes']) ||
         !reservationRules({ ...input.values, merchantId: placeholder })) return invalid;
-    } else if (!exactRecord(input.values, ['overrides']) || !reservationSchedule({
-      merchantId: placeholder, hours: [], breaks: [], blocks: [], overrides: input.values.overrides,
-    })) return invalid;
+    } else {
+      if (!exactRecord(input.values, ['overrides'])) return invalid;
+      const special: unknown = { merchantId: placeholder, hours: [], breaks: [], blocks: [], overrides: input.values.overrides };
+      if (!reservationSchedule(special) || reservationJsonbBytes(special) > 256 * 1024) return invalid;
+    }
     return { ok: true, command: input as ReservationCommand };
   } catch { return invalid; }
 }

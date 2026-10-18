@@ -155,6 +155,15 @@ describe('partner HTTP command boundary', () => {
     expect(response.status).toBe(400);
     expect(mock.calls.some((call) => ['insert', 'update'].includes(call.method))).toBe(false);
   });
+  it('returns 400 before a write when compact overrides would exceed the JSONB database limit', async () => {
+    const periods = Array.from({ length: 128 }, (_, startMinute) => ({ startMinute, endMinute: startMinute + 1 }));
+    const overrides = Array.from({ length: 53 }, (_, index) => ({ date: new Date(Date.UTC(2026, 0, index + 1)).toISOString().slice(0, 10), hours: periods, breaks: [] }));
+    const mock = session();
+    const response = await POST(request(JSON.stringify({ kind: 'dateOverrides', mode: 'create', values: { overrides } })));
+    expect(response.status).toBe(400);
+    expect(await response.json()).toMatchObject({ ok: false, code: 'INVALID_COMMAND' });
+    expect(mock.calls.some((call) => ['insert', 'update'].includes(call.method))).toBe(false);
+  });
   it('refuses reservation settings writes after booking activation without a write', async () => {
     const mock = session({ shop: { ...merchant, booking_enabled: true } });
     const response = await POST(request(JSON.stringify(reservationCommand)));

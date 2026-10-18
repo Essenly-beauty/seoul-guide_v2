@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { parseReservationCommand } from './reservation-commands';
+import { reservationSchedule } from './reservation-calendar';
 
 const stamp = '2026-10-18T01:02:03.123456+00:00';
 const rules = { kind: 'reservationRules', mode: 'create', values: {
@@ -53,6 +54,14 @@ describe('reservation command boundary', () => {
       date: new Date(Date.UTC(2026, 0, index + 1)).toISOString().slice(0, 10), hours: periods, breaks: [],
     }));
     expect(new TextEncoder().encode(JSON.stringify(days)).byteLength).toBeGreaterThan(256 * 1024);
+    expect(parseReservationCommand({ ...overrides, values: { overrides: days } }).ok).toBe(false);
+  });
+  it('rejects DB-expanded JSONB that passes the compact R1 limit', () => {
+    const periods = Array.from({ length: 128 }, (_, startMinute) => ({ startMinute, endMinute: startMinute + 1 }));
+    const days = Array.from({ length: 53 }, (_, index) => ({
+      date: new Date(Date.UTC(2026, 0, index + 1)).toISOString().slice(0, 10), hours: periods, breaks: [],
+    }));
+    expect(reservationSchedule({ merchantId: '00000000-0000-0000-0000-000000000000', hours: [], breaks: [], blocks: [], overrides: days })).toBe(true);
     expect(parseReservationCommand({ ...overrides, values: { overrides: days } }).ok).toBe(false);
   });
   it('returns invalid without executing malformed object behavior outside the guard', () => {

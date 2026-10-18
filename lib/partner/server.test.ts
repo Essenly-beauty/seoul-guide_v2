@@ -3,6 +3,7 @@ import { AuthApiError, AuthSessionMissingError, type SupabaseClient } from '@sup
 import { getPartnerContext, getPartnerSnapshot } from './server';
 import { savePartnerCommand } from './mutations';
 import { parsePartnerCommand, type PartnerCommand } from './contracts';
+import { reservationSchedule } from './reservation-calendar';
 
 const merchantId = '11111111-1111-1111-1111-111111111111';
 const id = '22222222-2222-2222-2222-222222222222';
@@ -169,6 +170,30 @@ describe('partner snapshot', () => {
   });
   it('rejects a malformed persisted override instead of returning a partial schedule', async () => {
     const mock = await context([result([]), result([]), result({ merchant_id: merchantId, hours: [], breaks: [], blocks: [], overrides: [{ date: '2026-02-30', hours: [], breaks: [] }], updated_at: stamp }), result(null)]);
+    await expect(getPartnerSnapshot(mock.client, mock.context)).rejects.toMatchObject({ status: 503 });
+  });
+  it('keeps a legacy year-0000 closure block visible to the admin without relaxing customer booking validation', async () => {
+    const block = { date: '0000-02-29', startMinute: 600, endMinute: 660 };
+    const special = { date: '2026-11-05', hours: [], breaks: [] };
+    const mock = await context([result([]), result([]), result({ merchant_id: merchantId, hours: [], breaks: [], blocks: [block], overrides: [special], updated_at: stamp }), result(null)]);
+    const snapshot = await getPartnerSnapshot(mock.client, mock.context);
+    expect(snapshot.schedule?.blocks).toEqual([block]);
+    expect(snapshot.dateOverrides).toEqual([special]);
+    expect(reservationSchedule({ ...snapshot.schedule, overrides: snapshot.dateOverrides })).toBe(false);
+  });
+  it.each(['0000-02-30', '0000-13-01', '0000-00-01'])('still rejects malformed legacy date %s', async (date) => {
+    const mock = await context([result([]), result([]), result({ merchant_id: merchantId, hours: [], breaks: [], blocks: [{ date, startMinute: 600, endMinute: 660 }], overrides: [], updated_at: stamp }), result(null)]);
+    await expect(getPartnerSnapshot(mock.client, mock.context)).rejects.toMatchObject({ status: 503 });
+  });
+  it('does not treat malformed overrides as legacy blocks', async () => {
+    const mock = await context([result([]), result([]), result({ merchant_id: merchantId, hours: [], breaks: [], blocks: [{ date: '0000-02-29', startMinute: 600, endMinute: 660 }], overrides: [{ date: '0000-02-29', hours: [], breaks: [] }], updated_at: stamp }), result(null)]);
+    await expect(getPartnerSnapshot(mock.client, mock.context)).rejects.toMatchObject({ status: 503 });
+  });
+  it('rejects an oversized full schedule even when legacy blocks are ignored for booking validation', async () => {
+    const periods = Array.from({ length: 128 }, (_, startMinute) => ({ startMinute, endMinute: startMinute + 1 }));
+    const blocks = Array.from({ length: 512 }, (_, startMinute) => ({ date: '0000-01-01', startMinute, endMinute: startMinute + 1 }));
+    const overrides = Array.from({ length: 52 }, (_, index) => ({ date: new Date(Date.UTC(2026, 0, index + 1)).toISOString().slice(0, 10), hours: periods, breaks: [] }));
+    const mock = await context([result([]), result([]), result({ merchant_id: merchantId, hours: [], breaks: [], blocks, overrides, updated_at: stamp }), result(null)]);
     await expect(getPartnerSnapshot(mock.client, mock.context)).rejects.toMatchObject({ status: 503 });
   });
   it('reads repeated allowed business types from valid existing database rows', async () => {
