@@ -52,10 +52,12 @@ export function reservationStaff(value: unknown): value is ReservationStaff {
       !boundedString(value.title, 120) || !boundedString(value.introduction, 1000) || !visibility(value.visibility) ||
       (value.visibility === 'visible' && !value.name.trim()) || !integer(value.sortOrder)) return false;
     const menuIds = value.menuIds;
-    if (!Array.isArray(menuIds) || menuIds.length > 1000) return false;
+    if (!Array.isArray(menuIds)) return false;
+    const length = menuIds.length;
+    if (!integer(length) || length > 1000) return false;
     const seen = new Set<string>();
     // Read indexes directly: iterators cannot hide invalid values, duplicates, or holes.
-    for (let index = 0; index < menuIds.length; index++) {
+    for (let index = 0; index < length; index++) {
       const id = menuIds[index];
       if (!canonicalUuid(id) || seen.has(id)) return false;
       seen.add(id);
@@ -70,8 +72,10 @@ export function eligibleStaff(staff: readonly ReservationStaff[], merchantId: st
   if (!canonicalUuid(menuId)) throw new Error('menu.invalid');
   try {
     if (!Array.isArray(staff)) throw new Error('staff.invalid');
+    const length = staff.length;
+    if (!integer(length) || length > 4294967295) throw new Error('staff.invalid');
     const members: ReservationStaff[] = [];
-    for (let index = 0; index < staff.length; index++) {
+    for (let index = 0; index < length; index++) {
       const member = staff[index];
       if (!reservationStaff(member)) throw new Error('staff.invalid');
       members.push(member);

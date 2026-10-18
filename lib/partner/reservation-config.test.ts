@@ -16,6 +16,7 @@ const staff: ReservationStaff = {
 const foreignStaff: ReservationStaff = { ...staff, id: 'dddddddd-dddd-dddd-dddd-dddddddddddd', merchantId: foreignMerchantId };
 const invalidIds = ['', 'not-a-uuid', merchantId.toUpperCase(), `A${merchantId.slice(1)}`, `${merchantId}\n`, `${merchantId}\u0000`, null, 1];
 const invalidNumbers = [-1, 0.5, NaN, Infinity, -Infinity, Number.MAX_SAFE_INTEGER + 1, '1', null, undefined];
+const invalidArrayLengths = [-1, 0.5, NaN, Infinity, undefined, '1', 4294967296, Number.MAX_SAFE_INTEGER + 1];
 
 describe('reservation configuration shape', () => {
   it.each([null, undefined, [], '', 1, true, new Date(), () => rules, {}])('rejects non-records and incomplete records %#', (value) => {
@@ -178,6 +179,25 @@ describe('reservation staff', () => {
     menuIds[Symbol.iterator] = () => { throw new Error('iterator.failure'); };
     expect(reservationStaff({ ...staff, menuIds })).toBe(true);
   });
+
+  it.each(invalidArrayLengths)('rejects an invalid reported menu array length %#', (length) => {
+    const menuIds = new Proxy([menuId], {
+      get: (target, key, receiver) => key === 'length' ? length : Reflect.get(target, key, receiver),
+    });
+    expect(reservationStaff({ ...staff, menuIds })).toBe(false);
+  });
+
+  it('reads the menu array length once before indexed validation', () => {
+    let lengthReads = 0;
+    const menuIds = new Proxy([menuId], {
+      get(target, key, receiver) {
+        if (key === 'length' && ++lengthReads > 1) throw new Error('length.read.twice');
+        return Reflect.get(target, key, receiver);
+      },
+    });
+    expect(reservationStaff({ ...staff, menuIds })).toBe(true);
+    expect(lengthReads).toBe(1);
+  });
 });
 
 describe('eligible reservation staff', () => {
@@ -259,5 +279,24 @@ describe('eligible reservation staff', () => {
       },
     });
     expect(() => eligibleStaff(input, merchantId, menuId)).toThrow('staff.invalid');
+  });
+
+  it.each(invalidArrayLengths)('rejects an invalid reported staff array length %#', (length) => {
+    const input = new Proxy([staff], {
+      get: (target, key, receiver) => key === 'length' ? length : Reflect.get(target, key, receiver),
+    });
+    expect(() => eligibleStaff(input, merchantId, menuId)).toThrow('staff.invalid');
+  });
+
+  it('reads the staff array length once before taking the validated snapshot', () => {
+    let lengthReads = 0;
+    const input = new Proxy([staff], {
+      get(target, key, receiver) {
+        if (key === 'length' && ++lengthReads > 1) throw new Error('length.read.twice');
+        return Reflect.get(target, key, receiver);
+      },
+    });
+    expect(eligibleStaff(input, merchantId, menuId)).toEqual([staff]);
+    expect(lengthReads).toBe(1);
   });
 });
