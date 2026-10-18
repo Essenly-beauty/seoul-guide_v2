@@ -299,6 +299,16 @@ git status --short
 
 Commit subject: `feat: persist tenant-isolated partner configuration`. Stage exact generated path and the two tests. Reviewers independently inspect actual SQL, test behavior and new privilege boundary. Address findings and repeat the relevant review before Task 2.
 
+- [ ] **Review follow-up: Align Unicode text bounds with PostgreSQL character counts.**
+
+The quality review reproduced a supplementary-Unicode mismatch: 61 emoji use 122 JavaScript UTF-16 code units but 61 PostgreSQL characters. Keep SQL's Unicode code-point convention and use it in the shared catalog validator. Modify `lib/partner/catalog.ts` only at the string bound check:
+
+```ts
+if (typeof menu[field] !== 'string' || Array.from(menu[field]).length > (field.startsWith('name') ? 120 : 4000)) errors.push(`${field}.invalid`);
+```
+
+First add failing cases in `lib/partner/catalog.test.ts` for each name/description field: `😀`.repeat(limit) passes and limit+1 fails. Add SQL actual owner UPDATE boundary cases for both names and descriptions to prove identical stored constraints. Run focused Vitest RED before the fix, then GREEN and full pgTAP replay. No migration change is necessary. Re-review the focused correction before the next task.
+
 ## Task 2: Owner account-deletion protection
 
 - [ ] **Step 1: Add failing route tests in `lib/partner/account-delete.test.ts`.**
