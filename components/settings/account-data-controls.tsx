@@ -5,6 +5,7 @@
 // -> purge local mirrors -> home. Guests see a sign-in nudge instead.
 
 import { useRef, useState } from "react";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/components/ui/toast";
@@ -14,6 +15,17 @@ import { purgeFavoritesMirror } from "@/lib/favorites";
 import { purgeProfileMirror } from "@/lib/profile";
 import { purgeRatingsMirror } from "@/lib/ratings";
 import { routes } from "@/lib/routes";
+import { Notice } from "@/components/ui/notice";
+
+export function accountDeleteFailure(body: unknown): { support: boolean; message: string } {
+  const value = body && typeof body === 'object' ? body as { code?: unknown; error?: unknown } : null;
+  if (value?.code === 'MERCHANT_ACCOUNT_REQUIRES_SUPPORT') return { support: true, message: 'Your account has not been deleted. This account manages a merchant. Contact support to arrange merchant ownership and account deletion.' };
+  return { support: false, message: typeof value?.error === 'string' ? value.error : 'Could not delete the account — try again.' };
+}
+
+export function AccountDeletionFeedback({ message }: { message: string }) {
+  return <Notice tone="warning" role="alert"><p>{message}</p><Link href="/support">Contact support</Link></Notice>;
+}
 
 export function AccountDataControls() {
   const { user, loading } = useAuthUser();
@@ -21,6 +33,7 @@ export function AccountDataControls() {
   const router = useRouter();
   const [open, setOpen] = useState(false);
   const [busy, setBusy] = useState(false);
+  const [supportFailure, setSupportFailure] = useState<{ userId: string; message: string } | null>(null);
   const cancelRef = useRef<HTMLButtonElement>(null);
   const dialogRef = useDialogFocus<HTMLDivElement>(open, () => !busy && setOpen(false), cancelRef);
 
@@ -34,8 +47,11 @@ export function AccountDataControls() {
     try {
       const res = await fetch("/api/account/delete", { method: "POST" });
       if (!res.ok) {
-        const body = (await res.json().catch(() => null)) as { error?: string } | null;
-        toast(body?.error ?? "Could not delete the account — try again.");
+        const failure = accountDeleteFailure(await res.json().catch(() => null));
+        if (failure.support) {
+          setSupportFailure({ userId: user.id, message: failure.message });
+          setOpen(false);
+        } else toast(failure.message);
         setBusy(false);
         return;
       }
@@ -56,6 +72,7 @@ export function AccountDataControls() {
   return (
     <>
       <p className="t-caption">Download a copy of everything tied to your account, or delete it permanently.</p>
+      {supportFailure?.userId === user.id && <AccountDeletionFeedback message={supportFailure.message} />}
       <div className="row" style={{ gap: 10 }}>
         <Button variant="secondary" size="sm" href="/api/account/export" external style={{ flex: 1 }}>
           Download my data
