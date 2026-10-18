@@ -9,9 +9,7 @@ import { AnchorTabs } from "@/components/ui/anchor-tabs";
 import { Button } from "@/components/ui/button";
 import { Chip } from "@/components/ui/chip";
 import { Collapse } from "@/components/ui/collapse";
-import { EmptyState } from "@/components/ui/empty-state";
 import { HoursToday } from "@/components/ui/hours-today";
-import { HScroll } from "@/components/ui/h-scroll";
 import { IconButton } from "@/components/ui/icon-button";
 import { ImgPh } from "@/components/ui/img-ph";
 import { LiveBadge } from "@/components/ui/live-badge";
@@ -34,7 +32,7 @@ import { routes } from "@/lib/routes";
 import { PLACES, PRODUCTS, TYPE_LABEL, zoneShort, type Place } from "@/lib/data";
 import { selectDaisoRanking } from "@/lib/daiso-ranking";
 import { GANGNAM_STATION, formatCompactDistance, formatDistance, haversineKm } from "@/lib/geo";
-import { hoursOn, isBookable, statusLabel } from "@/lib/places";
+import { hoursOn, isApproximatePlace, isBookable, PLACE_SOURCE_LABEL, statusLabel } from "@/lib/places";
 import { daisoBrandEn, daisoNameEn, daisoSubcategoryEn } from "@/lib/daiso-ranking-en";
 
 /** Anchor-tab targets (spec §4.6). Ids live on the sections below. */
@@ -54,28 +52,6 @@ const starsFor = (rating?: number) => {
   const filled = Math.max(0, Math.min(5, Math.round(rating ?? 0)));
   return "★★★★★".slice(0, filled) + "☆☆☆☆☆".slice(filled);
 };
-
-/** SectionHeader variant whose action toggles between expand/collapse labels. */
-function ToggleHeader({ title, count, expanded, expandLabel, collapseLabel, onToggle }: {
-  title: string;
-  count?: number;
-  expanded: boolean;
-  expandLabel: string;
-  collapseLabel: string;
-  onToggle: () => void;
-}) {
-  return (
-    <div className="row between" style={{ alignItems: "baseline" }}>
-      <h2 className="h2" style={{ fontFamily: "var(--sans)", fontSize: 16, fontWeight: 700 }}>
-        {title}
-        {count !== undefined && <span className="muted" style={{ fontWeight: 500, fontSize: 13 }}> · {count}</span>}
-      </h2>
-      <button className="small muted" aria-expanded={expanded} onClick={onToggle}>
-        {expanded ? collapseLabel : expandLabel}
-      </button>
-    </div>
-  );
-}
 
 // ── §4.6 · Title block (fixed, not a tab anchor) ──────────
 // Kakao-style compact header: caption / name+type / rating line / address.
@@ -108,8 +84,14 @@ function TitleBlock({ place, km }: { place: Place; km: number }) {
 
 function PlaceAddressDisclosure({ place, km }: { place: Place; km: number }) {
   const [expanded, setExpanded] = useState(false);
+  const approximate = isApproximatePlace(place);
   return (
     <div className="place-address-disclosure">
+      {approximate && (
+        <Notice tone="warning" icon="pin">
+          Approximate pin — neighborhood only. Search the place name in a map app to confirm the storefront before visiting.
+        </Notice>
+      )}
       <button
         type="button"
         className="place-address-toggle"
@@ -118,12 +100,10 @@ function PlaceAddressDisclosure({ place, km }: { place: Place; km: number }) {
       >
         <Icon name="pin" size="xs" aria-hidden="true" />
         <span>
-          <span className="map-meta-token mono">{formatCompactDistance(km)}</span>
-          <span aria-hidden="true"> · </span>
+          {!approximate && <><span className="map-meta-token mono">{formatCompactDistance(km)}</span><span aria-hidden="true"> · </span></>}
           {/* upstream normalises the source's "not enough information"
               placeholder to empty — never print it to a visitor */}
           {place.address || "Address not listed"}
-          {place.geoSource === "area" && " · approximate pin"}
         </span>
         <Icon
           name="down"
@@ -164,7 +144,7 @@ function PlaceAddressDisclosure({ place, km }: { place: Place; km: number }) {
           )}
         </div>
       )}
-      <TaxiCard place={place} />
+      {!approximate && <TaxiCard place={place} />}
     </div>
   );
 }
@@ -243,7 +223,7 @@ function HomeSection({ place }: { place: Place }) {
           Copy
         </ActionButton>
       </div>
-      {place.stationWalk && (
+      {place.stationWalk && !isApproximatePlace(place) && (
         <div className="inforow">
           <Icon name="locate" size="xs" />
           <span>
@@ -315,24 +295,17 @@ function TaxiCard({ place }: { place: Place }) {
   );
 }
 
-// ── Olive Young stores: bestsellers instead of a service menu ──
-// (user request 2026-08-16: the store page should route to the products
-// sold there. It used to be labelled "Olive Young bestsellers — chain-wide
-// chart"; the 2026-09-23 verification found no such chart on Olive Young's
-// site, and these 14 rows are hand-written samples, so the label now says what
-// the list actually is.)
+// ── Olive Young: a curated guide, with no branch inventory or ranking claim. ──
 function OliveYoungPicks() {
   const picks = PRODUCTS
-    .filter((p) => p.channel === "olive_young" && p.salesRank !== undefined)
-    .sort((a, b) => (a.salesRank ?? 99) - (b.salesRank ?? 99))
+    .filter((p) => p.channel === "olive_young")
     .slice(0, 4);
   return (
     <>
-      <div className="caption muted">A short list we refresh every week or two. Stock varies by branch.</div>
+      <div className="caption muted">Curated product examples. Availability and prices are not verified for this branch.</div>
       <div>
-        {picks.map((p, i) => (
+        {picks.map((p) => (
           <Link key={p.id} className="listrow" href={routes.shopItem(p.id)}>
-            <b className="mono num" style={{ width: 22, flex: "none", color: i === 0 ? "var(--accent)" : "var(--muted)" }}>{i + 1}</b>
             <div style={{ flex: 1, minWidth: 0 }}>
               <b style={{ display: "block", fontSize: 13.5, lineHeight: 1.3, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{p.name}</b>
               <div className="caption muted" style={{ overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{p.brand} · {p.nameKr}</div>
@@ -342,7 +315,7 @@ function OliveYoungPicks() {
         ))}
       </div>
       <Button variant="secondary" size="sm" href={routes.ranking}>
-        See the full product ranking
+        Explore the product guide
       </Button>
     </>
   );
@@ -373,14 +346,21 @@ function DaisoPicks() {
   );
 }
 
-// ── Services (d-services): menu rail ↔ full vertical menu ──
+function PlaceSourceLink({ place }: { place: Place }) {
+  const label = place.source ? PLACE_SOURCE_LABEL[place.source] : "Source listing";
+  return place.url ? (
+    <Button variant="secondary" size="sm" href={place.url} external>
+      View listing · {label}
+    </Button>
+  ) : <span className="caption muted">Listing link unavailable{place.source ? ` · ${label}` : ""}.</span>;
+}
+
+// ── Services: no venue-confirmed menus are available in this catalogue. ──
 function ServicesSection({ place }: { place: Place }) {
-  const [expanded, setExpanded] = useState(false);
-  const services = place.services ?? [];
   if (place.type === "olive_young") {
     return (
       <section id="d-services" className="d-sec stack sm">
-        <SectionHeader title="Products" actionLabel="Ranking" href={routes.ranking} />
+        <SectionHeader title="Products" actionLabel="Product guide" href={routes.ranking} />
         <OliveYoungPicks />
       </section>
     );
@@ -395,50 +375,9 @@ function ServicesSection({ place }: { place: Place }) {
   }
   return (
     <section id="d-services" className="d-sec stack sm">
-      {services.length === 0 ? (
-        <SectionHeader title="Services" />
-      ) : (
-        <ToggleHeader
-          title="Services"
-          count={services.length}
-          expanded={expanded}
-          expandLabel={`See all (${services.length}) ›`}
-          collapseLabel="Collapse ‹"
-          onToggle={() => setExpanded((v) => !v)}
-        />
-      )}
-      {/* Honest framing: no scraped place carries a service menu, so any
-          menu shown is curated/illustrative — never present it as venue-
-          confirmed (codex cross-check #1). */}
-      <div className="caption muted">Example menu for this category — confirm services and prices at the venue.</div>
-      {services.length === 0 ? (
-        <EmptyState>Walk-in retail — no service menu.</EmptyState>
-      ) : expanded ? (
-        <div>
-          {services.map((s) => (
-            <div key={s.name} className="listrow">
-              <div style={{ flex: 1, minWidth: 0 }}>
-                <b style={{ display: "block", fontSize: 13.5, lineHeight: 1.25 }}>{s.name}</b>
-                <div className="caption muted">
-                  {s.nameKr}{s.nameKr && s.durationMin ? " · " : ""}{s.durationMin ? `${s.durationMin} min` : ""}
-                </div>
-              </div>
-              <b style={{ fontSize: 14, flex: "none" }}>{s.price}</b>
-            </div>
-          ))}
-        </div>
-      ) : (
-        <HScroll ariaLabel="Services">
-          {services.map((s) => (
-            <div key={s.name} style={{ width: 128 }}>
-              <ImgPh style={{ height: 96, borderRadius: 12 }} />
-              <div style={{ fontWeight: 650, fontSize: 13.5, marginTop: 6, lineHeight: 1.25 }}>{s.name}</div>
-              {s.durationMin && <div className="caption muted">{s.durationMin} min</div>}
-              <div style={{ fontWeight: 750, fontSize: 14, marginTop: 2 }}>{s.price}</div>
-            </div>
-          ))}
-        </HScroll>
-      )}
+      <SectionHeader title="Services" />
+      <p className="small muted">Services and prices not verified. Check the listing and confirm with the venue before booking.</p>
+      <PlaceSourceLink place={place} />
       {place.type === "skin_clinic" && (
         <Notice tone="warning" icon="cross">
           Medical procedures require a consultation before booking. MYSEOULDROP does not provide medical advice.
@@ -714,12 +653,15 @@ function ReviewsSection({ place }: { place: Place }) {
       {/* Source-listing rating — the one review signal that's real data.
           Curated rows have synthetic numbers, so they show nothing here. */}
       {place.source !== "curated" && place.rating !== undefined && (
-        <div className="row" style={{ gap: 12, justifyContent: "center", alignItems: "baseline" }}>
-          <span style={{ fontSize: 30, fontWeight: 800, lineHeight: 1.15 }}>{place.rating.toFixed(1)}</span>
-          <span className="stars">{starsFor(place.rating)}</span>
-          {place.ratingCount !== undefined && (
-            <span className="caption muted">{place.ratingCount} ratings</span>
-          )}
+        <div className="stack sm">
+          <span className="caption muted">Imported listing rating</span>
+          <div className="row" style={{ gap: 12, justifyContent: "center", alignItems: "baseline" }}>
+            <span style={{ fontSize: 30, fontWeight: 800, lineHeight: 1.15 }}>{place.rating.toFixed(1)}</span>
+            <span className="stars">{starsFor(place.rating)}</span>
+            {place.ratingCount !== undefined && (
+              <span className="caption muted">{place.ratingCount} ratings</span>
+            )}
+          </div>
         </div>
       )}
       <TravelerReviews placeId={place.id} refreshKey={reviewBump} />
@@ -837,39 +779,40 @@ function InfoSection({ place }: { place: Place }) {
             : place.source === "olive_young"
               ? "Listed on Olive Young's own store finder — the English display name is ours, not the store's sign. Details can change; confirm important ones before visiting."
               : "Listed from public sources — details can change. Confirm important ones before visiting."}
-        {place.locationVerification === "provisional"
-          ? " Provisional location — the map pin is neighborhood-level; use the map-service button to confirm the storefront before visiting."
-          : place.geoSource === "area"
-            ? " Map pin is approximate (neighborhood-level)."
-            : ""}
+        {isApproximatePlace(place)
+          ? place.locationVerification === "provisional"
+            ? " Provisional location — the map pin is neighborhood-level; use the map-service button to confirm the storefront before visiting."
+            : " Map pin is approximate (neighborhood-level)."
+          : ""}
       </p>
+      <PlaceSourceLink place={place} />
       <PlaceCorrectionLauncher place={place} />
     </section>
   );
 }
 
-// ── Nearby ranking — independent section after Info ───────
+// ── Nearby places — distance order is not a quality ranking. ───────
 function NearbySection({ place }: { place: Place }) {
   const nearby = PLACES
     .filter((p) => p.type === place.type && p.id !== place.id)
     .map((p) => ({ p, km: haversineKm({ lat: place.lat, lng: place.lng }, { lat: p.lat, lng: p.lng }) }))
     .sort((a, b) => a.km - b.km)
-    .slice(0, 4)
-    .sort((a, b) => (b.p.rating ?? 0) - (a.p.rating ?? 0));
+    .slice(0, 4);
   if (nearby.length === 0) return null;
   return (
     <section className="stack sm">
-      <SectionHeader title={`Top rated nearby · ${TYPE_LABEL[place.type]}`} />
+      <SectionHeader title={`Nearby places · ${TYPE_LABEL[place.type]}`} />
       <div>
-        {nearby.map(({ p, km }, i) => (
+        {nearby.map(({ p, km }) => (
           <Link key={p.id} className="listrow" href={routes.place(p.id)}>
-            <span className="mono" style={{ width: 16, fontWeight: 700, flex: "none", textAlign: "center" }}>{i + 1}</span>
             <ImgPh style={{ width: 44, height: 44, flex: "none" }} />
             <div style={{ flex: 1, minWidth: 0 }}>
               <b style={{ display: "block", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{p.name}</b>
-              <div className="caption muted">{zoneShort(p.zone)} · {formatDistance(km)}</div>
+              <div className="caption muted">
+                {zoneShort(p.zone)}
+                {isApproximatePlace(p) ? " · Approximate pin" : !isApproximatePlace(place) ? ` · ${formatDistance(km)}` : ""}
+              </div>
             </div>
-            <RatingLine rating={p.rating} plain />
           </Link>
         ))}
       </div>

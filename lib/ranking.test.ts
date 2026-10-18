@@ -46,7 +46,7 @@ describe("retailer-specific ranking configuration", () => {
     expect(config.products).toBe(PRODUCTS);
     expect(config.products).toHaveLength(PRODUCTS.length);
     expect(config.products.some((product) => product.channel === "korea_exclusive")).toBe(true);
-    expect(config.tabs).toEqual(["sales", "review", "brands"]);
+    expect(config.tabs).toEqual(["products", "brands"]);
   });
 
   it("keeps only generated Daiso products and Daiso tabs in the Daiso config", () => {
@@ -98,8 +98,7 @@ describe("retailer-specific ranking configuration", () => {
   });
 
   it("supplies categories from only the selected retailer and tab", () => {
-    expect(OLIVE_YOUNG_RANKING_CONFIG.categoriesForTab("sales")).toBe(SHOP_CATEGORIES);
-    expect(OLIVE_YOUNG_RANKING_CONFIG.categoriesForTab("review")).toBe(SHOP_CATEGORIES);
+    expect(OLIVE_YOUNG_RANKING_CONFIG.categoriesForTab("products")).toBe(SHOP_CATEGORIES);
     expect(OLIVE_YOUNG_RANKING_CONFIG.categoriesForTab("brands")).toEqual([]);
 
     const dailyCategories = DAISO_RANKING_CONFIG.categoriesForTab("daily");

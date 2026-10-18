@@ -10,6 +10,11 @@ describe("MapLinkButtons", () => {
     expect(source).toContain("naverAppRouteUrl");
     expect(source).toContain("naverRouteUrl");
     expect(source).toContain("NAVER_MAP_IOS_APP_STORE_URL");
-    expect(source).toContain("newTab={platform === null}");
+    expect(source).toContain("newTab={approximate || platform === null}");
+  });
+
+  it("never installs an iOS fallback timer for an approximate name search", () => {
+    expect(source).toContain('if (approximate || platform !== "ios") return;');
+    expect(source).toContain("onClick={approximate ? undefined : tryNaverIos}");
   });
 });

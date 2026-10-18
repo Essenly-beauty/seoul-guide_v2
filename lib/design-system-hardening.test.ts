@@ -98,8 +98,8 @@ const P3_RAW_ALLOWANCES = new Map<string, number>([
   ["components/booking/booking-sheet.tsx: sheet", 1],
   // Domain rows whose multiline or full-row behavior differs from ListRow v2.
   ["components/mypage/notifications-form.tsx: listrow v2", 1],
-  // Includes retailer-specific chain-wide product previews for Olive Young and Daiso.
-  ["components/place/place-detail-body.tsx: listrow", 4],
+  // Retailer product previews and nearby places; illustrative service rows are omitted.
+  ["components/place/place-detail-body.tsx: listrow", 3],
   ["components/product/product-detail-body.tsx: listrow product-detail-routine-link", 1],
 ]);
 

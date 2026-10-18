@@ -68,11 +68,11 @@ test.beforeEach(async ({ page }) => {
   await page.emulateMedia({ reducedMotion: "reduce" });
 });
 
-test("defaults to Olive Young and preserves its ranking and brands flow", async ({ page }) => {
+test("defaults to Olive Young and preserves its product guide and brands flow", async ({ page }) => {
   await page.goto("/ranking");
 
   await expect(page).toHaveURL(/\/ranking$/);
-  await expect(page.getByRole("tab", { name: "Sales", exact: true })).toHaveAttribute("aria-selected", "true");
+  await expect(page.getByRole("tab", { name: "Products", exact: true })).toHaveAttribute("aria-selected", "true");
   await expect(page.getByRole("button", { name: "Olive Young", exact: true })).toHaveAttribute("aria-pressed", "true");
   await expect(page.getByRole("button", { name: "Olive Young", exact: true })).not.toContainText("Selected");
   await expect(page.getByRole("navigation", { name: "Ranking retailer" }).getByRole("button")).toHaveCount(3);
@@ -81,8 +81,8 @@ test("defaults to Olive Young and preserves its ranking and brands flow", async 
   await page.getByRole("button", { name: "More ›", exact: true }).click();
   await expect(page.getByTestId("olive-young-ranking-row")).toHaveCount(14);
 
-  await page.getByRole("tab", { name: "Review Best", exact: true }).click();
-  await expect(page.getByRole("heading", { name: /Highest-rated by reviews/ })).toBeVisible();
+  await expect(page.getByRole("heading", { name: /Product guide/ })).toBeVisible();
+  await expect(page.getByRole("tab", { name: "Review Best", exact: true })).toHaveCount(0);
   await page.getByRole("tab", { name: "Brands", exact: true }).click();
   await expect(page.getByRole("searchbox", { name: "Search brands" })).toBeVisible();
   await expect(page.locator('a[href^="/brand/"]')).not.toHaveCount(0);
@@ -99,7 +99,7 @@ test("restores Daiso directly and canonicalizes invalid retailers", async ({ pag
   await page.goto("/ranking?retailer=not-a-retailer");
   await expect(page).toHaveURL(/\/ranking\?retailer=olive_young$/);
   await expect(page.getByRole("button", { name: "Olive Young", exact: true })).toHaveAttribute("aria-pressed", "true");
-  await expect(page.getByRole("tab", { name: "Sales", exact: true })).toHaveAttribute("aria-selected", "true");
+  await expect(page.getByRole("tab", { name: "Products", exact: true })).toHaveAttribute("aria-selected", "true");
 });
 
 test("retailer switches replace history and Back returns to the prior page", async ({ page }) => {
@@ -218,7 +218,7 @@ test("keeps Daiso category pills compact, readable, focusable, and horizontally 
 
 test("keeps filtered source-rank gaps and resets incompatible retailer state", async ({ page }) => {
   await page.goto("/ranking");
-  await page.getByRole("tab", { name: "Review Best", exact: true }).click();
+  await expect(page.getByRole("tab", { name: "Products", exact: true })).toHaveAttribute("aria-selected", "true");
   await page.getByRole("group", { name: "Product category" }).getByRole("button", { name: "Haircare", exact: true }).click();
 
   await page.getByRole("button", { name: "Daiso", exact: true }).click();
@@ -242,7 +242,7 @@ test("keeps filtered source-rank gaps and resets incompatible retailer state", a
   await page.getByRole("tab", { name: "Rising", exact: true }).click();
   await categories.getByRole("button", { name: "Makeup", exact: true }).click();
   await page.getByRole("button", { name: "Olive Young", exact: true }).click();
-  await expect(page.getByRole("tab", { name: "Sales", exact: true })).toHaveAttribute("aria-selected", "true");
+  await expect(page.getByRole("tab", { name: "Products", exact: true })).toHaveAttribute("aria-selected", "true");
   await expect(page.getByRole("group", { name: "Product category" }).getByRole("button", { name: "All", exact: true })).toHaveAttribute("aria-pressed", "true");
 
   await page.getByRole("button", { name: "Daiso", exact: true }).click();

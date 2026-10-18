@@ -10,6 +10,7 @@ import { LiveBadge } from "@/components/ui/live-badge";
 import { BRAND_MARK_SRC, getPlace, TYPE_COLOR, TYPE_ICON, TYPE_LABEL, zoneShort, type Place } from "@/lib/data";
 import { formatCompactDistance, haversineKm, type LatLng } from "@/lib/geo";
 import { daisoRowServices } from "@/lib/daiso-row-services";
+import { isApproximatePlace } from "@/lib/places";
 import {
   getMapSheetHalfOffsetRatio,
   nextMapSheetSnap,
@@ -530,7 +531,7 @@ export function MapSheet({ places, origin, selectedId, groupPlaceIds = [], onSel
                 )}
                 <div className="caption muted maprow-meta">
                   <LiveBadge hours={place.hours} showUntil={false} />
-                  <span className="map-meta-token mono">{formatCompactDistance(km)}</span>
+                  <span className="map-meta-token mono">{isApproximatePlace(place) ? "Approximate pin" : formatCompactDistance(km)}</span>
                   <span>{place.address}</span>
                 </div>
                 <DaisoRowServices place={place} />
@@ -561,8 +562,8 @@ export function MapSheet({ places, origin, selectedId, groupPlaceIds = [], onSel
                 )}
                 <div className="caption muted maprow-meta">
                   <LiveBadge hours={p.hours} showUntil={false} />
-                  <span className="map-meta-token mono">{formatCompactDistance(km)}</span>
-                  {p.rating && <span className="map-meta-token stars">★{p.rating}</span>}
+                  <span className="map-meta-token mono">{isApproximatePlace(p) ? "Approximate pin" : formatCompactDistance(km)}</span>
+                  {p.source !== "curated" && p.rating && <span className="map-meta-token stars">★{p.rating}</span>}
                   {/* price folded into the meta line — the right-edge chip read too heavy */}
                   {p.type !== "daiso" && <span className="map-meta-token mono">{p.priceRange}</span>}
                   {p.englishOk && <span>English OK</span>}

@@ -3,6 +3,20 @@
 import type { DayHours, Place, PlaceType, PriceRange } from "./data";
 import { haversineKm } from "./geo";
 
+/** Neighborhood pins must not be used as precise storefront locations. */
+export function isApproximatePlace(place: Pick<Place, "geoSource" | "locationVerification">): boolean {
+  return place.geoSource === "area" || place.locationVerification === "provisional";
+}
+
+export const PLACE_SOURCE_LABEL = {
+  curated: "MYSEOULDROP curation",
+  creatrip: "Creatrip",
+  kakao: "Kakao Map",
+  ados: "A drop of Seoul",
+  daiso: "Daiso store finder",
+  olive_young: "Olive Young store finder",
+} as const;
+
 export type PlaceStatus = "open" | "closed" | "unknown";
 
 const toMin = (hhmm: string): number => {

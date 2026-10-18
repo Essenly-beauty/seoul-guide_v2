@@ -7,7 +7,7 @@ import {
 import { DAISO_RANKING_DATA } from "./generated/daiso-ranking-products";
 
 export type RankingRetailer = "olive_young" | "daiso";
-export type OliveYoungRankTab = "sales" | "review" | "brands";
+export type OliveYoungRankTab = "products" | "brands";
 
 export type RankingItem =
   | Readonly<{ retailer: "olive_young"; product: Product }>
@@ -20,7 +20,7 @@ export type RankingCategoryOption<Key extends string = string> = Readonly<{
 
 export type OliveYoungRankingConfig = Readonly<{
   retailer: "olive_young";
-  tabs: readonly ["sales", "review", "brands"];
+  tabs: readonly ["products", "brands"];
   products: readonly Product[];
   categoriesForTab: (
     tab: OliveYoungRankTab,
@@ -47,7 +47,7 @@ export function parseRankingRetailer(
 
 export const OLIVE_YOUNG_RANKING_CONFIG: OliveYoungRankingConfig = {
   retailer: "olive_young",
-  tabs: ["sales", "review", "brands"],
+  tabs: ["products", "brands"],
   products: PRODUCTS,
   categoriesForTab: (tab) => tab === "brands" ? [] : SHOP_CATEGORIES,
   emptyMessage: "No products in this category yet.",

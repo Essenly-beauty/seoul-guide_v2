@@ -39,10 +39,10 @@ describe("ranking retailer server/client boundary", () => {
 });
 
 describe("retailer-specific ranking presentation", () => {
-  it("calls editorial Olive Young picks What's trending without claiming today's official sales", () => {
-    expect(clientSource).toContain('title={tab === "sales" ? "What\'s trending" : "Highest-rated by reviews"}');
-    expect(clientSource).toContain('description={tab === "sales" ? "Curated beauty picks — not a live sales chart." : undefined}');
-    expect(clientSource).not.toContain("Today's sales ranking");
+  it("calls the illustrative Olive Young catalogue a product guide without invented ranking claims", () => {
+    expect(clientSource).toContain('title="Product guide"');
+    expect(clientSource).toContain("Curated product examples");
+    expect(clientSource).not.toMatch(/salesRank|reviewRank|Highest-rated|Trending|Also popular/);
     expect(clientSource).toContain('className="caption muted"');
   });
 
@@ -52,11 +52,6 @@ describe("retailer-specific ranking presentation", () => {
     expect(clientSource).toContain("config.categoriesForTab(tab).map");
     expect(clientSource).toContain("config.products");
     expect(clientSource).toContain("config.emptyMessage");
-    // Renamed 2026-09-23. The lists are refreshed by hand every week or two,
-    // so the copy may not borrow a live feed's vocabulary — see
-    // lib/ranking-freshness-copy.test.ts, which bans those words outright. The
-    // rail itself must stay, which is what this line pins.
-    expect(clientSource).toContain('<SectionHeader title="Also popular"');
     expect(clientSource).toContain('placeholder="Search brands"');
     expect(clientSource).toContain("href={routes.shopItem(p.id)}");
     expect(clientSource).not.toMatch(/import\s*\{[^}]*\bPRODUCTS\b[^}]*\}\s*from\s*["']@\/lib\/data["']/s);

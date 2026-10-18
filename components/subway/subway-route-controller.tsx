@@ -10,6 +10,7 @@ import { IconButton } from "@/components/ui/icon-button";
 import { RatingLine } from "@/components/ui/rating-line";
 import { PRODUCTS, TYPE_LABEL, type Place } from "@/lib/data";
 import { formatDistance, haversineKm } from "@/lib/geo";
+import { isApproximatePlace } from "@/lib/places";
 import { googleStationDirectionsUrl } from "@/lib/subway-directions";
 import { routes } from "@/lib/routes";
 import type { SubwayPlaceCategory } from "@/lib/subway-place-filter";
@@ -975,7 +976,7 @@ export function SubwayRouteController({
                               <> · <RatingLine rating={place.rating} count={place.ratingCount} plain /></>
                             )}
                           </span>
-                          <span className="station-row-dist mono">{formatDistance(km)} from the station</span>
+                          <span className="station-row-dist mono">{isApproximatePlace(place) ? "Approximate pin" : `${formatDistance(km)} from the station`}</span>
                         </span>
                       </button>
                     ))}
@@ -1241,7 +1242,7 @@ export function SubwayRouteController({
                           <> · <RatingLine rating={place.rating} count={place.ratingCount} plain /></>
                         )}
                       </span>
-                      <span className="station-row-dist mono">{formatDistance(km)} from the station</span>
+                      <span className="station-row-dist mono">{isApproximatePlace(place) ? "Approximate pin" : `${formatDistance(km)} from the station`}</span>
                     </span>
                   </button>
                 ))}

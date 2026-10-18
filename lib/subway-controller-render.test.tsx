@@ -4,6 +4,7 @@ import { load } from "cheerio";
 import { describe, expect, it } from "vitest";
 import { SubwayRouteController } from "@/components/subway/subway-route-controller";
 import { findRoute, findRouteVia, STATIONS } from "./subway";
+import { PLACES } from "./data";
 
 const noop = () => {};
 const defaults: ComponentProps<typeof SubwayRouteController> = {
@@ -20,6 +21,12 @@ function render(overrides: Partial<typeof defaults> = {}) {
 }
 
 describe("subway route controller", () => {
+  it("does not present neighborhood pins as measured distances from a station", () => {
+    const base = PLACES[0];
+    const $ = render({ places: [{ ...base, id: "approximate-test", geoSource: "area", lat: STATIONS.gangnam.lat, lng: STATIONS.gangnam.lng }] });
+    expect($(".station-row-dist").text()).toContain("Approximate pin");
+    expect($(".station-row-dist").text()).not.toMatch(/\d+\s*(?:m|km) from the station/);
+  });
   it("hands Google the selected named departure as well as the arrival", () => {
     const $ = render();
     const params = new URL($("a.subway-route-open").attr("href")!).searchParams;

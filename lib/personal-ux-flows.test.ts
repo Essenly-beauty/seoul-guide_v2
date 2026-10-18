@@ -86,7 +86,7 @@ describe("shared page header rhythm", () => {
     expect(blog).toContain('<TopBar center title="Blog" />');
     expect(saved).toContain('<TopBar center title="Saved" />');
     expect(ranking).toContain(
-      'const rankingTitle = initialRetailer === "daiso" ? "DAISO Ranking" : "OLIVE YOUNG Ranking"',
+      'const rankingTitle = initialRetailer === "daiso" ? "DAISO Ranking" : "OLIVE YOUNG Product Guide"',
     );
     expect(ranking).toContain('<TopBar center title={rankingTitle} />');
     expect(ranking).not.toContain('<TopBar center title="Ranking" />');

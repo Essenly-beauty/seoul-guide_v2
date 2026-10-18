@@ -8,10 +8,12 @@ import {
   NAVER_MAP_IOS_APP_STORE_URL,
   naverAndroidIntentUrl,
   naverAppRouteUrl,
+  naverMapUrl,
   naverRouteUrl,
   type LatLng,
 } from "@/lib/geo";
 import type { Place } from "@/lib/data";
+import { isApproximatePlace } from "@/lib/places";
 
 type MobilePlatform = "android" | "ios" | null;
 
@@ -23,7 +25,7 @@ function mobilePlatform(): MobilePlatform {
 }
 
 /**
- * Google / Kakao / NAVER route buttons (spec v2 §6).
+ * Map searches for approximate pins; route buttons for exact locations.
  *
  * NAVER is a real app hand-off on Android/iOS. Its UI language intentionally
  * follows the visitor's NAVER Map setting rather than overriding it from our
@@ -32,10 +34,11 @@ function mobilePlatform(): MobilePlatform {
 export function MapLinkButtons({ place, origin }: {
   // name + address feed the Google hand-off so its route sheet shows the
   // shop, not "핀 고정 위치"; nameKr feeds Kakao (owner report 2026-09-27).
-  place: Pick<Place, "nameKr" | "lat" | "lng" | "name" | "address">;
+  place: Pick<Place, "nameKr" | "lat" | "lng" | "name" | "address" | "geoSource" | "locationVerification">;
   origin?: LatLng | null;
 }) {
   const dest = { lat: place.lat, lng: place.lng };
+  const approximate = isApproximatePlace(place);
   const [platform, setPlatform] = useState<MobilePlatform>(null);
   const fallbackTimer = useRef<number | null>(null);
 
@@ -47,6 +50,7 @@ export function MapLinkButtons({ place, origin }: {
   }, []);
 
   const naverHref = (() => {
+    if (approximate) return naverMapUrl(place.nameKr || place.name);
     if (platform === null) return naverRouteUrl(place.nameKr, dest, origin);
     const appName = window.location.origin;
     if (platform === "android") return naverAndroidIntentUrl(place.nameKr, dest, origin, appName);
@@ -54,7 +58,7 @@ export function MapLinkButtons({ place, origin }: {
   })();
 
   const tryNaverIos = () => {
-    if (platform !== "ios") return;
+    if (approximate || platform !== "ios") return;
     const clearFallback = () => {
       if (fallbackTimer.current) clearTimeout(fallbackTimer.current);
       fallbackTimer.current = null;
@@ -74,12 +78,12 @@ export function MapLinkButtons({ place, origin }: {
   };
 
   const links = [
-    // Google gets the shop by name + address so its route sheet reads
+    // Exact places: Google gets the shop by name + address so its route sheet reads
     // "Olive Young Gangnam Town", not "핀 고정 위치"; the origin is left to
     // Google so it reads "내 위치" (owner report 2026-09-27). Kakao keeps
     // the coordinates: its link scheme carries a name alongside them.
-    { label: "Google", href: googleDirectionsUrl({ ...dest, name: place.name, address: place.address }), bg: "#4285f4", fg: "#fff" },
-    { label: "Kakao", href: kakaoRouteUrl(place.nameKr, dest, origin), bg: "#fae100", fg: "#3c1e1e" },
+    { label: "Google", href: approximate ? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(place.nameKr || place.name)}` : googleDirectionsUrl({ ...dest, name: place.name, address: place.address }), bg: "#4285f4", fg: "#fff" },
+    { label: "Kakao", href: approximate ? `https://map.kakao.com/link/search/${encodeURIComponent(place.nameKr || place.name)}` : kakaoRouteUrl(place.nameKr, dest, origin), bg: "#fae100", fg: "#3c1e1e" },
   ];
   return (
     <>
@@ -89,6 +93,7 @@ export function MapLinkButtons({ place, origin }: {
           size="sm"
           style={{ background: l.bg, color: l.fg, border: "none" }}
           href={l.href}
+          aria-label={approximate ? `Search for ${place.name} in ${l.label} Maps` : `Open directions in ${l.label} Maps`}
           external
         >
           {l.label}
@@ -99,9 +104,9 @@ export function MapLinkButtons({ place, origin }: {
         style={{ background: "#03c75a", color: "#fff", border: "none" }}
         href={naverHref}
         external
-        newTab={platform === null}
-        onClick={tryNaverIos}
-        aria-label="Open directions in NAVER Map"
+        newTab={approximate || platform === null}
+        onClick={approximate ? undefined : tryNaverIos}
+        aria-label={approximate ? `Search for ${place.name} in NAVER Map` : "Open directions in NAVER Map"}
       >
         Naver Map
       </Button>

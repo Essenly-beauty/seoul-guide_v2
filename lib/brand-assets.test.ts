@@ -22,7 +22,7 @@ describe("brand asset contract", () => {
     const ranking = source("components/ranking/ranking-page-client.tsx");
     expect(ranking).not.toContain("BrandMark");
     expect(ranking).toContain(
-      'const rankingTitle = initialRetailer === "daiso" ? "DAISO Ranking" : "OLIVE YOUNG Ranking"',
+      'const rankingTitle = initialRetailer === "daiso" ? "DAISO Ranking" : "OLIVE YOUNG Product Guide"',
     );
     expect(ranking).toContain('<TopBar center title={rankingTitle} />');
     expect(ranking).not.toContain('<TopBar center title="Ranking" />');

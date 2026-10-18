@@ -5,6 +5,7 @@ import { OliveYoungBrandHero } from "@/components/place/olive-young-brand-hero";
 import { LiveBadge } from "@/components/ui/live-badge";
 import { TYPE_LABEL, type Place } from "@/lib/data";
 import { formatCompactDistance } from "@/lib/geo";
+import { isApproximatePlace } from "@/lib/places";
 
 export function SelectedPlaceSummary({
   place,
@@ -20,6 +21,7 @@ export function SelectedPlaceSummary({
   onDismiss?: () => void;
 }) {
   const titleId = `selected-place-summary-${variant}-${place.id}`;
+  const approximate = isApproximatePlace(place);
   const accessibleName = place.nameKr && place.nameKr !== place.name
     ? `${place.name}, ${place.nameKr}`
     : place.name;
@@ -56,19 +58,19 @@ export function SelectedPlaceSummary({
             )}
             <div className="selected-place-summary-meta" aria-label="Place summary">
               <LiveBadge hours={place.hours} />
-              {place.rating !== undefined && (
+              {place.source !== "curated" && place.rating !== undefined && (
                 <span className="map-meta-token stars">
                   ★{place.rating}{place.ratingCount !== undefined ? ` (${place.ratingCount})` : ""}
                 </span>
               )}
               {place.priceRange && <span className="map-meta-token mono">{place.priceRange}</span>}
-              {place.locationVerification === "provisional" && (
+              {approximate && (
                 <span className="map-meta-token">Approximate pin</span>
               )}
             </div>
             <div className="selected-place-summary-address">
-              <span className="map-meta-token mono">{formatCompactDistance(km)}</span>
-              {place.address && <><span aria-hidden="true">·</span>
+              {!approximate && <span className="map-meta-token mono">{formatCompactDistance(km)}</span>}
+              {place.address && <>{!approximate && <span aria-hidden="true">·</span>}
               <span className="selected-place-summary-address-copy">{place.address}</span></>}
               {!place.address && <span className="selected-place-summary-address-copy">Address not listed</span>}
             </div>
@@ -101,22 +103,21 @@ export function SelectedPlaceSummary({
           )}
           <div className="selected-place-summary-meta" aria-label="Place summary">
             <LiveBadge hours={place.hours} />
-            {place.rating !== undefined && (
+            {place.source !== "curated" && place.rating !== undefined && (
               <span className="map-meta-token stars">
                 ★{place.rating}{place.ratingCount !== undefined ? ` (${place.ratingCount})` : ""}
               </span>
             )}
             {place.priceRange && <span className="map-meta-token mono">{place.priceRange}</span>}
             {place.englishOk && <span>English OK</span>}
-            {place.locationVerification === "provisional" && (
+            {approximate && (
               <span className="map-meta-token">Approximate pin</span>
             )}
           </div>
           <div className="selected-place-summary-address">
             <Icon name="pin" size="xs" aria-hidden="true" />
             <span className="selected-place-summary-address-copy">
-              <span className="map-meta-token mono">{formatCompactDistance(km)}</span>
-              <span aria-hidden="true"> · </span>
+              {!approximate && <><span className="map-meta-token mono">{formatCompactDistance(km)}</span><span aria-hidden="true"> · </span></>}
               {/* the source's own "not enough information" placeholder is
                   normalised to empty upstream — say so plainly instead */}
               {place.address || "Address not listed"}

@@ -23,7 +23,7 @@ describe("place address disclosure", () => {
   });
 
   it("labels owner-approved approximate locations on both map preview and detail", () => {
-    expect(mapSummarySource).toContain('place.locationVerification === "provisional"');
+    expect(mapSummarySource).toContain("isApproximatePlace(place)");
     expect(mapSummarySource).toContain("Approximate pin");
     expect(detailSource).toContain("Provisional location — the map pin is neighborhood-level");
   });

@@ -8,7 +8,6 @@ import { RankingFooter } from "@/components/ranking/ranking-footer";
 import { Button } from "@/components/ui/button";
 import { Chip } from "@/components/ui/chip";
 import { EmptyState } from "@/components/ui/empty-state";
-import { HScroll } from "@/components/ui/h-scroll";
 import { ImgPh } from "@/components/ui/img-ph";
 import { SearchField } from "@/components/ui/search-field";
 import { SectionDivider } from "@/components/ui/section-divider";
@@ -38,8 +37,7 @@ import {
 import { routes } from "@/lib/routes";
 
 const OLIVE_YOUNG_TAB_LABELS: Record<OliveYoungRankTab, string> = {
-  sales: "Sales",
-  review: "Review Best",
+  products: "Products",
   brands: "Brands",
 };
 
@@ -64,27 +62,22 @@ function nextTabIndex(
   return null;
 }
 
-// ── Olive Young ranked rows — detail-page "Top rated nearby" language ──
-function RankRow({ p, rank }: { p: Product; rank: number }) {
+// ── Curated product examples; catalogue order carries no rank claim. ──
+function ProductGuideRow({ p }: { p: Product }) {
   return (
     <Link className="listrow v2" data-testid="olive-young-ranking-row" href={routes.shopItem(p.id)}>
-      <span className="mono num" style={{ width: 24, fontSize: 15, fontWeight: 700, flex: "none", textAlign: "center", color: rank <= 3 ? "var(--accent)" : "var(--dim)" }}>
-        {rank}
-      </span>
       <ImgPh className="thumb56" />
       <div className="stack" style={{ flex: 1, minWidth: 0, gap: 2 }}>
         <b className="t-label-md" style={{ fontSize: 14, display: "block", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{p.name}</b>
         <div className="t-caption" style={{ overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
           {p.brand}
-          {p.isTrending && <span className="t-label-sm" style={{ color: "var(--accent)" }}> · Trending</span>}
         </div>
       </div>
-      {p.priceRange && <span className="mono num t-label-md" style={{ fontWeight: 700, flex: "none" }}>{p.priceRange}</span>}
     </Link>
   );
 }
 
-function RankSection({
+function ProductGuideSection({
   title,
   description,
   products,
@@ -105,7 +98,7 @@ function RankSection({
         <EmptyState>{emptyMessage}</EmptyState>
       ) : (
         <div>
-          {shown.map((p, i) => <RankRow key={p.id} p={p} rank={i + 1} />)}
+          {shown.map((p) => <ProductGuideRow key={p.id} p={p} />)}
         </div>
       )}
       {products.length > shown.length && (
@@ -113,32 +106,6 @@ function RankSection({
           More ›
         </Button>
       )}
-    </section>
-  );
-}
-
-// ── Trending rail — v2 horizontal card rail ────────────────
-function TrendingSection({ products }: { products: readonly Product[] }) {
-  const trending = useMemo(
-    () => products.filter((p) => p.isTrending).sort((a, b) => a.salesRank - b.salesRank),
-    [products],
-  );
-  if (trending.length === 0) return null;
-  return (
-    <section className="stack sm">
-      <SectionHeader title="Also popular" count={trending.length} />
-      <HScroll ariaLabel="Trending products">
-        {trending.map((p) => (
-          <Link key={p.id} href={routes.shopItem(p.id)} style={{ width: 128 }}>
-            <ImgPh style={{ height: 96, borderRadius: 12 }} />
-            <div style={{ fontWeight: 650, fontSize: 13.5, marginTop: 6, lineHeight: 1.25, display: "-webkit-box", WebkitLineClamp: 2, WebkitBoxOrient: "vertical", overflow: "hidden" }}>
-              {p.name}
-            </div>
-            <div className="caption muted">{p.brand}</div>
-            {p.priceRange && <div style={{ fontWeight: 750, fontSize: 14, marginTop: 2 }}>{p.priceRange}</div>}
-          </Link>
-        ))}
-      </HScroll>
     </section>
   );
 }
@@ -195,18 +162,14 @@ function BrandsPanel({ products }: { products: readonly Product[] }) {
   );
 }
 
-function OliveYoungRanking() {
+function OliveYoungProductGuide() {
   const config = OLIVE_YOUNG_RANKING_CONFIG;
-  const [tab, setTab] = useState<OliveYoungRankTab>("sales");
+  const [tab, setTab] = useState<OliveYoungRankTab>("products");
   const [category, setCategory] = useState<"all" | ProductCategory>("all");
 
-  const ranked = useMemo(() => {
-    let list = [...config.products].sort((a, b) =>
-      tab === "review" ? a.reviewRank - b.reviewRank : a.salesRank - b.salesRank,
-    );
-    if (category !== "all") list = list.filter((p) => p.category === category);
-    return list;
-  }, [category, config.products, tab]);
+  const products = useMemo(() => category === "all"
+    ? config.products
+    : config.products.filter((p) => p.category === category), [category, config.products]);
 
   const selectTab = (nextTab: OliveYoungRankTab) => setTab(nextTab);
   const onTabKeyDown = (event: KeyboardEvent<HTMLButtonElement>, index: number) => {
@@ -220,7 +183,7 @@ function OliveYoungRanking() {
 
   return (
     <>
-      <div className="chiprow" role="tablist" aria-label="Ranking type">
+      <div className="chiprow" role="tablist" aria-label="Product guide">
         {config.tabs.map((tabKey, index) => (
           <Chip
             key={tabKey}
@@ -255,19 +218,14 @@ function OliveYoungRanking() {
               ))}
             </div>
             <SectionDivider />
-            {/* key resets the "More ›" expansion when the ranking scope changes */}
-            <RankSection
+            {/* Reset the expanded list when the category changes. */}
+            <ProductGuideSection
               key={`${tab}:${category}`}
-              // Owner decision 2026-09-27: use editorial trend framing, but
-              // explicitly disclose that these are curated picks, not a live
-              // or same-day retailer sales chart.
-              title={tab === "sales" ? "What's trending" : "Highest-rated by reviews"}
-              description={tab === "sales" ? "Curated beauty picks — not a live sales chart." : undefined}
-              products={ranked}
+              title="Product guide"
+              description="Curated product examples. Availability and prices are not verified; check the retailer before shopping."
+              products={products}
               emptyMessage={config.emptyMessage}
             />
-            <SectionDivider />
-            <TrendingSection products={config.products} />
           </>
         ) : (
           <BrandsPanel products={config.products} />
@@ -435,7 +393,7 @@ export function RankingPageClient({
     () => createDaisoRankingConfig(daisoProducts),
     [daisoProducts],
   );
-  const rankingTitle = initialRetailer === "daiso" ? "DAISO Ranking" : "OLIVE YOUNG Ranking";
+  const rankingTitle = initialRetailer === "daiso" ? "DAISO Ranking" : "OLIVE YOUNG Product Guide";
 
   return (
     <>
@@ -443,7 +401,7 @@ export function RankingPageClient({
       <div className="app-scroll pad stack pagev2" data-testid="ranking-scroll">
         {initialRetailer === "daiso"
           ? <DaisoRanking config={daisoConfig} initialCategory={initialDaisoCategory} />
-          : <OliveYoungRanking />}
+          : <OliveYoungProductGuide />}
       </div>
       <RankingFooter retailer={initialRetailer} />
     </>
