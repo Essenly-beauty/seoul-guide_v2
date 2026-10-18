@@ -130,6 +130,29 @@ describe('mounted staff form completion after selection changes', () => {
     expect(drafts.read(calendarKey)).toBeUndefined();
   });
 
+  it('preserves uncertain and unconfirmed dirty A input across A→B→A while clearing only clean records', () => {
+    const drafts = new PartnerDraftStore();
+    const profileKey = `staff:profile:${staffA}`;
+    const calendarKey = `staff:calendar:${staffA}`;
+    const inactiveDirtyKey = `staff:profile:${staffB}`;
+    const baseline = { values: { name: 'A' }, updatedAt: '2026-10-18T00:00:00Z' };
+    const changed = { ...baseline, values: { name: 'uncertain A edit' } };
+    const uncertain: PartnerDraftRecord<typeof baseline> = { token: Symbol(profileKey), draft: changed, baseline, state: { kind: 'committed-stale' } };
+    const clean: PartnerDraftRecord<typeof baseline> = { token: Symbol(calendarKey), draft: baseline, baseline, state: { kind: 'reloading' } };
+    const unconfirmedDirty: PartnerDraftRecord<typeof baseline> = { token: Symbol(inactiveDirtyKey), draft: changed, baseline, state: { kind: 'error', message: 'retry' } };
+    drafts.write(profileKey, uncertain); drafts.write(calendarKey, clean); drafts.write(inactiveDirtyKey, unconfirmedDirty);
+    drafts.setActive(profileKey); drafts.setActive(calendarKey);
+    expect(drafts.hasActiveUnsavedChanges()).toBe(false);
+
+    discardStaffSelectionDrafts(drafts, staffA); // Navigate A → B without a discard confirmation.
+    expect(drafts.read(profileKey)).toBe(uncertain);
+    expect(drafts.read(calendarKey)).toBeUndefined();
+    discardStaffSelectionDrafts(drafts, staffB);
+    expect(drafts.read(inactiveDirtyKey)).toBe(unconfirmedDirty);
+    expect(drafts.read(profileKey)?.draft).toEqual(changed); // Return B → A and recover the uncertain form.
+    expect(drafts.read(profileKey)?.state).toEqual({ kind: 'committed-stale' });
+  });
+
   it('does not put A menu uncertainty or busy state on B after a late A result', async () => {
     let selectedId = staffA;
     let finish!: (value: { kind: 'committed-stale' }) => void;

@@ -38,8 +38,11 @@ export async function completeStaffReload(
 }
 
 export function discardStaffSelectionDrafts(drafts: PartnerDraftStore, id: string): void {
-  drafts.discard(`staff:profile:${id}`);
-  drafts.discard(`staff:calendar:${id}`);
+  for (const key of [`staff:profile:${id}`, `staff:calendar:${id}`]) {
+    const record = drafts.read(key);
+    if (!record || record.state.kind === 'pending' || record.state.kind === 'committed-stale') continue;
+    if (JSON.stringify(record.draft) === JSON.stringify(record.baseline)) drafts.discard(key);
+  }
 }
 
 export async function readBackStaffSave(
