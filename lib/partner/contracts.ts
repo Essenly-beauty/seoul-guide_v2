@@ -80,8 +80,8 @@ export function scheduleValues(value: unknown): value is ScheduleValues {
 export function settingsValues(value: unknown): value is SettingsValues {
   return record(value) && exactKeys(value, ['displayName', 'contactEmail', 'contactPhone', 'address', 'businessTypes']) &&
     boundedString(value.displayName, 120) && boundedString(value.contactEmail, 320) && boundedString(value.contactPhone, 80) &&
-    boundedString(value.address, 500) && Array.isArray(value.businessTypes) && value.businessTypes.length <= 3 &&
-    new Set(value.businessTypes).size === value.businessTypes.length && value.businessTypes.every((type: unknown) => typeof type === 'string' && ['hair', 'nail', 'head_spa'].includes(type));
+    boundedString(value.address, 500) && Array.isArray(value.businessTypes) &&
+    value.businessTypes.every((type: unknown) => typeof type === 'string' && ['hair', 'nail', 'head_spa'].includes(type));
 }
 export function parsePartnerCommand(input: unknown): { ok: true; command: PartnerCommand } | { ok: false; errors: string[] } {
   const invalid = { ok: false as const, errors: ['command.invalid'] };

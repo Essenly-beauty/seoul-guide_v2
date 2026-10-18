@@ -80,4 +80,8 @@ describe('strict partner command boundary', () => {
     ]) expect(parsePartnerCommand({ ...schedule, values }).ok).toBe(false);
     expect(parsePartnerCommand({ ...schedule, values: { hours: periods.slice(0, 128), breaks: [], blocks: blocks.slice(0, 512) } }).ok).toBe(true);
   });
+  it('accepts repeated allowed business types permitted by the persisted contract', () => {
+    const command = { ...settings, values: { ...settings.values, businessTypes: ['hair', 'hair', 'nail', 'hair'] } };
+    expect(parsePartnerCommand(command)).toEqual({ ok: true, command });
+  });
 });

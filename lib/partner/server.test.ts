@@ -11,7 +11,7 @@ const stamp = '2026-10-18T01:02:03.123456+00:00';
 const merchant = { id: merchantId, display_name: 'Shop', contact_email: '', contact_phone: '', address: '', business_types: ['hair'], status: 'active', booking_enabled: false, updated_at: stamp };
 const category = { id, merchant_id: merchantId, name_ko: '', name_en: 'Hair', visibility: 'draft', sort_order: 0, updated_at: stamp };
 const menu = { id, merchant_id: merchantId, category_id: id, name_ko: '', name_en: '', description_ko: '', description_en: '', price_krw: 1000, deposit_krw: 500, duration_minutes: null, cleanup_minutes: 0, visibility: 'draft', sort_order: 0, updated_at: stamp };
-type Result = { data: unknown; error: unknown };
+type Result = { data: unknown; error: unknown; rejection?: Error };
 function boundary(results: Result[] = [], user: unknown = { id: other }, authError: unknown = null) {
   const calls: { table: string; steps: [string, unknown[]][] }[] = [];
   const client = {
@@ -21,7 +21,10 @@ function boundary(results: Result[] = [], user: unknown = { id: other }, authErr
       calls.push(call);
       const builder: Record<string, unknown> = {};
       for (const method of ['select', 'eq', 'is', 'order', 'range', 'insert', 'update', 'limit']) builder[method] = (...args: unknown[]) => { call.steps.push([method, args]); return builder; };
-      const resolve = () => Promise.resolve(results.shift() ?? { data: null, error: null });
+      const resolve = () => {
+        const next = results.shift() ?? { data: null, error: null };
+        return next.rejection ? Promise.reject(next.rejection) : Promise.resolve(next);
+      };
       builder.maybeSingle = resolve;
       builder.then = (success: (value: Result) => unknown, failure?: (error: unknown) => unknown) => resolve().then(success, failure);
       return builder;
@@ -73,6 +76,23 @@ describe('verified partner context', () => {
   });
   it.each([new AuthSessionMissingError(), new AuthApiError('expired token', 401, 'bad_jwt')])('handles real SDK authentication error subclasses %#', async (error) => {
     await expect(getPartnerContext(boundary([], null, error).client)).rejects.toMatchObject({ status: 401 });
+  });
+  it.each([undefined, null, [], {}, { error: null }, { data: {}, error: null }, { data: null, error: null }, { data: { user: [] }, error: null }, { data: { user: { id: 'invalid' } }, error: null }])('fails closed before lookup on malformed auth response %#', async (auth) => {
+    const mock = boundary();
+    mock.auth.getUser.mockResolvedValueOnce(auth as never);
+    await expect(getPartnerContext(mock.client)).rejects.toMatchObject({ status: 503, code: 'PARTNER_UNAVAILABLE' });
+    expect(mock.calls).toEqual([]);
+  });
+  it('fails closed before lookup when getUser rejects', async () => {
+    const mock = boundary();
+    mock.auth.getUser.mockRejectedValueOnce(new Error('private provider failure'));
+    await expect(getPartnerContext(mock.client)).rejects.toMatchObject({ status: 503, code: 'PARTNER_UNAVAILABLE' });
+    expect(mock.calls).toEqual([]);
+  });
+  it('fails closed when the membership query promise rejects', async () => {
+    const mock = boundary([{ data: null, error: null, rejection: new Error('private query failure') }]);
+    await expect(getPartnerContext(mock.client)).rejects.toMatchObject({ status: 503, code: 'PARTNER_UNAVAILABLE' });
+    expect(mock.calls).toHaveLength(1);
   });
 });
 
@@ -126,6 +146,14 @@ describe('partner snapshot', () => {
   it('returns validated schedule timestamps and preserves meaningful empty arrays', async () => {
     const mock = await context([result([]), result([]), result({ merchant_id: merchantId, hours: [], breaks: [], blocks: [], updated_at: stamp })]);
     expect((await getPartnerSnapshot(mock.client, mock.context)).schedule).toEqual({ merchantId, hours: [], breaks: [], blocks: [], updatedAt: stamp });
+  });
+  it('reads repeated allowed business types from valid existing database rows', async () => {
+    const mock = await context([result([]), result([]), result(null)], { ...merchant, business_types: ['hair', 'hair', 'nail', 'hair'] });
+    expect((await getPartnerSnapshot(mock.client, mock.context)).merchant.businessTypes).toEqual(['hair', 'hair', 'nail', 'hair']);
+  });
+  it('fails closed when snapshot query promises reject', async () => {
+    const mock = await context([{ data: null, error: null, rejection: new Error('private snapshot failure') }]);
+    await expect(getPartnerSnapshot(mock.client, mock.context)).rejects.toMatchObject({ status: 503, code: 'PARTNER_UNAVAILABLE' });
   });
 });
 
@@ -197,5 +225,9 @@ describe('partner configuration writes', () => {
   ])('fails closed for rejected or malformed write results $status', async ({ row, status }) => {
     const mock = await context([row]);
     await expect(savePartnerCommand(mock.client, mock.context, createCategory)).rejects.toMatchObject({ status });
+  });
+  it('does not acknowledge a rejected mutation query promise', async () => {
+    const mock = await context([{ data: null, error: null, rejection: new Error('private mutation failure') }]);
+    await expect(savePartnerCommand(mock.client, mock.context, createCategory)).rejects.toMatchObject({ status: 503, code: 'PARTNER_UNAVAILABLE' });
   });
 });

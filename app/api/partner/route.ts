@@ -27,6 +27,22 @@ function failure(error: unknown): Response {
   const known = error instanceof PartnerError && Object.hasOwn(messages, error.code) ? error : new PartnerError(503, 'PARTNER_UNAVAILABLE');
   return json({ ok: false, code: known.code, error: messages[known.code] }, known.status);
 }
+function sameOrigin(request: Request): boolean {
+  try {
+    const header = request.headers.get('origin');
+    if (!header) return false;
+    const origin = new URL(header);
+    if (header !== origin.origin) return false;
+    const target = new URL(request.url);
+    const host = request.headers.get('host');
+    if (host !== null && host !== origin.host) return false;
+    if (header === target.origin) return true;
+    // Next 15 NextURL rewrites loopback IPs to localhost. Recover only that
+    // normalization using exact browser Origin/Host agreement, never forwarded headers.
+    return host === origin.host && target.hostname === 'localhost' &&
+      ['127.0.0.1', '[::1]'].includes(origin.hostname) && origin.protocol === target.protocol && origin.port === target.port;
+  } catch { return false; }
+}
 async function readJson(request: Request): Promise<unknown> {
   if (!request.body) throw new PartnerError(400, 'INVALID_JSON');
   const reader = request.body.getReader();
@@ -65,7 +81,7 @@ export async function GET(): Promise<Response> {
 
 export async function POST(request: Request): Promise<Response> {
   try {
-    if (request.headers.get('origin') !== new URL(request.url).origin) throw new PartnerError(403, 'INVALID_ORIGIN');
+    if (!sameOrigin(request)) throw new PartnerError(403, 'INVALID_ORIGIN');
     if (request.headers.get('content-type')?.split(';', 1)[0].trim().toLowerCase() !== 'application/json') throw new PartnerError(415, 'UNSUPPORTED_MEDIA_TYPE');
     const client = supabaseServer();
     const context = await getPartnerContext(client);
