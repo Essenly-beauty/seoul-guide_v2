@@ -4,6 +4,7 @@ import { createContext, useCallback, useContext, useEffect, useRef, useState, ty
 import { usePathname } from 'next/navigation';
 import { useAuthUser } from '@/lib/auth/use-auth';
 import type { PartnerCommand, PartnerSnapshot } from '@/lib/partner/contracts';
+import type { ReservationCommand } from '@/lib/partner/reservation-commands';
 import type { SaveState } from './partner-form';
 
 export type SaveResult = { kind: 'saved'; snapshot: PartnerSnapshot } | { kind: 'committed-stale' } | { kind: 'conflict' | 'error'; message: string } | { kind: 'cancelled' };
@@ -85,7 +86,7 @@ export class PartnerDraftStore {
 type Access = 'loading' | 'ready' | 'signed-out' | 'unassigned' | 'unavailable';
 type PartnerContextValue = {
   snapshot: PartnerSnapshot | null; access: Access; refreshing: boolean; stale: boolean;
-  refresh: () => Promise<PartnerSnapshot | null>; save: (command: PartnerCommand) => Promise<SaveResult>;
+  refresh: () => Promise<PartnerSnapshot | null>; save: (command: PartnerCommand | ReservationCommand) => Promise<SaveResult>;
   setDirty: (dirty: boolean) => void; confirmLeave: (discard?: boolean) => boolean; drafts: PartnerDraftStore;
 };
 const PartnerContext = createContext<PartnerContextValue | null>(null);
@@ -188,7 +189,7 @@ function PartnerSession({ children, authenticated, checking }: { children: React
     document.addEventListener('click', click, true);
     return () => { window.removeEventListener('beforeunload', unload); document.removeEventListener('click', click, true); };
   }, [confirmLeave, drafts]);
-  const save = useCallback(async (command: PartnerCommand): Promise<SaveResult> => {
+  const save = useCallback(async (command: PartnerCommand | ReservationCommand): Promise<SaveResult> => {
     if (!authenticated) return { kind: 'cancelled' };
     const request = requests.startWrite();
     if (!request) return { kind: 'error', message: '저장 중입니다. 잠시 기다려 주세요.' };

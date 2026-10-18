@@ -1,6 +1,8 @@
 import type { SupabaseClient } from '@supabase/supabase-js';
 import { boundedString, categoryValues, integer, menuValues, record, scheduleValues, merchantProfile, timestamp, uuid, type Category, type Menu, type Merchant, type PartnerSnapshot, type Schedule } from './contracts';
 import { validateMenu } from './catalog';
+import { reservationSchedule, type DateOverride } from './reservation-calendar';
+import { reservationRules, type ReservationRules } from './reservation-config';
 
 export class PartnerError extends Error {
   constructor(public readonly status: number, public readonly code: string) { super(code); }
@@ -20,7 +22,8 @@ export function queryData(result: unknown): unknown {
 export const merchantColumns = 'id,display_name,contact_email,contact_phone,address,business_types,status,booking_enabled,updated_at';
 export const categoryColumns = 'id,merchant_id,name_ko,name_en,visibility,sort_order,updated_at';
 export const menuColumns = 'id,merchant_id,category_id,name_ko,name_en,description_ko,description_en,price_krw,deposit_krw,duration_minutes,cleanup_minutes,visibility,sort_order,updated_at';
-export const scheduleColumns = 'merchant_id,hours,breaks,blocks,updated_at';
+export const scheduleColumns = 'merchant_id,hours,breaks,blocks,overrides,updated_at';
+export const reservationRulesColumns = 'merchant_id,mode,capacity,start_date,end_date,minimum_lead_minutes,slot_interval_minutes,updated_at';
 
 function decodeMerchant(row: unknown, merchantId: string): Merchant {
   if (!record(row) || row.id !== merchantId || !uuid(row.id) || !timestamp(row.updated_at) ||
@@ -43,12 +46,21 @@ export function decodeMenu(row: unknown, merchantId: string, categories: readonl
   if (validateMenu(menu, categories).length) return unavailable();
   return menu;
 }
-function decodeSchedule(row: unknown, merchantId: string): Schedule | null {
-  if (row === null) return null;
+function decodeSchedule(row: unknown, merchantId: string): { schedule: Schedule | null; dateOverrides: DateOverride[] } {
+  if (row === null) return { schedule: null, dateOverrides: [] };
   if (!record(row) || row.merchant_id !== merchantId || !timestamp(row.updated_at)) return unavailable();
   const values = { hours: row.hours, breaks: row.breaks, blocks: row.blocks };
-  if (!scheduleValues(values)) return unavailable();
-  return { merchantId, ...values, updatedAt: row.updated_at };
+  const combined: unknown = { merchantId, ...values, overrides: row.overrides };
+  if (!scheduleValues(values) || !reservationSchedule(combined)) return unavailable();
+  return { schedule: { merchantId, ...values, updatedAt: row.updated_at }, dateOverrides: combined.overrides };
+}
+function decodeReservationRules(row: unknown, merchantId: string): (ReservationRules & { updatedAt: string }) | null {
+  if (row === null) return null;
+  if (!record(row) || row.merchant_id !== merchantId || !timestamp(row.updated_at)) return unavailable();
+  const values = { merchantId, mode: row.mode, capacity: row.capacity, startDate: row.start_date, endDate: row.end_date,
+    minimumLeadMinutes: row.minimum_lead_minutes, slotIntervalMinutes: row.slot_interval_minutes };
+  if (!reservationRules(values)) return unavailable();
+  return { ...values, updatedAt: row.updated_at };
 }
 
 export type PartnerContext = { userId: string; merchant: Merchant; readOnly: boolean };
@@ -100,8 +112,9 @@ export async function getPartnerSnapshot(client: SupabaseClient, context: Partne
     const merchantId = context.merchant.id;
     const categories = (await allRows(client, 'merchant_categories', categoryColumns, merchantId)).map((row) => decodeCategory(row, merchantId));
     const menus = (await allRows(client, 'merchant_services', menuColumns, merchantId)).map((row) => decodeMenu(row, merchantId, categories));
-    const schedule = decodeSchedule(queryData(await client.from('merchant_schedules').select(scheduleColumns).eq('merchant_id', merchantId).maybeSingle()), merchantId);
+    const { schedule, dateOverrides } = decodeSchedule(queryData(await client.from('merchant_schedules').select(scheduleColumns).eq('merchant_id', merchantId).maybeSingle()), merchantId);
+    const rules = decodeReservationRules(queryData(await client.from('merchant_reservation_rules').select(reservationRulesColumns).eq('merchant_id', merchantId).maybeSingle()), merchantId);
     const sort = (a: Category | Menu, b: Category | Menu) => a.sortOrder - b.sortOrder || a.id.localeCompare(b.id);
-    return { merchant: context.merchant, categories: categories.sort(sort), menus: menus.sort(sort), schedule, readOnly: context.readOnly, loadedAt: new Date().toISOString() };
+    return { merchant: context.merchant, categories: categories.sort(sort), menus: menus.sort(sort), schedule, reservationRules: rules, dateOverrides, readOnly: context.readOnly, loadedAt: new Date().toISOString() };
   });
 }

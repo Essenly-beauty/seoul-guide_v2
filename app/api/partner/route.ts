@@ -2,6 +2,8 @@ import { supabaseServer } from '@/lib/supabase/server';
 import { parsePartnerCommand } from '@/lib/partner/contracts';
 import { getPartnerContext, getPartnerSnapshot, PartnerError } from '@/lib/partner/server';
 import { savePartnerCommand } from '@/lib/partner/mutations';
+import { parseReservationCommand } from '@/lib/partner/reservation-commands';
+import { saveReservationCommand } from '@/lib/partner/reservation-store';
 
 export const dynamic = 'force-dynamic';
 
@@ -85,9 +87,14 @@ export async function POST(request: Request): Promise<Response> {
     if (request.headers.get('content-type')?.split(';', 1)[0].trim().toLowerCase() !== 'application/json') throw new PartnerError(415, 'UNSUPPORTED_MEDIA_TYPE');
     const client = supabaseServer();
     const context = await getPartnerContext(client);
-    const parsed = parsePartnerCommand(await readJson(request));
-    if (!parsed.ok) throw new PartnerError(400, 'INVALID_COMMAND');
-    await savePartnerCommand(client, context, parsed.command);
+    const body = await readJson(request);
+    const parsed = parsePartnerCommand(body);
+    if (parsed.ok) await savePartnerCommand(client, context, parsed.command);
+    else {
+      const reservation = parseReservationCommand(body);
+      if (!reservation.ok) throw new PartnerError(400, 'INVALID_COMMAND');
+      await saveReservationCommand(client, context, reservation.command);
+    }
     return json({ ok: true });
   } catch (error) { return failure(error); }
 }

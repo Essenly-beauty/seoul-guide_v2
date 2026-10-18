@@ -100,7 +100,7 @@ describe('partner snapshot', () => {
   it('returns only owned mapped configuration and a null uncreated schedule', async () => {
     const mock = await context([result([category]), result([menu]), result(null)]);
     const snapshot = await getPartnerSnapshot(mock.client, mock.context);
-    expect(snapshot).toMatchObject({ merchant: { id: merchantId }, categories: [{ id, merchantId, updatedAt: stamp }], menus: [{ id, depositKrw: 500, updatedAt: stamp }], schedule: null, readOnly: false });
+    expect(snapshot).toMatchObject({ merchant: { id: merchantId }, categories: [{ id, merchantId, updatedAt: stamp }], menus: [{ id, depositKrw: 500, updatedAt: stamp }], schedule: null, reservationRules: null, dateOverrides: [], readOnly: false });
     expect(snapshot).not.toHaveProperty('membership');
     for (const call of mock.calls.slice(2)) expect(call.steps).toContainEqual(['eq', ['merchant_id', merchantId]]);
   });
@@ -128,7 +128,7 @@ describe('partner snapshot', () => {
     const mock = await context([result([]), result([]), result(null)], { ...merchant, status: 'suspended' });
     expect((await getPartnerSnapshot(mock.client, mock.context)).readOnly).toBe(true);
     await expect(savePartnerCommand(mock.client, mock.context, createCategory)).rejects.toMatchObject({ status: 403, code: 'PARTNER_READ_ONLY' });
-    expect(mock.calls).toHaveLength(5);
+    expect(mock.calls).toHaveLength(6);
   });
   it.each([
     [result([]), result([menu])],
@@ -144,8 +144,32 @@ describe('partner snapshot', () => {
     await expect(getPartnerSnapshot(mock.client, mock.context)).rejects.toMatchObject({ status: 503 });
   });
   it('returns validated schedule timestamps and preserves meaningful empty arrays', async () => {
-    const mock = await context([result([]), result([]), result({ merchant_id: merchantId, hours: [], breaks: [], blocks: [], updated_at: stamp })]);
+    const mock = await context([result([]), result([]), result({ merchant_id: merchantId, hours: [], breaks: [], blocks: [], overrides: [], updated_at: stamp })]);
     expect((await getPartnerSnapshot(mock.client, mock.context)).schedule).toEqual({ merchantId, hours: [], breaks: [], blocks: [], updatedAt: stamp });
+  });
+  it('maps owned rules and special dates while preserving the existing weekly schedule DTO', async () => {
+    const override = { date: '2026-11-05', hours: [{ startMinute: 540, endMinute: 1020 }], breaks: [] };
+    const rules = { merchant_id: merchantId, mode: 'shop', capacity: 2, start_date: '2026-11-01', end_date: '2026-12-31', minimum_lead_minutes: 60, slot_interval_minutes: 30, updated_at: stamp };
+    const mock = await context([result([]), result([]), result({ merchant_id: merchantId, hours: [], breaks: [], blocks: [], overrides: [override], updated_at: stamp }), result(rules)]);
+    const snapshot = await getPartnerSnapshot(mock.client, mock.context);
+    expect(snapshot.dateOverrides).toEqual([override]);
+    expect(snapshot.schedule).toEqual({ merchantId, hours: [], breaks: [], blocks: [], updatedAt: stamp });
+    expect(snapshot.reservationRules).toEqual({ merchantId, mode: 'shop', capacity: 2, startDate: '2026-11-01', endDate: '2026-12-31', minimumLeadMinutes: 60, slotIntervalMinutes: 30, updatedAt: stamp });
+    expect(mock.calls.at(-1)).toMatchObject({ table: 'merchant_reservation_rules' });
+    expect(mock.calls.at(-1)!.steps).toContainEqual(['eq', ['merchant_id', merchantId]]);
+    expect(mock.calls.at(-1)!.steps).toContainEqual(['select', ['merchant_id,mode,capacity,start_date,end_date,minimum_lead_minutes,slot_interval_minutes,updated_at']]);
+  });
+  it.each([
+    { merchant_id: other, mode: 'shop', capacity: 1, start_date: '2026-11-01', end_date: '2026-12-31', minimum_lead_minutes: 0, slot_interval_minutes: 30, updated_at: stamp },
+    { merchant_id: merchantId, mode: 'shop', capacity: 0, start_date: '2026-11-01', end_date: '2026-12-31', minimum_lead_minutes: 0, slot_interval_minutes: 30, updated_at: stamp },
+    { merchant_id: merchantId, mode: 'shop', capacity: 1, start_date: '2026-02-30', end_date: '2026-12-31', minimum_lead_minutes: 0, slot_interval_minutes: 30, updated_at: stamp },
+  ])('rejects foreign or malformed rules rows %#', async (rules) => {
+    const mock = await context([result([]), result([]), result(null), result(rules)]);
+    await expect(getPartnerSnapshot(mock.client, mock.context)).rejects.toMatchObject({ status: 503 });
+  });
+  it('rejects a malformed persisted override instead of returning a partial schedule', async () => {
+    const mock = await context([result([]), result([]), result({ merchant_id: merchantId, hours: [], breaks: [], blocks: [], overrides: [{ date: '2026-02-30', hours: [], breaks: [] }], updated_at: stamp }), result(null)]);
+    await expect(getPartnerSnapshot(mock.client, mock.context)).rejects.toMatchObject({ status: 503 });
   });
   it('reads repeated allowed business types from valid existing database rows', async () => {
     const mock = await context([result([]), result([]), result(null)], { ...merchant, business_types: ['hair', 'hair', 'nail', 'hair'] });

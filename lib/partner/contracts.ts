@@ -1,5 +1,7 @@
 import { validateMenu, type PartnerCategory, type PartnerMenu, type Visibility } from './catalog';
 import { validateSchedule, type PartnerSchedule } from './availability';
+import type { DateOverride } from './reservation-calendar';
+import type { ReservationRules } from './reservation-config';
 
 export type BusinessType = 'hair' | 'nail' | 'head_spa';
 export type Merchant = {
@@ -12,6 +14,7 @@ export type Menu = PartnerMenu & { updatedAt: string };
 export type Schedule = PartnerSchedule & { updatedAt: string };
 export type PartnerSnapshot = {
   merchant: Merchant; categories: Category[]; menus: Menu[]; schedule: Schedule | null;
+  reservationRules: (ReservationRules & { updatedAt: string }) | null; dateOverrides: DateOverride[];
   readOnly: boolean; loadedAt: string;
 };
 export type CategoryValues = Pick<PartnerCategory, 'nameKo' | 'nameEn' | 'visibility' | 'sortOrder'>;

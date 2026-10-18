@@ -10,10 +10,12 @@ const userId = '22222222-2222-2222-2222-222222222222';
 const stamp = '2026-10-18T00:00:00.123456+00:00';
 const merchant = { id: merchantId, display_name: 'Shop', contact_email: '', contact_phone: '', address: '', business_types: [], status: 'active', booking_enabled: false, updated_at: stamp };
 const validCommand = { kind: 'category', mode: 'create', id: userId, values: { nameKo: '', nameEn: 'Hair', visibility: 'draft', sortOrder: 0 } };
+const reservationCommand = { kind: 'reservationRules', mode: 'create', values: { mode: 'shop', capacity: 2, startDate: '2026-11-01', endDate: '2026-12-31', minimumLeadMinutes: 60, slotIntervalMinutes: 30 } };
+const specialCommand = { kind: 'dateOverrides', mode: 'create', values: { overrides: [{ date: '2026-11-05', hours: [], breaks: [] }] } };
 type Result = { data: unknown; error: unknown; rejection?: Error };
 const result = (data: unknown, error: unknown = null): Result => ({ data, error });
 function session(options: { user?: unknown; authError?: unknown; results?: Result[]; shop?: typeof merchant } = {}) {
-  const results = options.results ?? [result({ merchant_id: merchantId, user_id: userId, revoked_at: null }), result(options.shop ?? merchant), result([]), result([]), result(null)];
+  const results = options.results ?? [result({ merchant_id: merchantId, user_id: userId, revoked_at: null }), result(options.shop ?? merchant), result([]), result([]), result(null), result(null)];
   const calls: { table: string; method: string; args: unknown[] }[] = [];
   const client = {
     auth: { getUser: vi.fn(async () => ({ data: { user: options.user === undefined ? { id: userId, user_metadata: { merchant_id: 'forged' } } : options.user }, error: options.authError ?? null })) },
@@ -45,11 +47,27 @@ function privateHeaders(response: Response) {
 beforeEach(() => { vi.resetAllMocks(); session(); });
 
 describe('partner HTTP authentication and snapshots', () => {
+  it('returns persisted booking rules and special dates only from the owned merchant', async () => {
+    const override = { date: '2026-11-05', hours: [], breaks: [] };
+    const mock = session({ results: [result({ merchant_id: merchantId, user_id: userId, revoked_at: null }), result(merchant), result([]), result([]), result({ merchant_id: merchantId, hours: [], breaks: [], blocks: [], overrides: [override], updated_at: stamp }), result({ merchant_id: merchantId, mode: 'shop', capacity: 2, start_date: '2026-11-01', end_date: '2026-12-31', minimum_lead_minutes: 60, slot_interval_minutes: 30, updated_at: stamp })] });
+    const response = await GET();
+    expect(response.status).toBe(200);
+    expect(await response.json()).toMatchObject({ ok: true, snapshot: { dateOverrides: [override], reservationRules: { merchantId, capacity: 2, updatedAt: stamp } } });
+    expect(mock.calls).toContainEqual({ table: 'merchant_reservation_rules', method: 'eq', args: ['merchant_id', merchantId] });
+    privateHeaders(response);
+  });
+  it('fails closed if the owned rules query fails', async () => {
+    session({ results: [result({ merchant_id: merchantId, user_id: userId, revoked_at: null }), result(merchant), result([]), result([]), result(null), result(null, { message: 'private SQL' })] });
+    const response = await GET();
+    expect(response.status).toBe(503);
+    expect(JSON.stringify(await response.json())).not.toContain('private SQL');
+    privateHeaders(response);
+  });
   it('uses only the existing cookie-session client and returns a private owned snapshot', async () => {
     const mock = session();
     const response = await GET();
     expect(response.status).toBe(200);
-    expect(await response.json()).toMatchObject({ ok: true, snapshot: { merchant: { id: merchantId }, schedule: null, categories: [], menus: [], readOnly: false } });
+    expect(await response.json()).toMatchObject({ ok: true, snapshot: { merchant: { id: merchantId }, schedule: null, reservationRules: null, dateOverrides: [], categories: [], menus: [], readOnly: false } });
     privateHeaders(response);
     expect(mocks.privileged).not.toHaveBeenCalled();
     expect(mock.calls).toContainEqual({ table: 'merchant_memberships', method: 'eq', args: ['user_id', userId] });
@@ -121,6 +139,28 @@ describe('partner HTTP authentication and snapshots', () => {
 });
 
 describe('partner HTTP command boundary', () => {
+  it.each([reservationCommand, specialCommand])('routes verified reservation command %# to only its narrow table', async (command) => {
+    const mock = session({ results: [result({ merchant_id: merchantId, user_id: userId, revoked_at: null }), result(merchant), result({ merchant_id: merchantId })] });
+    const response = await POST(request(JSON.stringify(command)));
+    expect(response.status).toBe(200);
+    expect(await response.json()).toEqual({ ok: true });
+    const table = command.kind === 'reservationRules' ? 'merchant_reservation_rules' : 'merchant_schedules';
+    expect(mock.calls.find((call) => call.method === 'insert')).toMatchObject({ table, args: [expect.objectContaining({ merchant_id: merchantId })] });
+    expect(mocks.privileged).not.toHaveBeenCalled();
+    privateHeaders(response);
+  });
+  it('rejects a forged reservation tenant before mutation', async () => {
+    const mock = session();
+    const response = await POST(request(JSON.stringify({ ...reservationCommand, merchantId: userId })));
+    expect(response.status).toBe(400);
+    expect(mock.calls.some((call) => ['insert', 'update'].includes(call.method))).toBe(false);
+  });
+  it('refuses reservation settings writes after booking activation without a write', async () => {
+    const mock = session({ shop: { ...merchant, booking_enabled: true } });
+    const response = await POST(request(JSON.stringify(reservationCommand)));
+    expect(response.status).toBe(409);
+    expect(mock.calls.some((call) => ['insert', 'update'].includes(call.method))).toBe(false);
+  });
   it('rejects a valid legacy profile settings command privately without mutation', async () => {
     const mock = session({ results: [result({ merchant_id: merchantId, user_id: userId, revoked_at: null }), result(merchant), result({ id: merchantId })] });
     const response = await POST(request(JSON.stringify({ kind: 'settings', expectedUpdatedAt: stamp, values: { displayName: 'Changed', contactEmail: '', contactPhone: '', address: '', businessTypes: ['hair'] } })));

@@ -10,7 +10,7 @@ import type { PartnerSnapshot } from './contracts';
 
 const snapshot: PartnerSnapshot = {
   merchant: { id: '11111111-1111-4111-8111-111111111111', displayName: '서울 살롱', contactEmail: '', contactPhone: '', address: '', businessTypes: ['hair'], status: 'onboarding', bookingEnabled: false, updatedAt: '2026-10-18T00:00:00.123456+00:00' },
-  categories: [], menus: [], schedule: null, readOnly: false, loadedAt: '2026-10-18T00:00:00Z',
+  categories: [], menus: [], schedule: null, reservationRules: null, dateOverrides: [], readOnly: false, loadedAt: '2026-10-18T00:00:00Z',
 };
 const render = (element: React.ReactElement) => load(renderToStaticMarkup(element));
 describe('merchant admin actual markup', () => {
