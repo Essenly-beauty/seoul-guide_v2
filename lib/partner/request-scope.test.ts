@@ -2,6 +2,30 @@ import { describe, expect, it } from 'vitest';
 import { PartnerRequestScope } from '@/components/partner/partner-provider';
 
 describe('partner request lifecycle', () => {
+  it('lets a manual reload follow a newer focus refresh instead of reporting a false failure', async () => {
+    const scope = new PartnerRequestScope();
+    let finishFirst!: (value: string) => void;
+    let finishSecond!: (value: string) => void;
+    const firstResponse = new Promise<string>((resolve) => { finishFirst = resolve; });
+    const secondResponse = new Promise<string>((resolve) => { finishSecond = resolve; });
+    const first = scope.runRead(() => firstResponse, null);
+    const second = scope.runRead(() => secondResponse, null);
+    finishFirst('outdated');
+    finishSecond('latest');
+    expect(await first).toBe('latest');
+    expect(await second).toBe('latest');
+  });
+  it('does not forward a new session response to a read invalidated by access loss', async () => {
+    const scope = new PartnerRequestScope();
+    let finish!: (value: string) => void;
+    const response = new Promise<string>((resolve) => { finish = resolve; });
+    const old = scope.runRead(() => response, null);
+    scope.invalidate();
+    const current = scope.runRead(async () => 'new session', null);
+    finish('private old value');
+    expect(await old).toBeNull();
+    expect(await current).toBe('new session');
+  });
   it('only accepts the latest read even if an aborted response resolves late', () => {
     const scope = new PartnerRequestScope();
     const first = scope.startRead()!;

@@ -7,8 +7,8 @@ import { Notice } from '@/components/ui/notice';
 import { menuReadiness, type Visibility } from '@/lib/partner/catalog';
 import type { Category, PartnerSnapshot } from '@/lib/partner/contracts';
 import { categoryDraft, categoryFormValues, menuDraft, menuFormValues, type CategoryDraft, type MenuDraft } from '@/lib/partner/form-values';
-import { usePartner } from './partner-provider';
-import { Field, FormActions, usePartnerDraft } from './partner-form';
+import { usePartner, type PartnerEditor } from './partner-provider';
+import { DraftRecoveryNotice, Field, FormActions, usePartnerDraft } from './partner-form';
 import styles from './partner.module.css';
 
 export const visibilityLabels: Record<Visibility, string> = { draft: '초안', visible: '공개 준비 (예약 연결 후 적용)', hidden: '숨김', archived: '보관' };
@@ -42,7 +42,7 @@ export function MenuFields({ value, onChange, categories, depositKrw, disabled }
 
 function CategoryEditor({ id, snapshot }: { id: string; snapshot: PartnerSnapshot }) {
   const from = (current: PartnerSnapshot) => { const item = current.categories.find((category) => category.id === id); return { values: categoryDraft(item), updatedAt: item?.updatedAt ?? null }; };
-  const form = usePartnerDraft(from(snapshot));
+  const form = usePartnerDraft(`category:${id}`, from(snapshot));
   const disabled = snapshot.readOnly || form.locked;
   return <form className={styles.editor} onSubmit={(event) => {
     event.preventDefault();
@@ -52,13 +52,14 @@ function CategoryEditor({ id, snapshot }: { id: string; snapshot: PartnerSnapsho
     void form.submit({ kind: 'category', id, ...version, values: parsed.values }, from);
   }}>
     <h2 tabIndex={-1}>{form.draft.updatedAt ? '카테고리 편집' : '카테고리 추가'}</h2>
+    <DraftRecoveryNotice restored={form.restored} />
     <CategoryFields value={form.draft.values} onChange={(values) => form.setDraft({ ...form.draft, values })} disabled={disabled} />
     <FormActions state={form.state} disabled={disabled} dirty={form.dirty || !form.draft.updatedAt} onReload={() => void form.reload(from)} />
   </form>;
 }
 function MenuEditor({ id, snapshot }: { id: string; snapshot: PartnerSnapshot }) {
   const from = (current: PartnerSnapshot) => { const item = current.menus.find((menu) => menu.id === id); return { values: menuDraft(item), updatedAt: item?.updatedAt ?? null }; };
-  const form = usePartnerDraft(from(snapshot));
+  const form = usePartnerDraft(`menu:${id}`, from(snapshot));
   const depositKrw = snapshot.menus.find((menu) => menu.id === id)?.depositKrw ?? null;
   const disabled = snapshot.readOnly || form.locked;
   return <form className={styles.editor} onSubmit={(event) => {
@@ -69,13 +70,15 @@ function MenuEditor({ id, snapshot }: { id: string; snapshot: PartnerSnapshot })
     void form.submit({ kind: 'menu', id, ...version, values: parsed.values }, from);
   }}>
     <h2 tabIndex={-1}>{form.draft.updatedAt ? '메뉴 편집' : '메뉴 추가'}</h2>
+    <DraftRecoveryNotice restored={form.restored} />
     <MenuFields value={form.draft.values} onChange={(values) => form.setDraft({ ...form.draft, values })} categories={snapshot.categories} depositKrw={depositKrw} disabled={disabled} />
     <FormActions state={form.state} disabled={disabled} dirty={form.dirty || !form.draft.updatedAt} onReload={() => void form.reload(from)} />
   </form>;
 }
 export function PartnerServices() {
-  const { snapshot, confirmLeave } = usePartner();
-  const [editor, setEditor] = useState<{ kind: 'category' | 'menu'; id: string } | null>(null);
+  const { snapshot, confirmLeave, drafts } = usePartner();
+  const [editor, setEditorState] = useState(() => drafts.getEditor());
+  const setEditor = (value: PartnerEditor | null) => { drafts.setEditor(value); setEditorState(value); };
   const editorRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
     editorRef.current?.querySelector<HTMLElement>('h2')?.focus();
@@ -91,7 +94,7 @@ export function PartnerServices() {
   return <>
     <header className={styles.pageHeader}><p className={styles.eyebrow}>SERVICE CATALOG</p><h1>카테고리·메뉴</h1><p className={styles.muted}>우리 매장에 맞게 서비스를 나누고, 고객에게 전할 정보를 준비하세요.</p></header>
     <Notice tone="info">공개 준비로 저장해도 고객에게 즉시 공개되지 않습니다. 예약·결제 연결 후 승인된 설정이 적용됩니다.</Notice>
-    {editor && <div ref={editorRef}><div className={styles.actions}><Button variant="secondary" onClick={() => { if (confirmLeave()) setEditor(null); }}>편집 닫기</Button></div>{editor.kind === 'category' ? <CategoryEditor key={`category-${editor.id}`} id={editor.id} snapshot={snapshot} /> : <MenuEditor key={`menu-${editor.id}`} id={editor.id} snapshot={snapshot} />}</div>}
+    {editor && <div ref={editorRef}><div className={styles.actions}><Button variant="secondary" onClick={() => { if (confirmLeave()) { drafts.discard(`${editor.kind}:${editor.id}`); setEditor(null); } }}>편집 닫기</Button></div>{editor.kind === 'category' ? <CategoryEditor key={`category-${editor.id}`} id={editor.id} snapshot={snapshot} /> : <MenuEditor key={`menu-${editor.id}`} id={editor.id} snapshot={snapshot} />}</div>}
     <section className={styles.section} aria-labelledby="categories-title"><div className={styles.sectionHeading}><div><p className={styles.eyebrow}>01 / ORGANIZE</p><h2 id="categories-title">카테고리 <span className={styles.muted}>{categories.length}개</span></h2></div><Button variant="secondary" disabled={snapshot.readOnly} onClick={() => open('category')}>카테고리 추가</Button></div>
       {categories.length ? <ul className={styles.list}>{categories.map((category) => <li key={category.id} className={styles.listItem}><div><h3>{category.nameKo || category.nameEn || '이름 없는 카테고리'}</h3>{category.nameEn && <p lang="en">{category.nameEn}</p>}<p>표시 순서 {category.sortOrder} · {visibilityLabels[category.visibility]}</p></div><Button variant="secondary" aria-label={`${category.nameKo || '카테고리'} ${snapshot.readOnly ? '보기' : '편집'}`} onClick={() => open('category', category.id)}>{snapshot.readOnly ? '보기' : '편집'}</Button></li>)}</ul> : <p className={styles.empty}>아직 카테고리가 없습니다. 메뉴를 묶을 카테고리부터 추가해 주세요.</p>}
     </section>

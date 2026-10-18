@@ -7,7 +7,8 @@
 .shell h3 { font-size: 1rem; font-weight: 600; }
 .shell a { color: inherit; }
 .shell :is(button, a, input, select, textarea):focus-visible { outline: 2px solid var(--text); outline-offset: 3px; }
-.shell :global(.btn) { min-height: 44px; white-space: normal; font-size: .875rem; }
+.shell :global(.btn) { width: auto; max-width: 100%; min-height: 44px; white-space: normal; font-size: .875rem; }
+.shell :global(.btn.full) { width: 100%; }
 .shell :global(.btn.primary) { background: var(--accent-hover); color: var(--bg); }
 .shell :global(.btn.primary):hover { background: color-mix(in srgb, var(--accent-hover) 90%, var(--text)); }
 .shell :global(.banner) { margin: 0 0 24px; font-size: .875rem; line-height: 1.7; }

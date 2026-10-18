@@ -1,10 +1,10 @@
 'use client';
 
-import { useEffect, useRef, useState, type ReactNode } from 'react';
+import { useCallback, useEffect, useRef, useState, useSyncExternalStore, type ReactNode } from 'react';
 import { Button } from '@/components/ui/button';
 import { Notice } from '@/components/ui/notice';
 import type { PartnerCommand, PartnerSnapshot } from '@/lib/partner/contracts';
-import { usePartner } from './partner-provider';
+import { usePartner, type PartnerDraftRecord } from './partner-provider';
 import styles from './partner.module.css';
 
 export type SaveState = { kind: 'idle' | 'pending' | 'reloading' | 'saved' | 'committed-stale' } | { kind: 'error' | 'conflict'; message: string };
@@ -19,44 +19,64 @@ export function SaveStatus({ state, onReload }: { state: SaveState; onReload: ()
 }
 
 /** The baseline (including the exact DB version) travels with the draft. */
-export function usePartnerDraft<T>(initial: T) {
+export function usePartnerDraft<T>(key: string, initial: T) {
   const partner = usePartner();
-  const { setDirty } = partner;
-  const [draft, setDraft] = useState(initial);
-  const [baseline, setBaseline] = useState(initial);
-  const [state, setState] = useState<SaveState>({ kind: 'idle' });
+  const { setDirty, drafts } = partner;
+  const [fallback] = useState<PartnerDraftRecord<T>>(() => ({ token: Symbol(key), draft: initial, baseline: initial, state: { kind: 'idle' } }));
+  const [restored] = useState(() => {
+    const previous = drafts.read<T>(key);
+    return !!previous && (JSON.stringify(previous.draft) !== JSON.stringify(previous.baseline) || ['pending', 'reloading', 'committed-stale'].includes(previous.state.kind));
+  });
+  const getSnapshot = useCallback(() => drafts.read<T>(key) ?? fallback, [drafts, key, fallback]);
+  const record = useSyncExternalStore(drafts.subscribe, getSnapshot, () => fallback);
+  const { draft, baseline, state } = record;
   const busy = useRef(false);
-  const mounted = useRef(true);
   const dirty = JSON.stringify(draft) !== JSON.stringify(baseline);
   const locked = state.kind === 'pending' || state.kind === 'reloading' || state.kind === 'committed-stale';
   const serializedInitial = JSON.stringify(initial);
   useEffect(() => {
-    if (!dirty && !locked) { const next = JSON.parse(serializedInitial) as T; setDraft(next); setBaseline(next); }
-  }, [serializedInitial, dirty, locked]);
+    drafts.setActive(key);
+    if (!drafts.read(key)) drafts.write(key, fallback);
+    return () => drafts.setActive(null);
+  }, [drafts, key, fallback]);
+  useEffect(() => {
+    const current = drafts.read<T>(key);
+    if (current && !dirty && !locked) {
+      const next = JSON.parse(serializedInitial) as T;
+      drafts.write(key, { ...current, draft: next, baseline: next });
+    }
+  }, [serializedInitial, dirty, locked, drafts, key]);
   useEffect(() => { setDirty((dirty && state.kind !== 'committed-stale') || state.kind === 'pending'); return () => setDirty(false); }, [dirty, state.kind, setDirty]);
-  useEffect(() => { mounted.current = true; return () => { mounted.current = false; }; }, []);
-  const replace = (value: T) => { setDraft(value); setBaseline(value); };
-  const submit = async (command: PartnerCommand, next: (snapshot: PartnerSnapshot) => T, onSaved?: () => void) => {
+  const setDraft = (value: T) => drafts.write(key, { ...record, draft: value });
+  const setState = (value: SaveState) => drafts.write(key, { ...record, state: value });
+  const submit = async (command: PartnerCommand, next: (snapshot: PartnerSnapshot) => T) => {
     if (busy.current || locked || partner.snapshot?.readOnly) return;
     busy.current = true;
     setState({ kind: 'pending' });
     const result = await partner.save(command);
     busy.current = false;
-    if (!mounted.current || result.kind === 'cancelled') return;
-    if (result.kind === 'saved') { replace(next(result.snapshot)); setState({ kind: 'saved' }); partner.setDirty(false); onSaved?.(); }
-    else { setState(result); if (result.kind === 'committed-stale') partner.setDirty(false); }
+    if (result.kind === 'cancelled') return;
+    if (result.kind === 'saved') {
+      const value = next(result.snapshot);
+      drafts.complete(key, record.token, { ...record, draft: value, baseline: value, state: { kind: 'saved' } });
+    } else drafts.complete(key, record.token, { ...record, state: result });
   };
   const reload = async (next: (snapshot: PartnerSnapshot) => T) => {
-    if (busy.current || (state.kind !== 'committed-stale' && dirty && !partner.confirmLeave())) return;
+    if (busy.current || (locked && state.kind !== 'committed-stale') || (state.kind !== 'committed-stale' && dirty && !partner.confirmLeave(false))) return;
     busy.current = true;
     setState({ kind: 'reloading' });
     const current = await partner.refresh();
     busy.current = false;
-    if (!mounted.current) return;
-    if (current) { replace(next(current)); setState({ kind: 'idle' }); partner.setDirty(false); }
-    else setState(state.kind === 'committed-stale' ? { kind: 'committed-stale' } : { kind: 'error', message: '최신 정보를 불러오지 못했습니다. 현재 입력은 유지됩니다.' });
+    if (current) {
+      const value = next(current);
+      drafts.complete(key, record.token, { ...record, draft: value, baseline: value, state: { kind: 'idle' } });
+    } else drafts.complete(key, record.token, { ...record, state: state.kind === 'committed-stale' ? { kind: 'committed-stale' } : { kind: 'error', message: '최신 정보를 불러오지 못했습니다. 현재 입력은 유지됩니다.' } });
   };
-  return { draft, setDraft, dirty, locked, state, submit, reload, invalid: (message: string) => setState({ kind: 'error', message }) };
+  return { draft, setDraft, dirty, locked, state, restored, submit, reload, invalid: (message: string) => setState({ kind: 'error', message }) };
+}
+
+export function DraftRecoveryNotice({ restored }: { restored: boolean }) {
+  return restored ? <Notice tone="info" role="status">이전에 열어 둔 편집 내용을 복원했습니다. 입력 내용과 저장 상태를 확인해 주세요. 초안은 가맹점 관리 영역을 벗어나거나 로그아웃하면 지워집니다.</Notice> : null;
 }
 
 export function Field({ label, children, hint }: { label: string; children: ReactNode; hint?: string }) {

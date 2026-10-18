@@ -4,6 +4,7 @@ import { createContext, useCallback, useContext, useEffect, useRef, useState, ty
 import { usePathname } from 'next/navigation';
 import { useAuthUser } from '@/lib/auth/use-auth';
 import type { PartnerCommand, PartnerSnapshot } from '@/lib/partner/contracts';
+import type { SaveState } from './partner-form';
 
 export type SaveResult = { kind: 'saved'; snapshot: PartnerSnapshot } | { kind: 'committed-stale' } | { kind: 'conflict' | 'error'; message: string } | { kind: 'cancelled' };
 type ScopedRequest = { controller: AbortController; isCurrent: () => boolean };
@@ -13,6 +14,8 @@ export class PartnerRequestScope {
   private active = true;
   private read: AbortController | null = null;
   private write: AbortController | null = null;
+  private epoch = 0;
+  private latestRead: Promise<unknown> | null = null;
   activate() { this.active = true; }
   startRead(): ScopedRequest | null {
     if (!this.active) return null;
@@ -20,6 +23,19 @@ export class PartnerRequestScope {
     const controller = new AbortController();
     this.read = controller;
     return { controller, isCurrent: () => this.active && this.read === controller && !controller.signal.aborted };
+  }
+  runRead<T>(operation: (request: ScopedRequest) => Promise<T>, fallback: T): Promise<T> {
+    const request = this.startRead();
+    if (!request) return Promise.resolve(fallback);
+    const epoch = this.epoch;
+    const pending: Promise<T> = Promise.resolve().then(() => operation(request)).then((value) => {
+      if (request.isCurrent()) return value;
+      // Focus/visibility may supersede a manual or post-save read. Its caller
+      // needs the replacement read's result, not a synthetic connection error.
+      return this.active && this.epoch === epoch && this.latestRead && this.latestRead !== pending ? this.latestRead as Promise<T> : fallback;
+    });
+    this.latestRead = pending;
+    return pending;
   }
   startWrite(): ScopedRequest | null {
     if (!this.active || this.write) return null;
@@ -29,19 +45,48 @@ export class PartnerRequestScope {
   }
   finishWrite(request: ScopedRequest) { if (this.write === request.controller) this.write = null; }
   invalidate() {
+    ++this.epoch;
     this.read?.abort();
     this.write?.abort();
     this.read = null;
     this.write = null;
+    this.latestRead = null;
   }
   dispose() { this.active = false; this.invalidate(); }
+}
+
+export type PartnerDraftRecord<T> = { token: symbol; draft: T; baseline: T; state: SaveState };
+export type PartnerEditor = { kind: 'category' | 'menu'; id: string };
+/** Memory only, owned by one authenticated PartnerSession, never browser storage. */
+export class PartnerDraftStore {
+  private records = new Map<string, PartnerDraftRecord<unknown>>();
+  private listeners = new Set<() => void>();
+  private editor: PartnerEditor | null = null;
+  private activeKey: string | null = null;
+  subscribe = (listener: () => void) => { this.listeners.add(listener); return () => { this.listeners.delete(listener); }; };
+  read<T>(key: string): PartnerDraftRecord<T> | undefined { return this.records.get(key) as PartnerDraftRecord<T> | undefined; }
+  write<T>(key: string, value: PartnerDraftRecord<T>) { this.records.set(key, value); this.listeners.forEach((listener) => listener()); }
+  complete<T>(key: string, token: symbol, value: PartnerDraftRecord<T>): boolean {
+    if (this.records.get(key)?.token !== token) return false;
+    this.write(key, value);
+    return true;
+  }
+  discard(key: string) { this.records.delete(key); this.listeners.forEach((listener) => listener()); }
+  setActive(key: string | null) { this.activeKey = key; }
+  discardActive() { if (this.activeKey) this.discard(this.activeKey); }
+  hasUnsavedChanges() {
+    return [...this.records.values()].some((record) => record.state.kind === 'pending' || (record.state.kind !== 'committed-stale' && JSON.stringify(record.draft) !== JSON.stringify(record.baseline)));
+  }
+  getEditor() { return this.editor; }
+  setEditor(editor: PartnerEditor | null) { this.editor = editor; }
+  clear() { this.records.clear(); this.editor = null; this.activeKey = null; this.listeners.forEach((listener) => listener()); }
 }
 
 type Access = 'loading' | 'ready' | 'signed-out' | 'unassigned' | 'unavailable';
 type PartnerContextValue = {
   snapshot: PartnerSnapshot | null; access: Access; refreshing: boolean; stale: boolean;
   refresh: () => Promise<PartnerSnapshot | null>; save: (command: PartnerCommand) => Promise<SaveResult>;
-  setDirty: (dirty: boolean) => void; confirmLeave: () => boolean;
+  setDirty: (dirty: boolean) => void; confirmLeave: (discard?: boolean) => boolean; drafts: PartnerDraftStore;
 };
 const PartnerContext = createContext<PartnerContextValue | null>(null);
 export function usePartner() {
@@ -61,45 +106,62 @@ function PartnerSession({ children, authenticated, checking }: { children: React
   const [refreshing, setRefreshing] = useState(false);
   const [stale, setStale] = useState(false);
   const [requests] = useState(() => new PartnerRequestScope());
+  const [drafts] = useState(() => new PartnerDraftStore());
+  const merchantId = useRef<string | null>(null);
   const dirty = useRef(false);
   const setDirty = useCallback((value: boolean) => { dirty.current = value; }, []);
-  const confirmLeave = useCallback(() => !dirty.current || window.confirm('저장하지 않은 변경사항이 있습니다. 변경사항을 버리고 이동할까요?'), []);
+  const confirmLeave = useCallback((discard = true) => {
+    if (!dirty.current) return true;
+    if (!window.confirm('저장하지 않은 변경사항이 있습니다. 변경사항을 버릴까요?')) return false;
+    if (discard) { drafts.discardActive(); dirty.current = false; }
+    return true;
+  }, [drafts]);
   const clearAccess = useCallback((status: number) => {
     requests.invalidate();
+    drafts.clear();
+    merchantId.current = null;
     setSnapshot(null);
     setStale(false);
     setRefreshing(false);
     dirty.current = false;
     setAccess(status === 401 ? 'signed-out' : 'unassigned');
-  }, [requests]);
+  }, [requests, drafts]);
   const refresh = useCallback(async (): Promise<PartnerSnapshot | null> => {
     if (!authenticated) return null;
-    const request = requests.startRead();
-    if (!request) return null;
-    setRefreshing(true);
-    try {
-      const response = await fetch('/api/partner', { cache: 'no-store', credentials: 'same-origin', signal: request.controller.signal });
-      const body = await response.json();
+    return requests.runRead(async (request): Promise<PartnerSnapshot | null> => {
       if (!request.isCurrent()) return null;
-      if (response.status === 401 || response.status === 403) { clearAccess(response.status); return null; }
-      if (!response.ok || body?.ok !== true || !body.snapshot) throw new Error('unavailable');
-      setSnapshot(body.snapshot);
-      setAccess('ready');
-      setStale(false);
-      return body.snapshot;
-    } catch {
-      if (!request.isCurrent()) return null;
-      setStale(true);
-      setAccess((current) => current === 'ready' ? 'ready' : 'unavailable');
-      return null;
-    } finally {
-      if (request.isCurrent()) setRefreshing(false);
-    }
-  }, [authenticated, clearAccess, requests]);
+      setRefreshing(true);
+      try {
+        const response = await fetch('/api/partner', { cache: 'no-store', credentials: 'same-origin', signal: request.controller.signal });
+        const body = await response.json();
+        if (!request.isCurrent()) return null;
+        if (response.status === 401 || response.status === 403) { clearAccess(response.status); return null; }
+        if (!response.ok || body?.ok !== true || !body.snapshot) throw new Error('unavailable');
+        if (merchantId.current && merchantId.current !== body.snapshot.merchant.id) {
+          requests.invalidate();
+          drafts.clear();
+          dirty.current = false;
+          setRefreshing(false);
+        }
+        merchantId.current = body.snapshot.merchant.id;
+        setSnapshot(body.snapshot);
+        setAccess('ready');
+        setStale(false);
+        return body.snapshot;
+      } catch {
+        if (!request.isCurrent()) return null;
+        setStale(true);
+        setAccess((current) => current === 'ready' ? 'ready' : 'unavailable');
+        return null;
+      } finally {
+        if (request.isCurrent()) setRefreshing(false);
+      }
+    }, null);
+  }, [authenticated, clearAccess, requests, drafts]);
   useEffect(() => {
     requests.activate();
-    return () => requests.dispose();
-  }, [requests]);
+    return () => { requests.dispose(); drafts.clear(); };
+  }, [requests, drafts]);
   useEffect(() => { void refresh(); }, [pathname, refresh]);
   useEffect(() => {
     const focus = () => { if (document.visibilityState === 'visible') void refresh(); };
@@ -108,18 +170,24 @@ function PartnerSession({ children, authenticated, checking }: { children: React
     return () => { window.removeEventListener('focus', focus); document.removeEventListener('visibilitychange', focus); };
   }, [refresh]);
   useEffect(() => {
-    const unload = (event: BeforeUnloadEvent) => { if (dirty.current) { event.preventDefault(); event.returnValue = ''; } };
+    const unload = (event: BeforeUnloadEvent) => { if (dirty.current || drafts.hasUnsavedChanges()) { event.preventDefault(); event.returnValue = ''; } };
     const click = (event: MouseEvent) => {
       const anchor = event.target instanceof Element ? event.target.closest('a[href]') : null;
       if (!(anchor instanceof HTMLAnchorElement) || anchor.target === '_blank' || event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return;
       const destination = new URL(anchor.href, window.location.href);
       if (destination.pathname === window.location.pathname && destination.search === window.location.search) return;
-      if (!confirmLeave()) { event.preventDefault(); event.stopPropagation(); }
+      const leavesWorkspace = destination.origin !== window.location.origin || (destination.pathname !== '/partner' && !destination.pathname.startsWith('/partner/'));
+      let allowed = true;
+      if (leavesWorkspace && (dirty.current || drafts.hasUnsavedChanges())) {
+        allowed = window.confirm('가맹점 관리를 나가면 저장하지 않은 초안이 모두 지워집니다. 나갈까요?');
+        if (allowed) { drafts.clear(); dirty.current = false; }
+      } else allowed = confirmLeave();
+      if (!allowed) { event.preventDefault(); event.stopPropagation(); }
     };
     window.addEventListener('beforeunload', unload);
     document.addEventListener('click', click, true);
     return () => { window.removeEventListener('beforeunload', unload); document.removeEventListener('click', click, true); };
-  }, [confirmLeave]);
+  }, [confirmLeave, drafts]);
   const save = useCallback(async (command: PartnerCommand): Promise<SaveResult> => {
     if (!authenticated) return { kind: 'cancelled' };
     const request = requests.startWrite();
@@ -145,5 +213,5 @@ function PartnerSession({ children, authenticated, checking }: { children: React
       return { kind: 'error', message: '서버의 저장 결과를 확인하지 못했습니다. 다시 불러와 저장 여부를 확인해 주세요. 새 항목은 같은 식별자로 재시도됩니다.' };
     } finally { requests.finishWrite(request); }
   }, [authenticated, clearAccess, refresh, requests]);
-  return <PartnerContext.Provider value={{ snapshot, access, refreshing, stale, refresh, save, setDirty, confirmLeave }}>{children}</PartnerContext.Provider>;
+  return <PartnerContext.Provider value={{ snapshot, access, refreshing, stale, refresh, save, setDirty, confirmLeave, drafts }}>{children}</PartnerContext.Provider>;
 }

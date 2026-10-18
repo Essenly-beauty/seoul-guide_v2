@@ -5,7 +5,7 @@ import { Notice } from '@/components/ui/notice';
 import type { BusinessType, PartnerSnapshot, SettingsValues } from '@/lib/partner/contracts';
 import { settingsFormValues } from '@/lib/partner/form-values';
 import { usePartner } from './partner-provider';
-import { Field, FormActions, usePartnerDraft } from './partner-form';
+import { DraftRecoveryNotice, Field, FormActions, usePartnerDraft } from './partner-form';
 import { merchantStatus } from './partner-dashboard';
 import styles from './partner.module.css';
 
@@ -24,9 +24,10 @@ export function PartnerSettings() {
 }
 function SettingsEditor({ snapshot }: { snapshot: PartnerSnapshot }) {
   const from = (current: PartnerSnapshot) => { const { displayName, contactEmail, contactPhone, address, businessTypes, updatedAt } = current.merchant; return { values: { displayName, contactEmail, contactPhone, address, businessTypes }, updatedAt }; };
-  const form = usePartnerDraft(from(snapshot));
+  const form = usePartnerDraft('settings', from(snapshot));
   return <>
     <header className={styles.pageHeader}><p className={styles.eyebrow}>YOUR BUSINESS</p><h1>매장 정보</h1><p className={styles.muted}>고객과 운영자가 매장을 확인하고 연락할 수 있는 정보입니다.</p></header>
+    <DraftRecoveryNotice restored={form.restored} />
     <form onSubmit={(event) => { event.preventDefault(); const parsed = settingsFormValues(form.draft.values); if (!parsed.ok) { form.invalid(parsed.error); return; } void form.submit({ kind: 'settings', expectedUpdatedAt: form.draft.updatedAt, values: parsed.values }, from); }}>
       <SettingsFields value={form.draft.values} onChange={(values) => form.setDraft({ ...form.draft, values })} disabled={snapshot.readOnly || form.locked} />
       <FormActions state={form.state} disabled={snapshot.readOnly || form.locked} dirty={form.dirty} onReload={() => void form.reload(from)} />

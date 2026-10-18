@@ -5,7 +5,7 @@ import { Notice } from '@/components/ui/notice';
 import type { PartnerSnapshot } from '@/lib/partner/contracts';
 import { scheduleDraft, scheduleFormValues, type ScheduleDraft } from '@/lib/partner/form-values';
 import { usePartner } from './partner-provider';
-import { FormActions, usePartnerDraft } from './partner-form';
+import { DraftRecoveryNotice, FormActions, usePartnerDraft } from './partner-form';
 import styles from './partner.module.css';
 
 const weekdays = ['일요일', '월요일', '화요일', '수요일', '목요일', '금요일', '토요일'];
@@ -42,10 +42,11 @@ export function PartnerAvailability() {
 }
 function AvailabilityEditor({ snapshot }: { snapshot: PartnerSnapshot }) {
   const from = (current: PartnerSnapshot) => ({ values: scheduleDraft(current.schedule), updatedAt: current.schedule?.updatedAt ?? null });
-  const form = usePartnerDraft(from(snapshot));
+  const form = usePartnerDraft('schedule', from(snapshot));
   return <>
     <header className={styles.pageHeader}><p className={styles.eyebrow}>BUSINESS HOURS</p><h1>영업 일정</h1><p className={styles.muted}>매장의 한 주와 쉬어가는 시간을 정리하세요.</p></header>
     <Notice tone="info">모든 메뉴에 공통으로 적용하는 매장 일정입니다. 메뉴별 수용 인원이나 실제 예약 가능한 시간표가 아닙니다. 고객 예약은 아직 연결되지 않았습니다.</Notice>
+    <DraftRecoveryNotice restored={form.restored} />
     <form onSubmit={(event) => { event.preventDefault(); const parsed = scheduleFormValues(form.draft.values); if (!parsed.ok) { form.invalid(parsed.error); return; } const version = form.draft.updatedAt ? { mode: 'update' as const, expectedUpdatedAt: form.draft.updatedAt } : { mode: 'create' as const }; void form.submit({ kind: 'schedule', ...version, values: parsed.values }, from); }}>
       <ScheduleFields value={form.draft.values} onChange={(values) => form.setDraft({ ...form.draft, values })} disabled={snapshot.readOnly || form.locked} />
       <FormActions state={form.state} disabled={snapshot.readOnly || form.locked} dirty={form.dirty} onReload={() => void form.reload(from)} />
