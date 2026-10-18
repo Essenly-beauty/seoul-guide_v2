@@ -174,6 +174,9 @@ function StationCombobox({
 
   const finishEditing = () => {
     if (selectedId || !query.trim()) {
+      // Leaving an empty field commits its removal; dismissing its search
+      // instead restores the station saved before the query was cleared.
+      if (!selectedId) lastSelectedRef.current = null;
       setSelectionError(false);
       setOpen(false);
       return;
@@ -251,7 +254,7 @@ function StationCombobox({
             onClick={() => {
               setQuery("");
               setSelectionError(false);
-              lastSelectedRef.current = null;
+              preserveQueryRef.current = Boolean(selectedId);
               onSelect(null);
               setOpen(true);
               requestAnimationFrame(() => inputRef?.current?.focus());

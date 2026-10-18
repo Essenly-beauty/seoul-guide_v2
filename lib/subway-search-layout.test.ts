@@ -99,6 +99,22 @@ describe("subway endpoint search layout", () => {
     expect(cssSource).toMatch(/\.station-search-dismiss\s*\{[^}]*min-height:\s*44px;/);
   });
 
+  it("keeps the chosen station recoverable after Clear and a partial search", () => {
+    const start = controllerSource.indexOf('className="station-search-clear"');
+    const clear = controllerSource.slice(start, controllerSource.indexOf("</button>", start));
+    // Clear empties the live selection, but must preserve both the rollback
+    // station and the query through the ensuing selectedId=null effect.
+    expect(clear).toContain("onSelect(null)");
+    expect(clear).not.toContain("lastSelectedRef.current = null");
+    expect(clear).toContain("preserveQueryRef.current = Boolean(selectedId)");
+  });
+
+  it("allows an intentionally emptied endpoint to remain empty after leaving the field", () => {
+    const start = controllerSource.indexOf("const finishEditing =");
+    const finish = controllerSource.slice(start, controllerSource.indexOf("const exact =", start));
+    expect(finish).toContain("if (!selectedId) lastSelectedRef.current = null");
+  });
+
   it("inserts via stations into the connected field and exposes explicit order controls", () => {
     expect(controllerSource).toContain('className="subway-waypoint-row"');
     expect(controllerSource).toContain('aria-label={`Via ${index + 1}:');
