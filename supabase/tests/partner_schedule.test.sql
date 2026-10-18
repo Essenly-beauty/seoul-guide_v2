@@ -44,7 +44,11 @@ insert into public.merchant_memberships(merchant_id,user_id) values ('d0000000-0
 set local role authenticated;
 set local request.jwt.claim.sub='d0000000-0000-0000-0000-000000000001';
 select results_eq($$insert into public.merchant_schedules(merchant_id) values ('d0000000-0000-0000-0000-000000000002') returning hours::text$$,array['[]'],'owner creates empty aggregate returning');
-select lives_ok($$update public.merchant_schedules set hours='[{"weekday":0,"startMinute":0,"endMinute":120},{"weekday":0,"startMinute":180,"endMinute":240}]',breaks='[{"weekday":0,"startMinute":30,"endMinute":60}]',blocks='[{"date":"2028-02-29","startMinute":0,"endMinute":1440}]'$$,'owner writes valid multi interval aggregate');
+select results_eq(
+ $$update public.merchant_schedules set hours='[{"weekday":0,"startMinute":0,"endMinute":120},{"weekday":0,"startMinute":180,"endMinute":240}]',breaks='[{"weekday":0,"startMinute":30,"endMinute":60}]',blocks='[{"date":"2028-02-29","startMinute":0,"endMinute":1440}]' returning hours,breaks,blocks$$,
+ $$values ('[{"weekday":0,"startMinute":0,"endMinute":120},{"weekday":0,"startMinute":180,"endMinute":240}]'::jsonb,'[{"weekday":0,"startMinute":30,"endMinute":60}]'::jsonb,'[{"date":"2028-02-29","startMinute":0,"endMinute":1440}]'::jsonb)$$,
+ 'owner update returns stored multi interval aggregate'
+);
 select throws_ok($$update public.merchant_schedules set breaks='[{"weekday":0,"startMinute":100,"endMinute":200}]'$$,'23514',null,'stored CHECK rejects invalid owner update');
 select is((select breaks::text from public.merchant_schedules),'[{"weekday": 0, "endMinute": 60, "startMinute": 30}]','failed update preserves stored aggregate');
 select throws_ok($$update public.merchant_schedules set merchant_id=gen_random_uuid()$$,'42501',null,'schedule identifier cannot transfer');

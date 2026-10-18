@@ -40,6 +40,7 @@ select results_eq($$update public.merchant_services set price_krw=10000,duration
 select is_empty($$select id from public.merchants where id='b0000000-0000-0000-0000-000000000002'$$,'cross tenant read empty');
 select is_empty($$update public.merchants set display_name='stolen' where id='b0000000-0000-0000-0000-000000000002' returning id$$,'cross tenant update empty');
 select throws_ok($$insert into public.merchant_categories(merchant_id) values ('b0000000-0000-0000-0000-000000000002')$$,'42501',null,'cross tenant insert denied');
+select is_empty($$select id from public.merchant_categories where id='b0000000-0000-0000-0000-000000000003'$$,'A cannot read B category');
 select is_empty($$select id from public.merchant_services where merchant_id='b0000000-0000-0000-0000-000000000002'$$,'A cannot read B service');
 select is_empty($$select merchant_id from public.merchant_schedules where merchant_id='b0000000-0000-0000-0000-000000000002'$$,'A cannot read B schedule');
 select is_empty($$update public.merchant_services set name_en='stolen' where merchant_id='b0000000-0000-0000-0000-000000000002' returning id$$,'A cannot update B service');
@@ -107,6 +108,7 @@ update public.merchants set status='closed' where id='a0000000-0000-0000-0000-00
 set local role authenticated;
 set local request.jwt.claim.sub='a0000000-0000-0000-0000-000000000001';
 select is_empty($$update public.merchants set display_name='blocked' returning id$$,'closed merchant update denied');
+select results_eq($$select display_name from public.merchants$$,array['A changed'],'closed owner can still read merchant');
 set local role service_role;
 set local request.jwt.claim.sub='';
 select lives_ok($$update public.merchant_memberships set revoked_at=now() where merchant_id='a0000000-0000-0000-0000-000000000002'$$,'trusted service role revokes membership and audits');
