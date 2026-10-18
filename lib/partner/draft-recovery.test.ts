@@ -53,6 +53,35 @@ describe('session-scoped partner draft recovery', () => {
     expect(store.complete('settings', old.token, old)).toBe(false);
     expect(store.read('settings')).toBe(replacement);
   });
+  it('tracks every mounted form and discards all active edits without touching inactive drafts', () => {
+    const store = new PartnerDraftStore();
+    store.write('schedule', entry());
+    store.write('reservationRules', entry());
+    store.write('dateOverrides', entry());
+    store.write('menu:inactive', entry());
+    store.setActive('schedule');
+    store.setActive('reservationRules');
+    store.setActive('dateOverrides');
+    expect(store.hasActiveUnsavedChanges()).toBe(true);
+    store.discardActive();
+    expect(store.read('schedule')).toBeUndefined();
+    expect(store.read('reservationRules')).toBeUndefined();
+    expect(store.read('dateOverrides')).toBeUndefined();
+    expect(store.read('menu:inactive')).toBeDefined();
+    expect(store.hasActiveUnsavedChanges()).toBe(false);
+  });
+  it('unmounting one form does not mark another mounted form inactive', () => {
+    const store = new PartnerDraftStore();
+    store.write('schedule', entry());
+    store.write('dateOverrides', entry());
+    store.setActive('schedule');
+    store.setActive('dateOverrides');
+    store.setActive(null, 'schedule');
+    expect(store.hasActiveUnsavedChanges()).toBe(true);
+    store.discardActive();
+    expect(store.read('schedule')).toBeDefined();
+    expect(store.read('dateOverrides')).toBeUndefined();
+  });
   it('clears all private draft/editor state on access loss or session teardown', () => {
     const store = new PartnerDraftStore();
     const record = entry();

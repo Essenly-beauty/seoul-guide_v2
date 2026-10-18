@@ -3,7 +3,7 @@ import { load } from 'cheerio';
 import { describe, expect, it } from 'vitest';
 import { PartnerDashboardView } from '@/components/partner/partner-dashboard';
 import { CategoryFields, MenuFields } from '@/components/partner/partner-services';
-import { ScheduleFields } from '@/components/partner/partner-availability';
+import { ScheduleFields, ReservationRulesFields, DateOverridesFields } from '@/components/partner/partner-availability';
 import { PartnerSettingsView } from '@/components/partner/partner-settings';
 import { SaveStatus } from '@/components/partner/partner-form';
 import type { PartnerSnapshot } from './contracts';
@@ -63,6 +63,27 @@ describe('merchant admin actual markup', () => {
     expect($('input[aria-label="영업시간 1 시작 시간"]').length).toBe(1);
     expect($('input[aria-label="날짜별 휴무 1 날짜"]').length).toBe(1);
     expect($('button:not([disabled])').length).toBe(0);
+  });
+  it('renders a blank reservation policy without fictional defaults and explains the two modes', () => {
+    const $ = render(<ReservationRulesFields value={{ mode: 'shop', capacity: '', startDate: '', endDate: '', minimumLeadMinutes: '', slotIntervalMinutes: '' }} onChange={() => {}} disabled />);
+    expect($('select[name="mode"] option').length).toBe(2);
+    expect($.text()).toContain('담당자 선택형');
+    expect($.text()).toContain('매장 전체 동시 수용');
+    expect($.text()).toContain('Asia/Seoul');
+    for (const field of ['capacity', 'startDate', 'endDate', 'minimumLeadMinutes', 'slotIntervalMinutes']) expect($(`input[name="${field}"]`).val()).toBe('');
+    expect($('fieldset[disabled]').length).toBe(1);
+  });
+  it('renders special-date closure and opening controls as a separate accessible form section', () => {
+    const $ = render(<DateOverridesFields value={[{ date: '2026-11-05', closed: false, hours: [{ start: '09:00', end: '18:00' }], breaks: [] }, { date: '2026-11-06', closed: true, hours: [], breaks: [] }]} onChange={() => {}} disabled />);
+    expect($.text()).toContain('주간 영업시간과 휴게시간을 대체');
+    expect($.text()).toContain('날짜별 차단 시간');
+    expect($('input[aria-label="특별 영업일 1 날짜"]').val()).toBe('2026-11-05');
+    expect($('input[aria-label="특별 영업일 1 시작 시간 1"]').length).toBe(1);
+    expect($('button:not([disabled])').length).toBe(0);
+    expect($('fieldset[disabled]').length).toBe(1);
+    const empty = render(<DateOverridesFields value={[]} onChange={() => {}} disabled={false} />);
+    expect(empty.text()).toContain('특별 영업일이 아직 없습니다');
+    expect(empty.text()).not.toContain('예약 0건');
   });
   it('distinguishes committed data from a failed reload and exposes conflict recovery', () => {
     const stale = render(<SaveStatus state={{ kind: 'committed-stale' }} onReload={() => {}} />);

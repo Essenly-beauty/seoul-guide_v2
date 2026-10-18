@@ -4,6 +4,7 @@ import { useCallback, useEffect, useRef, useState, useSyncExternalStore, type Re
 import { Button } from '@/components/ui/button';
 import { Notice } from '@/components/ui/notice';
 import type { PartnerCommand, PartnerSnapshot } from '@/lib/partner/contracts';
+import type { ReservationCommand } from '@/lib/partner/reservation-commands';
 import { usePartner, type PartnerDraftRecord } from './partner-provider';
 import styles from './partner.module.css';
 
@@ -21,7 +22,7 @@ export function SaveStatus({ state, onReload }: { state: SaveState; onReload: ()
 /** The baseline (including the exact DB version) travels with the draft. */
 export function usePartnerDraft<T>(key: string, initial: T) {
   const partner = usePartner();
-  const { setDirty, drafts } = partner;
+  const { drafts } = partner;
   const [fallback] = useState<PartnerDraftRecord<T>>(() => ({ token: Symbol(key), draft: initial, baseline: initial, state: { kind: 'idle' } }));
   const [restored] = useState(() => {
     const previous = drafts.read<T>(key);
@@ -37,7 +38,7 @@ export function usePartnerDraft<T>(key: string, initial: T) {
   useEffect(() => {
     drafts.setActive(key);
     if (!drafts.read(key)) drafts.write(key, fallback);
-    return () => drafts.setActive(null);
+    return () => drafts.setActive(null, key);
   }, [drafts, key, fallback]);
   useEffect(() => {
     const current = drafts.read<T>(key);
@@ -46,10 +47,9 @@ export function usePartnerDraft<T>(key: string, initial: T) {
       drafts.write(key, { ...current, draft: next, baseline: next });
     }
   }, [serializedInitial, dirty, locked, drafts, key]);
-  useEffect(() => { setDirty((dirty && state.kind !== 'committed-stale') || state.kind === 'pending'); return () => setDirty(false); }, [dirty, state.kind, setDirty]);
   const setDraft = (value: T) => drafts.write(key, { ...record, draft: value });
   const setState = (value: SaveState) => drafts.write(key, { ...record, state: value });
-  const submit = async (command: PartnerCommand, next: (snapshot: PartnerSnapshot) => T) => {
+  const submit = async (command: PartnerCommand | ReservationCommand, next: (snapshot: PartnerSnapshot) => T) => {
     if (busy.current || locked || partner.snapshot?.readOnly) return;
     busy.current = true;
     setState({ kind: 'pending' });

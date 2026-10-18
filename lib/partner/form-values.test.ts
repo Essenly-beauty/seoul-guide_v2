@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
-import { parseMinute, formatMinute, parseOptionalInteger, categoryFormValues, menuFormValues, scheduleFormValues } from './form-values';
+import { parseMinute, formatMinute, parseOptionalInteger, categoryFormValues, menuFormValues, scheduleFormValues, reservationRulesDraft, reservationRulesFormValues, dateOverridesDraft, dateOverridesFormValues } from './form-values';
+import { reservationJsonbBytes } from './reservation-jsonb';
 
 describe('partner form conversions', () => {
   it('keeps blank, fractional and unsafe integers distinct from zero', () => {
@@ -39,5 +40,52 @@ describe('partner form conversions', () => {
     expect(scheduleFormValues({ hours: [row], breaks: [{ weekday: '2', start: '12:00', end: '13:00' }], blocks: [] }).ok).toBe(false);
     for (const date of ['', '2026-02-30']) expect(scheduleFormValues({ hours: [], breaks: [], blocks: [{ date, start: '00:00', end: '24:00' }] }).ok).toBe(false);
     expect(scheduleFormValues({ hours: Array(129).fill(row), breaks: [], blocks: [] }).ok).toBe(false);
+  });
+  it('starts reservation rules without invented business defaults and converts explicit inputs', () => {
+    const merchantId = '11111111-1111-4111-8111-111111111111';
+    const blank = reservationRulesDraft(null);
+    expect(blank).toEqual({ mode: 'shop', capacity: '', startDate: '', endDate: '', minimumLeadMinutes: '', slotIntervalMinutes: '' });
+    expect(reservationRulesFormValues(blank, merchantId).ok).toBe(false);
+    const filled = { ...blank, capacity: '2', startDate: '2026-11-01', endDate: '2026-12-31', minimumLeadMinutes: '0', slotIntervalMinutes: '30' };
+    expect(reservationRulesFormValues(filled, merchantId)).toEqual({ ok: true, values: { mode: 'shop', capacity: 2, startDate: '2026-11-01', endDate: '2026-12-31', minimumLeadMinutes: 0, slotIntervalMinutes: 30 } });
+    for (const changed of [{ capacity: '' }, { capacity: '0' }, { capacity: '1.5' }, { capacity: '9007199254740992' }, { startDate: '2026-02-30' }, { endDate: '2026-10-31' }, { minimumLeadMinutes: '' }, { minimumLeadMinutes: '525601' }, { slotIntervalMinutes: '' }, { slotIntervalMinutes: '1441' }]) {
+      expect(reservationRulesFormValues({ ...filled, ...changed }, merchantId).ok).toBe(false);
+    }
+    expect(reservationRulesDraft({ merchantId, ...filled, capacity: 2, minimumLeadMinutes: 0, slotIntervalMinutes: 30, updatedAt: '2026-10-18T00:00:00Z' })).toEqual(filled);
+  });
+  it('converts special opening, breaks, and full closure without losing stored date blocks', () => {
+    const merchantId = '11111111-1111-4111-8111-111111111111';
+    const schedule = { merchantId, hours: [{ weekday: 1, startMinute: 540, endMinute: 1080 }], breaks: [], blocks: [{ date: '2026-11-05', startMinute: 600, endMinute: 660 }] };
+    const draft = [{ date: '2026-11-05', closed: false, hours: [{ start: '09:00', end: '18:00' }], breaks: [{ start: '12:00', end: '13:00' }] }, { date: '2026-11-06', closed: true, hours: [], breaks: [] }];
+    const parsed = dateOverridesFormValues(draft, merchantId, schedule);
+    expect(parsed).toEqual({ ok: true, values: { overrides: [{ date: '2026-11-05', hours: [{ startMinute: 540, endMinute: 1080 }], breaks: [{ startMinute: 720, endMinute: 780 }] }, { date: '2026-11-06', hours: [], breaks: [] }] } });
+    expect(dateOverridesDraft(parsed.ok ? parsed.values.overrides : [])).toEqual(draft);
+    expect(dateOverridesFormValues([{ ...draft[0], closed: true }], merchantId, schedule)).toEqual({ ok: true, values: { overrides: [{ date: '2026-11-05', hours: [], breaks: [] }] } });
+    expect(dateOverridesFormValues([draft[0]], merchantId, { ...schedule, blocks: [{ date: '0000-12-31', startMinute: 0, endMinute: 1440 }] }).ok).toBe(true);
+    for (const changed of [{ date: '2026-02-30' }, { date: '' }, { hours: [{ start: '24:00', end: '24:00' }] }, { hours: [{ start: '09:00', end: '10:00' }], breaks: [{ start: '11:00', end: '12:00' }] }, { hours: [] }]) {
+      expect(dateOverridesFormValues([{ ...draft[0], ...changed }], merchantId, schedule).ok).toBe(false);
+    }
+    expect(dateOverridesFormValues([draft[0], { ...draft[0] }], merchantId, schedule).ok).toBe(false);
+    expect(dateOverridesFormValues(Array(367).fill(draft[1]), merchantId, schedule).ok).toBe(false);
+  });
+  it('checks the PostgreSQL JSONB byte limit against current weekly schedule plus draft overrides', () => {
+    const merchantId = '11111111-1111-4111-8111-111111111111';
+    const intervals = Array.from({ length: 16 }, (_, index) => ({ start: formatMinute(index * 2), end: formatMinute(index * 2 + 1) }));
+    const draft = Array.from({ length: 366 }, (_, index) => {
+      const date = new Date(Date.UTC(2026, 0, 1 + index)).toISOString().slice(0, 10);
+      return { date, closed: false, hours: intervals, breaks: [] };
+    });
+    const blocks = Array.from({ length: 512 }, (_, index) => ({ date: new Date(Date.UTC(2026, 0, 1 + index)).toISOString().slice(0, 10), startMinute: 0, endMinute: 1 }));
+    const noBlocks = { merchantId, hours: [], breaks: [], blocks: [] };
+    const withBlocks = { ...noBlocks, blocks };
+    const alone = dateOverridesFormValues(draft, merchantId, noBlocks);
+    expect(alone.ok).toBe(true);
+    if (!alone.ok) return;
+    expect(reservationJsonbBytes({ ...noBlocks, overrides: alone.values.overrides })).toBeLessThanOrEqual(262144);
+    expect(reservationJsonbBytes({ ...withBlocks, overrides: alone.values.overrides })).toBeGreaterThan(262144);
+    const combined = dateOverridesFormValues(draft, merchantId, withBlocks);
+    expect(combined).toEqual({ ok: false, error: '전체 일정과 특별 영업일의 저장 크기가 256KB를 넘습니다. 기간을 줄여 주세요.' });
+    const weekly = { hours: [], breaks: [], blocks: blocks.map(({ date }) => ({ date, start: '00:00', end: '00:01' })) };
+    expect(scheduleFormValues(weekly, alone.values.overrides)).toEqual(combined);
   });
 });

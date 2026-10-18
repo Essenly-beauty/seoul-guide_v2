@@ -63,7 +63,7 @@ export class PartnerDraftStore {
   private records = new Map<string, PartnerDraftRecord<unknown>>();
   private listeners = new Set<() => void>();
   private editor: PartnerEditor | null = null;
-  private activeKey: string | null = null;
+  private activeKeys = new Set<string>();
   subscribe = (listener: () => void) => { this.listeners.add(listener); return () => { this.listeners.delete(listener); }; };
   read<T>(key: string): PartnerDraftRecord<T> | undefined { return this.records.get(key) as PartnerDraftRecord<T> | undefined; }
   write<T>(key: string, value: PartnerDraftRecord<T>) { this.records.set(key, value); this.listeners.forEach((listener) => listener()); }
@@ -73,21 +73,29 @@ export class PartnerDraftStore {
     return true;
   }
   discard(key: string) { this.records.delete(key); this.listeners.forEach((listener) => listener()); }
-  setActive(key: string | null) { this.activeKey = key; }
-  discardActive() { if (this.activeKey) this.discard(this.activeKey); }
+  setActive(key: string | null, inactiveKey?: string) {
+    if (key) this.activeKeys.add(key);
+    else if (inactiveKey) this.activeKeys.delete(inactiveKey);
+    else this.activeKeys.clear();
+  }
+  discardActive() { for (const key of this.activeKeys) this.discard(key); }
+  hasActiveUnsavedChanges() { return [...this.activeKeys].some((key) => {
+    const record = this.records.get(key);
+    return record && (record.state.kind === 'pending' || (record.state.kind !== 'committed-stale' && JSON.stringify(record.draft) !== JSON.stringify(record.baseline)));
+  }); }
   hasUnsavedChanges() {
     return [...this.records.values()].some((record) => record.state.kind === 'pending' || (record.state.kind !== 'committed-stale' && JSON.stringify(record.draft) !== JSON.stringify(record.baseline)));
   }
   getEditor() { return this.editor; }
   setEditor(editor: PartnerEditor | null) { this.editor = editor; }
-  clear() { this.records.clear(); this.editor = null; this.activeKey = null; this.listeners.forEach((listener) => listener()); }
+  clear() { this.records.clear(); this.editor = null; this.activeKeys.clear(); this.listeners.forEach((listener) => listener()); }
 }
 
 type Access = 'loading' | 'ready' | 'signed-out' | 'unassigned' | 'unavailable';
 type PartnerContextValue = {
   snapshot: PartnerSnapshot | null; access: Access; refreshing: boolean; stale: boolean;
   refresh: () => Promise<PartnerSnapshot | null>; save: (command: PartnerCommand | ReservationCommand) => Promise<SaveResult>;
-  setDirty: (dirty: boolean) => void; confirmLeave: (discard?: boolean) => boolean; drafts: PartnerDraftStore;
+  confirmLeave: (discard?: boolean) => boolean; drafts: PartnerDraftStore;
 };
 const PartnerContext = createContext<PartnerContextValue | null>(null);
 export function usePartner() {
@@ -109,12 +117,10 @@ function PartnerSession({ children, authenticated, checking }: { children: React
   const [requests] = useState(() => new PartnerRequestScope());
   const [drafts] = useState(() => new PartnerDraftStore());
   const merchantId = useRef<string | null>(null);
-  const dirty = useRef(false);
-  const setDirty = useCallback((value: boolean) => { dirty.current = value; }, []);
   const confirmLeave = useCallback((discard = true) => {
-    if (!dirty.current) return true;
+    if (!drafts.hasActiveUnsavedChanges()) return true;
     if (!window.confirm('저장하지 않은 변경사항이 있습니다. 변경사항을 버릴까요?')) return false;
-    if (discard) { drafts.discardActive(); dirty.current = false; }
+    if (discard) drafts.discardActive();
     return true;
   }, [drafts]);
   const clearAccess = useCallback((status: number) => {
@@ -124,7 +130,6 @@ function PartnerSession({ children, authenticated, checking }: { children: React
     setSnapshot(null);
     setStale(false);
     setRefreshing(false);
-    dirty.current = false;
     setAccess(status === 401 ? 'signed-out' : 'unassigned');
   }, [requests, drafts]);
   const refresh = useCallback(async (): Promise<PartnerSnapshot | null> => {
@@ -141,7 +146,6 @@ function PartnerSession({ children, authenticated, checking }: { children: React
         if (merchantId.current && merchantId.current !== body.snapshot.merchant.id) {
           requests.invalidate();
           drafts.clear();
-          dirty.current = false;
           setRefreshing(false);
         }
         merchantId.current = body.snapshot.merchant.id;
@@ -171,7 +175,7 @@ function PartnerSession({ children, authenticated, checking }: { children: React
     return () => { window.removeEventListener('focus', focus); document.removeEventListener('visibilitychange', focus); };
   }, [refresh]);
   useEffect(() => {
-    const unload = (event: BeforeUnloadEvent) => { if (dirty.current || drafts.hasUnsavedChanges()) { event.preventDefault(); event.returnValue = ''; } };
+    const unload = (event: BeforeUnloadEvent) => { if (drafts.hasUnsavedChanges()) { event.preventDefault(); event.returnValue = ''; } };
     const click = (event: MouseEvent) => {
       const anchor = event.target instanceof Element ? event.target.closest('a[href]') : null;
       if (!(anchor instanceof HTMLAnchorElement) || anchor.target === '_blank' || event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return;
@@ -179,9 +183,9 @@ function PartnerSession({ children, authenticated, checking }: { children: React
       if (destination.pathname === window.location.pathname && destination.search === window.location.search) return;
       const leavesWorkspace = destination.origin !== window.location.origin || (destination.pathname !== '/partner' && !destination.pathname.startsWith('/partner/'));
       let allowed = true;
-      if (leavesWorkspace && (dirty.current || drafts.hasUnsavedChanges())) {
+      if (leavesWorkspace && drafts.hasUnsavedChanges()) {
         allowed = window.confirm('가맹점 관리를 나가면 저장하지 않은 초안이 모두 지워집니다. 나갈까요?');
-        if (allowed) { drafts.clear(); dirty.current = false; }
+        if (allowed) drafts.clear();
       } else allowed = confirmLeave();
       if (!allowed) { event.preventDefault(); event.stopPropagation(); }
     };
@@ -214,5 +218,5 @@ function PartnerSession({ children, authenticated, checking }: { children: React
       return { kind: 'error', message: '서버의 저장 결과를 확인하지 못했습니다. 다시 불러와 저장 여부를 확인해 주세요. 새 항목은 같은 식별자로 재시도됩니다.' };
     } finally { requests.finishWrite(request); }
   }, [authenticated, clearAccess, refresh, requests]);
-  return <PartnerContext.Provider value={{ snapshot, access, refreshing, stale, refresh, save, setDirty, confirmLeave, drafts }}>{children}</PartnerContext.Provider>;
+  return <PartnerContext.Provider value={{ snapshot, access, refreshing, stale, refresh, save, confirmLeave, drafts }}>{children}</PartnerContext.Provider>;
 }

@@ -51,7 +51,7 @@
 .fields { display: grid; gap: 20px; min-width: 0; margin: 0; padding: 0; border: 0; }
 .fields legend { font-weight: 600; margin-bottom: 16px; }
 .field { display: flex; flex-direction: column; gap: 8px; min-width: 0; color: var(--text); font-size: .875rem; font-weight: 500; }
-.field input, .field select, .field textarea, .scheduleRow input, .scheduleRow select { width: 100%; min-width: 0; min-height: 48px; border: 1px solid var(--dim); background: var(--surface); color: var(--text); border-radius: var(--r-sm); font: 1rem var(--sans); padding: 10px 12px; }
+.field input, .field select, .field textarea, .scheduleRow input, .scheduleRow select, .specialRow input { width: 100%; min-width: 0; min-height: 48px; border: 1px solid var(--dim); background: var(--surface); color: var(--text); border-radius: var(--r-sm); font: 1rem var(--sans); padding: 10px 12px; }
 .field textarea { min-height: 112px; resize: vertical; line-height: 1.65; }
 .field small, .hint { font-size: .75rem; font-weight: 400; color: var(--muted); line-height: 1.7; }
 .fields:disabled input, .fields:disabled select, .fields:disabled textarea { background: var(--surface-hover); color: var(--muted); cursor: not-allowed; }
@@ -73,10 +73,20 @@
 .scheduleRow label { display: flex; flex-direction: column; gap: 6px; min-width: 0; font-size: .75rem; }
 .scheduleRow button { justify-self: start; }
 .scheduleSection > button { margin-top: 16px; }
+.availabilitySection { margin: 40px 0 56px; min-width: 0; }
+.availabilitySection > .muted { max-width: 62ch; }
+.availabilitySection .editor { margin-top: 20px; }
+.specialDay { min-width: 0; padding: 24px 0; border-top: 1px solid var(--border); }
+.specialDay > .sectionHeading { padding-bottom: 12px; }
+.specialClosure { display: inline-flex; align-items: center; gap: 12px; min-height: 44px; margin: 16px 0 0; font-size: .875rem; font-weight: 600; }
+.specialClosure input { width: 20px; height: 20px; accent-color: var(--accent-hover); }
+.specialRow { display: grid; gap: 12px; padding: 16px 0; border-bottom: 1px solid var(--border); }
+.specialRow label { display: flex; flex-direction: column; gap: 6px; min-width: 0; font-size: .75rem; }
+.specialRow button { justify-self: start; }
 .gate { padding: 48px 0; max-width: 600px; }
 .gate p:not(.eyebrow) { margin: 24px 0; color: var(--muted); }
 .skip { position: absolute; top: 0; left: 16px; padding: 12px; background: var(--surface); transform: translateY(-150%); z-index: 5; }
 .skip:focus { transform: translateY(0); }
-@media (min-width: 600px) { .twoColumns { grid-template-columns: repeat(2, minmax(0, 1fr)); } .checklist li { grid-template-columns: 28px minmax(0, 1fr) auto; align-items: center; } .checklist li > :last-child { grid-column: auto; } .scheduleRow { grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr) minmax(0, 1fr) auto; align-items: end; } }
+@media (min-width: 600px) { .twoColumns { grid-template-columns: repeat(2, minmax(0, 1fr)); } .checklist li { grid-template-columns: 28px minmax(0, 1fr) auto; align-items: center; } .checklist li > :last-child { grid-column: auto; } .scheduleRow { grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr) minmax(0, 1fr) auto; align-items: end; } .specialRow { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) auto; align-items: end; } }
 @media (min-width: 900px) { .shell { display: grid; grid-template-columns: 220px minmax(0, 1fr); } .sidebar { padding: 48px 24px; border-bottom: 0; border-right: 1px solid var(--border); } .nav { grid-template-columns: 1fr; margin-top: 48px; } .support { margin-top: 32px; } .main { padding: 32px 48px 80px; } .pageHeader { margin-top: 28px; margin-bottom: 40px; } .shell h1 { font-size: 2.5rem; } .section { margin-top: 48px; } .editor { padding: 32px; } }
 @media (prefers-reduced-motion: reduce) { .shell *, .shell *::before, .shell *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; } }
