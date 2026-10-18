@@ -44,7 +44,14 @@ export function timestamp(value: unknown): value is string {
     Number.isFinite(Date.parse(value));
 }
 export function boundedString(value: unknown, max: number): value is string {
-  return typeof value === 'string' && Array.from(value).length <= max;
+  if (typeof value !== 'string') return false;
+  const points = Array.from(value);
+  // PostgreSQL text cannot contain NUL or lone UTF-16 surrogates. Array.from
+  // keeps valid surrogate pairs together, preserving Unicode code-point limits.
+  return points.length <= max && points.every((character) => {
+    const point = character.codePointAt(0)!;
+    return point !== 0 && (point < 0xD800 || point > 0xDFFF);
+  });
 }
 export function integer(value: unknown, minimum = 0): value is number {
   return typeof value === 'number' && Number.isSafeInteger(value) && value >= minimum;

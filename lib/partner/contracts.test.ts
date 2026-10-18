@@ -84,4 +84,28 @@ describe('strict partner command boundary', () => {
     const command = { ...settings, values: { ...settings.values, businessTypes: ['hair', 'hair', 'nail', 'hair'] } };
     expect(parsePartnerCommand(command)).toEqual({ ok: true, command });
   });
+  it.each(['\u0000', 'before\u0000after', '\uD800', '\uDC00', '\uD800x\uDC00', '\uD800\uD800\uDC00', '\uDC00\uD800\uDC00'])('rejects text PostgreSQL cannot store across all editable text fields %#', (text) => {
+    for (const field of ['nameKo', 'nameEn']) {
+      expect(parsePartnerCommand({ ...category, values: { ...category.values, [field]: text } }).ok).toBe(false);
+    }
+    for (const field of ['nameKo', 'nameEn', 'descriptionKo', 'descriptionEn']) {
+      expect(parsePartnerCommand({ ...menu, values: { ...menu.values, [field]: text } }).ok).toBe(false);
+    }
+    for (const field of ['displayName', 'contactEmail', 'contactPhone', 'address']) {
+      expect(parsePartnerCommand({ ...settings, values: { ...settings.values, [field]: text } }).ok).toBe(false);
+    }
+  });
+  it('preserves valid surrogate pairs and Unicode code-point boundaries for all text DTOs', () => {
+    const valid = '😀';
+    for (const [base, fields] of [
+      [category, { nameKo: 120, nameEn: 120 }],
+      [menu, { nameKo: 120, nameEn: 120, descriptionKo: 4000, descriptionEn: 4000 }],
+      [settings, { displayName: 120, contactEmail: 320, contactPhone: 80, address: 500 }],
+    ] as const) {
+      for (const [field, limit] of Object.entries(fields)) {
+        expect(parsePartnerCommand({ ...base, values: { ...base.values, [field]: valid.repeat(limit) } }).ok).toBe(true);
+        expect(parsePartnerCommand({ ...base, values: { ...base.values, [field]: valid.repeat(limit + 1) } }).ok).toBe(false);
+      }
+    }
+  });
 });
