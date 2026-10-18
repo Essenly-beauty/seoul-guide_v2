@@ -165,7 +165,7 @@ Revoke all table privileges from PUBLIC/anon/authenticated first (including defa
 
 - [ ] **Step 5: Add failing schedule tests, then the immutable schedule validator.**
 
-Contract: arrays only; objects with numeric integer `startMinute`/`endMinute`, 0 <= start < end <=1440; weekly items weekday integer0..6; date blocks use exact real `YYYY-MM-DD`; same-kind same-day intervals must not overlap; adjacent intervals allowed; every break contained in one opening interval. Empty arrays valid draft. Reject wrong JSON types and invalid dates with check violation, not uncontrolled casts. Fixed field JSON is stored in one row, so a whole edit is atomic. Calendar logic must agree with A1, including leap years; business hours are not bookable availability.
+Contract: arrays only; objects with numeric integer `startMinute`/`endMinute`, 0 <= start < end <=1440; weekly items weekday integer0..6; date blocks use exact real `YYYY-MM-DD`; same-kind same-day intervals must not overlap; adjacent intervals allowed; every break contained in one opening interval. Empty arrays valid draft. Reject wrong JSON types and invalid dates with check violation, not uncontrolled casts. Fixed field JSON is stored in one row, so a whole edit is atomic. Calendar logic must agree with A1, including leap years; business hours are not bookable availability. Bound work before overlap loops: at most 128 opening periods, 128 breaks, 512 date blocks, and 256 KiB total JSON text. These storage limits must be tested and surfaced by the A3 request parser/UI; A1 remains a pure calculation contract.
 
 ```sql
 create function private.partner_schedule_valid(h jsonb,b jsonb,d jsonb) returns boolean
@@ -174,6 +174,9 @@ declare arr jsonb; item jsonb; other jsonb; kind integer; pos integer; other_pos
  s numeric; e numeric; weekday numeric; yy integer; mm integer; dd integer; days integer;
 begin
  if h is null or b is null or d is null then return false; end if;
+ if jsonb_typeof(h)<>'array' or jsonb_typeof(b)<>'array' or jsonb_typeof(d)<>'array' then return false; end if;
+ if jsonb_array_length(h)>128 or jsonb_array_length(b)>128 or jsonb_array_length(d)>512
+  or octet_length(h::text)+octet_length(b::text)+octet_length(d::text)>262144 then return false; end if;
  for kind in 1..3 loop
   arr := case kind when 1 then h when 2 then b else d end;
   if jsonb_typeof(arr) <> 'array' then return false; end if;
