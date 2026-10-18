@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Notice } from '@/components/ui/notice';
 import type { Menu, PartnerSnapshot } from '@/lib/partner/contracts';
 import type { StaffCommand } from '@/lib/partner/staff-contracts';
-import { matchingStaffDetail, postStaffCommand, restoreStaffListFocus } from '@/lib/partner/staff-client';
+import { completeStaffDraft, completeStaffMenuAction, matchingStaffDetail, postStaffCommand, readBackStaffSave, restoreStaffListFocus } from '@/lib/partner/staff-client';
 import type { StaffCalendar, StaffDetail, StaffDetailSnapshot, StaffListSnapshot, StaffSummary } from '@/lib/partner/staff-server';
 import { staffCalendarDraft, staffCalendarFormValues, staffProfileDraft, staffProfileFormValues, type StaffCalendarDraft, type StaffProfileDraft } from '@/lib/partner/staff-form-values';
 import { PartnerRequestScope, uncertainSaveOutcomeMessage, usePartner, type PartnerDraftRecord } from './partner-provider';
@@ -105,12 +105,12 @@ function useStaffDraft<T extends { values: unknown; updatedAt: string | null }>(
     if (!current || ['pending', 'reloading', 'committed-stale'].includes(current.state.kind)) return;
     if (JSON.stringify(current.draft) === JSON.stringify(current.baseline) && JSON.stringify(current.baseline) !== serializedInitial) {
       const next = JSON.parse(serializedInitial) as T;
-      drafts.write(key, { ...current, draft: next, baseline: next });
+      drafts.complete(key, current.token, { ...current, draft: next, baseline: next });
     }
   }, [drafts, key, serializedInitial]);
-  const setDraft = (draft: T) => drafts.write(key, { ...record, draft });
-  const setState = (state: SaveState) => drafts.write(key, { ...record, state });
-  const replace = (value: T, state: SaveState = { kind: 'idle' }) => drafts.write(key, { ...record, draft: value, baseline: value, state });
+  const setDraft = (draft: T) => completeStaffDraft(drafts, key, record, { ...record, draft });
+  const setState = (state: SaveState) => completeStaffDraft(drafts, key, record, { ...record, state });
+  const replace = (value: T, state: SaveState = { kind: 'idle' }) => completeStaffDraft(drafts, key, record, { ...record, draft: value, baseline: value, state });
   const dirty = JSON.stringify(record.draft) !== JSON.stringify(record.baseline);
   const locked = ['pending', 'reloading', 'committed-stale'].includes(record.state.kind);
   return { ...record, dirty, locked, restored, setDraft, setState, replace };
@@ -291,37 +291,41 @@ function StaffWorkspace({ snapshot }: { snapshot: PartnerSnapshot }) {
   const select = (next: Selection | null, focusList = false) => {
     if (selection?.id === next?.id || !confirmLeave()) return;
     if (focusList) returnFocus.current = { id: selection?.isNew ? null : selection?.id ?? null };
-    setDetail(null); setDetailStale(false); setMenuMessage(null); setMenuAmbiguous(false); setSelection(next);
+    selectedRef.current = next;
+    setDetail(null); setDetailStale(false); setMenuBusy(false); setMenuMessage(null); setMenuAmbiguous(false); setSelection(next);
   };
   const save = async (command: StaffCommand): Promise<{ kind: 'saved'; detail: StaffDetailSnapshot } | { kind: 'conflict' | 'error' | 'committed-stale' | 'cancelled'; message: string }> => {
     const request = writes.startWrite();
     if (!request) return { kind: 'error', message: '다른 저장이 진행 중입니다.' };
+    const id = command.kind === 'staff' ? command.id : command.staffId;
+    const stillCurrent = () => request.isCurrent() && selectedRef.current?.id === id;
     try {
       const result = await postStaffCommand(command, request.controller.signal);
-      if (!request.isCurrent()) return { kind: 'cancelled', message: '' };
+      if (!stillCurrent()) return { kind: 'cancelled', message: '' };
       if (result === 'forbidden') { setList(null); setDetail(null); void refresh(); return { kind: 'error', message: '현재 매장을 수정할 권한이 없습니다.' }; }
       if (result === 'conflict') return { kind: 'conflict', message: '다른 곳에서 정보가 변경되었습니다. 현재 입력은 유지됩니다. 최신 정보를 확인해 주세요.' };
       if (result === 'error') return { kind: 'error', message: '저장하지 못했습니다. 입력 내용은 유지됩니다. 잠시 후 다시 시도해 주세요.' };
       if (result === 'ambiguous') return { kind: 'committed-stale', message: uncertainSaveOutcomeMessage };
-      const id = command.kind === 'staff' ? command.id : command.staffId;
-      if (selectedRef.current?.id !== id) return { kind: 'cancelled', message: '' };
-      const fresh = await loadDetail(id);
       void loadList();
-      if (!fresh) return { kind: 'committed-stale', message: uncertainSaveOutcomeMessage };
+      const readback = await readBackStaffSave(id, loadDetail, stillCurrent);
+      if (readback.kind === 'cancelled') return { kind: 'cancelled', message: '' };
+      if (readback.kind === 'committed-stale') return { kind: 'committed-stale', message: uncertainSaveOutcomeMessage };
       if (selectedRef.current?.isNew) setSelection({ id, isNew: false });
-      return { kind: 'saved', detail: fresh };
+      return { kind: 'saved', detail: readback.detail };
     } catch {
-      if (!request.isCurrent()) return { kind: 'cancelled', message: '' };
+      if (!stillCurrent()) return { kind: 'cancelled', message: '' };
       return { kind: 'committed-stale', message: uncertainSaveOutcomeMessage };
     } finally { writes.finishWrite(request); }
   };
   const toggleMenu = async (menuId: string, assigned: boolean) => {
     if (!selection || !detail || menuBusy || menuAmbiguous || snapshot.readOnly || snapshot.merchant.bookingEnabled) return;
+    const staffId = selection.id;
     setMenuBusy(true); setMenuMessage(null);
-    const result = await save({ kind: 'staffMenu', mode: assigned ? 'remove' : 'add', staffId: selection.id, menuId });
-    setMenuBusy(false);
-    if (result.kind === 'committed-stale') { setMenuAmbiguous(true); setMenuMessage('저장 결과를 확인하지 못했습니다. 다시 불러와 연결 상태를 확인한 뒤 필요하면 다시 시도해 주세요.'); }
-    else if (result.kind === 'conflict' || result.kind === 'error') setMenuMessage(result.message);
+    await completeStaffMenuAction(staffId, save({ kind: 'staffMenu', mode: assigned ? 'remove' : 'add', staffId, menuId }), () => selectedRef.current?.id === staffId, (result) => {
+      setMenuBusy(false);
+      if (result.kind === 'committed-stale') { setMenuAmbiguous(true); setMenuMessage('저장 결과를 확인하지 못했습니다. 다시 불러와 연결 상태를 확인한 뒤 필요하면 다시 시도해 주세요.'); }
+      else if (result.kind === 'conflict' || result.kind === 'error') setMenuMessage(result.message);
+    });
   };
   const currentDetail = detail?.staff.id === selection?.id ? detail : null;
   const readOnly = snapshot.readOnly || list?.readOnly === true || currentDetail?.readOnly === true;

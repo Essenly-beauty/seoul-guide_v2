@@ -1,6 +1,6 @@
 import { describe, expect, it, vi } from 'vitest';
-import { PartnerRequestScope } from '@/components/partner/partner-provider';
-import { matchingStaffDetail, postStaffCommand, restoreStaffListFocus } from './staff-client';
+import { PartnerDraftStore, PartnerRequestScope, type PartnerDraftRecord } from '@/components/partner/partner-provider';
+import { completeStaffDraft, completeStaffMenuAction, matchingStaffDetail, postStaffCommand, readBackStaffSave, restoreStaffListFocus } from './staff-client';
 import type { StaffCommand } from './staff-contracts';
 import type { StaffDetailSnapshot } from './staff-server';
 
@@ -53,6 +53,55 @@ describe('staff command response before readback', () => {
     expect(await postStaffCommand(command, controller.signal, async () => new Response(JSON.stringify({ ok: false }), { status: 403 }))).toBe('forbidden');
     expect(await postStaffCommand(command, controller.signal, async () => { throw new Error('connection lost'); })).toBe('ambiguous');
     expect(await postStaffCommand(command, controller.signal, async () => new Response(JSON.stringify({ ok: false }), { status: 503 }))).toBe('error');
+  });
+});
+
+describe('mounted staff form completion after selection changes', () => {
+  it('cancels A save readback after switching to B, even when the read resolves null', async () => {
+    const scope = new PartnerRequestScope();
+    let selectedId = staffA;
+    let finish!: (value: StaffDetailSnapshot | null) => void;
+    const pending = new Promise<StaffDetailSnapshot | null>((resolve) => { finish = resolve; });
+    const request = scope.startWrite();
+    expect(request).not.toBeNull();
+    const outcome = readBackStaffSave(staffA, async () => pending, () => !!request?.isCurrent() && selectedId === staffA);
+    selectedId = staffB;
+    finish(null);
+    expect(await outcome).toEqual({ kind: 'cancelled' });
+    scope.finishWrite(request!);
+  });
+
+  it('does not recreate an unmounted A draft after a superseded detail read adopts B', async () => {
+    const drafts = new PartnerDraftStore();
+    const scope = new PartnerRequestScope();
+    const key = `staff:profile:${staffA}`;
+    const baseline = { values: { name: 'A' }, updatedAt: '2026-10-18T00:00:00Z' };
+    const record: PartnerDraftRecord<typeof baseline> = { token: Symbol(key), draft: { ...baseline, values: { name: 'edited A' } }, baseline, state: { kind: 'pending' } };
+    drafts.write(key, record); drafts.setActive(key);
+    let finishA!: (value: StaffDetailSnapshot) => void;
+    let finishB!: (value: StaffDetailSnapshot) => void;
+    const pendingA = new Promise<StaffDetailSnapshot>((resolve) => { finishA = resolve; });
+    const pendingB = new Promise<StaffDetailSnapshot>((resolve) => { finishB = resolve; });
+    const readA = matchingStaffDetail(staffA, scope.runRead(async () => pendingA, null));
+    const readB = matchingStaffDetail(staffB, scope.runRead(async () => pendingB, null));
+    drafts.discardActive();
+    finishA(detail(staffA)); finishB(detail(staffB));
+    expect(await readA).toBeNull();
+    expect(await readB).toEqual(detail(staffB));
+    expect(completeStaffDraft(drafts, key, record, { ...record, state: { kind: 'committed-stale' } })).toBe(false);
+    expect(drafts.read(key)).toBeUndefined();
+  });
+
+  it('does not put A menu uncertainty or busy state on B after a late A result', async () => {
+    let selectedId = staffA;
+    let finish!: (value: { kind: 'committed-stale' }) => void;
+    const pending = new Promise<{ kind: 'committed-stale' }>((resolve) => { finish = resolve; });
+    const applied = vi.fn();
+    const action = completeStaffMenuAction(staffA, pending, () => selectedId === staffA, applied);
+    selectedId = staffB;
+    finish({ kind: 'committed-stale' });
+    await action;
+    expect(applied).not.toHaveBeenCalled();
   });
 });
 
