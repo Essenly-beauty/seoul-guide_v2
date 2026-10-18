@@ -96,20 +96,43 @@ export class PartnerDraftStore {
 }
 
 type PartnerHistoryLocation = { href: string; state: unknown };
-/** Runs before App Router's popstate listener; a rejected traversal restores its prior route/tree. */
+type PartnerTraversalApproval = { href: string; key: string };
+type PartnerNavigateEvent = Pick<Event, 'cancelable' | 'preventDefault'> & {
+  navigationType: string;
+  destination: { url: string; key: string; sameDocument: boolean };
+};
+function confirmPartnerTraversal(previousHref: string, destinationHref: string, drafts: PartnerDraftStore, confirmLeave: () => boolean, confirmExit: () => boolean): boolean {
+  const destination = new URL(destinationHref);
+  const leavesWorkspace = destination.origin !== new URL(previousHref).origin || (destination.pathname !== '/partner' && !destination.pathname.startsWith('/partner/'));
+  if (leavesWorkspace && drafts.hasUnsavedChanges()) {
+    if (!confirmExit()) return false;
+    drafts.clear();
+    return true;
+  }
+  return confirmLeave();
+}
+/** Cancel a supported same-document traversal before it changes the URL or history stack.
+ * https://html.spec.whatwg.org/multipage/nav-history-apis.html#the-navigate-event */
+export function guardPartnerNavigate(
+  event: PartnerNavigateEvent, previousHref: string, drafts: PartnerDraftStore,
+  confirmLeave: () => boolean, confirmExit: () => boolean,
+): PartnerTraversalApproval | null {
+  if (event.navigationType !== 'traverse' || !event.cancelable || !event.destination.sameDocument || event.destination.url === previousHref) return null;
+  if (!confirmPartnerTraversal(previousHref, event.destination.url, drafts, confirmLeave, confirmExit)) {
+    event.preventDefault();
+    return null;
+  }
+  return event.destination.key ? { href: event.destination.url, key: event.destination.key } : null;
+}
+/** Fallback for noncancelable/older traversals: protect drafts, though pushState may alter the Forward stack. */
 export function guardPartnerPopstate(
   event: Pick<PopStateEvent, 'stopImmediatePropagation'>, previous: PartnerHistoryLocation, destinationHref: string,
   drafts: PartnerDraftStore, confirmLeave: () => boolean, confirmExit: () => boolean,
   restore: (location: PartnerHistoryLocation) => void,
+  approval?: PartnerTraversalApproval | null, currentKey?: string | null,
 ): boolean {
-  if (destinationHref === previous.href) return true;
-  const destination = new URL(destinationHref);
-  const leavesWorkspace = destination.origin !== new URL(previous.href).origin || (destination.pathname !== '/partner' && !destination.pathname.startsWith('/partner/'));
-  let allowed = true;
-  if (leavesWorkspace && drafts.hasUnsavedChanges()) {
-    allowed = confirmExit();
-    if (allowed) drafts.clear();
-  } else allowed = confirmLeave();
+  if (destinationHref === previous.href || (approval?.href === destinationHref && approval.key === currentKey)) return true;
+  const allowed = confirmPartnerTraversal(previous.href, destinationHref, drafts, confirmLeave, confirmExit);
   if (!allowed) { event.stopImmediatePropagation(); restore(previous); }
   return allowed;
 }
@@ -142,6 +165,7 @@ function PartnerSession({ children, authenticated, checking }: { children: React
   const [drafts] = useState(() => new PartnerDraftStore());
   const merchantId = useRef<string | null>(null);
   const historyLocation = useRef<PartnerHistoryLocation | null>(null);
+  const approvedTraversal = useRef<PartnerTraversalApproval | null>(null);
   const confirmLeave = useCallback((discard = true) => {
     if (!drafts.hasActiveUnsavedChanges()) return true;
     if (!window.confirm('저장하지 않은 변경사항이 있습니다. 변경사항을 버릴까요?')) return false;
@@ -207,26 +231,33 @@ function PartnerSession({ children, authenticated, checking }: { children: React
       if (!(anchor instanceof HTMLAnchorElement) || anchor.target === '_blank' || event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return;
       const destination = new URL(anchor.href, window.location.href);
       if (destination.pathname === window.location.pathname && destination.search === window.location.search) return;
-      const leavesWorkspace = destination.origin !== window.location.origin || (destination.pathname !== '/partner' && !destination.pathname.startsWith('/partner/'));
-      let allowed = true;
-      if (leavesWorkspace && drafts.hasUnsavedChanges()) {
-        allowed = window.confirm('가맹점 관리를 나가면 저장하지 않은 초안이 모두 지워집니다. 나갈까요?');
-        if (allowed) drafts.clear();
-      } else allowed = confirmLeave();
+      const allowed = confirmPartnerTraversal(window.location.href, destination.href, drafts, confirmLeave,
+        () => window.confirm('가맹점 관리를 나가면 저장하지 않은 초안이 모두 지워집니다. 나갈까요?'));
       if (!allowed) { event.preventDefault(); event.stopPropagation(); }
+    };
+    const navigation = (window as Window & { navigation?: EventTarget & { currentEntry?: { key: string } | null } }).navigation;
+    const navigate = (event: Event) => {
+      if (!historyLocation.current) return;
+      const traversal = event as unknown as PartnerNavigateEvent;
+      if (traversal.navigationType !== 'traverse') return;
+      approvedTraversal.current = guardPartnerNavigate(traversal, window.location.href, drafts, confirmLeave,
+        () => window.confirm('가맹점 관리를 나가면 저장하지 않은 초안이 모두 지워집니다. 나갈까요?'));
     };
     const popstate = (event: PopStateEvent) => {
       const previous = historyLocation.current;
       if (!previous) return;
+      const approval = approvedTraversal.current;
+      approvedTraversal.current = null;
       const allowed = guardPartnerPopstate(event, previous, window.location.href, drafts, confirmLeave,
         () => window.confirm('가맹점 관리를 나가면 저장하지 않은 초안이 모두 지워집니다. 나갈까요?'),
-        (location) => window.history.pushState(location.state, '', location.href));
+        (location) => window.history.pushState(location.state, '', location.href), approval, navigation?.currentEntry?.key);
       if (allowed) historyLocation.current = { href: window.location.href, state: event.state };
     };
     window.addEventListener('beforeunload', unload);
     document.addEventListener('click', click, true);
+    navigation?.addEventListener('navigate', navigate);
     window.addEventListener('popstate', popstate, true);
-    return () => { window.removeEventListener('beforeunload', unload); document.removeEventListener('click', click, true); window.removeEventListener('popstate', popstate, true); };
+    return () => { window.removeEventListener('beforeunload', unload); document.removeEventListener('click', click, true); navigation?.removeEventListener('navigate', navigate); window.removeEventListener('popstate', popstate, true); };
   }, [confirmLeave, drafts]);
   const save = useCallback(async (command: PartnerCommand | ReservationCommand): Promise<SaveResult> => {
     if (!authenticated) return { kind: 'cancelled' };

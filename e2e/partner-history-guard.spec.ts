@@ -19,7 +19,7 @@ async function traverseAndDismiss(page: Page, direction: 'back' | 'forward') {
   await expect(page).toHaveURL(/\/partner\/services$/);
 }
 
-test('Back and Forward cannot discard a dirty partner draft through App Router popstate', async ({ page }) => {
+async function openServices(page: Page) {
   await page.goto('/login?switch=1');
   await page.locator('.auth-field').first().fill(email!);
   await page.locator('.auth-field').nth(1).fill(password!);
@@ -29,15 +29,22 @@ test('Back and Forward cannot discard a dirty partner draft through App Router p
   await page.goto('/partner');
   await page.getByRole('link', { name: '카테고리·메뉴' }).click();
   await expect(page.getByRole('button', { name: '카테고리 추가' })).toBeEnabled();
+}
+
+test('a rejected Back keeps the draft and the next accepted Back traverses one entry', async ({ page }) => {
+  await openServices(page);
   await page.getByRole('button', { name: '카테고리 추가' }).click();
   const name = page.getByLabel('카테고리명 (한국어)');
   await name.fill('저장하지 않은 뒤로 가기 초안');
   await traverseAndDismiss(page, 'back');
   await expect(name).toHaveValue('저장하지 않은 뒤로 가기 초안');
-
   page.once('dialog', (dialog) => { void dialog.accept(); });
-  await page.getByRole('button', { name: '편집 닫기' }).click();
-  await expect(name).toHaveCount(0);
+  await page.goBack();
+  await expect(page).toHaveURL(/\/partner$/);
+});
+
+test('a rejected Forward keeps its destination in the history stack', async ({ page }) => {
+  await openServices(page);
   await page.getByRole('link', { name: '운영자에게 문의' }).click();
   await expect(page).toHaveURL(/\/support$/);
   await page.goBack();
@@ -47,4 +54,8 @@ test('Back and Forward cannot discard a dirty partner draft through App Router p
   await forwardName.fill('저장하지 않은 앞으로 가기 초안');
   await traverseAndDismiss(page, 'forward');
   await expect(forwardName).toHaveValue('저장하지 않은 앞으로 가기 초안');
+  page.once('dialog', (dialog) => { void dialog.accept(); });
+  await page.getByRole('button', { name: '편집 닫기' }).click();
+  await page.goForward();
+  await expect(page).toHaveURL(/\/support$/);
 });

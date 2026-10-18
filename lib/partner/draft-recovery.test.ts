@@ -1,7 +1,7 @@
 import { describe, expect, it, vi } from 'vitest';
 import { createElement } from 'react';
 import { renderToStaticMarkup } from 'react-dom/server';
-import { guardPartnerPopstate, PartnerDraftStore, uncertainSaveOutcomeMessage, type PartnerDraftRecord } from '@/components/partner/partner-provider';
+import { guardPartnerNavigate, guardPartnerPopstate, PartnerDraftStore, uncertainSaveOutcomeMessage, type PartnerDraftRecord } from '@/components/partner/partner-provider';
 import { failedReloadState, rebaseUnchangedSharedSchedule, SaveStatus } from '@/components/partner/partner-form';
 
 const entry = (): PartnerDraftRecord<{ name: string; updatedAt: string }> => ({ token: Symbol(), draft: { name: '편집 중', updatedAt: '2026-10-18T01:02:03.123456+00:00' }, baseline: { name: '저장된 이름', updatedAt: '2026-10-18T01:02:03.123456+00:00' }, state: { kind: 'idle' } });
@@ -75,6 +75,58 @@ describe('session-scoped partner draft recovery', () => {
     expect(store.read('staff')).toBe(record);
     expect(guardPartnerPopstate({ stopImmediatePropagation: stop }, previous, previous.href, store, confirmLeave, () => true, restore)).toBe(true);
     expect(confirmLeave).toHaveBeenCalledOnce();
+  });
+  it('cancels a supported Back before traversal without rewriting history or losing an unconfirmed draft', () => {
+    const store = new PartnerDraftStore();
+    const record = { ...entry(), draft: entry().baseline, state: { kind: 'unconfirmed' as const } };
+    store.write('staff:profile:existing', record);
+    const prevent = vi.fn();
+    const confirmExit = vi.fn(() => false);
+    const event = { navigationType: 'traverse', cancelable: true, destination: { url: 'http://localhost/support', key: 'support-entry', sameDocument: true }, preventDefault: prevent };
+    expect(guardPartnerNavigate(event, 'http://localhost/partner/staff', store, () => true, confirmExit)).toBeNull();
+    expect(prevent).toHaveBeenCalledOnce();
+    expect(confirmExit).toHaveBeenCalledOnce();
+    expect(store.read('staff:profile:existing')).toBe(record);
+  });
+  it('defers noncancelable and cross-document traversals to the existing popstate fallback', () => {
+    const store = new PartnerDraftStore();
+    store.write('settings', entry()); store.setActive('settings');
+    const confirmLeave = vi.fn(() => false);
+    const prevent = vi.fn();
+    const destination = { url: 'http://localhost/partner/services', key: 'services-entry', sameDocument: true };
+    expect(guardPartnerNavigate({ navigationType: 'traverse', cancelable: false, destination, preventDefault: prevent }, 'http://localhost/partner/settings', store, confirmLeave, () => false)).toBeNull();
+    expect(guardPartnerNavigate({ navigationType: 'traverse', cancelable: true, destination: { ...destination, sameDocument: false }, preventDefault: prevent }, 'http://localhost/partner/settings', store, confirmLeave, () => false)).toBeNull();
+    expect(prevent).not.toHaveBeenCalled();
+    expect(confirmLeave).not.toHaveBeenCalled();
+    expect(store.hasUnsavedChanges()).toBe(true);
+  });
+  it('does not discard a draft when traversing between same-URL history entries', () => {
+    const store = new PartnerDraftStore();
+    store.write('settings', entry()); store.setActive('settings');
+    const confirmLeave = vi.fn(() => true);
+    const prevent = vi.fn();
+    const href = 'http://localhost/partner/settings';
+    expect(guardPartnerNavigate({ navigationType: 'traverse', cancelable: true, destination: { url: href, key: 'other-entry', sameDocument: true }, preventDefault: prevent }, href, store, confirmLeave, () => true)).toBeNull();
+    expect(confirmLeave).not.toHaveBeenCalled();
+    expect(prevent).not.toHaveBeenCalled();
+    expect(store.hasUnsavedChanges()).toBe(true);
+  });
+  it('consumes an accepted pre-traversal approval only for its matching history entry', () => {
+    const store = new PartnerDraftStore();
+    store.write('settings', entry()); store.setActive('settings');
+    const confirmLeave = vi.fn(() => { store.discardActive(); return true; });
+    const previous = { href: 'http://localhost/partner/settings', state: { __NA: true } };
+    const destination = { url: 'http://localhost/partner/services', key: 'services-entry', sameDocument: true };
+    const approval = guardPartnerNavigate({ navigationType: 'traverse', cancelable: true, destination, preventDefault: vi.fn() }, previous.href, store, confirmLeave, () => false);
+    expect(approval).toEqual({ href: destination.url, key: destination.key });
+    expect(guardPartnerPopstate({ stopImmediatePropagation: vi.fn() }, previous, destination.url, store, confirmLeave, () => false, vi.fn(), approval, destination.key)).toBe(true);
+    expect(confirmLeave).toHaveBeenCalledOnce();
+    store.write('settings', entry()); store.setActive('settings');
+    confirmLeave.mockReturnValue(false);
+    const restore = vi.fn();
+    expect(guardPartnerPopstate({ stopImmediatePropagation: vi.fn() }, previous, destination.url, store, confirmLeave, () => false, restore, approval, 'different-entry')).toBe(false);
+    expect(confirmLeave).toHaveBeenCalledTimes(2);
+    expect(restore).toHaveBeenCalledWith(previous);
   });
   it('does not unlock an unconfirmed form when its explicit recovery read fails', () => {
     expect(failedReloadState({ kind: 'unconfirmed' }, 'read failed')).toEqual({ kind: 'unconfirmed' });
