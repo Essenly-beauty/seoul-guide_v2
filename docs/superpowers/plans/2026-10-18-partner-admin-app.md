@@ -89,6 +89,10 @@ const result = await client.from('merchant_categories')
 
 ## Task 2: Responsive merchant admin and safe forms
 
+**Navigation implementation boundary:** Installed Next 15 App Router handles `popstate` internally and does not expose a supported cancellable Back/Forward guard. Do not patch global history or expand the root authentication store. Keep confirmation for rendered navigation links/editor switching and native page unload; add session-memory draft recovery (values, exact baseline version, stable new IDs and save state) across history traversal within `/partner`, with a visible restoration notice. Clear that memory on identity/access loss or partner unmount. Same-document Back leaving the entire partner scope cannot be universally intercepted; document this limitation instead of claiming universal navigation protection. No browser storage of merchant drafts.
+
+**Early browser evidence:** Real local owner login, category/menu creation and DB row verification, profile/industry save, schedule validation and valid save, background refresh preserving a dirty draft, and stale-version 409 preserving that draft passed. Desktop screenshot exposed inherited full-width buttons crowding the merchant name; scoped fix is required. Mobile input text is 16px and fields approximately 48px high. Existing browser zoom is 90%, so the first viewport override of 390px yielded a 433px CSS viewport; do not label that capture a verified 390px viewport. Browser dialog transport interrupted the discard/reload check; that check is not yet passed.
+
 - [ ] Add failing real render/conversion tests. Verify no fake booking counts or revenue; missing deposit says approval pending, not zero; suspended read-only; invalid time/number conversion; labels/required supporting copy.
 
 ```ts
