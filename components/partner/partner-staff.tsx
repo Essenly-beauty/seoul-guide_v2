@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Notice } from '@/components/ui/notice';
 import type { Menu, PartnerSnapshot } from '@/lib/partner/contracts';
 import type { StaffCommand } from '@/lib/partner/staff-contracts';
-import { completeStaffDraft, completeStaffMenuAction, matchingStaffDetail, postStaffCommand, readBackStaffSave, restoreStaffListFocus } from '@/lib/partner/staff-client';
+import { completeStaffDraft, completeStaffMenuAction, completeStaffReload, discardStaffSelectionDrafts, matchingStaffDetail, postStaffCommand, readBackStaffSave, restoreStaffListFocus } from '@/lib/partner/staff-client';
 import type { StaffCalendar, StaffDetail, StaffDetailSnapshot, StaffListSnapshot, StaffSummary } from '@/lib/partner/staff-server';
 import { staffCalendarDraft, staffCalendarFormValues, staffProfileDraft, staffProfileFormValues, type StaffCalendarDraft, type StaffProfileDraft } from '@/lib/partner/staff-form-values';
 import { PartnerRequestScope, uncertainSaveOutcomeMessage, usePartner, type PartnerDraftRecord } from './partner-provider';
@@ -116,15 +116,18 @@ function useStaffDraft<T extends { values: unknown; updatedAt: string | null }>(
   return { ...record, dirty, locked, restored, setDraft, setState, replace };
 }
 
-function StaffEditor({ selection, detail, readOnly, snapshot, onSave, onReload, onMenuToggle, menuBusy, menuMessage, menuAmbiguous }: {
+function StaffEditor({ selection, detail, readOnly, snapshot, onSave, onReload, isSelected, onMenuToggle, menuBusy, menuMessage, menuAmbiguous }: {
   selection: Selection; detail: StaffDetailSnapshot | null; readOnly: boolean; snapshot: PartnerSnapshot;
   onSave: (command: StaffCommand) => Promise<{ kind: 'saved'; detail: StaffDetailSnapshot } | { kind: 'conflict' | 'error' | 'committed-stale' | 'cancelled'; message: string }>;
-  onReload: () => Promise<StaffDetailSnapshot | null>; onMenuToggle: (menuId: string, assigned: boolean) => void; menuBusy: boolean; menuMessage: string | null; menuAmbiguous: boolean;
+  onReload: () => Promise<StaffDetailSnapshot | null>; isSelected: () => boolean; onMenuToggle: (menuId: string, assigned: boolean) => void; menuBusy: boolean; menuMessage: string | null; menuAmbiguous: boolean;
 }) {
   const person = detail?.staff;
   const profile = useStaffDraft(`staff:profile:${selection.id}`, { values: staffProfileDraft(person), updatedAt: person?.updatedAt ?? null });
   const calendar = useStaffDraft(`staff:calendar:${selection.id}`, { values: staffCalendarDraft(detail?.schedule ?? null), updatedAt: detail?.schedule?.updatedAt ?? null });
   const busy = useRef(false);
+  const mounted = useRef(false);
+  useEffect(() => { mounted.current = true; return () => { mounted.current = false; }; }, []);
+  const isCurrentView = () => mounted.current && isSelected();
   const disabled = readOnly || snapshot.merchant.bookingEnabled;
   const submitProfile = async (event: FormEvent) => {
     event.preventDefault();
@@ -160,16 +163,18 @@ function StaffEditor({ selection, detail, readOnly, snapshot, onSave, onReload, 
     if (profile.dirty && !window.confirm('담당자 정보의 저장하지 않은 변경사항을 버리고 다시 불러올까요?')) return;
     if (selection.isNew && !person) { profile.replace({ values: staffProfileDraft(), updatedAt: null }); return; }
     profile.setState({ kind: 'reloading' });
-    const fresh = await onReload();
-    if (fresh) profile.replace({ values: staffProfileDraft(fresh.staff), updatedAt: fresh.staff.updatedAt });
-    else profile.setState({ kind: 'error', message: '최신 담당자 정보를 불러오지 못했습니다. 현재 입력은 유지됩니다.' });
+    await completeStaffReload(selection.id, onReload(), isCurrentView, (fresh) => {
+      if (fresh) profile.replace({ values: staffProfileDraft(fresh.staff), updatedAt: fresh.staff.updatedAt });
+      else profile.setState({ kind: 'error', message: '최신 담당자 정보를 불러오지 못했습니다. 현재 입력은 유지됩니다.' });
+    });
   };
   const reloadCalendar = async () => {
     if (calendar.dirty && !window.confirm('담당자 일정의 저장하지 않은 변경사항을 버리고 다시 불러올까요?')) return;
     calendar.setState({ kind: 'reloading' });
-    const fresh = await onReload();
-    if (fresh) calendar.replace({ values: staffCalendarDraft(fresh.schedule), updatedAt: fresh.schedule?.updatedAt ?? null });
-    else calendar.setState({ kind: 'error', message: '최신 담당자 일정을 불러오지 못했습니다. 현재 입력은 유지됩니다.' });
+    await completeStaffReload(selection.id, onReload(), isCurrentView, (fresh) => {
+      if (fresh) calendar.replace({ values: staffCalendarDraft(fresh.schedule), updatedAt: fresh.schedule?.updatedAt ?? null });
+      else calendar.setState({ kind: 'error', message: '최신 담당자 일정을 불러오지 못했습니다. 현재 입력은 유지됩니다.' });
+    });
   };
   return <div className={styles.staffDetailBody}>
     <form className={styles.editor} onSubmit={(event) => void submitProfile(event)}>
@@ -196,7 +201,7 @@ export function PartnerStaff() {
 }
 
 function StaffWorkspace({ snapshot }: { snapshot: PartnerSnapshot }) {
-  const { confirmLeave, refresh } = usePartner();
+  const { confirmLeave, drafts, refresh } = usePartner();
   const [list, setList] = useState<StaffListSnapshot | null>(null);
   const [listState, setListState] = useState<ReadState>('loading');
   const [listStale, setListStale] = useState(false);
@@ -291,6 +296,7 @@ function StaffWorkspace({ snapshot }: { snapshot: PartnerSnapshot }) {
   const select = (next: Selection | null, focusList = false) => {
     if (selection?.id === next?.id || !confirmLeave()) return;
     if (focusList) returnFocus.current = { id: selection?.isNew ? null : selection?.id ?? null };
+    if (selection) discardStaffSelectionDrafts(drafts, selection.id);
     selectedRef.current = next;
     setDetail(null); setDetailStale(false); setMenuBusy(false); setMenuMessage(null); setMenuAmbiguous(false); setSelection(next);
   };
@@ -344,7 +350,7 @@ function StaffWorkspace({ snapshot }: { snapshot: PartnerSnapshot }) {
           {detailState === 'loading' && !selection.isNew && !currentDetail && <p role="status">담당자 정보를 불러오는 중입니다…</p>}
           {detailState === 'error' && <Notice tone="warning" role="alert">{currentDetail ? '최신 담당자 정보를 불러오지 못했습니다. 마지막 조회 정보를 표시합니다.' : notFound} <Button variant="secondary" onClick={() => void loadDetail(selection.id)}>다시 시도</Button></Notice>}
           {detailStale && currentDetail && <p className={styles.hint}>마지막으로 조회한 상세 정보입니다. 저장 전에 최신 정보를 확인해 주세요.</p>}
-          {(selection.isNew || currentDetail) && <StaffEditor key={selection.id} selection={selection} detail={currentDetail} readOnly={readOnly || listState === 'error' || detailState === 'error'} snapshot={snapshot} onSave={save} onReload={() => loadDetail(selection.id)} onMenuToggle={(menuId, assigned) => void toggleMenu(menuId, assigned)} menuBusy={menuBusy || menuAmbiguous} menuMessage={menuMessage} menuAmbiguous={menuAmbiguous} />}
+          {(selection.isNew || currentDetail) && <StaffEditor key={selection.id} selection={selection} detail={currentDetail} readOnly={readOnly || listState === 'error' || detailState === 'error'} snapshot={snapshot} onSave={save} onReload={() => loadDetail(selection.id)} isSelected={() => selectedRef.current?.id === selection.id} onMenuToggle={(menuId, assigned) => void toggleMenu(menuId, assigned)} menuBusy={menuBusy || menuAmbiguous} menuMessage={menuMessage} menuAmbiguous={menuAmbiguous} />}
         </>}
       </section>
     </div>

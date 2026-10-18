@@ -1,6 +1,6 @@
 import { describe, expect, it, vi } from 'vitest';
 import { PartnerDraftStore, PartnerRequestScope, type PartnerDraftRecord } from '@/components/partner/partner-provider';
-import { completeStaffDraft, completeStaffMenuAction, matchingStaffDetail, postStaffCommand, readBackStaffSave, restoreStaffListFocus } from './staff-client';
+import { completeStaffDraft, completeStaffMenuAction, completeStaffReload, discardStaffSelectionDrafts, matchingStaffDetail, postStaffCommand, readBackStaffSave, restoreStaffListFocus } from './staff-client';
 import type { StaffCommand } from './staff-contracts';
 import type { StaffDetailSnapshot } from './staff-server';
 
@@ -90,6 +90,44 @@ describe('mounted staff form completion after selection changes', () => {
     expect(await readB).toEqual(detail(staffB));
     expect(completeStaffDraft(drafts, key, record, { ...record, state: { kind: 'committed-stale' } })).toBe(false);
     expect(drafts.read(key)).toBeUndefined();
+  });
+
+  it('ignores a clean A profile/calendar reload after B is selected, then removes the stale form records', async () => {
+    const drafts = new PartnerDraftStore();
+    const scope = new PartnerRequestScope();
+    const profileKey = `staff:profile:${staffA}`;
+    const calendarKey = `staff:calendar:${staffA}`;
+    const baseline = { values: { name: 'A' }, updatedAt: '2026-10-18T00:00:00Z' };
+    const profile: PartnerDraftRecord<typeof baseline> = { token: Symbol(profileKey), draft: baseline, baseline, state: { kind: 'reloading' } };
+    const calendar: PartnerDraftRecord<typeof baseline> = { token: Symbol(calendarKey), draft: baseline, baseline, state: { kind: 'reloading' } };
+    drafts.write(profileKey, profile); drafts.write(calendarKey, calendar);
+    drafts.setActive(profileKey); drafts.setActive(calendarKey);
+    expect(drafts.hasActiveUnsavedChanges()).toBe(false);
+
+    let selectedId = staffA;
+    let finishA!: (value: StaffDetailSnapshot) => void;
+    let finishB!: (value: StaffDetailSnapshot) => void;
+    const pendingA = new Promise<StaffDetailSnapshot>((resolve) => { finishA = resolve; });
+    const pendingB = new Promise<StaffDetailSnapshot>((resolve) => { finishB = resolve; });
+    const readA = matchingStaffDetail(staffA, scope.runRead(async () => pendingA, null));
+    const applyProfile = vi.fn((fresh: StaffDetailSnapshot | null) => completeStaffDraft(drafts, profileKey, profile, { ...profile, state: fresh ? { kind: 'idle' } : { kind: 'error', message: 'false reload error' } }));
+    const applyCalendar = vi.fn((fresh: StaffDetailSnapshot | null) => completeStaffDraft(drafts, calendarKey, calendar, { ...calendar, state: fresh ? { kind: 'idle' } : { kind: 'error', message: 'false reload error' } }));
+    const profileReload = completeStaffReload(staffA, readA, () => selectedId === staffA, applyProfile);
+    const calendarReload = completeStaffReload(staffA, readA, () => selectedId === staffA, applyCalendar);
+
+    selectedId = staffB;
+    const readB = matchingStaffDetail(staffB, scope.runRead(async () => pendingB, null));
+    finishA(detail(staffA)); finishB(detail(staffB));
+    expect(await readA).toBeNull();
+    expect(await readB).toEqual(detail(staffB));
+    await Promise.all([profileReload, calendarReload]);
+    expect(applyProfile).not.toHaveBeenCalled();
+    expect(applyCalendar).not.toHaveBeenCalled();
+    expect(drafts.read(profileKey)?.state).toEqual({ kind: 'reloading' });
+    expect(drafts.read(calendarKey)?.state).toEqual({ kind: 'reloading' });
+    discardStaffSelectionDrafts(drafts, staffA);
+    expect(drafts.read(profileKey)).toBeUndefined();
+    expect(drafts.read(calendarKey)).toBeUndefined();
   });
 
   it('does not put A menu uncertainty or busy state on B after a late A result', async () => {

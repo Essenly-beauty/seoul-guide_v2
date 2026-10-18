@@ -28,6 +28,20 @@ export function completeStaffDraft<T>(drafts: PartnerDraftStore, key: string, pr
   return drafts.complete(key, previous.token, next);
 }
 
+/** A read may finish after its form was hidden, even when its clean draft token still exists. */
+export async function completeStaffReload(
+  id: string, pending: Promise<StaffDetailSnapshot | null>, isCurrentView: () => boolean,
+  apply: (fresh: StaffDetailSnapshot | null) => void,
+): Promise<void> {
+  const fresh = await pending;
+  if (isCurrentView()) apply(fresh?.staff.id === id ? fresh : null);
+}
+
+export function discardStaffSelectionDrafts(drafts: PartnerDraftStore, id: string): void {
+  drafts.discard(`staff:profile:${id}`);
+  drafts.discard(`staff:calendar:${id}`);
+}
+
 export async function readBackStaffSave(
   id: string, loadDetail: (id: string) => Promise<StaffDetailSnapshot | null>, isCurrent: () => boolean,
 ): Promise<{ kind: 'saved'; detail: StaffDetailSnapshot } | { kind: 'committed-stale' } | { kind: 'cancelled' }> {
