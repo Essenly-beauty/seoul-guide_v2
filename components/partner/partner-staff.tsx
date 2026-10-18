@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Notice } from '@/components/ui/notice';
 import type { Menu, PartnerSnapshot } from '@/lib/partner/contracts';
 import type { StaffCommand } from '@/lib/partner/staff-contracts';
-import { completeStaffDraft, completeStaffMenuAction, completeStaffReload, discardStaffSelectionDrafts, lockPendingStaffMenuOnLeave, matchingStaffDetail, persistedStaffSelection, postStaffCommand, readBackStaffSave, recoverStaffMenuLock, restoreStaffListFocus, staffCreateAbsentFromList, staffMenuLockAfterRead } from '@/lib/partner/staff-client';
+import { canResetNewStaffProfile, completeStaffDraft, completeStaffMenuAction, completeStaffReload, discardStaffSelectionDrafts, lockPendingStaffMenuOnLeave, matchingStaffDetail, persistedStaffSelection, postStaffCommand, readBackStaffSave, recoverNewStaffProfile, recoverStaffMenuLock, restoreStaffListFocus, staffMenuLockAfterRead } from '@/lib/partner/staff-client';
 import type { StaffCalendar, StaffDetail, StaffDetailSnapshot, StaffListSnapshot, StaffSummary } from '@/lib/partner/staff-server';
 import { staffCalendarDraft, staffCalendarFormValues, staffProfileDraft, staffProfileFormValues, type StaffCalendarDraft, type StaffProfileDraft } from '@/lib/partner/staff-form-values';
 import { PartnerRequestScope, uncertainSaveOutcomeMessage, usePartner, type PartnerDraftRecord } from './partner-provider';
@@ -167,18 +167,20 @@ function StaffEditor({ selection, detail, readOnly, snapshot, onSave, onReload, 
   };
   const reloadProfile = async () => {
     if ((profile.state.kind === 'unconfirmed' || (profile.dirty && profile.state.kind !== 'committed-stale')) && !window.confirm(profile.state.kind === 'unconfirmed' ? '저장 결과가 확인되지 않았습니다. 다시 불러오면 현재 담당자 입력이 조회된 정보로 바뀔 수 있습니다. 계속할까요?' : '담당자 정보의 저장하지 않은 변경사항을 버리고 다시 불러올까요?')) return;
-    if (selection.isNew && !person && profile.state.kind !== 'unconfirmed' && profile.state.kind !== 'committed-stale') { profile.replace({ values: staffProfileDraft(), updatedAt: null }); return; }
+    if (canResetNewStaffProfile(selection.isNew, !!person, profile.state.kind)) { profile.replace({ values: staffProfileDraft(), updatedAt: null }); return; }
     profile.setState({ kind: 'reloading' });
+    if (selection.isNew && !person && profile.state.kind !== 'committed-stale') {
+      const recovery = await recoverNewStaffProfile(selection.id, onReload, onReloadList, isCurrentView);
+      if (recovery.kind === 'found') profile.replace({ values: staffProfileDraft(recovery.detail.staff), updatedAt: recovery.detail.staff.updatedAt });
+      else if (recovery.kind === 'absent') {
+        onNotCreated();
+        profile.setState({ kind: 'error', message: '현재 목록에 이 담당자가 없습니다. 입력은 유지됩니다. 같은 담당자 ID로 다시 저장하거나 잠시 뒤 다시 확인해 주세요.' });
+      } else if (recovery.kind === 'unconfirmed') profile.setState({ kind: 'unconfirmed' });
+      return;
+    }
     await completeStaffReload(selection.id, onReload(), isCurrentView, async (fresh) => {
       if (fresh) profile.replace({ values: staffProfileDraft(fresh.staff), updatedAt: fresh.staff.updatedAt });
-      else if (selection.isNew && profile.state.kind === 'unconfirmed') {
-        const freshList = await onReloadList();
-        if (!isCurrentView()) return;
-        if (staffCreateAbsentFromList(selection.id, freshList)) {
-          onNotCreated();
-          profile.setState({ kind: 'error', message: '현재 목록에 이 담당자가 없습니다. 입력은 유지됩니다. 같은 담당자 ID로 다시 저장하거나 잠시 뒤 다시 확인해 주세요.' });
-        } else profile.setState({ kind: 'unconfirmed' });
-      } else profile.setState(failedReloadState(profile.state, '최신 담당자 정보를 불러오지 못했습니다. 현재 입력은 유지됩니다.'));
+      else profile.setState(failedReloadState(profile.state, '최신 담당자 정보를 불러오지 못했습니다. 현재 입력은 유지됩니다.'));
     });
   };
   const reloadCalendar = async () => {

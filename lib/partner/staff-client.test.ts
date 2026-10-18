@@ -1,6 +1,6 @@
 import { describe, expect, it, vi } from 'vitest';
 import { PartnerDraftStore, PartnerRequestScope, type PartnerDraftRecord } from '@/components/partner/partner-provider';
-import { completeStaffDraft, completeStaffMenuAction, completeStaffReload, discardStaffSelectionDrafts, lockPendingStaffMenuOnLeave, matchingStaffDetail, persistedStaffSelection, postStaffCommand, readBackStaffSave, recoverStaffMenuLock, restoreStaffListFocus, staffCreateAbsentFromList, staffMenuLockAfterRead } from './staff-client';
+import { canResetNewStaffProfile, completeStaffDraft, completeStaffMenuAction, completeStaffReload, discardStaffSelectionDrafts, lockPendingStaffMenuOnLeave, matchingStaffDetail, persistedStaffSelection, postStaffCommand, readBackStaffSave, recoverNewStaffProfile, recoverStaffMenuLock, restoreStaffListFocus, staffCreateAbsentFromList, staffMenuLockAfterRead } from './staff-client';
 import type { StaffCommand } from './staff-contracts';
 import type { StaffDetailSnapshot } from './staff-server';
 
@@ -49,18 +49,45 @@ describe('staff command response before readback', () => {
   });
   it('keeps conflict, access loss, and unconfirmed POST/JSON outcomes distinct from an acknowledged save', async () => {
     const controller = new AbortController();
-    expect(await postStaffCommand(command, controller.signal, async () => new Response(JSON.stringify({ ok: false }), { status: 409 }))).toBe('conflict');
-    expect(await postStaffCommand(command, controller.signal, async () => new Response(JSON.stringify({ ok: false }), { status: 403 }))).toBe('forbidden');
+    expect(await postStaffCommand(command, controller.signal, async () => new Response(JSON.stringify({ ok: false, code: 'PARTNER_CONFLICT' }), { status: 409 }))).toBe('conflict');
+    expect(await postStaffCommand(command, controller.signal, async () => new Response(JSON.stringify({ ok: false, code: 'PARTNER_FORBIDDEN' }), { status: 403 }))).toBe('forbidden');
     expect(await postStaffCommand(command, controller.signal, async () => { throw new Error('connection lost'); })).toBe('unconfirmed');
     expect(await postStaffCommand(command, controller.signal, async () => new Response('not JSON', { status: 200 }))).toBe('unconfirmed');
-    expect(await postStaffCommand(command, controller.signal, async () => new Response(JSON.stringify({ ok: false }), { status: 503 }))).toBe('error');
+    expect(await postStaffCommand(command, controller.signal, async () => new Response(JSON.stringify({ ok: false, code: 'PARTNER_UNAVAILABLE' }), { status: 503 }))).toBe('unconfirmed');
+  });
+  it.each([500, 502, 503, 504])('treats HTTP %i as unconfirmed even with a valid API-shaped JSON failure', async (status) => {
+    const response = new Response(JSON.stringify({ ok: false, code: 'PARTNER_UNAVAILABLE' }), { status });
+    expect(await postStaffCommand(command, new AbortController().signal, async () => response)).toBe('unconfirmed');
+  });
+  it.each([
+    { status: 200, body: { ok: false } },
+    { status: 200, body: {} },
+    { status: 200, body: { ok: 'true' } },
+    { status: 200, body: { ok: true, warning: 'unknown envelope' } },
+    { status: 201, body: { ok: true } },
+    { status: 408, body: { ok: false, code: 'PARTNER_UNAVAILABLE' } },
+    { status: 409, body: { ok: false } },
+    { status: 409, body: { ok: false, code: 'INVALID_COMMAND' } },
+  ])('treats non-authoritative response $status $body as unconfirmed', async ({ status, body }) => {
+    expect(await postStaffCommand(command, new AbortController().signal, async () => new Response(JSON.stringify(body), { status }))).toBe('unconfirmed');
+  });
+  it.each([
+    { status: 400, code: 'INVALID_COMMAND', outcome: 'error' },
+    { status: 400, code: 'INVALID_JSON', outcome: 'error' },
+    { status: 401, code: 'UNAUTHENTICATED', outcome: 'forbidden' },
+    { status: 403, code: 'PARTNER_READ_ONLY', outcome: 'forbidden' },
+    { status: 409, code: 'PARTNER_CONFLICT', outcome: 'conflict' },
+    { status: 413, code: 'BODY_TOO_LARGE', outcome: 'error' },
+    { status: 415, code: 'UNSUPPORTED_MEDIA_TYPE', outcome: 'error' },
+  ])('preserves explicit app rejection $status $code', async ({ status, code, outcome }) => {
+    expect(await postStaffCommand(command, new AbortController().signal, async () => new Response(JSON.stringify({ ok: false, code }), { status }))).toBe(outcome);
   });
   it('uses the same create UUID for a retry after an unconfirmed POST and treats 409 as conflict', async () => {
     const command: StaffCommand = { kind: 'staff', mode: 'create', id: staffA, values: { name: 'A', title: '', introduction: '', visibility: 'draft', sortOrder: 0 } };
     const bodies: string[] = [];
     const post = vi.fn(async (_url: string | URL | Request, init?: RequestInit) => {
       bodies.push(String(init?.body));
-      return bodies.length === 1 ? Promise.reject(new Error('response lost')) : new Response(JSON.stringify({ ok: false }), { status: 409 });
+      return bodies.length === 1 ? Promise.reject(new Error('response lost')) : new Response(JSON.stringify({ ok: false, code: 'PARTNER_CONFLICT' }), { status: 409 });
     }) as typeof fetch;
     const controller = new AbortController();
     expect(await postStaffCommand(command, controller.signal, post)).toBe('unconfirmed');
@@ -70,6 +97,41 @@ describe('staff command response before readback', () => {
     expect(JSON.parse(bodies[0]).id).toBe(staffA);
     expect(bodies[1]).toBe(bodies[0]);
     expect(staffCreateAbsentFromList(staffA, { merchantId, staff: [detail(staffA).staff], readOnly: false, loadedAt: '2026-10-18T00:00:00Z' })).toBe(false);
+  });
+  it('recovers a late original create after unknown POST, absent list, and same-UUID retry conflict without resetting input', async () => {
+    const command: StaffCommand = { kind: 'staff', mode: 'create', id: staffA, values: { name: 'Entered A', title: '', introduction: '', visibility: 'draft', sortOrder: 0 } };
+    const drafts = new PartnerDraftStore();
+    const key = `staff:profile:${staffA}`;
+    const values = { values: command.values, updatedAt: null };
+    const record: PartnerDraftRecord<typeof values> = { token: Symbol(key), draft: values, baseline: { values: { ...command.values, name: '' }, updatedAt: null }, state: { kind: 'pending' } };
+    drafts.write(key, record);
+    const controller = new AbortController();
+    const sent: string[] = [];
+    const post = vi.fn(async (_url: string | URL | Request, init?: RequestInit) => {
+      sent.push(String(init?.body));
+      if (sent.length === 1) throw new Error('acknowledgement lost after commit');
+      return new Response(JSON.stringify({ ok: false, code: 'PARTNER_CONFLICT' }), { status: 409 });
+    }) as typeof fetch;
+    expect(await postStaffCommand(command, controller.signal, post)).toBe('unconfirmed');
+    expect(completeStaffDraft(drafts, key, record, { ...record, state: { kind: 'unconfirmed' } })).toBe(true);
+    expect(staffCreateAbsentFromList(staffA, { merchantId, staff: [], readOnly: false, loadedAt: '2026-10-18T00:00:00Z' })).toBe(true);
+    expect(await postStaffCommand(command, controller.signal, post)).toBe('conflict');
+    expect(completeStaffDraft(drafts, key, record, { ...record, state: { kind: 'conflict', message: 'retry conflicted' } })).toBe(true);
+    expect(sent[1]).toBe(sent[0]);
+    expect(canResetNewStaffProfile(true, false, 'conflict')).toBe(false);
+    expect(drafts.read<typeof values>(key)?.draft.values.name).toBe('Entered A');
+    const reads: string[] = [];
+    const initiallyMissing = await recoverNewStaffProfile(staffA, async (id) => { reads.push(id); return null; }, async () => ({ merchantId, staff: [], readOnly: false, loadedAt: '2026-10-18T00:00:00Z' }), () => true);
+    expect(initiallyMissing).toEqual({ kind: 'absent' });
+    const committed = { ...detail(staffA), staff: { ...detail(staffA).staff, name: 'Original A' } };
+    const recovered = await recoverNewStaffProfile(staffA, async (id) => { reads.push(id); return committed; }, async () => { throw new Error('list should not be needed'); }, () => true);
+    expect(reads).toEqual([staffA, staffA]);
+    expect(recovered).toEqual({ kind: 'found', detail: committed });
+    expect(drafts.read<typeof values>(key)?.draft.values.name).toBe('Entered A'); // No automatic replacement on 409 or a background read.
+    expect(recovered.kind === 'found' && recovered.detail.staff.name).toBe('Original A');
+    expect(persistedStaffSelection({ id: staffA, isNew: true }, recovered.kind === 'found' ? recovered.detail.staff.id : '')).toEqual({ id: staffA, isNew: false });
+    expect(canResetNewStaffProfile(true, false, 'error')).toBe(false);
+    expect(canResetNewStaffProfile(true, false, 'idle')).toBe(true);
   });
 });
 

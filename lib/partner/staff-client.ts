@@ -3,6 +3,14 @@ import type { StaffCommand } from './staff-contracts';
 import type { PartnerDraftRecord, PartnerDraftStore } from '@/components/partner/partner-provider';
 
 export type StaffPostResult = 'acknowledged' | 'conflict' | 'forbidden' | 'error' | 'unconfirmed';
+const knownRejections: Record<number, readonly string[]> = {
+  400: ['INVALID_COMMAND', 'INVALID_JSON', 'BODY_READ_FAILED'],
+  401: ['UNAUTHENTICATED'],
+  403: ['INVALID_ORIGIN', 'PARTNER_UNASSIGNED', 'PARTNER_READ_ONLY', 'PARTNER_FORBIDDEN'],
+  409: ['PARTNER_CONFLICT'],
+  413: ['BODY_TOO_LARGE'],
+  415: ['UNSUPPORTED_MEDIA_TYPE'],
+};
 
 export async function postStaffCommand(command: StaffCommand, signal: AbortSignal, post: typeof fetch = fetch): Promise<StaffPostResult> {
   try {
@@ -11,9 +19,11 @@ export async function postStaffCommand(command: StaffCommand, signal: AbortSigna
       body: JSON.stringify(command), signal,
     });
     const body = await response.json();
+    if (response.status === 200 && body && typeof body === 'object' && !Array.isArray(body) && Object.keys(body).length === 1 && body.ok === true) return 'acknowledged';
+    if (!body || typeof body !== 'object' || Array.isArray(body) || body.ok !== false || typeof body.code !== 'string' || !knownRejections[response.status]?.includes(body.code)) return 'unconfirmed';
     if (response.status === 401 || response.status === 403) return 'forbidden';
     if (response.status === 409) return 'conflict';
-    return response.ok && body?.ok === true ? 'acknowledged' : 'error';
+    return 'error';
   } catch { return 'unconfirmed'; }
 }
 
@@ -71,6 +81,24 @@ export function staffCreateAbsentFromList(id: string, list: StaffListSnapshot | 
 
 export function persistedStaffSelection<T extends { id: string; isNew: boolean }>(selection: T | null, id: string): T | null {
   return selection?.id === id && selection.isNew ? { ...selection, isNew: false } : selection;
+}
+
+/** Only a never-submitted new form may reset locally; attempted creates must read the same UUID. */
+export function canResetNewStaffProfile(isNew: boolean, hasPerson: boolean, stateKind: string): boolean {
+  return isNew && !hasPerson && stateKind === 'idle';
+}
+
+/** An explicit create-recovery reload reads the original UUID before allowing any local reset or retry. */
+export async function recoverNewStaffProfile(
+  id: string, loadDetail: (id: string) => Promise<StaffDetailSnapshot | null>,
+  loadList: () => Promise<StaffListSnapshot | null>, isCurrent: () => boolean,
+): Promise<{ kind: 'found'; detail: StaffDetailSnapshot } | { kind: 'absent' | 'unconfirmed' | 'cancelled' }> {
+  const detail = await matchingStaffDetail(id, loadDetail(id));
+  if (!isCurrent()) return { kind: 'cancelled' };
+  if (detail) return { kind: 'found', detail };
+  const list = await loadList();
+  if (!isCurrent()) return { kind: 'cancelled' };
+  return { kind: staffCreateAbsentFromList(id, list) ? 'absent' : 'unconfirmed' };
 }
 
 export async function readBackStaffSave(
