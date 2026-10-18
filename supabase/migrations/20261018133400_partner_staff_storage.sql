@@ -54,7 +54,9 @@ create table public.merchant_staff (
   created_at timestamptz not null default now(),
   updated_at timestamptz not null default now(),
   unique (merchant_id, id),
-  check (visibility <> 'visible' or length(btrim(name)) > 0)
+  -- Match ECMAScript String.prototype.trim, including line terminators.
+  check (visibility <> 'visible' or length(btrim(name,
+    U&'\0009\000A\000B\000C\000D\0020\00A0\1680\2000\2001\2002\2003\2004\2005\2006\2007\2008\2009\200A\2028\2029\202F\205F\3000\FEFF')) > 0)
 );
 
 create table public.merchant_staff_menus (
@@ -140,6 +142,8 @@ create policy partner_update on public.merchant_staff_schedules
 -- The row lock serializes competing direct Data API inserts for one staff
 -- member. The owner check is inside SECURITY DEFINER so it cannot be bypassed
 -- through the trigger's elevated table privileges.
+-- The count relies on READ COMMITTED snapshots. Any future REPEATABLE READ
+-- writer needs a separate serialization design before using this path.
 create function private.partner_staff_menu_limit()
   returns trigger language plpgsql security definer set search_path = '' as $body$
 begin

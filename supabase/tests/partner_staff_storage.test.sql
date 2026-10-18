@@ -210,6 +210,14 @@ select throws_ok($$update public.merchant_staff set sort_order=-1$$, '23514', nu
 select throws_ok($$update public.merchant_staff set sort_order=9007199254740992$$, '23514', null, 'unsafe staff order rejected');
 select throws_ok($$update public.merchant_staff set visibility='published'$$, '23514', null, 'unknown visibility rejected');
 select throws_ok($$update public.merchant_staff set name='  '$$, '23514', null, 'visible staff requires a nonblank name');
+select throws_ok($$update public.merchant_staff set name=E'\t\n\r'$$,
+  '23514', null, 'visible staff rejects ASCII control whitespace-only name');
+select throws_ok($$update public.merchant_staff set name=U&'\00A0'$$,
+  '23514', null, 'visible staff rejects nonbreaking-space-only name');
+select throws_ok($$update public.merchant_staff set name=U&'\2000\200A'$$,
+  '23514', null, 'visible staff rejects Unicode space-only name');
+select lives_ok($$update public.merchant_staff set name=U&'\200B'$$,
+  'zero-width space remains valid because JavaScript trim preserves it');
 select lives_ok($$update public.merchant_staff set visibility='draft',name=''$$, 'an incomplete draft may have no name');
 select lives_ok($$update public.merchant_staff set visibility='hidden'$$, 'hidden staff remains a valid profile state');
 select lives_ok($$update public.merchant_staff set name='STAFF_PRIVATE_MARKER',visibility='visible'$$, 'owner can restore visible staff');
