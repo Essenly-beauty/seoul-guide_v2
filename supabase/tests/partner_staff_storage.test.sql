@@ -14,9 +14,23 @@ from pg_class where oid in (
   'public.merchant_staff_menus'::regclass,
   'public.merchant_staff_schedules'::regclass
 );
+select ok(exists (
+  select 1 from pg_trigger tg
+  where tg.tgrelid = ('public.' || t)::regclass
+    and tg.tgfoid = 'private.partner_touch()'::regprocedure
+    and not tg.tgisinternal and tg.tgenabled in ('O','A')
+    and (tg.tgtype::integer & 2) = 2
+    and (tg.tgtype::integer & 16) = 16
+), t || ' updates run the row touch hook')
+from unnest(array['merchant_staff','merchant_staff_schedules']) t;
 select ok(not has_table_privilege('anon', 'public.' || t, privilege), t || ' denies anon ' || privilege)
 from unnest(array['merchant_staff','merchant_staff_menus','merchant_staff_schedules']) t
 cross join unnest(array['select','insert','update','delete']) privilege;
+select ok(not has_table_privilege(role_name, 'public.' || t, privilege),
+  t || ' denies ' || role_name || ' ' || privilege)
+from unnest(array['anon','authenticated']) role_name
+cross join unnest(array['merchant_staff','merchant_staff_menus','merchant_staff_schedules']) t
+cross join unnest(array['truncate','references','trigger','maintain']) privilege;
 select ok(not has_column_privilege('anon', 'public.' || t, a.attname, privilege),
   t || '.' || a.attname || ' denies anon ' || privilege)
 from unnest(array['merchant_staff','merchant_staff_menus','merchant_staff_schedules']) t
@@ -276,11 +290,24 @@ select throws_ok($$update public.merchant_staff_schedules set blocks='[{"date":"
 
 -- Cross-tenant foreign keys must reject IDs supplied to an otherwise valid
 -- tenant write. RLS by itself cannot prove this relationship.
-set local role service_role;
-set local request.jwt.claim.sub = '';
-insert into public.merchant_staff(id,merchant_id,name,visibility) values
-  ('f4000000-0000-0000-0000-000000000015','f4000000-0000-0000-0000-000000000012','B staff','visible');
 set local role authenticated;
+set local request.jwt.claim.sub = 'f4000000-0000-0000-0000-000000000001';
+select lives_ok($$insert into public.merchant_staff(id,merchant_id,name)
+  values ('f4000000-0000-0000-0000-000000000006','f4000000-0000-0000-0000-000000000002','Second A staff')$$,
+  'owner creates a second staff profile for isolated write denials');
+set local request.jwt.claim.sub = 'f4000000-0000-0000-0000-000000000011';
+select results_eq($$insert into public.merchant_staff(id,merchant_id,name,visibility)
+  values ('f4000000-0000-0000-0000-000000000015','f4000000-0000-0000-0000-000000000012','B staff','visible')
+  returning id::text$$, array['f4000000-0000-0000-0000-000000000015'],
+  'B owner creates own staff');
+select results_eq($$insert into public.merchant_staff_menus(merchant_id,staff_id,service_id)
+  values ('f4000000-0000-0000-0000-000000000012','f4000000-0000-0000-0000-000000000015','f4000000-0000-0000-0000-000000000014')
+  returning service_id::text$$, array['f4000000-0000-0000-0000-000000000014'],
+  'B owner assigns B menu to B staff');
+select results_eq($$insert into public.merchant_staff_schedules(merchant_id,staff_id)
+  values ('f4000000-0000-0000-0000-000000000012','f4000000-0000-0000-0000-000000000015')
+  returning staff_id::text$$, array['f4000000-0000-0000-0000-000000000015'],
+  'B owner creates B staff schedule');
 set local request.jwt.claim.sub = 'f4000000-0000-0000-0000-000000000001';
 select throws_ok($$insert into public.merchant_staff_menus(merchant_id,staff_id,service_id)
   values ('f4000000-0000-0000-0000-000000000002','f4000000-0000-0000-0000-000000000015','f4000000-0000-0000-0000-000000000004')$$,
@@ -291,11 +318,32 @@ select throws_ok($$insert into public.merchant_staff_menus(merchant_id,staff_id,
 set local role service_role;
 set local request.jwt.claim.sub = '';
 select throws_ok($$insert into public.merchant_staff_schedules(merchant_id,staff_id)
-  values ('f4000000-0000-0000-0000-000000000012','f4000000-0000-0000-0000-000000000005')$$,
+  values ('f4000000-0000-0000-0000-000000000012','f4000000-0000-0000-0000-000000000006')$$,
   '23503', null, 'B schedule cannot point at A staff');
 
 set local role authenticated;
 set local request.jwt.claim.sub = 'f4000000-0000-0000-0000-000000000011';
+select results_eq($$select name from public.merchant_staff where id='f4000000-0000-0000-0000-000000000015'$$,
+  array['B staff'], 'B owner reads own staff');
+select results_eq($$update public.merchant_staff set title='B lead'
+  where id='f4000000-0000-0000-0000-000000000015' returning title$$,
+  array['B lead'], 'B owner updates own staff');
+select results_eq($$select service_id::text from public.merchant_staff_menus
+  where staff_id='f4000000-0000-0000-0000-000000000015'$$,
+  array['f4000000-0000-0000-0000-000000000014'], 'B owner reads own assignment');
+select results_eq($$delete from public.merchant_staff_menus
+  where staff_id='f4000000-0000-0000-0000-000000000015' returning service_id::text$$,
+  array['f4000000-0000-0000-0000-000000000014'], 'B owner removes own assignment');
+select lives_ok($$insert into public.merchant_staff_menus(merchant_id,staff_id,service_id)
+  values ('f4000000-0000-0000-0000-000000000012','f4000000-0000-0000-0000-000000000015','f4000000-0000-0000-0000-000000000014')$$,
+  'B owner restores own assignment');
+select results_eq($$update public.merchant_staff_schedules
+  set hours='[{"weekday":2,"startMinute":540,"endMinute":600}]'
+  where staff_id='f4000000-0000-0000-0000-000000000015' returning jsonb_array_length(hours)$$,
+  array[1], 'B owner updates own schedule');
+select results_eq($$select jsonb_array_length(hours) from public.merchant_staff_schedules
+  where staff_id='f4000000-0000-0000-0000-000000000015'$$,
+  array[1], 'B owner reads own schedule');
 select is_empty($$select id from public.merchant_staff where merchant_id='f4000000-0000-0000-0000-000000000002'$$,
   'B owner cannot read A staff');
 select is_empty($$select staff_id from public.merchant_staff_menus where merchant_id='f4000000-0000-0000-0000-000000000002'$$,
@@ -316,10 +364,6 @@ select throws_ok($$insert into public.merchant_staff_schedules(merchant_id,staff
   values ('f4000000-0000-0000-0000-000000000002','f4000000-0000-0000-0000-000000000005')$$,
   '42501', null, 'B owner cannot create A schedule');
 
-set local request.jwt.claim.sub = 'f4000000-0000-0000-0000-000000000001';
-select lives_ok($$insert into public.merchant_staff(id,merchant_id,name)
-  values ('f4000000-0000-0000-0000-000000000006','f4000000-0000-0000-0000-000000000002','Second A staff')$$,
-  'owner creates a second staff profile for isolated write denials');
 set local request.jwt.claim.sub = 'f4000000-0000-0000-0000-000000000021';
 select throws_ok($$insert into public.merchant_staff(id,merchant_id,name)
   values ('f4000000-0000-0000-0000-000000000017','f4000000-0000-0000-0000-000000000002','unassigned')$$,
