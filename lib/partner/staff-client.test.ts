@@ -1,6 +1,6 @@
 import { describe, expect, it, vi } from 'vitest';
 import { PartnerDraftStore, PartnerRequestScope, type PartnerDraftRecord } from '@/components/partner/partner-provider';
-import { completeStaffDraft, completeStaffMenuAction, completeStaffReload, discardStaffSelectionDrafts, matchingStaffDetail, postStaffCommand, readBackStaffSave, restoreStaffListFocus } from './staff-client';
+import { completeStaffDraft, completeStaffMenuAction, completeStaffReload, discardStaffSelectionDrafts, lockPendingStaffMenuOnLeave, matchingStaffDetail, postStaffCommand, readBackStaffSave, recoverStaffMenuLock, restoreStaffListFocus, staffCreateAbsentFromList, staffMenuLockAfterRead } from './staff-client';
 import type { StaffCommand } from './staff-contracts';
 import type { StaffDetailSnapshot } from './staff-server';
 
@@ -47,16 +47,36 @@ describe('staff command response before readback', () => {
       method: 'POST', credentials: 'same-origin', signal: controller.signal, body: JSON.stringify(command),
     }));
   });
-  it('keeps conflict, access loss, and ambiguous network outcome distinct for draft recovery', async () => {
+  it('keeps conflict, access loss, and unconfirmed POST/JSON outcomes distinct from an acknowledged save', async () => {
     const controller = new AbortController();
     expect(await postStaffCommand(command, controller.signal, async () => new Response(JSON.stringify({ ok: false }), { status: 409 }))).toBe('conflict');
     expect(await postStaffCommand(command, controller.signal, async () => new Response(JSON.stringify({ ok: false }), { status: 403 }))).toBe('forbidden');
-    expect(await postStaffCommand(command, controller.signal, async () => { throw new Error('connection lost'); })).toBe('ambiguous');
+    expect(await postStaffCommand(command, controller.signal, async () => { throw new Error('connection lost'); })).toBe('unconfirmed');
+    expect(await postStaffCommand(command, controller.signal, async () => new Response('not JSON', { status: 200 }))).toBe('unconfirmed');
     expect(await postStaffCommand(command, controller.signal, async () => new Response(JSON.stringify({ ok: false }), { status: 503 }))).toBe('error');
+  });
+  it('uses the same create UUID for a retry after an unconfirmed POST and treats 409 as conflict', async () => {
+    const command: StaffCommand = { kind: 'staff', mode: 'create', id: staffA, values: { name: 'A', title: '', introduction: '', visibility: 'draft', sortOrder: 0 } };
+    const bodies: string[] = [];
+    const post = vi.fn(async (_url: string | URL | Request, init?: RequestInit) => {
+      bodies.push(String(init?.body));
+      return bodies.length === 1 ? Promise.reject(new Error('response lost')) : new Response(JSON.stringify({ ok: false }), { status: 409 });
+    }) as typeof fetch;
+    const controller = new AbortController();
+    expect(await postStaffCommand(command, controller.signal, post)).toBe('unconfirmed');
+    expect(staffCreateAbsentFromList(staffA, null)).toBe(false); // A failed verification read must remain locked.
+    expect(staffCreateAbsentFromList(staffA, { merchantId, staff: [detail(staffB).staff], readOnly: false, loadedAt: '2026-10-18T00:00:00Z' })).toBe(true);
+    expect(await postStaffCommand(command, controller.signal, post)).toBe('conflict');
+    expect(JSON.parse(bodies[0]).id).toBe(staffA);
+    expect(bodies[1]).toBe(bodies[0]);
+    expect(staffCreateAbsentFromList(staffA, { merchantId, staff: [detail(staffA).staff], readOnly: false, loadedAt: '2026-10-18T00:00:00Z' })).toBe(false);
   });
 });
 
 describe('mounted staff form completion after selection changes', () => {
+  it('reserves committed-stale for an acknowledged POST whose detail readback fails', async () => {
+    expect(await readBackStaffSave(staffA, async () => null, () => true)).toEqual({ kind: 'committed-stale' });
+  });
   it('cancels A save readback after switching to B, even when the read resolves null', async () => {
     const scope = new PartnerRequestScope();
     let selectedId = staffA;
@@ -151,6 +171,48 @@ describe('mounted staff form completion after selection changes', () => {
     expect(drafts.read(inactiveDirtyKey)).toBe(unconfirmedDirty);
     expect(drafts.read(profileKey)?.draft).toEqual(changed); // Return B → A and recover the uncertain form.
     expect(drafts.read(profileKey)?.state).toEqual({ kind: 'committed-stale' });
+  });
+
+  it('preserves unconfirmed A input on staff switches even when its draft equals its baseline', () => {
+    const drafts = new PartnerDraftStore();
+    const key = `staff:profile:${staffA}`;
+    const baseline = { values: { name: 'A' }, updatedAt: '2026-10-18T00:00:00Z' };
+    const unconfirmed: PartnerDraftRecord<typeof baseline> = { token: Symbol(key), draft: baseline, baseline, state: { kind: 'unconfirmed' } };
+    drafts.write(key, unconfirmed); drafts.setActive(key);
+    expect(drafts.hasActiveUnsavedChanges()).toBe(true);
+    drafts.setActive(null, key);
+    expect(drafts.hasUnsavedChanges()).toBe(true);
+    discardStaffSelectionDrafts(drafts, staffA);
+    expect(drafts.read(key)).toBe(unconfirmed);
+  });
+
+  it('keeps a menu link locked across background reads and staff switches until explicit successful reload', () => {
+    const locks = new Map([[staffA, '연결 요청 결과를 확인할 수 없습니다.']]);
+    expect(staffMenuLockAfterRead(locks, staffA, false)).toBe('연결 요청 결과를 확인할 수 없습니다.');
+    expect(staffMenuLockAfterRead(locks, staffB, false)).toBeNull();
+    expect(locks.get(staffA)).toBeDefined(); // Return B → A: the original menu is still locked.
+    expect(staffMenuLockAfterRead(locks, staffA, true)).toBeNull();
+    expect(locks.has(staffA)).toBe(false);
+  });
+
+  it('locks only A when its menu write is pending at selection switch and waits for completion before recovery read', async () => {
+    const locks = new Map<string, string>();
+    let finish!: () => void;
+    const pendingAction = new Promise<void>((resolve) => { finish = resolve; });
+    const pending = new Map([[staffA, pendingAction]]);
+    lockPendingStaffMenuOnLeave(locks, pending, staffA);
+    expect(locks.get(staffA)).toContain('연결 요청');
+    expect(locks.has(staffB)).toBe(false);
+    const read = vi.fn(async () => detail(staffA));
+    let selectedId = staffB;
+    const cancelledRecovery = recoverStaffMenuLock(staffA, pendingAction, () => selectedId === staffA, read);
+    expect(read).not.toHaveBeenCalled();
+    finish();
+    expect(await cancelledRecovery).toBeNull();
+    expect(locks.has(staffA)).toBe(true);
+    selectedId = staffA;
+    expect(await recoverStaffMenuLock(staffA, pendingAction, () => selectedId === staffA, read)).toEqual(detail(staffA));
+    expect(read).toHaveBeenCalledWith(staffA, true);
   });
 
   it('does not put A menu uncertainty or busy state on B after a late A result', async () => {

@@ -4,7 +4,7 @@ import { describe, expect, it } from 'vitest';
 import { StaffCalendarFields, StaffListView, StaffMenuAssignments, StaffModeNotice, StaffProfileFields } from '@/components/partner/partner-staff';
 import { staffCalendarDraft, staffProfileDraft } from './staff-form-values';
 import type { StaffSummary } from './staff-server';
-import type { PartnerSnapshot } from './contracts';
+import type { Menu, PartnerSnapshot } from './contracts';
 
 const merchantId = '11111111-1111-4111-8111-111111111111';
 const staffId = '22222222-2222-4222-8222-222222222222';
@@ -45,6 +45,23 @@ describe('staff editor visible states', () => {
     expect(calendar.text()).toContain('주간 근무');
     expect(calendar.text()).toContain('특별 날짜');
     expect(calendar('fieldset[disabled]').length).toBe(2);
+  });
+
+  it('identifies duplicate and blank menu names uniquely without adding IDs to unique names', () => {
+    const menu = (id: string, nameKo: string): Menu => ({ id, merchantId, categoryId: staffId, nameKo, nameEn: '', descriptionKo: '', descriptionEn: '', priceKrw: null, depositKrw: null, durationMinutes: null, cleanupMinutes: 0, visibility: 'draft', sortOrder: 0, updatedAt: '2026-10-18T00:00:00Z' });
+    const first = menu('aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa', '커트');
+    const second = menu('bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb', '커트');
+    const blank = menu('cccccccc-cccc-4ccc-8ccc-cccccccccccc', '');
+    const unique = menu('dddddddd-dddd-4ddd-8ddd-dddddddddddd', '염색');
+    const $ = render(<StaffMenuAssignments menus={[first, second, blank, unique]} menuIds={[]} busy={false} disabled={false} onToggle={() => {}} />);
+    for (const target of [first, second, blank]) {
+      const row = $('li').filter((_, item) => $(item).text().includes(target.id));
+      expect(row.length).toBe(1);
+      expect(row.find('button').attr('aria-label')).toContain(target.id);
+    }
+    const uniqueRow = $('li').filter((_, item) => $(item).text().includes('염색'));
+    expect(uniqueRow.text()).not.toContain(unique.id);
+    expect(uniqueRow.find('button').attr('aria-label')).not.toContain(unique.id);
   });
 
   it('calls staff special dates and accessible time controls 근무 rather than 영업', () => {

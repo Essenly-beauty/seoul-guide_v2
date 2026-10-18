@@ -8,14 +8,17 @@ import type { ReservationCommand } from '@/lib/partner/reservation-commands';
 import { usePartner, type PartnerDraftRecord } from './partner-provider';
 import styles from './partner.module.css';
 
-export type SaveState = { kind: 'idle' | 'pending' | 'reloading' | 'saved' | 'committed-stale' } | { kind: 'error' | 'conflict'; message: string };
+export type SaveState = { kind: 'idle' | 'pending' | 'reloading' | 'saved' | 'committed-stale' | 'unconfirmed' } | { kind: 'error' | 'conflict'; message: string };
+export function failedReloadState(previous: SaveState, message: string): SaveState {
+  return previous.kind === 'unconfirmed' || previous.kind === 'committed-stale' ? previous : { kind: 'error', message };
+}
 export function SaveStatus({ state, onReload }: { state: SaveState; onReload: () => void }) {
   if (state.kind === 'idle') return null;
   return <div className={styles.saveStatus}>
-    <Notice tone={state.kind === 'error' || state.kind === 'conflict' || state.kind === 'committed-stale' ? 'warning' : 'info'} role={state.kind === 'error' || state.kind === 'conflict' ? 'alert' : 'status'}>
-      {state.kind === 'pending' ? '저장 중입니다…' : state.kind === 'reloading' ? '최신 정보를 불러오는 중입니다…' : state.kind === 'saved' ? '저장했습니다.' : state.kind === 'committed-stale' ? '저장은 완료됐지만 최신 정보 조회 실패. 중복 저장을 막기 위해 다시 불러오기 전까지 편집을 잠갔습니다.' : 'message' in state ? state.message : ''}
+    <Notice tone={state.kind === 'error' || state.kind === 'conflict' || state.kind === 'committed-stale' || state.kind === 'unconfirmed' ? 'warning' : 'info'} role={state.kind === 'error' || state.kind === 'conflict' || state.kind === 'unconfirmed' ? 'alert' : 'status'}>
+      {state.kind === 'pending' ? '저장 중입니다…' : state.kind === 'reloading' ? '최신 정보를 불러오는 중입니다…' : state.kind === 'saved' ? '저장했습니다.' : state.kind === 'committed-stale' ? '저장은 완료됐지만 최신 정보 조회 실패. 중복 저장을 막기 위해 다시 불러오기 전까지 편집을 잠갔습니다.' : state.kind === 'unconfirmed' ? '저장 요청이 처리됐는지 확인할 수 없습니다. 현재 입력을 유지하고 편집을 잠갔습니다. 다시 불러와 저장 여부를 확인해 주세요.' : 'message' in state ? state.message : ''}
     </Notice>
-    {(state.kind === 'conflict' || state.kind === 'committed-stale') && <Button variant="secondary" onClick={onReload}>{state.kind === 'conflict' ? '변경사항 버리고 다시 불러오기' : '저장된 정보 다시 불러오기'}</Button>}
+    {(state.kind === 'conflict' || state.kind === 'committed-stale' || state.kind === 'unconfirmed') && <Button variant="secondary" onClick={onReload}>{state.kind === 'conflict' ? '변경사항 버리고 다시 불러오기' : state.kind === 'unconfirmed' ? '저장 여부 확인하고 다시 불러오기' : '저장된 정보 다시 불러오기'}</Button>}
   </div>;
 }
 
@@ -24,7 +27,7 @@ type VersionedValues = { values: unknown; updatedAt: string | null };
 /** Preserve this form's edits when only a sibling field changed on the shared schedule row. */
 export function rebaseUnchangedSharedSchedule<T extends VersionedValues>(record: PartnerDraftRecord<T>, incoming: VersionedValues): PartnerDraftRecord<T> | null {
   if (!incoming.updatedAt || incoming.updatedAt === record.baseline.updatedAt ||
-    record.state.kind === 'pending' || record.state.kind === 'reloading' || record.state.kind === 'committed-stale' ||
+    record.state.kind === 'pending' || record.state.kind === 'reloading' || record.state.kind === 'committed-stale' || record.state.kind === 'unconfirmed' ||
     JSON.stringify(record.draft) === JSON.stringify(record.baseline) ||
     JSON.stringify(incoming.values) !== JSON.stringify(record.baseline.values)) return null;
   return { ...record,
@@ -40,14 +43,14 @@ export function usePartnerDraft<T extends VersionedValues>(key: string, initial:
   const [fallback] = useState<PartnerDraftRecord<T>>(() => ({ token: Symbol(key), draft: initial, baseline: initial, state: { kind: 'idle' } }));
   const [restored] = useState(() => {
     const previous = drafts.read<T>(key);
-    return !!previous && (JSON.stringify(previous.draft) !== JSON.stringify(previous.baseline) || ['pending', 'reloading', 'committed-stale'].includes(previous.state.kind));
+    return !!previous && (JSON.stringify(previous.draft) !== JSON.stringify(previous.baseline) || ['pending', 'reloading', 'committed-stale', 'unconfirmed'].includes(previous.state.kind));
   });
   const getSnapshot = useCallback(() => drafts.read<T>(key) ?? fallback, [drafts, key, fallback]);
   const record = useSyncExternalStore(drafts.subscribe, getSnapshot, () => fallback);
   const { draft, baseline, state } = record;
   const busy = useRef(false);
   const dirty = JSON.stringify(draft) !== JSON.stringify(baseline);
-  const locked = state.kind === 'pending' || state.kind === 'reloading' || state.kind === 'committed-stale';
+  const locked = state.kind === 'pending' || state.kind === 'reloading' || state.kind === 'committed-stale' || state.kind === 'unconfirmed';
   const serializedInitial = JSON.stringify(initial);
   useEffect(() => {
     drafts.setActive(key);
@@ -56,7 +59,7 @@ export function usePartnerDraft<T extends VersionedValues>(key: string, initial:
   }, [drafts, key, fallback]);
   useEffect(() => {
     const current = drafts.read<T>(key);
-    if (!current || current.state.kind === 'pending' || current.state.kind === 'reloading' || current.state.kind === 'committed-stale') return;
+    if (!current || current.state.kind === 'pending' || current.state.kind === 'reloading' || current.state.kind === 'committed-stale' || current.state.kind === 'unconfirmed') return;
     const next = JSON.parse(serializedInitial) as T;
     if (JSON.stringify(current.draft) === JSON.stringify(current.baseline)) {
       if (JSON.stringify(current.baseline) !== serializedInitial) drafts.write(key, { ...current, draft: next, baseline: next });
@@ -80,7 +83,7 @@ export function usePartnerDraft<T extends VersionedValues>(key: string, initial:
     } else drafts.complete(key, record.token, { ...record, state: result });
   };
   const reload = async (next: (snapshot: PartnerSnapshot) => T) => {
-    if (busy.current || (locked && state.kind !== 'committed-stale') || (dirty && !drafts.confirmReload(key, () => window.confirm('이 양식의 저장하지 않은 변경사항을 버리고 다시 불러올까요?')))) return;
+    if (busy.current || (locked && state.kind !== 'committed-stale' && state.kind !== 'unconfirmed') || ((dirty || state.kind === 'unconfirmed') && !drafts.confirmReload(key, () => window.confirm(state.kind === 'unconfirmed' ? '저장 결과가 확인되지 않았습니다. 다시 불러오면 현재 입력이 조회된 정보로 바뀔 수 있습니다. 계속할까요?' : '이 양식의 저장하지 않은 변경사항을 버리고 다시 불러올까요?')))) return;
     busy.current = true;
     setState({ kind: 'reloading' });
     const current = await partner.refresh();
@@ -88,7 +91,7 @@ export function usePartnerDraft<T extends VersionedValues>(key: string, initial:
     if (current) {
       const value = next(current);
       drafts.complete(key, record.token, { ...record, draft: value, baseline: value, state: { kind: 'idle' } });
-    } else drafts.complete(key, record.token, { ...record, state: state.kind === 'committed-stale' ? { kind: 'committed-stale' } : { kind: 'error', message: '최신 정보를 불러오지 못했습니다. 현재 입력은 유지됩니다.' } });
+    } else drafts.complete(key, record.token, { ...record, state: failedReloadState(state, '최신 정보를 불러오지 못했습니다. 현재 입력은 유지됩니다.') });
   };
   return { draft, setDraft, dirty, locked, state, restored, submit, reload, invalid: (message: string) => setState({ kind: 'error', message }) };
 }
@@ -105,8 +108,8 @@ export function FormActions({ state, disabled, dirty, onReload }: { state: SaveS
     <SaveStatus state={state} onReload={onReload} />
     <div className={styles.actions}>
       <Button type="submit" disabled={disabled || !dirty}>{state.kind === 'pending' ? '저장 중…' : '변경사항 저장'}</Button>
-      {state.kind !== 'conflict' && state.kind !== 'committed-stale' && <Button variant="secondary" disabled={state.kind === 'pending' || state.kind === 'reloading'} onClick={onReload}>변경사항 버리고 다시 불러오기</Button>}
-      {dirty && state.kind !== 'committed-stale' && <span className={styles.muted}>저장하지 않은 변경사항</span>}
+      {state.kind !== 'conflict' && state.kind !== 'committed-stale' && state.kind !== 'unconfirmed' && <Button variant="secondary" disabled={state.kind === 'pending' || state.kind === 'reloading'} onClick={onReload}>변경사항 버리고 다시 불러오기</Button>}
+      {dirty && state.kind !== 'committed-stale' && state.kind !== 'unconfirmed' && <span className={styles.muted}>저장하지 않은 변경사항</span>}
     </div>
   </div>;
 }

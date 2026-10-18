@@ -81,14 +81,14 @@ export class PartnerDraftStore {
   discardActive() { for (const key of this.activeKeys) this.discard(key); }
   hasActiveUnsavedChanges() { return [...this.activeKeys].some((key) => {
     const record = this.records.get(key);
-    return record && (record.state.kind === 'pending' || (record.state.kind !== 'committed-stale' && JSON.stringify(record.draft) !== JSON.stringify(record.baseline)));
+    return record && (record.state.kind === 'pending' || record.state.kind === 'unconfirmed' || (record.state.kind !== 'committed-stale' && JSON.stringify(record.draft) !== JSON.stringify(record.baseline)));
   }); }
   hasUnsavedChanges() {
-    return [...this.records.values()].some((record) => record.state.kind === 'pending' || (record.state.kind !== 'committed-stale' && JSON.stringify(record.draft) !== JSON.stringify(record.baseline)));
+    return [...this.records.values()].some((record) => record.state.kind === 'pending' || record.state.kind === 'unconfirmed' || (record.state.kind !== 'committed-stale' && JSON.stringify(record.draft) !== JSON.stringify(record.baseline)));
   }
   confirmReload(key: string, confirm: () => boolean) {
     const record = this.records.get(key);
-    return !record || record.state.kind === 'committed-stale' || JSON.stringify(record.draft) === JSON.stringify(record.baseline) || confirm();
+    return !record || record.state.kind === 'committed-stale' || (record.state.kind !== 'unconfirmed' && JSON.stringify(record.draft) === JSON.stringify(record.baseline)) || confirm();
   }
   getEditor() { return this.editor; }
   setEditor(editor: PartnerEditor | null) { this.editor = editor; }

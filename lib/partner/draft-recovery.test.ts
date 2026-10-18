@@ -1,6 +1,8 @@
 import { describe, expect, it, vi } from 'vitest';
+import { createElement } from 'react';
+import { renderToStaticMarkup } from 'react-dom/server';
 import { PartnerDraftStore, uncertainSaveOutcomeMessage, type PartnerDraftRecord } from '@/components/partner/partner-provider';
-import { rebaseUnchangedSharedSchedule } from '@/components/partner/partner-form';
+import { failedReloadState, rebaseUnchangedSharedSchedule, SaveStatus } from '@/components/partner/partner-form';
 
 const entry = (): PartnerDraftRecord<{ name: string; updatedAt: string }> => ({ token: Symbol(), draft: { name: '편집 중', updatedAt: '2026-10-18T01:02:03.123456+00:00' }, baseline: { name: '저장된 이름', updatedAt: '2026-10-18T01:02:03.123456+00:00' }, state: { kind: 'idle' } });
 
@@ -15,6 +17,24 @@ describe('session-scoped partner draft recovery', () => {
     expect(store.hasUnsavedChanges()).toBe(false);
     store.write('settings', { ...record, draft: record.baseline, state: { kind: 'pending' } });
     expect(store.hasUnsavedChanges()).toBe(true);
+  });
+  it('treats an unacknowledged POST as unsaved even when values equal the baseline', () => {
+    const store = new PartnerDraftStore();
+    const record = entry();
+    const unconfirmed: PartnerDraftRecord<typeof record.draft> = { ...record, draft: record.baseline, state: { kind: 'unconfirmed' } };
+    store.write('staff', unconfirmed); store.setActive('staff');
+    expect(store.hasActiveUnsavedChanges()).toBe(true);
+    expect(store.confirmReload('staff', () => false)).toBe(false);
+    store.setActive(null, 'staff');
+    expect(store.hasUnsavedChanges()).toBe(true);
+    const html = renderToStaticMarkup(createElement(SaveStatus, { state: unconfirmed.state, onReload: () => {} }));
+    expect(html).toContain('저장 여부');
+    expect(html).not.toContain('저장은 완료');
+  });
+  it('does not unlock an unconfirmed form when its explicit recovery read fails', () => {
+    expect(failedReloadState({ kind: 'unconfirmed' }, 'read failed')).toEqual({ kind: 'unconfirmed' });
+    expect(failedReloadState({ kind: 'committed-stale' }, 'read failed')).toEqual({ kind: 'committed-stale' });
+    expect(failedReloadState({ kind: 'idle' }, 'read failed')).toEqual({ kind: 'error', message: 'read failed' });
   });
   it('retains entered values, exact baseline version and the new editor UUID across subscribers', () => {
     const store = new PartnerDraftStore();
@@ -130,10 +150,10 @@ describe('session-scoped partner draft recovery', () => {
     expect(record.draft.updatedAt).toBe(baseline.updatedAt);
     expect(rebaseUnchangedSharedSchedule(record, { values: baseline.values, updatedAt: '2026-10-18T02:00:00Z' })?.state).toEqual({ kind: 'idle' });
   });
-  it('does not rebase pending, reloading or committed-stale drafts', () => {
+  it('does not rebase pending, reloading, committed-stale or unconfirmed drafts', () => {
     const baseline = { values: [], updatedAt: '2026-10-18T01:00:00Z' };
     const next = { values: [], updatedAt: '2026-10-18T02:00:00Z' };
-    for (const kind of ['pending', 'reloading', 'committed-stale'] as const) {
+    for (const kind of ['pending', 'reloading', 'committed-stale', 'unconfirmed'] as const) {
       const record = { token: Symbol(), baseline, draft: { values: [{ date: '2026-11-05' }], updatedAt: baseline.updatedAt }, state: { kind } };
       expect(rebaseUnchangedSharedSchedule(record, next)).toBeNull();
     }
