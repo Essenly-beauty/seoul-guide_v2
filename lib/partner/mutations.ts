@@ -30,13 +30,11 @@ export async function savePartnerCommand(client: SupabaseClient, context: Partne
       table = 'merchant_schedules'; key = 'merchant_id'; id = merchantId;
       values = { hours: command.values.hours, breaks: command.values.breaks, blocks: command.values.blocks };
     } else {
-      table = 'merchants'; key = 'id'; id = merchantId;
-      const value = command.values;
-      values = { display_name: value.displayName, contact_email: value.contactEmail, contact_phone: value.contactPhone, address: value.address, business_types: value.businessTypes };
+      throw new PartnerError(400, 'INVALID_COMMAND');
     }
-    const query = command.kind !== 'settings' && command.mode === 'create'
+    const query = command.mode === 'create'
       ? client.from(table).insert({ ...values, ...(key === 'id' ? { id } : {}), merchant_id: merchantId })
-      : client.from(table).update(values).eq(key, id).eq(table === 'merchants' ? 'id' : 'merchant_id', merchantId).eq('updated_at', command.expectedUpdatedAt);
+      : client.from(table).update(values).eq(key, id).eq('merchant_id', merchantId).eq('updated_at', command.expectedUpdatedAt);
     const result: unknown = await query.select(key).maybeSingle();
     if (!record(result)) return unavailable();
     if (result.error !== null) {

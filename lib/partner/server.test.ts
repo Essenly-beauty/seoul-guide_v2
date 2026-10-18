@@ -2,7 +2,7 @@ import { describe, expect, it, vi } from 'vitest';
 import { AuthApiError, AuthSessionMissingError, type SupabaseClient } from '@supabase/supabase-js';
 import { getPartnerContext, getPartnerSnapshot } from './server';
 import { savePartnerCommand } from './mutations';
-import { parsePartnerCommand } from './contracts';
+import { parsePartnerCommand, type PartnerCommand } from './contracts';
 
 const merchantId = '11111111-1111-1111-1111-111111111111';
 const id = '22222222-2222-2222-2222-222222222222';
@@ -210,11 +210,11 @@ describe('partner configuration writes', () => {
       if (mode === 'update') expect(mock.calls[2].steps).toContainEqual(['eq', ['updated_at', stamp]]);
     }
   });
-  it('updates only operator-independent merchant settings', async () => {
+  it.each(['settings', 'unsupported'])('rejects stale internal %s commands before any query', async (kind) => {
     const mock = await context([result({ id: merchantId })]);
-    await savePartnerCommand(mock.client, mock.context, command({ kind: 'settings', expectedUpdatedAt: stamp, values: { displayName: 'Updated', contactEmail: '', contactPhone: '', address: '', businessTypes: ['nail'] } }));
-    expect(mock.calls[2].steps).toContainEqual(['update', [{ display_name: 'Updated', contact_email: '', contact_phone: '', address: '', business_types: ['nail'] }]]);
-    expect(mock.calls[2].steps).toContainEqual(['eq', ['id', merchantId]]);
+    const stale = { kind, expectedUpdatedAt: stamp, values: { displayName: 'Updated', contactEmail: '', contactPhone: '', address: '', businessTypes: ['nail'] } } as unknown as PartnerCommand;
+    await expect(savePartnerCommand(mock.client, mock.context, stale)).rejects.toMatchObject({ status: 400, code: 'INVALID_COMMAND' });
+    expect(mock.calls).toHaveLength(2);
   });
   it.each([
     { row: result(null, { code: '23514', message: 'operator deposit race' }), status: 409 },

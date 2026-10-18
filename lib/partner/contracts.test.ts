@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { parsePartnerCommand } from './contracts';
+import { parsePartnerCommand, merchantProfile } from './contracts';
 
 const id = '12345678-1234-1234-1234-123456789abc';
 const stamp = '2026-10-18T01:02:03.123456+00:00';
@@ -9,7 +9,7 @@ const schedule = { kind: 'schedule', mode: 'create', values: { hours: [{ weekday
 const settings = { kind: 'settings', expectedUpdatedAt: stamp, values: { displayName: '', contactEmail: '', contactPhone: '', address: '', businessTypes: ['hair', 'nail', 'head_spa'] } };
 
 describe('strict partner command boundary', () => {
-  it.each([category, menu, schedule, settings])('accepts valid draft command %# without coercing', (command) => {
+  it.each([category, menu, schedule])('accepts valid draft command %# without coercing', (command) => {
     expect(parsePartnerCommand(command)).toEqual({ ok: true, command });
   });
   it.each([category, menu, schedule])('preserves an opaque microsecond update stamp %#', (command) => {
@@ -48,9 +48,12 @@ describe('strict partner command boundary', () => {
   ])('rejects invalid schedule %#', (values) => {
     expect(parsePartnerCommand({ ...schedule, values: { ...schedule.values, ...values } }).ok).toBe(false);
   });
-  it('rejects unknown settings fields/types and oversized strings', () => {
+  it('rejects the legacy settings command even when its profile is valid', () => {
+    expect(parsePartnerCommand(settings).ok).toBe(false);
+  });
+  it('rejects unknown profile fields/types and oversized strings when reading', () => {
     for (const values of [{ ...settings.values, businessTypes: ['other'] }, { ...settings.values, businessTypes: [null] }, { ...settings.values, address: 'a'.repeat(501) }, { ...settings.values, contactEmail: null }]) {
-      expect(parsePartnerCommand({ ...settings, values }).ok).toBe(false);
+      expect(merchantProfile(values)).toBe(false);
     }
   });
   it('never coerces objects into command discriminators', () => {
@@ -81,8 +84,7 @@ describe('strict partner command boundary', () => {
     expect(parsePartnerCommand({ ...schedule, values: { hours: periods.slice(0, 128), breaks: [], blocks: blocks.slice(0, 512) } }).ok).toBe(true);
   });
   it('accepts repeated allowed business types permitted by the persisted contract', () => {
-    const command = { ...settings, values: { ...settings.values, businessTypes: ['hair', 'hair', 'nail', 'hair'] } };
-    expect(parsePartnerCommand(command)).toEqual({ ok: true, command });
+    expect(merchantProfile({ ...settings.values, businessTypes: ['hair', 'hair', 'nail', 'hair'] })).toBe(true);
   });
   it.each(['\u0000', 'before\u0000after', '\uD800', '\uDC00', '\uD800x\uDC00', '\uD800\uD800\uDC00', '\uDC00\uD800\uDC00'])('rejects text PostgreSQL cannot store across all editable text fields %#', (text) => {
     for (const field of ['nameKo', 'nameEn']) {
@@ -92,7 +94,7 @@ describe('strict partner command boundary', () => {
       expect(parsePartnerCommand({ ...menu, values: { ...menu.values, [field]: text } }).ok).toBe(false);
     }
     for (const field of ['displayName', 'contactEmail', 'contactPhone', 'address']) {
-      expect(parsePartnerCommand({ ...settings, values: { ...settings.values, [field]: text } }).ok).toBe(false);
+      expect(merchantProfile({ ...settings.values, [field]: text })).toBe(false);
     }
   });
   it('preserves valid surrogate pairs and Unicode code-point boundaries for all text DTOs', () => {
@@ -100,12 +102,15 @@ describe('strict partner command boundary', () => {
     for (const [base, fields] of [
       [category, { nameKo: 120, nameEn: 120 }],
       [menu, { nameKo: 120, nameEn: 120, descriptionKo: 4000, descriptionEn: 4000 }],
-      [settings, { displayName: 120, contactEmail: 320, contactPhone: 80, address: 500 }],
     ] as const) {
       for (const [field, limit] of Object.entries(fields)) {
         expect(parsePartnerCommand({ ...base, values: { ...base.values, [field]: valid.repeat(limit) } }).ok).toBe(true);
         expect(parsePartnerCommand({ ...base, values: { ...base.values, [field]: valid.repeat(limit + 1) } }).ok).toBe(false);
       }
+    }
+    for (const [field, limit] of Object.entries({ displayName: 120, contactEmail: 320, contactPhone: 80, address: 500 })) {
+      expect(merchantProfile({ ...settings.values, [field]: valid.repeat(limit) })).toBe(true);
+      expect(merchantProfile({ ...settings.values, [field]: valid.repeat(limit + 1) })).toBe(false);
     }
   });
 });

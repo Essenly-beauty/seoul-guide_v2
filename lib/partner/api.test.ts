@@ -121,6 +121,14 @@ describe('partner HTTP authentication and snapshots', () => {
 });
 
 describe('partner HTTP command boundary', () => {
+  it('rejects a valid legacy profile settings command privately without mutation', async () => {
+    const mock = session({ results: [result({ merchant_id: merchantId, user_id: userId, revoked_at: null }), result(merchant), result({ id: merchantId })] });
+    const response = await POST(request(JSON.stringify({ kind: 'settings', expectedUpdatedAt: stamp, values: { displayName: 'Changed', contactEmail: '', contactPhone: '', address: '', businessTypes: ['hair'] } })));
+    expect(response.status).toBe(400);
+    expect(await response.json()).toMatchObject({ ok: false, code: 'INVALID_COMMAND' });
+    expect(mock.calls.some((call) => ['insert', 'update'].includes(call.method))).toBe(false);
+    privateHeaders(response);
+  });
   it('acknowledges only an accepted write and ignores request tenant selectors', async () => {
     const mock = session({ results: [result({ merchant_id: merchantId, user_id: userId, revoked_at: null }), result(merchant), result({ id: userId })] });
     const response = await POST(request());

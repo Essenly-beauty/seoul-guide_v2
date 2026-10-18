@@ -4,7 +4,7 @@ import { describe, expect, it } from 'vitest';
 import { PartnerDashboardView } from '@/components/partner/partner-dashboard';
 import { CategoryFields, MenuFields } from '@/components/partner/partner-services';
 import { ScheduleFields } from '@/components/partner/partner-availability';
-import { SettingsFields } from '@/components/partner/partner-settings';
+import { PartnerSettingsView } from '@/components/partner/partner-settings';
 import { SaveStatus } from '@/components/partner/partner-form';
 import type { PartnerSnapshot } from './contracts';
 
@@ -32,14 +32,28 @@ describe('merchant admin actual markup', () => {
     expect($('fieldset[disabled]').length).toBe(1);
     for (const label of ['메뉴명 (한국어)', '총 금액 (원)', '시술 시간 (분)', '정리 시간 (분)']) expect($('label').text()).toContain(label);
   });
-  it('renders category and business settings with labelled fields and protected status', () => {
+  it('renders category fields with labels', () => {
     const category = render(<CategoryFields value={{ nameKo: '', nameEn: '', visibility: 'draft', sortOrder: '0' }} onChange={() => {}} disabled />);
     expect(category('fieldset[disabled]').length).toBe(1);
     expect(category('label').text()).toContain('카테고리명 (영어)');
-    const settings = render(<SettingsFields value={snapshot.merchant} onChange={() => {}} disabled />);
-    expect(settings('input[type="checkbox"]').length).toBe(3);
-    expect(settings('input[name="bookingEnabled"]').length).toBe(0);
-    expect(settings('fieldset[disabled]').length).toBe(1);
+  });
+  it('shows a semantic read-only profile with actual values, ownership and support', () => {
+    const $ = render(<PartnerSettingsView snapshot={{ ...snapshot, merchant: { ...snapshot.merchant, displayName: '<script>shop</script>', contactEmail: 'owner@example.test', contactPhone: '02-1234-5678', address: '서울시 강남구', businessTypes: ['hair', 'hair', 'nail', 'head_spa'] } }} />);
+    expect($('h1').text()).toBe('매장 정보');
+    for (const value of ['<script>shop</script>', 'owner@example.test', '02-1234-5678', '서울시 강남구', '헤어 · 네일 · 헤드스파', '입점 준비 중', '예약 기능 연결 전']) expect($('dd').text()).toContain(value);
+    expect($('script').length).toBe(0);
+    expect($('dt').text()).toContain('상호명');
+    expect($.text()).toMatch(/매장 정보와 사진.*운영자/);
+    expect($('a[href="/support"]').text()).toContain('매장 정보 수정 요청 →');
+    expect($('form,input,select,textarea,button').length).toBe(0);
+    expect($.text()).toContain('예약금');
+    expect($.text()).toContain('계정 삭제');
+  });
+  it('marks blank profile values unregistered and describes booking approval honestly', () => {
+    const $ = render(<PartnerSettingsView snapshot={{ ...snapshot, merchant: { ...snapshot.merchant, displayName: ' ', businessTypes: [], bookingEnabled: true, status: 'active' } }} />);
+    expect($('dd').filter((_, node) => $(node).text() === '미등록').length).toBe(5);
+    expect($.text()).toContain('고객 예약·결제 연결은 별도 확인 필요');
+    expect($('form,input,select,textarea,button').length).toBe(0);
   });
   it('labels every schedule row and disables add/remove in read-only mode', () => {
     const $ = render(<ScheduleFields value={{ hours: [{ weekday: '1', start: '09:00', end: '18:00' }], breaks: [], blocks: [{ date: '', start: '00:00', end: '24:00' }] }} onChange={() => {}} disabled />);

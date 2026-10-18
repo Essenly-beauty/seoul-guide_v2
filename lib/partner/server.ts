@@ -1,5 +1,5 @@
 import type { SupabaseClient } from '@supabase/supabase-js';
-import { boundedString, categoryValues, integer, menuValues, record, scheduleValues, settingsValues, timestamp, uuid, type Category, type Menu, type Merchant, type PartnerSnapshot, type Schedule } from './contracts';
+import { boundedString, categoryValues, integer, menuValues, record, scheduleValues, merchantProfile, timestamp, uuid, type Category, type Menu, type Merchant, type PartnerSnapshot, type Schedule } from './contracts';
 import { validateMenu } from './catalog';
 
 export class PartnerError extends Error {
@@ -26,7 +26,7 @@ function decodeMerchant(row: unknown, merchantId: string): Merchant {
   if (!record(row) || row.id !== merchantId || !uuid(row.id) || !timestamp(row.updated_at) ||
     typeof row.booking_enabled !== 'boolean' || !boundedString(row.status, 20) || !['onboarding', 'active', 'suspended', 'closed'].includes(row.status)) return unavailable();
   const values = { displayName: row.display_name, contactEmail: row.contact_email, contactPhone: row.contact_phone, address: row.address, businessTypes: row.business_types };
-  if (!settingsValues(values)) return unavailable();
+  if (!merchantProfile(values)) return unavailable();
   return { id: row.id, ...values, status: row.status as Merchant['status'], bookingEnabled: row.booking_enabled, updatedAt: row.updated_at };
 }
 export function decodeCategory(row: unknown, merchantId: string): Category {

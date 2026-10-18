@@ -17,13 +17,12 @@ export type PartnerSnapshot = {
 export type CategoryValues = Pick<PartnerCategory, 'nameKo' | 'nameEn' | 'visibility' | 'sortOrder'>;
 export type MenuValues = Omit<PartnerMenu, 'id' | 'merchantId' | 'depositKrw'>;
 export type ScheduleValues = Omit<PartnerSchedule, 'merchantId'>;
-export type SettingsValues = Pick<Merchant, 'displayName' | 'contactEmail' | 'contactPhone' | 'address' | 'businessTypes'>;
+export type MerchantProfile = Pick<Merchant, 'displayName' | 'contactEmail' | 'contactPhone' | 'address' | 'businessTypes'>;
 type Version = { mode: 'create'; expectedUpdatedAt?: never } | { mode: 'update'; expectedUpdatedAt: string };
 export type PartnerCommand =
   | ({ kind: 'category'; id: string; values: CategoryValues } & Version)
   | ({ kind: 'menu'; id: string; values: MenuValues } & Version)
-  | ({ kind: 'schedule'; values: ScheduleValues } & Version)
-  | { kind: 'settings'; expectedUpdatedAt: string; values: SettingsValues };
+  | ({ kind: 'schedule'; values: ScheduleValues } & Version);
 
 export function record(value: unknown): value is Record<string, unknown> {
   return value !== null && typeof value === 'object' && !Array.isArray(value) &&
@@ -84,7 +83,7 @@ export function scheduleValues(value: unknown): value is ScheduleValues {
   if (new TextEncoder().encode(JSON.stringify(value)).byteLength > 256 * 1024) return false;
   return validateSchedule({ ...(value as ScheduleValues), merchantId: placeholder }).length === 0;
 }
-export function settingsValues(value: unknown): value is SettingsValues {
+export function merchantProfile(value: unknown): value is MerchantProfile {
   return record(value) && exactKeys(value, ['displayName', 'contactEmail', 'contactPhone', 'address', 'businessTypes']) &&
     boundedString(value.displayName, 120) && boundedString(value.contactEmail, 320) && boundedString(value.contactPhone, 80) &&
     boundedString(value.address, 500) && Array.isArray(value.businessTypes) &&
@@ -94,14 +93,10 @@ export function parsePartnerCommand(input: unknown): { ok: true; command: Partne
   const invalid = { ok: false as const, errors: ['command.invalid'] };
   try {
     if (!record(input)) return invalid;
-    if (input.kind === 'settings') {
-      if (!exactKeys(input, ['kind', 'expectedUpdatedAt', 'values']) || !timestamp(input.expectedUpdatedAt) || !settingsValues(input.values)) return invalid;
-    } else {
-      if (typeof input.kind !== 'string' || !['category', 'menu', 'schedule'].includes(input.kind) || typeof input.mode !== 'string' || !['create', 'update'].includes(input.mode)) return invalid;
-      const keys = ['kind', 'mode', 'values', ...(input.kind === 'schedule' ? [] : ['id']), ...(input.mode === 'update' ? ['expectedUpdatedAt'] : [])];
-      if (!exactKeys(input, keys) || (input.kind !== 'schedule' && !uuid(input.id)) || (input.mode === 'update' && !timestamp(input.expectedUpdatedAt))) return invalid;
-      if (!(input.kind === 'category' ? categoryValues(input.values) : input.kind === 'menu' ? menuValues(input.values) : scheduleValues(input.values))) return invalid;
-    }
+    if (typeof input.kind !== 'string' || !['category', 'menu', 'schedule'].includes(input.kind) || typeof input.mode !== 'string' || !['create', 'update'].includes(input.mode)) return invalid;
+    const keys = ['kind', 'mode', 'values', ...(input.kind === 'schedule' ? [] : ['id']), ...(input.mode === 'update' ? ['expectedUpdatedAt'] : [])];
+    if (!exactKeys(input, keys) || (input.kind !== 'schedule' && !uuid(input.id)) || (input.mode === 'update' && !timestamp(input.expectedUpdatedAt))) return invalid;
+    if (!(input.kind === 'category' ? categoryValues(input.values) : input.kind === 'menu' ? menuValues(input.values) : scheduleValues(input.values))) return invalid;
     return { ok: true, command: input as PartnerCommand };
   } catch { return invalid; }
 }

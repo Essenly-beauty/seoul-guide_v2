@@ -1,6 +1,6 @@
 import { validateMenu, type PartnerCategory, type Visibility } from './catalog';
 import { validateSchedule } from './availability';
-import { categoryValues, menuValues, scheduleValues, settingsValues, type CategoryValues, type MenuValues, type ScheduleValues, type SettingsValues, type Schedule, type Category, type Menu } from './contracts';
+import { categoryValues, menuValues, scheduleValues, type CategoryValues, type MenuValues, type ScheduleValues, type Schedule, type Category, type Menu } from './contracts';
 
 export type Conversion<T> = { ok: true; values: T } | { ok: false; error: string };
 export type CategoryDraft = { nameKo: string; nameEn: string; visibility: Visibility; sortOrder: string };
@@ -56,7 +56,4 @@ export function scheduleFormValues(draft: ScheduleDraft): Conversion<ScheduleVal
   if (errors.includes('breaks.outside_hours')) return { ok: false, error: '휴게시간은 같은 요일의 영업시간 안에 있어야 합니다.' };
   if (!scheduleValues(values)) return { ok: false, error: '날짜와 시간 범위를 확인해 주세요. 종료 시간은 시작 시간보다 늦어야 하며, 자정을 넘는 영업은 요일별로 나누어 입력해 주세요.' };
   return { ok: true, values };
-}
-export function settingsFormValues(values: SettingsValues): Conversion<SettingsValues> {
-  return settingsValues(values) ? { ok: true, values } : { ok: false, error: '상호명 120자, 이메일 320자, 전화번호 80자, 주소 500자 이내로 입력해 주세요.' };
 }
