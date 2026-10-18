@@ -32,7 +32,9 @@ Work only in `/Users/hanmyeong-gwan/mobile_design/.worktrees/service-quality-202
 
 ## Task 1: Shared booking settings and staff configuration
 
-- [ ] Write failing tests in `lib/partner/reservation-config.test.ts` for the contracts below. Use canonical UUID fixture IDs for two tenants and two menus. Verify null/nonobjects/unknown keys/invalid UTF-16/NUL/unsafe numbers/unknown mode are rejected, not coerced.
+**Completed and independently reviewed:** `721cda6` + `635226e` + `6add064` + `3e5fb2f`. RED observed before implementation and each regression fix; final 162 focused tests, typecheck and diff checks pass. Spec and quality reviewers approved `3e5fb2f`. New validators reject exceptional runtime inspections and consistently validate indexed arrays with captured, noncoerced lengths.
+
+- [x] Write failing tests in `lib/partner/reservation-config.test.ts` for the contracts below. Use canonical UUID fixture IDs for two tenants and two menus. Verify null/nonobjects/unknown keys/invalid UTF-16/NUL/unsafe numbers/unknown mode are rejected, not coerced.
 
 ```ts
 export type ReservationRules = {
@@ -61,7 +63,7 @@ export function eligibleStaff(
 ): ReservationStaff[];
 ```
 
-Rules: all keys mandatory; both dates real `YYYY-MM-DD`, year 0001–9999, `startDate <= endDate` inclusive. Positive safe-integer capacity (no automatic default); lead time integer 0–525600 minutes (a technical one-year bound, not an auto-selected shop policy); interval integer 1–1440 minutes. Names max 120 Unicode code points, title 120, introduction 1000, no NUL/lone surrogate; drafts may have blank names, but visible staff need a trimmed nonempty name. `sortOrder` nonnegative safe integer. `menuIds` at most 1000 unique canonical UUID strings; explicit assignment only. A staff object does not contain authentication IDs, pictures or permissions. Cross-tenant menu existence is checked when persisting, not fabricated by this pure validator.
+Rules: all keys mandatory; both dates real `YYYY-MM-DD`, year 0001–9999, `startDate <= endDate` inclusive. Positive safe-integer capacity (no automatic default); lead time integer 0–525600 minutes (a technical one-year bound, not an auto-selected shop policy); interval integer 1–1440 minutes. Names max 120 Unicode code points, title 120, introduction 1000, no NUL/lone surrogate; drafts may have blank names, but visible staff need a trimmed nonempty name. `sortOrder` nonnegative safe integer. `menuIds` at most 1000 unique canonical UUID strings; explicit assignment only. A staff object does not contain authentication IDs, pictures or permissions. Cross-tenant menu existence is checked when persisting, not fabricated by this pure validator. Both `unknown` type guards return false on malformed runtime objects, including throwing getters/proxies; the eligibility query is intentionally a throwing operation instead.
 
 ```ts
 expect(reservationRules({ ...rules, capacity: 0 })).toBe(false);
@@ -71,9 +73,9 @@ expect(eligibleStaff([foreignStaff, hiddenStaff, staff], merchantId, menuId))
   .toEqual([staff]);
 ```
 
-- [ ] Run `npx vitest run lib/partner/reservation-config.test.ts`, record RED from missing behavior, not a typo.
-- [ ] Implement the exact types and validators above in `reservation-config.ts`. `eligibleStaff` fails on malformed records/invalid query IDs, filters by merchant/menu/visible status, sorts by sortOrder then ID without changing inputs. Different canonical-UUID letter case must not permit duplicate assignments or tenant mismatch: require lowercase UUIDs for new contracts or compare normalized IDs consistently; use lowercase-only new contracts for this plan.
-- [ ] Run the focused tests, `npm run typecheck`, `git diff --check`; self-review. Commit only these two files. Independent spec review then quality review must pass before Task 2.
+- [x] Run `npx vitest run lib/partner/reservation-config.test.ts`, record RED from missing behavior, not a typo.
+- [x] Implement the exact types and validators above in `reservation-config.ts`. `eligibleStaff` fails on malformed records/invalid query IDs, filters by merchant/menu/visible status, sorts by sortOrder then ID without changing inputs. Different canonical-UUID letter case must not permit duplicate assignments or tenant mismatch: require lowercase UUIDs for new contracts or compare normalized IDs consistently; use lowercase-only new contracts for this plan.
+- [x] Run the focused tests, `npm run typecheck`, `git diff --check`; self-review. Commit only these two files. Independent spec review then quality review must pass before Task 2.
 
 ## Task 2: Special-date opening hours and staff work schedules
 
