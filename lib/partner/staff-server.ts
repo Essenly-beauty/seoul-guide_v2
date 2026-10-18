@@ -70,11 +70,12 @@ export async function getStaffList(client: SupabaseClient, context: PartnerConte
     const merchantId = context.merchant.id;
     const staff: StaffSummary[] = [];
     let previousId = '';
-    for (let offset = 0; offset <= 10000; offset += 200) {
-      const page = queryData(await client.from('merchant_staff').select(staffColumns)
-        .eq('merchant_id', merchantId).order('id', { ascending: true }).range(offset, offset + 199));
-      if (!Array.isArray(page) || page.length > 200) return unavailable();
-      if (staff.length + page.length > 10000) throw new PartnerError(503, 'PARTNER_LIMIT_EXCEEDED');
+    for (;;) {
+      const pageSize = Math.min(200, 10000 - staff.length);
+      const query = client.from('merchant_staff').select(staffColumns)
+        .eq('merchant_id', merchantId).order('id', { ascending: true });
+      const page = queryData(await (previousId ? query.gt('id', previousId) : query).range(0, pageSize - 1));
+      if (!Array.isArray(page) || page.length > pageSize) return unavailable();
       for (const row of page) {
         const decoded = decodeProfile(row, merchantId, []);
         if (decoded.id <= previousId) return unavailable();
@@ -82,9 +83,16 @@ export async function getStaffList(client: SupabaseClient, context: PartnerConte
         const { menuIds: _unknownMenuIds, ...summary } = decoded;
         staff.push(summary);
       }
-      if (page.length < 200) return { merchantId, staff, readOnly: context.readOnly, loadedAt: new Date().toISOString() };
+      if (page.length < pageSize) break;
+      if (staff.length === 10000) {
+        const sentinel = queryData(await client.from('merchant_staff').select('id')
+          .eq('merchant_id', merchantId).gt('id', previousId).order('id', { ascending: true }).range(0, 0));
+        if (!Array.isArray(sentinel) || sentinel.length > 1) return unavailable();
+        if (sentinel.length === 1) throw new PartnerError(503, 'PARTNER_LIMIT_EXCEEDED');
+        break;
+      }
     }
-    return unavailable();
+    return { merchantId, staff, readOnly: context.readOnly, loadedAt: new Date().toISOString() };
   });
 }
 

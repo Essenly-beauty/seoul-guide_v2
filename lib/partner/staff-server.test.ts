@@ -15,21 +15,24 @@ const schedule = { merchant_id: merchantId, staff_id: staffId, hours: [{ weekday
 const merchant = { id: merchantId, displayName: 'Shop', contactEmail: '', contactPhone: '', address: '', businessTypes: ['hair'] as ['hair'], status: 'active' as const, bookingEnabled: false, updatedAt: stamp };
 const context: PartnerContext = { userId, merchant, readOnly: false };
 type Result = { data: unknown; error: unknown; rejection?: Error };
+type QueryCall = { table: string; steps: [string, unknown[]][] };
+type Answer = Result | ((call: QueryCall) => Result);
 const result = (data: unknown, error: unknown = null): Result => ({ data, error });
 
-function boundary(results: Result[], authUser: unknown = { id: userId }) {
-  const calls: { table: string; steps: [string, unknown[]][] }[] = [];
+function boundary(results: Answer[], authUser: unknown = { id: userId }) {
+  const calls: QueryCall[] = [];
   const client = {
     auth: { getUser: vi.fn(async () => ({ data: { user: authUser }, error: null })) },
     from: vi.fn((table: string) => {
       const call = { table, steps: [] as [string, unknown[]][] };
       calls.push(call);
       const builder: Record<string, unknown> = {};
-      for (const method of ['select', 'eq', 'order', 'range', 'limit', 'in', 'is']) {
+      for (const method of ['select', 'eq', 'gt', 'order', 'range', 'limit', 'in', 'is']) {
         builder[method] = (...args: unknown[]) => { call.steps.push([method, args]); return builder; };
       }
       const resolve = () => {
-        const next = results.shift() ?? { data: null, error: null };
+        const answer = results.shift() ?? { data: null, error: null };
+        const next = typeof answer === 'function' ? answer(call) : answer;
         return next.rejection ? Promise.reject(next.rejection) : Promise.resolve(next);
       };
       builder.maybeSingle = resolve;
@@ -61,7 +64,24 @@ describe('staff list projection', () => {
     const page = Array.from({ length: 200 }, (_, index) => ({ ...profile, id: `00000000-0000-0000-0000-${String(index).padStart(12, '0')}` }));
     const mock = boundary([result(page), result([profile])]);
     expect((await getStaffList(mock.client, context)).staff).toHaveLength(201);
-    expect(mock.calls[1].steps).toContainEqual(['range', [200, 399]]);
+    expect(mock.calls[1].steps).toContainEqual(['gt', ['id', page[199].id]]);
+    expect(mock.calls[1].steps).toContainEqual(['range', [0, 199]]);
+  });
+
+  it('does not skip the next ID when an earlier row is deleted between pages', async () => {
+    const ids = Array.from({ length: 201 }, (_, index) => `00000000-0000-0000-0000-${String(index).padStart(12, '0')}`);
+    let rows = ids.map((id) => ({ ...profile, id }));
+    const queriedPage = (call: QueryCall): Result => {
+      const cursor = call.steps.find(([method]) => method === 'gt')?.[1][1] as string | undefined;
+      const [start, end] = call.steps.find(([method]) => method === 'range')![1] as [number, number];
+      const page = rows.filter((row) => !cursor || row.id > cursor).slice(start, end + 1);
+      rows = rows.filter((row) => row.id !== ids[0]);
+      return result(page);
+    };
+    const mock = boundary([queriedPage, queriedPage]);
+    const list = await getStaffList(mock.client, context);
+    expect(list.staff.map((member) => member.id)).toContain(ids[200]);
+    expect(mock.calls[1].steps).toContainEqual(['gt', ['id', ids[199]]]);
   });
 
   it('rejects a 10,001st row with a bounded extra page', async () => {
@@ -69,6 +89,22 @@ describe('staff list projection', () => {
     const mock = boundary([...pages, result([profile])]);
     await expect(getStaffList(mock.client, context)).rejects.toMatchObject({ status: 503, code: 'PARTNER_LIMIT_EXCEEDED' });
     expect(mock.calls).toHaveLength(51);
+    expect(mock.calls[50].steps).toContainEqual(['gt', ['id', '00000000-0000-0000-0000-000000009999']]);
+    expect(mock.calls[50].steps).toContainEqual(['range', [0, 0]]);
+  });
+
+  it('accepts exactly 10,000 profiles only after an empty sentinel query', async () => {
+    const pages = Array.from({ length: 50 }, (_, page) => result(Array.from({ length: 200 }, (_, index) => ({ ...profile, id: `00000000-0000-0000-0000-${String(page * 200 + index).padStart(12, '0')}` }))));
+    const mock = boundary([...pages, result([])]);
+    expect((await getStaffList(mock.client, context)).staff).toHaveLength(10000);
+    expect(mock.calls).toHaveLength(51);
+    expect(mock.calls[50].steps).toContainEqual(['range', [0, 0]]);
+  });
+
+  it('rejects an out-of-order ID across page boundaries', async () => {
+    const page = Array.from({ length: 200 }, (_, index) => ({ ...profile, id: `00000000-0000-0000-0000-${String(index).padStart(12, '0')}` }));
+    await expect(getStaffList(boundary([result(page), result([page[199]])]).client, context))
+      .rejects.toMatchObject({ status: 503, code: 'PARTNER_UNAVAILABLE' });
   });
 
   it.each([
