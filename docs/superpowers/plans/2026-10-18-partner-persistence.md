@@ -34,7 +34,7 @@ Operator provisioning is a trusted server/SQL procedure, not a new public RPC or
 
 Reservations do not exist at A2. `booking_enabled` defaults false and CHECK enforces false until the separately reviewed B migration. Deposit remains null until trusted operator approval; owners cannot insert or change it. A nonnull deposit is positive, safe integer KRW and never greater than a nonnull total. All other A1 fields retain their snake_case equivalents, empty draft text, positive nullable money/duration and nonnegative cleanup/sort values. Cross-merchant category references fail at DB level.
 
-- [ ] **Step 1: Write a failing schema test before authoring DDL.**
+- [x] **Step 1: Write a failing schema test before authoring DDL.**
 
 ```sql
 begin;
@@ -49,7 +49,7 @@ select * from finish();
 rollback;
 ```
 
-- [ ] **Step 2: Run RED against the isolated baseline.**
+- [x] **Step 2: Run RED against the isolated baseline.**
 
 ```bash
 SUPABASE_TELEMETRY_DISABLED=1 supabase test db /Users/hanmyeong-gwan/mobile_design/.worktrees/service-quality-20261018/supabase/tests/partner_storage.test.sql --local --workdir /private/tmp/partner-db-20261018-GtGZtZ
@@ -57,7 +57,7 @@ SUPABASE_TELEMETRY_DISABLED=1 supabase test db /Users/hanmyeong-gwan/mobile_desi
 
 Expected: six missing-table assertion failures, not a connection/tool error.
 
-- [ ] **Step 3: Author minimal tables in temporary SQL and apply with local `db query`.**
+- [x] **Step 3: Author minimal tables in temporary SQL and apply with local `db query`.**
 
 This is the concrete table contract. Put the script in one `DO $ddl$ BEGIN ... END $ddl$` statement for CLI prepared-statement compatibility. Functions inside it require distinct dollar tags. Check constraints must reject invalid values rather than relying on UI validation.
 
@@ -127,7 +127,7 @@ create index merchant_audit_events_merchant_time_idx on public.merchant_audit_ev
 create index merchant_audit_events_actor_idx on public.merchant_audit_events(actor_user_id);
 ```
 
-- [ ] **Step 4: Add failing tenant/grant tests, then the policies and grants.**
+- [x] **Step 4: Add failing tenant/grant tests, then the policies and grants.**
 
 Seed two auth users, two merchants and two memberships inside a rolled-back pgTAP transaction, using UUIDs ending 1/2 for users, 11/12 for merchants, 21/22 for categories. Provision as postgres with no JWT claim. Exercise `set local role authenticated` and `set local request.jwt.claim.sub` for each owner. Execute actual INSERT/UPDATE RETURNING, not just policy-name assertions. Core test patterns:
 
@@ -163,7 +163,7 @@ grant execute on function private.partner_can_write(uuid) to authenticated;
 
 Revoke all table privileges from PUBLIC/anon/authenticated first (including defaults), then grant authenticated SELECT on all six tables. Grant UPDATE only these columns: merchants `(display_name,contact_email,contact_phone,address,business_types)`; categories `(name_ko,name_en,visibility,sort_order)`; services `(category_id,name_ko,name_en,description_ko,description_en,price_krw,duration_minutes,cleanup_minutes,visibility,sort_order)`; schedules `(hours,breaks,blocks)`. INSERT only categories `(id,merchant_id,name_ko,name_en,visibility,sort_order)`, services `(id,merchant_id,category_id,name_ko,name_en,description_ko,description_en,price_krw,duration_minutes,cleanup_minutes,visibility,sort_order)`, schedules `(merchant_id,hours,breaks,blocks)`. Grant service_role all six tables for explicitly trusted server operations. No DELETE, membership write or audit write grant to ordinary users.
 
-- [ ] **Step 5: Add failing schedule tests, then the immutable schedule validator.**
+- [x] **Step 5: Add failing schedule tests, then the immutable schedule validator.**
 
 Contract: arrays only; objects with numeric integer `startMinute`/`endMinute`, 0 <= start < end <=1440; weekly items weekday integer0..6; date blocks use exact real `YYYY-MM-DD`; same-kind same-day intervals must not overlap; adjacent intervals allowed; every break contained in one opening interval. Empty arrays valid draft. Reject wrong JSON types and invalid dates with check violation, not uncontrolled casts. Fixed field JSON is stored in one row, so a whole edit is atomic. Calendar logic must agree with A1, including leap years; business hours are not bookable availability. Bound work before overlap loops: at most 128 opening periods, 128 breaks, 512 date blocks, and 256 KiB total JSON text. These storage limits must be tested and surfaced by the A3 request parser/UI; A1 remains a pure calculation contract.
 
@@ -231,7 +231,7 @@ select lives_ok($$insert into public.merchant_schedules(merchant_id,hours,breaks
  '[{"weekday":1,"startMinute":720,"endMinute":780}]')$$,'valid schedule persisted');
 ```
 
-- [ ] **Step 6: Add failing audit tests, then private trigger functions.**
+- [x] **Step 6: Add failing audit tests, then private trigger functions.**
 
 Every successful merchant/membership/category/service/schedule INSERT, meaningful UPDATE and DELETE emits an audit event in the same transaction. Keep only changed field names, table/id, actor and timestamp: no raw old/new JSON, contact details, customer data or secrets. Null actor denotes trusted operator SQL/service-role work. Reject null-UID ordinary caller. Private SECURITY DEFINER is narrowly justified for inserting into a table clients cannot append to. Fixed empty search_path, fully qualified relations, revoked direct execution, explicit auth.uid check. No elevated authorization helper.
 
@@ -272,7 +272,7 @@ revoke all on function private.partner_audit() from public,anon,authenticated,se
 
 Attach `partner_touch` BEFORE UPDATE and `partner_audit` AFTER INSERT OR UPDATE OR DELETE FOR EACH ROW to the five configuration tables, not the audit table. Test own successful menu price update produces matching actor/changed_fields, failed cross-tenant update produces no audit, owner cannot forge/modify/delete audit, cross-tenant audit hidden, membership change is audited. Test trusted service_role provisioning separately from postgres. Test auth user deletion raises FK violation even for revoked owner, and ordinary nonowner user deletion still works. Test default false booking plus operator true attempt fails CHECK.
 
-- [ ] **Step 7: Verify all security cases and run advisors.**
+- [x] **Step 7: Verify all security cases and run advisors.**
 
 ```bash
 SUPABASE_TELEMETRY_DISABLED=1 supabase test db /Users/hanmyeong-gwan/mobile_design/.worktrees/service-quality-20261018/supabase/tests --local --workdir /private/tmp/partner-db-20261018-GtGZtZ
@@ -281,7 +281,7 @@ SUPABASE_TELEMETRY_DISABLED=1 supabase db advisors --local --type all --fail-on 
 
 Expected tests all PASS. Separate pre-existing baseline advisor notices from new issues; fix new security errors and FK-index gaps. Query pg_class/pg_policies/routine privileges to verify actual state, not only SQL text. Every UPDATE has both USING/WITH CHECK and SELECT support. Check no accidental anon/PUBLIC grants, private definer callable by ordinary users, default-privilege leakage, policy recursion or merchant transfer by updating IDs.
 
-- [ ] **Step 8: Generate and replay the migration.**
+- [x] **Step 8: Generate and replay the migration.**
 
 ```bash
 SUPABASE_TELEMETRY_DISABLED=1 supabase db pull partner_configuration --local --yes --schema public,private --workdir /private/tmp/partner-db-20261018-GtGZtZ
@@ -290,7 +290,7 @@ SUPABASE_TELEMETRY_DISABLED=1 supabase migration list --local --workdir /private
 
 Inspect generated SQL: only six new tables and their functions/indexes/policies/grants/triggers, no unrelated baseline mutation. Include private schema creation and ACLs if diff engine omits them; verify those repairs with replay. Copy only the generated new migration to worktree. Create another empty isolated project with `mktemp -d`, unique project id and unused ports, seed disabled. Copy all repository migrations and start it, then rerun entire pgTAP directory against that project. This fresh replay proves the committed migration, not just scratch DB state. Never reset the existing mobile_design database.
 
-- [ ] **Step 9: Self-review, commit exact SQL/test files, spec review, then quality review.**
+- [x] **Step 9: Self-review, commit exact SQL/test files, spec review, then quality review.**
 
 ```bash
 git diff --check
@@ -299,7 +299,7 @@ git status --short
 
 Commit subject: `feat: persist tenant-isolated partner configuration`. Stage exact generated path and the two tests. Reviewers independently inspect actual SQL, test behavior and new privilege boundary. Address findings and repeat the relevant review before Task 2.
 
-- [ ] **Review follow-up: Align Unicode text bounds with PostgreSQL character counts.**
+- [x] **Review follow-up: Align Unicode text bounds with PostgreSQL character counts.**
 
 The quality review reproduced a supplementary-Unicode mismatch: 61 emoji use 122 JavaScript UTF-16 code units but 61 PostgreSQL characters. Keep SQL's Unicode code-point convention and use it in the shared catalog validator. Modify `lib/partner/catalog.ts` only at the string bound check:
 
@@ -311,7 +311,7 @@ First add failing cases in `lib/partner/catalog.test.ts` for each name/descripti
 
 ## Task 2: Owner account-deletion protection
 
-- [ ] **Step 1: Add failing route tests in `lib/partner/account-delete.test.ts`.**
+- [x] **Step 1: Add failing route tests in `lib/partner/account-delete.test.ts`.**
 
 Import real `POST` from `@/app/api/account/delete/route`; replace `supabaseServer` and `createClient` only because these are external session/network boundaries. Stub environment per test and restore it. Keep existing same-origin/auth behavior. The critical behavior assertion is:
 
@@ -329,7 +329,7 @@ expect(signOut).not.toHaveBeenCalled();
 
 Fixtures cover authenticated owner (including revoked membership returned by DB), ordinary user with empty membership list (200 and deletion), ownership query error (503 and no privileged client/deletion), query transport rejection (503), no user (401, no ownership query), and cross-origin (403). Assert the owner query selects only merchant_id and filters the server-authenticated user id, not request input. DB pgTAP already validates the real RLS and FK, so do not fake tenant isolation in unit tests.
 
-- [ ] **Step 2: Run RED.**
+- [x] **Step 2: Run RED.**
 
 ```bash
 npx vitest run lib/partner/account-delete.test.ts
@@ -337,7 +337,7 @@ npx vitest run lib/partner/account-delete.test.ts
 
 Expected owner/error tests fail because current route deletes user without ownership check.
 
-- [ ] **Step 3: Insert fail-closed ownership check immediately after authenticated user lookup and before service-role creation.**
+- [x] **Step 3: Insert fail-closed ownership check immediately after authenticated user lookup and before service-role creation.**
 
 ```ts
 try {
@@ -358,7 +358,7 @@ try {
 
 Update route comment to distinguish normal account-owned cascades from restricted merchant ownership. Do not change auth provider/global SSR/session flow or use service role to read merchant data. DB FK catches the race if ownership is assigned after the read; no orphaning even when the route returns its existing generic deletion failure.
 
-- [ ] **Step 4: Verify behavior and repository checks.**
+- [x] **Step 4: Verify behavior and repository checks.**
 
 ```bash
 npx vitest run lib/partner/account-delete.test.ts
@@ -370,7 +370,7 @@ git diff --check
 
 Expected targeted tests pass, no existing regressions (baseline 118 files /1127 tests), type/lint exit0. Record existing tooling notices separately. Do not call a build/browser/live-account deletion tested unless actually performed.
 
-- [ ] **Step 5: Commit, spec review, then quality review.**
+- [x] **Step 5: Commit, spec review, then quality review.**
 
 ```bash
 git add app/api/account/delete/route.ts lib/partner/account-delete.test.ts
@@ -379,10 +379,10 @@ git commit -m "fix: protect merchant owners from account deletion"
 
 ## Verification handoff
 
-- [ ] Main agent reruns new SQL tests against fresh-replay DB, full Vitest/type/lint, checks git diff and reviews final integration.
-- [ ] Update progress report with exact tests, migration name, isolated DB details, local-only changes and no deployment.
-- [ ] Document deployment ordering: approved migration must precede code containing ownership lookup; missing relation fails closed503. No temporary permissive fallback.
-- [ ] A3 still needs authenticated server data paths and merchant UI; A4 needs UI/integration QA. B still needs separate approved booking/payment design, provider, partner and policies. A2 is not a live reservation system.
+- [x] Main agent reruns new SQL tests against fresh-replay DB, full Vitest/type/lint, checks git diff and reviews final integration.
+- [x] Update progress report with exact tests, migration name, isolated DB details, local-only changes and no deployment.
+- [x] Document deployment ordering: approved migration must precede code containing ownership lookup; missing relation fails closed503. No temporary permissive fallback.
+- [x] A3 still needs authenticated server data paths and merchant UI; A4 needs UI/integration QA. B still needs separate approved booking/payment design, provider, partner and policies. A2 is not a live reservation system.
 
 ## Plan self-review
 
