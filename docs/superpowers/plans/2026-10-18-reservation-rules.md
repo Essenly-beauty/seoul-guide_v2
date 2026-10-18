@@ -79,7 +79,9 @@ expect(eligibleStaff([foreignStaff, hiddenStaff, staff], merchantId, menuId))
 
 ## Task 2: Special-date opening hours and staff work schedules
 
-- [ ] Write failing tests in `lib/partner/reservation-calendar.test.ts` for this interface:
+**Completed and independently reviewed:** `aaa2c08`; RED 52 failed / 65 passed, GREEN 117 calendar tests. Parent reran the required combined suites: 296 tests pass. Typecheck and diff checks pass. Spec and quality reviewers approved; spec reviewer additionally compared 500 schedules to a minute-by-minute oracle. No API, UI or DB changes in this unit.
+
+- [x] Write failing tests in `lib/partner/reservation-calendar.test.ts` for this interface:
 
 ```ts
 import type { MinuteInterval, PartnerSchedule } from './availability';
@@ -104,9 +106,9 @@ expect(reservationIntervals({ ...schedule, overrides: [
 expect(reservationSchedule({ ...schedule, overrides: [override, override] })).toBe(false);
 ```
 
-- [ ] Run `npx vitest run lib/partner/reservation-calendar.test.ts`, observe RED.
-- [ ] Implement `reservationSchedule` and `reservationIntervals` in `reservation-calendar.ts`. Use `scheduleValues` for the old schedule shape; validate each override as a synthetic weekday schedule and validate real dates explicitly. For a matching override substitute its hours/breaks with the target weekday, keep date blocks, then call `businessIntervals`. Preserve old exports/tests unchanged. Cover special opening on a normally closed weekday, full-day closure, custom breaks replacing weekly ones, blocks clipping special hours, invalid/duplicate dates and mutation safety.
-- [ ] Run both new test files plus `lib/partner/availability.test.ts`, typecheck and diff checks; commit exact two files. Independent spec then quality review before Task 3.
+- [x] Run `npx vitest run lib/partner/reservation-calendar.test.ts`, observe RED.
+- [x] Implement `reservationSchedule` and `reservationIntervals` in `reservation-calendar.ts`. Use `scheduleValues` for the old schedule shape; validate each override as a synthetic weekday schedule and validate real dates explicitly. For a matching override substitute its hours/breaks with the target weekday, keep date blocks, then call `businessIntervals`. Preserve old exports/tests unchanged. Cover special opening on a normally closed weekday, full-day closure, custom breaks replacing weekly ones, blocks clipping special hours, invalid/duplicate dates and mutation safety.
+- [x] Run both new test files plus `lib/partner/availability.test.ts`, typecheck and diff checks; commit exact two files. Independent spec then quality review before Task 3.
 
 ## Task 3: Shared slot calculation with store and staff capacity
 
