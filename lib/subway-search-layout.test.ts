@@ -76,6 +76,29 @@ describe("subway endpoint search layout", () => {
     expect(controllerSource).toContain("buttonRef={routeButtonRef}");
   });
 
+  it("opens an existing route editor without choosing an endpoint for the visitor", () => {
+    const openEditor = controllerSource.slice(controllerSource.indexOf("const openEditor ="), controllerSource.indexOf("const cancelEditor ="));
+    expect(openEditor).not.toContain('pendingFocusRef.current = "search"');
+    expect(controllerSource).toContain('aria-label="Route endpoints"');
+    expect(controllerSource).toContain("routeEditorRef.current?.focus()");
+  });
+
+  it("advances only on an explicit station choice with an unfilled next step", () => {
+    expect(controllerSource).toContain("if (id && advanceFocus && !draftArrival)");
+    expect(controllerSource).toContain("if (id && advanceFocus && !arrivalId)");
+    // Exact-name validation on blur and dismissing search must not hijack a
+    // click on the other endpoint or an editor action.
+    expect(controllerSource).toContain("commit(exact, false)");
+    expect(controllerSource).toContain("commit(previous, false)");
+  });
+
+  it("offers the same non-destructive search dismissal on screen and with Escape", () => {
+    expect(controllerSource).toContain('aria-label={`Close ${label.toLowerCase()} station search`}');
+    expect(controllerSource).toContain("onClick={dismissSearch}");
+    expect(controllerSource).toMatch(/event.key === "Escape"[\s\S]*?dismissSearch\(\)/);
+    expect(cssSource).toMatch(/\.station-search-dismiss\s*\{[^}]*min-height:\s*44px;/);
+  });
+
   it("inserts via stations into the connected field and exposes explicit order controls", () => {
     expect(controllerSource).toContain('className="subway-waypoint-row"');
     expect(controllerSource).toContain('aria-label={`Via ${index + 1}:');
@@ -246,33 +269,33 @@ describe("subway flow: search → station → place (owner walkthrough 2026-08-2
   });
 
   it("station results lead with the name and trail the line badges", () => {
-    const row = controller.slice(controller.indexOf('role="option"'), controller.indexOf('role="option"') + 1400);
+    const start = controller.indexOf('role="option"');
+    const row = controller.slice(start, controller.indexOf("</button>", start));
     expect(row.indexOf("station-result-name")).toBeLessThan(row.indexOf("<StationLineBadges"));
   });
 });
 
-describe("station search: while results are open, everything else gives up its room", () => {
-  // Owner report 2026-09-27, from a real iPhone with the keyboard up: the
-  // results list under the arrival field showed one row. The numbers: the
-  // panel is capped at the viewport minus the keyboard (~544px on an iPhone),
-  // and the header (110) + the two-field card (370) + the footer (130) leave
-  // it nothing. The picker is the whole task while it is open, so the other
-  // field, the decorative route rail, the swap button and the footer step
-  // aside until a station is picked.
+describe("station search keeps the whole route editable", () => {
+  // Searching one endpoint must not erase the route context or the way out.
   const css = readFileSync(new URL("../app/globals.css", import.meta.url), "utf8");
 
-  it("hides the field that is not being searched", () => {
-    expect(css).toMatch(/\.subway-search-field-stack:has\(\.station-search-results\) \.station-combobox:not\(:has\(\.station-search-results\)\)\s*\{[^}]*display: none/);
+  it("keeps both endpoint fields visible during either search", () => {
+    expect(css).not.toMatch(/\.subway-search-field-stack:has\(\.station-search-results\) \.station-combobox:not\(:has\(\.station-search-results\)\)\s*\{[^}]*display: none/);
   });
 
-  it("hides the route rail and the swap button", () => {
-    expect(css).toMatch(/\.subway-search-fields:has\(\.station-search-results\) \.subway-search-route-rail[^{]*\{[^}]*display: none/);
-    expect(css).toMatch(/\.subway-search-fields:has\(\.station-search-results\) \[aria-label="Swap departure and arrival"\][^{]*\{[^}]*display: none/);
+  it("keeps the route rail and swap button visible", () => {
+    expect(css).not.toMatch(/\.subway-search-fields:has\(\.station-search-results\) \.subway-search-route-rail[^{]*\{[^}]*display: none/);
+    expect(css).not.toMatch(/\.subway-search-fields:has\(\.station-search-results\) \[aria-label="Swap departure and arrival"\][^{]*\{[^}]*display: none/);
   });
 
-  it("hides the Show route / Update route footer", () => {
-    // Picking a row is the action; the footer only takes 130px from the list.
-    expect(css).toMatch(/\.subway-controller:has\(\.station-search-results\) \.subway-search-footer\s*\{[^}]*display: none/);
+  it("keeps Cancel and the route action outside the scrolling suggestions", () => {
+    expect(css).not.toMatch(/\.subway-controller:has\(\.station-search-results\) \.subway-search-footer\s*\{[^}]*display: none/);
+    expect(css).toMatch(/\.subway-search-footer\s*\{[^}]*flex: none/);
+  });
+
+  it("reserves the same bounded height that the results occupy below both fields", () => {
+    expect(css).toMatch(/\.subway-search-field-stack \.station-search-results\s*\{[^}]*top:\s*calc\(100% \+ 6px\);[^}]*max-height:\s*var\(--station-results-height\)/);
+    expect(css).toMatch(/\.subway-search-fields:has\(\.station-search-results\)\s*\{[^}]*margin-bottom:\s*calc\(var\(--station-results-height\) \+ 6px\)/);
   });
 });
 
@@ -328,11 +351,8 @@ describe("subway panel layout defects (owner reports 2026-08-22)", () => {
   });
 
   it("gives the station picker real height instead of a 230px box", () => {
-    // Still the panel-aware clamp the 2026-08-22 owner report asked for; it is
-    // now also capped by the live viewport so the 240px floor cannot outgrow
-    // the space left when the software keyboard is up (R3).
-    expect(css).toContain("clamp(240px, calc(78dvh - 225px), 520px)");
-    expect(css).toMatch(/\.station-search-results[^{]*\{[^}]*max-height:\s*min\(clamp\(240px[^}]*var\(--kb/);
+    expect(css).toMatch(/--station-results-height:[^;]*100dvh[^;]*var\(--kb/);
+    expect(css).toMatch(/\.station-search-results[^{]*\{[^}]*overflow-y:\s*auto/);
   });
 
   it("does not put route editing inside the shop list", () => {
@@ -392,14 +412,11 @@ describe("timing is Google's job, the stepper is the bottom control", () => {
   });
 });
 
-describe("station search: the divider between the fields leaves with the hidden field", () => {
+describe("station search keeps the divider between its visible endpoints", () => {
   const css = readFileSync(new URL("../app/globals.css", import.meta.url), "utf8");
 
-  it("drops the border-top of the field being searched", () => {
-    // `.station-combobox + .station-combobox` draws a hairline between
-    // Departure and Arrival. display:none does not take a node out of the `+`
-    // combinator, so with Departure hidden the Arrival field kept a stray line
-    // over it (runtime screenshot, 2026-09-27).
-    expect(css).toMatch(/\.subway-search-field-stack:has\(\.station-search-results\) \.station-combobox:has\(\.station-search-results\)\s*\{[^}]*border-top:\s*0;/);
+  it("does not remove the divider when search opens", () => {
+    expect(css).not.toMatch(/\.subway-search-field-stack:has\(\.station-search-results\) \.station-combobox:has\(\.station-search-results\)\s*\{[^}]*border-top:\s*0;/);
+    expect(css).toMatch(/\.station-combobox \+ \.station-combobox\s*\{[^}]*border-top:\s*1px solid var\(--border\)/);
   });
 });

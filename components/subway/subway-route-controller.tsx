@@ -9,7 +9,8 @@ import { Button } from "@/components/ui/button";
 import { IconButton } from "@/components/ui/icon-button";
 import { RatingLine } from "@/components/ui/rating-line";
 import { PRODUCTS, TYPE_LABEL, type Place } from "@/lib/data";
-import { formatDistance, googleDirectionsUrl, haversineKm } from "@/lib/geo";
+import { formatDistance, haversineKm } from "@/lib/geo";
+import { googleStationDirectionsUrl } from "@/lib/subway-directions";
 import { routes } from "@/lib/routes";
 import type { SubwayPlaceCategory } from "@/lib/subway-place-filter";
 import {
@@ -23,7 +24,6 @@ import {
   routeSegmentStartIndices,
   searchStations,
   stationDisplayName,
-  travelMinutes,
   type SubwayRoute,
   type SubwayStation,
 } from "@/lib/subway";
@@ -111,7 +111,7 @@ function StationCombobox({
   inputRef?: React.RefObject<HTMLInputElement | null>;
   locationStatus: "idle" | "loading" | "granted" | "fallback";
   onRetryLocation: () => void;
-  onSelect: (id: string | null) => void;
+  onSelect: (id: string | null, advanceFocus?: boolean) => void;
 }) {
   const inputId = useId();
   const listId = `${inputId}-list`;
@@ -150,12 +150,26 @@ function StationCombobox({
     });
   }, [activeIndex, listId, open, suggestions]);
 
-  const commit = (station: SubwayStation) => {
+  const commit = (station: SubwayStation, advanceFocus = true) => {
     lastSelectedRef.current = station;
-    onSelect(station.id);
+    onSelect(station.id, advanceFocus);
     setQuery(station.name);
     setSelectionError(false);
     setOpen(false);
+  };
+
+  const dismissSearch = () => {
+    // Focus returns to the same field before closing the results. Its focus
+    // handler may open them, so close last to keep the picker dismissed.
+    inputRef?.current?.focus({ preventScroll: true });
+    const previous = lastSelectedRef.current;
+    if (previous) commit(previous, false);
+    else {
+      setQuery("");
+      setSelectionError(false);
+      setOpen(false);
+      onSelect(null, false);
+    }
   };
 
   const finishEditing = () => {
@@ -166,7 +180,7 @@ function StationCombobox({
     }
     const exact = exactStationMatch(query);
     if (exact) {
-      commit(exact);
+      commit(exact, false);
       return;
     }
     setSelectionError(true);
@@ -225,14 +239,7 @@ function StationCombobox({
               commit(suggestions[Math.max(activeIndex, 0)]);
             } else if (event.key === "Escape") {
               event.preventDefault();
-              const previous = lastSelectedRef.current;
-              if (previous) commit(previous);
-              else {
-                setQuery("");
-                setSelectionError(false);
-                setOpen(false);
-                onSelect(null);
-              }
+              dismissSearch();
             }
           }}
         />
@@ -257,14 +264,24 @@ function StationCombobox({
 
       {open && (
         <div className="station-search-results">
-          <div className="station-results-label">
-            {query.trim()
-              ? "Best matches"
-              : nearbyStationId
-                ? "Near you, recent and popular"
-                : recentIds.length > 0
-                  ? "Recent and popular"
-                  : "Popular stations"}
+          <div className="station-results-header">
+            <div className="station-results-label">
+              {query.trim()
+                ? "Best matches"
+                : nearbyStationId
+                  ? "Near you, recent and popular"
+                  : recentIds.length > 0
+                    ? "Recent and popular"
+                    : "Popular stations"}
+            </div>
+            <button
+              type="button"
+              className="station-search-dismiss"
+              aria-label={`Close ${label.toLowerCase()} station search`}
+              onClick={dismissSearch}
+            >
+              Close search
+            </button>
           </div>
           {!query.trim() && locationStatus === "loading" && (
             <div className="station-location-note" role="status">Finding a nearby station...</div>
@@ -310,6 +327,7 @@ function StationCombobox({
                     onPointerCancel={() => { selectingOptionRef.current = false; }}
                     onClick={() => {
                       selectingOptionRef.current = false;
+                      inputRef?.current?.focus({ preventScroll: true });
                       commit(station);
                     }}
                   >
@@ -428,6 +446,7 @@ export function SubwayRouteController({
   const viaInputRef = useRef<HTMLInputElement>(null);
   const routeButtonRef = useRef<HTMLButtonElement>(null);
   const routeSummaryRef = useRef<HTMLDivElement>(null);
+  const routeEditorRef = useRef<HTMLDivElement>(null);
   const nearbyControlsRef = useRef<HTMLDivElement>(null);
   const viaAddButtonRef = useRef<HTMLButtonElement>(null);
   const viaRowRefs = useRef(new Map<string, HTMLDivElement>());
@@ -438,7 +457,7 @@ export function SubwayRouteController({
     | { kind: "via"; id: string }
     | null
   >(null);
-  const pendingFocusRef = useRef<"search" | "route" | null>(null);
+  const pendingFocusRef = useRef<"search" | "editor" | "route" | null>(null);
   const snapDragStart = useRef<{ y: number; snap: SubwaySnap } | null>(null);
   const snapDragMoved = useRef(false); // suppresses the native click that follows a drag release
   const [waypointAnnouncement, setWaypointAnnouncement] = useState("");
@@ -460,11 +479,14 @@ export function SubwayRouteController({
     if (pendingFocusRef.current === "search" && editing) {
       departureInputRef.current?.focus();
       pendingFocusRef.current = null;
+    } else if (pendingFocusRef.current === "editor" && editing) {
+      routeEditorRef.current?.focus();
+      pendingFocusRef.current = null;
     } else if (pendingFocusRef.current === "route" && !editing && route) {
       routeSummaryRef.current?.focus();
       pendingFocusRef.current = null;
     }
-  }, [editing, route]);
+  }, [editing, route, routeFormOpen]);
   useEffect(() => {
     if (viaAdding) viaInputRef.current?.focus();
   }, [viaAdding]);
@@ -599,7 +621,7 @@ export function SubwayRouteController({
   };
 
   const openEditor = () => {
-    pendingFocusRef.current = "search";
+    pendingFocusRef.current = "editor";
     setDraftDeparture(departureId);
     setDraftArrival(arrivalId);
     setDraftVias(viaIds);
@@ -784,10 +806,9 @@ export function SubwayRouteController({
             <div className="subway-ticket-meta">
               <a
                 className="subway-route-open"
-                href={googleDirectionsUrl(
-                  STATIONS[readyRoute.stations[readyRoute.stations.length - 1]],
+                href={googleStationDirectionsUrl(
                   STATIONS[readyRoute.stations[0]],
-                  "transit",
+                  STATIONS[readyRoute.stations[readyRoute.stations.length - 1]],
                   viaIds.map((id) => STATIONS[id]).filter(Boolean),
                 )}
                 target="_blank"
@@ -809,6 +830,7 @@ export function SubwayRouteController({
               <button type="button" className="subway-text-action" onClick={openEditor}>Edit</button>
               <IconButton name="x" label="Close subway planner" iconSize="xs" onClick={onClose} />
             </div>
+            <p className="subway-route-preview-label">Route preview</p>
             <div className="subway-ticket-ends">
               <b>{stationDisplayName(STATIONS[readyRoute.stations[0]])}</b>
               <b>{stationDisplayName(STATIONS[readyRoute.stations[readyRoute.stations.length - 1]])}</b>
@@ -876,6 +898,7 @@ export function SubwayRouteController({
               {readyRoute.stations.length - 1} stops
               {readyRoute.segments.length > 1 && ` · ${readyRoute.segments.length - 1} transfer${readyRoute.segments.length > 2 ? "s" : ""}`}
             </p>
+            <p className="subway-route-preview-note">Check Google Maps for current timings and transfers.</p>
           </div>
           {snap === "compact" && (
             <div className="subway-compact-station">
@@ -973,7 +996,7 @@ export function SubwayRouteController({
                 </button>
               </div>
             )}
-            <div className="subway-search-fields" hidden={!routeFormOpen}>
+            <div ref={routeEditorRef} className="subway-search-fields" role="group" aria-label="Route endpoints" tabIndex={-1} hidden={!routeFormOpen}>
               <span className="subway-search-route-rail" aria-hidden="true">
                 <RailStop stationId={draftDeparture} kind="departure" />
                 {draftVias.map((id) => (
@@ -1000,11 +1023,11 @@ export function SubwayRouteController({
                   inputRef={departureInputRef}
                   locationStatus={locationStatus}
                   onRetryLocation={onRetryLocation}
-                  onSelect={(id) => {
+                  onSelect={(id, advanceFocus) => {
                     setDraftDeparture(id);
                     remember(id);
                     onStation(id ?? draftArrival);
-                    if (id) requestAnimationFrame(() => arrivalInputRef.current?.focus());
+                    if (id && advanceFocus && !draftArrival) requestAnimationFrame(() => arrivalInputRef.current?.focus());
                   }}
                 />
                 {draftVias.map((id, index) => (
@@ -1097,11 +1120,11 @@ export function SubwayRouteController({
                   inputRef={arrivalInputRef}
                   locationStatus={locationStatus}
                   onRetryLocation={onRetryLocation}
-                  onSelect={(id) => {
+                  onSelect={(id, advanceFocus) => {
                     setDraftArrival(id);
                     remember(id);
                     onStation(id ?? draftDeparture);
-                    if (id) requestAnimationFrame(() => routeButtonRef.current?.focus());
+                    if (id && advanceFocus && !arrivalId) requestAnimationFrame(() => routeButtonRef.current?.focus());
                   }}
                 />
               </div>

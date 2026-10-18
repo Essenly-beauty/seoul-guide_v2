@@ -408,6 +408,7 @@
 
   .subway-search-panel { padding: 14px 16px 20px; }
   .subway-search-fields {
+    --station-results-height: max(128px, min(360px, calc(100dvh - var(--kb, 0px) - 360px)));
     position: relative;
     display: grid;
     grid-template-columns: 24px minmax(0, 1fr) 44px;
@@ -586,12 +587,12 @@
   .station-search-results {
     position: relative;
     z-index: 10;
-    max-height: clamp(240px, 46dvh, 520px);
+    max-height: max(128px, min(360px, calc(100dvh - var(--kb, 0px) - 360px)));
     margin-top: 5px;
     overflow-y: auto;
     background: var(--surface);
     border: 1px solid var(--border);
-    border-radius: 8px;
+    border-radius: var(--r-md);
     box-shadow: var(--shadow-float);
   }
   .subway-search-field-stack .station-search-results {
@@ -600,43 +601,34 @@
     left: 0;
     right: 0;
     z-index: 20;
-    /* the picker is the whole task while it is open — let it use the space
-       the panel already reserved instead of stopping at 230px with an empty
-       half-screen underneath (owner report 2026-08-22) */
-    /* the clamp's 240px floor cannot drop below the space that is actually
-       left once the keyboard is up, so cap it by the live viewport too */
-    max-height: min(clamp(240px, calc(78dvh - 225px), 520px), calc(100dvh - var(--kb, 0px) - 200px));
+    /* Results start after the complete endpoint group. Reserve their bounded
+       height below so the other field, swap and footer remain reachable. */
+    max-height: var(--station-results-height);
     margin-top: 0;
   }
   .subway-search-fields:has(.station-search-results) {
-    margin-bottom: clamp(0px, calc(78dvh - 219px - var(--kb, 0px)), 526px);
+    margin-bottom: calc(var(--station-results-height) + 6px);
   }
   .subway-controller.search-ready:has(.station-search-results) {
     height: min(88%, 720px);
   }
-  /* Station search with results open (owner report 2026-09-27, real iPhone,
-     keyboard up): the panel is capped at the viewport minus the keyboard,
-     about 544px, and the header (110) + the two-field card (370) + the footer
-     (130) left the results list one row. The picker is the whole task while
-     it is open, so everything that is not the picker steps aside until a
-     station is chosen: the other field, the decorative route rail, the swap
-     button, and the Show/Update route footer. They all come back the moment
-     the results close. */
-  .subway-search-field-stack:has(.station-search-results) .station-combobox:not(:has(.station-search-results)) {
-    display: none;
+  .station-results-header {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
   }
-  .subway-search-fields:has(.station-search-results) .subway-search-route-rail,
-  .subway-search-fields:has(.station-search-results) [aria-label="Swap departure and arrival"] {
-    display: none;
-  }
-  .subway-controller:has(.station-search-results) .subway-search-footer {
-    display: none;
-  }
-  /* display:none does not take a node out of the `+` combinator, so the
-     hairline `.station-combobox + .station-combobox` draws between the two
-     fields stayed above the lone Arrival field. */
-  .subway-search-field-stack:has(.station-search-results) .station-combobox:has(.station-search-results) {
-    border-top: 0;
+  .station-search-dismiss {
+    min-height: 44px;
+    flex: none;
+    padding: 0 12px;
+    color: var(--accent);
+    font-size: 12px;
+    font-weight: 700;
   }
   .station-results-label {
     padding: 8px 11px 5px;
@@ -3754,7 +3746,7 @@
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    min-height: 40px;
+    min-height: 44px;
     margin-right: auto;
     min-width: 0;
     color: var(--muted);
@@ -3764,6 +3756,18 @@
     text-overflow: ellipsis;
   }
   .subway-route-open .icn { color: var(--accent); flex: none; }
+  .subway-route-preview-label {
+    margin-bottom: 6px;
+    color: var(--accent);
+    font-size: 11px;
+    font-weight: 700;
+  }
+  .subway-route-preview-note {
+    margin-top: 6px;
+    color: var(--muted);
+    font-size: 11px;
+    line-height: 1.4;
+  }
   .subway-route-summary .subway-ticket-meta > .subway-nearby-jump,
   .subway-route-summary .subway-ticket-meta > .subway-text-action {
     flex: none;
