@@ -2,7 +2,7 @@ import type { SupabaseClient } from '@supabase/supabase-js';
 import { record, timestamp, uuid } from './contracts';
 import { reservationSchedule, type ReservationSchedule } from './reservation-calendar';
 import { reservationStaff, type ReservationStaff } from './reservation-config';
-import { PartnerError, partnerOperation, queryData, unavailable, type PartnerContext } from './server';
+import { getPartnerContext, PartnerError, partnerOperation, queryData, unavailable, type PartnerContext } from './server';
 
 export const staffColumns = 'id,merchant_id,name,title,introduction,visibility,sort_order,updated_at';
 export const staffMenuColumns = 'merchant_id,staff_id,service_id';
@@ -29,11 +29,10 @@ function decodeProfile(row: unknown, merchantId: string, menuIds: string[]): Sta
   return { ...staff, updatedAt: row.updated_at };
 }
 
-function decodeLinks(rows: unknown, merchantId: string, staffId: string): string[] {
+function decodeLinks(rows: unknown, merchantId: string, staffId: string, previousId: string): string[] {
   if (!Array.isArray(rows) || rows.length > 1001) return unavailable();
   if (rows.length > 1000) throw new PartnerError(503, 'PARTNER_LIMIT_EXCEEDED');
   const menuIds: string[] = [];
-  let previousId = '';
   for (const row of rows) {
     if (!record(row) || row.merchant_id !== merchantId || row.staff_id !== staffId ||
       !canonicalUuid(row.service_id) || row.service_id <= previousId) return unavailable();
@@ -41,6 +40,22 @@ function decodeLinks(rows: unknown, merchantId: string, staffId: string): string
     menuIds.push(row.service_id);
   }
   return menuIds;
+}
+
+async function loadLinks(client: SupabaseClient, merchantId: string, staffId: string): Promise<string[]> {
+  const menuIds: string[] = [];
+  for (;;) {
+    const previousId = menuIds.at(-1) ?? '';
+    const pageSize = 1001 - menuIds.length;
+    const query = client.from('merchant_staff_menus').select(staffMenuColumns)
+      .eq('merchant_id', merchantId).eq('staff_id', staffId).order('service_id', { ascending: true });
+    const page = queryData(await (previousId ? query.gt('service_id', previousId) : query).limit(pageSize));
+    if (!Array.isArray(page) || page.length > pageSize) return unavailable();
+    const ids = decodeLinks(page, merchantId, staffId, previousId);
+    if (menuIds.length + ids.length > 1000) throw new PartnerError(503, 'PARTNER_LIMIT_EXCEEDED');
+    if (ids.length === 0) return menuIds;
+    menuIds.push(...ids);
+  }
 }
 
 function decodeCalendar(row: unknown, merchantId: string, staffId: string): StaffCalendar | null {
@@ -65,6 +80,14 @@ async function verifyServices(client: SupabaseClient, merchantId: string, menuId
   }
 }
 
+async function recheckContext(client: SupabaseClient, context: PartnerContext): Promise<PartnerContext> {
+  const current = await getPartnerContext(client);
+  if (current.userId !== context.userId || current.merchant.id !== context.merchant.id) {
+    throw new PartnerError(403, 'PARTNER_UNASSIGNED');
+  }
+  return current;
+}
+
 export async function getStaffList(client: SupabaseClient, context: PartnerContext): Promise<StaffListSnapshot> {
   return partnerOperation(async () => {
     const merchantId = context.merchant.id;
@@ -83,7 +106,7 @@ export async function getStaffList(client: SupabaseClient, context: PartnerConte
         const { menuIds: _unknownMenuIds, ...summary } = decoded;
         staff.push(summary);
       }
-      if (page.length < pageSize) break;
+      if (page.length === 0) break;
       if (staff.length === 10000) {
         const sentinel = queryData(await client.from('merchant_staff').select('id')
           .eq('merchant_id', merchantId).gt('id', previousId).order('id', { ascending: true }).range(0, 0));
@@ -92,7 +115,8 @@ export async function getStaffList(client: SupabaseClient, context: PartnerConte
         break;
       }
     }
-    return { merchantId, staff, readOnly: context.readOnly, loadedAt: new Date().toISOString() };
+    const current = await recheckContext(client, context);
+    return { merchantId, staff, readOnly: current.readOnly, loadedAt: new Date().toISOString() };
   });
 }
 
@@ -102,24 +126,19 @@ export async function getStaffDetail(client: SupabaseClient, context: PartnerCon
     const merchantId = context.merchant.id;
     const profile = queryData(await client.from('merchant_staff').select(staffColumns)
       .eq('merchant_id', merchantId).eq('id', id).maybeSingle());
-    if (profile === null) throw new PartnerError(404, 'STAFF_NOT_FOUND');
+    if (profile === null) {
+      await recheckContext(client, context);
+      throw new PartnerError(404, 'STAFF_NOT_FOUND');
+    }
     const base = decodeProfile(profile, merchantId, []);
     if (base.id !== id) return unavailable();
 
-    const menuIds = decodeLinks(queryData(await client.from('merchant_staff_menus').select(staffMenuColumns)
-      .eq('merchant_id', merchantId).eq('staff_id', id).order('service_id', { ascending: true }).limit(1001)), merchantId, id);
-    // PostgREST may cap a requested 1,001 rows at 1,000. Probe the next
-    // ordered position instead of mistaking a truncated response for complete data.
-    if (menuIds.length === 1000) {
-      const overflow = queryData(await client.from('merchant_staff_menus').select(staffMenuColumns)
-        .eq('merchant_id', merchantId).eq('staff_id', id).order('service_id', { ascending: true }).range(1000, 1000));
-      if (!Array.isArray(overflow) || overflow.length > 1) return unavailable();
-      if (overflow.length === 1) throw new PartnerError(503, 'PARTNER_LIMIT_EXCEEDED');
-    }
+    const menuIds = await loadLinks(client, merchantId, id);
     const schedule = decodeCalendar(queryData(await client.from('merchant_staff_schedules').select(staffScheduleColumns)
       .eq('merchant_id', merchantId).eq('staff_id', id).maybeSingle()), merchantId, id);
     const staff = decodeProfile(profile, merchantId, menuIds);
     await verifyServices(client, merchantId, menuIds);
-    return { merchantId, staff, schedule, readOnly: context.readOnly, loadedAt: new Date().toISOString() };
+    const current = await recheckContext(client, context);
+    return { merchantId, staff, schedule, readOnly: current.readOnly, loadedAt: new Date().toISOString() };
   });
 }
