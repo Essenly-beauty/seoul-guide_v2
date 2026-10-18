@@ -26,14 +26,24 @@ cross join unnest(array['select','insert','update']) privilege;
 select ok(has_table_privilege('authenticated', 'public.' || t, 'select'), t || ' allows owner reads')
 from unnest(array['merchant_staff','merchant_staff_menus','merchant_staff_schedules']) t;
 select ok(not has_table_privilege('authenticated', 'public.' || t, 'insert'), t || ' has no unrestricted owner insert grant')
-from unnest(array['merchant_staff','merchant_staff_schedules']) t;
+from unnest(array['merchant_staff','merchant_staff_schedules','merchant_staff_menus']) t;
 select ok(not has_table_privilege('authenticated', 'public.' || t, 'update'), t || ' has no unrestricted owner update grant')
 from unnest(array['merchant_staff','merchant_staff_schedules','merchant_staff_menus']) t;
 select ok(not has_table_privilege('authenticated', 'public.' || t, 'delete'), t || ' cannot be hard-deleted by an owner')
 from unnest(array['merchant_staff','merchant_staff_schedules']) t;
-select ok(has_table_privilege('authenticated', 'public.merchant_staff_menus', privilege),
-  'owner may ' || privilege || ' a menu assignment')
-from unnest(array['insert','delete']) privilege;
+select ok(has_table_privilege('authenticated', 'public.merchant_staff_menus', 'delete'),
+  'owner may remove a menu assignment');
+select ok(has_column_privilege('authenticated', 'public.merchant_staff_menus', c, 'insert'),
+  'owner may insert assignment ' || c)
+from unnest(array['merchant_id','staff_id','service_id']) c;
+select ok(not has_column_privilege('authenticated', 'public.merchant_staff_menus', 'created_at', 'insert'),
+  'owner cannot forge assignment creation time');
+select ok(not exists (
+  select 1 from pg_attribute a
+  where a.attrelid = 'public.merchant_staff_menus'::regclass and a.attnum > 0 and not a.attisdropped
+    and a.attname <> all(array['merchant_id','staff_id','service_id'])
+    and has_column_privilege('authenticated', 'public.merchant_staff_menus', a.attname, 'insert')
+), 'assignment has no unexpected owner-insertable columns');
 select ok(not exists (
   select 1 from pg_attribute a
   where a.attrelid = 'public.merchant_staff_menus'::regclass and a.attnum > 0 and not a.attisdropped
@@ -111,6 +121,12 @@ insert into auth.users(id,email) values
 insert into public.merchants(id,display_name,status) values
   ('f4000000-0000-0000-0000-000000000002','Staff Fixture A','active'),
   ('f4000000-0000-0000-0000-000000000012','Staff Fixture B','active');
+select is((select count(*) from public.merchants
+  where id in ('f4000000-0000-0000-0000-000000000002','f4000000-0000-0000-0000-000000000012')
+    and booking_enabled=false), 2::bigint, 'staff fixtures do not activate customer booking');
+select throws_ok($$update public.merchants set booking_enabled=true
+  where id='f4000000-0000-0000-0000-000000000002'$$,
+  '23514', null, 'even a privileged caller cannot activate booking through staff setup');
 insert into public.merchant_memberships(merchant_id,user_id) values
   ('f4000000-0000-0000-0000-000000000002','f4000000-0000-0000-0000-000000000001'),
   ('f4000000-0000-0000-0000-000000000012','f4000000-0000-0000-0000-000000000011');
