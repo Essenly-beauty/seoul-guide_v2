@@ -1,5 +1,5 @@
-import { describe, expect, it } from 'vitest';
-import { PartnerDraftStore, type PartnerDraftRecord } from '@/components/partner/partner-provider';
+import { describe, expect, it, vi } from 'vitest';
+import { PartnerDraftStore, uncertainSaveOutcomeMessage, type PartnerDraftRecord } from '@/components/partner/partner-provider';
 
 const entry = (): PartnerDraftRecord<{ name: string; updatedAt: string }> => ({ token: Symbol(), draft: { name: '편집 중', updatedAt: '2026-10-18T01:02:03.123456+00:00' }, baseline: { name: '저장된 이름', updatedAt: '2026-10-18T01:02:03.123456+00:00' }, state: { kind: 'idle' } });
 
@@ -81,6 +81,26 @@ describe('session-scoped partner draft recovery', () => {
     store.discardActive();
     expect(store.read('schedule')).toBeDefined();
     expect(store.read('dateOverrides')).toBeUndefined();
+  });
+  it('checks only the form being reloaded while preserving another dirty form', () => {
+    const store = new PartnerDraftStore();
+    const clean = entry();
+    store.write('schedule', { ...clean, draft: clean.baseline });
+    const special = entry();
+    store.write('dateOverrides', special);
+    store.setActive('schedule');
+    store.setActive('dateOverrides');
+    const confirm = vi.fn(() => false);
+    expect(store.confirmReload('schedule', confirm)).toBe(true);
+    expect(confirm).not.toHaveBeenCalled();
+    expect(store.confirmReload('dateOverrides', confirm)).toBe(false);
+    expect(confirm).toHaveBeenCalledTimes(1);
+    expect(store.read('dateOverrides')).toEqual(special);
+    expect(store.read('schedule')?.draft).toEqual(clean.baseline);
+  });
+  it('does not promise a stable client identifier when a save outcome is unknown', () => {
+    expect(uncertainSaveOutcomeMessage).toContain('저장 여부를 확인');
+    expect(uncertainSaveOutcomeMessage).not.toMatch(/같은 식별자|중복 없이 재시도/);
   });
   it('clears all private draft/editor state on access loss or session teardown', () => {
     const store = new PartnerDraftStore();

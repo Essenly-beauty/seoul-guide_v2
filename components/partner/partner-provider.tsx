@@ -86,12 +86,17 @@ export class PartnerDraftStore {
   hasUnsavedChanges() {
     return [...this.records.values()].some((record) => record.state.kind === 'pending' || (record.state.kind !== 'committed-stale' && JSON.stringify(record.draft) !== JSON.stringify(record.baseline)));
   }
+  confirmReload(key: string, confirm: () => boolean) {
+    const record = this.records.get(key);
+    return !record || record.state.kind === 'committed-stale' || JSON.stringify(record.draft) === JSON.stringify(record.baseline) || confirm();
+  }
   getEditor() { return this.editor; }
   setEditor(editor: PartnerEditor | null) { this.editor = editor; }
   clear() { this.records.clear(); this.editor = null; this.activeKeys.clear(); this.listeners.forEach((listener) => listener()); }
 }
 
 type Access = 'loading' | 'ready' | 'signed-out' | 'unassigned' | 'unavailable';
+export const uncertainSaveOutcomeMessage = '서버의 저장 결과를 확인하지 못했습니다. 다시 불러와 저장 여부를 확인한 뒤 필요하면 다시 저장해 주세요.';
 type PartnerContextValue = {
   snapshot: PartnerSnapshot | null; access: Access; refreshing: boolean; stale: boolean;
   refresh: () => Promise<PartnerSnapshot | null>; save: (command: PartnerCommand | ReservationCommand) => Promise<SaveResult>;
@@ -215,7 +220,7 @@ function PartnerSession({ children, authenticated, checking }: { children: React
       return current ? { kind: 'saved', snapshot: current } : { kind: 'committed-stale' };
     } catch {
       if (!request.isCurrent()) return { kind: 'cancelled' };
-      return { kind: 'error', message: '서버의 저장 결과를 확인하지 못했습니다. 다시 불러와 저장 여부를 확인해 주세요. 새 항목은 같은 식별자로 재시도됩니다.' };
+      return { kind: 'error', message: uncertainSaveOutcomeMessage };
     } finally { requests.finishWrite(request); }
   }, [authenticated, clearAccess, refresh, requests]);
   return <PartnerContext.Provider value={{ snapshot, access, refreshing, stale, refresh, save, confirmLeave, drafts }}>{children}</PartnerContext.Provider>;

@@ -62,7 +62,7 @@ export function usePartnerDraft<T>(key: string, initial: T) {
     } else drafts.complete(key, record.token, { ...record, state: result });
   };
   const reload = async (next: (snapshot: PartnerSnapshot) => T) => {
-    if (busy.current || (locked && state.kind !== 'committed-stale') || (state.kind !== 'committed-stale' && dirty && !partner.confirmLeave(false))) return;
+    if (busy.current || (locked && state.kind !== 'committed-stale') || (dirty && !drafts.confirmReload(key, () => window.confirm('이 양식의 저장하지 않은 변경사항을 버리고 다시 불러올까요?')))) return;
     busy.current = true;
     setState({ kind: 'reloading' });
     const current = await partner.refresh();
