@@ -10,7 +10,7 @@ import { routes } from '@/lib/routes';
 import { usePartner } from './partner-provider';
 import styles from './partner.module.css';
 
-const navigation = [['/partner', '운영 현황'], ['/partner/services', '카테고리·메뉴'], ['/partner/availability', '영업 일정'], ['/partner/settings', '매장 정보']] as const;
+const navigation = [['/partner', '운영 현황'], ['/partner/services', '카테고리·메뉴'], ['/partner/staff', '담당자'], ['/partner/availability', '영업 일정'], ['/partner/settings', '매장 정보']] as const;
 export function PartnerShell({ children }: { children: ReactNode }) {
   const pathname = usePathname();
   const { snapshot, access, stale, refreshing, refresh } = usePartner();

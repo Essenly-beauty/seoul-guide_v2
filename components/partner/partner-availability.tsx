@@ -9,10 +9,10 @@ import { DraftRecoveryNotice, Field, FormActions, usePartnerDraft } from './part
 import styles from './partner.module.css';
 
 const weekdays = ['일요일', '월요일', '화요일', '수요일', '목요일', '금요일', '토요일'];
-export function ScheduleFields({ value, onChange, disabled }: { value: ScheduleDraft; onChange: (value: ScheduleDraft) => void; disabled: boolean }) {
-  return <fieldset className={styles.fields} disabled={disabled}><legend>영업 일정 입력</legend><p className={styles.hint}>시간대 Asia/Seoul (한국 표준시). 영업시간 128개, 휴게시간 128개, 날짜별 휴무 512개까지 설정할 수 있습니다. 시간은 09:00 형식으로 입력하며 종료 시간은 24:00까지 가능합니다.</p>
+export function ScheduleFields({ value, onChange, disabled, subject = 'shop' }: { value: ScheduleDraft; onChange: (value: ScheduleDraft) => void; disabled: boolean; subject?: 'shop' | 'staff' }) {
+  return <fieldset className={styles.fields} disabled={disabled}><legend>{subject === 'staff' ? '담당자 근무 일정 입력' : '영업 일정 입력'}</legend><p className={styles.hint}>시간대 Asia/Seoul (한국 표준시). {subject === 'staff' ? '근무시간' : '영업시간'} 128개, 휴게시간 128개, 날짜별 휴무 512개까지 설정할 수 있습니다. 시간은 09:00 형식으로 입력하며 종료 시간은 24:00까지 가능합니다.</p>
     {(['hours', 'breaks'] as const).map((kind) => {
-      const label = kind === 'hours' ? '영업시간' : '휴게시간';
+      const label = kind === 'hours' ? subject === 'staff' ? '근무시간' : '영업시간' : '휴게시간';
       return <section key={kind} className={styles.scheduleSection}><h3>{label} <span className={styles.muted}>{value[kind].length} / 128</span></h3>
         {!value[kind].length && <p className={styles.muted}>{label}이 설정되지 않았습니다.</p>}
         {value[kind].map((row, index) => <div key={index} className={styles.scheduleRow}>
@@ -45,11 +45,11 @@ export function ReservationRulesFields({ value, onChange, disabled }: { value: R
     <p className={styles.hint}>날짜와 시간은 Asia/Seoul 기준입니다. 설정을 저장해도 고객 예약 접수는 자동으로 시작되지 않습니다.</p>
   </fieldset>;
 }
-export function DateOverridesFields({ value, onChange, disabled }: { value: DateOverrideDraft[]; onChange: (value: DateOverrideDraft[]) => void; disabled: boolean }) {
+export function DateOverridesFields({ value, onChange, disabled, subject = 'shop' }: { value: DateOverrideDraft[]; onChange: (value: DateOverrideDraft[]) => void; disabled: boolean; subject?: 'shop' | 'staff' }) {
   const updateDay = (index: number, change: Partial<DateOverrideDraft>) => onChange(value.map((day, position) => position === index ? { ...day, ...change } : day));
   const updatePeriod = (dayIndex: number, kind: 'hours' | 'breaks', periodIndex: number, change: Partial<SpecialPeriodDraft>) => updateDay(dayIndex, { [kind]: value[dayIndex][kind].map((period, position) => position === periodIndex ? { ...period, ...change } : period) });
   return <fieldset className={styles.fields} disabled={disabled}><legend>특별 영업일과 휴무</legend>
-    <p className={styles.hint}>특별 날짜의 영업시간·휴게시간은 그 요일의 주간 영업시간과 휴게시간을 대체합니다. 주간 일정의 날짜별 차단 시간은 특별 날짜에도 그대로 적용됩니다. 시간대 Asia/Seoul.</p>
+    <p className={styles.hint}>특별 날짜의 {subject === 'staff' ? '근무시간' : '영업시간'}·휴게시간은 그 요일의 주간 {subject === 'staff' ? '근무시간' : '영업시간'}과 휴게시간을 대체합니다. 주간 일정의 날짜별 차단 시간은 특별 날짜에도 그대로 적용됩니다. 시간대 Asia/Seoul.</p>
     {!value.length && <p className={styles.empty}>특별 영업일이 아직 없습니다. 평소와 다른 영업시간이나 종일 휴무가 있을 때 날짜를 추가해 주세요.</p>}
     {value.map((day, index) => <section key={index} className={styles.specialDay} aria-label={`특별 영업일 ${index + 1}`}>
       <div className={styles.sectionHeading}><h3>특별 날짜 {index + 1} <span className={styles.muted}>/ {value.length}</span></h3><Button variant="secondary" disabled={disabled} aria-label={`특별 영업일 ${index + 1} 삭제`} onClick={() => onChange(value.filter((_, position) => position !== index))}>날짜 삭제</Button></div>

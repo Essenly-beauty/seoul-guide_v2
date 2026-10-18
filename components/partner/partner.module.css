@@ -83,6 +83,29 @@
 .specialRow { display: grid; gap: 12px; padding: 16px 0; border-bottom: 1px solid var(--border); }
 .specialRow label { display: flex; flex-direction: column; gap: 6px; min-width: 0; font-size: .75rem; }
 .specialRow button { justify-self: start; }
+.staffWorkspace { display: grid; gap: 24px; margin: 32px 0 56px; min-width: 0; }
+.staffListPane, .staffDetailPane { min-width: 0; }
+.staffListPane .sectionHeading { border-bottom: 1px solid var(--border); }
+.staffList { list-style: none; padding: 0; margin: 0; }
+.staffList li { border-bottom: 1px solid var(--border); }
+.staffListButton { display: grid; gap: 2px; width: 100%; min-height: 64px; text-align: left; padding: 10px 12px; border: 0; border-radius: var(--r-sm); background: transparent; color: var(--text); cursor: pointer; font: inherit; }
+.staffListButton:hover, .staffListButton[aria-current='true'] { background: var(--surface-hover); }
+.staffListButton[aria-current='true'] { box-shadow: inset 3px 0 0 var(--accent); }
+.staffListName { font-weight: 600; overflow-wrap: anywhere; }
+.staffListMeta { color: var(--muted); font-size: .75rem; overflow-wrap: anywhere; }
+.staffDetailTitle { margin: 0 0 16px !important; }
+.staffDetailBody .editor { margin: 0 0 32px; }
+.staffDetailSection { margin: 32px 0; border-block: 1px solid var(--border); padding: 24px 0; }
+.staffDetailSection :global(.banner) { margin-top: 16px; }
+.staffMenuList { list-style: none; padding: 0; margin: 16px 0 0; }
+.staffMenuList li { display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 72px; padding: 12px 0; border-bottom: 1px solid var(--border); }
+.staffMenuList li > div { display: grid; min-width: 0; overflow-wrap: anywhere; }
+.staffMenuList small { color: var(--muted); font-size: .75rem; }
+.staffMenuList button { flex-shrink: 0; }
+.staffCalendarHeading { margin-top: 32px !important; }
+.staffBack { margin-bottom: 20px; }
+@media (max-width: 699px) { .staffWorkspace[data-detail-open='true'] .staffListPane { display: none; } .staffWorkspace[data-detail-open='false'] .staffDetailPane { display: none; } }
+@media (min-width: 700px) { .staffWorkspace { grid-template-columns: minmax(220px, 280px) minmax(0, 1fr); align-items: start; } .staffListPane { position: sticky; top: 20px; max-height: calc(100dvh - 40px); overflow-y: auto; } .staffBack { display: none !important; } .staffDetailBody .scheduleRow, .staffDetailBody .specialRow { grid-template-columns: repeat(2, minmax(0, 1fr)); } .staffDetailBody .scheduleRow button, .staffDetailBody .specialRow button { grid-column: 1 / -1; } }
 .gate { padding: 48px 0; max-width: 600px; }
 .gate p:not(.eyebrow) { margin: 24px 0; color: var(--muted); }
 .skip { position: absolute; top: 0; left: 16px; padding: 12px; background: var(--surface); transform: translateY(-150%); z-index: 5; }
