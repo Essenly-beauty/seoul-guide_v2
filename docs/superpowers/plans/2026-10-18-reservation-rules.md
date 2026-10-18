@@ -112,7 +112,9 @@ expect(reservationSchedule({ ...schedule, overrides: [override, override] })).to
 
 ## Task 3: Shared slot calculation with store and staff capacity
 
-- [ ] Write failing tests in `lib/partner/reservation-slots.test.ts` for the interface below. Fixtures are clearly synthetic domain test data, never inserted as production content.
+**Completed and independently reviewed:** `9f285ef`; initial RED 19 failed / 1 passed plus two independently failing precision regressions; GREEN 22 slot tests. Spec and quality reviewers approved. Quality independently checked 2,000 randomized microsecond occupancy cases. Whole-unit reviewer approved all six files, 414 dependency-inclusive tests and 48 additional integration probes. Parent full suite: 130 files / 1,655 tests, typecheck and lint pass; all 301 new tests also pass with `TZ=America/Los_Angeles`. Production build succeeds with 58 pages using guarded real local Supabase API 54381 configuration; the initial build without those environment values failed and was not treated as a code failure or masked with fake values.
+
+- [x] Write failing tests in `lib/partner/reservation-slots.test.ts` for the interface below. Fixtures are clearly synthetic domain test data, never inserted as production content.
 
 ```ts
 import type { PartnerCategory, PartnerMenu } from './catalog';
@@ -145,7 +147,7 @@ Contract and algorithm:
 3. Shop mode requires null staff and null staffSchedule, and all menus share the same capacity. Staff mode requires a visible eligible staff member belonging to the same merchant and a validated same-merchant schedule explicitly bound by the caller; unavailable/unassigned/missing staff yields no slots. Reject a supplied foreign staff or schedule. No automatic staff choice.
 4. Get merchant effective intervals and (in staff mode) staff effective intervals; intersect. Merge adjacent effective intervals before fitting duration so an artificial adjacent split does not create a false gap. Both service duration and cleanup must fit; their safe-integer sum cannot exceed 1440 minutes. A single-visit package uses the same menu price/duration fields, not a special resource algorithm.
 5. Start-time grid is anchored to local midnight, at `slotIntervalMinutes` multiples; round up interval starts. Require `startAt >= now + minimumLeadMinutes`, with exact milliseconds. Seoul date midnight converts using explicit `+09:00`, not host timezone. Output UTC ISO strings; end exactly at local 24:00 is valid, spilling beyond that date is not.
-6. Consider only confirmed rows or holds with `expiresAt > now`. Occupancy ranges are half-open `[startAt,endAt)` and include cleanup. Ignore expired holds, not invalid rows. Count concurrent store occupancy with a sweep-line/event maximum within each candidate interval, not the total number of rows touching the candidate. Adjacent existing reservations do not count as simultaneous; end events precede start events at equal timestamps. A candidate is allowed only if peak existing occupancy is strictly less than capacity. Any overlapping active occupancy for the selected staff blocks that candidate across all menus, regardless of store capacity. Include other staff and staff-less occupied rows when checking shared store capacity. Do not mutate inputs.
+6. Consider only confirmed rows or holds with `expiresAt > now`. Occupancy ranges are half-open `[startAt,endAt)` and include cleanup. Ignore expired holds, not invalid rows. Count concurrent store occupancy with a sweep-line/event maximum within each candidate interval, not the total number of rows touching the candidate. Adjacent existing reservations do not count as simultaneous; end events precede start events at equal timestamps. Preserve PostgreSQL's accepted six-digit fractional timestamp precision internally (for example epoch microseconds as bigint), so truncation cannot expire a hold early or rounding manufacture overlap at an adjacent microsecond boundary. A candidate is allowed only if peak existing occupancy is strictly less than capacity. Any overlapping active occupancy for the selected staff blocks that candidate across all menus, regardless of store capacity. Include other staff and staff-less occupied rows when checking shared store capacity. Do not mutate inputs.
 7. Document explicitly: this computes candidates from a snapshot and does NOT lock resources, create holds, prove authorization or guarantee a later confirmation. The persistence transaction must recheck both capacity dimensions atomically. No routes, booking activation, mock payment or successful reservation creation in this plan.
 
 ```ts
@@ -156,13 +158,13 @@ expect(() => reservationSlots({ ...input, occupancies: [foreignOccupancy] }))
 
 Required behavior tests: staff enabled/disabled; assigned/hidden/foreign/missing staff; weekly and special-date intersection; duration+cleanup; min-lead and start/end date boundaries; Seoul UTC rollover; same staff different-menu collision; different staff blocked by full store; capacity 2 with two sequential occupancies still allowing a candidate; truly simultaneous occupancies blocking; end/start adjacency; expired versus valid holds at exact expiry; nonvisible/draft menu and missing deposit; malformed/duplicate occupancy fails closed; no input mutation. Add invalid runtime configuration tests where practical; no unsafe casting to claim a failed read is empty.
 
-- [ ] Run `npx vitest run lib/partner/reservation-slots.test.ts`, record RED.
-- [ ] Implement the described validator, interval intersection/merging and event-sweep calculation in `reservation-slots.ts`. Keep helpers private to this unit; split only if review demonstrates a clear independent responsibility.
-- [ ] Run all three new files, existing catalog/availability tests, `npm run typecheck`, `npm run lint`, full `npm test`, `git diff --check`; commit exact files. Independent spec then quality review, followed by whole-unit review. Record actual counts and any unexecuted integration checks.
+- [x] Run `npx vitest run lib/partner/reservation-slots.test.ts`, record RED.
+- [x] Implement the described validator, interval intersection/merging and event-sweep calculation in `reservation-slots.ts`. Keep helpers private to this unit; split only if review demonstrates a clear independent responsibility.
+- [x] Run all three new files, existing catalog/availability tests, `npm run typecheck`, `npm run lint`, full `npm test`, `git diff --check`; commit exact files. Independent spec then quality review, followed by whole-unit review. Record actual counts and any unexecuted integration checks.
 
 ## Self-review and handoff checklist
 
-- [ ] All three tasks pass both reviews; new contracts are independent of unchanged A3 API, so current admin still functions while integration is built.
-- [ ] Explain that staff/settings persistence and user-facing screens are not yet added by this unit. Do not label shared slots as an available live booking flow.
-- [ ] Carry pending A3 SQL fixture test isolation, final build, independent UI reviews and navigation/discard browser checks into the persisted-operations plan.
-- [ ] Keep general content/photo/CMS editing out of scope; package is one visit; staff is not an admin login; deposit and publish gates unchanged.
+- [x] All three tasks pass both reviews; new contracts are independent of unchanged A3 API, so current admin still functions while integration is built.
+- [x] Explain that staff/settings persistence and user-facing screens are not yet added by this unit. Do not label shared slots as an available live booking flow.
+- [x] Carry pending A3 SQL fixture test isolation, final build, independent UI reviews and navigation/discard browser checks into the persisted-operations plan. First persisted slice: `2026-10-18-platform-owned-merchant-profile.md`; broader A3 checks remain outstanding.
+- [x] Keep general content/photo/CMS editing out of scope; package is one visit; staff is not an admin login; deposit and publish gates unchanged.
