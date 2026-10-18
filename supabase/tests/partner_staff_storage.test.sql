@@ -14,14 +14,72 @@ from pg_class where oid in (
   'public.merchant_staff_menus'::regclass,
   'public.merchant_staff_schedules'::regclass
 );
-select ok(not has_table_privilege('anon', 'public.' || t, 'select'), t || ' denies anonymous reads')
+select ok(not has_table_privilege('anon', 'public.' || t, privilege), t || ' denies anon ' || privilege)
+from unnest(array['merchant_staff','merchant_staff_menus','merchant_staff_schedules']) t
+cross join unnest(array['select','insert','update','delete']) privilege;
+select ok(not has_column_privilege('anon', 'public.' || t, a.attname, privilege),
+  t || '.' || a.attname || ' denies anon ' || privilege)
+from unnest(array['merchant_staff','merchant_staff_menus','merchant_staff_schedules']) t
+join pg_attribute a on a.attrelid = ('public.' || t)::regclass and a.attnum > 0 and not a.attisdropped
+cross join unnest(array['select','insert','update']) privilege;
+
+select ok(has_table_privilege('authenticated', 'public.' || t, 'select'), t || ' allows owner reads')
 from unnest(array['merchant_staff','merchant_staff_menus','merchant_staff_schedules']) t;
+select ok(not has_table_privilege('authenticated', 'public.' || t, 'insert'), t || ' has no unrestricted owner insert grant')
+from unnest(array['merchant_staff','merchant_staff_schedules']) t;
+select ok(not has_table_privilege('authenticated', 'public.' || t, 'update'), t || ' has no unrestricted owner update grant')
+from unnest(array['merchant_staff','merchant_staff_schedules','merchant_staff_menus']) t;
 select ok(not has_table_privilege('authenticated', 'public.' || t, 'delete'), t || ' cannot be hard-deleted by an owner')
 from unnest(array['merchant_staff','merchant_staff_schedules']) t;
-select ok(not has_column_privilege('authenticated', 'public.merchant_staff', c, 'update'), 'owner cannot change staff ' || c)
+select ok(has_table_privilege('authenticated', 'public.merchant_staff_menus', privilege),
+  'owner may ' || privilege || ' a menu assignment')
+from unnest(array['insert','delete']) privilege;
+select ok(not exists (
+  select 1 from pg_attribute a
+  where a.attrelid = 'public.merchant_staff_menus'::regclass and a.attnum > 0 and not a.attisdropped
+    and has_column_privilege('authenticated', 'public.merchant_staff_menus', a.attname, 'update')
+), 'owner has no column-level assignment UPDATE path around the link limit');
+
+select ok(has_column_privilege('authenticated', 'public.merchant_staff', c, 'insert'),
+  'owner may insert staff ' || c)
+from unnest(array['id','merchant_id','name','title','introduction','sort_order','visibility']) c;
+select ok(has_column_privilege('authenticated', 'public.merchant_staff', c, 'update'),
+  'owner may update staff ' || c)
+from unnest(array['name','title','introduction','sort_order','visibility']) c;
+select ok(not has_column_privilege('authenticated', 'public.merchant_staff', c, 'insert'),
+  'owner cannot insert staff ' || c)
+from unnest(array['created_at','updated_at']) c;
+select ok(not has_column_privilege('authenticated', 'public.merchant_staff', c, 'update'),
+  'owner cannot update staff ' || c)
 from unnest(array['id','merchant_id','created_at','updated_at']) c;
-select ok(not has_column_privilege('authenticated', 'public.merchant_staff_schedules', c, 'update'), 'owner cannot change schedule ' || c)
+select ok(not exists (
+  select 1 from pg_attribute a
+  where a.attrelid = 'public.merchant_staff'::regclass and a.attnum > 0 and not a.attisdropped
+    and ((a.attname <> all(array['id','merchant_id','name','title','introduction','sort_order','visibility'])
+          and has_column_privilege('authenticated', 'public.merchant_staff', a.attname, 'insert'))
+      or (a.attname <> all(array['name','title','introduction','sort_order','visibility'])
+          and has_column_privilege('authenticated', 'public.merchant_staff', a.attname, 'update')))
+), 'staff profile has no extra owner-writable columns');
+select ok(has_column_privilege('authenticated', 'public.merchant_staff_schedules', c, 'insert'),
+  'owner may insert staff schedule ' || c)
+from unnest(array['merchant_id','staff_id','hours','breaks','blocks','overrides']) c;
+select ok(has_column_privilege('authenticated', 'public.merchant_staff_schedules', c, 'update'),
+  'owner may update staff schedule ' || c)
+from unnest(array['hours','breaks','blocks','overrides']) c;
+select ok(not has_column_privilege('authenticated', 'public.merchant_staff_schedules', c, 'insert'),
+  'owner cannot insert staff schedule ' || c)
+from unnest(array['created_at','updated_at']) c;
+select ok(not has_column_privilege('authenticated', 'public.merchant_staff_schedules', c, 'update'),
+  'owner cannot update staff schedule ' || c)
 from unnest(array['merchant_id','staff_id','created_at','updated_at']) c;
+select ok(not exists (
+  select 1 from pg_attribute a
+  where a.attrelid = 'public.merchant_staff_schedules'::regclass and a.attnum > 0 and not a.attisdropped
+    and ((a.attname <> all(array['merchant_id','staff_id','hours','breaks','blocks','overrides'])
+          and has_column_privilege('authenticated', 'public.merchant_staff_schedules', a.attname, 'insert'))
+      or (a.attname <> all(array['hours','breaks','blocks','overrides'])
+          and has_column_privilege('authenticated', 'public.merchant_staff_schedules', a.attname, 'update')))
+), 'staff schedule has no extra owner-writable columns');
 select ok(not exists (
   select 1 from pg_constraint
   where conrelid = 'public.merchant_staff'::regclass
@@ -87,7 +145,7 @@ select results_eq($$insert into public.merchant_staff_schedules(merchant_id,staf
   values ('f4000000-0000-0000-0000-000000000002','f4000000-0000-0000-0000-000000000005',
     '[{"weekday":1,"startMinute":540,"endMinute":1080}]',
     '[{"weekday":1,"startMinute":720,"endMinute":780}]',
-    '[{"date":"2026-11-01","startMinute":600,"endMinute":660}]',
+    '[{"date":"2099-12-27","startMinute":600,"endMinute":660}]',
     '[{"date":"2026-11-02","hours":[],"breaks":[]}]')
   returning staff_id::text$$, array['f4000000-0000-0000-0000-000000000005'], 'owner creates own staff schedule');
 select results_eq($$update public.merchant_staff_schedules
@@ -125,6 +183,8 @@ select throws_ok($$update public.merchant_staff set name='  '$$, '23514', null, 
 select lives_ok($$update public.merchant_staff set visibility='draft',name=''$$, 'an incomplete draft may have no name');
 select lives_ok($$update public.merchant_staff set visibility='hidden'$$, 'hidden staff remains a valid profile state');
 select lives_ok($$update public.merchant_staff set name='STAFF_PRIVATE_MARKER',visibility='visible'$$, 'owner can restore visible staff');
+select lives_ok($$update public.merchant_staff set introduction='INTRODUCTION_PRIVATE_MARKER'$$,
+  'owner saves a private booking introduction');
 
 select throws_ok($$insert into public.merchant_staff_menus(merchant_id,staff_id,service_id)
   values ('f4000000-0000-0000-0000-000000000002','f4000000-0000-0000-0000-000000000005','f4000000-0000-0000-0000-000000000004')$$,
@@ -300,16 +360,20 @@ select ok(exists(select 1 from public.merchant_audit_events
 select ok(exists(select 1 from public.merchant_audit_events
   where merchant_id='f4000000-0000-0000-0000-000000000002'
     and entity_table='merchant_staff_menus' and action='INSERT'
+    and entity_id='f4000000-0000-0000-0000-000000000005'
     and changed_fields @> array['staff_id','service_id']::text[]), 'assignment audit records changed field names');
 select ok(exists(select 1 from public.merchant_audit_events
   where merchant_id='f4000000-0000-0000-0000-000000000002'
     and entity_table='merchant_staff_schedules' and action='UPDATE'
+    and entity_id='f4000000-0000-0000-0000-000000000005'
     and changed_fields @> array['hours']::text[]), 'schedule audit records changed field names');
 select ok(not exists(select 1 from public.merchant_audit_events
   where merchant_id='f4000000-0000-0000-0000-000000000002'
     and (row_to_json(merchant_audit_events)::text like '%STAFF_PRIVATE_MARKER%'
+      or row_to_json(merchant_audit_events)::text like '%INTRODUCTION_PRIVATE_MARKER%'
+      or row_to_json(merchant_audit_events)::text like '%2099-12-27%'
       or row_to_json(merchant_audit_events)::text like '%startMinute%')),
-  'staff names and schedule values never enter audit rows');
+  'staff names, introductions, and schedule values never enter audit rows');
 
 set local role service_role;
 set local request.jwt.claim.sub = '';
@@ -317,6 +381,12 @@ select lives_ok($$update public.merchants set status='suspended' where id='f4000
   'operator suspends fixture merchant');
 set local role authenticated;
 set local request.jwt.claim.sub = 'f4000000-0000-0000-0000-000000000001';
+select results_eq($$select name from public.merchant_staff where id='f4000000-0000-0000-0000-000000000005'$$,
+  array['STAFF_PRIVATE_MARKER'], 'suspended owner retains profile read access');
+select results_eq($$select count(*) from public.merchant_staff_menus where staff_id='f4000000-0000-0000-0000-000000000005'$$,
+  array[1000::bigint], 'suspended owner retains assignment read access');
+select results_eq($$select count(*) from public.merchant_staff_schedules where staff_id='f4000000-0000-0000-0000-000000000005'$$,
+  array[1::bigint], 'suspended owner retains schedule read access');
 select is_empty($$update public.merchant_staff set title='suspended edit' returning id$$,
   'suspended owner cannot update staff');
 select is_empty($$update public.merchant_staff_schedules set hours='[]' returning staff_id$$,
@@ -330,9 +400,19 @@ select throws_ok($$insert into public.merchant_staff_menus(merchant_id,staff_id,
 select throws_ok($$insert into public.merchant_staff_schedules(merchant_id,staff_id)
   values ('f4000000-0000-0000-0000-000000000002','f4000000-0000-0000-0000-000000000006')$$,
   '42501', null, 'suspended owner cannot create a schedule');
+select is_empty($$delete from public.merchant_staff_menus
+  where merchant_id='f4000000-0000-0000-0000-000000000002'
+    and staff_id='f4000000-0000-0000-0000-000000000005'
+    and service_id='f4000000-0000-0000-0000-000000000004' returning service_id$$,
+  'suspended owner cannot remove an existing assignment');
+select is((select count(*) from public.merchant_staff_menus where staff_id='f4000000-0000-0000-0000-000000000005'),
+  1000::bigint, 'suspension preserves existing assignments');
 
 set local role service_role;
 set local request.jwt.claim.sub = '';
+select results_eq($$update public.merchants set status='active'
+  where id='f4000000-0000-0000-0000-000000000002' returning status$$,
+  array['active'], 'operator reactivates fixture before revoking membership');
 select lives_ok($$update public.merchant_memberships set revoked_at=now()
   where merchant_id='f4000000-0000-0000-0000-000000000002'$$, 'operator revokes fixture owner');
 set local role authenticated;
