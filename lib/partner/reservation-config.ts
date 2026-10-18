@@ -50,10 +50,17 @@ export function reservationStaff(value: unknown): value is ReservationStaff {
     if (!exactRecord(value, ['id', 'merchantId', 'name', 'title', 'introduction', 'visibility', 'sortOrder', 'menuIds']) ||
       !canonicalUuid(value.id) || !canonicalUuid(value.merchantId) || !boundedString(value.name, 120) ||
       !boundedString(value.title, 120) || !boundedString(value.introduction, 1000) || !visibility(value.visibility) ||
-      (value.visibility === 'visible' && !value.name.trim()) || !integer(value.sortOrder) ||
-      !Array.isArray(value.menuIds) || value.menuIds.length > 1000) return false;
-    // Array.from visits sparse entries as undefined, so holes cannot pass validation.
-    return Array.from(value.menuIds).every(canonicalUuid) && new Set(value.menuIds).size === value.menuIds.length;
+      (value.visibility === 'visible' && !value.name.trim()) || !integer(value.sortOrder)) return false;
+    const menuIds = value.menuIds;
+    if (!Array.isArray(menuIds) || menuIds.length > 1000) return false;
+    const seen = new Set<string>();
+    // Read indexes directly: iterators cannot hide invalid values, duplicates, or holes.
+    for (let index = 0; index < menuIds.length; index++) {
+      const id = menuIds[index];
+      if (!canonicalUuid(id) || seen.has(id)) return false;
+      seen.add(id);
+    }
+    return true;
   } catch { return false; }
 }
 
@@ -61,10 +68,16 @@ export function reservationStaff(value: unknown): value is ReservationStaff {
 export function eligibleStaff(staff: readonly ReservationStaff[], merchantId: string, menuId: string): ReservationStaff[] {
   if (!canonicalUuid(merchantId)) throw new Error('merchant.invalid');
   if (!canonicalUuid(menuId)) throw new Error('menu.invalid');
-  if (!Array.isArray(staff)) throw new Error('staff.invalid');
-  for (const member of staff) {
-    if (!reservationStaff(member)) throw new Error('staff.invalid');
-  }
-  return staff.filter((member) => member.merchantId === merchantId && member.visibility === 'visible' && member.menuIds.includes(menuId))
-    .sort((a, b) => a.sortOrder - b.sortOrder || (a.id < b.id ? -1 : a.id > b.id ? 1 : 0));
+  try {
+    if (!Array.isArray(staff)) throw new Error('staff.invalid');
+    const members: ReservationStaff[] = [];
+    for (let index = 0; index < staff.length; index++) {
+      const member = staff[index];
+      if (!reservationStaff(member)) throw new Error('staff.invalid');
+      members.push(member);
+    }
+    return members.filter((member) => member.merchantId === merchantId && member.visibility === 'visible' &&
+      Array.prototype.includes.call(member.menuIds, menuId))
+      .sort((a, b) => a.sortOrder - b.sortOrder || (a.id < b.id ? -1 : a.id > b.id ? 1 : 0));
+  } catch { throw new Error('staff.invalid'); }
 }

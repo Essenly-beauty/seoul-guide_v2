@@ -166,6 +166,18 @@ describe('reservation staff', () => {
     expect(reservationStaff({ ...staff, menuIds: menuIds.slice(0, 1000) })).toBe(true);
     expect(reservationStaff({ ...staff, menuIds })).toBe(false);
   });
+
+  it.each([{ indexedIds: ['invalid'] }, { indexedIds: [menuId, menuId] }])('validates indexed menu IDs even when an iterator hides them %#', ({ indexedIds }) => {
+    const menuIds = [...indexedIds];
+    menuIds[Symbol.iterator] = function* () { yield menuId; if (menuIds.length > 1) yield otherMenuId; return undefined; };
+    expect(reservationStaff({ ...staff, menuIds })).toBe(false);
+  });
+
+  it('does not use the menu array iterator for validation', () => {
+    const menuIds = [menuId];
+    menuIds[Symbol.iterator] = () => { throw new Error('iterator.failure'); };
+    expect(reservationStaff({ ...staff, menuIds })).toBe(true);
+  });
 });
 
 describe('eligible reservation staff', () => {
@@ -212,5 +224,40 @@ describe('eligible reservation staff', () => {
       ? Object.defineProperty({ ...staff }, 'merchantId', { get() { throw new Error('property.failure'); } })
       : new Proxy(staff, { getPrototypeOf() { throw new Error('prototype.failure'); } });
     expect(() => eligibleStaff([value], merchantId, menuId)).toThrow('staff.invalid');
+  });
+
+  it('rejects an indexed invalid row hidden by a custom iterator', () => {
+    const input = [{ ...staff, name: '' }];
+    input[Symbol.iterator] = function* () { return undefined; };
+    expect(() => eligibleStaff(input, merchantId, menuId)).toThrow('staff.invalid');
+  });
+
+  it('selects indexed staff without using custom array iteration or filtering', () => {
+    const input = [staff];
+    input[Symbol.iterator] = () => { throw new Error('iterator.failure'); };
+    Object.defineProperty(input, 'filter', { value: () => [foreignStaff] });
+    expect(eligibleStaff(input, merchantId, menuId)).toEqual([staff]);
+  });
+
+  it('checks indexed menu membership without invoking a custom includes method', () => {
+    const menuIds = [otherMenuId];
+    Object.defineProperty(menuIds, 'includes', { value: () => true });
+    expect(eligibleStaff([{ ...staff, menuIds }], merchantId, menuId)).toEqual([]);
+  });
+
+  it('uses staff.invalid for a revoked array proxy', () => {
+    const { proxy, revoke } = Proxy.revocable([staff], {});
+    revoke();
+    expect(() => eligibleStaff(proxy, merchantId, menuId)).toThrow('staff.invalid');
+  });
+
+  it.each(['length', '0'])('uses staff.invalid when array access to %s throws', (property) => {
+    const input = new Proxy([staff], {
+      get(target, key, receiver) {
+        if (key === property) throw new Error('array.failure');
+        return Reflect.get(target, key, receiver);
+      },
+    });
+    expect(() => eligibleStaff(input, merchantId, menuId)).toThrow('staff.invalid');
   });
 });
