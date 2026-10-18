@@ -4,7 +4,8 @@ import { load } from "cheerio";
 import { describe, expect, it } from "vitest";
 import { SubwayRouteController } from "@/components/subway/subway-route-controller";
 import { findRoute, findRouteVia, STATIONS } from "./subway";
-import { PLACES } from "./data";
+import { PLACES, PRODUCTS } from "./data";
+import { routes } from "./routes";
 
 const noop = () => {};
 const defaults: ComponentProps<typeof SubwayRouteController> = {
@@ -21,6 +22,19 @@ function render(overrides: Partial<typeof defaults> = {}) {
 }
 
 describe("subway route controller", () => {
+  it("shows Olive Young examples in catalogue order rather than synthetic sales order", () => {
+    const $ = render({ category: "olive_young" });
+    expect($(".subway-product-picks a").map((_, el) => $(el).attr("href")).get()).toEqual(
+      PRODUCTS.filter(product => product.channel === "olive_young").slice(0, 3).map(product => routes.shopItem(product.id)),
+    );
+  });
+
+  it("discloses unverified availability and prices instead of showing illustrative price tiers", () => {
+    const $ = render({ category: "olive_young" });
+    expect($(".subway-product-picks").text()).toContain("Curated product examples. Availability and prices are not verified for this branch.");
+    expect($(".subway-product-picks a").text()).not.toContain("₩");
+  });
+
   it("does not present neighborhood pins as measured distances from a station", () => {
     const base = PLACES[0];
     const $ = render({ places: [{ ...base, id: "approximate-test", geoSource: "area", lat: STATIONS.gangnam.lat, lng: STATIONS.gangnam.lng }] });

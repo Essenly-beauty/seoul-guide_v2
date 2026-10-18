@@ -730,7 +730,7 @@ export function SubwayRouteController({
   }, [activeStation, places]);
 
   const oliveYoungPicks = useMemo(
-    () => PRODUCTS.filter((product) => product.channel === "olive_young").sort((a, b) => a.salesRank - b.salesRank).slice(0, 3),
+    () => PRODUCTS.filter((product) => product.channel === "olive_young").slice(0, 3),
     [],
   );
 
@@ -1263,14 +1263,13 @@ export function SubwayRouteController({
                 <div className="subway-nearby-heading">
                   <div>
                     <h3>Products to look for</h3>
-                    <p>Store-level stock is not available here.</p>
+                    <p>Curated product examples. Availability and prices are not verified for this branch.</p>
                   </div>
                 </div>
                 {oliveYoungPicks.map((product) => (
                   <Link key={product.id} href={routes.shopItem(product.id)}>
                     <span>{product.brand}</span>
                     <b>{product.name}</b>
-                    <span className="mono">{product.priceRange}</span>
                     <Icon name="chev" size="xs" />
                   </Link>
                 ))}
