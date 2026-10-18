@@ -178,6 +178,51 @@ describe('staff command boundary', () => {
     reject({ ...createSchedule, values });
   });
 
+  it('returns the validated calendar as a plain serializable command', () => {
+    const values = structuredClone(calendar);
+    Object.defineProperty(values.overrides, 'toJSON', { value: () => [] });
+    const input = { ...createSchedule, values };
+    const result = parseStaffCommand(input);
+    expect(result.ok).toBe(true);
+    if (!result.ok) return;
+    expect(result.command).not.toBe(input);
+    expect(JSON.parse(JSON.stringify(result.command))).toEqual(createSchedule);
+    values.overrides[0].hours[0].startMinute = 700;
+    expect(JSON.parse(JSON.stringify(result.command))).toEqual(createSchedule);
+  });
+
+  it('does not return mutable profile getters after validation', () => {
+    let name = '민지';
+    const values = Object.defineProperty({ ...profile }, 'name', {
+      enumerable: true, get: () => name,
+    });
+    const result = parseStaffCommand({ ...createProfile, values });
+    name = ' \t';
+    if (!result.ok) {
+      expect(result).toEqual(invalid);
+      return;
+    }
+    expect(result.command.kind).toBe('staff');
+    if (result.command.kind !== 'staff') return;
+    expect(result.command.values.name).toBe('민지');
+    expect(JSON.parse(JSON.stringify(result.command)).values.name).toBe('민지');
+  });
+
+  it('returns a stable single-menu link when an input getter changes', () => {
+    let linkedId = menuId;
+    const input = Object.defineProperty({ ...addMenu }, 'menuId', {
+      enumerable: true, get: () => linkedId,
+    });
+    const result = parseStaffCommand(input);
+    linkedId = 'invalid';
+    if (!result.ok) {
+      expect(result).toEqual(invalid);
+      return;
+    }
+    expect(result.command).toEqual(addMenu);
+    expect(JSON.parse(JSON.stringify(result.command))).toEqual(addMenu);
+  });
+
   it('contains hostile inspection failures and cyclic commands as invalid', () => {
     const fail = () => { throw new Error('hostile'); };
     reject(new Proxy(createProfile, { getPrototypeOf: fail }));

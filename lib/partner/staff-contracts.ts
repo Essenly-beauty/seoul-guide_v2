@@ -30,11 +30,10 @@ function copyList<T, U>(items: T[], maximum: number, copy: (item: T) => U): U[] 
   return result;
 }
 
-/** Ignore input-controlled array toJSON methods when measuring PostgreSQL's jsonb size. */
-function calendarSnapshot(schedule: ReservationSchedule): ReservationSchedule {
+/** Ignore input-controlled array toJSON methods in the returned command and JSONB measurement. */
+function calendarSnapshot(schedule: ReservationSchedule): StaffScheduleValues {
   const minute = ({ startMinute, endMinute }: { startMinute: number; endMinute: number }) => ({ startMinute, endMinute });
   return {
-    merchantId: placeholder,
     hours: copyList(schedule.hours, 128, (period) => ({ weekday: period.weekday, ...minute(period) })),
     breaks: copyList(schedule.breaks, 128, (period) => ({ weekday: period.weekday, ...minute(period) })),
     blocks: copyList(schedule.blocks, 512, (block) => ({ date: block.date, ...minute(block) })),
@@ -50,27 +49,53 @@ export function parseStaffCommand(input: unknown): { ok: true; command: StaffCom
   const invalid = { ok: false as const, errors: ['command.invalid'] };
   try {
     if (!record(input)) return invalid;
-    if (input.kind === 'staffMenu') {
+    const kind = input.kind;
+    const mode = input.mode;
+    if (kind === 'staffMenu') {
       if (!exactRecord(input, ['kind', 'mode', 'staffId', 'menuId']) ||
-        (input.mode !== 'add' && input.mode !== 'remove') ||
-        !canonicalUuid(input.staffId) || !canonicalUuid(input.menuId)) return invalid;
-      return { ok: true, command: input as StaffCommand };
+        (mode !== 'add' && mode !== 'remove')) return invalid;
+      const staffId = input.staffId;
+      const menuId = input.menuId;
+      if (!canonicalUuid(staffId) || !canonicalUuid(menuId)) return invalid;
+      return { ok: true, command: { kind, mode, staffId, menuId } };
     }
-    if (input.kind !== 'staff' && input.kind !== 'staffSchedule') return invalid;
-    if (input.mode !== 'create' && input.mode !== 'update') return invalid;
-    const idKey = input.kind === 'staff' ? 'id' : 'staffId';
-    if (!exactRecord(input, ['kind', 'mode', idKey, 'values', ...(input.mode === 'update' ? ['expectedUpdatedAt'] : [])]) ||
-      !canonicalUuid(input[idKey]) || (input.mode === 'update' && !timestamp(input.expectedUpdatedAt))) return invalid;
-    if (input.kind === 'staff') {
-      if (!exactRecord(input.values, ['name', 'title', 'introduction', 'visibility', 'sortOrder']) ||
-        !reservationStaff({ ...input.values, id: placeholder, merchantId: placeholder, menuIds: [] })) return invalid;
+    if (kind !== 'staff' && kind !== 'staffSchedule') return invalid;
+    if (mode !== 'create' && mode !== 'update') return invalid;
+    const idKey = kind === 'staff' ? 'id' : 'staffId';
+    if (!exactRecord(input, ['kind', 'mode', idKey, 'values', ...(mode === 'update' ? ['expectedUpdatedAt'] : [])])) return invalid;
+    const id = input[idKey];
+    const rawValues = input.values;
+    const expectedUpdatedAt = mode === 'update' ? input.expectedUpdatedAt : undefined;
+    if (!canonicalUuid(id) || (mode === 'update' && !timestamp(expectedUpdatedAt))) return invalid;
+    if (kind === 'staff') {
+      if (!exactRecord(rawValues, ['name', 'title', 'introduction', 'visibility', 'sortOrder'])) return invalid;
+      const profile = {
+        id: placeholder, merchantId: placeholder,
+        name: rawValues.name, title: rawValues.title, introduction: rawValues.introduction,
+        visibility: rawValues.visibility, sortOrder: rawValues.sortOrder, menuIds: [],
+      };
+      if (!reservationStaff(profile)) return invalid;
+      const values: StaffProfileValues = {
+        name: profile.name, title: profile.title, introduction: profile.introduction,
+        visibility: profile.visibility, sortOrder: profile.sortOrder,
+      };
+      const command: StaffCommand = mode === 'create'
+        ? { kind, mode, id, values }
+        : { kind, mode, id, expectedUpdatedAt: expectedUpdatedAt as string, values };
+      return { ok: true, command };
     } else {
-      if (!exactRecord(input.values, ['hours', 'breaks', 'blocks', 'overrides'])) return invalid;
-      const schedule: unknown = { ...input.values, merchantId: placeholder };
+      if (!exactRecord(rawValues, ['hours', 'breaks', 'blocks', 'overrides'])) return invalid;
+      const schedule: unknown = {
+        merchantId: placeholder, hours: rawValues.hours, breaks: rawValues.breaks,
+        blocks: rawValues.blocks, overrides: rawValues.overrides,
+      };
       if (!reservationSchedule(schedule)) return invalid;
-      const snapshot = calendarSnapshot(schedule);
-      if (!reservationSchedule(snapshot) || reservationJsonbBytes(snapshot) > 256 * 1024) return invalid;
+      const values = calendarSnapshot(schedule);
+      if (!reservationSchedule({ merchantId: placeholder, ...values }) || reservationJsonbBytes(values) > 256 * 1024) return invalid;
+      const command: StaffCommand = mode === 'create'
+        ? { kind, mode, staffId: id, values }
+        : { kind, mode, staffId: id, expectedUpdatedAt: expectedUpdatedAt as string, values };
+      return { ok: true, command };
     }
-    return { ok: true, command: input as StaffCommand };
   } catch { return invalid; }
 }
