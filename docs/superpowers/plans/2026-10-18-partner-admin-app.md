@@ -97,6 +97,8 @@ const result = await client.from('merchant_categories')
 
 **New design request (2026-10-18):** User supplied the Naver Dashboard Behance reference (`https://www.behance.net/gallery/194113213/Naver-Dashboard`) and screenshot. Functional work is preserved; do not yet treat current editorial styling as the final visual design. Proposed reference adaptation is top header, left navigation, pale workspace and white task panels, with list/detail organization where useful. No real chat, fake statistics, fake people or new booking activation are implied. Confirm the revised visual direction before implementation, then review the final combined UI.
 
+**Latest scope revision (2026-10-18, awaiting design review):** General app content and images stay with the platform team. The user's subsequent custom-column/CMS request has been withdrawn in favor of reservation-only merchant operations: menus/packages, bookable dates/times and optional staff. See [reservation operations revision](../specs/2026-10-18-partner-reservation-operations-design.md). Its proposed staff eligibility/schedules and shared capacity model change the original no-staff, single-capacity assumptions; general merchant information also becomes read-only in the merchant UI and API. Do not execute the conflicting settings/schedule bullets below unchanged or mark existing reviews complete. Preserve existing implementation and verification evidence, obtain review of the revision, then produce the revised implementation plan.
+
 - [ ] Add failing real render/conversion tests. Verify no fake booking counts or revenue; missing deposit says approval pending, not zero; suspended read-only; invalid time/number conversion; labels/required supporting copy.
 
 ```ts
