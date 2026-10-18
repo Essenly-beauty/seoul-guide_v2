@@ -38,6 +38,18 @@ describe('reservation configuration shape', () => {
       expect(validate(Object.create(fixture))).toBe(false);
     }
   });
+
+  it.each([[reservationRules, rules], [reservationStaff, staff]] as const)('rejects throwing property getters without leaking exceptions %#', (validate, fixture) => {
+    const value = Object.defineProperty({ ...fixture }, 'merchantId', {
+      get() { throw new Error('property.failure'); },
+    });
+    expect(validate(value)).toBe(false);
+  });
+
+  it.each([[reservationRules, rules], [reservationStaff, staff]] as const)('rejects throwing getPrototypeOf traps without leaking exceptions %#', (validate, fixture) => {
+    const value = new Proxy(fixture, { getPrototypeOf() { throw new Error('prototype.failure'); } });
+    expect(validate(value)).toBe(false);
+  });
 });
 
 describe('reservation rules', () => {
@@ -193,5 +205,12 @@ describe('eligible reservation staff', () => {
 
   it.each([null, undefined, {}, 'staff', Array(1), [null], [staff, { ...staff, name: '' }], [{ ...foreignStaff, menuIds: [menuId, menuId] }], [{ ...staff, visibility: 'hidden', sortOrder: -1 }]])('fails on malformed collections and rows before filtering %#', (value) => {
     expect(() => eligibleStaff(value as readonly ReservationStaff[], merchantId, menuId)).toThrow('staff.invalid');
+  });
+
+  it.each(['property', 'prototype'])('uses staff.invalid when a row throws during %s inspection', (kind) => {
+    const value = kind === 'property'
+      ? Object.defineProperty({ ...staff }, 'merchantId', { get() { throw new Error('property.failure'); } })
+      : new Proxy(staff, { getPrototypeOf() { throw new Error('prototype.failure'); } });
+    expect(() => eligibleStaff([value], merchantId, menuId)).toThrow('staff.invalid');
   });
 });

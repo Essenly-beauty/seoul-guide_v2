@@ -36,21 +36,25 @@ function calendarDate(value: unknown): value is string {
 }
 
 export function reservationRules(value: unknown): value is ReservationRules {
-  return exactRecord(value, ['merchantId', 'mode', 'capacity', 'startDate', 'endDate', 'minimumLeadMinutes', 'slotIntervalMinutes']) &&
-    canonicalUuid(value.merchantId) && (value.mode === 'shop' || value.mode === 'staff') && integer(value.capacity, 1) &&
-    calendarDate(value.startDate) && calendarDate(value.endDate) && value.startDate <= value.endDate &&
-    integer(value.minimumLeadMinutes) && value.minimumLeadMinutes <= 525600 &&
-    integer(value.slotIntervalMinutes, 1) && value.slotIntervalMinutes <= 1440;
+  try {
+    return exactRecord(value, ['merchantId', 'mode', 'capacity', 'startDate', 'endDate', 'minimumLeadMinutes', 'slotIntervalMinutes']) &&
+      canonicalUuid(value.merchantId) && (value.mode === 'shop' || value.mode === 'staff') && integer(value.capacity, 1) &&
+      calendarDate(value.startDate) && calendarDate(value.endDate) && value.startDate <= value.endDate &&
+      integer(value.minimumLeadMinutes) && value.minimumLeadMinutes <= 525600 &&
+      integer(value.slotIntervalMinutes, 1) && value.slotIntervalMinutes <= 1440;
+  } catch { return false; }
 }
 
 export function reservationStaff(value: unknown): value is ReservationStaff {
-  if (!exactRecord(value, ['id', 'merchantId', 'name', 'title', 'introduction', 'visibility', 'sortOrder', 'menuIds']) ||
-    !canonicalUuid(value.id) || !canonicalUuid(value.merchantId) || !boundedString(value.name, 120) ||
-    !boundedString(value.title, 120) || !boundedString(value.introduction, 1000) || !visibility(value.visibility) ||
-    (value.visibility === 'visible' && !value.name.trim()) || !integer(value.sortOrder) ||
-    !Array.isArray(value.menuIds) || value.menuIds.length > 1000) return false;
-  // Array.from visits sparse entries as undefined, so holes cannot pass validation.
-  return Array.from(value.menuIds).every(canonicalUuid) && new Set(value.menuIds).size === value.menuIds.length;
+  try {
+    if (!exactRecord(value, ['id', 'merchantId', 'name', 'title', 'introduction', 'visibility', 'sortOrder', 'menuIds']) ||
+      !canonicalUuid(value.id) || !canonicalUuid(value.merchantId) || !boundedString(value.name, 120) ||
+      !boundedString(value.title, 120) || !boundedString(value.introduction, 1000) || !visibility(value.visibility) ||
+      (value.visibility === 'visible' && !value.name.trim()) || !integer(value.sortOrder) ||
+      !Array.isArray(value.menuIds) || value.menuIds.length > 1000) return false;
+    // Array.from visits sparse entries as undefined, so holes cannot pass validation.
+    return Array.from(value.menuIds).every(canonicalUuid) && new Set(value.menuIds).size === value.menuIds.length;
+  } catch { return false; }
 }
 
 /** Configuration eligibility only; menu ownership and actual availability are checked separately. */
