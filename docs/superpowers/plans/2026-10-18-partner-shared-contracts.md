@@ -30,7 +30,7 @@ A1은 전체 기획의 메뉴/시간 검증 및 앱↔업체 공통 계약을 �
 - 브랜치: `codex/service-quality-release-20261018`. 원래 작업 디렉터리의 미커밋 변경은 건드리지 않는다.
 - 기존 미추적 `reports/operations/service-quality-release-2026-10-18.md`를 커밋에 포함하지 않는다. 원격 push·배포 없음.
 - Git 작성자: `gksaudrhks12-sys <gksaudrhks12@gmail.com>`.
-- 2026-10-18 확인: Docker daemon 연결 실패. `supabase --version`/`--help`도 홈 디렉터리 telemetry 쓰기 권한 오류. 운영 DB로 검증을 대체하지 않는다. 사용자에게 Docker 실행을 요청했으며, A1은 이 환경과 무관하게 검증 가능하다.
+- 2026-10-18 확인: Docker daemon 연결 실패. Supabase CLI는 기본 실행 시 홈 디렉터리 telemetry 쓰기 권한 오류가 있었지만, 공식 문서의 `SUPABASE_TELEMETRY_DISABLED=1`을 해당 명령에만 적용해 버전 `2.115.0` 및 도움말 실행을 확인했다. 영구 설정 변경이나 권한 확대는 하지 않았다. 사용자에게 Docker 실행을 요청했으며, 운영 DB로 검증을 대체하지 않는다. A1은 이 환경과 무관하게 검증 가능하다. [공식 텔레메트리 설정](https://supabase.com/docs/guides/local-development/cli/getting-started#telemetry)
 - A2 시작 전 CLI 동작 및 로컬 DB를 확보한다. Supabase 스킬에 따라 로컬 SQL 반복 검증 → advisors → 생성 migration → migration list 검증 순서. 실제 SQL 실행/권한 테스트 없이 RLS 통과라고 표현하지 않는다.
 - 현재 Next.js 15와 기존 Supabase 인증을 유지한다. 데이터·인증 제공업체를 교체하거나 결제 SDK를 설치하지 않는다.
 
@@ -45,12 +45,12 @@ A1은 전체 기획의 메뉴/시간 검증 및 앱↔업체 공통 계약을 �
 
 **Files:** 위 네 파일만 생성한다. 테스트 fixture는 테스트 파일 안에만 둔다. 앱에 샘플 업체나 예약을 제공하는 fallback을 만들지 않는다.
 
-- [ ] **Step 1: 기준 테스트 실행**
+- [x] **Step 1: 기준 테스트 실행**
 
 Run: `npm test`.
 Expected: 기존 전체 테스트 통과. 실패하면 새 기능과 분리해서 보고하고 진행 여부를 확인한다.
 
-- [ ] **Step 2: 카탈로그 실패 테스트 작성**
+- [x] **Step 2: 카탈로그 실패 테스트 작성**
 
 Create `lib/partner/catalog.test.ts`:
 
@@ -115,12 +115,12 @@ describe("shared partner catalog", () => {
 });
 ```
 
-- [ ] **Step 3: 실패 확인**
+- [x] **Step 3: 실패 확인**
 
 Run: `npm test -- lib/partner/catalog.test.ts`.
 Expected initial RED: `./catalog` missing. 파일 생성 후에는 실패한 동작별 구현으로 진행하고, 테스트가 우연히 통과한 기존 기능이 아닌지 확인한다.
 
-- [ ] **Step 4: 최소 카탈로그 구현**
+- [x] **Step 4: 최소 카탈로그 구현**
 
 Create `lib/partner/catalog.ts`:
 
@@ -187,12 +187,12 @@ export function publicMenu(menu: PartnerMenu, categories: readonly PartnerCatego
 }
 ```
 
-- [ ] **Step 5: 카탈로그 GREEN 확인**
+- [x] **Step 5: 카탈로그 GREEN 확인**
 
 Run: `npm test -- lib/partner/catalog.test.ts`.
 Expected: 모든 테스트 통과. 컴파일만으로 API 입력 검증·DB 권한을 보장한다고 주장하지 않는다.
 
-- [ ] **Step 6: 영업시간 실패 테스트 작성**
+- [x] **Step 6: 영업시간 실패 테스트 작성**
 
 Create `lib/partner/availability.test.ts`:
 
@@ -245,12 +245,12 @@ describe("shared business hours", () => {
 });
 ```
 
-- [ ] **Step 7: 영업시간 RED 확인**
+- [x] **Step 7: 영업시간 RED 확인**
 
 Run: `npm test -- lib/partner/availability.test.ts`.
 Expected initial RED: `./availability` missing. 이후 각 동작이 실패하는 것을 확인하고 최소 구현한다.
 
-- [ ] **Step 8: 최소 영업시간 구현**
+- [x] **Step 8: 최소 영업시간 구현**
 
 Create `lib/partner/availability.ts`:
 
@@ -317,7 +317,7 @@ export function businessIntervals(schedule: PartnerSchedule, merchantId: string,
 }
 ```
 
-- [ ] **Step 9: 통합 GREEN 및 정적 검사**
+- [x] **Step 9: 통합 GREEN 및 정적 검사**
 
 Run: `npm test -- lib/partner/catalog.test.ts lib/partner/availability.test.ts`.
 Run: `npm run typecheck`.
@@ -325,11 +325,11 @@ Run: `npm run lint`.
 Run: `npm test`.
 Expected: 새 테스트 및 기존 테스트 모두 통과. 전체 DB·예약 기능이 검증됐다는 의미는 아니다.
 
-- [ ] **Step 10: 사양 검토 → 코드 품질 검토 → 수정 → 재검증**
+- [x] **Step 10: 사양 검토 → 코드 품질 검토 → 수정 → 재검증**
 
 검토자는 원본을 읽고 계약을 검증한다. 특히 ① null과 0 구분 ② 공개 필드 allowlist ③ 업체 일치 ④ 입력 불변성 ⑤ 한국 날짜 ⑥ 자정/구간 경계 ⑦ 영업시간을 예약 가능 시간으로 오인하지 않는 문서화를 확인한다. 카탈로그에는 DB 권한이 없으므로 인증·RLS를 통과했다고 주장하면 안 된다.
 
-- [ ] **Step 11: 지정 파일만 커밋하고 상태 기록**
+- [x] **Step 11: 지정 파일만 커밋하고 상태 기록**
 
 ```bash
 git add lib/partner/catalog.ts lib/partner/catalog.test.ts lib/partner/availability.ts lib/partner/availability.test.ts
@@ -348,3 +348,13 @@ DB 명칭은 snake_case, TypeScript는 위 camelCase로 매핑한다. 업체와 
 추가 설계에서 DB 테이블·API·UI를 위 계약에 연결할 때 테스트 fixture를 운영 seed나 fallback으로 옮기지 않는다. 처음부터 실데이터 저장과 권한 검증을 사용하는 관리자만 제공한다.
 
 참고: [Supabase RLS](https://supabase.com/docs/guides/database/postgres/row-level-security), [Supabase SSR](https://supabase.com/docs/guides/auth/server-side/creating-a-client), [Next.js 15 cookies](https://nextjs.org/docs/15/app/api-reference/functions/cookies). 기존 프로젝트 버전을 기준으로 구현하고 불필요한 업그레이드는 하지 않는다.
+
+## 실행 기록 — 2026-10-18
+
+- 구현 커밋: `0c1a6b001d893d81b4ff18d7a76ce6fd91f02cb7` (지정한 도메인/테스트 파일 네 개만).
+- 기존 기준: 116개 테스트 파일, 1,089개 테스트 통과.
+- 구현 담당자 RED 확인: 카탈로그 20개 실패 후 21개 통과, 영업시간 16개 실패 후 17개 통과. `merchant.invalid` 계약 교정도 별도 실패 테스트 후 수정.
+- 루트 재검증: 신규 38개 통과, 전체 118개 파일/1,127개 테스트 통과, 타입 검사·린트 통과. 린트 도구의 기존 Next deprecation 및 workspace-root 안내는 남아 있음.
+- 독립 사양 검토 및 코드 품질 검토: 승인, 수정 필요 사항 없음. 각 검토자도 신규 38개 테스트를 실행함.
+- A1만 완료. A2의 로컬 DB 권한 테스트, A3 관리자 UI, A4 관리자 통합 검증, B 고객 예약·결제 연결은 완료하지 않았다. 배포하지 않았다.
+- Docker 연결 재확인 결과 엔진에 연결되지 않음. 사용자에게 Docker Desktop 실행을 요청한 상태. 운영 DB로 대체하지 않음.
