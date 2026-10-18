@@ -2,6 +2,7 @@ import type { SupabaseClient } from '@supabase/supabase-js';
 import { record, timestamp, uuid } from './contracts';
 import { reservationSchedule, type ReservationSchedule } from './reservation-calendar';
 import { reservationStaff, type ReservationStaff } from './reservation-config';
+import { parseStaffCommand, type StaffCommand } from './staff-contracts';
 import { getPartnerContext, PartnerError, partnerOperation, queryData, unavailable, type PartnerContext } from './server';
 
 export const staffColumns = 'id,merchant_id,name,title,introduction,visibility,sort_order,updated_at';
@@ -140,5 +141,59 @@ export async function getStaffDetail(client: SupabaseClient, context: PartnerCon
     await verifyServices(client, merchantId, menuIds);
     const current = await recheckContext(client, context);
     return { merchantId, staff, schedule, readOnly: current.readOnly, loadedAt: new Date().toISOString() };
+  });
+}
+
+function acknowledgedWrite(result: unknown, identity: Record<string, string>): void {
+  if (!record(result) || !Object.hasOwn(result, 'data') || !Object.hasOwn(result, 'error')) return unavailable();
+  if (result.error !== null) {
+    if (record(result.error)) {
+      if (['23505', '23503', '23514'].includes(String(result.error.code))) throw new PartnerError(409, 'PARTNER_CONFLICT');
+      if (result.error.code === '42501') throw new PartnerError(403, 'PARTNER_FORBIDDEN');
+    }
+    return unavailable();
+  }
+  if (result.data === null) throw new PartnerError(409, 'PARTNER_CONFLICT');
+  if (!record(result.data)) return unavailable();
+  for (const [key, value] of Object.entries(identity)) {
+    if (!Object.hasOwn(result.data, key) || result.data[key] !== value) return unavailable();
+  }
+}
+
+/** Each command changes one owned row or one owned menu link through the cookie session. */
+export async function saveStaffCommand(client: SupabaseClient, context: PartnerContext, command: StaffCommand): Promise<void> {
+  return partnerOperation(async () => {
+    const parsed = parseStaffCommand(command);
+    if (!parsed.ok) throw new PartnerError(400, 'INVALID_COMMAND');
+    const verified = await recheckContext(client, context);
+    if (context.readOnly || verified.readOnly || !['onboarding', 'active'].includes(verified.merchant.status)) throw new PartnerError(403, 'PARTNER_READ_ONLY');
+    if (context.merchant.bookingEnabled || verified.merchant.bookingEnabled) throw new PartnerError(409, 'PARTNER_CONFLICT');
+    const merchantId = verified.merchant.id;
+    const value = parsed.command;
+    if (value.kind === 'staff') {
+      const fields = {
+        name: value.values.name, title: value.values.title, introduction: value.values.introduction,
+        visibility: value.values.visibility, sort_order: value.values.sortOrder,
+      };
+      const query = value.mode === 'create'
+        ? client.from('merchant_staff').insert({ merchant_id: merchantId, id: value.id, ...fields })
+        : client.from('merchant_staff').update(fields).eq('merchant_id', merchantId).eq('id', value.id).eq('updated_at', value.expectedUpdatedAt);
+      acknowledgedWrite(await query.select('merchant_id,id').maybeSingle(), { merchant_id: merchantId, id: value.id });
+    } else if (value.kind === 'staffMenu') {
+      const identity = { merchant_id: merchantId, staff_id: value.staffId, service_id: value.menuId };
+      const query = value.mode === 'add'
+        ? client.from('merchant_staff_menus').insert(identity)
+        : client.from('merchant_staff_menus').delete().eq('merchant_id', merchantId).eq('staff_id', value.staffId).eq('service_id', value.menuId);
+      acknowledgedWrite(await query.select('merchant_id,staff_id,service_id').maybeSingle(), identity);
+    } else {
+      const fields = {
+        hours: value.values.hours, breaks: value.values.breaks,
+        blocks: value.values.blocks, overrides: value.values.overrides,
+      };
+      const query = value.mode === 'create'
+        ? client.from('merchant_staff_schedules').insert({ merchant_id: merchantId, staff_id: value.staffId, ...fields })
+        : client.from('merchant_staff_schedules').update(fields).eq('merchant_id', merchantId).eq('staff_id', value.staffId).eq('updated_at', value.expectedUpdatedAt);
+      acknowledgedWrite(await query.select('merchant_id,staff_id').maybeSingle(), { merchant_id: merchantId, staff_id: value.staffId });
+    }
   });
 }
