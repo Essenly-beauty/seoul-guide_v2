@@ -343,7 +343,7 @@ Expected owner/error tests fail because current route deletes user without owner
 try {
   const { data: memberships, error: membershipError } = await supabase
     .from('merchant_memberships').select('merchant_id').eq('user_id', user.id).limit(1);
-  if (membershipError || memberships === null) {
+  if (membershipError || !Array.isArray(memberships)) {
     return NextResponse.json({ code: 'MERCHANT_OWNERSHIP_CHECK_FAILED', error: 'Deletion is temporarily unavailable.' }, { status: 503 });
   }
   if (memberships.length > 0) {
