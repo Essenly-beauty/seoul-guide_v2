@@ -207,6 +207,29 @@ const txt = async (p, sel) => (await p.locator(sel).first().innerText()).replace
     // rules: notifications
     await p.locator('.sidebar [data-page="rules"]').click();
     check('r.toggles', await p.locator('.toggles .switch').count() === 3);
+    // info: 매장 정보 — 설정에서 자동 반영 / 저장하면 즉시 반영 / 운영팀 검수 후 반영 + 고객 앱 상세페이지 미리보기 (시안 v3.3)
+    await p.locator('.sidebar [data-page="info"]').click();
+    check('i.tiers', await p.locator('.info-edit .panel-head h2 .tier').count() === 3 && (await txt(p, '.info-status')).includes('지도 장소 연결됨') && (await txt(p, '.info-status')).includes('검수 대기 없음'), await txt(p, '.info-status'));
+    check('i.hours', (await txt(p, '.auto-list li:nth-child(1) .v')).includes('월 10:00–19:00 · 화 휴무 · 수~토 10:00–19:00 · 일 10:00–18:00') && (await txt(p, '.auto-list li:nth-child(1) .v')).includes('지금 영업 중 · 19:00까지'), await txt(p, '.auto-list li:nth-child(1) .v'));
+    check('i.closed', (await txt(p, '.auto-list li:nth-child(2) .v')).includes('10월 27일'));
+    check('i.preview', await p.locator('.info-preview').isVisible() && (await txt(p, '.pv-live')) === 'Open until 19:00' && (await txt(p, '.pv .kr')) === '서울살롱 성수' && (await p.locator('.pv-menu').count()) === 3 && (await p.locator('.pv .pv-av .avatar').count()) === 3);
+    await p.screenshot({ path: OUT + '/d-info.png', fullPage: true });
+    await p.fill('#info-instant input[name="phone"]', '02-465-1234'); await p.fill('#info-instant input[name="notice"]', '10월 27일은 정비로 쉬어요');
+    await p.locator('#info-instant button[type="submit"]').click();
+    check('i.instant', (await txt(p, '.pv')).includes('02-465-1234') && (await txt(p, '.pv-notice')).includes('10월 27일') && (await txt(p, '.info-log li')).includes('바로 반영'), await txt(p, '.info-log li'));
+    await p.fill('#info-review input[name="nameKr"]', '서울살롱 성수점'); await p.locator('[data-action="shop-photo"]').click();
+    check('i.photoDraft', await p.locator('#shop-photos .ph').count() === 4 && await p.locator('#shop-photos .ph.pend').count() === 1);
+    await p.locator('#info-review button[type="submit"]').click();
+    check('i.pending', (await txt(p, '#pending-box b')).includes('검수 대기 2항목') && (await txt(p, '.pv .kr')).includes('서울살롱 성수') && !(await txt(p, '.pv .kr')).includes('성수점') && (await p.locator('.pv-pend').count()) === 2, await txt(p, '#pending-box b'));
+    await p.screenshot({ path: OUT + '/d-info-pending.png', fullPage: true });
+    await p.locator('.sidebar [data-page="home"]').click();
+    check('i.homeTodo', (await p.locator('.todo li').allInnerTexts()).some(t => t.includes('매장 정보 검수 대기 2항목')));
+    await p.locator('[data-todo-go="info"]').click();
+    await p.locator('[data-action="info-approve"]').click();
+    check('i.approved', (await p.locator('#pending-box').count()) === 0 && (await txt(p, '.pv .kr')) === '서울살롱 성수점' && (await txt(p, '.photo-row b')) === '매장 사진 4장' && (await txt(p, '.info-status')).includes('검수 대기 없음'), await txt(p, '.pv .kr'));
+    await p.locator('[data-action="shop-photo"]').click(); await p.locator('#info-review button[type="submit"]').click(); await p.locator('[data-action="info-cancel"]').click();
+    check('i.cancel', (await p.locator('#pending-box').count()) === 0 && (await txt(p, '.photo-row b')) === '매장 사진 4장');
+    check('i.overflow', await overflowOk(p));
     // current scenario: home shows no fake numbers
     await p.locator('.sidebar [data-page="home"]').click();
     await p.locator('#cal-scenario').selectOption('current');
@@ -216,6 +239,8 @@ const txt = async (p, sel) => (await p.locator(sel).first().innerText()).replace
     await p.screenshot({ path: OUT + '/d-home-current.png', fullPage: true });
     await p.locator('.sidebar [data-page="stats"]').click();
     check('s.current.empty', (await txt(p, 'main')).includes('예약 연동 후 집계돼요'));
+    await p.locator('.sidebar [data-page="info"]').click();
+    check('i.current', (await p.locator('.notice').count()) === 1 && (await txt(p, '.pv-cta')).includes('Booking opens soon') && (await txt(p, '.info-status')).includes('연결 대기'));
     check('d.errors', errs.length === 0, errs);
     await c.close();
   }
@@ -244,6 +269,15 @@ const txt = async (p, sel) => (await p.locator(sel).first().innerText()).replace
     await p.locator('#more-menu [data-page="stats"]').click();
     check('m.stats.overflow', await overflowOk(p));
     await p.screenshot({ path: OUT + '/m-stats.png', fullPage: true });
+    await p.locator('.mobile-nav [popovertarget="more-menu"]').click();
+    await p.locator('#more-menu [data-page="info"]').click();
+    check('m.info.edit', await p.locator('.info-seg').isVisible() && !(await p.locator('.info-preview').isVisible()) && (await p.locator('#shop-photos .ph').count()) === 3);
+    check('m.info.overflow', await overflowOk(p));
+    await p.screenshot({ path: OUT + '/m-info.png', fullPage: true });
+    await p.locator('[data-info-view="preview"]').click();
+    check('m.info.preview', await p.locator('.info-preview').isVisible() && !(await p.locator('.info-edit').isVisible()) && (await txt(p, '.pv-cta')).includes('Book now'));
+    check('m.info.previewOverflow', await overflowOk(p));
+    await p.screenshot({ path: OUT + '/m-info-preview.png', fullPage: true });
     await p.locator('.mobile-nav [data-page="calendar"]').click(); await p.locator('[data-cal-view="month"]').click();
     check('m.month.overflow', await overflowOk(p));
     check('m.month.count', (await p.locator('.mday.has').count()) >= 6);

@@ -8,7 +8,7 @@ npm ci                       # playwright 패키지 포함
 npx playwright install chromium   # 브라우저가 없을 때 한 번
 python3 -m http.server 3111 --bind 127.0.0.1 --directory docs/designs/partner-admin-redesign-20261019 &
 node docs/designs/partner-admin-redesign-20261019/qa/cal-verify.cjs   # 예약 캘린더·고객 미리보기 68개
-node docs/designs/partner-admin-redesign-20261019/qa/ops-verify.cjs   # 홈·예약 목록·고객·통계·처리 규칙 58개
+node docs/designs/partner-admin-redesign-20261019/qa/ops-verify.cjs   # 홈·예약 목록·고객·통계·처리 규칙·월간·출근표·메시지·매장 정보 119개
 ```
 
 - 마지막 줄 `N/N passed`가 기준. 스크린샷은 `$TMPDIR/partner-admin-qa/{cal,ops}/`에 남는다(`QA_OUT`으로 변경).
