@@ -185,6 +185,23 @@ const overflowOk = p => p.evaluate(() => document.documentElement.scrollWidth <=
     check('m.cp.fits', dlg.y >= 0 && dlg.y + dlg.height <= 844, dlg);
     await p.screenshot({ path: OUT + '/m-customer.png' });
     await p.keyboard.press('Escape');
+    // 터치(v3.4): 예약 블록 위에서 바로 쓸면 스크롤, 길게 누른 뒤 끌면 시간 변경. CDP 터치 이벤트로 재현.
+    await p.locator('.mobile-nav [data-page="calendar"]').click(); await p.locator('[data-cal-view="timeline"]').click();
+    const tt = async sel => (await p.locator(sel).first().innerText()).replace(/\s+/g, ' ');
+    const cdp = await c.newCDPSession(p);
+    const prepTouch = async () => { await p.evaluate(() => document.querySelector('.ev.draggable').scrollIntoView({ block: 'center' })); await p.waitForTimeout(200); const bb = await p.locator('.ev.draggable').first().boundingBox(); const x = bb.x + bb.width / 2, y = bb.y + 12; return { y, tp: yy => [{ x, y: yy, radiusX: 2, radiusY: 2, force: 1 }] }; };
+    let { y: ty, tp } = await prepTouch(); const y0 = await p.evaluate(() => scrollY);
+    await cdp.send('Input.dispatchTouchEvent', { type: 'touchStart', touchPoints: tp(ty) });
+    for (let i = 1; i <= 6; i++) { await p.waitForTimeout(16); await cdp.send('Input.dispatchTouchEvent', { type: 'touchMove', touchPoints: tp(ty - i * 25) }); }
+    await cdp.send('Input.dispatchTouchEvent', { type: 'touchEnd', touchPoints: [] }); await p.waitForTimeout(300);
+    check('m.touch.swipeScrolls', (await p.evaluate(() => scrollY)) > y0 && (await p.locator('.confirm-box').count()) === 0, { y0, y1: await p.evaluate(() => scrollY) });
+    ({ y: ty, tp } = await prepTouch());
+    await cdp.send('Input.dispatchTouchEvent', { type: 'touchStart', touchPoints: tp(ty) }); await p.waitForTimeout(500);
+    for (let i = 1; i <= 8; i++) { await p.waitForTimeout(16); await cdp.send('Input.dispatchTouchEvent', { type: 'touchMove', touchPoints: tp(ty + i * 10) }); }
+    check('m.touch.dragging', (await p.locator('.ev.dragging').count()) === 1 && (await p.locator('.drag-label').count()) === 1);
+    await cdp.send('Input.dispatchTouchEvent', { type: 'touchEnd', touchPoints: [] }); await p.waitForTimeout(300);
+    check('m.touch.longPressMoves', (await p.locator('.confirm-box').count()) === 1 && (await tt('.confirm-box')).includes('→'), (await p.locator('.confirm-box').count()) ? await tt('.confirm-box') : null);
+    await p.screenshot({ path: OUT + '/m-touch-drag.png' });
     check('m.smallTargets', true, await p.evaluate(() => [...document.querySelectorAll('main button, main select, .mobile-nav button, .fab')].filter(e => { const r = e.getBoundingClientRect(); return r.width && (r.height < 44 || r.width < 44); }).map(e => `${(e.textContent || e.getAttribute('aria-label') || '').trim().slice(0, 12)} ${Math.round(e.getBoundingClientRect().width)}x${Math.round(e.getBoundingClientRect().height)}`)));
     check('m.errors', errs.length === 0, errs);
     await c.close();

@@ -230,6 +230,40 @@ const txt = async (p, sel) => (await p.locator(sel).first().innerText()).replace
     await p.locator('[data-action="shop-photo"]').click(); await p.locator('#info-review button[type="submit"]').click(); await p.locator('[data-action="info-cancel"]').click();
     check('i.cancel', (await p.locator('#pending-box').count()) === 0 && (await txt(p, '.photo-row b')) === '매장 사진 4장');
     check('i.overflow', await overflowOk(p));
+    // 정산·결제 상태 (v3.4, 돈의 흐름 기본안 예시)
+    await p.locator('.sidebar [data-page="settlement"]').click();
+    const skp = (await p.locator('.settle-kpis .kpi').allInnerTexts()).map(t => t.replace(/\s+/g, ' '));
+    check('p.settle.kpis', skp.length === 4 && skp[0].includes('180,000') && skp[1].includes('20,000') && skp[2].includes('160,000') && skp[3].includes('144,000'), skp); // 앞 단계에서 앱 예약 1건을 취소해 환불 2건
+    check('p.settle.rows', await p.locator('.settle-table tbody tr').count() === 18 && (await p.locator('.settle-table .status').count()) >= 36, await p.locator('.settle-table tbody tr').count());
+    check('p.settle.overflow', await overflowOk(p));
+    await p.screenshot({ path: OUT + '/d-settlement.png', fullPage: true });
+    await p.locator('[data-settle-month="09"]').click();
+    check('p.settle.sep', (await txt(p, '.panel-head h2')).includes('9월') && (await txt(p, '.settle-kpis')).includes('147,600'));
+    await p.locator('[data-settle-month="10"]').click(); await p.locator('[data-settle-booking="p8"]').click();
+    check('p.settle.toDetail', (await txt(p, '#crumb-page')) === '예약 목록' && (await txt(p, '.side')).includes('환불 없음 · 업체 귀속'));
+    await p.locator('[data-list-tab="취소"]').click();
+    const payLabels = await p.locator('.brow .b-amt small').allInnerTexts();
+    check('p.list.cancelChips', payLabels.includes('환불 없음 · 업체 귀속') && payLabels.includes('전액 환불 완료'), payLabels);
+    await p.locator('[data-list-tab="확정"]').click(); await p.locator('[data-booking="r9"]').click();
+    check('p.detail.confirmed', (await txt(p, '.side')).includes('예약금 결제 완료'));
+    await p.locator('[data-booking-status="취소"]').click(); await p.selectOption('#cancel-form select', '매장 사정으로 취소'); await p.locator('#cancel-form button[type="submit"]').click();
+    check('p.detail.shopCancelRefund', (await txt(p, '.side')).includes('전액 환불 처리 중'), await txt(p, '.side'));
+    // 영문 이름 (고객 앱은 영어 우선)
+    await p.locator('.sidebar [data-page="home"]').click();
+    check('e.homeTodo', (await p.locator('.todo li').allInnerTexts()).some(t => t.includes('영문 이름이 없는 메뉴 1개')));
+    await p.locator('.sidebar [data-page="menus"]').click();
+    check('e.menuList', (await p.locator('.table .en').allInnerTexts()).join('|') === 'Design Cut|Signature Perm|영문 이름 없음 · 운영팀 번역 전까지 한글로 보여요|Cut + Head Spa', await p.locator('.table .en').allInnerTexts());
+    await p.locator('[data-menu="3"]').click(); await p.fill('#menu-form [name="nameEn"]', 'Scalp Relaxing Spa'); await p.locator('#menu-form button[type="submit"]').click();
+    check('e.menuSaved', (await p.locator('.table .en.missing').count()) === 0);
+    await p.locator('.sidebar [data-page="home"]').click();
+    check('e.todoGone', !(await p.locator('.todo li').allInnerTexts()).some(t => t.includes('영문 이름이 없는')));
+    await p.locator('.sidebar [data-page="rules"]').click(); await p.locator('[data-action="open-customer"]').click();
+    check('e.cpMenus', (await p.locator('#customer .pick b').allInnerTexts()).join('|') === 'Design Cut|Signature Perm|Scalp Relaxing Spa', await p.locator('#customer .pick b').allInnerTexts());
+    await p.locator('[data-cp-menu="1"]').click(); await p.locator('[data-cp-next]').click();
+    check('e.cpStaff', (await p.locator('#customer .pick b').allInnerTexts())[0].startsWith('Jiu · 지우'));
+    await p.keyboard.press('Escape');
+    await p.locator('.sidebar [data-page="staff"]').click();
+    check('e.staffForm', (await p.inputValue('#staff-form [name="nameEn"]')) === 'Jiu' && (await p.locator('#staff-form [name="introEn"]').count()) === 1);
     // current scenario: home shows no fake numbers
     await p.locator('.sidebar [data-page="home"]').click();
     await p.locator('#cal-scenario').selectOption('current');
@@ -278,6 +312,11 @@ const txt = async (p, sel) => (await p.locator(sel).first().innerText()).replace
     check('m.info.preview', await p.locator('.info-preview').isVisible() && !(await p.locator('.info-edit').isVisible()) && (await txt(p, '.pv-cta')).includes('Book now'));
     check('m.info.previewOverflow', await overflowOk(p));
     await p.screenshot({ path: OUT + '/m-info-preview.png', fullPage: true });
+    await p.locator('.mobile-nav [popovertarget="more-menu"]').click();
+    await p.locator('#more-menu [data-page="settlement"]').click();
+    check('m.settle', (await p.locator('.settle-table tbody tr').count()) === 17 && await overflowOk(p));
+    await p.screenshot({ path: OUT + '/m-settlement.png', fullPage: true });
+    await p.screenshot({ path: OUT + '/m-settlement-top.png' });
     await p.locator('.mobile-nav [data-page="calendar"]').click(); await p.locator('[data-cal-view="month"]').click();
     check('m.month.overflow', await overflowOk(p));
     check('m.month.count', (await p.locator('.mday.has').count()) >= 6);
