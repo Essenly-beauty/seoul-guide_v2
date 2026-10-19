@@ -17,6 +17,7 @@
 | 레퍼런스 조사 | `reports/design/2026-10-19-partner-admin-benchmark.md` (1차 10/19 오전, 2차 6절 10/19 오후) |
 | 검증 기록 | `reports/design/2026-10-19-partner-admin-preview-check.md` |
 | 릴리스 후보 검토(Codex) | `reports/operations/service-quality-release-2026-10-18.md`, `reports/operations/partner-booking-progress-2026-10-18.md` |
+| 실서비스 운영 요건 검토(환불 흐름·영역별 점검표·출시 최소 세트·결정 5개) | `reports/operations/partner-service-launch-readiness-2026-10-19.md` |
 
 `docs/`는 `.gitignore`의 `/docs/*`에 걸린다. 시안·설계 파일은 `git add -f`로 올렸으므로 수정 후에도 `git add -f 경로`로 다시 올린다. `docs/superpowers/specs/*`의 기존 설계 문서들도 같은 방식이다.
 
@@ -49,6 +50,8 @@ python3 -m http.server 3111 --bind 127.0.0.1 --directory docs/designs/partner-ad
 - 지도는 현행(Leaflet+CARTO) 유지.
 
 ## 6. 사용자 확인 대기 (답이 오면 반영)
+
+0. **운영 요건 검토의 결정 5개**(돈의 흐름, 예약금·환불 스케줄, 결제사, 파일럿 업체, 운영팀 역할) — `partner-service-launch-readiness-2026-10-19.md` 4절.
 
 1. 홈 KPI 4개(오늘 예약·방문 완료·노쇼·현장 결제 예정)와 할 일 항목이 아침에 보고 싶은 것과 맞는가.
 2. 업체가 직접 넣는 예약이 근무시간 밖이거나 휴게와 겹칠 때: 시안은 경고 후 허용(다른 예약·막은 시간·휴무일은 차단).
