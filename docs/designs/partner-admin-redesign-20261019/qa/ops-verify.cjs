@@ -134,6 +134,67 @@ const txt = async (p, sel) => (await p.locator(sel).first().innerText()).replace
     check('g.week.moved', (await p.locator('.col[data-col-date="22"] [data-booking="r6"]').count()) === 1 && (await p.locator('.col[data-col-date="21"] [data-booking="r6"]').count()) === 0);
     await p.locator('[data-cal-view="day"]').click(); await p.locator('[data-cal-nav="today"]').click();
     check('g.doneNotDraggable', !(await p.locator('[data-booking="r1"]').evaluate(e => e.classList.contains('draggable'))));
+    // + 예약 추가 from a non-calendar page opens the form directly
+    await p.locator('.sidebar [data-page="list"]').click();
+    await p.locator('[data-action="add-open"]').click();
+    check('f.addFromList', (await txt(p, '#crumb-page')) === '예약 캘린더' && await p.locator('#cal-form[data-type="booking"]').isVisible());
+    await p.locator('[data-panel-close]').first().click();
+    // month view
+    await p.locator('[data-cal-view="month"]').click();
+    check('mo.cells', await p.locator('.mday:not(.empty)').count() === 31 && (await p.locator('.mday.empty').count()) === 4);
+    check('mo.closedTuesdays', await p.locator('.mday.closed').count() === 4, await p.locator('.mday.closed').count());
+    check('mo.todayHasBookings', (await txt(p, '[data-cal-month-day="19"]')).includes('10:00 김하늘'));
+    check('mo.avatars', await p.locator('[data-cal-month-day="21"] .mday-av .avatar').count() === 3);
+    check('mo.summary', (await txt(p, '.side')).includes('영업일') && (await txt(p, '.side')).includes('디자이너 출근일'));
+    check('mo.navDisabled', await p.locator('[data-cal-nav="1"]').isDisabled());
+    await p.screenshot({ path: OUT + '/d-month.png', fullPage: true });
+    await p.locator('[data-cal-month-day="21"]').click();
+    check('mo.toDay', (await p.locator('[data-cal-view="day"]').getAttribute('aria-pressed')) === 'true' && (await txt(p, '.cal-date')).includes('21일'));
+    // roster: toggle minseo off on the 22nd, see it in the calendar, then reset
+    await p.locator('.sidebar [data-page="roster"]').click();
+    check('ro.rows', await p.locator('.roster tbody tr').count() === 4);
+    check('ro.sumBefore', (await txt(p, '.roster tbody tr:nth-child(4) .r-sum')).startsWith('27'), await txt(p, '.roster tbody tr:nth-child(4) .r-sum'));
+    await p.locator('[data-roster="minseo:22"]').click();
+    check('ro.toggledOff', await p.locator('td.off [data-roster="minseo:22"]').count() === 1 && (await txt(p, '.savebar')).includes('바꾼 날 1건'));
+    check('ro.sumAfter', (await txt(p, '.roster tbody tr:nth-child(4) .r-sum')).startsWith('26'));
+    check('ro.shopOffDisabled', await p.locator('[data-roster="soyeon:6"]').isDisabled() && await p.locator('[data-roster="jiu:20"]').isDisabled());
+    await p.locator('[data-roster="shop:20"]').click();
+    check('ro.shopOpenOnTuesday', await p.locator('td.on.ex [data-roster="shop:20"]').count() === 1 && await p.locator('[data-roster="jiu:20"]').isEnabled() && (await p.locator('td.off [data-roster="jiu:20"]').count()) === 1);
+    await p.locator('[data-roster="jiu:20"]').click();
+    check('ro.workOnClosedWeekday', await p.locator('td.on.ex [data-roster="jiu:20"]').count() === 1 && (await txt(p, '.savebar')).includes('바꾼 날 3건'));
+    await p.screenshot({ path: OUT + '/d-roster.png', fullPage: true });
+    await p.locator('.sidebar [data-page="calendar"]').click();
+    await p.locator('[data-cal-view="day"]').click(); await p.locator('[data-cal-nav="today"]').click(); await p.locator('[data-cal-nav="1"]').click(); await p.locator('[data-cal-nav="1"]').click(); await p.locator('[data-cal-nav="1"]').click();
+    check('ro.calendarReflects', (await txt(p, '.cal-date')).includes('22일') && (await p.locator('.col[data-col="minseo"] .zone.off.full').count()) === 1);
+    await p.locator('.sidebar [data-page="roster"]').click();
+    await p.locator('[data-action="roster-reset"]').click();
+    check('ro.reset', (await txt(p, '.roster tbody tr:nth-child(4) .r-sum')).startsWith('27') && await p.locator('[data-action="roster-reset"]').isDisabled());
+    // messages
+    check('ms.navBadge', (await txt(p, '.sidebar [data-page="messages"] .nbadge')) === '2');
+    await p.locator('.sidebar [data-page="messages"]').click();
+    check('ms.threads', await p.locator('.msg-item').count() === 4 && (await p.locator('.msg-item .unread').count()) === 2);
+    await p.locator('[data-thread="t1"]').click();
+    check('ms.opened', (await p.locator('.bubble').count()) === 3 && (await p.locator('.msg-item .unread').count()) === 1 && (await txt(p, '.msg-bkcard')).includes('시그니처 펌'));
+    await p.locator('[data-quick]').first().click();
+    check('ms.quickFills', (await p.locator('#msg-form textarea').inputValue()).startsWith('네, 예약 확인했어요'));
+    await p.locator('#msg-form button[type=submit]').click();
+    check('ms.sent', (await p.locator('.bubble.shop').count()) === 1 && (await txt(p, '.bubble.shop')).includes('방금'));
+    await p.screenshot({ path: OUT + '/d-messages.png', fullPage: true });
+    await p.locator('.msg-head [data-booking]').click();
+    check('ms.toBooking', (await txt(p, '#crumb-page')) === '예약 캘린더' && (await txt(p, '#panel-title')).includes('최유진'));
+    await p.locator('[data-msg-booking]').first().click();
+    check('ms.backToThread', (await txt(p, '#crumb-page')) === '메시지' && (await p.locator('.msg-item.sel').count()) === 1);
+    await p.locator('.sidebar [data-page="home"]').click();
+    check('ms.homeTodo', (await txt(p, '.todo')).includes('답변을 기다리는 메시지 1건'));
+    // menu images
+    await p.locator('.sidebar [data-page="menus"]').click();
+    check('mi.thumbs', await p.locator('.table .thumb').count() === 4);
+    await p.locator('[data-menu="1"]').click();
+    check('mi.editorPhoto', await p.locator('#menu-photo .thumb').isVisible() && (await txt(p, '#menu-photo')).includes('사진 올리기'));
+    await p.locator('#editor [data-close="editor"]').first().click();
+    await p.locator('#customer-preview').click();
+    check('mi.customerThumbs', await p.locator('#customer .pick .thumb').count() >= 3);
+    await p.keyboard.press('Escape');
     // stats
     await p.locator('.sidebar [data-page="stats"]').click();
     const sk = await p.locator('.kpi b').allInnerTexts();
@@ -183,6 +244,20 @@ const txt = async (p, sel) => (await p.locator(sel).first().innerText()).replace
     await p.locator('#more-menu [data-page="stats"]').click();
     check('m.stats.overflow', await overflowOk(p));
     await p.screenshot({ path: OUT + '/m-stats.png', fullPage: true });
+    await p.locator('.mobile-nav [data-page="calendar"]').click(); await p.locator('[data-cal-view="month"]').click();
+    check('m.month.overflow', await overflowOk(p));
+    check('m.month.count', (await p.locator('.mday.has').count()) >= 6);
+    await p.screenshot({ path: OUT + '/m-month.png', fullPage: true });
+    await p.locator('[data-cal-month-day="24"]').click();
+    check('m.month.toList', (await p.locator('[data-cal-view="list"]').getAttribute('aria-pressed')) === 'true' && (await txt(p, '.cal-date')).includes('24일'));
+    await p.locator('.mobile-nav [data-page="messages"]').click();
+    check('m.msg.list', await p.locator('.msg-item').count() === 4 && !(await p.locator('.msg-thread').isVisible()));
+    await p.locator('[data-thread="t2"]').click();
+    check('m.msg.thread', await p.locator('.msg-thread').isVisible() && !(await p.locator('.msg-list').isVisible()));
+    await p.screenshot({ path: OUT + '/m-messages.png', fullPage: true });
+    await p.locator('[data-msg-back]').click();
+    check('m.msg.back', await p.locator('.msg-list').isVisible());
+    check('m.msg.overflow', await overflowOk(p));
     check('m.smallTargets', true, await p.evaluate(() => [...document.querySelectorAll('main button, main select, main input, .mobile-nav button')].filter(e => { const r = e.getBoundingClientRect(); return r.width && (r.height < 44 || r.width < 44) && !e.closest('.switch'); }).map(e => `${(e.textContent || e.getAttribute('aria-label') || '').trim().slice(0, 12)} ${Math.round(e.getBoundingClientRect().width)}x${Math.round(e.getBoundingClientRect().height)}`)));
     check('m.errors', errs.length === 0, errs);
     await c.close();
