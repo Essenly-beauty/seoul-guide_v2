@@ -105,6 +105,35 @@ const txt = async (p, sel) => (await p.locator(sel).first().innerText()).replace
     check('k.weekly.nextWeek', (await p.locator('.col[data-col-date="26"] .zone.blk').count()) === 1 && (await txt(p, '.col[data-col-date="26"] .zone.blk')).includes('주간 정리'));
     check('k.weekly.notTuesday', await p.locator('.col[data-col-date="27"] .zone.blk').count() === 0);
     await p.locator('[data-cal-nav="today"]').click(); await p.locator('[data-cal-view="day"]').click();
+    // drag to move (desktop mouse): 15-min snap, confirm box, menu/provider guard
+    const dragTo = async (sel, colSel, min) => { const src = await p.locator(sel).boundingBox(); const col = await p.locator(colSel).boundingBox(); await p.mouse.move(src.x + 24, src.y + 10); await p.mouse.down(); await p.mouse.move(src.x + 34, src.y + 40, { steps: 4 }); await p.mouse.move(col.x + col.width / 2, col.y + (min - 540) * 1.1 + 10, { steps: 14 }); await p.mouse.up(); };
+    await p.locator('[data-cal-nav="today"]').click();
+    await p.evaluate(() => { const sc = document.querySelector('.cal-scroll'); sc.scrollTop = 40; });
+    await dragTo('[data-booking="r5"]', '.col[data-col="jiu"]', 600);
+    check('g.previewShown', await p.locator('.ev.pending[data-booking="r5"]').count() === 1 && (await p.locator('.col[data-col="jiu"] .ev.pending').count()) === 1);
+    const mb = await txt(p, '.confirm-box');
+    check('g.menuGuard', mb.includes('지우 디자이너: ‘두피 릴랙싱 스파’ 메뉴를 제공하지 않아요') && await p.locator('[data-move-confirm]').isDisabled(), mb.slice(0, 140));
+    await p.screenshot({ path: OUT + '/d-drag-guard.png' });
+    await p.locator('[data-move-cancel]').click();
+    check('g.cancelRestores', await p.locator('.ev.pending').count() === 0 && (await p.locator('.col[data-col="minseo"] [data-booking="r5"]').count()) === 1);
+    await dragTo('[data-booking="r5"]', '.col[data-col="minseo"]', 600);
+    check('g.previewTime', (await txt(p, '.confirm-box')).includes('10:00–11:00') && await p.locator('[data-move-confirm]').isEnabled(), await txt(p, '.confirm-box'));
+    await p.locator('[data-move-confirm]').click();
+    const r5top = await p.locator('[data-booking="r5"]').evaluate(e => parseFloat(e.style.top));
+    check('g.moved', Math.abs(r5top - 66) < 0.5 && (await txt(p, '.side')).includes('10:00–11:00'), r5top);
+    check('g.noPendingAfter', await p.locator('.ev.pending').count() === 0);
+    // click (no drag) still opens detail
+    await p.locator('[data-booking="r4"]').click();
+    check('g.clickStillOpens', (await txt(p, '#panel-title')).includes('정민재'));
+    // week view: drag across days keeps designer
+    await p.locator('[data-cal-view="week"]').click();
+    await p.evaluate(() => { document.querySelector('.cal-scroll').scrollTop = 40; });
+    await dragTo('[data-booking="r6"]', '.col[data-col-date="22"]', 660);
+    check('g.week.preview', (await txt(p, '.confirm-box')).includes('10월 22일 (목) 11:00') && (await txt(p, '.confirm-box')).includes('지우'));
+    await p.locator('[data-move-confirm]').click();
+    check('g.week.moved', (await p.locator('.col[data-col-date="22"] [data-booking="r6"]').count()) === 1 && (await p.locator('.col[data-col-date="21"] [data-booking="r6"]').count()) === 0);
+    await p.locator('[data-cal-view="day"]').click(); await p.locator('[data-cal-nav="today"]').click();
+    check('g.doneNotDraggable', !(await p.locator('[data-booking="r1"]').evaluate(e => e.classList.contains('draggable'))));
     // stats
     await p.locator('.sidebar [data-page="stats"]').click();
     const sk = await p.locator('.kpi b').allInnerTexts();
