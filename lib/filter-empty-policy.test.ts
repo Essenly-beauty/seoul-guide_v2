@@ -52,8 +52,8 @@ describe("empty-result prompt wiring", () => {
 
   it("offers both ways out: change the filters, or clear them", () => {
     const modal = read("components/map/filter-empty-modal.tsx");
-    expect(modal).toMatch(/Change filters<\/Button>/);
-    expect(modal).toMatch(/Clear filters<\/Button>/);
+    expect(modal).toContain('text={"Change filters"}');
+    expect(modal).toContain('text={"Clear filters"}');
     expect(screen).toMatch(/onAdjust=\{\(\) => \{ setEmptyPrompt\(false\); setFilterOpen\(true\); \}\}/);
     expect(screen).toMatch(/onReset=\{\(\) => \{ setEmptyPrompt\(false\); setFilters\(EMPTY_FILTERS\); \}\}/);
   });

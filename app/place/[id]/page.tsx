@@ -4,7 +4,7 @@ import { BackButtonBordered } from "@/components/ui/back-button";
 import { PlaceDetailBody } from "@/components/place/place-detail-body";
 import { PlaceCtaBar } from "@/components/place/place-cta-bar";
 import { routes } from "@/lib/routes";
-import { getPlace } from "@/lib/data";
+import { getPublishedPlace } from "@/lib/place-profile-server";
 import { placeJsonLd, placeMetadata } from "@/lib/place-seo";
 
 type Props = { params: Promise<{ id: string }> };
@@ -17,14 +17,14 @@ type Props = { params: Promise<{ id: string }> };
 // a page-level notFound() alone is a soft 404 (status 200).
 export async function generateMetadata(props: Props): Promise<Metadata> {
   const { id } = await props.params;
-  const place = getPlace(id);
+  const place = await getPublishedPlace(id);
   if (!place) notFound();
   return placeMetadata(place);
 }
 
 export default async function PlaceDetailPage(props: Props) {
   const params = await props.params;
-  const place = getPlace(params.id);
+  const place = await getPublishedPlace(params.id);
   if (!place) notFound();
 
   // "<" is escaped so a data value can never close the script element.

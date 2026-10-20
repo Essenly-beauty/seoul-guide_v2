@@ -1,5 +1,6 @@
 "use client";
 
+import { T } from "@/lib/i18n/locale-provider";
 import { useState } from "react";
 import { Icon } from "@/components/icon";
 import type { SubwayPlaceCategory } from "@/lib/subway-place-filter";
@@ -67,7 +68,7 @@ export function StationFilterRail({ radiusKm, category, onRadius, onCategory }: 
             aria-pressed={category === option.key}
             onClick={() => onCategory(option.key)}
           >
-            {option.label}
+            <T text={option.label} />
           </button>
         ))}
       </div>

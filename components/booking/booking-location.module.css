@@ -1,0 +1,20 @@
+.section { margin: 24px 0; min-width: 0; }
+.heading { margin: 0 0 12px; font-size: 14px; font-weight: 650; line-height: 1.4; }
+.frame { position: relative; height: 160px; border-radius: 12px; overflow: hidden; isolation: isolate; background: var(--surface-hover); }
+.map { height: 100%; width: 100%; background: var(--surface-hover); }
+.map :global(.leaflet-control-attribution) { font-size: 9px; line-height: 1.5; background: var(--surface); color: var(--muted); }
+.map :global(.leaflet-control-attribution a) { color: var(--muted); }
+.fallback { display: flex; align-items: center; justify-content: center; gap: 10px; min-height: 80px; padding: 18px; background: var(--surface-hover); border-radius: 12px; color: var(--muted); font-size: 12px; line-height: 1.5; }
+.frame > .fallback { height: 100%; }
+.fallback svg { width: 20px; height: 20px; flex: none; }
+.tileError { position: absolute; inset: 0; z-index: 1000; background: var(--surface-hover); display: grid; place-items: center; padding: 20px; font-size: 12px; line-height: 1.5; color: var(--muted); text-align: center; }
+.address { display: flex; align-items: flex-start; gap: 8px; margin: 12px 0 0; }
+.address svg { width: 17px; height: 17px; flex: none; margin-top: 2px; color: var(--muted); }
+.address p { margin: 0; min-width: 0; font-size: 13px; line-height: 1.6; overflow-wrap: anywhere; }
+.address strong { display: block; margin-bottom: 2px; font-weight: 600; }
+.address span { color: var(--muted); white-space: pre-line; }
+.actions { display: flex; flex-wrap: wrap; gap: 4px 22px; margin-top: 6px; }
+.action { display: inline-flex; align-items: center; gap: 6px; min-height: 44px; padding: 8px 0; border: 0; background: transparent; color: var(--text); font: 500 12px/1.5 var(--sans); text-decoration: underline; text-underline-offset: 3px; cursor: pointer; }
+.action svg { width: 14px; height: 14px; flex: none; }
+.action:focus-visible { outline: 2px solid var(--text); outline-offset: 3px; border-radius: 3px; }
+.message { font-size: 12px; line-height: 1.6; color: var(--muted); margin: 0; }

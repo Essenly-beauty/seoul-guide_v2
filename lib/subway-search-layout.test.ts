@@ -10,7 +10,8 @@ const routeStripSource = readFileSync(
   new URL("../components/subway/route-strip.tsx", import.meta.url),
   "utf8",
 );
-const iconSource = readFileSync(new URL("../components/icon.tsx", import.meta.url), "utf8");
+const pickerSource = readFileSync(new URL("../components/subway/station-search-field.tsx", import.meta.url), "utf8");
+const pickerCss = readFileSync(new URL("../components/subway/station-search-field.module.css", import.meta.url), "utf8");
 
 describe("subway endpoint search layout", () => {
   it("groups departure and arrival into a connected route field", () => {
@@ -40,18 +41,17 @@ describe("subway endpoint search layout", () => {
     expect(cssSource).toContain(".subway-route-dot:not(.line)::before");
   });
 
-  it("opens station suggestions below the connected fields at full width", () => {
-    expect(cssSource).toContain(".subway-search-field-stack .station-search-results");
-    expect(cssSource).toContain(".subway-search-fields:has(.station-search-results)");
+  it("opens a dedicated search screen above the map instead of an inline dropdown", () => {
+    expect(controllerSource).toContain("<StationSearchField");
+    expect(pickerSource).toContain("createPortal(");
+    expect(pickerSource).toContain('role="dialog" aria-modal="true"');
+    expect(pickerCss).toMatch(/\.page\s*\{[^}]*position: absolute;[^}]*inset: 0 0 var\(--kb, 0px\)/);
   });
 
-  it("uses one clear control and a placeholder that fits a mobile route field", () => {
-    expect(controllerSource).toContain('placeholder="Search station"');
-    expect(controllerSource).not.toContain("Station name in English or Korean");
-    expect(controllerSource).toContain("{query && open && (");
-    expect(cssSource).toMatch(
-      /\.station-search-input input::-webkit-search-cancel-button\s*\{[^}]*display:\s*none;/,
-    );
+  it("provides a labelled search input with a separate query clear action", () => {
+    expect(pickerSource).toContain('placeholder={t("Search station")}');
+    expect(pickerSource).toContain('label="Clear station search"');
+    expect(pickerCss).toContain("::-webkit-search-cancel-button");
   });
 
   it("keeps focused text inset and preserves a 44px input row", () => {
@@ -71,7 +71,7 @@ describe("subway endpoint search layout", () => {
   });
 
   it("moves from a chosen arrival station to the route action without reopening results", () => {
-    expect(controllerSource.match(/arrivalInputRef\.current\?\.focus\(\)/g)).toHaveLength(1);
+    expect(controllerSource.match(/arrivalButtonRef\.current\?\.focus\(\)/g)).toHaveLength(1);
     expect(controllerSource).toContain("routeButtonRef.current?.focus()");
     expect(controllerSource).toContain("buttonRef={routeButtonRef}");
   });
@@ -83,49 +83,33 @@ describe("subway endpoint search layout", () => {
     expect(controllerSource).toContain("routeEditorRef.current?.focus()");
   });
 
-  it("advances only on an explicit station choice with an unfilled next step", () => {
+  it("advances only after a selected result, not when dismissing search", () => {
     expect(controllerSource).toContain("if (id && advanceFocus && !draftArrival)");
     expect(controllerSource).toContain("if (id && advanceFocus && !arrivalId)");
-    // Exact-name validation on blur and dismissing search must not hijack a
-    // click on the other endpoint or an editor action.
-    expect(controllerSource).toContain("commit(exact, false)");
-    expect(controllerSource).toContain("commit(previous, false)");
+    expect(pickerSource).toContain("onSelect(id, true)");
+    expect(pickerSource).not.toContain("onBlur=");
   });
 
-  it("offers the same non-destructive search dismissal on screen and with Escape", () => {
-    expect(controllerSource).toContain('aria-label={`Close ${label.toLowerCase()} station search`}');
-    expect(controllerSource).toContain("onClick={dismissSearch}");
-    expect(controllerSource).toMatch(/event.key === "Escape"[\s\S]*?dismissSearch\(\)/);
-    expect(cssSource).toMatch(/\.station-search-dismiss\s*\{[^}]*min-height:\s*44px;/);
+  it("uses shared Escape, focus trapping and a visible Back action", () => {
+    expect(pickerSource).toContain("useDialogFocus<HTMLDivElement>(true, onClose, inputRef)");
+    expect(pickerSource).toContain('name="back"');
+    expect(pickerSource).toContain("onClick={onClose}");
   });
 
-  it("keeps the chosen station recoverable after Clear and a partial search", () => {
-    const start = controllerSource.indexOf('className="station-search-clear"');
-    const clear = controllerSource.slice(start, controllerSource.indexOf("</button>", start));
-    // Clear empties the live selection, but must preserve both the rollback
-    // station and the query through the ensuing selectedId=null effect.
-    expect(clear).toContain("onSelect(null)");
-    expect(clear).not.toContain("lastSelectedRef.current = null");
-    expect(clear).toContain("preserveQueryRef.current = Boolean(selectedId)");
+  it("keeps the selected endpoint separate from the editable query", () => {
+    expect(pickerSource).toContain('onChange={(event) => setQuery(event.target.value)}');
+    expect(pickerSource).toContain('setQuery(""); inputRef.current?.focus()');
+    expect(pickerSource).not.toContain("onSelect(null)");
   });
 
-  it.each(["station-search-clear", "station-search-dismiss"])(
-    "%s prevents pointer focus transfer before its click can run",
-    (className) => {
-      const start = controllerSource.indexOf(`className="${className}"`);
-      const button = controllerSource.slice(start, controllerSource.indexOf("</button>", start));
-      // Mobile browsers may blur with relatedTarget=null when a button is
-      // pressed, which would close/unmount it before click. Cancelling the
-      // pointer default keeps input focus without a flag left on cancellation.
-      expect(button).toContain("onPointerDown={(event) => event.preventDefault()}");
-      expect(button).toContain("onClick=");
-    },
-  );
+  it("ignores Enter during Korean IME composition", () => {
+    expect(pickerSource).toContain("event.nativeEvent.isComposing");
+    expect(pickerSource).toContain("event.keyCode === 229");
+  });
 
-  it("allows an intentionally emptied endpoint to remain empty after leaving the field", () => {
-    const start = controllerSource.indexOf("const finishEditing =");
-    const finish = controllerSource.slice(start, controllerSource.indexOf("const exact =", start));
-    expect(finish).toContain("if (!selectedId) lastSelectedRef.current = null");
+  it("provides explicit removal rather than clearing the endpoint as someone types", () => {
+    expect(pickerSource).toContain("onClick={() => commit(null)}");
+    expect(pickerSource).toContain('text="Remove station"');
   });
 
   it("inserts via stations into the connected field and exposes explicit order controls", () => {
@@ -153,23 +137,14 @@ describe("subway endpoint search layout", () => {
   });
 
   it("keeps combobox suggestions out of the Tab sequence", () => {
-    expect(controllerSource).toMatch(/role="option"\s+tabIndex=\{-1\}/);
+    expect(pickerSource).toMatch(/role="option"\s+tabIndex=\{-1\}/);
   });
 
-  it("uses compact line badges and quiet accessible context icons", () => {
-    // Result rows grew to 64px/15.5px on 2026-08-02 — the list read too small.
-    expect(cssSource).toMatch(
-      /\.station-result-options > button\s*\{[^}]*min-height:\s*64px;[^}]*gap:\s*9px;/,
-    );
-    expect(cssSource).toMatch(
-      /\.station-linebadge\s*\{[^}]*min-width:\s*20px;[^}]*height:\s*20px;/,
-    );
-    expect(cssSource).toMatch(/\.station-result-name b\s*\{[^}]*font-size:\s*15\.5px;/);
-    expect(cssSource).toMatch(/\.station-result-name > span\s*\{[^}]*font-size:\s*12px;/);
-    expect(controllerSource).toContain('name={context === "Recent" ? "history" : "locate"}');
-    expect(controllerSource).toContain('<span className="sr-only">{context}</span>');
-    expect(iconSource).toContain('| "history"');
-    expect(iconSource).toContain('id="i-history"');
+  it("shows English and Korean station names with readable line badges", () => {
+    expect(pickerSource).toContain("{station.name}");
+    expect(pickerSource).toContain('lang="ko">{station.nameKr}');
+    expect(pickerSource).toContain("lineTextColor(LINE_META[line].color)");
+    expect(pickerSource).toContain('role="group" aria-label={t(group.label)}');
   });
 
   it("restores focus and announces via changes when a focused row unmounts", () => {
@@ -315,33 +290,28 @@ describe("subway flow: search → station → place (owner walkthrough 2026-08-2
   });
 
   it("station results lead with the name and trail the line badges", () => {
-    const start = controller.indexOf('role="option"');
-    const row = controller.slice(start, controller.indexOf("</button>", start));
-    expect(row.indexOf("station-result-name")).toBeLessThan(row.indexOf("<StationLineBadges"));
+    const start = pickerSource.indexOf('role="option"');
+    const row = pickerSource.slice(start, pickerSource.indexOf("</button>", start));
+    expect(row.indexOf("styles.name")).toBeLessThan(row.indexOf("styles.lines"));
   });
 });
 
-describe("station search keeps the whole route editable", () => {
-  // Searching one endpoint must not erase the route context or the way out.
-  const css = readFileSync(new URL("../app/globals.css", import.meta.url), "utf8");
-
-  it("keeps both endpoint fields visible during either search", () => {
-    expect(css).not.toMatch(/\.subway-search-field-stack:has\(\.station-search-results\) \.station-combobox:not\(:has\(\.station-search-results\)\)\s*\{[^}]*display: none/);
+describe("station search preserves the route underneath", () => {
+  it("uses a button launcher so restoring focus cannot reopen the search", () => {
+    expect(pickerSource).toContain('aria-haspopup="dialog"');
+    expect(pickerSource).toContain("onClick={() => setOpen(true)}");
+    expect(pickerSource).not.toContain("onFocus={() => setOpen(true)}");
   });
 
-  it("keeps the route rail and swap button visible", () => {
-    expect(css).not.toMatch(/\.subway-search-fields:has\(\.station-search-results\) \.subway-search-route-rail[^{]*\{[^}]*display: none/);
-    expect(css).not.toMatch(/\.subway-search-fields:has\(\.station-search-results\) \[aria-label="Swap departure and arrival"\][^{]*\{[^}]*display: none/);
+  it("keeps route submission and swap actions in the planner", () => {
+    expect(controllerSource).toContain('aria-label="Swap departure and arrival"');
+    expect(controllerSource).toContain("onClick={applyRoute}");
+    expect(pickerSource).not.toContain("applyRoute");
   });
 
-  it("keeps Cancel and the route action outside the scrolling suggestions", () => {
-    expect(css).not.toMatch(/\.subway-controller:has\(\.station-search-results\) \.subway-search-footer\s*\{[^}]*display: none/);
-    expect(css).toMatch(/\.subway-search-footer\s*\{[^}]*flex: none/);
-  });
-
-  it("reserves the same bounded height that the results occupy below both fields", () => {
-    expect(css).toMatch(/\.subway-search-field-stack \.station-search-results\s*\{[^}]*top:\s*calc\(100% \+ 6px\);[^}]*max-height:\s*var\(--station-results-height\)/);
-    expect(css).toMatch(/\.subway-search-fields:has\(\.station-search-results\)\s*\{[^}]*margin-bottom:\s*calc\(var\(--station-results-height\) \+ 6px\)/);
+  it("scrolls only the result body and leaves the search header visible", () => {
+    expect(pickerCss).toMatch(/\.results\s*\{[^}]*min-height: 0;[^}]*overflow-y: auto/);
+    expect(pickerCss).toMatch(/\.header\s*\{[^}]*flex: none/);
   });
 });
 
@@ -396,9 +366,9 @@ describe("subway panel layout defects (owner reports 2026-08-22)", () => {
     expect(rail).toContain('className="station-sheet-cats"');
   });
 
-  it("gives the station picker real height instead of a 230px box", () => {
-    expect(css).toMatch(/--station-results-height:[^;]*100dvh[^;]*var\(--kb/);
-    expect(css).toMatch(/\.station-search-results[^{]*\{[^}]*overflow-y:\s*auto/);
+  it("fits the dedicated search screen above the software keyboard", () => {
+    expect(pickerCss).toContain("inset: 0 0 var(--kb, 0px)");
+    expect(pickerCss).toContain("overscroll-behavior: contain");
   });
 
   it("does not put route editing inside the shop list", () => {
@@ -408,7 +378,7 @@ describe("subway panel layout defects (owner reports 2026-08-22)", () => {
   });
 
   it("pluralises the place count", () => {
-    expect(controller).toContain('rankedPlaces.length === 1 ? "place" : "places"');
+    expect(controller).toContain('rankedPlaces.length === 1 ? "{count} place" : "{count} places"');
   });
 });
 

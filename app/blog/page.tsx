@@ -1,7 +1,8 @@
 "use client";
 
+import { T } from "@/lib/i18n/locale-provider";
+
 import Link from "next/link";
-import { TopBar } from "@/components/ui/top-bar";
 import { BottomNav } from "@/components/ui/bottom-nav";
 import { TopicTag } from "@/components/ui/topic-tag";
 import { ImgPh } from "@/components/ui/img-ph";
@@ -17,13 +18,8 @@ export default function BlogListPage() {
   const stories = rest;
   return (
     <>
-      <TopBar center title="Blog" />
-      <div className="app-scroll pad stack pagev2">
-        {/* Top-level page title — the one serif moment on the page */}
-        <div>
-          <div className="label">Blog</div>
-          <div className="h1">K-beauty <span style={{ fontStyle: "italic", color: "var(--accent)" }}>tips &amp; stories.</span></div>
-        </div>
+      <div className="app-scroll pad stack pagev2 app-tab-content stories-page">
+        <h1 className="h1"><T text={"Beauty tips & stories"} /></h1>
 
         {/* Featured story — big image card */}
         <section className="stack sm">
@@ -32,7 +28,7 @@ export default function BlogListPage() {
             <ImgPh style={{ height: 170, borderRadius: 12 }} />
             <div>
               <div style={{ fontWeight: 650, fontSize: 16, lineHeight: 1.3 }}>{hero.title}</div>
-              <div className="caption muted" style={{ marginTop: 4 }}>{hero.date} · {hero.readMin} min read</div>
+              <div className="caption muted" style={{ marginTop: 4 }}>{hero.date} · <T text="{minutes} min read" values={{ minutes: hero.readMin }} /></div>
             </div>
           </Link>
           <div className="chipwrap">
@@ -46,9 +42,9 @@ export default function BlogListPage() {
           <SectionHeader title="Coffee & Cafés" />
           <Link href={routes.coffee} className="coffee-blog-feature">
             <div>
-              <div className="label">8 EDITORIAL STORIES</div>
-              <b>오늘의 서울을 카페로 고르는 법</b>
-              <p className="small muted">작업할 창가, 아침의 첫 잔, 책과 노을을 위한 서울 카페 큐레이션.</p>
+              <div className="label"><T text={"8 café stories"} /></div>
+              <b><T text={"Find your Seoul café"} /></b>
+              <p className="small muted">A quiet window seat, your first coffee, or a stop at sunset.</p>
             </div>
             <span aria-hidden="true">→</span>
           </Link>
@@ -64,8 +60,8 @@ export default function BlogListPage() {
               <Link key={`${a.slug}-${i}`} className="listrow" href={routes.blogArticle(a.slug)}>
                 <ImgPh style={{ width: 56, height: 56, flex: "none", borderRadius: 12 }} />
                 <div style={{ flex: 1, minWidth: 0 }}>
-                  <b style={{ display: "block", fontWeight: 650, fontSize: 14, lineHeight: 1.3, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{a.title}</b>
-                  <div className="caption muted">{a.date} · {a.readMin} min read</div>
+                  <b className="story-list-title">{a.title}</b>
+                  <div className="caption muted">{a.date} · <T text="{minutes} min read" values={{ minutes: a.readMin }} /></div>
                 </div>
               </Link>
             ))}

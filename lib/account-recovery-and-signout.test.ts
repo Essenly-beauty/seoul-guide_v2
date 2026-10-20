@@ -27,7 +27,7 @@ describe("account recovery", () => {
     expect(resetPassword).toContain('const [confirmPw, setConfirmPw] = useState("");');
     expect(resetPassword).toContain("if (pw !== confirmPw)");
     expect(resetPassword).toContain("Passwords don't match");
-    expect(resetPassword).toContain('placeholder="Confirm new password"');
+    expect(resetPassword).toContain('placeholder={t("Confirm new password")}');
   });
 });
 

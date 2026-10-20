@@ -1,0 +1,10 @@
+.notice { margin: 0 0 12px; padding: 14px; background: var(--surface-hover); border-radius: 9px; color: var(--text); }
+.notice strong { display: block; margin: 0 0 6px; font-size: 11px; font-weight: 600; color: var(--muted); }
+.notice p { margin: 0; font-size: 13px; line-height: 1.6; white-space: pre-wrap; overflow-wrap: anywhere; }
+.contacts { display: grid; gap: 16px; margin: 12px 0; }
+.contacts > div { display: grid; gap: 0; }
+.contacts svg { width: 18px; height: 18px; margin-top: 1px; stroke-width: 1.7; flex: none; color: var(--muted); }
+.contacts dt { display: flex; align-items: center; gap: 12px; font-size: 11px; color: var(--muted); line-height: 1.5; }
+.contacts dd { margin: 0 0 0 30px; font-size: 13px; line-height: 1.5; overflow-wrap: anywhere; }
+.contacts a { display: inline-flex; align-items: center; min-height: 44px; color: var(--text); text-underline-offset: 3px; }
+.contacts a:focus-visible { outline: 2px solid var(--text); outline-offset: 3px; }

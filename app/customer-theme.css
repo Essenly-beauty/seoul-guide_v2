@@ -1,0 +1,396 @@
+/* Customer app refresh, 2026-10-19.
+ * Black/white actions, spacious rows, restrained orange feedback.
+ * Partner operations keep their existing theme. The marker is server-rendered.
+ * Imported after globals.css; explicit selectors resolve the legacy cascade.
+ */
+:root:not(:has([data-partner-shell])) {
+  --bg: #ffffff;
+  --surface: #ffffff;
+  --surface-hover: #f4f4f1;
+  --text: #171717;
+  --muted: #62625e;
+  --dim: #6a6a65;
+  --border: #e6e6e1;
+  --action: #171717;
+  --action-hover: #303030;
+  --on-action: #ffffff;
+  --action-soft: #f1f1ed;
+  --filter-selected: #eeeee9;
+  --filter-border: #777771;
+  --accent-ink: #b83d00;
+  --editorial-surface: #f2f4eb;
+  --editorial-text: #283024;
+  --editorial-muted: #586350;
+  --type-caption: .75rem;
+  --type-body: .875rem;
+  --type-section: 1rem;
+  --type-title: 1.25rem;
+  --r-sm: 8px;
+  --r-md: 12px;
+  --r-lg: 16px;
+  --space-page: 22px;
+  --shadow-sm: 0 2px 5px rgba(23, 23, 23, .08);
+  --shadow-card: none;
+  --shadow-float: 0 3px 8px rgba(23, 23, 23, .05), 0 12px 28px rgba(23, 23, 23, .12);
+  --shadow-accent: 0 3px 8px rgba(23, 23, 23, .08);
+  --serif: var(--sans);
+  --place-detail-edge-inset: var(--space-page);
+}
+:root[data-theme="dark"]:not(:has([data-partner-shell])) {
+  --bg: #111111;
+  --surface: #1b1b1a;
+  --surface-hover: #292927;
+  --text: #f6f6f2;
+  --muted: #b5b5ae;
+  --dim: #a3a39d;
+  --border: #363633;
+  --action: #f5f5f0;
+  --action-hover: #deded8;
+  --on-action: #171717;
+  --action-soft: #30302d;
+  --filter-selected: #30302d;
+  --filter-border: #92928a;
+  --accent-ink: #ff965e;
+  --editorial-surface: #22271f;
+  --editorial-text: #e5eadc;
+  --editorial-muted: #b1bca5;
+  --shadow-sm: 0 2px 5px rgba(0, 0, 0, .25);
+  --shadow-float: 0 4px 12px rgba(0, 0, 0, .22), 0 16px 32px rgba(0, 0, 0, .3);
+  --shadow-accent: none;
+}
+:root:not(:has([data-partner-shell])) .theme-dark {
+  --action: #f5f5f0;
+  --action-hover: #deded8;
+  --on-action: #171717;
+  --action-soft: #30302d;
+}
+:root:not([data-theme="dark"]):not(:has([data-partner-shell])) body { background: #eeeeea; }
+:root:not(:has([data-partner-shell])) body::after { display: none; }
+:root:not(:has([data-partner-shell])) :is(h1, h2, h3, h4, .hero, .h1, .h2, .h3) {
+  font-family: var(--sans);
+  font-weight: 600;
+  letter-spacing: -.02em;
+  line-height: 1.35;
+}
+:root:not(:has([data-partner-shell])) .h1 { font-size: var(--type-title); }
+:root:not(:has([data-partner-shell])) .label {
+  font-family: var(--sans);
+  font-size: var(--type-caption);
+  font-weight: 500;
+  letter-spacing: 0;
+  text-transform: none;
+  line-height: 1.4;
+}
+:root:not(:has([data-partner-shell])) .hero { line-height: 1.12; letter-spacing: -.04em; }
+:root:not(:has([data-partner-shell])) .topbar {
+  background: var(--surface);
+  backdrop-filter: none;
+  gap: 12px;
+  min-height: calc(52px + env(safe-area-inset-top));
+  padding: calc(4px + env(safe-area-inset-top)) 16px 4px;
+}
+:root:not(:has([data-partner-shell])) .topbar .title {
+  font-family: var(--sans);
+  font-size: var(--type-section);
+  font-weight: 600;
+  letter-spacing: -.015em;
+  text-transform: none;
+  text-align: left;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+:root:not(:has([data-partner-shell])) .topbar-slot:empty { display: none; }
+:root:not(:has([data-partner-shell])) .topbar .title::after { content: none; }
+:root:not(:has([data-partner-shell])) .app-scroll.pad { padding: 24px var(--space-page) 28px; }
+:root:not(:has([data-partner-shell])) .app-scroll.pad.stack { gap: 24px; }
+:root:not(:has([data-partner-shell])) .app-scroll.app-tab-content { padding-top: calc(20px + env(safe-area-inset-top)); }
+:root:not(:has([data-partner-shell])) .section-heading { gap: 12px; min-width: 0; }
+:root:not(:has([data-partner-shell])) .section-heading > h2 { min-width: 0; overflow-wrap: anywhere; }
+:root:not(:has([data-partner-shell])) .section-heading-count { margin-left: 8px; font-size: var(--type-caption); font-weight: 400; }
+:root:not(:has([data-partner-shell])) .section-head { gap: 16px; padding-bottom: 4px; }
+:root:not(:has([data-partner-shell])) .seeall { color: var(--text); min-height: 44px; }
+:root:not(:has([data-partner-shell])) .pagev2 .sec-divider {
+  margin-inline: 0;
+  height: 1px;
+  background: var(--border);
+  border: 0;
+  box-shadow: none;
+}
+:root:not(:has([data-partner-shell])) .pagev2 .hscroll {
+  margin-inline: calc(-1 * var(--space-page));
+  padding-inline: var(--space-page);
+}
+:root:not(:has([data-partner-shell])) .card { padding: 18px; box-shadow: none; }
+:root:not(:has([data-partner-shell])) .card.tap:hover { border-color: var(--text); }
+:root:not(:has([data-partner-shell])) .listrow.v2 { padding-block: 18px; gap: 16px; }
+:root:not(:has([data-partner-shell])) .listrow.v2 .listrow-copy { gap: 5px; }
+:root:not(:has([data-partner-shell])) .rankrow { padding: 16px; gap: 16px; box-shadow: none; }
+:root:not(:has([data-partner-shell])) .btn.primary,
+:root:not(:has([data-partner-shell])) .auth-cta {
+  background: var(--action);
+  color: var(--on-action);
+  box-shadow: var(--shadow-accent);
+}
+:root:not(:has([data-partner-shell])) .btn { min-height: 52px; padding: 14px 18px; border-radius: var(--r-md); }
+:root:not(:has([data-partner-shell])) .btn.sm { min-height: 44px; padding: 10px 14px; }
+:root:not(:has([data-partner-shell])) .btn.primary:hover,
+:root:not(:has([data-partner-shell])) .auth-cta:hover { background: var(--action-hover); }
+:root:not(:has([data-partner-shell])) .btn.tonal { background: var(--action-soft); color: var(--text); }
+:root:not(:has([data-partner-shell])) .btn.tonal:hover { background: var(--surface-hover); }
+:root:not(:has([data-partner-shell])) .btn:disabled,
+:root:not(:has([data-partner-shell])) .btn[aria-disabled="true"],
+:root:not(:has([data-partner-shell])) .btn[aria-disabled="true"]:hover,
+:root:not(:has([data-partner-shell])) .btn:disabled:hover {
+  background: var(--surface-hover);
+  color: var(--dim);
+  border-color: transparent;
+  box-shadow: none;
+}
+:root:not(:has([data-partner-shell])) .chip { border-radius: 10px; padding-inline: 12px; font-family: var(--sans); font-size: .8125rem; }
+:root:not(:has([data-partner-shell])) .chip:is(.selected, [aria-pressed="true"]),
+:root:not(:has([data-partner-shell])) .map-top .chip:is(.selected, [aria-pressed="true"]),
+:root:not(:has([data-partner-shell])) .map-top .chip.chip-all.selected,
+:root:not(:has([data-partner-shell])) .sfchip.on,
+:root:not(:has([data-partner-shell])) .station-filter-rail .sfchip.on {
+  background: var(--filter-selected);
+  border-color: var(--filter-border);
+  color: var(--text);
+  font-weight: 600;
+}
+:root:not(:has([data-partner-shell])) .timeslot[aria-pressed="true"] { background: var(--action); border-color: var(--action); color: var(--on-action); }
+:root:not([data-theme="dark"]):not(:has([data-partner-shell])) .map-top .chip:not(.selected) { background: rgba(255, 255, 255, .96); }
+:root:not(:has([data-partner-shell])) .chip.soft[aria-pressed="true"] {
+  background: var(--action-soft);
+  border-color: var(--text);
+  color: var(--text);
+}
+/* This rail paints its visible chip inside a larger touch target. */
+:root:not(:has([data-partner-shell])) .chip.daiso-category-chip {
+  padding: 2px 0;
+  background: transparent;
+  border-color: transparent;
+}
+:root:not(:has([data-partner-shell])) .daiso-category-chip-visual { border-radius: 10px; }
+:root:not(:has([data-partner-shell])) .chip.daiso-category-chip:is(.selected, [aria-pressed="true"]) .daiso-category-chip-visual {
+  background: var(--filter-selected);
+  border-color: var(--filter-border);
+  color: var(--text);
+}
+:root:not(:has([data-partner-shell])) .input { background: var(--surface); min-height: 52px; }
+:root:not(:has([data-partner-shell])) .mobile-search-field { background: var(--surface-hover); border-radius: 12px; }
+:root:not(:has([data-partner-shell])) .field label { font-family: var(--sans); font-size: 12px; letter-spacing: 0; text-transform: none; margin-bottom: 9px; }
+:root:not(:has([data-partner-shell])) input:is([type="checkbox"], [type="radio"]) { accent-color: var(--accent); }
+:root:not(:has([data-partner-shell])) .bottomnav { box-shadow: 0 -2px 10px rgba(0, 0, 0, .035); }
+:root:not(:has([data-partner-shell])) .bottomnav .nav[aria-current="page"] { color: var(--text); }
+:root:not(:has([data-partner-shell])) .bottomnav .nav[aria-current="page"]::before { background: var(--text); }
+:root:not(:has([data-partner-shell])) .sheet { border-radius: 22px 22px 0 0; box-shadow: var(--shadow-float); }
+:root:not(:has([data-partner-shell])) .sheet .shead { padding: 20px var(--space-page) 16px; }
+:root:not(:has([data-partner-shell])) .sheet .sbody { padding-inline: var(--space-page); }
+:root:not(:has([data-partner-shell])) .sheet-title { font-size: var(--type-title); line-height: 1.3; }
+:root:not(:has([data-partner-shell])) .sheet .shead .label { margin-bottom: 4px; }
+:root:not(:has([data-partner-shell])) .map-screen { --map-action: var(--action); }
+:root:not(:has([data-partner-shell])) .map-screen .pin-selected:not(.pin-selected-oy) {
+  background: var(--action);
+  box-shadow: 0 0 0 2px var(--surface), var(--shadow-float);
+}
+:root:not(:has([data-partner-shell])) .map-screen .pin-selected:not(.pin-selected-oy) .icn { color: var(--on-action); }
+:root:not(:has([data-partner-shell])) :is(.map-fab-fav.on, .map-modebtn.on, .pin-badge.selected) {
+  background: var(--action);
+  border-color: var(--action);
+  color: var(--on-action);
+}
+/* Nearby rows: the place leads; context and live facts read as captions. */
+:root:not(:has([data-partner-shell])) .maprow { --maprow-thumb: 72px; gap: 14px; padding-block: 16px; }
+:root:not(:has([data-partner-shell])) .maprow .place-name-primary {
+  font-size: var(--type-body);
+  line-height: 1.4;
+  font-weight: 600;
+  white-space: normal;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow-wrap: anywhere;
+}
+:root:not(:has([data-partner-shell])) :is(.maprow-category, .maprow-address) { margin-top: 4px; font-size: var(--type-caption); color: var(--muted); line-height: 1.4; overflow-wrap: anywhere; }
+:root:not(:has([data-partner-shell])) .maprow-meta { margin-top: 6px; gap: 4px 10px; }
+:root:not(:has([data-partner-shell])) .maprow-daiso-services { gap: 4px; margin-top: 6px; }
+:root:not(:has([data-partner-shell])) .maprow-daiso-service { padding: 2px 6px; font-size: .6875rem; line-height: 1.35; border-radius: 5px; }
+:root:not(:has([data-partner-shell])) :is(.maprow-meta, .selected-place-summary-meta, .place-address-toggle) .map-meta-token {
+  font-family: var(--sans);
+  font-size: var(--type-caption);
+  font-weight: 400;
+  letter-spacing: 0;
+  font-variant-numeric: tabular-nums;
+}
+:root:not(:has([data-partner-shell])) .livebadge { font-size: var(--type-caption); font-weight: 500; text-transform: none; letter-spacing: 0; line-height: 1.4; }
+:root:not(:has([data-partner-shell])) .livebadge::before { width: 5px; height: 5px; }
+:root:not(:has([data-partner-shell])) .livebadge.open { --status-color: var(--success); }
+:root:not(:has([data-partner-shell])) .livebadge.closed { --status-color: var(--error); }
+:root:not(:has([data-partner-shell])) .livebadge.closed::before { border-radius: 1px; }
+:root:not(:has([data-partner-shell])) .livebadge-until { font-weight: 400; color: var(--muted); }
+:root:not(:has([data-partner-shell])) .selected-place-summary-title { font-size: var(--type-section); line-height: 1.4; }
+:root:not(:has([data-partner-shell])) .selected-place-summary.half .selected-place-summary-title { font-size: var(--type-title); }
+/* Product rows: 14px title, 12px reference text, quiet source ranks. */
+:root:not(:has([data-partner-shell])) .ranking-position { width: 16px; flex: none; align-self: flex-start; padding-top: 18px; text-align: center; font-family: var(--sans); font-size: var(--type-body); font-weight: 500; color: var(--muted); }
+:root:not(:has([data-partner-shell])) .ranking-product-copy { gap: 5px; }
+:root:not(:has([data-partner-shell])) .ranking-product-copy > b { display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden; overflow-wrap: anywhere; font-size: var(--type-body); font-weight: 500; line-height: 1.5; }
+:root:not(:has([data-partner-shell])) .ranking-product-copy > .t-caption { font-size: var(--type-caption); color: var(--muted); line-height: 1.5; }
+:root:not(:has([data-partner-shell])) .listrow.v2.ranking-product-row { align-items: flex-start; gap: 12px; padding-block: 14px; border: 0; }
+:root:not(:has([data-partner-shell])) .ranking-product-row .thumb56 { border-radius: var(--r-sm); }
+:root:not(:has([data-partner-shell])) .ranking-retailer-heading { display: flex; align-items: center; gap: 12px; padding-bottom: 4px; }
+:root:not(:has([data-partner-shell])) .ranking-retailer-heading img { flex: none; }
+:root:not(:has([data-partner-shell])) .ranking-retailer-heading h1 { font-size: var(--type-section); letter-spacing: -.01em; }
+:root:not(:has([data-partner-shell])) .ranking-retailer-heading small { display: block; margin-top: 2px; color: var(--muted); font-size: var(--type-caption); font-weight: 400; letter-spacing: 0; }
+:root:not(:has([data-partner-shell])) .ranking-page .sec-divider { display: none; }
+/* Detail pages keep one address, a compact taxi action and thin dividers. */
+:root:not(:has([data-partner-shell])) .detail-scroll > .pad { padding-inline: var(--space-page); }
+:root:not(:has([data-partner-shell])) .detail-scroll .place-detail-intro { padding-block: 16px 12px; }
+:root:not(:has([data-partner-shell])) .place-detail-title { font-size: var(--type-title); font-weight: 600; }
+:root:not(:has([data-partner-shell])) .place-detail-name-stack { gap: 6px; }
+:root:not(:has([data-partner-shell])) .place-detail-name-stack .place-name-primary { display: block; white-space: normal; overflow: visible; }
+:root:not(:has([data-partner-shell])) .place-detail-meta { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 12px; margin-top: 12px; font-size: var(--type-caption); color: var(--muted); }
+:root:not(:has([data-partner-shell])) .place-detail-meta .rating { font-family: var(--sans); font-size: var(--type-caption); }
+:root:not(:has([data-partner-shell])) .place-photo-empty { min-height: 72px; display: flex; align-items: center; justify-content: center; gap: 8px; padding: 16px 56px; background: var(--surface-hover); border-radius: var(--r-md); font-size: var(--type-caption); color: var(--muted); }
+:root:not(:has([data-partner-shell])) .place-photo-empty .icn { flex: none; }
+:root:not(:has([data-partner-shell])) .place-address-toggle { min-height: 44px; padding-block: 8px; }
+:root:not(:has([data-partner-shell])) .place-address-toggle > span { white-space: normal; overflow-wrap: anywhere; }
+:root:not(:has([data-partner-shell])) .place-address-disclosure > .taxicard { position: relative; isolation: isolate; overflow: hidden; margin-top: 8px; min-height: 48px; padding: 10px 12px; background: var(--accent-soft); border: 0; gap: 10px; font-size: var(--type-body); }
+:root:not(:has([data-partner-shell])) .taxicard .ic { width: 24px; height: 24px; background: none; color: var(--accent-ink); }
+:root:not(:has([data-partner-shell])) .taxicard .ic .icn { color: inherit; }
+:root:not(:has([data-partner-shell])) .taxicard::before { content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none; background: linear-gradient(100deg, transparent 20%, var(--accent-soft-2) 50%, transparent 80%); opacity: 0; animation: taxi-hint-sweep 1800ms 500ms ease-in-out 2; }
+:root:not(:has([data-partner-shell])) .taxicard:hover { background: var(--accent-soft-2); }
+@keyframes taxi-hint-sweep {
+  0% { transform: translateX(-100%); opacity: 0; }
+  25%, 65% { opacity: 1; }
+  100% { transform: translateX(100%); opacity: 0; }
+}
+:root:not(:has([data-partner-shell])) .taxicard > span:not(.ic) { flex: 1; min-width: 0; }
+:root:not(:has([data-partner-shell])) .taxicard > .icn { flex: none; }
+:root:not(:has([data-partner-shell])) .detail-scroll .sec-divider { height: 1px; margin: 16px 0; border: 0; box-shadow: none; background: var(--border); }
+:root:not(:has([data-partner-shell])) .detail-scroll .anchortabs { gap: 18px; padding-inline: var(--space-page); overflow-x: auto; scrollbar-width: none; }
+:root:not(:has([data-partner-shell])) .detail-scroll .anchortabs button { flex: none; font-size: var(--type-body); font-weight: 500; }
+:root:not(:has([data-partner-shell])) .detail-compactbar b { text-align: left; min-width: 0; font-size: var(--type-body); font-weight: 600; }
+:root:not(:has([data-partner-shell])) .place-actions > * + *::before { display: none; }
+:root:not(:has([data-partner-shell])) .place-actions { padding: 8px var(--space-page) 12px; gap: 4px; border: 0; background: transparent; }
+:root:not(:has([data-partner-shell])) .place-actions > :is(a, button) { min-width: 0; border-radius: var(--r-sm); }
+:root:not(:has([data-partner-shell])) .place-actions > :is(a, button):hover { background: var(--surface-hover); }
+:root:not(:has([data-partner-shell])) .place-actions .lbl { white-space: nowrap; }
+:root:not(:has([data-partner-shell])) .collapse-trigger { border: 0; background: transparent; padding: 12px 0; min-height: 48px; text-align: left; gap: 12px; font-size: var(--type-body); }
+:root:not(:has([data-partner-shell])) .collapse-trigger b { font-weight: 500; }
+:root:not(:has([data-partner-shell])) .collapse-indicator { flex: none; transition: transform 180ms ease-out; }
+/* The label owns its row. Facilities wrap below it instead of squeezing it. */
+:root:not(:has([data-partner-shell])) .inforow.store-facts { display: grid; grid-template-columns: 20px minmax(0, 1fr); align-items: start; gap: 8px 10px; padding-block: 10px; }
+:root:not(:has([data-partner-shell])) .store-facts > .icn { margin-top: 3px; }
+:root:not(:has([data-partner-shell])) .store-facts-label { white-space: nowrap; font-size: var(--type-body); }
+:root:not(:has([data-partner-shell])) .store-facts-values { grid-column: 2; display: flex; flex-wrap: wrap; min-width: 0; gap: 6px; }
+:root:not(:has([data-partner-shell])) .store-fact { max-width: 100%; padding: 3px 6px; border-radius: 5px; background: var(--surface-hover); color: var(--muted); font-size: .6875rem; line-height: 1.4; overflow-wrap: anywhere; }
+:root:not(:has([data-partner-shell])) .store-fact.is-important { color: var(--warning); font-weight: 600; }
+/* Correction form: dialog title > place name > field labels. */
+:root:not(:has([data-partner-shell])) .sheet:has(.place-correction-place) .sbody { gap: 20px; padding-bottom: max(24px, env(safe-area-inset-bottom)); }
+:root:not(:has([data-partner-shell])) .place-correction-place { gap: 6px; }
+:root:not(:has([data-partner-shell])) .place-correction-place > b { font-size: var(--type-section); font-weight: 600; line-height: 1.4; overflow-wrap: anywhere; }
+:root:not(:has([data-partner-shell])) .place-correction-place > span { font-size: var(--type-body); line-height: 1.5; }
+:root:not(:has([data-partner-shell])) .place-correction-group { min-width: 0; margin: 0; padding: 0; border: 0; }
+:root:not(:has([data-partner-shell])) :is(.place-correction-group > legend, .place-correction-note > span:first-child) { padding: 0; font-size: var(--type-caption); font-weight: 600; line-height: 1.4; }
+:root:not(:has([data-partner-shell])) .place-correction-options .chip { min-height: 44px; max-width: 100%; white-space: normal; text-align: left; }
+:root:not(:has([data-partner-shell])) .place-correction-note textarea { font-size: var(--type-section); min-height: 104px; padding: 12px; }
+/* Editorial content uses theme-aware surfaces and a quiet, consistent scale. */
+:root:not(:has([data-partner-shell])) .coffee-blog-feature { background: var(--editorial-surface); color: var(--editorial-text); padding: 18px; border-radius: var(--r-md); }
+:root:not(:has([data-partner-shell])) .coffee-blog-feature :is(.label, .muted) { color: var(--editorial-muted); }
+:root:not(:has([data-partner-shell])) .coffee-blog-feature b { font-family: var(--sans); font-size: var(--type-section); font-weight: 600; line-height: 1.4; }
+:root:not(:has([data-partner-shell])) .coffee-blog-feature p { font-size: var(--type-body); line-height: 1.6; }
+:root:not(:has([data-partner-shell])) .stories-page .sec-divider { display: none; }
+:root:not(:has([data-partner-shell])) .stories-page .listrow { padding-block: 12px; border: 0; gap: 12px; }
+:root:not(:has([data-partner-shell])) .story-list-title { display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden; font-size: var(--type-body); font-weight: 500; line-height: 1.5; }
+:root:not(:has([data-partner-shell])) .story-list-title + .caption { margin-top: 4px; }
+:root:not(:has([data-partner-shell])) .topic-tag { min-height: 0; padding: 3px 7px; border-radius: 5px; font-size: .6875rem; font-weight: 400; line-height: 1.4; }
+:root:not(:has([data-partner-shell])) .article-body { padding: 24px var(--space-page) 32px; gap: 28px; }
+:root:not(:has([data-partner-shell])) .article-heading { display: flex; flex-direction: column; gap: 12px; }
+:root:not(:has([data-partner-shell])) .article-heading h1 { font-size: 1.5rem; line-height: 1.4; letter-spacing: -.025em; text-wrap: pretty; }
+:root:not(:has([data-partner-shell])) .article-body > p,
+:root:not(:has([data-partner-shell])) .article-section p { font-size: var(--type-body); line-height: 1.8; color: var(--text); }
+:root:not(:has([data-partner-shell])) .article-section { display: flex; flex-direction: column; gap: 10px; }
+:root:not(:has([data-partner-shell])) .article-body .article-section h2 { margin: 0; font-size: var(--type-section); font-weight: 600; line-height: 1.5; }
+:root:not(:has([data-partner-shell])) .product-detail-badges { gap: 6px; }
+:root:not(:has([data-partner-shell])) .product-detail-badges .badge { padding: 3px 7px; background: var(--surface-hover); color: var(--muted); font-family: var(--sans); font-size: .6875rem; font-weight: 500; line-height: 1.4; letter-spacing: 0; text-transform: none; border-radius: 5px; }
+:root:not(:has([data-partner-shell])) .product-detail-badges .badge.accent { background: var(--accent-soft); color: var(--accent-ink); }
+:root:not(:has([data-partner-shell])) .product-detail-badges .icn { width: 12px; height: 12px; }
+/* Account groups use whitespace, without a card around each set of rows. */
+:root:not(:has([data-partner-shell])) .account-menu .sec-divider { display: none; }
+:root:not(:has([data-partner-shell])) .account-menu-group { gap: 0; }
+:root:not(:has([data-partner-shell])) .account-menu-group .section-heading { margin-bottom: 12px; }
+:root:not(:has([data-partner-shell])) .account-menu-group .inforow { padding-block: 12px; min-height: 52px; border: 0; font-size: var(--type-body); }
+:root:not(:has([data-partner-shell])) .settings-group { gap: 12px; }
+:root:not(:has([data-partner-shell])) .settings-group-list { border: 0; border-radius: 0; background: transparent; padding: 0; }
+:root:not(:has([data-partner-shell])) .settings-row { border: 0; padding-inline: 0; }
+:root:not(:has([data-partner-shell])) .settings-row-title { font-weight: 500; }
+:root:not(:has([data-partner-shell])) .settings-row-icon { background: transparent; }
+:root:not(:has([data-partner-shell])) .settings-account-actions .signout-menu-row { border: 0; padding: 8px 0; min-height: 52px; gap: 11px; font-size: var(--type-body); }
+:root:not(:has([data-partner-shell])) .settings-account-actions .signout-menu-row > .icn { width: 32px; padding: 6px; }
+@media (prefers-reduced-motion: reduce) {
+  :root:not(:has([data-partner-shell])) .taxicard::before { animation: none; }
+  :root:not(:has([data-partner-shell])) .collapse-indicator { transition: none; }
+}
+@media (min-width: 480px) {
+  :root:not([data-theme="dark"]):not(:has([data-partner-shell])) .app-shell {
+    border-color: #d5d5cf;
+    box-shadow: 0 16px 60px rgba(23, 23, 23, .10);
+  }
+}
+@media (max-width: 359px) {
+  :root:not(:has([data-partner-shell])) { --space-page: 18px; }
+}
+/* Preview height follows its contents; media never sits behind fixed actions. */
+:root:not(:has([data-partner-shell])) .mapsheet.half.has-selection { transform: translateY(calc(100% - var(--selected-sheet-half-height, 48%))); }
+:root:not(:has([data-partner-shell])) .mapsheet.half.has-selection .mapsheet-detail-body { flex-basis: calc(var(--selected-sheet-half-height, 48%) - 44px - var(--selected-action-bar-height)); }
+:root:not(:has([data-partner-shell])) .mapsheet.half.has-selection :is(.mapsheet-view-enter, .selected-place-summary.half) { flex: none; }
+:root:not(:has([data-partner-shell])) .selected-place-summary.half { padding-bottom: 16px; }
+:root:not(:has([data-partner-shell])) .selected-place-summary-no-photo { display: flex; align-items: center; min-height: 32px; margin-top: 12px; color: var(--muted); font-size: var(--type-caption); }
+:root:not(:has([data-partner-shell])) .mapsheet.half.has-selection .selected-place-summary-media-rail { flex: none; height: 132px; max-height: none; }
+:root:not(:has([data-partner-shell])) .mapsheet.half.has-selection .selected-place-summary-media-rail > .selected-place-summary-media { height: 132px; min-height: 0; }
+:root:not(:has([data-partner-shell])) .selected-place-summary-media-grid .selected-place-summary-media { height: 132px; min-height: 0; }
+:root:not(:has([data-partner-shell])) .selected-place-summary-media img { object-fit: contain; }
+:root:not(:has([data-partner-shell])) .maprow-photo-fallback .maprow-fallback-glyph { width: 26px; height: 26px; }
+/* Search groups: one heading, a compact list, and consistent section spacing. */
+:root:not(:has([data-partner-shell])) .search-page { display: flex; flex-direction: column; gap: 28px; padding-top: 20px; }
+:root:not(:has([data-partner-shell])) .search-group { display: flex; flex-direction: column; gap: 12px; }
+:root:not(:has([data-partner-shell])) .search-group-title { font-size: var(--type-body); line-height: 1.4; font-weight: 600; margin: 0; }
+:root:not(:has([data-partner-shell])) .search-page .listrow { min-height: 64px; padding-block: 12px; gap: 12px; border: 0; }
+:root:not(:has([data-partner-shell])) .search-categories { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+:root:not(:has([data-partner-shell])) .search-categories .chip { min-width: 0; min-height: 48px; justify-content: flex-start; padding: 10px; gap: 8px; white-space: normal; font-size: .8125rem; text-align: left; }
+:root:not(:has([data-partner-shell])) .search-page .chipwrap { gap: 8px; }
+:root:not(:has([data-partner-shell])) .search-page .chipwrap .chip { font-size: .8125rem; padding-inline: 12px; min-height: 44px; }
+:root:not(:has([data-partner-shell])) .search-topbar { padding-inline: 8px 16px; }
+:root:not(:has([data-partner-shell])) .search-topbar .mobile-search-field { min-width: 0; border-radius: 12px; }
+:root:not(:has([data-partner-shell])) .search-topbar .mobile-search-field:focus-within { border-color: var(--muted); box-shadow: 0 0 0 1px var(--muted); }
+/* Station controls stay in their row; swap belongs beside Add via. */
+:root:not(:has([data-partner-shell])) .subway-search-fields { grid-template-columns: 20px minmax(0, 1fr); border: 0; padding: 8px; gap: 4px; }
+:root:not(:has([data-partner-shell])) .subway-search-route-rail { padding-block: 22px; min-height: 128px; }
+:root:not(:has([data-partner-shell])) .subway-search-field-stack .station-combobox { padding: 0; min-height: 64px; }
+:root:not(:has([data-partner-shell])) .subway-search-field-stack .station-combobox > button { min-height: 64px; }
+:root:not(:has([data-partner-shell])) .subway-waypoint-row { grid-template-columns: minmax(0, 1fr) 132px; padding-block: 0; min-height: 64px; }
+:root:not(:has([data-partner-shell])) .subway-waypoint-field { min-height: 64px; padding-inline: 12px 0; }
+:root:not(:has([data-partner-shell])) .subway-waypoint-field > b { font-size: var(--type-body); }
+:root:not(:has([data-partner-shell])) .subway-waypoint-field > span { font-size: var(--type-caption); font-weight: 400; }
+:root:not(:has([data-partner-shell])) .subway-waypoint-order { grid-template-columns: repeat(3, 44px); margin: 0; }
+:root:not(:has([data-partner-shell])) .subway-waypoint-order button:nth-child(2) .icn { transform: rotate(90deg); }
+:root:not(:has([data-partner-shell])) .subway-waypoint-order button:last-child .icn { transform: none; }
+:root:not(:has([data-partner-shell])) .subway-via-editor { display: flex; align-items: center; gap: 8px; }
+:root:not(:has([data-partner-shell])) .subway-via-editor[hidden] { display: none; }
+:root:not(:has([data-partner-shell])) .subway-swap-action { display: inline-flex; width: auto; min-height: 44px; margin-left: auto; gap: 6px; padding-inline: 12px; border-radius: 8px; font-size: var(--type-caption); }
+:root:not(:has([data-partner-shell])) .subway-swap-action::before { content: none; }
+:root:not(:has([data-partner-shell])) .subway-via-add { border: 0; color: var(--text); font-weight: 500; }
+@media (max-width: 359px) {
+  :root:not(:has([data-partner-shell])) .subway-waypoint-row:not(.adding) { grid-template-columns: minmax(0, 1fr); }
+  :root:not(:has([data-partner-shell])) .subway-waypoint-order { justify-content: end; }
+}
+:root:not(:has([data-partner-shell])) .ranking-footer-mark { filter: none; opacity: 1; }
+:root:not(:has([data-partner-shell])) .maprow-thumb.image-thumbnail { width: var(--maprow-thumb); height: var(--maprow-thumb); }
+:root:not(:has([data-partner-shell])) .map-searchpill > span { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+:root:not(:has([data-partner-shell])) .mapsheet.half.has-selection .mapsheet-detail-body { flex-grow: 0; flex-shrink: 0; }
+/* Selected previews vary in height. Keep both map controls immediately above
+   the measured edge, side by side so they do not climb into the search bar. */
+:root:not(:has([data-partner-shell])) .map-screen:has(.mapsheet.half.has-selection) .map-fab { bottom: calc(var(--selected-sheet-half-height, 48%) + 12px); }
+:root:not(:has([data-partner-shell])) .map-screen:has(.mapsheet.half.has-selection) .map-fab-fav { right: 68px; }

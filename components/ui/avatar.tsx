@@ -12,19 +12,22 @@ type AvatarProps = {
   size?: number;
   /** Renders a Link (e.g. to My page) instead of a static circle. */
   href?: string;
+  title?: string;
+  'aria-label'?: string;
+  'aria-hidden'?: boolean;
 };
 
-export function Avatar({ name, size, href }: AvatarProps) {
+export function Avatar({ name, size, href, title, 'aria-label': ariaLabel, 'aria-hidden': ariaHidden }: AvatarProps) {
   const style: CSSProperties | undefined = size
     ? { width: size, height: size, fontSize: Math.round(size * 0.35) }
     : undefined;
   const content = name ? name.trim().charAt(0).toUpperCase() : <Icon name="user" size="sm" />;
   if (href) {
     return (
-      <Link className="avatar" style={style} href={href} aria-label={name ? `${name} — profile` : "Profile"}>
+      <Link className="avatar" style={style} href={href} title={title} aria-hidden={ariaHidden} aria-label={ariaLabel ?? (name ? `${name} — profile` : "Profile")}>
         {content}
       </Link>
     );
   }
-  return <span className="avatar" style={style}>{content}</span>;
+  return <span className="avatar" style={style} title={title} aria-hidden={ariaHidden} aria-label={ariaLabel}>{content}</span>;
 }

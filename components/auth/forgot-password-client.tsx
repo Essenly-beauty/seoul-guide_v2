@@ -4,6 +4,7 @@
 // dead-ended at the FAQ). Sends a reset email; the link lands on
 // /auth/callback, explicitly targeting /reset-password after PKCE exchange.
 
+import { useLocale } from "@/lib/i18n/locale-provider";
 import Link from "next/link";
 import { useState } from "react";
 import { AuthShell } from "@/components/auth/auth-shell";
@@ -12,6 +13,7 @@ import { routes } from "@/lib/routes";
 import { authLinkWithNext, oauthCallbackUrl, passwordResetDestination } from "@/lib/auth-return";
 
 export function ForgotPasswordClient({ next }: { next?: string }) {
+  const { t } = useLocale();
   const [email, setEmail] = useState("");
   const [busy, setBusy] = useState(false);
   const [sent, setSent] = useState(false);
@@ -41,14 +43,13 @@ export function ForgotPasswordClient({ next }: { next?: string }) {
       title="Reset password"
       oauthNext={next}
       support={sent
-        ? <>If an account exists for <b style={{ color: "var(--text)" }}>{email.trim()}</b>, a reset link is on its way.</>
-        : <>Enter your account email and we&apos;ll send a reset link.</>}
-      foot={<>Remembered it? <Link className="auth-link" href={authLinkWithNext(routes.signIn, next)}>Sign in</Link></>}
+        ? t("If an account exists for {email}, a reset link is on its way.", { email: email.trim() })
+        : t("Enter your account email and we'll send a reset link.")}
+      foot={<>{t("Remembered it?")} <Link className="auth-link" href={authLinkWithNext(routes.signIn, next)}>{t("Sign in")}</Link></>}
     >
       {sent ? (
         <p className="auth-support" style={{ marginTop: 28, lineHeight: 1.6 }}>
-          Open the link on this device to choose a new password.
-          Didn&apos;t get it? Check spam, or try again in a minute.
+          {t("Open the link on this device to choose a new password. Check spam, or try again in a minute.")}
         </p>
       ) : (
         <form onSubmit={submit} style={{ display: "contents" }}>
@@ -58,8 +59,8 @@ export function ForgotPasswordClient({ next }: { next?: string }) {
               type="email"
               inputMode="email"
               autoComplete="email"
-              placeholder="Enter email"
-              aria-label="Email"
+              placeholder={t("Enter email")}
+              aria-label={t("Email")}
               aria-invalid={!!error}
               aria-describedby={error ? "forgot-error" : undefined}
               required
@@ -67,9 +68,9 @@ export function ForgotPasswordClient({ next }: { next?: string }) {
               onChange={(e) => setEmail(e.target.value)}
             />
           </div>
-          {error && <p id="forgot-error" className="auth-error" role="alert">{error}</p>}
+          {error && <p id="forgot-error" className="auth-error" role="alert">{t(error)}</p>}
           <button className="auth-cta" type="submit" disabled={busy}>
-            {busy ? "Sending…" : "Send reset link"}
+            {t(busy ? "Sending…" : "Send reset link")}
           </button>
         </form>
       )}

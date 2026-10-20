@@ -1,6 +1,7 @@
 // Sample data layer mirroring seoul-beauty-guide's Product/Place/Journal models.
 // Filters in Shop and Spot operate over these in-memory arrays (client-side, single-select, AND-combined).
 
+import { localBookingPreviewPlaces } from "./booking/local-preview";
 import type { IconName } from "@/components/icon";
 import { CREATRIP_PLACES } from "./generated/creatrip-places";
 import { PLACE_PHOTOS, PLACE_PHOTO_THUMBNAILS } from "./generated/place-photos";
@@ -88,7 +89,7 @@ export const TYPE_LABEL: Record<PlaceType, string> = {
 };
 export const TYPE_ICON: Record<PlaceType, IconName> = {
   olive_young: "bag", daiso: "gift", skin_clinic: "cross", hair_salon: "scissors",
-  nail_lash: "spa", personal_color: "mark", head_spa: "spa", mall: "gift", etc: "pin",
+  nail_lash: "hand", personal_color: "mark", head_spa: "shower", mall: "store", etc: "pin",
 };
 
 /** Olive Young's brand lime — used by the OY brand mark on chips and map pins. */
@@ -99,7 +100,7 @@ export const OY_BRAND_GREEN = "#9bce26";
  *  mark fall back to their TYPE_ICON glyph in TYPE_COLOR. */
 export const BRAND_MARK_SRC: Partial<Record<PlaceType, string>> = {
   olive_young: "/brands/olive-young-logo.jpeg",
-  daiso: "/brands/daiso-mark.svg",
+  daiso: "/brands/daiso-logo.jpeg",
 };
 
 /** Category accent colors (spec v2 §3.1) — shared by filter chips, map pins, and search rows.
@@ -509,6 +510,8 @@ export const PLACES: Place[] = applyEnglishNameOverrides(CATALOGUE_PLACES)
     Boolean(place.address) &&
     (place.geoSource !== "area" || place.locationVerification === "provisional")
   );
+
+PLACES.push(...localBookingPreviewPlaces());
 
 const PUBLISHED_PLACE_TYPES = new Set(PLACES.map((place) => place.type));
 

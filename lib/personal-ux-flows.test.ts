@@ -21,7 +21,7 @@ const blog = source("app/blog/page.tsx");
 const saved = source("app/favorites/page.tsx");
 const ranking = source("components/ranking/ranking-page-client.tsx");
 const topBar = source("components/ui/top-bar.tsx");
-const css = source("app/globals.css");
+const css = source("app/globals.css") + source("app/customer-theme.css");
 
 describe("editable beauty profile", () => {
   it("shows the complete question set and saves revised selections", () => {
@@ -29,7 +29,7 @@ describe("editable beauty profile", () => {
     expect(profileEditor).toContain("QUESTIONS.map");
     expect(profileEditor).toContain("answerQuestion");
     expect(profileEditor).toContain("selected={selected}");
-    expect(profileEditor).toContain('aria-label="Beauty profile answers"');
+    expect(profileEditor).toContain('aria-label={t("Beauty profile answers")}');
   });
 });
 
@@ -76,22 +76,23 @@ describe("my review inspection", () => {
 });
 
 describe("shared page header rhythm", () => {
-  it("keeps every TopBar at the same My reviews height even without controls", () => {
+  it("keeps the remaining navigation bars compact and aligned", () => {
     expect(topBar).toContain('className="topbar-slot left"');
     expect(topBar).toContain('className="topbar-slot right"');
-    expect(css).toMatch(/\.topbar\s*\{[^}]*min-height:\s*calc\(68px \+ env\(safe-area-inset-top\)\)/);
+    expect(css).toMatch(/\.topbar\s*\{[^}]*min-height:\s*calc\(52px \+ env\(safe-area-inset-top\)\)/);
   });
 
-  it("uses the same quiet centered header across Blog, Ranking, and Saved", () => {
-    expect(blog).toContain('<TopBar center title="Blog" />');
-    expect(saved).toContain('<TopBar center title="Saved" />');
-    expect(ranking).toContain(
-      'const rankingTitle = initialRetailer === "daiso" ? "DAISO Ranking" : "OLIVE YOUNG Product Guide"',
-    );
-    expect(ranking).toContain('<TopBar center title={rankingTitle} />');
-    expect(ranking).not.toContain('<TopBar center title="Ranking" />');
+  it("does not repeat the main tab labels in a separate sticky header", () => {
+    for (const page of [blog, saved, ranking, menu]) {
+      expect(page).not.toContain("<TopBar");
+      expect(page).toContain("<h1");
+    }
+    for (const page of [blog, saved, menu]) expect(page).toContain("app-tab-content");
+    // Ranking keeps retailer context and controls fixed while its results scroll.
+    expect(ranking).toContain('data-testid="ranking-screen"');
+    expect(ranking).toContain('className="ranking-retailer-heading"');
+    expect(ranking).toContain('<h1 aria-label={t(rankingTitle)}>');
     expect(ranking).not.toContain("<BrandMark");
-    expect(ranking).not.toContain('<div className="topbar center">');
   });
 });
 

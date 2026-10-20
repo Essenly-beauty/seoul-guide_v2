@@ -8,6 +8,7 @@ const FOCUSABLE_SELECTOR = [
   "input:not([disabled])",
   "select:not([disabled])",
   "textarea:not([disabled])",
+  "summary",
   '[tabindex]:not([tabindex="-1"])',
 ].join(",");
 
@@ -32,7 +33,10 @@ export function useDialogFocus<T extends HTMLElement>(
     const dialog = dialogRef.current;
     const getFocusable = () =>
       Array.from(dialog?.querySelectorAll<HTMLElement>(FOCUSABLE_SELECTOR) ?? [])
-        .filter((element) => element.getAttribute("aria-hidden") !== "true");
+        // A listbox's arrow-key options are buttons too, but tabindex=-1
+        // excludes them from the native Tab order. They cannot define its edge.
+        // :disabled also covers inputs disabled by an ancestor fieldset.
+        .filter((element) => element.tabIndex >= 0 && !element.matches(':disabled') && !element.closest('[hidden], [inert], [aria-hidden="true"]'));
 
     const focusFrame = requestAnimationFrame(() => {
       (initialFocusRef?.current ?? getFocusable()[0] ?? dialog)?.focus();
@@ -59,7 +63,7 @@ export function useDialogFocus<T extends HTMLElement>(
       if (event.shiftKey && (active === first || !dialog.contains(active))) {
         event.preventDefault();
         last.focus();
-      } else if (!event.shiftKey && active === last) {
+      } else if (!event.shiftKey && (active === last || !dialog.contains(active))) {
         event.preventDefault();
         first.focus();
       }

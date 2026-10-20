@@ -29,6 +29,6 @@ export function PartnerSettingsView({ snapshot }: { snapshot: PartnerSnapshot })
       <Notice tone="info">매장 정보와 사진은 운영자가 등록하고 관리합니다. 사장님은 예약 메뉴와 일정을 관리할 수 있습니다.</Notice>
       <Link className={styles.textLink} href="/support">매장 정보 수정 요청 →</Link>
     </section>
-    <section className={styles.section}><p className={styles.eyebrow}>MANAGED BY OPERATIONS</p><h2>승인 및 예약 연결</h2><dl className={styles.readonlyValue}><dt>매장 상태</dt><dd>{merchantStatus[snapshot.merchant.status]}</dd><dt>예약 연결 승인</dt><dd>{snapshot.merchant.bookingEnabled ? '운영자 승인됨 · 고객 예약·결제 연결은 별도 확인 필요' : '예약 기능 연결 전'}</dd><dt>예약금 정책</dt><dd>메뉴별 예약금은 운영자가 승인합니다. 미설정 메뉴는 운영자 승인 대기 상태입니다.</dd></dl><Notice tone="info">매장 상태, 예약 연결과 예약금은 직접 변경할 수 없습니다. 변경 또는 계정 삭제가 필요하면 운영자에게 문의해 주세요.</Notice><Link className={styles.textLink} href="/support">승인 및 계정 관리 문의 →</Link></section>
+    <section className={styles.section}><p className={styles.eyebrow}>MANAGED BY OPERATIONS</p><h2>승인 및 예약 연결</h2><dl className={styles.readonlyValue}><dt>매장 상태</dt><dd>{merchantStatus[snapshot.merchant.status]}</dd><dt>예약 연결 승인</dt><dd>{snapshot.merchant.bookingEnabled ? '고객 예약 연결 승인됨 · 운영 중인 매장은 예약 접수 가능' : '고객 예약 접수 준비 · 운영자 승인 필요'}</dd><dt>결제 방식</dt><dd>현장 결제 · 고객은 예약한 총 금액을 매장에서 결제합니다.</dd></dl><Notice tone="info">매장 상태와 예약 연결 승인은 직접 변경할 수 없습니다. 변경 또는 계정 삭제가 필요하면 운영자에게 문의해 주세요.</Notice><Link className={styles.textLink} href="/support">승인 및 계정 관리 문의 →</Link></section>
   </>;
 }

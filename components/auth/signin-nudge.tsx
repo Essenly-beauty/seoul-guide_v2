@@ -13,6 +13,7 @@
 //    account-value moments). Detail views stay prompt-free — the ask
 //    happens on Save, not on looking (user decision 2026-08-16).
 
+import { useLocale } from "@/lib/i18n/locale-provider";
 import { useCallback, useEffect, useState, type ReactNode } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -53,6 +54,7 @@ const COPY: Record<NudgeContext, { title: string; body: string }> = {
 };
 
 export function useSigninNudge(): { nudge: (c: NudgeContext, options?: NudgeOptions) => void; sheet: ReactNode } {
+  const { t } = useLocale();
   const { user, loading } = useAuthUser();
   const pathname = usePathname();
   const [active, setActive] = useState<ActiveNudge | null>(null);
@@ -91,17 +93,17 @@ export function useSigninNudge(): { nudge: (c: NudgeContext, options?: NudgeOpti
   const registerParam = `?next=${encodeURIComponent(onboardingTarget)}`;
   const sheet = active ? (
     <BottomSheet title={COPY[active.context].title} kicker="MYSEOULDROP account" onClose={() => setActive(null)}>
-      <p className="small muted" style={{ margin: 0, lineHeight: 1.55 }}>{COPY[active.context].body}</p>
+      <p className="small muted" style={{ margin: 0, lineHeight: 1.55 }}>{t(COPY[active.context].body)}</p>
       <div className="stack sm" style={{ marginTop: 16 }}>
         <button type="button" className="welcome-social welcome-social-google" disabled={busy} aria-busy={busy} onClick={google}>
           <GoogleGlyph />
-          <span>Continue with Google</span>
+          <span>{t("Continue with Google")}</span>
         </button>
         <Button href={`${routes.register}${registerParam}`} onClick={rememberSavedPlace}>Sign up with email</Button>
         <p className="caption muted" style={{ textAlign: "center", margin: "2px 0 0" }}>
-          <Link className="auth-link" href={`${routes.signIn}${signInParam}`}>Sign in</Link>
+          <Link className="auth-link" href={`${routes.signIn}${signInParam}`}>{t("Sign in")}</Link>
           <span className="dim" aria-hidden="true"> · </span>
-          <button className="auth-link" style={{ font: "inherit" }} onClick={() => setActive(null)}>Keep exploring</button>
+          <button className="auth-link" style={{ font: "inherit" }} onClick={() => setActive(null)}>{t("Keep exploring")}</button>
         </p>
       </div>
     </BottomSheet>

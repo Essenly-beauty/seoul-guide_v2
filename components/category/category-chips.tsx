@@ -1,5 +1,6 @@
 "use client";
 
+import { T } from "@/lib/i18n/locale-provider";
 import { CategoryBadge } from "./category-badge";
 import { Chip } from "@/components/ui/chip";
 import { MAP_CATEGORIES, type PlaceType } from "@/lib/data";
@@ -26,7 +27,7 @@ export function CategoryChips({ selected, onToggle, onClear, className, style }:
           onClick={() => (c.key === "all" ? onClear() : onToggle(c.key as PlaceType))}
         >
           {c.key !== "all" && <CategoryBadge type={c.key as PlaceType} size={16} />}
-          {c.label}
+          <T text={c.label} />
         </Chip>
       ))}
     </div>

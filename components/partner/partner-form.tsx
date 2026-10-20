@@ -7,6 +7,7 @@ import type { PartnerCommand, PartnerSnapshot } from '@/lib/partner/contracts';
 import type { ReservationCommand } from '@/lib/partner/reservation-commands';
 import { usePartner, type PartnerDraftRecord } from './partner-provider';
 import styles from './partner.module.css';
+import editorStyles from './partner-editors.module.css';
 
 export type SaveState = { kind: 'idle' | 'pending' | 'reloading' | 'saved' | 'committed-stale' | 'unconfirmed' } | { kind: 'error' | 'conflict'; message: string };
 export function failedReloadState(previous: SaveState, message: string): SaveState {
@@ -104,7 +105,7 @@ export function Field({ label, children, hint }: { label: string; children: Reac
   return <label className={styles.field}><span>{label}</span>{children}{hint && <small>{hint}</small>}</label>;
 }
 export function FormActions({ state, disabled, dirty, onReload }: { state: SaveState; disabled: boolean; dirty: boolean; onReload: () => void }) {
-  return <div className={styles.formFooter}>
+  return <div className={`${styles.formFooter} ${editorStyles.savebar}`} data-dirty={dirty}>
     <SaveStatus state={state} onReload={onReload} />
     <div className={styles.actions}>
       <Button type="submit" disabled={disabled || !dirty}>{state.kind === 'pending' ? '저장 중…' : '변경사항 저장'}</Button>

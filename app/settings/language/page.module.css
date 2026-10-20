@@ -1,0 +1,11 @@
+.page { display: flex; flex-direction: column; gap: 24px; }
+.description { color: var(--muted); font-size: var(--type-body); line-height: 1.7; max-width: 38ch; }
+.options { border: 0; padding: 0; margin: 0; min-width: 0; display: grid; }
+.option { display: flex; align-items: center; justify-content: space-between; gap: 24px; padding-block: 20px; cursor: pointer; }
+.option + .option { border-top: 1px solid var(--border); }
+.copy { display: grid; gap: 4px; }
+.nativeName { color: var(--text); font-size: var(--type-section); font-weight: 500; }
+.translatedName { color: var(--muted); font-size: var(--type-caption); }
+.option input { width: 22px; height: 22px; margin: 0; accent-color: var(--action); flex: none; }
+.option:focus-within { outline: 2px solid var(--text); outline-offset: 4px; border-radius: var(--r-sm); }
+.status { min-height: 24px; color: var(--muted); font-size: var(--type-caption); }

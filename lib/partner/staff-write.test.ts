@@ -117,16 +117,17 @@ describe('narrow staff writes', () => {
     }
   });
 
-  it('blocks booking-enabled merchants before touching staff rows', async () => {
+  it('allows booking-enabled merchants to save staff while preserving the fresh ownership check', async () => {
     const mock = boundary(result({ merchant_id: merchantId, id: staffId }), { merchant: { ...merchantRow, booking_enabled: true } });
-    await expect(saveStaffCommand(mock.client, context, profile)).rejects.toMatchObject({ status: 409, code: 'PARTNER_CONFLICT' });
-    expect(mock.calls.some(({ table }) => table.startsWith('merchant_staff'))).toBe(false);
+    await saveStaffCommand(mock.client, context, profile);
+    expect(mock.calls.map(({ table }) => table)).toEqual(['merchant_memberships', 'merchants', 'merchant_staff']);
   });
 
-  it('does not clear an earlier booking gate if a later context read differs', async () => {
+  it('allows earlier booking-enabled context and preserves calendar conflict protection in the database', async () => {
+    const active = { ...context, merchant: { ...merchant, bookingEnabled: true } };
     const mock = boundary(result({ merchant_id: merchantId, id: staffId }));
-    await expect(saveStaffCommand(mock.client, { ...context, merchant: { ...merchant, bookingEnabled: true } }, profile))
-      .rejects.toMatchObject({ status: 409, code: 'PARTNER_CONFLICT' });
-    expect(mock.calls.some(({ table }) => table.startsWith('merchant_staff'))).toBe(false);
+    await saveStaffCommand(mock.client, active, profile);
+    const conflict = boundary(result(null, { code: '23514' }));
+    await expect(saveStaffCommand(conflict.client, active, calendar)).rejects.toMatchObject({ status: 409, code: 'PARTNER_CONFLICT' });
   });
 });

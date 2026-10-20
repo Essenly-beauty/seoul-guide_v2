@@ -8,9 +8,9 @@ export function Collapse({ summary, children }: { summary: ReactNode; children: 
   const [open, setOpen] = useState(false);
   return (
     <>
-      <button className="card tap row between" onClick={() => setOpen((v) => !v)} aria-expanded={open}>
+      <button className="card tap row between collapse-trigger" onClick={() => setOpen((v) => !v)} aria-expanded={open}>
         <span>{summary}</span>
-        <Icon name="chev" size="sm" style={{ color: "var(--dim)", transform: open ? "rotate(90deg)" : undefined, transition: "transform .2s" }} />
+        <Icon name="down" size="sm" className="collapse-indicator" style={{ color: "var(--dim)", transform: open ? "rotate(180deg)" : undefined }} />
       </button>
       {open && <div>{children}</div>}
     </>

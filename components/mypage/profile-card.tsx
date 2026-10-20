@@ -4,6 +4,7 @@
 // gauge + one question at a time with 1-tap chip answers; each question shows
 // a "why we ask" caption. All answered → compact incentive row.
 
+import { useLocale } from "@/lib/i18n/locale-provider";
 import Link from "next/link";
 import { Icon } from "@/components/icon";
 import { Chip } from "@/components/ui/chip";
@@ -12,6 +13,7 @@ import { routes } from "@/lib/routes";
 import { answerQuestion, nextQuestion, profileCompleteness, useProfile } from "@/lib/profile";
 
 export function ProfileCard() {
+  const { t } = useLocale();
   const { toast } = useToast();
   const profile = useProfile();
   const pct = profileCompleteness(profile);
@@ -37,8 +39,8 @@ export function ProfileCard() {
             reward completion with what's actually true (tuned picks). */}
         <span style={{ fontSize: 20 }} aria-hidden="true">✨</span>
         <div style={{ flex: 1, minWidth: 0 }}>
-          <b style={{ fontSize: 14 }}>Profile complete · Picks tuned to you</b>
-          <div className="t-caption">Your map and rankings now match your beauty profile</div>
+          <b style={{ fontSize: 14 }}>{t("Profile complete · Picks tuned to you")}</b>
+          <div className="t-caption">{t("Your map and rankings now match your beauty profile")}</div>
         </div>
         <Icon name="chev" size="xs" style={{ color: "var(--dim)", flex: "none" }} />
       </Link>
@@ -46,18 +48,18 @@ export function ProfileCard() {
   }
 
   return (
-    <section className="stack sm" style={{ ...shell, padding: "12px 14px", gap: 8 }} aria-label="Profile completeness">
+    <section className="stack sm" style={{ ...shell, padding: "12px 14px", gap: 8 }} aria-label={t("Profile completeness")}>
       <div className="row" style={{ gap: 10 }}>
-        <b className="t-label-md" style={{ fontSize: 14, flex: "none" }}>Profile completeness</b>
+        <b className="t-label-md" style={{ fontSize: 14, flex: "none" }}>{t("Profile completeness")}</b>
         <span className="t-label-sm" style={{ color: "var(--accent)", fontWeight: 700, marginLeft: "auto" }}>{pct}%</span>
       </div>
       <div className="rbar" role="progressbar" aria-valuenow={pct} aria-valuemin={0} aria-valuemax={100} style={{ flex: "none", background: "var(--border)" }}>
         <i style={{ width: `${pct}%`, background: "var(--accent)" }} />
       </div>
-      <div className="t-caption">Answers make recommendations smarter.</div>
+      <div className="t-caption">{t("Answers make recommendations smarter.")}</div>
       <div style={{ marginTop: 2 }}>
-        <b style={{ fontSize: 14, display: "block" }}>{q.title}</b>
-        <div className="t-caption">Why we ask · {q.why}</div>
+        <b style={{ fontSize: 14, display: "block" }}>{t(q.title)}</b>
+        <div className="t-caption">{t("Why we ask")} · {t(q.why)}</div>
       </div>
       {/* Single-tap chips. For the multi-select interests question one tap is
           treated as "answered" (≥1 interest) and the card advances — the full
@@ -68,7 +70,7 @@ export function ProfileCard() {
             key={o.value}
             onClick={() => {
               answerQuestion(q.key, o.value);
-              toast("Saved — thanks!");
+              toast(t("Saved — thanks!"));
             }}
           >
             {o.label}

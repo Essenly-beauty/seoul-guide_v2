@@ -1,9 +1,10 @@
 "use client";
 
-import { Fragment, useEffect, useId, useMemo, useRef, useState } from "react";
+import { T, useLocale } from "@/lib/i18n/locale-provider";
+import { Fragment, useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
 import { CategoryBadge } from "@/components/category/category-badge";
-import { ImgPh } from "@/components/ui/img-ph";
+import { PlaceThumbnail } from "@/components/place/place-thumbnail";
 import { Icon } from "@/components/icon";
 import { Button } from "@/components/ui/button";
 import { IconButton } from "@/components/ui/icon-button";
@@ -17,18 +18,16 @@ import type { SubwayPlaceCategory } from "@/lib/subway-place-filter";
 import {
   LINE_META,
   STATIONS,
-  exactStationMatch,
   findRoute,
   findRouteVia,
   lineTextColor,
   moveRouteWaypoint,
   routeSegmentStartIndices,
-  searchStations,
   stationDisplayName,
   type SubwayRoute,
-  type SubwayStation,
 } from "@/lib/subway";
 import { RouteStrip } from "./route-strip";
+import { StationSearchField } from "./station-search-field";
 import { useKeyboardInset } from "@/components/ui/use-keyboard-inset";
 
 /** Route-panel snap tiers — content is curated per tier, not just clipped. */
@@ -37,14 +36,6 @@ export type SubwaySnap = "compact" | "half" | "full";
 const SNAP_ORDER: SubwaySnap[] = ["compact", "half", "full"];
 const MAX_VIAS = 2;
 
-const POPULAR_STATIONS = [
-  "gangnam",
-  "myeongdong",
-  "hongik_univ",
-  "seoul",
-  "seongsu",
-  "apgujeong_rodeo",
-];
 const RECENT_KEY = "essenly.recentSubwayStations";
 const scrollBehavior = (): ScrollBehavior =>
   typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth";
@@ -75,291 +66,6 @@ function RailStop({ stationId, kind }: { stationId: string | null; kind: "depart
     >
       {meta.shortLabel}
     </span>
-  );
-}
-
-function StationLineBadges({ station }: { station: SubwayStation }) {
-  return (
-    <span className="station-linebadges" aria-label={station.lines.map((line) => LINE_META[line].label).join(", ")}>
-      {station.lines.map((line) => (
-        <span
-          key={line}
-          className="station-linebadge"
-          style={{ background: LINE_META[line].color, color: lineTextColor(LINE_META[line].color) }}
-          aria-hidden="true"
-        >
-          {LINE_META[line].shortLabel}
-        </span>
-      ))}
-    </span>
-  );
-}
-
-function StationCombobox({
-  label,
-  selectedId,
-  nearbyStationId,
-  recentIds,
-  inputRef,
-  locationStatus,
-  onRetryLocation,
-  onSelect,
-}: {
-  label: string;
-  selectedId: string | null;
-  nearbyStationId: string | null;
-  recentIds: string[];
-  inputRef?: React.RefObject<HTMLInputElement | null>;
-  locationStatus: "idle" | "loading" | "granted" | "fallback";
-  onRetryLocation: () => void;
-  onSelect: (id: string | null, advanceFocus?: boolean) => void;
-}) {
-  const inputId = useId();
-  const listId = `${inputId}-list`;
-  const [query, setQuery] = useState(selectedId ? STATIONS[selectedId].name : "");
-  const [open, setOpen] = useState(false);
-  const [activeIndex, setActiveIndex] = useState(-1);
-  const selectingOptionRef = useRef(false);
-  const [selectionError, setSelectionError] = useState(false);
-  const preserveQueryRef = useRef(false);
-  const lastSelectedRef = useRef<SubwayStation | null>(selectedId ? STATIONS[selectedId] : null);
-  const errorId = `${inputId}-error`;
-
-  useEffect(() => {
-    if (!selectedId && preserveQueryRef.current) {
-      preserveQueryRef.current = false;
-      return;
-    }
-    lastSelectedRef.current = selectedId ? STATIONS[selectedId] : null;
-    setQuery(selectedId ? STATIONS[selectedId].name : "");
-    if (selectedId) setSelectionError(false);
-  }, [selectedId]);
-
-  const suggestions = useMemo(() => {
-    if (query.trim()) return searchStations(query, 8);
-    const ids = [nearbyStationId, ...recentIds, ...POPULAR_STATIONS].filter((id): id is string => Boolean(id));
-    return [...new Set(ids)].map((id) => STATIONS[id]).filter(Boolean).slice(0, 8);
-  }, [nearbyStationId, query, recentIds]);
-
-  useEffect(() => setActiveIndex(-1), [query, open]);
-  useEffect(() => {
-    if (!open || activeIndex < 0 || !suggestions[activeIndex]) return;
-    document.getElementById(`${listId}-${suggestions[activeIndex].id}`)?.scrollIntoView({
-      behavior: scrollBehavior(),
-      block: "nearest",
-      inline: "nearest",
-    });
-  }, [activeIndex, listId, open, suggestions]);
-
-  const commit = (station: SubwayStation, advanceFocus = true) => {
-    lastSelectedRef.current = station;
-    onSelect(station.id, advanceFocus);
-    setQuery(station.name);
-    setSelectionError(false);
-    setOpen(false);
-  };
-
-  const dismissSearch = () => {
-    // Focus returns to the same field before closing the results. Its focus
-    // handler may open them, so close last to keep the picker dismissed.
-    inputRef?.current?.focus({ preventScroll: true });
-    const previous = lastSelectedRef.current;
-    if (previous) commit(previous, false);
-    else {
-      setQuery("");
-      setSelectionError(false);
-      setOpen(false);
-      onSelect(null, false);
-    }
-  };
-
-  const finishEditing = () => {
-    if (selectedId || !query.trim()) {
-      // Leaving an empty field commits its removal; dismissing its search
-      // instead restores the station saved before the query was cleared.
-      if (!selectedId) lastSelectedRef.current = null;
-      setSelectionError(false);
-      setOpen(false);
-      return;
-    }
-    const exact = exactStationMatch(query);
-    if (exact) {
-      commit(exact, false);
-      return;
-    }
-    setSelectionError(true);
-    setOpen(false);
-  };
-
-  return (
-    <div
-      className="station-combobox"
-      onBlur={(event) => {
-        if (selectingOptionRef.current) return;
-        if (!event.currentTarget.contains(event.relatedTarget as Node | null)) finishEditing();
-      }}
-    >
-      <label htmlFor={inputId}>{label}</label>
-      <div className="station-search-input">
-        <Icon name="search" size="xs" />
-        <input
-          id={inputId}
-          ref={inputRef}
-          type="search"
-          inputMode="search"
-          enterKeyHint="search"
-          role="combobox"
-          aria-autocomplete="list"
-          aria-expanded={open}
-          aria-controls={listId}
-          aria-activedescendant={open && activeIndex >= 0 && suggestions[activeIndex] ? `${listId}-${suggestions[activeIndex].id}` : undefined}
-          aria-describedby={selectionError ? errorId : undefined}
-          aria-invalid={selectionError || undefined}
-          autoComplete="off"
-          spellCheck={false}
-          placeholder="Search station"
-          value={query}
-          onFocus={() => setOpen(true)}
-          onChange={(event) => {
-            setQuery(event.target.value);
-            setSelectionError(false);
-            if (selectedId) {
-              preserveQueryRef.current = true;
-              onSelect(null);
-            }
-            setOpen(true);
-          }}
-          onKeyDown={(event) => {
-            if (event.key === "ArrowDown") {
-              event.preventDefault();
-              setOpen(true);
-              setActiveIndex((index) => Math.min(index + 1, suggestions.length - 1));
-            } else if (event.key === "ArrowUp") {
-              event.preventDefault();
-              setOpen(true);
-              setActiveIndex((index) => index <= 0 ? Math.max(suggestions.length - 1, 0) : index - 1);
-            } else if (event.key === "Enter" && open && suggestions[Math.max(activeIndex, 0)]) {
-              event.preventDefault();
-              commit(suggestions[Math.max(activeIndex, 0)]);
-            } else if (event.key === "Escape") {
-              event.preventDefault();
-              dismissSearch();
-            }
-          }}
-        />
-        {query && open && (
-          <button
-            type="button"
-            className="station-search-clear"
-            aria-label={`Clear ${label.toLowerCase()}`}
-            onPointerDown={(event) => event.preventDefault()}
-            onClick={() => {
-              setQuery("");
-              setSelectionError(false);
-              preserveQueryRef.current = Boolean(selectedId);
-              onSelect(null);
-              setOpen(true);
-              requestAnimationFrame(() => inputRef?.current?.focus());
-            }}
-          >
-            <Icon name="x" size="xs" />
-          </button>
-        )}
-      </div>
-
-      {open && (
-        <div className="station-search-results">
-          <div className="station-results-header">
-            <div className="station-results-label">
-              {query.trim()
-                ? "Best matches"
-                : nearbyStationId
-                  ? "Near you, recent and popular"
-                  : recentIds.length > 0
-                    ? "Recent and popular"
-                    : "Popular stations"}
-            </div>
-            <button
-              type="button"
-              className="station-search-dismiss"
-              aria-label={`Close ${label.toLowerCase()} station search`}
-              onPointerDown={(event) => event.preventDefault()}
-              onClick={dismissSearch}
-            >
-              Close search
-            </button>
-          </div>
-          {!query.trim() && locationStatus === "loading" && (
-            <div className="station-location-note" role="status">Finding a nearby station...</div>
-          )}
-          {!query.trim() && locationStatus === "idle" && (
-            <div className="station-location-note">
-              <span>Use your location to find the nearest station.</span>
-              <button type="button" onClick={onRetryLocation}>Use location</button>
-            </div>
-          )}
-          {!query.trim() && locationStatus === "fallback" && (
-            <div className="station-location-note">
-              <span>Location is unavailable. Showing popular stations.</span>
-              <button type="button" onClick={onRetryLocation}>Retry</button>
-            </div>
-          )}
-          {!query.trim() && locationStatus === "granted" && !nearbyStationId && (
-            <div className="station-location-note">No station is within 2 km. Showing popular stations.</div>
-          )}
-          <div id={listId} className="station-result-options" role="listbox" aria-label={`${label} station results`}>
-            {suggestions.length === 0 ? (
-              <div className="station-no-results">No stations match &quot;{query.trim()}&quot;.</div>
-            ) : (
-              suggestions.map((station, index) => {
-                const context = station.id === nearbyStationId
-                  ? "Near you"
-                  : recentIds.includes(station.id)
-                    ? "Recent"
-                    : null;
-                return (
-                  <button
-                    type="button"
-                    key={station.id}
-                    id={`${listId}-${station.id}`}
-                    role="option"
-                    tabIndex={-1}
-                    aria-selected={selectedId === station.id}
-                    className={index === activeIndex ? "active" : ""}
-                    onPointerMove={() => setActiveIndex(index)}
-                    onPointerDown={(event) => {
-                      if (event.button === 0) selectingOptionRef.current = true;
-                    }}
-                    onPointerCancel={() => { selectingOptionRef.current = false; }}
-                    onClick={() => {
-                      selectingOptionRef.current = false;
-                      inputRef?.current?.focus({ preventScroll: true });
-                      commit(station);
-                    }}
-                  >
-                    {/* Kakao Metro order: the name leads, the line badges sit
-                        at the trailing edge (owner reference 2026-08-22). */}
-                    <span className="station-result-name">
-                      <b>{station.name}</b>
-                      <span lang="ko">{station.nameKr}</span>
-                    </span>
-                    {context && (
-                      <span className="station-result-context">
-                        <Icon name={context === "Recent" ? "history" : "locate"} size="sm" />
-                        <span className="sr-only">{context}</span>
-                      </span>
-                    )}
-                    <StationLineBadges station={station} />
-                  </button>
-                );
-              })
-            )}
-          </div>
-          <span className="sr-only" aria-live="polite">{suggestions.length} station results</span>
-        </div>
-      )}
-      {selectionError && <p id={errorId} className="station-field-error" role="alert">Select a station from the list.</p>}
-    </div>
   );
 }
 
@@ -440,6 +146,7 @@ export function SubwayRouteController({
   // 2026-08-23). The track is the control; the dots are its ticks.
   const trackRef = useRef<HTMLDivElement>(null);
   const trackDragging = useRef(false);
+  const { t } = useLocale();
   const [draftDeparture, setDraftDeparture] = useState(departureId);
   const [draftArrival, setDraftArrival] = useState(arrivalId);
   const [draftVias, setDraftVias] = useState<string[]>(viaIds);
@@ -447,9 +154,9 @@ export function SubwayRouteController({
   const [recentIds, setRecentIds] = useState<string[]>([]);
   const [activeRouteIndex, setActiveRouteIndex] = useState(0);
   const selectedPlaceRef = useRef<HTMLDivElement>(null);
-  const departureInputRef = useRef<HTMLInputElement>(null);
-  const arrivalInputRef = useRef<HTMLInputElement>(null);
-  const viaInputRef = useRef<HTMLInputElement>(null);
+  const departureButtonRef = useRef<HTMLButtonElement>(null);
+  const arrivalButtonRef = useRef<HTMLButtonElement>(null);
+  const viaButtonRef = useRef<HTMLButtonElement>(null);
   const routeButtonRef = useRef<HTMLButtonElement>(null);
   const routeSummaryRef = useRef<HTMLDivElement>(null);
   const routeEditorRef = useRef<HTMLDivElement>(null);
@@ -483,7 +190,7 @@ export function SubwayRouteController({
   }, [selectedPlaceId]);
   useEffect(() => {
     if (pendingFocusRef.current === "search" && editing) {
-      departureInputRef.current?.focus();
+      departureButtonRef.current?.focus();
       pendingFocusRef.current = null;
     } else if (pendingFocusRef.current === "editor" && editing) {
       routeEditorRef.current?.focus();
@@ -494,15 +201,15 @@ export function SubwayRouteController({
     }
   }, [editing, route, routeFormOpen]);
   useEffect(() => {
-    if (viaAdding) viaInputRef.current?.focus();
+    if (viaAdding) viaButtonRef.current?.focus();
   }, [viaAdding]);
   useEffect(() => {
     const pending = pendingWaypointFocusRef.current;
     if (!pending) return;
     const target = pending.kind === "departure"
-      ? departureInputRef.current
+      ? departureButtonRef.current
       : pending.kind === "arrival"
-        ? arrivalInputRef.current
+        ? arrivalButtonRef.current
         : pending.kind === "add"
           ? viaAddButtonRef.current
           : viaRowRefs.current.get(pending.id) ?? null;
@@ -785,16 +492,16 @@ export function SubwayRouteController({
       {!readyRoute && !browsingStation && (
         <header className="subway-controller-header">
           <div>
-            <span className="subway-controller-kicker"><Icon name="train" size="xs" /> Subway</span>
+            <span className="subway-controller-kicker"><Icon name="train" size="xs" /><T text={"Subway"} /></span>
             {/* With a route ready the ticket card below states both endpoints,
                 so repeating them here cost ~52px of the shop list for nothing. */}
             {!readyRoute && (
-              <h2>{browsingStation && activeStation ? `Near ${activeStation.name}` : "Choose your route"}</h2>
+              <h2>{browsingStation && activeStation ? t("Near {station}", { station: activeStation.name }) : t("Choose your route")}</h2>
             )}
           </div>
           <div className="row" style={{ gap: 4 }}>
             {route && !editing && (
-              <button type="button" className="subway-text-action" onClick={openEditor}>Edit</button>
+              <button type="button" className="subway-text-action" onClick={openEditor}><T text={"Edit"} /></button>
             )}
             <IconButton name="x" label="Close subway planner" iconSize="xs" onClick={onClose} />
           </div>
@@ -830,13 +537,13 @@ export function SubwayRouteController({
                   title="Show nearby places"
                   onClick={showNearby}
                 >
-                  <Icon name="pin" size="xs" /> <span>Nearby</span>
+                  <Icon name="pin" size="xs" /> <span><T text={"Nearby"} /></span>
                 </button>
               )}
-              <button type="button" className="subway-text-action" onClick={openEditor}>Edit</button>
+              <button type="button" className="subway-text-action" onClick={openEditor}><T text={"Edit"} /></button>
               <IconButton name="x" label="Close subway planner" iconSize="xs" onClick={onClose} />
             </div>
-            <p className="subway-route-preview-label">Route preview</p>
+            <p className="subway-route-preview-label"><T text={"Route preview"} /></p>
             <div className="subway-ticket-ends">
               <b>{stationDisplayName(STATIONS[readyRoute.stations[0]])}</b>
               <b>{stationDisplayName(STATIONS[readyRoute.stations[readyRoute.stations.length - 1]])}</b>
@@ -904,7 +611,7 @@ export function SubwayRouteController({
               {readyRoute.stations.length - 1} stops
               {readyRoute.segments.length > 1 && ` · ${readyRoute.segments.length - 1} transfer${readyRoute.segments.length > 2 ? "s" : ""}`}
             </p>
-            <p className="subway-route-preview-note">Check Google Maps for current timings and transfers.</p>
+            <p className="subway-route-preview-note"><T text={"Check Google Maps for current timings and transfers."} /></p>
           </div>
           {snap === "compact" && (
             <div className="subway-compact-station">
@@ -947,7 +654,7 @@ export function SubwayRouteController({
                   <IconButton name="x" label="Close subway browse" iconSize="xs" onClick={onClose} />
                 </div>
                 <p className="station-sheet-sub">
-                  {rankedPlaces.length} {rankedPlaces.length === 1 ? "place" : "places"} · within {radiusLabel(radiusKm)} · straight-line from the station centre
+                  <T text={rankedPlaces.length === 1 ? "{count} place" : "{count} places"} values={{ count: rankedPlaces.length }} /> · within {radiusLabel(radiusKm)} · straight-line from the station centre
                 </p>
 
                 {/* One filter rail (owner decision 2026-08-22): radius opens a
@@ -964,19 +671,19 @@ export function SubwayRouteController({
                         onClick={() => onPlace(place.id)}
                         aria-current={selectedPlaceId === place.id ? "true" : undefined}
                       >
-                        <ImgPh className="station-row-thumb" />
+                        <PlaceThumbnail place={place} size={48} className="station-row-thumb" />
                         <span className="station-row-copy">
                           <span className="place-name-primary">{place.name}</span>
                           {place.nameKr !== place.name && (
                             <span className="place-name-secondary" lang="ko">{place.nameKr}</span>
                           )}
                           <span className="station-row-meta">
-                            {TYPE_LABEL[place.type]}
+                            <T text={TYPE_LABEL[place.type]} />
                             {place.source !== "curated" && place.rating !== undefined && (
                               <> · <RatingLine rating={place.rating} count={place.ratingCount} plain /></>
                             )}
                           </span>
-                          <span className="station-row-dist mono">{isApproximatePlace(place) ? "Approximate pin" : `${formatDistance(km)} from the station`}</span>
+                          <span className="station-row-dist mono">{isApproximatePlace(place) ? t("Approximate pin") : t("{distance} from the station", { distance: formatDistance(km) })}</span>
                         </span>
                       </button>
                     ))}
@@ -1021,19 +728,19 @@ export function SubwayRouteController({
                 <RailStop stationId={draftArrival} kind="arrival" />
               </span>
               <div className="subway-search-field-stack">
-                <StationCombobox
+                <StationSearchField
                   label="Departure"
                   selectedId={draftDeparture}
                   nearbyStationId={nearbyStationId}
                   recentIds={recentIds}
-                  inputRef={departureInputRef}
+                  buttonRef={departureButtonRef}
                   locationStatus={locationStatus}
                   onRetryLocation={onRetryLocation}
                   onSelect={(id, advanceFocus) => {
                     setDraftDeparture(id);
                     remember(id);
                     onStation(id ?? draftArrival);
-                    if (id && advanceFocus && !draftArrival) requestAnimationFrame(() => arrivalInputRef.current?.focus());
+                    if (id && advanceFocus && !draftArrival) requestAnimationFrame(() => arrivalButtonRef.current?.focus());
                   }}
                 />
                 {draftVias.map((id, index) => (
@@ -1049,17 +756,9 @@ export function SubwayRouteController({
                     aria-label={`Via ${index + 1}: ${STATIONS[id].name}`}
                   >
                     <div className="subway-waypoint-field">
-                      <span>{`Via ${index + 1}`}</span>
+                      <span><T text="Via {number}" values={{ number: index + 1 }} /></span>
                       <b title={STATIONS[id].name}>{STATIONS[id].name}</b>
-                      <button
-                        type="button"
-                        className="station-search-clear"
-                        aria-label={`Remove via station ${STATIONS[id].name}`}
-                        title={`Remove ${STATIONS[id].name}`}
-                        onClick={() => removeDraftVia(index)}
-                      >
-                        <Icon name="x" size="xs" />
-                      </button>
+
                     </div>
                     <div className="subway-waypoint-order" role="group" aria-label={`Position ${STATIONS[id].name} in route`}>
                       <button
@@ -1080,17 +779,27 @@ export function SubwayRouteController({
                       >
                         <Icon name="chev" size="xs" />
                       </button>
+                      <button
+                        type="button"
+                        className="subway-waypoint-remove"
+                        aria-label={`Remove via station ${STATIONS[id].name}`}
+                        title={`Remove ${STATIONS[id].name}`}
+                        onClick={() => removeDraftVia(index)}
+                      >
+                        <Icon name="x" size="xs" />
+                      </button>
                     </div>
                   </div>
                 ))}
                 {viaAdding && (
                   <div className="subway-waypoint-row adding">
-                    <StationCombobox
-                      label={`Via ${draftVias.length + 1}`}
+                    <StationSearchField
+                      label={t("Via {number}", { number: draftVias.length + 1 })}
+                      autoOpen
                       selectedId={null}
                       nearbyStationId={nearbyStationId}
                       recentIds={recentIds}
-                      inputRef={viaInputRef}
+                      buttonRef={viaButtonRef}
                       locationStatus={locationStatus}
                       onRetryLocation={onRetryLocation}
                       onSelect={(id) => {
@@ -1118,12 +827,12 @@ export function SubwayRouteController({
                     </button>
                   </div>
                 )}
-                <StationCombobox
+                <StationSearchField
                   label="Arrival"
                   selectedId={draftArrival}
                   nearbyStationId={nearbyStationId}
                   recentIds={recentIds}
-                  inputRef={arrivalInputRef}
+                  buttonRef={arrivalButtonRef}
                   locationStatus={locationStatus}
                   onRetryLocation={onRetryLocation}
                   onSelect={(id, advanceFocus) => {
@@ -1134,9 +843,22 @@ export function SubwayRouteController({
                   }}
                 />
               </div>
+
+            </div>
+
+            <div className="subway-via-editor" hidden={!routeFormOpen}>
+              {!viaAdding && draftVias.length < MAX_VIAS ? (
+                <button
+                  ref={viaAddButtonRef}
+                  type="button"
+                  className="subway-via-add"
+                  onClick={() => setViaAdding(true)}
+                >
+                  <Icon name="plus" size="xs" /><T text={"Add via station"} /></button>
+              ) : null}
               <button
                 type="button"
-                className="subway-swap-button"
+                className="subway-swap-button subway-swap-action"
                 aria-label="Swap departure and arrival"
                 title="Swap departure and arrival"
                 disabled={!draftDeparture && !draftArrival}
@@ -1148,26 +870,12 @@ export function SubwayRouteController({
                   if (focusId) onStation(focusId);
                 }}
               >
-                <Icon name="swap" size="sm" />
-              </button>
+                <Icon name="swap" size="sm" /><T text={"Swap"} /></button>
             </div>
 
-            <div className="subway-via-editor" hidden={!routeFormOpen}>
-              {!viaAdding && draftVias.length < MAX_VIAS ? (
-                <button
-                  ref={viaAddButtonRef}
-                  type="button"
-                  className="subway-via-add"
-                  onClick={() => setViaAdding(true)}
-                >
-                  <Icon name="plus" size="xs" /> Add via station
-                </button>
-              ) : null}
-            </div>
-
-            {sameStation && <p className="station-search-error" role="alert">Departure and arrival must be different stations.</p>}
-            {viaConflict && <p className="station-search-error" role="alert">Via stations must be different from departure, arrival, and each other.</p>}
-            {routeUnavailable && <p className="station-search-error" role="alert">A route could not be found between these stations.</p>}
+            {sameStation && <p className="station-search-error" role="alert"><T text={"Departure and arrival must be different stations."} /></p>}
+            {viaConflict && <p className="station-search-error" role="alert"><T text={"Via stations must be different from departure, arrival, and each other."} /></p>}
+            {routeUnavailable && <p className="station-search-error" role="alert"><T text={"A route could not be found between these stations."} /></p>}
             {/* The old three-item teaser lived here. It was gated on DRAFT
                 values, so it vanished the instant an arrival was typed — and
                 the browse state now leads with the whole list anyway, so a
@@ -1192,7 +900,7 @@ export function SubwayRouteController({
                     </span>
                   );
                 })}
-                <span className="subway-route-arrival"><b>Arrive</b> {STATIONS[readyRoute.stations[readyRoute.stations.length - 1]].name}</span>
+                <span className="subway-route-arrival"><b><T text={"Arrive"} /></b> {STATIONS[readyRoute.stations[readyRoute.stations.length - 1]].name}</span>
               </div>
             )}
 
@@ -1230,19 +938,19 @@ export function SubwayRouteController({
                     onClick={() => onPlace(place.id)}
                     aria-current={selectedPlaceId === place.id ? "true" : undefined}
                   >
-                    <ImgPh className="station-row-thumb" />
+                    <PlaceThumbnail place={place} size={48} className="station-row-thumb" />
                     <span className="station-row-copy">
                       <span className="place-name-primary">{place.name}</span>
                       {place.nameKr !== place.name && (
                         <span className="place-name-secondary" lang="ko">{place.nameKr}</span>
                       )}
                       <span className="station-row-meta">
-                        {TYPE_LABEL[place.type]}
+                        <T text={TYPE_LABEL[place.type]} />
                         {place.source !== "curated" && place.rating !== undefined && (
                           <> · <RatingLine rating={place.rating} count={place.ratingCount} plain /></>
                         )}
                       </span>
-                      <span className="station-row-dist mono">{isApproximatePlace(place) ? "Approximate pin" : `${formatDistance(km)} from the station`}</span>
+                      <span className="station-row-dist mono">{isApproximatePlace(place) ? t("Approximate pin") : t("{distance} from the station", { distance: formatDistance(km) })}</span>
                     </span>
                   </button>
                 ))}
@@ -1252,8 +960,8 @@ export function SubwayRouteController({
                 <b>No {EMPTY_CATEGORY_LABEL[category]} in our current data</b>
                 <p>Nothing is listed within {radiusLabel(radiusKm)} of {activeStation.name} Station.</p>
                 <div className="row" style={{ gap: 8, justifyContent: "center" }}>
-                  {radiusKm < 2 && <Button variant="secondary" size="sm" onClick={() => onRadius(2)}>Expand to 2 km</Button>}
-                  {category !== "all" && <Button variant="secondary" size="sm" onClick={() => onCategory("all")}>Show all</Button>}
+                  {radiusKm < 2 && <Button variant="secondary" size="sm" onClick={() => onRadius(2)}><T text={"Expand to 2 km"} /></Button>}
+                  {category !== "all" && <Button variant="secondary" size="sm" onClick={() => onCategory("all")}><T text={"Show all"} /></Button>}
                 </div>
               </div>
             )}
@@ -1293,16 +1001,16 @@ export function SubwayRouteController({
             >
       <button type="button" disabled={!previousId} aria-label={previousId ? `Previous station: ${STATIONS[previousId].name}` : "Departure"} onClick={() => previousId && selectRouteIndex(activeIndex - 1)}>
       <Icon name="back" size="xs" />
-      <span>{previousId ? stationDisplayName(STATIONS[previousId]) : "Departure"}</span>
+      <span>{previousId ? stationDisplayName(STATIONS[previousId]) : t("Departure")}</span>
       </button>
       <div className="subway-active-station">
       <b title={activeStation.name} aria-label={activeStation.name}>{stationDisplayName(activeStation)}</b>
                 {/* the count used to sit on its own heading row below — it
                     belongs to the station the stepper already names */}
-      <span>{rankedPlaces.length} {rankedPlaces.length === 1 ? "place" : "places"} · {radiusLabel(radiusKm)}</span>
+      <span><T text={rankedPlaces.length === 1 ? "{count} place" : "{count} places"} values={{ count: rankedPlaces.length }} /> · {radiusLabel(radiusKm)}</span>
       </div>
       <button type="button" disabled={!nextId} aria-label={nextId ? `Next station: ${STATIONS[nextId].name}` : "Arrival"} onClick={() => nextId && selectRouteIndex(activeIndex + 1)}>
-      <span>{nextId ? stationDisplayName(STATIONS[nextId]) : "Arrival"}</span>
+      <span>{nextId ? stationDisplayName(STATIONS[nextId]) : t("Arrival")}</span>
       <Icon name="chev" size="xs" />
       </button>
       </div>
@@ -1310,7 +1018,7 @@ export function SubwayRouteController({
       <span className="sr-only" aria-live="polite">{waypointAnnouncement}</span>
       {(editing || !route) && routeFormOpen && (
         <div className="subway-search-actions subway-search-footer">
-          {!canApplyRoute && <p id="subway-route-help" className="subway-action-help">{routeHelp}</p>}
+          {!canApplyRoute && <p id="subway-route-help" className="subway-action-help">{t(routeHelp)}</p>}
           {route && <Button variant="secondary" onClick={cancelEditor}>Cancel</Button>}
           <Button
             buttonRef={routeButtonRef}

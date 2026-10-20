@@ -5,7 +5,7 @@ const registerClient = readFileSync(new URL("../components/auth/register-client.
 
 describe("email signup policy", () => {
   it("sends a new account through the optional onboarding screen after sign-up", () => {
-    expect(registerClient).toContain("start saving places right away");
+    expect(registerClient).toContain("Create your free account and start saving places.");
     expect(registerClient).toContain("if (data.session)");
     expect(registerClient).toContain("router.push(onboardingTarget)");
   });

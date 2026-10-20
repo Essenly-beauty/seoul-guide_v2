@@ -1,0 +1,26 @@
+/* One bounded screen: fixed controls and footer, with only the results scrolling. */
+.screen { display: flex; flex: 1 1 0; flex-direction: column; min-height: 0; min-width: 0; max-height: var(--ranking-viewport-height, 100%); overflow: hidden; background: var(--bg); }
+.main { display: flex; flex: 1 1 0; flex-direction: column; min-height: 0; min-width: 0; overflow: hidden; }
+.screen .main.main > header { flex: none; margin: 0; padding: calc(16px + env(safe-area-inset-top)) var(--space-page, 22px) 12px; }
+.guide, .panel, .results { display: flex; flex: 1 1 0; flex-direction: column; min-height: 0; min-width: 0; overflow: hidden; }
+.tabs, .filters, .searchControls, .resultHeading { flex: none; min-width: 0; padding-inline: var(--space-page, 22px); }
+.tabs { padding-block: 2px; }
+.filters { padding-block: 2px 0; }
+.screen .main :is(.tabs, .filters) :global(.chiprow) { gap: 6px; margin: 0; padding: 0; min-height: 44px; align-items: center; overscroll-behavior-x: contain; scrollbar-width: none; }
+.screen .main :is(.tabs, .filters) :global(.chiprow)::-webkit-scrollbar { display: none; }
+.screen .main .tabs :global(.chip) { flex: none; justify-content: center; min-height: 44px; padding: 9px 16px; border: 1px solid var(--border); border-radius: 10px; background: transparent; color: var(--text); font-size: 14px; line-height: 1.4; font-weight: 500; }
+.screen .main .tabs :global(.chip)[aria-selected="true"] { background: var(--action); border-color: var(--action); color: var(--on-action); font-weight: 600; }
+/* A smaller visible outline retains a full-height touch target for every category. */
+.screen .main .filters.filters :global(.chip) { flex: none; min-height: 44px; padding: 4px 0; border: 0; border-radius: 8px; background: transparent; color: var(--text); font-size: 12px; box-shadow: none; }
+.screen .main .filters.filters :is(.categoryVisual, :global(.daiso-category-chip-visual)) { display: inline-flex; align-items: center; min-height: 36px; padding: 0 10px; border: 1px solid var(--border); border-radius: 8px; background: transparent; color: var(--text); font-size: 12px; line-height: 1.4; font-weight: 400; white-space: nowrap; }
+.screen .main .filters.filters :global(.chip)[aria-pressed="true"] :is(.categoryVisual, :global(.daiso-category-chip-visual)) { border-color: var(--filter-border); background: var(--filter-selected); color: var(--text); font-weight: 600; }
+.screen .main .tabs :global(.chip):focus-visible { outline: 2px solid var(--text); outline-offset: -3px; box-shadow: none; }
+.screen .main .filters.filters :global(.chip):focus-visible { outline: none; box-shadow: none; }
+.screen .main .filters.filters :global(.chip):focus-visible :is(.categoryVisual, :global(.daiso-category-chip-visual)) { box-shadow: inset 0 0 0 2px var(--text); }
+.searchControls { padding-top: 8px; padding-bottom: 0; }
+.screen .main .searchControls :global(.mobile-search-field) { min-height: 44px; padding: 0 12px; border-radius: 10px; }
+.resultHeading { padding-top: 12px; padding-bottom: 8px; }
+.screen .resultsScroll { flex: 1 1 0; min-height: 0; min-width: 0; overflow-y: auto; overflow-x: hidden; overscroll-behavior-y: contain; -webkit-overflow-scrolling: touch; padding: 0 var(--space-page, 22px) 24px; scroll-padding-block: 8px 24px; animation: none; }
+.resultsScroll > p { margin: 0 0 10px; }
+.resultsScroll > :global(.btn) { display: flex; margin: 12px auto 0; }
+.resultsScroll:focus-visible { outline: 2px solid var(--border); outline-offset: -2px; }

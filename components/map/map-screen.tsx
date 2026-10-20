@@ -1,5 +1,6 @@
 "use client";
 
+import { T } from "@/lib/i18n/locale-provider";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { preload } from "react-dom";
 import dynamic from "next/dynamic";
@@ -485,7 +486,7 @@ export function MapScreen() {
           {mode === "map" ? (
             <Link className="map-searchpill" href={`${routes.search}?cat=${cats[0] ?? "all"}`}>
               <Icon name="search" size="sm" style={{ color: "var(--muted)" }} aria-hidden="true" />
-              <span className="small muted">Search places, areas</span>
+              <span className="small muted"><T text={"Search places, areas"} /></span>
             </Link>
           ) : (
             <Link
@@ -497,7 +498,7 @@ export function MapScreen() {
               aria-label={activeStation ? `${STATIONS[activeStation].name} Station — search for another station or place` : "Search for a station"}
             >
               <Icon name="train" size="sm" style={{ color: "var(--accent)" }} aria-hidden="true" />
-              <span className="small">{activeStation ? `${STATIONS[activeStation].name} Station` : "Choose a station below"}</span>
+              <span className="small">{activeStation ? `${STATIONS[activeStation].name} Station` : <T text="Choose a station below" />}</span>
               <Icon name="search" size="xs" style={{ color: "var(--muted)", marginLeft: "auto" }} aria-hidden="true" />
             </Link>
           )}
@@ -517,7 +518,7 @@ export function MapScreen() {
             }}
           >
             <Icon name="train" size="sm" />
-            <span>Subway</span>
+            <span><T text={"Subway"} /></span>
           </button>
         </div>
         {/* Station filters ride with the map chrome, not inside the panel —
@@ -565,14 +566,10 @@ export function MapScreen() {
               setMoved(false);
               handleMapSelect(null);
             }}
-          >
-            Search this area
-          </Chip>
+          ><T text={"Search this area"} /></Chip>
         )}
         {mode === "map" && area && !moved && (
-          <Chip style={{ justifySelf: "center" }} onClick={() => setArea(null)}>
-            Clear area · show all
-          </Chip>
+          <Chip style={{ justifySelf: "center" }} onClick={() => setArea(null)}><T text={"Clear area · show all"} /></Chip>
         )}
       </div>
 
@@ -742,7 +739,7 @@ export function MapScreen() {
         <div className="map-banner" role="status">
           <Icon name="heart" size="xs" style={{ color: "var(--accent)", flex: "none" }} aria-hidden="true" />
           <span className="small" style={{ flex: 1, minWidth: 0 }}>
-            <b>Your saved places</b> · {favs.place.length} {favs.place.length === 1 ? "place" : "places"}
+            <b><T text={"Your saved places"} /></b> · <T text={favs.place.length === 1 ? "{count} place" : "{count} places"} values={{ count: favs.place.length }} />
           </span>
           <IconButton name="x" label="Show all places" size={32} iconSize="xs" onClick={() => router.replace(routes.map)} />
         </div>
@@ -750,9 +747,9 @@ export function MapScreen() {
 
       {mode === "map" && !sharedList && savedParam !== "1" && status === "fallback" && !bannerDismissed && (
         <div className="map-banner" role="status">
-          <span className="small" style={{ flex: 1, minWidth: 0 }}>Location is off — showing <b>Gangnam Station</b> as your starting point.</span>
+          <span className="small" style={{ flex: 1, minWidth: 0 }}><T text="Location is off — showing Gangnam Station as your starting point." /></span>
           <div className="map-banner-actions">
-            <Button size="sm" variant="secondary" onClick={retry}>Enable location</Button>
+            <Button size="sm" variant="secondary" onClick={retry}><T text={"Enable location"} /></Button>
             <Link className="small map-banner-link" href={`${routes.settingsApp}#location`}>Settings</Link>
           </div>
           <IconButton name="x" label="Dismiss" size={32} iconSize="xs" onClick={() => setBannerDismissed(true)} />

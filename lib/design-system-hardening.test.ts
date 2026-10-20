@@ -91,11 +91,8 @@ const P3_RAW_ALLOWANCES = new Map<string, number>([
   ["app/favorites/page.tsx: listrow", 1],
   ["app/favorites/page.tsx: listrow v2", 1],
   ["components/ranking/ranking-page-client.tsx: listrow", 1],
-  ["components/ranking/ranking-page-client.tsx: listrow v2", 2],
+  ["components/ranking/ranking-page-client.tsx: listrow v2 ranking-product-row", 2],
   ["app/search/page.tsx: listrow v2", 5],
-  // Interactive empty state and a multi-step sheet with a bespoke header/footer.
-  ["components/booking/booking-sheet.tsx: overlay", 1],
-  ["components/booking/booking-sheet.tsx: sheet", 1],
   // Domain rows whose multiline or full-row behavior differs from ListRow v2.
   ["components/mypage/notifications-form.tsx: listrow v2", 1],
   // Retailer product previews and nearby places; illustrative service rows are omitted.

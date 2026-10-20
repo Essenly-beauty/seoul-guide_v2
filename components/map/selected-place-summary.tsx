@@ -1,5 +1,6 @@
 "use client";
 
+import { T } from "@/lib/i18n/locale-provider";
 import { Icon } from "@/components/icon";
 import { OliveYoungBrandHero } from "@/components/place/olive-young-brand-hero";
 import { LiveBadge } from "@/components/ui/live-badge";
@@ -29,11 +30,8 @@ export function SelectedPlaceSummary({
   // `photos` is the future shape; `photoUrl` is what the type carries today.
   const photos: string[] = (place.photos ?? (place.photoUrl ? [place.photoUrl] : [])).filter(Boolean);
   const emptyMedia = (
-    <div className="selected-place-summary-media-grid is-empty">
-      <div className="selected-place-summary-media" role="img" aria-label={`${place.name} photos coming soon`}>
-        <Icon name="pin" size="sm" aria-hidden="true" />
-        <span>Photos coming soon</span>
-      </div>
+    <div className="selected-place-summary-no-photo">
+      <span><T text={"No photos yet"} /></span>
     </div>
   );
 
@@ -51,7 +49,7 @@ export function SelectedPlaceSummary({
               <h2 id={titleId} className="selected-place-summary-title">
                 <span className="place-name-primary">{place.name}</span>
               </h2>
-              <span className="selected-place-summary-category">{TYPE_LABEL[place.type]}</span>
+              <span className="selected-place-summary-category"><T text={TYPE_LABEL[place.type]} /></span>
             </div>
             {place.nameKr && place.nameKr !== place.name && (
               <div className="place-name-secondary" lang="ko">{place.nameKr}</div>
@@ -65,14 +63,14 @@ export function SelectedPlaceSummary({
               )}
               {place.priceRange && <span className="map-meta-token mono">{place.priceRange}</span>}
               {approximate && (
-                <span className="map-meta-token">Approximate pin</span>
+                <span className="map-meta-token"><T text={"Approximate pin"} /></span>
               )}
             </div>
             <div className="selected-place-summary-address">
               {!approximate && <span className="map-meta-token mono">{formatCompactDistance(km)}</span>}
               {place.address && <>{!approximate && <span aria-hidden="true">·</span>}
               <span className="selected-place-summary-address-copy">{place.address}</span></>}
-              {!place.address && <span className="selected-place-summary-address-copy">Address not listed</span>}
+              {!place.address && <span className="selected-place-summary-address-copy"><T text={"Address not listed"} /></span>}
             </div>
           </div>
         </button>
@@ -96,7 +94,7 @@ export function SelectedPlaceSummary({
             <h2 id={titleId} className="selected-place-summary-title">
               <span className="place-name-primary">{place.name}</span>
             </h2>
-            <span className="selected-place-summary-category">{TYPE_LABEL[place.type]}</span>
+            <span className="selected-place-summary-category"><T text={TYPE_LABEL[place.type]} /></span>
           </div>
           {place.nameKr && place.nameKr !== place.name && (
             <div className="place-name-secondary" lang="ko">{place.nameKr}</div>
@@ -109,9 +107,9 @@ export function SelectedPlaceSummary({
               </span>
             )}
             {place.priceRange && <span className="map-meta-token mono">{place.priceRange}</span>}
-            {place.englishOk && <span>English OK</span>}
+            {place.englishOk && <span><T text={"English OK"} /></span>}
             {approximate && (
-              <span className="map-meta-token">Approximate pin</span>
+              <span className="map-meta-token"><T text={"Approximate pin"} /></span>
             )}
           </div>
           <div className="selected-place-summary-address">
@@ -120,7 +118,7 @@ export function SelectedPlaceSummary({
               {!approximate && <><span className="map-meta-token mono">{formatCompactDistance(km)}</span><span aria-hidden="true"> · </span></>}
               {/* the source's own "not enough information" placeholder is
                   normalised to empty upstream — say so plainly instead */}
-              {place.address || "Address not listed"}
+              {place.address || <T text="Address not listed" />}
             </span>
           </div>
         </div>

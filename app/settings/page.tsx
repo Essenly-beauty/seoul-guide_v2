@@ -1,3 +1,4 @@
+import { LanguageSettingsRow } from "@/components/settings/language-settings-row";
 import { TopBar } from "@/components/ui/top-bar";
 import { BottomNav } from "@/components/ui/bottom-nav";
 import { BackButton } from "@/components/ui/back-button";
@@ -21,6 +22,7 @@ export default function SettingsPage() {
         <section className="settings-group">
           <SectionHeader title="App" />
           <div className="settings-group-list">
+            <LanguageSettingsRow />
             <SettingsRow icon="mark" title="App preferences" value="Install, location, theme" href={routes.settingsApp} />
           </div>
         </section>

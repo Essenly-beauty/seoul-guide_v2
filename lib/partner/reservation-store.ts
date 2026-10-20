@@ -8,7 +8,6 @@ export async function saveReservationCommand(client: SupabaseClient, context: Pa
     if ((command.kind !== 'reservationRules' && command.kind !== 'dateOverrides') ||
       (command.mode !== 'create' && command.mode !== 'update')) throw new PartnerError(400, 'INVALID_COMMAND');
     if (context.readOnly || !['onboarding', 'active'].includes(context.merchant.status)) throw new PartnerError(403, 'PARTNER_READ_ONLY');
-    if (context.merchant.bookingEnabled) throw new PartnerError(409, 'PARTNER_CONFLICT');
     const merchantId = context.merchant.id;
     if (!uuid(merchantId)) return unavailable();
     const table = command.kind === 'reservationRules' ? 'merchant_reservation_rules' : 'merchant_schedules';

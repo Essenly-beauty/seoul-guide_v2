@@ -4,6 +4,7 @@
 // Visitors can explore freely and keep device-local saves; members see their
 // name and email.
 
+import { useLocale } from "@/lib/i18n/locale-provider";
 import { Avatar } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { IconButton } from "@/components/ui/icon-button";
@@ -11,6 +12,7 @@ import { displayName, useAuthUser } from "@/lib/auth/use-auth";
 import { routes } from "@/lib/routes";
 
 export function MenuProfile() {
+  const { t } = useLocale();
   const { user, loading } = useAuthUser();
   const name = displayName(user);
 
@@ -32,8 +34,8 @@ export function MenuProfile() {
     return (
       <div className="row" style={{ gap: 14 }}>
         <div style={{ flex: 1, minWidth: 0 }}>
-          <b style={{ fontSize: 17 }}>Keep your Seoul picks</b>
-          <div className="caption muted">Explore freely — saved places stay on this device until you sign in.</div>
+          <b style={{ fontSize: 17 }}>{t("Keep your Seoul picks")}</b>
+          <div className="caption muted">{t("Explore freely — saved places stay on this device until you sign in.")}</div>
         </div>
         <Button size="sm" href={`${routes.signIn}?next=${routes.menu}`} style={{ flex: "none" }}>
           Sign in
@@ -48,10 +50,10 @@ export function MenuProfile() {
       <div style={{ flex: 1, minWidth: 0 }}>
         <b style={{ fontSize: 17 }}>{name}</b>
         <div className="caption muted" style={{ overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
-          {user?.email ?? "Member"}
+          {user?.email ?? t("Member")}
         </div>
       </div>
-      <IconButton name="user" label="Edit profile" variant="soft" href={routes.settings} />
+      <IconButton name="user" label={t("Edit profile")} variant="soft" href={routes.settings} />
     </div>
   );
 }

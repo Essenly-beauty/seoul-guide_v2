@@ -1,0 +1,21 @@
+'use client';
+import {Button} from '@/components/ui/button';
+import Link from 'next/link';
+import {useEffect,useState} from 'react';
+import {useSearchParams} from 'next/navigation';
+import {useAuthUser} from '@/lib/auth/use-auth';
+import {useBookingResource} from '@/components/booking/use-booking-resource';
+import {BookingConversation} from '@/components/booking/booking-conversation';
+import {partnerMessageThreads,type PartnerMessageThread} from '@/lib/booking/communication-contracts';
+import {record} from '@/lib/partner/contracts';
+import {dateLabel,kstDate,timeLabel} from '@/lib/partner/dashboard';
+import {usePartner} from './partner-provider';
+import {usePartnerBookings} from './use-partner-bookings';
+import {BookingLoadState,DashboardHeading,EmptyPanel,StatusChip} from './dashboard-widgets';
+function threadResponse(value:unknown):value is {threads:PartnerMessageThread[]}{return record(value)&&partnerMessageThreads(value.threads);}
+export function PartnerMessages(){const {user}=useAuthUser();const {snapshot}=usePartner();return user&&snapshot?<Messages key={`${user.id}:${snapshot.merchant.id}`} scope={`${user.id}:${snapshot.merchant.id}`}/>:null;}
+function Messages({scope}:{scope:string}) {const params=useSearchParams();const resource=usePartnerBookings();const {snapshot,stale}=usePartner();const threads=useBookingResource('/api/partner/operations/messages',threadResponse,scope);const [selected,setSelected]=useState(params.get('booking'));const [query,setQuery]=useState('');useEffect(()=>{setSelected(params.get('booking'));},[params]);
+  const rows=(resource.data?.bookings??[]).filter(b=>b.source==='app'&&b.customerId).map(booking=>({booking,thread:threads.data?.threads.find(t=>t.bookingId===booking.id)})).filter(({booking})=>!query||[booking.customerName,booking.serviceName].some(text=>text.toLocaleLowerCase().includes(query.toLocaleLowerCase()))).sort((a,b)=>(b.thread?.unreadCount?1:0)-(a.thread?.unreadCount?1:0)||Date.parse(b.thread?.lastMessage.createdAt??b.booking.updatedAt)-Date.parse(a.thread?.lastMessage.createdAt??a.booking.updatedAt));
+  const current=resource.data?.bookings.find(b=>b.id===selected);const unread=threads.data?.threads.filter(t=>t.unreadCount>0).length??0;
+  return <><DashboardHeading title="메시지" description={`읽지 않은 대화 ${unread}건 · 고객의 앱 예약 상세와 연결됩니다.`}/><BookingLoadState loading={resource.loading||threads.loading} error={resource.error||threads.error} onRefresh={()=>{resource.refresh();threads.refresh();}}/><section className={`panel msg-layout ${current?'open':''}`}><div className="msg-list"><div className="toolbar"><input type="search" className="search" placeholder="고객명·메뉴" aria-label="대화 검색" value={query} onChange={e=>setQuery(e.target.value)}/></div><div role="list">{rows.map(({booking,thread})=><div key={booking.id} role="listitem"><button className={`msg-item ${selected===booking.id?'sel':''}`} onClick={()=>setSelected(booking.id)}><span className="initial">{Array.from(booking.customerName)[0]}</span><span className="msg-main"><b>{booking.customerName}{!!thread?.unreadCount&&<i className="unread" aria-label={`읽지 않은 메시지 ${thread.unreadCount}개`}/>}</b><small className="msg-bk">{dateLabel(kstDate(booking.startAt))} {timeLabel(booking.startAt)} · {booking.serviceName}</small><span className="msg-last">{thread?.lastMessage.sender==='merchant'?'나: ':''}{thread?.lastMessage.body??'예약과 관련한 대화를 시작하세요.'}</span></span><small className="msg-time">{thread?timeLabel(thread.lastMessage.createdAt):''}</small></button></div>)}</div>{resource.data&&!rows.length&&<EmptyPanel title="대화할 앱 예약이 없어요">고객이 앱에서 예약하면 메시지를 주고받을 수 있습니다.</EmptyPanel>}</div><div className="msg-thread">{current?<><div className="live-thread-header"><Button variant="secondary" className="link" onClick={()=>setSelected(null)}>← 목록</Button><div><h2>{current.customerName}</h2><p className="small muted">{current.serviceName} · {dateLabel(kstDate(current.startAt))} {timeLabel(current.startAt)}</p></div><StatusChip status={current.status}/><Button href={`/partner/bookings?booking=${current.id}`} variant="secondary" className="compact">예약 상세</Button></div><BookingConversation key={current.id} bookingId={current.id} partner scope={scope} disabled={snapshot?.readOnly||stale}/></>:<EmptyPanel title="대화를 선택해 주세요">왼쪽에서 고객을 누르면 예약과 대화를 함께 확인할 수 있어요.</EmptyPanel>}</div></section></>;
+}

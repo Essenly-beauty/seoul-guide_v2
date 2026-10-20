@@ -1,2 +1,2 @@
-import { PartnerSettings } from '@/components/partner/partner-settings';
-export default function SettingsPage() { return <PartnerSettings />; }
+import {PartnerStoreProfile} from '@/components/partner/partner-store-profile';
+export default function Page(){return <PartnerStoreProfile/>;}

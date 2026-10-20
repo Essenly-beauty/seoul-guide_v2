@@ -5585,6 +5585,7 @@
   }
   /* v2 list rows: 12px rhythm, 56px thumb (doc2 spacing_12 / size_56-ish media) */
   .listrow.v2 { padding: 12px 0; gap: 12px; align-items: center; }
+  .listrow-copy { gap: 2px; }
   .listrow.v2 .thumb56 { width: 56px; height: 56px; border-radius: 12px; flex: none; }
 }
 
@@ -6778,4 +6779,40 @@
 }
 .modal.closing .box {
   animation: scrim-out var(--dur-exit, 200ms) var(--ease-exit, ease) forwards;
+}
+
+/* 2026-10-19 mobile map refinement: elevation communicates the layer order.
+   Keep existing tile provider, geographic groups and collision/zoom behaviour. */
+@layer components {
+  .map-screen {
+    --map-control-shadow: 0 2px 5px rgba(28, 22, 16, .05), 0 9px 24px rgba(28, 22, 16, .12);
+    --map-panel-shadow: 0 -2px 6px rgba(28, 22, 16, .03), 0 -12px 32px rgba(28, 22, 16, .10);
+    --map-action: #171717;
+  }
+  :root[data-theme="dark"] .map-screen {
+    --map-control-shadow: 0 2px 6px rgba(0, 0, 0, .2), 0 10px 26px rgba(0, 0, 0, .32);
+    --map-panel-shadow: 0 -4px 24px rgba(0, 0, 0, .32);
+  }
+  :root:not([data-theme="dark"]) .map-screen .map-searchpill {
+    background: var(--surface);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+  .map-screen .map-searchpill {
+    min-height: 48px;
+    border-radius: 14px;
+    box-shadow: var(--map-control-shadow);
+  }
+  .map-screen .map-fab { box-shadow: var(--map-control-shadow); }
+  .map-screen .mapsheet,
+  :root:not([data-theme="dark"]) .map-screen .mapsheet { box-shadow: var(--map-panel-shadow); }
+  .map-screen .pin-badge { box-shadow: 0 2px 5px var(--pin-shadow-c), 0 5px 12px var(--pin-shadow-c); }
+  .map-screen .pin-selected:not(.pin-selected-oy) {
+    background: var(--map-action);
+    box-shadow: 0 0 0 2px var(--surface), 0 3px 7px rgba(23, 23, 23, .12), 0 8px 18px rgba(23, 23, 23, .18);
+  }
+  .map-screen .pin-selected:not(.pin-selected-oy) .icn { color: #fff; }
+  .map-screen .btn.primary { background: var(--map-action); box-shadow: 0 4px 12px rgba(23, 23, 23, .10); }
+  .map-screen .btn.primary:hover { background: #303030; }
+  .map-screen .btn.primary:disabled { background: var(--surface-hover); color: var(--dim); box-shadow: none; }
 }

@@ -4,7 +4,7 @@ import { withTileKey } from "./map-tiles";
 /** CARTO Basemaps Terms (updated 2026-08-26) require every request to carry
  *  the customer's own API key; keyless tiles may be watermarked. The key is
  *  public by nature (it ships to the browser) and lives in
- *  NEXT_PUBLIC_CARTO_API_KEY — absent locally, tiles keep working unkeyed. */
+ *  NEXT_PUBLIC_CARTO_API_KEY in every environment, including local previews. */
 describe("withTileKey", () => {
   const template = "https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png";
 

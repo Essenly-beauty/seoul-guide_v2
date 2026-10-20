@@ -1,5 +1,7 @@
 "use client";
 
+import { T, useLocale } from "@/lib/i18n/locale-provider";
+
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import { createPortal } from "react-dom";
 import Link from "next/link";
@@ -11,7 +13,8 @@ import { Chip } from "@/components/ui/chip";
 import { Collapse } from "@/components/ui/collapse";
 import { HoursToday } from "@/components/ui/hours-today";
 import { IconButton } from "@/components/ui/icon-button";
-import { ImgPh } from "@/components/ui/img-ph";
+import { PlaceThumbnail } from "@/components/place/place-thumbnail";
+import { ProductThumbnail } from "@/components/product/product-thumbnail";
 import { LiveBadge } from "@/components/ui/live-badge";
 import { Notice } from "@/components/ui/notice";
 import { RatingLine } from "@/components/ui/rating-line";
@@ -23,6 +26,9 @@ import { Icon } from "@/components/icon";
 import { useLocation } from "@/components/map/use-location";
 import { useSigninNudge } from "@/components/auth/signin-nudge";
 import { PlaceCorrectionLauncher } from "@/components/place/place-correction-launcher";
+import type { PublishedPlace } from "@/lib/place-profile";
+import { PublicStoreContact, PublicStoreNotice } from "@/components/place/public-store-profile";
+import { PublicServiceMenu } from "@/components/place/public-service-menu";
 import { OliveYoungBrandHero } from "@/components/place/olive-young-brand-hero";
 import { toggleFavorite, useFavorites } from "@/lib/favorites";
 import { REVIEW_MAX_LEN, setReview, useMyRatings, useMyRatingsReady } from "@/lib/ratings";
@@ -32,7 +38,7 @@ import { routes } from "@/lib/routes";
 import { PLACES, PRODUCTS, TYPE_LABEL, zoneShort, type Place } from "@/lib/data";
 import { selectDaisoRanking } from "@/lib/daiso-ranking";
 import { GANGNAM_STATION, formatCompactDistance, formatDistance, haversineKm } from "@/lib/geo";
-import { hoursOn, isApproximatePlace, isBookable, PLACE_SOURCE_LABEL, statusLabel } from "@/lib/places";
+import { hoursOn, isApproximatePlace, PLACE_SOURCE_LABEL, statusLabel } from "@/lib/places";
 import { daisoBrandEn, daisoNameEn, daisoSubcategoryEn } from "@/lib/daiso-ranking-en";
 
 /** Anchor-tab targets (spec §4.6). Ids live on the sections below. */
@@ -54,28 +60,23 @@ const starsFor = (rating?: number) => {
 };
 
 // ── §4.6 · Title block (fixed, not a tab anchor) ──────────
-// Kakao-style compact header: caption / name+type / rating line / address.
-// The old header chips are gone — station walk already lives in the Home info
-// rows, and "English OK" is a muted token on the rating line (less pill noise).
+// Name first; category and visit information stay in quieter, separate rows.
 function TitleBlock({ place, km }: { place: Place; km: number }) {
   return (
-    <div>
-      <div className="row" style={{ gap: 8, alignItems: "flex-start", flexWrap: "wrap" }}>
+    <div className="place-detail-heading">
         <div className="place-detail-name-stack">
-          <h1 className="h1" style={{ fontSize: 21, letterSpacing: "-0.01em", fontFamily: "var(--sans)", fontWeight: 700 }}>
+          <h1 className="h1 place-detail-title">
             <span className="place-name-primary">{place.name}</span>
           </h1>
           {place.nameKr !== place.name && (
             <span className="place-name-secondary" lang="ko">{place.nameKr}</span>
           )}
         </div>
-        <span className="small muted">{TYPE_LABEL[place.type]}</span>
-      </div>
-      <div className="row" style={{ gap: 8, marginTop: 8 }}>
-        <LiveBadge hours={place.hours} />
+      <div className="place-detail-meta">
+        <span><T text={TYPE_LABEL[place.type]} /></span>
+        <LiveBadge hours={place.hours} showUntil={false} />
         {/* curated rows carry synthetic ratings — show real (scraped) ones only */}
-        {place.source !== "curated" && <RatingLine rating={place.rating} count={place.ratingCount} />}
-        {place.englishOk && <span className="t-caption" style={{ flex: "none" }}>· English OK</span>}
+        {place.source !== "curated" && <RatingLine plain rating={place.rating} count={place.ratingCount} />}
       </div>
       <PlaceAddressDisclosure place={place} km={km} />
     </div>
@@ -83,14 +84,13 @@ function TitleBlock({ place, km }: { place: Place; km: number }) {
 }
 
 function PlaceAddressDisclosure({ place, km }: { place: Place; km: number }) {
+  const { t } = useLocale();
   const [expanded, setExpanded] = useState(false);
   const approximate = isApproximatePlace(place);
   return (
     <div className="place-address-disclosure">
       {approximate && (
-        <Notice tone="warning" icon="pin">
-          Approximate pin — neighborhood only. Search the place name in a map app to confirm the storefront before visiting.
-        </Notice>
+        <Notice tone="warning" icon="pin"><T text={"Approximate pin — neighborhood only. Search the place name in a map app to confirm the storefront before visiting."} /> </Notice>
       )}
       <button
         type="button"
@@ -103,7 +103,7 @@ function PlaceAddressDisclosure({ place, km }: { place: Place; km: number }) {
           {!approximate && <><span className="map-meta-token mono">{formatCompactDistance(km)}</span><span aria-hidden="true"> · </span></>}
           {/* upstream normalises the source's "not enough information"
               placeholder to empty — never print it to a visitor */}
-          {place.address || "Address not listed"}
+          {place.address || t("Address not listed")}
         </span>
         <Icon
           name="down"
@@ -116,30 +116,30 @@ function PlaceAddressDisclosure({ place, km }: { place: Place; km: number }) {
       {expanded && (
         <div className="place-address-panel">
           <div className="place-address-detail-row">
-            <span>English name</span>
+            <span><T text={"English name"} /></span>
             <b>{place.name}</b>
-            <ActionButton copy={place.name} aria-label="Copy English name">Copy</ActionButton>
+            <ActionButton copy={place.name} aria-label="Copy English name"><T text={"Copy"} /></ActionButton>
           </div>
           {/* 137 scraped rows carry the English name in the Korean field. A
               "Korean name" row that repeats the English one is worse than no
               row — it tells a taxi driver nothing (owner audit 2026-08-23). */}
           {/[가-힣]/.test(place.nameKr) && (
             <div className="place-address-detail-row">
-              <span>Korean name</span>
+              <span><T text={"Korean name"} /></span>
               <b lang="ko">{place.nameKr}</b>
-              <ActionButton copy={place.nameKr} aria-label="Copy Korean name">Copy</ActionButton>
+              <ActionButton copy={place.nameKr} aria-label="Copy Korean name"><T text={"Copy"} /></ActionButton>
             </div>
           )}
           {place.address ? (
             <div className="place-address-detail-row">
-              <span>Address</span>
+              <span><T text={"Address"} /></span>
               <b lang="ko">{place.address}</b>
-              <ActionButton copy={place.address} aria-label="Copy address">Copy address</ActionButton>
+              <ActionButton copy={place.address} aria-label="Copy address"><T text={"Copy address"} /></ActionButton>
             </div>
           ) : (
             <div className="place-address-detail-row">
-              <span>Address</span>
-              <b className="muted">Not listed in our sources yet</b>
+              <span><T text={"Address"} /></span>
+              <b className="muted"><T text={"Not listed in our sources yet"} /></b>
             </div>
           )}
         </div>
@@ -155,6 +155,7 @@ function PlaceAddressDisclosure({ place, km }: { place: Place; km: number }) {
 // real businesses (launch audit P0-2); they return per-place once verified
 // contact data exists.
 function PlaceActions({ place }: { place: Place }) {
+  const { t } = useLocale();
   const favs = useFavorites();
   const { toast, share } = useToast();
   const { nudge, sheet } = useSigninNudge();
@@ -164,72 +165,59 @@ function PlaceActions({ place }: { place: Place }) {
       {sheet}
       {/* our own map first — external Google/Kakao/Naver live in the CTA bar
           (user report 2026-08-16: no in-app path from detail to the map) */}
-      <Link href={`${routes.map}?place=${encodeURIComponent(place.id)}`} aria-label="View on the MYSEOULDROP map">
+      <Link href={`${routes.map}?place=${encodeURIComponent(place.id)}`} aria-label={t("View on the MYSEOULDROP map")}>
         <Icon name="pin" />
-        <span className="lbl">Map</span>
+        <span className="lbl"><T text={"Map"} /></span>
       </Link>
       <button
         className={saved ? "saved" : undefined}
         aria-pressed={saved}
-        aria-label={saved ? "Remove from favorites" : "Add to favorites"}
+        aria-label={t(saved ? "Remove from favorites" : "Add to favorites")}
         onClick={() => {
           const next = toggleFavorite("place", place.id);
-          toast(next ? "Saved to favorites" : "Removed");
+          toast(t(next ? "Saved to favorites" : "Removed"));
           if (next) nudge("favorite", { savedPlace: { id: place.id, name: place.name } }); // guest-only, once per device
         }}
       >
         <Icon name={saved ? "heart" : "heart-o"} />
-        <span className="lbl">Save</span>
+        <span className="lbl"><T text={"Save"} /></span>
       </button>
       <button onClick={() => share(`${place.name} on MYSEOULDROP`)}>
         <Icon name="share" />
-        <span className="lbl">Share</span>
+        <span className="lbl"><T text={"Share"} /></span>
       </button>
       <ActionButton copy={`${place.name} · ${place.nameKr}`} aria-label="Copy place name">
         <Icon name="copy" />
-        <span className="lbl">Copy name</span>
+        <span className="lbl"><T text={"Copy name"} /></span>
       </ActionButton>
     </div>
   );
 }
 
 // ── Home (d-home): visit-decision summary + actions ───────
-function HomeSection({ place }: { place: Place }) {
+function HomeSection({ place }: { place: PublishedPlace }) {
+  const { t } = useLocale();
   const about = place.about || place.aboutKr;
   return (
     <section id="d-home" className="d-sec stack sm">
+      <PublicStoreNotice contact={place.publishedContact} />
       {about && (
         <p className="small muted" style={{ margin: 0, lineHeight: 1.55 }}>{about}</p>
       )}
       {place.hours && (
         <div className="inforow">
           <Icon name="cal" size="xs" />
-          <LiveBadge hours={place.hours} showUntil={false} />
+          <span><T text={"Today"} /></span>
           <HoursToday hours={place.hours} />
         </div>
       )}
-      <div className="inforow">
-        <Icon name="pin" size="xs" />
-        <span style={{ minWidth: 0 }}>{place.address || "Address not listed"}</span>
-        <Link
-          className="small chev"
-          style={{ color: "var(--accent)", fontWeight: 600 }}
-          href={`${routes.map}?place=${encodeURIComponent(place.id)}`}
-          aria-label="View on the MYSEOULDROP map"
-        >
-          Map
-        </Link>
-        <ActionButton className="small" style={{ color: "var(--accent)", fontWeight: 600, flex: "none" }} copy={place.address} aria-label="Copy address">
-          Copy
-        </ActionButton>
-      </div>
       {place.stationWalk && !isApproximatePlace(place) && (
         <div className="inforow">
           <Icon name="locate" size="xs" />
           <span>
-            {place.stationWalk.station} Stn.{place.stationWalk.exit ? ` Exit ${place.stationWalk.exit}` : ""}
+            <T text="{station} Stn." values={{ station: place.stationWalk.station }} />{place.stationWalk.exit ? ` ${t("Exit {exit}", { exit: place.stationWalk.exit })}` : ""}
           </span>
-          <span className="caption muted chev">{place.stationWalk.minutes} min walk</span>
+          <span className="caption muted chev"><T text="{minutes} min walk" values={{ minutes: place.stationWalk.minutes }} /></span>
         </div>
       )}
       {/* Launch audit P0-1: the "welcome deal" coupon was a prototype
@@ -244,6 +232,7 @@ function HomeSection({ place }: { place: Place }) {
 // arm's length for the driver.) 205 scraped rows carry an English-only
 // nameKr — the Korean name line appears only when it actually helps.
 function TaxiCard({ place }: { place: Place }) {
+  const { t } = useLocale();
   const [open, setOpen] = useState(false);
   // portal to .app-shell — inline, the detail page's sticky/transform
   // ancestors trap the scrim in a lower stacking context (same reason
@@ -255,12 +244,10 @@ function TaxiCard({ place }: { place: Place }) {
   const krName = /[가-힣]/.test(place.nameKr) ? place.nameKr : null;
   return (
     <>
-      <button className="taxicard" onClick={() => setOpen(true)}>
+      <button type="button" className="taxicard" onClick={() => setOpen(true)}>
         <span className="ic"><Icon name="car" size="sm" /></span>
-        <div>
-          <b>Show to taxi driver</b>
-          <div className="caption muted">{[krName ?? place.name, place.address].filter(Boolean).join(" · ")}</div>
-        </div>
+        <span><T text={"Show to taxi driver"} /></span>
+        <Icon name="chev" size="xs" aria-hidden="true" />
       </button>
       {open && host && createPortal(
         <div className="modal" onClick={(e) => e.target === e.currentTarget && setOpen(false)}>
@@ -269,23 +256,18 @@ function TaxiCard({ place }: { place: Place }) {
             className="box taxi-modal"
             role="dialog"
             aria-modal="true"
-            aria-label="Show this screen to the taxi driver"
+            aria-label={t("Show this screen to the taxi driver")}
             tabIndex={-1}
           >
             <div className="taxi-modal-kicker">이 주소로 가주세요</div>
-            <div className="caption muted">Please take me to this address</div>
+            <div className="caption muted"><T text={"Please take me to this address"} /></div>
             <div className="taxi-modal-name">{krName ?? place.name}</div>
             {place.address
               ? <div className="taxi-modal-addr">{place.address}</div>
-              : <p className="small muted" style={{ marginTop: 8 }}>
-                  We don&apos;t have a street address for this place yet — show the name
-                  above and the map pin.
-                </p>}
+              : <p className="small muted" style={{ marginTop: 8 }}><T text={"We don't have a street address for this place yet — show the name above and the map pin."} /> </p>}
             <div className="row" style={{ gap: 8, marginTop: 18 }}>
-              <ActionButton variant="secondary" style={{ flex: 1 }} copy={`${krName ?? place.name}, ${place.address}`}>
-                Copy
-              </ActionButton>
-              <Button buttonRef={closeRef} style={{ flex: 1 }} onClick={() => setOpen(false)}>Close</Button>
+              <Button buttonRef={closeRef} variant="secondary" style={{ flex: 1 }} onClick={() => setOpen(false)}><T text={"Close"} /></Button>
+              <ActionButton variant="primary" style={{ flex: 1 }} copy={[krName ?? place.name, place.address].filter(Boolean).join(", ")}><T text={"Copy"} /> </ActionButton>
             </div>
           </div>
         </div>,
@@ -302,7 +284,7 @@ function OliveYoungPicks() {
     .slice(0, 4);
   return (
     <>
-      <div className="caption muted">Curated product examples. Availability and prices are not verified for this branch.</div>
+      <div className="caption muted"><T text={"Curated product examples. Availability and prices are not verified for this branch."} /></div>
       <div>
         {picks.map((p) => (
           <Link key={p.id} className="listrow" href={routes.shopItem(p.id)}>
@@ -314,9 +296,7 @@ function OliveYoungPicks() {
           </Link>
         ))}
       </div>
-      <Button variant="secondary" size="sm" href={routes.ranking}>
-        Explore the product guide
-      </Button>
+      <Button variant="secondary" size="sm" href={routes.ranking}><T text={"Explore the product guide"} /> </Button>
     </>
   );
 }
@@ -325,12 +305,12 @@ function DaisoPicks() {
   const picks = selectDaisoRanking("daily").slice(0, 4);
   return (
     <>
-      <div className="caption muted">Daiso Mall ranking — chain-wide chart, stock varies by branch.</div>
+      <div className="caption muted"><T text={"Daiso Mall ranking — chain-wide chart, stock varies by branch."} /></div>
       <div>
         {picks.map(({ product: p, rank }) => (
           <Link key={p.id} className="listrow" href={routes.daisoProduct(p.productNo)}>
             <b className="mono num" style={{ width: 22, flex: "none", color: rank === 1 ? "var(--accent)" : "var(--muted)" }}>{rank}</b>
-            <ImgPh style={{ width: 44, height: 44, flex: "none" }} />
+            <ProductThumbnail product={p} size={44} />
             <div style={{ flex: 1, minWidth: 0 }}>
               <b style={{ display: "block", fontSize: 13.5, lineHeight: 1.3, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{daisoNameEn(p.productNo) || p.nameKr}</b>
               <div className="caption muted" style={{ overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{daisoBrandEn(p.productNo) || p.brand} · {daisoSubcategoryEn(p.subcategoryKr)}</div>
@@ -339,23 +319,19 @@ function DaisoPicks() {
           </Link>
         ))}
       </div>
-      <Button variant="secondary" size="sm" href={routes.rankingRetailer("daiso")}>
-        See the full Daiso ranking
-      </Button>
+      <Button variant="secondary" size="sm" href={routes.rankingRetailer("daiso")}><T text={"See the full Daiso ranking"} /> </Button>
     </>
   );
 }
 
-function PlaceSourceLink({ place }: { place: Place }) {
+function PlaceSourceNote({ place }: { place: Place }) {
+  // Source records remain in the catalogue for attribution. Beauty booking
+  // stays in MYSEOULDROP; never turn a competitor listing into a booking CTA.
   const label = place.source ? PLACE_SOURCE_LABEL[place.source] : "Source listing";
-  return place.url ? (
-    <Button variant="secondary" size="sm" href={place.url} external>
-      View listing · {label}
-    </Button>
-  ) : <span className="caption muted">Listing link unavailable{place.source ? ` · ${label}` : ""}.</span>;
+  return place.source ? <span className="caption muted"><T text="Source: {source}." values={{ source: label }} /></span> : null;
 }
 
-// ── Services: no venue-confirmed menus are available in this catalogue. ──
+// Public service information requires an explicitly approved merchant/place link.
 function ServicesSection({ place }: { place: Place }) {
   if (place.type === "olive_young") {
     return (
@@ -376,36 +352,25 @@ function ServicesSection({ place }: { place: Place }) {
   return (
     <section id="d-services" className="d-sec stack sm">
       <SectionHeader title="Services" />
-      <p className="small muted">Services and prices not verified. Check the listing and confirm with the venue before booking.</p>
-      <PlaceSourceLink place={place} />
+      <PublicServiceMenu placeId={place.id} fallback={
+        <p className="small muted"><T text={"Verified services and prices are not available yet."} /></p>
+      } />
       {place.type === "skin_clinic" && (
-        <Notice tone="warning" icon="cross">
-          Medical procedures require a consultation before booking. MYSEOULDROP does not provide medical advice.
-        </Notice>
+        <Notice tone="warning" icon="cross"><T text={"Medical procedures require a consultation before booking. MYSEOULDROP does not provide medical advice."} /> </Notice>
       )}
-      {/* Launch scope: in-app booking (and its demo payment) is disabled
-          until real availability + payments exist (audit P0-1). Discovery
-          stays honest — save the place and book on site. */}
-      {(place.type === "skin_clinic" || isBookable(place)) && (
-        <Notice icon="cal">
-          In-app booking is coming soon — save this place and book at the
-          venue or through its official channels.
-        </Notice>
-      )}
+
     </section>
   );
 }
 
-function PlacePhotoCollage({ photos, placeName, brandFallback = false }: { photos: readonly string[]; placeName: string; brandFallback?: boolean }) {
-  const visiblePhotos = photos.slice(0, 3);
-  const hasThreePhotos = visiblePhotos.length >= 3;
+function PlacePhotoCollage({ photos, placeName, brandFallback = false, media, fullGallery = false }: { photos: readonly string[]; placeName: string; brandFallback?: boolean; media?: PublishedPlace['publishedMedia']; fullGallery?: boolean }) {
+  const visiblePhotos = fullGallery ? photos : photos.slice(0, 3);
+  const hasThreePhotos = !fullGallery && visiblePhotos.length >= 3;
 
   if (visiblePhotos.length === 0) {
     const emptyMedia = (
-      <div style={{ display: "grid", gridTemplateColumns: "2fr 1fr", gridTemplateRows: "73px 73px", gap: 6 }}>
-        <ImgPh style={{ gridRow: "1 / 3" }} />
-        <ImgPh />
-        <ImgPh />
+      <div className="place-photo-empty">
+        <span><T text={"No photos yet"} /></span>
       </div>
     );
     return brandFallback ? <OliveYoungBrandHero className="olive-young-detail-brand-hero" fallback={emptyMedia} /> : emptyMedia;
@@ -416,7 +381,8 @@ function PlacePhotoCollage({ photos, placeName, brandFallback = false }: { photo
       className="place-photo-collage"
       style={{
         display: "grid",
-        gridTemplateColumns: visiblePhotos.length === 1 ? "1fr" : "1.4fr 1fr",
+        gridTemplateColumns: visiblePhotos.length === 1 ? "1fr" : fullGallery ? "repeat(2, minmax(0, 1fr))" : "1.4fr 1fr",
+        gridAutoRows: "170px",
         gridTemplateRows: hasThreePhotos ? "82px 82px" : "170px",
         gap: 6,
         overflow: "hidden",
@@ -430,12 +396,14 @@ function PlacePhotoCollage({ photos, placeName, brandFallback = false }: { photo
         <img
           key={src}
           src={src}
+          width={media?.find(item => item.url === src)?.width}
+          height={media?.find(item => item.url === src)?.height}
           alt={`${placeName} photo ${index + 1} of ${photos.length}`}
           style={{
             width: "100%",
             height: "100%",
             minWidth: 0,
-            objectFit: "cover",
+            objectFit: "contain",
             gridRow: hasThreePhotos && index === 0 ? "1 / 3" : undefined,
             background: "var(--soft)",
           }}
@@ -446,14 +414,15 @@ function PlacePhotoCollage({ photos, placeName, brandFallback = false }: { photo
 }
 
 // ── Photos (d-photos): verified gallery or honest empty state ────
-function PhotosSection({ place }: { place: Place }) {
+function PhotosSection({ place }: { place: PublishedPlace }) {
+  const { t } = useLocale();
   const photos = place.photos ?? [];
   return (
     <section id="d-photos" className="d-sec stack sm">
-      <SectionHeader title={photos.length > 0 ? `Photos · ${photos.length}` : "Photos"} />
-      <PlacePhotoCollage photos={photos} placeName={place.name} />
+      <SectionHeader title={photos.length > 0 ? `${t("Photos")} · ${photos.length}` : "Photos"} />
+      <PlacePhotoCollage fullGallery photos={photos} media={place.publishedMedia} placeName={place.name} />
       {photos.length === 0 && (
-        <span className="caption muted">Real photos are on the way — we&apos;re collecting them place by place.</span>
+        <span className="caption muted"><T text={"Real photos are on the way — we're collecting them place by place."} /></span>
       )}
     </section>
   );
@@ -463,6 +432,7 @@ function PhotosSection({ place }: { place: Place }) {
 // (리뷰 공개 전환 2026-08-16.) Only reviews whose author ticked "Post
 // publicly" appear; first names only; 3 distinct reports auto-hide a row.
 function TravelerReviews({ placeId, refreshKey }: { placeId: string; refreshKey: number }) {
+  const { t, locale } = useLocale();
   const { toast } = useToast();
   const [reviews, setReviews] = useState<PublicReview[] | null>(null);
   const [reporting, setReporting] = useState<string | null>(null);
@@ -474,15 +444,15 @@ function TravelerReviews({ placeId, refreshKey }: { placeId: string; refreshKey:
   if (reviews === null) return null; // quiet while loading
   return (
     <div className="stack sm">
-      <b style={{ fontSize: 14.5 }}>Traveler reviews{reviews.length > 0 ? ` · ${reviews.length}` : ""}</b>
+      <b style={{ fontSize: 14.5 }}><T text={"Traveler reviews"} />{reviews.length > 0 ? ` · ${reviews.length}` : ""}</b>
       {reviews.length === 0 ? (
-        <p className="caption muted" style={{ margin: 0 }}>No traveler reviews yet — rate your visit and be the first.</p>
+        <p className="caption muted" style={{ margin: 0 }}><T text={"No traveler reviews yet — rate your visit and be the first."} /></p>
       ) : reviews.map((r) => (
         <div key={r.id} className="stack" style={{ gap: 4, background: "var(--surface)", border: "1px solid var(--border)", borderRadius: 12, padding: "10px 12px" }}>
           <div className="row" style={{ gap: 8 }}>
-            <b style={{ fontSize: 13 }}>{r.displayName}{r.mine ? " (you)" : ""}</b>
+            <b style={{ fontSize: 13 }}>{r.displayName}{r.mine ? ` (${t("you")})` : ""}</b>
             <span className="stars" style={{ fontSize: 12 }}>{starsFor(r.rating)}</span>
-            <span className="caption muted chev">{timeAgo(r.at)}</span>
+            <span className="caption muted chev">{locale === "en" ? timeAgo(r.at) : new Date(r.at).toLocaleDateString(locale)}</span>
           </div>
           <p className="small" style={{ margin: 0, whiteSpace: "pre-wrap" }}>{r.body}</p>
           {!r.mine && (reporting === r.id ? (
@@ -495,22 +465,20 @@ function TravelerReviews({ placeId, refreshKey }: { placeId: string; refreshKey:
                   onClick={async () => {
                     setReporting(null);
                     const res = await reportReview(r.id, reason.key);
-                    toast(res === "reported"
+                    toast(t(res === "reported"
                       ? "Reported — our team will take a look"
                       : res === "already"
                         ? "You already reported this review"
-                        : "Sign in to report reviews");
+                        : "Sign in to report reviews"));
                   }}
                 >
-                  {reason.label}
+                  <T text={reason.label} />
                 </button>
               ))}
-              <button className="caption muted" onClick={() => setReporting(null)}>Cancel</button>
+              <button className="caption muted" onClick={() => setReporting(null)}><T text={"Cancel"} /></button>
             </div>
           ) : (
-            <button className="caption" style={{ color: "var(--dim)", alignSelf: "flex-start" }} onClick={() => setReporting(r.id)}>
-              Report
-            </button>
+            <button className="caption" style={{ color: "var(--dim)", alignSelf: "flex-start" }} onClick={() => setReporting(r.id)}><T text={"Report"} /> </button>
           ))}
         </div>
       ))}
@@ -524,6 +492,7 @@ function TravelerReviews({ placeId, refreshKey }: { placeId: string; refreshKey:
 // What shows is real: the source listing's rating, the visitor's own
 // rating/review, and consented public traveler reviews.
 function ReviewsSection({ place }: { place: Place }) {
+  const { t } = useLocale();
   const { toast } = useToast();
   // Shared store — persists per place, syncs to the account when signed in.
   const myRatings = useMyRatings();
@@ -562,18 +531,18 @@ function ReviewsSection({ place }: { place: Place }) {
     const saved = await setReview(place.id, draftRating, draft, postPublic);
     setSavingReview(false);
     if (saved === "auth-required") {
-      toast("Please sign in again to save your rating and review.");
+      toast(t("Please sign in again to save your rating and review."));
       nudgeRating("rating");
       return;
     }
     if (!saved) {
-      toast("Couldn’t save your review. Your draft is still here — please try again.");
+      toast(t("Couldn’t save your review. Your draft is still here — please try again."));
       return;
     }
     setComposing(false);
-    toast(draft.trim()
+    toast(t(draft.trim()
       ? postPublic ? "Review posted — travelers can now see it" : "Review saved as a private note"
-      : "Rating saved");
+      : "Rating saved"));
     setReviewBump((b) => b + 1);
   };
 
@@ -583,13 +552,13 @@ function ReviewsSection({ place }: { place: Place }) {
     <section id="d-reviews" className="d-sec stack">
       {ratingNudgeSheet}
       {/* Rate prompt — tappable stars, persisted per place */}
-      <div className="stack sm" style={{ alignItems: "center", textAlign: "center" }}>
-        <b style={{ fontSize: 14.5 }}>Been here? Rate your visit</b>
-        <div className="row" style={{ gap: 6, justifyContent: "center" }} role="group" aria-label={`Rate ${selectedRating} of 5 stars`}>
+      <div className="stack sm" style={{ alignItems: "flex-start", textAlign: "left" }}>
+        <b style={{ fontSize: 14.5 }}><T text={"Been here? Rate your visit"} /></b>
+        <div className="row" style={{ gap: 6, justifyContent: "center" }} role="group" aria-label={t("Rate {rating} of 5 stars", { rating: selectedRating })}>
           {[1, 2, 3, 4, 5].map((n) => (
             <button
               key={n}
-              aria-label={`Rate ${n} stars`}
+              aria-label={t("Rate {rating} stars", { rating: n })}
               disabled={loading || !ready || savingReview}
               aria-pressed={selectedRating === n}
               onClick={() => composing && user ? setDraftRating(n) : beginReview(n)}
@@ -600,9 +569,8 @@ function ReviewsSection({ place }: { place: Place }) {
           ))}
         </div>
         {myRating !== null && !composing && (
-          <span className="caption muted">
-            You rated {myRating} star{myRating === 1 ? "" : "s"} ·{" "}
-            <button className="caption" style={{ color: "var(--accent)", fontWeight: 600 }} onClick={() => beginReview()}>Edit</button>
+          <span className="caption muted"><T text={myRating === 1 ? "You rated {rating} star" : "You rated {rating} stars"} values={{ rating: myRating }} /> ·{" "}
+            <button className="caption" style={{ color: "var(--accent)", fontWeight: 600 }} onClick={() => beginReview()}><T text={"Edit"} /></button>
           </span>
         )}
 
@@ -610,25 +578,21 @@ function ReviewsSection({ place }: { place: Place }) {
         {!(composing && user) && (
           myReview ? (
             <div className="stack sm" style={{ width: "100%", textAlign: "left", background: "var(--surface)", border: "1px solid var(--border)", borderRadius: 12, padding: "10px 12px" }}>
-              <span className="t-caption">Your review · {myRatings[place.id]?.isPublic ? "public" : "private note"}</span>
+              <span className="t-caption"><T text="Your review · {visibility}" values={{ visibility: t(myRatings[place.id]?.isPublic ? "public" : "private note") }} /></span>
               <p className="small" style={{ whiteSpace: "pre-wrap" }}>{myReview}</p>
-              <button className="caption" style={{ color: "var(--accent)", fontWeight: 600, alignSelf: "flex-start" }} onClick={() => beginReview()}>
-                Edit review
-              </button>
+              <button className="caption" style={{ color: "var(--accent)", fontWeight: 600, alignSelf: "flex-start" }} onClick={() => beginReview()}><T text={"Edit review"} /> </button>
             </div>
           ) : (
-            <button className="caption" disabled={loading || !ready} style={{ color: "var(--accent)", fontWeight: 600 }} onClick={() => beginReview()}>
-              Write a review
-            </button>
+            <button className="caption" disabled={loading || !ready} style={{ color: "var(--accent)", fontWeight: 600 }} onClick={() => beginReview()}><T text={"Write a review"} /> </button>
           )
         )}
         {composing && user && !loading && ready && (
           <div className="stack sm" style={{ width: "100%", textAlign: "left" }}>
-            <span className="caption muted">Choose your stars above. Add a review if you like.</span>
+            <span className="caption muted"><T text={"Choose your stars above. Add a review if you like."} /></span>
             <textarea
               className="input"
-              aria-label="Your review"
-              placeholder="How was your visit? Tips for other travelers welcome."
+              aria-label={t("Your review")}
+              placeholder={t("How was your visit? Tips for other travelers welcome.")}
               rows={4}
               maxLength={REVIEW_MAX_LEN}
               value={draft}
@@ -639,12 +603,12 @@ function ReviewsSection({ place }: { place: Place }) {
             {/* terms promise consent-first publishing — this checkbox IS the consent */}
             {draft.trim() && <label className="row caption" style={{ gap: 8, alignItems: "flex-start", cursor: "pointer" }}>
               <input type="checkbox" checked={postPublic} onChange={(e) => setPostPublic(e.target.checked)} style={{ marginTop: 1 }} />
-              <span className="muted">Post publicly — share this review with other travelers. Leave unchecked to keep it private.</span>
+              <span className="muted"><T text={"Post publicly — share this review with other travelers. Leave unchecked to keep it private."} /></span>
             </label>}
             <div className="row" style={{ gap: 8 }}>
-              <Button variant="secondary" size="sm" style={{ flex: 1 }} onClick={() => setComposing(false)}>Cancel</Button>
+              <Button variant="secondary" size="sm" style={{ flex: 1 }} onClick={() => setComposing(false)}><T text={"Cancel"} /></Button>
               <Button size="sm" style={{ flex: 1 }} disabled={savingReview || draftRating < 1} onClick={saveReview}>
-                {savingReview ? "Saving…" : draft.trim() ? "Save review" : "Save rating"}
+                <T text={savingReview ? "Saving…" : draft.trim() ? "Save review" : "Save rating"} />
               </Button>
             </div>
           </div>
@@ -654,12 +618,12 @@ function ReviewsSection({ place }: { place: Place }) {
           Curated rows have synthetic numbers, so they show nothing here. */}
       {place.source !== "curated" && place.rating !== undefined && (
         <div className="stack sm">
-          <span className="caption muted">Imported listing rating</span>
-          <div className="row" style={{ gap: 12, justifyContent: "center", alignItems: "baseline" }}>
-            <span style={{ fontSize: 30, fontWeight: 800, lineHeight: 1.15 }}>{place.rating.toFixed(1)}</span>
+          <span className="caption muted"><T text={"Imported listing rating"} /></span>
+          <div className="row" style={{ gap: 10, flexWrap: "wrap", alignItems: "baseline" }}>
+            <span style={{ fontSize: 24, fontWeight: 600, lineHeight: 1.2 }}>{place.rating.toFixed(1)}</span>
             <span className="stars">{starsFor(place.rating)}</span>
             {place.ratingCount !== undefined && (
-              <span className="caption muted">{place.ratingCount} ratings</span>
+              <span className="caption muted"><T text="{count} ratings" values={{ count: place.ratingCount }} /></span>
             )}
           </div>
         </div>
@@ -694,22 +658,16 @@ function StoreFactsRow({ place }: { place: Place }) {
     .sort((a, b) => STORE_FACT_ORDER.indexOf(a) - STORE_FACT_ORDER.indexOf(b));
   if (facts.length === 0) return null;
   return (
-    <div className="inforow" style={{ alignItems: "flex-start" }}>
+    <div className="inforow store-facts">
       <Icon name="mark" size="xs" />
-      <span>In store</span>
-      <span className="chev" style={{ display: "flex", flexWrap: "wrap", gap: 6, justifyContent: "flex-end" }}>
+      <span className="store-facts-label"><T text={"In store"} /></span>
+      <span className="store-facts-values">
         {facts.map((key) => (
           <span
             key={key}
-            className="caption"
-            style={{
-              padding: "2px 8px", borderRadius: 999, whiteSpace: "nowrap",
-              border: "1px solid var(--line)",
-              color: key === "cashless-store" ? "var(--warning, var(--text))" : "var(--muted)",
-              fontWeight: key === "cashless-store" ? 600 : 400,
-            }}
+            className={key === "cashless-store" ? "store-fact is-important" : "store-fact"}
           >
-            {STORE_FACT_LABELS[key]}
+            <T text={STORE_FACT_LABELS[key]} />
           </span>
         ))}
       </span>
@@ -718,7 +676,8 @@ function StoreFactsRow({ place }: { place: Place }) {
 }
 
 // ── Info (d-info): full details — Naver home/info split ───
-function InfoSection({ place }: { place: Place }) {
+function InfoSection({ place }: { place: PublishedPlace }) {
+  const { t } = useLocale();
   const { toast } = useToast();
   // A Vercel server's date can differ from the visitor's local date. Delay
   // today/open-state decoration until hydration has completed on the device.
@@ -726,9 +685,9 @@ function InfoSection({ place }: { place: Place }) {
   useEffect(() => setToday(new Date().getDay()), []);
   return (
     <section id="d-info" className="d-sec stack sm">
-      <h2 className="h2" style={{ fontFamily: "var(--sans)", fontSize: 16, fontWeight: 700 }}>Information</h2>
+      <h2 className="h2" style={{ fontFamily: "var(--sans)", fontSize: 16, fontWeight: 700 }}><T text={"Information"} /></h2>
       {place.hours && (
-        <Collapse summary={<b>Hours{today !== null ? ` · ${statusLabel(place.hours)}` : ""}</b>}>
+        <Collapse summary={<b><T text={"Hours"} />{today !== null ? ` · ${t(statusLabel(place.hours))}` : ""}</b>}>
           <div className="stack" style={{ gap: 4, padding: "8px 4px" }}>
             {WEEKDAYS.map((d, i) => {
               // Each row reads its own day. A uniform week answers the same
@@ -738,21 +697,19 @@ function InfoSection({ place }: { place: Place }) {
               const isToday = today !== null && i === today;
               return (
                 <div key={d} className="row between small" style={{ fontWeight: isToday ? 700 : 400, color: isToday ? "var(--text)" : "var(--muted)" }}>
-                  <span>{d}{isToday ? " (today)" : ""}</span>
-                  <span className="mono">{dayHours ? `${dayHours.open} – ${dayHours.close}` : "Closed"}</span>
+                  <span>{t(d)}{isToday ? ` (${t("today")})` : ""}</span>
+                  <span className="mono">{dayHours ? `${dayHours.open} – ${dayHours.close}` : t("Closed")}</span>
                 </div>
               );
             })}
           </div>
         </Collapse>
       )}
-      {/* Launch audit P0-2: contact (website/phone/Instagram) and facility
-          rows (parking/payment) were shared samples shown on every place —
-          removed until per-place verified data exists. */}
+      <PublicStoreContact contact={place.publishedContact} />
       <div className="inforow">
-        <Icon name="mark" size="xs" />
-        <span>English</span>
-        <span className="caption muted chev">{place.englishOk ? "Staff can assist in English" : "Translation app recommended"}</span>
+        <Icon name="languages" size="xs" />
+        <span><T text={"English"} /></span>
+        <span className="caption muted chev"><T text={place.englishOk ? "Staff can assist in English" : "Translation app recommended"} /></span>
       </div>
       {/* The facility chips pulled in the launch audit were one invented
           sample repeated on every place. These are per-place and come from the
@@ -762,13 +719,15 @@ function InfoSection({ place }: { place: Place }) {
       {place.priceRange && (
         <div className="inforow">
           <span className="muted" style={{ width: 20, textAlign: "center", flex: "none" }} aria-hidden="true">₩</span>
-          <span>Price range</span>
+          <span><T text={"Price range"} /></span>
           <span className="chev mono" style={{ fontWeight: 600 }}>{place.priceRange}</span>
         </div>
       )}
       {/* provenance disclosure (data-ledger slice) */}
       <p className="caption muted" style={{ marginTop: 4 }}>
-        {place.source === "daiso"
+        <T text={place.publishedContact
+          ? "Store information provided by the venue. Other listing details come from our sources."
+          : place.source === "daiso"
           ? place.nameVerification === "provisional"
             ? "Official Daiso store listing — the English display name is provisional and has not yet been verified on Naver Map or Google. Confirm important details before visiting."
             : place.nameVerification === "derived"
@@ -778,14 +737,14 @@ function InfoSection({ place }: { place: Place }) {
             ? "Curated pick — details compiled by our team and not yet venue-verified. Confirm before visiting."
             : place.source === "olive_young"
               ? "Listed on Olive Young's own store finder — the English display name is ours, not the store's sign. Details can change; confirm important ones before visiting."
-              : "Listed from public sources — details can change. Confirm important ones before visiting."}
-        {isApproximatePlace(place)
+              : "Listed from public sources — details can change. Confirm important ones before visiting."} />
+        <T text={isApproximatePlace(place)
           ? place.locationVerification === "provisional"
             ? " Provisional location — the map pin is neighborhood-level; use the map-service button to confirm the storefront before visiting."
             : " Map pin is approximate (neighborhood-level)."
-          : ""}
+          : ""} />
       </p>
-      <PlaceSourceLink place={place} />
+      <PlaceSourceNote place={place} />
       <PlaceCorrectionLauncher place={place} />
     </section>
   );
@@ -793,6 +752,7 @@ function InfoSection({ place }: { place: Place }) {
 
 // ── Nearby places — distance order is not a quality ranking. ───────
 function NearbySection({ place }: { place: Place }) {
+  const { t } = useLocale();
   const nearby = PLACES
     .filter((p) => p.type === place.type && p.id !== place.id)
     .map((p) => ({ p, km: haversineKm({ lat: place.lat, lng: place.lng }, { lat: p.lat, lng: p.lng }) }))
@@ -801,16 +761,16 @@ function NearbySection({ place }: { place: Place }) {
   if (nearby.length === 0) return null;
   return (
     <section className="stack sm">
-      <SectionHeader title={`Nearby places · ${TYPE_LABEL[place.type]}`} />
+      <SectionHeader title={`${t("Nearby places")} · ${t(TYPE_LABEL[place.type])}`} />
       <div>
         {nearby.map(({ p, km }) => (
           <Link key={p.id} className="listrow" href={routes.place(p.id)}>
-            <ImgPh style={{ width: 44, height: 44, flex: "none" }} />
+            <PlaceThumbnail place={p} size={44} />
             <div style={{ flex: 1, minWidth: 0 }}>
               <b style={{ display: "block", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{p.name}</b>
               <div className="caption muted">
                 {zoneShort(p.zone)}
-                {isApproximatePlace(p) ? " · Approximate pin" : !isApproximatePlace(place) ? ` · ${formatDistance(km)}` : ""}
+                {isApproximatePlace(p) ? ` · ${t("Approximate pin")}` : !isApproximatePlace(place) ? ` · ${formatDistance(km)}` : ""}
               </div>
             </div>
           </Link>
@@ -822,6 +782,7 @@ function NearbySection({ place }: { place: Place }) {
 
 /** Compact-bar ⋮ menu — closes on outside tap / Escape. */
 function MoreMenu({ place }: { place: Place }) {
+  const { t } = useLocale();
   const router = useRouter();
   const { toast, copy, share } = useToast();
   const [open, setOpen] = useState(false);
@@ -877,12 +838,12 @@ function MoreMenu({ place }: { place: Place }) {
         onClick={() => setOpen((v) => !v)}
       />
       {open && (
-        <div className="detail-menucard" role="menu" aria-label="Place actions" onKeyDown={onMenuKeyDown}>
-          <button ref={(node) => { menuItemRefs.current[0] = node; }} type="button" role="menuitem" tabIndex={-1} onClick={pick(() => copy(window.location.href))}>Copy link</button>
-          <button ref={(node) => { menuItemRefs.current[1] = node; }} type="button" role="menuitem" tabIndex={-1} onClick={pick(() => share(`${place.name} on MYSEOULDROP`))}>Share</button>
+        <div className="detail-menucard" role="menu" aria-label={t("Place actions")} onKeyDown={onMenuKeyDown}>
+          <button ref={(node) => { menuItemRefs.current[0] = node; }} type="button" role="menuitem" tabIndex={-1} onClick={pick(() => copy(window.location.href))}><T text={"Copy link"} /></button>
+          <button ref={(node) => { menuItemRefs.current[1] = node; }} type="button" role="menuitem" tabIndex={-1} onClick={pick(() => share(`${place.name} on MYSEOULDROP`))}><T text={"Share"} /></button>
           {/* codex cross-check #5: the old thank-you toast faked a report —
               route to the real feedback channel instead */}
-          <button ref={(node) => { menuItemRefs.current[2] = node; }} type="button" role="menuitem" tabIndex={-1} onClick={pick(() => router.push(routes.support))}>Report an issue</button>
+          <button ref={(node) => { menuItemRefs.current[2] = node; }} type="button" role="menuitem" tabIndex={-1} onClick={pick(() => router.push(routes.support))}><T text={"Report an issue"} /></button>
         </div>
       )}
     </div>
@@ -894,10 +855,11 @@ function MoreMenu({ place }: { place: Place }) {
     fades in once the photo header scrolls out. Header chrome (back/share/favorite)
     and the CTA bar stay with callers. */
 export function PlaceDetailBody({ place, heroOverlay, onCollapse }: {
-  place: Place;
+  place: PublishedPlace;
   heroOverlay?: ReactNode;
   onCollapse?: () => void;
 }) {
+  const { t } = useLocale();
   const router = useRouter();
   const heroRef = useRef<HTMLDivElement>(null);
   const [compact, setCompact] = useState(false);
@@ -932,7 +894,7 @@ export function PlaceDetailBody({ place, heroOverlay, onCollapse }: {
 
       {/* §4.6 photo header collage */}
       <div ref={heroRef} style={{ position: "relative", padding: 8 }}>
-        <PlacePhotoCollage photos={place.photos ?? (place.photoUrl ? [place.photoUrl] : [])} placeName={place.name} brandFallback={place.type === "olive_young"} />
+        <PlacePhotoCollage photos={place.photos ?? (place.photoUrl ? [place.photoUrl] : [])} media={place.publishedMedia} placeName={place.name} brandFallback={place.type === "olive_young"} />
         {onCollapse && (
           <IconButton
             name="down"
@@ -946,7 +908,7 @@ export function PlaceDetailBody({ place, heroOverlay, onCollapse }: {
         {heroOverlay}
       </div>
 
-      <div className="pad" style={{ paddingTop: 8, paddingBottom: 12 }}>
+      <div className="pad place-detail-intro">
         <TitleBlock place={place} km={km} />
       </div>
 
@@ -954,7 +916,7 @@ export function PlaceDetailBody({ place, heroOverlay, onCollapse }: {
       <PlaceActions place={place} />
 
       {/* §4.6 sticky anchor tabs with scroll-spy */}
-      <AnchorTabs sections={SECTIONS} offset={STICKY_OFFSET} />
+      <AnchorTabs sections={SECTIONS.map(section => ({ ...section, label: t(section.label) }))} offset={STICKY_OFFSET} />
 
       <div className="pad stack">
         <HomeSection place={place} />

@@ -1,3 +1,4 @@
+import { T } from "@/lib/i18n/locale-provider";
 import Link from "next/link";
 import { Icon, type IconName } from "@/components/icon";
 
@@ -15,8 +16,8 @@ export function SettingsRow({ icon, title, value, href }: SettingsRowProps) {
       <span className="settings-row-icon">
         <Icon name={icon} size="xs" />
       </span>
-      <span className="settings-row-title">{title}</span>
-      {value && <span className="settings-row-value">{value}</span>}
+      <span className="settings-row-title"><T text={title} /></span>
+      {value && <span className="settings-row-value"><T text={value} /></span>}
       <Icon name="chev" size="xs" className="settings-row-chevron" />
     </Link>
   );

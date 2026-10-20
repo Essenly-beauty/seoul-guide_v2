@@ -18,6 +18,14 @@ export function getMapSheetHalfOffsetRatio(hasSelection: boolean): number {
   return hasSelection ? 0.52 : 0.42;
 }
 
+/** Content-sized preview, including the independently fixed action bar. Tall
+ * summaries scroll; the half snap still leaves part of the map visible. */
+export function selectedSheetVisibleHeight(viewport: number, content: number, handle: number, actions: number, peek: number): number {
+  const minimum = Math.min(viewport, peek + 16);
+  const maximum = Math.max(minimum, viewport * 0.68);
+  return Math.round(Math.min(viewport, Math.max(minimum, Math.min(maximum, content + handle + actions))));
+}
+
 // ── Drag physics ─────────────────────────────────────────────────────────
 // Pure so the release rules can be unit-tested without a DOM. Positions are
 // the sheet's translateY in px: 0 = full, larger = further down the screen.

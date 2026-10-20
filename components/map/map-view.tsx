@@ -1,6 +1,6 @@
 "use client";
 
-import { withTileKey } from "@/lib/map-tiles";
+import { MAP_TILE_URLS as TILE_URLS, MAP_ATTRIBUTION as ATTRIB, withTileKey } from "@/lib/map-tiles";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { createPortal, preconnect } from "react-dom";
 import { Circle, MapContainer, Polyline, TileLayer, Marker, useMap, useMapEvents } from "react-leaflet";
@@ -8,7 +8,7 @@ import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 import { TouchZoomRotate, bearingOf, resetNorth, settleNorth, visibleBounds } from "@/lib/map-touch-rotate";
 import { Icon } from "@/components/icon";
-import { TYPE_ICON, TYPE_LABEL, zoneShort, type Place } from "@/lib/data";
+import { BRAND_MARK_SRC, TYPE_ICON, TYPE_LABEL, zoneShort, type Place } from "@/lib/data";
 import { haversineKm, type LatLng } from "@/lib/geo";
 import { visibleMapAnchor } from "@/lib/map-camera";
 import { groupPlacesByCoordinate, type PlaceCoordinateGroup } from "@/lib/place-coordinate-groups";
@@ -48,12 +48,6 @@ export type MapViewProps = {
   /** Station discs become tappable when set — opens the station's nearby browse. */
   onStationClick?: (id: string) => void;
 };
-
-const TILE_URLS = {
-  dark: "https://{s}.basemaps.cartocdn.com/rastertiles/dark_all/{z}/{x}/{y}{r}.png",
-  light: "https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png",
-} as const;
-const ATTRIB = '&copy; <a href="https://www.openstreetmap.org/copyright">OSM</a> &copy; <a href="https://carto.com/attributions">CARTO</a>';
 
 const INITIAL_ZOOM = 15; // neighborhood scale — dots/badges stay tappable on phones (was 13)
 /** §4.2 zoom thresholds: dots/clusters ≤13, ★4.5+ badges 14–15, all badges ≥16. */
@@ -106,17 +100,14 @@ const VIVID_PIN_COLOR: Record<Place["type"], string> = {
 const pinColor = (type: Place["type"], vivid = false) =>
   vivid ? VIVID_PIN_COLOR[type] : MUTED_PIN_COLOR[type];
 
-/** Olive Young dot markers use the olive motif (lime "O" + red drupe) on a
-    map-toned disc, drawn a notch larger than ordinary dots (user request). */
-const oyOliveHtml = (px: number) => `<svg viewBox="0 0 24 24" style="width:${px}px;height:${px}px" aria-hidden="true">
-  <circle cx="12" cy="12" r="11" fill="var(--pin-disc)" stroke="var(--pin-disc-ring)" stroke-width="1.2"/>
-  <ellipse cx="12" cy="12.6" rx="5" ry="6.2" fill="none" stroke="#9bce26" stroke-width="2.6" transform="rotate(16 12 12.6)"/>
-  <ellipse cx="14.1" cy="7.4" rx="1.7" ry="2.1" fill="#e0716e" transform="rotate(20 14.1 7.4)"/>
-</svg>`;
-/** OY discs run ~2x the ordinary 12px dots — the brand ask is "spot me first". */
-const OY_DOT_PX = 26;
+/** Retailer pins use the same owner-provided artwork as category chips. */
+const brandPinHtml = (type: Place["type"], px: number) =>
+  `<img src="${BRAND_MARK_SRC[type]}" width="${px}" height="${px}" alt="" aria-hidden="true" style="display:block;width:${px}px;height:${px}px;object-fit:contain;border-radius:5px;background:#fff"/>`;
+const BRAND_DOT_PX = 26;
 const pinGlyph = (type: Place["type"], px: number) =>
-  `<svg class="icn" style="width:${px}px;height:${px}px" aria-hidden="true"><use href="#i-${TYPE_ICON[type]}"/></svg>`;
+  BRAND_MARK_SRC[type]
+    ? brandPinHtml(type, px)
+    : `<svg class="icn" style="width:${px}px;height:${px}px" aria-hidden="true"><use href="#i-${TYPE_ICON[type]}"/></svg>`;
 function pinMode(place: Place, selected: boolean, zoom: number): PinMode {
   if (selected) return "badge"; // selected pin is a badge at any zoom (§5.1)
   if (zoom >= BADGE_ALL_ZOOM) return "badge";
@@ -136,28 +127,26 @@ function pinIcon(place: Place, selected: boolean, mode: PinMode, hero = false, v
     mode === "dot"
       ? L.divIcon({
           className: "map-anchor",
-          html: place.type === "olive_young"
-            ? `<div class="pin-hitarea"><div class="pin-oy">${oyOliveHtml(OY_DOT_PX)}</div></div>`
+          html: BRAND_MARK_SRC[place.type]
+            ? `<div class="pin-hitarea"><div class="pin-oy">${brandPinHtml(place.type, BRAND_DOT_PX)}</div></div>`
             : `<div class="pin-hitarea"><div class="pin-dot" style="background:${pinColor(place.type, vivid)}"></div></div>`,
           iconSize: [44, 44],
           iconAnchor: [22, 22],
         })
       : selected
         ? L.divIcon({
-            // Compact enlarged icon — rating/LIVE already live in the callout
-            // above. Selection reads as a surface capsule with the category's
-            // vivid glyph inside a thin accent ring — the solid orange capsule
-            // shouted too loudly (user 2026-08-03).
+            // Compact enlarged icon; selection follows the neutral primary
+            // palette (user refinement 2026-10-19). Olive Young retains
+            // its recognizable olive mark. Exact prices need approved menus.
             className: "map-anchor",
-            html: `<div class="pin-hitarea badge-hit"><div class="pin-selected${place.type === "olive_young" ? " pin-selected-oy" : ""}" style="color:${VIVID_PIN_COLOR[place.type]}">${place.type === "olive_young" ? oyOliveHtml(24) : `<svg class="icn" aria-hidden="true"><use href="#i-${TYPE_ICON[place.type]}"/></svg>`}</div></div>`,
+            html: `<div class="pin-hitarea badge-hit"><div class="pin-selected${place.type === "olive_young" ? " pin-selected-oy" : ""}" style="color:${VIVID_PIN_COLOR[place.type]}">${pinGlyph(place.type, 24)}</div></div>`,
             iconSize: [44, 44],
             iconAnchor: [22, 44],
           })
         : L.divIcon({
             className: "map-anchor",
-            // OY badges carry the olive logo disc instead of a lettered tile;
-            // the hero accent tile never overrides the brand mark.
-            html: `<div class="pin-hitarea badge-hit"><div class="pin-badge${hero ? " hero" : ""}">${place.type === "olive_young" ? oyOliveHtml(19) : `<span class="catbadge" style="width:17px;height:17px;background:${hero ? "var(--accent)" : pinColor(place.type, vivid)}">${pinGlyph(place.type, 11)}</span>`}${place.rating ?? ""}</div></div>`,
+            // Retailer artwork stays intact when a badge gains a hero accent.
+            html: `<div class="pin-hitarea badge-hit"><div class="pin-badge${hero ? " hero" : ""}">${BRAND_MARK_SRC[place.type] ? brandPinHtml(place.type, 19) : `<span class="catbadge" style="width:17px;height:17px;background:${hero ? "var(--accent)" : pinColor(place.type, vivid)}">${pinGlyph(place.type, 11)}</span>`}${place.rating ?? ""}</div></div>`,
             iconSize: [44, 44],
             iconAnchor: [22, 44],
           });

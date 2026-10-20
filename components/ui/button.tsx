@@ -1,3 +1,4 @@
+import { T } from "@/lib/i18n/locale-provider";
 import type { CSSProperties, MouseEventHandler, ReactNode, Ref } from "react";
 import Link from "next/link";
 import { Icon, type IconName } from "@/components/icon";
@@ -57,7 +58,7 @@ export function Button({
   const content = (
     <>
       {icon && <Icon name={icon} size="xs" />}
-      {children}
+      {typeof children === "string" ? <T text={children} /> : children}
     </>
   );
 

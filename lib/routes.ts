@@ -41,6 +41,7 @@ export const routes = {
   brand: (id: string) => `/brand/${id}`,
   placesCategory: (cat: string) => `/places/${cat}`,
   place: (id: string) => `/place/${id}`,
+  placeBooking: (id: string) => `/place/${encodeURIComponent(id)}/book`,
   search: "/search",
   download: "/download",
   blogArticle: (slug: string) => `/blog/${slug}`,
@@ -58,6 +59,7 @@ export const routes = {
   settingsName: "/settings/account/name",
   settingsEmail: "/settings/account/email",
   settingsApp: "/settings/app",
+  settingsLanguage: "/settings/language",
   settingsPrivacy: "/settings/privacy",
   support: "/support",
   legalTerms: "/legal/terms",
@@ -73,5 +75,4 @@ export const sample = {
   place: "juno-hair-gangnam",
   product: "cosrx-snail-mucin",
   journal: "korean-glass-skin-routine",
-  booking: "HS-4F92A1",
 } as const;

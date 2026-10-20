@@ -10,7 +10,7 @@ export const dynamic = 'force-dynamic';
 
 export async function GET(): Promise<Response> {
   try {
-    const client = supabaseServer();
+    const client = await supabaseServer();
     const context = await getPartnerContext(client);
     return partnerJson({ ok: true, snapshot: await getPartnerSnapshot(client, context) });
   } catch (error) { return partnerFailure(error); }
@@ -20,7 +20,7 @@ export async function POST(request: Request): Promise<Response> {
   try {
     if (!sameOrigin(request)) throw new PartnerError(403, 'INVALID_ORIGIN');
     if (request.headers.get('content-type')?.split(';', 1)[0].trim().toLowerCase() !== 'application/json') throw new PartnerError(415, 'UNSUPPORTED_MEDIA_TYPE');
-    const client = supabaseServer();
+    const client = await supabaseServer();
     const context = await getPartnerContext(client);
     const body = await readJson(request);
     const parsed = parsePartnerCommand(body);

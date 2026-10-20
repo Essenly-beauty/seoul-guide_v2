@@ -68,10 +68,18 @@ describe('narrow reservation settings writes', () => {
     await expect(saveReservationCommand(mock.client, context, { ...rules, mode: 'delete' } as never)).rejects.toMatchObject({ status: 400, code: 'INVALID_COMMAND' });
     expect(mock.calls).toEqual([]);
   });
-  it.each([{ ...context, readOnly: true }, { ...context, merchant: { ...context.merchant, status: 'suspended' as const } }, { ...context, merchant: { ...context.merchant, bookingEnabled: true } }])('rejects non-writable or live-booking context before any query %#', async (denied) => {
+  it.each([{ ...context, readOnly: true }, { ...context, merchant: { ...context.merchant, status: 'suspended' as const } }])('rejects non-writable context before any query %#', async (denied) => {
     const mock = boundary();
-    await expect(saveReservationCommand(mock.client, denied, command(rules))).rejects.toMatchObject({ status: denied.merchant.bookingEnabled ? 409 : 403 });
+    await expect(saveReservationCommand(mock.client, denied, command(rules))).rejects.toMatchObject({ status: 403 });
     expect(mock.calls).toEqual([]);
+  });
+  it('allows versioned settings updates while bookings are active and keeps database conflicts', async () => {
+    const mock = boundary();
+    const active = { ...context, merchant: { ...context.merchant, bookingEnabled: true } };
+    await saveReservationCommand(mock.client, active, command({ ...rules, mode: 'update', expectedUpdatedAt: stamp }));
+    expect(mock.calls[0].steps).toContainEqual(['eq', ['updated_at', stamp]]);
+    const conflict = boundary({ data: null, error: { code: '23514' } });
+    await expect(saveReservationCommand(conflict.client, active, command(rules))).rejects.toMatchObject({ status: 409, code: 'PARTNER_CONFLICT' });
   });
   it.each([
     [{ data: null, error: null }, 409],

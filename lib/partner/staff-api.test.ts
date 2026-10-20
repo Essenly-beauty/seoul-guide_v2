@@ -103,12 +103,18 @@ describe('staff HTTP boundary', () => {
     privateResponse(response);
   });
 
+  it('accepts staff writes for an active booking-enabled merchant', async () => {
+    session({ shop: { ...merchant, booking_enabled: true } });
+    const response = await POST(post());
+    expect(response.status).toBe(200);
+    expect(await response.json()).toEqual({ ok: true });
+  });
+
   it.each([
     [{ user: null }, 401, 'UNAUTHENTICATED'],
     [{ membership: null }, 403, 'PARTNER_UNASSIGNED'],
     [{ shop: { ...merchant, status: 'suspended' } }, 403, 'PARTNER_READ_ONLY'],
     [{ shop: { ...merchant, status: 'closed' } }, 403, 'PARTNER_READ_ONLY'],
-    [{ shop: { ...merchant, booking_enabled: true } }, 409, 'PARTNER_CONFLICT'],
     [{ write: result(null) }, 409, 'PARTNER_CONFLICT'],
     [{ write: result(null, { code: '23505', message: 'private SQL detail' }) }, 409, 'PARTNER_CONFLICT'],
     [{ write: result(null, { code: 'PGRST999', message: 'private SQL detail' }) }, 503, 'PARTNER_UNAVAILABLE'],

@@ -1,7 +1,7 @@
 "use client";
 
+import { useLocale, LANGUAGE_NAMES } from "@/lib/i18n/locale-provider";
 import Link from "next/link";
-import { TopBar } from "@/components/ui/top-bar";
 import { BottomNav } from "@/components/ui/bottom-nav";
 import { SectionHeader } from "@/components/ui/section-header";
 import { SectionDivider } from "@/components/ui/section-divider";
@@ -20,13 +20,14 @@ import { useMyRatings, useMyRatingsReady } from "@/lib/ratings";
 
 type MenuRow = { icon: Parameters<typeof Icon>[0]["name"]; title: string; value?: string; href: string; badge?: string };
 
-// Launch scope (audit P0-1/P0-3): Reservations, My Trip, Beauty Kit, and
+// Launch scope (audit P0-1/P0-3): My Trip, Beauty Kit, and
 // Notifications are prototype flows with no backend — hidden from the public
 // menu until each is real. Restore a row by adding it back here.
 const GROUPS: { title: string; rows: MenuRow[] }[] = [
   {
     title: "My activity",
     rows: [
+      { icon: "cal", title: "My bookings", href: routes.bookings },
       { icon: "heart", title: "Saved", href: routes.favorites },
       { icon: "book", title: "My reviews", href: routes.reviews },
     ],
@@ -35,6 +36,7 @@ const GROUPS: { title: string; rows: MenuRow[] }[] = [
     title: "Preferences",
     rows: [
       { icon: "user", title: "Beauty profile", value: "Skin & hair type", href: routes.onboardingProfile },
+      { icon: "languages", title: "Language", href: routes.settingsLanguage },
       { icon: "mark", title: "Settings", href: routes.settings },
     ],
   },
@@ -48,6 +50,7 @@ const GROUPS: { title: string; rows: MenuRow[] }[] = [
 ];
 
 export default function MenuPage() {
+  const { locale, t } = useLocale();
   // Live favorites — the Saved count reflects the account (or guest list),
   // not a hardcoded demo number. Counted against the catalog so it always
   // matches exactly what the Saved page renders.
@@ -71,17 +74,17 @@ export default function MenuPage() {
   const ratedLabel = ratingsReady ? String(ratedCount) : "–";
   return (
     <>
-      <TopBar title="Menu" />
       {joinSheet}
-      <div className="app-scroll pad stack pagev2">
+      <div className="app-scroll pad stack pagev2 app-tab-content account-menu">
+        <h1 className="sr-only">{t("My account")}</h1>
         {/* Profile header block — live session state */}
         <section className="stack">
           <MenuProfile />
           <div className="row between" style={{ textAlign: "center" }}>
             {[[savedLabel, "Saved"], [ratedLabel, "My reviews"]].map(([n, l]) => (
               <div key={l} style={{ flex: 1 }}>
-                <div className="h2" style={{ color: "var(--accent)" }}>{n}</div>
-                <div className="caption muted">{l}</div>
+                <div className="h2">{n}</div>
+                <div className="caption muted">{t(l)}</div>
               </div>
             ))}
           </div>
@@ -93,7 +96,7 @@ export default function MenuPage() {
         {GROUPS.map((g) => (
           <div key={g.title} className="stack" style={{ gap: 12 }}>
             <SectionDivider />
-            <section className="stack sm">
+            <section className="stack sm account-menu-group">
               <SectionHeader title={g.title} />
               {g.rows.map((m) => {
                 const badge =
@@ -103,9 +106,10 @@ export default function MenuPage() {
                 return (
                   <Link key={m.title} className="inforow" href={m.href}>
                     <Icon name={m.icon} size="xs" />
-                    <span style={{ minWidth: 0, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{m.title}</span>
+                    <span style={{ minWidth: 0, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{t(m.title)}</span>
                     <span className="chev row" style={{ gap: 7 }}>
-                      {m.value && <span className="caption muted">{m.value}</span>}
+                      {m.title === "Language" && <span className="caption muted">{LANGUAGE_NAMES[locale]}</span>}
+                      {m.value && <span className="caption muted">{t(m.value)}</span>}
                       {badge && <Badge tone="dim">{badge}</Badge>}
                       <Icon name="chev" size="xs" style={{ color: "var(--dim)" }} />
                     </span>
@@ -115,7 +119,7 @@ export default function MenuPage() {
               {g.title === "Support" && (
                 <FeedbackLauncher className="inforow" style={{ width: "100%" }}>
                   <Icon name="ext" size="xs" />
-                  <span style={{ minWidth: 0, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>Send feedback</span>
+                  <span style={{ minWidth: 0, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{t("Send feedback")}</span>
                   <span className="chev row" style={{ gap: 7 }}>
                     <Icon name="chev" size="xs" style={{ color: "var(--dim)" }} />
                   </span>

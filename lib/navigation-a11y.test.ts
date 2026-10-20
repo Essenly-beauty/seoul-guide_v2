@@ -31,8 +31,8 @@ describe("navigation and compact control accessibility", () => {
     expect(rankingFooterSource).toContain('aria-pressed={retailer === "daiso"}');
     expect(rankingFooterSource).toContain('aria-label="Olive Young"');
     expect(rankingFooterSource).toContain('aria-label="Daiso"');
-    expect(rankingFooterSource).toContain('src="/brands/olive-young-mark.svg"');
-    expect(rankingFooterSource).toContain('src="/brands/daiso-mark.svg"');
+    expect(rankingFooterSource).toContain('src="/brands/olive-young-logo.jpeg"');
+    expect(rankingFooterSource).toContain('src="/brands/daiso-logo.jpeg"');
     expect(rankingFooterSource.match(/alt=""/g)).toHaveLength(2);
     expect(rankingFooterSource.match(/aria-hidden="true"/g)).toHaveLength(2);
     expect(rankingFooterSource).not.toContain("Selected");

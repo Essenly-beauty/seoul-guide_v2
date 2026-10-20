@@ -32,6 +32,22 @@ describe('partner catalog', () => {
     expect(publicMenu(draft, [category], 'merchant', true)).toBeNull();
   });
 
+  it('allows an explicitly selected pay-at-venue menu to be ready without changing the deposit projection', () => {
+    const atVenue = { ...menu, depositKrw: null };
+    expect(menuReadiness(atVenue, [category], { paymentMode: 'pay_at_venue' })).toEqual([]);
+    expect(menuReadiness(atVenue, [category])).toEqual(['depositKrw.required']);
+    expect(publicMenu(atVenue, [category], 'merchant', true)).toBeNull();
+  });
+
+  it('still requires valid content, price, duration and visible ownership for pay-at-venue publication', () => {
+    const incomplete = { ...menu, depositKrw: null, priceKrw: null, durationMinutes: null, descriptionEn: '', visibility: 'draft' as const };
+    expect(menuReadiness(incomplete, [{ ...category, visibility: 'hidden' }], { paymentMode: 'pay_at_venue' })).toEqual(expect.arrayContaining([
+      'priceKrw.required', 'durationMinutes.required', 'descriptionEn.required', 'menu.not_visible', 'category.not_visible',
+    ]));
+    expect(menuReadiness({ ...menu, depositKrw: -1 }, [category], { paymentMode: 'pay_at_venue' })).toContain('depositKrw.invalid');
+    expect(menuReadiness(menu, [{ ...category, merchantId: 'foreign' }], { paymentMode: 'pay_at_venue' })).toContain('category.invalid');
+  });
+
   it.each(['priceKrw', 'depositKrw', 'durationMinutes'] as const)('rejects invalid positive integer %s', (field) => {
     for (const value of [0, -1, 1.5, NaN, Infinity, Number.MAX_SAFE_INTEGER + 1]) {
       expect(validateMenu({ ...menu, [field]: value }, [category])).toContain(`${field}.invalid`);

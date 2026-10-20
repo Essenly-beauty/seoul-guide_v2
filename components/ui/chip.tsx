@@ -1,3 +1,4 @@
+import { T } from "@/lib/i18n/locale-provider";
 import type React from "react";
 import type { CSSProperties, MouseEventHandler, ReactNode, Ref } from "react";
 
@@ -23,13 +24,13 @@ export function Chip({ selected, soft, mono, onClick, buttonRef, className, styl
     .filter(Boolean)
     .join(" ");
   if (!onClick) {
-    return <span className={cls} style={style} {...rest}>{children}</span>;
+    return <span className={cls} style={style} {...rest}>{typeof children === "string" ? <T text={children} /> : children}</span>;
   }
   // aria-pressed only when not acting as a tab (tabs use aria-selected instead)
   const pressed = rest.role === "tab" || rest.role === "radio" ? undefined : selected;
   return (
     <button ref={buttonRef} type="button" className={cls} style={style} aria-pressed={pressed} onClick={onClick} {...rest}>
-      {children}
+      {typeof children === "string" ? <T text={children} /> : children}
     </button>
   );
 }
@@ -37,5 +38,5 @@ export function Chip({ selected, soft, mono, onClick, buttonRef, className, styl
 const STATUS_LABEL = { confirmed: "Confirmed", pending: "Reschedule pending", cancelled: "Cancelled", completed: "Completed" } as const;
 
 export function StatusChip({ status, children }: { status: keyof typeof STATUS_LABEL; children?: ReactNode }) {
-  return <span className={`statuschip ${status}`}>{children ?? STATUS_LABEL[status]}</span>;
+  return <span className={`statuschip ${status}`}>{children ?? <T text={STATUS_LABEL[status]} />}</span>;
 }

@@ -1,5 +1,6 @@
 "use client";
 
+import { useLocale } from "@/lib/i18n/locale-provider";
 import { Chip } from "@/components/ui/chip";
 import { useToast } from "@/components/ui/toast";
 import {
@@ -10,21 +11,22 @@ import {
 } from "@/lib/profile";
 
 export function BeautyProfileEditor() {
+  const { t } = useLocale();
   const profile = useProfile();
   const { toast } = useToast();
   const completeness = profileCompleteness(profile);
 
   return (
-    <section className="profile-editor" aria-label="Beauty profile answers">
+    <section className="profile-editor" aria-label={t("Beauty profile answers")}>
       <div className="profile-editor-progress">
         <div className="row between">
-          <b>Profile completeness</b>
+          <b>{t("Profile completeness")}</b>
           <span className="t-label-sm" style={{ color: "var(--accent)" }}>{completeness}%</span>
         </div>
         <div className="rbar" role="progressbar" aria-valuenow={completeness} aria-valuemin={0} aria-valuemax={100}>
           <i style={{ width: `${completeness}%` }} />
         </div>
-        <p className="t-caption">Every answer stays editable as your plans change.</p>
+        <p className="t-caption">{t("Every answer stays editable as your plans change.")}</p>
       </div>
 
       <div className="profile-editor-questions">
@@ -33,11 +35,11 @@ export function BeautyProfileEditor() {
             <div className="profile-question-copy">
               <span className="label">{String(index + 1).padStart(2, "0")}</span>
               <div>
-                <h2 id={`profile-question-${question.key}`}>{question.title}</h2>
-                <p className="t-caption">{question.why}</p>
+                <h2 id={`profile-question-${question.key}`}>{t(question.title)}</h2>
+                <p className="t-caption">{t(question.why)}</p>
               </div>
             </div>
-            <div className="chipwrap" role={question.multi ? "group" : "radiogroup"} aria-label={question.title}>
+            <div className="chipwrap" role={question.multi ? "group" : "radiogroup"} aria-label={t(question.title)}>
               {question.options.map((option) => {
                 const selected = question.key === "interests"
                   ? profile.interests.includes(option.value as (typeof profile.interests)[number])
@@ -50,7 +52,7 @@ export function BeautyProfileEditor() {
                     aria-checked={question.multi ? undefined : selected}
                     onClick={() => {
                       answerQuestion(question.key, option.value);
-                      toast("Profile updated");
+                      toast(t("Profile updated"));
                     }}
                   >
                     {option.label}
