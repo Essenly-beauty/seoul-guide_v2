@@ -104,3 +104,10 @@ python3 -m http.server 3111 --bind 127.0.0.1 --directory docs/designs/partner-ad
 - 로컬 테스트 계정은 `$TMPDIR/myseouldrop-booking-local-access.json`(Codex 프로비저닝 스크립트가 생성, 권한 600). 스크립트는 이 파일을 읽기만 하고 값은 저장소·보고서·대화에 적지 않는다.
 - 로그인 폼은 하이드레이션 전에 제출되면 GET으로 비밀번호가 URL에 실린다(화면 점검 결함 A). 자동화에서는 `#signin-email`이 뜬 뒤 2초 기다렸다 제출한다. 고쳐지면 이 주의는 지운다.
 - Codex(VS Code)는 10/19 오전에 사용량 한도였지만 10/19 밤부터 다시 동작했다. Claude 쪽 메모리는 기기·계정별이므로 이 문서가 기준이다.
+
+## 9. 2026-10-20 밤 추가 (사용량 한도로 중단된 상태)
+
+- **QA 보고서** `reports/design/2026-10-20-webapp-admin-propagation-qa.md`(4차; Codex 채점 7/10 — 남은 요구: 회원 메시지·시간 변경·고객 취소 왕복과 검색→지도→상세 실측, 과거 소스 보관본). 원본 증거는 `.gstack/qa-reports/run-20261020T105544Z-webapp/`(gitignore, 이 기기에만 있음).
+- **DB 구조 제안 2판** `reports/architecture/2026-10-20-database-architecture-proposal.md`(Codex 채점 7/10 — 남은 요구: 지연 트리거 무잠금 주장 제거·큐/재시도 계약, 기존 프로필·미디어 응답 재현 필드, 연결 해제 vs 장소 비공개 구분·캐시 무효화·ETag, 리뷰 집계 제외 또는 전체 이벤트, 권한 DDL·정합성 검사·트리거 롤백 이름).
+- **코드 변경(미커밋, Codex 작업 트리와 같은 파일 포함)**: 비회원 ♥ 미보관(`lib/favorites.ts`·`favorite-button`·상세 Save·지도 공유 목록·`signin-nudge`·`signup-return-notice`·favorites 문구·i18n), 스켈레톤 로딩(`components/ui/skeleton.tsx`, `app/loading.tsx`, 고객 예약·메뉴·저장 목록 로딩 상태, globals.css), 상세 사진 헤더(커버 타일·+N·라이트박스, Photos 섹션·탭 제거, `.place-hero-chrome`), 썸네일 cover, 첫 리뷰 유도(TravelerReviews), 지하철 트랙 밀도(`data-density` + CSS; 16/39/60정거장 342px에서 넘침 없음 실측), **관리자 ‘고객 화면 사진 영역’ 스위치**(마이그레이션 `20261020123000_store_profile_show_photos.sql` — 로컬 DB에만 적용, `profile-contracts.ts` showPhotos, `place-profile.ts` photosEnabled, 관리자 토글·미리보기). 검증: typecheck·lint 통과, vitest 36파일 938개 통과, Playwright `scripts/verify-impl*.cjs`·`verify-toggle.cjs` 통과(비회원 ♥→가입 시트→로그인 복귀 시 저장, 토글 왕복 9/9). Codex 코드 리뷰는 요청해 둔 상태(결과 미확인, `codex-impl1.log`는 scratchpad에만).
+- 원격 DB에는 아무것도 적용하지 않았다. 이 코드 변경을 커밋하려면 Codex의 미커밋 변경과 섞이므로 파일 단위로 조정이 필요하다.
