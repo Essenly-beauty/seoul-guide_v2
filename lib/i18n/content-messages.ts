@@ -2,6 +2,17 @@ import type { MessageCatalog } from "./types";
 
 // Detail, reviews, saved lists and product-guide chrome; source names stay unchanged.
 const rows: [string, string, string, string, string][] = [
+  ["Explore products for each step.", "各ステップの商品を見る。", "浏览每个步骤的产品。", "Explora productos para cada paso.", "Découvrez les produits pour chaque étape."],
+  ["Routine length", "ステップ数", "步骤数量", "Número de pasos", "Nombre d’étapes"],
+  ["{count} steps", "{count}ステップ", "{count}步", "{count} pasos", "{count} étapes"],
+  ["Cleanser", "クレンジング", "洁面", "Limpiador", "Nettoyant"],
+  ["Toner", "化粧水", "爽肤水", "Tónico", "Lotion tonique"],
+  ["Essence", "エッセンス", "精华水", "Esencia", "Essence"],
+  ["Serum", "美容液", "精华液", "Sérum", "Sérum"],
+  ["Moisturizer", "保湿クリーム", "保湿霜", "Hidratante", "Crème hydratante"],
+  ["Sunscreen", "日焼け止め", "防晒", "Protector solar", "Protection solaire"],
+  ["Mask Pack", "フェイスマスク", "面膜", "Mascarilla", "Masque"],
+  ["No products yet for this step.", "このステップの商品はまだありません。", "此步骤暂无产品。", "Aún no hay productos para este paso.", "Aucun produit pour cette étape pour le moment."],
   ["Home", "ホーム", "首页", "Inicio", "Accueil"],
   ["Services", "メニュー", "服务", "Servicios", "Prestations"],
   ["Photos", "写真", "照片", "Fotos", "Photos"],

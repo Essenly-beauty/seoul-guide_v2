@@ -46,7 +46,7 @@ export const viewport: Viewport = {
   initialScale: 1,
   viewportFit: "cover",
   interactiveWidget: "resizes-content",
-  themeColor: "#f6f7f9", // light default; ThemeProvider swaps it for dark users
+  themeColor: "#ffffff", // light default; ThemeProvider matches the active app background
 };
 
 /** Applies the stored theme before first paint — no light/dark flash. */

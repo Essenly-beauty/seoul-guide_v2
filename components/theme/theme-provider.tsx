@@ -18,7 +18,8 @@ const ThemeContext = createContext<{ theme: AppTheme; setTheme: (t: AppTheme) =>
 /** Keep the browser chrome (status bar / address bar) on the app's theme —
     the static viewport meta was dark-only, wrong in light mode (audit). */
 function applyMetaTheme(theme: AppTheme) {
-  const color = theme === "light" ? "#f6f7f9" : "#0b0c0f";
+  const color = getComputedStyle(document.documentElement).getPropertyValue("--bg").trim()
+    || (theme === "light" ? "#ffffff" : "#111111");
   let meta = document.querySelector('meta[name="theme-color"]');
   if (!meta) {
     meta = document.createElement("meta");

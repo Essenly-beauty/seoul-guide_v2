@@ -32,6 +32,7 @@ describe("verified list images", () => {
   it("renders an available place photo uncropped and uses a small semantic fallback otherwise", () => {
     const photo = load(renderToStaticMarkup(<PlaceThumbnail place={{ ...place, photos: ["/approved.webp"] }} size={44} />));
     expect(photo("img").attr("src")).toBe("/approved.webp");
+    expect(photo("img").attr("loading")).toBe("lazy");
     expect(photo("img").attr("alt")).toBe("Test Salon photo");
     expect(photo("img").attr("style")).toContain("object-fit:contain");
     expect(photo("[data-image-kind=photo]").attr("style")).toContain("width:44px");

@@ -1,0 +1,33 @@
+.routine { padding-bottom: 24px; }
+.intro { margin: 0 0 16px; color: var(--muted); font-size: 13px; line-height: 1.5; }
+.selector {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 4px;
+  padding: 4px;
+  border-radius: 12px;
+  background: var(--surface-hover);
+}
+.selector button {
+  min-height: 44px;
+  padding: 8px 4px;
+  border: 0;
+  border-radius: 9px;
+  background: transparent;
+  color: var(--muted);
+  font: inherit;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+}
+.selector button[aria-pressed="true"] { background: var(--action); color: var(--on-action); }
+.steps { display: grid; gap: 24px; margin: 24px 0 0; padding: 0; list-style: none; }
+.step { min-width: 0; }
+.routine .heading { display: flex; align-items: baseline; gap: 10px; margin: 0 0 10px; font-size: 15px; font-weight: 600; }
+.number { color: var(--dim); font-size: 12px; font-weight: 500; font-variant-numeric: tabular-nums; }
+.product { display: flex; align-items: center; gap: 12px; min-width: 0; border-radius: 10px; color: var(--text); text-decoration: none; }
+.copy { flex: 1; min-width: 0; display: grid; gap: 4px; }
+.brand { color: var(--muted); font-size: 12px; line-height: 1.4; }
+.name { font-size: 14px; font-weight: 500; line-height: 1.5; overflow-wrap: anywhere; }
+.chevron { flex: none; color: var(--dim); width: 16px; height: 16px; }
+.selector button:focus-visible, .product:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }

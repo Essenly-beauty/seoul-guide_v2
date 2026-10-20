@@ -64,7 +64,8 @@
   --on-action: #171717;
   --action-soft: #30302d;
 }
-:root:not([data-theme="dark"]):not(:has([data-partner-shell])) body { background: #eeeeea; }
+:root:not(:has([data-partner-shell])),
+:root:not(:has([data-partner-shell])) body { background: var(--bg); }
 :root:not(:has([data-partner-shell])) body::after { display: none; }
 :root:not(:has([data-partner-shell])) :is(h1, h2, h3, h4, .hero, .h1, .h2, .h3) {
   font-family: var(--sans);

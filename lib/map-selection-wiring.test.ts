@@ -463,7 +463,8 @@ describe("place photo ingestion", () => {
     const sheet = readFileSync(new URL("../components/map/map-sheet.tsx", import.meta.url), "utf8");
     expect(sheet).toContain('<PlaceThumbnail place={place} size={72}');
     const thumbnail = readFileSync(new URL("../components/ui/image-thumbnail.tsx", import.meta.url), "utf8");
-    expect(thumbnail).toContain('loading="lazy"');
+    expect(thumbnail).toContain('loading = "lazy"');
+    expect(thumbnail).toContain('loading={loading}');
     expect(thumbnail).toContain('decoding="async"');
     expect(thumbnail).toContain('objectFit: "contain"');
   });

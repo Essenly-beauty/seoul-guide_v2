@@ -11,10 +11,11 @@ type ImageThumbnailProps = {
   size?: number;
   className?: string;
   style?: CSSProperties;
+  loading?: "eager" | "lazy";
 };
 
 /** A compact, uncropped image with a quiet fallback after every source fails. */
-export function ImageThumbnail({ sources, fallbackIcon, fallbackLabel, size = 56, className, style }: ImageThumbnailProps) {
+export function ImageThumbnail({ sources, fallbackIcon, fallbackLabel, size = 56, className, style, loading = "lazy" }: ImageThumbnailProps) {
   const [failed, setFailed] = useState<string[]>([]);
   const image = firstAvailableImage(sources, failed);
   return (
@@ -32,7 +33,7 @@ export function ImageThumbnail({ sources, fallbackIcon, fallbackLabel, size = 56
           key={image.src}
           src={image.src}
           alt={image.alt}
-          loading="lazy"
+          loading={loading}
           decoding="async"
           onError={() => setFailed((previous) => [...previous, image.src])}
           style={{ width: "100%", height: "100%", objectFit: "contain", display: "block", background: image.kind === "brand" ? "#fff" : undefined }}
