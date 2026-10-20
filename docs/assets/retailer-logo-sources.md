@@ -1,8 +1,13 @@
-# Retailer navigation marks
+# Retailer logo assets
 
-The files in `public/brands/` are original, non-official in-app navigation marks. They are not retailer logos, official CI assets, or endorsements, and must not be presented as such.
+The active Olive Young and Daiso marks are the owner-provided retailer artwork already approved in [the retailer UI plan](../superpowers/plans/2026-09-27-retailer-ui-brand-copy.md). These local files identify the retailer; they do not represent a photo of an individual store or product.
 
-- `olive-young-mark.svg` reuses My Seoul Drop's existing circular/leaf visual motif; it does not reproduce Olive Young artwork. Its active mark uses Olive Young Green (`#9bce26`), sampled from the current official web presentation. The official gift-card page itself labels the colorway “OLIVE YOUNG Green”: [Olive Young gift cards](https://www.oliveyoung.co.kr/store/giftCardGuide/getGiftCardGuide.do). Because that page does not publish a machine-readable CI specification, the small footer label uses a contrast-adjusted dark companion (`#526c13`) while the SVG keeps the sampled source green.
-- `daiso-mark.svg` is an original shopping-bag/letter-D badge. It does not trace or reproduce Daiso's official six-dot BI artwork. Only the documented Daiso red, RGB `215, 0, 17` (`#d70011`), is used as a color reference: [Daiso company/BI site](https://www.daiso.co.kr/).
+- `public/brands/olive-young-logo.jpeg`: supplied 200 × 200 Olive Young olive mark on white. Used in category chips, map pins, list fallbacks and ranking navigation.
+- `public/brands/daiso-logo.jpeg`: supplied 407 × 406 Daiso six-circle mark and wordmark on red. Used in the same retailer identity contexts.
+- `public/brands/olive-young-hero.avif`: supplied Olive Young chain image. Its visible `Brand image` caption distinguishes it from a verified branch photo.
 
-Do not replace these marks with downloaded retailer artwork unless redistribution permission is separately confirmed and documented.
+`BRAND_MARK_SRC` in `lib/data.ts` provides the shared compact image paths. Verified place photos take precedence over these retailer fallbacks. Render all artwork with `object-fit: contain` so the original image is not cropped.
+
+The older `olive-young-mark.svg` and `daiso-mark.svg` are original, non-official navigation approximations. They are retained as historical assets and are no longer used in the active retailer UI. The earlier instruction describing all files in this folder as non-official navigation marks was incorrect for the owner-provided JPEG and AVIF assets.
+
+This change reuses the approved local assets; it does not introduce downloaded artwork or assert new redistribution permissions.
