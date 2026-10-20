@@ -7,7 +7,7 @@
 
 ## 0. 2026-10-19 업데이트 — 파트너 예약 관리자 재설계 (최신)
 
-10/14~10/19 작업은 브랜치 `codex/service-quality-release-20261018`에 있다(릴리스 후보 + 업체용 예약 관리자 + UX 재설계 시안 v3.3, 마지막 커밋 `d4ae672` 2026-10-19 저녁). **이어가려면 `reports/operations/partner-admin-redesign-handoff-2026-10-19.md`부터 읽는다** — 파일 위치, 실행·검증 방법, 사용자 결정 사항과 대기 질문, 다음 단계가 거기 있다. 아래 1~6절은 2026-09-27 기준 앱 전반 핸드오프로 여전히 유효하다.
+10/14~10/20 작업은 브랜치 `codex/service-quality-release-20261018`에 있다(릴리스 후보 + 업체용 예약 관리자 + UX 재설계 시안 v3.4 `c66c5db` + 10/20 Codex의 실제 관리자·고객 예약 연동 구현(커밋 전 작업 트리) + 10/20 오후 시안↔구현 화면 점검 `reports/design/2026-10-20-partner-admin-implementation-screen-check.md`). **이어가려면 `reports/operations/partner-admin-redesign-handoff-2026-10-19.md`부터 읽는다** — 파일 위치, 실행·검증 방법, 사용자 결정 사항과 대기 질문, 다음 단계가 거기 있다. 아래 1~6절은 2026-09-27 기준 앱 전반 핸드오프로 여전히 유효하다.
 
 ---
 
