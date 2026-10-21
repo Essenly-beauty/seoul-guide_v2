@@ -17,6 +17,9 @@ export type IconName =
   | "bag"
   | "scissors"
   | "spa"
+  | "shower"
+  | "hand"
+  | "store"
   | "cross"
   | "pin"
   | "copy"
@@ -33,6 +36,7 @@ export type IconName =
   | "lock"
   | "door"
   | "mark"
+  | "languages"
   | "search"
   | "history"
   | "locate"
@@ -78,6 +82,15 @@ export function IconSprite() {
       style={{ position: "absolute" }}
       aria-hidden="true"
     >
+      {/* lucide: languages */}
+      <symbol id="i-languages" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round">
+        <path d="m5 8 6 6" />
+        <path d="m4 14 6-6 2-3" />
+        <path d="M2 5h12" />
+        <path d="M7 2h1" />
+        <path d="m22 22-5-10-5 10" />
+        <path d="M14 18h6" />
+      </symbol>
       {/* lucide: house */}
       <symbol id="i-home" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round">
         <path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8" />
@@ -166,6 +179,32 @@ export function IconSprite() {
         <path d="M12 10v12" />
         <path d="M12 22c4.2 0 7-1.667 7-5-4.2 0-7 1.667-7 5Z" />
         <path d="M12 22c-4.2 0-7-1.667-7-5 4.2 0 7 1.667 7 5Z" />
+      </symbol>
+      {/* lucide: shower-head */}
+      <symbol id="i-shower" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round">
+        <path d="m4 4 2.5 2.5" />
+        <path d="M13.5 6.5a4.95 4.95 0 0 0-7 7" />
+        <path d="M15 5 5 15" />
+        <path d="M14 17v.01" />
+        <path d="M10 16v.01" />
+        <path d="M13 13v.01" />
+        <path d="M16 10v.01" />
+        <path d="M11 20v.01" />
+        <path d="M17 14v.01" />
+        <path d="M20 11v.01" />
+      </symbol>
+      {/* lucide: hand */}
+      <symbol id="i-hand" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M18 11V6a2 2 0 0 0-2-2a2 2 0 0 0-2 2" />
+        <path d="M14 10V4a2 2 0 0 0-2-2a2 2 0 0 0-2 2v2" />
+        <path d="M10 10.5V6a2 2 0 0 0-2-2a2 2 0 0 0-2 2v8" />
+        <path d="M18 8a2 2 0 1 1 4 0v6a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-5.99-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L7 15" />
+      </symbol>
+      {/* lucide: store */}
+      <symbol id="i-store" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M15 21v-5a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v5" />
+        <path d="M17.774 10.31a1.12 1.12 0 0 0-1.549 0 2.5 2.5 0 0 1-3.451 0 1.12 1.12 0 0 0-1.548 0 2.5 2.5 0 0 1-3.452 0 1.12 1.12 0 0 0-1.549 0 2.5 2.5 0 0 1-3.77-3.248l2.889-4.184A2 2 0 0 1 7 2h10a2 2 0 0 1 1.653.873l2.895 4.192a2.5 2.5 0 0 1-3.774 3.244" />
+        <path d="M4 10.95V19a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8.05" />
       </symbol>
       {/* lucide: cross */}
       <symbol id="i-cross" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round">

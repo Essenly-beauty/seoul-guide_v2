@@ -759,6 +759,9 @@
      a dotted connector, meta + actions in a quiet row underneath. */
   .subway-route-summary {
     display: grid;
+    /* A zero-minimum column: long endpoint names ellipsize instead of
+       widening every row (track, Edit, ×) past the sheet (track-1). */
+    grid-template-columns: minmax(0, 1fr);
     gap: 6px;
     padding: 12px 16px 9px;
     color: var(--muted);
@@ -769,6 +772,7 @@
     display: flex;
     justify-content: space-between;
     gap: 12px;
+    min-width: 0; /* the names ellipsize; their nowrap width never sizes the column */
   }
   .subway-ticket-ends b {
     color: var(--text);
@@ -1863,8 +1867,11 @@
     gap: 8px;
     overflow-x: auto;
     padding-bottom: 2px;
+    scrollbar-width: none;
   }
   .chiprow::-webkit-scrollbar {
+    display: none;
+    width: 0;
     height: 0;
   }
   .chipwrap {
@@ -2768,6 +2775,58 @@
     to { transform: translateX(320%); }
   }
 
+  /* Skeleton placeholders (components/ui/skeleton.tsx) — every loading state
+     draws the shape of its content; the brand splash is retired (2026-10-20). */
+  .skel {
+    display: block;
+    flex: none;
+    max-width: 100%;
+    background: var(--surface-hover);
+    background-image: linear-gradient(90deg, var(--surface-hover) 0%, var(--border) 45%, var(--surface-hover) 90%);
+    background-size: 320% 100%;
+    animation: skel-shimmer 1.5s ease-in-out infinite;
+  }
+  @keyframes skel-shimmer { from { background-position: 120% 0; } to { background-position: -120% 0; } }
+  @media (prefers-reduced-motion: reduce) { .skel { animation: none; } }
+  .skel-lines { display: flex; flex-direction: column; min-width: 0; flex: 1; }
+  .skel-list { display: flex; flex-direction: column; gap: 14px; }
+  .skel-row { display: flex; align-items: center; gap: 12px; }
+  .skel-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+  .skel-status { display: flex; flex-direction: column; gap: 14px; min-width: 0; }
+  .skel-sr { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+  .skel-page { flex: 1; padding: 18px 16px 32px; background: var(--bg); }
+  .skel-chips-end { justify-content: flex-end; }
+
+  /* Place detail photo header (2026-10-20): rounded Kakao-style collage, photos
+     cover their tiles, "+N" on the last tile; the gallery opens full screen. */
+  .place-photo-collage { display: grid; gap: 4px; border-radius: 16px; overflow: hidden; background: var(--soft); aspect-ratio: 4 / 3; max-height: 320px; }
+  .place-photo-collage.layout-one { grid-template-columns: 1fr; }
+  .place-photo-collage.layout-two { grid-template-columns: 1fr 1fr; }
+  .place-photo-collage.layout-three { grid-template-columns: 1.5fr 1fr; grid-template-rows: 1fr 1fr; }
+  .place-photo-collage.layout-three .place-photo-tile:first-child { grid-row: 1 / 3; }
+  .place-photo-tile { position: relative; display: block; width: 100%; height: 100%; min-width: 0; min-height: 0; padding: 0; border: 0; border-radius: 0; background: var(--soft); overflow: hidden; cursor: zoom-in; }
+  .place-photo-tile img { display: block; width: 100%; height: 100%; object-fit: cover; }
+  .place-photo-tile:focus-visible { outline: 3px solid var(--accent); outline-offset: -3px; }
+  .place-photo-more { position: absolute; inset: 0; display: grid; place-items: center; background: rgba(0, 0, 0, 0.42); color: #fff; font-size: 18px; font-weight: 700; letter-spacing: 0.02em; }
+  .place-hero-chrome { position: relative; height: 62px; }
+  .photo-lightbox { position: fixed; inset: 0; z-index: 2000; display: flex; flex-direction: column; background: #000; color: #fff; }
+  .photo-lightbox-bar { display: flex; align-items: center; justify-content: space-between; padding: calc(10px + env(safe-area-inset-top, 0px)) 12px 10px 16px; font-size: 14px; font-variant-numeric: tabular-nums; }
+  .photo-lightbox-nav { display: flex; align-items: center; gap: 2px; }
+  .photo-lightbox-nav > span { min-width: 56px; text-align: center; }
+  .photo-lightbox-track { flex: 1; display: flex; overflow-x: auto; overflow-y: hidden; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
+  .photo-lightbox-track::-webkit-scrollbar { display: none; }
+  /* One definite 100% cell, so the image's max-height resolves against the
+     frame instead of an auto row sized by the image itself (lightbox-1). */
+  .photo-lightbox-track > figure { flex: 0 0 100%; margin: 0; display: grid; grid-template: 100% / 100%; place-items: center; min-width: 0; min-height: 0; scroll-snap-align: center; scroll-snap-stop: always; }
+  .photo-lightbox-track img { display: block; max-width: 100%; max-height: 100%; object-fit: contain; }
+
+  /* First-review invitation (2026-10-20) */
+  .first-review-prompt { display: flex; flex-direction: column; gap: 6px; padding: 14px; border: 1px dashed var(--border); border-radius: 12px; background: var(--surface); }
+  .first-review-prompt > b { font-size: 14px; }
+  .first-review-cta { align-self: flex-start; margin-top: 4px; min-height: 36px; padding: 0 14px; border-radius: 999px; background: var(--accent); color: #fff; font-size: 13px; font-weight: 600; }
+
+  .skel-page-bar { display: flex; align-items: center; gap: 12px; margin-bottom: 4px; }
+
   /* Route-change loading sweep — rides the header's bottom hairline instead
      of the shell top; a soft gradient drifts across with a long easing. */
   .route-sweep .topbar::after {
@@ -3143,8 +3202,10 @@
     z-index: 15;
   }
 
-  /* booking sheet */
-  .overlay {
+  /* booking sheet. Scoped away from IconButton's `overlay` variant (class
+     "iconbtn overlay"): unscoped, this scrim rule pinned every overlay icon
+     button to its positioned ancestor's top-left (codex review 2026-10-20). */
+  .overlay:not(.iconbtn) {
     position: absolute;
     inset: 0;
     background: var(--scrim);
@@ -3778,30 +3839,35 @@
      so a thumb can catch it anywhere along the line, with the touch gesture
      reserved for horizontal drag so the sheet does not scroll underneath. */
   .subway-ticket-track {
-    display: flex;
-    align-items: center;
-    gap: 0;
+    position: relative;
     margin: 2px 0;
     min-height: 44px;
     touch-action: pan-y;
     cursor: grab;
     user-select: none;
   }
+  /* The rail is inset so the end dots (and the active dot's 1.45× ring) stay
+     inside the track; stops and legs are placed along it by percentage. */
+  .subway-track-rail { position: absolute; top: 0; bottom: 0; left: 10px; right: 10px; }
   .subway-ticket-track:active { cursor: grabbing; }
   .subway-ticket-track:focus-visible {
     outline: 2px solid var(--accent);
     outline-offset: 2px;
     border-radius: 8px;
   }
-  .subway-track-leg { flex: 1; height: 3px; border-radius: 2px; opacity: 0.5; min-width: 2px; }
+  .subway-track-leg { position: absolute; top: 50%; height: 3px; margin-top: -1.5px; opacity: 0.5; }
+  .subway-track-leg:first-of-type { border-radius: 2px 0 0 2px; }
+  .subway-track-leg:last-of-type { border-radius: 0 2px 2px 0; }
   .subway-track-stop {
-    flex: none;
+    position: absolute;
+    top: 50%;
     width: 9px;
     height: 9px;
     padding: 0;
     border-radius: 50%;
     background: var(--stop-color, var(--dim));
     opacity: 0.55;
+    transform: translate(-50%, -50%);
     transition: transform 0.16s ease, opacity 0.16s ease;
   }
   .subway-track-stop.end { width: 11px; height: 11px; opacity: 1; }
@@ -3814,10 +3880,25 @@
   }
   .subway-track-stop.active {
     opacity: 1;
-    transform: scale(1.45);
+    transform: translate(-50%, -50%) scale(1.45);
     box-shadow: 0 0 0 3px var(--surface), 0 0 0 5px var(--stop-color, var(--accent));
   }
   @media (prefers-reduced-motion: reduce) { .subway-track-stop { transition: none; } }
+  /* Dense tracks (data-density follows the measured dot spacing): ordinary
+     stops shrink first; when dots would touch, only ends, transfers and the
+     active stop stay visible on a continuous line. */
+  .subway-ticket-track[data-density="1"] .subway-track-stop { width: 6px; height: 6px; }
+  .subway-ticket-track[data-density="1"] .subway-track-stop.end { width: 10px; height: 10px; }
+  .subway-ticket-track[data-density="1"] .subway-track-stop.transfer { width: 11px; height: 11px; border-width: 2.5px; }
+  .subway-ticket-track[data-density="2"] .subway-track-stop { width: 2px; height: 2px; opacity: 0.35; }
+  .subway-ticket-track[data-density="2"] .subway-track-stop.end { width: 10px; height: 10px; opacity: 1; }
+  .subway-ticket-track[data-density="2"] .subway-track-stop.transfer { width: 11px; height: 11px; border-width: 2.5px; opacity: 1; }
+  .subway-ticket-track[data-density="2"] .subway-track-stop.active { width: 8px; height: 8px; opacity: 1; }
+  /* The ticket header (Open in Google Maps · Nearby · Edit · ×) wraps instead of
+     pushing its last buttons off-screen on narrow phones. */
+  .subway-route-summary .subway-ticket-meta { flex-wrap: wrap; row-gap: 2px; min-width: 0; }
+  .subway-route-summary .subway-route-open { min-width: 0; flex: 1 1 160px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
   .subway-ticket-count { margin: 0; font-size: 12px; color: var(--muted); }
 
   .subway-station-focus.pinned {
@@ -5585,6 +5666,7 @@
   }
   /* v2 list rows: 12px rhythm, 56px thumb (doc2 spacing_12 / size_56-ish media) */
   .listrow.v2 { padding: 12px 0; gap: 12px; align-items: center; }
+  .listrow-copy { gap: 2px; }
   .listrow.v2 .thumb56 { width: 56px; height: 56px; border-radius: 12px; flex: none; }
 }
 
@@ -5971,27 +6053,10 @@
     background: var(--surface);
   }
   .product-detail-gallery {
-    display: grid;
-    grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
-    grid-template-rows: 82px 82px;
-    gap: 6px;
-  }
-  .product-detail-gallery .imgph {
     min-width: 0;
-    border-radius: var(--r-md);
-  }
-  .product-detail-gallery-main {
-    grid-row: 1 / 3;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    background-color: var(--surface-hover);
-  }
-  .product-detail-gallery .label {
-    max-width: 100%;
-    padding: 0 8px;
-    overflow-wrap: anywhere;
-    text-align: center;
+    overflow: hidden;
+    border-radius: 12px;
+    line-height: 0;
     letter-spacing: 0;
   }
   .product-detail-hero-actions {
@@ -6778,4 +6843,40 @@
 }
 .modal.closing .box {
   animation: scrim-out var(--dur-exit, 200ms) var(--ease-exit, ease) forwards;
+}
+
+/* 2026-10-19 mobile map refinement: elevation communicates the layer order.
+   Keep existing tile provider, geographic groups and collision/zoom behaviour. */
+@layer components {
+  .map-screen {
+    --map-control-shadow: 0 2px 5px rgba(28, 22, 16, .05), 0 9px 24px rgba(28, 22, 16, .12);
+    --map-panel-shadow: 0 -2px 6px rgba(28, 22, 16, .03), 0 -12px 32px rgba(28, 22, 16, .10);
+    --map-action: #171717;
+  }
+  :root[data-theme="dark"] .map-screen {
+    --map-control-shadow: 0 2px 6px rgba(0, 0, 0, .2), 0 10px 26px rgba(0, 0, 0, .32);
+    --map-panel-shadow: 0 -4px 24px rgba(0, 0, 0, .32);
+  }
+  :root:not([data-theme="dark"]) .map-screen .map-searchpill {
+    background: var(--surface);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+  .map-screen .map-searchpill {
+    min-height: 48px;
+    border-radius: 14px;
+    box-shadow: var(--map-control-shadow);
+  }
+  .map-screen .map-fab { box-shadow: var(--map-control-shadow); }
+  .map-screen .mapsheet,
+  :root:not([data-theme="dark"]) .map-screen .mapsheet { box-shadow: var(--map-panel-shadow); }
+  .map-screen .pin-badge { box-shadow: 0 2px 5px var(--pin-shadow-c), 0 5px 12px var(--pin-shadow-c); }
+  .map-screen .pin-selected:not(.pin-selected-oy) {
+    background: var(--map-action);
+    box-shadow: 0 0 0 2px var(--surface), 0 3px 7px rgba(23, 23, 23, .12), 0 8px 18px rgba(23, 23, 23, .18);
+  }
+  .map-screen .pin-selected:not(.pin-selected-oy) .icn { color: #fff; }
+  .map-screen .btn.primary { background: var(--map-action); box-shadow: 0 4px 12px rgba(23, 23, 23, .10); }
+  .map-screen .btn.primary:hover { background: #303030; }
+  .map-screen .btn.primary:disabled { background: var(--surface-hover); color: var(--dim); box-shadow: none; }
 }

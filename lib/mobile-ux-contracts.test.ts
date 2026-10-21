@@ -26,6 +26,7 @@ const subwaySource = source("../components/subway/subway-route-controller.tsx");
 const dialogHookSource = source("../components/ui/use-dialog-focus.ts");
 const bottomSheetSource = source("../components/ui/bottom-sheet.tsx");
 const bookingSource = source("../components/booking/booking-sheet.tsx");
+const cancelBookingSource = source("../components/booking/cancel-booking-button.tsx");
 const signoutSource = source("../components/ui/signout-modal.tsx");
 const filterSource = source("../components/map/filter-sheet.tsx");
 const profileSource = source("../app/onboarding/beauty-profile/page.tsx");
@@ -68,10 +69,10 @@ describe("mobile interaction contracts", () => {
   });
 
   it("keeps subway endpoint search continuous and explains disabled routing", () => {
-    expect(subwaySource).toContain('type="search"');
-    expect(subwaySource).toContain('inputMode="search"');
-    expect(subwaySource).toContain('enterKeyHint="search"');
-    expect(subwaySource).toContain("arrivalInputRef.current?.focus()");
+    expect(source("../components/subway/station-search-field.tsx")).toContain('type="search"');
+    expect(source("../components/subway/station-search-field.tsx")).toContain('inputMode="search"');
+    expect(source("../components/subway/station-search-field.tsx")).toContain('enterKeyHint="search"');
+    expect(subwaySource).toContain("arrivalButtonRef.current?.focus()");
     expect(subwaySource).toContain('id="subway-route-help"');
     expect(subwaySource).toContain('aria-describedby={!canApplyRoute ? "subway-route-help" : undefined}');
   });
@@ -86,7 +87,7 @@ describe("dialog and form accessibility contracts", () => {
   });
 
   it("applies dialog semantics and focus management to sheets and confirmation dialogs", () => {
-    for (const dialogSource of [bookingSource, signoutSource]) {
+    for (const dialogSource of [cancelBookingSource, signoutSource]) {
       expect(dialogSource).toContain("useDialogFocus");
       expect(dialogSource).toContain('role="dialog"');
       expect(dialogSource).toContain('aria-modal="true"');
@@ -97,6 +98,14 @@ describe("dialog and form accessibility contracts", () => {
     expect(bottomSheetSource).toContain('role="dialog"');
     expect(bottomSheetSource).toContain('aria-modal="true"');
     expect(bottomSheetSource).toContain("tabIndex={-1}");
+  });
+
+  it("opens real booking routes and confirms cancellation in the accessible dialog", () => {
+    expect(bookingSource).toContain("href={routes.placeBooking(placeId)}");
+    expect(bookingSource).not.toContain('role="dialog"');
+    expect(cancelBookingSource).toContain("cancelBooking(value.id)");
+    expect(cancelBookingSource).toContain('aria-labelledby="booking-cancel-title"');
+    expect(cancelBookingSource).toContain('aria-describedby="booking-cancel-description"');
   });
 
   it("keeps the post-signup profile entrypoint account-synced", () => {

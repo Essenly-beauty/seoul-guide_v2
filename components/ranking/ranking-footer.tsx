@@ -1,5 +1,7 @@
 "use client";
 
+import { T, useLocale } from "@/lib/i18n/locale-provider";
+
 import { useEffect, useRef } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
@@ -42,6 +44,7 @@ export function hasMeaningfulRankingHistory(): boolean {
 }
 
 export function RankingFooter({ retailer }: { retailer: RankingRetailer }) {
+  const { t } = useLocale();
   const router = useRouter();
   const returnRouteRef = useRef<string | null>(null);
   const didConsumeReturnRouteRef = useRef(false);
@@ -80,12 +83,12 @@ export function RankingFooter({ retailer }: { retailer: RankingRetailer }) {
   return (
     <nav
       className="bottomnav ranking-footer"
-      aria-label="Ranking retailer"
+      aria-label={t("Ranking retailer")}
       data-testid="ranking-footer"
     >
       <button type="button" className="nav" onClick={goBack}>
         <Icon name="back" />
-        <span>Back</span>
+        <span><T text={"Back"} /></span>
       </button>
       <button
         type="button"
@@ -96,9 +99,10 @@ export function RankingFooter({ retailer }: { retailer: RankingRetailer }) {
       >
         <Image
           className="ranking-footer-mark"
-          src="/brands/olive-young-mark.svg"
+          src="/brands/olive-young-logo.jpeg"
           width={24}
           height={24}
+          style={{ objectFit: "contain", borderRadius: 4 }}
           alt=""
           aria-hidden="true"
         />
@@ -113,9 +117,10 @@ export function RankingFooter({ retailer }: { retailer: RankingRetailer }) {
       >
         <Image
           className="ranking-footer-mark"
-          src="/brands/daiso-mark.svg"
+          src="/brands/daiso-logo.jpeg"
           width={24}
           height={24}
+          style={{ objectFit: "contain", borderRadius: 4 }}
           alt=""
           aria-hidden="true"
         />

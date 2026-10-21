@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
+import "./customer-theme.css";
 import { fontVariables } from "./fonts";
 import { IconSprite } from "@/components/icon";
 import { RouteProgress } from "@/components/ui/route-progress";
@@ -8,6 +9,7 @@ import { PwaRegister } from "@/components/system/pwa-register";
 import { WebVitalsReporter } from "@/components/system/web-vitals-reporter";
 import { ThemeProvider } from "@/components/theme/theme-provider";
 import { ToastProvider } from "@/components/ui/toast";
+import { LocaleProvider } from "@/lib/i18n/locale-provider";
 import { SignupReturnNotice } from "@/components/auth/signup-return-notice";
 
 export const metadata: Metadata = {
@@ -44,7 +46,7 @@ export const viewport: Viewport = {
   initialScale: 1,
   viewportFit: "cover",
   interactiveWidget: "resizes-content",
-  themeColor: "#f6f7f9", // light default; ThemeProvider swaps it for dark users
+  themeColor: "#ffffff", // light default; ThemeProvider matches the active app background
 };
 
 /** Applies the stored theme before first paint — no light/dark flash. */
@@ -66,6 +68,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <ErrorReporterInit />
         <PwaRegister />
         <WebVitalsReporter />
+        <LocaleProvider>
         <ThemeProvider>
           <ToastProvider>
             <div className="app-shell">
@@ -75,6 +78,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             </div>
           </ToastProvider>
         </ThemeProvider>
+        </LocaleProvider>
       </body>
     </html>
   );

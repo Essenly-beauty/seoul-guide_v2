@@ -1,5 +1,6 @@
 "use client";
 
+import { T } from "@/lib/i18n/locale-provider";
 import { useEffect, useState } from "react";
 import { hoursToday, placeStatus } from "@/lib/places";
 import type { Place } from "@/lib/data";
@@ -17,18 +18,16 @@ export function LiveBadge({ hours, showUntil = true }: { hours?: Place["hours"];
     return <span className="livebadge loading" aria-hidden="true">LIVE</span>;
   }
   if (!hours) {
-    return <span className="livebadge unknown">Hours unknown</span>;
+    return <span className="livebadge unknown"><T text={"Hours unknown"} /></span>;
   }
   if (placeStatus(hours, now) !== "open") {
-    return <span className="livebadge closed">Closed</span>;
+    return <span className="livebadge closed"><T text={"Closed"} /></span>;
   }
   // "until" has to be today's closing time, not a week-wide one: a place that
   // shuts at 20:00 on Sundays must not advertise its 22:30 weekday close.
   const until = hoursToday(hours, now);
   return (
-    <span className="livebadge open">
-      Live
-      {showUntil && until && <span className="livebadge-until"> until {until.close}</span>}
+    <span className="livebadge open"><T text={"Open"} />{showUntil && until && <span className="livebadge-until"> <T text="until {time}" values={{ time: until.close }} /></span>}
     </span>
   );
 }

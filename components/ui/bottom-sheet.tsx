@@ -1,5 +1,6 @@
 "use client";
 
+import { useLocale } from "@/lib/i18n/locale-provider";
 import { useEffect, useId, useState, type ReactNode } from "react";
 import { createPortal } from "react-dom";
 import { IconButton } from "@/components/ui/icon-button";
@@ -24,6 +25,7 @@ type BottomSheetProps = {
 };
 
 export function BottomSheet({ title, ariaLabel, kicker, onClose, children, footer }: BottomSheetProps) {
+  const { t } = useLocale();
   const [host, setHost] = useState<Element | null>(null);
   const titleId = useId();
   const kickerId = useId();
@@ -43,16 +45,16 @@ export function BottomSheet({ title, ariaLabel, kicker, onClose, children, foote
         className="sheet"
         role="dialog"
         aria-modal="true"
-        aria-label={ariaLabel}
+        aria-label={ariaLabel ? t(ariaLabel) : undefined}
         aria-labelledby={ariaLabel ? undefined : kicker ? `${kickerId} ${titleId}` : titleId}
         tabIndex={-1}
       >
         <div className="shead">
           <div>
-            {kicker && <div id={kickerId} className="label">{kicker}</div>}
-            <h2 id={titleId} className="sheet-title">{title}</h2>
+            {kicker && <div id={kickerId} className="label">{t(kicker)}</div>}
+            <h2 id={titleId} className="sheet-title">{t(title)}</h2>
           </div>
-          <IconButton name="x" label="Close" onClick={onClose} />
+          <IconButton name="x" label={t("Close")} onClick={onClose} />
         </div>
         <div className="sbody stack">{children}</div>
         {footer && <div className="sfoot">{footer}</div>}

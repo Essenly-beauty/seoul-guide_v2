@@ -56,7 +56,7 @@ export class PartnerRequestScope {
   dispose() { this.active = false; this.invalidate(); }
 }
 
-export type PartnerDraftRecord<T> = { token: symbol; draft: T; baseline: T; state: SaveState };
+export type PartnerDraftRecord<T> = { token: symbol; draft: T; baseline: T; state: SaveState; retainUnconfirmed?: boolean };
 export type PartnerEditor = { kind: 'category' | 'menu'; id: string };
 /** Memory only, owned by one authenticated PartnerSession, never browser storage. */
 export class PartnerDraftStore {
@@ -78,7 +78,17 @@ export class PartnerDraftStore {
     else if (inactiveKey) this.activeKeys.delete(inactiveKey);
     else this.activeKeys.clear();
   }
-  discardActive() { for (const key of this.activeKeys) this.discard(key); }
+  discardActive() { for (const key of this.activeKeys) {
+    const record = this.records.get(key);
+    // A submitted create may already exist on the server. Keep its idempotency
+    // key through internal navigation until the same request is acknowledged.
+    if (record?.retainUnconfirmed && ['pending', 'unconfirmed'].includes(record.state.kind)) continue;
+    this.discard(key);
+  } }
+  hasRetainedSubmission() { return [...this.activeKeys].some(key => {
+    const record = this.records.get(key);
+    return record?.retainUnconfirmed && ['pending', 'unconfirmed'].includes(record.state.kind);
+  }); }
   hasActiveUnsavedChanges() { return [...this.activeKeys].some((key) => {
     const record = this.records.get(key);
     return record && (record.state.kind === 'pending' || record.state.kind === 'unconfirmed' || (record.state.kind !== 'committed-stale' && JSON.stringify(record.draft) !== JSON.stringify(record.baseline)));
@@ -168,7 +178,9 @@ function PartnerSession({ children, authenticated, checking }: { children: React
   const approvedTraversal = useRef<PartnerTraversalApproval | null>(null);
   const confirmLeave = useCallback((discard = true) => {
     if (!drafts.hasActiveUnsavedChanges()) return true;
-    if (!window.confirm('저장하지 않은 변경사항이 있습니다. 변경사항을 버릴까요?')) return false;
+    if (!window.confirm(drafts.hasRetainedSubmission()
+      ? '저장 결과를 확인 중인 예약이 있습니다. 이동해도 같은 요청을 보관하며, 예약 추가를 다시 열면 결과를 확인할 수 있습니다. 이동할까요?'
+      : '저장하지 않은 변경사항이 있습니다. 변경사항을 버릴까요?')) return false;
     if (discard) drafts.discardActive();
     return true;
   }, [drafts]);
@@ -272,7 +284,7 @@ function PartnerSession({ children, authenticated, checking }: { children: React
       }
       if (!response.ok || body?.ok !== true) {
         if (response.status === 403) void refresh();
-        if (response.status === 409) return { kind: 'conflict', message: '다른 곳에서 정보가 변경되었습니다. 현재 입력은 유지됩니다. 최신 정보를 확인하려면 변경사항을 버리고 다시 불러와 주세요.' };
+        if (response.status === 409) return { kind: 'conflict', message: ['schedule', 'dateOverrides', 'reservationRules'].includes(command.kind) ? '예약과 겹치는 운영시간 변경은 저장할 수 없습니다. 다른 곳에서 설정이 변경되었을 수도 있습니다. 현재 입력은 유지되며, 최신 예약과 설정을 확인해 주세요.' : '다른 곳에서 정보가 변경되었습니다. 현재 입력은 유지됩니다. 최신 정보를 확인하려면 변경사항을 버리고 다시 불러와 주세요.' };
         const message = body?.code === 'PARTNER_READ_ONLY' || body?.code === 'PARTNER_FORBIDDEN' ? '현재 이 매장을 수정할 권한이 없습니다. 권한을 다시 확인하고 있습니다.' : body?.code === 'PARTNER_LIMIT_EXCEEDED' ? '등록 가능한 항목 수를 초과했습니다. 기존 항목을 수정하거나 운영자에게 문의해 주세요.' : body?.code === 'INVALID_COMMAND' ? '입력한 값이 저장 조건에 맞지 않습니다. 이름 길이, 금액과 시간 범위를 확인해 주세요.' : '저장하지 못했습니다. 입력 내용은 유지됩니다. 잠시 후 다시 시도해 주세요.';
         return { kind: 'error', message };
       }

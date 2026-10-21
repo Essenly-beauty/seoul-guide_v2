@@ -9,7 +9,7 @@ import { AnchorTabs } from "@/components/ui/anchor-tabs";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Chip } from "@/components/ui/chip";
-import { ImgPh } from "@/components/ui/img-ph";
+import { ProductThumbnail } from "@/components/product/product-thumbnail";
 import { Notice } from "@/components/ui/notice";
 import { SectionDivider } from "@/components/ui/section-divider";
 import { SectionHeader } from "@/components/ui/section-header";
@@ -327,21 +327,13 @@ export function ProductDetailBody({ product }: { product: Product }) {
         fallback={routes.rankingRetailer("olive_young")}
         rankingHref={routes.rankingRetailer("olive_young")}
       >
-        <div
-          className="product-detail-gallery"
-          role="img"
-          aria-label={`${product.name} product gallery`}
-        >
-          <ImgPh className="product-detail-gallery-main">
-            <Icon name="bag" style={{ width: 44, height: 44, color: "var(--dim)" }} />
-            <span className="caption muted">Product photo coming soon</span>
-          </ImgPh>
-          <ImgPh><span className="label">{product.brand}</span></ImgPh>
-          <ImgPh>
-            <span className="label">
-              {product.stepCategory ? STEP_LABEL[product.stepCategory] : cap(product.category)}
-            </span>
-          </ImgPh>
+        <div className="product-detail-gallery">
+          <ProductThumbnail
+            product={product}
+            decorative={false}
+            loading="eager"
+            style={{ width: "100%", height: product.imageUrl ? 240 : 100, borderRadius: 0, background: product.imageUrl ? "#fff" : "var(--surface-hover)" }}
+          />
         </div>
       </ProductDetailScrollHeader>
 

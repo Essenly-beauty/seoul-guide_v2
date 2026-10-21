@@ -1,11 +1,13 @@
 "use client";
 
+import { T, useLocale } from "@/lib/i18n/locale-provider";
+
 import { useState } from "react";
 import Link from "next/link";
-import { TopBar } from "@/components/ui/top-bar";
 import { BottomNav } from "@/components/ui/bottom-nav";
 import { FavoriteButton } from "@/components/ui/favorite-button";
-import { ImgPh } from "@/components/ui/img-ph";
+import { PlaceThumbnail } from "@/components/place/place-thumbnail";
+import { ProductThumbnail } from "@/components/product/product-thumbnail";
 import { EmptyState } from "@/components/ui/empty-state";
 import { ListRow } from "@/components/ui/list-row";
 import { LiveBadge } from "@/components/ui/live-badge";
@@ -29,13 +31,14 @@ import { OwnedSharedLists } from "@/components/favorites/owned-shared-lists";
 // Pulsing placeholder rows while the account's saved list is fetched —
 // flashing "nothing saved yet" on a fresh device reads as data loss.
 function LoadingRows() {
+  const { t } = useLocale();
   const bar = { borderRadius: 6, background: "var(--surface-hover)", border: "1px solid var(--border)" };
   return (
     <div
       className="stack sm"
       role="status"
       aria-busy="true"
-      aria-label="Loading saved items"
+      aria-label={t("Loading saved items")}
       style={{ animation: "pulse 1.6s ease-in-out infinite" }}
     >
       {[0, 1, 2].map((i) => (
@@ -56,6 +59,7 @@ function LoadingRows() {
 // Members name the snapshot before it becomes a link (v1.1: the auto
 // title was the only option); guests get the join sheet.
 function ShareListButton({ placeIds, onCreated }: { placeIds: string[]; onCreated: () => void }) {
+  const { t } = useLocale();
   const { user } = useAuthUser();
   const { nudge, sheet } = useSigninNudge();
   const { toast, share } = useToast();
@@ -70,9 +74,9 @@ function ShareListButton({ placeIds, onCreated }: { placeIds: string[]; onCreate
       const id = await createSharedList(finalTitle, placeIds);
       setNaming(false);
       onCreated();
-      share({ title: finalTitle, text: "My saved places on MYSEOULDROP. No app install needed; sign in or create an account to open this web link:", url: sharedListUrl(window.location.origin, id) });
+      share({ title: finalTitle, text: t("My saved places on MYSEOULDROP. No app install needed; sign in or create an account to open this web link:"), url: sharedListUrl(window.location.origin, id) });
     } catch (e) {
-      toast(e instanceof Error && e.message === "Nothing to share yet" ? e.message : "Couldn't create the share link — try again");
+      toast(t(e instanceof Error && e.message === "Nothing to share yet" ? e.message : "Couldn't create the share link — try again"));
     } finally {
       setBusy(false);
     }
@@ -81,7 +85,7 @@ function ShareListButton({ placeIds, onCreated }: { placeIds: string[]; onCreate
   if (naming) {
     return (
       <div className="stack sm" style={{ background: "var(--surface)", border: "1px solid var(--border)", borderRadius: 12, padding: "12px" }}>
-        <label className="caption muted" htmlFor="share-list-name">Name your list — friends see this title on the link</label>
+        <label className="caption muted" htmlFor="share-list-name"><T text={"Name your list — friends see this title on the link"} /></label>
         <input
           id="share-list-name"
           className="input"
@@ -92,10 +96,10 @@ function ShareListButton({ placeIds, onCreated }: { placeIds: string[]; onCreate
           autoFocus
         />
         <div className="row" style={{ gap: 8 }}>
-          <Button variant="secondary" size="sm" style={{ flex: 1 }} disabled={busy} onClick={() => setNaming(false)}>Cancel</Button>
-          <Button size="sm" style={{ flex: 1 }} disabled={busy} onClick={() => void shareNow()}>Share link</Button>
+          <Button variant="secondary" size="sm" style={{ flex: 1 }} disabled={busy} onClick={() => setNaming(false)}><T text={"Cancel"} /></Button>
+          <Button size="sm" style={{ flex: 1 }} disabled={busy} onClick={() => void shareNow()}><T text={"Share link"} /></Button>
         </div>
-        <p className="t-caption">No app install needed. Friends sign in or create an account to open the web link and save places to their own list.</p>
+        <p className="t-caption"><T text={"No app install needed. Friends sign in or create an account to open the web link and save places to their own list."} /></p>
       </div>
     );
   }
@@ -116,14 +120,14 @@ function ShareListButton({ placeIds, onCreated }: { placeIds: string[]; onCreate
           setNaming(true);
         }}
       >
-        <Icon name="share" size="xs" /> Share this list
-      </Button>
+        <Icon name="share" size="xs" /><T text={"Share this list"} /> </Button>
     </>
   );
 }
 
 // ── Places — category filter + detail-page list rows ──────
 function PlacesSection({ favPlaces, onShareCreated }: { favPlaces: Place[]; onShareCreated: () => void }) {
+  const { t } = useLocale();
   const [cats, setCats] = useState<Place["type"][]>([]);
   const shown = cats.length === 0 ? favPlaces : favPlaces.filter((p) => cats.includes(p.type));
   return (
@@ -135,17 +139,17 @@ function PlacesSection({ favPlaces, onShareCreated }: { favPlaces: Place[]; onSh
         onClear={() => setCats([])}
       />
       {shown.length === 0 ? (
-        <EmptyState>{favPlaces.length === 0 ? "Nothing saved yet — tap ♥ on any place." : "No saved places in this category."}</EmptyState>
+        <EmptyState><T text={favPlaces.length === 0 ? "Nothing saved yet — tap ♥ on any place." : "No saved places in this category."} /></EmptyState>
       ) : (
         <div>
           {shown.map((p) => (
             <ListRow
               key={p.id}
               href={routes.place(p.id)}
-              media={<ImgPh className="thumb56" />}
+              media={<PlaceThumbnail place={p} className="thumb56" />}
               title={p.name}
               titleAccessory={<CategoryBadge type={p.type} size={16} />}
-              caption={<>{[TYPE_LABEL[p.type], zoneShort(p.zone), p.priceRange].filter(Boolean).join(" · ")}</>}
+              caption={<>{[t(TYPE_LABEL[p.type]), zoneShort(p.zone), p.priceRange].filter(Boolean).join(" · ")}</>}
               meta={(
                 <>
                   <RatingLine rating={p.rating} count={p.ratingCount} plain />
@@ -168,12 +172,12 @@ function ProductsSection({ favProducts }: { favProducts: Product[] }) {
   return (
     <section className="stack sm">
       <SectionHeader title="Products" count={favProducts.length} actionLabel="See all" href={routes.ranking} />
-      {favProducts.length === 0 && <EmptyState>No saved products yet.</EmptyState>}
+      {favProducts.length === 0 && <EmptyState><T text={"No saved products yet."} /></EmptyState>}
       <div>
         {favProducts.map((prod) => (
           <div className="listrow v2" key={prod.id}>
             <Link href={routes.shopItem(prod.id)} className="row" style={{ gap: 12, flex: 1, minWidth: 0 }}>
-              <ImgPh className="thumb56" />
+              <ProductThumbnail product={prod} className="thumb56" />
               <div className="stack" style={{ flex: 1, minWidth: 0, gap: 2 }}>
                 <b className="t-label-md" style={{ fontSize: 14, display: "block", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{prod.name}</b>
                 <div className="t-caption" style={{ overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
@@ -195,7 +199,7 @@ function ArticlesSection({ favArticles }: { favArticles: Article[] }) {
   return (
     <section className="stack sm">
       <SectionHeader title="Blog" count={favArticles.length} actionLabel="See all" href={routes.blog} />
-      {favArticles.length === 0 && <EmptyState>No saved stories yet.</EmptyState>}
+      {favArticles.length === 0 && <EmptyState><T text={"No saved stories yet."} /></EmptyState>}
       <div>
         {favArticles.map((a) => (
           <div className="listrow" key={a.slug}>
@@ -203,7 +207,7 @@ function ArticlesSection({ favArticles }: { favArticles: Article[] }) {
               <span className="ic"><Icon name="book" size="sm" /></span>
               <div style={{ flex: 1, minWidth: 0 }}>
                 <b style={{ display: "block", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{a.title}</b>
-                <div className="caption muted">{a.date} · {a.readMin} min read</div>
+                <div className="caption muted">{a.date} · <T text="{minutes} min read" values={{ minutes: a.readMin }} /></div>
               </div>
             </Link>
             <FavoriteButton kind="article" id={a.slug} variant="soft" size="xs" />
@@ -225,18 +229,14 @@ export default function FavoritesPage() {
   const favArticles = ARTICLES.filter((a) => favs.article.includes(a.slug));
   return (
     <>
-      <TopBar center title="Saved" />
-      <div className="app-scroll pad stack pagev2">
-        <div>
-          <div className="label">Saved</div>
-          <div className="h1">Your <span style={{ fontStyle: "italic", color: "var(--accent)" }}>K-beauty list.</span></div>
-        </div>
+      <div className="app-scroll pad stack pagev2 app-tab-content">
+        <h1 className="h1"><T text={"Your saved list"} /></h1>
         {/* guest -> account funnel: saves live on this device only until sign-in */}
         {ready && !authLoading && !user && (
           <Notice icon="user">
             <span className="row" style={{ gap: 10, alignItems: "center", flexWrap: "wrap" }}>
-              <span style={{ flex: 1, minWidth: 180 }}>Saved on this device — sign in to keep your list on your account.</span>
-              <Button size="sm" href={`${routes.signIn}?next=/favorites`} style={{ flex: "none" }}>Sign in</Button>
+              <span style={{ flex: 1, minWidth: 180 }}><T text={"Sign in to save places — hearts are kept on your account."} /></span>
+              <Button size="sm" href={`${routes.signIn}?next=/favorites`} style={{ flex: "none" }}><T text={"Sign in"} /></Button>
             </span>
           </Notice>
         )}

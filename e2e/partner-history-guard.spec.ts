@@ -27,7 +27,8 @@ async function openServices(page: Page) {
   await page.waitForURL((url) => !url.pathname.startsWith('/login'));
 
   await page.goto('/partner');
-  await page.getByRole('link', { name: '카테고리·메뉴' }).click();
+  await page.getByRole('navigation', { name: '가맹점 관리' }).getByRole('link', { name: '메뉴·패키지' }).click();
+  await page.locator('details').filter({ hasText: '카테고리 관리' }).locator('summary').click();
   await expect(page.getByRole('button', { name: '카테고리 추가' })).toBeEnabled();
 }
 
@@ -48,6 +49,8 @@ test('a rejected Forward keeps its destination in the history stack', async ({ p
   await page.getByRole('link', { name: '운영자에게 문의' }).click();
   await expect(page).toHaveURL(/\/support$/);
   await page.goBack();
+  const categories = page.locator('details').filter({ hasText: '카테고리 관리' });
+  if ((await categories.getAttribute('open')) === null) await categories.locator('summary').click();
   await expect(page.getByRole('button', { name: '카테고리 추가' })).toBeEnabled();
   await page.getByRole('button', { name: '카테고리 추가' }).click();
   const forwardName = page.getByLabel('카테고리명 (한국어)');

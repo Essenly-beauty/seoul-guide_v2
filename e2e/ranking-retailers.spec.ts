@@ -266,7 +266,7 @@ test("uses internal product links, concise metadata, placeholders, and keeps the
   await expect(first).not.toContainText("₩");
   await expect(first).not.toContainText(/reviews/i);
   await expect(first.getByLabel(/Rating .* out of 5/)).toHaveCount(0);
-  await expect(rows.locator(".imgph.thumb56")).toHaveCount(20);
+  await expect(rows.locator(".image-thumbnail.thumb56")).toHaveCount(20);
 
   const last = rows.last();
   await last.scrollIntoViewIfNeeded();

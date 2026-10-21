@@ -1,9 +1,10 @@
+import { T } from "@/lib/i18n/locale-provider";
 import { notFound } from "next/navigation";
 import { BottomNav } from "@/components/ui/bottom-nav";
 import { Button } from "@/components/ui/button";
 import { BackButtonBordered } from "@/components/ui/back-button";
 import { ActionButton } from "@/components/ui/action-button";
-import { Badge } from "@/components/ui/badge";
+import { TopicTag } from "@/components/ui/topic-tag";
 import { Icon } from "@/components/icon";
 import { routes } from "@/lib/routes";
 import { getArticle } from "@/lib/data";
@@ -25,28 +26,35 @@ export default async function JournalDetailPage(props: { params: Promise<{ slug:
         </div>
 
         <div className="pad stack article-body">
-          <div className="row" style={{ gap: 6, flexWrap: "wrap" }}>
-            {a.tags.map((t) => <Badge key={t} tone="accent">{t}</Badge>)}
-          </div>
-          <h1 className="hero" style={{ fontSize: 28 }}>{a.title}</h1>
-          <p className="caption muted mono">{a.date} · {a.readMin} min read</p>
+          <header className="article-heading">
+            <div className="chipwrap">
+              {a.tags.map((t) => <TopicTag key={t}>{t}</TopicTag>)}
+            </div>
+            <h1>{a.title}</h1>
+            <p className="caption muted">{a.date} · <T text="{minutes} min read" values={{ minutes: a.readMin }} /></p>
+          </header>
 
           <p>Glass skin isn&apos;t a filter. It&apos;s hydration you can see, built one layer at a time. The Korean routine that made it famous has seven steps, but the logic is simple: clean, balance, hydrate, hold.</p>
-          <h2 className="h2">1. Double cleanse</h2>
+          <section className="article-section">
+          <h2>1. Double cleanse</h2>
           <p className="muted">Start with an oil cleanser to dissolve SPF and makeup. Follow with a gentle foam. Residue is the enemy of the glow.</p>
-          <h2 className="h2">2. Toner, essence, serum</h2>
+          </section>
+          <section className="article-section">
+          <h2>2. Toner, essence, serum</h2>
           <p className="muted">Tap. Don&apos;t rub. Each layer is a thin film of moisture you&apos;ll seal in later. Choose hydrating toners over astringents if your skin runs dry.</p>
-          <h2 className="h2">3. Moisturize + SPF</h2>
+          </section>
+          <section className="article-section">
+          <h2>3. Moisturize + SPF</h2>
           <p className="muted">The seal. Even if you skip every other step, don&apos;t skip this. Korean SPFs are lighter and reapply-friendly.</p>
+          </section>
 
           <ActionButton variant="secondary" share={`${a.title} | myseouldrop.com`}>
-            <Icon name="share" size="sm" /> Share this article
-          </ActionButton>
+            <Icon name="share" size="sm" /><T text={"Share this article"} /> </ActionButton>
 
           <div className="card accent stack sm">
-            <b className="serif h3">Try MYSEOULDROP</b>
-            <p className="small muted">Free K-beauty guide + hair kit for your Seoul trip.</p>
-            <Button href={routes.splash}>Sign Up →</Button>
+            <b className="serif h3"><T text={"Try MYSEOULDROP"} /></b>
+            <p className="small muted"><T text={"Free K-beauty guide + hair kit for your Seoul trip."} /></p>
+            <Button href={routes.splash}><T text={"Sign Up →"} /></Button>
           </div>
         </div>
       </div>

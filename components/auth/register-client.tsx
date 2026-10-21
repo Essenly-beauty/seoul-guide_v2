@@ -1,5 +1,6 @@
 "use client";
 
+import { useLocale } from "@/lib/i18n/locale-provider";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
@@ -20,6 +21,7 @@ const COUNTRIES = [
 const RESEND_COOLDOWN_S = 60;
 
 export function RegisterClient({ next }: { next?: string }) {
+  const { t } = useLocale();
   const router = useRouter();
   const onboardingTarget = registrationDestination(next);
   const signInHref = signInFromRegistration(next);
@@ -133,12 +135,11 @@ export function RegisterClient({ next }: { next?: string }) {
       <AuthShell
         title="Check your email"
         oauthNext={onboardingTarget}
-        support={<>We sent a confirmation link to <b style={{ color: "var(--text)" }}>{sentTo}</b></>}
-        foot={<>Wrong address? <button className="auth-link" onClick={() => { setSentTo(null); setResendNote(null); }}>Try again</button></>}
+        support={t("We sent a confirmation link to {email}", { email: sentTo })}
+        foot={<>{t("Wrong address?")} <button className="auth-link" onClick={() => { setSentTo(null); setResendNote(null); }}>{t("Try again")}</button></>}
       >
         <p className="auth-support" style={{ marginTop: 28, lineHeight: 1.6 }}>
-          Tap the link in the email to activate your account.
-          For the smoothest ride, open it on this device.
+          {t("Tap the link in the email to activate your account. Open it on this device.")}
         </p>
         <button
           type="button"
@@ -147,12 +148,12 @@ export function RegisterClient({ next }: { next?: string }) {
           disabled={resendIn > 0}
           onClick={resend}
         >
-          {resendIn > 0 ? `Resend available in ${resendIn}s` : "Resend email"}
+          {resendIn > 0 ? t("Resend available in {seconds}s", { seconds: resendIn }) : t("Resend email")}
         </button>
-        {resendNote && <p className="auth-support" role="status" style={{ marginTop: 14 }}>{resendNote}</p>}
+        {resendNote && <p className="auth-support" role="status" style={{ marginTop: 14 }}>{t(resendNote)}</p>}
         <p className="auth-support" style={{ marginTop: 18 }}>
-          Confirmed it already (maybe on another device)?{" "}
-          <Link className="auth-link" href={signInHref}>Sign in</Link>
+          {t("Already confirmed?")}{" "}
+          <Link className="auth-link" href={signInHref}>{t("Sign in")}</Link>
         </p>
       </AuthShell>
     );
@@ -162,16 +163,16 @@ export function RegisterClient({ next }: { next?: string }) {
     <AuthShell
       title="Register"
       oauthNext={onboardingTarget}
-      support={<>Create your free account and start saving places right away. Need help? <Link className="auth-link" href={routes.support}>Contact us</Link></>}
-      foot={<>Do you have an account? <Link className="auth-link" href={signInHref}>Sign in</Link></>}
+      support={t("Create your free account and start saving places.")}
+      foot={<>{t("Already have an account?")} <Link className="auth-link" href={signInHref}>{t("Sign in")}</Link></>}
     >
       <form onSubmit={submit} style={{ display: "contents" }}>
         <div className="auth-fields">
           <input
             className="auth-field"
             autoComplete="name"
-            placeholder="Full name"
-            aria-label="Full name"
+            placeholder={t("Full name")}
+            aria-label={t("Full name")}
             required
             value={form.name}
             onChange={set("name")}
@@ -181,8 +182,8 @@ export function RegisterClient({ next }: { next?: string }) {
             type="email"
             inputMode="email"
             autoComplete="email"
-            placeholder="Enter email"
-            aria-label="Email"
+            placeholder={t("Enter email")}
+            aria-label={t("Email")}
             aria-invalid={!!error}
             aria-describedby={error ? "register-error" : undefined}
             required
@@ -194,8 +195,8 @@ export function RegisterClient({ next }: { next?: string }) {
               className="auth-field"
               type={reveal ? "text" : "password"}
               autoComplete="new-password"
-              placeholder="Password"
-              aria-label="Password"
+              placeholder={t("Password")}
+              aria-label={t("Password")}
               aria-invalid={!!error}
               aria-describedby={error ? "register-error" : undefined}
               required
@@ -207,7 +208,7 @@ export function RegisterClient({ next }: { next?: string }) {
             <button
               type="button"
               className="auth-field-toggle"
-              aria-label={reveal ? "Hide password" : "Show password"}
+              aria-label={t(reveal ? "Hide password" : "Show password")}
               aria-pressed={reveal}
               onClick={() => setReveal((v) => !v)}
             >
@@ -218,8 +219,8 @@ export function RegisterClient({ next }: { next?: string }) {
             className="auth-field"
             type={reveal ? "text" : "password"}
             autoComplete="new-password"
-            placeholder="Confirm password"
-            aria-label="Confirm password"
+            placeholder={t("Confirm password")}
+            aria-label={t("Confirm password")}
             aria-invalid={!!error && error.includes("match")}
             required
             minLength={PASSWORD_MIN_LENGTH}
@@ -228,14 +229,14 @@ export function RegisterClient({ next }: { next?: string }) {
           />
           <select
             className="auth-field"
-            aria-label="Country (optional)"
+            aria-label={t("Country (optional)")}
             value={form.country}
             onChange={(e) => setForm((f) => ({ ...f, country: e.target.value }))}
             style={{ color: form.country ? undefined : "var(--dim)" }}
           >
-            <option value="">Where are you visiting from? (optional)</option>
+            <option value="">{t("Where are you visiting from? (optional)")}</option>
             {COUNTRIES.map(([code, label]) => (
-              <option key={code} value={code}>{label}</option>
+              <option key={code} value={code}>{t(label)}</option>
             ))}
           </select>
         </div>
@@ -247,11 +248,11 @@ export function RegisterClient({ next }: { next?: string }) {
               required
               checked={consent}
               onChange={(e) => setConsent(e.target.checked)}
-              aria-label="Agree to the Terms and Privacy Policy"
+              aria-label={t("Agree to the Terms and Privacy Policy")}
             />
             <span style={{ flex: 1 }}>
-              I agree to the <Link className="auth-link" href={routes.legalTerms}>Terms of Service</Link> and{" "}
-              <Link className="auth-link" href={routes.legalPrivacy}>Privacy Policy</Link>. (required)
+              {t("I agree to the")} <Link className="auth-link" href={routes.legalTerms}>{t("Terms of Service")}</Link> {t("and")}{" "}
+              <Link className="auth-link" href={routes.legalPrivacy}>{t("Privacy Policy")}</Link>. {t("(required)")}
             </span>
           </label>
           <label className="auth-consent caption muted">
@@ -259,22 +260,22 @@ export function RegisterClient({ next }: { next?: string }) {
               type="checkbox"
               checked={marketing}
               onChange={(e) => setMarketing(e.target.checked)}
-              aria-label="Receive tips and updates by email"
+              aria-label={t("Receive tips and updates by email")}
             />
-            <span>Send me Seoul beauty tips and app updates. (optional)</span>
+            <span>{t("Send me Seoul beauty tips and app updates. (optional)")}</span>
           </label>
         </div>
 
         {error && (
           <p id="register-error" className="auth-error" role="alert">
-            {error}{error.includes("already has an account") && (
-              <> <Link className="auth-link" href={signInHref}>Sign in</Link> · <Link className="auth-link" href={resetHref}>Reset password</Link></>
+            {t(error)}{error.includes("already has an account") && (
+              <> <Link className="auth-link" href={signInHref}>{t("Sign in")}</Link> · <Link className="auth-link" href={resetHref}>{t("Reset password")}</Link></>
             )}
           </p>
         )}
 
         <button className="auth-cta" type="submit" disabled={busy}>
-          {busy ? "Creating account…" : "Create account"}
+          {t(busy ? "Creating account…" : "Create account")}
         </button>
       </form>
     </AuthShell>

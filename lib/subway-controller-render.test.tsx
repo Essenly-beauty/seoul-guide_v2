@@ -63,10 +63,12 @@ describe("subway route controller", () => {
     expect(params.get("origin")).toContain("Gangnam Station");
   });
 
-  it("renders both labelled endpoint fields and the swap action", () => {
+  it("renders labelled station-search launchers with committed endpoints and the swap action", () => {
     const $ = render({ route: null, activeStationId: null });
-    expect($(".station-combobox label").map((_, label) => $(label).text()).get()).toEqual(["Departure", "Arrival"]);
-    expect($("input[role='combobox']").map((_, input) => $(input).attr("value")).get()).toEqual(["Gangnam", "Hongik Univ."]);
+    const launchers = $(".station-combobox button[aria-haspopup='dialog']");
+    expect(launchers.map((_, button) => $(button).attr("aria-label")).get()).toEqual(["Departure: Gangnam", "Arrival: Hongik Univ."]);
+    expect($("input[role='combobox']")).toHaveLength(0);
+    expect(launchers.map((_, button) => $(button).attr("aria-expanded")).get()).toEqual(["false", "false"]);
     expect($("button[aria-label='Swap departure and arrival']").attr("disabled")).toBeUndefined();
   });
 

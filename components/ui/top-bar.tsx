@@ -1,3 +1,4 @@
+import { T } from "@/lib/i18n/locale-provider";
 import type { ReactNode } from "react";
 
 type TopBarProps = {
@@ -13,7 +14,7 @@ export function TopBar({ left, title, right, center, titleClassName }: TopBarPro
   return (
     <div className={"topbar" + (center ? " center" : "")}>
       <span className="topbar-slot left">{left}</span>
-      <span className={"title " + (titleClassName ?? "")}>{title}</span>
+      <span className={"title " + (titleClassName ?? "")}>{typeof title === "string" ? <T text={title} /> : title}</span>
       <span className="topbar-slot right">{right}</span>
     </div>
   );

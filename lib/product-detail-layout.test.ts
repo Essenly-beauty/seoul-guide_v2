@@ -48,9 +48,11 @@ describe("product detail information-page layout", () => {
     expect(daisoCtaSource).toContain('cat=daiso');
   });
 
-  it("renders a collage with shared progressive back/share chrome", () => {
+  it("renders the actual product photo with shared progressive back/share chrome", () => {
     expect(bodySource).toContain('className="product-detail-gallery"');
-    expect(bodySource.match(/<ImgPh/g)?.length ?? 0).toBeGreaterThanOrEqual(3);
+    expect(bodySource).toContain("<ProductThumbnail");
+    expect(bodySource).toContain('loading="eager"');
+    expect(bodySource).not.toContain("<ImgPh");
     expect(bodySource).toContain("ProductDetailScrollHeader");
     expect(daisoBodySource).toContain("ProductDetailScrollHeader");
     expect(routeSource).not.toContain("heroOverlay=");
@@ -103,7 +105,7 @@ describe("product detail information-page layout", () => {
 
   it("keeps the product shell stable and scannable on a narrow mobile viewport", () => {
     expect(cssSource).toMatch(
-      /\.product-detail-gallery\s*\{[^}]*grid-template-columns:\s*minmax\(0,\s*1\.4fr\) minmax\(0,\s*1fr\);[^}]*grid-template-rows:\s*82px 82px;/,
+      /\.product-detail-gallery\s*\{[^}]*min-width:\s*0;[^}]*overflow:\s*hidden;/,
     );
     expect(cssSource).toMatch(
       /\.product-detail-scroll \.anchortabs\s*\{[^}]*overflow-x:\s*auto;/,

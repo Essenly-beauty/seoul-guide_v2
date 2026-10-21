@@ -1,0 +1,32 @@
+ok   A.search.results — count=56 first="JUNO HAIR | Gangnam Square Branch · Hair Salon ★ 4.2 (73) · 90 m · 서울 강남구 테헤란로 1"
+ok   A.map.deepLink — /map?place=ct-juno-hair-gangnam-square-branch
+ok   A.map.summaryShowsResult — name="JUNO HAIR"
+ok   A.detail.open — detail=1
+ok   A.detail.title — intro="JUNO HAIR | Gangnam Square Branch 준오헤어 강남역스퀘어2호점 Hair Salon Open ★ 4.2 (73) 90m · 서울 강남구 테헤란로 101 3F"
+ok   A.external.google.destinationIsName — https://www.google.com/maps/dir/?api=1&destination=JUNO HAIR | Gangnam Square Branch, 서울 강남구 테헤란로 101&travelmode=transit
+ok   A.external.kakaoNaver — Google, Kakao, Naver Map
+ok   A.back.returnsToSearch — /search
+ok   A.errors.none
+ok   B.slots.available — date=Fri, Oct 23, 2026 slots=10:00,10:30,11:00,11:30,12:00,12:30,13:00,13:30,14:00,14:30,15:00,15:30,16:00,16:30,17:00,17:30,18:00,18:30
+ok   B.created — url=/bookings/4e6a8745-6ee5-488f-a794-f88a6c678361 status=Awaiting confirmation
+ok   B.customer.messageShown —  booking Messages Seoul time You QA r1: 주차 가능한가요? Oct 21 · 10:16 Sent Message the venue 
+FAIL B.partner.threadHasMessage — 매장 정보를 불러오고 있습니다 접근 권한과 최신 설정을 확인하고 있습니다.
+FAIL B.partner.replySent — {}
+FAIL B.customer.replyVisible — not shown
+ok   B.partner.bookingListed — looking for 10월 23일 14:00 QA Guest
+ok   B.partner.rescheduled — new=10:00 net={"m":"PATCH","status":200,"url":"/api/partner/operations/bookings/4e6a8745-6ee5-488f-a794-f88a6c678361","body":"{\"booking\":{\"id\":\"4e6a8
+ok   B.customer.seesNewTime —  Studio · Test Signature cut · Min Fri, Oct 23, 2026 · 10:00 Seoul time View boo
+ok   B.customer.cancelled — Booking details You cancelled this booking. Cancelled MYSEOULDROP Booking Studio · Test S
+FAIL B.partner.showsCancelled — 예약 목록 기간·상태·담당자로 예약을 찾고, 상세에서 처리해요. 새로고침 + 예약 추가 오늘 이번 주 이번 달 지난 예약 전체 모든 담당자 Local media QA Min Jiyoon 모든 경로 앱 전화 방문 날짜 지정 전체 9 확인 대기 1 예약 확정 0 취소 8 방문 완료 0 미방문 0 오늘 11:00–12:00 화면점검 테스트 010-0000-000
+ok   B.partner.homeRecentHasCancel — 최근 예약 변경 QA Guest · Signature cut 취소 10월 21일 (수) 10:18 QA Guest · Signature cut 확인 대기 10월 20일 (화) 21:04 QA Guest · Signature cut 취소 10월 20일 (화) 20:41 QA Guest · Signature cut 취소 10월 20일 (화) 20:32
+ok   B.customer.errors.none
+
+18/22 passed
+FAILED:
+- B.partner.threadHasMessage — 매장 정보를 불러오고 있습니다 접근 권한과 최신 설정을 확인하고 있습니다.
+- B.partner.replySent — {}
+- B.customer.replyVisible — not shown
+- B.partner.showsCancelled — 예약 목록 기간·상태·담당자로 예약을 찾고, 상세에서 처리해요. 새로고침 + 예약 추가 오늘 이번 주 이번 달 지난 예약 전체 모든 담당자 Local media QA Min Jiyoon 모든 경로 앱 전화 방문 날짜 지정 전체 9 확인 대기 1 예약 확정 0 취소 8 방문 완료 0 미방문 0 오늘 11:00–12:00 화면점검 테스트 010-0000-000
+evidence: /private/tmp/claude-501/-Users-hanmyeong-gwan-mobile-design/c0d42143-4b4a-430f-8cde-e410efaabd0e/scratchpad/qa/out/roundtrip/member-roundtrip.json
+
+[exited with code 0]

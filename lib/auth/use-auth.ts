@@ -6,6 +6,7 @@
 import { useEffect, useMemo, useState } from "react";
 import type { User } from "@supabase/supabase-js";
 import { supabaseBrowser } from "@/lib/supabase/client";
+import { isDefiniteSignOut } from "@/lib/auth/session-errors";
 
 export function useAuthUser(): { user: User | null; loading: boolean } {
   const supabase = useMemo(() => supabaseBrowser(), []);
@@ -21,8 +22,15 @@ export function useAuthUser(): { user: User | null; loading: boolean } {
     // server-side) alive across reloads (auth doc issue #3, 2026-08-16).
     let sawAuthEvent = false;
     let sawServerUser = false;
-    supabase.auth.getUser().then(({ data }) => {
+    supabase.auth.getUser().then(({ data, error }) => {
       if (cancelled) return;
+      // Offline or an auth-server hiccup is not a sign-out: keep the cached
+      // INITIAL_SESSION user rather than showing a signed-in member as a guest
+      // (the favorites store keeps the account too — review 2026-10-21).
+      if (!data.user && !isDefiniteSignOut(error)) {
+        setLoading(false);
+        return;
+      }
       sawServerUser = true;
       if (!sawAuthEvent) setUser(data.user ?? null);
       setLoading(false);

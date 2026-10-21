@@ -27,6 +27,7 @@ import { Icon } from "@/components/icon";
 import { MAP_CATEGORIES, TYPE_COLOR, TYPE_LABEL, type PlaceType } from "@/lib/data";
 
 const SEMANTIC_COLORS = [
+  ["--action", "Primary action"], ["--on-action", "On primary"],
   ["--brand", "Brand"], ["--brand-soft", "Brand soft"], ["--text-primary", "Text primary"],
   ["--text-secondary", "Text secondary"], ["--text-disabled", "Text disabled"],
   ["--bg-surface", "Surface"], ["--bg-surface-sunken", "Surface sunken"], ["--border-default", "Border"],

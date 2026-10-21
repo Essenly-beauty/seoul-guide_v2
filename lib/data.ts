@@ -1,6 +1,7 @@
 // Sample data layer mirroring seoul-beauty-guide's Product/Place/Journal models.
 // Filters in Shop and Spot operate over these in-memory arrays (client-side, single-select, AND-combined).
 
+import { localBookingPreviewPlaces } from "./booking/local-preview";
 import type { IconName } from "@/components/icon";
 import { CREATRIP_PLACES } from "./generated/creatrip-places";
 import { PLACE_PHOTOS, PLACE_PHOTO_THUMBNAILS } from "./generated/place-photos";
@@ -88,7 +89,7 @@ export const TYPE_LABEL: Record<PlaceType, string> = {
 };
 export const TYPE_ICON: Record<PlaceType, IconName> = {
   olive_young: "bag", daiso: "gift", skin_clinic: "cross", hair_salon: "scissors",
-  nail_lash: "spa", personal_color: "mark", head_spa: "spa", mall: "gift", etc: "pin",
+  nail_lash: "hand", personal_color: "mark", head_spa: "shower", mall: "store", etc: "pin",
 };
 
 /** Olive Young's brand lime — used by the OY brand mark on chips and map pins. */
@@ -99,7 +100,7 @@ export const OY_BRAND_GREEN = "#9bce26";
  *  mark fall back to their TYPE_ICON glyph in TYPE_COLOR. */
 export const BRAND_MARK_SRC: Partial<Record<PlaceType, string>> = {
   olive_young: "/brands/olive-young-logo.jpeg",
-  daiso: "/brands/daiso-mark.svg",
+  daiso: "/brands/daiso-logo.jpeg",
 };
 
 /** Category accent colors (spec v2 §3.1) — shared by filter chips, map pins, and search rows.
@@ -510,6 +511,8 @@ export const PLACES: Place[] = applyEnglishNameOverrides(CATALOGUE_PLACES)
     (place.geoSource !== "area" || place.locationVerification === "provisional")
   );
 
+PLACES.push(...localBookingPreviewPlaces());
+
 const PUBLISHED_PLACE_TYPES = new Set(PLACES.map((place) => place.type));
 
 /** Do not offer a discovery filter that can only lead to an empty result. */
@@ -544,13 +547,13 @@ export type Product = {
 };
 
 export const PRODUCTS: Product[] = [
-  { id: "cosrx-snail-mucin", brand: "COSRX", name: "Advanced Snail 96 Mucin Power Essence", nameKr: "코스알엑스 달팽이 뮤신 96 에센스", category: "skincare", stepCategory: "essence", channel: "olive_young", priceRange: "₩₩", isEditorsPick: true, isTrending: true, skinTypes: ["Dry", "Sensitive"], concerns: ["Hydration", "Brightening"], zoneAvailability: ["myeongdong", "hongdae", "gangnam_station"], salesRank: 1, reviewRank: 2 },
-  { id: "anua-heartleaf-toner", brand: "Anua", name: "Heartleaf 77% Soothing Toner", nameKr: "아누아 어성초 77 토너", category: "skincare", stepCategory: "toner", channel: "olive_young", priceRange: "₩", isTrending: true, skinTypes: ["Oily", "Combo", "Sensitive"], concerns: ["Redness", "Pores"], salesRank: 2, reviewRank: 1 },
-  { id: "boj-glow-serum", brand: "Beauty of Joseon", name: "Glow Deep Serum: Rice + Alpha Arbutin", nameKr: "조선미녀 글로우 세럼", category: "skincare", stepCategory: "serum", channel: "olive_young", priceRange: "₩₩", isEditorsPick: true, skinTypes: ["Dry", "Combo"], concerns: ["Brightening", "Hydration"], salesRank: 4, reviewRank: 3 },
-  { id: "boj-relief-sun", brand: "Beauty of Joseon", name: "Relief Sun: Rice + Probiotics SPF50+", nameKr: "조선미녀 릴리프 선크림", category: "skincare", stepCategory: "sunscreen", channel: "olive_young", priceRange: "₩", isTrending: true, skinTypes: ["Dry", "Oily", "Combo", "Sensitive"], concerns: ["Hydration"], salesRank: 3, reviewRank: 4 },
-  { id: "klairs-cleansing-oil", brand: "Klairs", name: "Gentle Black Deep Cleansing Oil", nameKr: "클레어스 젠틀 블랙 클렌징 오일", category: "skincare", stepCategory: "cleanser", channel: "olive_young", priceRange: "₩₩", skinTypes: ["Dry", "Sensitive"], concerns: ["Hydration"], salesRank: 8, reviewRank: 9 },
-  { id: "illiyoon-cream", brand: "Illiyoon", name: "Ceramide Ato Concentrate Cream", nameKr: "일리윤 세라마이드 아토 크림", category: "skincare", stepCategory: "moisturizer", channel: "olive_young", priceRange: "₩", isEssenly: true, skinTypes: ["Dry", "Sensitive"], concerns: ["Hydration"], salesRank: 7, reviewRank: 6 },
-  { id: "mediheal-teatree", brand: "Mediheal", name: "Tea Tree Care Solution Mask (10pk)", nameKr: "메디힐 티트리 마스크팩", category: "skincare", stepCategory: "mask_pack", channel: "olive_young", priceRange: "₩", skinTypes: ["Oily", "Combo"], concerns: ["Acne", "Redness"], salesRank: 6, reviewRank: 5 },
+  { id: "cosrx-snail-mucin", imageUrl: "/products/cosrx-snail-mucin.webp", brand: "COSRX", name: "Advanced Snail 96 Mucin Power Essence", nameKr: "코스알엑스 달팽이 뮤신 96 에센스", category: "skincare", stepCategory: "essence", channel: "olive_young", priceRange: "₩₩", isEditorsPick: true, isTrending: true, skinTypes: ["Dry", "Sensitive"], concerns: ["Hydration", "Brightening"], zoneAvailability: ["myeongdong", "hongdae", "gangnam_station"], salesRank: 1, reviewRank: 2 },
+  { id: "anua-heartleaf-toner", imageUrl: "/products/anua-heartleaf-toner.webp", brand: "Anua", name: "Heartleaf 77% Soothing Toner", nameKr: "아누아 어성초 77 토너", category: "skincare", stepCategory: "toner", channel: "olive_young", priceRange: "₩", isTrending: true, skinTypes: ["Oily", "Combo", "Sensitive"], concerns: ["Redness", "Pores"], salesRank: 2, reviewRank: 1 },
+  { id: "boj-glow-serum", imageUrl: "/products/boj-glow-serum.webp", brand: "Beauty of Joseon", name: "Glow Deep Serum: Rice + Alpha Arbutin", nameKr: "조선미녀 글로우 세럼", category: "skincare", stepCategory: "serum", channel: "olive_young", priceRange: "₩₩", isEditorsPick: true, skinTypes: ["Dry", "Combo"], concerns: ["Brightening", "Hydration"], salesRank: 4, reviewRank: 3 },
+  { id: "boj-relief-sun", imageUrl: "/products/boj-relief-sun.webp", brand: "Beauty of Joseon", name: "Relief Sun: Rice + Probiotics SPF50+", nameKr: "조선미녀 릴리프 선크림", category: "skincare", stepCategory: "sunscreen", channel: "olive_young", priceRange: "₩", isTrending: true, skinTypes: ["Dry", "Oily", "Combo", "Sensitive"], concerns: ["Hydration"], salesRank: 3, reviewRank: 4 },
+  { id: "klairs-cleansing-oil", imageUrl: "/products/klairs-cleansing-oil.webp", brand: "Klairs", name: "Gentle Black Deep Cleansing Oil", nameKr: "클레어스 젠틀 블랙 클렌징 오일", category: "skincare", stepCategory: "cleanser", channel: "olive_young", priceRange: "₩₩", skinTypes: ["Dry", "Sensitive"], concerns: ["Hydration"], salesRank: 8, reviewRank: 9 },
+  { id: "illiyoon-cream", imageUrl: "/products/illiyoon-cream.webp", brand: "Illiyoon", name: "Ceramide Ato Concentrate Cream", nameKr: "일리윤 세라마이드 아토 크림", category: "skincare", stepCategory: "moisturizer", channel: "olive_young", priceRange: "₩", isEssenly: true, skinTypes: ["Dry", "Sensitive"], concerns: ["Hydration"], salesRank: 7, reviewRank: 6 },
+  { id: "mediheal-teatree", imageUrl: "/products/mediheal-teatree.webp", brand: "Mediheal", name: "Tea Tree Care Solution Mask (10pk)", nameKr: "메디힐 티트리 마스크팩", category: "skincare", stepCategory: "mask_pack", channel: "olive_young", priceRange: "₩", skinTypes: ["Oily", "Combo"], concerns: ["Acne", "Redness"], salesRank: 6, reviewRank: 5 },
   { id: "mise-perfect-shampoo", brand: "Mise en Scène", name: "Perfect Serum Shampoo", nameKr: "미장센 퍼펙트 세럼 샴푸", category: "haircare", stepCategory: "shampoo", channel: "olive_young", priceRange: "₩", skinTypes: [], concerns: ["Damaged", "Frizz"], salesRank: 10, reviewRank: 11 },
   { id: "tsubaki-treatment", brand: "Tsubaki", name: "Premium Repair Hair Treatment", nameKr: "츠바키 프리미엄 리페어 트리트먼트", category: "haircare", stepCategory: "hair_treatment", channel: "korea_exclusive", priceRange: "₩₩", skinTypes: [], concerns: ["Damaged"], salesRank: 11, reviewRank: 12 },
   { id: "romand-tint", brand: "rom&nd", name: "Juicy Lasting Tint", nameKr: "롬앤 쥬시 래스팅 틴트", category: "makeup", channel: "olive_young", priceRange: "₩", isTrending: true, skinTypes: [], concerns: [], salesRank: 5, reviewRank: 8 },

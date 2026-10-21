@@ -1,5 +1,6 @@
 "use client";
 
+import { useLocale } from "@/lib/i18n/locale-provider";
 import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import Link from "next/link";
@@ -33,6 +34,7 @@ const ABOUT: Row[] = [
 ];
 
 export function HamburgerMenu() {
+  const { t } = useLocale();
   const [open, setOpen] = useState(false);
   const [host, setHost] = useState<Element | null>(null);
   const pathname = usePathname();
@@ -56,7 +58,7 @@ export function HamburgerMenu() {
 
   return (
     <>
-      <IconButton name="menu" label="Menu" iconSize="md" onClick={() => setOpen(true)} />
+      <IconButton name="menu" label={t("Menu")} iconSize="md" onClick={() => setOpen(true)} />
 
       {mounted && host && createPortal(
         <>
@@ -64,29 +66,29 @@ export function HamburgerMenu() {
             className={closing ? "drawer-scrim closing" : "drawer-scrim"}
             onClick={() => setOpen(false)}
           />
-          <div className={closing ? "drawer closing" : "drawer"} role="dialog" aria-label="Menu">
+          <div className={closing ? "drawer closing" : "drawer"} role="dialog" aria-label={t("Menu")}>
             <div className="dhead">
-              <span className="label">Menu</span>
-              <IconButton name="x" label="Close" onClick={() => setOpen(false)} />
+              <span className="label">{t("Menu")}</span>
+              <IconButton name="x" label={t("Close")} onClick={() => setOpen(false)} />
             </div>
 
-            <div className="dsection label">Primary</div>
+            <div className="dsection label">{t("Primary")}</div>
             {PRIMARY.map((r) => (
               <Link key={r.href} href={r.href} className="drow" aria-current={isActive(r.href) ? "page" : undefined} onClick={() => setOpen(false)}>
-                <Icon name={r.icon} size="sm" />{r.label}
+                <Icon name={r.icon} size="sm" />{t(r.label)}
               </Link>
             ))}
 
-            <div className="dsection label">Account</div>
+            <div className="dsection label">{t("Account")}</div>
             {ACCOUNT.map((r) => (
               <Link key={r.href} href={r.href} className="drow" aria-current={isActive(r.href) ? "page" : undefined} onClick={() => setOpen(false)}>
-                <Icon name={r.icon} size="sm" />{r.label}
+                <Icon name={r.icon} size="sm" />{t(r.label)}
               </Link>
             ))}
-            <div className="dsection label">About</div>
+            <div className="dsection label">{t("About")}</div>
             {ABOUT.map((r) => (
               <Link key={r.href} href={r.href} className="drow" onClick={() => setOpen(false)}>
-                <Icon name={r.icon} size="sm" />{r.label}
+                <Icon name={r.icon} size="sm" />{t(r.label)}
               </Link>
             ))}
           </div>

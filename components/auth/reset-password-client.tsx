@@ -3,6 +3,7 @@
 // Landing for the password-recovery email link (session already established
 // by /auth/callback via verifyOtp type=recovery). Sets the new password.
 
+import { useLocale } from "@/lib/i18n/locale-provider";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { AuthShell } from "@/components/auth/auth-shell";
@@ -13,6 +14,7 @@ import { routes } from "@/lib/routes";
 import { safeAuthNext } from "@/lib/auth-return";
 
 export function ResetPasswordClient({ next }: { next?: string }) {
+  const { t } = useLocale();
   const router = useRouter();
   const [reveal, setReveal] = useState(false);
   const [pw, setPw] = useState("");
@@ -58,7 +60,7 @@ export function ResetPasswordClient({ next }: { next?: string }) {
       title="New password"
       oauthNext={next}
       support="Choose a new password for your account."
-      foot={<span className="caption dim">You&apos;ll stay signed in on this device.</span>}
+      foot={<span className="caption dim">{t("You'll stay signed in on this device.")}</span>}
     >
       <form onSubmit={submit} style={{ display: "contents" }}>
         <div className="auth-fields">
@@ -67,8 +69,8 @@ export function ResetPasswordClient({ next }: { next?: string }) {
               className="auth-field"
               type={reveal ? "text" : "password"}
               autoComplete="new-password"
-              placeholder="New password"
-              aria-label="New password"
+              placeholder={t("New password")}
+              aria-label={t("New password")}
               aria-invalid={!!error}
               aria-describedby={error ? "reset-error" : undefined}
               required
@@ -80,7 +82,7 @@ export function ResetPasswordClient({ next }: { next?: string }) {
             <button
               type="button"
               className="auth-field-toggle"
-              aria-label={reveal ? "Hide password" : "Show password"}
+              aria-label={t(reveal ? "Hide password" : "Show password")}
               aria-pressed={reveal}
               onClick={() => setReveal((v) => !v)}
             >
@@ -91,8 +93,8 @@ export function ResetPasswordClient({ next }: { next?: string }) {
             className="auth-field"
             type={reveal ? "text" : "password"}
             autoComplete="new-password"
-            placeholder="Confirm new password"
-            aria-label="Confirm new password"
+            placeholder={t("Confirm new password")}
+            aria-label={t("Confirm new password")}
             aria-invalid={Boolean(error && error.includes("match"))}
             aria-describedby={error ? "reset-error" : undefined}
             required
@@ -101,9 +103,9 @@ export function ResetPasswordClient({ next }: { next?: string }) {
             onChange={(e) => setConfirmPw(e.target.value)}
           />
         </div>
-        {error && <p id="reset-error" className="auth-error" role="alert">{error}</p>}
+        {error && <p id="reset-error" className="auth-error" role="alert">{t(error)}</p>}
         <button className="auth-cta" type="submit" disabled={busy}>
-          {busy ? "Saving…" : "Save password"}
+          {t(busy ? "Saving…" : "Save password")}
         </button>
       </form>
     </AuthShell>

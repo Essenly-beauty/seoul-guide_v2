@@ -1,5 +1,6 @@
 "use client";
 
+import { useLocale } from "@/lib/i18n/locale-provider";
 import Link from "next/link";
 import { Icon, type IconName } from "@/components/icon";
 import { rememberRankingReturnRoute } from "@/lib/ranking-return-route";
@@ -18,8 +19,9 @@ const ITEMS: { key: NavKey; label: string; icon: IconName; href: string }[] = [
 ];
 
 export function BottomNav({ active }: { active?: NavKey }) {
+  const { t } = useLocale();
   return (
-    <nav className="bottomnav" aria-label="Main">
+    <nav className="bottomnav" aria-label={t("Main")}>
       {ITEMS.map((item) => (
         <Link
           key={item.key}
@@ -34,7 +36,7 @@ export function BottomNav({ active }: { active?: NavKey }) {
           }}
         >
           <Icon name={item.icon} />
-          {item.label}
+          {t(item.label)}
         </Link>
       ))}
     </nav>

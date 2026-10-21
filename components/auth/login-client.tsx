@@ -2,15 +2,15 @@
 
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
-import { Suspense, useEffect, useState } from "react";
+import { Suspense, useEffect, useRef, useState } from "react";
 import { AuthShell } from "@/components/auth/auth-shell";
 import { EyeGlyph } from "@/components/brand/auth-glyphs";
 import { supabaseBrowser } from "@/lib/supabase/client";
 import { routes } from "@/lib/routes";
 import { authLinkWithNext, safeAuthNext } from "@/lib/auth-return";
+import { useLocale } from "@/lib/i18n/locale-provider";
+import styles from "./auth.module.css";
 
-/** Reasons /auth/callback can forward here with (review: one generic message
-    hid expired links and cross-browser PKCE failures behind the same copy). */
 const CALLBACK_ERRORS: Record<string, string> = {
   auth: "That sign-in link didn't work — sign in with your password instead.",
   expired: "That link has expired — sign in, or request a fresh one.",
@@ -18,6 +18,7 @@ const CALLBACK_ERRORS: Record<string, string> = {
 };
 
 function SignInForm() {
+  const { t } = useLocale();
   const router = useRouter();
   const searchParams = useSearchParams();
   const nextTarget = safeAuthNext(searchParams.get("next")) ?? routes.map;
@@ -29,173 +30,129 @@ function SignInForm() {
   const [resendBusy, setResendBusy] = useState(false);
   const [resendIn, setResendIn] = useState(0);
   const [resendNote, setResendNote] = useState<string | null>(null);
+  const errorRef = useRef<HTMLParagraphElement>(null);
   const [error, setError] = useState<string | null>(() => {
     const code = searchParams.get("error");
-    return code ? CALLBACK_ERRORS[code] ?? CALLBACK_ERRORS.auth : null;
+    return code ? (Object.prototype.hasOwnProperty.call(CALLBACK_ERRORS, code) ? CALLBACK_ERRORS[code] : CALLBACK_ERRORS.auth) : null;
   });
 
-  // The callback-error banner should show once, not resurrect on reload/back —
-  // but keep ?next= so the sign-in that follows still finishes the journey.
+  // Clear callback errors from the address, preserving the user's destination.
   useEffect(() => {
     if (searchParams.get("error")) {
+      const params = new URLSearchParams();
       const next = searchParams.get("next");
-      router.replace(next ? `${routes.signIn}?next=${encodeURIComponent(next)}` : routes.signIn);
+      if (next) params.set("next", next);
+      if (searchParams.get("switch") === "1") params.set("switch", "1");
+      router.replace(params.size ? `${routes.signIn}?${params}` : routes.signIn);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  useEffect(() => { if (error) errorRef.current?.focus(); }, [error]);
   useEffect(() => {
     if (resendIn <= 0) return;
     const timer = window.setTimeout(() => setResendIn((seconds) => Math.max(0, seconds - 1)), 1000);
     return () => window.clearTimeout(timer);
   }, [resendIn]);
 
-  const submit = async (e: React.FormEvent) => {
-    e.preventDefault();
+  const submit = async (event: React.FormEvent) => {
+    event.preventDefault();
     if (busy) return;
     setBusy(true);
     setError(null);
     setUnconfirmed(false);
     setResendNote(null);
-    const supabase = supabaseBrowser();
-    const { error: err } = await supabase.auth.signInWithPassword({
-      email: id.trim(),
-      password: pw,
-    });
-    if (err) {
-      setBusy(false);
-      const isUnconfirmed = err.message === "Email not confirmed";
-      setUnconfirmed(isUnconfirmed);
-      setError(
-        err.message === "Invalid login credentials"
+    try {
+      const { error: err } = await supabaseBrowser().auth.signInWithPassword({ email: id.trim(), password: pw });
+      if (err) {
+        const isUnconfirmed = err.message === "Email not confirmed";
+        setUnconfirmed(isUnconfirmed);
+        setError(err.message === "Invalid login credentials"
           ? "Email or password doesn't match — please try again."
-          : isUnconfirmed
-            ? "Please confirm your email first — check your inbox for our link."
-            : err.message,
-      );
-      return;
+          : isUnconfirmed ? "Please confirm your email first — check your inbox for our link." : err.message);
+        setBusy(false);
+        return;
+      }
+      router.push(nextTarget);
+      router.refresh();
+    } catch {
+      setError("Unable to connect. Check your connection and try again.");
+      setBusy(false);
     }
-    router.push(nextTarget);
-    router.refresh();
   };
 
   const resendConfirmation = async () => {
     if (resendBusy || resendIn > 0 || !id.trim()) return;
     setResendBusy(true);
     setResendNote(null);
-    const { error: err } = await supabaseBrowser().auth.resend({
-      type: "signup",
-      email: id.trim(),
-      options: {
-        emailRedirectTo: `${window.location.origin}/auth/callback?next=${encodeURIComponent(nextTarget)}`,
-      },
-    });
-    setResendBusy(false);
-    if (err) {
-      setResendNote(err.message.toLowerCase().includes("rate limit")
-        ? "Too many emails — please wait a minute before trying again."
-        : "We couldn't send another link right now. Please try again shortly.");
-      return;
-    }
-    setResendNote("Confirmation email sent again — check spam too.");
-    setResendIn(60);
+    try {
+      const { error: err } = await supabaseBrowser().auth.resend({
+        type: "signup", email: id.trim(),
+        options: { emailRedirectTo: `${window.location.origin}/auth/callback?next=${encodeURIComponent(nextTarget)}` },
+      });
+      if (err) {
+        setResendNote(err.message.toLowerCase().includes("rate limit")
+          ? "Too many emails — please wait a minute before trying again."
+          : "We couldn't send another link right now. Please try again shortly.");
+        return;
+      }
+      setResendNote("Confirmation email sent again — check spam too.");
+      setResendIn(60);
+    } catch {
+      setResendNote("Unable to connect. Check your connection and try again.");
+    } finally { setResendBusy(false); }
   };
 
   return (
-    <form onSubmit={submit} style={{ display: "contents" }}>
+    <form onSubmit={submit} className={styles.form} aria-busy={busy}>
       <div className="auth-fields">
-        <input
-          className="auth-field"
-          type="email"
-          inputMode="email"
-          autoComplete="email"
-          placeholder="Enter email"
-          aria-label="Email"
-          aria-invalid={!!error}
-          aria-describedby={error ? "signin-error" : undefined}
-          required
-          value={id}
-          onChange={(e) => setId(e.target.value)}
-        />
-        <div className="auth-field-wrap">
-          <input
-            className="auth-field"
-            type={reveal ? "text" : "password"}
-            autoComplete="current-password"
-            placeholder="Password"
-            aria-label="Password"
-            aria-invalid={!!error}
-            aria-describedby={error ? "signin-error" : undefined}
-            required
-            value={pw}
-            onChange={(e) => setPw(e.target.value)}
-            style={{ paddingRight: 58 }}
-          />
-          <button
-            type="button"
-            className="auth-field-toggle"
-            aria-label={reveal ? "Hide password" : "Show password"}
-            aria-pressed={reveal}
-            onClick={() => setReveal((v) => !v)}
-          >
-            <EyeGlyph off={!reveal} />
-          </button>
+        <div className={styles.fieldGroup}>
+          <label htmlFor="signin-email">{t("Email")}</label>
+          <input id="signin-email" name="email" className="auth-field" type="email" inputMode="email" autoComplete="email" autoCapitalize="none" spellCheck={false}
+            placeholder={t("Enter email")} aria-invalid={!!error} aria-describedby={error ? "signin-error" : undefined} required value={id} onChange={(event) => setId(event.target.value)} />
+        </div>
+        <div className={styles.fieldGroup}>
+          <label htmlFor="signin-password">{t("Password")}</label>
+          <div className="auth-field-wrap">
+            <input id="signin-password" name="password" className={`auth-field ${styles.passwordField}`} type={reveal ? "text" : "password"} autoComplete="current-password"
+              placeholder={t("Password")} aria-invalid={!!error} aria-describedby={error ? "signin-error" : undefined} required value={pw} onChange={(event) => setPw(event.target.value)} />
+            <button type="button" className="auth-field-toggle" aria-label={t(reveal ? "Hide password" : "Show password")} aria-pressed={reveal} onClick={() => setReveal((value) => !value)}><EyeGlyph off={!reveal} /></button>
+          </div>
         </div>
       </div>
-
-      {error && <p id="signin-error" className="auth-error" role="alert">{error}</p>}
-      {unconfirmed && (
-        <div className="stack sm" style={{ marginTop: 2 }}>
-          <button type="button" className="auth-cta-secondary" disabled={resendBusy || resendIn > 0} onClick={resendConfirmation}>
-            {resendBusy ? "Sending…" : resendIn > 0 ? `Resend available in ${resendIn}s` : "Resend confirmation email"}
-          </button>
-          {resendNote && <p className="auth-support" role="status">{resendNote}</p>}
-        </div>
-      )}
-
-      <Link className="auth-aside" href={authLinkWithNext(routes.forgotPassword, nextTarget)}>Forgot password?</Link>
-      <button className="auth-cta" type="submit" disabled={busy}>
-        {busy ? "Signing in…" : "Sign In"}
-      </button>
+      <Link className="auth-aside" href={authLinkWithNext(routes.forgotPassword, nextTarget)}>{t("Forgot password?")}</Link>
+      {error && <p ref={errorRef} tabIndex={-1} id="signin-error" className="auth-error" role="alert">{t(error)}</p>}
+      {unconfirmed && <div className={styles.resend}>
+        <button type="button" className="auth-cta-secondary" disabled={resendBusy || resendIn > 0} onClick={resendConfirmation}>
+          {resendBusy ? t("Sending…") : resendIn > 0 ? t("Resend available in {seconds}s", { seconds: resendIn }) : t("Resend confirmation email")}
+        </button>
+        {resendNote && <p className="auth-support" role="status">{t(resendNote)}</p>}
+      </div>}
+      <button className="auth-cta" type="submit" disabled={busy}>{t(busy ? "Signing in…" : "Sign in")}</button>
     </form>
   );
 }
 
-// Full-width outline button — the foot link alone buried the signup path
-// (user report 2026-08-16). Carries ?next= and account-switch intent so the
-// funnel round-trips even when the browser is already signed in.
 function RegisterCta() {
+  const { t } = useLocale();
   const searchParams = useSearchParams();
   const next = safeAuthNext(searchParams.get("next"));
   const params = new URLSearchParams();
   if (next) params.set("next", next);
   if (searchParams.get("switch") === "1") params.set("switch", "1");
   const query = params.toString();
-  const href = query ? `${routes.register}?${query}` : routes.register;
-  return (
-    <div style={{ display: "grid", gap: 10, marginTop: 26, textAlign: "center" }}>
-      <span className="small muted">Not a member yet?</span>
-      <Link className="auth-cta-secondary" href={href}>Create an account</Link>
-    </div>
-  );
+  return <div className={styles.register}>
+    <span>{t("Not a member yet?")}</span>
+    <Link className="auth-link" href={query ? `${routes.register}?${query}` : routes.register}>{t("Create an account")}</Link>
+  </div>;
 }
 
 export function LoginClient({ next }: { next?: string }) {
-  return (
-    <AuthShell
-      title="Sign in"
-      oauthNext={next}
-      support={<>If you need any support <Link className="auth-link" href={routes.support}>click here</Link></>}
-      cta={
-        <Suspense fallback={null}>
-          <RegisterCta />
-        </Suspense>
-      }
-    >
-      {/* useSearchParams needs a Suspense boundary in app router pages */}
-      <Suspense fallback={null}>
-        <SignInForm />
-      </Suspense>
-    </AuthShell>
-  );
+  const { t } = useLocale();
+  return <AuthShell title="Sign in" oauthNext={next}
+    support={t("Sign in to keep your saved places with you.")}
+    cta={<Suspense fallback={null}><RegisterCta /></Suspense>}
+    foot={<Link className="auth-link" href={routes.support}>{t("Need help?")}</Link>}>
+    <Suspense fallback={null}><SignInForm /></Suspense>
+  </AuthShell>;
 }

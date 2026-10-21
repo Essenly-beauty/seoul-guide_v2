@@ -61,8 +61,6 @@ const nextConfig = {
   // the page-level redirect() calls did — caught by client_errors).
   async redirects() {
     return [
-      { source: "/bookings", destination: "/menu", permanent: false },
-      { source: "/bookings/:id", destination: "/menu", permanent: false },
       { source: "/trip", destination: "/menu", permanent: false },
       { source: "/mypage/notifications", destination: "/settings", permanent: false },
       { source: "/mypage/reviews/new", destination: "/mypage/reviews", permanent: false },

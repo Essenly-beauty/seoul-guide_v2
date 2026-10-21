@@ -32,12 +32,15 @@ export function validateMenu(menu: PartnerMenu, categories: readonly PartnerCate
   return errors;
 }
 
-export function menuReadiness(menu: PartnerMenu, categories: readonly PartnerCategory[]): string[] {
+export function menuReadiness(menu: PartnerMenu, categories: readonly PartnerCategory[], options: { paymentMode?: 'pay_at_venue' } = {}): string[] {
   const errors = validateMenu(menu, categories);
   for (const field of ['nameKo', 'nameEn', 'descriptionKo', 'descriptionEn'] as const) {
     if (typeof menu[field] !== 'string' || !menu[field].trim()) errors.push(`${field}.required`);
   }
   for (const field of ['priceKrw', 'depositKrw', 'durationMinutes'] as const) {
+    // The live booking flow collects the full amount at the venue. Keep the
+    // default deposit-backed projection strict for its existing callers.
+    if (field === 'depositKrw' && options.paymentMode === 'pay_at_venue') continue;
     if (menu[field] === null) errors.push(`${field}.required`);
   }
   if (menu.visibility !== 'visible') errors.push('menu.not_visible');

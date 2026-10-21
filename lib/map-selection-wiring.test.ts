@@ -156,13 +156,16 @@ describe("map place selection wiring", () => {
     expect(compactBranch).not.toContain("selected-place-summary-media-grid");
   });
 
-  it("renders English first and Korean second in every map sheet place row", () => {
-    const generalRows = sheetSource.slice(sheetSource.indexOf(": !selectedPlace ? ranked.map"));
-
+  it("keeps nearby rows concise and reserves Korean names for selected details", () => {
+    const start = sheetSource.indexOf(": !selectedPlace ? ranked.map");
+    const generalRows = sheetSource.slice(start, sheetSource.indexOf("Kakao-style: while a pin is active", start));
+    expect(start).toBeGreaterThan(0);
+    expect(generalRows).toContain('<div className="place-name-primary">{p.name}</div>'); // the slice really holds the rows (tests-3)
     expect(sheetSource.match(/className="place-name-primary"/g)?.length).toBeGreaterThanOrEqual(2);
-    expect(sheetSource.match(/className="place-name-secondary"/g)?.length).toBeGreaterThanOrEqual(2);
-    expect(generalRows.indexOf("{p.name}")).toBeLessThan(generalRows.indexOf("{p.nameKr}"));
-    expect(generalRows).toContain('lang="ko"');
+    expect(generalRows).not.toContain('className="place-name-secondary"');
+    expect(generalRows).not.toContain("p.priceRange");
+    expect(generalRows).not.toContain("English OK");
+    expect(summarySource).toContain("{place.nameKr}");
   });
 
   it("renders English first and Korean second in both selected summary densities", () => {
@@ -202,49 +205,34 @@ describe("map place selection wiring", () => {
     expect(sheetSource).not.toMatch(/min walk/);
   });
 
-  it("shows a store thumbnail when available, else the brand mark or the category's map-pin glyph", () => {
-    expect(sheetSource).toContain("function MapRowThumb");
-    expect(sheetSource).toContain("{placePhoto ? (");
-    expect(sheetSource).toContain('className="maprow-photo"');
-    expect(sheetSource).toContain('alt=""');
-    // Known retailers get their own mark (public/brands), never a generic pin.
-    expect(sheetSource).toContain(' : BRAND_MARK_SRC[place.type]');
-    expect(sheetSource).toContain('className={place.type === "daiso" ? "maprow-brand-mark maprow-brand-mark--daiso"');
-    // Everything else mirrors the map pin: TYPE_ICON glyph in TYPE_COLOR.
-    expect(sheetSource).toContain('className="maprow-photo-fallback" style={{ color: TYPE_COLOR[place.type] }}');
-    expect(sheetSource).toContain("<Icon name={TYPE_ICON[place.type]}");
-    // Both row kinds share the one component.
+  it("uses shared verified-photo thumbnails for both map row kinds", () => {
+    expect(sheetSource).toContain('<PlaceThumbnail place={place} size={72}');
+    expect(sheetSource).not.toContain("decorative={false}"); // row media stays out of the row's accessible name (tests-1)
     expect(sheetSource.match(/<MapRowThumb place=/g)).toHaveLength(2);
-  });
-
-  it("uses the supplied full-square Daiso logo for photo-less nearby rows only", () => {
-    expect(sheetSource).toContain('const brandMark = place.type === "daiso" ? "/brands/daiso-logo.jpeg" : BRAND_MARK_SRC[place.type]');
-    expect(sheetSource.indexOf("{placePhoto ? (")).toBeLessThan(sheetSource.indexOf(") : brandMark ? ("));
-    expect(cssSource).toMatch(/\.maprow-brand-mark--daiso\s*\{[^}]*width:\s*100%;[^}]*height:\s*100%;/s);
+    const sources = readFileSync(new URL("../lib/place-images.ts", import.meta.url), "utf8");
+    expect(sources).toContain("place.photoThumbnail");
+    expect(sources).toContain("BRAND_MARK_SRC[place.type]");
     expect(existsSync(new URL("../public/brands/daiso-logo.jpeg", import.meta.url))).toBe(true);
   });
 
   it("uses Olive Young brand imagery only when a real store photo is missing", () => {
-    expect(sheetSource).toContain(' : BRAND_MARK_SRC[place.type]');
-    expect(sheetSource.indexOf("{placePhoto ? (")).toBeLessThan(sheetSource.indexOf(") : brandMark ? ("));
-    expect(sheetSource).toContain('place.type === "olive_young" ? "maprow-brand-mark maprow-brand-mark--olive-young"');
-    expect(cssSource).toMatch(/\.maprow-brand-mark--olive-young\s*\{[^}]*width:\s*100%;[^}]*height:\s*100%;/s);
     expect(summarySource).toContain('place.type === "olive_young"');
     expect(summarySource).toContain("photos.length === 0");
     expect(summarySource).toContain("<OliveYoungBrandHero");
     expect(detailSource).toContain('place.type === "olive_young"');
     expect(detailSource).toContain("<OliveYoungBrandHero");
     expect(detailSource).toContain('place.photos ?? (place.photoUrl ? [place.photoUrl] : [])');
-    expect(detailSource).toContain("<PhotosSection place={place}");
+    // The header collage is the only photo area (owner decision 2026-10-20).
+    expect(detailSource).toContain("<PlacePhotoCollage photos={photos} media={place.publishedMedia}");
+    expect(detailSource).not.toContain("<PhotosSection");
   });
 
-  it("keeps Daiso map rows free of duplicate category and price while showing confirmed services", () => {
-    expect(sheetSource).toContain('{place.type !== "daiso" && <span className="label">{TYPE_LABEL[place.type]} · {zoneShort(place.zone)}</span>}');
-    expect(sheetSource).toContain('{p.type !== "daiso" && <span className="label">{TYPE_LABEL[p.type]} · {zoneShort(p.zone)}</span>}');
-    expect(sheetSource).toContain('{p.type !== "daiso" && <span className="map-meta-token mono">{p.priceRange}</span>}');
+  it("keeps Daiso rows free of duplicate category and price while showing confirmed services", () => {
+    expect(sheetSource).toContain('place.type !== "daiso" && <><T text={TYPE_LABEL[place.type]}');
+    expect(sheetSource).toContain('p.type !== "daiso" && <><T text={TYPE_LABEL[p.type]}');
+    expect(sheetSource).not.toContain("p.priceRange");
     expect(sheetSource.match(/<DaisoRowServices place=/g)).toHaveLength(2);
     expect(sheetSource).toContain('const services = daisoRowServices(place)');
-    expect(cssSource).toContain(".maprow-daiso-service {");
   });
 
   it("reuses the direct place-detail body and CTA at the full snap", () => {
@@ -263,7 +251,7 @@ describe("map place selection wiring", () => {
   it("keeps opening status first in selected summaries and nearby rows", () => {
     const compactSummary = summarySource.match(/if \(variant === "compact"\)[\s\S]*?\n  }\n\n  return/)?.[0] ?? "";
     const nearbyMeta = sheetSource.match(/<div className="caption muted maprow-meta">[\s\S]*?<\/div>/)?.[0] ?? "";
-    const detailMeta = detailSource.match(/<div className="row" style=\{\{ gap: 8, marginTop: 8 \}\}>[\s\S]*?<\/div>/)?.[0] ?? "";
+    const detailMeta = detailSource.match(/<div className="place-detail-meta">[\s\S]*?<\/div>/)?.[0] ?? "";
     expect(compactSummary.indexOf("<LiveBadge")).toBeGreaterThanOrEqual(0);
     expect(compactSummary.indexOf("<LiveBadge")).toBeLessThan(compactSummary.indexOf("formatCompactDistance"));
     expect(nearbyMeta.indexOf("<LiveBadge")).toBeGreaterThanOrEqual(0);
@@ -421,7 +409,7 @@ describe("selected-pin sheet owns the bottom of the screen (Kakao pattern)", () 
     expect(styles).toContain("flex: 0 0 calc(50% - 4px)");
     // the empty state stays a single honest block
     expect(summary).toContain("photos.length > 0");
-    expect(summary).toContain("Photos coming soon");
+    expect(summary).toContain("No photos yet");
   });
 
   it("lets half-sheet photos consume the visible space above the action bar", () => {
@@ -478,11 +466,13 @@ describe("place photo ingestion", () => {
 
   it("uses dedicated small thumbnails for map rows and defers their decoding offscreen", () => {
     const sheet = readFileSync(new URL("../components/map/map-sheet.tsx", import.meta.url), "utf8");
-    expect(sheet).toContain("const placePhoto = place.photoThumbnail ?? place.photos?.[0] ?? place.photoUrl");
-    expect(sheet).toContain('loading="lazy"');
-    expect(sheet).toContain('decoding="async"');
-    expect(sheet).toContain("width={84}");
-    expect(sheet).toContain("height={84}");
+    expect(sheet).toContain('<PlaceThumbnail place={place} size={72}');
+    const thumbnail = readFileSync(new URL("../components/ui/image-thumbnail.tsx", import.meta.url), "utf8");
+    expect(thumbnail).toContain('loading = "lazy"');
+    expect(thumbnail).toContain('loading={loading}');
+    expect(thumbnail).toContain('decoding="async"');
+    // Photos fill the box; brand marks and product shots stay uncropped.
+    expect(thumbnail).toContain('objectFit: image.kind === "brand" ? "contain" : fit');
   });
 
   it("loads only the initially visible selected-place photos eagerly", () => {
@@ -491,12 +481,13 @@ describe("place photo ingestion", () => {
     expect(summary).toContain('decoding="async"');
   });
 
-  it("renders real place photos in both the detail hero and Photos section", () => {
+  it("renders real place photos in the detail hero collage, the page's only photo area", () => {
     const detail = readFileSync(new URL("../components/place/place-detail-body.tsx", import.meta.url), "utf8");
     expect(detail).toContain("function PlacePhotoCollage");
     expect(detail).toContain("photos.slice(0, 3)");
-    expect(detail).toContain("<PlacePhotoCollage photos={place.photos ?? (place.photoUrl ? [place.photoUrl] : [])}");
-    expect(detail).toContain("<PhotosSection place={place}");
+    expect(detail).toContain("const photos = place.photos ?? (place.photoUrl ? [place.photoUrl] : []);");
+    expect(detail).toContain("<PlacePhotoCollage photos={photos} media={place.publishedMedia}");
+    expect(detail).not.toContain("<PhotosSection");
   });
 });
 

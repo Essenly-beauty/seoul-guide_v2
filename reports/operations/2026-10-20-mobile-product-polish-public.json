@@ -1,0 +1,76 @@
+{
+  "checkedAt": "2026-10-20T05:05:02.200Z",
+  "sha": "b26586bd65f894bf4eb54d0405add238b39d4c0d",
+  "deploymentId": "dpl_2ZEE7c1s3WdeyB5Et94e6bvxxAQb",
+  "origin": "https://myseouldrop.app",
+  "pages": [
+    {
+      "path": "/shop/routine-filter",
+      "status": 200,
+      "themeColor": "#ffffff"
+    },
+    {
+      "path": "/shop/cosrx-snail-mucin",
+      "status": 200,
+      "themeColor": "#ffffff"
+    },
+    {
+      "path": "/support",
+      "status": 200,
+      "themeColor": "#ffffff"
+    },
+    {
+      "path": "/favorites",
+      "status": 200,
+      "themeColor": "#ffffff"
+    }
+  ],
+  "images": [
+    {
+      "path": "/products/cosrx-snail-mucin.webp",
+      "status": 200,
+      "bytes": 5892,
+      "sha256": "13428aaf645a38e09170837f0442207db6eaaf6e1cabb3fb49a90935db18b1ad"
+    },
+    {
+      "path": "/products/anua-heartleaf-toner.webp",
+      "status": 200,
+      "bytes": 6914,
+      "sha256": "0ae7e6a962c557a1b54f9964b2604e0c1d9cd00b48659b1529c2fa8457242768"
+    },
+    {
+      "path": "/products/boj-glow-serum.webp",
+      "status": 200,
+      "bytes": 7492,
+      "sha256": "300fe5994c4db72bd95519fefb35fc9692ff7adca4e0975cf97d0b5d7abbd4fa"
+    },
+    {
+      "path": "/products/illiyoon-cream.webp",
+      "status": 200,
+      "bytes": 28054,
+      "sha256": "b0ad048d8b0918e659d891ff34b45298ec9f4743bb982ce46734b2d46cccb117"
+    },
+    {
+      "path": "/products/klairs-cleansing-oil.webp",
+      "status": 200,
+      "bytes": 16138,
+      "sha256": "bc6d28d92720bfc207d1128b1144771b2846b932bdcb8a15012a93e6731dfd09"
+    },
+    {
+      "path": "/products/mediheal-teatree.webp",
+      "status": 200,
+      "bytes": 7618,
+      "sha256": "c5e303c4279e49be0300a52a90ab43b69842ea334b4e4dac48f972040f3aa066"
+    },
+    {
+      "path": "/products/boj-relief-sun.webp",
+      "status": 200,
+      "bytes": 11202,
+      "sha256": "2ede927bd56b88967674843858c393e2b220b92f94965bf5b21d52b36d4f9dea"
+    }
+  ],
+  "styles": 3,
+  "manifest": "white",
+  "horizontalScroll": "overflow auto; scrollbar hidden",
+  "browserVisualTest": "Not performed: existing browser administration policy block; no workaround used."
+}

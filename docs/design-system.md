@@ -1,4 +1,7 @@
-# Essenly 디자인 시스템 (v1.1)
+# MYSEOULDROP 디자인 시스템 (v2)
+
+> 2026-10-19 고객 앱 갱신: `app/customer-theme.css`를 `globals.css` 다음에 불러온다. 기존 지도·검색·매장·랭킹·저장·마이 화면의 공통 스타일에 적용하며 `data-partner-shell`이 있는 관리자 화면은 제외한다.
+> 주요 행동은 `--action` 블랙 / `--on-action` 흰색, 다크 모드에서는 밝은 뉴트럴 / 검정. 오렌지 `--accent`는 체크·혜택·상태의 강조색으로 유지한다. 제목은 산세리프, 좌우 22px(좁은 화면 18px), 주요 섹션 간 24px, 목록 세로 18px. 카드의 상시 그림자는 없애고 지도 컨트롤·시트에만 높이를 표현한다.
 
 > 작성: 2026-07-25 · 근거: 서비스 전수 감사 + 사용자 제공 4-레이어 토큰 가이드(files/doc2)
 > 목표: 흩어진 클래스 조합을 **토큰 → 컴포넌트 → 제품 패턴** 구조로 정리해 서비스 일관성 확보
@@ -20,9 +23,9 @@
 
 | Layer | 정의 위치 | 예 |
 |---|---|---|
-| raw | `:root` 기존 변수 | `--accent #0C8E70`, `--border #E2E8F0`, `--r-md 10px` |
+| raw | `:root` 기존 변수 + 고객 테마 | `--accent #e94f00`, `--action #171717`, `--border #e6e6e1`, `--r-md 12px` |
 | semantic | `:root` 신규 별칭 | `--text-primary→--text`, `--text-secondary→--muted`, `--text-disabled→--dim`, `--bg-page→--bg`, `--bg-surface→--surface`, `--border-default→--border`, `--brand→--accent`, `--focus-ring-*` |
-| component | 컴포넌트 CSS | `.btn.primary{background:var(--brand)}` |
+| component | 컴포넌트 CSS | `.btn.primary{background:var(--action);color:var(--on-action)}` |
 | 카테고리/노선 | 기존 | `--c-*`(7 카테고리+mall), LINE_META |
 
 타이포/간격: 기존 시맨틱 유틸(`.t-heading-sm .t-label-md/sm .t-caption .num`)과 `--r-*`, 12px 리듬 유지 — 이미 doc 기준으로 구축됨.
@@ -36,9 +39,9 @@
 ```
 | variant | 스타일 | 용도 |
 |---|---|---|
-| primary | 솔리드 브랜드 | 화면당 1개 주 행동 (Apply, Show route, View details-CTA) |
+| primary | 블랙/화이트 행동색 | 화면당 1개 주 행동 (Apply, Show route, View details-CTA) |
 | secondary | 헤어라인 뉴트럴 + 다크 텍스트 | 더보기/보조 (기존 ghost·outline **통합**) |
-| tonal | brand-soft 배경 + 브랜드 텍스트 | primary 옆 짝 버튼 (All Categories류) |
+| tonal | 중립 배경 + 본문 텍스트 | primary 옆 짝 버튼 (All Categories류) |
 | danger | 기존 유지 | 파괴적 행동 |
 - 클래스 산출: `btn primary|secondary|tonal|danger [sm] [full]` — **`outline`/`ghost` 클래스는 폐기**(Tailwind 충돌 원천 제거), 마이그레이션 완료까지 CSS 별칭만 유지.
 
@@ -134,3 +137,16 @@
 2. **P2 마이그레이션(병렬)** — A: `app/**` · B: `components/**` 전 사용처 치환, ghost/outline 클래스 제거
 3. **P3 기초 컴포넌트** — ListRow, BottomSheet, SearchField, Switch, Notice, EmptyState, Avatar, Badge, SectionDivider
 4. **P4 hardening** — 실제 화면 채택, 모든 렌더 분기의 event/ref 전달, 상태·접근성 계약, syntax-aware 원시 패턴 검사, 문서 Git 추적
+
+
+### 2026-10-20 고객 UI 후속 기준
+
+사용자 실제 캡처 검토 후 customer-theme.css에 반영. 기본 탭의 반복 상단 제목 바 제거. 남는 공통 헤더는 왼쪽16px/52px + safe area. 제목20px, 섹션16px, 목록14px, 설명12px, 정보 태그11px. 선택 필터는 밝은 중립색/테두리이며 주요 실행 버튼만 action 색상을 쓴다. 지도 목록은 이름과 방문 판단 정보 중심으로 간소화. 시설 라벨과 값은 다른 행에서 배치하고 태그는 줄바꿈한다. 역 선택은 station-search-field의 전용 화면에서 검색하고, 선택 전 입력은 기존 경로를 변경하지 않는다. 자세한 기록: reports/design/2026-10-20-customer-ui-refinement.md.
+
+후속 상세 기준: 계정 목록의 중첩 테두리와 스토리·랭킹의 반복 구분선은 제거한다. 랭킹에는 작은 소매 브랜드 문맥을 유지하고 영문 상품명14px/500 + 보조12px을 쓴다. 스토리 제목24px/1.4, 본문14px/1.8, 소제목16px. 카페 카드에는 테마별 editorial 토큰, 작은 오렌지 텍스트에는 accent-ink 토큰을 사용한다. 상품 정보 배지는11px/문장형 표기와 중립색을 기본으로 하고 Editor’s Pick만 오렌지를 쓴다. 택시 안내 배경 강조는2회 후 종료하고 reduced-motion에서 끈다. Collapse는 아래→위 화살표, Open/Closed는 문구·색상·표식 모양을 함께 구분한다.
+
+### Customer locale and imagery additions · 2026-10-20
+
+Customer chrome supports `en`, `ja`, `zh-CN`, `es`, `fr` through `useLocale()` and the `T` client leaf. Use source-key templates with named values for dynamic counts, durations and station roles; do not concatenate a translated label around numbers. Keep verified place names, addresses and user/editorial content in the supplied language until an actual translation exists. Language settings are reachable without signing in.
+
+Verified media uses `PlaceThumbnail` / `ProductThumbnail`, preserving the full image with `contain`. Photos take precedence over supplied brand artwork, followed by a quiet semantic category icon. Brand art is not a branch photo. No-photo map previews use a short note and natural content height; the measured sheet edge also positions map controls. Authentication forms use visible labels and 54px controls, with a neutral focus ring and black primary action.

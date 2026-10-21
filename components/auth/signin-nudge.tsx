@@ -4,15 +4,17 @@
 // 2026-08-16: the welcome gateway is gone; everyone lands on the map and
 // the account is sold contextually). Visitors meet it on the My tab, on
 // place-detail views, and on account-value actions (heart, rating, saved
-// layer). Always dismissible: the visitor action itself has already
-// completed locally for saves. Ratings require sign-in before writing;
-// "Keep exploring" dismisses that request without creating a rating.
+// layer). Always dismissible. Saves and ratings require sign-in before
+// anything is written (owner decision 2026-10-20: a guest's heart is not
+// archived — the place is remembered for this session and saved only once
+// they return signed in; "Keep exploring" saves nothing).
 //
 // Frequency by context:
 //  - menu, favorite, rating, savedLayer: every time (deliberate,
 //    account-value moments). Detail views stay prompt-free — the ask
 //    happens on Save, not on looking (user decision 2026-08-16).
 
+import { useLocale } from "@/lib/i18n/locale-provider";
 import { useCallback, useEffect, useState, type ReactNode } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -22,7 +24,7 @@ import { GoogleGlyph } from "@/components/brand/auth-glyphs";
 import { useAuthUser } from "@/lib/auth/use-auth";
 import { supabaseBrowser } from "@/lib/supabase/client";
 import { routes } from "@/lib/routes";
-import { setPendingFavoriteReturn } from "@/lib/signup-return";
+import { clearPendingFavoriteReturn, setPendingFavoriteReturn } from "@/lib/signup-return";
 
 export type NudgeContext = "favorite" | "rating" | "savedLayer" | "menu" | "shareList";
 type SavedPlace = { id: string; name: string };
@@ -32,7 +34,7 @@ type ActiveNudge = { context: NudgeContext; savedPlace?: SavedPlace };
 const COPY: Record<NudgeContext, { title: string; body: string }> = {
   favorite: {
     title: "Save it to your account",
-    body: "This heart lives only on this device. Join and your saved places follow you — any phone, safely backed up.",
+    body: "Join to save this place. Your saved places then follow you — any phone, safely backed up.",
   },
   rating: {
     title: "Sign in to rate and review",
@@ -52,7 +54,11 @@ const COPY: Record<NudgeContext, { title: string; body: string }> = {
   },
 };
 
+/** A heart on a product, an article or a whole list: nothing is saved on the visitor's behalf. */
+const FAVORITE_ITEM_BODY = "Join to keep favorites. Your saved items then follow you — any phone, safely backed up.";
+
 export function useSigninNudge(): { nudge: (c: NudgeContext, options?: NudgeOptions) => void; sheet: ReactNode } {
+  const { t } = useLocale();
   const { user, loading } = useAuthUser();
   const pathname = usePathname();
   const [active, setActive] = useState<ActiveNudge | null>(null);
@@ -70,9 +76,13 @@ export function useSigninNudge(): { nudge: (c: NudgeContext, options?: NudgeOpti
     [loading, user],
   );
 
+  // The sheet the visitor joins from decides what is saved afterwards: its
+  // place, or nothing — an older sheet's request never rides along (fav-flow-4).
   const rememberSavedPlace = () => {
     if (active?.savedPlace) {
       setPendingFavoriteReturn({ placeId: active.savedPlace.id, placeName: active.savedPlace.name });
+    } else {
+      clearPendingFavoriteReturn();
     }
   };
 
@@ -91,17 +101,17 @@ export function useSigninNudge(): { nudge: (c: NudgeContext, options?: NudgeOpti
   const registerParam = `?next=${encodeURIComponent(onboardingTarget)}`;
   const sheet = active ? (
     <BottomSheet title={COPY[active.context].title} kicker="MYSEOULDROP account" onClose={() => setActive(null)}>
-      <p className="small muted" style={{ margin: 0, lineHeight: 1.55 }}>{COPY[active.context].body}</p>
+      <p className="small muted" style={{ margin: 0, lineHeight: 1.55 }}>{t(active.context === "favorite" && !active.savedPlace ? FAVORITE_ITEM_BODY : COPY[active.context].body)}</p>
       <div className="stack sm" style={{ marginTop: 16 }}>
         <button type="button" className="welcome-social welcome-social-google" disabled={busy} aria-busy={busy} onClick={google}>
           <GoogleGlyph />
-          <span>Continue with Google</span>
+          <span>{t("Continue with Google")}</span>
         </button>
         <Button href={`${routes.register}${registerParam}`} onClick={rememberSavedPlace}>Sign up with email</Button>
         <p className="caption muted" style={{ textAlign: "center", margin: "2px 0 0" }}>
-          <Link className="auth-link" href={`${routes.signIn}${signInParam}`}>Sign in</Link>
+          <Link className="auth-link" href={`${routes.signIn}${signInParam}`} onClick={rememberSavedPlace}>{t("Sign in")}</Link>
           <span className="dim" aria-hidden="true"> · </span>
-          <button className="auth-link" style={{ font: "inherit" }} onClick={() => setActive(null)}>Keep exploring</button>
+          <button className="auth-link" style={{ font: "inherit" }} onClick={() => setActive(null)}>{t("Keep exploring")}</button>
         </p>
       </div>
     </BottomSheet>

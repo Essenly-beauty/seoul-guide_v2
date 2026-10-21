@@ -49,9 +49,7 @@ export default function AccountSettingsPage() {
             <section className="settings-group settings-account-actions">
               <SectionHeader title="Account access" />
               <div className="settings-group-list">
-                <Button className="settings-switch-account" variant="secondary" href="/login?switch=1">
-                  Log in with a different account
-                </Button>
+                <SettingsRow icon="swap" title="Switch account" href="/login?switch=1" />
                 <SignoutModal menuRow />
               </div>
             </section>

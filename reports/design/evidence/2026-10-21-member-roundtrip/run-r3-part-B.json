@@ -1,0 +1,86 @@
+{
+ "B.dates": [
+  "Wed, Oct 21, 2026",
+  "Thu, Oct 22, 2026",
+  "Fri, Oct 23, 2026",
+  "Sat, Oct 24, 2026",
+  "Sun, Oct 25, 2026"
+ ],
+ "check:B.slots.available": {
+  "ok": true,
+  "info": "date=Fri, Oct 23, 2026 slots=10:00,10:30,11:00,11:30,12:00,12:30,13:00,13:30,14:00,14:30,15:00,15:30,16:00,16:30,17:00,17:30,18:00,18:30"
+ },
+ "B.target": {
+  "chosen": "Fri, Oct 23, 2026",
+  "START": "14:00",
+  "KR_DATE": "10월 23일",
+  "ISO_DATE": "2026-10-23"
+ },
+ "B.customerName": "QA Guest",
+ "check:B.created": {
+  "ok": true,
+  "info": "url=/bookings/9b9eccb6-a832-48e9-b6c3-aa744b192fea status=Awaiting confirmation"
+ },
+ "check:B.customer.messageShown": {
+  "ok": true,
+  "info": " booking Messages Seoul time You QA r3: 주차 가능한가요? Oct 21 · 10:25 Sent Message the venue "
+ },
+ "B.partner.messagesLoadMs": 1,
+ "check:B.partner.threadHasMessage": {
+  "ok": true,
+  "info": " 연결됩니다. Q QA Guest 10월 23일 (금) 14:00 · Signature cut QA r3: 주차 가능한가요? 10:25 Q QA Guest 10월 23일 (금) 10:00 · Signature cut QA r1: "
+ },
+ "check:B.partner.replySent": {
+  "ok": true,
+  "info": "POST status=201"
+ },
+ "check:B.customer.replyVisible": {
+  "ok": true,
+  "info": "가능한가요? Oct 21 · 10:25 Read Venue QA r3: 지하 주차 2시간 무료입니다. Oct 21 · 10:25 Message the v"
+ },
+ "B.partner.bookingsLoadMs": 3021,
+ "B.partner.row": "10월 23일 (금) 14:00–15:00 QA Guest 010-0000-0003 Signature cut Min 앱 60,000원 현장 결제 확인 대기",
+ "check:B.partner.bookingListed": {
+  "ok": true,
+  "info": "looking for 10월 23일 14:00 QA Guest"
+ },
+ "B.partner.rescheduleOptions": [
+  "시간 선택",
+  "10:00–11:00",
+  "10:30–11:30",
+  "11:00–12:00",
+  "11:30–12:30",
+  "12:00–13:00",
+  "12:30–13:30",
+  "13:00–14:00",
+  "13:30–14:30",
+  "14:00–15:00",
+  "14:30–15:30",
+  "15:00–16:00"
+ ],
+ "check:B.partner.rescheduled": {
+  "ok": true,
+  "info": "new=10:00 net={\"m\":\"PATCH\",\"status\":200,\"url\":\"/api/partner/operations/bookings/9b9eccb6-a832-48e9-b6c3-aa744b192fea\",\"body\":\"{\\\"booking\\\":{\\\"id\\\":\\\"9b9ec"
+ },
+ "B.newStart": "10:00",
+ "check:B.customer.seesNewTime": {
+  "ok": true,
+  "info": " Studio · Test Signature cut · Min Fri, Oct 23, 2026 · 10:00 Seoul time View boo"
+ },
+ "check:B.customer.cancelled": {
+  "ok": true,
+  "info": "Booking details You cancelled this booking. Cancelled MYSEOULDROP Booking Studio · Test S"
+ },
+ "check:B.partner.showsCancelled": {
+  "ok": true,
+  "info": "10월 23일 (금) 10:00–11:00 QA Guest 010-0000-0003 Signature cut Min 앱 60,000원 현장 결제 취소 10월 23일 (금) 10:00–11:00 QA Guest 010-0000-0003 Signature cut Min 앱 60,000원 현장 결제 취소 10월 23일 ("
+ },
+ "check:B.partner.homeRecentHasCancel": {
+  "ok": true,
+  "info": "최근 예약 변경 QA Guest · Signature cut 취소 10월 21일 (수) 10:26 QA Guest · Signature cut 취소 10월 21일 (수) 10:21 QA Guest · Signature cut 취소 10월 21일 (수) 10:18 QA Guest · Signature cut 확인 대기 10월 20일 (화) 21:04"
+ },
+ "check:B.customer.errors.none": {
+  "ok": true,
+  "info": ""
+ }
+}

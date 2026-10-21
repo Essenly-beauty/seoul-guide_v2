@@ -7,6 +7,37 @@ import { failedReloadState, rebaseUnchangedSharedSchedule, SaveStatus } from '@/
 const entry = (): PartnerDraftRecord<{ name: string; updatedAt: string }> => ({ token: Symbol(), draft: { name: '편집 중', updatedAt: '2026-10-18T01:02:03.123456+00:00' }, baseline: { name: '저장된 이름', updatedAt: '2026-10-18T01:02:03.123456+00:00' }, state: { kind: 'idle' } });
 
 describe('session-scoped partner draft recovery', () => {
+  it('retains a submitted booking request through internal discard and restores its exact request ID', () => {
+    const store = new PartnerDraftStore();
+    const request = { requestId: '11111111-1111-4111-8111-111111111111', startAt: '2026-10-20T10:00:00+09:00' };
+    const pending: PartnerDraftRecord<typeof request | null> = { token: Symbol(), draft: request, baseline: null, state: { kind: 'pending' }, retainUnconfirmed: true };
+    store.write('booking:create:studio', pending);
+    store.write('settings', entry());
+    store.setActive('booking:create:studio'); store.setActive('settings');
+    expect(store.hasRetainedSubmission()).toBe(true);
+    store.discardActive();
+    expect(store.read('settings')).toBeUndefined();
+    expect(store.read('booking:create:studio')?.draft).toEqual(request);
+    // The old editor's aborted response must still update the preserved token.
+    expect(store.complete('booking:create:studio', pending.token, { ...pending, state: { kind: 'unconfirmed' } })).toBe(true);
+    store.setActive(null); store.setActive('booking:create:studio');
+    store.discardActive();
+    expect(store.read('booking:create:studio')?.draft).toEqual(request);
+    expect(store.complete('booking:create:studio', pending.token, { ...pending, draft: null, baseline: null, state: { kind: 'saved' } })).toBe(true);
+    expect(store.hasRetainedSubmission()).toBe(false);
+    expect(store.hasUnsavedChanges()).toBe(false);
+    store.discardActive();
+    expect(store.read('booking:create:studio')).toBeUndefined();
+  });
+  it('does not restore a retained submitted booking into another account session', () => {
+    const store = new PartnerDraftStore();
+    const pending = { ...entry(), state: { kind: 'unconfirmed' as const }, retainUnconfirmed: true };
+    store.write('booking:create:studio', pending); store.setActive('booking:create:studio');
+    store.clear();
+    expect(store.complete('booking:create:studio', pending.token, pending)).toBe(false);
+    expect(store.hasUnsavedChanges()).toBe(false);
+    expect(store.read('booking:create:studio')).toBeUndefined();
+  });
   it('keeps the unload warning for inactive unsaved drafts, but not confirmed commits', () => {
     const store = new PartnerDraftStore();
     const record = entry();

@@ -3,65 +3,55 @@
 import { useState } from "react";
 import Link from "next/link";
 import { Icon } from "@/components/icon";
-import { ActionButton } from "@/components/ui/action-button";
+import { ProductThumbnail } from "@/components/product/product-thumbnail";
+import { useLocale } from "@/lib/i18n/locale-provider";
 import { routes } from "@/lib/routes";
 import { PRODUCTS, STEP_MAP, STEP_LABEL, type StepCategory } from "@/lib/data";
+import styles from "./routine-content.module.css";
 
 export function RoutineContent() {
+  const { t } = useLocale();
   const [stepCount, setStepCount] = useState<3 | 5 | 7>(3);
   const steps = STEP_MAP[stepCount];
 
   const recFor = (step: StepCategory) => PRODUCTS.find((p) => p.stepCategory === step);
 
   return (
-    <div className="stack">
-      <div>
-        <div className="label">Your Routine</div>
-        <h1 className="h1">K-Beauty Routine</h1>
-        <p className="muted" style={{ marginTop: 6 }}>Curated for Dry skin · hydration + brightening.</p>
-      </div>
+    <div className={styles.routine}>
+      <h1 className="sr-only">{t("Routine")}</h1>
+      <p className={styles.intro}>{t("Explore products for each step.")}</p>
 
-      <div className="segmented" role="tablist">
+      <div className={styles.selector} role="group" aria-label={t("Routine length")}>
         {([3, 5, 7] as const).map((n) => (
-          <button key={n} aria-pressed={stepCount === n} onClick={() => setStepCount(n)}>{n}-Step</button>
+          <button type="button" key={n} aria-pressed={stepCount === n} onClick={() => setStepCount(n)}>{t("{count} steps", { count: n })}</button>
         ))}
       </div>
 
-      <div className="card">
-        <div className="routine-timeline">
+      <ol className={styles.steps}>
           {steps.map((step, i) => {
             const rec = recFor(step);
             return (
-              <div className={"rt-step" + (rec ? " done" : "")} key={step}>
-                <div className="rt-rail">
-                  <span className="rt-num">{String(i + 1).padStart(2, "0")}</span>
-                  <span className="rt-line" />
-                </div>
-                <div className="rt-body">
-                  <div className="rt-label">{STEP_LABEL[step]}</div>
+              <li className={styles.step} key={step}>
+                  <h2 className={styles.heading}>
+                    <span className={styles.number} aria-hidden="true">{String(i + 1).padStart(2, "0")}</span>
+                    {t(STEP_LABEL[step])}
+                  </h2>
                   {rec ? (
-                    <Link className="rt-product" href={routes.shopItem(rec.id)}>
-                      <div className="thumb hero-img" />
-                      <div style={{ flex: 1, minWidth: 0 }}>
-                        <b style={{ display: "block" }}>{rec.name}</b>
-                        <div className="name-kr">{rec.nameKr}</div>
-                        <div className="caption muted" style={{ marginTop: 3 }}>{rec.brand} · {rec.priceRange}</div>
-                      </div>
-                      <Icon name="chev" size="sm" className="chev" />
+                    <Link className={styles.product} href={routes.shopItem(rec.id)}>
+                      <ProductThumbnail product={rec} size={72} style={{ background: "#fff" }} />
+                      <span className={styles.copy}>
+                        <span className={styles.brand}>{rec.brand}</span>
+                        <span className={styles.name}>{rec.name}</span>
+                      </span>
+                      <Icon name="chev" size="sm" className={styles.chevron} aria-hidden="true" />
                     </Link>
                   ) : (
-                    <p className="rt-empty">No products yet for this step.</p>
+                    <p className={styles.intro}>{t("No products yet for this step.")}</p>
                   )}
-                </div>
-              </div>
+              </li>
             );
           })}
-        </div>
-      </div>
-
-      {/* 2026-07-25: `outline` → `secondary` (identical styles; ghost/outline classes are deprecated aliases) */}
-      <ActionButton variant="secondary" toast="Routine added to favorites"><Icon name="heart-o" size="sm" /> Add to Favorites</ActionButton>
-
+      </ol>
     </div>
   );
 }

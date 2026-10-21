@@ -1,0 +1,22 @@
+patched roundtrip script (4 edits)
+ok   B.slots.available — date=Fri, Oct 23, 2026 slots=10:00,10:30,11:00,11:30,12:00,12:30,13:00,13:30,14:00,14:30,15:00,15:30,16:00,16:30,17:00,17:30,18:00,18:30
+ok   B.created — url=/bookings/cbc61b3e-832e-469c-9eed-401c9cc0e0ae status=Awaiting confirmation
+ok   B.customer.messageShown —  booking Messages Seoul time You QA r2: 주차 가능한가요? Oct 21 · 10:19 Sent Message the venue 
+ok   B.partner.threadHasMessage —  연결됩니다. Q QA Guest 10월 23일 (금) 14:00 · Signature cut QA r2: 주차 가능한가요? 10:19 Q QA Guest 10월 23일 (금) 10:00 · Signature cut QA r1: 
+FAIL B.partner.replySent — {}
+FAIL B.customer.replyVisible — not shown
+ok   B.partner.bookingListed — looking for 10월 23일 14:00 QA Guest
+ok   B.partner.rescheduled — new=10:00 net={"m":"PATCH","status":200,"url":"/api/partner/operations/bookings/cbc61b3e-832e-469c-9eed-401c9cc0e0ae","body":"{\"booking\":{\"id\":\"cbc61
+ok   B.customer.seesNewTime —  Studio · Test Signature cut · Min Fri, Oct 23, 2026 · 10:00 Seoul time View boo
+ok   B.customer.cancelled — Booking details You cancelled this booking. Cancelled MYSEOULDROP Booking Studio · Test S
+ok   B.partner.showsCancelled — 10월 23일 (금) 10:00–11:00 QA Guest 010-0000-0003 Signature cut Min 앱 60,000원 현장 결제 취소 10월 23일 (금) 10:00–11:00 QA Guest 010-0000-0003 Signature cut Min 앱 60,000원 현장 결제 취소 10건 · 현장 
+ok   B.partner.homeRecentHasCancel — 최근 예약 변경 QA Guest · Signature cut 취소 10월 21일 (수) 10:21 QA Guest · Signature cut 취소 10월 21일 (수) 10:18 QA Guest · Signature cut 확인 대기 10월 20일 (화) 21:04 QA Guest · Signature cut 취소 10월 20일 (화) 20:41
+ok   B.customer.errors.none
+
+11/13 passed
+FAILED:
+- B.partner.replySent — {}
+- B.customer.replyVisible — not shown
+evidence: /private/tmp/claude-501/-Users-hanmyeong-gwan-mobile-design/c0d42143-4b4a-430f-8cde-e410efaabd0e/scratchpad/qa/out/roundtrip2/member-roundtrip.json
+
+[exited with code 0]

@@ -10,7 +10,7 @@ import { safeAuthNext } from "@/lib/auth-return";
 export default async function RegisterPage({ searchParams }: { searchParams: Promise<Record<string, string | string[] | undefined>> }) {
   const params = await searchParams;
   if (params.switch !== "1") {
-    const { data: { user } } = await supabaseServer().auth.getUser();
+    const { data: { user } } = await (await supabaseServer()).auth.getUser();
     if (user) redirect(safeAuthNext(params.next) ?? routes.map);
   }
   const next = typeof params.next === "string" ? params.next : undefined;

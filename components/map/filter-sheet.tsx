@@ -1,5 +1,6 @@
 "use client";
 
+import { T, useLocale } from "@/lib/i18n/locale-provider";
 import { useState } from "react";
 import { BottomSheet } from "@/components/ui/bottom-sheet";
 import { Button } from "@/components/ui/button";
@@ -19,6 +20,7 @@ export function FilterSheet({ cats, filters, onApply, onClose }: {
   onApply: (f: MapFilters) => void;
   onClose: () => void;
 }) {
+  const { t } = useLocale();
   const [draft, setDraft] = useState<MapFilters>(filters);
   // With category chips selected, show those categories' tag groups; with
   // none, show every group — the filter badge counts tags even when no
@@ -39,27 +41,27 @@ export function FilterSheet({ cats, filters, onApply, onClose }: {
 
   return (
     <BottomSheet
-      title={cats.length === 0 ? "All categories" : cats.map((c) => TYPE_LABEL[c]).join(" · ")}
+      title={cats.length === 0 ? t("All categories") : cats.map((c) => t(TYPE_LABEL[c])).join(" · ")}
       kicker="Filters"
       onClose={onClose}
       footer={
         <div className="row" style={{ gap: 8 }}>
-          <Button variant="secondary" style={{ flex: 1 }} onClick={() => setDraft(EMPTY_FILTERS)}>Reset</Button>
-          <Button style={{ flex: 2 }} onClick={() => { onApply(draft); onClose(); }}>Apply filters</Button>
+          <Button variant="secondary" style={{ flex: 1 }} onClick={() => setDraft(EMPTY_FILTERS)}><T text={"Reset"} /></Button>
+          <Button style={{ flex: 2 }} onClick={() => { onApply(draft); onClose(); }}><T text={"Apply filters"} /></Button>
         </div>
       }
     >
       <div className="filtersheet stack">
       <div>
-        <div className="label">Rating & options</div>
+        <div className="label"><T text={"Rating & options"} /></div>
         <div className="chipwrap" style={{ marginTop: 6 }}>
           <Chip selected={draft.minRating4} onClick={() => setDraft({ ...draft, minRating4: !draft.minRating4 })}>★ 4.0+</Chip>
-          <Chip selected={draft.englishOnly} onClick={() => setDraft({ ...draft, englishOnly: !draft.englishOnly })}>English OK</Chip>
-          <Chip selected={draft.bookableOnly} onClick={() => setDraft({ ...draft, bookableOnly: !draft.bookableOnly })}>Bookable</Chip>
+          <Chip selected={draft.englishOnly} onClick={() => setDraft({ ...draft, englishOnly: !draft.englishOnly })}><T text={"English OK"} /></Chip>
+          <Chip selected={draft.bookableOnly} onClick={() => setDraft({ ...draft, bookableOnly: !draft.bookableOnly })}><T text={"Bookable"} /></Chip>
         </div>
       </div>
       <div>
-        <div className="label">Price</div>
+        <div className="label"><T text={"Price"} /></div>
         <div className="chipwrap" style={{ marginTop: 6 }}>
           {PRICE_OPTIONS.map((p: PriceRange) => (
             <Chip key={p} mono selected={draft.prices.includes(p)} onClick={() => setDraft({ ...draft, prices: toggle(draft.prices, p) })}>{p}</Chip>
@@ -67,7 +69,7 @@ export function FilterSheet({ cats, filters, onApply, onClose }: {
         </div>
       </div>
       <div>
-        <div className="label">Distance from me</div>
+        <div className="label"><T text={"Distance from me"} /></div>
         <div className="chipwrap" style={{ marginTop: 6 }}>
           {DISTANCES.map((d) => (
             <Chip
@@ -85,7 +87,7 @@ export function FilterSheet({ cats, filters, onApply, onClose }: {
         <div key={g.type} className="filtergroup">
           <div className="filtergroup-head">
             <CategoryBadge type={g.type} size={15} />
-            <span>{TYPE_LABEL[g.type]}</span>
+            <span><T text={TYPE_LABEL[g.type]} /></span>
           </div>
           <div className="chipwrap" style={{ marginTop: 8 }}>
             {g.tags.map((s) => (

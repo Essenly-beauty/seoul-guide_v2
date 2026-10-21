@@ -50,7 +50,7 @@ export function ListRow({
   const body = (
     <>
       {media}
-      <div className="stack" style={{ flex: 1, minWidth: 0, gap: 2 }}>
+      <div className="stack listrow-copy" style={{ flex: 1, minWidth: 0 }}>
         <div className="row" style={{ gap: 6, minWidth: 0 }}>
           {titleAccessory}
           <b className="t-label-md" style={{ fontSize: 14, ...ELLIPSIS }}>{title}</b>

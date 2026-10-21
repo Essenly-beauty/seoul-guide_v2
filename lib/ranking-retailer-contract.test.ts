@@ -13,11 +13,10 @@ const footerSource = source("components/ranking/ranking-footer.tsx");
 const bottomNavSource = source("components/ui/bottom-nav.tsx");
 const returnRouteSource = source("lib/ranking-return-route.ts");
 const cssSource = source("app/globals.css");
+const rankingCssSource = source("components/ranking/ranking-page.module.css");
 const playwrightSource = source("playwright.config.ts");
 const rankingE2eSource = source("e2e/ranking-retailers.spec.ts");
 const qaRouteSource = source("app/ranking/qa/page.tsx");
-const oliveYoungMarkSource = source("public/brands/olive-young-mark.svg");
-const daisoMarkSource = source("public/brands/daiso-mark.svg");
 const retailerLogoSources = source("docs/assets/retailer-logo-sources.md");
 
 describe("ranking retailer server/client boundary", () => {
@@ -66,23 +65,23 @@ describe("retailer-specific ranking presentation", () => {
     expect(clientSource).toContain("selectDaisoRankingFromProducts(config.products");
     expect(clientSource).not.toContain("categoriesForDaisoRank");
     expect(clientSource).toContain("{row.rank}");
-    expect(clientSource).toContain("<ImgPh className=\"thumb56\" />");
-    // English leads for the visitor, Korean stays underneath so it can be
-    // shown in store (2026-09-20); the subcategory is translated too.
+    expect(clientSource).toContain("<ProductThumbnail product={product} className=\"thumb56\" />");
+    // English leads in the scan list; the Korean original and fulfillment
+    // options live on the linked product detail (2026-10-20 refinement).
     expect(clientSource).toContain("daisoNameEn(product.productNo) || product.nameKr");
-    expect(clientSource).toContain('className="t-caption" lang="ko">{product.nameKr}');
+    expect(clientSource).not.toContain('className="t-caption ranking-local-name"');
     expect(clientSource).toContain("daisoSubcategoryEn(product.subcategoryKr)");
     expect(clientSource).not.toContain("WON.format(product.priceWon)");
     expect(clientSource).not.toContain("product.rating !== null");
     expect(clientSource).not.toContain("product.reviewCountText");
-    expect(clientSource).toContain("product.delivery");
+    expect(clientSource).not.toContain("product.delivery");
     expect(clientSource).toContain("href={routes.daisoProduct(product.productNo)}");
     expect(clientSource).not.toContain('target="_blank"');
     expect(clientSource).not.toContain('rel="noopener noreferrer"');
     expect(clientSource).not.toContain('Source {collectedAt}');
     expect(clientSource).not.toContain('delivery.parcel ? "Parcel"');
     expect(clientSource).not.toContain("★");
-    expect(clientSource).toContain('className="daiso-ranking-tags"');
+    expect(clientSource).not.toContain('className="daiso-ranking-tags"');
   });
 
   it("treats an explicitly empty Daiso dataset as unavailable without fallback", () => {
@@ -100,25 +99,19 @@ describe("retailer-specific ranking presentation", () => {
     expect(clientSource).not.toMatch(/daisoProducts\.length\s*\?[^:]+:\s*(?:PRODUCTS|OLIVE_YOUNG_RANKING_CONFIG\.products)/);
   });
 
-  it("gives only the Daiso category filters a compact inner pill treatment", () => {
+  it("shares compact outlined category rails while keeping upper tabs strongly selected", () => {
     expect(clientSource).toContain('className="chiprow daiso-category-row"');
     expect(clientSource).toContain('className="daiso-category-chip"');
     expect(clientSource).toContain('className="daiso-category-chip-visual"');
-    expect(clientSource).toContain('<div className="chiprow" role="tablist" aria-label="Daiso ranking type">');
-    expect(clientSource).not.toMatch(/className="daiso-category-chip"\s+soft/);
-    // 40px chip floor (owner, 2026-09-27): the 36px visual plus 2px of
-    // padding each side lands on 40 exactly.
-    expect(cssSource).toMatch(/\.chip\.daiso-category-chip\s*\{[\s\S]*?min-height:\s*40px;[\s\S]*?padding:\s*2px\s+0;/);
-    expect(cssSource).toMatch(/\.daiso-category-chip-visual\s*\{[\s\S]*?min-height:\s*36px;[\s\S]*?padding:\s*0\s+12px;[\s\S]*?font-size:\s*12px;/);
-    expect(cssSource).toContain(".chip.daiso-category-chip.selected .daiso-category-chip-visual");
-    expect(cssSource).toContain("--daiso-category-text: #b83d00");
-    expect(cssSource).toContain("--daiso-category-text: #ff8a5c");
-    expect(cssSource).toContain("--daiso-category-focus-ring: #1c2431");
-    expect(cssSource).toContain("--daiso-category-focus-ring: #f2f3f5");
-    expect(cssSource).toContain("color: var(--daiso-category-text)");
-    expect(cssSource).toContain(".chip.daiso-category-chip:focus-visible {\n    outline: none;");
-    expect(cssSource).toContain(".chip.daiso-category-chip:focus-visible .daiso-category-chip-visual");
+    expect(clientSource).toContain('className={styles.categoryVisual}');
+    expect(clientSource).toContain('<div className="chiprow" role="tablist" aria-label={t("Daiso ranking type")}>');
+    expect(rankingCssSource).toMatch(/\[aria-selected="true"\]\s*\{[^}]*background:\s*var\(--action\);[^}]*color:\s*var\(--on-action\)/);
+    expect(rankingCssSource).toMatch(/filters\.filters :global\(\.chip\)\s*\{[^}]*min-height:\s*44px;/);
+    expect(rankingCssSource).toMatch(/:is\(\.categoryVisual, :global\(\.daiso-category-chip-visual\)\)\s*\{[^}]*min-height:\s*36px;[^}]*font-size:\s*12px;/);
+    expect(rankingCssSource).toContain('border-color: var(--filter-border)');
+    expect(rankingCssSource).toContain('box-shadow: inset 0 0 0 2px var(--text)');
   });
+
 });
 
 describe("ranking-only retailer footer", () => {
@@ -134,9 +127,9 @@ describe("ranking-only retailer footer", () => {
     expect(buttons[0]).toContain("Back");
     expect(buttons[1]).toContain("Olive Young");
     expect(buttons[2]).toContain("Daiso");
-    expect(footerSource).toContain('aria-label="Ranking retailer"');
-    expect(buttons[1]).toContain('src="/brands/olive-young-mark.svg"');
-    expect(buttons[2]).toContain('src="/brands/daiso-mark.svg"');
+    expect(footerSource).toContain('aria-label={t("Ranking retailer")}');
+    expect(buttons[1]).toContain('src="/brands/olive-young-logo.jpeg"');
+    expect(buttons[2]).toContain('src="/brands/daiso-logo.jpeg"');
     expect(buttons[1]).toContain('alt=""');
     expect(buttons[2]).toContain('alt=""');
     expect(buttons[1]).toContain('aria-hidden="true"');
@@ -146,15 +139,15 @@ describe("ranking-only retailer footer", () => {
     expect(footerSource).not.toContain("ranking-footer-selection");
       });
 
-  it("keeps original local navigation marks and documents their non-official provenance", () => {
-    expect(oliveYoungMarkSource).toContain('stroke="#9bce26"');
-    expect(daisoMarkSource).toContain('stroke="#d70011"');
-    expect(retailerLogoSources).toContain("original, non-official in-app navigation marks");
-    expect(retailerLogoSources).toContain("not retailer logos");
-    expect(retailerLogoSources).toContain("does not trace or reproduce Daiso's official six-dot BI artwork");
-    expect(retailerLogoSources).toContain("https://www.oliveyoung.co.kr");
-    expect(retailerLogoSources).toContain("#9bce26");
-    expect(retailerLogoSources).toContain("https://www.daiso.co.kr");
+  it("uses the approved owner-provided retailer logos and documents their source", () => {
+    expect(clientSource).toContain("/brands/olive-young-logo.jpeg");
+    expect(clientSource).toContain("/brands/daiso-logo.jpeg");
+    expect(clientSource).not.toContain("-mark.svg");
+    expect(footerSource).not.toContain("-mark.svg");
+    expect(retailerLogoSources).toContain("owner-provided retailer artwork");
+    expect(retailerLogoSources).toContain("2026-09-27-retailer-ui-brand-copy.md");
+    expect(retailerLogoSources).toContain("do not represent a photo of an individual store or product");
+    expect(retailerLogoSources).toContain("object-fit: contain");
   });
 
   it("replaces retailer URLs and uses proven browser/app history with a map fallback", () => {
@@ -218,7 +211,7 @@ describe("ranking-only retailer footer", () => {
   });
 
   it("keeps the shared five-item BottomNav independent and unchanged in purpose", () => {
-    expect(bottomNavSource).toContain('aria-label="Main"');
+    expect(bottomNavSource).toContain('aria-label={t("Main")}');
     expect(bottomNavSource).toContain('{ key: "map", label: "Map"');
     expect(bottomNavSource).toContain('{ key: "blog", label: "Stories"');
     expect(bottomNavSource).toContain('{ key: "ranking", label: "Ranking"');

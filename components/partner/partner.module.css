@@ -1,19 +1,21 @@
 :global(.app-shell):has(.shell) { max-width: none; width: 100%; height: auto; min-height: 100dvh; margin: 0; overflow: visible; border: 0; border-radius: 0; box-shadow: none; }
-.shell { width: 100%; max-width: 1200px; margin: 0 auto; min-height: 100dvh; color: var(--text); font-family: var(--sans); line-height: 1.65; padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left); }
-.shell *, .shell *::before, .shell *::after { box-sizing: border-box; }
-.shell h1, .shell h2, .shell h3, .shell p { margin: 0; }
-.shell h1 { font-size: 2rem; font-weight: 600; line-height: 1.35; letter-spacing: -.04em; overflow-wrap: anywhere; }
-.shell h2 { font-size: 1.25rem; font-weight: 600; letter-spacing: -.025em; }
-.shell h3 { font-size: 1rem; font-weight: 600; }
-.shell a { color: inherit; }
-.shell :is(button, a, input, select, textarea):focus-visible { outline: 2px solid var(--text); outline-offset: 3px; }
-.shell :global(.btn) { width: auto; max-width: 100%; min-height: 44px; white-space: normal; font-size: .875rem; }
-.shell :global(.btn.full) { width: 100%; }
-.shell :global(.btn.primary) { background: var(--accent-hover); color: var(--bg); }
-.shell :global(.btn.primary):hover { background: color-mix(in srgb, var(--accent-hover) 90%, var(--text)); }
-.shell :global(.banner) { margin: 0 0 24px; font-size: .875rem; line-height: 1.7; }
-.shell :global(.banner) p { margin-top: 8px; }
-.shell :global(.badge) { white-space: normal; text-transform: none; font-family: var(--sans); letter-spacing: 0; }
+.shell { --bg:#f3f5f7; --paper:#fff; --surface:#fff; --surface-hover:#edf2ef; --text:#1b2422; --ink:#1b2422; --muted:#5f6e6a; --border:#e6eae8; --dim:#cfd8d4; --accent:#0c8e70; --accent-hover:#0c8e70; --r-sm:8px; --r-md:14px; --sans:'Pretendard Variable',Pretendard,'Apple SD Gothic Neo','Malgun Gothic',sans-serif; width:100%; max-width:1800px; margin:0 auto; min-height:100dvh; display:grid; grid-template-columns:204px minmax(0,1fr); color:var(--text); background:var(--bg); font:400 15px/1.5 var(--sans); letter-spacing:-.01em; font-variant-numeric:tabular-nums; color-scheme:light; }
+.shell *, .shell *::before, .shell *::after { box-sizing:border-box; }
+.shell h1,.shell h2,.shell h3,.shell p { margin:0; font-family:var(--sans); }
+.shell h1 { font-size:22px; font-weight:700; line-height:1.4; letter-spacing:-.03em; overflow-wrap:anywhere; }
+.shell h2 { font-size:17px; font-weight:700; letter-spacing:-.02em; }
+.shell h3 { font-size:16px; font-weight:650; }
+.shell a { color:var(--accent); }
+.shell :is(button,a,input,select,textarea):focus-visible { outline:3px solid var(--accent); outline-offset:3px; }
+.shell :global(.btn) { width:auto; max-width:100%; min-height:44px; white-space:normal; font:600 14px/1.4 var(--sans); border-radius:8px; box-shadow:none; }
+.shell :global(.btn.full) { width:100%; }
+.shell :global(.btn.primary) { background:var(--accent); color:#f9fffc; border:1px solid var(--accent); }
+.shell :global(.btn.primary):hover { background:#086e57; }
+.shell :global(.btn.secondary) { background:var(--paper); color:var(--ink); border:1px solid var(--border); }
+.shell :global(.btn.link) { border-color:transparent; background:transparent; color:var(--accent); }
+.shell :global(.banner) { margin:0 0 24px; font:400 14px/1.7 var(--sans); border-radius:8px; }
+.shell :global(.banner) p { margin-top:8px; }
+.shell :global(.badge) { white-space:normal; text-transform:none; font:600 12px/1.4 var(--sans); letter-spacing:0; border:0; border-radius:6px; }
 .sidebar { padding: 24px 20px 0; border-bottom: 1px solid var(--border); }
 .brand { font-family: var(--serif); font-size: 1.125rem; font-weight: 600; letter-spacing: -.025em; }
 .brand span { display: block; font-family: var(--sans); font-size: .75rem; letter-spacing: .04em; color: var(--muted); margin-top: 4px; }
@@ -26,12 +28,12 @@
 .toolbar { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-bottom: 24px; font-size: .75rem; }
 .toolbar > span { min-width: 0; overflow-wrap: anywhere; }
 .toolbar button { flex-shrink: 0; }
-.pageHeader { margin: 12px 0 32px; }
-.pageHeader > :last-child:not(:first-child) { margin-top: 16px; }
-.eyebrow { font-size: .625rem; letter-spacing: .14em; font-weight: 600; color: var(--muted); margin-bottom: 12px !important; }
+.pageHeader { margin: 0 0 24px; }
+.pageHeader > :last-child:not(:first-child) { margin-top: 6px; }
+.eyebrow { display:none; font-size: .625rem; letter-spacing: .14em; font-weight: 600; color: var(--muted); margin-bottom: 12px !important; }
 .titleSub { display: block; margin-top: 12px; font-size: 1rem; letter-spacing: -.02em; color: var(--muted); font-weight: 400; }
 .muted { color: var(--muted); font-size: .875rem; }
-.section { margin: 40px 0; }
+.section { margin:24px 0; padding:24px; border:1px solid var(--border); border-radius:14px; background:var(--paper); }
 .section > p { margin-top: 12px; }
 .sectionHeading { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; padding-bottom: 16px; }
 .checklist, .list { list-style: none; padding: 0; margin: 0; border-top: 1px solid var(--border); }
@@ -51,7 +53,7 @@
 .fields { display: grid; gap: 20px; min-width: 0; margin: 0; padding: 0; border: 0; }
 .fields legend { font-weight: 600; margin-bottom: 16px; }
 .field { display: flex; flex-direction: column; gap: 8px; min-width: 0; color: var(--text); font-size: .875rem; font-weight: 500; }
-.field input, .field select, .field textarea, .scheduleRow input, .scheduleRow select, .specialRow input { width: 100%; min-width: 0; min-height: 48px; border: 1px solid var(--dim); background: var(--surface); color: var(--text); border-radius: var(--r-sm); font: 1rem var(--sans); padding: 10px 12px; }
+.field input, .field select, .field textarea, .scheduleRow input, .scheduleRow select, .specialRow input { width: 100%; min-width: 0; min-height: 44px; border: 1px solid var(--dim); background: var(--surface); color: var(--text); border-radius: var(--r-sm); font: 1rem var(--sans); padding: 10px 12px; }
 .field textarea { min-height: 112px; resize: vertical; line-height: 1.65; }
 .field small, .hint { font-size: .75rem; font-weight: 400; color: var(--muted); line-height: 1.7; }
 .fields:disabled input, .fields:disabled select, .fields:disabled textarea { background: var(--surface-hover); color: var(--muted); cursor: not-allowed; }
@@ -104,6 +106,24 @@
 .staffMenuList button { flex-shrink: 0; }
 .staffCalendarHeading { margin-top: 32px !important; }
 .staffBack { margin-bottom: 20px; }
+.bookingFilters { display: grid; gap: 16px; padding: 20px 0; border-block: 1px solid var(--border); }
+.bookingFilters > button { justify-self: start; align-self: end; }
+.bookingCount { margin: 20px 0 12px !important; color: var(--muted); font-size: .875rem; }
+.bookingList { list-style: none; padding: 0; margin: 0; }
+.bookingItem { padding: 24px 0; border-bottom: 1px solid var(--border); }
+.bookingHeading { display: flex; align-items: start; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+.bookingHeading > div { min-width: 0; overflow-wrap: anywhere; }
+.bookingTime { color: var(--muted); font-size: .875rem; margin-bottom: 8px !important; font-variant-numeric: tabular-nums; }
+.bookingService { margin: 12px 0 4px !important; overflow-wrap: anywhere; }
+.bookingDetails { margin: 12px 0; font-size: .875rem; }
+.bookingDetails summary { display: list-item; min-height: 44px; padding: 10px 0; cursor: pointer; text-underline-offset: 4px; }
+.bookingDetails summary:focus-visible { outline: 2px solid var(--text); outline-offset: 3px; }
+.bookingDetails dl { display: grid; grid-template-columns: 88px minmax(0, 1fr); gap: 8px 16px; margin: 0 0 20px; padding: 16px; background: var(--surface); border-radius: var(--r-sm); }
+.bookingDetails dt { color: var(--muted); }
+.bookingDetails dd { margin: 0; overflow-wrap: anywhere; }
+.bookingDetails dd a { display: inline-flex; min-height: 44px; align-items: center; margin-block: -10px; }
+.bookingNotes { white-space: pre-wrap; }
+@media (min-width: 600px) { .bookingFilters { grid-template-columns: repeat(3, minmax(0, 1fr)); } .bookingFilters > button { grid-column: 1 / -1; } }
 @media (max-width: 699px) { .staffWorkspace[data-detail-open='true'] .staffListPane { display: none; } .staffWorkspace[data-detail-open='false'] .staffDetailPane { display: none; } }
 @media (min-width: 700px) { .staffWorkspace { grid-template-columns: minmax(220px, 280px) minmax(0, 1fr); align-items: start; } .staffListPane { position: sticky; top: 20px; max-height: calc(100dvh - 40px); overflow-y: auto; } .staffBack { display: none !important; } .staffDetailBody .scheduleRow, .staffDetailBody .specialRow { grid-template-columns: repeat(2, minmax(0, 1fr)); } .staffDetailBody .scheduleRow button, .staffDetailBody .specialRow button { grid-column: 1 / -1; } }
 .gate { padding: 48px 0; max-width: 600px; }
@@ -111,5 +131,6 @@
 .skip { position: absolute; top: 0; left: 16px; padding: 12px; background: var(--surface); transform: translateY(-150%); z-index: 5; }
 .skip:focus { transform: translateY(0); }
 @media (min-width: 600px) { .twoColumns { grid-template-columns: repeat(2, minmax(0, 1fr)); } .checklist li { grid-template-columns: 28px minmax(0, 1fr) auto; align-items: center; } .checklist li > :last-child { grid-column: auto; } .scheduleRow { grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr) minmax(0, 1fr) auto; align-items: end; } .specialRow { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) auto; align-items: end; } }
-@media (min-width: 900px) { .shell { display: grid; grid-template-columns: 220px minmax(0, 1fr); } .sidebar { padding: 48px 24px; border-bottom: 0; border-right: 1px solid var(--border); } .nav { grid-template-columns: 1fr; margin-top: 48px; } .support { margin-top: 32px; } .main { padding: 32px 48px 80px; } .pageHeader { margin-top: 28px; margin-bottom: 40px; } .shell h1 { font-size: 2.5rem; } .section { margin-top: 48px; } .editor { padding: 32px; } }
+@media (max-width:800px) { .shell { display:block; } .section { padding:20px 16px; } }
+
 @media (prefers-reduced-motion: reduce) { .shell *, .shell *::before, .shell *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; } }

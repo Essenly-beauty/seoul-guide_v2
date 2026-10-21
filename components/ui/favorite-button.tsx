@@ -7,6 +7,7 @@ import { useSigninNudge } from "@/components/auth/signin-nudge";
 import { toggleFavorite, useFavorites, type FavKind } from "@/lib/favorites";
 import { recordValueMoment } from "@/lib/install-nudge";
 import { getPlace } from "@/lib/data";
+import { useAuthUser } from "@/lib/auth/use-auth";
 
 type FavoriteButtonProps = {
   /** Wire to the shared store — hearts sync across screens and the Saved tab. */
@@ -26,6 +27,7 @@ export function FavoriteButton({ kind, id, initial = false, variant = "plain", s
   const on = stored ?? localOn;
   const { toast } = useToast();
   const { nudge, sheet } = useSigninNudge();
+  const { user, loading } = useAuthUser();
   return (
     <>
       <IconButton
@@ -38,6 +40,13 @@ export function FavoriteButton({ kind, id, initial = false, variant = "plain", s
         onClick={(e) => {
           e.preventDefault();
           e.stopPropagation();
+          const place = kind === "place" && id ? getPlace(id) : null;
+          // Guests save nothing (owner decision 2026-10-20): the join sheet
+          // remembers the place and saves it once they return signed in.
+          if (!user) {
+            if (!loading) nudge("favorite", place ? { savedPlace: { id: place.id, name: place.name } } : undefined);
+            return;
+          }
           const next = kind && id ? toggleFavorite(kind, id) : !on;
           if (!(kind && id)) setLocalOn(next);
           toast(next ? "Saved to favorites" : "Removed");
@@ -45,9 +54,6 @@ export function FavoriteButton({ kind, id, initial = false, variant = "plain", s
           // the Home Screen offer becomes fair to make. Counted, not shown:
           // lib/install-nudge-policy.ts decides whether it appears.
           if (next) recordValueMoment();
-          // guests get a one-time account nudge after their first save
-          const place = kind === "place" && id ? getPlace(id) : null;
-          if (next) nudge("favorite", place ? { savedPlace: { id: place.id, name: place.name } } : undefined);
         }}
       />
       {sheet}

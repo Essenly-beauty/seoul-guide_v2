@@ -19,7 +19,7 @@ function staffIdFromQuery(request: Request): string | null {
 export async function GET(request: Request): Promise<Response> {
   try {
     const id = staffIdFromQuery(request);
-    const client = supabaseServer();
+    const client = await supabaseServer();
     const context = await getPartnerContext(client);
     const snapshot = id === null ? await getStaffList(client, context) : await getStaffDetail(client, context, id);
     return partnerJson({ ok: true, snapshot });
@@ -31,7 +31,7 @@ export async function POST(request: Request): Promise<Response> {
     if (new URL(request.url).searchParams.size !== 0) throw new PartnerError(400, 'INVALID_COMMAND');
     if (!sameOrigin(request)) throw new PartnerError(403, 'INVALID_ORIGIN');
     if (request.headers.get('content-type')?.split(';', 1)[0].trim().toLowerCase() !== 'application/json') throw new PartnerError(415, 'UNSUPPORTED_MEDIA_TYPE');
-    const client = supabaseServer();
+    const client = await supabaseServer();
     const context = await getPartnerContext(client);
     const parsed = parseStaffCommand(await readJson(request));
     if (!parsed.ok) throw new PartnerError(400, 'INVALID_COMMAND');

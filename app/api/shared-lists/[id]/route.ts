@@ -16,7 +16,7 @@ export async function GET(
   { params }: { params: Promise<{ id: string }> },
 ) {
   try {
-    const { data: { user }, error: authError } = await supabaseServer().auth.getUser();
+    const { data: { user }, error: authError } = await (await supabaseServer()).auth.getUser();
     if (authError || !user) return failure(401, "Sign in to open this list.");
 
     const { id } = await params;

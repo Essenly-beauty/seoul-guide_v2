@@ -24,7 +24,7 @@ describe("brand asset contract", () => {
     expect(ranking).toContain(
       'const rankingTitle = initialRetailer === "daiso" ? "DAISO Ranking" : "OLIVE YOUNG Product Guide"',
     );
-    expect(ranking).toContain('<TopBar center title={rankingTitle} />');
+    expect(ranking).toContain('<h1 aria-label={t(rankingTitle)}>');
     expect(ranking).not.toContain('<TopBar center title="Ranking" />');
     expect(ranking).not.toContain('BrandMark, Icon } from "@/components/icon"');
     expect(source("components/icon.tsx")).not.toContain("i-mark-brand");

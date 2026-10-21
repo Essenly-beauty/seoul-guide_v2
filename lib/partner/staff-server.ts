@@ -167,7 +167,6 @@ export async function saveStaffCommand(client: SupabaseClient, context: PartnerC
     if (!parsed.ok) throw new PartnerError(400, 'INVALID_COMMAND');
     const verified = await recheckContext(client, context);
     if (context.readOnly || verified.readOnly || !['onboarding', 'active'].includes(verified.merchant.status)) throw new PartnerError(403, 'PARTNER_READ_ONLY');
-    if (context.merchant.bookingEnabled || verified.merchant.bookingEnabled) throw new PartnerError(409, 'PARTNER_CONFLICT');
     const merchantId = verified.merchant.id;
     const value = parsed.command;
     if (value.kind === 'staff') {

@@ -1,3 +1,6 @@
+"use client";
+
+import { useLocale } from "@/lib/i18n/locale-provider";
 import type { AriaAttributes, CSSProperties, MouseEventHandler, Ref } from "react";
 import Link from "next/link";
 import { Icon, type IconName } from "@/components/icon";
@@ -45,16 +48,17 @@ export function IconButton({
   style,
   ...rest
 }: IconButtonProps) {
+  const { t } = useLocale();
   const cls = ["iconbtn", variant === "plain" ? "" : variant, className].filter(Boolean).join(" ");
   const sizing = size ? { width: size, height: size, ...style } : style;
   const glyph = <Icon name={name} size={iconSize === "md" ? undefined : iconSize} />;
   if (href && !disabled) {
     return external ? (
-      <a className={cls} style={sizing} href={href} target="_blank" rel="noopener noreferrer" aria-label={label} title={label} onClick={onClick} {...rest}>
+      <a className={cls} style={sizing} href={href} target="_blank" rel="noopener noreferrer" aria-label={t(label)} title={t(label)} onClick={onClick} {...rest}>
         {glyph}
       </a>
     ) : (
-      <Link className={cls} style={sizing} href={href} aria-label={label} title={label} onClick={onClick} {...rest}>
+      <Link className={cls} style={sizing} href={href} aria-label={t(label)} title={t(label)} onClick={onClick} {...rest}>
         {glyph}
       </Link>
     );
@@ -65,8 +69,8 @@ export function IconButton({
       type="button"
       className={cls}
       style={sizing}
-      aria-label={label}
-      title={label}
+      aria-label={t(label)}
+      title={t(label)}
       aria-pressed={pressed}
       disabled={disabled}
       onClick={onClick}

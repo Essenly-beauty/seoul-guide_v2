@@ -1,5 +1,7 @@
 "use client";
 
+import { T, useLocale } from "@/lib/i18n/locale-provider";
+
 import { useState } from "react";
 import { BottomSheet } from "@/components/ui/bottom-sheet";
 import { Button } from "@/components/ui/button";
@@ -19,6 +21,7 @@ const CORRECTION_TYPES = [
 type CorrectionType = (typeof CORRECTION_TYPES)[number]["value"];
 
 export function PlaceCorrectionLauncher({ place }: { place: Place }) {
+  const { t } = useLocale();
   const { toast } = useToast();
   const [open, setOpen] = useState(false);
   const [issueType, setIssueType] = useState<CorrectionType | null>(null);
@@ -52,10 +55,10 @@ export function PlaceCorrectionLauncher({ place }: { place: Place }) {
     });
     setBusy(false);
     if (result === "lost") {
-      toast("Couldn't send or save this correction — please try again.");
+      toast(t("Couldn't send or save this correction — please try again."));
       return;
     }
-    toast(result === "sent" ? "Thanks — we'll verify this place." : "Saved offline — we'll send it when you're back online.");
+    toast(t(result === "sent" ? "Thanks — we'll verify this place." : "Saved offline — we'll send it when you're back online."));
     close();
   };
 
@@ -66,17 +69,15 @@ export function PlaceCorrectionLauncher({ place }: { place: Place }) {
         size="sm"
         className="place-correction-trigger"
         onClick={() => setOpen(true)}
-      >
-        Report incorrect info
-      </Button>
+      ><T text={"Report incorrect info"} /> </Button>
       {open && (
-        <BottomSheet title="Fix place information" kicker="Help us improve" onClose={() => { if (!busy) close(); }}>
+        <BottomSheet title="Fix place information" onClose={() => { if (!busy) close(); }}>
           <p className="place-correction-place">
             <b>{place.name}</b>
-            <span className="t-caption">Choose what needs checking. A note is optional.</span>
+            <span className="t-caption"><T text={"Choose what needs checking. A note is optional."} /></span>
           </p>
-          <div>
-            <div className="label">What is incorrect?</div>
+          <fieldset className="place-correction-group">
+            <legend><T text={"What needs correcting?"} /></legend>
             <div className="chipwrap place-correction-options">
               {CORRECTION_TYPES.map((item) => (
                 <Chip
@@ -84,25 +85,25 @@ export function PlaceCorrectionLauncher({ place }: { place: Place }) {
                   selected={issueType === item.value}
                   onClick={() => setIssueType(item.value)}
                 >
-                  {item.label}
+                  <T text={item.label} />
                 </Chip>
               ))}
             </div>
-          </div>
+          </fieldset>
           <label className="place-correction-note">
-            <span className="label">Details <span className="muted">(optional)</span></span>
+            <span><T text="Details (optional)" /></span>
             <textarea
               className="input"
               rows={3}
               maxLength={600}
               value={note}
-              placeholder={issue?.prompt ?? "Add a helpful detail"}
+              placeholder={t(issue?.prompt ?? "Add a helpful detail")}
               onChange={(event) => setNote(event.target.value)}
             />
             <span className="t-caption num">{note.length}/600</span>
           </label>
           <Button disabled={!issueType || busy} onClick={() => void submit()}>
-            {busy ? "Sending…" : "Send correction"}
+            <T text={busy ? "Sending…" : "Send correction"} />
           </Button>
         </BottomSheet>
       )}

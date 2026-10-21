@@ -111,3 +111,22 @@ python3 -m http.server 3111 --bind 127.0.0.1 --directory docs/designs/partner-ad
 - **DB 구조 제안 2판** `reports/architecture/2026-10-20-database-architecture-proposal.md`(Codex 채점 7/10 — 남은 요구: 지연 트리거 무잠금 주장 제거·큐/재시도 계약, 기존 프로필·미디어 응답 재현 필드, 연결 해제 vs 장소 비공개 구분·캐시 무효화·ETag, 리뷰 집계 제외 또는 전체 이벤트, 권한 DDL·정합성 검사·트리거 롤백 이름).
 - **코드 변경(미커밋, Codex 작업 트리와 같은 파일 포함)**: 비회원 ♥ 미보관(`lib/favorites.ts`·`favorite-button`·상세 Save·지도 공유 목록·`signin-nudge`·`signup-return-notice`·favorites 문구·i18n), 스켈레톤 로딩(`components/ui/skeleton.tsx`, `app/loading.tsx`, 고객 예약·메뉴·저장 목록 로딩 상태, globals.css), 상세 사진 헤더(커버 타일·+N·라이트박스, Photos 섹션·탭 제거, `.place-hero-chrome`), 썸네일 cover, 첫 리뷰 유도(TravelerReviews), 지하철 트랙 밀도(`data-density` + CSS; 16/39/60정거장 342px에서 넘침 없음 실측), **관리자 ‘고객 화면 사진 영역’ 스위치**(마이그레이션 `20261020123000_store_profile_show_photos.sql` — 로컬 DB에만 적용, `profile-contracts.ts` showPhotos, `place-profile.ts` photosEnabled, 관리자 토글·미리보기). 검증: typecheck·lint 통과, vitest 36파일 938개 통과, Playwright `scripts/verify-impl*.cjs`·`verify-toggle.cjs` 통과(비회원 ♥→가입 시트→로그인 복귀 시 저장, 토글 왕복 9/9). Codex 코드 리뷰는 요청해 둔 상태(결과 미확인, `codex-impl1.log`는 scratchpad에만).
 - 원격 DB에는 아무것도 적용하지 않았다. 이 코드 변경을 커밋하려면 Codex의 미커밋 변경과 섞이므로 파일 단위로 조정이 필요하다.
+
+## 10. 2026-10-20 밤 2부 — Codex 코드 리뷰 반복 (Claude)
+
+- 9절의 "Codex 코드 리뷰 미확인"에 답이 왔었다: **6/10**, 지적 7건(RPC 5키 호환, 지도 상세 사진 OFF 미적용, 가입 복귀 저장 소실, 라이트박스 포커스·포털, 긴 노선 잘림, 썸네일 테스트). 전부 고치고 재검증한 뒤 2차 **7/10**(남은 6건: 즐겨찾기 서버 확인·중복 전송, 공개 프로필 실패 캐시, 포털 드래그가 시트를 움직임, 배경 inert, OFF 도착 시 라이트박스, DB 테스트 재현성)도 고쳤다. 3차 **7/10**(11개 중 7개 RESOLVED; 남은 4건 — 항목별 쓰기 순서, 조회 중 완료된 토글 보존, 늦은 완료가 새 요청 삭제, 사진 API 실패가 OFF 폐기)도 고치고 경합 재현 테스트 17개를 더했다. 4차 **7/10**(7개 RESOLVED; 3차 수정이 만든 결함 3건 포함 7건 지적) → 전부 수정(병합 직렬화·확정 상태 롤백·계정 게이팅·requestId·프로필/사진 분리 메모·일회용 스택으로 빈 DB 마이그레이션 검증). 5차 결과: **(채점 대기 — 갱신)**. 상세 표·근거·검증은 `reports/design/2026-10-20-codex-review-fixes.md`.
+- 발견한 기존 결함: 전역 `.overlay` 스크림이 overlay 아이콘 버튼 전체를 absolute로 만들고 있었음(`.overlay:not(.iconbtn)`로 수정). 어젯밤 "vitest 938개"는 부분 실행이었고 전체 실행에서 계약 테스트 5개가 깨져 있었음(갱신 완료). **앞으로 vitest는 전체 실행만 "통과"로 적는다**(176→179파일, 2,274개, 약 10초).
+- 정책 메모: 썸네일 cover는 **장소 사진만**, 상품·브랜드는 contain 유지(`ImageThumbnail` `fit` prop) — 사용자 확인 전까지의 판단.
+- 새 QA 스크립트: `docs/designs/partner-admin-redesign-20261019/qa/impl-map-lightbox.cjs`(21)·`impl-map-photos-off.cjs`(10)·`impl-track-geometry.cjs`(8), README에 사용법. 스크린샷 `reports/design/evidence/2026-10-20-codex-round2/`.
+- 검증(최종 상태): tsc 0 · lint 0 · vitest 179/2,274 · DB 157 · Playwright 21/10/8 · 어젯밤 회귀 21/21.
+- **여전히 미커밋.** 이 수정과 Codex의 10/20 구현(261개 파일)이 같은 파일에 섞여 있어 분리 커밋이 불가능하다. 전체 트리 기준 검증이 전부 통과하므로 커밋 방식만 결정하면 된다(사용자 질문 중). 원격 DB에는 아무것도 적용하지 않았고, `show_photos` 마이그레이션은 이제 "DB 먼저, 앱 나중" 순서로 안전하다(RPC가 4키 요청도 받음).
+- 남은 것: 새 DB에서 마이그레이션 순서 적용 검증(미실시), QA 보고서 4차(7/10)의 회원 왕복(메시지·시간 변경·고객 취소) 실측 — 어젯밤 `round3-flows.cjs`는 슬롯 버튼(`/^16:00/`)을 못 찾고 멈춤(영업시간·날짜 의존), DB 제안 3판.
+
+## 11. 2026-10-21 (Claude, 사용량 한도로 중단 — 여기서 재개)
+- 상세: `reports/design/2026-10-20-codex-review-fixes.md` 5~7절. 요약: 내부 7관점 적대 검증(25건) → 수정, **즐겨찾기 저장소를 계정별 Session + 항목별 reconciler로 재작성**(+기기 미러 소유 태그), 재작성분 1차 검증 21건·2차 검증 9건 모두 수정(인증 순서 가드 `sawAuthEvent`, 오프라인 부팅은 로그아웃 아님 `lib/auth/session-errors.ts`, 스냅샷 계정 범위 `.eq(user_id)`, 같은 계정 재로그인 시 세션 인계, 시작 토큰, 온라인 복귀 시 스냅샷 재시도, 로그아웃 모달이 `signOut()` 실패를 알림, 계정 삭제 후 로컬 signOut, 알림은 스토어 계정 일치 시에만).
+- 검증(최종): tsc 0 · lint 0 · vitest **214파일 2,397개** · DB 161(로컬 QA + 일회용 빈 DB에 마이그레이션 25개 순서 적용) · 브라우저 79/79(+`impl-signout.cjs`는 실행 중이었음 — 결과 미확인, 다시 돌릴 것).
+- DB 제안 3판 작성(`reports/architecture/2026-10-20-database-architecture-proposal.md`, 1,060줄, 내부 검증 36건 반영). 웹앱↔관리자 회원 왕복 22/22(`qa/impl-member-roundtrip.cjs`, 증거 `reports/design/evidence/2026-10-21-member-roundtrip/`).
+- **Codex**: 로그인은 10/21 13:42에 복구됨. 단 `gpt-6-astra`는 이 계정에서 더 이상 지원 안 됨(400). `GSTACK_CODEX_MODEL=gpt-6-luna`로 요청 단위 지정하면 동작(probe OK, config는 안 바꿈). **다음 할 일: 이 모델로 5차 채점** — 프롬프트는 이전 차수 형식(채점표·2/3/4차 원문·변경 요약·부록 diff) 재사용.
+- 남은 결정: 커밋 방식(Codex 미커밋 구현과 섞임), 상품 썸네일 contain 정책 확인, rpc-2(예약 견적 정의 변경) 확인, ratings.ts도 같은 오프라인 부팅 퍼지 문제(미수정, 범위 밖).
+- 10/21 끝: `impl-signout.cjs` 결과 — 유효한 토큰으로 오프라인 로그아웃 시 auth-js가 로컬 세션을 지우고 성공(알림 없음·기기 사본 삭제)해서 스크립트의 "오프라인=실패" 기대가 틀림(앱 동작은 맞음). 실패 경로는 만료된 토큰에서만 생기므로 단위 테스트(`lib/signout-modal-result.test.ts`)로만 고정됨. 스크립트는 온라인 경로만 확인하도록 고쳐야 함. `verify-impl` 21/21.
+- 10/21 저녁: Codex 5차 **6**(gpt-6-luna) → 병합 행 단일 경로·구버전 요청 ID 부여(Google 지적은 반박) → 6차 **9** → 사진 신선도 P3 수정 → 7차 확인 **9**(새 결함 없음). **목표(9점) 달성.** 최종: vitest 214/2,399, tsc·lint 0, 비회원 ♥ 회귀 21/21, 로그아웃 9/9(`qa/impl-signout.cjs` 기대값 수정됨). 남은 것: 커밋 방식 결정, 상품 썸네일 정책·rpc-2 확인, ratings.ts 오프라인 퍼지(범위 밖).

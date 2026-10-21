@@ -55,7 +55,7 @@ describe("place status hydration", () => {
     const detail = source("components/place/place-detail-body.tsx");
     // The seven rows resolve per day instead of repeating one pair.
     expect(detail).toContain("hoursOn(place.hours, i)");
-    expect(detail).toContain('dayHours ? `${dayHours.open} – ${dayHours.close}` : "Closed"');
+    expect(detail).toContain('dayHours ? `${dayHours.open} – ${dayHours.close}` : t("Closed")');
     expect(detail).not.toMatch(/place\.hours!\.open\} – \{place\.hours!\.close/);
   });
 });

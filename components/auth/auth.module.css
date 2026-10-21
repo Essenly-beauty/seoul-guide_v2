@@ -1,0 +1,41 @@
+.screen {
+  --auth-space-xs: 8px;
+  --auth-space-sm: 12px;
+  --auth-space-md: 16px;
+  --auth-space-lg: 24px;
+  --auth-space-xl: 32px;
+  --auth-control-height: 54px;
+  padding: calc(var(--auth-space-xs) + env(safe-area-inset-top)) var(--space-page) max(var(--auth-space-lg), env(safe-area-inset-bottom));
+  text-align: left;
+}
+.screen :global(.auth-top) { display: grid; grid-template-columns: 44px minmax(0, 1fr) 44px; justify-items: center; margin-inline: calc(-1 * var(--auth-space-xs)); min-height: 44px; }
+.language { display: grid; place-items: center; min-width: 44px; min-height: 44px; color: var(--text); border-radius: var(--r-sm); }
+.heading { margin-top: var(--auth-space-xl); }
+.screen :global(.auth-title) { margin: 0; font-size: var(--type-title); font-weight: 600; line-height: 1.4; }
+.screen :global(.auth-support) { margin-top: var(--auth-space-xs); font-size: var(--type-body); line-height: 1.65; }
+.form { display: flex; flex-direction: column; }
+.screen :global(.auth-fields) { gap: var(--auth-space-lg); margin-top: var(--auth-space-xl); }
+.fieldGroup { display: grid; gap: var(--auth-space-xs); }
+.fieldGroup > label { font-size: var(--type-body); font-weight: 500; }
+.screen :global(.auth-field) { min-height: var(--auth-control-height); padding: var(--auth-space-md); border: 1px solid var(--border); border-radius: var(--r-md); background: var(--surface-hover); font-weight: 400; }
+.screen :global(.auth-field)::placeholder { font-weight: 400; }
+.screen :global(.auth-field):focus-visible { outline: 2px solid var(--text); outline-offset: 2px; border-color: var(--text); }
+.screen :global(.auth-field)[aria-invalid="true"] { border-color: var(--error); }
+.screen .passwordField { padding-right: calc(var(--auth-space-md) + 44px); }
+.screen :global(.auth-field-toggle) { right: var(--auth-space-xs); color: var(--muted); }
+.screen :global(.auth-aside) { align-self: flex-end; display: flex; align-items: center; min-height: 44px; margin-top: var(--auth-space-xs); font-size: var(--type-caption); font-weight: 500; color: var(--text); }
+.screen :global(.auth-cta) { min-height: var(--auth-control-height); margin-top: var(--auth-space-md); border-radius: var(--r-md); font-size: var(--type-body); font-weight: 600; box-shadow: none; }
+.screen :global(.auth-cta-secondary) { min-height: 48px; padding: var(--auth-space-sm); border: 1px solid var(--border); border-radius: var(--r-md); color: var(--text); font-size: var(--type-body); font-weight: 500; }
+.screen :global(.auth-cta-secondary):hover { background: var(--surface-hover); }
+.screen :global(.auth-or) { justify-content: center; margin-top: var(--auth-space-lg); font-size: var(--type-caption); }
+.screen :global(.auth-or)::before, .screen :global(.auth-or)::after { content: none; }
+.google { display: flex; align-items: center; justify-content: center; gap: var(--auth-space-sm); min-height: var(--auth-control-height); margin-top: var(--auth-space-md); padding: var(--auth-space-sm); border: 1px solid var(--border); border-radius: var(--r-md); color: var(--text); font-size: var(--type-body); font-weight: 500; }
+.google svg { width: 20px; height: 20px; flex: none; }
+.google:hover { background: var(--surface-hover); }
+.register { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; column-gap: var(--auth-space-xs); margin-top: var(--auth-space-lg); color: var(--muted); font-size: var(--type-caption); }
+.screen :global(.auth-link) { display: inline-flex; align-items: center; min-height: 44px; color: var(--text); font-weight: 600; text-decoration: underline; text-underline-offset: 3px; }
+.screen :global(.auth-foot) { margin-top: auto; padding-top: var(--auth-space-lg); text-align: center; font-size: var(--type-caption); font-weight: 400; }
+.screen :global(.auth-error) { font-size: var(--type-caption); line-height: 1.65; text-align: left; }
+.screen :global(.auth-error):focus { outline: 2px solid var(--error); outline-offset: 4px; border-radius: var(--r-sm); }
+.screen button:disabled { opacity: .6; cursor: wait; }
+.resend { margin-top: var(--auth-space-md); }

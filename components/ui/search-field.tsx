@@ -1,5 +1,6 @@
 "use client";
 
+import { useLocale } from "@/lib/i18n/locale-provider";
 import type { CSSProperties, Ref } from "react";
 import { Icon } from "@/components/icon";
 import { IconButton } from "@/components/ui/icon-button";
@@ -39,6 +40,7 @@ export function SearchField({
   className,
   style,
 }: SearchFieldProps) {
+  const { t } = useLocale();
   const cls = ["mobile-search-field", className].filter(Boolean).join(" ");
   return (
     <div className={cls} style={style}>
@@ -54,15 +56,15 @@ export function SearchField({
         autoComplete="off"
         spellCheck={false}
         autoFocus={autoFocus}
-        placeholder={placeholder}
-        aria-label={label}
+        placeholder={placeholder ? t(placeholder) : undefined}
+        aria-label={t(label)}
         value={value}
         onChange={(e) => onChange(e.target.value)}
       />
       {onClear && value && (
         <IconButton
           name="x"
-          label={clearLabel}
+          label={t(clearLabel)}
           variant={clearVariant}
           iconSize="xs"
           onClick={onClear}

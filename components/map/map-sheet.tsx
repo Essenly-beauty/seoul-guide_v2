@@ -1,18 +1,22 @@
 "use client";
 
 import { useCallback, useEffect, useId, useLayoutEffect, useMemo, useRef, useState } from "react";
+import { PlaceThumbnail } from "@/components/place/place-thumbnail";
+import { T } from "@/lib/i18n/locale-provider";
 import { Icon } from "@/components/icon";
 import { SelectedPlaceSummary } from "@/components/map/selected-place-summary";
 import { PlaceDetailBody } from "@/components/place/place-detail-body";
+import { usePublishedPlace } from "@/components/place/use-published-place";
 import { PlaceCtaBar } from "@/components/place/place-cta-bar";
 import { SelectedPlaceActionBar } from "./selected-place-action-bar";
 import { LiveBadge } from "@/components/ui/live-badge";
-import { BRAND_MARK_SRC, getPlace, TYPE_COLOR, TYPE_ICON, TYPE_LABEL, zoneShort, type Place } from "@/lib/data";
+import { getPlace, TYPE_LABEL, zoneShort, type Place } from "@/lib/data";
 import { formatCompactDistance, haversineKm, type LatLng } from "@/lib/geo";
 import { daisoRowServices } from "@/lib/daiso-row-services";
 import { isApproximatePlace } from "@/lib/places";
 import {
   getMapSheetHalfOffsetRatio,
+  selectedSheetVisibleHeight,
   nextMapSheetSnap,
   resolveReleaseSnap,
   resolveSelectedPlaceView,
@@ -76,6 +80,10 @@ export function MapSheet({ places, origin, selectedId, groupPlaceIds = [], onSel
     ? ranked.find(({ p }) => p.id === selectedId)?.p ?? getPlace(selectedId) ?? null
     : null;
   const selectedKm = selectedId ? ranked.find(({ p }) => p.id === selectedId)?.km ?? 0 : 0;
+  // The catalog entry opens instantly; the venue's published profile (name,
+  // English OK, contact, notice, photo-header switch) overlays it once fetched,
+  // the same merge the /place route does on the server.
+  const publishedPlace = usePublishedPlace(selectedPlace);
   const groupPlaces = useMemo(
     () => groupPlaceIds.map((id) => getPlace(id)).filter((place): place is Place => Boolean(place)),
     [groupPlaceIds],
@@ -87,7 +95,7 @@ export function MapSheet({ places, origin, selectedId, groupPlaceIds = [], onSel
   // together when the two states disagreed during a drag or Map-tab cycle.
   const selectedView = resolveSelectedPlaceView(snap);
   const snapLabel = selectedPlace && selectedView === "compact"
-    ? `Selected place preview collapsed. ${selectedPlace?.name ?? "Place"}. Press to reopen.`
+    ? `Selected place preview collapsed. ${(publishedPlace ?? selectedPlace)?.name ?? "Place"}. Press to reopen.`
     : groupPlaces.length > 1
       ? `${groupTitle}. Press to fully expand.`
     : snap === "peek"
@@ -154,6 +162,7 @@ export function MapSheet({ places, origin, selectedId, groupPlaceIds = [], onSel
       at peek, so the last measurement is remembered for the drag that heads
       there; before any measurement a typical card is assumed. */
   const lastPeekHeight = useRef<number | null>(null);
+  const halfHeight = useRef<{ id: string; height: number } | null>(null);
   const peekVisibleHeight = useCallback(() => {
     if (!selectedPlace) return 62;
     const sheet = sheetRef.current;
@@ -177,7 +186,9 @@ export function MapSheet({ places, origin, selectedId, groupPlaceIds = [], onSel
       : Math.max(currentHeight, parentHeight * 0.82);
     return {
       full: 0,
-      half: h * getMapSheetHalfOffsetRatio(Boolean(selectedPlace)),
+      half: selectedPlace && halfHeight.current?.id === selectedPlace.id
+        ? Math.max(0, h - halfHeight.current.height)
+        : h * getMapSheetHalfOffsetRatio(Boolean(selectedPlace)),
       // Measure the peek content instead of assuming 136px. A long name wraps
       // to two lines and the category line fell below the cut, half-clipped by
       // the action bar (owner report 2026-08-23). Measuring means any content
@@ -194,7 +205,42 @@ export function MapSheet({ places, origin, selectedId, groupPlaceIds = [], onSel
   useLayoutEffect(() => {
     const el = sheetRef.current;
     if (!el || snap !== "peek" || !selectedPlace) return;
-    el.style.setProperty("--selected-sheet-peek-height", `${peekVisibleHeight()}px`);
+    const measure = () => el.style.setProperty("--selected-sheet-peek-height", `${peekVisibleHeight()}px`);
+    measure();
+    // The compact card re-flows when the venue's published name or address
+    // arrives after the pin was selected; keep the peek position in step.
+    const card = el.querySelector(".selected-place-summary.compact");
+    if (!(card instanceof HTMLElement) || typeof ResizeObserver === "undefined") return;
+    const observer = new ResizeObserver(measure);
+    observer.observe(card);
+    return () => observer.disconnect();
+  }, [snap, selectedPlace, peekVisibleHeight]);
+
+  useLayoutEffect(() => {
+    const sheet = sheetRef.current;
+    if (!sheet || !selectedPlace || snap !== "half") return;
+    const summary = sheet.querySelector(".selected-place-summary.half");
+    const parent = sheet.parentElement;
+    const actions = parent?.querySelector(".selected-place-actions");
+    if (!(summary instanceof HTMLElement) || !parent) return;
+    const measure = () => {
+      const actionHeight = actions instanceof HTMLElement ? actions.offsetHeight : 68;
+      const height = selectedSheetVisibleHeight(parent.clientHeight, summary.offsetHeight,
+        handleRef.current?.offsetHeight ?? 44, actionHeight, peekVisibleHeight());
+      halfHeight.current = { id: selectedPlace.id, height };
+      sheet.style.setProperty("--selected-sheet-half-height", `${height}px`);
+      parent.style.setProperty("--selected-sheet-half-height", `${height}px`);
+      sheet.style.setProperty("--selected-action-bar-height", `${actionHeight}px`);
+    };
+    measure();
+    const observer = new ResizeObserver(measure);
+    observer.observe(summary);
+    observer.observe(parent);
+    if (actions) observer.observe(actions);
+    return () => {
+      observer.disconnect();
+      parent.style.removeProperty("--selected-sheet-half-height");
+    };
   }, [snap, selectedPlace, peekVisibleHeight]);
 
   const cycle = useCallback(() => {
@@ -465,7 +511,7 @@ export function MapSheet({ places, origin, selectedId, groupPlaceIds = [], onSel
             role={groupPlaces.length > 1 ? "heading" : undefined}
             aria-level={groupPlaces.length > 1 ? 2 : undefined}
           >
-            {groupPlaces.length > 1 ? groupTitle : `${ranked.length} places near you`}
+            {groupPlaces.length > 1 ? groupTitle : <T text="{count} places near you" values={{ count: ranked.length }} />}
           </div>
         )}
       </div>
@@ -473,7 +519,7 @@ export function MapSheet({ places, origin, selectedId, groupPlaceIds = [], onSel
       {selectedPlace && selectedView === "compact" && (
         <div key={`compact:${selectedPlace.id}`} className="mapsheet-view-enter">
           <SelectedPlaceSummary
-            place={selectedPlace}
+            place={publishedPlace ?? selectedPlace}
             km={selectedKm}
             variant="compact"
             onOpen={openSelectedSummary}
@@ -493,7 +539,7 @@ export function MapSheet({ places, origin, selectedId, groupPlaceIds = [], onSel
         {selectedPlace && selectedView === "summary" ? (
           <div key={`summary:${selectedPlace.id}`} className="mapsheet-view-enter">
             <SelectedPlaceSummary
-              place={selectedPlace}
+              place={publishedPlace ?? selectedPlace}
               km={selectedKm}
               variant="half"
               onDismiss={dismissSelectedSummary}
@@ -502,7 +548,7 @@ export function MapSheet({ places, origin, selectedId, groupPlaceIds = [], onSel
         ) : selectedPlace && selectedView === "detail" ? (
           <div key={`detail:${selectedPlace.id}`} className="mapsheet-view-enter">
             <PlaceDetailBody
-              place={selectedPlace}
+              place={publishedPlace ?? selectedPlace}
               onCollapse={() => collapseFullDetail()}
             />
           </div>
@@ -524,16 +570,13 @@ export function MapSheet({ places, origin, selectedId, groupPlaceIds = [], onSel
             >
               <MapRowThumb place={place} />
               <div className="maprow-copy">
-                {place.type !== "daiso" && <span className="label">{TYPE_LABEL[place.type]} · {zoneShort(place.zone)}</span>}
                 <div className="place-name-primary">{place.name}</div>
-                {place.nameKr !== place.name && (
-                  <div className="place-name-secondary" lang="ko">{place.nameKr}</div>
-                )}
+                <div className="maprow-category">{place.type !== "daiso" && <><T text={TYPE_LABEL[place.type]} /> · </>}{zoneShort(place.zone)}</div>
                 <div className="caption muted maprow-meta">
                   <LiveBadge hours={place.hours} showUntil={false} />
                   <span className="map-meta-token mono">{isApproximatePlace(place) ? "Approximate pin" : formatCompactDistance(km)}</span>
-                  <span>{place.address}</span>
                 </div>
+                <div className="maprow-address">{place.address}</div>
                 <DaisoRowServices place={place} />
               </div>
             </button>
@@ -555,25 +598,19 @@ export function MapSheet({ places, origin, selectedId, groupPlaceIds = [], onSel
             >
               <MapRowThumb place={p} />
               <div className="maprow-copy">
-                {p.type !== "daiso" && <span className="label">{TYPE_LABEL[p.type]} · {zoneShort(p.zone)}</span>}
                 <div className="place-name-primary">{p.name}</div>
-                {p.nameKr !== p.name && (
-                  <div className="place-name-secondary" lang="ko">{p.nameKr}</div>
-                )}
+                <div className="maprow-category">{p.type !== "daiso" && <><T text={TYPE_LABEL[p.type]} /> · </>}{zoneShort(p.zone)}</div>
                 <div className="caption muted maprow-meta">
                   <LiveBadge hours={p.hours} showUntil={false} />
-                  <span className="map-meta-token mono">{isApproximatePlace(p) ? "Approximate pin" : formatCompactDistance(km)}</span>
+                  <span className="map-meta-token">{isApproximatePlace(p) ? "Approximate pin" : formatCompactDistance(km)}</span>
                   {p.source !== "curated" && p.rating && <span className="map-meta-token stars">★{p.rating}</span>}
-                  {/* price folded into the meta line — the right-edge chip read too heavy */}
-                  {p.type !== "daiso" && <span className="map-meta-token mono">{p.priceRange}</span>}
-                  {p.englishOk && <span>English OK</span>}
                 </div>
                 <DaisoRowServices place={p} />
               </div>
             </button>
           )) : null}
       </div>
-      {selectedPlace && selectedView === "detail" && <PlaceCtaBar place={selectedPlace} />}
+      {selectedPlace && selectedView === "detail" && <PlaceCtaBar place={publishedPlace ?? selectedPlace} />}
     </section>
     {/* Kakao-style: while a pin is active the sheet owns the bottom of the
         screen — Save / Share / the three route hand-offs — instead of
@@ -583,7 +620,7 @@ export function MapSheet({ places, origin, selectedId, groupPlaceIds = [], onSel
         inside it, so an in-sheet bar lands at the sheet's off-screen bottom
         rather than the visitor's. The detail view keeps its own CTA bar. */}
     {selectedPlace && selectedView !== "detail" && (
-      <SelectedPlaceActionBar place={selectedPlace} />
+      <SelectedPlaceActionBar place={publishedPlace ?? selectedPlace} />
     )}
     </>
   );
@@ -595,39 +632,7 @@ export function MapSheet({ places, origin, selectedId, groupPlaceIds = [], onSel
     uses, so the list never shows a generic pin for a known brand (owner
     request 2026-09-12). */
 function MapRowThumb({ place }: { place: Place }) {
-  const placePhoto = place.photoThumbnail ?? place.photos?.[0] ?? place.photoUrl;
-  const brandMark = place.type === "daiso" ? "/brands/daiso-logo.jpeg" : BRAND_MARK_SRC[place.type];
-  return (
-    <div className="thumb hero-img maprow-thumb">
-      {placePhoto ? (
-        // Storefront URLs come from verified place data and are not limited to
-        // one image host, so keep this thumbnail browser-native.
-        // eslint-disable-next-line @next/next/no-img-element
-        <img
-          className="maprow-photo"
-          src={placePhoto}
-          alt=""
-          width={84}
-          height={84}
-          loading="lazy"
-          decoding="async"
-        />
-      ) : brandMark ? (
-        <span className="maprow-photo-fallback maprow-brand-fallback">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            className={place.type === "daiso" ? "maprow-brand-mark maprow-brand-mark--daiso" : place.type === "olive_young" ? "maprow-brand-mark maprow-brand-mark--olive-young" : "maprow-brand-mark"}
-            src={brandMark}
-            alt=""
-          />
-        </span>
-      ) : (
-        <span className="maprow-photo-fallback" style={{ color: TYPE_COLOR[place.type] }}>
-          <Icon name={TYPE_ICON[place.type]} className="maprow-fallback-glyph" />
-        </span>
-      )}
-    </div>
-  );
+  return <PlaceThumbnail place={place} size={72} className="maprow-thumb" />;
 }
 
 function DaisoRowServices({ place }: { place: Place }) {
@@ -635,7 +640,7 @@ function DaisoRowServices({ place }: { place: Place }) {
   if (services.length === 0) return null;
   return (
     <div className="caption muted maprow-daiso-services">
-      {services.map((label) => <span className="maprow-daiso-service" key={label}>{label}</span>)}
+      {services.map((label) => <span className="maprow-daiso-service" key={label}><T text={label} /></span>)}
     </div>
   );
 }

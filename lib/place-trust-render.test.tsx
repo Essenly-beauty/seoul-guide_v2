@@ -38,19 +38,21 @@ describe("place information trust", () => {
 
   it("does not present category examples as a salon's services or prices", () => {
     const $ = detail(salon);
-    expect($("#d-services").text()).toContain("Services and prices not verified");
+    expect($("#d-services").text()).toContain("Checking venue menus");
+    expect($("#d-services").text()).not.toContain("Verified services and prices are not available yet");
     expect($("#d-services").text()).not.toContain("Illustrative cut");
     expect($("#d-services").text()).not.toContain("₩99,999");
-    expect($("#d-services a").attr("href")).toBe(salon.url);
-    expect($("#d-services a").text()).toContain("Creatrip");
+    expect($("#d-services a")).toHaveLength(0);
+    expect($("#d-services").text()).toContain("Checking booking availability");
   });
 
-  it("states missing source links explicitly without calling a salon walk-in retail", () => {
+  it("explains booking availability without requiring an external source link", () => {
     const $ = detail({ ...salon, url: undefined, services: undefined });
     expect($("#d-services").text()).not.toContain("Walk-in retail");
-    expect($("#d-services").text()).toContain("Listing link unavailable");
+    expect($("#d-services").text()).toContain("Checking booking availability");
+    expect($('#d-services a[href^="http"]')).toHaveLength(0);
     expect($("#d-info").text()).toContain("Creatrip");
-    expect($("#d-info").text()).toContain("Listing link unavailable");
+    expect($("#d-info").text()).not.toContain("Listing link unavailable");
   });
 
   it.each([
@@ -60,7 +62,8 @@ describe("place information trust", () => {
   ] as const)("names the actual %s listing source without inventing a verification date", (source, label) => {
     const $ = detail({ ...salon, source });
     const sourceLink = $("#d-info a").filter((_, el) => $(el).attr("href") === salon.url);
-    expect(sourceLink.text()).toContain(label);
+    expect(sourceLink).toHaveLength(0);
+    expect($("#d-info").text()).toContain(`Source: ${label}`);
     expect($("#d-info").text()).not.toMatch(/verified on|last verified|2026-/i);
   });
 

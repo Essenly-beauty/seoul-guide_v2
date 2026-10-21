@@ -1,5 +1,6 @@
 "use client";
 
+import { T } from "@/lib/i18n/locale-provider";
 import { useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { useDialogFocus } from "@/components/ui/use-dialog-focus";
@@ -43,13 +44,11 @@ export function FilterEmptyModal({
         aria-describedby="filter-empty-description"
         tabIndex={-1}
       >
-        <h3 id="filter-empty-title" className="h3">No places match these filters</h3>
-        <p id="filter-empty-description" className="muted small">
-          Nothing nearby fits every filter you set. Loosen them, or clear them to see everything again.
-        </p>
+        <h3 id="filter-empty-title" className="h3"><T text={"No places match these filters"} /></h3>
+        <p id="filter-empty-description" className="muted small"><T text={"Nothing nearby fits every filter you set. Loosen them, or clear them to see everything again."} /></p>
         <div className="row" style={{ gap: 10, marginTop: 16 }}>
-          <Button variant="secondary" style={{ flex: 1 }} onClick={onReset}>Clear filters</Button>
-          <Button buttonRef={adjustRef} variant="primary" style={{ flex: 1 }} onClick={onAdjust}>Change filters</Button>
+          <Button variant="secondary" style={{ flex: 1 }} onClick={onReset}><T text={"Clear filters"} /></Button>
+          <Button buttonRef={adjustRef} variant="primary" style={{ flex: 1 }} onClick={onAdjust}><T text={"Change filters"} /></Button>
         </div>
       </div>
     </div>

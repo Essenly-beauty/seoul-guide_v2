@@ -1,5 +1,6 @@
 "use client";
 
+import { T, useLocale } from "@/lib/i18n/locale-provider";
 import { Suspense, useEffect, useMemo, useRef, useState, type CSSProperties } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -8,7 +9,8 @@ import { Button } from "@/components/ui/button";
 import { Chip } from "@/components/ui/chip";
 import { IconButton } from "@/components/ui/icon-button";
 import { SearchField } from "@/components/ui/search-field";
-import { ImgPh } from "@/components/ui/img-ph";
+import { PlaceThumbnail } from "@/components/place/place-thumbnail";
+import { ProductThumbnail } from "@/components/product/product-thumbnail";
 import { BackButton } from "@/components/ui/back-button";
 import { CategoryBadge } from "@/components/category/category-badge";
 import { RatingLine } from "@/components/ui/rating-line";
@@ -95,7 +97,7 @@ function StationRow({ station, onOpen }: { station: SubwayStation; onOpen: () =>
         </b>
         <div className="t-caption">
           {station.nameKr}
-          {nearby > 0 && <> · {nearby} nearby</>}
+          {nearby > 0 && <> · <T text="{count} nearby" values={{ count: nearby }} /></>}
         </div>
       </div>
       <Icon name="chev" size="sm" style={{ color: "var(--dim)" }} />
@@ -114,11 +116,11 @@ function PlaceRow({ r, query, onOpen, onFill }: {
   return (
     <div className="listrow v2">
       <button style={rowBtn} onClick={onOpen}>
-        <CategoryBadge type={p.type} size={17} />
+        <PlaceThumbnail place={p} size={44} />
         <div style={{ flex: 1, minWidth: 0 }}>
-          <div style={{ fontWeight: 600, fontSize: 14.5, display: "-webkit-box", WebkitBoxOrient: "vertical", WebkitLineClamp: 2, overflow: "hidden", overflowWrap: "anywhere" }}>
+          <div style={{ fontWeight: 600, fontSize: 14, display: "-webkit-box", WebkitBoxOrient: "vertical", WebkitLineClamp: 2, overflow: "hidden", overflowWrap: "anywhere" }}>
             <Highlight text={p.name} query={query} />
-            <span className="muted" style={{ fontWeight: 500 }}> · {TYPE_LABEL[p.type]}</span>
+            <span className="muted" style={{ fontWeight: 500 }}> · <T text={TYPE_LABEL[p.type]} /></span>
           </div>
           <div className="t-caption" style={{ marginTop: 2, whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>
             {p.rating !== undefined && <><RatingLine rating={p.rating} count={p.ratingCount} plain />{" · "}</>}
@@ -138,6 +140,7 @@ function PlaceRow({ r, query, onOpen, onFill }: {
 }
 
 function SearchPageInner() {
+  const { t } = useLocale();
   const router = useRouter();
   const { loc } = useLocation();
   const [raw, setRaw] = useState("");
@@ -208,12 +211,12 @@ function SearchPageInner() {
 
   return (
     <>
-      <div className="topbar" style={{ gap: 8 }}>
+      <div className="topbar search-topbar" style={{ gap: 8 }}>
         <BackButton fallback={routes.map} />
         <SearchField
           inputRef={inputRef}
           style={{ flex: 1 }}
-          placeholder="Salons, products, districts… (EN or 한글)"
+          placeholder={t("Places, products, areas")}
           label="Search MYSEOULDROP"
           value={raw}
           onChange={setRaw}
@@ -221,20 +224,18 @@ function SearchPageInner() {
         />
       </div>
 
-      <main className="app-scroll pad stack">
+      <main className="app-scroll pad search-page">
         {!query && (
           <>
             {recent.length > 0 && (
               <section className="stack sm">
                 <div className="row" style={{ justifyContent: "space-between" }}>
-                  <span className="label">Recent</span>
+                  <span className="label"><T text={"Recent"} /></span>
                   <button
                     type="button"
                     className="caption muted section-action"
                     onClick={clearRecent}
-                  >
-                    Clear
-                  </button>
+                  ><T text={"Clear"} /></button>
                 </div>
                 {recent.map((term) => (
                   <div key={term} className="row" style={{ gap: 10, padding: "4px 0" }}>
@@ -247,37 +248,42 @@ function SearchPageInner() {
               </section>
             )}
 
-            <div className="label" style={{ marginTop: recent.length ? 8 : 0 }}>
-              {trendingZone ? <>Trending near you · {zoneShort(trendingZone)}</> : <>Trending in Seoul</>}
-            </div>
+            <section className="search-group">
+            <h2 className="search-group-title">
+              {trendingZone ? <><T text="Places to explore" /> · {zoneShort(trendingZone)}</> : <><T text={"Places to explore"} /></>}
+            </h2>
             <ol style={{ listStyle: "none", margin: 0, padding: 0 }}>
               {trending.map((p, i) => (
                 <li key={p.id}>
                   <button className="listrow v2" style={{ cursor: "pointer", font: "inherit", color: "inherit" }} onClick={() => openPlace(p)}>
                     <span className="mono num" style={{ width: 24, fontSize: 15, fontWeight: 700, flex: "none", textAlign: "center", color: i === 0 ? "var(--accent)" : "var(--dim)" }}>{i + 1}</span>
                     <div style={{ flex: 1, minWidth: 0, textAlign: "left" }}>
-                      <div style={{ fontWeight: 600, fontSize: 14.5, display: "-webkit-box", WebkitBoxOrient: "vertical", WebkitLineClamp: 2, overflow: "hidden", overflowWrap: "anywhere" }}>{p.name}</div>
+                      <div style={{ fontWeight: 600, fontSize: 14, display: "-webkit-box", WebkitBoxOrient: "vertical", WebkitLineClamp: 2, overflow: "hidden", overflowWrap: "anywhere" }}>{p.name}</div>
                       <div className="t-caption" style={{ marginTop: 2 }}>
                         <RatingLine rating={p.rating} count={p.ratingCount} plain />
                       </div>
                     </div>
-                    <CategoryBadge type={p.type} size={17} />
+                    <PlaceThumbnail place={p} size={44} />
                   </button>
                 </li>
               ))}
             </ol>
 
-            <div className="label" style={{ marginTop: 8 }}>Browse by category</div>
-            <div className="chipwrap">
+            </section>
+            <section className="search-group">
+            <h2 className="search-group-title"><T text={"Browse by category"} /></h2>
+            <div className="search-categories">
               {MAP_CATEGORIES.filter((c) => c.key !== "all").map((c) => (
                 <Chip key={c.key} onClick={() => router.push(`${routes.map}?cat=${c.key}`)}>
                   <CategoryBadge type={c.key as PlaceType} size={16} />
-                  {c.label}
+                  <T text={c.label} />
                 </Chip>
               ))}
             </div>
 
-            <div className="label" style={{ marginTop: 8 }}>Popular areas</div>
+            </section>
+            <section className="search-group">
+            <h2 className="search-group-title"><T text={"Popular areas"} /></h2>
             <div className="chipwrap">
               {ZONES.map((z) => (
                 <Chip key={z.key} onClick={() => router.push(`${routes.map}?zone=${z.key}`)}>
@@ -285,20 +291,21 @@ function SearchPageInner() {
                 </Chip>
               ))}
             </div>
+            </section>
           </>
         )}
 
         {noResults && (
           <div style={{ textAlign: "center", padding: "40px 0" }}>
-            <p className="muted">No matches for &quot;{query}&quot;.</p>
-            <p className="caption dim" style={{ marginTop: 6 }}>Try a shorter word &mdash; &quot;spa&quot;, a district like &quot;Hongdae&quot;, or the Korean name.</p>
-            <Button variant="secondary" style={{ marginTop: 16 }} href={routes.map}>Browse all places</Button>
+            <p className="muted"><T text="No matches for “{query}”." values={{ query }} /></p>
+            <p className="caption dim" style={{ marginTop: 6 }}><T text="Try a shorter word, a district, or the Korean name." /></p>
+            <Button variant="secondary" style={{ marginTop: 16 }} href={routes.map}><T text={"Browse all places"} /></Button>
           </div>
         )}
 
         {extra.stations.length > 0 && (
           <section className="stack sm">
-            <div className="label">Stations · {extra.stations.length}</div>
+            <div className="label"><T text="Stations" /> · {extra.stations.length}</div>
             {extra.stations.map((st) => (
               <StationRow key={st.id} station={st} onOpen={() => saveRecent(raw)} />
             ))}
@@ -307,13 +314,13 @@ function SearchPageInner() {
 
         {ranked.results.length > 0 && (
           <section className="stack sm">
-            <div className="label">Places · {ranked.results.length}</div>
+            <div className="label"><T text="Places" /> · {ranked.results.length}</div>
             {ranked.results.map((r) => (
               <PlaceRow key={r.place.id} r={r} query={query} onOpen={() => openPlace(r.place)} onFill={() => fillQuery(r.place.name)} />
             ))}
             {ranked.similar.length > 0 && (
               <>
-                <div className="label" style={{ marginTop: 8 }}>Similar nearby</div>
+                <div className="label" style={{ marginTop: 8 }}><T text={"Similar nearby"} /></div>
                 {ranked.similar.map((r) => (
                   <PlaceRow key={r.place.id} r={r} query={query} onOpen={() => openPlace(r.place)} onFill={() => fillQuery(r.place.name)} />
                 ))}
@@ -324,10 +331,10 @@ function SearchPageInner() {
 
         {extra.products.length > 0 && (
           <section>
-            <div className="label">Products · {extra.products.length}</div>
+            <div className="label"><T text="Products" /> · {extra.products.length}</div>
             {extra.products.map((p) => (
               <Link className="listrow v2" key={p.id} href={routes.shopItem(p.id)}>
-                <ImgPh className="thumb56" />
+                <ProductThumbnail product={p} className="thumb56" />
                 <div style={{ flex: 1, minWidth: 0 }}>
                   <b className="t-label-md" style={{ fontSize: 14, display: "block", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{p.name}</b>
                   <div className="t-caption">{p.brand}</div>
@@ -340,7 +347,7 @@ function SearchPageInner() {
 
         {extra.articles.length > 0 && (
           <section>
-            <div className="label">Blog · {extra.articles.length}</div>
+            <div className="label"><T text="Stories" /> · {extra.articles.length}</div>
             {extra.articles.map((a) => (
               <Link className="listrow v2" key={a.slug} href={routes.blogArticle(a.slug)}>
                 <span className="ic"><Icon name="book" size="sm" /></span>

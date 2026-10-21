@@ -60,3 +60,9 @@ playwright-report/
 # 2026-09 web-app best-practices research (summary + raw reports)
 !/docs/research/
 !/docs/research/**
+# Reviewable customer mobile study and its implementation plan.
+!/docs/designs/
+/docs/designs/*
+!/docs/designs/customer-booking-mobile-20261019/
+!/docs/designs/customer-booking-mobile-20261019/**
+!/docs/superpowers/plans/2026-10-19-mobile-booking.md

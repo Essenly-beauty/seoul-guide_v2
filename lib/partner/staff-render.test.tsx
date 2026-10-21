@@ -20,14 +20,14 @@ describe('staff editor visible states', () => {
     expect($.text()).toContain('담당자 등록은 선택');
     expect($.text()).toContain('예약 방식을 아직 설정하지 않았습니다');
     expect($.text()).toContain('아직 등록된 담당자가 없습니다');
-    expect($.text()).toContain('고객 예약은 아직 시작되지 않았습니다');
+    expect($.text()).toContain('고객 예약을 받으려면 매장 운영 승인과 예약 연결이 필요합니다');
     expect($.text()).not.toMatch(/샘플|오늘 예약|매출/);
   });
 
   it('explains staff mode with no eligible linked public staff and distinguishes stale data', () => {
     const staff: StaffSummary[] = [{ id: staffId, merchantId, name: '민지', title: '', introduction: '', visibility: 'draft', sortOrder: 0, updatedAt: '2026-10-18T00:00:00Z' }];
     const $ = render(<><StaffModeNotice snapshot={{ ...snapshot, reservationRules: { merchantId, mode: 'staff', capacity: 1, startDate: '2026-11-01', endDate: '2026-12-01', minimumLeadMinutes: 60, slotIntervalMinutes: 30, updatedAt: '2026-10-18T00:00:00Z' } }} eligibleCount={0} /><StaffListView staff={staff} selectedId={staffId} loading={false} stale onSelect={() => {}} /></>);
-    expect($.text()).toContain('공개 준비된 담당자와 제공 메뉴 연결이 없으면');
+    expect($.text()).toContain('공개된 담당자와 제공 메뉴 연결이 없으면');
     expect($.text()).toContain('마지막으로 조회한 담당자');
     expect($('button[aria-current="true"]').length).toBe(1);
   });

@@ -164,11 +164,13 @@ describe('partner HTTP command boundary', () => {
     expect(await response.json()).toMatchObject({ ok: false, code: 'INVALID_COMMAND' });
     expect(mock.calls.some((call) => ['insert', 'update'].includes(call.method))).toBe(false);
   });
-  it('refuses reservation settings writes after booking activation without a write', async () => {
-    const mock = session({ shop: { ...merchant, booking_enabled: true } });
+  it('accepts owned reservation settings writes after booking activation', async () => {
+    const mock = session({ results: [result({ merchant_id: merchantId, user_id: userId, revoked_at: null }), result({ ...merchant, booking_enabled: true }), result({ merchant_id: merchantId })] });
     const response = await POST(request(JSON.stringify(reservationCommand)));
-    expect(response.status).toBe(409);
-    expect(mock.calls.some((call) => ['insert', 'update'].includes(call.method))).toBe(false);
+    expect(response.status).toBe(200);
+    expect(await response.json()).toEqual({ ok: true });
+    expect(mock.calls.find((call) => call.method === 'insert')).toMatchObject({ table: 'merchant_reservation_rules', args: [expect.objectContaining({ merchant_id: merchantId })] });
+    privateHeaders(response);
   });
   it('rejects a valid legacy profile settings command privately without mutation', async () => {
     const mock = session({ results: [result({ merchant_id: merchantId, user_id: userId, revoked_at: null }), result(merchant), result({ id: merchantId })] });
