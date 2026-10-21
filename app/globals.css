@@ -2823,7 +2823,7 @@
   /* First-review invitation (2026-10-20) */
   .first-review-prompt { display: flex; flex-direction: column; gap: 6px; padding: 14px; border: 1px dashed var(--border); border-radius: 12px; background: var(--surface); }
   .first-review-prompt > b { font-size: 14px; }
-  .first-review-cta { align-self: flex-start; margin-top: 4px; min-height: 36px; padding: 0 14px; border-radius: 999px; background: var(--accent); color: #fff; font-size: 13px; font-weight: 600; }
+  .first-review-cta { align-self: flex-start; margin-top: 4px; min-height: 40px; padding: 0 14px; border-radius: 999px; background: var(--accent); color: #fff; font-size: 13px; font-weight: 600; }
 
   .skel-page-bar { display: flex; align-items: center; gap: 12px; margin-bottom: 4px; }
 

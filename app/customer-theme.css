@@ -342,6 +342,8 @@
 }
 @media (max-width: 359px) {
   :root:not(:has([data-partner-shell])) { --space-page: 18px; }
+  /* Three map hand-offs share the book bar; keep "Naver Map" on one line at 320px. */
+  :root:not(:has([data-partner-shell])) .bookbar .btn { padding-inline: 8px; font-size: 14px; white-space: nowrap; }
 }
 /* Preview height follows its contents; media never sits behind fixed actions. */
 :root:not(:has([data-partner-shell])) .mapsheet.half.has-selection { transform: translateY(calc(100% - var(--selected-sheet-half-height, 48%))); }
@@ -395,3 +397,8 @@
    the measured edge, side by side so they do not climb into the search bar. */
 :root:not(:has([data-partner-shell])) .map-screen:has(.mapsheet.half.has-selection) .map-fab { bottom: calc(var(--selected-sheet-half-height, 48%) + 12px); }
 :root:not(:has([data-partner-shell])) .map-screen:has(.mapsheet.half.has-selection) .map-fab-fav { right: 68px; }
+/* Place detail copy is shown in five languages: avoid a lone last line (ja "…ご確認くださ / い。"),
+   and keep Japanese phrases whole where the browser supports it. */
+:root:not(:has([data-partner-shell])) :is(.place-detail-heading, .detail-scroll) { text-wrap: pretty; }
+:root:not(:has([data-partner-shell])) :is(.place-detail-heading, .detail-scroll) .caption { text-wrap: balance; }
+:root:lang(ja):not(:has([data-partner-shell])) :is(.place-detail-heading, .detail-scroll) { word-break: auto-phrase; }

@@ -131,6 +131,6 @@
 .skip { position: absolute; top: 0; left: 16px; padding: 12px; background: var(--surface); transform: translateY(-150%); z-index: 5; }
 .skip:focus { transform: translateY(0); }
 @media (min-width: 600px) { .twoColumns { grid-template-columns: repeat(2, minmax(0, 1fr)); } .checklist li { grid-template-columns: 28px minmax(0, 1fr) auto; align-items: center; } .checklist li > :last-child { grid-column: auto; } .scheduleRow { grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr) minmax(0, 1fr) auto; align-items: end; } .specialRow { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) auto; align-items: end; } }
-@media (max-width:800px) { .shell { display:block; } .section { padding:20px 16px; } }
+@media (max-width:900px) { .shell { display:block; } .section { padding:20px 16px; } }
 
 @media (prefers-reduced-motion: reduce) { .shell *, .shell *::before, .shell *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; } }

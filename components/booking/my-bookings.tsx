@@ -9,7 +9,7 @@ import { useLocale } from '@/lib/i18n/locale-provider';
 import { authLinkWithNext } from '@/lib/auth-return';
 import { booking, bookingList, type Booking } from '@/lib/booking/contracts';
 import { routes } from '@/lib/routes';
-import { bookingDate, bookingErrorMessage, bookingTime } from './customer-booking-state';
+import { bookingDate, bookingErrorMessage, bookingPrice, bookingTime } from './customer-booking-state';
 import { useBookingResource } from './use-booking-resource';
 import { BookingStatus } from './booking-summary';
 import { CancelBookingButton } from './cancel-booking-button';
@@ -59,7 +59,7 @@ export function BookingDetail({ id }: { id: string }) {
       <BookingHeading title={t(statusMessage)} />
       <BookingTicket value={value}><BookingStatus status={value.status} /></BookingTicket>
       <BookingLocationCard placeId={value.placeId}/>
-      <div className={styles.amounts}><div className={styles.total}><span>{t('Total')}</span><strong>₩{value.totalKrw.toLocaleString(locale)}</strong></div></div>
+      <div className={styles.amounts}><div className={styles.total}><span>{t('Total')}</span><strong>{bookingPrice(value.totalKrw)}</strong></div></div>
       {value.paymentMode === 'pay_at_venue' && <div className={styles.policy}><strong>{t('Pay at the venue')}</strong><p>{t('No payment is collected online.')}</p></div>}
       <dl className={styles.customerDetails}><div><dt>{t('Full name')}</dt><dd>{value.customerName}</dd></div><div><dt>{t('Phone number')}</dt><dd>{value.phone || '—'}</dd></div>{value.notes && <div><dt>{t('Notes')}</dt><dd>{value.notes}</dd></div>}</dl>
       <div className={styles.detailActions}><Link href={routes.place(value.placeId)} className={styles.secondary}>{t('View venue')}</Link>{canCancel && <CancelBookingButton key={`${user?.id}:${value.id}`} text disabled={resource.loading} value={value} onCancelled={next => { if (user) setOverride({ userId: user.id, value: next }); }} onRefresh={resource.refresh} />}</div>

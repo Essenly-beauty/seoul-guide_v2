@@ -44,6 +44,11 @@ export function bookingErrorMessage(code: string): string {
   };
   return Object.prototype.hasOwnProperty.call(messages, code) ? messages[code] : 'We could not connect. Please try again.';
 }
+/** Same KRW style as the venue's public menu (₩60,000) in every language: French grouping uses a narrow no-break
+ *  space that Plus Jakarta Sans draws about 1px wide, so "₩60 000" read as "₩60000". */
+export function bookingPrice(value: number): string {
+  return `₩${value.toLocaleString('en-US')}`;
+}
 export function bookingTime(value: string, locale: string): string {
   return new Intl.DateTimeFormat(locale, { timeZone: 'Asia/Seoul', hour: '2-digit', minute: '2-digit', hourCycle: 'h23' }).format(new Date(value));
 }

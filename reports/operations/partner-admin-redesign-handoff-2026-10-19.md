@@ -131,3 +131,11 @@ python3 -m http.server 3111 --bind 127.0.0.1 --directory docs/designs/partner-ad
 - 10/21 끝: `impl-signout.cjs` 결과 — 유효한 토큰으로 오프라인 로그아웃 시 auth-js가 로컬 세션을 지우고 성공(알림 없음·기기 사본 삭제)해서 스크립트의 "오프라인=실패" 기대가 틀림(앱 동작은 맞음). 실패 경로는 만료된 토큰에서만 생기므로 단위 테스트(`lib/signout-modal-result.test.ts`)로만 고정됨. 스크립트는 온라인 경로만 확인하도록 고쳐야 함. `verify-impl` 21/21.
 - 10/21 저녁: Codex 5차 **6**(gpt-6-luna) → 병합 행 단일 경로·구버전 요청 ID 부여(Google 지적은 반박) → 6차 **9** → 사진 신선도 P3 수정 → 7차 확인 **9**(새 결함 없음). **목표(9점) 달성.** 최종: vitest 214/2,399, tsc·lint 0, 비회원 ♥ 회귀 21/21, 로그아웃 9/9(`qa/impl-signout.cjs` 기대값 수정됨). 남은 것: 커밋 방식 결정, 상품 썸네일 정책·rpc-2 확인, ratings.ts 오프라인 퍼지(범위 밖).
 - 10/21 밤: 사용자 결정으로 전체 커밋 `3dea772` → GitHub `codex/service-quality-release-20261018` 푸시(배포·원격 DB 없음). 깨끗한 체크아웃에서 tsc·vitest 2,399·`next build` 통과. 제3자 캡처 `reports/design/references/beautynow-20261019/…html`은 커밋에서 제외(미추적). 다음: 원격 DB 마이그레이션(8개, `20261019*` 7개 + `20261020123000`) 적용 계획 → 앱 배포 순서, 상품 썸네일·rpc-2 확인, ratings.ts 오프라인 퍼지.
+
+## 12. 2026-10-21~22 화면 문장·레이아웃·버튼 전수 점검 (Claude)
+- 요청: 어색한 줄바꿈·레이아웃을 벗어나는 글자·눌러도 제대로 동작하지 않는 버튼을 관리자·고객 예약 화면 전체에서 검토. 결과·근거: `reports/design/2026-10-21-screen-text-layout-review.md`, 비교 이미지 `reports/design/evidence/2026-10-21-screen-review/`.
+- 새 점검 도구(`qa/`, README 마지막 절): `impl-layout-audit.cjs`(+`layout-audit-lib.cjs`, `impl-audit-matrix.cjs`, `impl-audit-report.cjs`) 22개 크기·언어 조합 측정, `impl-controls-audit.cjs` 버튼 크롤러, 실제 흐름 `impl-confirm-flow.cjs`(16)·`impl-settings-roundtrip.cjs`(29)·`impl-long-values.cjs`(14).
+- 고친 것: 관리자 한국어 어절 중간 줄바꿈 86곳(`keep-all`), 예약 목록 필터 잘림·겹침, 휴대폰 머리 버튼 3줄·상태 탭 붙음, 고객 앱 전역 `.topbar` sticky 가 관리자에 걸려 상세 패널 머리가 숨던 것(클래스 충돌), 주간 머리글 잘림, 예약 블록 글자 아래 잘림, **휴대폰 정산 이름 링크 눌리지 않음**, 820~834px 태블릿(휴대폰 배치 기준 800→900px), 1280px 상태 칩 잘림, 터치 영역, 긴 값, **'시간 변경' 창 담당자 비우면 409 오류 표시**, 고객 프랑스어 가격 '₩60000'→'₩60,000', 일·중·영 고아 줄, 320px 지도 버튼.
+- 검증: tsc 0 · lint 0 · vitest **216파일 2,411개** · 수정 후 22개 조합 재측정 결함 0 · 실제 흐름 확정 16/16, 왕복 13/13(B), 전화 예약 10/10, 설정 왕복 29/29 · Codex 8차 7 → 9차 8 → **10차 9(새 결함 없음)**.
+- 남은 것: '변경사항 버리고 다시 불러오기'의 브라우저 기본 `confirm()`(동작 정상, 모양 불일치), 부하 중 `/api/partner` 17분 뒤 503 1회(재현 안 됨 — 서버 데이터 요청 시간 제한 확인 필요).
+- 측정용 전용 개발 서버(세션 임시 폴더의 `devA`/`devB`, 3114/3115)는 끝나면 종료. 로컬 QA DB에 점검용 취소 예약 몇 건(QA Confirm, LONGNAME…)이 남아 있다(모두 취소 상태).

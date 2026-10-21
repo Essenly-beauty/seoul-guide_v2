@@ -58,3 +58,26 @@ NODE_PATH=$PWD/node_modules node docs/designs/partner-admin-redesign-20261019/qa
 ```sh
 NODE_PATH=$PWD/node_modules node docs/designs/partner-admin-redesign-20261019/qa/impl-photo-fit-and-ticket.cjs   # 라이트박스 사진이 가로 폰(844×390)·노트북(1280×720)·세로 폰에서 틀 안에 맞춰짐 + 긴 역 이름이 노선 티켓을 넓히지 않음(320/390px) (5)
 ```
+
+## 화면 문장·레이아웃·버튼 전수 점검 — 2026-10-21 추가
+
+관리자(/partner/*)와 고객 예약 흐름을 화면 크기·언어별로 브라우저에서 재고, 버튼을 하나씩 눌러 본다. 앞 절과 같은 전제(로컬 Supabase·테스트 매장·`$TMPDIR/myseouldrop-booking-local-access.json`). 결과 해석은 `reports/design/2026-10-21-screen-text-layout-review.md`.
+
+```sh
+# 레이아웃: 22개 조합(관리자 8개 화면 크기, 고객 영어 6개 + 일·중·스·프 각 2개)을 N개씩 동시에
+NODE_PATH=$PWD/node_modules MATRIX=layout MATRIX_JOBS=3 MATRIX_OUT=/tmp/layout node docs/designs/partner-admin-redesign-20261019/qa/impl-audit-matrix.cjs
+node docs/designs/partner-admin-redesign-20261019/qa/impl-audit-report.cjs /tmp/layout            # 같은 문제를 한 번만 묶어 출력(--json out.json)
+# 한 조합만: AUDIT_SIDE=admin|customer AUDIT_VIEWPORT=390x844 [AUDIT_LOCALE=ja] [AUDIT_STATES=home,bookings-all]
+NODE_PATH=$PWD/node_modules AUDIT_SIDE=admin AUDIT_VIEWPORT=390x844 node docs/designs/partner-admin-redesign-20261019/qa/impl-layout-audit.cjs
+# 버튼: 누르면 무엇이든 일어나는지(이동·창·상태·요청), 오류·안 닫히는 창·눌리지 않는 버튼
+NODE_PATH=$PWD/node_modules MATRIX=controls MATRIX_JOBS=2 MATRIX_OUT=/tmp/controls node docs/designs/partner-admin-redesign-20261019/qa/impl-audit-matrix.cjs
+# 저장·확정 버튼 실제 흐름(로컬 테스트 매장만 바꾸고 원래대로 돌린다)
+NODE_PATH=$PWD/node_modules node docs/designs/partner-admin-redesign-20261019/qa/impl-confirm-flow.cjs        # 예약 요청 → 예약 확정(확인창) → 고객 Confirmed → 메시지 버튼 → 업체 취소(사유) → 고객 Cancelled (16)
+NODE_PATH=$PWD/node_modules node docs/designs/partner-admin-redesign-20261019/qa/impl-settings-roundtrip.cjs  # 예약 설정·매장 정보·메뉴 편집·근무시간: 저장 → 새로고침 반영 → 원복, 버리기·되돌리기 (29)
+NODE_PATH=$PWD/node_modules node docs/designs/partner-admin-redesign-20261019/qa/impl-long-values.cjs         # 띄어쓰기 없는 40자 이름·긴 URL 메모 예약으로 6개 화면 × 360·1440 넘침 측정 후 예약 정리 (14)
+```
+
+- 점검 항목: 문서 가로 넘침, 상자에 잘린 글자(말줄임·줄 제한은 따로 표시), 상자 밖으로 삐져나온 글자, 화면 끝에서 잘린 요소, 버튼·탭·칩 이름이 2줄 이상, 한국어 어절 안 줄바꿈(단어가 칸보다 길면 `forced`), 1~2글자만 남은 마지막 줄(일·중은 글자 단위), 글자끼리 겹침, 선택 상자·안내 문구 잘림, 터치 화면 40px 미만 영역, 다른 요소에 가려 눌리지 않는 버튼, 하단 고정 바에 영구히 가려지는 내용.
+- 겹침·가림은 스크롤에 따라 나타나는 머리글(전환 효과)이 있어 스크롤 후 화면 갱신을 기다려 판정하고, 열린 창·시트 뒤의 배경과 줄 끝 보존 공백은 문제로 보지 않는다.
+- 개발 서버 하나에 여러 브라우저를 붙이면 컴파일·응답이 크게 늦어진다. 동시 실행은 서버당 2~3개가 적당하고, 처음 여는 경로는 컴파일되는 동안 404·시간 초과가 날 수 있어 로그인 도우미가 한 번 더 시도한다.
+- 버튼 점검의 `NOT-CLICKABLE`·`not-found-after-reset`·data 속성 대기 `CRASH`는 React가 그 순간 다시 그린 경우가 대부분이다. 결과를 보고 해당 버튼을 따로 눌러 확인한다(보고서에 수동 확인 결과가 있다).

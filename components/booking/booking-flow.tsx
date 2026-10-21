@@ -10,7 +10,7 @@ import { routes } from '@/lib/routes';
 import type { MerchantMedia } from '@/lib/partner/media-contracts';
 import { publicPlaceMediaResponse } from '@/lib/place-media';
 import { bookingAvailability, bookingCatalog } from '@/lib/booking/contracts';
-import { bookingErrorMessage, bookingReducer, bookingStartDate, bookingTime, bookingTimeGroups, initialBookingState, submitBooking, type BookingConfiguration } from './customer-booking-state';
+import { bookingErrorMessage, bookingPrice, bookingReducer, bookingStartDate, bookingTime, bookingTimeGroups, initialBookingState, submitBooking, type BookingConfiguration } from './customer-booking-state';
 import { useBookingResource } from './use-booking-resource';
 import { BookingReview } from './booking-summary';
 import { BookingArrow, BookingContext, BookingDatePicker, BookingFooter, BookingHeader, BookingHeading, BookingHint, BookingPhoto, BookingThumbnail, type BookingVenue } from './booking-ui';
@@ -155,7 +155,7 @@ function BookingFlowContent({ placeId, initialService = '', isPreview = false, v
                 {venue?.notice && <div className={styles.policy}><strong>{t('Venue notice')}</strong><p>{venue.notice}</p></div>}
                 <div className={styles.sectionTitle}><h2>{t('Service')}</h2><span>{t('Prices in KRW')}</span></div>
                 <div className={styles.options} role="group" aria-label={t('Choose a service')}>{catalog.services.map(item => <button type="button" key={item.id} className={styles.serviceOption} aria-pressed={service?.id === item.id} onClick={() => dispatch({ type: 'service', value: item.id })}>
-                  <BookingThumbnail media={media.find(photo => photo.targetKind === 'menu' && photo.targetId === item.id)} name={item.name} /><span className={styles.optionCopy}><strong>{item.name}</strong>{item.description && <small>{item.description}</small>}<span className={styles.serviceMeta}><b>₩{item.priceKrw.toLocaleString(locale)}</b><span>{t('{minutes} min', { minutes: item.durationMinutes })}</span></span></span><span className={styles.selection} aria-hidden="true" />
+                  <BookingThumbnail media={media.find(photo => photo.targetKind === 'menu' && photo.targetId === item.id)} name={item.name} /><span className={styles.optionCopy}><strong>{item.name}</strong>{item.description && <small>{item.description}</small>}<span className={styles.serviceMeta}><b>{bookingPrice(item.priceKrw)}</b><span>{t('{minutes} min', { minutes: item.durationMinutes })}</span></span></span><span className={styles.selection} aria-hidden="true" />
                 </button>)}</div>
                 {!catalog.services.length && <p className={styles.hint}>{t('This venue is not accepting bookings right now.')}</p>}
                 <BookingHint>{t('Pay at the venue')} · {t('No payment is collected online.')}</BookingHint>

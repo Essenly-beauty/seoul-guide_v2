@@ -10,6 +10,11 @@
   background: var(--surface);
   font-family: var(--sans);
 }
+/* Five languages share these screens: headings balance their lines and short copy avoids a lone last line
+   (ja "…確認しま / す。", en "… for / you."); Japanese also keeps phrases whole where the browser supports it. */
+.shell :where(h1, h2, h3), .cancelScreen :where(h1, h2, h3) { text-wrap: balance; }
+.shell :where(p, small, li, label > span), .cancelScreen :where(p, small, li) { text-wrap: pretty; }
+:global(html:lang(ja)) :is(.shell, .cancelScreen) { word-break: auto-phrase; }
 .flow { display: flex; flex-direction: column; flex: 1; min-height: 0; }
 .scroll { flex: 1; min-height: 0; min-width: 0; overflow-y: auto; overflow-x: hidden; overscroll-behavior: contain; scrollbar-width: thin; }
 .page { padding: 25px var(--booking-inset, 22px) 28px; }
@@ -23,7 +28,7 @@
 .heading { margin: 0; }
 .heading h1 { font-size: 20px; font-weight: 650; line-height: 1.35; letter-spacing: -.45px; margin: 0; overflow-wrap: anywhere; }
 .heading h1:focus { outline: none; }
-.heading > p:not(.stepLabel) { color: var(--muted); font-size: 13px; line-height: 1.6; margin: 10px 0 0; }
+.heading > p:not(.stepLabel) { color: var(--muted); font-size: 13px; line-height: 1.6; margin: 10px 0 0; text-wrap: pretty; }
 .stepLabel { display: flex; gap: 8px; align-items: center; color: var(--muted); font-size: 11px; font-weight: 550; margin: 0 0 10px; }
 .stepLabel i { width: 5px; height: 5px; border-radius: 50%; background: var(--accent); }
 .fieldset { margin: 0; padding: 0; min-width: 0; border: 0; }
@@ -31,7 +36,7 @@
 .sectionTitle { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; margin: 28px 0 12px; }
 .sectionTitle h2 { margin: 0; font-size: 16px; line-height: 1.4; }
 .sectionTitle > span { color: var(--muted); font-size: 11px; text-align: right; }
-.hint { color: var(--muted); font-size: 12px; line-height: 1.6; margin: 0; font-weight: 400; }
+.hint { color: var(--muted); font-size: 12px; line-height: 1.6; margin: 0; font-weight: 400; text-wrap: pretty; }
 .caption { color: var(--muted); font-size: 11px; line-height: 1.5; }
 .venuePhoto { width: 100%; height: 170px; object-fit: contain; display: block; }
 .venueAddress { color: var(--muted); font-size: 12px; line-height: 1.5; margin: 14px 0 0; overflow-wrap: anywhere; }
