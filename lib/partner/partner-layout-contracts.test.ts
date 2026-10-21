@@ -56,6 +56,10 @@ describe("partner layout contracts", () => {
     expect(dashboard).toMatch(/:is\([^)]*\.side dd[^)]*\.activity li>\*[^)]*\) \{min-width:0;overflow-wrap:anywhere;\}/);
   });
 
+  it("keeps the disclosure marker on the booking-history summary while giving it a 44px touch target", () => {
+    expect(dashboard).toMatch(/\.side details>summary \{min-height:44px;display:list-item;/);
+  });
+
   it("labels week columns with the day only; the full date stays for assistive text", () => {
     expect(dayLabel("2026-10-19")).toBe("19일 (월)");
     expect(dateLabel("2026-10-19")).toBe("10월 19일 (월)");
