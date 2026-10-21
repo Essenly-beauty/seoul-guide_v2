@@ -1,0 +1,7 @@
+2026-10-22 08:30 KST, disposable local Supabase stack (project_id runner-check-20261022, ports 54520-54529), removed after the run.
+Supabase CLI 2.115.0, image public.ecr.aws/supabase/postgres:17.6.1.159 (PostgreSQL 17.6), node-postgres 8.23.0.
+Migrations: the repository's 23 files without 20261020123000 and 20260926083440 (the production ledger state: 23 rows, head 20261019200901).
+Rehearsal DB: pg_dump with backup-show-photos.cjs's options (6 schemas, schema only; ledger and storage.buckets rows), then
+create database booking_release_rehearsal_<epoch> + pg_restore --no-owner, exactly as C4-1. restore-*.err are those stderr files.
+Runner copies differ from the release files only in OPS path, rehearsal port (54382 -> 54522) and the manifest source path
+(test-copy-diff.txt). apply-guards.sql and rollback-20261020123000.sql were used unchanged (their sha256 pins passed).

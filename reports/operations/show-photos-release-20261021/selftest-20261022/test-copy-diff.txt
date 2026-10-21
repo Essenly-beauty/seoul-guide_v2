@@ -1,0 +1,25 @@
+== apply-show-photos.cjs (release file → test copy)
+8c8
+< const OPS='/Users/hanmyeong-gwan/myseouldrop-ops/show-photos',RUN=OPS+'/run',W=OPS+'/integrate';
+---
+> const OPS='<scratchpad>/runner-test/ops',RUN=OPS+'/run',W=OPS+'/integrate';
+45c45
+<  config={host:'127.0.0.1',port:54382,user:'postgres',password:process.env.REHEARSAL_PGPASSWORD||'postgres',database:name};
+---
+>  config={host:'127.0.0.1',port:54522,user:'postgres',password:process.env.REHEARSAL_PGPASSWORD||'postgres',database:name};
+== rollback-show-photos.cjs (release file → test copy)
+7c7
+< const OPS='/Users/hanmyeong-gwan/myseouldrop-ops/show-photos',RUN=OPS+'/run',W=OPS+'/integrate';
+---
+> const OPS='<scratchpad>/runner-test/ops',RUN=OPS+'/run',W=OPS+'/integrate';
+27c27
+<  config={host:'127.0.0.1',port:54382,user:'postgres',password:process.env.REHEARSAL_PGPASSWORD||'postgres',database:name};
+---
+>  config={host:'127.0.0.1',port:54522,user:'postgres',password:process.env.REHEARSAL_PGPASSWORD||'postgres',database:name};
+== apply-guards.sql identical
+== rollback-20261020123000.sql identical
+== release-migrations-20261021.json (source path only)
+2c2
+<   "source": "/Users/hanmyeong-gwan/myseouldrop-ops/show-photos/integrate",
+---
+>   "source": "<scratchpad>/runner-test/ops/integrate",
