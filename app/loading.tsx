@@ -1,16 +1,18 @@
-import { BrandMark, BrandWordmark } from "@/components/brand/brand-logo";
+import { Skeleton, SkeletonLines, SkeletonList, SkeletonStatus } from "@/components/ui/skeleton";
 
-// Splash: brand lockup dead-center on the theme's own field (a black flash in
-// light mode read as a glitch) with a thin indeterminate bar — pulsing the
-// whole logo read cheap.
+// Route-level loading: the page's own shape (header, hero, text, rows) drawn
+// as skeleton blocks — not the brand lockup (owner decision 2026-10-20: a logo
+// splash hides what is coming; a skeleton shows it).
 export default function Loading() {
   return (
-    <div className="splash" role="status" aria-label="Loading">
-      <div className="splash-lockup">
-        <BrandMark size={66} />
-        <BrandWordmark size={15} />
+    <SkeletonStatus label="Loading" className="skel-page">
+      <div className="skel-page-bar">
+        <Skeleton width={40} height={40} radius={20} />
+        <Skeleton width="44%" height={16} radius={6} />
       </div>
-      <span className="splash-bar" aria-hidden="true" />
-    </div>
+      <Skeleton height={190} radius={16} />
+      <SkeletonLines lines={3} widths={["70%", "92%", "52%"]} lineHeight={13} />
+      <SkeletonList rows={3} />
+    </SkeletonStatus>
   );
 }

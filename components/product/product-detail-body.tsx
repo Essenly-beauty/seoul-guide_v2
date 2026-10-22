@@ -330,6 +330,7 @@ export function ProductDetailBody({ product }: { product: Product }) {
         <div className="product-detail-gallery">
           <ProductThumbnail
             product={product}
+            decorative={false}
             loading="eager"
             style={{ width: "100%", height: product.imageUrl ? 240 : 100, borderRadius: 0, background: product.imageUrl ? "#fff" : "var(--surface-hover)" }}
           />

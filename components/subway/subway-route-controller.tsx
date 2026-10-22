@@ -1,7 +1,7 @@
 "use client";
 
 import { T, useLocale } from "@/lib/i18n/locale-provider";
-import { Fragment, useEffect, useMemo, useRef, useState } from "react";
+import { Fragment, useCallback, useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
 import { CategoryBadge } from "@/components/category/category-badge";
 import { PlaceThumbnail } from "@/components/place/place-thumbnail";
@@ -10,6 +10,7 @@ import { Button } from "@/components/ui/button";
 import { IconButton } from "@/components/ui/icon-button";
 import { RatingLine } from "@/components/ui/rating-line";
 import { PRODUCTS, TYPE_LABEL, type Place } from "@/lib/data";
+import { routeTrackDensity, segmentIndexForHop, stopIndexAt, stopOffset, trackKeyTarget } from "@/lib/subway-track";
 import { formatDistance, haversineKm } from "@/lib/geo";
 import { isApproximatePlace } from "@/lib/places";
 import { googleStationDirectionsUrl } from "@/lib/subway-directions";
@@ -145,6 +146,22 @@ export function SubwayRouteController({
   // Drag the route track to move between stations (owner request
   // 2026-08-23). The track is the control; the dots are its ticks.
   const trackRef = useRef<HTMLDivElement>(null);
+  // The rail is the geometry the stops are laid along: its measured width
+  // picks the dot density, and pointer scrubbing maps against it.
+  const railEl = useRef<HTMLDivElement | null>(null);
+  const railObserver = useRef<ResizeObserver | null>(null);
+  const [railWidth, setRailWidth] = useState(0);
+  const railRef = useCallback((node: HTMLDivElement | null) => {
+    railObserver.current?.disconnect();
+    railObserver.current = null;
+    railEl.current = node;
+    if (!node) return;
+    setRailWidth(node.getBoundingClientRect().width);
+    if (typeof ResizeObserver === "undefined") return;
+    const observer = new ResizeObserver((entries) => setRailWidth(entries[0]?.contentRect.width ?? 0));
+    observer.observe(node);
+    railObserver.current = observer;
+  }, []);
   const trackDragging = useRef(false);
   const { t } = useLocale();
   const [draftDeparture, setDraftDeparture] = useState(departureId);
@@ -453,17 +470,15 @@ export function SubwayRouteController({
   const browsingStation = Boolean(!readyRoute && activeStation && !routeFormOpen);
 
   /** Map a pointer x to the nearest stop and focus it. Stops sit at even
-      fractions of the track, so the nearest one is a rounded ratio. */
+      fractions of the rail, so the nearest one is a rounded ratio. */
   const focusStopAt = (clientX: number) => {
     const el = trackRef.current;
     if (!el || !readyRoute) return;
-    const rect = el.getBoundingClientRect();
-    const last = readyRoute.stations.length - 1;
-    if (rect.width <= 0 || last <= 0) return;
-    const ratio = Math.min(1, Math.max(0, (clientX - rect.left) / rect.width));
-    const index = Math.round(ratio * last);
-    if (index !== activeIndex) selectRouteIndex(index);
+    const index = stopIndexAt(clientX, (railEl.current ?? el).getBoundingClientRect(), readyRoute.stations.length);
+    if (index !== null && index !== activeIndex) selectRouteIndex(index);
   };
+
+  const trackDensity = routeTrackDensity(readyRoute?.stations.length ?? 0, railWidth);
 
   return (
     <section
@@ -556,6 +571,10 @@ export function SubwayRouteController({
             <div
               ref={trackRef}
               className="subway-ticket-track"
+              // Long trips (39 stops · 3 transfers was overflowing the sheet,
+              // owner report 2026-10-20): dense tracks shrink ordinary stops,
+              // very long ones draw only ends, transfers and the active stop.
+              data-density={trackDensity}
               role="slider"
               tabIndex={0}
               aria-label="Station on this route"
@@ -577,35 +596,39 @@ export function SubwayRouteController({
               }}
               onPointerCancel={() => { trackDragging.current = false; }}
               onKeyDown={(event) => {
-                if (event.key === "ArrowLeft" && activeIndex > 0) {
-                  event.preventDefault();
-                  selectRouteIndex(activeIndex - 1);
-                } else if (event.key === "ArrowRight" && activeIndex < readyRoute.stations.length - 1) {
-                  event.preventDefault();
-                  selectRouteIndex(activeIndex + 1);
-                }
+                const target = trackKeyTarget(event.key, activeIndex, readyRoute.stations.length);
+                if (target === null) return;
+                event.preventDefault();
+                if (target !== activeIndex) selectRouteIndex(target);
               }}
             >
-              {readyRoute.stations.map((id, index) => {
-                const segmentIndex = Math.max(0, segmentStarts.findLastIndex((start) => start <= index));
-                const color = LINE_META[readyRoute.segments[segmentIndex].line]?.color ?? "var(--dim)";
-                const isTransfer = index > 0 && segmentStarts.includes(index);
-                const isEnd = index === 0 || index === readyRoute.stations.length - 1;
-                return (
-                  <Fragment key={`${id}-${index}`}>
-                    {index > 0 && <i className="subway-track-leg" style={{ background: color }} />}
-                    {/* Display only. Sixteen 9px targets would fail the 44px
-                        touch rule and be miserable to hit anyway — the pinned
-                        stepper below is how you move, and it drives the
-                        highlight here. */}
-                    <span
-                      className={`subway-track-stop${index === activeIndex ? " active" : ""}${isTransfer ? " transfer" : ""}${isEnd ? " end" : ""}`}
-                      style={{ "--stop-color": color } as React.CSSProperties}
-                      title={stationDisplayName(STATIONS[id])}
-                    />
-                  </Fragment>
-                );
-              })}
+              {/* Stops sit at even fractions of the rail (left: index/last), so
+                  the track never grows past the sheet however long the trip,
+                  and focusStopAt's rounded ratio lands on the dot it shows. */}
+              <div ref={railRef} className="subway-track-rail">
+                {readyRoute.stations.map((id, index) => {
+                  const count = readyRoute.stations.length;
+                  const segmentIndex = Math.max(0, segmentStarts.findLastIndex((start) => start <= index));
+                  const color = LINE_META[readyRoute.segments[segmentIndex].line]?.color ?? "var(--dim)";
+                  const legColor = LINE_META[readyRoute.segments[segmentIndexForHop(segmentStarts, index - 1)].line]?.color ?? "var(--dim)";
+                  const isTransfer = index > 0 && segmentStarts.includes(index);
+                  const isEnd = index === 0 || index === count - 1;
+                  return (
+                    <Fragment key={`${id}-${index}`}>
+                      {index > 0 && <i className="subway-track-leg" style={{ background: legColor, left: stopOffset(index - 1, count), width: stopOffset(1, count) }} />}
+                      {/* Display only. Sixteen 9px targets would fail the 44px
+                          touch rule and be miserable to hit anyway — the pinned
+                          stepper below is how you move, and it drives the
+                          highlight here. */}
+                      <span
+                        className={`subway-track-stop${index === activeIndex ? " active" : ""}${isTransfer ? " transfer" : ""}${isEnd ? " end" : ""}`}
+                        style={{ "--stop-color": color, left: stopOffset(index, count) } as React.CSSProperties}
+                        title={stationDisplayName(STATIONS[id])}
+                      />
+                    </Fragment>
+                  );
+                })}
+              </div>
             </div>
             <p className="subway-ticket-count">
               {readyRoute.stations.length - 1} stops

@@ -1,10 +1,10 @@
-# 파트너 예약 관리자 재설계 — 핸드오프 (2026-10-19, 저녁 갱신)
+# 파트너 예약 관리자 재설계 — 핸드오프 (2026-10-20 오후 갱신)
 
-다른 계정·다른 기기에서 이 작업을 그대로 이어가기 위한 문서. 이 문서 하나와 브랜치만 있으면 된다. 마지막 갱신: 2026-10-19 저녁, 커밋 `d4ae672` 이후.
+다른 계정·다른 기기에서 이 작업을 그대로 이어가기 위한 문서. 이 문서 하나와 브랜치만 있으면 된다. 마지막 갱신: 2026-10-20 오후, 커밋 `c66c5db`(시안 v3.4) 이후.
 
 ## 1. 지금 상태 한 줄
 
-업체용 예약 관리자(`/partner/*`)의 **UX 재설계 시안 v3.4**(홈·예약 캘린더·예약 목록·고객·메시지·메뉴·담당자·근무시간·출근표·예약 설정·통계·정산·매장 정보)이 사용자 검토 대기 중이다. 시안은 승인 전 인터랙션 목업이며, 실제 앱·서버·DB·배포는 바꾸지 않았다. 승인되면 시안을 현재 API에 연결하는 구현 단계로 넘어간다.
+시안 **v3.4**(`c66c5db`)는 사용자 검토 대기 중인데, 10/19 밤~10/20 오후에 **Codex 세션이 같은 클론에서 시안을 실제 `/partner/*` 13개 화면과 고객 예약 흐름에 연결했다**(`reports/operations/2026-10-20-dashboard-demo-parity.md`, `2026-10-20-integrated-booking.md`, `2026-10-20-partner-operations.md`; 10/20 오후 기준 **커밋 전 작업 트리에 261개 파일 변경**, 로컬 Supabase 마이그레이션 4개). Claude는 10/20 오후에 그 구현을 3113에서 PC·모바일로 점검해 결함 14건(높음 1·중 5·낮 8)을 `reports/design/2026-10-20-partner-admin-implementation-screen-check.md`에 남겼다. 다음은 (1) Codex 작업 커밋·푸시, (2) 결함 A~F 수정과 재검증, (3) 6절의 사용자 결정이다.
 
 ## 2. 어디에 무엇이 있나
 
@@ -19,6 +19,8 @@
 | 검증 기록 | `reports/design/2026-10-19-partner-admin-preview-check.md` |
 | 릴리스 후보 검토(Codex) | `reports/operations/service-quality-release-2026-10-18.md`, `reports/operations/partner-booking-progress-2026-10-18.md` |
 | 실서비스 운영 요건 검토(환불 흐름·영역별 점검표·출시 최소 세트·결정 5개) | `reports/operations/partner-service-launch-readiness-2026-10-19.md` |
+| 실제 구현(Codex 10/20) 기록 | `reports/operations/2026-10-20-dashboard-demo-parity.md`(화면·범위·검증), `2026-10-20-integrated-booking.md`(예약 연동·테스트 계정 위치·실행 자료), `2026-10-20-partner-operations.md`(API 계약·마이그레이션) — 10/20 오후 기준 미커밋 |
+| 시안↔구현 화면 점검(Claude 10/20) | `reports/design/2026-10-20-partner-admin-implementation-screen-check.md` + `docs/designs/partner-admin-redesign-20261019/qa/impl-screens.cjs`·`impl-flow.cjs` (3113 로그인 후 13개 화면·흐름·터치) |
 
 `docs/`는 `.gitignore`의 `/docs/*`에 걸린다. 시안·설계 파일은 `git add -f`로 올렸으므로 수정 후에도 `git add -f 경로`로 다시 올린다. `docs/superpowers/specs/*`의 기존 설계 문서들도 같은 방식이다.
 
@@ -37,7 +39,7 @@ python3 -m http.server 3111 --bind 127.0.0.1 --directory docs/designs/partner-ad
 ### 재개 체크리스트 (로그인 직후 10분)
 
 1. 이 문서 4절(한 일)·6절(대기 질문)·7절(다음 단계)을 읽는다.
-2. `git fetch && git switch codex/service-quality-release-20261018 && git log --oneline -6` — 맨 위가 ‘design: … (시안 v3.4)’ 커밋이면 이 문서와 같은 상태다. 더 새 커밋이 있으면 그 커밋 메시지부터 읽는다.
+2. `git fetch && git switch codex/service-quality-release-20261018 && git log --oneline -6` — 맨 위가 ‘docs: 실제 관리자 구현 화면 점검…’ 커밋이면 이 문서와 같은 상태다. 더 새 커밋이 있으면 그 커밋 메시지부터 읽는다. **`git status`에 `app/partner/*`·`components/partner/*` 등 대량 변경이 미커밋으로 보이면 Codex 세션의 작업 중 상태다** — 통째로 커밋·되돌리기 하지 말고 8절을 읽는다.
 3. 위 명령으로 시안 서버를 띄우고 홈 → 매장 정보 → 예약 캘린더 순으로 한 번 훑는다.
 4. `node docs/designs/partner-admin-redesign-20261019/qa/ops-verify.cjs`와 `cal-verify.cjs`로 206개 통과를 확인한다(Playwright 필요: `npx playwright install chromium`).
 5. 사용자가 6절 질문에 답했는지 확인한다. 답이 있으면 설계 문서 ‘승인 전 확인할 질문’을 확정 사항으로 옮기고, 없으면 시안 범위 안에서만 작업한다.
@@ -53,7 +55,10 @@ python3 -m http.server 3111 --bind 127.0.0.1 --directory docs/designs/partner-ad
 4. **10/19 저녁 (Claude)**: 사용자 질문 “매장 정보를 바꾸면 지도·상세페이지에 자동 반영되나” → 현재는 아님(상세페이지는 정적 생성 데이터, 업체↔장소 연결 없음)이라고 답하고, **v3.3** 매장 정보 화면을 ‘설정에서 자동 반영 / 저장하면 즉시 반영 / 운영팀 검수 후 반영’ 3단계 + 고객 앱 상세페이지 미리보기(검수 중 표시) + 홈 할 일 연동으로 교체. 검증 187개(ops 119 + cal 68).
 5. **10/19 밤 (Claude, “하던 작업 계속” 요청)**: 운영 요건 검토에서 비어 있던 관리자 항목을 시안 **v3.4**로 채움 — 예약별 결제·환불 상태 칩(예약 상세·목록·정산 공통), **정산** 화면(월 선택, 수납/환불/정산 대상/지급 예정 KPI, 예약별 명세, 지난달 지급 완료 예시; 돈의 흐름 기본안 가정·수수료 예시 10% 표기), 메뉴·디자이너 **영문 이름**(편집기·담당자 폼·고객 미리보기 영문 우선·홈 할 일), 터치 기기에서 예약 블록을 잡아도 스크롤되도록 `touch-action` 수정(길게 누른 뒤 끌기만 이동), 토스트가 클릭을 가로채지 않도록 수정. 검증 206개(ops 135 + cal 71, CDP 터치 포함).
 
-커밋(모두 GitHub에 푸시됨): `74be7d8` 시안 v3 + 조사 + 핸드오프 → `163f867` 아바타·끌어서 옮기기(v3.1) → `838d020` 월간·출근표·메시지·메뉴 사진·예약 추가 수정(v3.2) → `27b1d73` 실서비스 운영 요건 검토 → `d4ae672` 매장 정보 3단계 반영(v3.3) → `d341fd3` 핸드오프 갱신 → 다음 커밋 정산·결제 상태·영문 이름·터치(v3.4).
+6. **10/19 밤–10/20 오후 (Codex, 같은 클론·커밋 전)**: 시안 v3.4를 실제 앱에 연결 — 예약 원장(`customer_bookings`·이벤트)과 고객 예약 흐름(메뉴→담당자→시간→확인, 내 예약, 취소, 대화), 관리자 13개 화면(`app/partner/{calendar,bookings,customers,messages,statistics,roster,rules,settlement}` 신설 + 기존 services·staff·availability·settings 재구성, `components/partner/dashboard.css`), 운영 API(`/api/partner/operations/*`: 전화·방문 예약, 확정·취소·완료·미방문·시간 변경, 고객 메모, 메시지, 매장 정보 즉시/검수, 담당자 영문, 사진 업로드), 마이그레이션 4개(로컬만). 결제 모드는 `pay_at_venue`, 예약금·수수료는 ‘결정 전’ 표기. DB 150·동시성 28·HTTP 178·단위 2,223개 통과. 브라우저 화면·터치 검증은 Chrome 정책 차단으로 미완료.
+7. **10/20 오후 (Claude)**: 6의 빈칸을 Playwright로 채움 — 3113 로그인 후 13개 화면 PC·모바일 캡처(HTTP 200·오류 0·넘침 0), 전화 예약 추가→캘린더→모바일 터치(쓸기=스크롤, 길게 누른 뒤 끌기=이동 안내)→상세→업체 취소 흐름 통과. 결함 14건 기록(로그인 폼 하이드레이션 전 GET 제출로 비밀번호 URL 노출, 예약 목록 필터 행 찌그러짐, 모바일 머리 버튼 줄바꿈, 상태 탭 겹침, 출근표가 반복 영업시간을 반영 안 함, 주간 머리 잘림 등). 스크립트 `qa/impl-screens.cjs`·`qa/impl-flow.cjs` 추가. 코드는 손대지 않았다(Codex 세션이 작업 중).
+
+커밋(모두 GitHub에 푸시됨): `74be7d8` 시안 v3 + 조사 + 핸드오프 → `163f867` 아바타·끌어서 옮기기(v3.1) → `838d020` 월간·출근표·메시지·메뉴 사진·예약 추가 수정(v3.2) → `27b1d73` 실서비스 운영 요건 검토 → `d4ae672` 매장 정보 3단계 반영(v3.3) → `d341fd3` 핸드오프 갱신 → `c66c5db` 정산·결제 상태·영문 이름·터치(v3.4) → 다음 커밋 구현 화면 점검(10/20). **Codex의 10/20 구현(6번)은 아직 어떤 커밋에도 없다.**
 
 ## 5. 사용자 결정 사항 (이미 정해진 것)
 
@@ -77,6 +82,8 @@ python3 -m http.server 3111 --bind 127.0.0.1 --directory docs/designs/partner-ad
 
 ## 7. 다음 단계 (승인 후)
 
+**10/20 추가.** 아래 1~3·6~8의 상당 부분을 Codex가 10/20에 구현했다(4절 6번, 커밋 전). 지금 당장의 순서는 (0) Codex 작업을 검토해 커밋·푸시(테스트 2,223개·typecheck·lint 통과 상태라고 보고됨) → (0b) 화면 점검 결함 A~F 수정(`reports/design/2026-10-20-partner-admin-implementation-screen-check.md` 2절) 후 `qa/impl-screens.cjs`·`qa/impl-flow.cjs` 재실행 → (0c) 실제 기기 터치·고객 예약 흐름 확인. 그 뒤 아래 항목 중 남은 것(알림, 결제·환불 실제 연동, 검수 큐 운영 화면, 원격 DB 마이그레이션·배포)으로 간다.
+
 1. 공통 shell·탐색·목록-상세·독립 탭과 예약 캘린더(일간·주간·모바일 목록)를 현재 API(근무·휴게·막은 시간·날짜 예외, `merchant_schedules`/`merchant_staff_schedules`의 `hours/breaks/blocks/overrides`)에 연결. 반복 막기는 `blocks`의 `weekday` 규칙.
 2. 예약 저장(앱 예약 + 업체 입력 전화·방문)과 업체별 고객 테이블은 **아직 서버에 없다**. 이 둘이 생겨야 홈 KPI·예약 목록·고객·통계·최근 활동이 실제 데이터로 동작한다. 그 전에는 ‘현재 제공 범위’ 화면만 노출.
 3. 고객 앱 `components/booking/booking-sheet.tsx`는 고정 데이터 데모라 디자이너 선택 단계가 없다. 관리자 데이터(메뉴 → 제공 디자이너 → 가용 시간)로 교체.
@@ -93,4 +100,42 @@ python3 -m http.server 3111 --bind 127.0.0.1 --directory docs/designs/partner-ad
 - 시안의 루트 레이아웃 클래스가 `.app`이라 상태·세그먼트 클래스 이름으로 `app`을 쓰면 충돌한다(`k-app`, `s-app` 사용). `.now`(캘린더 현재 시각 선)·`.warn`도 이미 쓰인다. 새 클래스는 접두어를 붙이고, 넣기 전에 기존 `<style>`과 이름을 대조한다.
 - 시안은 HTML 한 파일이라 Claude/Codex가 고칠 때는 파이썬 치환 스크립트로 넣는 편이 안전하다. 한글이 들어간 스크립트는 `python3 -X utf8`로 실행하고 파일 머리에 `# -*- coding: utf-8 -*-`를 둔다.
 - 시안의 모든 상호·이름·연락처·금액은 가상 예시다. ‘연동 후 예시’ 숫자를 실제 통계로 옮기지 않는다.
-- Codex(VS Code)는 10/25까지 사용량 한도. 그 전까지는 Claude Code에서 이어간다. Claude 쪽 메모리는 기기·계정별이므로 이 문서가 기준이다.
+- **이 클론도 10/20부터 Codex 세션과 함께 쓴다.** 커밋 전에 `git status`로 남의 변경을 확인하고, 자기 파일만 `git add 경로`로 올린다(`git add -A`·`git commit -a` 금지). Codex가 만든 미커밋 변경은 되돌리거나 stash 하지 않는다.
+- 로컬 테스트 계정은 `$TMPDIR/myseouldrop-booking-local-access.json`(Codex 프로비저닝 스크립트가 생성, 권한 600). 스크립트는 이 파일을 읽기만 하고 값은 저장소·보고서·대화에 적지 않는다.
+- 로그인 폼은 하이드레이션 전에 제출되면 GET으로 비밀번호가 URL에 실린다(화면 점검 결함 A). 자동화에서는 `#signin-email`이 뜬 뒤 2초 기다렸다 제출한다. 고쳐지면 이 주의는 지운다.
+- Codex(VS Code)는 10/19 오전에 사용량 한도였지만 10/19 밤부터 다시 동작했다. Claude 쪽 메모리는 기기·계정별이므로 이 문서가 기준이다.
+
+## 9. 2026-10-20 밤 추가 (사용량 한도로 중단된 상태)
+
+- **QA 보고서** `reports/design/2026-10-20-webapp-admin-propagation-qa.md`(4차; Codex 채점 7/10 — 남은 요구: 회원 메시지·시간 변경·고객 취소 왕복과 검색→지도→상세 실측, 과거 소스 보관본). 원본 증거는 `.gstack/qa-reports/run-20261020T105544Z-webapp/`(gitignore, 이 기기에만 있음).
+- **DB 구조 제안 2판** `reports/architecture/2026-10-20-database-architecture-proposal.md`(Codex 채점 7/10 — 남은 요구: 지연 트리거 무잠금 주장 제거·큐/재시도 계약, 기존 프로필·미디어 응답 재현 필드, 연결 해제 vs 장소 비공개 구분·캐시 무효화·ETag, 리뷰 집계 제외 또는 전체 이벤트, 권한 DDL·정합성 검사·트리거 롤백 이름).
+- **코드 변경(미커밋, Codex 작업 트리와 같은 파일 포함)**: 비회원 ♥ 미보관(`lib/favorites.ts`·`favorite-button`·상세 Save·지도 공유 목록·`signin-nudge`·`signup-return-notice`·favorites 문구·i18n), 스켈레톤 로딩(`components/ui/skeleton.tsx`, `app/loading.tsx`, 고객 예약·메뉴·저장 목록 로딩 상태, globals.css), 상세 사진 헤더(커버 타일·+N·라이트박스, Photos 섹션·탭 제거, `.place-hero-chrome`), 썸네일 cover, 첫 리뷰 유도(TravelerReviews), 지하철 트랙 밀도(`data-density` + CSS; 16/39/60정거장 342px에서 넘침 없음 실측), **관리자 ‘고객 화면 사진 영역’ 스위치**(마이그레이션 `20261020123000_store_profile_show_photos.sql` — 로컬 DB에만 적용, `profile-contracts.ts` showPhotos, `place-profile.ts` photosEnabled, 관리자 토글·미리보기). 검증: typecheck·lint 통과, vitest 36파일 938개 통과, Playwright `scripts/verify-impl*.cjs`·`verify-toggle.cjs` 통과(비회원 ♥→가입 시트→로그인 복귀 시 저장, 토글 왕복 9/9). Codex 코드 리뷰는 요청해 둔 상태(결과 미확인, `codex-impl1.log`는 scratchpad에만).
+- 원격 DB에는 아무것도 적용하지 않았다. 이 코드 변경을 커밋하려면 Codex의 미커밋 변경과 섞이므로 파일 단위로 조정이 필요하다.
+
+## 10. 2026-10-20 밤 2부 — Codex 코드 리뷰 반복 (Claude)
+
+- 9절의 "Codex 코드 리뷰 미확인"에 답이 왔었다: **6/10**, 지적 7건(RPC 5키 호환, 지도 상세 사진 OFF 미적용, 가입 복귀 저장 소실, 라이트박스 포커스·포털, 긴 노선 잘림, 썸네일 테스트). 전부 고치고 재검증한 뒤 2차 **7/10**(남은 6건: 즐겨찾기 서버 확인·중복 전송, 공개 프로필 실패 캐시, 포털 드래그가 시트를 움직임, 배경 inert, OFF 도착 시 라이트박스, DB 테스트 재현성)도 고쳤다. 3차 **7/10**(11개 중 7개 RESOLVED; 남은 4건 — 항목별 쓰기 순서, 조회 중 완료된 토글 보존, 늦은 완료가 새 요청 삭제, 사진 API 실패가 OFF 폐기)도 고치고 경합 재현 테스트 17개를 더했다. 4차 **7/10**(7개 RESOLVED; 3차 수정이 만든 결함 3건 포함 7건 지적) → 전부 수정(병합 직렬화·확정 상태 롤백·계정 게이팅·requestId·프로필/사진 분리 메모·일회용 스택으로 빈 DB 마이그레이션 검증). 5차 결과: **(채점 대기 — 갱신)**. 상세 표·근거·검증은 `reports/design/2026-10-20-codex-review-fixes.md`.
+- 발견한 기존 결함: 전역 `.overlay` 스크림이 overlay 아이콘 버튼 전체를 absolute로 만들고 있었음(`.overlay:not(.iconbtn)`로 수정). 어젯밤 "vitest 938개"는 부분 실행이었고 전체 실행에서 계약 테스트 5개가 깨져 있었음(갱신 완료). **앞으로 vitest는 전체 실행만 "통과"로 적는다**(176→179파일, 2,274개, 약 10초).
+- 정책 메모: 썸네일 cover는 **장소 사진만**, 상품·브랜드는 contain 유지(`ImageThumbnail` `fit` prop) — 사용자 확인 전까지의 판단.
+- 새 QA 스크립트: `docs/designs/partner-admin-redesign-20261019/qa/impl-map-lightbox.cjs`(21)·`impl-map-photos-off.cjs`(10)·`impl-track-geometry.cjs`(8), README에 사용법. 스크린샷 `reports/design/evidence/2026-10-20-codex-round2/`.
+- 검증(최종 상태): tsc 0 · lint 0 · vitest 179/2,274 · DB 157 · Playwright 21/10/8 · 어젯밤 회귀 21/21.
+- **여전히 미커밋.** 이 수정과 Codex의 10/20 구현(261개 파일)이 같은 파일에 섞여 있어 분리 커밋이 불가능하다. 전체 트리 기준 검증이 전부 통과하므로 커밋 방식만 결정하면 된다(사용자 질문 중). 원격 DB에는 아무것도 적용하지 않았고, `show_photos` 마이그레이션은 이제 "DB 먼저, 앱 나중" 순서로 안전하다(RPC가 4키 요청도 받음).
+- 남은 것: 새 DB에서 마이그레이션 순서 적용 검증(미실시), QA 보고서 4차(7/10)의 회원 왕복(메시지·시간 변경·고객 취소) 실측 — 어젯밤 `round3-flows.cjs`는 슬롯 버튼(`/^16:00/`)을 못 찾고 멈춤(영업시간·날짜 의존), DB 제안 3판.
+
+## 11. 2026-10-21 (Claude, 사용량 한도로 중단 — 여기서 재개)
+- 상세: `reports/design/2026-10-20-codex-review-fixes.md` 5~7절. 요약: 내부 7관점 적대 검증(25건) → 수정, **즐겨찾기 저장소를 계정별 Session + 항목별 reconciler로 재작성**(+기기 미러 소유 태그), 재작성분 1차 검증 21건·2차 검증 9건 모두 수정(인증 순서 가드 `sawAuthEvent`, 오프라인 부팅은 로그아웃 아님 `lib/auth/session-errors.ts`, 스냅샷 계정 범위 `.eq(user_id)`, 같은 계정 재로그인 시 세션 인계, 시작 토큰, 온라인 복귀 시 스냅샷 재시도, 로그아웃 모달이 `signOut()` 실패를 알림, 계정 삭제 후 로컬 signOut, 알림은 스토어 계정 일치 시에만).
+- 검증(최종): tsc 0 · lint 0 · vitest **214파일 2,397개** · DB 161(로컬 QA + 일회용 빈 DB에 마이그레이션 25개 순서 적용) · 브라우저 79/79(+`impl-signout.cjs`는 실행 중이었음 — 결과 미확인, 다시 돌릴 것).
+- DB 제안 3판 작성(`reports/architecture/2026-10-20-database-architecture-proposal.md`, 1,060줄, 내부 검증 36건 반영). 웹앱↔관리자 회원 왕복 22/22(`qa/impl-member-roundtrip.cjs`, 증거 `reports/design/evidence/2026-10-21-member-roundtrip/`).
+- **Codex**: 로그인은 10/21 13:42에 복구됨. 단 `gpt-6-astra`는 이 계정에서 더 이상 지원 안 됨(400). `GSTACK_CODEX_MODEL=gpt-6-luna`로 요청 단위 지정하면 동작(probe OK, config는 안 바꿈). **다음 할 일: 이 모델로 5차 채점** — 프롬프트는 이전 차수 형식(채점표·2/3/4차 원문·변경 요약·부록 diff) 재사용.
+- 남은 결정: 커밋 방식(Codex 미커밋 구현과 섞임), 상품 썸네일 contain 정책 확인, rpc-2(예약 견적 정의 변경) 확인, ratings.ts도 같은 오프라인 부팅 퍼지 문제(미수정, 범위 밖).
+- 10/21 끝: `impl-signout.cjs` 결과 — 유효한 토큰으로 오프라인 로그아웃 시 auth-js가 로컬 세션을 지우고 성공(알림 없음·기기 사본 삭제)해서 스크립트의 "오프라인=실패" 기대가 틀림(앱 동작은 맞음). 실패 경로는 만료된 토큰에서만 생기므로 단위 테스트(`lib/signout-modal-result.test.ts`)로만 고정됨. 스크립트는 온라인 경로만 확인하도록 고쳐야 함. `verify-impl` 21/21.
+- 10/21 저녁: Codex 5차 **6**(gpt-6-luna) → 병합 행 단일 경로·구버전 요청 ID 부여(Google 지적은 반박) → 6차 **9** → 사진 신선도 P3 수정 → 7차 확인 **9**(새 결함 없음). **목표(9점) 달성.** 최종: vitest 214/2,399, tsc·lint 0, 비회원 ♥ 회귀 21/21, 로그아웃 9/9(`qa/impl-signout.cjs` 기대값 수정됨). 남은 것: 커밋 방식 결정, 상품 썸네일 정책·rpc-2 확인, ratings.ts 오프라인 퍼지(범위 밖).
+- 10/21 밤: 사용자 결정으로 전체 커밋 `3dea772` → GitHub `codex/service-quality-release-20261018` 푸시(배포·원격 DB 없음). 깨끗한 체크아웃에서 tsc·vitest 2,399·`next build` 통과. 제3자 캡처 `reports/design/references/beautynow-20261019/…html`은 커밋에서 제외(미추적). 다음: 원격 DB 마이그레이션(8개, `20261019*` 7개 + `20261020123000`) 적용 계획 → 앱 배포 순서, 상품 썸네일·rpc-2 확인, ratings.ts 오프라인 퍼지.
+
+## 12. 2026-10-21~22 화면 문장·레이아웃·버튼 전수 점검 (Claude)
+- 요청: 어색한 줄바꿈·레이아웃을 벗어나는 글자·눌러도 제대로 동작하지 않는 버튼을 관리자·고객 예약 화면 전체에서 검토. 결과·근거: `reports/design/2026-10-21-screen-text-layout-review.md`, 비교 이미지 `reports/design/evidence/2026-10-21-screen-review/`.
+- 새 점검 도구(`qa/`, README 마지막 절): `impl-layout-audit.cjs`(+`layout-audit-lib.cjs`, `impl-audit-matrix.cjs`, `impl-audit-report.cjs`) 22개 크기·언어 조합 측정, `impl-controls-audit.cjs` 버튼 크롤러, 실제 흐름 `impl-confirm-flow.cjs`(16)·`impl-settings-roundtrip.cjs`(29)·`impl-long-values.cjs`(14).
+- 고친 것: 관리자 한국어 어절 중간 줄바꿈 86곳(`keep-all`), 예약 목록 필터 잘림·겹침, 휴대폰 머리 버튼 3줄·상태 탭 붙음, 고객 앱 전역 `.topbar` sticky 가 관리자에 걸려 상세 패널 머리가 숨던 것(클래스 충돌), 주간 머리글 잘림, 예약 블록 글자 아래 잘림, **휴대폰 정산 이름 링크 눌리지 않음**, 820~834px 태블릿(휴대폰 배치 기준 800→900px), 1280px 상태 칩 잘림, 터치 영역, 긴 값, **'시간 변경' 창 담당자 비우면 409 오류 표시**, 고객 프랑스어 가격 '₩60000'→'₩60,000', 일·중·영 고아 줄, 320px 지도 버튼.
+- 검증: tsc 0 · lint 0 · vitest **216파일 2,411개** · 수정 후 22개 조합 재측정 결함 0 · 실제 흐름 확정 16/16, 왕복 13/13(B), 전화 예약 10/10, 설정 왕복 29/29 · Codex 8차 7 → 9차 8 → **10차 9(새 결함 없음)**.
+- 남은 것: '변경사항 버리고 다시 불러오기'의 브라우저 기본 `confirm()`(동작 정상, 모양 불일치), 부하 중 `/api/partner` 17분 뒤 503 1회(재현 안 됨 — 서버 데이터 요청 시간 제한 확인 필요).
+- 측정용 전용 개발 서버(세션 임시 폴더의 `devA`/`devB`, 3114/3115)는 끝나면 종료. 로컬 QA DB에 점검용 취소 예약 몇 건(QA Confirm, LONGNAME…)이 남아 있다(모두 취소 상태).

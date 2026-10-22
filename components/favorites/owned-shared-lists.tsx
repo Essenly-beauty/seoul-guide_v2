@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { SkeletonLines, SkeletonStatus } from "@/components/ui/skeleton";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { SectionHeader } from "@/components/ui/section-header";
@@ -37,7 +38,7 @@ export function OwnedSharedListsView({
   return (
     <section className="stack sm">
       <SectionHeader title="Your shared links" count={status === "ready" ? items.length : undefined} />
-      {status === "loading" && <p className="small muted" role="status">Loading shared links…</p>}
+      {status === "loading" && <SkeletonStatus label="Loading shared links…"><SkeletonLines lines={2} widths={['70%', '45%']} /></SkeletonStatus>}
       {status === "error" && (
         <div className="row" role="alert" style={{ gap: 8 }}>
           <span className="small" style={{ flex: 1 }}>Couldn&apos;t load your links.</span>

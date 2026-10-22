@@ -1,0 +1,134 @@
+{
+ "check:A.search.results": {
+  "ok": true,
+  "info": "count=56 first=\"JUNO HAIR | Gangnam Square Branch · Hair Salon ★ 4.2 (73) · 90 m · 서울 강남구 테헤란로 1\""
+ },
+ "check:A.map.deepLink": {
+  "ok": true,
+  "info": "/map?place=ct-juno-hair-gangnam-square-branch"
+ },
+ "check:A.map.summaryShowsResult": {
+  "ok": true,
+  "info": "name=\"JUNO HAIR\""
+ },
+ "check:A.detail.open": {
+  "ok": true,
+  "info": "detail=1"
+ },
+ "check:A.detail.title": {
+  "ok": true,
+  "info": "intro=\"JUNO HAIR | Gangnam Square Branch 준오헤어 강남역스퀘어2호점 Hair Salon Open ★ 4.2 (73) 90m · 서울 강남구 테헤란로 101 3F\""
+ },
+ "A.externalLinks": [
+  {
+   "label": "Google",
+   "href": "https://www.google.com/maps/dir/?api=1&destination=JUNO%20HAIR%20%7C%20Gangnam%20Square%20Branch%2C%20%EC%84%9C%EC%9A%B8%20%EA%B0%95%EB%82%A8%EA%B5%AC%20%ED%85%8C%ED%97%A4%EB%9E%80%EB%A1%9C%20101&travelmode=transit"
+  },
+  {
+   "label": "Kakao",
+   "href": "https://map.kakao.com/link/to/%EC%A4%80%EC%98%A4%ED%97%A4%EC%96%B4%20%EA%B0%95%EB%82%A8%EC%97%AD%EC%8A%A4%ED%80%98%EC%96%B42%ED%98%B8%EC%A0%90,37.498616,127.027955"
+  },
+  {
+   "label": "Naver Map",
+   "href": "https://map.naver.com/p/search/%EC%A4%80%EC%98%A4%ED%97%A4%EC%96%B4%20%EA%B0%95%EB%82%A8%EC%97%AD%EC%8A%A4%ED%80%98%EC%96%B42%ED%98%B8%EC%A0%90"
+  }
+ ],
+ "check:A.external.google.destinationIsName": {
+  "ok": true,
+  "info": "https://www.google.com/maps/dir/?api=1&destination=JUNO HAIR | Gangnam Square Branch, 서울 강남구 테헤란로 101&travelmode=transit"
+ },
+ "check:A.external.kakaoNaver": {
+  "ok": true,
+  "info": "Google, Kakao, Naver Map"
+ },
+ "check:A.back.returnsToSearch": {
+  "ok": true,
+  "info": "/search"
+ },
+ "check:A.errors.none": {
+  "ok": true,
+  "info": ""
+ },
+ "B.dates": [
+  "Wed, Oct 21, 2026",
+  "Thu, Oct 22, 2026",
+  "Fri, Oct 23, 2026",
+  "Sat, Oct 24, 2026",
+  "Sun, Oct 25, 2026"
+ ],
+ "check:B.slots.available": {
+  "ok": true,
+  "info": "date=Fri, Oct 23, 2026 slots=10:00,10:30,11:00,11:30,12:00,12:30,13:00,13:30,14:00,14:30,15:00,15:30,16:00,16:30,17:00,17:30,18:00,18:30"
+ },
+ "B.target": {
+  "chosen": "Fri, Oct 23, 2026",
+  "START": "14:00",
+  "KR_DATE": "10월 23일",
+  "ISO_DATE": "2026-10-23"
+ },
+ "B.customerName": "QA Guest",
+ "check:B.created": {
+  "ok": true,
+  "info": "url=/bookings/4e6a8745-6ee5-488f-a794-f88a6c678361 status=Awaiting confirmation"
+ },
+ "check:B.customer.messageShown": {
+  "ok": true,
+  "info": " booking Messages Seoul time You QA r1: 주차 가능한가요? Oct 21 · 10:16 Sent Message the venue "
+ },
+ "check:B.partner.threadHasMessage": {
+  "ok": false,
+  "info": "매장 정보를 불러오고 있습니다 접근 권한과 최신 설정을 확인하고 있습니다."
+ },
+ "check:B.partner.replySent": {
+  "ok": false,
+  "info": "{}"
+ },
+ "check:B.customer.replyVisible": {
+  "ok": false,
+  "info": "not shown"
+ },
+ "B.partner.row": "10월 23일 (금) 14:00–15:00 QA Guest 010-0000-0003 Signature cut Min 앱 60,000원 현장 결제 확인 대기",
+ "check:B.partner.bookingListed": {
+  "ok": true,
+  "info": "looking for 10월 23일 14:00 QA Guest"
+ },
+ "B.partner.rescheduleOptions": [
+  "시간 선택",
+  "10:00–11:00",
+  "10:30–11:30",
+  "11:00–12:00",
+  "11:30–12:30",
+  "12:00–13:00",
+  "12:30–13:30",
+  "13:00–14:00",
+  "13:30–14:30",
+  "14:00–15:00",
+  "14:30–15:30",
+  "15:00–16:00"
+ ],
+ "check:B.partner.rescheduled": {
+  "ok": true,
+  "info": "new=10:00 net={\"m\":\"PATCH\",\"status\":200,\"url\":\"/api/partner/operations/bookings/4e6a8745-6ee5-488f-a794-f88a6c678361\",\"body\":\"{\\\"booking\\\":{\\\"id\\\":\\\"4e6a8"
+ },
+ "B.newStart": "10:00",
+ "check:B.customer.seesNewTime": {
+  "ok": true,
+  "info": " Studio · Test Signature cut · Min Fri, Oct 23, 2026 · 10:00 Seoul time View boo"
+ },
+ "check:B.customer.cancelled": {
+  "ok": true,
+  "info": "Booking details You cancelled this booking. Cancelled MYSEOULDROP Booking Studio · Test S"
+ },
+ "check:B.partner.showsCancelled": {
+  "ok": false,
+  "info": "예약 목록 기간·상태·담당자로 예약을 찾고, 상세에서 처리해요. 새로고침 + 예약 추가 오늘 이번 주 이번 달 지난 예약 전체 모든 담당자 Local media QA Min Jiyoon 모든 경로 앱 전화 방문 날짜 지정 전체 9 확인 대기 1 예약 확정 0 취소 8 방문 완료 0 미방문 0 오늘 11:00–12:00 화면점검 테스트 010-0000-000"
+ },
+ "check:B.partner.homeRecentHasCancel": {
+  "ok": true,
+  "info": "최근 예약 변경 QA Guest · Signature cut 취소 10월 21일 (수) 10:18 QA Guest · Signature cut 확인 대기 10월 20일 (화) 21:04 QA Guest · Signature cut 취소 10월 20일 (화) 20:41 QA Guest · Signature cut 취소 10월 20일 (화) 20:32"
+ },
+ "check:B.customer.errors.none": {
+  "ok": true,
+  "info": ""
+ }
+}

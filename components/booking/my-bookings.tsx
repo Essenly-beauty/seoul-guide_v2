@@ -1,5 +1,6 @@
 'use client';
 import Link from 'next/link';
+import { SkeletonChips, SkeletonLines, SkeletonList, SkeletonStatus } from '@/components/ui/skeleton';
 import { useEffect, useState } from 'react';
 import { Check, Clock3, X } from 'lucide-react';
 import { BottomNav } from '@/components/ui/bottom-nav';
@@ -8,7 +9,7 @@ import { useLocale } from '@/lib/i18n/locale-provider';
 import { authLinkWithNext } from '@/lib/auth-return';
 import { booking, bookingList, type Booking } from '@/lib/booking/contracts';
 import { routes } from '@/lib/routes';
-import { bookingDate, bookingErrorMessage, bookingTime } from './customer-booking-state';
+import { bookingDate, bookingErrorMessage, bookingPrice, bookingTime } from './customer-booking-state';
 import { useBookingResource } from './use-booking-resource';
 import { BookingStatus } from './booking-summary';
 import { CancelBookingButton } from './cancel-booking-button';
@@ -34,7 +35,7 @@ export function MyBookings() {
   }).sort((a, b) => Date.parse(b.startAt) - Date.parse(a.startAt));
   return <div className={styles.shell}><BookingHeader backHref={routes.menu} title={t('My bookings')} /><main className={`${styles.scroll} ${styles.page}`}>
     <h1 className={styles.srOnly}>{t('My bookings')}</h1><p className={styles.hint}>{t('Your appointments and their latest status.')}</p>
-    {loading ? <p role="status">{t('Loading bookings…')}</p> : !user || resource.error === 'AUTH_REQUIRED' ? <AuthPrompt next={routes.bookings} /> : resource.error ? <div className={styles.empty}><p role="alert">{t(bookingErrorMessage(resource.error))}</p><button className={styles.secondary} onClick={resource.refresh}>{t('Retry')}</button></div> : resource.loading && !resource.data ? <p role="status">{t('Loading bookings…')}</p> : !bookings.length ? <div className={styles.empty}><h2>{t('No bookings yet')}</h2><p className={styles.hint}>{t('Find a venue and choose an available service to get started.')}</p><Link className={styles.primary} href={routes.map}>{t('Explore places')}<BookingArrow /></Link></div> : <ul className={styles.list}>{bookings.map(item => <li key={item.id}><article className={styles.bookingCard}>
+    {loading ? <SkeletonStatus label={t('Loading bookings…')}><SkeletonList rows={3} thumb={48} /></SkeletonStatus> : !user || resource.error === 'AUTH_REQUIRED' ? <AuthPrompt next={routes.bookings} /> : resource.error ? <div className={styles.empty}><p role="alert">{t(bookingErrorMessage(resource.error))}</p><button className={styles.secondary} onClick={resource.refresh}>{t('Retry')}</button></div> : resource.loading && !resource.data ? <SkeletonStatus label={t('Loading bookings…')}><SkeletonList rows={3} thumb={48} /></SkeletonStatus> : !bookings.length ? <div className={styles.empty}><h2>{t('No bookings yet')}</h2><p className={styles.hint}>{t('Find a venue and choose an available service to get started.')}</p><Link className={styles.primary} href={routes.map}>{t('Explore places')}<BookingArrow /></Link></div> : <ul className={styles.list}>{bookings.map(item => <li key={item.id}><article className={styles.bookingCard}>
       <BookingStatus status={item.status} /><h2>{item.merchantName}</h2><p>{item.serviceName}{item.staffName && <> · {item.staffName}</>}</p><p className={styles.bookingDate}>{bookingDate(item.startAt, locale)} · {bookingTime(item.startAt, locale)}</p><p className={styles.caption}>{t('Seoul time')}</p>
       <Link href={routes.booking(item.id)} className={styles.secondary}>{t('View booking')}</Link>
       {['requested', 'confirmed'].includes(item.status) && Date.parse(item.startAt) > Date.now() && <CancelBookingButton key={`${user?.id}:${item.id}`} text disabled={resource.loading} value={item} onCancelled={next => { if (user) setOverrides(previous => ({ userId: user.id, values: { ...(previous?.userId === user.id ? previous.values : {}), [next.id]: next } })); resource.refresh(); }} onRefresh={resource.refresh} />}
@@ -53,12 +54,12 @@ export function BookingDetail({ id }: { id: string }) {
   const canCancel = value && ['requested', 'confirmed'].includes(value.status) && Date.parse(value.startAt) > Date.now();
   const statusMessage = value ? value.status === 'requested' ? 'The venue will confirm your request.' : value.status === 'confirmed' ? 'Your appointment is confirmed.' : value.status === 'cancelled' ? value.cancelledBy === 'merchant' ? 'The venue cancelled this booking.' : 'You cancelled this booking.' : value.status === 'completed' ? 'Your visit is complete.' : 'The venue marked this appointment as missed.' : '';
   return <div className={styles.shell}><BookingHeader backHref={routes.bookings} title={t('Booking details')} /><main className={`${styles.scroll} ${styles.page}`}>
-    {loading ? <p role="status">{t('Loading booking details…')}</p> : !user || resource.error === 'AUTH_REQUIRED' ? <AuthPrompt next={routes.booking(id)} /> : resource.error ? <div className={styles.empty}><p role="alert">{t(bookingErrorMessage(resource.error))}</p><button className={styles.secondary} onClick={resource.refresh}>{t('Retry')}</button><Link className={styles.secondary} href={routes.bookings}>{t('My bookings')}</Link></div> : !value ? <p role="status">{t('Loading booking details…')}</p> : <>
+    {loading ? <SkeletonStatus label={t('Loading booking details…')}><SkeletonLines lines={4} widths={['60%', '90%', '75%', '40%']} /></SkeletonStatus> : !user || resource.error === 'AUTH_REQUIRED' ? <AuthPrompt next={routes.booking(id)} /> : resource.error ? <div className={styles.empty}><p role="alert">{t(bookingErrorMessage(resource.error))}</p><button className={styles.secondary} onClick={resource.refresh}>{t('Retry')}</button><Link className={styles.secondary} href={routes.bookings}>{t('My bookings')}</Link></div> : !value ? <SkeletonStatus label={t('Loading booking details…')}><SkeletonLines lines={4} widths={['60%', '90%', '75%', '40%']} /></SkeletonStatus> : <>
       <div className={styles.resultSymbol} aria-hidden="true">{value.status === 'requested' ? <Clock3 /> : ['confirmed', 'completed'].includes(value.status) ? <Check /> : <X />}</div>
       <BookingHeading title={t(statusMessage)} />
       <BookingTicket value={value}><BookingStatus status={value.status} /></BookingTicket>
       <BookingLocationCard placeId={value.placeId}/>
-      <div className={styles.amounts}><div className={styles.total}><span>{t('Total')}</span><strong>₩{value.totalKrw.toLocaleString(locale)}</strong></div></div>
+      <div className={styles.amounts}><div className={styles.total}><span>{t('Total')}</span><strong>{bookingPrice(value.totalKrw)}</strong></div></div>
       {value.paymentMode === 'pay_at_venue' && <div className={styles.policy}><strong>{t('Pay at the venue')}</strong><p>{t('No payment is collected online.')}</p></div>}
       <dl className={styles.customerDetails}><div><dt>{t('Full name')}</dt><dd>{value.customerName}</dd></div><div><dt>{t('Phone number')}</dt><dd>{value.phone || '—'}</dd></div>{value.notes && <div><dt>{t('Notes')}</dt><dd>{value.notes}</dd></div>}</dl>
       <div className={styles.detailActions}><Link href={routes.place(value.placeId)} className={styles.secondary}>{t('View venue')}</Link>{canCancel && <CancelBookingButton key={`${user?.id}:${value.id}`} text disabled={resource.loading} value={value} onCancelled={next => { if (user) setOverride({ userId: user.id, value: next }); }} onRefresh={resource.refresh} />}</div>

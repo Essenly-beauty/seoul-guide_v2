@@ -207,6 +207,8 @@ export function MapScreen() {
 
   const saveAllShared = useCallback(() => {
     if (!sharedList) return;
+    // guests save nothing (owner decision 2026-10-20) — the join sheet is the outcome
+    if (!authUser) { nudge("favorite"); return; }
     const have = new Set(favs.place);
     let added = 0;
     for (const id of sharedList.placeIds) {
@@ -216,8 +218,6 @@ export function MapScreen() {
       }
     }
     toast(added > 0 ? `Saved ${added} place${added === 1 ? "" : "s"} to your list` : "Already in your list");
-    // guests keep the local save (consistent with hearts) and meet the funnel
-    if (!authUser && added > 0) nudge("favorite");
   }, [authUser, favs.place, nudge, sharedList, toast]);
 
   // Search flow entry `/map?place={id}` (spec §2, §4.4): select the place and

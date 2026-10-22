@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#ffffff">
+  <title>MYSEOULDROP · Booking demo</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <aside class="study" aria-label="Demo controls" data-i18n-label="previewControls">
+    <a class="wordmark" href="#start">MYSEOUL<span>DROP</span><i></i></a>
+    <p class="eyebrow" data-i18n="studyEyebrow">MOBILE DEMO / 01</p>
+    <h1 data-i18n="studyTitle">Less searching.<br>More Seoul.</h1>
+    <p class="study-intro" data-i18n="studyIntro">Try a sample appointment from service selection to confirmation.</p>
+    <nav id="study-nav" aria-label="Preview screens" data-i18n-label="previewScreens"></nav>
+    <div class="study-notes">
+      <strong data-i18n="notesTitle">Interactive booking demo</strong>
+      <p data-i18n="notesBody">Salon, staff, availability and prices are examples. Payment and cancellation terms are illustrative.</p>
+      <p data-i18n="notesNavigation">Screen shortcuts load sample choices. Use Start demo to test each step yourself.</p>
+      <p data-i18n="demoNote">Sample only. No booking, payment or message is sent.</p>
+    </div>
+    <button class="reset" data-action="reset"><span data-i18n="reset">Start over</span><span aria-hidden="true">↗</span></button>
+  </aside>
+  <div class="device-wrap">
+    <div class="preview-label">
+      <span class="demo-label" data-i18n="demo">Booking demo</span>
+      <div class="preview-tools">
+        <label class="sr-only" for="demo-language" data-i18n="language">Language</label>
+        <select id="demo-language" name="language">
+          <option value="en" lang="en">English</option>
+          <option value="ja" lang="ja">日本語</option>
+          <option value="zh-CN" lang="zh-CN">简体中文</option>
+          <option value="es" lang="es">Español</option>
+          <option value="fr" lang="fr">Français</option>
+        </select>
+        <button class="toolbar-reset" data-action="reset" aria-label="Start over" data-i18n-label="reset"><span aria-hidden="true">↺</span></button>
+      </div>
+    </div>
+    <main class="device" id="app" aria-label="Mobile booking demo" data-i18n-label="mobilePreview"></main>
+    <p class="device-caption" data-i18n="demoNote">Sample only. No booking, payment or message is sent.</p>
+  </div>
+  <div id="announcer" class="sr-only" role="status" aria-live="polite"></div>
+  <script src="locales.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

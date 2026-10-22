@@ -235,7 +235,7 @@ export default function FavoritesPage() {
         {ready && !authLoading && !user && (
           <Notice icon="user">
             <span className="row" style={{ gap: 10, alignItems: "center", flexWrap: "wrap" }}>
-              <span style={{ flex: 1, minWidth: 180 }}><T text={"Saved on this device — sign in to keep your list on your account."} /></span>
+              <span style={{ flex: 1, minWidth: 180 }}><T text={"Sign in to save places — hearts are kept on your account."} /></span>
               <Button size="sm" href={`${routes.signIn}?next=/favorites`} style={{ flex: "none" }}><T text={"Sign in"} /></Button>
             </span>
           </Notice>

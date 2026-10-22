@@ -6,6 +6,7 @@ import { T } from "@/lib/i18n/locale-provider";
 import { Icon } from "@/components/icon";
 import { SelectedPlaceSummary } from "@/components/map/selected-place-summary";
 import { PlaceDetailBody } from "@/components/place/place-detail-body";
+import { usePublishedPlace } from "@/components/place/use-published-place";
 import { PlaceCtaBar } from "@/components/place/place-cta-bar";
 import { SelectedPlaceActionBar } from "./selected-place-action-bar";
 import { LiveBadge } from "@/components/ui/live-badge";
@@ -79,6 +80,10 @@ export function MapSheet({ places, origin, selectedId, groupPlaceIds = [], onSel
     ? ranked.find(({ p }) => p.id === selectedId)?.p ?? getPlace(selectedId) ?? null
     : null;
   const selectedKm = selectedId ? ranked.find(({ p }) => p.id === selectedId)?.km ?? 0 : 0;
+  // The catalog entry opens instantly; the venue's published profile (name,
+  // English OK, contact, notice, photo-header switch) overlays it once fetched,
+  // the same merge the /place route does on the server.
+  const publishedPlace = usePublishedPlace(selectedPlace);
   const groupPlaces = useMemo(
     () => groupPlaceIds.map((id) => getPlace(id)).filter((place): place is Place => Boolean(place)),
     [groupPlaceIds],
@@ -90,7 +95,7 @@ export function MapSheet({ places, origin, selectedId, groupPlaceIds = [], onSel
   // together when the two states disagreed during a drag or Map-tab cycle.
   const selectedView = resolveSelectedPlaceView(snap);
   const snapLabel = selectedPlace && selectedView === "compact"
-    ? `Selected place preview collapsed. ${selectedPlace?.name ?? "Place"}. Press to reopen.`
+    ? `Selected place preview collapsed. ${(publishedPlace ?? selectedPlace)?.name ?? "Place"}. Press to reopen.`
     : groupPlaces.length > 1
       ? `${groupTitle}. Press to fully expand.`
     : snap === "peek"
@@ -200,7 +205,15 @@ export function MapSheet({ places, origin, selectedId, groupPlaceIds = [], onSel
   useLayoutEffect(() => {
     const el = sheetRef.current;
     if (!el || snap !== "peek" || !selectedPlace) return;
-    el.style.setProperty("--selected-sheet-peek-height", `${peekVisibleHeight()}px`);
+    const measure = () => el.style.setProperty("--selected-sheet-peek-height", `${peekVisibleHeight()}px`);
+    measure();
+    // The compact card re-flows when the venue's published name or address
+    // arrives after the pin was selected; keep the peek position in step.
+    const card = el.querySelector(".selected-place-summary.compact");
+    if (!(card instanceof HTMLElement) || typeof ResizeObserver === "undefined") return;
+    const observer = new ResizeObserver(measure);
+    observer.observe(card);
+    return () => observer.disconnect();
   }, [snap, selectedPlace, peekVisibleHeight]);
 
   useLayoutEffect(() => {
@@ -506,7 +519,7 @@ export function MapSheet({ places, origin, selectedId, groupPlaceIds = [], onSel
       {selectedPlace && selectedView === "compact" && (
         <div key={`compact:${selectedPlace.id}`} className="mapsheet-view-enter">
           <SelectedPlaceSummary
-            place={selectedPlace}
+            place={publishedPlace ?? selectedPlace}
             km={selectedKm}
             variant="compact"
             onOpen={openSelectedSummary}
@@ -526,7 +539,7 @@ export function MapSheet({ places, origin, selectedId, groupPlaceIds = [], onSel
         {selectedPlace && selectedView === "summary" ? (
           <div key={`summary:${selectedPlace.id}`} className="mapsheet-view-enter">
             <SelectedPlaceSummary
-              place={selectedPlace}
+              place={publishedPlace ?? selectedPlace}
               km={selectedKm}
               variant="half"
               onDismiss={dismissSelectedSummary}
@@ -535,7 +548,7 @@ export function MapSheet({ places, origin, selectedId, groupPlaceIds = [], onSel
         ) : selectedPlace && selectedView === "detail" ? (
           <div key={`detail:${selectedPlace.id}`} className="mapsheet-view-enter">
             <PlaceDetailBody
-              place={selectedPlace}
+              place={publishedPlace ?? selectedPlace}
               onCollapse={() => collapseFullDetail()}
             />
           </div>
@@ -597,7 +610,7 @@ export function MapSheet({ places, origin, selectedId, groupPlaceIds = [], onSel
             </button>
           )) : null}
       </div>
-      {selectedPlace && selectedView === "detail" && <PlaceCtaBar place={selectedPlace} />}
+      {selectedPlace && selectedView === "detail" && <PlaceCtaBar place={publishedPlace ?? selectedPlace} />}
     </section>
     {/* Kakao-style: while a pin is active the sheet owns the bottom of the
         screen — Save / Share / the three route hand-offs — instead of
@@ -607,7 +620,7 @@ export function MapSheet({ places, origin, selectedId, groupPlaceIds = [], onSel
         inside it, so an in-sheet bar lands at the sheet's off-screen bottom
         rather than the visitor's. The detail view keeps its own CTA bar. */}
     {selectedPlace && selectedView !== "detail" && (
-      <SelectedPlaceActionBar place={selectedPlace} />
+      <SelectedPlaceActionBar place={publishedPlace ?? selectedPlace} />
     )}
     </>
   );

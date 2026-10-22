@@ -1,5 +1,6 @@
 'use client';
 import { useCallback, useEffect, useRef, useState, type FormEvent } from 'react';
+import { SkeletonChips, SkeletonStatus } from '@/components/ui/skeleton';
 import { ArrowDown, ArrowUp, MessageCircle } from 'lucide-react';
 import type { BookingMessageInput, BookingMessageSnapshot } from '@/lib/booking/communication-contracts';
 import { useLocale } from '@/lib/i18n/locale-provider';
@@ -150,7 +151,7 @@ function ConversationContent({ bookingId, partner = false, scope, disabled = fal
   return <section className={styles.conversation} lang={partner ? 'ko' : undefined} aria-label={t('Booking messages')}>
     <div className={styles.heading}><h2><MessageCircle aria-hidden="true" />{t('Messages')}</h2><span>{t('Seoul time')}</span></div>
     {!url ? <p className={styles.notice}>{t('Please sign in again to view your messages.')}</p> : snapshot?.availability === 'unavailable' ? <p className={styles.notice}>{t('Messaging is unavailable for this booking.')}</p> : <>
-      {loading && !snapshot && <p className={styles.notice} role="status">{t('Loading messages…')}</p>}
+      {loading && !snapshot && <SkeletonStatus label={t('Loading messages…')}><SkeletonChips count={1} width="72%" height={44} /><SkeletonChips count={1} width="58%" height={44} className="skel-chips-end" /></SkeletonStatus>}
       {loadError && <div className={styles.error} role="alert"><span>{t(loadError === 'AUTH_REQUIRED' || loadError === 'BOOKING_NOT_FOUND' ? bookingMessageError(loadError) : 'Messages could not be loaded. Try again.')}</span><button type="button" onClick={() => void refresh()}>{t('Retry')}</button></div>}
       {snapshot && <>
         <div ref={pane} className={styles.thread} role="log" aria-label={t('Booking messages')} aria-live="polite" aria-relevant="additions" tabIndex={0} onScroll={() => { const element = pane.current; if (element) { bottom.current = element.scrollHeight - element.scrollTop - element.clientHeight < 32; setAtBottom(bottom.current); } }}>

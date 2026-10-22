@@ -16,6 +16,9 @@ export function useDialogFocus<T extends HTMLElement>(
   open: boolean,
   onClose: () => void,
   initialFocusRef?: RefObject<HTMLElement | null>,
+  /** Where focus returns when the element that opened the dialog is gone by
+      the time it closes (its section was switched off or re-rendered). */
+  returnFocusFallbackRef?: RefObject<HTMLElement | null>,
 ) {
   const dialogRef = useRef<T>(null);
   const onCloseRef = useRef(onClose);
@@ -31,6 +34,7 @@ export function useDialogFocus<T extends HTMLElement>(
       ? document.activeElement
       : null;
     const dialog = dialogRef.current;
+    const fallbackAtClose = () => returnFocusFallbackRef?.current ?? null;
     const getFocusable = () =>
       Array.from(dialog?.querySelectorAll<HTMLElement>(FOCUSABLE_SELECTOR) ?? [])
         // A listbox's arrow-key options are buttons too, but tabindex=-1
@@ -73,9 +77,13 @@ export function useDialogFocus<T extends HTMLElement>(
     return () => {
       cancelAnimationFrame(focusFrame);
       document.removeEventListener("keydown", onKeyDown);
-      requestAnimationFrame(() => previouslyFocused?.focus());
+      requestAnimationFrame(() => {
+        // Read at close time on purpose: the fallback is whatever node holds the ref then.
+        const target = previouslyFocused?.isConnected === false ? fallbackAtClose() : previouslyFocused;
+        target?.focus();
+      });
     };
-  }, [initialFocusRef, open]);
+  }, [initialFocusRef, open, returnFocusFallbackRef]);
 
   return dialogRef;
 }

@@ -6,6 +6,8 @@ export const kstDate = (value: string | number = Date.now()) => new Date(new Dat
 export const shiftDate = (date:string,days:number) => new Date(Date.parse(`${date}T00:00:00Z`)+days*86400000).toISOString().slice(0,10);
 export const timeLabel = (value:string) => new Intl.DateTimeFormat('ko-KR',{timeZone:'Asia/Seoul',hour:'2-digit',minute:'2-digit',hourCycle:'h23'}).format(new Date(value));
 export const dateLabel = (date:string) => new Intl.DateTimeFormat('ko-KR',{timeZone:'UTC',month:'long',day:'numeric',weekday:'short'}).format(new Date(`${date}T00:00:00Z`));
+/** Week-view column heading: the month already shows in the date picker, and "10월 19일 (월)" overflows a 104px column. */
+export const dayLabel = (date:string) => new Intl.DateTimeFormat('ko-KR',{timeZone:'UTC',day:'numeric',weekday:'short'}).format(new Date(`${date}T00:00:00Z`));
 export const money = (value:number) => `${value.toLocaleString('ko-KR')}원`;
 export const sourceLabels = {app:'앱',phone:'전화',walkin:'방문'} as const;
 export function periodBounds(period:BookingPeriod,today:string):[string,string] {

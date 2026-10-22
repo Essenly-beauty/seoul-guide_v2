@@ -1,6 +1,7 @@
 'use client';
 
 import { BookingEntry } from "@/components/booking/booking-entry";
+import { SkeletonList, SkeletonStatus } from '@/components/ui/skeleton';
 import { T } from "@/lib/i18n/locale-provider";
 
 import { useCallback, useEffect, useState, type ReactNode } from 'react';
@@ -25,7 +26,7 @@ export function PublicServiceMenuView({ state, fallback, onRetry }: { state: Men
   }
   return <>
     {state.kind === 'ready' && fallback}
-    {state.kind === 'loading' && <p className="caption muted" role="status"><T text={"Checking venue menus…"} /></p>}
+    {state.kind === 'loading' && <SkeletonStatus label="Checking venue menus…"><SkeletonList rows={2} thumb={0} /></SkeletonStatus>}
     {state.kind === 'error' && <div className={styles.error}><p className="caption muted" role="status"><T text={"Venue menus are temporarily unavailable."} /></p><button className={styles.retry} onClick={onRetry}><T text={"Retry"} /></button></div>}
   </>;
 }

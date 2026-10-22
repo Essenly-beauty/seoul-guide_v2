@@ -157,7 +157,10 @@ describe("map place selection wiring", () => {
   });
 
   it("keeps nearby rows concise and reserves Korean names for selected details", () => {
-    const generalRows = sheetSource.slice(sheetSource.indexOf(": !selectedPlace ? ranked.map"), sheetSource.indexOf("// Kakao-style"));
+    const start = sheetSource.indexOf(": !selectedPlace ? ranked.map");
+    const generalRows = sheetSource.slice(start, sheetSource.indexOf("Kakao-style: while a pin is active", start));
+    expect(start).toBeGreaterThan(0);
+    expect(generalRows).toContain('<div className="place-name-primary">{p.name}</div>'); // the slice really holds the rows (tests-3)
     expect(sheetSource.match(/className="place-name-primary"/g)?.length).toBeGreaterThanOrEqual(2);
     expect(generalRows).not.toContain('className="place-name-secondary"');
     expect(generalRows).not.toContain("p.priceRange");
@@ -204,6 +207,7 @@ describe("map place selection wiring", () => {
 
   it("uses shared verified-photo thumbnails for both map row kinds", () => {
     expect(sheetSource).toContain('<PlaceThumbnail place={place} size={72}');
+    expect(sheetSource).not.toContain("decorative={false}"); // row media stays out of the row's accessible name (tests-1)
     expect(sheetSource.match(/<MapRowThumb place=/g)).toHaveLength(2);
     const sources = readFileSync(new URL("../lib/place-images.ts", import.meta.url), "utf8");
     expect(sources).toContain("place.photoThumbnail");
@@ -212,14 +216,15 @@ describe("map place selection wiring", () => {
   });
 
   it("uses Olive Young brand imagery only when a real store photo is missing", () => {
-    expect(cssSource).toMatch(/\.maprow-brand-mark--olive-young\s*\{[^}]*width:\s*100%;[^}]*height:\s*100%;/s);
     expect(summarySource).toContain('place.type === "olive_young"');
     expect(summarySource).toContain("photos.length === 0");
     expect(summarySource).toContain("<OliveYoungBrandHero");
     expect(detailSource).toContain('place.type === "olive_young"');
     expect(detailSource).toContain("<OliveYoungBrandHero");
     expect(detailSource).toContain('place.photos ?? (place.photoUrl ? [place.photoUrl] : [])');
-    expect(detailSource).toContain("<PhotosSection place={place}");
+    // The header collage is the only photo area (owner decision 2026-10-20).
+    expect(detailSource).toContain("<PlacePhotoCollage photos={photos} media={place.publishedMedia}");
+    expect(detailSource).not.toContain("<PhotosSection");
   });
 
   it("keeps Daiso rows free of duplicate category and price while showing confirmed services", () => {
@@ -466,7 +471,8 @@ describe("place photo ingestion", () => {
     expect(thumbnail).toContain('loading = "lazy"');
     expect(thumbnail).toContain('loading={loading}');
     expect(thumbnail).toContain('decoding="async"');
-    expect(thumbnail).toContain('objectFit: "contain"');
+    // Photos fill the box; brand marks and product shots stay uncropped.
+    expect(thumbnail).toContain('objectFit: image.kind === "brand" ? "contain" : fit');
   });
 
   it("loads only the initially visible selected-place photos eagerly", () => {
@@ -475,12 +481,13 @@ describe("place photo ingestion", () => {
     expect(summary).toContain('decoding="async"');
   });
 
-  it("renders real place photos in both the detail hero and Photos section", () => {
+  it("renders real place photos in the detail hero collage, the page's only photo area", () => {
     const detail = readFileSync(new URL("../components/place/place-detail-body.tsx", import.meta.url), "utf8");
     expect(detail).toContain("function PlacePhotoCollage");
     expect(detail).toContain("photos.slice(0, 3)");
-    expect(detail).toContain("<PlacePhotoCollage photos={place.photos ?? (place.photoUrl ? [place.photoUrl] : [])}");
-    expect(detail).toContain("<PhotosSection place={place}");
+    expect(detail).toContain("const photos = place.photos ?? (place.photoUrl ? [place.photoUrl] : []);");
+    expect(detail).toContain("<PlacePhotoCollage photos={photos} media={place.publishedMedia}");
+    expect(detail).not.toContain("<PhotosSection");
   });
 });
 

@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { ArrowLeft, ArrowRight, CalendarDays, ChevronLeft, ChevronRight, Clock3, Info, Scissors, UserRound, X } from 'lucide-react';
 import type { MerchantMedia } from '@/lib/partner/media-contracts';
 import { useLocale } from '@/lib/i18n/locale-provider';
-import { bookingCalendarLabel, bookingDate, bookingDateWindow, bookingTime, shiftBookingDate, type BookingService, type CustomerBooking } from './customer-booking-state';
+import { bookingCalendarLabel, bookingDate, bookingDateWindow, bookingPrice, bookingTime, shiftBookingDate, type BookingService, type CustomerBooking } from './customer-booking-state';
 import styles from './customer-booking.module.css';
 
 export type BookingVenue = { name?: string; photoUrl?: string; photoWidth?: number; photoHeight?: number; address?: string; introduction?: string; englishOk?: boolean; notice?: string };
@@ -25,7 +25,7 @@ export function BookingHeading({ title, subtitle, step, total }: { title: string
 
 export function BookingFooter({ service, children, note }: { service?: BookingService; children: ReactNode; note?: string }) {
   const { t, locale } = useLocale();
-  return <footer className={styles.footer}>{service && <div className={styles.footerSummary}><span>{service.name}<small>{t('{minutes} min', { minutes: service.durationMinutes })} · {t('Total')}</small></span><strong>₩{service.priceKrw.toLocaleString(locale)}</strong></div>}{children}{note && <p className={styles.footerNote}>{note}</p>}</footer>;
+  return <footer className={styles.footer}>{service && <div className={styles.footerSummary}><span>{service.name}<small>{t('{minutes} min', { minutes: service.durationMinutes })} · {t('Total')}</small></span><strong>{bookingPrice(service.priceKrw)}</strong></div>}{children}{note && <p className={styles.footerNote}>{note}</p>}</footer>;
 }
 export function BookingArrow() { return <ArrowRight className={styles.actionArrow} aria-hidden="true" />; }
 export function BookingHint({ children, clock = false }: { children: ReactNode; clock?: boolean }) {

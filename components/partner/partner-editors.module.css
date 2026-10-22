@@ -32,7 +32,7 @@
 .menuTitle strong { font-weight:650; }
 .menuThumb { display:grid; place-items:center; width:44px; height:44px; border-radius:8px; flex:none; background:var(--editor-tint); color:var(--editor-accent); }
 .menuThumb svg { width:22px; height:22px; }
-.textButton { border:0; background:transparent; color:var(--editor-accent); padding:10px 4px; min-width:44px; min-height:44px; font:inherit; cursor:pointer; }
+.textButton { display:inline-flex; align-items:center; justify-content:center; border:0; background:transparent; color:var(--editor-accent); padding:10px 4px; min-width:44px; min-height:44px; font:inherit; cursor:pointer; } /* 링크(a)로 쓸 때도 최소 크기가 적용되게 inline-flex */
 .textButton:disabled { opacity:.45; cursor:not-allowed; }
 .status { display:inline-flex; border-radius:5px; background:var(--editor-bg); color:var(--editor-muted); padding:4px 8px; font-size:12px; white-space:nowrap; }
 .status[data-visible=true] { background:var(--editor-tint); color:#086e57; }
@@ -134,7 +134,7 @@
 .scope [hidden] { display:none !important; }
 .scope :is(button,a,input,select,textarea):focus-visible { outline:2px solid var(--editor-accent); outline-offset:3px; }
 @media(max-width:1160px) { .table th,.table td { padding-inline:14px; } .dateLayout { grid-template-columns:250px minmax(0,1fr); } .weekRow { grid-template-columns:60px minmax(60px,1fr) 130px 44px; gap:10px; } }
-@media(max-width:800px) {
+@media(max-width:900px) {
   .pageHead { gap:12px; flex-wrap:wrap; } .pageHead h1 { font-size:22px; }
   .toolbar { padding:16px; gap:8px; } .toolbar input { max-width:none; font-size:16px; min-width:150px; } .toolbar select { max-width:100%; }
   .panelBody,.staffForm { padding:20px 16px !important; } .panelHead { padding:20px 16px 0; }

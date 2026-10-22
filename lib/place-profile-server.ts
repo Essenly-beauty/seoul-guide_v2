@@ -33,5 +33,10 @@ export const getPublishedPlace = cache(async (placeId: string) => {
   const place = getPlace(placeId);
   if (!place) return undefined;
   const [profile, media] = await Promise.all([readPublicPlaceProfile(place.id), readPublicPlaceMedia(place.id)]);
+  // Store photos ride on a published profile: it carries the venue's photo
+  // switch. A profile that could not be read reads as unpublished, and then the
+  // directory place is shown as it is — never the venue's own photos with the
+  // switch unknown (the map sheet's lookup does the same; rpc-1).
+  if (profile.status !== 'published') return place;
   return mergePublicPlaceMedia(mergePublicPlaceProfile(place, profile), media);
 });

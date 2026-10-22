@@ -29,14 +29,26 @@ describe("verified list images", () => {
     expect(placeImageSources(place)).toEqual([]);
   });
 
-  it("renders an available place photo uncropped and uses a small semantic fallback otherwise", () => {
+  it("stays out of a row's accessible name: rows are named by their own text (tests-1)", () => {
     const photo = load(renderToStaticMarkup(<PlaceThumbnail place={{ ...place, photos: ["/approved.webp"] }} size={44} />));
+    expect(photo("img").attr("alt")).toBe("");
+    expect(photo("[data-image-kind=photo]").attr("aria-hidden")).toBe("true");
+    const empty = load(renderToStaticMarkup(<PlaceThumbnail place={place} />));
+    expect(empty("[role=img]")).toHaveLength(0);
+    expect(empty("[aria-label]")).toHaveLength(0);
+    expect(empty("[data-image-kind=fallback]").attr("aria-hidden")).toBe("true");
+    const product = load(renderToStaticMarkup(<ProductThumbnail product={{ name: "Row product", imageUrl: "/product.webp" }} />));
+    expect(product("img").attr("alt")).toBe("");
+  });
+
+  it("fills the box with an available place photo and uses a small semantic fallback otherwise", () => {
+    const photo = load(renderToStaticMarkup(<PlaceThumbnail place={{ ...place, photos: ["/approved.webp"] }} size={44} decorative={false} />));
     expect(photo("img").attr("src")).toBe("/approved.webp");
     expect(photo("img").attr("loading")).toBe("lazy");
     expect(photo("img").attr("alt")).toBe("Test Salon photo");
-    expect(photo("img").attr("style")).toContain("object-fit:contain");
+    expect(photo("img").attr("style")).toContain("object-fit:cover");
     expect(photo("[data-image-kind=photo]").attr("style")).toContain("width:44px");
-    const empty = load(renderToStaticMarkup(<PlaceThumbnail place={place} />));
+    const empty = load(renderToStaticMarkup(<PlaceThumbnail place={place} decorative={false} />));
     expect(empty("img")).toHaveLength(0);
     expect(empty("use").attr("href")).toBe("#i-scissors");
     expect(empty("svg").attr("style")).toContain("width:22px");
@@ -44,9 +56,10 @@ describe("verified list images", () => {
   });
 
   it("labels a chain logo as a brand image rather than as a branch photo", () => {
-    const $ = load(renderToStaticMarkup(<PlaceThumbnail place={{ ...place, type: "olive_young" }} />));
+    const $ = load(renderToStaticMarkup(<PlaceThumbnail place={{ ...place, type: "olive_young" }} decorative={false} />));
     expect($("img").attr("src")).toBe("/brands/olive-young-logo.jpeg");
     expect($("img").attr("alt")).toBe("Olive Young logo");
+    expect($("img").attr("style")).toContain("object-fit:contain");
     expect($("[data-image-kind=brand]")).toHaveLength(1);
   });
 

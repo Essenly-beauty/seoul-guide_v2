@@ -48,6 +48,12 @@ describe('merchant profile publishing boundary', () => {
     expect(db.rpc).toHaveBeenCalledWith('partner_store_profile', expect.objectContaining({ p_action: 'update', p_values: instant, p_expected_updated_at: updatedAt }));
     expect((await PATCH(write({ action: 'update', expectedUpdatedAt: updatedAt, values: { ...instant, address: 'Unreviewed' } }))).status).toBe(400);
   });
+  it('passes the photo switch through only as a boolean fifth instant field (rpc-4)', async () => {
+    membership(); result({ ...snapshot, profile: { ...profile, ...instant, showPhotos: false } });
+    expect((await PATCH(write({ action: 'update', expectedUpdatedAt: updatedAt, values: { ...instant, showPhotos: false } }))).status).toBe(200);
+    expect(db.rpc).toHaveBeenCalledWith('partner_store_profile', expect.objectContaining({ p_action: 'update', p_values: { ...instant, showPhotos: false } }));
+    expect((await PATCH(write({ action: 'update', expectedUpdatedAt: updatedAt, values: { ...instant, showPhotos: 'no' } }))).status).toBe(400);
+  });
   it('persists review requests without publishing requested names or addresses', async () => {
     membership(); result({ ...snapshot, pendingReview: { id, fields: review, createdAt: updatedAt, updatedAt } });
     const response = await PATCH(write({ action: 'request_review', expectedUpdatedAt: updatedAt, values: review })); expect(response.status).toBe(200);

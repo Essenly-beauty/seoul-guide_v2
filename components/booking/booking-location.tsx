@@ -1,5 +1,6 @@
 'use client';
 import dynamic from 'next/dynamic';
+import { SkeletonChips, SkeletonStatus } from '@/components/ui/skeleton';
 import Link from 'next/link';
 import { useCallback } from 'react';
 import { ArrowUpRight, MapPin, Navigation } from 'lucide-react';
@@ -10,7 +11,7 @@ import { routes } from '@/lib/routes';
 import { useBookingResource } from './use-booking-resource';
 import styles from './booking-location.module.css';
 
-function MapLoading() { const { t } = useLocale(); return <div className={styles.fallback} role="status">{t('Loading map…')}</div>; }
+function MapLoading() { const { t } = useLocale(); return <SkeletonStatus label={t('Loading map…')} className={styles.fallback} style={{ display: 'block', padding: 0 }}><SkeletonChips count={1} width="100%" height="100%" /></SkeletonStatus>; }
 const LocationMap = dynamic(() => import('./booking-location-map'), { ssr: false, loading: MapLoading });
 
 export function BookingLocationView({ location }: { location: BookingLocation }) {

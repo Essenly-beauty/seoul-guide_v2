@@ -1,7 +1,7 @@
 import { boundedString, exactKeys, record, uuid } from './contracts';
 import { bookingTimestamp } from '@/lib/booking/contracts';
 
-export type StoreInstantValues = { contactPhone: string; contactEmail: string; englishOk: boolean; notice: string };
+export type StoreInstantValues = { contactPhone: string; contactEmail: string; englishOk: boolean; notice: string; /** Customer page photo header on/off (owner request 2026-10-20). Optional only until every environment has the show_photos column. */ showPhotos?: boolean };
 export type StoreReviewValues = { nameKo: string; nameEn: string; address: string; introductionKo: string; introductionEn: string };
 export type StoreProfile = StoreInstantValues & StoreReviewValues & { updatedAt: string };
 export type StoreProfileReview = { id: string; fields: Partial<StoreReviewValues>; createdAt: string; updatedAt: string };
@@ -15,10 +15,17 @@ export type PublicStoreProfile = { status: 'unpublished'; placeId: string } | { 
 const reviewKeys = ['nameKo', 'nameEn', 'address', 'introductionKo', 'introductionEn'] as const;
 function placeId(value: unknown): value is string { return boundedString(value, 200) && /^[a-zA-Z0-9][a-zA-Z0-9_-]{0,199}$/.test(value); }
 export function storeInstantValues(value: unknown): value is StoreInstantValues {
-  return record(value) && exactKeys(value, ['contactPhone', 'contactEmail', 'englishOk', 'notice']) &&
+  return record(value) && (exactKeys(value, ['contactPhone', 'contactEmail', 'englishOk', 'notice']) || (exactKeys(value, ['contactPhone', 'contactEmail', 'englishOk', 'notice', 'showPhotos']) && typeof value.showPhotos === 'boolean')) &&
     boundedString(value.contactPhone, 80) && (value.contactPhone === '' || /^[+\d(). -]+$/.test(value.contactPhone)) &&
     boundedString(value.contactEmail, 254) && (value.contactEmail === '' || /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value.contactEmail)) &&
     typeof value.englishOk === 'boolean' && boundedString(value.notice, 60);
+}
+/** The instant-field draft for a snapshot. showPhotos travels only when the
+    server reported it: a 5-key request to a database without the show_photos
+    column would fail the whole save (codex review 2026-10-20). */
+export function storeInstantDraft(data: PartnerStoreProfileSnapshot): StoreInstantValues {
+  const { contactPhone, contactEmail, englishOk, notice, showPhotos } = data.profile;
+  return { contactPhone, contactEmail, englishOk, notice, ...(showPhotos === undefined ? {} : { showPhotos }) };
 }
 export function storeReviewValues(value: unknown): value is StoreReviewValues {
   return record(value) && exactKeys(value, reviewKeys) && boundedString(value.nameKo, 120) && value.nameKo.trim().length > 0 &&

@@ -34,6 +34,15 @@ describe('saved store preview', () => {
     expect($('a.pv-cta')).toHaveLength(0);
   });
 
+  it('hides the photo area when the venue switched it off, like the customer page (rpc-4)', () => {
+    const active = media('33333333-3333-4333-8333-333333333333', 'active');
+    const $ = load(renderToStaticMarkup(<StorePhonePreview data={{ ...data, profile: { ...data.profile, showPhotos: false } }} snapshot={snapshot} catalog={null} catalogLoading={false} catalogError={false} photos={[active]} />));
+    expect($('.pv-photos')).toHaveLength(0);
+    expect($('img')).toHaveLength(0);
+    const on = load(renderToStaticMarkup(<StorePhonePreview data={{ ...data, profile: { ...data.profile, showPhotos: true } }} snapshot={snapshot} catalog={null} catalogLoading={false} catalogError={false} photos={[active]} />));
+    expect(on('img')).toHaveLength(1);
+  });
+
   it('does not turn unknown photo or booking results into fabricated empty availability', () => {
     const $ = load(renderToStaticMarkup(<StorePhonePreview data={data} snapshot={{ ...snapshot, schedule: null }} catalog={null} catalogLoading={false} catalogError photos={null} />));
     expect($.text()).toContain('운영시간을 설정해 주세요');

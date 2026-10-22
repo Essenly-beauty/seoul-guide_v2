@@ -35,7 +35,7 @@ export function StorePhonePreview({ data, snapshot, catalog, catalogLoading, cat
   const activePhotos = photos?.filter(photo => photo.status === 'active');
   const mark = (field: keyof typeof profile) => data.pendingReview && Object.hasOwn(data.pendingReview.fields, field) ? <i className="pv-pend">변경 검수 중</i> : null;
   return <><div className="phone"><div className="pv" aria-label="고객 앱 상세페이지 미리보기">
-    {activePhotos?.length ? <div className={`pv-photos ${styles.previewPhotos}`}>{activePhotos.slice(0, 3).map((photo, index) =>
+    {profile.showPhotos === false ? null : activePhotos?.length ? <div className={`pv-photos ${styles.previewPhotos}`}>{activePhotos.slice(0, 3).map((photo, index) =>
       // The backend validates and re-encodes these same-origin images.
       // eslint-disable-next-line @next/next/no-img-element
       <img key={photo.id} src={photo.url} alt={`공개된 매장 사진 ${index + 1}`} width={photo.width} height={photo.height} />)}</div> : <div className="pv-photos pv-photos-empty">{photos === null ? '매장 사진 조회 중…' : '공개된 매장 사진 없음'}</div>}

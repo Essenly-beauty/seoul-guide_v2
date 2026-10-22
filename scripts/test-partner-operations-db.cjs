@@ -19,6 +19,11 @@ const rpc=async(name,args,values)=>{const row=await q(`select public.${name}(${a
  if(!(await q("select to_regclass('public.booking_messages') as t"))[0].t) await c.query(fs.readFileSync('supabase/migrations/20261019195512_partner_customer_notes_and_messages.sql','utf8'));
  if(!(await q("select to_regclass('public.merchant_store_profiles') as t"))[0].t) await c.query(fs.readFileSync('supabase/migrations/20261019200212_partner_store_profile_and_staff_english.sql','utf8'));
  if(!(await q("select to_regclass('public.merchant_media') as t"))[0].t) await c.query(fs.readFileSync('supabase/migrations/20261019200901_merchant_media_storage.sql','utf8'));
+ { const showPhotosSql=fs.readFileSync('supabase/migrations/20261020123000_store_profile_show_photos.sql','utf8');const hasShowPhotos=(await q("select 1 from information_schema.columns where table_schema='public' and table_name='merchant_store_profiles' and column_name='show_photos'")).length>0;
+   // Always run the file's function bodies (rolled back with the transaction) so the test proves the migration as committed, not whatever a QA database carries.
+   await c.query(hasShowPhotos?showPhotosSql.slice(showPhotosSql.indexOf('create or replace function')):showPhotosSql);
+   // The column the migration commits to, whatever an earlier draft left on a QA database (rpc-3).
+   eq((await q("select is_nullable,column_default,data_type from information_schema.columns where table_schema='public' and table_name='merchant_store_profiles' and column_name='show_photos'"))[0],{is_nullable:'NO',column_default:'true',data_type:'boolean'}); }
  for(const id of [ids.owner,ids.customer,ids.other])await q("insert into auth.users(id,aud,role,email) values($1,'authenticated','authenticated',$2)",[id,`${id}@booking-test.invalid`]);
  await q("insert into public.merchants(id,display_name,status,booking_enabled) values($1,'Integration test salon','active',true)",[ids.merchant]);
  await q('insert into public.merchant_memberships(merchant_id,user_id) values($1,$2)',[ids.merchant,ids.owner]);
@@ -143,10 +148,19 @@ const rpc=async(name,args,values)=>{const row=await q(`select public.${name}(${a
  await as('authenticated',ids.owner);
  const storeInitial=await rpc('partner_store_profile','',[]);eq(storeInitial.pendingReview,null);eq(storeInitial.profile.nameKo,'Integration test salon');
  const instantValues={contactPhone:'02-1234-5678',contactEmail:'venue@example.test',englishOk:true,notice:'Test notice'};
- const storeSaved=await rpc('partner_store_profile',"'update',$1,$2",[storeInitial.profile.updatedAt,JSON.stringify(instantValues)]);eq(storeSaved.profile.notice,'Test notice');
+ const storeSaved=await rpc('partner_store_profile',"'update',$1,$2",[storeInitial.profile.updatedAt,JSON.stringify(instantValues)]);eq(storeSaved.profile.notice,'Test notice');eq(storeSaved.profile.showPhotos,true);
  await error(()=>rpc('partner_store_profile',"'update',$1,$2",[storeInitial.profile.updatedAt,JSON.stringify(instantValues)]),'BOOKING_CONFLICT');
+ // Photo header switch: the 5-key request flips it, the legacy 4-key request leaves it alone, anything else is rejected.
+ const quoteBeforeSwitch=(await rpc('booking_catalog','$1',['integration-test-salon'])).services[0].quoteVersion;
+ const photosOff=await rpc('partner_store_profile',"'update',$1,$2",[storeSaved.profile.updatedAt,JSON.stringify({...instantValues,showPhotos:false})]);eq(photosOff.profile.showPhotos,false);
+ eq((await rpc('booking_catalog','$1',['integration-test-salon'])).services[0].quoteVersion,quoteBeforeSwitch); // a photo-switch save keeps open quotes valid (rpc-2)
+ const photosKept=await rpc('partner_store_profile',"'update',$1,$2",[photosOff.profile.updatedAt,JSON.stringify(instantValues)]);eq(photosKept.profile.showPhotos,false);
+ await error(()=>rpc('partner_store_profile',"'update',$1,$2",[photosKept.profile.updatedAt,JSON.stringify({...instantValues,showPhotos:'yes'})]),'INVALID_REQUEST');
+ await error(()=>rpc('partner_store_profile',"'update',$1,$2",[photosKept.profile.updatedAt,JSON.stringify({...instantValues,showPhotos:true,extra:1})]),'INVALID_REQUEST');
+ await as('anon');eq((await rpc('public_store_profile','$1',['integration-test-salon'])).profile.showPhotos,false);await as('authenticated',ids.owner);
+ const photosOn=await rpc('partner_store_profile',"'update',$1,$2",[photosKept.profile.updatedAt,JSON.stringify({...instantValues,showPhotos:true})]);eq(photosOn.profile.showPhotos,true);
  const reviewValues={nameKo:'Requested venue name',nameEn:'Requested English name',address:'Proposed new address',introductionKo:'요청 소개',introductionEn:'Requested introduction'};
- const review=await rpc('partner_store_profile',"'request_review',$1,$2",[storeSaved.profile.updatedAt,JSON.stringify(reviewValues)]);eq(review.pendingReview.fields.nameEn,'Requested English name');eq(review.profile.nameKo,'Integration test salon');
+ const review=await rpc('partner_store_profile',"'request_review',$1,$2",[photosOn.profile.updatedAt,JSON.stringify(reviewValues)]);eq(review.pendingReview.fields.nameEn,'Requested English name');eq(review.profile.nameKo,'Integration test salon');
  await as('anon');
  const publicProfile=await rpc('public_store_profile','$1',['integration-test-salon']);eq(publicProfile.status,'published');eq(publicProfile.profile.notice,'Test notice');eq(publicProfile.profile.nameKo,'Integration test salon');eq(publicProfile.profile.nameEn,'');eq(publicProfile.pendingReview,undefined);
  await error(()=>q('select * from public.merchant_profile_reviews'),'42501');
@@ -154,6 +168,10 @@ const rpc=async(name,args,values)=>{const row=await q(`select public.${name}(${a
  await as('authenticated',ids.other);
  const otherProfile=await rpc('partner_store_profile','',[]);eq(otherProfile.profile.nameKo,'Other merchant');eq(otherProfile.pendingReview,null);
  await error(()=>rpc('partner_store_profile',"'cancel_review',$1,null,$2",[otherProfile.profile.updatedAt,review.pendingReview.id]),'PROFILE_REVIEW_NOT_FOUND');
+ // A profile row first created by a review request takes the column default: the photo area stays on (rpc-3).
+ const otherReview=await rpc('partner_store_profile',"'request_review',$1,$2",[otherProfile.profile.updatedAt,JSON.stringify({...reviewValues,nameKo:'Other merchant'})]);
+ await as('postgres');eq((await q('select show_photos from public.merchant_store_profiles where merchant_id=$1',[tenant2]))[0].show_photos,true);await as('authenticated',ids.other);
+ const otherAfter=await rpc('partner_store_profile',"'cancel_review',$1,null,$2",[otherReview.profile.updatedAt,otherReview.pendingReview.id]);eq(otherAfter.profile.showPhotos,true);
  await as('authenticated',ids.owner);
  const cancelledReview=await rpc('partner_store_profile',"'cancel_review',$1,null,$2",[review.profile.updatedAt,review.pendingReview.id]);eq(cancelledReview.pendingReview,null);eq(cancelledReview.profile.nameKo,'Integration test salon');
  const staffProfile=await rpc('partner_staff_profile','$1',[ids.staff]);eq(staffProfile.nameEn,'');

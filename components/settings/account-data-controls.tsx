@@ -11,6 +11,7 @@ import { Button } from "@/components/ui/button";
 import { useToast } from "@/components/ui/toast";
 import { useDialogFocus } from "@/components/ui/use-dialog-focus";
 import { useAuthUser } from "@/lib/auth/use-auth";
+import { supabaseBrowser } from "@/lib/supabase/client";
 import { purgeFavoritesMirror } from "@/lib/favorites";
 import { purgeProfileMirror } from "@/lib/profile";
 import { purgeRatingsMirror } from "@/lib/ratings";
@@ -55,7 +56,11 @@ export function AccountDataControls() {
         setBusy(false);
         return;
       }
-      // account is gone — remove every local trace before leaving
+      // account is gone — remove every local trace before leaving. The server
+      // cleared the cookies, but nothing told this page: a local sign-out emits
+      // SIGNED_OUT to every subscriber here (useAuthUser, the stores), so none of
+      // them keeps acting as the deleted account (review 2026-10-21).
+      await supabaseBrowser().auth.signOut({ scope: "local" }).catch(() => undefined);
       purgeFavoritesMirror();
       purgeProfileMirror();
       purgeRatingsMirror();

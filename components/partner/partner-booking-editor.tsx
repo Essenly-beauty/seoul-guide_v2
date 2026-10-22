@@ -14,6 +14,13 @@ export function PartnerDialog({title,children,onClose,busy=false}:{title:string;
   const ref=useDialogFocus<HTMLDivElement>(true,()=>{if(!busy)onClose();});
   return <div className="live-modal-backdrop"><div ref={ref} className="live-modal" role="dialog" aria-modal="true" aria-labelledby="operation-dialog-title" tabIndex={-1}><div className="dialog-head"><h2 id="operation-dialog-title">{title}</h2><button type="button" disabled={busy} onClick={onClose} aria-label="닫기">×</button></div>{children}</div></div>;
 }
+/** Slot lookup for the editor. Null while a required staff member is not chosen: the reschedule lookup used to go out without
+ *  one, the server answered 409 BOOKING_UNAVAILABLE and the dialog showed "예약 시간을 조회하지 못했습니다" (2026-10-21 점검). */
+export function editorAvailabilityUrl({bookingId,placeId,serviceId,staffId,date,needsStaff}:{bookingId?:string;placeId:string;serviceId:string;staffId:string;date:string;needsStaff:boolean}):string|null {
+  if(needsStaff&&!staffId) return null;
+  if(bookingId) return `/api/partner/operations/bookings/${bookingId}/availability?date=${date}${staffId?`&staffId=${staffId}`:''}`;
+  return serviceId?`/api/places/${encodeURIComponent(placeId)}/availability?serviceId=${serviceId}&date=${date}${needsStaff&&staffId?`&staffId=${staffId}`:''}`:null;
+}
 export async function writeBookingOperation(path:string,input:PartnerBookingMutation|PartnerBookingCreateInput,signal:AbortSignal):Promise<PartnerBooking> {
   const response=await fetch(path,{method:'requestId' in input?'POST':'PATCH',credentials:'same-origin',headers:{'Content-Type':'application/json'},body:JSON.stringify(input),signal});
   const body:unknown=await response.json();
@@ -56,7 +63,7 @@ export function BookingEditor({placeId,booking,initialDate=kstDate(),initialStar
   useEffect(()=>{mounted.current=true;return()=>{mounted.current=false;controller.current?.abort();};},[]);
   const staff=catalog?.staff.filter(s=>s.serviceIds.includes(serviceId))??[];
   const needsStaff=booking?booking.staffId!==null:catalog?.selectionMode==='staff';
-  const availabilityUrl=booking?`/api/partner/operations/bookings/${booking.id}/availability?date=${date}${staffId?`&staffId=${staffId}`:''}`:serviceId&&(!needsStaff||staffId)?`/api/places/${encodeURIComponent(placeId)}/availability?serviceId=${serviceId}&date=${date}${needsStaff&&staffId?`&staffId=${staffId}`:''}`:null;
+  const availabilityUrl=editorAvailabilityUrl({bookingId:booking?.id,placeId,serviceId,staffId,date,needsStaff});
   const availability=useBookingResource(availabilityUrl,slotsGuard,scope);
   const selected=availability.data?.slots.find(slot=>Date.parse(slot.startAt)===Date.parse(startAt));
   const menu=catalog?.services.find(s=>s.id===serviceId);
@@ -76,8 +83,9 @@ export function BookingEditor({placeId,booking,initialDate=kstDate(),initialStar
     {restored&&<p className="notice" role="status">처리 여부가 확인되지 않은 예약 요청을 복원했습니다. 같은 요청으로 결과를 확인해 주세요.</p>}
     <fieldset disabled={locked} className="live-form-fields">
       {!booking&&<><div className="pills"><label className="choice"><input type="radio" name="source" value="phone" checked={source==='phone'} onChange={()=>setSource('phone')}/>전화</label><label className="choice"><input type="radio" name="source" value="walkin" checked={source==='walkin'} onChange={()=>setSource('walkin')}/>방문</label></div><div className="form-grid"><label className="field">고객 이름<input required maxLength={120} value={customerName} onChange={e=>setName(e.target.value)} autoComplete="off"/></label><label className="field">연락처<input required type="tel" maxLength={80} pattern="[+0-9(). \-]+" value={phone} onChange={e=>setPhone(e.target.value)} autoComplete="off"/></label></div><label className="field">메뉴<select required value={serviceId} onChange={e=>{setServiceId(e.target.value);setStaffId('');setStartAt('');}}><option value="">메뉴 선택</option>{catalog?.services.map(s=><option key={s.id} value={s.id}>{s.name} · {s.durationMinutes}분 · {money(s.priceKrw)}</option>)}</select></label></>}
-      {needsStaff&&<label className="field">담당자<select required value={staffId} onChange={e=>{setStaffId(e.target.value);setStartAt('');}}><option value="">담당자 선택</option>{booking?.staffId&&!staff.some(s=>s.id===booking.staffId)&&<option value={booking.staffId}>{booking.staffName}</option>}{staff.map(s=><option key={s.id} value={s.id}>{s.name}</option>)}</select></label>}
+      {needsStaff&&<label className="field">담당자<select required value={staffId} onChange={e=>{setStaffId(e.target.value);setStartAt('');}}><option value="" disabled>담당자 선택</option>{booking?.staffId&&!staff.some(s=>s.id===booking.staffId)&&<option value={booking.staffId}>{booking.staffName}</option>}{staff.map(s=><option key={s.id} value={s.id}>{s.name}</option>)}</select></label>}
       <div className="form-grid"><label className="field">날짜<input required type="date" value={date} min={catalog?.startDate} max={catalog?.endDate} onChange={e=>{setDate(e.target.value);setStartAt('');}}/></label><label className="field">예약 가능한 시작 시간<select required value={selected?.startAt??''} disabled={availability.loading||!!availability.error||!availability.data} onChange={e=>setStartAt(e.target.value)}><option value="">{availability.loading?'조회 중…':'시간 선택'}</option>{availability.data?.slots.map(slot=><option key={slot.startAt} value={slot.startAt}>{timeLabel(slot.startAt)}–{timeLabel(slot.serviceEndAt)}</option>)}</select></label></div>
+      {needsStaff&&!staffId&&<p className="inline-note">담당자를 선택하면 예약 가능한 시간이 표시됩니다.</p>}
       {availability.error&&<p className="live-error" role="alert">예약 시간을 조회하지 못했습니다. <Button type="button" variant="secondary" className="link" onClick={availability.refresh}>다시 조회</Button></p>}{availability.data&&!availability.data.slots.length&&<p className="inline-note">선택한 날짜에 가능한 시간이 없습니다. 다른 날짜를 선택해 주세요.</p>}
       {selected&&<p className="inline-note">{timeLabel(selected.startAt)}–{timeLabel(selected.serviceEndAt)} · 정리 포함 {timeLabel(selected.occupiedUntil)}까지 · {money(booking?.totalKrw??menu?.priceKrw??0)} 현장 결제</p>}
       {!booking&&<label className="field">요청사항 (선택)<textarea value={notes} maxLength={2000} onChange={e=>setNotes(e.target.value)}/></label>}

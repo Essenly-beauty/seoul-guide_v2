@@ -1,5 +1,6 @@
 'use client';
 import { useCallback, useEffect, useReducer, useRef, useState } from 'react';
+import { SkeletonChips, SkeletonLines, SkeletonList, SkeletonStatus } from '@/components/ui/skeleton';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useAuthUser } from '@/lib/auth/use-auth';
@@ -9,7 +10,7 @@ import { routes } from '@/lib/routes';
 import type { MerchantMedia } from '@/lib/partner/media-contracts';
 import { publicPlaceMediaResponse } from '@/lib/place-media';
 import { bookingAvailability, bookingCatalog } from '@/lib/booking/contracts';
-import { bookingErrorMessage, bookingReducer, bookingStartDate, bookingTime, bookingTimeGroups, initialBookingState, submitBooking, type BookingConfiguration } from './customer-booking-state';
+import { bookingErrorMessage, bookingPrice, bookingReducer, bookingStartDate, bookingTime, bookingTimeGroups, initialBookingState, submitBooking, type BookingConfiguration } from './customer-booking-state';
 import { useBookingResource } from './use-booking-resource';
 import { BookingReview } from './booking-summary';
 import { BookingArrow, BookingContext, BookingDatePicker, BookingFooter, BookingHeader, BookingHeading, BookingHint, BookingPhoto, BookingThumbnail, type BookingVenue } from './booking-ui';
@@ -141,7 +142,7 @@ function BookingFlowContent({ placeId, initialService = '', isPreview = false, v
       <main ref={content} className={styles.scroll}>
         {!catalog ? <div className={styles.page}><div className={styles.empty}>
           <h1 tabIndex={-1}>{t('Book a visit')}</h1>
-          {configuration.loading ? <p role="status">{t('Loading booking details…')}</p> : configuration.error ? <><p role="alert">{t(bookingErrorMessage(configuration.error))}</p><button type="button" className={styles.secondary} onClick={configuration.refresh}>{t('Retry')}</button></> : <><p>{t('This venue is not accepting bookings right now.')}</p><Link className={styles.secondary} href={routes.place(placeId)}>{t('Back to venue')}</Link></>}
+          {configuration.loading ? <SkeletonStatus label={t('Loading booking details…')}><SkeletonLines lines={2} widths={['55%', '85%']} /><SkeletonList rows={2} thumb={44} /></SkeletonStatus> : configuration.error ? <><p role="alert">{t(bookingErrorMessage(configuration.error))}</p><button type="button" className={styles.secondary} onClick={configuration.refresh}>{t('Retry')}</button></> : <><p>{t('This venue is not accepting bookings right now.')}</p><Link className={styles.secondary} href={routes.place(placeId)}>{t('Back to venue')}</Link></>}
         </div></div> : <>
           {step === 0 && <BookingPhoto src={venue?.photoUrl} width={venue?.photoWidth} height={venue?.photoHeight} name={venue?.name ?? catalog.merchantName} />}
           <div className={styles.page}>
@@ -154,7 +155,7 @@ function BookingFlowContent({ placeId, initialService = '', isPreview = false, v
                 {venue?.notice && <div className={styles.policy}><strong>{t('Venue notice')}</strong><p>{venue.notice}</p></div>}
                 <div className={styles.sectionTitle}><h2>{t('Service')}</h2><span>{t('Prices in KRW')}</span></div>
                 <div className={styles.options} role="group" aria-label={t('Choose a service')}>{catalog.services.map(item => <button type="button" key={item.id} className={styles.serviceOption} aria-pressed={service?.id === item.id} onClick={() => dispatch({ type: 'service', value: item.id })}>
-                  <BookingThumbnail media={media.find(photo => photo.targetKind === 'menu' && photo.targetId === item.id)} name={item.name} /><span className={styles.optionCopy}><strong>{item.name}</strong>{item.description && <small>{item.description}</small>}<span className={styles.serviceMeta}><b>₩{item.priceKrw.toLocaleString(locale)}</b><span>{t('{minutes} min', { minutes: item.durationMinutes })}</span></span></span><span className={styles.selection} aria-hidden="true" />
+                  <BookingThumbnail media={media.find(photo => photo.targetKind === 'menu' && photo.targetId === item.id)} name={item.name} /><span className={styles.optionCopy}><strong>{item.name}</strong>{item.description && <small>{item.description}</small>}<span className={styles.serviceMeta}><b>{bookingPrice(item.priceKrw)}</b><span>{t('{minutes} min', { minutes: item.durationMinutes })}</span></span></span><span className={styles.selection} aria-hidden="true" />
                 </button>)}</div>
                 {!catalog.services.length && <p className={styles.hint}>{t('This venue is not accepting bookings right now.')}</p>}
                 <BookingHint>{t('Pay at the venue')} · {t('No payment is collected online.')}</BookingHint>
@@ -172,7 +173,7 @@ function BookingFlowContent({ placeId, initialService = '', isPreview = false, v
                 {service && <BookingContext staff>{staff?.name ?? t('Venue team')} · {service.name} · {t('{minutes} min', { minutes: service.durationMinutes })}</BookingContext>}
                 <BookingDatePicker first={firstDate} last={catalog.endDate} date={date} onChange={value => dispatch({ type: 'date', value })} />
                 <div aria-live="polite">
-                  {availability.loading ? <p role="status" className={styles.availabilityMessage}>{t('Checking available times…')}</p> : availability.error ? <div className={styles.error} role="alert">{t(bookingErrorMessage(availability.error))}<button type="button" className={styles.secondary} onClick={availability.refresh}>{t('Retry')}</button></div> : groups.length ? groups.map(group => <div className={styles.timeGroup} key={group.label}><h2>{t(group.label)}</h2><div className={styles.times} role="group" aria-label={t(group.label)}>{group.slots.map(slot => <button type="button" className={styles.time} key={`${slot.startAt}:${slot.staffId}`} aria-pressed={selection.slot?.startAt === slot.startAt && selection.slot.staffId === slot.staffId} onClick={() => dispatch({ type: 'slot', slot, quoteVersion: availability.data!.quoteVersion })}>{bookingTime(slot.startAt, locale)}</button>)}</div></div>) : <p className={styles.availabilityMessage}>{t('No times are available on this date. Please choose another date.')}</p>}
+                  {availability.loading ? <SkeletonStatus label={t('Checking available times…')} className={styles.availabilityMessage}><SkeletonChips count={8} width={68} height={40} /></SkeletonStatus> : availability.error ? <div className={styles.error} role="alert">{t(bookingErrorMessage(availability.error))}<button type="button" className={styles.secondary} onClick={availability.refresh}>{t('Retry')}</button></div> : groups.length ? groups.map(group => <div className={styles.timeGroup} key={group.label}><h2>{t(group.label)}</h2><div className={styles.times} role="group" aria-label={t(group.label)}>{group.slots.map(slot => <button type="button" className={styles.time} key={`${slot.startAt}:${slot.staffId}`} aria-pressed={selection.slot?.startAt === slot.startAt && selection.slot.staffId === slot.staffId} onClick={() => dispatch({ type: 'slot', slot, quoteVersion: availability.data!.quoteVersion })}>{bookingTime(slot.startAt, locale)}</button>)}</div></div>) : <p className={styles.availabilityMessage}>{t('No times are available on this date. Please choose another date.')}</p>}
                 </div>
                 <BookingHint clock>{selection.slot ? `${bookingTime(selection.slot.startAt, locale)}–${bookingTime(selection.slot.serviceEndAt, locale)} · ${t('Seoul time')}` : t('Choose a time to see when your visit will end.')}</BookingHint>
               </section>}
