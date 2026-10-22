@@ -441,9 +441,13 @@ export function MapScreen() {
     // Subway mode owns the camera too: resolving GPS must not pull it away
     // from the station selected in the bottom controller.
     if (status !== "granted" || !loc || initialLocationHandledRef.current) return;
+    // A ?list= owns the camera only while it can still show pins: wait until it
+    // settles, and let an unavailable link behave like a plain /map visit.
+    if (listParam && shareView.status === "loading") return;
     initialLocationHandledRef.current = true;
-    if (mode === "map" && !deepLinkedPlace && !listParam && savedParam !== "1") setFlyTarget(loc);
-  }, [status, loc, deepLinkedPlace, listParam, mode, savedParam]);
+    const listOwnsCamera = Boolean(listParam) && shareView.status !== "unavailable";
+    if (mode === "map" && !deepLinkedPlace && !listOwnsCamera && savedParam !== "1") setFlyTarget(loc);
+  }, [status, loc, deepLinkedPlace, listParam, shareView.status, mode, savedParam]);
 
   return (
     <div className={`map-screen${mode === "subway" ? ` subway-mode${subwayRouteReady ? " subway-route-ready" : ""}${subwayEditing ? " subway-editing" : ""}` : ""}`}>

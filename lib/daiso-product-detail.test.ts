@@ -7,6 +7,10 @@ import {
 describe("Daiso product detail lookup", () => {
   it("accepts only the namespaced numeric route id", () => {
     expect(parseDaisoProductRouteId("daiso:1018161")).toBe("1018161");
+    // What app/shop/[id]/page.tsx actually receives for /shop/daiso%3A1018161.
+    expect(parseDaisoProductRouteId("daiso%3A1018161")).toBe("1018161");
+    expect(parseDaisoProductRouteId("daiso%253A1018161")).toBeNull();
+    expect(parseDaisoProductRouteId("daiso%E0%A4%A")).toBeNull();
     expect(parseDaisoProductRouteId("daiso:0")).toBeNull();
     expect(parseDaisoProductRouteId("daiso:not-a-number")).toBeNull();
     expect(parseDaisoProductRouteId("1018161")).toBeNull();
