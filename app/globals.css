@@ -2794,7 +2794,6 @@
   .skel-chips { display: flex; flex-wrap: wrap; gap: 8px; }
   .skel-status { display: flex; flex-direction: column; gap: 14px; min-width: 0; }
   .skel-sr { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
-  .skel-page { flex: 1; padding: 18px 16px 32px; background: var(--bg); }
   .skel-chips-end { justify-content: flex-end; }
 
   /* Place detail photo header (2026-10-20): rounded Kakao-style collage, photos
@@ -2824,8 +2823,6 @@
   .first-review-prompt { display: flex; flex-direction: column; gap: 6px; padding: 14px; border: 1px dashed var(--border); border-radius: 12px; background: var(--surface); }
   .first-review-prompt > b { font-size: 14px; }
   .first-review-cta { align-self: flex-start; margin-top: 4px; min-height: 40px; padding: 0 14px; border-radius: 999px; background: var(--accent); color: #fff; font-size: 13px; font-weight: 600; }
-
-  .skel-page-bar { display: flex; align-items: center; gap: 12px; margin-bottom: 4px; }
 
   /* Route-change loading sweep — rides the header's bottom hairline instead
      of the shell top; a soft gradient drifts across with a long easing. */

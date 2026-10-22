@@ -1,0 +1,21 @@
+== start: ledger 23/20261019200901
+PASS T7 freeze violation stops PRE_GUARD (exit 1)
+PASS T7 ledger unchanged
+PASS T7 cleanup left no store rows
+PASS T8 ledger writer blocks the runner (55P03 lock_timeout)
+PASS T8 ledger unchanged
+PASS T9 freeze-table writer blocks the runner (55P03)
+PASS T1 apply commits (exit 0, applied, postCommitOk)
+PASS T1 ledger 24 / head target
+PASS T2 rerun is a verified skip
+PASS T3 tampered ledger row fails skip-verify
+PASS T4 changed column fails skip-verify on POST_GUARD
+PASS T4b restored state skips again
+PASS T5 rollback refuses when target is not the head
+PASS T5b ledger writer blocks the rollback (55P03)
+PASS T5b ledger still 24
+PASS T6 rollback commits (23 rows, head 20261019200901)
+PASS T6 column gone
+PASS T10 reapply commits
+PASS T10 rerun skips (verified)
+== end: ledger 24/20261020123000; 19 passed, 0 failed
