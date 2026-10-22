@@ -2,7 +2,7 @@ import type { CSSProperties, ReactNode } from "react";
 
 // Skeleton placeholders — every loading state draws the shape of the content
 // it is waiting for instead of a logo or a sentence (owner decision 2026-10-20).
-// Plain markup, no hooks, so server components (app/loading.tsx) can use it.
+// Plain markup, no hooks, so server components can use it too.
 // Motion lives in globals.css (.skel) and stops under prefers-reduced-motion.
 
 type Size = number | string;

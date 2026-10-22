@@ -11,10 +11,10 @@ type Props = { params: Promise<{ id: string }> };
 
 // Unique title/description/canonical/OG per place (Google Search Central,
 // ogp.me). The route announcer also reads document.title, so this is what
-// VoiceOver hears on arrival. notFound() must be thrown HERE: metadata is
-// resolved before the shell streams, whereas the page body renders inside
-// app/loading.tsx's Suspense boundary after a 200 has already been sent —
-// a page-level notFound() alone is a soft 404 (status 200).
+// VoiceOver hears on arrival. notFound() is thrown HERE, before any byte of
+// the page is sent, so an unknown id is a real 404. There is deliberately no
+// route-level loading.tsx (lib/route-loading-contract.test.ts): a streamed
+// skeleton made the page body hydrate late and fail intermittently.
 export async function generateMetadata(props: Props): Promise<Metadata> {
   const { id } = await props.params;
   const place = await getPublishedPlace(id);
