@@ -6,6 +6,7 @@ import { IconSprite } from "@/components/icon";
 import { RouteProgress } from "@/components/ui/route-progress";
 import { ErrorReporterInit } from "@/components/system/error-reporter-init";
 import { PwaRegister } from "@/components/system/pwa-register";
+import { RouteSlot } from "@/components/system/route-slot";
 import { WebVitalsReporter } from "@/components/system/web-vitals-reporter";
 import { ThemeProvider } from "@/components/theme/theme-provider";
 import { ToastProvider } from "@/components/ui/toast";
@@ -74,7 +75,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <div className="app-shell">
               <RouteProgress />
               <SignupReturnNotice />
-              {children}
+              <RouteSlot>{children}</RouteSlot>
             </div>
           </ToastProvider>
         </ThemeProvider>
