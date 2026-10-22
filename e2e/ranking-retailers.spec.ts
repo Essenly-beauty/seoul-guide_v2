@@ -5,6 +5,7 @@ import {
   selectDaisoRanking,
   type DaisoRankKey,
 } from "../lib/daiso-ranking";
+import { daisoNameEn } from "../lib/daiso-ranking-en";
 import { RANKING_RETURN_ROUTE_KEY } from "../lib/ranking-return-route";
 
 test.use({ viewport: { width: 390, height: 844 } });
@@ -188,10 +189,12 @@ test("keeps Daiso category pills compact, readable, focusable, and horizontally 
       const surface = getComputedStyle(document.documentElement).getPropertyValue("--surface").trim();
       const background = styles.backgroundColor.match(/rgba?\(([^)]+)\)/)?.[1].split(",").map(Number);
       const base = surface.match(/#([0-9a-f]{6})/i)?.[1];
-      if (!background || background.length < 4 || !base) throw new Error("Unable to resolve Daiso chip colors");
+      if (!background || background.length < 3 || !base) throw new Error("Unable to resolve Daiso chip colors");
       const baseRgb = base.match(/../g)?.map((channel) => parseInt(channel, 16));
       if (!baseRgb) throw new Error("Unable to resolve surface color");
-      const alpha = background[3];
+      // Since dc30b07 the selected pill is an opaque --filter-selected (rgb, 3 channels);
+      // a translucent rgba() pill is still blended over --surface.
+      const alpha = background[3] ?? 1;
       const blended = background.slice(0, 3).map((channel, index) => Math.round(channel * alpha + baseRgb[index] * (1 - alpha)));
       const ring = styles.boxShadow.match(/rgb[a]?\(([^)]+)\)/)?.[1];
       if (!ring) throw new Error("Unable to resolve Daiso focus ring color");
@@ -289,22 +292,28 @@ test("uses internal product links, concise metadata, placeholders, and keeps the
 
 test("opens a Daiso row in the internal detail and progressively reveals shared header actions", async ({ page }) => {
   const expected = selectDaisoRanking("daily")[0].product;
+  // de688fb: English leads; the Korean original stays underneath for in-store use.
+  const expectedName = daisoNameEn(expected.productNo) || expected.nameKr;
   await page.goto("/ranking?retailer=daiso");
   await daisoRows(page).first().click();
 
   await expect(page).toHaveURL(new RegExp(`/shop/daiso(?:%3A|:)${expected.productNo}$`, "i"));
-  await expect(page.getByRole("heading", { name: expected.nameKr, exact: true })).toBeVisible();
+  await expect(page.getByRole("heading", { level: 1, name: expectedName, exact: true })).toBeVisible();
+  await expect(page.locator('.product-detail-title-block p[lang="ko"]')).toHaveText(expected.nameKr);
   await expect(page.getByRole("navigation", { name: "Daiso product actions" })).toBeVisible();
   await expect(page.getByRole("link", { name: "Find nearby Daiso", exact: true })).toHaveAttribute("href", "/map?cat=daiso");
   await expect(page.getByRole("link", { name: /Buy on Daiso Mall/ })).toHaveAttribute("target", "_blank");
 
   const scroller = page.locator(".app-scroll");
   const compact = page.locator(".product-detail-progress-bar");
-  await expect(page.locator(".product-detail-hero-actions").getByRole("button", { name: "Share product" })).toBeVisible();
+  // ca8013b (owner, 2026-09-27): the hero carries only Back; Share lives in the CTA and compact bars.
+  const heroActions = page.locator(".product-detail-hero-actions");
+  await expect(heroActions.getByRole("button", { name: "Back", exact: true })).toBeVisible();
+  await expect(heroActions.getByRole("button", { name: "Share product" })).toHaveCount(0);
   await expect(compact).toHaveCSS("opacity", "0");
   await scroller.evaluate((node) => { node.scrollTop = 80; });
   await expect.poll(async () => Number(await compact.evaluate((node) => getComputedStyle(node).opacity))).toBeGreaterThan(0);
-  await expect(compact.getByText(expected.nameKr, { exact: true })).toBeVisible();
+  await expect(compact.getByText(expectedName, { exact: true })).toBeVisible();
   await expect(compact.getByRole("button", { name: "Share product" })).toBeVisible();
   await expect(compact.getByRole("button", { name: "More product actions" })).toBeVisible();
 });

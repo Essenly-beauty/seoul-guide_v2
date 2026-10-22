@@ -66,8 +66,8 @@ test.describe("discovery smoke (no auth needed)", () => {
   });
 
   test("prototype routes stay closed (redirects)", async ({ page }) => {
-    await page.goto("/bookings");
-    await expect(page).toHaveURL(/\/menu/);
+    // /bookings left this list on 2026-10-20 (dc30b07): it is the real
+    // "My bookings" page now, linked from the My tab.
     await page.goto("/trip");
     await expect(page).toHaveURL(/\/menu/);
     await page.goto("/mypage/reviews/new");
@@ -76,17 +76,35 @@ test.describe("discovery smoke (no auth needed)", () => {
 
   test("hangul place ids resolve", async ({ page }) => {
     await page.goto(`/place/${encodeURIComponent("oy-학동중앙점")}`);
-    // the id stays hangul; the title is English now (English-first titles,
-    // 2026-08-23) — this spec is about the id resolving, not the copy
-    await expect(page.getByRole("heading", { name: /Hakdongjungang/ })).toBeVisible();
+    // the id stays hangul; the English title is copy and keeps changing
+    // (romanized 2026-08-23, verified "Hakdong Central" 2026-09-21), so pin
+    // the Korean name the id is built from — this spec is about the id
+    // resolving, not the copy
+    await expect(page.getByText("올리브영 학동중앙점", { exact: true })).toBeVisible();
     await expect(page.getByText(/wandered off/)).toHaveCount(0); // not the 404 page
   });
 
   test("broken shared-list link falls back to the normal map", async ({ page }) => {
     await page.goto("/map?list=not-a-real-id");
-    await expect(page.getByText("That shared list link isn't available")).toBeVisible({ timeout: 20_000 });
-    await expect(page).toHaveURL(/\/map$/);
+    // since 2026-10-17 (979966f) a bad link keeps a banner up instead of a
+    // toast + automatic redirect; the map stays usable underneath it
+    const banner = page.locator(".map-banner").filter({ hasText: "This shared list isn't available" });
+    await expect(banner).toBeVisible({ timeout: 20_000 });
     await expect(page.locator(".leaflet-marker-icon").first()).toBeVisible({ timeout: 20_000 });
+    await banner.getByRole("link", { name: "Explore map" }).click();
+    await expect(page).toHaveURL(/\/map$/);
+    await expect(banner).toHaveCount(0);
+  });
+
+  test.describe("with location allowed", () => {
+    // a dead ?list= owns no pins, so it must not keep the first GPS fix from
+    // centring the map the way a plain /map visit does
+    test.use({ geolocation: { latitude: 37.5572, longitude: 126.9245 }, permissions: ["geolocation"] });
+    test("broken shared-list link still centres on the visitor", async ({ page }) => {
+      await page.goto("/map?list=not-a-real-id");
+      await expect(page.locator(".map-banner").filter({ hasText: "This shared list isn't available" })).toBeVisible({ timeout: 20_000 });
+      await expect(page.getByTitle("Your current location")).toBeInViewport({ timeout: 20_000 });
+    });
   });
 });
 

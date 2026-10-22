@@ -5,7 +5,9 @@ import { DAISO_PLACES } from "../lib/generated/daiso-places";
 test.use({ viewport: { width: 390, height: 844 } });
 
 test("a selected Daiso store exposes the chain-wide ranking preview", async ({ page }) => {
-  const store = DAISO_PLACES[0];
+  // The map shows the published catalogue name (lib/data.ts applies
+  // scripts/lib/en-name-overrides.json), not the generated romanization.
+  const store = PLACES.find((place) => place.id === DAISO_PLACES[0].id)!;
   await page.goto(`/map?place=${encodeURIComponent(store.id)}`);
   await expect(page.locator(".selected-place-summary.half")).toContainText(store.name);
   await page.locator(".mapsheet-handle").click();
@@ -17,8 +19,8 @@ test("a selected Daiso store exposes the chain-wide ranking preview", async ({ p
 });
 
 test("co-located Daiso branches can be selected individually", async ({ page }) => {
-  const firstBranch = DAISO_PLACES.find((place) => place.nameKr === "강남고속버스터미널2호점");
-  const secondBranch = DAISO_PLACES.find((place) => place.nameKr === "강남고속버스터미널점");
+  const firstBranch = PLACES.find((place) => place.type === "daiso" && place.nameKr === "강남고속버스터미널2호점");
+  const secondBranch = PLACES.find((place) => place.type === "daiso" && place.nameKr === "강남고속버스터미널점");
   expect(firstBranch).toBeDefined();
   expect(secondBranch).toBeDefined();
 
@@ -39,11 +41,15 @@ test("co-located Daiso branches can be selected individually", async ({ page }) 
   await groupMarker.click();
 
   const sheet = page.locator(".mapsheet");
-  await expect(sheet).toContainText("강남고속버스터미널2호점");
-  await expect(sheet).toContainText("강남고속버스터미널점");
+  // Chooser rows are English-only; the Korean name shows once a branch is
+  // selected. The two names differ only by the trailing "2": match exactly.
+  const choices = sheet.locator(".maprow-coordinate-choice");
+  await expect(choices).toHaveCount(2);
+  await expect(choices.getByText(firstBranch!.name, { exact: true })).toBeVisible();
+  await expect(choices.getByText(secondBranch!.name, { exact: true })).toBeVisible();
 
-  const secondBranchRow = sheet.locator(".maprow-coordinate-choice").filter({
-    hasText: "강남고속버스터미널점",
+  const secondBranchRow = choices.filter({
+    has: page.getByText(secondBranch!.name, { exact: true }),
   });
   await secondBranchRow.click();
 
@@ -67,8 +73,11 @@ test("a grouped Daiso pin opened from subway browsing switches to the map choose
   await expect(page.locator(".subway-controller")).toHaveCount(0);
   const sheet = page.locator(".mapsheet");
   await expect(sheet).toContainText("2 places at this pin");
-  await expect(sheet).toContainText("강남고속버스터미널2호점");
-  await expect(sheet).toContainText("강남고속버스터미널점");
+  const choices = sheet.locator(".maprow-coordinate-choice");
+  for (const nameKr of ["강남고속버스터미널2호점", "강남고속버스터미널점"]) {
+    const branch = PLACES.find((place) => place.type === "daiso" && place.nameKr === nameKr)!;
+    await expect(choices.getByText(branch.name, { exact: true })).toBeVisible();
+  }
 });
 
 test("all Daiso stores stay responsive through map pan and All-Daiso-All filtering", async ({ page }) => {
@@ -107,8 +116,9 @@ test("all Daiso stores stay responsive through map pan and All-Daiso-All filteri
 
   const rows = sheet.locator(".mapsheet-body > .maprow");
   await expect(rows).toHaveCount(publishedDaiso);
-  await expect(rows.first().locator(".label")).toContainText("Daiso");
-  await expect(rows.last().locator(".label")).toContainText("Daiso");
+  // Daiso rows carry no category label (the logo and name already say Daiso).
+  await expect(rows.first().locator(".place-name-primary")).toContainText("Daiso");
+  await expect(rows.last().locator(".place-name-primary")).toContainText("Daiso");
 
   // Expand the flex-contained sheet, reach the final Daiso row through its
   // own scrollport, and prove it ends above (not behind) the normal-flow nav.
