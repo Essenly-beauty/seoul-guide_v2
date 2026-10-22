@@ -74,6 +74,14 @@ test.describe("discovery smoke (no auth needed)", () => {
     await expect(page).toHaveURL(/\/mypage\/reviews$/);
   });
 
+  test("my bookings is a real page, not a closed prototype", async ({ page }) => {
+    // replaces the old /bookings -> /menu redirect check (removed on purpose in dc30b07)
+    const res = await page.goto("/bookings");
+    expect(res?.status()).toBe(200);
+    await expect(page).toHaveURL(/\/bookings$/);
+    await expect(page.getByRole("heading", { level: 1, name: "My bookings", exact: true })).toBeVisible();
+  });
+
   test("hangul place ids resolve", async ({ page }) => {
     await page.goto(`/place/${encodeURIComponent("oy-학동중앙점")}`);
     // the id stays hangul; the English title is copy and keeps changing
